@@ -1,7 +1,13 @@
-export function buildInstallPlan(skills, agent, options = {}) {
+function buildInstallPlan(skills, agent, options = {}) {
   const allowReview = options.allowReview === true;
 
   return skills.map((skill) => {
+    const compatible = new Set(skill.compatibility ?? []);
+    const isCompatible =
+      compatible.has(agent) ||
+      (agent === "generic-agent" && compatible.has("agent-skills")) ||
+      (agent === "agent-skills" && compatible.has("agent-skills"));
+
     const base = {
       id: skill.id,
       agent,
@@ -9,6 +15,10 @@ export function buildInstallPlan(skills, agent, options = {}) {
       license: skill.license.spdx,
       source: "https://github.com/" + skill.source.repo
     };
+
+    if (!isCompatible) {
+      return { ...base, action: "incompatible", reason: "agent_not_supported", command: null };
+    }
 
     if (skill.distribution === "blocked") {
       return { ...base, action: "blocked", reason: "registry_blocked", command: null };
@@ -18,7 +28,7 @@ export function buildInstallPlan(skills, agent, options = {}) {
       return {
         ...base,
         action: "source-direct",
-        reason: "non_redistributable_upstream",
+        reason: "upstream_direct_install",
         command: [
           "npx skills add",
           "https://github.com/" + skill.source.repo,
@@ -47,31 +57,29 @@ export function buildInstallPlan(skills, agent, options = {}) {
       };
     }
 
-    if (skill.distribution === "bundled" && !skill.materialized) {
+    if (skill.distribution === "bundled") {
+      if (skill.release?.status !== "eligible" || !skill.materialized) {
+        return {
+          ...base,
+          action: "hold",
+          reason: "bundle_not_released",
+          command: null
+        };
+      }
+
       return {
         ...base,
-        action: "source-bridge",
-        reason: "bundle_eligible_but_not_materialized",
+        action: "install",
         command: [
-          "npx skills add",
-          "https://github.com/" + skill.source.repo,
-          "--skill", JSON.stringify(skill.name),
-          "--agent", agent,
-          "-y"
+          "install-from-registry",
+          skill.materialized_root,
+          "--agent", agent
         ].join(" ")
       };
     }
 
-    const command = [
-      "install-from-registry",
-      skill.materialized_root ?? ("skills/" + skill.id),
-      "--agent", agent
-    ].join(" ");
-
-    return {
-      ...base,
-      action: "install",
-      command
-    };
+    return { ...base, action: "hold", reason: "unknown_distribution_state", command: null };
   });
 }
+
+export { buildInstallPlan };
