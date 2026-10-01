@@ -98,7 +98,14 @@ export function createServer() {
           agent,
           limit,
           token: process.env.GITHUB_TOKEN,
-          remote: url.searchParams.get("remote") !== "false"
+          remote: url.searchParams.get("remote") !== "false",
+          ai: process.env.AI_DISCOVERY_BASE_URL && process.env.AI_DISCOVERY_MODEL
+            ? {
+                baseUrl: process.env.AI_DISCOVERY_BASE_URL,
+                model: process.env.AI_DISCOVERY_MODEL,
+                apiKey: process.env.AI_DISCOVERY_API_KEY
+              }
+            : undefined
         });
         return json(res, 200, { ...result, choices: toInstallChoices(result, agent) });
       } catch (error) {
