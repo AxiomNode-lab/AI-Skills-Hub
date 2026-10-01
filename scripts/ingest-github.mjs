@@ -118,6 +118,7 @@ for (const item of skillPaths) {
     }
   }
 
+  const license = await licenseEvidenceFor(item.path, frontmatter.license ?? null, item.path);
   const capabilityScan = {
     shell: /(^|\s)(bash|sh|zsh|pwsh|powershell)\b|(?:^|\s)(sudo|chmod)\b|rm\s+-rf/i.test(body),
     network: /\b(curl|wget)\b|https?:\/\/|fetch\(/i.test(body),
