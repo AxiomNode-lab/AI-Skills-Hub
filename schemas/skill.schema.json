@@ -1,5 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ai-skills-hub.dev/schemas/skill.v0.2.schema.json",
   "type": "object",
   "required": [
     "id",
@@ -15,10 +16,11 @@
     "release",
     "integrity"
   ],
+  "additionalProperties": false,
   "properties": {
     "id": {
       "type": "string",
-      "minLength": 3
+      "pattern": "^[a-z0-9._-]+(?:/[a-z0-9._-]+)+$"
     },
     "name": {
       "type": "string",
@@ -28,18 +30,24 @@
       "type": "string",
       "minLength": 1
     },
+    "description": {
+      "type": "string"
+    },
     "source": {
       "type": "object",
       "required": [
         "repo",
         "path"
       ],
+      "additionalProperties": false,
       "properties": {
         "repo": {
-          "type": "string"
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"
         },
         "path": {
-          "type": "string"
+          "type": "string",
+          "minLength": 1
         },
         "revision": {
           "type": "string",
@@ -49,10 +57,6 @@
           "const": "git-commit"
         },
         "url": {
-          "type": "string",
-          "format": "uri"
-        },
-        "tree_sha": {
           "type": "string"
         },
         "state": {
@@ -62,8 +66,7 @@
             "unknown"
           ]
         }
-      },
-      "additionalProperties": false
+      }
     },
     "category": {
       "type": "array",
@@ -79,6 +82,7 @@
         "redistributable",
         "status"
       ],
+      "additionalProperties": false,
       "properties": {
         "spdx": {
           "type": "string"
@@ -92,9 +96,11 @@
             "unknown",
             "review-required"
           ]
+        },
+        "evidence": {
+          "type": "string"
         }
-      },
-      "additionalProperties": false
+      }
     },
     "distribution": {
       "enum": [
@@ -113,14 +119,25 @@
     "security": {
       "type": "object",
       "required": [
-        "scan_status"
+        "scan_status",
+        "risk"
       ],
+      "additionalProperties": true,
       "properties": {
         "scan_status": {
           "enum": [
             "verified",
             "pending",
             "review-required"
+          ]
+        },
+        "risk": {
+          "enum": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "unknown"
           ]
         },
         "network": {
@@ -140,12 +157,38 @@
             "boolean",
             "null"
           ]
+        },
+        "dynamic_execution": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "package_install": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "filesystem_write": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "encoded_content": {
+          "type": [
+            "boolean",
+            "null"
+          ]
         }
-      },
-      "additionalProperties": true
+      }
     },
     "materialized": {
       "type": "boolean"
+    },
+    "materialized_root": {
+      "type": "string"
     },
     "release": {
       "type": "object",
@@ -153,6 +196,7 @@
         "status",
         "reasons"
       ],
+      "additionalProperties": false,
       "properties": {
         "status": {
           "enum": [
@@ -167,27 +211,31 @@
             "type": "string"
           }
         }
-      },
-      "additionalProperties": false
+      }
     },
     "integrity": {
       "type": "object",
+      "additionalProperties": false,
       "properties": {
         "upstream_skill_sha256": {
           "type": [
             "string",
             "null"
-          ]
+          ],
+          "pattern": "^(sha256:)?[0-9a-f]{64}$|^$"
         },
         "last_ingested_revision": {
           "type": [
             "string",
             "null"
-          ]
+          ],
+          "pattern": "^[0-9a-f]{40}$"
         }
-      },
-      "additionalProperties": false
+      }
+    },
+    "quality": {
+      "type": "object",
+      "additionalProperties": true
     }
-  },
-  "additionalProperties": false
+  }
 }
