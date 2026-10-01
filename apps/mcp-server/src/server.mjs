@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
+import { fileURLToPath } from "node:url";
 import { loadRegistry } from "../../../packages/core/src/index.mjs";
 
 const registry=loadRegistry();
@@ -44,16 +45,24 @@ function parseFrontmatter(body){
   return result;
 }
 
+function skillUri(skill){
+  return "skill://" + encodeURIComponent(skill.id) + "/SKILL.md";
+}
+
+function fileUri(skill,relative){
+  return "skill://" + encodeURIComponent(skill.id) + "/" + relative.split(path.sep).join("/");
+}
+
 function manifestFor(skill){
   const root=path.resolve(skill.materialized_root);
   const skillFile=path.join(root,"SKILL.md");
   const frontmatter=parseFrontmatter(fs.readFileSync(skillFile,"utf8"));
-  const skillUri="skill://"+skill.id.replaceAll("/","/")+"/SKILL.md";
+  const rootSkillUri=skillUri(skill);
   const resources=walkFiles(root).map((full)=>{
     const rel=path.relative(root,full).split(path.sep).join("/");
     const bytes=fs.readFileSync(full);
     return {
-      uri:"skill://"+skill.id+"/"+rel,
+      uri:fileUri(skill,rel),
       digest:"sha256:"+crypto.createHash("sha256").update(bytes).digest("hex"),
       size:bytes.length
     };
@@ -62,11 +71,11 @@ function manifestFor(skill){
   const total=resources.reduce((sum,item)=>sum+item.size,0);
   if(total>16*1024*1024) throw new Error("Skill exceeds MCP size limit: "+skill.id);
 
-  const top=resources.find((r)=>r.uri===skillUri);
+  const top=resources.find((r)=>r.uri===rootSkillUri);
   if(!top) throw new Error("Skill SKILL.md missing from manifest: "+skill.id);
 
   return {
-    uri:skillUri,
+    uri:rootSkillUri,
     frontmatter,
     resources
   };
@@ -126,7 +135,7 @@ export function handleMessage(message){
 
   if(method==="skills/get"){
     const uri=params.uri;
-    const skill=materializedSkills().find((candidate)=>"skill://"+candidate.id+"/SKILL.md"===uri);
+    const skill=materializedSkills().find((candidate)=>skillUri(candidate)===uri);
     if(!skill) return jsonRpcError(id,-32602,"Skill not found: "+String(uri));
     return jsonRpcResult(id,{
       resultType:"complete",
@@ -142,7 +151,7 @@ export function handleMessage(message){
     const rest=uri.slice("skill://".length);
     const slash=rest.indexOf("/");
     if(slash<1) return jsonRpcError(id,-32602,"Invalid resource URI");
-    const skillId=rest.slice(0,slash);
+    const skillId=decodeURIComponent(rest.slice(0,slash));
     const rel=rest.slice(slash+1);
     const skill=materializedSkills().find((candidate)=>candidate.id===skillId);
     if(!skill) return jsonRpcError(id,-32602,"Resource not found");
@@ -165,7 +174,7 @@ export function handleMessage(message){
   return jsonRpcError(id,-32601,"Method not found: "+method);
 }
 
-if(process.argv[1] && path.resolve(process.argv[1])===path.resolve(new URL(import.meta.url).pathname)){
+if(process.argv[1] && fileURLToPath(import.meta.url)===process.argv[1]){
   let buffer="";
   process.stdin.setEncoding("utf8");
   process.stdin.on("data",(chunk)=>{
