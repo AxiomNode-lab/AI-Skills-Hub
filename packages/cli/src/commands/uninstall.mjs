@@ -1,13 +1,14 @@
 import { confirm, select } from "@inquirer/prompts";
 import fs from "node:fs";
+import path from "node:path";
 import { readInstallRecords, removeInstallRecord } from "../../../installer/src/state.mjs";
 import { removeMCPServer } from "../../../installer/src/adapters/MCPAdapter.mjs";
 import { resolveInstallRoot } from "../../../installer/src/targets.mjs";
 
 function safeInside(root, candidate) {
-  const r = require("node:path").resolve(root);
-  const c = require("node:path").resolve(candidate);
-  return c === r || c.startsWith(r + require("node:path").sep);
+  const r = path.resolve(root);
+  const c = path.resolve(candidate);
+  return c !== r && c.startsWith(r + path.sep);
 }
 
 export async function uninstallCommand(options = {}) {
@@ -43,15 +44,16 @@ export async function uninstallCommand(options = {}) {
 
   try {
     if (record.type === "mcp-server") {
-      await removeMCPServer(record.destination, record.skill_id);
+      removeMCPServer(record.destination, record.name || record.skill_id);
     } else {
-      const path = await import("node:path");
       const root = resolveInstallRoot(record.agent || "agent-skills", scope, process.cwd());
       const destination = path.resolve(record.destination);
-      if (!safeInside(root, destination) || path.dirname(destination) === path.resolve(root)) {
-        if (!safeInside(root, destination)) {
-          throw new Error("Refusing to remove a path outside the managed installation root.");
-        }
+      if (!safeInside(root, destination)) {
+        throw new Error("Refusing to remove a path outside the managed installation root.");
+      }
+      const stat = fs.lstatSync(destination);
+      if (stat.isSymbolicLink()) {
+        throw new Error("Refusing to remove a symbolic-link installation.");
       }
       await fs.promises.rm(destination, { recursive: true, force: true });
     }
