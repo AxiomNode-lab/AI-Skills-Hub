@@ -41,6 +41,12 @@ for (const skill of data.skills) {
   if (skill.materialized && skill.release.status !== "eligible") {
     throw new Error(skill.id + " materialized skill must be release-eligible");
   }
+  if (skill.release.status === "eligible") {
+    if (skill.distribution !== "bundled") throw new Error(skill.id + " release-eligible skill must be bundled");
+    if (!skill.materialized) throw new Error(skill.id + " release-eligible skill must be materialized");
+    if (skill.security.scan_status !== "verified") throw new Error(skill.id + " release-eligible skill must have verified security scan");
+    if (skill.security.risk === "high") throw new Error(skill.id + " release-eligible skill cannot be high risk");
+  }
 
   if (!["verified","pending","review-required"].includes(skill.security.scan_status)) {
     throw new Error(skill.id + " invalid security scan status");
