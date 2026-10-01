@@ -2,10 +2,11 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { buildInstallPlan } from "./index.mjs";
 
-const skill = (distribution) => ({
+const skill = (distribution, materialized = false) => ({
   id: "example/" + distribution,
   name: "example",
   distribution,
+  materialized,
   license: {spdx:"MIT"},
   source: {repo:"example/repo"}
 });
@@ -16,10 +17,15 @@ test("review-required is held by default", () => {
   assert.equal(item.command, null);
 });
 
-test("bundled skill produces an install command", () => {
-  const [item] = buildInstallPlan([skill("bundled")], "codex");
+test("bundle-eligible but unmaterialized uses a source bridge", () => {
+  const [item] = buildInstallPlan([skill("bundled", false)], "codex");
+  assert.equal(item.action, "source-bridge");
+});
+
+test("materialized bundle installs from registry", () => {
+  const [item] = buildInstallPlan([skill("bundled", true)], "codex");
   assert.equal(item.action, "install");
-  assert.match(item.command, /npx skills add/);
+  assert.match(item.command, /install-from-registry/);
 });
 
 test("review override is explicit", () => {
