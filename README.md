@@ -1,6 +1,6 @@
 <div align="center">
   <img src="docs/images/logo.jpg" alt="AI Skills Hub Logo" width="300" />
-# AI Skills Hub
+
 
 **A registry and installation layer for AI agent capabilities.**
 
