@@ -46,11 +46,16 @@ function parseFrontmatter(body){
 }
 
 function skillUri(skill){
-  return "skill://" + encodeURIComponent(skill.id) + "/SKILL.md";
+  return "skill://" + skill.id + "/SKILL.md";
 }
 
 function fileUri(skill,relative){
-  return "skill://" + encodeURIComponent(skill.id) + "/" + relative.split(path.sep).join("/");
+  return "skill://" + skill.id + "/" + relative.split(path.sep).join("/");
+}
+
+function skillForUri(uri){
+  const candidates=materializedSkills().sort((a,b)=>b.id.length-a.id.length);
+  return candidates.find((candidate)=>uri===skillUri(candidate) || uri.startsWith("skill://"+candidate.id+"/"));
 }
 
 function manifestFor(skill){
@@ -116,6 +121,16 @@ export function handleMessage(message){
     });
   }
 
+  if(method==="server/discover"){
+    return jsonRpcResult(id,{
+      capabilities:{
+        resources:{},
+        extensions:{"io.modelcontextprotocol/skills":{directoryRead:false}}
+      },
+      instructions:"AI Skills Hub serves only release-eligible materialized Skills. Use skills/list or skills/get, then resources/read; verify SHA-256 digests from the manifest."
+    });
+  }
+
   if(method==="ping") return jsonRpcResult(id,{});
 
   if(method==="skills/list"){
@@ -135,7 +150,7 @@ export function handleMessage(message){
 
   if(method==="skills/get"){
     const uri=params.uri;
-    const skill=materializedSkills().find((candidate)=>skillUri(candidate)===uri);
+    const skill=skillForUri(uri);
     if(!skill) return jsonRpcError(id,-32602,"Skill not found: "+String(uri));
     return jsonRpcResult(id,{
       resultType:"complete",
@@ -148,13 +163,11 @@ export function handleMessage(message){
   if(method==="resources/read"){
     const uri=params.uri;
     if(typeof uri!=="string" || !uri.startsWith("skill://")) return jsonRpcError(id,-32602,"Invalid resource URI");
-    const rest=uri.slice("skill://".length);
-    const slash=rest.indexOf("/");
-    if(slash<1) return jsonRpcError(id,-32602,"Invalid resource URI");
-    const skillId=decodeURIComponent(rest.slice(0,slash));
-    const rel=rest.slice(slash+1);
-    const skill=materializedSkills().find((candidate)=>candidate.id===skillId);
+    const skill=skillForUri(uri);
     if(!skill) return jsonRpcError(id,-32602,"Resource not found");
+    const prefix="skill://"+skill.id+"/";
+    const rel=uri.startsWith(prefix)?uri.slice(prefix.length):"";
+    if(!rel || rel.includes("..")) return jsonRpcError(id,-32602,"Invalid resource URI");
 
     const root=path.resolve(skill.materialized_root);
     const full=path.resolve(root,rel);
