@@ -6,7 +6,11 @@ settings:
 
 importers:
   .: {}
-  apps/api: {}
+  apps/api:
+    dependencies:
+      '@ai-skills-hub/discovery':
+        specifier: workspace:*
+        version: link:../../packages/discovery
   apps/mcp-server: {}
   apps/web: {}
   packages/cli:
