@@ -1,19 +1,22 @@
-const registry = await fetch("../../catalog/skills.json").then((r) => r.json()).catch(() => ({skills:[]}));
+const API = window.AI_SKILLS_API_URL || "http://localhost:8787";
+const response = await fetch(API + "/api/skills").catch(() => null);
+const registry = response ? await response.json() : {skills:[]};
+const skills = registry.skills ?? [];
 const skillsEl = document.querySelector("#skills");
 const search = document.querySelector("#search");
 const stats = document.querySelector("#stats");
 const count = document.querySelector("#count");
 
 const groups = {
-  total: registry.skills.length,
-  bundled: registry.skills.filter((s) => s.distribution === "bundled").length,
-  direct: registry.skills.filter((s) => s.distribution === "source-direct").length,
-  review: registry.skills.filter((s) => s.distribution === "review-required").length
+  total: skills.length,
+  bundled: skills.filter((s) => s.distribution === "bundled").length,
+  direct: skills.filter((s) => s.distribution === "source-direct").length,
+  review: skills.filter((s) => s.distribution === "review-required").length
 };
 
-stats.innerHTML = [
-  ["total","Skills"],["bundled","Bundled"],["direct","Source-direct"],["review","Review"]
-].map(([key,label]) => '<div class="stat"><strong>' + groups[key] + '</strong><span>' + label + '</span></div>').join("");
+stats.innerHTML = [["total","Skills"],["bundled","Bundled"],["direct","Source-direct"],["review","Review"]]
+  .map(([key,label]) => '<div class="stat"><strong>' + groups[key] + '</strong><span>' + label + '</span></div>')
+  .join("");
 
 function escapeHtml(value) {
   return String(value).replace(/[&<>"']/g, (char) => ({
@@ -23,7 +26,7 @@ function escapeHtml(value) {
 
 function render() {
   const q = search.value.trim().toLowerCase();
-  const items = registry.skills.filter((s) =>
+  const items = skills.filter((s) =>
     !q || [s.id,s.name,s.publisher,...s.category].join(" ").toLowerCase().includes(q)
   );
   count.textContent = items.length + " results";
@@ -36,5 +39,5 @@ function render() {
       '<span class="badge">' + escapeHtml(s.security.scan_status) + '</span></div></article>';
   }).join("");
 }
-search.addEventListener("input", render);
+search.addEventListener("input",render);
 render();
