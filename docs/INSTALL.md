@@ -33,3 +33,11 @@ Set these environment variables to enable model-based reranking without changing
     AI_DISCOVERY_API_KEY=optional-secret
 
 Only public Skill metadata is sent to the reranker.
+
+## Natural-language discovery
+
+  skills-hub add "I need a PDF tool for Codex" --agent codex --remote
+
+Add `--all` to execute all actionable candidates returned by the discovery broker. Remote execution always requires explicit `--remote`.
+
+Without `--remote`, remote candidates are shown but not executed.
