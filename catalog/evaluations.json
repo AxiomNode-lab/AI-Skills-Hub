@@ -1,0 +1,32 @@
+{
+  "schema_version": "0.1",
+  "policy": {
+    "status": "framework-only",
+    "note": "Evaluation metadata does not imply that a model has executed the Skill."
+  },
+  "suites": [
+    {
+      "id": "structure",
+      "scope": "all",
+      "checks": ["valid SKILL.md frontmatter", "valid name", "valid description"]
+    },
+    {
+      "id": "security-baseline",
+      "scope": "all",
+      "checks": ["capability scan", "immutable provenance", "no unresolved high-risk finding"]
+    },
+    {
+      "id": "workflow",
+      "scope": [
+        "obra/superpowers/systematic-debugging",
+        "obra/superpowers/test-driven-development",
+        "obra/superpowers/writing-plans"
+      ],
+      "checks": [
+        "expected workflow stages are followed",
+        "verification claims are backed by evidence",
+        "output contains actionable artifacts"
+      ]
+    }
+  ]
+}
