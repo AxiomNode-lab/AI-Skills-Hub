@@ -26,11 +26,11 @@ Usage:
   skills-hub info <skill-id>
   skills-hub targets
   skills-hub plan <bundle-or-skill> [--agent <agent>]
-  skills-hub install <bundle-or-skill> --agent <agent> [--scope project|user] [--overwrite]
+  skills-hub install <bundle-or-skill> --agent <agent> [--scope project|user] [--overwrite] [--force]
   skills-hub audit
   skills-hub doctor [--scope project|user]
   skills-hub remove <skill-id> [--scope project|user] [--force]
-  skills-hub update <bundle-or-skill> --agent <agent> [--scope project|user]
+  skills-hub update <bundle-or-skill> --agent <agent> [--scope project|user] [--force]
 `);
   process.exit(0);
 }
@@ -98,6 +98,7 @@ if (command === "install") {
   const agent = flag("--agent");
   const scope = flag("--scope") ?? "project";
   const overwrite = args.includes("--overwrite");
+  const force = args.includes("--force");
 
   if (!target || !agent) {
     console.error("Usage: skills-hub install <bundle-or-skill> --agent <agent> [--scope project|user] [--overwrite]");
@@ -121,7 +122,8 @@ if (command === "install") {
         results.push(installMaterializedSkill(skill, {
           agent,
           scope,
-          overwrite
+          overwrite,
+          force
         }));
       } catch (error) {
         failed = true;
@@ -196,6 +198,7 @@ if (command === "update") {
   const target = args[0];
   const agent = flag("--agent");
   const scope = flag("--scope") ?? "project";
+  const force = args.includes("--force");
   if (!target || !agent) {
     console.error("Usage: skills-hub update <bundle-or-skill> --agent <agent> [--scope project|user]");
     process.exit(1);
@@ -212,7 +215,7 @@ if (command === "update") {
     try {
       results.push(installMaterializedSkill(
         skills.find((s)=>s.id===item.id),
-        {agent,scope,overwrite:true}
+        {agent,scope,overwrite:true,force}
       ));
     } catch(error) {
       results.push({id:item.id,action:"error",error:error.message});
