@@ -48,13 +48,18 @@ export async function searchMcpRegistry(query,{limit=20,fetchImpl=fetch,cacheDir
   const cached=readCache(cacheDir,key,cacheTtlMs);
   if(cached) return cached;
 
-  const url=BASE+"?search="+encodeURIComponent(query)+"&version=latest&limit="+Math.min(100,Math.max(1,limit));
-  const response=await fetchImpl(url,{headers:{accept:"application/json","user-agent":"AI-Skills-Hub-discovery/0.2"}});
-  if(!response.ok) throw new Error("MCP Registry "+response.status);
-  const body=await response.json();
-  const rows=body.servers ?? [];
+  const terms=[query,...String(query).toLowerCase().split(/[^a-z0-9._/-]+/).filter(x=>x.length>2).slice(0,4)];
+  const uniqueTerms=[...new Set(terms)];
+  const responses=await Promise.allSettled(uniqueTerms.map(async term=>{
+    const url=BASE+"?search="+encodeURIComponent(term)+"&version=latest&limit="+Math.min(100,Math.max(1,limit));
+    const response=await fetchImpl(url,{headers:{accept:"application/json","user-agent":"AI-Skills-Hub-discovery/0.2"}});
+    if(!response.ok) throw new Error("MCP Registry "+response.status);
+    return response.json();
+  }));
+  const rows=responses.filter(x=>x.status==="fulfilled").flatMap(x=>x.value.servers ?? []);
 
   const output=[];
+  const seenServers=new Set();
   for(const row of rows){
     const server=row.server ?? row;
     const meta=row._meta?.["io.modelcontextprotocol/registry/official"] ?? {};
