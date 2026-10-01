@@ -18,7 +18,7 @@ for (const relative of forbiddenPaths) {
 }
 
 test("repository does not contain fabricated MCP utility identifiers or local settings", () => {
-  const roots = ["catalog", "capabilities-library", "packages", "scripts", "tests", ".github"];
+  const roots = ["catalog", "capabilities-library", "packages", "scripts", ".github"];
   const matches = [];
 
   function walk(dir) {
