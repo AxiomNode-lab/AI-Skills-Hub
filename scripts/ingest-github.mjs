@@ -69,7 +69,14 @@ const result = {
 };
 
 const licenseBodyCache = new Map();
-async function licenseEvidenceFor(skillPath) {
+async function licenseEvidenceFor(skillPath, declaredLicense, skillTextPath) {
+  if (declaredLicense) {
+    const declared = classifyLicense(normalizeLicense(declaredLicense));
+    if (declared.spdx !== "NOASSERTION") {
+      return { ...declared, evidence_type: "skill-frontmatter", evidence_path: skillTextPath };
+    }
+  }
+
   const parts = skillPath.split("/");
   parts.pop();
   const candidates = [];
@@ -98,7 +105,7 @@ for (const item of skillPaths) {
   if (!body) continue;
 
   const skillSha = crypto.createHash("sha256").update(body).digest("hex");
-  const license = await licenseEvidenceFor(item.path);
+  const license = await licenseEvidenceFor(item.path, frontmatter.license ?? null, item.path);
   const scan = scanText(body);
   const lines = body.split(/\r?\n/);
   const frontmatter = {};
@@ -125,7 +132,7 @@ for (const item of skillPaths) {
     description: frontmatter.description ?? null,
     skill_sha256: skillSha,
     license,
-    security: { scan_status: "verified", risk: riskLevel(scan), capabilities: scan.capabilities, findings: scan.findings },
+    security: { scan_status: scan.findings.length ? "review-required" : "verified", risk: riskLevel(scan), capabilities: scan.capabilities, findings: scan.findings },
     capabilities: capabilityScan
   });
 
