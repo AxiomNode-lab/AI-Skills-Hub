@@ -68,8 +68,19 @@ function atomicWrite(file, body) {
   fs.renameSync(temp, file);
 }
 
+function assertStateFileSafe(file) {
+  if (!fs.existsSync(file)) return;
+  if (fs.lstatSync(file).isSymbolicLink()) {
+    throw new Error("installation state file cannot be a symbolic link");
+  }
+  if (!fs.statSync(file).isFile()) {
+    throw new Error("installation state file must be a regular file");
+  }
+}
+
 export function writeInstallRecord(record, cwd=process.cwd()) {
   const file = stateFile(record.scope, cwd);
+  assertStateFileSafe(file);
   const data = fs.existsSync(file)
     ? JSON.parse(fs.readFileSync(file, "utf8"))
     : { schema_version: "0.2", installed: {}, history: [] };
@@ -95,6 +106,7 @@ export function writeInstallRecord(record, cwd=process.cwd()) {
 
 export function readInstallRecords(scope="project", cwd=process.cwd()) {
   const file = stateFile(scope, cwd);
+  assertStateFileSafe(file);
   if (!fs.existsSync(file)) return {};
   const body = fs.readFileSync(file, "utf8");
   if (Buffer.byteLength(body) > MAX_STATE_BYTES) throw new Error("installation state is too large");
@@ -104,6 +116,7 @@ export function readInstallRecords(scope="project", cwd=process.cwd()) {
 
 export function removeInstallRecord(skillId, scope="project", cwd=process.cwd()) {
   const file = stateFile(scope, cwd);
+  assertStateFileSafe(file);
   if (!fs.existsSync(file)) return;
   const data = JSON.parse(fs.readFileSync(file, "utf8"));
   delete data.installed[skillId];
