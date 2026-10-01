@@ -11,7 +11,8 @@ A Skill is eligible for public bundled distribution only when all gates pass:
 7. Security capability scan completed.
 8. No unresolved blocking finding.
 9. Registry, bundle, and lockfile validation passes.
-10. Regression tests pass.
+10. Registry/installer/MCP/plugin regression tests pass.
+11. For executable Skills, declared runtime capabilities are reviewed against observed content.
 
 Popularity is a discovery signal, not a trust or safety approval.
 
