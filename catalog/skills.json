@@ -1,6 +1,6 @@
 {
   "schema_version": "0.2",
-  "generated_at": "2026-10-01T22:20:00+03:00",
+  "generated_at": "2026-10-01T22:55:00+03:00",
   "skills": [
     {
       "id": "anthropics/frontend-design",
@@ -1821,6 +1821,80 @@
         "claude-code",
         "codex",
         "cursor"
+      ],
+      "security": {
+        "scan_status": "pending",
+        "network": null,
+        "shell": null,
+        "credentials": null
+      },
+      "materialized": false
+    },
+    {
+      "id": "openai/build-chatgpt-app",
+      "name": "build-chatgpt-app",
+      "publisher": "OpenAI",
+      "source": {
+        "repo": "openai/plugins",
+        "path": "plugins/openai-developers/skills/build-chatgpt-app",
+        "revision": "5fd93af4cd0c623e020d0cc7e9ce178b4ac1f70f",
+        "revision_type": "git-commit",
+        "url": "https://github.com/openai/plugins/tree/5fd93af4cd0c623e020d0cc7e9ce178b4ac1f70f/plugins/openai-developers/skills/build-chatgpt-app"
+      },
+      "category": [
+        "openai",
+        "chatgpt",
+        "apps"
+      ],
+      "license": {
+        "spdx": "Apache-2.0",
+        "redistributable": true,
+        "status": "verified"
+      },
+      "distribution": "bundled",
+      "compatibility": [
+        "agent-skills",
+        "claude-code",
+        "codex",
+        "cursor",
+        "github-copilot"
+      ],
+      "security": {
+        "scan_status": "pending",
+        "network": null,
+        "shell": null,
+        "credentials": null
+      },
+      "materialized": false
+    },
+    {
+      "id": "openai/chatgpt-app-submission",
+      "name": "chatgpt-app-submission",
+      "publisher": "OpenAI",
+      "source": {
+        "repo": "openai/plugins",
+        "path": "plugins/openai-developers/skills/chatgpt-app-submission",
+        "revision": "5fd93af4cd0c623e020d0cc7e9ce178b4ac1f70f",
+        "revision_type": "git-commit",
+        "url": "https://github.com/openai/plugins/tree/5fd93af4cd0c623e020d0cc7e9ce178b4ac1f70f/plugins/openai-developers/skills/chatgpt-app-submission"
+      },
+      "category": [
+        "openai",
+        "chatgpt",
+        "submission"
+      ],
+      "license": {
+        "spdx": "Apache-2.0",
+        "redistributable": true,
+        "status": "verified"
+      },
+      "distribution": "bundled",
+      "compatibility": [
+        "agent-skills",
+        "claude-code",
+        "codex",
+        "cursor",
+        "github-copilot"
       ],
       "security": {
         "scan_status": "pending",
