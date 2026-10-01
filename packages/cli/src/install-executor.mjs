@@ -65,12 +65,26 @@ function assertSafeExternalPlan(plan, agent) {
       break;
     }
     case "codex-mcp":
-      if (binary !== "codex" || plan.argv[1] !== "mcp" || plan.argv[2] !== "add") {
+      if (
+        binary !== "codex"
+        || plan.argv[1] !== "mcp"
+        || plan.argv[2] !== "add"
+        || !plan.argv[3]
+        || String(plan.argv[3]).startsWith("-")
+      ) {
         throw new Error("Invalid Codex MCP installation plan.");
+      }
+      if (plan.argv[4] === "--url" && !validHttpsUrl(plan.argv[5])) {
+        throw new Error("Invalid Codex MCP URL.");
       }
       break;
     case "claude-mcp":
-      if (binary !== "claude" || plan.argv[1] !== "mcp" || plan.argv[2] !== "add") {
+      if (
+        binary !== "claude"
+        || plan.argv[1] !== "mcp"
+        || plan.argv[2] !== "add"
+        || !plan.argv[3]
+      ) {
         throw new Error("Invalid Claude MCP installation plan.");
       }
       break;
@@ -108,13 +122,34 @@ export async function installCapability(
     return { ...plan, action: plan.action, installed: false };
   }
 
-  if (plan.action === "source-direct" || plan.action === "marketplace") {
+  if (
+    plan.action === "source-direct"
+    || plan.action === "marketplace"
+    || plan.action === "configuration"
+  ) {
     if (!confirmed) {
       return {
         ...plan,
         installed: false,
         requires_confirmation: true,
         reason: plan.reason || "explicit_confirmation_required"
+      };
+    }
+
+    if (plan.action === "configuration") {
+      const adapter = getAdapter(capability);
+      const result = await adapter.install({
+        agent,
+        scope,
+        cwd,
+        overwrite: true,
+        force: true,
+        env
+      });
+      return {
+        ...plan,
+        ...result,
+        installed: true
       };
     }
 
