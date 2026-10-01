@@ -95,10 +95,16 @@ async function runDiscovery() {
   try {
     const agent = els.agent.value || "agent-skills";
     const payload = await getJson("/api/discover?q=" + encodeURIComponent(query) + "&agent=" + encodeURIComponent(agent) + "&limit=30");
-    skills = (payload.results ?? []).map((entry) => ({
-      ...(entry.item ?? {}),
-      _score: entry.score,
-      _origin: entry.origin
+    skills = (payload.choices ?? []).map((choice) => ({
+      id: choice.id,
+      name: choice.name,
+      artifact_type: choice.artifact_type ?? "skill",
+      distribution: choice.action === "install" ? "bundled" : "source-direct",
+      compatibility_verified: choice.compatibility_verified,
+      source: choice.source,
+      _score: choice.score,
+      _origin: choice.origin,
+      _choice: choice
     }));
     discoveryMode = true;
     els.searchStatus.textContent = (payload.remote_searched ? "Hybrid discovery" : "Local discovery") + " · " + skills.length + " candidates";
@@ -115,7 +121,9 @@ async function runDiscovery() {
 }
 
 function filtered() {
-  if (discoveryMode) return skills;
+  if (discoveryMode) {
+    return skills.filter((s) => !els.type.value || (s.artifact_type ?? "skill") === els.type.value);
+  }
   const q = els.search.value.trim().toLowerCase();
   const agent = els.agent.value;
   const distribution = els.distribution.value;
@@ -124,6 +132,7 @@ function filtered() {
   return skills.filter((s) => {
     if (q && ![s.id,s.name,s.publisher,...(s.category ?? [])].join(" ").toLowerCase().includes(q)) return false;
     if (agent && !(s.compatibility ?? []).includes(agent)) return false;
+    if (els.type.value && (s.artifact_type ?? "skill") !== els.type.value) return false;
     if (distribution && s.distribution !== distribution) return false;
     if (category && !(s.category ?? []).includes(category)) return false;
     return true;
@@ -154,7 +163,7 @@ function render() {
     const revision = s.source?.revision ? s.source.revision.slice(0,8) : "unpinned";
     const origin = s._origin === "remote-github" ? "remote" : "registry";
     return '<article class="card">' +
-      '<div class="card-top"><span class="state ' + escapeHtml(s.distribution) + '">' + escapeHtml(s.distribution) + '</span><span class="risk">risk:' + escapeHtml(risk) + '</span></div>' +
+      '<div class="card-top"><span class="state ' + escapeHtml(s.distribution) + '">' + escapeHtml(s.distribution) + '</span><span class="risk">' + escapeHtml(s.artifact_type ?? "skill") + ' · ' + escapeHtml(origin) + ' · risk:' + escapeHtml(risk) + '</span></div>' +
       '<h3>' + escapeHtml(s.name) + '</h3>' +
       '<div class="meta">' + escapeHtml(s.publisher) + ' · ' + escapeHtml(s.license?.spdx ?? "NOASSERTION") + '</div>' +
       '<div class="chips">' + chips + '</div>' +
@@ -172,16 +181,16 @@ function openDrawer(id) {
   const skill = skills.find((s) => s.id === id);
   if (!skill) return;
   els.drawerTitle.textContent = skill.name;
-  const sourceUrl = "https://github.com/" + skill.source.repo + "/tree/" + (skill.source.revision || "main") + "/" + skill.source.path;
-  const install = skill.distribution === "source-direct" || skill.distribution === "review-required"
-    ? "npx skills add " + "https://github.com/" + skill.source.repo + " --skill " + JSON.stringify(skill.name)
-    : "skills-hub install " + skill.id + " --agent <agent>";
+  const sourceUrl = skill.source?.url ?? skill.source?.install_url ?? null;
+  const choice = skill._choice ?? null;
+  const install = choice?.command
+    ?? (choice?.action === "configuration" ? JSON.stringify(choice.config,null,2) : "No direct installer available");
   const caps = Object.entries(skill.security ?? {})
     .filter(([key,value]) => key !== "scan_status" && value === true)
     .map(([key]) => '<span class="badge warning">' + escapeHtml(key) + '</span>').join("") || '<span class="badge ok">no declared sensitive capability</span>';
 
   els.drawerBody.innerHTML =
-    '<div class="detail-block"><div class="detail-label">SOURCE</div><a href="' + sourceUrl + '" target="_blank" rel="noreferrer">' + escapeHtml(skill.source.repo) + '</a><div class="muted">' + escapeHtml(skill.source.path) + '</div></div>' +
+    '<div class="detail-block"><div class="detail-label">SOURCE</div>' + (sourceUrl ? '<a href="' + escapeHtml(sourceUrl) + '" target="_blank" rel="noreferrer">' + escapeHtml(skill.source?.repo ?? sourceUrl) + '</a>' : '<span class="muted">Remote metadata</span>') + '<div class="muted">' + escapeHtml(skill.source?.path ?? "") + '</div></div>' +
     '<div class="detail-grid"><div><div class="detail-label">LICENSE</div><strong>' + escapeHtml(skill.license?.spdx ?? "NOASSERTION") + '</strong></div><div><div class="detail-label">DISTRIBUTION</div><strong>' + escapeHtml(skill.distribution) + '</strong></div><div><div class="detail-label">RELEASE</div><strong>' + escapeHtml(skill.release?.status ?? "pending") + '</strong></div><div><div class="detail-label">SECURITY</div><strong>' + escapeHtml(skill.security?.scan_status ?? "pending") + '</strong></div></div>' +
     '<div class="detail-block"><div class="detail-label">CAPABILITIES</div><div class="badges">' + caps + '</div></div>' +
     '<div class="detail-block"><div class="detail-label">COMPATIBILITY</div><div class="badges">' + (skill.compatibility ?? []).map((a) => '<span class="badge">' + escapeHtml(a) + '</span>').join("") + '</div></div>' +
