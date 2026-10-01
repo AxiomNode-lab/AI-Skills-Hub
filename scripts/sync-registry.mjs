@@ -7,6 +7,12 @@ const ROOT=process.cwd();
 const sources=JSON.parse(fs.readFileSync(path.join(ROOT,"catalog/sources.json"),"utf8"));
 const registryFile=path.join(ROOT,"catalog/skills.json");
 const registry=JSON.parse(fs.readFileSync(registryFile,"utf8"));
+const previousGeneratedAt = registry.generated_at;
+const previousSnapshot = JSON.stringify({
+  schema_version: registry.schema_version,
+  policy_version: registry.policy_version,
+  skills: registry.skills
+});
 const sourceEntries=sources.sources.filter((s)=>s.kind==="github" && s.repo && s.ingest_enabled === true);
 
 const namespaceByRepo={
@@ -56,6 +62,7 @@ function releaseFor(skill){
 
 const existingBySource=new Map(registry.skills.map((s)=>[s.source.repo+":"+s.source.path,s]));
 const existingById=new Map(registry.skills.map((s)=>[s.id,s]));
+const seenSourceKeys=new Set();
 const discovered=[];
 for(const source of sourceEntries){
   const ref=source.default_branch??"main";
@@ -71,6 +78,7 @@ for(const source of sourceEntries){
 
 for(const {source,item,revision} of discovered){
   const sourceKey=source.repo+":"+item.path;
+  seenSourceKeys.add(sourceKey);
   let skill=existingBySource.get(sourceKey);
   const namespace=namespaceByRepo[source.repo]??source.repo.split("/")[0].toLowerCase().replace(/[^a-z0-9-]/g,"-");
   const stableId=skill?.id ?? namespace+"/"+item.name;
@@ -161,8 +169,34 @@ for(const {source,item,revision} of discovered){
   skill.release=releaseFor(skill);
 }
 
+for (const skill of registry.skills) {
+  const sourceRepo = skill.source?.repo;
+  if (!sourceEntries.some((source) => source.repo === sourceRepo)) continue;
+
+  const sourceKey = sourceRepo + ":" + skill.source.path;
+  if (seenSourceKeys.has(sourceKey)) continue;
+
+  skill.source = {
+    ...skill.source,
+    state: "missing"
+  };
+  skill.materialized = false;
+  skill.distribution = "blocked";
+  skill.release = {
+    status: "hold",
+    reasons: ["upstream-skill-missing"]
+  };
+}
+
 registry.skills.sort((a,b)=>a.id.localeCompare(b.id));
-registry.generated_at=new Date().toISOString();
+const nextSnapshot = JSON.stringify({
+  schema_version: registry.schema_version,
+  policy_version: registry.policy_version,
+  skills: registry.skills
+});
+registry.generated_at = nextSnapshot === previousSnapshot
+  ? previousGeneratedAt
+  : new Date().toISOString();
 fs.writeFileSync(registryFile,JSON.stringify(registry,null,2)+"\n");
 
 const bundlesFile=path.join(ROOT,"catalog/bundles.json");
