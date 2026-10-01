@@ -1,6 +1,6 @@
 {
   "schema_version": "0.2",
-  "generated_at": "2026-10-01T23:05:00+03:00",
+  "generated_at": "2026-10-01T23:59:00+03:00",
   "skills": [
     {
       "id": "anthropics/frontend-design",
@@ -2511,6 +2511,350 @@
         "network": null,
         "shell": null,
         "credentials": null
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "non-redistributable"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": null,
+        "last_ingested_revision": "5fd93af4cd0c623e020d0cc7e9ce178b4ac1f70f"
+      }
+    },
+    {
+      "id": "kdense/paper-lookup",
+      "name": "paper-lookup",
+      "publisher": "K-Dense AI",
+      "description": "Search 18 scholarly APIs and return reproducible provenance.",
+      "source": {
+        "repo": "K-Dense-AI/scientific-agent-skills",
+        "path": "skills/paper-lookup",
+        "revision": "ed4cea6cb24b0588f144264125e255ce8ce43f66",
+        "revision_type": "git-commit",
+        "url": "https://github.com/K-Dense-AI/scientific-agent-skills/tree/ed4cea6cb24b0588f144264125e255ce8ce43f66/skills/paper-lookup",
+        "state": "present"
+      },
+      "category": [
+        "research",
+        "literature"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "skill-level SKILL.md declares MIT"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills",
+        "claude-code",
+        "codex",
+        "cursor"
+      ],
+      "security": {
+        "scan_status": "pending",
+        "risk": "unknown",
+        "network": true,
+        "shell": true,
+        "credentials": false
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "security-scan-pending",
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": null,
+        "last_ingested_revision": "ed4cea6cb24b0588f144264125e255ce8ce43f66"
+      }
+    },
+    {
+      "id": "kdense/scientific-critical-thinking",
+      "name": "scientific-critical-thinking",
+      "publisher": "K-Dense AI",
+      "description": "Evaluate scientific claims, methodology, bias, confounding, and evidence quality.",
+      "source": {
+        "repo": "K-Dense-AI/scientific-agent-skills",
+        "path": "skills/scientific-critical-thinking",
+        "revision": "ed4cea6cb24b0588f144264125e255ce8ce43f66",
+        "revision_type": "git-commit",
+        "url": "https://github.com/K-Dense-AI/scientific-agent-skills/tree/ed4cea6cb24b0588f144264125e255ce8ce43f66/skills/scientific-critical-thinking",
+        "state": "present"
+      },
+      "category": [
+        "research",
+        "critical-thinking"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "skill-level SKILL.md declares MIT"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills",
+        "claude-code",
+        "codex",
+        "cursor"
+      ],
+      "security": {
+        "scan_status": "pending",
+        "risk": "unknown",
+        "network": false,
+        "shell": false,
+        "credentials": false
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "security-scan-pending",
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": null,
+        "last_ingested_revision": "ed4cea6cb24b0588f144264125e255ce8ce43f66"
+      }
+    },
+    {
+      "id": "kdense/scientific-brainstorming",
+      "name": "scientific-brainstorming",
+      "publisher": "K-Dense AI",
+      "description": "Generate and challenge research directions with transparent evaluation.",
+      "source": {
+        "repo": "K-Dense-AI/scientific-agent-skills",
+        "path": "skills/scientific-brainstorming",
+        "revision": "ed4cea6cb24b0588f144264125e255ce8ce43f66",
+        "revision_type": "git-commit",
+        "url": "https://github.com/K-Dense-AI/scientific-agent-skills/tree/ed4cea6cb24b0588f144264125e255ce8ce43f66/skills/scientific-brainstorming",
+        "state": "present"
+      },
+      "category": [
+        "research",
+        "ideation"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "skill-level SKILL.md declares MIT"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills",
+        "claude-code",
+        "codex",
+        "cursor"
+      ],
+      "security": {
+        "scan_status": "pending",
+        "risk": "unknown",
+        "network": false,
+        "shell": false,
+        "credentials": false
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "security-scan-pending",
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": null,
+        "last_ingested_revision": "ed4cea6cb24b0588f144264125e255ce8ce43f66"
+      }
+    },
+    {
+      "id": "kdense/shap",
+      "name": "shap",
+      "publisher": "K-Dense AI",
+      "description": "Explain and audit machine-learning predictions with SHAP.",
+      "source": {
+        "repo": "K-Dense-AI/scientific-agent-skills",
+        "path": "skills/shap",
+        "revision": "ed4cea6cb24b0588f144264125e255ce8ce43f66",
+        "revision_type": "git-commit",
+        "url": "https://github.com/K-Dense-AI/scientific-agent-skills/tree/ed4cea6cb24b0588f144264125e255ce8ce43f66/skills/shap",
+        "state": "present"
+      },
+      "category": [
+        "ml",
+        "interpretability"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "skill-level SKILL.md declares MIT"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills",
+        "claude-code",
+        "codex",
+        "cursor"
+      ],
+      "security": {
+        "scan_status": "pending",
+        "risk": "unknown",
+        "network": false,
+        "shell": true,
+        "credentials": false
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "security-scan-pending",
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": null,
+        "last_ingested_revision": "ed4cea6cb24b0588f144264125e255ce8ce43f66"
+      }
+    },
+    {
+      "id": "openai/agents-sdk",
+      "name": "agents-sdk",
+      "publisher": "OpenAI",
+      "description": "Build and evaluate OpenAI Agents SDK apps from Codex.",
+      "source": {
+        "repo": "openai/plugins",
+        "path": "plugins/openai-developers/skills/agents-sdk",
+        "revision": "5fd93af4cd0c623e020d0cc7e9ce178b4ac1f70f",
+        "revision_type": "git-commit",
+        "url": "https://github.com/openai/plugins/tree/5fd93af4cd0c623e020d0cc7e9ce178b4ac1f70f/plugins/openai-developers/skills/agents-sdk",
+        "state": "present"
+      },
+      "category": [
+        "openai",
+        "agents"
+      ],
+      "license": {
+        "spdx": "Proprietary",
+        "redistributable": false,
+        "status": "verified",
+        "evidence": "openai-developers plugin manifest declares Proprietary"
+      },
+      "distribution": "source-direct",
+      "compatibility": [
+        "agent-skills",
+        "codex",
+        "claude-code"
+      ],
+      "security": {
+        "scan_status": "pending",
+        "risk": "unknown",
+        "network": false,
+        "shell": false,
+        "credentials": false
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "non-redistributable"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": null,
+        "last_ingested_revision": "5fd93af4cd0c623e020d0cc7e9ce178b4ac1f70f"
+      }
+    },
+    {
+      "id": "openai/openai-api-troubleshooting",
+      "name": "openai-api-troubleshooting",
+      "publisher": "OpenAI",
+      "description": "Classify and route OpenAI API runtime failures.",
+      "source": {
+        "repo": "openai/plugins",
+        "path": "plugins/openai-developers/skills/openai-api-troubleshooting",
+        "revision": "5fd93af4cd0c623e020d0cc7e9ce178b4ac1f70f",
+        "revision_type": "git-commit",
+        "url": "https://github.com/openai/plugins/tree/5fd93af4cd0c623e020d0cc7e9ce178b4ac1f70f/plugins/openai-developers/skills/openai-api-troubleshooting",
+        "state": "present"
+      },
+      "category": [
+        "openai",
+        "agents"
+      ],
+      "license": {
+        "spdx": "Proprietary",
+        "redistributable": false,
+        "status": "verified",
+        "evidence": "openai-developers plugin manifest declares Proprietary"
+      },
+      "distribution": "source-direct",
+      "compatibility": [
+        "agent-skills",
+        "codex",
+        "claude-code"
+      ],
+      "security": {
+        "scan_status": "pending",
+        "risk": "unknown",
+        "network": false,
+        "shell": false,
+        "credentials": false
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "non-redistributable"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": null,
+        "last_ingested_revision": "5fd93af4cd0c623e020d0cc7e9ce178b4ac1f70f"
+      }
+    },
+    {
+      "id": "openai/openai-platform-api-key",
+      "name": "openai-platform-api-key",
+      "publisher": "OpenAI",
+      "description": "Secure credential-gate guidance for OpenAI API-backed work.",
+      "source": {
+        "repo": "openai/plugins",
+        "path": "plugins/openai-developers/skills/openai-platform-api-key",
+        "revision": "5fd93af4cd0c623e020d0cc7e9ce178b4ac1f70f",
+        "revision_type": "git-commit",
+        "url": "https://github.com/openai/plugins/tree/5fd93af4cd0c623e020d0cc7e9ce178b4ac1f70f/plugins/openai-developers/skills/openai-platform-api-key",
+        "state": "present"
+      },
+      "category": [
+        "openai",
+        "agents"
+      ],
+      "license": {
+        "spdx": "Proprietary",
+        "redistributable": false,
+        "status": "verified",
+        "evidence": "openai-developers plugin manifest declares Proprietary"
+      },
+      "distribution": "source-direct",
+      "compatibility": [
+        "agent-skills",
+        "codex",
+        "claude-code"
+      ],
+      "security": {
+        "scan_status": "pending",
+        "risk": "unknown",
+        "network": false,
+        "shell": false,
+        "credentials": true
       },
       "materialized": false,
       "release": {
