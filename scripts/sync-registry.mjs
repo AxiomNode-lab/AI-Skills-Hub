@@ -7,7 +7,7 @@ const ROOT=process.cwd();
 const sources=JSON.parse(fs.readFileSync(path.join(ROOT,"catalog/sources.json"),"utf8"));
 const registryFile=path.join(ROOT,"catalog/skills.json");
 const registry=JSON.parse(fs.readFileSync(registryFile,"utf8"));
-const sourceEntries=sources.sources.filter((s)=>s.kind==="github" && s.repo);
+const sourceEntries=sources.sources.filter((s)=>s.kind==="github" && s.repo && s.ingest_enabled === true);
 
 const namespaceByRepo={
   "anthropics/skills":"anthropics",
