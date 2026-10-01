@@ -34,7 +34,7 @@ test("remote discovery does not claim unverified agent compatibility",async()=>{
   const fakeFetch=async()=>({ok:true,json:async()=>({items:[{path:"skills/pdf-helper/SKILL.md"}]})});
   const result=await (await import("../packages/discovery/src/index.mjs")).searchRemote("PDF",{
     sources:[{id:"remote/source",kind:"github",repo:"remote/source",default_branch:"main"}],
-    agent:"codex",limit:5,fetchImpl:fakeFetch,cacheDir:"/tmp/ai-skills-hub-discovery-tests-final"
+    agent:"codex",limit:5,fetchImpl:fakeFetch,cacheDir:"/tmp/ai-skills-hub-discovery-tests-"+process.pid
   });
   assert.equal(result[0].item.name,"pdf-helper");
   assert.equal(result[0].item.compatibility_verified,false);
