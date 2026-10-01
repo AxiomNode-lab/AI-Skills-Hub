@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ai-skills-hub.dev/schemas/sources.v0.2.schema.json",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "sources"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "type": "string"
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "kind"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 3
+          },
+          "kind": {
+            "enum": [
+              "github",
+              "standard",
+              "documentation"
+            ]
+          },
+          "repo": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "default_branch": {
+            "type": "string"
+          },
+          "ingest_enabled": {
+            "type": "boolean"
+          },
+          "official": {
+            "type": "boolean"
+          },
+          "priority": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
