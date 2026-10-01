@@ -1,18 +1,16 @@
-import { readLocalCapabilities } from '../utils.mjs';
+import { searchRegistry } from "@ai-skills-hub/discovery";
+import { loadRegistry } from "@ai-skills-hub/core";
 
-export async function searchCommand(query, options) {
-  const allCapabilities = await readLocalCapabilities();
-  
-  let results = allCapabilities;
-  if (query) {
-    const lowerQuery = query.toLowerCase();
-    results = allCapabilities.filter(c => 
-      (c.name && c.name.toLowerCase().includes(lowerQuery)) ||
-      (c.description && c.description.toLowerCase().includes(lowerQuery)) ||
-      (c.type && c.type.toLowerCase().includes(lowerQuery)) ||
-      (c.id && c.id.toLowerCase().includes(lowerQuery))
-    );
-  }
+export function searchCommand(query, options = {}) {
+  const registry = loadRegistry(
+    "catalog/skills.json",
+    "catalog/bundles.json"
+  );
+
+  const results = searchRegistry(registry, query || "", {
+    agent: options.agent || undefined,
+    limit: options.limit || 50
+  }).map(({ item, score }) => ({ ...item, _score: score }));
 
   if (options.json) {
     console.log(JSON.stringify(results, null, 2));
@@ -20,7 +18,7 @@ export async function searchCommand(query, options) {
   }
 
   if (results.length === 0) {
-    console.log(`No capabilities found matching "${query || ''}".`);
+    console.log(`No capabilities found matching "${query || ""}".`);
     return;
   }
 
@@ -28,11 +26,11 @@ export async function searchCommand(query, options) {
   for (const cap of results) {
     console.log(`ID: ${cap.id}`);
     console.log(`Name: ${cap.name}`);
-    console.log(`Type: ${cap.type}`);
-    console.log(`Description: ${cap.description || 'N/A'}`);
-    if (cap.dependencies?.length) {
-      console.log(`Dependencies: ${cap.dependencies.join(', ')}`);
-    }
+    console.log(`Type: ${cap.artifact_type || cap.type || "skill"}`);
+    console.log(`Distribution: ${cap.distribution}`);
+    console.log(`Release: ${cap.release?.status || "unknown"}`);
+    console.log(`Security: ${cap.security?.risk || "unknown"} / ${cap.security?.scan_status || "unknown"}`);
+    console.log(`Description: ${cap.description || "N/A"}`);
     console.log("------------------------------------------");
   }
 }
