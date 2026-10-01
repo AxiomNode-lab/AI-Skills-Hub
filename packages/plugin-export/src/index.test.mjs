@@ -57,3 +57,25 @@ test("portable export uses fixed skills directory and notices", () => {
   assert.ok(fs.existsSync(path.join(out,"THIRD-PARTY-NOTICES.md")));
   assert.match(fs.readFileSync(path.join(out,"THIRD-PARTY-NOTICES.md"),"utf8"),/Apache-2\.0/);
 });
+
+
+test("export rejects unverified release state even when materialized",()=>{
+  const temp=fs.mkdtempSync(path.join(os.tmpdir(),"plugin-export-"));
+  const skill=skillFixture(temp);
+  assert.throws(() => exportPortablePlugin({
+    outputDir:path.join(temp,"out"),
+    manifest:buildPortablePluginManifest({name:"example-plugin",description:"Example"}),
+    skills:[{...skill,release:{status:"pending"},security:{scan_status:"verified",risk:"none"}}
+  ]),/release gates/);
+});
+
+test("export accepts only release-eligible bundled artifacts",()=>{
+  const temp=fs.mkdtempSync(path.join(os.tmpdir(),"plugin-export-"));
+  const skill=skillFixture(temp);
+  const result=exportPortablePlugin({
+    outputDir:path.join(temp,"out"),
+    manifest:buildPortablePluginManifest({name:"example-plugin",description:"Example"}),
+    skills:[{...skill,distribution:"bundled",release:{status:"eligible"},security:{scan_status:"verified",risk:"none"},license:{spdx:"MIT",redistributable:true,status:"verified"}}]
+  });
+  assert.equal(result.skillCount,1);
+});
