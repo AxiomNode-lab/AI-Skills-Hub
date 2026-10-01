@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ai-skills-hub.dev/schemas/capability-result.v0.1.schema.json",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "artifact_type",
+    "origin",
+    "action",
+    "status",
+    "compatibility_verified"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "artifact_type": {
+      "enum": [
+        "skill",
+        "mcp-server",
+        "agent-plugin",
+        "cli-tool"
+      ]
+    },
+    "score": {
+      "type": "number"
+    },
+    "origin": {
+      "type": "string",
+      "minLength": 1
+    },
+    "agent": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "compatibility_verified": {
+      "type": "boolean"
+    },
+    "action": {
+      "enum": [
+        "install",
+        "source-direct",
+        "configuration",
+        "marketplace",
+        "adapter-pending",
+        "unsupported"
+      ]
+    },
+    "status": {
+      "type": "string"
+    },
+    "adapter": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "reason": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "source": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": true
+    },
+    "command": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "argv": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": "string"
+      }
+    },
+    "config": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": true
+    },
+    "target": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "note": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  }
+}
