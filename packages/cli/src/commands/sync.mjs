@@ -3,44 +3,42 @@ import fs from "node:fs/promises";
 import path from "node:path";
 
 export async function syncCommand() {
-  console.log("🔄 Syncing installed capabilities with their remote Git repositories...");
+  const cacheDir = path.resolve(process.cwd(), "capabilities-library");
 
-  const os = await import('node:os');
-  const cacheDir = path.resolve(process.cwd(), 'capabilities-library');
-  
   try {
     const entries = await fs.readdir(cacheDir, { withFileTypes: true });
     let syncCount = 0;
 
     for (const entry of entries) {
-      if (entry.isDirectory()) {
-        const capPath = path.join(cacheDir, entry.name);
-        const gitDir = path.join(capPath, ".git");
-        
-        try {
-          await fs.access(gitDir);
-          // It's a git repo
-          console.log(`\n⬇️  Syncing ${entry.name}...`);
-          try {
-            execFileSync("git", ["pull"], { cwd: capPath, stdio: 'inherit' });
-            syncCount++;
-          } catch (e) {
-            console.error(`⚠️ Failed to sync ${entry.name}. Skipping.`);
-          }
-        } catch {
-          // Not a git repo, skip
-        }
+      if (!entry.isDirectory()) continue;
+
+      const capPath = path.join(cacheDir, entry.name);
+      const gitDir = path.join(capPath, ".git");
+
+      try {
+        await fs.access(gitDir);
+      } catch {
+        continue;
+      }
+
+      console.log(`Syncing ${entry.name}...`);
+      try {
+        execFileSync("git", ["pull", "--ff-only"], {
+          cwd: capPath,
+          stdio: "inherit"
+        });
+        syncCount += 1;
+      } catch {
+        console.error(`Failed to sync ${entry.name}; repository left unchanged.`);
       }
     }
 
-    if (syncCount === 0) {
-      console.log("\nℹ️ No Git-linked capabilities found in your local cache.");
-    } else {
-      console.log(`\n✅ Successfully synced ${syncCount} capabilities!`);
-      console.log(`Note: To apply these updates to your agents, run the 'skills-hub' interactive installer again.`);
-    }
-
+    console.log(
+      syncCount === 0
+        ? "No Git-linked capabilities found in capabilities-library/."
+        : `Successfully synced ${syncCount} capabilities.`
+    );
   } catch (error) {
-    console.error(`❌ Failed to read capabilities cache:`, error.message);
+    console.error(`Failed to read capabilities cache: ${error.message}`);
   }
 }
