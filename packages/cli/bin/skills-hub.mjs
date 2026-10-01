@@ -2,7 +2,7 @@
 import { loadRegistry, resolveBundle, filterForAgent } from "@ai-skills-hub/core";
 import { buildInstallPlan } from "@ai-skills-hub/installer";
 import { installMaterializedSkill, verifyInstalledSkill, doctorInstalledSkills, uninstallSkillRecord } from "@ai-skills-hub/installer/native";
-import { hybridSearch, toInstallChoices } from "@ai-skills-hub/discovery";
+import { hybridSearch, toInstallChoices, summarizeInstallPlan } from "@ai-skills-hub/discovery";
 import fs from "node:fs";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
@@ -97,7 +97,7 @@ if (!command || command === "help") {
 Usage:
   skills-hub search <term>
   skills-hub discover <natural-language-query> --agent <agent> [--no-remote]
-  skills-hub add <natural-language-query> --agent <agent> [--scope project|user] [--remote] [--index <n>]
+  skills-hub add <natural-language-query> --agent <agent> [--scope project|user] [--remote] [--all] [--index <n>]
   skills-hub info <skill-id>
   skills-hub targets
   skills-hub plan <bundle-or-skill> [--agent <agent>]
@@ -168,7 +168,47 @@ if (command === "add") {
     token: process.env.GITHUB_TOKEN,
     remote: !args.includes("--no-remote")
   });
-  const choices = toInstallChoices(discovery, agent);
+  const choices = toInstallChoices(discovery, agent, {scope});
+
+  const all = args.includes("--all");
+  const summary = summarizeInstallPlan(discovery,agent,{scope});
+  if (all) {
+    if (!args.includes("--remote") && summary.remote.length) {
+      console.log(JSON.stringify({
+        query, summary,
+        next_step: "Re-run with --all --remote to execute remote adapters."
+      },null,2));
+      process.exit(3);
+    }
+
+    const results = [];
+    const executable = choices.filter((choice) =>
+      choice.action === "install" ||
+      (args.includes("--remote") && ["source-direct","marketplace","configuration"].includes(choice.action))
+    );
+
+    const configChoices = executable.filter((choice)=>choice.action==="configuration");
+    for (const choice of configChoices) {
+      try { results.push(await executeChoice(choice,agent,scope)); }
+      catch (error) { results.push({id:choice.id,action:"error",error:error.message}); }
+    }
+
+    const commandChoices = executable.filter((choice)=>choice.action!=="configuration");
+    const executed = await mapConcurrent(commandChoices,3,async(choice)=>executeChoice(choice,agent,scope));
+    results.push(...executed.map((result)=>result?.error
+      ? {action:"error",error:result.error.message}
+      : result
+    ));
+
+    console.log(JSON.stringify({
+      query,agent,scope,all:true,summary,
+      executed:results.filter((r)=>r.action==="executed"||r.action==="installed"||r.action==="configured").length,
+      errors:results.filter((r)=>r.action==="error").length,
+      results
+    },null,2));
+    process.exit(results.some((r)=>r.action==="error") ? 2 : 0);
+  }
+
   const selected = choices[selectedIndex - 1];
 
   if (!selected) {
