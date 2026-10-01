@@ -2,6 +2,7 @@ import { filterForAgent } from "@ai-skills-hub/core";
 import os from "node:os";
 import path from "node:path";
 import { cacheKey, readCache, writeCache } from "./cache.mjs";
+import { rerankWithModel } from "./rerank.mjs";
 
 const norm = (v) => String(v ?? "").toLowerCase().trim();
 const ARABIC_HINTS = new Map([
@@ -101,7 +102,16 @@ export async function hybridSearch(registry,query,opts={}) {
     if (seen.has(key)) continue; seen.add(key); merged.push(entry);
   }
   merged.sort((a,b)=>b.score-a.score || a.item.name.localeCompare(b.item.name));
-  return {query,agent:opts.agent ?? null,remote_searched:true,results:merged.slice(0,opts.limit ?? 20)};
+  const baseResults=merged.slice(0,opts.limit ?? 20);
+  let finalResults=baseResults;
+  let aiReranked=false;
+  if(opts.ai?.baseUrl && opts.ai?.model){
+    try {
+      finalResults=await rerankWithModel(baseResults,query,opts.ai);
+      aiReranked=true;
+    } catch {}
+  }
+  return {query,agent:opts.agent ?? null,remote_searched:true,ai_reranked:aiReranked,results:finalResults};
 }
 
 export function toInstallChoices(searchResult,agent) {
