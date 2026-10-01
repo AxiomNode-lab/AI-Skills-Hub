@@ -16,7 +16,7 @@ if(materialized.length !== skills.length){
 const safeName=bundleName.replace(/^@/,"").replace(/[^a-z0-9._-]+/gi,"-");
 const manifest=buildPortablePluginManifest({
   name:"ai-skills-hub-" + safeName,
-  version:"0.1.0",
+  version:"0.2.0",
   description:"Portable Agent Skills bundle exported by AI Skills Hub: " + bundleName,
   repository:"https://github.com/AxiomNode-lab/AI-Skills-Hub",
   author:{name:"AxiomNode-lab"}
