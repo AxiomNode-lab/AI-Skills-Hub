@@ -1,5 +1,9 @@
 name: Materialize Approved Skills
 
+concurrency:
+  group: ai-skills-hub-materialize
+  cancel-in-progress: true
+
 on:
   workflow_dispatch:
 

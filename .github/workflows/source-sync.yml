@@ -1,5 +1,9 @@
 name: Source Sync
 
+concurrency:
+  group: ai-skills-hub-source-sync
+  cancel-in-progress: true
+
 on:
   schedule:
     - cron: "17 3 * * *"

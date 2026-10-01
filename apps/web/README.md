@@ -1,12 +1,18 @@
 # Registry Web
 
-The static discovery UI expects the Registry API at `http://localhost:8787`.
+The web client uses the same-origin /api endpoint by default.
 
-Run:
+Local development:
 
-```bash
+~~~bash
 node apps/api/src/server.mjs
-python3 -m http.server 4173 -d apps/web/public
-```
+node apps/web/dev-server.mjs
+~~~
 
-For another API origin, set `window.AI_SKILLS_API_URL` before loading `app.js`.
+Docker development:
+
+~~~bash
+docker compose up --build
+~~~
+
+A custom API origin can be supplied through window.AI_SKILLS_API_URL before app.js executes.
