@@ -11,6 +11,18 @@ const skill = (distribution, materialized = false) => ({
   source: {repo:"example/repo"}
 });
 
+test("blocked skill never becomes executable", () => {
+  const [item] = buildInstallPlan([skill("blocked")], "codex");
+  assert.equal(item.action, "blocked");
+  assert.equal(item.command, null);
+});
+
+test("source-direct always uses upstream bridge", () => {
+  const [item] = buildInstallPlan([skill("source-direct", false)], "claude-code");
+  assert.equal(item.action, "source-direct");
+  assert.match(item.command, /npx skills add/);
+});
+
 test("review-required is held by default", () => {
   const [item] = buildInstallPlan([skill("review-required")], "codex");
   assert.equal(item.action, "hold");

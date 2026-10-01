@@ -14,6 +14,21 @@ export function buildInstallPlan(skills, agent, options = {}) {
       return { ...base, action: "blocked", reason: "registry_blocked", command: null };
     }
 
+    if (skill.distribution === "source-direct") {
+      return {
+        ...base,
+        action: "source-direct",
+        reason: "non_redistributable_upstream",
+        command: [
+          "npx skills add",
+          "https://github.com/" + skill.source.repo,
+          "--skill", JSON.stringify(skill.name),
+          "--agent", agent,
+          "-y"
+        ].join(" ")
+      };
+    }
+
     if (skill.distribution === "review-required") {
       if (!allowReview) {
         return { ...base, action: "hold", reason: "manual_review_required", command: null };

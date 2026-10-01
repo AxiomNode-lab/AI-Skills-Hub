@@ -12,7 +12,8 @@
     "compatibility",
     "security",
     "materialized",
-    "release"
+    "release",
+    "integrity"
   ],
   "properties": {
     "id": {
@@ -50,6 +51,16 @@
         "url": {
           "type": "string",
           "format": "uri"
+        },
+        "tree_sha": {
+          "type": "string"
+        },
+        "state": {
+          "enum": [
+            "present",
+            "missing",
+            "unknown"
+          ]
         }
       },
       "additionalProperties": false
@@ -155,6 +166,24 @@
           "items": {
             "type": "string"
           }
+        }
+      },
+      "additionalProperties": false
+    },
+    "integrity": {
+      "type": "object",
+      "properties": {
+        "upstream_skill_sha256": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "last_ingested_revision": {
+          "type": [
+            "string",
+            "null"
+          ]
         }
       },
       "additionalProperties": false

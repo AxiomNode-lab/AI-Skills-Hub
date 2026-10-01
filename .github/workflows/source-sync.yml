@@ -29,6 +29,8 @@ jobs:
           node scripts/ingest-github.mjs microsoft/skills main
           node scripts/ingest-github.mjs openai/plugins main
           node scripts/refresh-source-index.mjs
+          node scripts/sync-curated-catalog.mjs
+          node scripts/generate-lockfile.mjs
       - run: node scripts/validate-registry.mjs
       - name: Commit snapshots
         run: |
@@ -38,6 +40,6 @@ jobs:
           fi
           git config user.name "ai-skills-hub-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add catalog/ingestion
+          git add catalog/ingestion catalog/skills.json catalog/skills.lock.json catalog/source-index.json
           git commit -m "chore: refresh source ingestion snapshots"
           git push

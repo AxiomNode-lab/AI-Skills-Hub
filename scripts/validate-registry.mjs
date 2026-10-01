@@ -27,10 +27,14 @@ for (const skill of data.skills) {
   if (skill.distribution === "bundled" && !/^[0-9a-f]{40}$/.test(skill.source.revision ?? "")) {
     throw new Error(skill.id + " bundled artifact must pin a 40-char git commit");
   }
+  if (skill.source.state && !["present","missing","unknown"].includes(skill.source.state)) {
+    throw new Error(skill.id + " invalid source state");
+  }
 
   if (typeof skill.materialized !== "boolean") throw new Error(skill.id + " invalid materialized flag");
   if (!["pending","eligible","hold"].includes(skill.release?.status)) throw new Error(skill.id + " invalid release status");
   if (!Array.isArray(skill.release?.reasons)) throw new Error(skill.id + " invalid release reasons");
+  if (!skill.integrity || typeof skill.integrity !== "object") throw new Error(skill.id + " missing integrity metadata");
   if (skill.distribution !== "bundled" && skill.release.status === "eligible") {
     throw new Error(skill.id + " non-bundled skill cannot be release-eligible");
   }
