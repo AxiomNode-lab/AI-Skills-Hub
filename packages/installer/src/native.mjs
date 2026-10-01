@@ -37,6 +37,7 @@ export function installMaterializedSkill(skill, options = {}) {
   const scope = options.scope ?? "project";
   const agent = options.agent ?? "agent-skills";
   const overwrite = options.overwrite === true;
+  const force = options.force === true;
 
   if (
     skill.distribution !== "bundled" ||
@@ -54,6 +55,24 @@ export function installMaterializedSkill(skill, options = {}) {
   const root = resolveInstallRoot(agent, scope, cwd);
   const destination = normalizeSkillDirectory(root, skill.name);
   if (!safeInside(root, destination)) throw new Error("Unsafe installation path");
+
+  if (fs.existsSync(destination)) {
+    if (!overwrite) {
+      throw new Error("Destination exists; pass --overwrite to replace: " + destination);
+    }
+    const records = readInstallRecords(scope, cwd);
+    const existing = records[skill.id];
+    if (!existing) {
+      if (!force) {
+        throw new Error("Destination is not managed by AI Skills Hub; pass --force to replace: " + destination);
+      }
+    } else {
+      const verification = verifyInstallRecord(existing);
+      if (!verification.ok && !force) {
+        throw new Error("Existing installation changed; pass --force to replace: " + verification.reason);
+      }
+    }
+  }
 
   copyDirectory(sourceRoot, destination, overwrite);
 
