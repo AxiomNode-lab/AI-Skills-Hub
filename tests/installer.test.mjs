@@ -27,3 +27,10 @@ test("incompatible agent is rejected before install resolution",()=>{
   const plan=buildInstallPlan([{...base,distribution:"source-direct",compatibility:["agent-skills","claude-code"]}],"codex");
   assert.equal(plan[0].action,"incompatible");
 });
+
+
+test("install plan marks compatible bundled release as local install",()=>{
+  const skill={...base,distribution:"bundled",materialized:true,release:{status:"eligible"},security:{scan_status:"verified",risk:"none"}};
+  const plan=buildInstallPlan([skill],"codex");
+  assert.equal(plan[0].action,"install");
+});
