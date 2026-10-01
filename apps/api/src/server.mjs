@@ -86,6 +86,29 @@ export function createServer() {
       });
     }
 
+    if (url.pathname === "/api/capabilities/search") {
+      const query = (url.searchParams.get("q") ?? "").trim();
+      const agent = url.searchParams.get("agent") ?? "agent-skills";
+      const limit = clampInteger(url.searchParams.get("limit"), 20, 1, 50);
+      if (!query) return json(res, 400, { error: "missing_query" });
+      const sources = JSON.parse(fs.readFileSync("catalog/sources.json","utf8")).sources;
+      try {
+        const result = await hybridSearch(registry, query, {
+          sources,
+          agent,
+          limit,
+          token: process.env.GITHUB_TOKEN,
+          remote: url.searchParams.get("remote") !== "false",
+          ai: process.env.AI_DISCOVERY_BASE_URL && process.env.AI_DISCOVERY_MODEL
+            ? {baseUrl:process.env.AI_DISCOVERY_BASE_URL,model:process.env.AI_DISCOVERY_MODEL,apiKey:process.env.AI_DISCOVERY_API_KEY}
+            : undefined
+        });
+        return json(res, 200, { ...result, choices: toInstallChoices(result, agent) });
+      } catch (error) {
+        return json(res, 502, { error:"capability_search_failed", message:error.message });
+      }
+    }
+
     if (url.pathname === "/api/discover") {
       const query = (url.searchParams.get("q") ?? "").trim();
       const agent = url.searchParams.get("agent") ?? "agent-skills";
