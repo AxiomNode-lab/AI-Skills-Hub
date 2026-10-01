@@ -1,4 +1,5 @@
 import fs from "node:fs/promises";
+import fsSync from "node:fs";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
 import { loadRegistry } from "@ai-skills-hub/core";
@@ -7,8 +8,7 @@ function executableCandidates(command) {
   const value = String(command ?? "").trim();
   if (!value) return [];
 
-  const separator = path.sep;
-  const isPath = value.includes("/") || value.includes("\") || path.isAbsolute(value);
+  const isPath = value.includes("/") || value.includes("\\") || path.isAbsolute(value);
   if (isPath) return [value];
 
   const pathEntries = (process.env.PATH ?? "").split(path.delimiter).filter(Boolean);
@@ -25,21 +25,17 @@ function executableCandidates(command) {
 }
 
 export function isExecutableAvailable(command) {
-  try {
-    return executableCandidates(command).some((candidate) => {
-      try {
-        const stat = fsSync.statSync(candidate);
-        if (!stat.isFile()) return false;
-        if (process.platform === "win32") return true;
-        fsSync.accessSync(candidate, fsSync.constants.X_OK);
-        return true;
-      } catch {
-        return false;
-      }
-    });
-  } catch {
-    return false;
-  }
+  return executableCandidates(command).some((candidate) => {
+    try {
+      const stat = fsSync.statSync(candidate);
+      if (!stat.isFile()) return false;
+      if (process.platform === "win32") return true;
+      fsSync.accessSync(candidate, fsSync.constants.X_OK);
+      return true;
+    } catch {
+      return false;
+    }
+  });
 }
 
 export function checkPrerequisites(prerequisites) {
@@ -76,6 +72,7 @@ export async function fileExists(p) {
 export function readLocalCapabilities() {
   const registryPath = path.resolve(process.cwd(), "catalog", "skills.json");
   const bundlesPath = path.resolve(process.cwd(), "catalog", "bundles.json");
+
   try {
     const registry = loadRegistry(registryPath, bundlesPath);
     if (!Array.isArray(registry.skills)) {
@@ -134,5 +131,3 @@ export async function checkForUpdates() {
     // Version checks are best-effort and must never block the CLI.
   }
 }
-
-import fsSync from "node:fs";
