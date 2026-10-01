@@ -1,6 +1,6 @@
 # AI Skills Hub
 
-A license-aware, provenance-first registry and distribution layer for AI Agent Skills.
+A unified discovery and installation hub for AI Agent Skills, Tools, Plugins, and MCP integrations.
 
 ## Why it exists
 
@@ -33,6 +33,11 @@ Upstream Sources
     Registry
       |
   +---+---+----------------+
+      |
+      v
+Semantic Discovery
+      |
+skills.sh + approved GitHub sources
   |       |                |
   v       v                v
 Web      CLI               MCP
@@ -61,6 +66,8 @@ pnpm validate
 pnpm test
 pnpm audit
 pnpm cli search frontend
+pnpm cli discover "I need a PDF tool for Codex" --agent codex
+pnpm cli add "I need a PDF tool for Codex" --agent codex --remote
 pnpm cli plan @core --agent codex
 pnpm api
 pnpm web
@@ -81,3 +88,9 @@ The default catalog is metadata-first. Third-party content is only materialized 
 ## Standards
 
 The project targets the open Agent Skills format, Agent Plugins packaging, and the MCP Skills extension.
+
+## Unified discovery
+
+The Hub searches its local catalog first, then semantic external discovery and approved GitHub sources when the requested Skill is not already present locally. Remote results stay metadata-only until they pass the Hub release policy.
+
+The discovery layer can use the public skills ecosystem as a semantic index, then bridge installation through the upstream skills CLI.
