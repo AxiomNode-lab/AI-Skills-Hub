@@ -4,10 +4,26 @@ import path from "node:path";
 import { cacheKey, readCache, writeCache } from "./cache.mjs";
 
 const norm = (v) => String(v ?? "").toLowerCase().trim();
+const ARABIC_HINTS = new Map([
+  ["اداة","tool"],["أداة","tool"],["ادوات","tools"],["أدوات","tools"],
+  ["بدي","need"],["اريد","need"],["أريد","need"],["محتاج","need"],
+  ["اعمل","create"],["اعمللي","create"],["تعمل","create"],["إنشاء","create"],
+  ["بحث","search"],["يبحث","search"],["برمجة","programming"],["مطور","developer"],
+  ["كود","code"],["موقع","website"],["صور","images"],["فيديو","video"],
+  ["ملف","file"],["ملفات","files"],["ديسكورد","discord"],["تلغرام","telegram"],
+  ["واتساب","whatsapp"],["على","for"],["ل","for"]
+]);
+
+function expandQuery(value) {
+  const original = String(value ?? "");
+  const parts = original.split(/\s+/).map(x => x.replace(/[،؛,.!?؟]/g,""));
+  return [original, ...parts.map(x => ARABIC_HINTS.get(x)).filter(Boolean)].join(" ").trim();
+}
+
 const words = (v) => norm(v).split(/[^a-z0-9@._/-]+/).filter(Boolean);
 
 function score(query, item, agent) {
-  const q = norm(query);
+  const q = norm(expandQuery(query));
   const hay = norm([item.id,item.name,item.publisher,item.description,...(item.category ?? []),...(item.tags ?? [])].join(" "));
   let n = 0;
   if (!q) n = 1;
@@ -47,7 +63,7 @@ export async function searchRemote(query,{sources=[],agent,limit=20,token,fetchI
   if(cached) return cached;
   const enabled = sources.filter(s => s.kind === "github" && s.discovery_enabled !== false);
   const jobs = enabled.map(async source => {
-    const q = encodeURIComponent("SKILL.md " + query + " repo:" + source.repo);
+    const q = encodeURIComponent("SKILL.md " + expandQuery(query) + " repo:" + source.repo);
     const data = await github("https://api.github.com/search/code?q="+q+"&per_page=20",{token,fetchImpl});
     return {source,data};
   });
@@ -62,12 +78,12 @@ export async function searchRemote(query,{sources=[],agent,limit=20,token,fetchI
       const name = path.split("/").pop();
       const item = {
         id: source.id + "/" + name, name, publisher: source.repo.split("/")[0],
-        description: null, category:[], tags:[], compatibility:["agent-skills"],
+        description: null, category:[], tags:[], compatibility:["agent-skills"], compatibility_verified:false,
         distribution:"source-direct", origin:"remote-github",
         source:{repo:source.repo,path,revision:null,revision_type:"git-commit",
           url:"https://github.com/"+source.repo+"/tree/"+(source.default_branch ?? "main")+"/"+path}
       };
-      if (!agent || agent === "agent-skills") results.push({item,score:score(query,item,agent),origin:"remote-github"});
+      results.push({item,score:score(query,item,agent),origin:"remote-github"});
     }
   }
   const output=results.filter(x=>x.score>0).sort((a,b)=>b.score-a.score || a.item.name.localeCompare(b.item.name)).slice(0,limit);
