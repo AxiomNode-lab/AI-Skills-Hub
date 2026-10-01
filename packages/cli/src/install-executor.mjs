@@ -1,6 +1,7 @@
 import { execFileSync } from "node:child_process";
 import { buildAdapterPlan } from "@ai-skills-hub/discovery";
 import { getAdapter } from "../../installer/src/adapters/index.mjs";
+import { writeInstallRecord } from "../../installer/src/state.mjs";
 
 const TRUSTED_BINARIES = new Set(["npx", "pnpm", "codex", "claude", "copilot"]);
 
@@ -182,6 +183,25 @@ export async function installCapability(
       force: true,
       env
     });
+
+    if (!result.record && result.destination) {
+      writeInstallRecord({
+        schema_version: "0.2",
+        skill_id: capability.id,
+        name: capability.name,
+        type: capability.type ?? capability.artifact_type ?? "skill",
+        agent,
+        scope,
+        source: {
+          repo: capability.source?.repo ?? null,
+          path: capability.source?.path ?? null,
+          revision: capability.source?.revision ?? null
+        },
+        installed_at: new Date().toISOString(),
+        destination: result.destination,
+        files: []
+      }, cwd);
+    }
 
     return {
       ...plan,
