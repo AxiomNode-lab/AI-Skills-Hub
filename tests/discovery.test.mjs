@@ -149,3 +149,29 @@ test("unsupported MCP transport remains pending",async()=>{
   },"codex");
   assert.equal(plan.action,"adapter-pending");
 });
+
+test("unreleased bundled skill remains held by discovery adapter",async()=>{
+  const {buildAdapterPlan}=await import("../packages/discovery/src/adapters.mjs");
+  const plan=buildAdapterPlan({
+    artifact_type:"skill",
+    name:"not-ready",
+    distribution:"bundled",
+    materialized:false,
+    release:{status:"pending"},
+    source:{repo:"example/repo",path:"skills/not-ready"}
+  },"codex");
+  assert.equal(plan.action,"adapter-pending");
+  assert.equal(plan.reason,"bundle_not_released");
+});
+
+test("review-required skill cannot silently become source-direct",async()=>{
+  const {buildAdapterPlan}=await import("../packages/discovery/src/adapters.mjs");
+  const plan=buildAdapterPlan({
+    artifact_type:"skill",
+    name:"needs-review",
+    distribution:"review-required",
+    source:{repo:"example/repo",path:"skills/needs-review"}
+  },"codex");
+  assert.equal(plan.action,"adapter-pending");
+  assert.equal(plan.reason,"manual_review_required");
+});
