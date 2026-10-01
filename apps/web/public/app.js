@@ -94,7 +94,7 @@ async function runDiscovery() {
   els.searchStatus.textContent = "Searching registry + remote sources…";
   try {
     const agent = els.agent.value || "agent-skills";
-    const payload = await getJson("/api/discover?q=" + encodeURIComponent(query) + "&agent=" + encodeURIComponent(agent) + "&limit=30");
+    const payload = await getJson("/api/capabilities/search?q=" + encodeURIComponent(query) + "&agent=" + encodeURIComponent(agent) + "&limit=30");
     skills = (payload.choices ?? []).map((choice) => ({
       id: choice.id,
       name: choice.name,
@@ -169,7 +169,7 @@ function render() {
     const risk = s.security?.risk ?? (s.security?.scan_status === "verified" ? "low" : "pending");
     const release = s.release?.status ?? "pending";
     const revision = s.source?.revision ? s.source.revision.slice(0,8) : "unpinned";
-    const origin = s._origin === "remote-github" ? "remote" : "registry";
+    const origin = s._origin ?? "registry";
     return '<article class="card">' +
       '<div class="card-top"><span class="state ' + escapeHtml(s.distribution) + '">' + escapeHtml(s.distribution) + '</span><span class="risk">' + escapeHtml(s.artifact_type ?? "skill") + ' · ' + escapeHtml(origin) + ' · risk:' + escapeHtml(risk) + '</span></div>' +
       '<h3>' + escapeHtml(s.name) + '</h3>' +
