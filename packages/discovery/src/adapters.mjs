@@ -13,6 +13,30 @@ export function buildAdapterPlan(item, agent, { scope="project" } = {}) {
   const url = sourceUrl(item.source);
   const name = item.name;
 
+  if (type === "skill" && item.distribution === "bundled" && !(item.materialized && item.release?.status === "eligible")) {
+    return {
+      artifact_type:type,
+      action:"adapter-pending",
+      status:"planned",
+      adapter:"registry-release-gate",
+      reason:"bundle_not_released",
+      command:null,
+      argv:null
+    };
+  }
+
+  if (type === "skill" && item.distribution === "review-required") {
+    return {
+      artifact_type:type,
+      action:"adapter-pending",
+      status:"planned",
+      adapter:"manual-review",
+      reason:"manual_review_required",
+      command:null,
+      argv:null
+    };
+  }
+
   if (type === "skill" && url && name) {
     return {
       artifact_type:type,
