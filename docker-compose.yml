@@ -1,0 +1,18 @@
+services:
+  api:
+    image: node:20-alpine
+    working_dir: /app
+    command: ["node","apps/api/src/server.mjs"]
+    ports:
+      - "8787:8787"
+    volumes:
+      - ./:/app:ro
+    restart: unless-stopped
+
+  web:
+    image: nginx:1.27-alpine
+    ports:
+      - "4173:80"
+    volumes:
+      - ./apps/web/public:/usr/share/nginx/html:ro
+    restart: unless-stopped
