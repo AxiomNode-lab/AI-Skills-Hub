@@ -58,6 +58,7 @@ test("portable export uses fixed skills directory and notices", () => {
   assert.equal("skills" in manifest,false);
   assert.ok(fs.existsSync(path.join(out,"skills","example","SKILL.md")));
   assert.ok(fs.existsSync(path.join(out,"THIRD-PARTY-NOTICES.md")));
+  assert.equal(fs.existsSync(path.join(out,".codex-plugin","plugin.json")),false);
   assert.match(fs.readFileSync(path.join(out,"THIRD-PARTY-NOTICES.md"),"utf8"),/Apache-2\.0/);
 });
 
