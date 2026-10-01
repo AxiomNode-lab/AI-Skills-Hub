@@ -1,0 +1,33 @@
+import fs from "node:fs";
+import path from "node:path";
+
+export function loadRegistry(file = "catalog/skills.json") {
+  return JSON.parse(fs.readFileSync(path.resolve(file), "utf8"));
+}
+
+export function indexSkills(registry) {
+  return new Map(registry.skills.map((skill) => [skill.id, skill]));
+}
+
+export function resolveBundle(registry, bundleName) {
+  const items = registry.bundles?.[bundleName];
+  if (!items) throw new Error("Unknown bundle: " + bundleName);
+  const index = indexSkills(registry);
+  return items.map((id) => {
+    const skill = index.get(id);
+    if (!skill) throw new Error("Bundle references unknown skill: " + id);
+    return skill;
+  });
+}
+
+export function filterForAgent(skills, agent) {
+  return skills.filter((skill) => skill.compatibility.includes("agent-skills") || skill.compatibility.includes(agent));
+}
+
+export function summarize(skills) {
+  return skills.reduce((acc, skill) => {
+    acc.total += 1;
+    acc[skill.distribution] = (acc[skill.distribution] ?? 0) + 1;
+    return acc;
+  }, { total: 0 });
+}
