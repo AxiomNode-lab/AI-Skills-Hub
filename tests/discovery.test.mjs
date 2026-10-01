@@ -39,3 +39,26 @@ test("remote discovery does not claim unverified agent compatibility",async()=>{
   assert.equal(result[0].item.name,"pdf-helper");
   assert.equal(result[0].item.compatibility_verified,false);
 });
+
+test("skills.sh results retain install URL and provenance",async()=>{
+  const fakeFetch=async()=>({
+    ok:true,
+    json:async()=>({data:[{
+      id:"owner/repo/demo",
+      name:"demo",
+      source:"owner/repo",
+      installUrl:"https://github.com/owner/repo",
+      url:"https://skills.sh/owner/repo/demo",
+      installs:100
+    }]})
+  });
+  const mod=await import("../packages/discovery/src/index.mjs");
+  const result=await mod.searchSkillsSh("demo",{
+    agent:"codex",
+    limit:5,
+    source:{api:"https://skills.sh/api/v1/skills/search"},
+    fetchImpl:fakeFetch,
+    cacheDir:"/tmp/ai-skills-hub-skills-sh-tests-final"
+  });
+  assert.equal(result[0].item.source.install_url,"https://github.com/owner/repo");
+});
