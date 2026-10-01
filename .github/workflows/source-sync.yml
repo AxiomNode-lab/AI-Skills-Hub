@@ -28,6 +28,7 @@ jobs:
           node scripts/ingest-github.mjs K-Dense-AI/scientific-agent-skills main
           node scripts/ingest-github.mjs microsoft/skills main
           node scripts/ingest-github.mjs openai/plugins main
+          node scripts/refresh-source-index.mjs
       - run: node scripts/validate-registry.mjs
       - name: Commit snapshots
         run: |

@@ -19,7 +19,6 @@ const manifest=buildPortablePluginManifest({
   version:"0.1.0",
   description:"Portable Agent Skills bundle exported by AI Skills Hub: " + bundleName,
   repository:"https://github.com/AxiomNode-lab/AI-Skills-Hub",
-  license:"MIT",
   author:{name:"AxiomNode-lab"}
 });
 const result=exportPortablePlugin({outputDir,manifest,skills:materialized});
