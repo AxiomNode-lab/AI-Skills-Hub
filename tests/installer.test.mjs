@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { buildInstallPlan } from "../packages/installer/src/index.mjs";
 
-const base={id:"demo/skill",name:"demo-skill",license:{spdx:"MIT"},source:{repo:"demo/repo",path:"skills/demo-skill"}};
+const base={id:"demo/skill",name:"demo-skill",license:{spdx:"MIT",redistributable:true,status:"verified"},source:{repo:"demo/repo",path:"skills/demo-skill",revision:"0".repeat(40)},compatibility:["agent-skills","codex","claude-code"],security:{scan_status:"pending",risk:"none"},release:{status:"hold"},materialized:false};
 
 test("unreleased bundled skill is held instead of bypassing release gates",()=>{
   const plan=buildInstallPlan([{...base,distribution:"bundled",materialized:false,release:{status:"pending"},compatibility:["agent-skills","codex"]}],"codex");
