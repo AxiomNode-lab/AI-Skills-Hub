@@ -72,6 +72,22 @@ export function createServer() {
       });
     }
 
+    if (url.pathname === "/api/providers") {
+      const sources = JSON.parse(fs.readFileSync("catalog/sources.json","utf8")).sources;
+      return json(res, 200, {
+        total: sources.length,
+        providers: sources.map((source) => ({
+          id: source.id,
+          kind: source.kind,
+          enabled: source.ingest_enabled !== false && source.discovery_enabled !== false,
+          priority: source.priority ?? null,
+          discovery: Boolean(source.discovery_enabled !== false && ["github","registry"].includes(source.kind)),
+          official: source.official ?? false,
+          api: source.api ?? null
+        }))
+      });
+    }
+
     if (url.pathname === "/api/catalog") {
       const distributions = registry.skills.reduce((acc, s) => {
         acc[s.distribution] = (acc[s.distribution] ?? 0) + 1;
