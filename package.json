@@ -1,6 +1,6 @@
 {
   "name": "ai-skills-hub",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "description": "License-aware registry for AI Agent Skills.",
   "license": "MIT",
@@ -9,7 +9,8 @@
     "validate": "node scripts/validate-registry.mjs",
     "test": "node --test",
     "lint": "node scripts/validate-registry.mjs",
-    "audit": "node scripts/audit-registry.mjs"
+    "audit": "node scripts/audit-registry.mjs",
+    "ingest": "node scripts/ingest-github.mjs"
   },
   "engines": {
     "node": ">=20"
