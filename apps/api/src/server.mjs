@@ -57,7 +57,7 @@ function filterSkills(url) {
 }
 
 export function createServer() {
-  return http.createServer((req, res) => {
+  return http.createServer(async (req, res) => {
     const url = new URL(req.url, "http://localhost");
 
     if (req.method !== "GET") return json(res, 405, { error: "method_not_allowed" }, { allow: "GET" });
