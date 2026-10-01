@@ -94,18 +94,29 @@ export async function readLocalCapabilities() {
     return [];
   }
   
-  const entries = await fs.readdir(libDir, { withFileTypes: true });
-  const promises = [];
+  const manifests = [];
   
-  for (const entry of entries) {
-    if (entry.isDirectory()) {
-      const capPath = path.join(libDir, entry.name);
-      promises.push(readCapabilityManifest(capPath, entry.name));
+  async function walk(dir) {
+    const entries = await fs.readdir(dir, { withFileTypes: true });
+    
+    // Check if this directory is a capability itself (has manifest.json or SKILL.md)
+    if (await fileExists(path.join(dir, 'manifest.json')) || await fileExists(path.join(dir, 'SKILL.md'))) {
+       const id = path.basename(dir);
+       const cap = await readCapabilityManifest(dir, id);
+       if (cap) manifests.push(cap);
+       // Skip walking deeper inside a capability folder
+       return;
+    }
+    
+    for (const entry of entries) {
+      if (entry.isDirectory() && !entry.name.startsWith('.')) {
+        await walk(path.join(dir, entry.name));
+      }
     }
   }
   
-  const results = await Promise.all(promises);
-  return results.filter(Boolean);
+  await walk(libDir);
+  return manifests;
 }
 
 export function resolveDependencies(selectedIds, allCapabilities) {

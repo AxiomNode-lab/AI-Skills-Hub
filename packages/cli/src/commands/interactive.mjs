@@ -1,4 +1,4 @@
-import { select, checkbox, confirm, input } from '@inquirer/prompts';
+import { select, checkbox, confirm, input, Separator } from '@inquirer/prompts';
 import { detectAgents } from '../../../installer/src/detector.mjs';
 import { getAdapter } from '../../../installer/src/adapters/index.mjs';
 import { readLocalCapabilities, resolveDependencies, checkPrerequisites, autoSyncCapability } from '../utils.mjs';
@@ -69,10 +69,26 @@ export async function interactiveCommand() {
   }
 
   // 5. Select Capabilities
-  const capabilityChoices = displayCapabilities.map(c => ({
-    name: `${c.name} [${c.type}] - ${c.description || ''}`,
-    value: c.id
-  }));
+  const mcpServers = displayCapabilities.filter(c => c.type === 'mcp-server');
+  const agentSkills = displayCapabilities.filter(c => c.type === 'skill');
+  const others = displayCapabilities.filter(c => c.type !== 'mcp-server' && c.type !== 'skill');
+
+  const capabilityChoices = [];
+  
+  if (mcpServers.length > 0) {
+    capabilityChoices.push(new Separator('=== 🌐 MCP Servers (System Integrations) ==='));
+    mcpServers.forEach(c => capabilityChoices.push({ name: `${c.name} - ${c.description || ''}`, value: c.id }));
+  }
+  
+  if (agentSkills.length > 0) {
+    capabilityChoices.push(new Separator('=== 🧠 Agent Skills (Prompts & Behaviors) ==='));
+    agentSkills.forEach(c => capabilityChoices.push({ name: `${c.name} - ${c.description || ''}`, value: c.id }));
+  }
+  
+  if (others.length > 0) {
+    capabilityChoices.push(new Separator('=== 🛠️ Other Tools ==='));
+    others.forEach(c => capabilityChoices.push({ name: `${c.name} [${c.type}] - ${c.description || ''}`, value: c.id }));
+  }
 
   const selectedIds = await checkbox({
     message: 'Select the capabilities you want to install:',
