@@ -2,6 +2,13 @@
   <img src="docs/images/logo.jpg" alt="AI Skills Hub Logo" width="300" />
   <h1>AI Skills Hub</h1>
   <p><strong>Enterprise-Grade AI Capability & Package Manager</strong></p>
+  
+  <p>
+    <a href="https://github.com/AxiomNode-lab/AI-Skills-Hub/actions"><img src="https://img.shields.io/github/actions/workflow/status/AxiomNode-lab/AI-Skills-Hub/ci.yml?branch=main&label=Build&style=flat-square" alt="Build Status"></a>
+    <a href="https://github.com/AxiomNode-lab/AI-Skills-Hub/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square" alt="License: MIT"></a>
+    <a href="https://github.com/AxiomNode-lab/AI-Skills-Hub/releases"><img src="https://img.shields.io/github/v/release/AxiomNode-lab/AI-Skills-Hub?style=flat-square&color=success" alt="Release"></a>
+    <a href="https://github.com/AxiomNode-lab/AI-Skills-Hub/pulls"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" alt="PRs Welcome"></a>
+  </p>
 </div>
 
 ---

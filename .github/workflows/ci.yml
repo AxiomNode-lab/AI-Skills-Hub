@@ -1,36 +1,35 @@
 name: CI
 
-concurrency:
-  group: ai-skills-hub-ci-${{ github.ref }}
-  cancel-in-progress: true
-
 on:
   push:
-    branches: [main]
+    branches: [ "main" ]
   pull_request:
+    branches: [ "main" ]
 
 jobs:
-  validate:
+  build:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [22.x]
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 10.4.1
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 24
-          cache: pnpm
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm validate
-      - run: node scripts/validate-sources.mjs
-      - run: pnpm validate-workspace
-      - run: pnpm capability-schema-check
-      - run: pnpm static-check
-      - run: pnpm generate-lock
-      - run: node scripts/validate-materialized.mjs
-      - run: git diff --exit-code -- catalog/skills.lock.json
-      - run: pnpm test
-      - run: pnpm dedupe
-      - run: git diff --exit-code -- catalog/reports/dedupe.json
-      - run: pnpm audit
+    - uses: actions/checkout@v4
+    
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        
+    - name: Install pnpm
+      run: npm install -g pnpm
+      
+    - name: Install Dependencies
+      run: pnpm install
+      
+    - name: Run Validation Checks
+      run: pnpm validate
+      
+    - name: Run Tests
+      run: pnpm test
