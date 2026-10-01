@@ -112,6 +112,32 @@
       "discovery_enabled": true,
       "priority": "semantic-external",
       "notes": "External semantic Agent Skills discovery index; candidates remain unverified until local policy review."
+    },
+    {
+      "id": "registry.modelcontextprotocol.io",
+      "kind": "registry",
+      "url": "https://registry.modelcontextprotocol.io",
+      "api": "https://registry.modelcontextprotocol.io/v0.1/servers",
+      "discovery_enabled": true,
+      "priority": "official-mcp-registry"
+    },
+    {
+      "id": "npmjs.org",
+      "kind": "registry",
+      "url": "https://registry.npmjs.org",
+      "api": "https://registry.npmjs.org/-/v1/search",
+      "discovery_enabled": true,
+      "priority": "package-registry"
+    },
+    {
+      "id": "github/agent-plugins",
+      "kind": "github",
+      "repo": "agentplugins/agent-plugins-example",
+      "default_branch": "main",
+      "official": true,
+      "priority": "agent-plugins-standard",
+      "discovery_enabled": false,
+      "plugin_discovery_enabled": true
     }
   ]
 }
