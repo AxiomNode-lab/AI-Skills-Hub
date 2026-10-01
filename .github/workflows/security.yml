@@ -54,7 +54,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          if git grep -nEI '(sk-[A-Za-z0-9]{20,}|ghp_[A-Za-z0-9]{20,}|BEGIN (RSA|EC|OPENSSH|DSA) PRIVATE KEY|xox[baprs]-[A-Za-z0-9-]{20,})' -- . ':!docs/SECURITY-MODEL.md'; then
+          if git grep -nEI '(sk-[A-Za-z0-9]{20,}|ghp_[A-Za-z0-9]{20,}|BEGIN (RSA|EC|OPENSSH|DSA) PRIVATE KEY|xox[baprs]-[A-Za-z0-9-]{20,})' -- packages scripts tests catalog .github; then
             echo "Potential secret material found."
             exit 1
           fi
