@@ -57,6 +57,7 @@ if (!command || command === "help") {
 Usage:
   skills-hub search <term>
   skills-hub discover <natural-language-query> --agent <agent> [--no-remote]
+  skills-hub add <natural-language-query> --agent <agent> [--remote] [--index <n>]
   skills-hub info <skill-id>
   skills-hub targets
   skills-hub plan <bundle-or-skill> [--agent <agent>]
@@ -96,6 +97,67 @@ if (command === "discover") {
     remote: !args.includes("--no-remote")
   });
   console.log(JSON.stringify({ ...result, choices: toInstallChoices(result, agent) }, null, 2));
+  process.exit(0);
+}
+
+if (command === "add") {
+  const agent = flag("--agent") ?? "agent-skills";
+  const selectedIndex = Math.max(1, Number(flag("--index") ?? "1"));
+  const ignoredFlags = new Set(["--agent","--index","--remote","--no-remote"]);
+  const query = args.filter((value,index) =>
+    !ignoredFlags.has(value) && args[index - 1] !== "--agent" && args[index - 1] !== "--index"
+  ).join(" ").trim();
+
+  if (!query) {
+    console.error("Missing natural-language discovery query.");
+    process.exit(1);
+  }
+
+  const sources = JSON.parse(fs.readFileSync("catalog/sources.json","utf8")).sources;
+  const discovery = await hybridSearch(registry, query, {
+    sources,
+    agent,
+    limit: 10,
+    token: process.env.GITHUB_TOKEN,
+    remote: !args.includes("--no-remote")
+  });
+  const choices = toInstallChoices(discovery, agent);
+  const selected = choices[selectedIndex - 1];
+
+  if (!selected) {
+    console.error(JSON.stringify({query,agent,choices},null,2));
+    process.exit(2);
+  }
+
+  if (selected.action === "install") {
+    const skill = registry.skills.find((s) => s.id === selected.id);
+    const result = installMaterializedSkill(skill, {
+      agent,
+      scope: "project",
+      overwrite: false,
+      persistState: true
+    });
+    console.log(JSON.stringify({query,selected,result},null,2));
+    process.exit(0);
+  }
+
+  if (!args.includes("--remote")) {
+    console.log(JSON.stringify({
+      query,
+      selected,
+      next_step: "Re-run with --remote to execute the upstream installer."
+    },null,2));
+    process.exit(3);
+  }
+
+  const skill = registry.skills.find((s) => s.id === selected.id) ?? {
+    id:selected.id,
+    name:selected.name,
+    source:selected.source,
+    distribution:"source-direct"
+  };
+  const result = await executeSourceBridge(skill, agent);
+  console.log(JSON.stringify({query,selected,result},null,2));
   process.exit(0);
 }
 
