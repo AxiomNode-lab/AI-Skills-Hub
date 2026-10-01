@@ -92,10 +92,49 @@ export async function searchRemote(query,{sources=[],agent,limit=20,token,fetchI
   return output;
 }
 
+export async function searchSkillsSh(query,{agent,limit=20,source,token,fetchImpl=fetch,cacheDir=path.join(os.homedir(),".cache","ai-skills-hub","discovery"),cacheTtlMs=300000}={}) {
+  const base=source?.api ?? "https://skills.sh/api/v1/skills/search";
+  const key=cacheKey({provider:"skills.sh",query,agent,limit});
+  const cached=readCache(cacheDir,key,cacheTtlMs);
+  if(cached) return cached;
+  const url=base+"?q="+encodeURIComponent(expandQuery(query))+"&limit="+Math.min(200,Math.max(1,limit));
+  const r=await fetchImpl(url,{headers:headers(token)});
+  if(!r.ok) throw new Error("skills.sh API "+r.status);
+  const body=await r.json();
+  const items=body.data ?? body.skills ?? [];
+  const result=items.map(item=>({
+    item:{
+      id:item.id ?? ((item.source ?? "skills.sh")+"/"+item.name),
+      name:item.name ?? item.slug,
+      publisher:(item.source ?? "").split("/")[0] || "unknown",
+      description:item.description ?? null,
+      category:item.tags ?? [],
+      tags:item.tags ?? [],
+      compatibility:["agent-skills"],
+      compatibility_verified:false,
+      distribution:"source-direct",
+      origin:"skills.sh",
+      installs:item.installs ?? 0,
+      source:{repo:item.source,url:item.installUrl ?? item.url ?? null,path:item.path ?? "",revision:null,revision_type:"git-commit"}
+    },
+    score:score(query,item,agent)+(item.installs ? Math.min(20,Math.log10(item.installs+1)*4) : 0),
+    origin:"skills.sh"
+  }));
+  result.sort((a,b)=>b.score-a.score || (b.item.installs??0)-(a.item.installs??0));
+  const output=result.slice(0,limit);
+  writeCache(cacheDir,key,output);
+  return output;
+}
+
 export async function hybridSearch(registry,query,opts={}) {
   const local=searchRegistry(registry,query,opts);
   if (opts.remote === false) return {query,agent:opts.agent ?? null,remote_searched:false,results:local};
-  const remote=await searchRemote(query,opts);
+  const remoteJobs=[
+    searchSkillsSh(query,{...opts,source:(opts.sources ?? []).find(s=>s.id==="skills.sh")}),
+    searchRemote(query,opts)
+  ];
+  const settled=await Promise.allSettled(remoteJobs);
+  const remote=settled.filter(x=>x.status==="fulfilled").flatMap(x=>x.value);
   const seen=new Set(); const merged=[];
   for (const entry of [...local,...remote]) {
     const key=entry.item.id ?? (entry.item.source.repo+":"+entry.item.source.path);
