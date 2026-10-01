@@ -21,13 +21,17 @@ const api = async (url) => {
 
 const raw = async (path) => {
   const encodedPath = path.split("/").map(encodeURIComponent).join("/");
-  const url = "https://raw.githubusercontent.com/" + repo + "/" + encodeURIComponent(ref) + "/" + encodedPath;
+  const url = "https://raw.githubusercontent.com/" + repo + "/" + revision + "/" + encodedPath;
   const res = await fetch(url, { headers: { "user-agent": "AI-Skills-Hub-ingestor/0.2" } });
   if (!res.ok) return null;
   return res.text();
 };
 
-const tree = await api("https://api.github.com/repos/" + repo + "/git/trees/" + encodeURIComponent(ref) + "?recursive=1");
+const commitList = await api("https://api.github.com/repos/" + repo + "/commits?sha=" + encodeURIComponent(ref) + "&per_page=1");
+const revision = commitList[0]?.sha;
+if (!revision) throw new Error("Unable to resolve ref to an immutable commit.");
+
+const tree = await api("https://api.github.com/repos/" + repo + "/git/trees/" + revision + "?recursive=1");
 if (tree.truncated) {
   console.error("GitHub returned a truncated tree; refuse unsafe partial ingestion.");
   process.exit(2);
@@ -56,7 +60,7 @@ for (const file of licenseFiles) {
 
 const result = {
   schema_version: "0.2",
-  source: { repo, ref, tree_sha: tree.sha },
+  source: { repo, ref, revision, revision_type: "git-commit", tree_sha: tree.sha },
   discovered_skills: [],
   license_files: licenses,
   warnings: []
