@@ -1,0 +1,1647 @@
+{
+  "schema_version": "0.2",
+  "source": {
+    "repo": "anthropics/skills",
+    "ref": "main",
+    "revision": "8a1541c4a3ffa5a20a5a91de0dcf3f0bab1d1ef4",
+    "revision_type": "git-commit",
+    "tree_sha": "8a1541c4a3ffa5a20a5a91de0dcf3f0bab1d1ef4"
+  },
+  "discovered_skills": [
+    {
+      "path": "skills/academy-guide/SKILL.md",
+      "name": "academy-guide",
+      "description": ">",
+      "skill_sha256": "f27992510c051355dfe68c92394d509af730da5298094ec86834ee40bbd31376",
+      "license": {
+        "spdx": "Complete terms in LICENSE.txt",
+        "redistributable": false,
+        "status": "review-required",
+        "evidence_type": "skill-frontmatter",
+        "evidence_path": "skills/academy-guide/SKILL.md"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "capabilities": {
+          "shell": false,
+          "network": true,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "network-access",
+            "line": 30,
+            "evidence": "https://",
+            "context": "All content lives on [Claude Academy](https://academy.claude.com),"
+          },
+          {
+            "type": "network-access",
+            "line": 40,
+            "evidence": "https://",
+            "context": "surface: [Claude](https://academy.claude.com/claude),"
+          },
+          {
+            "type": "network-access",
+            "line": 41,
+            "evidence": "https://",
+            "context": "[Claude Code](https://academy.claude.com/code),"
+          },
+          {
+            "type": "network-access",
+            "line": 42,
+            "evidence": "https://",
+            "context": "[Claude Cowork](https://academy.claude.com/cowork),"
+          },
+          {
+            "type": "network-access",
+            "line": 43,
+            "evidence": "https://",
+            "context": "[AI Fluency](https://academy.claude.com/fluency), and the"
+          },
+          {
+            "type": "network-access",
+            "line": 44,
+            "evidence": "https://",
+            "context": "[developer platform](https://academy.claude.com/platform). When a user"
+          },
+          {
+            "type": "network-access",
+            "line": 90,
+            "evidence": "https://",
+            "context": "   to the [resources library](https://academy.claude.com/resources) for"
+          },
+          {
+            "type": "network-access",
+            "line": 101,
+            "evidence": "https://",
+            "context": "   `https://academy.claude.com/` plus its path: `/courses/{slug}` for"
+          },
+          {
+            "type": "network-access",
+            "line": 115,
+            "evidence": "https://",
+            "context": "   [academy.claude.com/resources](https://academy.claude.com/resources)"
+          },
+          {
+            "type": "network-access",
+            "line": 124,
+            "evidence": "https://",
+            "context": "[academy.claude.com/assets/data/catalog.json](https://academy.claude.com/assets/data/catalog.json),"
+          },
+          {
+            "type": "network-access",
+            "line": 145,
+            "evidence": "https://",
+            "context": "copied verbatim and only ever under `https://academy.claude.com/`."
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": true,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/algorithmic-art/SKILL.md",
+      "name": "algorithmic-art",
+      "description": "Creating algorithmic art using p5.js with seeded randomness and interactive parameter exploration. Use this when users request creating art using code, generative art, algorithmic art, flow fields, or particle systems. Create original algorithmic art rather than copying existing artists' work to avoid copyright violations.",
+      "skill_sha256": "3bc4092c09804853186524c826bc0621b940bb6122c05b84496dff95388e6eef",
+      "license": {
+        "spdx": "Complete terms in LICENSE.txt",
+        "redistributable": false,
+        "status": "review-required",
+        "evidence_type": "skill-frontmatter",
+        "evidence_path": "skills/algorithmic-art/SKILL.md"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "capabilities": {
+          "shell": false,
+          "network": true,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "network-access",
+            "line": 280,
+            "evidence": "https://",
+            "context": "  <script src=\"https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js\"></script>"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": true,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/brand-guidelines/SKILL.md",
+      "name": "brand-guidelines",
+      "description": "Applies Anthropic's official brand colors and typography to any sort of artifact that may benefit from having Anthropic's look-and-feel. Use it when brand colors or style guidelines, visual formatting, or company design standards apply.",
+      "skill_sha256": "1120b3769e2985cefb3d25be981b1f914abeba57ae079b83c20c666c164fa9fe",
+      "license": {
+        "spdx": "Complete terms in LICENSE.txt",
+        "redistributable": false,
+        "status": "review-required",
+        "evidence_type": "skill-frontmatter",
+        "evidence_path": "skills/brand-guidelines/SKILL.md"
+      },
+      "security": {
+        "scan_status": "verified",
+        "risk": "none",
+        "capabilities": {
+          "shell": false,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": []
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/canvas-design/SKILL.md",
+      "name": "canvas-design",
+      "description": "Create beautiful visual art in .png and .pdf documents using design philosophy. You should use this skill when the user asks to create a poster, piece of art, design, or other static piece. Create original visual designs, never copying existing artists' work to avoid copyright violations.",
+      "skill_sha256": "a1f288079624402f30682753c1d43920b6664785698d21d3e7aa197450a6448b",
+      "license": {
+        "spdx": "Complete terms in LICENSE.txt",
+        "redistributable": false,
+        "status": "review-required",
+        "evidence_type": "skill-frontmatter",
+        "evidence_path": "skills/canvas-design/SKILL.md"
+      },
+      "security": {
+        "scan_status": "verified",
+        "risk": "none",
+        "capabilities": {
+          "shell": false,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": []
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/claude-api/SKILL.md",
+      "name": "claude-api",
+      "description": "|-",
+      "skill_sha256": "9aac10d9ffb8778c5b7c0b9ec612b3915e83065feb92763c8231469e9fbc29c9",
+      "license": {
+        "spdx": "Complete terms in LICENSE.txt",
+        "redistributable": false,
+        "status": "review-required",
+        "evidence_type": "skill-frontmatter",
+        "evidence_path": "skills/claude-api/SKILL.md"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "high",
+        "capabilities": {
+          "shell": true,
+          "network": true,
+          "credentials": true,
+          "dynamic_execution": true,
+          "package_install": false,
+          "filesystem_write": true,
+          "encoded_content": true
+        },
+        "findings": [
+          {
+            "type": "network-access",
+            "line": 23,
+            "evidence": "curl",
+            "context": "2. **Raw HTTP** (`curl`, `requests`, `fetch`, `httpx`, etc.) - only when the user explicitly asks for cURL/REST/raw HTTP, the project is a shell/cURL project, or the language has no official SDK."
+          },
+          {
+            "type": "network-access",
+            "line": 23,
+            "evidence": "cURL",
+            "context": "2. **Raw HTTP** (`curl`, `requests`, `fetch`, `httpx`, etc.) - only when the user explicitly asks for cURL/REST/raw HTTP, the project is a shell/cURL project, or the language has no official SDK."
+          },
+          {
+            "type": "network-access",
+            "line": 23,
+            "evidence": "cURL",
+            "context": "2. **Raw HTTP** (`curl`, `requests`, `fetch`, `httpx`, etc.) - only when the user explicitly asks for cURL/REST/raw HTTP, the project is a shell/cURL project, or the language has no official SDK."
+          },
+          {
+            "type": "network-access",
+            "line": 27,
+            "evidence": "cURL",
+            "context": "**Never guess SDK usage.** Function names, class names, namespaces, method signatures, and import paths must come from explicit documentation - either the `{lang}/` files in this skill or the official SDK repositories or documentation links"
+          },
+          {
+            "type": "credential-access",
+            "line": 62,
+            "evidence": "API key",
+            "context": "| `cost-optimize` | Reduce what existing Claude API code costs to run, without sacrificing output quality. **Read `shared/cost-optimization.md` immediately** and follow it in order: Step 0 (establish scope, quality bar, and baseline), the t"
+          },
+          {
+            "type": "network-access",
+            "line": 93,
+            "evidence": "cURL",
+            "context": " - Use AskUserQuestion with options: Python, TypeScript, Java, Go, Ruby, cURL/raw HTTP, C#, PHP"
+          },
+          {
+            "type": "network-access",
+            "line": 98,
+            "evidence": "cURL",
+            "context": " - Suggest cURL/raw HTTP examples from `curl/` and note that community SDKs may exist"
+          },
+          {
+            "type": "network-access",
+            "line": 98,
+            "evidence": "curl",
+            "context": " - Suggest cURL/raw HTTP examples from `curl/` and note that community SDKs may exist"
+          },
+          {
+            "type": "network-access",
+            "line": 101,
+            "evidence": "cURL",
+            "context": "5. **If user needs cURL/raw HTTP examples**, read from `curl/`."
+          },
+          {
+            "type": "network-access",
+            "line": 101,
+            "evidence": "curl",
+            "context": "5. **If user needs cURL/raw HTTP examples**, read from `curl/`."
+          },
+          {
+            "type": "network-access",
+            "line": 105,
+            "evidence": "cURL",
+            "context": "Every SDK language above supports both the beta Tool Runner and Managed Agents (beta) - Python (`@beta_tool` decorator), TypeScript (`betaZodTool` + Zod), Java (annotated classes), Go (`BetaToolRunner` in the `toolrunner` pkg), Ruby (`BaseT"
+          },
+          {
+            "type": "shell-execution",
+            "line": 127,
+            "evidence": "bash",
+            "context": "> **Note:** Managed Agents is the right choice when you want Anthropic to run the agent loop *and* host the container where tools execute - file ops, bash, code execution all run in the per-session workspace. If you want to host the compute"
+          },
+          {
+            "type": "shell-execution",
+            "line": 139,
+            "evidence": "bash",
+            "context": "| 3 | **Managed Agents** (REST, beta) | Agent config + your tool results | Anthropic supplies the harness **and** hosts a per-session sandbox (**harness + deployment**) | Anthropic-hosted sandbox (bash, files, code exec) + Skills/MCP + your"
+          },
+          {
+            "type": "shell-execution",
+            "line": 140,
+            "evidence": "Bash",
+            "context": "| 4 | **Claude Agent SDK** - *separate product* (`claude-agent-sdk` / `@anthropic-ai/claude-agent-sdk`) | A prompt + options | SDK supplies the Claude Code harness + built-in tools (**harness only**); you host | Built-in Read/Write/Edit/Bas"
+          },
+          {
+            "type": "shell-execution",
+            "line": 146,
+            "evidence": "bash",
+            "context": "> - **Claude Agent SDK** (`claude-agent-sdk` / `@anthropic-ai/claude-agent-sdk`) is Claude Code packaged as a library. It ships built-in tools (file read/write/edit, bash, grep, web search), the full agent loop, context management, hooks, s"
+          },
+          {
+            "type": "network-access",
+            "line": 196,
+            "evidence": "https://",
+            "context": "**Partner pricing:** The prices above are Anthropic first-party API rates - they also apply to Claude on Microsoft Foundry, which is billed through the Microsoft Marketplace at standard API rates. Claude on Amazon Bedrock and Vertex AI is p"
+          },
+          {
+            "type": "network-access",
+            "line": 196,
+            "evidence": "https://",
+            "context": "**Partner pricing:** The prices above are Anthropic first-party API rates - they also apply to Claude on Microsoft Foundry, which is billed through the Microsoft Marketplace at standard API rates. Claude on Amazon Bedrock and Vertex AI is p"
+          },
+          {
+            "type": "credential-access",
+            "line": 231,
+            "evidence": "credential",
+            "context": "**When you need to call the API and `ANTHROPIC_API_KEY` is unset, don't ask the user for a key.** First run `ant auth status` - it shows which credential source and profile is active. If it reports an active profile:"
+          },
+          {
+            "type": "credential-access",
+            "line": 234,
+            "evidence": "access-token",
+            "context": "- **Raw `curl` / HTTP:** get a short-lived token with `ant auth print-credentials --access-token` and send it as `Authorization: Bearer <token>` **plus** the header `anthropic-beta: oauth-2025-04-20` (OAuth tokens go on `Authorization: Bear"
+          },
+          {
+            "type": "credential-access",
+            "line": 234,
+            "evidence": "api-key",
+            "context": "- **Raw `curl` / HTTP:** get a short-lived token with `ant auth print-credentials --access-token` and send it as `Authorization: Bearer <token>` **plus** the header `anthropic-beta: oauth-2025-04-20` (OAuth tokens go on `Authorization: Bear"
+          },
+          {
+            "type": "credential-access",
+            "line": 234,
+            "evidence": "API key",
+            "context": "- **Raw `curl` / HTTP:** get a short-lived token with `ant auth print-credentials --access-token` and send it as `Authorization: Bearer <token>` **plus** the header `anthropic-beta: oauth-2025-04-20` (OAuth tokens go on `Authorization: Bear"
+          },
+          {
+            "type": "credential-access",
+            "line": 234,
+            "evidence": "access-token",
+            "context": "- **Raw `curl` / HTTP:** get a short-lived token with `ant auth print-credentials --access-token` and send it as `Authorization: Bearer <token>` **plus** the header `anthropic-beta: oauth-2025-04-20` (OAuth tokens go on `Authorization: Bear"
+          },
+          {
+            "type": "network-access",
+            "line": 234,
+            "evidence": "curl",
+            "context": "- **Raw `curl` / HTTP:** get a short-lived token with `ant auth print-credentials --access-token` and send it as `Authorization: Bearer <token>` **plus** the header `anthropic-beta: oauth-2025-04-20` (OAuth tokens go on `Authorization: Bear"
+          },
+          {
+            "type": "network-access",
+            "line": 234,
+            "evidence": "curl",
+            "context": "- **Raw `curl` / HTTP:** get a short-lived token with `ant auth print-credentials --access-token` and send it as `Authorization: Bearer <token>` **plus** the header `anthropic-beta: oauth-2025-04-20` (OAuth tokens go on `Authorization: Bear"
+          },
+          {
+            "type": "credential-access",
+            "line": 236,
+            "evidence": "credential",
+            "context": "Only ask the user for a key if `ant auth status` reports no active credential source (or `ant` itself isn't installed). Suggest `ant auth login` as the first option - it stores a profile under `~/.config/anthropic/` that the SDKs read autom"
+          },
+          {
+            "type": "credential-access",
+            "line": 238,
+            "evidence": "API-key",
+            "context": "Full auth details (named profiles, scopes, the API-key-shadows-profile trap, refresh-token expiry): `shared/anthropic-cli.md`."
+          },
+          {
+            "type": "network-access",
+            "line": 310,
+            "evidence": "cURL",
+            "context": "| cURL | `anthropic-beta: fast-mode-2026-02-01` header | `\"speed\": \"fast\"` in body |"
+          },
+          {
+            "type": "credential-access",
+            "line": 362,
+            "evidence": "api_key",
+            "context": "| Python | `from anthropic import AnthropicFoundry` -> `AnthropicFoundry(api_key=..., resource=\"...\")` |"
+          },
+          {
+            "type": "credential-access",
+            "line": 372,
+            "evidence": "API key",
+            "context": "Two required constructor args: GCP `project_id` and `region`. Vertex model IDs take **no prefix** - current-generation models (Opus 5.5/5/4.8/4.7/4.6, Sonnet 5.5, Sonnet 5, Sonnet 4.6) use the bare first-party ID (e.g. `\"claude-opus-5-5\"`);"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 405,
+            "evidence": "delete",
+            "context": "**Claude Opus 5, Claude Opus 5.5, Claude Opus 4.8, Claude Fable 5, Claude Fable 5.1, Claude Mythos 5, Claude Mythos 5.1, and Claude Sonnet 5.5; not Claude Sonnet 5; no beta header.** Append `{\"role\": \"system\", \"content\": \"...\"}` to the `mes"
+          },
+          {
+            "type": "shell-execution",
+            "line": 411,
+            "evidence": "bash",
+            "context": "**Managed Agents** is a third surface: server-managed stateful agents with Anthropic-hosted tool execution. You create a persisted, versioned Agent config (`POST /v1/agents`), then start Sessions that reference it. Each session provisions a"
+          },
+          {
+            "type": "network-access",
+            "line": 425,
+            "evidence": "cURL",
+            "context": "**Reading guide:** Start with `shared/managed-agents-overview.md`, then the topical `shared/managed-agents-*.md` files (core, environments, tools, events, outcomes, multiagent, webhooks, memory, scheduled-deployments, client-patterns, onboa"
+          },
+          {
+            "type": "network-access",
+            "line": 425,
+            "evidence": "curl",
+            "context": "**Reading guide:** Start with `shared/managed-agents-overview.md`, then the topical `shared/managed-agents-*.md` files (core, environments, tools, events, outcomes, multiagent, webhooks, memory, scheduled-deployments, client-patterns, onboa"
+          },
+          {
+            "type": "network-access",
+            "line": 425,
+            "evidence": "curl",
+            "context": "**Reading guide:** Start with `shared/managed-agents-overview.md`, then the topical `shared/managed-agents-*.md` files (core, environments, tools, events, outcomes, multiagent, webhooks, memory, scheduled-deployments, client-patterns, onboa"
+          },
+          {
+            "type": "encoded-content",
+            "line": 457,
+            "evidence": "base64",
+            "context": "**PDF (base64, no beta):** `{\"type\": \"document\", \"source\": {\"type\": \"base64\", \"media_type\": \"application/pdf\", \"data\": <b64 string>}}` in user content, placed before the text block. Base64 string must have no newlines. Limits: 32 MB request"
+          },
+          {
+            "type": "encoded-content",
+            "line": 457,
+            "evidence": "base64",
+            "context": "**PDF (base64, no beta):** `{\"type\": \"document\", \"source\": {\"type\": \"base64\", \"media_type\": \"application/pdf\", \"data\": <b64 string>}}` in user content, placed before the text block. Base64 string must have no newlines. Limits: 32 MB request"
+          },
+          {
+            "type": "encoded-content",
+            "line": 457,
+            "evidence": "Base64",
+            "context": "**PDF (base64, no beta):** `{\"type\": \"document\", \"source\": {\"type\": \"base64\", \"media_type\": \"application/pdf\", \"data\": <b64 string>}}` in user content, placed before the text block. Base64 string must have no newlines. Limits: 32 MB request"
+          },
+          {
+            "type": "credential-access",
+            "line": 481,
+            "evidence": "credential",
+            "context": "**Admin API (beta, since 2026-08-26):** organization management - members, invites, workspaces and workspace members, API keys, rate limit reports, service accounts, federation issuers/rules, CMEK external keys - under `client.beta.organiza"
+          },
+          {
+            "type": "credential-access",
+            "line": 481,
+            "evidence": "API key",
+            "context": "**Admin API (beta, since 2026-08-26):** organization management - members, invites, workspaces and workspace members, API keys, rate limit reports, service accounts, federation issuers/rules, CMEK external keys - under `client.beta.organiza"
+          },
+          {
+            "type": "network-access",
+            "line": 493,
+            "evidence": "curl",
+            "context": "After detecting the language, read the relevant files based on what the user needs. Every `{lang}/...`, `shared/...`, and `curl/...` path cited in this document is relative to this skill's base directory, and none of those files' content is"
+          },
+          {
+            "type": "network-access",
+            "line": 495,
+            "evidence": "cURL",
+            "context": "**All SDK languages use the same multi-file layout** - directory `{lang}/claude-api/` containing `README.md` (install, client init, basic request, thinking, caching, stop details, misc), `tool-use.md` (tool definitions, agentic loop, Anthro"
+          },
+          {
+            "type": "network-access",
+            "line": 495,
+            "evidence": "cURL",
+            "context": "**All SDK languages use the same multi-file layout** - directory `{lang}/claude-api/` containing `README.md` (install, client init, basic request, thinking, caching, stop details, misc), `tool-use.md` (tool definitions, agentic loop, Anthro"
+          },
+          {
+            "type": "network-access",
+            "line": 495,
+            "evidence": "curl",
+            "context": "**All SDK languages use the same multi-file layout** - directory `{lang}/claude-api/` containing `README.md` (install, client init, basic request, thinking, caching, stop details, misc), `tool-use.md` (tool definitions, agentic loop, Anthro"
+          },
+          {
+            "type": "dynamic-execution",
+            "line": 517,
+            "evidence": "eval (",
+            "context": "**Iteratively improving an app against an eval (prompt tuning, hill-climbing):**"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 531,
+            "evidence": "remove",
+            "context": "**Auditing or cleaning up prompts, tool descriptions, skills, or agent configuration files such as `CLAUDE.md` (\"is this prompt outdated\", \"remove the cruft\", \"this was written for an older model\"):**"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 532,
+            "evidence": "delete",
+            "context": "-> Read `shared/prompt-audit.md` - dated-pattern tables with greppable signals, the keep list (what NOT to delete), and the report + proposed-diff output contract"
+          },
+          {
+            "type": "shell-execution",
+            "line": 542,
+            "evidence": "bash",
+            "context": "-> Read `shared/agent-design.md` (bash vs. dedicated tools, programmatic tool calling, tool search/skills, context editing vs. compaction vs. memory, caching principles)"
+          },
+          {
+            "type": "network-access",
+            "line": 551,
+            "evidence": "curl",
+            "context": "-> Read `shared/admin-api.md` - `client.beta.organization` endpoint/method table, admin credentials, per-language naming and pagination, what stays curl-only"
+          },
+          {
+            "type": "network-access",
+            "line": 560,
+            "evidence": "curl",
+            "context": "-> See the reading guide in the `## Managed Agents (Beta)` section above - it lists every `shared/managed-agents-*.md` file and the language-specific READMEs (`{lang}/managed-agents/README.md`, `curl/managed-agents.md`)."
+          },
+          {
+            "type": "filesystem-write",
+            "line": 580,
+            "evidence": "delete",
+            "context": "- **Disabling thinking on Claude Opus 5 has two failure modes - prefer low/medium effort instead.** (On Claude Opus 5.5 it can't be disabled at all - `{type: \"disabled\"}` is a 400 at every effort level; use `low` effort. On Claude Sonnet 5."
+          },
+          {
+            "type": "shell-execution",
+            "line": 588,
+            "evidence": "Bash",
+            "context": "- **Bash and text editor tools are Anthropic-defined, schema-less.** Declare `{\"type\": \"bash_20250124\", \"name\": \"bash\"}` / `{\"type\": \"text_editor_20250728\", \"name\": \"str_replace_based_edit_tool\"}` - no `input_schema`. A custom tool with you"
+          },
+          {
+            "type": "shell-execution",
+            "line": 588,
+            "evidence": "bash",
+            "context": "- **Bash and text editor tools are Anthropic-defined, schema-less.** Declare `{\"type\": \"bash_20250124\", \"name\": \"bash\"}` / `{\"type\": \"text_editor_20250728\", \"name\": \"str_replace_based_edit_tool\"}` - no `input_schema`. A custom tool with you"
+          },
+          {
+            "type": "shell-execution",
+            "line": 588,
+            "evidence": "bash",
+            "context": "- **Bash and text editor tools are Anthropic-defined, schema-less.** Declare `{\"type\": \"bash_20250124\", \"name\": \"bash\"}` / `{\"type\": \"text_editor_20250728\", \"name\": \"str_replace_based_edit_tool\"}` - no `input_schema`. A custom tool with you"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": true,
+        "network": true,
+        "credentials": true,
+        "dynamic_execution": true,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/discernment-nudge/SKILL.md",
+      "name": "discernment-nudge",
+      "description": ">",
+      "skill_sha256": "9191177c4a8ef11a20dace786d708506b22d43e748c71287bb823de0dc812dad",
+      "license": {
+        "spdx": "Complete terms in LICENSE.txt",
+        "redistributable": false,
+        "status": "review-required",
+        "evidence_type": "skill-frontmatter",
+        "evidence_path": "skills/discernment-nudge/SKILL.md"
+      },
+      "security": {
+        "scan_status": "verified",
+        "risk": "none",
+        "capabilities": {
+          "shell": false,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": []
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/doc-coauthoring/SKILL.md",
+      "name": "doc-coauthoring",
+      "description": "Guide users through a structured workflow for co-authoring documentation. Use when user wants to write documentation, proposals, technical specs, decision docs, or similar structured content. This workflow helps users efficiently transfer context, refine content through iteration, and verify the doc works for readers. Trigger when user mentions writing docs, creating proposals, drafting specs, or similar documentation tasks.",
+      "skill_sha256": "2e47d78846faeea4a56e9809c52700087a15a2155a3f293a3efbaded81398ef4",
+      "license": {
+        "spdx": "NOASSERTION",
+        "redistributable": false,
+        "status": "review-required"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "capabilities": {
+          "shell": false,
+          "network": true,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": true,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "filesystem-write",
+            "line": 112,
+            "evidence": "remove",
+            "context": "3. User will indicate what to keep/remove/combine"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 176,
+            "evidence": "Remove",
+            "context": "- \"Remove 3 (duplicates 1)\""
+          },
+          {
+            "type": "filesystem-write",
+            "line": 177,
+            "evidence": "Remove",
+            "context": "- \"Remove 6 (audience already knows this)\""
+          },
+          {
+            "type": "filesystem-write",
+            "line": 203,
+            "evidence": "Remove",
+            "context": "Provide a note: Instead of editing the doc directly, ask them to indicate what to change. This helps learning of their style for future sections. For example: \"Remove the X bullet - already covered by Y\" or \"Make the third paragraph more co"
+          },
+          {
+            "type": "network-access",
+            "line": 303,
+            "evidence": "https://",
+            "context": "1. Open a fresh Claude conversation: https://claude.ai"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": true,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/docx/SKILL.md",
+      "name": "docx",
+      "description": "Use this skill whenever the user wants to create, read, edit, or manipulate Word documents (.docx files) or Word templates (.dotx files). Triggers include: any mention of 'Word doc', 'word document', '.docx', '.dotx', or requests to produce professional documents with formatting like tables of contents, headings, page numbers, or letterheads. Also use when extracting or reorganizing content from .docx or .dotx files, inserting or replacing images in documents, performing find-and-replace in Word files, working with tracked changes or comments, or converting content into a polished Word document. If the user asks for a 'report', 'memo', 'letter', 'template', or similar deliverable as a Word or .docx file, use this skill. Do NOT use for PDFs, spreadsheets, Google Docs, or general coding tasks unrelated to document generation.",
+      "skill_sha256": "8017469ea95fb7d28225c62daf8e2f3492a7b516fc64c18c28977cbf8980b7fe",
+      "license": {
+        "spdx": "Proprietary. LICENSE.txt has complete terms",
+        "redistributable": false,
+        "status": "review-required",
+        "evidence_type": "skill-frontmatter",
+        "evidence_path": "skills/docx/SKILL.md"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "medium",
+        "capabilities": {
+          "shell": true,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": true,
+          "filesystem_write": true,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "package-install",
+            "line": 21,
+            "evidence": "npm install",
+            "context": "`docx` is preinstalled — do not run `npm install` first; write the script and `require('docx')` directly. Only if that require fails: `npm install docx`. The model knows the API; these are the footguns:"
+          },
+          {
+            "type": "package-install",
+            "line": 21,
+            "evidence": "npm install",
+            "context": "`docx` is preinstalled — do not run `npm install` first; write the script and `require('docx')` directly. Only if that require fails: `npm install docx`. The model knows the API; these are the footguns:"
+          },
+          {
+            "type": "shell-execution",
+            "line": 39,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 51,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 53,
+            "evidence": "delete",
+            "context": "find unpacked -type l -delete   # strip symlink entries — docx from external parties is untrusted"
+          },
+          {
+            "type": "shell-execution",
+            "line": 78,
+            "evidence": "bash",
+            "context": "```bash"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": true
+      }
+    },
+    {
+      "path": "skills/frontend-design/SKILL.md",
+      "name": "frontend-design",
+      "description": "Guidance for distinctive, intentional visual design when building new UI or reshaping an existing one. Helps with aesthetic direction, typography, and making choices that don't read as templated defaults.",
+      "skill_sha256": "d91970639e9f5c37682ac7ab60094d35f1c7c1f38d731bd56396563aee10c1d3",
+      "license": {
+        "spdx": "Complete terms in LICENSE.txt",
+        "redistributable": false,
+        "status": "review-required",
+        "evidence_type": "skill-frontmatter",
+        "evidence_path": "skills/frontend-design/SKILL.md"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "capabilities": {
+          "shell": false,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": true,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "filesystem-write",
+            "line": 59,
+            "evidence": "remove",
+            "context": "Spend your boldness in one place. Let one element be the memorable thing, keep everything around it quiet and disciplined, and cut any decoration that does not serve the brief. Build to a quality floor without announcing it: responsive down"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/internal-comms/SKILL.md",
+      "name": "internal-comms",
+      "description": "A set of resources to help me write all kinds of internal communications, using the formats that my company likes to use. Claude should use this skill whenever asked to write some sort of internal communications (status reports, leadership updates, 3P updates, company newsletters, FAQs, incident reports, project updates, etc.).",
+      "skill_sha256": "067b7587a344a928fc6534ef66b1bcd591fc7c26d207ea7ca3334aeb678d6475",
+      "license": {
+        "spdx": "Complete terms in LICENSE.txt",
+        "redistributable": false,
+        "status": "review-required",
+        "evidence_type": "skill-frontmatter",
+        "evidence_path": "skills/internal-comms/SKILL.md"
+      },
+      "security": {
+        "scan_status": "verified",
+        "risk": "none",
+        "capabilities": {
+          "shell": false,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": []
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/mcp-builder/SKILL.md",
+      "name": "mcp-builder",
+      "description": "Guide for creating high-quality MCP (Model Context Protocol) servers that enable LLMs to interact with external services through well-designed tools. Use when building MCP servers to integrate external APIs or services, whether in Python (FastMCP) or Node/TypeScript (MCP SDK).",
+      "skill_sha256": "0f4592dcb53cf2b5d6b7febee6b4152018b565551a1c29e3c612f57b218ab295",
+      "license": {
+        "spdx": "Complete terms in LICENSE.txt",
+        "redistributable": false,
+        "status": "review-required",
+        "evidence_type": "skill-frontmatter",
+        "evidence_path": "skills/mcp-builder/SKILL.md"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "capabilities": {
+          "shell": false,
+          "network": true,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "network-access",
+            "line": 41,
+            "evidence": "https://",
+            "context": "Start with the sitemap to find relevant pages: `https://modelcontextprotocol.io/sitemap.xml`"
+          },
+          {
+            "type": "network-access",
+            "line": 43,
+            "evidence": "https://",
+            "context": "Then fetch specific pages with `.md` suffix for markdown format (e.g., `https://modelcontextprotocol.io/specification/draft.md`)."
+          },
+          {
+            "type": "network-access",
+            "line": 61,
+            "evidence": "https://",
+            "context": "- **TypeScript SDK**: Use WebFetch to load `https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/README.md`"
+          },
+          {
+            "type": "network-access",
+            "line": 65,
+            "evidence": "https://",
+            "context": "- **Python SDK**: Use WebFetch to load `https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/README.md`"
+          },
+          {
+            "type": "network-access",
+            "line": 203,
+            "evidence": "https://",
+            "context": "- **MCP Protocol**: Start with sitemap at `https://modelcontextprotocol.io/sitemap.xml`, then fetch specific pages with `.md` suffix"
+          },
+          {
+            "type": "network-access",
+            "line": 212,
+            "evidence": "https://",
+            "context": "- **Python SDK**: Fetch from `https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/README.md`"
+          },
+          {
+            "type": "network-access",
+            "line": 213,
+            "evidence": "https://",
+            "context": "- **TypeScript SDK**: Fetch from `https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/README.md`"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": true,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/pdf/SKILL.md",
+      "name": "pdf",
+      "description": "Use this skill whenever the user wants to do anything with PDF files. This includes reading or extracting text/tables from PDFs, combining or merging multiple PDFs into one, splitting PDFs apart, rotating pages, adding watermarks, creating new PDFs, filling PDF forms, encrypting/decrypting PDFs, extracting images, and OCR on scanned PDFs to make them searchable. If the user mentions a .pdf file or asks to produce one, use this skill.",
+      "skill_sha256": "9f78b8359fbd4943ad260a7a1e436e5a96503406d6c34e99f69223d647d85b9c",
+      "license": {
+        "spdx": "Proprietary. LICENSE.txt has complete terms",
+        "redistributable": false,
+        "status": "review-required",
+        "evidence_type": "skill-frontmatter",
+        "evidence_path": "skills/pdf/SKILL.md"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "medium",
+        "capabilities": {
+          "shell": true,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": true,
+          "filesystem_write": true,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "shell-execution",
+            "line": 192,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 204,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 215,
+            "evidence": "Remove",
+            "context": "# Remove password"
+          },
+          {
+            "type": "shell-execution",
+            "line": 220,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "package-install",
+            "line": 235,
+            "evidence": "pip install",
+            "context": "# Requires: pip install pytesseract pdf2image"
+          },
+          {
+            "type": "shell-execution",
+            "line": 272,
+            "evidence": "bash",
+            "context": "```bash"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": true
+      }
+    },
+    {
+      "path": "skills/pptx/SKILL.md",
+      "name": "pptx",
+      "description": "Use this skill any time a .pptx or .potx file is involved in any way — as input, output, or both. This includes: creating slide decks, pitch decks, or presentations; reading, parsing, or extracting text from any .pptx or .potx file (even if the extracted content will be used elsewhere, like in an email or summary); editing, modifying, or updating existing presentations; combining or splitting slide files; working with templates (.potx), layouts, speaker notes, or comments. Trigger whenever the user mentions \\\"deck,\\\" \\\"slides,\\\" \\\"presentation,\\\" or references a .pptx or .potx filename, regardless of what they plan to do with the content afterward. If a .pptx or .potx file needs to be opened, created, or touched, use this skill.",
+      "skill_sha256": "a7ff03e2c85b636f55232a6b1555f5dd90216b7a1a359ab289d8364e6acbc6a0",
+      "license": {
+        "spdx": "Proprietary. LICENSE.txt has complete terms",
+        "redistributable": false,
+        "status": "review-required",
+        "evidence_type": "skill-frontmatter",
+        "evidence_path": "skills/pptx/SKILL.md"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "medium",
+        "capabilities": {
+          "shell": true,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": true,
+          "filesystem_write": true,
+          "encoded_content": true
+        },
+        "findings": [
+          {
+            "type": "filesystem-write",
+            "line": 25,
+            "evidence": "Delete",
+            "context": "| `scripts/clean.py unpacked/` | Delete slides, media, and rels no longer referenced. Run **after** `<p:sldIdLst>` is final |"
+          },
+          {
+            "type": "package-install",
+            "line": 31,
+            "evidence": "npm install",
+            "context": "`pptxgenjs` is preinstalled — do not run `npm install` first; write the script and `require('pptxgenjs')` directly. Only if that require fails: `npm install pptxgenjs`. The model knows the API; these are the footguns:"
+          },
+          {
+            "type": "package-install",
+            "line": 31,
+            "evidence": "npm install",
+            "context": "`pptxgenjs` is preinstalled — do not run `npm install` first; write the script and `require('pptxgenjs')` directly. Only if that require fails: `npm install pptxgenjs`. The model knows the API; these are the footguns:"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 48,
+            "evidence": "writeFile",
+            "context": "- **After `writeFile()`, run `python scripts/office/validate.py deck.pptx`.** It reports the two chart faults above and the slide-XML defects PowerPoint refuses, and names the fix for each. Fix them in your generator, not by hand-editing th"
+          },
+          {
+            "type": "encoded-content",
+            "line": 50,
+            "evidence": "base64",
+            "context": "- **Icons:** render `react-icons` to SVG (`ReactDOMServer.renderToStaticMarkup`), rasterize with `sharp` at ≥256px, and insert via `addImage({ data: \"image/png;base64,\" + buf.toString(\"base64\") })` — the `image/png;base64,` prefix is requir"
+          },
+          {
+            "type": "encoded-content",
+            "line": 50,
+            "evidence": "base64",
+            "context": "- **Icons:** render `react-icons` to SVG (`ReactDOMServer.renderToStaticMarkup`), rasterize with `sharp` at ≥256px, and insert via `addImage({ data: \"image/png;base64,\" + buf.toString(\"base64\") })` — the `image/png;base64,` prefix is requir"
+          },
+          {
+            "type": "encoded-content",
+            "line": 50,
+            "evidence": "base64",
+            "context": "- **Icons:** render `react-icons` to SVG (`ReactDOMServer.renderToStaticMarkup`), rasterize with `sharp` at ≥256px, and insert via `addImage({ data: \"image/png;base64,\" + buf.toString(\"base64\") })` — the `image/png;base64,` prefix is requir"
+          },
+          {
+            "type": "package-install",
+            "line": 50,
+            "evidence": "npm install",
+            "context": "- **Icons:** render `react-icons` to SVG (`ReactDOMServer.renderToStaticMarkup`), rasterize with `sharp` at ≥256px, and insert via `addImage({ data: \"image/png;base64,\" + buf.toString(\"base64\") })` — the `image/png;base64,` prefix is requir"
+          },
+          {
+            "type": "shell-execution",
+            "line": 56,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 59,
+            "evidence": "delete",
+            "context": "# reorder / delete slides = edit <p:sldIdLst> in ppt/presentation.xml"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 66,
+            "evidence": "delete",
+            "context": "- **Do all structural work — add, delete, reorder — before editing any slide's content.** `add_slide.py` copies a slide file verbatim, so duplicating after you edit clones the edited content; and `clean.py` deletes any slide missing from `<"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 75,
+            "evidence": "delete",
+            "context": "- **Template slots ≠ source items.** If the template shows 4 team members and you have 3, delete the 4th member's entire group (image + text boxes), not just its text — then check for orphaned visuals in QA."
+          },
+          {
+            "type": "shell-execution",
+            "line": 172,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 180,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 188,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 225,
+            "evidence": "bash",
+            "context": "```bash"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": true
+      }
+    },
+    {
+      "path": "skills/skill-creator/SKILL.md",
+      "name": "skill-creator",
+      "description": "Create new skills, modify and improve existing skills, and measure skill performance. Use when users want to create a skill from scratch, edit, or optimize an existing skill, run evals to test a skill, benchmark skill performance with variance analysis, or optimize a skill's description for better triggering accuracy.",
+      "skill_sha256": "dcd4803e61e913e6fc27294184cd3a71f09f5e924ff20c8a9a20173e7b3c2bcf",
+      "license": {
+        "spdx": "NOASSERTION",
+        "redistributable": false,
+        "status": "review-required",
+        "evidence_path": "skills/skill-creator/LICENSE.txt"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "capabilities": {
+          "shell": true,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": true,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "shell-execution",
+            "line": 228,
+            "evidence": "bash",
+            "context": "   ```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 237,
+            "evidence": "bash",
+            "context": "   ```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 286,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 300,
+            "evidence": "Remove",
+            "context": "2. **Keep the prompt lean.** Remove things that aren't pulling their weight. Make sure to read the transcripts, not just the final outputs — if it looks like the skill is making the model waste a bunch of time doing things that are unproduc"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 370,
+            "evidence": "remove",
+            "context": "4. The user can edit queries, toggle should-trigger, add/remove entries, then click \"Export Eval Set\""
+          },
+          {
+            "type": "shell-execution",
+            "line": 381,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 412,
+            "evidence": "bash",
+            "context": "```bash"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/slack-gif-creator/SKILL.md",
+      "name": "slack-gif-creator",
+      "description": "Knowledge and utilities for creating animated GIFs optimized for Slack. Provides constraints, validation tools, and animation concepts. Use when users request animated GIFs for Slack like \"make me a GIF of X doing Y for Slack.",
+      "skill_sha256": "2efca615ce55a3edd8fc05c779068a8085816617991987e446606403cd3abb22",
+      "license": {
+        "spdx": "Complete terms in LICENSE.txt",
+        "redistributable": false,
+        "status": "review-required",
+        "evidence_type": "skill-frontmatter",
+        "evidence_path": "skills/slack-gif-creator/SKILL.md"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "medium",
+        "capabilities": {
+          "shell": true,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": true,
+          "filesystem_write": true,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "filesystem-write",
+            "line": 221,
+            "evidence": "Remove",
+            "context": "4. **Remove duplicates** - `remove_duplicates=True` in save()"
+          },
+          {
+            "type": "shell-execution",
+            "line": 252,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "package-install",
+            "line": 253,
+            "evidence": "pip install",
+            "context": "pip install pillow imageio numpy"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": true
+      }
+    },
+    {
+      "path": "skills/theme-factory/SKILL.md",
+      "name": "theme-factory",
+      "description": "Toolkit for styling artifacts with a theme. These artifacts can be slides, docs, reportings, HTML landing pages, etc. There are 10 pre-set themes with colors/fonts that you can apply to any artifact that has been creating, or can generate a new theme on-the-fly.",
+      "skill_sha256": "c35893e221e28895c52143cc11bf30e41a44817796b39d4b15727dadc9796552",
+      "license": {
+        "spdx": "Complete terms in LICENSE.txt",
+        "redistributable": false,
+        "status": "review-required",
+        "evidence_type": "skill-frontmatter",
+        "evidence_path": "skills/theme-factory/SKILL.md"
+      },
+      "security": {
+        "scan_status": "verified",
+        "risk": "none",
+        "capabilities": {
+          "shell": false,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": []
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/web-artifacts-builder/SKILL.md",
+      "name": "web-artifacts-builder",
+      "description": "Suite of tools for creating elaborate, multi-component claude.ai HTML artifacts using modern frontend web technologies (React, Tailwind CSS, shadcn/ui). Use for complex artifacts requiring state management, routing, or shadcn/ui components - not for simple single-file HTML/JSX artifacts.",
+      "skill_sha256": "81c5002c6643b0de7b8710b00e7a9038daa6fb9b68d59870ee6adb12da8d10f8",
+      "license": {
+        "spdx": "Complete terms in LICENSE.txt",
+        "redistributable": false,
+        "status": "review-required",
+        "evidence_type": "skill-frontmatter",
+        "evidence_path": "skills/web-artifacts-builder/SKILL.md"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "capabilities": {
+          "shell": true,
+          "network": true,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "shell-execution",
+            "line": 10,
+            "evidence": "sh",
+            "context": "1. Initialize the frontend repo using `scripts/init-artifact.sh`"
+          },
+          {
+            "type": "shell-execution",
+            "line": 12,
+            "evidence": "sh",
+            "context": "3. Bundle all code into a single HTML file using `scripts/bundle-artifact.sh`"
+          },
+          {
+            "type": "shell-execution",
+            "line": 27,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 28,
+            "evidence": "bash",
+            "context": "bash scripts/init-artifact.sh <project-name>"
+          },
+          {
+            "type": "shell-execution",
+            "line": 28,
+            "evidence": "sh",
+            "context": "bash scripts/init-artifact.sh <project-name>"
+          },
+          {
+            "type": "shell-execution",
+            "line": 48,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 49,
+            "evidence": "bash",
+            "context": "bash scripts/bundle-artifact.sh"
+          },
+          {
+            "type": "shell-execution",
+            "line": 49,
+            "evidence": "sh",
+            "context": "bash scripts/bundle-artifact.sh"
+          },
+          {
+            "type": "network-access",
+            "line": 74,
+            "evidence": "https://",
+            "context": "- **shadcn/ui components**: https://ui.shadcn.com/docs/components"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": true,
+        "network": true,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/webapp-testing/SKILL.md",
+      "name": "webapp-testing",
+      "description": "Toolkit for interacting with and testing local web applications using Playwright. Supports verifying frontend functionality, debugging UI behavior, capturing browser screenshots, and viewing browser logs.",
+      "skill_sha256": "51b7349e77ec63b7744a6f63647e7566a0b4d2e301121cc10e8c2113af6556a2",
+      "license": {
+        "spdx": "Complete terms in LICENSE.txt",
+        "redistributable": false,
+        "status": "review-required",
+        "evidence_type": "skill-frontmatter",
+        "evidence_path": "skills/webapp-testing/SKILL.md"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "capabilities": {
+          "shell": true,
+          "network": true,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "shell-execution",
+            "line": 40,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 45,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "network-access",
+            "line": 59,
+            "evidence": "http://",
+            "context": "    page.goto('http://localhost:5173') # Server already running and ready"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": true,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/xlsx/SKILL.md",
+      "name": "xlsx",
+      "description": "Use this skill any time a spreadsheet file is the primary input or output. This means any task where the user wants to: open, read, edit, or fix an existing .xlsx, .xlsm, .xltx, .csv, or .tsv file (e.g., adding columns, computing formulas, formatting, charting, cleaning messy data); create a new spreadsheet from scratch or from other data sources; or convert between tabular file formats. Trigger especially when the user references a spreadsheet file by name or path — even casually (like \\\"the xlsx in my downloads\\\") — and wants something done to it or produced from it. Also trigger for cleaning or restructuring messy tabular data files (malformed rows, misplaced headers, junk data) into proper spreadsheets. The deliverable must be a spreadsheet file. Do NOT trigger when the primary deliverable is a Word document, HTML report, standalone Python script, database pipeline, or Google Sheets API integration, even if tabular data is involved.",
+      "skill_sha256": "6712b39718fe815054abca9c3ee72f989613e6f771c8a5c58f30a65a6c905622",
+      "license": {
+        "spdx": "Proprietary. LICENSE.txt has complete terms",
+        "redistributable": false,
+        "status": "review-required",
+        "evidence_type": "skill-frontmatter",
+        "evidence_path": "skills/xlsx/SKILL.md"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "medium",
+        "capabilities": {
+          "shell": true,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": true,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "package-install",
+            "line": 16,
+            "evidence": "pip install",
+            "context": "> `openpyxl`, `pandas`, and `markitdown` are preinstalled — do not run `pip install` first; write the script and import directly. Only if an import fails (or the `markitdown` command is missing): `pip install` the missing package."
+          },
+          {
+            "type": "package-install",
+            "line": 16,
+            "evidence": "pip install",
+            "context": "> `openpyxl`, `pandas`, and `markitdown` are preinstalled — do not run `pip install` first; write the script and import directly. Only if an import fails (or the `markitdown` command is missing): `pip install` the missing package."
+          },
+          {
+            "type": "shell-execution",
+            "line": 36,
+            "evidence": "bash",
+            "context": "```bash"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": true
+      }
+    },
+    {
+      "path": "template/SKILL.md",
+      "name": "template-skill",
+      "description": "Replace with description of the skill and when Claude should use it.",
+      "skill_sha256": "eb685d91de039ed864fbd790cddf31684b017fd4a34ee1a55760d8d7cdbadefa",
+      "license": {
+        "spdx": "NOASSERTION",
+        "redistributable": false,
+        "status": "review-required"
+      },
+      "security": {
+        "scan_status": "verified",
+        "risk": "none",
+        "capabilities": {
+          "shell": false,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": []
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    }
+  ],
+  "license_files": [
+    {
+      "path": "skills/academy-guide/LICENSE.txt",
+      "sha256": "bc6b3af2f331cbc7fb0da1344efb2cbe5877a31498b4d70dbc7000f3405a1362",
+      "preview": "Apache License Version 2.0, January 2004 http://www.apache.org/licenses/ TERMS AND CONDITIONS FOR USE, REPRODUC"
+    },
+    {
+      "path": "skills/algorithmic-art/LICENSE.txt",
+      "sha256": "bc6b3af2f331cbc7fb0da1344efb2cbe5877a31498b4d70dbc7000f3405a1362",
+      "preview": "Apache License Version 2.0, January 2004 http://www.apache.org/licenses/ TERMS AND CONDITIONS FOR USE, REPRODUC"
+    },
+    {
+      "path": "skills/brand-guidelines/LICENSE.txt",
+      "sha256": "bc6b3af2f331cbc7fb0da1344efb2cbe5877a31498b4d70dbc7000f3405a1362",
+      "preview": "Apache License Version 2.0, January 2004 http://www.apache.org/licenses/ TERMS AND CONDITIONS FOR USE, REPRODUC"
+    },
+    {
+      "path": "skills/canvas-design/LICENSE.txt",
+      "sha256": "bc6b3af2f331cbc7fb0da1344efb2cbe5877a31498b4d70dbc7000f3405a1362",
+      "preview": "Apache License Version 2.0, January 2004 http://www.apache.org/licenses/ TERMS AND CONDITIONS FOR USE, REPRODUC"
+    },
+    {
+      "path": "skills/claude-api/LICENSE.txt",
+      "sha256": "bc6b3af2f331cbc7fb0da1344efb2cbe5877a31498b4d70dbc7000f3405a1362",
+      "preview": "Apache License Version 2.0, January 2004 http://www.apache.org/licenses/ TERMS AND CONDITIONS FOR USE, REPRODUC"
+    },
+    {
+      "path": "skills/discernment-nudge/LICENSE.txt",
+      "sha256": "bc6b3af2f331cbc7fb0da1344efb2cbe5877a31498b4d70dbc7000f3405a1362",
+      "preview": "Apache License Version 2.0, January 2004 http://www.apache.org/licenses/ TERMS AND CONDITIONS FOR USE, REPRODUC"
+    },
+    {
+      "path": "skills/docx/LICENSE.txt",
+      "sha256": "79f6d8f5b427252fa3b1c11ecdbdb6bf610b944f7530b4de78f770f38741cfaa",
+      "preview": "© 2025 Anthropic, PBC. All rights reserved. LICENSE: Use of these materials (including all code, prompts, assets, files, and other components of this Skill) is governed by your agreement with Anthrop"
+    },
+    {
+      "path": "skills/frontend-design/LICENSE.txt",
+      "sha256": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594",
+      "preview": "Apache License Version 2.0, January 2004 http://www.apache.org/licenses/ TERMS AND CONDITIONS FOR USE, REPRODUC"
+    },
+    {
+      "path": "skills/internal-comms/LICENSE.txt",
+      "sha256": "bc6b3af2f331cbc7fb0da1344efb2cbe5877a31498b4d70dbc7000f3405a1362",
+      "preview": "Apache License Version 2.0, January 2004 http://www.apache.org/licenses/ TERMS AND CONDITIONS FOR USE, REPRODUC"
+    },
+    {
+      "path": "skills/mcp-builder/LICENSE.txt",
+      "sha256": "bc6b3af2f331cbc7fb0da1344efb2cbe5877a31498b4d70dbc7000f3405a1362",
+      "preview": "Apache License Version 2.0, January 2004 http://www.apache.org/licenses/ TERMS AND CONDITIONS FOR USE, REPRODUC"
+    },
+    {
+      "path": "skills/pdf/LICENSE.txt",
+      "sha256": "79f6d8f5b427252fa3b1c11ecdbdb6bf610b944f7530b4de78f770f38741cfaa",
+      "preview": "© 2025 Anthropic, PBC. All rights reserved. LICENSE: Use of these materials (including all code, prompts, assets, files, and other components of this Skill) is governed by your agreement with Anthrop"
+    },
+    {
+      "path": "skills/pptx/LICENSE.txt",
+      "sha256": "79f6d8f5b427252fa3b1c11ecdbdb6bf610b944f7530b4de78f770f38741cfaa",
+      "preview": "© 2025 Anthropic, PBC. All rights reserved. LICENSE: Use of these materials (including all code, prompts, assets, files, and other components of this Skill) is governed by your agreement with Anthrop"
+    },
+    {
+      "path": "skills/skill-creator/LICENSE.txt",
+      "sha256": "bc6b3af2f331cbc7fb0da1344efb2cbe5877a31498b4d70dbc7000f3405a1362",
+      "preview": "Apache License Version 2.0, January 2004 http://www.apache.org/licenses/ TERMS AND CONDITIONS FOR USE, REPRODUC"
+    },
+    {
+      "path": "skills/slack-gif-creator/LICENSE.txt",
+      "sha256": "bc6b3af2f331cbc7fb0da1344efb2cbe5877a31498b4d70dbc7000f3405a1362",
+      "preview": "Apache License Version 2.0, January 2004 http://www.apache.org/licenses/ TERMS AND CONDITIONS FOR USE, REPRODUC"
+    },
+    {
+      "path": "skills/theme-factory/LICENSE.txt",
+      "sha256": "bc6b3af2f331cbc7fb0da1344efb2cbe5877a31498b4d70dbc7000f3405a1362",
+      "preview": "Apache License Version 2.0, January 2004 http://www.apache.org/licenses/ TERMS AND CONDITIONS FOR USE, REPRODUC"
+    },
+    {
+      "path": "skills/web-artifacts-builder/LICENSE.txt",
+      "sha256": "bc6b3af2f331cbc7fb0da1344efb2cbe5877a31498b4d70dbc7000f3405a1362",
+      "preview": "Apache License Version 2.0, January 2004 http://www.apache.org/licenses/ TERMS AND CONDITIONS FOR USE, REPRODUC"
+    },
+    {
+      "path": "skills/webapp-testing/LICENSE.txt",
+      "sha256": "bc6b3af2f331cbc7fb0da1344efb2cbe5877a31498b4d70dbc7000f3405a1362",
+      "preview": "Apache License Version 2.0, January 2004 http://www.apache.org/licenses/ TERMS AND CONDITIONS FOR USE, REPRODUC"
+    },
+    {
+      "path": "skills/xlsx/LICENSE.txt",
+      "sha256": "79f6d8f5b427252fa3b1c11ecdbdb6bf610b944f7530b4de78f770f38741cfaa",
+      "preview": "© 2025 Anthropic, PBC. All rights reserved. LICENSE: Use of these materials (including all code, prompts, assets, files, and other components of this Skill) is governed by your agreement with Anthrop"
+    }
+  ],
+  "warnings": [
+    {
+      "path": "skills/claude-api/SKILL.md",
+      "type": "review-signal",
+      "capabilities": {
+        "shell": true,
+        "network": true,
+        "credentials": true,
+        "dynamic_execution": true,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/docx/SKILL.md",
+      "type": "review-signal",
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": true
+      }
+    },
+    {
+      "path": "skills/pdf/SKILL.md",
+      "type": "review-signal",
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": true
+      }
+    },
+    {
+      "path": "skills/pptx/SKILL.md",
+      "type": "review-signal",
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": true
+      }
+    },
+    {
+      "path": "skills/slack-gif-creator/SKILL.md",
+      "type": "review-signal",
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": true
+      }
+    },
+    {
+      "path": "skills/xlsx/SKILL.md",
+      "type": "review-signal",
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": true
+      }
+    }
+  ]
+}

@@ -66,20 +66,24 @@ for(const source of sourceEntries){
   const file=path.join(ROOT,"catalog/ingestion",source.repo.replaceAll("/","__")+".json");
   if(!fs.existsSync(file)) throw new Error("Missing ingestion output for "+source.repo);
   const payload=JSON.parse(fs.readFileSync(file,"utf8"));
-  for(const item of payload.discovered_skills) discovered.push({source,item});
+  for(const item of payload.discovered_skills) discovered.push({source,item,revision:payload.source.revision});
 }
 
-for(const {source,item} of discovered){
+for(const {source,item,revision} of discovered){
   const sourceKey=source.repo+":"+item.path;
   let skill=existingBySource.get(sourceKey);
   const namespace=namespaceByRepo[source.repo]??source.repo.split("/")[0].toLowerCase().replace(/[^a-z0-9-]/g,"-");
   const stableId=skill?.id ?? namespace+"/"+item.name;
+  if(!skill) {
+    skill = existingById.get(stableId);
+  }
+  
   if(!skill){
     skill={
       id:stableId,
       name:item.name,
       publisher:source.repo.split("/")[0],
-      source:{repo:source.repo,path:item.path,revision:item.source.revision,revision_type:"git-commit"},
+      source:{repo:source.repo,path:item.path,revision:revision,revision_type:"git-commit"},
       category:deriveCategory(source.id,item.path),
       license:{spdx:item.license?.spdx??"NOASSERTION",redistributable:item.license?.redistributable===true,status:item.license?.status??"review-required",evidence:item.license?.evidence_path??"ingestion"},
       distribution:"review-required",
@@ -93,7 +97,7 @@ for(const {source,item} of discovered){
       },
       materialized:false,
       release:{status:"hold",reasons:["new-skill-review-required"]},
-      integrity:{upstream_skill_sha256:item.skill_sha256,last_ingested_revision:item.source.revision}
+      integrity:{upstream_skill_sha256:item.skill_sha256,last_ingested_revision:revision}
     };
     registry.skills.push(skill);
     existingBySource.set(sourceKey,skill);
@@ -106,9 +110,9 @@ for(const {source,item} of discovered){
     ...skill.source,
     repo:source.repo,
     path:item.path,
-    revision:item.source.revision,
+    revision:revision,
     revision_type:"git-commit",
-    url:"https://github.com/"+source.repo+"/tree/"+item.source.revision+"/"+item.path,
+    url:"https://github.com/"+source.repo+"/tree/"+revision+"/"+item.path,
     state:"present"
   };
   if(item.description) skill.description=item.description;
@@ -137,10 +141,10 @@ for(const {source,item} of discovered){
   skill.integrity={
     ...(skill.integrity??{}),
     upstream_skill_sha256:item.skill_sha256,
-    last_ingested_revision:item.source.revision
+    last_ingested_revision:revision
   };
 
-  const revisionChanged=previousRevision && previousRevision!==item.source.revision;
+  const revisionChanged=previousRevision && previousRevision!==revision;
   if(revisionChanged){
     skill.materialized=false;
     if(skill.distribution==="bundled") skill.release={status:"pending",reasons:["upstream-revision-changed","security-scan-pending","rematerialization-required"]};

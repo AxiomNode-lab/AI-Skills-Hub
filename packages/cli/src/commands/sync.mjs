@@ -1,4 +1,4 @@
-import { execSync } from "node:child_process";
+import { execFileSync } from "node:child_process";
 import fs from "node:fs/promises";
 import path from "node:path";
 
@@ -22,7 +22,7 @@ export async function syncCommand() {
           // It's a git repo
           console.log(`\n⬇️  Syncing ${entry.name}...`);
           try {
-            execSync(`git pull`, { cwd: capPath, stdio: 'inherit' });
+            execFileSync("git", ["pull"], { cwd: capPath, stdio: 'inherit' });
             syncCount++;
           } catch (e) {
             console.error(`⚠️ Failed to sync ${entry.name}. Skipping.`);

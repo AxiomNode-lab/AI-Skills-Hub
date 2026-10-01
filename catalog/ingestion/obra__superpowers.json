@@ -1,0 +1,1084 @@
+{
+  "schema_version": "0.2",
+  "source": {
+    "repo": "obra/superpowers",
+    "ref": "main",
+    "revision": "8ca22dba9a94f28898bbce59f2537ff4d87c747d",
+    "revision_type": "git-commit",
+    "tree_sha": "8ca22dba9a94f28898bbce59f2537ff4d87c747d"
+  },
+  "discovered_skills": [
+    {
+      "path": "skills/brainstorming/SKILL.md",
+      "name": "brainstorming",
+      "description": "You MUST use this before any creative work - creating features, building components, adding functionality, or modifying behavior. Explores user intent, requirements and design before implementation.",
+      "skill_sha256": "a32d2255354775aa124855aa7100cf276bea096fff4ebb3a0edf57be216e6c72",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "capabilities": {
+          "shell": false,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": true,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "filesystem-write",
+            "line": 214,
+            "evidence": "remove",
+            "context": "- YAGNI ruthlessly - remove unnecessary features from every approach and design"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/diagnosing-superpowers/SKILL.md",
+      "name": "diagnosing-superpowers",
+      "description": "Use when a superpowers session went wrong and your human partner wants to know why — repeated work, ignored plans, stumbles, poor results, a skill that didn't fire, \"it took too long\", \"why is it so expensive\", \"what is it doing\" — or wants to build a bug report for the superpowers maintainers, for the current session or a past one identified by id or path, on any harness.",
+      "skill_sha256": "5a652f8132cc901eb5ca61f89157839f87a2f20aed037fc7a2b51051bc37cd19",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "capabilities": {
+          "shell": false,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": true,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "filesystem-write",
+            "line": 90,
+            "evidence": "delete",
+            "context": "- **Read-only.** Never modify, move, or delete a session file."
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/dispatching-parallel-agents/SKILL.md",
+      "name": "dispatching-parallel-agents",
+      "description": "Use when facing 2+ independent tasks that can be worked on without shared state or sequential dependencies",
+      "skill_sha256": "1968923066f3b707eb01d1992cdf4c42284c3855f70253b9cd5000ff45fca13c",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "verified",
+        "risk": "none",
+        "capabilities": {
+          "shell": false,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": []
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/executing-plans/SKILL.md",
+      "name": "executing-plans",
+      "description": "Use when executing an implementation plan in the current session as the implementer yourself — your human partner chose inline execution, or no subagent tool is available",
+      "skill_sha256": "f38e8f2ddcf079f65493adc713c1fed78421dfaf5f4dbf6b3a6b2b1d95466e71",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "medium",
+        "capabilities": {
+          "shell": false,
+          "network": false,
+          "credentials": true,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": true,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "credential-access",
+            "line": 37,
+            "evidence": "secret",
+            "context": "in secret."
+          },
+          {
+            "type": "filesystem-write",
+            "line": 87,
+            "evidence": "delete",
+            "context": "    \"Final review clean: delete this plan's workspace\" [shape=box];"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 103,
+            "evidence": "delete",
+            "context": "    \"Re-grade, then: Critical/Important → ONE fix pass, each fix RED→GREEN + green suite; Minor → ledger\" -> \"Final review clean: delete this plan's workspace\";"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 104,
+            "evidence": "delete",
+            "context": "    \"Final review clean: delete this plan's workspace\" -> \"Use superpowers:finishing-a-development-branch\";"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 293,
+            "evidence": "delete",
+            "context": "Before you delete anything, collect every ledger line containing"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 300,
+            "evidence": "delete",
+            "context": "When the final review is clean and its fixes are committed, delete this"
+          },
+          {
+            "type": "credential-access",
+            "line": 313,
+            "evidence": "secret",
+            "context": "| \"The plan is wrong here, I'll just do the right thing\" | Do the right thing and ledger the ruling. Unledgered deviation is a decision made in secret. |"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 370,
+            "evidence": "Delete",
+            "context": "[Delete this plan's workspace — the record now lives in git]"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": true,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/finishing-a-development-branch/SKILL.md",
+      "name": "finishing-a-development-branch",
+      "description": "Use when implementation is complete, all tests pass, and you need to decide how to integrate the work",
+      "skill_sha256": "8db5a922b242dd4e1bf824cb91c13b3e8d8e8a86d6ceaf7f0774eb9cce909d65",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "capabilities": {
+          "shell": true,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": true,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "shell-execution",
+            "line": 30,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 88,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 107,
+            "evidence": "delete",
+            "context": "delete the branch:"
+          },
+          {
+            "type": "shell-execution",
+            "line": 109,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 115,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 138,
+            "evidence": "delete",
+            "context": "This will permanently delete:"
+          },
+          {
+            "type": "shell-execution",
+            "line": 148,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 153,
+            "evidence": "delete",
+            "context": "Then clean up the worktree (Step 6) and force-delete the branch:"
+          },
+          {
+            "type": "shell-execution",
+            "line": 155,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 172,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 173,
+            "evidence": "remove",
+            "context": "git worktree remove \"$WORKTREE_PATH\""
+          },
+          {
+            "type": "shell-execution",
+            "line": 182,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 193,
+            "evidence": "Delete",
+            "context": "3. Delete them (unrecoverable)"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 198,
+            "evidence": "remove",
+            "context": "Carry out the choice, then remove the worktree."
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/receiving-code-review/SKILL.md",
+      "name": "receiving-code-review",
+      "description": "Use when receiving code review feedback, before implementing suggestions, especially if feedback seems unclear or technically questionable - requires technical rigor and verification, not performative agreement or blind implementation",
+      "skill_sha256": "091df1629510af1b92fc4abd6f96732ebedb4cb2c0f3457e8f2740b0504a2438",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "capabilities": {
+          "shell": false,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": true,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "filesystem-write",
+            "line": 94,
+            "evidence": "Remove",
+            "context": "  IF unused: \"This endpoint isn't called. Remove it (YAGNI)?\""
+          },
+          {
+            "type": "filesystem-write",
+            "line": 148,
+            "evidence": "DELETE",
+            "context": "**If you catch yourself about to write \"Thanks\":** DELETE IT. State the fix instead."
+          },
+          {
+            "type": "filesystem-write",
+            "line": 180,
+            "evidence": "Remove",
+            "context": "Reviewer: \"Remove legacy code\""
+          },
+          {
+            "type": "filesystem-write",
+            "line": 181,
+            "evidence": "remove",
+            "context": "❌ \"You're absolutely right! Let me remove that...\""
+          },
+          {
+            "type": "filesystem-write",
+            "line": 186,
+            "evidence": "Remove",
+            "context": "Reviewer: \"Remove legacy code\""
+          },
+          {
+            "type": "filesystem-write",
+            "line": 193,
+            "evidence": "Remove",
+            "context": "✅ \"Grepped codebase - nothing calls this endpoint. Remove it (YAGNI)? Or is there usage I'm missing?\""
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/requesting-code-review/SKILL.md",
+      "name": "requesting-code-review",
+      "description": "Use when completing tasks, implementing major features, or before merging to verify work meets requirements",
+      "skill_sha256": "cfcee1b06774e7c0517f1e09be1a11f2d5680257072723e709ddbcf7e08b795a",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "capabilities": {
+          "shell": true,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "shell-execution",
+            "line": 27,
+            "evidence": "bash",
+            "context": "```bash"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/subagent-driven-development/SKILL.md",
+      "name": "subagent-driven-development",
+      "description": "Use when executing implementation plans with independent tasks in the current session",
+      "skill_sha256": "8dde5589ee083fb4999106d116f01c8fdaf3116a8a9813fdedeb80329de49046",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "high",
+        "capabilities": {
+          "shell": true,
+          "network": false,
+          "credentials": true,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": true,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "filesystem-write",
+            "line": 90,
+            "evidence": "delete",
+            "context": "    \"Final review clean: delete this plan's workspace\" [shape=box];"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 119,
+            "evidence": "delete",
+            "context": "    \"Final findings? ONE fix dispatch, one scoped re-review, adjudicate residuals\" -> \"Final review clean: delete this plan's workspace\";"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 120,
+            "evidence": "delete",
+            "context": "    \"Final review clean: delete this plan's workspace\" -> \"Use superpowers:finishing-a-development-branch\";"
+          },
+          {
+            "type": "shell-execution",
+            "line": 137,
+            "evidence": "bash",
+            "context": "  `bash scripts/sdd-workspace PLAN_FILE` — it prints the plan's git-ignored"
+          },
+          {
+            "type": "shell-execution",
+            "line": 252,
+            "evidence": "bash",
+            "context": "  `bash scripts/task-brief PLAN_FILE N` — it extracts the task's full text to a"
+          },
+          {
+            "type": "shell-execution",
+            "line": 290,
+            "evidence": "bash",
+            "context": "**DONE:** Generate the review package (`bash scripts/review-package PLAN_FILE BASE HEAD`, from this skill's directory — it prints the unique file path it wrote; BASE is the commit you recorded before dispatching the implementer — never `HEA"
+          },
+          {
+            "type": "shell-execution",
+            "line": 317,
+            "evidence": "bash",
+            "context": "  `bash scripts/review-package PLAN_FILE BASE HEAD` and pass the reviewer the file path"
+          },
+          {
+            "type": "shell-execution",
+            "line": 318,
+            "evidence": "bash",
+            "context": "  it prints (or, without bash: `git log --oneline`, `git diff --stat`,"
+          },
+          {
+            "type": "shell-execution",
+            "line": 396,
+            "evidence": "bash",
+            "context": "**The re-review is scoped.** Run `bash scripts/review-package PLAN_FILE FIX_BASE HEAD`"
+          },
+          {
+            "type": "shell-execution",
+            "line": 448,
+            "evidence": "bash",
+            "context": "`bash scripts/review-package PLAN_FILE MERGE_BASE HEAD` (MERGE_BASE = the commit the"
+          },
+          {
+            "type": "shell-execution",
+            "line": 463,
+            "evidence": "bash",
+            "context": "(`bash scripts/review-package PLAN_FILE FIX_BASE HEAD` over the fix range,"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 473,
+            "evidence": "delete",
+            "context": "Before you delete anything, collect every ledger line containing `Ruling:` —"
+          },
+          {
+            "type": "credential-access",
+            "line": 480,
+            "evidence": "secret",
+            "context": "made in secret."
+          },
+          {
+            "type": "destructive-operation",
+            "line": 483,
+            "evidence": "rm -rf",
+            "context": "delete this plan's workspace (`rm -rf <workspace>`) — the git history is"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 483,
+            "evidence": "delete",
+            "context": "delete this plan's workspace (`rm -rf <workspace>`) — the git history is"
+          },
+          {
+            "type": "shell-execution",
+            "line": 483,
+            "evidence": "rm -rf",
+            "context": "delete this plan's workspace (`rm -rf <workspace>`) — the git history is"
+          },
+          {
+            "type": "shell-execution",
+            "line": 510,
+            "evidence": "bash",
+            "context": "[Resolve workspace: bash scripts/sdd-workspace docs/superpowers/plans/feature-plan.md — no ledger inside, fresh start]"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 565,
+            "evidence": "Delete",
+            "context": "[Delete this plan's workspace — the record now lives in git]"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": true,
+        "network": false,
+        "credentials": true,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/systematic-debugging/SKILL.md",
+      "name": "systematic-debugging",
+      "description": "Use when encountering any bug, test failure, or unexpected behavior, before proposing fixes",
+      "skill_sha256": "808fc5717aa88ad65efff312b11c186294d3e6ee301afb584e2f86599b137787",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "capabilities": {
+          "shell": true,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "shell-execution",
+            "line": 88,
+            "evidence": "bash",
+            "context": "   ```bash"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": true,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/test-driven-development/SKILL.md",
+      "name": "test-driven-development",
+      "description": "Use when implementing any feature or bugfix, before writing implementation code",
+      "skill_sha256": "64b03fce4aee5a97a93160cea8111f3ba13a17b7c001db4bd5836d67fd10705d",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "capabilities": {
+          "shell": true,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": true,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "filesystem-write",
+            "line": 37,
+            "evidence": "Delete",
+            "context": "Write code before the test? Delete it. Start over."
+          },
+          {
+            "type": "filesystem-write",
+            "line": 43,
+            "evidence": "Delete",
+            "context": "- Delete means delete"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 43,
+            "evidence": "delete",
+            "context": "- Delete means delete"
+          },
+          {
+            "type": "shell-execution",
+            "line": 117,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 172,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 198,
+            "evidence": "Remove",
+            "context": "- Remove duplication"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 231,
+            "evidence": "Delete",
+            "context": "| \"Keep as reference, write tests first\" | You'll adapt it. That's testing after. Delete means delete. |"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 231,
+            "evidence": "delete",
+            "context": "| \"Keep as reference, write tests first\" | You'll adapt it. That's testing after. Delete means delete. |"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 254,
+            "evidence": "Delete",
+            "context": "**All of these mean: Delete code. Start over with TDD.**"
+          },
+          {
+            "type": "shell-execution",
+            "line": 269,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 285,
+            "evidence": "bash",
+            "context": "```bash"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/using-git-worktrees/SKILL.md",
+      "name": "using-git-worktrees",
+      "description": "Use when starting feature work that needs isolation from current workspace or before executing implementation plans - ensures an isolated workspace exists via native tools or git worktree fallback",
+      "skill_sha256": "8cfb86f121269e8f7f12361e6795c4f6738828340e28964c9229d365666c9edd",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "medium",
+        "capabilities": {
+          "shell": true,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": true,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "shell-execution",
+            "line": 20,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 28,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 70,
+            "evidence": "bash",
+            "context": "   ```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 82,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 92,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 106,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "package-install",
+            "line": 108,
+            "evidence": "npm install",
+            "context": "if [ -f package.json ]; then npm install; fi"
+          },
+          {
+            "type": "package-install",
+            "line": 114,
+            "evidence": "pip install",
+            "context": "if [ -f requirements.txt ]; then pip install -r requirements.txt; fi"
+          },
+          {
+            "type": "shell-execution",
+            "line": 125,
+            "evidence": "bash",
+            "context": "```bash"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": true
+      }
+    },
+    {
+      "path": "skills/using-superpowers/SKILL.md",
+      "name": "using-superpowers",
+      "description": "Use when starting any conversation - establishes how to find and use skills, requiring skill invocation before ANY response including clarifying questions",
+      "skill_sha256": "82c5c8866ad7f5dd4440ce66bd7806ba48a2f13771beae5cf112e53f08fe36ba",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "verified",
+        "risk": "none",
+        "capabilities": {
+          "shell": false,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": []
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/verification-before-completion/SKILL.md",
+      "name": "verification-before-completion",
+      "description": "Use when about to claim work is complete, fixed, or passing, before committing or creating PRs - requires running verification commands and confirming output before making any success claims; evidence before assertions always",
+      "skill_sha256": "2befe7fc55bcadaa3d97dd9e8efeb633d2561c0ebe74c5a8b17c4d9e7e4520b3",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "verified",
+        "risk": "none",
+        "capabilities": {
+          "shell": false,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": []
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/writing-plans/SKILL.md",
+      "name": "writing-plans",
+      "description": "Use when you have a spec or requirements for a multi-step task, before touching code",
+      "skill_sha256": "a6c67c1900064347c2a329990dd3c555657c51c3ec53b259a08aa01a2c26139a",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "high",
+        "capabilities": {
+          "shell": true,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": true,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "dynamic-execution",
+            "line": 112,
+            "evidence": "function(",
+            "context": "    result = function(input)"
+          },
+          {
+            "type": "dynamic-execution",
+            "line": 121,
+            "evidence": "function(",
+            "context": "- [ ] **Step 3: Implement `function(input: InputType) -> ResultType` in `exact/path/to/file.py`**"
+          },
+          {
+            "type": "shell-execution",
+            "line": 134,
+            "evidence": "bash",
+            "context": "```bash"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": true,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/writing-skills/SKILL.md",
+      "name": "writing-skills",
+      "description": "Use when creating new skills, editing existing skills, or verifying skills work before deployment",
+      "skill_sha256": "bbdfe742f853562e643a3d40d64476359d47881e39cef80a189283fa26d11ab9",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "capabilities": {
+          "shell": true,
+          "network": true,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": true,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "network-access",
+            "line": 96,
+            "evidence": "https://",
+            "context": "- Two required fields: `name` and `description` (see [agentskills.io/specification](https://agentskills.io/specification) for all supported fields)"
+          },
+          {
+            "type": "shell-execution",
+            "line": 225,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 262,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 319,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 374,
+            "evidence": "bash",
+            "context": "Invoke bundled scripts through their interpreter in the prose (`bash scripts/tool.sh`, `node scripts/tool.js`), never by bare path: some harness plugin packagers strip executable bits, and a bare `scripts/tool.sh` fails there with `Permissi"
+          },
+          {
+            "type": "shell-execution",
+            "line": 374,
+            "evidence": "sh",
+            "context": "Invoke bundled scripts through their interpreter in the prose (`bash scripts/tool.sh`, `node scripts/tool.js`), never by bare path: some harness plugin packagers strip executable bits, and a bare `scripts/tool.sh` fails there with `Permissi"
+          },
+          {
+            "type": "shell-execution",
+            "line": 374,
+            "evidence": "sh",
+            "context": "Invoke bundled scripts through their interpreter in the prose (`bash scripts/tool.sh`, `node scripts/tool.js`), never by bare path: some harness plugin packagers strip executable bits, and a bare `scripts/tool.sh` fails there with `Permissi"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 384,
+            "evidence": "Delete",
+            "context": "Write skill before testing? Delete it. Start over."
+          },
+          {
+            "type": "filesystem-write",
+            "line": 393,
+            "evidence": "Delete",
+            "context": "- Delete means delete"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 393,
+            "evidence": "delete",
+            "context": "- Delete means delete"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 492,
+            "evidence": "Delete",
+            "context": "Write code before test? Delete it."
+          },
+          {
+            "type": "filesystem-write",
+            "line": 498,
+            "evidence": "Delete",
+            "context": "Write code before test? Delete it. Start over."
+          },
+          {
+            "type": "filesystem-write",
+            "line": 504,
+            "evidence": "Delete",
+            "context": "- Delete means delete"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 504,
+            "evidence": "delete",
+            "context": "- Delete means delete"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 543,
+            "evidence": "Delete",
+            "context": "**All of these mean: Delete code. Start over with TDD.**"
+          },
+          {
+            "type": "network-access",
+            "line": 640,
+            "evidence": "https://",
+            "context": "- [ ] YAML frontmatter with required `name` and `description` fields (max 1024 chars; see [spec](https://agentskills.io/specification))"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": true,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    }
+  ],
+  "license_files": [
+    {
+      "path": "LICENSE",
+      "sha256": "a37e0e9697144819e1d965176ac4ae5bc3fa02d11e7812036bbcadf6dafe2400",
+      "preview": "MIT License Copyright (c) 2025 Jesse Vincent Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to dea"
+    }
+  ],
+  "warnings": [
+    {
+      "path": "skills/using-git-worktrees/SKILL.md",
+      "type": "review-signal",
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": true
+      }
+    },
+    {
+      "path": "skills/writing-plans/SKILL.md",
+      "type": "review-signal",
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": true,
+        "package_install": false
+      }
+    }
+  ]
+}

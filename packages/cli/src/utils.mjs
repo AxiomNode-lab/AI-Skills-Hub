@@ -1,7 +1,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import os from "node:os";
-import { execSync } from "node:child_process";
+import { execFileSync } from "node:child_process";
 import { loadRegistry } from "@ai-skills-hub/core";
 
 export function checkPrerequisites(prerequisites) {
@@ -10,21 +10,9 @@ export function checkPrerequisites(prerequisites) {
   const missing = [];
   for (const prereq of prerequisites) {
     try {
-      execSync(`command -v ${prereq}`, { stdio: 'ignore' });
+      execFileSync("command", ["-v", prereq], { stdio: 'ignore' });
     } catch {
-      console.log(`\n⚠️  Prerequisite '${prereq}' is missing. Attempting auto-install...`);
-      try {
-        if (prereq === 'uv') {
-          execSync(`curl -LsSf https://astral.sh/uv/install.sh | sh`, { stdio: 'inherit' });
-          const home = os.homedir();
-          process.env.PATH = `${process.env.PATH}:${home}/.cargo/bin:${home}/.local/bin`;
-          console.log(`✅ Successfully auto-installed '${prereq}'`);
-        } else {
-          throw new Error("No auto-installer defined for this tool.");
-        }
-      } catch (autoErr) {
-        missing.push(prereq);
-      }
+      missing.push(prereq);
     }
   }
   return { missing };
@@ -37,7 +25,7 @@ export async function autoSyncCapability(capPath) {
     await fs.access(gitDir);
     // It's a git repo, fetch latest
     console.log(`🔄 Auto-syncing capability (git pull)...`);
-    execSync(`git pull`, { cwd: capPath, stdio: 'ignore' });
+    execFileSync("git", ["pull"], { cwd: capPath, stdio: 'ignore' });
   } catch {
     // Not a git repo or no access, skip gracefully
   }
@@ -52,41 +40,7 @@ export async function fileExists(p) {
   }
 }
 
-export async function readCapabilityManifest(capPath, id) {
-  const manifestPath = path.join(capPath, 'manifest.json');
-  if (await fileExists(manifestPath)) {
-    try {
-      const data = JSON.parse(await fs.readFile(manifestPath, 'utf8'));
-      return {
-        ...data,
-        id: data.id || id,
-        materialized_root: capPath,
-        materialized: true,
-        distribution: "bundled",
-        release: { status: "eligible" }
-      };
-    } catch (e) {
-      console.error(`Error reading manifest for ${id}:`, e.message);
-    }
-  }
-  
-  const skillMdPath = path.join(capPath, 'SKILL.md');
-  if (await fileExists(skillMdPath)) {
-    return {
-      id,
-      name: id,
-      type: "skill",
-      description: "Legacy skill without manifest.",
-      materialized_root: capPath,
-      materialized: true,
-      distribution: "bundled",
-      release: { status: "eligible" },
-      dependencies: []
-    };
-  }
-  
-  return null;
-}
+
 
 export async function readLocalCapabilities() {
   try {

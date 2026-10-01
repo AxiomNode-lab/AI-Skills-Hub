@@ -150,7 +150,7 @@ for (const item of skillPaths) {
     }
   }
 
-  const license = await licenseEvidenceFor(item.path, frontmatter.license ?? null, item.path);
+  const license = await licenseEvidenceFor(item, frontmatter.license ?? null, item);
   const capabilityScan = {
     shell: /(^|\s)(bash|sh|zsh|pwsh|powershell)\b|(?:^|\s)(sudo|chmod)\b|rm\s+-rf/i.test(body),
     network: /\b(curl|wget)\b|https?:\/\/|fetch\(/i.test(body),
@@ -160,8 +160,8 @@ for (const item of skillPaths) {
   };
 
   result.discovered_skills.push({
-    path: item.path,
-    name: frontmatter.name ?? item.path.split("/").slice(-2, -1)[0],
+    path: item,
+    name: frontmatter.name ?? item.split("/").slice(-2, -1)[0],
     description: frontmatter.description ?? null,
     skill_sha256: skillSha,
     license,
@@ -170,7 +170,7 @@ for (const item of skillPaths) {
   });
 
   if (capabilityScan.dynamic_execution || capabilityScan.package_install) {
-    result.warnings.push({ path: item.path, type: "review-signal", capabilities: capabilityScan });
+    result.warnings.push({ path: item, type: "review-signal", capabilities: capabilityScan });
   }
 }
 

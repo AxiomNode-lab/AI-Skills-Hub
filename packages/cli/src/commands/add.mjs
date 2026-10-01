@@ -17,7 +17,7 @@ export async function addCommand(query, options = {}) {
   if (query.startsWith("http") || query.startsWith("git@") || query.endsWith(".git")) {
     console.log(`📥 Fetching capability from ${query}...`);
     try {
-      const execSync = (await import("node:child_process")).execSync;
+      const { execFileSync } = await import("node:child_process");
       const fs = (await import("node:fs/promises")).default;
       const repoName = query.split('/').pop().replace('.git', '');
       const libDir = path.resolve(process.cwd(), "capabilities-library");
@@ -32,7 +32,7 @@ export async function addCommand(query, options = {}) {
       } catch {}
 
       console.log(`Cloning into ${targetDir}...`);
-      execSync(`git clone ${query} ${targetDir}`, { stdio: 'inherit' });
+      execFileSync("git", ["clone", query, targetDir], { stdio: 'inherit' });
       console.log(`\n✅ Successfully added ${repoName} to your capabilities library!`);
       console.log(`Run 'skills-hub' to install it to your agents.`);
       return;

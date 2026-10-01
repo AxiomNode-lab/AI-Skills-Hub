@@ -159,16 +159,16 @@ export async function interactiveCommand() {
         const os = await import('node:os');
         const fs = await import('node:fs');
         const path = await import('node:path');
-        const { execSync } = await import('node:child_process');
+        const { execFileSync } = await import('node:child_process');
         
         const cacheDir = path.resolve(os.homedir(), '.ai-skills-hub', 'cache', cap.id);
         if (!fs.existsSync(cacheDir)) {
           console.log(`☁️  Downloading ${cap.name} from remote...`);
           fs.mkdirSync(cacheDir, { recursive: true });
-          execSync(`git clone ${cap.source_url} ${cacheDir}`, { stdio: 'ignore' });
+          execFileSync("git", ["clone", cap.source_url, cacheDir], { stdio: 'ignore' });
         } else {
           console.log(`🔄 Syncing latest version of ${cap.name}...`);
-          execSync(`git pull`, { cwd: cacheDir, stdio: 'ignore' });
+          execFileSync("git", ["pull"], { cwd: cacheDir, stdio: 'ignore' });
         }
         cap.materialized_root = cacheDir;
       } else {

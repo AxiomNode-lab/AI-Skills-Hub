@@ -64,8 +64,10 @@ export class MCPAdapter {
       };
     }
 
-    // Write back
-    fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
+    // Write back atomically
+    const tmpPath = `${configPath}.tmp.${Date.now()}`;
+    fs.writeFileSync(tmpPath, JSON.stringify(config, null, 2));
+    fs.renameSync(tmpPath, configPath);
 
     return {
       id: this.capability.id,

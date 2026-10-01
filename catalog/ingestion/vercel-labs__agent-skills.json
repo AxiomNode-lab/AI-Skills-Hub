@@ -1,0 +1,920 @@
+{
+  "schema_version": "0.2",
+  "source": {
+    "repo": "vercel-labs/agent-skills",
+    "ref": "main",
+    "revision": "063bee94c3f4df8453406c830b0a7df0f2860278",
+    "revision_type": "git-commit",
+    "tree_sha": "063bee94c3f4df8453406c830b0a7df0f2860278"
+  },
+  "discovered_skills": [
+    {
+      "path": "skills/composition-patterns/SKILL.md",
+      "name": "vercel-composition-patterns",
+      "description": null,
+      "skill_sha256": "e38e0eaa609316b10423a9a138ed95e35099accd3f735585295c8a8f165c28a3",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_type": "skill-frontmatter",
+        "evidence_path": "skills/composition-patterns/SKILL.md"
+      },
+      "security": {
+        "scan_status": "verified",
+        "risk": "none",
+        "capabilities": {
+          "shell": false,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": []
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/deploy-to-vercel/SKILL.md",
+      "name": "deploy-to-vercel",
+      "description": "Deploy applications and websites to Vercel. Use when the user requests deployment actions like \"deploy my app\", \"deploy and give me the link\", \"push this live\", or \"create a preview deployment\".",
+      "skill_sha256": "cfcc3dd479ab2e0ae721ddf39b8af84d977321487672f1487c8d6855f576927b",
+      "license": {
+        "spdx": "NOASSERTION",
+        "redistributable": false,
+        "status": "review-required"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "medium",
+        "capabilities": {
+          "shell": true,
+          "network": true,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": true,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "shell-execution",
+            "line": 19,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 39,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 66,
+            "evidence": "bash",
+            "context": "   ```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 74,
+            "evidence": "bash",
+            "context": "   ```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 88,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 94,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 99,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 118,
+            "evidence": "bash",
+            "context": "   ```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 124,
+            "evidence": "bash",
+            "context": "   ```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 140,
+            "evidence": "bash",
+            "context": "   ```bash"
+          },
+          {
+            "type": "package-install",
+            "line": 141,
+            "evidence": "npm install",
+            "context": "   npm install -g vercel"
+          },
+          {
+            "type": "shell-execution",
+            "line": 145,
+            "evidence": "bash",
+            "context": "   ```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 153,
+            "evidence": "bash",
+            "context": "   ```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 166,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 167,
+            "evidence": "bash",
+            "context": "bash /mnt/skills/user/deploy-to-vercel/resources/deploy.sh [path]"
+          },
+          {
+            "type": "shell-execution",
+            "line": 167,
+            "evidence": "sh",
+            "context": "bash /mnt/skills/user/deploy-to-vercel/resources/deploy.sh [path]"
+          },
+          {
+            "type": "shell-execution",
+            "line": 174,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 176,
+            "evidence": "bash",
+            "context": "bash /mnt/skills/user/deploy-to-vercel/resources/deploy.sh"
+          },
+          {
+            "type": "shell-execution",
+            "line": 176,
+            "evidence": "sh",
+            "context": "bash /mnt/skills/user/deploy-to-vercel/resources/deploy.sh"
+          },
+          {
+            "type": "shell-execution",
+            "line": 179,
+            "evidence": "bash",
+            "context": "bash /mnt/skills/user/deploy-to-vercel/resources/deploy.sh /path/to/project"
+          },
+          {
+            "type": "shell-execution",
+            "line": 179,
+            "evidence": "sh",
+            "context": "bash /mnt/skills/user/deploy-to-vercel/resources/deploy.sh /path/to/project"
+          },
+          {
+            "type": "shell-execution",
+            "line": 182,
+            "evidence": "bash",
+            "context": "bash /mnt/skills/user/deploy-to-vercel/resources/deploy.sh /path/to/project.tgz"
+          },
+          {
+            "type": "shell-execution",
+            "line": 182,
+            "evidence": "sh",
+            "context": "bash /mnt/skills/user/deploy-to-vercel/resources/deploy.sh /path/to/project.tgz"
+          },
+          {
+            "type": "shell-execution",
+            "line": 196,
+            "evidence": "bash",
+            "context": "   ```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 201,
+            "evidence": "bash",
+            "context": "   ```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 206,
+            "evidence": "bash",
+            "context": "   ```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 210,
+            "evidence": "bash",
+            "context": "   bash \"$skill_dir/resources/deploy-codex.sh\""
+          },
+          {
+            "type": "shell-execution",
+            "line": 210,
+            "evidence": "sh",
+            "context": "   bash \"$skill_dir/resources/deploy-codex.sh\""
+          },
+          {
+            "type": "shell-execution",
+            "line": 213,
+            "evidence": "bash",
+            "context": "   bash \"$skill_dir/resources/deploy-codex.sh\" /path/to/project"
+          },
+          {
+            "type": "shell-execution",
+            "line": 213,
+            "evidence": "sh",
+            "context": "   bash \"$skill_dir/resources/deploy-codex.sh\" /path/to/project"
+          },
+          {
+            "type": "shell-execution",
+            "line": 216,
+            "evidence": "bash",
+            "context": "   bash \"$skill_dir/resources/deploy-codex.sh\" /path/to/project.tgz"
+          },
+          {
+            "type": "shell-execution",
+            "line": 216,
+            "evidence": "sh",
+            "context": "   bash \"$skill_dir/resources/deploy-codex.sh\" /path/to/project.tgz"
+          },
+          {
+            "type": "shell-execution",
+            "line": 234,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 235,
+            "evidence": "bash",
+            "context": "bash ~/.claude/skills/deploy-to-vercel/resources/deploy.sh [path]"
+          },
+          {
+            "type": "shell-execution",
+            "line": 235,
+            "evidence": "sh",
+            "context": "bash ~/.claude/skills/deploy-to-vercel/resources/deploy.sh [path]"
+          },
+          {
+            "type": "network-access",
+            "line": 259,
+            "evidence": "https://",
+            "context": "  Preview URL: https://my-app-abc123.vercel.app"
+          },
+          {
+            "type": "network-access",
+            "line": 260,
+            "evidence": "https://",
+            "context": "  Claim URL:   https://vercel.com/claim-deployment?code=..."
+          },
+          {
+            "type": "network-access",
+            "line": 266,
+            "evidence": "curl",
+            "context": "**Do not** curl or fetch the deployed URL to verify it works. Just return the link."
+          },
+          {
+            "type": "network-access",
+            "line": 279,
+            "evidence": "https://",
+            "context": "1. Go to https://claude.ai/settings/capabilities"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": true,
+        "network": true,
+        "credentials": true,
+        "dynamic_execution": false,
+        "package_install": true
+      }
+    },
+    {
+      "path": "skills/react-best-practices/SKILL.md",
+      "name": "vercel-react-best-practices",
+      "description": "React and Next.js performance optimization guidelines from Vercel Engineering. This skill should be used when writing, reviewing, or refactoring React/Next.js code to ensure optimal performance patterns. Triggers on tasks involving React components, Next.js pages, data fetching, bundle optimization, or performance improvements.",
+      "skill_sha256": "71ed7794962fa6e803ee83030517b5b93a9f70fbfeb431ec4535c5480a8d8355",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_type": "skill-frontmatter",
+        "evidence_path": "skills/react-best-practices/SKILL.md"
+      },
+      "security": {
+        "scan_status": "verified",
+        "risk": "none",
+        "capabilities": {
+          "shell": false,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": []
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/react-native-skills/SKILL.md",
+      "name": "vercel-react-native-skills",
+      "description": null,
+      "skill_sha256": "4012750a5ccbe064ca04af3835d5d1b011979d2d09d9b6df1c8128fac58e0a66",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_type": "skill-frontmatter",
+        "evidence_path": "skills/react-native-skills/SKILL.md"
+      },
+      "security": {
+        "scan_status": "verified",
+        "risk": "none",
+        "capabilities": {
+          "shell": false,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": []
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/react-view-transitions/SKILL.md",
+      "name": "vercel-react-view-transitions",
+      "description": "Guide for implementing smooth, native-feeling animations using React's View Transition API (`<ViewTransition>` component, `addTransitionType`, and CSS view transition pseudo-elements). Use this skill whenever the user wants to add page transitions, animate route changes, create shared element animations, animate enter/exit of components, animate list reorder, implement directional (forward/back) navigation animations, or integrate view transitions in Next.js. Also use when the user mentions view transitions, `startViewTransition`, `ViewTransition`, transition types, or asks about animating between UI states in React without third-party animation libraries.",
+      "skill_sha256": "1520343c8814c972fee001cac6d6185976d6eb3f4edcac33afe95c10f3b3228b",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_type": "skill-frontmatter",
+        "evidence_path": "skills/react-view-transitions/SKILL.md"
+      },
+      "security": {
+        "scan_status": "verified",
+        "risk": "none",
+        "capabilities": {
+          "shell": false,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": []
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/vercel-cli-with-tokens/SKILL.md",
+      "name": "vercel-cli-with-tokens",
+      "description": "Deploy and manage projects on Vercel using token-based authentication. Use when working with Vercel CLI using access tokens rather than interactive login — e.g. \"deploy to vercel\", \"set up vercel\", \"add environment variables to vercel\".",
+      "skill_sha256": "c06bea99e75eab07fde4fae26069baa002f82f39b53f07981704c2901551dd4c",
+      "license": {
+        "spdx": "NOASSERTION",
+        "redistributable": false,
+        "status": "review-required"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "medium",
+        "capabilities": {
+          "shell": true,
+          "network": true,
+          "credentials": true,
+          "dynamic_execution": false,
+          "package_install": true,
+          "filesystem_write": true,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "shell-execution",
+            "line": 19,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 27,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 33,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 41,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 47,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "credential-access",
+            "line": 53,
+            "evidence": "access token",
+            "context": "If none of the above yield a token, ask the user to provide one. They can create a Vercel access token at vercel.com/account/tokens."
+          },
+          {
+            "type": "shell-execution",
+            "line": 59,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 72,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "network-access",
+            "line": 81,
+            "evidence": "https://",
+            "context": "**If you have a project URL** (e.g. `https://vercel.com/my-team/my-project`), extract the team slug:"
+          },
+          {
+            "type": "shell-execution",
+            "line": 83,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "network-access",
+            "line": 84,
+            "evidence": "https://",
+            "context": "# e.g. \"my-team\" from \"https://vercel.com/my-team/my-project\""
+          },
+          {
+            "type": "network-access",
+            "line": 85,
+            "evidence": "https://",
+            "context": "echo \"$PROJECT_URL\" | sed 's|https://vercel.com/||' | cut -d/ -f1"
+          },
+          {
+            "type": "shell-execution",
+            "line": 90,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 101,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "package-install",
+            "line": 102,
+            "evidence": "npm install",
+            "context": "npm install -g vercel"
+          },
+          {
+            "type": "shell-execution",
+            "line": 114,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 120,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 126,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 132,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 142,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 154,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 162,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 170,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 184,
+            "evidence": "bash",
+            "context": "   ```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 191,
+            "evidence": "bash",
+            "context": "   ```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 199,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 205,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 212,
+            "evidence": "bash",
+            "context": "   ```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 217,
+            "evidence": "bash",
+            "context": "   ```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 234,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 247,
+            "evidence": "Remove",
+            "context": "# Remove a variable"
+          },
+          {
+            "type": "shell-execution",
+            "line": 253,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 269,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 282,
+            "evidence": "remove",
+            "context": "If this project is managed by Stripe Projects. **Ask the user before running any paid or destructive plan change** — upgrades bill a real card, downgrades remove seats."
+          },
+          {
+            "type": "network-access",
+            "line": 297,
+            "evidence": "https://",
+            "context": "Full details: https://vercel.com/docs/plans/pro-plan"
+          },
+          {
+            "type": "network-access",
+            "line": 306,
+            "evidence": "curl",
+            "context": "- **Do not curl/fetch deployed URLs to verify.** Just return the link to the user."
+          },
+          {
+            "type": "shell-execution",
+            "line": 316,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 332,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 340,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 351,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "package-install",
+            "line": 352,
+            "evidence": "npm install",
+            "context": "npm install -g vercel"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": true,
+        "credentials": true,
+        "dynamic_execution": false,
+        "package_install": true
+      }
+    },
+    {
+      "path": "skills/vercel-optimize/SKILL.md",
+      "name": "vercel-optimize",
+      "description": "Use for Vercel cost and performance optimization on deployed projects, especially Next.js, SvelteKit, Nuxt, and limited Astro apps. Collect Vercel metrics, usage, project config, and code scan results first; investigate only metric-backed candidates; produce ranked recommendations grounded in verified files and version-aware Vercel/framework docs. Trigger for Vercel bill reduction, slow or expensive routes, caching opportunities, Function Invocations, Build Minutes, Fast Data Transfer, Core Web Vitals, Bot Management, Fluid compute, or cost breakdown requests.",
+      "skill_sha256": "95ae2683b30d892d165af92a350c5628b68106f395a59b448857b654e306ed91",
+      "license": {
+        "spdx": "NOASSERTION",
+        "redistributable": false,
+        "status": "review-required"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "capabilities": {
+          "shell": true,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": true,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "shell-execution",
+            "line": 57,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 67,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 93,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 108,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 118,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 126,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 139,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 150,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 166,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 187,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 193,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 194,
+            "evidence": "mkdir",
+            "context": "mkdir -p \"$RUN_DIR/briefs\" \"$RUN_DIR/sub-agent-outputs\""
+          },
+          {
+            "type": "shell-execution",
+            "line": 221,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 232,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 247,
+            "evidence": "bash",
+            "context": "```bash"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/web-design-guidelines/SKILL.md",
+      "name": "web-design-guidelines",
+      "description": "Review UI code for Web Interface Guidelines compliance. Use when asked to \"review my UI\", \"check accessibility\", \"audit design\", \"review UX\", or \"check my site against best practices\".",
+      "skill_sha256": "f4647ca866a3accf763777f83e7682954f0187cd6bea7eea0399796652414e8f",
+      "license": {
+        "spdx": "NOASSERTION",
+        "redistributable": false,
+        "status": "review-required"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "capabilities": {
+          "shell": false,
+          "network": true,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "network-access",
+            "line": 26,
+            "evidence": "https://",
+            "context": "https://raw.githubusercontent.com/vercel-labs/web-interface-guidelines/main/command.md"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": true,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/writing-guidelines/SKILL.md",
+      "name": "writing-guidelines",
+      "description": "Review docs/prose for Writing Guidelines compliance. Use when asked to \"review my docs\", \"check writing style\", \"audit prose\", \"review docs voice and tone\", or \"check this page against the writing handbook\".",
+      "skill_sha256": "89a5f581193289b80af58b980090aeed535047c8df2b55ccbaae0de40283a99d",
+      "license": {
+        "spdx": "NOASSERTION",
+        "redistributable": false,
+        "status": "review-required"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "capabilities": {
+          "shell": false,
+          "network": true,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "network-access",
+            "line": 26,
+            "evidence": "https://",
+            "context": "https://raw.githubusercontent.com/vercel-labs/writing-guidelines/main/command.md"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": true,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    }
+  ],
+  "license_files": [],
+  "warnings": [
+    {
+      "path": "skills/deploy-to-vercel/SKILL.md",
+      "type": "review-signal",
+      "capabilities": {
+        "shell": true,
+        "network": true,
+        "credentials": true,
+        "dynamic_execution": false,
+        "package_install": true
+      }
+    },
+    {
+      "path": "skills/vercel-cli-with-tokens/SKILL.md",
+      "type": "review-signal",
+      "capabilities": {
+        "shell": false,
+        "network": true,
+        "credentials": true,
+        "dynamic_execution": false,
+        "package_install": true
+      }
+    }
+  ]
+}
