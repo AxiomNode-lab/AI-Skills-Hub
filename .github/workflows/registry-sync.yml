@@ -24,18 +24,14 @@ jobs:
           version: 10.4.1
       - uses: actions/setup-node@v4
         with:
-          node-version: 24
+          node-version: 22.x
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - name: Sync upstream metadata
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: pnpm sync-registry
-      - run: pnpm validate
-      - run: pnpm generate-lock
-      - run: node scripts/validate-materialized.mjs
-      - run: pnpm dedupe
-      - run: pnpm test
+      - run: pnpm validate-all
       - name: Commit generated registry updates
         shell: bash
         run: |
