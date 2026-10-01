@@ -187,6 +187,7 @@ export function toInstallChoices(searchResult,agent,{scope="project"}={}) {
       reason:adapter.reason ?? null,
       source:item.source,
       command:adapter.command ?? null,
+      argv:adapter.argv ?? null,
       config:adapter.config ?? null,
       target:adapter.target ?? null,
       note:adapter.note ?? null
