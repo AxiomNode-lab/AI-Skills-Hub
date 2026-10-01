@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { classifyLicense, normalizeLicense } from "./index.mjs";
 
 test("normalizes common license names", () => {
-  assert.equal(normalizeLicense("Apache License 2.0"), "Apache-2.0");
+  assert.equal(normalizeLicense("Apache License, Version 2.0"), "Apache-2.0");
   assert.equal(normalizeLicense("MIT License"), "MIT");
 });
 
