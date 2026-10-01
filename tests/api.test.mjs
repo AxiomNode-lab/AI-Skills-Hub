@@ -21,6 +21,11 @@ test("API endpoints expose health, skills, and bundles",async(t)=>{
   const searchJson=await search.json();
   assert.ok(searchJson.skills.some((s)=>s.name.includes("frontend") || s.category.includes("frontend")));
 
+  const capabilities=await fetch(base+"/api/capabilities/search?q=frontend&agent=codex&remote=false");
+  assert.equal(capabilities.status,200);
+  const capabilityJson=await capabilities.json();
+  assert.ok(capabilityJson.choices.some((choice)=>choice.artifact_type==="skill"));
+
   const bundles=await fetch(base+"/api/bundles");
   assert.equal(bundles.status,200);
   const bundleJson=await bundles.json();
