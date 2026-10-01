@@ -115,7 +115,7 @@ export async function searchSkillsSh(query,{agent,limit=20,source,token,fetchImp
       distribution:"source-direct",
       origin:"skills.sh",
       installs:item.installs ?? 0,
-      source:{repo:item.source,url:item.installUrl ?? item.url ?? null,path:item.path ?? "",revision:null,revision_type:"git-commit"}
+      source:{repo:item.source,install_url:item.installUrl ?? null,url:item.url ?? null,path:item.path ?? "",revision:null,revision_type:"git-commit"}
     },
     score:score(query,item,agent)+(item.installs ? Math.min(20,Math.log10(item.installs+1)*4) : 0),
     origin:"skills.sh"
@@ -156,8 +156,21 @@ export async function hybridSearch(registry,query,opts={}) {
 export function toInstallChoices(searchResult,agent) {
   return searchResult.results.map(({item,score,origin}) => {
     const local = item.distribution === "bundled" && item.materialized && item.release?.status === "eligible";
-    return { id:item.id,name:item.name,score,origin,agent, action:local?"install":"source-direct", source:item.source,
-      command: local ? ["skills-hub","install",item.id,"--agent",agent].join(" ")
-        : ["npx","skills","add","https://github.com/"+item.source.repo,"--skill",JSON.stringify(item.name),"--agent",agent,"-y"].join(" ") };
+    const installTarget = item.source?.install_url ?? item.source?.url ?? (item.source?.repo ? "https://github.com/" + item.source.repo : null);
+    return {
+      id:item.id,
+      name:item.name,
+      score,
+      origin,
+      agent,
+      compatibility_verified:item.compatibility_verified !== false,
+      action:local ? "install" : installTarget ? "source-direct" : "unsupported",
+      source:item.source,
+      command:local
+        ? ["skills-hub","install",item.id,"--agent",agent].join(" ")
+        : installTarget
+          ? ["npx","--yes","skills","add",installTarget,"--skill",JSON.stringify(item.name),"--agent",agent,"-y"].join(" ")
+          : null
+    };
   });
 }
