@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { loadRegistry, resolveBundle, filterForAgent } from "@ai-skills-hub/core";
 import { buildInstallPlan } from "@ai-skills-hub/installer";
-import { installMaterializedSkill, verifyInstalledSkill, doctorInstalledSkills, uninstallSkillRecord } from "@ai-skills-hub/installer/native";
+import { installMaterializedSkill, doctorInstalledSkills, uninstallSkillRecord } from "@ai-skills-hub/installer/native";
 import { hybridSearch, toInstallChoices, summarizeInstallPlan } from "@ai-skills-hub/discovery";
 import fs from "node:fs";
 import { execFile } from "node:child_process";
@@ -71,17 +71,6 @@ async function executeChoice(choice, agent, scope) {
 
 function requireDir(file) {
   return file.endsWith("/") ? file.slice(0,-1) : file.substring(0,file.lastIndexOf("/") > 0 ? file.lastIndexOf("/") : 1);
-}
-
-async function executeSourceBridge(skill, agent) {
-  if (!skill.source?.repo || !skill.name) throw new Error("Remote install metadata incomplete");
-  const url = "https://github.com/" + skill.source.repo;
-  await execFileAsync("npx", ["--yes","skills","add",url,"--skill",skill.name,"--agent",agent,"-y"], {
-    env: process.env,
-    cwd: process.cwd(),
-    maxBuffer: 4 * 1024 * 1024
-  });
-  return { id:skill.id, agent, action:"source-direct-installed", source:url };
 }
 
 function selectedSkills(target, agent) {
