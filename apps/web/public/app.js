@@ -5,6 +5,8 @@ const els = {
   distribution: document.querySelector("#distribution"),
   category: document.querySelector("#category"),
   clear: document.querySelector("#clear"),
+  discover: document.querySelector("#discover"),
+  searchStatus: document.querySelector("#search-status"),
   stats: document.querySelector("#stats"),
   count: document.querySelector("#count"),
   skills: document.querySelector("#skills"),
@@ -18,6 +20,8 @@ const els = {
 };
 
 let skills = [];
+let catalogSkills = [];
+let discoveryMode = false;
 let catalog = null;
 
 function escapeHtml(value) {
@@ -34,10 +38,11 @@ async function getJson(path) {
 
 async function load() {
   try {
-    [catalog, skills] = await Promise.all([
+    [catalog, catalogSkills] = await Promise.all([
       getJson("/api/catalog"),
       getJson("/api/skills?limit=100").then((result) => result.skills ?? [])
     ]);
+    skills = catalogSkills;
     renderStats();
     populateFilters();
     render();
@@ -75,7 +80,42 @@ function populateFilters() {
   ).join(""));
 }
 
+async function runDiscovery() {
+  const query = els.search.value.trim();
+  if (!query) {
+    discoveryMode = false;
+    skills = catalogSkills;
+    els.searchStatus.textContent = "Local registry + remote sources";
+    render();
+    return;
+  }
+
+  els.discover.disabled = true;
+  els.searchStatus.textContent = "Searching registry + remote sources…";
+  try {
+    const agent = els.agent.value || "agent-skills";
+    const payload = await getJson("/api/discover?q=" + encodeURIComponent(query) + "&agent=" + encodeURIComponent(agent) + "&limit=30");
+    skills = (payload.results ?? []).map((entry) => ({
+      ...(entry.item ?? {}),
+      _score: entry.score,
+      _origin: entry.origin
+    }));
+    discoveryMode = true;
+    els.searchStatus.textContent = (payload.remote_searched ? "Hybrid discovery" : "Local discovery") + " · " + skills.length + " candidates";
+    render();
+  } catch (error) {
+    els.searchStatus.textContent = "Remote discovery unavailable; showing local matches";
+    discoveryMode = false;
+    skills = catalogSkills.filter((s) => [s.id,s.name,s.publisher,...(s.category ?? [])].join(" ").toLowerCase().includes(query.toLowerCase()));
+    render();
+    console.error(error);
+  } finally {
+    els.discover.disabled = false;
+  }
+}
+
 function filtered() {
+  if (discoveryMode) return skills;
   const q = els.search.value.trim().toLowerCase();
   const agent = els.agent.value;
   const distribution = els.distribution.value;
@@ -112,6 +152,7 @@ function render() {
     const risk = s.security?.risk ?? (s.security?.scan_status === "verified" ? "low" : "pending");
     const release = s.release?.status ?? "pending";
     const revision = s.source?.revision ? s.source.revision.slice(0,8) : "unpinned";
+    const origin = s._origin === "remote-github" ? "remote" : "registry";
     return '<article class="card">' +
       '<div class="card-top"><span class="state ' + escapeHtml(s.distribution) + '">' + escapeHtml(s.distribution) + '</span><span class="risk">risk:' + escapeHtml(risk) + '</span></div>' +
       '<h3>' + escapeHtml(s.name) + '</h3>' +
@@ -158,8 +199,13 @@ function closeDrawer() {
   el.addEventListener("input",render);
   el.addEventListener("change",render);
 });
+els.discover.addEventListener("click",runDiscovery);
+els.search.addEventListener("keydown",(event) => { if(event.key === "Enter") runDiscovery(); });
 els.clear.addEventListener("click",() => {
   els.search.value = "";
+  discoveryMode = false;
+  skills = catalogSkills;
+  els.searchStatus.textContent = "Local registry + remote sources";
   els.agent.value = "";
   els.distribution.value = "";
   els.category.value = "";
