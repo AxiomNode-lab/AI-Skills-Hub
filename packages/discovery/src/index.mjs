@@ -75,7 +75,7 @@ export async function searchRemote(query,{sources=[],agent,limit=20,token,fetchI
     const {source,data}=job.value;
     for (const hit of data.items ?? []) {
       if (!hit.path.endsWith("/SKILL.md")) continue;
-      const path = hit.path.slice(0,-8);
+      const path = hit.path.slice(0,-"/SKILL.md".length);
       const name = path.split("/").pop();
       const item = {
         id: source.id + "/" + name, name, publisher: source.repo.split("/")[0],
