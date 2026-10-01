@@ -1,7 +1,7 @@
 import { select, checkbox, confirm, input, Separator } from '@inquirer/prompts';
 import { detectAgents } from '../../../installer/src/detector.mjs';
 import { getAdapter } from '../../../installer/src/adapters/index.mjs';
-import { readCatalogCapabilities, resolveDependencies, checkPrerequisites, autoSyncCapability } from '../utils.mjs';
+import { readLocalCapabilities, resolveDependencies, checkPrerequisites, autoSyncCapability } from '../utils.mjs';
 
 // Simple local search engine
 function searchCapabilities(query, capabilities) {
@@ -42,7 +42,7 @@ export async function interactiveCommand() {
   console.log(`\n✅ Selected Agent: ${selectedAgentId}\n`);
 
   // 3. Read Local Capabilities (Async, fast)
-  const allCapabilities = await readCatalogCapabilities();
+  const allCapabilities = await readLocalCapabilities();
   if (allCapabilities.length === 0) {
     console.log("⚠️ No capabilities found in 'capabilities-library/'.");
     return;

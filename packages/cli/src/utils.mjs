@@ -2,6 +2,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import os from "node:os";
 import { execSync } from "node:child_process";
+import { loadRegistry } from "@ai-skills-hub/core";
 
 export function checkPrerequisites(prerequisites) {
   if (!prerequisites || !Array.isArray(prerequisites)) return { missing: [] };
@@ -87,26 +88,17 @@ export async function readCapabilityManifest(capPath, id) {
   return null;
 }
 
-export async function readCatalogCapabilities() {
+export async function readLocalCapabilities() {
   try {
-    const response = await fetch("https://raw.githubusercontent.com/AxiomNode-lab/AI-Skills-Hub/main/catalog/registry.json", {
-      signal: AbortSignal.timeout(2500)
-    });
-    if (response.ok) {
-      return await response.json();
-    }
-  } catch (e) {
-    // fallback to local
+    const registry = loadRegistry(
+      path.resolve(process.cwd(), "catalog", "skills.json"),
+      path.resolve(process.cwd(), "catalog", "bundles.json")
+    );
+    return registry.skills || [];
+  } catch (error) {
+    // Only fail gracefully if it's explicitly allowed, but core will throw if not found
+    return [];
   }
-  
-  const localPath = path.resolve(process.cwd(), "catalog", "registry.json");
-  if (await fileExists(localPath)) {
-    try {
-      return JSON.parse(await fs.readFile(localPath, 'utf8'));
-    } catch {}
-  }
-  
-  return [];
 }
 
 export function resolveDependencies(selectedIds, allCapabilities) {

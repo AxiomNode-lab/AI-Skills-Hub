@@ -69,15 +69,15 @@ AI Agent Capability Platform CLI
 Usage: skills-hub [command] [options]
 
 Commands:
-  (none)      Run interactive installer UI
-  create      Wizard to create a new capability
-  add <url>   Fetch a capability from a Git URL
-  sync        Update all Git-fetched capabilities
-  uninstall   Interactive UI to uninstall capabilities
-  search <q>  Search capabilities (Headless)
-  info <id>   View capability details (Headless)
-  list        List installed capabilities (Headless)
-  install <id> Install specific capability (Headless)
+  (none)             Run interactive installer UI
+  create             Wizard to create a new capability
+  add <url|query>    Fetch from Git or search via Natural Language
+  sync               Update all Git-fetched capabilities in capabilities-library/
+  uninstall          Interactive UI to uninstall capabilities
+  search <q>         Search capabilities (Headless)
+  info <id>          View capability details (Headless)
+  list               List installed capabilities (Headless)
+  install <id>       Install specific capability (Headless)
 
 Options:
   --json      Output raw JSON (for search, info, list, install)

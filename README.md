@@ -1,7 +1,7 @@
 <div align="center">
   <img src="docs/images/logo.jpg" alt="AI Skills Hub Logo" width="300" />
   <h1>AI Skills Hub</h1>
-  <p><strong>كل ما يحتاجه الذكاء الاصطناعي الخاص بك للبرمجة.. في مكان واحد.</strong></p>
+  <p><strong>A trustworthy, license-aware registry and distribution layer for AI Agent Skills.</strong></p>
   
   <p>
     <a href="https://github.com/AxiomNode-lab/AI-Skills-Hub/actions"><img src="https://img.shields.io/github/actions/workflow/status/AxiomNode-lab/AI-Skills-Hub/ci.yml?branch=main&label=Build&style=flat-square" alt="Build Status"></a>
@@ -11,34 +11,74 @@
 
 ---
 
-## ما هو AI Skills Hub؟
+## Overview
 
-كمبرمج، أنت تبحث دائماً عن أدوات ومهارات لتطوير برمجياتك بمساعدة الذكاء الاصطناعي. بدلاً من البحث كل يوم عن أداة جديدة أو مهارة معينة (Skills) أو خادم (MCP Server) لربط الذكاء الاصطناعي بقواعد البيانات أو GitHub... **لقد جمعنا لك كل شيء هنا.**
+AI Skills Hub is a secure, verifiable registry for AI Agent capabilities (Agent Skills, MCP Servers, and Developer Plugins). It provides a unified CLI to discover, inspect, and install verified capabilities directly into your favorite agents (e.g., Cursor, Claude Code, GitHub Copilot).
 
-هذا المشروع هو عبارة عن **متجر متكامل (Package Manager)**. بنقرة واحدة من التيرمينال، يمكنك تزويد المساعد الذكي الخاص بك (مثل Claude Desktop أو Cursor أو أي Agent آخر) بأفضل المهارات المبرمجة مسبقاً من مجتمع المطورين.
+## Prerequisites
 
-## المميزات الأساسية
-- **مكتبة ضخمة:** يحتوي على أكثر من 50 مهارة وأداة MCP جاهزة (من قواعد بيانات، أدوات SEO، اتصال بـ Github وغيرها).
-- **سهل ومُنظم:** كل شيء منظم في مجلدات (Skills للقدرات البرمجية، و MCP للربط مع الخدمات).
-- **يعمل من التيرمينال:** واجهة تيرمينال أنيقة وجميلة تسمح لك بتصفح وتثبيت المهارات بضغطة زر.
-- **تحديث ذاتي:** يجلب آخر التحديثات والأكواد من المطورين الأصليين مباشرة.
+- **Node.js** >= 22
+- **pnpm** >= 10.4.1
+- **Git**
 
-## كيف تستخدمه؟
+## Quick Start
 
-فقط قم بتشغيل هذا الأمر في التيرمينال، وستفتح لك واجهة أنيقة تتيح لك اختيار المهارات التي تريد تثبيتها:
+### 1. Download and Install
+
+Clone the repository and install dependencies:
 
 ```bash
-node packages/cli/bin/skills-hub.mjs
+git clone https://github.com/AxiomNode-lab/AI-Skills-Hub.git
+cd AI-Skills-Hub
+pnpm install --frozen-lockfile
 ```
 
-للاختيار، استخدم المسطرة `Space`، ولتأكيد التثبيت اضغط `Enter`. 
+### 2. Validate the Installation
 
-## الهيكلة (للمطورين)
-قمنا بترتيب المشروع ليكون نظيفاً جداً من الداخل:
-- `capabilities-library/mcp-servers/`: خوادم الـ MCP للاتصال الخارجي.
-- `capabilities-library/agent-skills/`: المهارات والتعليمات التي تجعل الـ Agent مبرمجاً أفضل.
+Ensure the registry schema is valid and your environment is correctly set up:
 
-إذا كنت تريد إضافة مهارة، فقط أضف مجلدها هنا وسيتعرف عليها النظام تلقائياً!
+```bash
+pnpm validate
+pnpm test
+```
 
-## المساهمة
-نحن نرحب بإضافة المزيد من المهارات للمستودع! راجع `CONTRIBUTING.md` لمزيد من التفاصيل.
+### 3. Discover Capabilities
+
+You can search for capabilities using natural language or keywords via the CLI:
+
+```bash
+pnpm cli search "pdf tools" --agent codex
+```
+
+### 4. Install a Capability
+
+Install a capability from the registry to your agent's local environment. For example, to install `pdf-tool` for Codex:
+
+```bash
+pnpm cli install pdf-tool --agent codex
+```
+
+*(Note: Capabilities distributed via `source-direct` will execute an installation command, such as `npx`, and require your confirmation.)*
+
+### 5. Interactive Mode
+
+Alternatively, you can browse and install capabilities using the interactive UI:
+
+```bash
+pnpm cli
+```
+
+Use the `Space` bar to select capabilities and `Enter` to confirm.
+
+---
+
+## Architecture
+
+The AI Skills Hub enforces a strict supply-chain policy:
+- **Registry Source of Truth:** The central catalog (`catalog/skills.json` and `catalog/bundles.json`) defines all approved capabilities.
+- **Materialization:** Bundled skills are fully verified and copied directly into your agent's workspace.
+- **Security Check:** High-risk or unverified skills are held in a `review-required` state and cannot bypass release gates.
+
+## Contributing
+
+We welcome community skills! Please review `AGENTS.md` and `CONTRIBUTING.md` for our inclusion policies before submitting a new capability.

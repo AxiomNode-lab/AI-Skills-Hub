@@ -6,7 +6,7 @@ export async function syncCommand() {
   console.log("🔄 Syncing installed capabilities with their remote Git repositories...");
 
   const os = await import('node:os');
-  const cacheDir = path.resolve(os.homedir(), '.ai-skills-hub', 'cache');
+  const cacheDir = path.resolve(process.cwd(), 'capabilities-library');
   
   try {
     const entries = await fs.readdir(cacheDir, { withFileTypes: true });
