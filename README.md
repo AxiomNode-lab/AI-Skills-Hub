@@ -1,112 +1,80 @@
-# AI Skills Hub
+<div align="center">
+  <img src="docs/images/logo.jpg" alt="AI Skills Hub Logo" width="300" />
+  <h1>AI Skills Hub</h1>
+  <p><strong>Enterprise-Grade AI Capability & Package Manager</strong></p>
+</div>
 
-A unified discovery and installation hub for AI Agent Skills, Tools, Plugins, and MCP integrations.
+---
 
-## Why it exists
+A unified discovery, installation, and security hub for AI Agent Skills, Tools, Plugins, and MCP (Model Context Protocol) integrations.
 
-AI Skills are portable instruction packages, but a public repository is not automatically safe or redistributable. AI Skills Hub separates discovery from redistribution and records what the system knows about each artifact.
+## 🚀 Overview
 
-Core principles:
+AI Skills Hub is a professional, autonomous, and highly secure platform designed to manage and distribute capabilities for AI agents. Built for modern AI workflows, it separates discovery from redistribution, ensuring that every tool or skill your AI uses is verified, licensed, and safe.
 
-- Artifact-level licensing, not repository-level assumptions.
-- Immutable upstream revisions and content hashes.
-- Explicit distribution states: bundled, source-direct, review-required, blocked.
-- Security capability metadata and explainable heuristic findings.
-- Agent-aware installation targets.
-- MCP Skills interoperability.
-- Generated lockfiles for reproducible registry state.
+**Key Enterprise Features:**
+- **Auto-Healing Dependencies:** Automatically detects and installs missing system prerequisites (like `uv`, Node.js packages, etc.).
+- **Auto-Sync Mechanics:** Always fetches the latest upstream version via `git pull` before installing capabilities.
+- **Headless AI Mode:** A robust CLI API designed specifically for AI Agents to self-manage, discover, and install their own tools programmatically.
+- **Secure MCP Injection:** Safely edits Agent configurations (e.g., Claude Desktop) to inject MCP servers with required environment variables.
+- **Strict Release Gates:** Artifact-level licensing, immutable upstream revisions, and rigorous security capability metadata.
 
-## Current architecture
+## 🏗️ Architecture
 
 ```
-Upstream Sources
-      |
-      v
-  GitHub Ingestion
-      |
-      +--> License Resolution
-      +--> Security Scan
-      +--> Provenance / Hash
-      +--> Curation Policy
-      |
-      v
-    Registry
-      |
-  +---+---+----------------+
-      |
-      v
-Semantic Discovery
-      |
-skills.sh + approved GitHub sources
-  |       |                |
-  v       v                v
-Web      CLI               MCP
- |        |                 |
-Browse   Plan/Install     skills/list
-API      Audit/Doctor     skills/get
- |        |               resources/read
- +--------+----------------+
+User / AI Agent
+      ↓
+ Natural Language Request / Headless CLI
+      ↓
+ AI Skills Hub Discovery Engine
+      ├── Local Registry
+      ├── MCP Registry
+      └── Upstream GitHub Sources
+      ↓
+ Rank & Resolve Dependencies
+      ↓
+ Secure Installation & Execution
 ```
 
-## Repository layout
+## 🛠️ Usage
 
-- `catalog/` normalized registry data, bundles, locks, source manifests
-- `packages/` reusable core, installer, security, license, materializer, CLI, plugin export
-- `apps/api/` read-only registry HTTP API
-- `apps/web/` browser catalog
-- `apps/mcp-server/` MCP Skills server
-- `scripts/` ingestion, synchronization, lock generation, validation
-- `docs/` architecture, policy, install, API, schema, roadmap
+AI Skills Hub provides a powerful CLI for both humans and AI agents.
 
-## Local usage
-
+### For Humans (Interactive Mode)
+Launch the interactive wizard to scan your system for AI agents, browse the capability library, and install tools with guided setup:
 ```bash
-pnpm install
-pnpm validate
-pnpm test
-pnpm audit
-pnpm cli search frontend
-pnpm cli discover "I need a PDF tool for Codex" --agent codex
-pnpm cli add "I need a PDF tool for Codex" --agent codex --remote
-pnpm cli plan @core --agent codex
-pnpm api
-pnpm web
-pnpm mcp
+node packages/cli/bin/skills-hub.mjs
 ```
 
-The default catalog is metadata-first. Third-party content is only materialized when its distribution state, licensing, provenance, integrity, and security release gates permit it.
+### For AI Agents (Headless Mode)
+Agents can use the CLI programmatically to upgrade their own capabilities:
 
-## Distribution states
+**Search for capabilities:**
+```bash
+node packages/cli/bin/skills-hub.mjs search "frontend" --json
+```
+
+**Get capability details:**
+```bash
+node packages/cli/bin/skills-hub.mjs info frontend-design-skill --json
+```
+
+**Install capability (Auto-approves security prompts):**
+```bash
+node packages/cli/bin/skills-hub.mjs install frontend-design-skill --agent claude-code --yes
+```
+
+## 🔐 Distribution & Security States
 
 | State | Meaning |
 | --- | --- |
-| `bundled` | Registry may contain a vendored copy after verification and release gates |
-| `source-direct` | Install bridge points to upstream; content is not vendored |
-| `review-required` | Discoverable, but automated redistribution is held |
-| `blocked` | Explicitly excluded by policy |
+| `bundled` | Verified and vendored safely in the registry. |
+| `source-direct` | Points directly to upstream verified sources. |
+| `review-required` | High-risk capabilities (like CLI tools or MCP servers) that require explicit consent. |
+| `blocked` | Excluded by security policy. |
 
-## Standards
+## 🤝 Contributing
+The project targets the open Agent Skills format and the MCP Skills extension. See `CONTRIBUTING.md` for guidelines on submitting new capabilities.
 
-The project targets the open Agent Skills format, Agent Plugins packaging, and the MCP Skills extension.
-
-## Unified discovery
-
-The Hub searches its local catalog first, then semantic external discovery and approved GitHub sources when the requested Skill is not already present locally. Remote results stay metadata-only until they pass the Hub release policy.
-
-The discovery layer can use the public skills ecosystem as a semantic index, then bridge installation through the upstream skills CLI.
-
-## One-command discovery and bulk install
-
-Find and install one capability:
-
-  skills-hub add "I need a PDF tool for Codex" --agent codex --remote
-
-Review the full actionable set before execution:
-
-  skills-hub add "I need developer productivity tools for Codex" --agent codex
-
-Execute every actionable result explicitly:
-
-  skills-hub add "I need developer productivity tools for Codex" --agent codex --all --remote
-
-The Hub separates local released artifacts from remote adapters and review-required results. It never silently executes unverified candidates.
+---
+*Built for the future of autonomous systems.*
