@@ -87,36 +87,26 @@ export async function readCapabilityManifest(capPath, id) {
   return null;
 }
 
-export async function readLocalCapabilities() {
-  const libDir = path.resolve(process.cwd(), "capabilities-library");
-  if (!(await fileExists(libDir))) {
-    await fs.mkdir(libDir, { recursive: true });
-    return [];
+export async function readCatalogCapabilities() {
+  try {
+    const response = await fetch("https://raw.githubusercontent.com/AxiomNode-lab/AI-Skills-Hub/main/catalog/registry.json", {
+      signal: AbortSignal.timeout(2500)
+    });
+    if (response.ok) {
+      return await response.json();
+    }
+  } catch (e) {
+    // fallback to local
   }
   
-  const manifests = [];
-  
-  async function walk(dir) {
-    const entries = await fs.readdir(dir, { withFileTypes: true });
-    
-    // Check if this directory is a capability itself (has manifest.json or SKILL.md)
-    if (await fileExists(path.join(dir, 'manifest.json')) || await fileExists(path.join(dir, 'SKILL.md'))) {
-       const id = path.basename(dir);
-       const cap = await readCapabilityManifest(dir, id);
-       if (cap) manifests.push(cap);
-       // Skip walking deeper inside a capability folder
-       return;
-    }
-    
-    for (const entry of entries) {
-      if (entry.isDirectory() && !entry.name.startsWith('.')) {
-        await walk(path.join(dir, entry.name));
-      }
-    }
+  const localPath = path.resolve(process.cwd(), "catalog", "registry.json");
+  if (await fileExists(localPath)) {
+    try {
+      return JSON.parse(await fs.readFile(localPath, 'utf8'));
+    } catch {}
   }
   
-  await walk(libDir);
-  return manifests;
+  return [];
 }
 
 export function resolveDependencies(selectedIds, allCapabilities) {

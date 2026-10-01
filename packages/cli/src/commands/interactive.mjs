@@ -1,7 +1,7 @@
 import { select, checkbox, confirm, input, Separator } from '@inquirer/prompts';
 import { detectAgents } from '../../../installer/src/detector.mjs';
 import { getAdapter } from '../../../installer/src/adapters/index.mjs';
-import { readLocalCapabilities, resolveDependencies, checkPrerequisites, autoSyncCapability } from '../utils.mjs';
+import { readCatalogCapabilities, resolveDependencies, checkPrerequisites, autoSyncCapability } from '../utils.mjs';
 
 // Simple local search engine
 function searchCapabilities(query, capabilities) {
@@ -42,7 +42,7 @@ export async function interactiveCommand() {
   console.log(`\n✅ Selected Agent: ${selectedAgentId}\n`);
 
   // 3. Read Local Capabilities (Async, fast)
-  const allCapabilities = await readLocalCapabilities();
+  const allCapabilities = await readCatalogCapabilities();
   if (allCapabilities.length === 0) {
     console.log("⚠️ No capabilities found in 'capabilities-library/'.");
     return;
@@ -154,8 +154,27 @@ export async function interactiveCommand() {
     try {
       console.log(`Installing ${cap.name} (${cap.type})...`);
       
-      // Auto-Sync
-      await autoSyncCapability(cap.materialized_root);
+      // Dynamic Git Clone if it's a remote URL
+      if (cap.source_url) {
+        const os = await import('node:os');
+        const fs = await import('node:fs');
+        const path = await import('node:path');
+        const { execSync } = await import('node:child_process');
+        
+        const cacheDir = path.resolve(os.homedir(), '.ai-skills-hub', 'cache', cap.id);
+        if (!fs.existsSync(cacheDir)) {
+          console.log(`☁️  Downloading ${cap.name} from remote...`);
+          fs.mkdirSync(cacheDir, { recursive: true });
+          execSync(`git clone ${cap.source_url} ${cacheDir}`, { stdio: 'ignore' });
+        } else {
+          console.log(`🔄 Syncing latest version of ${cap.name}...`);
+          execSync(`git pull`, { cwd: cacheDir, stdio: 'ignore' });
+        }
+        cap.materialized_root = cacheDir;
+      } else {
+        // If it's a bundled or MCP purely npx based, we just need a dummy root
+        cap.materialized_root = process.cwd();
+      }
       
       // Check prerequisites
       if (cap.prerequisites && cap.prerequisites.length > 0) {

@@ -3,17 +3,18 @@ import fs from "node:fs/promises";
 import path from "node:path";
 
 export async function syncCommand() {
-  console.log("🔄 Syncing capabilities with their remote Git repositories...");
+  console.log("🔄 Syncing installed capabilities with their remote Git repositories...");
 
-  const libDir = path.resolve(process.cwd(), "capabilities-library");
+  const os = await import('node:os');
+  const cacheDir = path.resolve(os.homedir(), '.ai-skills-hub', 'cache');
   
   try {
-    const entries = await fs.readdir(libDir, { withFileTypes: true });
+    const entries = await fs.readdir(cacheDir, { withFileTypes: true });
     let syncCount = 0;
 
     for (const entry of entries) {
       if (entry.isDirectory()) {
-        const capPath = path.join(libDir, entry.name);
+        const capPath = path.join(cacheDir, entry.name);
         const gitDir = path.join(capPath, ".git");
         
         try {
@@ -33,13 +34,13 @@ export async function syncCommand() {
     }
 
     if (syncCount === 0) {
-      console.log("\nℹ️ No Git-linked capabilities found in your library.");
+      console.log("\nℹ️ No Git-linked capabilities found in your local cache.");
     } else {
       console.log(`\n✅ Successfully synced ${syncCount} capabilities!`);
       console.log(`Note: To apply these updates to your agents, run the 'skills-hub' interactive installer again.`);
     }
 
   } catch (error) {
-    console.error(`❌ Failed to read capabilities library:`, error.message);
+    console.error(`❌ Failed to read capabilities cache:`, error.message);
   }
 }
