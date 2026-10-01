@@ -101,6 +101,14 @@ async function runDiscovery() {
       artifact_type: choice.artifact_type ?? "skill",
       distribution: choice.action === "install" ? "bundled" : "source-direct",
       compatibility_verified: choice.compatibility_verified,
+      description: choice.description ?? "",
+      publisher: choice.publisher ?? "",
+      category: choice.category ?? [],
+      tags: choice.tags ?? [],
+      license: choice.license ?? {spdx:"NOASSERTION"},
+      security: choice.security ?? {scan_status:"pending",risk:"unknown"},
+      release: choice.release ?? {status:"hold"},
+      installation: choice.installation ?? null,
       source: choice.source,
       _score: choice.score,
       _origin: choice.origin,
@@ -165,7 +173,8 @@ function render() {
     return '<article class="card">' +
       '<div class="card-top"><span class="state ' + escapeHtml(s.distribution) + '">' + escapeHtml(s.distribution) + '</span><span class="risk">' + escapeHtml(s.artifact_type ?? "skill") + ' · ' + escapeHtml(origin) + ' · risk:' + escapeHtml(risk) + '</span></div>' +
       '<h3>' + escapeHtml(s.name) + '</h3>' +
-      '<div class="meta">' + escapeHtml(s.publisher) + ' · ' + escapeHtml(s.license?.spdx ?? "NOASSERTION") + '</div>' +
+      '<div class="meta">' + escapeHtml(s.publisher || "unknown") + ' · ' + escapeHtml(s.license?.spdx ?? "NOASSERTION") + '</div>' +
+      '<p class="description">' + escapeHtml(s.description ?? "") + '</p>' +
       '<div class="chips">' + chips + '</div>' +
       '<div class="badges"><span class="badge">' + escapeHtml(release) + '</span>' + capabilityBadges(s) + '</div>' +
       '<div class="card-foot"><span class="revision">rev ' + escapeHtml(revision) + '</span><button class="details" data-id="' + encodeURIComponent(s.id) + '" type="button">Details</button></div>' +
