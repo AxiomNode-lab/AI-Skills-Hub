@@ -47,14 +47,17 @@ export function buildAdapterPlan(item, agent, { scope="project" } = {}) {
       if (agent === "cursor") {
         return {
           artifact_type:type,action:"configuration",status:"implemented",adapter:"cursor-mcp-json",
-          argv:null,
-          command:null,
-          config:{
-            mcpServers:{
-              [name]:{url:install.url}
-            }
-          },
+          argv:null,command:null,
+          config:{mcpServers:{[name]:{url:install.url}}},
           target:scope === "user" ? "~/.cursor/mcp.json" : ".cursor/mcp.json"
+        };
+      }
+      if (agent === "github-copilot") {
+        return {
+          artifact_type:type,action:"configuration",status:"implemented",adapter:"copilot-mcp-json",
+          argv:null,command:null,
+          config:{mcpServers:{[name]:{url:install.url}}},
+          target:scope === "user" ? "~/.copilot/mcp-config.json" : ".mcp.json"
         };
       }
     }
@@ -85,13 +88,17 @@ export function buildAdapterPlan(item, agent, { scope="project" } = {}) {
       if (agent === "cursor") {
         return {
           artifact_type:type,action:"configuration",status:"implemented",adapter:"cursor-mcp-json",
-          command:null,
-          config:{
-            mcpServers:{
-              [name]:{command:runtime,args}
-            }
-          },
+          argv:null,command:null,
+          config:{mcpServers:{[name]:{command:runtime,args}}},
           target:scope === "user" ? "~/.cursor/mcp.json" : ".cursor/mcp.json"
+        };
+      }
+      if (agent === "github-copilot") {
+        return {
+          artifact_type:type,action:"configuration",status:"implemented",adapter:"copilot-mcp-json",
+          argv:null,command:null,
+          config:{mcpServers:{[name]:{command:runtime,args}}},
+          target:scope === "user" ? "~/.copilot/mcp-config.json" : ".mcp.json"
         };
       }
     }
@@ -130,13 +137,15 @@ export function buildAdapterPlan(item, agent, { scope="project" } = {}) {
 
   if (type === "cli-tool" && item.source?.package) {
     const pkg=item.source.package;
+    const version = item.source.version ? "@"+item.source.version : "";
     return {
       artifact_type:type,
       action:"source-direct",
       status:"implemented",
       adapter:"npm-package",
-      argv:["npx","--yes",pkg],
-      command:["npx","--yes",pkg].join(" ")
+      argv:["pnpm","add","-D",pkg+version],
+      command:["pnpm","add","-D",pkg+version].join(" "),
+      note:"Installs the package into the current project; choose a global package-manager workflow later if the tool requires it."
     };
   }
 
