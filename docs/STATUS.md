@@ -27,13 +27,13 @@ AI Skills Hub is a unified AI Agent capability hub: one project for discovery, c
 
 ## Catalog
 
-- 61 normalized Skill records.
+- 61 normalized Skill records (artifact_type=skill).
 - 19 bundled candidates.
 - 9 source-direct records.
 - 33 review-required records.
 - 0 materialized Skills at this point.
 - 0 release-eligible Skills at this point.
-- 12 tracked sources/providers/standards.
+- 15 tracked sources/providers/standards/providers.
 - 7 bundles.
 
 ## Trust pipeline
@@ -53,7 +53,7 @@ Materialization and release eligibility remain separate from catalog discovery.
 
 ## Next major implementation
 
-- Expand the unified registry beyond Skills into MCP servers, Agent Plugins, and CLI tools using tested installation adapters.
+- Expand the local capability catalog beyond Skills into persisted MCP, Agent Plugin, and CLI records using the tested adapters.
 - Add dependency graphs and eval-based quality signals.
 - Add content-addressed snapshot downloads for released first-party bundles.
 - Add update/rollback transactions and signed release attestations.
