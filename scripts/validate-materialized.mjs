@@ -27,6 +27,7 @@ function walkFiles(dir,base=dir){
     const full=path.join(dir,entry.name);
     if(entry.isDirectory()) out.push(...walkFiles(full,base));
     else if(entry.isFile()) out.push({full,relative:path.relative(base,full).split(path.sep).join("/")});
+    else if(entry.isSymbolicLink()) failures.push(path.relative(base,full)+": symlinks are forbidden in materialized skills");
     else failures.push(path.relative(base,full)+": unsupported filesystem entry");
   }
   return out.sort((a,b)=>a.relative.localeCompare(b.relative));
@@ -55,15 +56,24 @@ for(const skill of registry.skills.filter((s)=>s.materialized)){
     if(manifest.source?.revision!==skill.source.revision) throw new Error("manifest revision mismatch");
 
     const files=walkFiles(rootDir);
+    let totalBytes=0;
     const actual=new Map(files.map((item)=>{
       const bytes=fs.readFileSync(item.full);
       const st=fs.statSync(item.full);
+      totalBytes += bytes.length;
+      if(st.mode & 0o6000) throw new Error("setuid/setgid bits are forbidden: "+item.relative);
       return [item.relative,{
         sha256:"sha256:"+crypto.createHash("sha256").update(bytes).digest("hex"),
         bytes:bytes.length,
         mode:(st.mode&0o111)?"100755":"100644"
       }];
     }));
+
+    if(totalBytes>20*1024*1024) throw new Error("materialized skill exceeds total size limit");
+    if(skill.distribution!=="bundled") throw new Error("only bundled skills may be materialized");
+    if(!skill.license?.redistributable || skill.license?.status!=="verified") throw new Error("materialized skill has invalid redistribution license state");
+    if(skill.security?.scan_status!=="verified") throw new Error("materialized skill has no verified security scan");
+    if(skill.security?.risk==="high") throw new Error("high-risk materialized skill is blocked");
 
     const expected=manifest.materialized_files??[];
     if(actual.size!==expected.length) throw new Error("file count mismatch");
