@@ -16,9 +16,8 @@ const skills = catalog.skills
 const lock = {
   lockfile_version: 1,
   registry_schema: catalog.schema_version,
-  generated_at: new Date().toISOString(),
   skills
 };
 
 fs.writeFileSync("catalog/skills.lock.json", JSON.stringify(lock, null, 2) + "\n");
-console.log("Generated lockfile for", skills.length, "bundled skills");
+console.log("Generated deterministic lockfile for", skills.length, "bundled skills");
