@@ -1,0 +1,57 @@
+{
+  "schema_version": "0.1",
+  "agents": [
+    {
+      "id": "claude-code",
+      "displayName": "Claude Code",
+      "nativeSkillDirs": [
+        ".claude/skills",
+        "~/.claude/skills"
+      ],
+      "pluginSupport": true
+    },
+    {
+      "id": "codex",
+      "displayName": "Codex",
+      "nativeSkillDirs": [
+        ".agents/skills",
+        "~/.agents/skills"
+      ],
+      "pluginSupport": true
+    },
+    {
+      "id": "cursor",
+      "displayName": "Cursor",
+      "nativeSkillDirs": [
+        ".cursor/skills",
+        "~/.cursor/skills"
+      ],
+      "pluginSupport": true
+    },
+    {
+      "id": "opencode",
+      "displayName": "OpenCode",
+      "nativeSkillDirs": [
+        ".opencode/skills",
+        "~/.config/opencode/skills"
+      ],
+      "pluginSupport": false
+    },
+    {
+      "id": "github-copilot",
+      "displayName": "GitHub Copilot",
+      "nativeSkillDirs": [
+        ".github/skills"
+      ],
+      "pluginSupport": true
+    },
+    {
+      "id": "generic-agent",
+      "displayName": "Generic Agent Skills",
+      "nativeSkillDirs": [
+        ".agents/skills"
+      ],
+      "pluginSupport": false
+    }
+  ]
+}
