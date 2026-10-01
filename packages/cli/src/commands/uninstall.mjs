@@ -55,7 +55,10 @@ export async function uninstallCommand(options = {}) {
     } else {
       const root = resolveInstallRoot(record.agent || "agent-skills", scope, process.cwd());
       const destination = path.resolve(record.destination);
-      if (!safeInside(root, destination)) {
+      if (
+        !safeInside(root, destination)
+        || path.dirname(destination) !== path.resolve(root)
+      ) {
         throw new Error("Refusing to remove a path outside the managed installation root.");
       }
       const stat = fs.lstatSync(destination);
