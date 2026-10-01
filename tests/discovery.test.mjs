@@ -117,3 +117,14 @@ test("plugin discovery normalizes a portable Agent Plugin",async()=>{
   assert.equal(result[0].item.artifact_type,"agent-plugin");
   assert.equal(result[0].item.source.repo,"demo/plugins");
 });
+
+test("MCP discovery broadens natural-language queries to useful tokens",async()=>{
+  const calls=[];
+  const fakeFetch=async(url)=>{
+    calls.push(url);
+    return {ok:true,json:async()=>({servers:[]})};
+  };
+  const {searchMcpRegistry}=await import("../packages/discovery/src/mcp-registry.mjs");
+  await searchMcpRegistry("PDF tools for Codex",{limit:5,fetchImpl:fakeFetch,cacheDir:"/tmp/aih-mcp-broad-"+process.pid});
+  assert.ok(calls.length >= 2);
+});
