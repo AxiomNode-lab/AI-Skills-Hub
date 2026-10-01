@@ -22,7 +22,9 @@
     "web": "node apps/web/dev-server.mjs",
     "sync-registry": "node scripts/sync-registry.mjs",
     "verify": "pnpm validate && pnpm test",
-    "cli": "node packages/cli/bin/skills-hub.mjs"
+    "cli": "node packages/cli/bin/skills-hub.mjs",
+    "validate-workspace": "node scripts/validate-workspace.mjs",
+    "static-check": "node scripts/static-check.mjs"
   },
   "engines": {
     "node": ">=22"
