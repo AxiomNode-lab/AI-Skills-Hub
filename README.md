@@ -94,3 +94,19 @@ The project targets the open Agent Skills format, Agent Plugins packaging, and t
 The Hub searches its local catalog first, then semantic external discovery and approved GitHub sources when the requested Skill is not already present locally. Remote results stay metadata-only until they pass the Hub release policy.
 
 The discovery layer can use the public skills ecosystem as a semantic index, then bridge installation through the upstream skills CLI.
+
+## One-command discovery and bulk install
+
+Find and install one capability:
+
+  skills-hub add "I need a PDF tool for Codex" --agent codex --remote
+
+Review the full actionable set before execution:
+
+  skills-hub add "I need developer productivity tools for Codex" --agent codex
+
+Execute every actionable result explicitly:
+
+  skills-hub add "I need developer productivity tools for Codex" --agent codex --all --remote
+
+The Hub separates local released artifacts from remote adapters and review-required results. It never silently executes unverified candidates.
