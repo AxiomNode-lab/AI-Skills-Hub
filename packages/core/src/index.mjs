@@ -14,6 +14,11 @@ export function indexSkills(registry) {
   return new Map(registry.skills.map((skill) => [skill.id, skill]));
 }
 
+export function findSkill(registry, idOrName) {
+  return registry.skills.find((skill) => skill.id === idOrName)
+    ?? registry.skills.find((skill) => skill.name === idOrName);
+}
+
 export function resolveBundle(registry, bundleName) {
   const items = registry.bundles?.[bundleName];
   if (!items) throw new Error("Unknown bundle: " + bundleName);
@@ -26,9 +31,11 @@ export function resolveBundle(registry, bundleName) {
 }
 
 export function filterForAgent(skills, agent) {
-  return skills.filter((skill) =>
-    skill.compatibility.includes("agent-skills") || skill.compatibility.includes(agent)
-  );
+  return skills.filter((skill) => {
+    const compatibility = new Set(skill.compatibility ?? []);
+    return compatibility.has(agent)
+      || (agent === "generic-agent" && compatibility.has("agent-skills"));
+  });
 }
 
 export function summarize(skills) {
