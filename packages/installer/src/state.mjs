@@ -3,6 +3,8 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 
+const MAX_STATE_BYTES = 2 * 1024 * 1024;
+
 export function stateRoot(scope="project", cwd=process.cwd()) {
   return scope === "user"
     ? path.join(os.homedir(), ".ai-skills-hub")
@@ -23,8 +25,12 @@ function walk(root) {
     for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
       const full = path.join(dir, entry.name);
       if (entry.name === "installed.json") continue;
+      if (entry.isSymbolicLink()) {
+        throw new Error("symlink_detected:" + path.relative(root, full).split(path.sep).join("/"));
+      }
       if (entry.isDirectory()) visit(full);
       else if (entry.isFile()) files.push(full);
+      else throw new Error("unsupported_entry:" + path.relative(root, full));
     }
   };
   if (fs.existsSync(root)) visit(root);
@@ -34,7 +40,7 @@ function walk(root) {
 export function buildInstallRecord(skill, destination, { agent, scope }) {
   const root = path.resolve(destination);
   return {
-    schema_version: "0.1",
+    schema_version: "0.2",
     skill_id: skill.id,
     name: skill.name,
     agent,
@@ -54,20 +60,47 @@ export function buildInstallRecord(skill, destination, { agent, scope }) {
   };
 }
 
+function atomicWrite(file, body) {
+  fs.mkdirSync(path.dirname(file), { recursive: true });
+  if (Buffer.byteLength(body) > MAX_STATE_BYTES) throw new Error("installation state is too large");
+  const temp = file + ".tmp-" + process.pid + "-" + crypto.randomBytes(6).toString("hex");
+  fs.writeFileSync(temp, body, { mode: 0o600 });
+  fs.renameSync(temp, file);
+}
+
 export function writeInstallRecord(record, cwd=process.cwd()) {
   const file = stateFile(record.scope, cwd);
-  fs.mkdirSync(path.dirname(file), { recursive: true });
   const data = fs.existsSync(file)
     ? JSON.parse(fs.readFileSync(file, "utf8"))
-    : { schema_version: "0.1", installed: {} };
+    : { schema_version: "0.2", installed: {}, history: [] };
+
+  data.schema_version = "0.2";
+  data.history = Array.isArray(data.history) ? data.history : [];
+
+  const previous = data.installed[record.skill_id];
+  if (previous && previous.destination === record.destination) {
+    data.history.push({
+      skill_id: record.skill_id,
+      action: "replace",
+      at: new Date().toISOString(),
+      previous_revision: previous.source?.revision ?? null,
+      next_revision: record.source?.revision ?? null
+    });
+    if (data.history.length > 100) data.history = data.history.slice(-100);
+  }
+
   data.installed[record.skill_id] = record;
-  fs.writeFileSync(file, JSON.stringify(data, null, 2) + "\n");
+  atomicWrite(file, JSON.stringify(data, null, 2) + "
+");
 }
 
 export function readInstallRecords(scope="project", cwd=process.cwd()) {
   const file = stateFile(scope, cwd);
   if (!fs.existsSync(file)) return {};
-  return JSON.parse(fs.readFileSync(file, "utf8")).installed ?? {};
+  const body = fs.readFileSync(file, "utf8");
+  if (Buffer.byteLength(body) > MAX_STATE_BYTES) throw new Error("installation state is too large");
+  const parsed = JSON.parse(body);
+  return parsed.installed ?? {};
 }
 
 export function removeInstallRecord(skillId, scope="project", cwd=process.cwd()) {
@@ -75,25 +108,39 @@ export function removeInstallRecord(skillId, scope="project", cwd=process.cwd())
   if (!fs.existsSync(file)) return;
   const data = JSON.parse(fs.readFileSync(file, "utf8"));
   delete data.installed[skillId];
+
   if (Object.keys(data.installed).length === 0) {
     fs.rmSync(file, { force: true });
     try { fs.rmdirSync(path.dirname(file)); } catch {}
     return;
   }
-  fs.writeFileSync(file, JSON.stringify(data, null, 2) + "\n");
+
+  atomicWrite(file, JSON.stringify(data, null, 2) + "
+");
 }
 
 export function verifyInstallRecord(record) {
   const root = path.resolve(record.destination);
-  if (!fs.existsSync(root) || !fs.statSync(root).isDirectory()) {
-    return { ok: false, reason: "destination_missing", skill_id: record.skill_id };
+  if (!fs.existsSync(root) || !fs.statSync(root).isDirectory() || fs.lstatSync(root).isSymbolicLink()) {
+    return { ok: false, reason: "destination_missing_or_symlink", skill_id: record.skill_id };
+  }
+
+  let files;
+  try {
+    files = walk(root);
+  } catch (error) {
+    return { ok: false, reason: error.message, skill_id: record.skill_id };
   }
 
   const expected = new Map((record.files ?? []).map((file) => [file.path, file]));
   const actual = new Map(
-    walk(root).map((full) => {
+    files.map((full) => {
       const relative = path.relative(root, full).split(path.sep).join("/");
-      return [relative, { sha256: hashFile(full), bytes: fs.statSync(full).size }];
+      return [relative, {
+        sha256: hashFile(full),
+        bytes: fs.statSync(full).size,
+        mode: (fs.statSync(full).mode & 0o111) ? "100755" : "100644"
+      }];
     })
   );
 
@@ -111,6 +158,9 @@ export function verifyInstallRecord(record) {
     }
     if (observed.bytes !== expectedFile.bytes) {
       return { ok: false, reason: "file_size_changed", skill_id: record.skill_id, path: relative };
+    }
+    if (expectedFile.mode && observed.mode !== expectedFile.mode) {
+      return { ok: false, reason: "file_mode_changed", skill_id: record.skill_id, path: relative };
     }
   }
 
