@@ -30,6 +30,6 @@ jobs:
           fi
           git config user.name "ai-skills-hub-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add skills catalog/skills.json
+          git add skills catalog/skills.json catalog/materialized-manifests
           git commit -m "chore: materialize approved skills"
           git push

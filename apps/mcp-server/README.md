@@ -4,8 +4,8 @@ This server exposes materialized, release-eligible Skills using the MCP Skills e
 
 Implemented methods:
 - skills/list with cursor pagination and complete resource manifests
-- skills/get
-- resources/read
+- skills/get with complete skill entries and cache hints
+- resources/read for individual skill files
 
 The server advertises io.modelcontextprotocol/skills with directoryRead=false.
 
