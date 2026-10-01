@@ -1,4 +1,4 @@
-const API = window.AI_SKILLS_API_URL || "/api";
+const API = window.AI_SKILLS_API_URL || "";
 const response = await fetch(API + "/api/skills").catch(() => null);
 const registry = response ? await response.json() : {skills:[]};
 const skills = registry.skills ?? [];
