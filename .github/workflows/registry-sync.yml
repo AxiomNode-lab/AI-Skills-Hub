@@ -1,0 +1,52 @@
+name: Registry Sync
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "23 2 * * 1"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: registry-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.4.1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Sync upstream metadata
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: pnpm sync-registry
+      - run: pnpm validate
+      - run: pnpm generate-lock
+      - run: node scripts/validate-materialized.mjs
+      - run: pnpm dedupe
+      - run: pnpm test
+      - name: Commit generated registry updates
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --quiet; then
+            echo "No registry changes."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add catalog/
+          git add docs/ || true
+          git commit -m "chore(registry): sync upstream skills"
+          git push
