@@ -4,6 +4,10 @@ import { buildInstallPlan } from "@ai-skills-hub/installer";
 import { installMaterializedSkill, verifyInstalledSkill, doctorInstalledSkills, uninstallSkillRecord } from "@ai-skills-hub/installer/native";
 import { hybridSearch, toInstallChoices } from "@ai-skills-hub/discovery";
 import fs from "node:fs";
+import { execFile } from "node:child_process";
+import { promisify } from "node:util";
+import { writeInstallRecord } from "@ai-skills-hub/installer/state";
+const execFileAsync = promisify(execFile);
 
 const [, , command, ...args] = process.argv;
 const registry = loadRegistry();
@@ -11,6 +15,33 @@ const registry = loadRegistry();
 function flag(name) {
   const i = args.indexOf(name);
   return i >= 0 ? args[i + 1] : undefined;
+}
+
+
+async function mapConcurrent(items, limit, worker) {
+  const results = new Array(items.length);
+  let cursor = 0;
+  async function run() {
+    while (true) {
+      const index = cursor++;
+      if (index >= items.length) return;
+      try { results[index] = await worker(items[index], index); }
+      catch (error) { results[index] = { error }; }
+    }
+  }
+  await Promise.all(Array.from({length:Math.min(limit,Math.max(1,items.length))}, run));
+  return results;
+}
+
+async function executeSourceBridge(skill, agent) {
+  if (!skill.source?.repo || !skill.name) throw new Error("Remote install metadata incomplete");
+  const url = "https://github.com/" + skill.source.repo;
+  await execFileAsync("npx", ["--yes","skills","add",url,"--skill",skill.name,"--agent",agent,"-y"], {
+    env: process.env,
+    cwd: process.cwd(),
+    maxBuffer: 4 * 1024 * 1024
+  });
+  return { id:skill.id, agent, action:"source-direct-installed", source:url };
 }
 
 function selectedSkills(target, agent) {
@@ -29,7 +60,7 @@ Usage:
   skills-hub info <skill-id>
   skills-hub targets
   skills-hub plan <bundle-or-skill> [--agent <agent>]
-  skills-hub install <bundle-or-skill> --agent <agent> [--scope project|user] [--overwrite] [--force]
+  skills-hub install <bundle-or-skill> --agent <agent> [--scope project|user] [--overwrite] [--force] [--remote]
   skills-hub audit
   skills-hub doctor [--scope project|user]
   skills-hub remove <skill-id> [--scope project|user] [--force]
@@ -137,29 +168,34 @@ if (command === "install") {
   const results = [];
   let failed = false;
 
-  for (const item of plan) {
-    const skill = skills.find((s) => s.id === item.id);
-    if (item.action === "install") {
-      try {
-        results.push(installMaterializedSkill(skill, {
-          agent,
-          scope,
-          overwrite,
-          force
-        }));
-      } catch (error) {
-        failed = true;
-        results.push({id:item.id,action:"error",error:error.message});
-      }
-    } else {
-      results.push({
-        id:item.id,
-        action:item.action,
-        reason:item.reason ?? null,
-        command:item.command ?? null
-      });
-      if (item.action === "blocked") failed = true;
+  const installResults = await mapConcurrent(
+    plan.filter((item) => item.action === "install"),
+    4,
+    async (item) => {
+      const skill = skills.find((s) => s.id === item.id);
+      return installMaterializedSkill(skill, {agent,scope,overwrite,force,persistState:false});
     }
+  );
+  for (const result of installResults) {
+    if (result?.error) { failed=true; results.push({action:"error",error:result.error.message}); continue; }
+    if (result?.record) writeInstallRecord(result.record, process.cwd());
+    results.push(result);
+  }
+
+  const remoteEnabled = args.includes("--remote");
+  const remoteResults = remoteEnabled ? await mapConcurrent(
+    plan.filter((item) => item.action === "source-direct"),
+    3,
+    async (item) => executeSourceBridge(skills.find((s) => s.id === item.id), agent)
+  ) : [];
+  for (const result of remoteResults) {
+    if (result?.error) { failed=true; results.push({action:"error",error:result.error.message}); }
+    else results.push(result);
+  }
+
+  for (const item of plan.filter((item) => !["install","source-direct"].includes(item.action))) {
+    results.push({id:item.id,action:item.action,reason:item.reason ?? null,command:item.command ?? null});
+    if (item.action === "blocked") failed = true;
   }
 
   console.log(JSON.stringify({
@@ -171,7 +207,7 @@ if (command === "install") {
     installed:results.filter((r)=>r.action==="installed").length,
     held:results.filter((r)=>r.action==="hold").length,
     source_bridge:results.filter((r)=>r.action==="source-bridge").length,
-    source_direct:results.filter((r)=>r.action==="source-direct").length,
+    source_direct:results.filter((r)=>r.action==="source-direct" || r.action==="source-direct-installed").length,
     blocked:results.filter((r)=>r.action==="blocked").length,
     errors:results.filter((r)=>r.action==="error").length,
     results
