@@ -3,22 +3,51 @@ const redistributable = new Set([
   "ISC", "MPL-2.0", "CC-BY-4.0", "CC-BY-SA-4.0"
 ]);
 
+function key(value) {
+  return String(value ?? "")
+    .trim()
+    .toLowerCase()
+    .replace(/[(),.]/g, "")
+    .replace(/\s+/g, " ");
+}
+
 export function normalizeLicense(value) {
   const raw = String(value ?? "").trim();
+  if (!raw) return "NOASSERTION";
+  const normalized = key(raw);
   const aliases = new Map([
-    ["Apache License 2.0", "Apache-2.0"],
-    ["Apache 2", "Apache-2.0"],
-    ["MIT License", "MIT"],
-    ["CC BY-SA 4.0", "CC-BY-SA-4.0"],
-    ["Attribution-ShareAlike 4.0 International", "CC-BY-SA-4.0"]
+    ["mit", "MIT"],
+    ["mit license", "MIT"],
+    ["apache 2", "Apache-2.0"],
+    ["apache license 2.0", "Apache-2.0"],
+    ["apache license version 2.0", "Apache-2.0"],
+    ["apache license, version 2.0", "Apache-2.0"],
+    ["apache-2.0", "Apache-2.0"],
+    ["cc by 4.0", "CC-BY-4.0"],
+    ["cc-by-4.0", "CC-BY-4.0"],
+    ["cc by-sa 4.0", "CC-BY-SA-4.0"],
+    ["cc-by-sa-4.0", "CC-BY-SA-4.0"],
+    ["attribution-sharealike 4.0 international", "CC-BY-SA-4.0"],
+    ["mozilla public license 2.0", "MPL-2.0"],
+    ["mpl-2.0", "MPL-2.0"],
+    ["bsd 2-clause", "BSD-2-Clause"],
+    ["bsd 3-clause", "BSD-3-Clause"],
+    ["isc", "ISC"],
+    ["proprietary", "Proprietary"],
+    ["all rights reserved", "Proprietary"],
+    ["noassertion", "NOASSERTION"]
   ]);
-  return aliases.get(raw) ?? raw;
+  return aliases.get(normalized) ?? raw;
 }
 
 export function classifyLicense(value) {
   const spdx = normalizeLicense(value);
-  if (!spdx || /unknown|noassertion/i.test(spdx)) {
-    return { spdx: "NOASSERTION", redistributable: false, status: "review-required" };
+  if (!spdx || spdx === "NOASSERTION" || /unknown|proprietary/i.test(spdx)) {
+    return {
+      spdx: spdx || "NOASSERTION",
+      redistributable: false,
+      status: spdx === "Proprietary" ? "verified" : "review-required"
+    };
   }
   return {
     spdx,
