@@ -137,7 +137,7 @@ test("unified adapter plan marks npm CLI tools executable with npx",async()=>{
     source:{package:"demo-ai-cli"}
   },"codex");
   assert.equal(plan.action,"source-direct");
-  assert.deepEqual(plan.argv,["npx","--yes","demo-ai-cli"]);
+  assert.deepEqual(plan.argv,["pnpm","add","-D","demo-ai-cli"]);
 });
 
 test("unsupported MCP transport remains pending",async()=>{
