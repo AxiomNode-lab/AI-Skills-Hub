@@ -1,0 +1,30 @@
+name: Materialize Approved Skills
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  materialize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: node scripts/materialize-approved.mjs --all
+      - run: node scripts/validate-registry.mjs
+      - run: node scripts/audit-registry.mjs
+      - name: Commit materialized skills
+        run: |
+          if git diff --quiet; then
+            echo "No materialization changes."
+            exit 0
+          fi
+          git config user.name "ai-skills-hub-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add skills catalog/skills.json
+          git commit -m "chore: materialize approved skills"
+          git push
