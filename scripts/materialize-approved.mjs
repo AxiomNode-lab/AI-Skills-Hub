@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import crypto from "node:crypto";
 import fs from "node:fs";
+import { scanText, riskLevel } from "../packages/security/src/index.mjs";
 import path from "node:path";
 
 const args = process.argv.slice(2);
@@ -70,7 +71,11 @@ for (const skill of targets) {
   fs.mkdirSync(destination, {recursive:true});
 
   let totalBytes = 0;
-  const materializedFiles = [];
+  const fetchedFiles = [];
+  const allFindings = [];
+  const aggregate = {shell:false,network:false,credentials:false};
+
+  const isTextPath = (value) => /\.(md|mdx|txt|json|ya?ml|xml|html?|css|js|mjs|cjs|ts|tsx|jsx|py|rb|go|rs|java|kt|sh|bash|zsh|ps1|toml|ini|cfg|conf)$/i.test(value);
 
   for (const file of files) {
     const relative = file.path.slice(prefix.length);
@@ -80,13 +85,43 @@ for (const skill of targets) {
     if (bytes.length > 5 * 1024 * 1024) throw new Error("File too large: " + file.path);
     if (totalBytes > 25 * 1024 * 1024) throw new Error("Skill exceeds 25 MiB: " + skill.id);
 
-    fs.mkdirSync(path.dirname(out), {recursive:true});
-    fs.writeFileSync(out, bytes);
-    materializedFiles.push({path:relative,sha256:crypto.createHash("sha256").update(bytes).digest("hex"),bytes:bytes.length});
+    if (isTextPath(relative)) {
+      const scan = scanText(bytes.toString("utf8"));
+      allFindings.push(...scan.findings.map((finding) => ({...finding,file:relative})));
+      aggregate.shell ||= scan.capabilities.shell;
+      aggregate.network ||= scan.capabilities.network;
+      aggregate.credentials ||= scan.capabilities.credentials;
+    }
+
+    fetchedFiles.push({file,relative,out,bytes});
   }
 
-  if (!materializedFiles.some((f) => /(^|\/)SKILL\.md$/i.test(f.path))) {
+  if (!fetchedFiles.some((f) => /(^|\/)SKILL\.md$/i.test(f.relative))) {
     throw new Error("Materialized source has no SKILL.md: " + skill.id);
+  }
+
+  const scanResult = {
+    status:"verified",
+    risk: riskLevel({findings:allFindings}),
+    capabilities:aggregate,
+    findings:allFindings
+  };
+
+  if (scanResult.risk === "high") {
+    throw new Error("High-risk security findings block materialization for " + skill.id);
+  }
+
+  const materializedFiles = [];
+  for (const entry of fetchedFiles) {
+    fs.mkdirSync(path.dirname(entry.out), {recursive:true});
+    fs.writeFileSync(entry.out, entry.bytes);
+    if (entry.file.mode === "100755") fs.chmodSync(entry.out, 0o755);
+    materializedFiles.push({
+      path:entry.relative,
+      sha256:crypto.createHash("sha256").update(entry.bytes).digest("hex"),
+      bytes:entry.bytes.length,
+      mode:entry.file.mode ?? "100644"
+    });
   }
 
   const metadata = {
@@ -94,6 +129,7 @@ for (const skill of targets) {
     skill_id:skill.id,
     source:skill.source,
     registry_license:skill.license,
+    security_scan:scanResult,
     materialized_files:materializedFiles,
     total_bytes:totalBytes
   };
@@ -102,6 +138,15 @@ for (const skill of targets) {
   skill.materialized = true;
   skill.materialized_root = path.relative(root, destination).replaceAll(path.sep, "/");
   skill.materialized_files = materializedFiles.length;
+  skill.security = {
+    ...skill.security,
+    scan_status:"verified",
+    risk:scanResult.risk,
+    network:scanResult.capabilities.network,
+    shell:scanResult.capabilities.shell,
+    credentials:scanResult.capabilities.credentials,
+    findings:scanResult.findings
+  };
   console.log("Materialized " + skill.id + " (" + materializedFiles.length + " files, " + totalBytes + " bytes)");
 }
 
