@@ -1,6 +1,7 @@
 export const artifactTypes = ["skill","mcp-server","agent-plugin","cli-tool"];
 
 function sourceUrl(source) {
+  if (source?.install_url) return source.install_url;
   if (source?.url) return source.url;
   if (source?.repo) return "https://github.com/" + source.repo;
   return null;
@@ -27,27 +28,33 @@ export function buildAdapterPlan(item, agent) {
   if (type === "mcp-server") {
     return {
       artifact_type:type,
-      action:"source-direct",
+      action:"adapter-pending",
+      status:"planned",
       adapter:"mcp-config",
-      command:["skills-hub","mcp","add",url,"--agent",agent].join(" ")
+      reason:"mcp_adapter_not_implemented",
+      command:null
     };
   }
 
   if (type === "agent-plugin") {
     return {
       artifact_type:type,
-      action:"source-direct",
+      action:"adapter-pending",
+      status:"planned",
       adapter:"agent-plugin",
-      command:["skills-hub","plugin","add",url,"--agent",agent].join(" ")
+      reason:"plugin_adapter_not_implemented",
+      command:null
     };
   }
 
   if (type === "cli-tool") {
     return {
       artifact_type:type,
-      action:"source-direct",
+      action:"adapter-pending",
+      status:"planned",
       adapter:"package-manager",
-      command:["skills-hub","tool","add",name].join(" ")
+      reason:"tool_adapter_not_implemented",
+      command:null
     };
   }
 
