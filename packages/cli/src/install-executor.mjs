@@ -53,6 +53,8 @@ function assertSafeExternalPlan(plan, agent) {
         || !skillName
         || agentFlag !== "--agent"
         || targetAgent !== agent
+        || plan.argv[9] !== "-y"
+        || plan.argv.length !== 10
       ) {
         throw new Error("Invalid skills CLI installation plan.");
       }
@@ -71,6 +73,7 @@ function assertSafeExternalPlan(plan, agent) {
         || plan.argv[2] !== "add"
         || !plan.argv[3]
         || String(plan.argv[3]).startsWith("-")
+        || /[\r\n\0]/.test(String(plan.argv[3]))
       ) {
         throw new Error("Invalid Codex MCP installation plan.");
       }
@@ -84,6 +87,7 @@ function assertSafeExternalPlan(plan, agent) {
         || plan.argv[1] !== "mcp"
         || plan.argv[2] !== "add"
         || !plan.argv[3]
+        || /[\r\n\0]/.test(String(plan.argv[3]))
       ) {
         throw new Error("Invalid Claude MCP installation plan.");
       }
