@@ -1,4 +1,7 @@
 import { filterForAgent } from "@ai-skills-hub/core";
+import os from "node:os";
+import path from "node:path";
+import { cacheKey, readCache, writeCache } from "./cache.mjs";
 
 const norm = (v) => String(v ?? "").toLowerCase().trim();
 const words = (v) => norm(v).split(/[^a-z0-9@._/-]+/).filter(Boolean);
@@ -38,7 +41,10 @@ async function github(url,{token,fetchImpl=fetch}={}) {
   return r.json();
 }
 
-export async function searchRemote(query,{sources=[],agent,limit=20,token,fetchImpl=fetch}={}) {
+export async function searchRemote(query,{sources=[],agent,limit=20,token,fetchImpl=fetch,cacheDir=path.join(os.homedir(),".cache","ai-skills-hub","discovery"),cacheTtlMs=300000}={}) {
+  const key=cacheKey({query,agent,limit,sources:sources.map(s=>[s.id,s.repo,s.default_branch])});
+  const cached=readCache(cacheDir,key,cacheTtlMs);
+  if(cached) return cached;
   const enabled = sources.filter(s => s.kind === "github" && s.discovery_enabled !== false);
   const jobs = enabled.map(async source => {
     const q = encodeURIComponent("SKILL.md " + query + " repo:" + source.repo);
@@ -64,7 +70,9 @@ export async function searchRemote(query,{sources=[],agent,limit=20,token,fetchI
       if (!agent || agent === "agent-skills") results.push({item,score:score(query,item,agent),origin:"remote-github"});
     }
   }
-  return results.filter(x=>x.score>0).sort((a,b)=>b.score-a.score || a.item.name.localeCompare(b.item.name)).slice(0,limit);
+  const output=results.filter(x=>x.score>0).sort((a,b)=>b.score-a.score || a.item.name.localeCompare(b.item.name)).slice(0,limit);
+  writeCache(cacheDir,key,output);
+  return output;
 }
 
 export async function hybridSearch(registry,query,opts={}) {
