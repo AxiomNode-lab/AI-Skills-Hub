@@ -101,7 +101,7 @@ if (command === "install") {
   const force = args.includes("--force");
 
   if (!target || !agent) {
-    console.error("Usage: skills-hub install <bundle-or-skill> --agent <agent> [--scope project|user] [--overwrite]");
+    console.error("Usage: skills-hub install <bundle-or-skill> --agent <agent> [--scope project|user] [--overwrite] [--force]");
     process.exit(1);
   }
   if (!["project","user"].includes(scope)) {
@@ -200,7 +200,7 @@ if (command === "update") {
   const scope = flag("--scope") ?? "project";
   const force = args.includes("--force");
   if (!target || !agent) {
-    console.error("Usage: skills-hub update <bundle-or-skill> --agent <agent> [--scope project|user]");
+    console.error("Usage: skills-hub update <bundle-or-skill> --agent <agent> [--scope project|user] [--force]");
     process.exit(1);
   }
   const skills = selectedSkills(target, agent);
