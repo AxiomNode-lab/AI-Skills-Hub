@@ -90,8 +90,7 @@ export function writeInstallRecord(record, cwd=process.cwd()) {
   }
 
   data.installed[record.skill_id] = record;
-  atomicWrite(file, JSON.stringify(data, null, 2) + "
-");
+  atomicWrite(file, JSON.stringify(data, null, 2) + "\n");
 }
 
 export function readInstallRecords(scope="project", cwd=process.cwd()) {
@@ -115,8 +114,7 @@ export function removeInstallRecord(skillId, scope="project", cwd=process.cwd())
     return;
   }
 
-  atomicWrite(file, JSON.stringify(data, null, 2) + "
-");
+  atomicWrite(file, JSON.stringify(data, null, 2) + "\n");
 }
 
 export function verifyInstallRecord(record) {
