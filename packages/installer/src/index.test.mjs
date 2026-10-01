@@ -20,6 +20,7 @@ test("review-required is held by default", () => {
 test("bundle-eligible but unmaterialized uses a source bridge", () => {
   const [item] = buildInstallPlan([skill("bundled", false)], "codex");
   assert.equal(item.action, "source-bridge");
+  assert.match(item.command, /npx skills add/);
 });
 
 test("materialized bundle installs from registry", () => {
@@ -28,7 +29,8 @@ test("materialized bundle installs from registry", () => {
   assert.match(item.command, /install-from-registry/);
 });
 
-test("review override is explicit", () => {
+test("review override uses the upstream source bridge", () => {
   const [item] = buildInstallPlan([skill("review-required")], "codex", {allowReview:true});
   assert.equal(item.action, "source-direct");
+  assert.match(item.command, /npx skills add/);
 });
