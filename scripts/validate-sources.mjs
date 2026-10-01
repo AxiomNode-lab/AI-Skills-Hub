@@ -11,6 +11,8 @@ for(const source of sources.sources??[]){
     if(!/^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/.test(source.repo??"")) errors.push("invalid github repo: "+source.id);
     if(!source.default_branch) errors.push("github source missing default_branch: "+source.id);
     if(source.ingest_enabled===true && source.official===undefined && !source.priority) errors.push("enabled source lacks provenance class: "+source.id);
+  }else if(source.kind==="registry"){
+    if(!source.url || !source.api) errors.push("registry source missing url/api: "+source.id);
   }else if(!source.url){
     errors.push("non-github source missing url: "+source.id);
   }
