@@ -57,7 +57,9 @@ async function executeChoice(choice, agent, scope) {
     fs.mkdirSync(requireDir(output), {recursive:true});
     const existing = fs.existsSync(output) ? JSON.parse(fs.readFileSync(output,"utf8")) : {mcpServers:{}};
     existing.mcpServers = {...(existing.mcpServers ?? {}), ...(choice.config.mcpServers ?? {})};
-    fs.writeFileSync(output, JSON.stringify(existing,null,2)+"\n",{mode:0o600});
+    const temporary = output + ".tmp-" + process.pid;
+    fs.writeFileSync(temporary, JSON.stringify(existing,null,2)+"\n",{mode:0o600});
+    fs.renameSync(temporary, output);
     return {id:choice.id,action:"configured",target:output};
   }
 
