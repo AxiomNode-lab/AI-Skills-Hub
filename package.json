@@ -24,7 +24,9 @@
     "verify": "pnpm validate && pnpm test",
     "cli": "node packages/cli/bin/skills-hub.mjs",
     "validate-workspace": "node scripts/validate-workspace.mjs",
-    "static-check": "node scripts/static-check.mjs"
+    "static-check": "node scripts/static-check.mjs",
+    "discover": "node packages/cli/bin/skills-hub.mjs discover",
+    "validate-discovery": "node tests/discovery.test.mjs"
   },
   "engines": {
     "node": ">=22"
