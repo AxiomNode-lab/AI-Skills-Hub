@@ -24,3 +24,18 @@ test("source-direct becomes upstream bridge",()=>{
   assert.equal(choices[0].action,"source-direct");
   assert.match(choices[0].command,/npx/);
 });
+
+test("Arabic technical request finds the PDF intent",()=>{
+  const result=searchRegistry(registry,"بدي أداة PDF",{agent:"codex",limit:5});
+  assert.equal(result[0].item.id,"demo/pdf-tool");
+});
+
+test("remote discovery does not claim unverified agent compatibility",async()=>{
+  const fakeFetch=async()=>({ok:true,json:async()=>({items:[{path:"skills/pdf-helper/SKILL.md"}]})});
+  const result=await (await import("../packages/discovery/src/index.mjs")).searchRemote("PDF",{
+    sources:[{id:"remote/source",kind:"github",repo:"remote/source",default_branch:"main"}],
+    agent:"codex",limit:5,fetchImpl:fakeFetch,cacheDir:"/tmp/ai-skills-hub-discovery-tests-final"
+  });
+  assert.equal(result[0].item.name,"pdf-helper");
+  assert.equal(result[0].item.compatibility_verified,false);
+});
