@@ -1,6 +1,8 @@
 import http from "node:http";
 import { fileURLToPath } from "node:url";
 import { loadRegistry, resolveBundle, filterForAgent } from "../../../packages/core/src/index.mjs";
+import { hybridSearch, toInstallChoices } from "../../../packages/discovery/src/index.mjs";
+import fs from "node:fs";
 
 const PORT = Number(process.env.PORT ?? 8787);
 const registry = loadRegistry();
@@ -82,6 +84,26 @@ export function createServer() {
         distributions,
         bundles: Object.fromEntries(Object.entries(bundles).map(([name, ids]) => [name, ids.length]))
       });
+    }
+
+    if (url.pathname === "/api/discover") {
+      const query = (url.searchParams.get("q") ?? "").trim();
+      const agent = url.searchParams.get("agent") ?? "agent-skills";
+      const limit = clampInteger(url.searchParams.get("limit"), 20, 1, 50);
+      if (!query) return json(res, 400, { error: "missing_query" });
+      const sources = JSON.parse(fs.readFileSync("catalog/sources.json","utf8")).sources;
+      try {
+        const result = await hybridSearch(registry, query, {
+          sources,
+          agent,
+          limit,
+          token: process.env.GITHUB_TOKEN,
+          remote: url.searchParams.get("remote") !== "false"
+        });
+        return json(res, 200, { ...result, choices: toInstallChoices(result, agent) });
+      } catch (error) {
+        return json(res, 502, { error: "remote_discovery_failed", message: error.message });
+      }
     }
 
     if (url.pathname === "/api/skills") {
