@@ -15,9 +15,13 @@
     "export-plugin": "node scripts/export-plugin.mjs",
     "dedupe": "node scripts/dedupe-report.mjs",
     "validate-materialized": "node scripts/validate-materialized.mjs",
-    "validate-all": "pnpm validate && pnpm generate-lock && pnpm validate-materialized && pnpm dedupe && pnpm test"
+    "validate-all": "pnpm validate && pnpm generate-lock && pnpm validate-materialized && pnpm dedupe && pnpm test",
+    "materialize": "node scripts/materialize.mjs",
+    "mcp": "node packages/mcp-server/src/server.mjs",
+    "api": "node apps/api/src/server.mjs",
+    "web": "node apps/web/dev-server.mjs"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
   }
 }
