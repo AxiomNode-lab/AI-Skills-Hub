@@ -18,3 +18,20 @@ test("capability flags are boolean when scanned and null when pending", () => {
     }
   }
 });
+
+
+test("current catalog keeps source-direct OpenAI artifacts non-redistributable",()=>{
+  const registry=JSON.parse(fs.readFileSync("catalog/skills.json","utf8"));
+  for(const skill of registry.skills.filter((s)=>s.id.startsWith("openai/"))){
+    assert.equal(skill.license.spdx,"Proprietary",skill.id);
+    assert.equal(skill.distribution,"source-direct",skill.id);
+  }
+});
+
+test("release eligibility implies completed security verification",()=>{
+  const registry=JSON.parse(fs.readFileSync("catalog/skills.json","utf8"));
+  for(const skill of registry.skills.filter((s)=>s.release?.status==="eligible")){
+    assert.equal(skill.materialized,true,skill.id);
+    assert.equal(skill.security.scan_status,"verified",skill.id);
+  }
+});
