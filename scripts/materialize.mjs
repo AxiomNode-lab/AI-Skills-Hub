@@ -13,6 +13,10 @@ const selected=ids.map(id=>{
   return s;
 });
 const outputRoot="vendor/skills";
+if(selected.some((skill)=>skill.release?.status!=="eligible")){
+  const ids=selected.filter((skill)=>skill.release?.status!=="eligible").map((skill)=>skill.id);
+  throw new Error("Materialization blocked; skills have not passed release gates: "+ids.join(", "));
+}
 for(const skill of selected){
   const result=await materializeSkill(skill,{root:outputRoot,token:process.env.GITHUB_TOKEN});
   writeMaterializationManifest(result);
