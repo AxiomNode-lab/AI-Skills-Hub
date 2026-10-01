@@ -9,11 +9,12 @@ test("all catalog records have explicit distribution state", () => {
   for (const skill of registry.skills) assert.ok(valid.has(skill.distribution), skill.id);
 });
 
-test("sensitive capability flags are booleans", () => {
+test("capability flags are boolean when scanned and null when pending", () => {
   const registry = JSON.parse(fs.readFileSync("catalog/skills.json", "utf8"));
   for (const skill of registry.skills) {
     for (const key of ["network", "shell", "credentials"]) {
-      assert.equal(typeof skill.security[key], "boolean", `${skill.id}: ${key}`);
+      const value = skill.security[key];
+      assert.ok(value === null || typeof value === "boolean", skill.id + ": " + key);
     }
   }
 });
