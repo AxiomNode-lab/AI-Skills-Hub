@@ -1,0 +1,15 @@
+{
+  "id": "mcp-time",
+  "name": "Time MCP Server",
+  "type": "mcp-server",
+  "description": "Access precise time and timezone data.",
+  "distribution": "bundled",
+  "mcpConfig": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@modelcontextprotocol/server-time"
+    ]
+  },
+  "requiredEnv": []
+}

@@ -1,0 +1,17 @@
+{
+  "id": "mcp-google-drive",
+  "name": "Google Drive MCP Server",
+  "type": "mcp-server",
+  "description": "Read and manage files on Google Drive.",
+  "distribution": "bundled",
+  "mcpConfig": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@modelcontextprotocol/server-google-drive"
+    ]
+  },
+  "requiredEnv": [
+    "GOOGLE_DRIVE_API_KEY"
+  ]
+}

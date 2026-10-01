@@ -1,0 +1,18 @@
+{
+  "id": "mcp-aws",
+  "name": "AWS MCP Server",
+  "type": "mcp-server",
+  "description": "Interact with AWS infrastructure.",
+  "distribution": "bundled",
+  "mcpConfig": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@modelcontextprotocol/server-aws"
+    ]
+  },
+  "requiredEnv": [
+    "AWS_ACCESS_KEY_ID",
+    "AWS_SECRET_ACCESS_KEY"
+  ]
+}

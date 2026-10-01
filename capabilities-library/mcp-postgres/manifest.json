@@ -1,0 +1,17 @@
+{
+  "id": "mcp-postgres",
+  "name": "PostgreSQL MCP Server",
+  "type": "mcp-server",
+  "description": "Query and explore Postgres databases.",
+  "distribution": "bundled",
+  "mcpConfig": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@modelcontextprotocol/server-postgres"
+    ]
+  },
+  "requiredEnv": [
+    "POSTGRES_URL"
+  ]
+}

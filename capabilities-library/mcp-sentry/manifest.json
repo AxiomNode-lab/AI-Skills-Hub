@@ -1,0 +1,17 @@
+{
+  "id": "mcp-sentry",
+  "name": "Sentry MCP Server",
+  "type": "mcp-server",
+  "description": "Query and manage errors in Sentry.",
+  "distribution": "bundled",
+  "mcpConfig": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@modelcontextprotocol/server-sentry"
+    ]
+  },
+  "requiredEnv": [
+    "SENTRY_AUTH_TOKEN"
+  ]
+}
