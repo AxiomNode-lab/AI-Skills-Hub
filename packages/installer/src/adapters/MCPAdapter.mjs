@@ -103,6 +103,9 @@ function buildServerConfig(capability, env = {}) {
     const args = Array.isArray(installation.runtimeArguments)
       ? installation.runtimeArguments.map((value) => String(value))
       : [];
+    if (args.some((value) => value.includes("\0"))) {
+      throw new Error("MCP runtime arguments contain an invalid NUL byte.");
+    }
 
     const server = {
       type: "local",
