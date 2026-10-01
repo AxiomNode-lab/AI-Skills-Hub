@@ -20,14 +20,15 @@ const skillFixture = (temp) => {
   };
 };
 
-test("portable manifest uses Agent Plugins 1.0 schema", () => {
+test("portable manifest contains only Agent Plugins core fields", () => {
   const m=buildPortablePluginManifest({
     name:"example-plugin",
     description:"Example plugin",
     repository:"https://example.test/repo"
   });
-  assert.equal(m.skills,"./skills/");
-  assert.match(m.$schema,/agent-plugins.org\/schemas\/1\.0\.0/);
+  assert.equal("$schema" in m,true);
+  assert.equal(m.name,"example-plugin");
+  assert.equal("skills" in m,false);
   assert.equal("license" in m,false);
 });
 
@@ -40,7 +41,7 @@ test("export refuses unmaterialized skills", () => {
   }));
 });
 
-test("export includes portable and Codex manifests plus notices", () => {
+test("portable export uses fixed skills directory and notices", () => {
   const temp=fs.mkdtempSync(path.join(os.tmpdir(),"plugin-export-"));
   const out=path.join(temp,"out");
   const skill=skillFixture(temp);
@@ -50,8 +51,9 @@ test("export includes portable and Codex manifests plus notices", () => {
     skills:[skill]
   });
   assert.equal(result.skillCount,1);
-  assert.ok(fs.existsSync(path.join(out,"plugin.json")));
-  assert.ok(fs.existsSync(path.join(out,".codex-plugin","plugin.json")));
-  assert.ok(fs.readFileSync(path.join(out,"THIRD-PARTY-NOTICES.md"),"utf8").includes("Apache-2.0"));
+  const manifest=JSON.parse(fs.readFileSync(path.join(out,"plugin.json"),"utf8"));
+  assert.equal("skills" in manifest,false);
   assert.ok(fs.existsSync(path.join(out,"skills","example","SKILL.md")));
+  assert.ok(fs.existsSync(path.join(out,"THIRD-PARTY-NOTICES.md")));
+  assert.match(fs.readFileSync(path.join(out,"THIRD-PARTY-NOTICES.md"),"utf8"),/Apache-2\.0/);
 });

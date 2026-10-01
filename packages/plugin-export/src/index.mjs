@@ -19,8 +19,7 @@ export function buildPortablePluginManifest({name,version="1.0.0",description,re
     description,
     ...(author ? {author} : {}),
     ...(repository ? {repository} : {}),
-    ...(license ? {license} : {}),
-    skills: "./skills/"
+    ...(license ? {license} : {})
   };
 }
 
