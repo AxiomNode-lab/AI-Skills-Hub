@@ -6,6 +6,7 @@ import { rerankWithModel } from "./rerank.mjs";
 import { searchMcpRegistry } from "./mcp-registry.mjs";
 import { searchNpmTools } from "./npm.mjs";
 import { searchAgentPlugins } from "./plugins.mjs";
+import { buildAdapterPlan } from "./adapters.mjs";
 
 const norm = (v) => String(v ?? "").toLowerCase().trim();
 const ARABIC_HINTS = new Map([
@@ -159,24 +160,36 @@ export async function hybridSearch(registry,query,opts={}) {
   return {query,agent:opts.agent ?? null,remote_searched:true,ai_reranked:aiReranked,results:finalResults};
 }
 
-export function toInstallChoices(searchResult,agent) {
+export function toInstallChoices(searchResult,agent,{scope="project"}={}) {
   return searchResult.results.map(({item,score,origin}) => {
     const local = item.distribution === "bundled" && item.materialized && item.release?.status === "eligible";
-    const installTarget = item.source?.install_url ?? item.source?.url ?? (item.source?.repo ? "https://github.com/" + item.source.repo : null);
+    const adapter = local
+      ? {
+          artifact_type:item.artifact_type ?? "skill",
+          action:"install",
+          status:"implemented",
+          adapter:"registry",
+          command:["skills-hub","install",item.id,"--agent",agent,"--scope",scope].join(" ")
+        }
+      : buildAdapterPlan(item,agent,{scope});
+
     return {
       id:item.id,
       name:item.name,
+      artifact_type:item.artifact_type ?? "skill",
       score,
       origin,
       agent,
       compatibility_verified:item.compatibility_verified !== false,
-      action:local ? "install" : installTarget ? "source-direct" : "unsupported",
+      action:adapter.action,
+      status:adapter.status ?? "unknown",
+      adapter:adapter.adapter ?? null,
+      reason:adapter.reason ?? null,
       source:item.source,
-      command:local
-        ? ["skills-hub","install",item.id,"--agent",agent].join(" ")
-        : installTarget
-          ? ["npx","--yes","skills","add",installTarget,"--skill",JSON.stringify(item.name),"--agent",agent,"-y"].join(" ")
-          : null
+      command:adapter.command ?? null,
+      config:adapter.config ?? null,
+      target:adapter.target ?? null,
+      note:adapter.note ?? null
     };
   });
 }
