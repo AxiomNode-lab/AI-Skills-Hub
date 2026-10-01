@@ -1,244 +1,172 @@
-import { select, checkbox, confirm, input, Separator } from '@inquirer/prompts';
-import { detectAgents } from '../../../installer/src/detector.mjs';
-import { getAdapter } from '../../../installer/src/adapters/index.mjs';
-import { readLocalCapabilities, resolveDependencies, checkPrerequisites, autoSyncCapability } from '../utils.mjs';
+import { select, checkbox, confirm, input, Separator } from "@inquirer/prompts";
+import { detectAgents } from "../../../installer/src/detector.mjs";
+import { loadRegistry, filterForAgent } from "@ai-skills-hub/core";
+import { searchRegistry } from "@ai-skills-hub/discovery";
+import { installCapability } from "../install-executor.mjs";
+import { resolveDependencies, checkPrerequisites } from "../utils.mjs";
 
-// Simple local search engine
-function searchCapabilities(query, capabilities) {
-  if (!query) return capabilities;
-  const lowerQuery = query.toLowerCase();
-  return capabilities.filter(c => 
-    (c.name && c.name.toLowerCase().includes(lowerQuery)) ||
-    (c.description && c.description.toLowerCase().includes(lowerQuery)) ||
-    (c.type && c.type.toLowerCase().includes(lowerQuery))
-  );
+function displayName(cap) {
+  return `${cap.name} [${cap.distribution}]`;
 }
 
 export async function interactiveCommand() {
   console.log("AI Skills Hub CLI v0.2.0");
-  console.log("────────────────────────\n");
+  console.log("----------------------\n");
 
-  // Detect Agents
-  console.log("Scanning system for AI Agents...");
   const detectedAgents = await detectAgents();
-  
   if (detectedAgents.length === 0) {
-    console.log("❌ No known AI agents detected on the system or in Docker.");
+    console.log("No supported AI agents detected.");
     return;
   }
-
-  // 2. Select Agent
-  const agentChoices = detectedAgents.map(a => ({
-    name: a.name + (a.type === 'docker' ? ' 🐳' : ' 💻'),
-    value: a.id,
-    description: `Type: ${a.type}`
-  }));
 
   const selectedAgentId = await select({
-    message: 'Select the AI Agent you want to install capabilities for:',
-    choices: agentChoices
+    message: "Select the AI agent:",
+    choices: detectedAgents.map((agent) => ({
+      name: agent.name,
+      value: agent.id,
+      description: `Type: ${agent.type}`
+    }))
   });
 
-  console.log(`\n✅ Selected Agent: ${selectedAgentId}\n`);
+  const registry = loadRegistry("catalog/skills.json", "catalog/bundles.json");
+  const agentCapabilities = filterForAgent(registry.skills, selectedAgentId);
 
-  // 3. Read Local Capabilities (Async, fast)
-  const allCapabilities = await readLocalCapabilities();
-  if (allCapabilities.length === 0) {
-    console.log("⚠️ No capabilities found in 'capabilities-library/'.");
+  if (agentCapabilities.length === 0) {
+    console.log(`No catalog capabilities are compatible with ${selectedAgentId}.`);
     return;
   }
 
-  // 4. Search Option
   const searchMode = await select({
-    message: 'How would you like to find capabilities?',
+    message: "How would you like to find capabilities?",
     choices: [
-      { name: 'Browse all', value: 'browse' },
-      { name: 'Search by keyword / intent', value: 'search' }
+      { name: "Browse compatible capabilities", value: "browse" },
+      { name: "Search by keyword or intent", value: "search" }
     ]
   });
 
-  let displayCapabilities = allCapabilities;
-  if (searchMode === 'search') {
-    const query = await input({ message: 'Enter your search query:' });
-    displayCapabilities = searchCapabilities(query, allCapabilities);
-    if (displayCapabilities.length === 0) {
-      console.log(`❌ No capabilities found matching "${query}". Exiting.`);
-      return;
-    }
-    console.log(`🔎 Found ${displayCapabilities.length} capabilities matching your query.\n`);
+  let candidates = agentCapabilities;
+  if (searchMode === "search") {
+    const query = await input({ message: "Search query:" });
+    candidates = searchRegistry(registry, query, {
+      agent: selectedAgentId,
+      remote: false,
+      limit: 50
+    }).map(({ item }) => item);
   }
 
-  // 5. Select Capabilities
-  const mcpServers = displayCapabilities.filter(c => c.type === 'mcp-server');
-  const agentSkills = displayCapabilities.filter(c => c.type === 'skill');
-  const others = displayCapabilities.filter(c => c.type !== 'mcp-server' && c.type !== 'skill');
-
-  const capabilityChoices = [];
-  
-  if (mcpServers.length > 0) {
-    capabilityChoices.push(new Separator('=== 🌐 MCP Servers (System Integrations) ==='));
-    mcpServers.forEach(c => capabilityChoices.push({ name: `${c.name} - ${c.description || ''}`, value: c.id }));
-  }
-  
-  if (agentSkills.length > 0) {
-    capabilityChoices.push(new Separator('=== 🧠 Agent Skills (Prompts & Behaviors) ==='));
-    agentSkills.forEach(c => capabilityChoices.push({ name: `${c.name} - ${c.description || ''}`, value: c.id }));
-  }
-  
-  if (others.length > 0) {
-    capabilityChoices.push(new Separator('=== 🛠️ Other Tools ==='));
-    others.forEach(c => capabilityChoices.push({ name: `${c.name} [${c.type}] - ${c.description || ''}`, value: c.id }));
-  }
-
-  const selectedIds = await checkbox({
-    message: 'Select the capabilities you want to install:',
-    choices: capabilityChoices,
-    required: true
-  });
-
-  if (selectedIds.length === 0) {
-    console.log("No capabilities selected. Exiting.");
+  if (candidates.length === 0) {
+    console.log("No matching capabilities found.");
     return;
   }
 
-  // 6. Resolve Dependencies
-  const finalInstallList = resolveDependencies(selectedIds, allCapabilities);
-  const extraDeps = finalInstallList.filter(c => !selectedIds.includes(c.id));
-  
-  if (extraDeps.length > 0) {
-    console.log(`\n📦 The following dependencies will also be installed:`);
-    for (const dep of extraDeps) {
-      console.log(`   - ${dep.name} [${dep.type}]`);
+  const grouped = [
+    ["Agent Skills", candidates.filter((cap) => (cap.artifact_type || cap.type) === "skill")],
+    ["MCP Servers", candidates.filter((cap) => (cap.artifact_type || cap.type) === "mcp-server")],
+    ["Other Capabilities", candidates.filter((cap) => !["skill", "mcp-server"].includes(cap.artifact_type || cap.type))]
+  ];
+
+  const choices = [];
+  for (const [label, items] of grouped) {
+    if (!items.length) continue;
+    choices.push(new Separator(`--- ${label} ---`));
+    for (const cap of items) {
+      choices.push({
+        name: displayName(cap),
+        value: cap.id,
+        description: `${cap.description || "No description."} Security: ${cap.security?.risk || "unknown"}; release: ${cap.release?.status || "unknown"}`
+      });
     }
   }
 
-  // 7. Security Consent
-  const highRiskCaps = finalInstallList.filter(c => c.type === 'cli-tool' || c.type === 'mcp-server');
-  if (highRiskCaps.length > 0) {
-    console.log("\n⚠️  SECURITY WARNING ⚠️");
-    console.log("The following capabilities require elevated permissions or configuration changes:");
-    for (const cap of highRiskCaps) {
-      if (cap.type === 'cli-tool') {
-        console.log(`- ${cap.name}: Installs executable scripts to your system PATH.`);
-      } else if (cap.type === 'mcp-server') {
-        console.log(`- ${cap.name}: Modifies the configuration of your AI Agent (${selectedAgentId}).`);
-      }
-    }
-    const consent = await confirm({
-      message: `Do you understand the risks and consent to installing these capabilities?`,
-      default: false
-    });
-    
-    if (!consent) {
-      console.log("\n❌ Installation aborted due to lack of security consent.");
-      return;
-    }
-  } else {
-    // Basic confirm if no high risk
-    const confirmInstall = await confirm({
-      message: `Ready to install ${finalInstallList.length} item(s) to ${selectedAgentId}. Continue?`
-    });
+  const selectedIds = await checkbox({
+    message: "Select capabilities to install:",
+    choices,
+    required: true
+  });
 
-    if (!confirmInstall) {
-      console.log("Aborted.");
-      return;
-    }
+  if (!selectedIds.length) {
+    console.log("No capabilities selected.");
+    return;
   }
 
-  // 8. Install
-  console.log("\n🚀 Installing capabilities...\n");
-  let hasErrors = false;
-  let mcpInstalled = false;
+  const finalInstallList = resolveDependencies(selectedIds, registry.skills);
+  const resolvedPlans = [];
 
   for (const cap of finalInstallList) {
-    try {
-      console.log(`Installing ${cap.name} (${cap.type})...`);
-      
-      // Dynamic Git Clone if it's a remote URL
-      if (cap.source_url) {
-        const os = await import('node:os');
-        const fs = await import('node:fs');
-        const path = await import('node:path');
-        const { execFileSync } = await import('node:child_process');
-        
-        const cacheDir = path.resolve(os.homedir(), '.ai-skills-hub', 'cache', cap.id);
-        if (!fs.existsSync(cacheDir)) {
-          console.log(`☁️  Downloading ${cap.name} from remote...`);
-          fs.mkdirSync(cacheDir, { recursive: true });
-          execFileSync("git", ["clone", cap.source_url, cacheDir], { stdio: 'ignore' });
-        } else {
-          console.log(`🔄 Syncing latest version of ${cap.name}...`);
-          execFileSync("git", ["pull"], { cwd: cacheDir, stdio: 'ignore' });
-        }
-        cap.materialized_root = cacheDir;
-      } else {
-        // If it's a bundled or MCP purely npx based, we just need a dummy root
-        cap.materialized_root = process.cwd();
-      }
-      
-      // Check prerequisites
-      if (cap.prerequisites && cap.prerequisites.length > 0) {
-        const { missing } = checkPrerequisites(cap.prerequisites);
-        if (missing.length > 0) {
-          console.error(`❌ Error: Missing prerequisites for ${cap.name}: ${missing.join(', ')}`);
-          console.error(`Please install them first (e.g., via brew, apt, or npm).`);
-          hasErrors = true;
-          continue; // Skip installation for this cap
-        }
-      }
+    const result = await installCapability(cap, {
+      agent: selectedAgentId,
+      scope: "project",
+      confirmed: false
+    });
+    resolvedPlans.push({ cap, result });
+  }
 
-      // Prompt for requiredEnv
-      let env = {};
-      if (cap.requiredEnv && cap.requiredEnv.length > 0) {
-        console.log(`🔑 This capability requires Environment Variables to function:`);
-        for (const envVar of cap.requiredEnv) {
-          const val = await input({ 
-            message: `${envVar}:`, 
-            validate: (v) => v.trim().length > 0 || "This field is required" 
-          });
-          env[envVar] = val;
-        }
-      }
+  const actionable = resolvedPlans.filter(({ result }) =>
+    ["install", "configuration", "source-direct", "marketplace"].includes(result.action)
+  );
 
-      const adapter = getAdapter(cap);
-      const result = await adapter.install({
-        agent: selectedAgentId,
-        scope: "project",
-        overwrite: true,
-        force: true,
-        env
-      });
-      
-      const { writeInstallRecord } = await import('../../../installer/src/state.mjs');
-      writeInstallRecord({
-        schema_version: "0.2",
-        skill_id: cap.id,
-        name: cap.name,
-        type: cap.type,
-        agent: selectedAgentId,
-        scope: "project",
-        installed_at: new Date().toISOString(),
-        destination: result.destination,
-        files: []
-      });
+  const blocked = resolvedPlans.filter(({ result }) =>
+    ["hold", "blocked", "unsupported", "incompatible", "adapter-pending"].includes(result.action)
+  );
 
-      if (cap.type === 'mcp-server') mcpInstalled = true;
-
-      console.log(`✅ Success: Installed to ${result.destination}\n`);
-    } catch (error) {
-      hasErrors = true;
-      console.error(`❌ Failed to install ${cap.name}:`, error.message, "\n");
+  if (blocked.length) {
+    console.log("\nSome selected capabilities cannot currently be installed:");
+    for (const { cap, result } of blocked) {
+      console.log(`- ${cap.id}: ${result.reason || result.action}`);
     }
   }
 
-  if (hasErrors) {
-    console.log("⚠️ Finished with some errors.");
-  } else {
-    console.log("🎉 All done successfully!");
+  if (!actionable.length) {
+    console.log("No installable capabilities remain.");
+    return;
   }
 
-  if (mcpInstalled) {
-    console.log(`\n⚠️  IMPORTANT: You have installed or updated an MCP server.`);
-    console.log(`Please RESTART your AI Agent (e.g. Claude Desktop) for the changes to take effect!`);
+  const requiresConsent = actionable.some(({ result }) =>
+    ["source-direct", "marketplace", "configuration"].includes(result.action)
+  );
+
+  if (requiresConsent) {
+    console.log("\nExternal installers and agent configuration changes require explicit confirmation.");
   }
+
+  const proceed = await confirm({
+    message: `Install ${actionable.length} capability/capabilities to ${selectedAgentId}?`,
+    default: false
+  });
+
+  if (!proceed) {
+    console.log("Installation aborted.");
+    return;
+  }
+
+  let failures = 0;
+  for (const { cap } of actionable) {
+    try {
+      const prerequisites = checkPrerequisites(cap.prerequisites);
+      if (prerequisites.missing.length) {
+        console.error(`Skipped ${cap.id}: missing prerequisites: ${prerequisites.missing.join(", ")}`);
+        failures += 1;
+        continue;
+      }
+
+      const result = await installCapability(cap, {
+        agent: selectedAgentId,
+        scope: "project",
+        confirmed: true,
+        env: {}
+      });
+
+      if (!result.installed) {
+        console.error(`Skipped ${cap.id}: ${result.reason || result.action}`);
+        failures += 1;
+      } else {
+        console.log(`Installed ${cap.id}.`);
+      }
+    } catch (error) {
+      failures += 1;
+      console.error(`Failed to install ${cap.id}: ${error.message}`);
+    }
+  }
+
+  console.log(failures ? `Finished with ${failures} failure(s).` : "Installation complete.");
 }
