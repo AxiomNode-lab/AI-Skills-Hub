@@ -13,5 +13,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: node scripts/validate-registry.mjs
-      - run: node scripts/audit-registry.mjs
+          cache: pnpm
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.4.1
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm validate
+      - run: pnpm test
+      - run: pnpm audit
