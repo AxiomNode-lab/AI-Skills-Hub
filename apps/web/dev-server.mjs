@@ -19,10 +19,16 @@ function mime(file){
 const server=http.createServer(async(req,res)=>{
   const url=new URL(req.url,"http://localhost");
 
+  if(req.method !== "GET"){
+    res.writeHead(405,{"content-type":"application/json","allow":"GET"});
+    res.end(JSON.stringify({error:"method_not_allowed"}));
+    return;
+  }
+
   if(url.pathname.startsWith("/api/")){
     try{
       const upstream=await fetch(apiOrigin+url.pathname+url.search,{headers:{accept:req.headers.accept??"*/*"}});
-      res.writeHead(upstream.status,{"content-type":upstream.headers.get("content-type")??"application/json"});
+      res.writeHead(upstream.status,{"content-type":upstream.headers.get("content-type")??"application/json","x-content-type-options":"nosniff"});
       res.end(Buffer.from(await upstream.arrayBuffer()));
     }catch(err){
       res.writeHead(502,{"content-type":"application/json"});
@@ -40,7 +46,7 @@ const server=http.createServer(async(req,res)=>{
     return;
   }
 
-  res.writeHead(200,{"content-type":mime(candidate),"cache-control":"no-store"});
+  res.writeHead(200,{"content-type":mime(candidate),"cache-control":"no-store","x-content-type-options":"nosniff","x-frame-options":"DENY","referrer-policy":"no-referrer"});
   res.end(fs.readFileSync(candidate));
 });
 
