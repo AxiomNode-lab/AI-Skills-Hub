@@ -1,11 +1,10 @@
-import { readInstallRecords } from '../../../installer/src/state.mjs';
+import { readInstallRecords } from "../../../installer/src/state.mjs";
 
-export async function listCommand(options) {
-  const agent = options.agent || "project"; // Default scope
-  const records = readInstallRecords("project");
-  
-  // Filter by agent if provided, otherwise show all
-  const list = Object.values(records).filter(r => options.agent ? r.agent === options.agent : true);
+export function listCommand(options = {}) {
+  const records = readInstallRecords(options.scope || "project");
+  const list = Object.values(records).filter(
+    (record) => !options.agent || record.agent === options.agent
+  );
 
   if (options.json) {
     console.log(JSON.stringify(list, null, 2));
@@ -13,15 +12,20 @@ export async function listCommand(options) {
   }
 
   if (list.length === 0) {
-    console.log(options.agent ? `No capabilities installed for agent: ${options.agent}` : "No capabilities installed.");
+    console.log(
+      options.agent
+        ? `No capabilities installed for agent: ${options.agent}`
+        : "No capabilities installed."
+    );
     return;
   }
 
-  console.log(`Installed Capabilities (${options.agent || 'All Agents'}):\n`);
-  for (const r of list) {
-    console.log(`- ${r.skill_id} [${r.type}]`);
-    console.log(`  Agent: ${r.agent}`);
-    console.log(`  Installed at: ${r.installed_at}`);
+  console.log(`Installed Capabilities (${options.agent || "All Agents"}):\n`);
+  for (const record of list) {
+    console.log(`- ${record.skill_id} [${record.type || "skill"}]`);
+    console.log(`  Agent: ${record.agent}`);
+    console.log(`  Scope: ${record.scope}`);
+    console.log(`  Installed at: ${record.installed_at}`);
     console.log("");
   }
 }
