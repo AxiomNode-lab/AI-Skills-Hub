@@ -10,21 +10,54 @@ if (!repo) {
   process.exit(1);
 }
 
-const api = async (url) => {
-  const res = await fetch(url, {
-    headers: {
-      accept: "application/vnd.github+json",
-      "user-agent": "AI-Skills-Hub-ingestor/0.2"
+const token = process.env.GITHUB_TOKEN;
+const baseHeaders = {
+  accept: "application/vnd.github+json",
+  "user-agent": "AI-Skills-Hub-ingestor/0.2"
+};
+if (token) baseHeaders.authorization = "Bearer " + token;
+
+function delay(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+async function fetchWithRetry(url, init = {}, { attempts = 4 } = {}) {
+  let lastError = null;
+  for (let attempt = 0; attempt < attempts; attempt += 1) {
+    try {
+      const res = await fetch(url, init);
+      if (res.ok) return res;
+      if (![403, 429, 500, 502, 503, 504].includes(res.status) || attempt === attempts - 1) {
+        return res;
+      }
+      const retryAfter = Number(res.headers.get("retry-after"));
+      const reset = Number(res.headers.get("x-ratelimit-reset"));
+      const resetDelay = Number.isFinite(reset) && reset > 0
+        ? Math.max(0, reset * 1000 - Date.now())
+        : 0;
+      const backoff = Math.min(30_000, 1_000 * 2 ** attempt);
+      await delay(Math.max(Number.isFinite(retryAfter) ? retryAfter * 1000 : 0, resetDelay, backoff));
+    } catch (error) {
+      lastError = error;
+      if (attempt === attempts - 1) throw error;
+      await delay(Math.min(30_000, 1_000 * 2 ** attempt));
     }
-  });
-  if (!res.ok) throw new Error("GitHub API " + res.status + ": " + (await res.text()).slice(0, 500));
+  }
+  throw lastError ?? new Error("request failed");
+}
+
+const api = async (url) => {
+  const res = await fetchWithRetry(url, { headers: baseHeaders });
+  if (!res.ok) {
+    throw new Error("GitHub API " + res.status + ": " + (await res.text()).slice(0, 500));
+  }
   return res.json();
 };
 
-const raw = async (path) => {
-  const encodedPath = path.split("/").map(encodeURIComponent).join("/");
+const raw = async (filePath) => {
+  const encodedPath = filePath.split("/").map(encodeURIComponent).join("/");
   const url = "https://raw.githubusercontent.com/" + repo + "/" + revision + "/" + encodedPath;
-  const res = await fetch(url, { headers: { "user-agent": "AI-Skills-Hub-ingestor/0.2" } });
+  const res = await fetchWithRetry(url, { headers: { "user-agent": baseHeaders["user-agent"], ...(token ? {authorization:"Bearer "+token} : {}) } });
   if (!res.ok) return null;
   return res.text();
 };
