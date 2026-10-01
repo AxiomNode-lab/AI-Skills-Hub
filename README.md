@@ -1,38 +1,83 @@
 # AI Skills Hub
 
-A license-aware, provenance-first registry for AI Agent Skills.
+A license-aware, provenance-first registry and distribution layer for AI Agent Skills.
 
-AI Skills Hub is designed to answer a practical question: **what can I install, where did it come from, is redistribution allowed, what capabilities does it request, and which agents can use it?**
+## Why it exists
 
-## Goals
-- Discover and curate high-value Agent Skills.
-- Preserve source provenance and immutable source revisions.
-- Detect licensing constraints before redistribution.
-- Scan Skills for potentially sensitive execution capabilities.
-- Support bundles and multi-agent installation planning.
-- Remain compatible with the open Agent Skills ecosystem.
+AI Skills are portable instruction packages, but a public repository is not automatically safe or redistributable. AI Skills Hub separates discovery from redistribution and records what the system knows about each artifact.
 
-## Current foundation
-The repository currently contains a curated metadata catalog spanning official and ecosystem sources. The catalog is intentionally **not** a blind mirror: third-party artifacts are bundled only after redistribution rights and provenance are verified. Everything else is classified as source-direct or review-required.
+Core principles:
+
+- Artifact-level licensing, not repository-level assumptions.
+- Immutable upstream revisions and content hashes.
+- Explicit distribution states: bundled, source-direct, review-required, blocked.
+- Security capability metadata and explainable heuristic findings.
+- Agent-aware installation targets.
+- MCP Skills interoperability.
+- Generated lockfiles for reproducible registry state.
+
+## Current architecture
+
+```
+Upstream Sources
+      |
+      v
+  GitHub Ingestion
+      |
+      +--> License Resolution
+      +--> Security Scan
+      +--> Provenance / Hash
+      +--> Curation Policy
+      |
+      v
+    Registry
+      |
+  +---+---+----------------+
+  |       |                |
+  v       v                v
+Web      CLI               MCP
+ |        |                 |
+Browse   Plan/Install     skills/list
+API      Audit/Doctor     skills/get
+ |        |               resources/read
+ +--------+----------------+
+```
 
 ## Repository layout
-- `catalog/` normalized skill metadata, bundles, sources, and ingestion snapshots
-- `schemas/` machine-readable registry schemas
-- `packages/` reusable registry, security, license, and CLI modules
-- `apps/` API and web discovery surfaces
-- `scripts/` ingestion and audit tooling
-- `docs/` architecture, policy, quality, and roadmap
 
-## Development
+- `catalog/` normalized registry data, bundles, locks, source manifests
+- `packages/` reusable core, installer, security, license, materializer, CLI, plugin export
+- `apps/api/` read-only registry HTTP API
+- `apps/web/` browser catalog
+- `apps/mcp-server/` MCP Skills server
+- `scripts/` ingestion, synchronization, lock generation, validation
+- `docs/` architecture, policy, install, API, schema, roadmap
+
+## Local usage
 
 ```bash
 pnpm install
 pnpm validate
 pnpm test
 pnpm audit
+pnpm cli search frontend
+pnpm cli plan @core --agent codex
+pnpm api
+pnpm web
+pnpm mcp
 ```
 
-## Policy
-A public GitHub repository is not automatically redistributable. License decisions are made at the smallest relevant artifact and recorded with provenance.
+The default catalog is metadata-first. Third-party content is only materialized when its distribution state, licensing, provenance, integrity, and security release gates permit it.
 
-See [LICENSE-POLICY](docs/LICENSE-POLICY.md), [QUALITY-GATES](docs/QUALITY-GATES.md), and [ARCHITECTURE](docs/ARCHITECTURE.md).
+## Distribution states
+
+| State | Meaning |
+| --- | --- |
+| `bundled` | Registry may contain a vendored copy after verification and release gates |
+| `source-direct` | Install bridge points to upstream; content is not vendored |
+| `review-required` | Discoverable, but automated redistribution is held |
+| `blocked` | Explicitly excluded by policy |
+
+## Standards
+
+The project targets the open Agent Skills format, Agent Plugins packaging, and the MCP Skills extension.
