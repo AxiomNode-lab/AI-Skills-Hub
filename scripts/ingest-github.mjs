@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 import crypto from "node:crypto";
 import fs from "node:fs";
+import { scanText, riskLevel } from "../packages/security/src/index.mjs";
+import { classifyLicense, normalizeLicense } from "../packages/licenses/src/index.mjs";
 
 const [, , repo, ref = "main"] = process.argv;
 if (!repo) {
@@ -66,11 +68,38 @@ const result = {
   warnings: []
 };
 
+const licenseBodyCache = new Map();
+async function licenseEvidenceFor(skillPath) {
+  const parts = skillPath.split("/");
+  parts.pop();
+  const candidates = [];
+  for (let i = parts.length; i >= 0; i--) {
+    const prefix = parts.slice(0, i).join("/");
+    for (const file of licenseFiles) {
+      const dir = file.includes("/") ? file.slice(0, file.lastIndexOf("/")) : "";
+      if (dir === prefix) candidates.push(file);
+    }
+  }
+  const selected = candidates[0] ?? licenseFiles.find((p) => !p.includes("/"));
+  if (!selected) return { spdx: "NOASSERTION", redistributable: false, status: "review-required" };
+  if (!licenseBodyCache.has(selected)) licenseBodyCache.set(selected, await raw(selected));
+  const body = licenseBodyCache.get(selected);
+  const first = body?.slice(0, 2000) ?? "";
+  let detected = "NOASSERTION";
+  if (/Apache License.*Version 2\.0/i.test(first)) detected = "Apache-2.0";
+  else if (/MIT License/i.test(first)) detected = "MIT";
+  else if (/Attribution-ShareAlike 4\.0/i.test(first)) detected = "CC-BY-SA-4.0";
+  else if (/Mozilla Public License.*2\.0/i.test(first)) detected = "MPL-2.0";
+  return { ...classifyLicense(normalizeLicense(detected)), evidence_path: selected };
+}
+
 for (const item of skillPaths) {
   const body = await raw(item);
   if (!body) continue;
 
   const skillSha = crypto.createHash("sha256").update(body).digest("hex");
+  const license = await licenseEvidenceFor(item.path);
+  const scan = scanText(body);
   const lines = body.split(/\r?\n/);
   const frontmatter = {};
 
@@ -95,6 +124,8 @@ for (const item of skillPaths) {
     name: frontmatter.name ?? item.path.split("/").slice(-2, -1)[0],
     description: frontmatter.description ?? null,
     skill_sha256: skillSha,
+    license,
+    security: { scan_status: "verified", risk: riskLevel(scan), capabilities: scan.capabilities, findings: scan.findings },
     capabilities: capabilityScan
   });
 
