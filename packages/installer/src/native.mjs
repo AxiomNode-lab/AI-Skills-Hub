@@ -97,12 +97,12 @@ export function uninstallSkillRecord(skillId, options = {}) {
   if (!record) throw new Error("Installation record not found: " + skillId);
 
   const destination = path.resolve(record.destination);
-  const parent = path.dirname(destination);
+  const root = resolveInstallRoot(record.agent ?? "agent-skills", scope, cwd);
   const base = path.basename(destination);
   if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(base)) {
     throw new Error("Invalid recorded skill destination");
   }
-  if (!destination.startsWith(parent + path.sep)) {
+  if (!safeInside(root, destination) || path.dirname(destination) !== path.resolve(root)) {
     throw new Error("Unsafe recorded destination");
   }
 
