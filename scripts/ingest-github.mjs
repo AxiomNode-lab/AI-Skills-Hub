@@ -105,7 +105,6 @@ for (const item of skillPaths) {
   if (!body) continue;
 
   const skillSha = crypto.createHash("sha256").update(body).digest("hex");
-  const license = await licenseEvidenceFor(item.path, frontmatter.license ?? null, item.path);
   const scan = scanText(body);
   const lines = body.split(/\r?\n/);
   const frontmatter = {};
