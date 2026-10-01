@@ -12,7 +12,10 @@
     "audit": "node scripts/audit-registry.mjs",
     "ingest": "node scripts/ingest-github.mjs",
     "generate-lock": "node scripts/generate-lockfile.mjs",
-    "export-plugin": "node scripts/export-plugin.mjs"
+    "export-plugin": "node scripts/export-plugin.mjs",
+    "dedupe": "node scripts/dedupe-report.mjs",
+    "validate-materialized": "node scripts/validate-materialized.mjs",
+    "validate-all": "pnpm validate && pnpm generate-lock && pnpm validate-materialized && pnpm dedupe && pnpm test"
   },
   "engines": {
     "node": ">=20"

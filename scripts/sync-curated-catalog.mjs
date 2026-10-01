@@ -50,6 +50,16 @@ for(const skill of catalog.skills){
     if(previousRevision && previousRevision!==snapshot.source.revision){
       revisionChanges++;
       if(skill.distribution==="bundled"){
+        if(skill.materialized_root){
+          const oldRoot=path.resolve(root,skill.materialized_root);
+          if(oldRoot.startsWith(path.resolve(root,"skills")+path.sep) && fs.existsSync(oldRoot)){
+            fs.rmSync(oldRoot,{recursive:true,force:true});
+          }
+        }
+        const oldManifest=path.resolve(root,"catalog","materialized-manifests",skill.id.replaceAll("/","__")+".json");
+        if(oldManifest.startsWith(path.resolve(root,"catalog","materialized-manifests")+path.sep) && fs.existsSync(oldManifest)){
+          fs.rmSync(oldManifest,{force:true});
+        }
         skill.materialized=false;
         delete skill.materialized_root;
         delete skill.materialized_files;

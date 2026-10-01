@@ -8,8 +8,8 @@ Generated from repository state on 2026-10-01.
 - 21 distribution-bundled candidates
 - 4 source-direct proprietary Anthropic document Skills
 - 29 review-required records
-- 0 materialized Skills at this point
-- 7 source repositories / standards tracked
+- 0 materialized Skills at this point; 21 are bundle-eligible candidates
+- 11 tracked sources/standards (7 Skill sources + 4 ecosystem standards/docs)
 
 ## Implemented
 

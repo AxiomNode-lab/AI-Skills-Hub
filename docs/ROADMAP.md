@@ -22,11 +22,12 @@
 - [x] heuristic security scanning
 - [x] immutable source revisions
 - [x] source SKILL.md hashing
-- [ ] per-file content digests in catalog records
+- [x] per-file content digests in materialization manifests
 - [ ] SPDX parser with exception handling
 - [ ] deeper script/reference/assets static analysis
 - [ ] dependency and package manifest inspection
 - [ ] signature/attestation verification
+- [ ] authenticated GitHub ingestion and rate-limit backoff
 - [ ] deduplication and fork lineage
 
 ## 0.3 Distribution

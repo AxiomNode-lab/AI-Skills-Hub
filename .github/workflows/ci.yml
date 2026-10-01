@@ -27,4 +27,6 @@ jobs:
       - run: node scripts/validate-materialized.mjs
       - run: git diff --exit-code -- catalog/skills.lock.json
       - run: pnpm test
+      - run: pnpm dedupe
+      - run: git diff --exit-code -- catalog/reports/dedupe.json
       - run: pnpm audit
