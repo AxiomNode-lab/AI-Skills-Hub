@@ -57,8 +57,17 @@ export function exportPortablePlugin({outputDir,manifest,skills=[]}) {
   fs.writeFileSync(path.join(codexRoot,"plugin.json"),JSON.stringify(manifest,null,2)+"\n");
 
   for(const skill of skills){
-    if(!skill.materialized || !skill.materialized_root){
-      throw new Error("Cannot export non-materialized skill: " + skill.id);
+    if(
+      skill.distribution !== "bundled" ||
+      !skill.materialized ||
+      !skill.materialized_root ||
+      skill.release?.status !== "eligible" ||
+      !skill.license?.redistributable ||
+      skill.license?.status !== "verified" ||
+      skill.security?.scan_status !== "verified" ||
+      skill.security?.risk === "high"
+    ){
+      throw new Error("Cannot export skill that has not passed registry release gates: " + skill.id);
     }
     const dest=path.join(root,"skills",skill.name);
     fs.cpSync(path.resolve(skill.materialized_root),dest,{recursive:true,dereference:true});
