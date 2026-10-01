@@ -7,8 +7,17 @@ const skill = (distribution, materialized = false) => ({
   name: "example",
   distribution,
   materialized,
-  license: {spdx:"MIT"},
-  source: {repo:"example/repo"}
+  compatibility: ["agent-skills", "codex", "claude-code"],
+  license: { spdx:"MIT", redistributable:true, status:"verified" },
+  source: {
+    repo:"example/repo",
+    path:"skills/example",
+    revision:"0".repeat(40)
+  },
+  security: { scan_status: materialized ? "verified" : "pending", risk:"none" },
+  release: distribution === "bundled"
+    ? { status: materialized ? "eligible" : "pending" }
+    : { status:"hold" }
 });
 
 test("blocked skill never becomes executable", () => {
@@ -29,13 +38,13 @@ test("review-required is held by default", () => {
   assert.equal(item.command, null);
 });
 
-test("bundle-eligible but unmaterialized uses a source bridge", () => {
+test("unreleased bundled skill cannot bypass release gates", () => {
   const [item] = buildInstallPlan([skill("bundled", false)], "codex");
-  assert.equal(item.action, "source-bridge");
-  assert.match(item.command, /npx skills add/);
+  assert.equal(item.action, "hold");
+  assert.equal(item.reason, "bundle_not_released");
 });
 
-test("materialized bundle installs from registry", () => {
+test("materialized eligible bundle installs from registry", () => {
   const [item] = buildInstallPlan([skill("bundled", true)], "codex");
   assert.equal(item.action, "install");
   assert.match(item.command, /install-from-registry/);
