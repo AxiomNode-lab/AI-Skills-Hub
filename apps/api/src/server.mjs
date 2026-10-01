@@ -5,14 +5,20 @@ import { loadRegistry, resolveBundle, filterForAgent } from "../../../packages/c
 const PORT = Number(process.env.PORT ?? 8787);
 const registry = loadRegistry();
 const bundles = registry.bundles ?? {};
+const AGENTS = new Set(["generic","agent-skills","claude-code","codex","cursor","opencode","github-copilot","copilot"]);
 
-function json(res, status, value) {
+function json(res, status, value, headers = {}) {
+  const body = JSON.stringify(value);
   res.writeHead(status, {
     "content-type": "application/json; charset=utf-8",
-    "cache-control": "no-store",
-    "access-control-allow-origin": "*"
+    "cache-control": "public, max-age=30",
+    "x-content-type-options": "nosniff",
+    "x-frame-options": "DENY",
+    "referrer-policy": "no-referrer",
+    "permissions-policy": "camera=(), microphone=(), geolocation=()",
+    ...headers
   });
-  res.end(JSON.stringify(value));
+  res.end(body);
 }
 
 function getSkill(id) {
@@ -20,78 +26,104 @@ function getSkill(id) {
 }
 
 function clampInteger(value, fallback, min, max) {
-  const parsed=Number(value);
-  if(!Number.isInteger(parsed)) return fallback;
-  return Math.min(max,Math.max(min,parsed));
+  const parsed = Number(value);
+  if (!Number.isInteger(parsed)) return fallback;
+  return Math.min(max, Math.max(min, parsed));
+}
+
+function filterSkills(url) {
+  const q = (url.searchParams.get("q") ?? "").trim().toLowerCase();
+  const category = url.searchParams.get("category");
+  const distribution = url.searchParams.get("distribution");
+  const license = url.searchParams.get("license");
+  const publisher = (url.searchParams.get("publisher") ?? "").trim().toLowerCase();
+  const release = url.searchParams.get("release");
+  const agent = url.searchParams.get("agent");
+
+  let skills = registry.skills.filter((s) => {
+    if (q && ![s.id, s.name, s.publisher, ...s.category].join(" ").toLowerCase().includes(q)) return false;
+    if (category && !s.category.includes(category)) return false;
+    if (distribution && s.distribution !== distribution) return false;
+    if (license && s.license.spdx !== license) return false;
+    if (publisher && !s.publisher.toLowerCase().includes(publisher)) return false;
+    if (release && s.release?.status !== release) return false;
+    return true;
+  });
+
+  if (agent && AGENTS.has(agent)) skills = filterForAgent(skills, agent);
+  return skills.sort((a, b) => a.name.localeCompare(b.name) || a.id.localeCompare(b.id));
 }
 
 export function createServer() {
   return http.createServer((req, res) => {
     const url = new URL(req.url, "http://localhost");
 
-    if (req.method !== "GET") return json(res, 405, {error:"method_not_allowed"});
+    if (req.method !== "GET") return json(res, 405, { error: "method_not_allowed" }, { allow: "GET" });
 
     if (url.pathname === "/api/health") {
       return json(res, 200, {
-        status:"ok",
-        schema_version:registry.schema_version,
-        skills:registry.skills.length
+        status: "ok",
+        schema_version: registry.schema_version,
+        policy_version: registry.policy_version,
+        skills: registry.skills.length,
+        generated_at: registry.generated_at
+      });
+    }
+
+    if (url.pathname === "/api/catalog") {
+      const distributions = registry.skills.reduce((acc, s) => {
+        acc[s.distribution] = (acc[s.distribution] ?? 0) + 1;
+        return acc;
+      }, {});
+      return json(res, 200, {
+        schema_version: registry.schema_version,
+        generated_at: registry.generated_at,
+        total: registry.skills.length,
+        distributions,
+        bundles: Object.fromEntries(Object.entries(bundles).map(([name, ids]) => [name, ids.length]))
       });
     }
 
     if (url.pathname === "/api/skills") {
-      const q=(url.searchParams.get("q") ?? "").trim().toLowerCase();
-      const category=url.searchParams.get("category");
-      const distribution=url.searchParams.get("distribution");
-      const license=url.searchParams.get("license");
-      const publisher=(url.searchParams.get("publisher") ?? "").trim().toLowerCase();
-      const release=url.searchParams.get("release");
-      const offset=clampInteger(url.searchParams.get("offset"),0,0,Number.MAX_SAFE_INTEGER);
-      const limit=clampInteger(url.searchParams.get("limit"),50,1,100);
+      const offset = clampInteger(url.searchParams.get("offset"), 0, 0, Number.MAX_SAFE_INTEGER);
+      const limit = clampInteger(url.searchParams.get("limit"), 50, 1, 100);
+      const skills = filterSkills(url);
+      const total = skills.length;
+      const page = skills.slice(offset, offset + limit);
+      const nextOffset = offset + limit < total ? offset + limit : null;
 
-      let skills=registry.skills.filter((s) => {
-        if(q && ![s.id,s.name,s.publisher,...s.category].join(" ").toLowerCase().includes(q)) return false;
-        if(category && !s.category.includes(category)) return false;
-        if(distribution && s.distribution !== distribution) return false;
-        if(license && s.license.spdx !== license) return false;
-        if(publisher && !s.publisher.toLowerCase().includes(publisher)) return false;
-        if(release && s.release?.status !== release) return false;
-        return true;
-      }).sort((a,b)=>a.name.localeCompare(b.name) || a.id.localeCompare(b.id));
-
-      const total=skills.length;
-      const page=skills.slice(offset,offset+limit);
-      const nextOffset=offset+limit<total ? offset+limit : null;
-
-      return json(res,200,{
-        total,
-        offset,
-        limit,
-        next_offset:nextOffset,
-        skills:page
-      });
+      return json(res, 200, { total, offset, limit, next_offset: nextOffset, skills: page });
     }
 
     if (url.pathname.startsWith("/api/skills/")) {
       const id = decodeURIComponent(url.pathname.slice("/api/skills/".length));
       const found = getSkill(id);
-      return found ? json(res,200,found) : json(res,404,{error:"skill_not_found"});
+      return found ? json(res, 200, found) : json(res, 404, { error: "skill_not_found" });
     }
 
-    if (url.pathname === "/api/bundles") return json(res,200,{bundles:Object.fromEntries(
-      Object.entries(bundles).map(([name,ids])=>[name,{count:ids.length}])
-    )});
+    if (url.pathname === "/api/bundles") {
+      return json(res, 200, {
+        bundles: Object.fromEntries(
+          Object.entries(bundles).map(([name, ids]) => [name, { count: ids.length }])
+        )
+      });
+    }
 
     if (url.pathname.startsWith("/api/bundles/")) {
       const name = decodeURIComponent(url.pathname.slice("/api/bundles/".length));
-      if (!bundles[name]) return json(res,404,{error:"bundle_not_found"});
-      const items = resolveBundle(registry,name);
+      if (!bundles[name]) return json(res, 404, { error: "bundle_not_found" });
+      const items = resolveBundle(registry, name);
       const agent = url.searchParams.get("agent");
-      const filtered = agent ? filterForAgent(items,agent) : items;
-      return json(res,200,{bundle:name,agent:agent??"generic",total:filtered.length,skills:filtered});
+      const filtered = agent && AGENTS.has(agent) ? filterForAgent(items, agent) : items;
+      return json(res, 200, {
+        bundle: name,
+        agent: agent ?? null,
+        total: filtered.length,
+        skills: filtered
+      });
     }
 
-    return json(res,404,{error:"not_found"});
+    return json(res, 404, { error: "not_found" });
   });
 }
 
