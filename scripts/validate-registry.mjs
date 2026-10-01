@@ -12,7 +12,7 @@ for (const skill of data.skills) {
   if (ids.has(skill.id)) throw new Error("Duplicate skill id: " + skill.id);
   ids.add(skill.id);
 
-  for (const field of ["id","name","publisher","source","category","license","distribution","compatibility","security"]) {
+  for (const field of ["id","name","publisher","source","category","license","distribution","compatibility","security","materialized"]) {
     if (!(field in skill)) throw new Error(skill.id + " missing " + field);
   }
 
@@ -25,6 +25,8 @@ for (const skill of data.skills) {
   if (skill.distribution === "bundled" && !/^[0-9a-f]{40}$/.test(skill.source.revision ?? "")) {
     throw new Error(skill.id + " bundled artifact must pin a 40-char git commit");
   }
+
+  if (typeof skill.materialized !== "boolean") throw new Error(skill.id + " invalid materialized flag");
 
   if (!["verified","pending","review-required"].includes(skill.security.scan_status)) {
     throw new Error(skill.id + " invalid security scan status");
