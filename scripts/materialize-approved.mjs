@@ -83,7 +83,8 @@ for (const skill of targets) {
     const bytes = await sourceBytes(skill.source.repo, skill.source.revision, file.path);
     totalBytes += bytes.length;
     if (bytes.length > 5 * 1024 * 1024) throw new Error("File too large: " + file.path);
-    if (totalBytes > 25 * 1024 * 1024) throw new Error("Skill exceeds 25 MiB: " + skill.id);
+    if (files.length > 512) throw new Error("Skill exceeds 512 files: " + skill.id);
+    if (totalBytes > 16 * 1024 * 1024) throw new Error("Skill exceeds 16 MiB: " + skill.id);
 
     if (isTextPath(relative)) {
       const scan = scanText(bytes.toString("utf8"));
@@ -125,7 +126,7 @@ for (const skill of targets) {
   }
 
   const metadata = {
-    schema_version:"0.1",
+    schema_version:"0.2",
     skill_id:skill.id,
     source:skill.source,
     registry_license:skill.license,
@@ -133,7 +134,12 @@ for (const skill of targets) {
     materialized_files:materializedFiles,
     total_bytes:totalBytes
   };
-  fs.writeFileSync(path.join(destination, ".ai-skills-hub.json"), JSON.stringify(metadata,null,2) + "\n");
+  const metadataDir=path.join(root,"catalog","materialized-manifests");
+  fs.mkdirSync(metadataDir,{recursive:true});
+  fs.writeFileSync(
+    path.join(metadataDir,skill.id.replaceAll("/","__")+".json"),
+    JSON.stringify(metadata,null,2)+"\n"
+  );
 
   skill.materialized = true;
   skill.materialized_root = path.relative(root, destination).replaceAll(path.sep, "/");

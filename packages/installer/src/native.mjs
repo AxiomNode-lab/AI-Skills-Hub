@@ -23,32 +23,6 @@ function copyDirectory(src, destination, overwrite = false) {
     dereference:true
   });
 
-  const manifestPath = path.join(destination, ".ai-skills-hub.json");
-  const manifest = {
-    installer_version: "0.1.0",
-    installed_at: new Date().toISOString(),
-    content_root: src,
-    source_manifest: null,
-    files: []
-  };
-
-  const walk = (dir) => {
-    for (const entry of fs.readdirSync(dir,{withFileTypes:true})) {
-      const full=path.join(dir,entry.name);
-      if (entry.name === ".ai-skills-hub.json") continue;
-      if (entry.isDirectory()) walk(full);
-      else if (entry.isFile()) {
-        const bytes=fs.readFileSync(full);
-        manifest.files.push({
-          path:path.relative(destination,full).split(path.sep).join("/"),
-          sha256:"sha256:"+crypto.createHash("sha256").update(bytes).digest("hex"),
-          bytes:bytes.length
-        });
-      }
-    }
-  };
-  walk(destination);
-  fs.writeFileSync(manifestPath,JSON.stringify(manifest,null,2)+"\n");
 }
 
 export function installMaterializedSkill(skill, options = {}) {

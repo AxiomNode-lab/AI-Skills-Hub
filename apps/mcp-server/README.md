@@ -1,14 +1,16 @@
 # MCP Skills Server
 
-The server exposes only materialized Skills from the local registry.
+This server exposes materialized, release-eligible Skills using the MCP Skills extension.
 
-It implements the MCP Skills extension surface:
-- skills/list
+Implemented methods:
+- skills/list with cursor pagination and complete resource manifests
 - skills/get
 - resources/read
+
+The server advertises io.modelcontextprotocol/skills with directoryRead=false.
 
 Start from the repository root:
 
 node apps/mcp-server/src/server.mjs
 
-The implementation intentionally does not advertise or serve review-required/source-direct Skills as local MCP resources.
+Only Skills that are materialized and marked release-eligible are served.
