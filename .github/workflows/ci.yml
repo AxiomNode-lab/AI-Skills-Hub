@@ -19,5 +19,7 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm validate
+      - run: pnpm generate-lock
+      - run: git diff --exit-code -- catalog/skills.lock.json
       - run: pnpm test
       - run: pnpm audit
