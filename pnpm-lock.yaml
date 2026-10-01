@@ -1,0 +1,14 @@
+lockfileVersion: '9.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+  .: {}
+  packages/core: {}
+  packages/cli:
+    dependencies:
+      '@ai-skills-hub/core':
+        specifier: workspace:*
+        version: link:../core
