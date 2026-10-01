@@ -38,6 +38,7 @@ export function installMaterializedSkill(skill, options = {}) {
   const agent = options.agent ?? "agent-skills";
   const overwrite = options.overwrite === true;
   const force = options.force === true;
+  const persistState = options.persistState !== false;
 
   if (
     skill.distribution !== "bundled" ||
@@ -77,7 +78,7 @@ export function installMaterializedSkill(skill, options = {}) {
   copyDirectory(sourceRoot, destination, overwrite);
 
   const record = buildInstallRecord(skill, destination, { agent, scope });
-  writeInstallRecord(record, cwd);
+  if (persistState) writeInstallRecord(record, cwd);
 
   return {
     id: skill.id,
@@ -86,7 +87,8 @@ export function installMaterializedSkill(skill, options = {}) {
     root,
     destination,
     action: "installed",
-    file_count: record.files.length
+    file_count: record.files.length,
+    record
   };
 }
 
