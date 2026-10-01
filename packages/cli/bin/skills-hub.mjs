@@ -2,6 +2,8 @@
 import { loadRegistry, resolveBundle, filterForAgent } from "@ai-skills-hub/core";
 import { buildInstallPlan } from "@ai-skills-hub/installer";
 import { installMaterializedSkill, verifyInstalledSkill, doctorInstalledSkills, uninstallSkillRecord } from "@ai-skills-hub/installer/native";
+import { hybridSearch, toInstallChoices } from "@ai-skills-hub/discovery";
+import fs from "node:fs";
 
 const [, , command, ...args] = process.argv;
 const registry = loadRegistry();
@@ -23,6 +25,7 @@ if (!command || command === "help") {
 
 Usage:
   skills-hub search <term>
+  skills-hub discover <natural-language-query> --agent <agent> [--no-remote]
   skills-hub info <skill-id>
   skills-hub targets
   skills-hub plan <bundle-or-skill> [--agent <agent>]
@@ -43,6 +46,25 @@ if (command === "search") {
   for (const s of matches) {
     console.log(s.id + "\t" + s.license.spdx + "\t" + s.distribution);
   }
+  process.exit(0);
+}
+
+if (command === "discover") {
+  const query = args[0];
+  const agent = flag("--agent") ?? "agent-skills";
+  if (!query) {
+    console.error("Missing discovery query.");
+    process.exit(1);
+  }
+  const sources = JSON.parse(fs.readFileSync("catalog/sources.json","utf8")).sources;
+  const result = await hybridSearch(registry, query, {
+    sources,
+    agent,
+    limit: 20,
+    token: process.env.GITHUB_TOKEN,
+    remote: !args.includes("--no-remote")
+  });
+  console.log(JSON.stringify({ ...result, choices: toInstallChoices(result, agent) }, null, 2));
   process.exit(0);
 }
 
