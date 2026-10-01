@@ -4,6 +4,7 @@ import crypto from "node:crypto";
 
 const MAX_FILE_BYTES=2*1024*1024;
 const MAX_FILES=256;
+const MAX_TOTAL_BYTES=20*1024*1024;
 
 function safeRelative(p){
   const normalized=path.posix.normalize(p).replace(/^\.\//,"");
@@ -36,7 +37,10 @@ export async function materializeSkill(skill,{root="vendor/skills",token,fetchIm
   if(files.length>MAX_FILES) throw new Error("Skill exceeds file limit: "+skill.id);
 
   const manifest=[];
+  let totalBytes=0;
   for(const item of files.sort((a,b)=>a.path.localeCompare(b.path))){
+    if(item.mode==="120000") throw new Error("Symlink materialization is forbidden: "+item.path);
+    if(item.type==="commit") throw new Error("Git submodule materialization is forbidden: "+item.path);
     const rel=safeRelative(item.path.slice(prefix.length));
     if(!rel || rel.includes("\0")) throw new Error("Invalid skill-relative path: "+item.path);
     const url=`https://raw.githubusercontent.com/${skill.source.repo}/${skill.source.revision}/${item.path.split("/").map(encodeURIComponent).join("/")}`;
@@ -44,6 +48,8 @@ export async function materializeSkill(skill,{root="vendor/skills",token,fetchIm
     if(!res.ok) throw new Error("Source fetch failed "+res.status+": "+item.path);
     const bytes=Buffer.from(await res.arrayBuffer());
     if(bytes.length>MAX_FILE_BYTES) throw new Error("File exceeds size limit: "+item.path);
+    totalBytes += bytes.length;
+    if(totalBytes>MAX_TOTAL_BYTES) throw new Error("Skill exceeds total size limit: "+skill.id);
     const out=path.resolve(target,rel);
     if(!(out===target || out.startsWith(target+path.sep))) throw new Error("Path traversal blocked: "+item.path);
     fs.mkdirSync(path.dirname(out),{recursive:true});
