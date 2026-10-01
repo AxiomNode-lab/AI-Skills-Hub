@@ -52,10 +52,6 @@ export function exportPortablePlugin({outputDir,manifest,skills=[]}) {
 
   fs.writeFileSync(path.join(root,"plugin.json"),JSON.stringify(manifest,null,2)+"\n");
 
-  const codexRoot=path.join(root,".codex-plugin");
-  fs.mkdirSync(codexRoot,{recursive:true});
-  fs.writeFileSync(path.join(codexRoot,"plugin.json"),JSON.stringify(manifest,null,2)+"\n");
-
   for(const skill of skills){
     if(
       skill.distribution !== "bundled" ||
@@ -78,7 +74,6 @@ export function exportPortablePlugin({outputDir,manifest,skills=[]}) {
   return {
     root,
     manifest:path.join(root,"plugin.json"),
-    codexManifest:path.join(codexRoot,"plugin.json"),
     notices:path.join(root,"THIRD-PARTY-NOTICES.md"),
     skillCount:skills.length
   };
