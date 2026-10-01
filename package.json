@@ -7,7 +7,7 @@
   "packageManager": "pnpm@10.4.1",
   "scripts": {
     "validate": "node scripts/validate-registry.mjs",
-    "test": "node --test tests packages",
+    "test": "node --test 'tests/**/*.test.mjs' 'packages/**/*.test.mjs'",
     "lint": "node scripts/static-check.mjs",
     "audit": "node scripts/audit-registry.mjs",
     "ingest": "node scripts/ingest-github.mjs",
