@@ -43,3 +43,23 @@ test("repository does not contain fabricated MCP utility identifiers or local se
   roots.forEach(walk);
   assert.deepEqual(matches, []);
 });
+
+
+test("CLI source contains no shell-string execSync calls", () => {
+  const matches = [];
+
+  function walk(dir) {
+    if (!fs.existsSync(dir)) return;
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const full = path.join(dir, entry.name);
+      if (entry.isDirectory()) walk(full);
+      else if (entry.isFile() && /\.mjs$/.test(entry.name)) {
+        const body = fs.readFileSync(full, "utf8");
+        if (/\bexecSync\s*\(/.test(body)) matches.push(full);
+      }
+    }
+  }
+
+  walk("packages/cli");
+  assert.deepEqual(matches, []);
+});
