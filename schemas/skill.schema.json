@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "publisher",
+    "source",
+    "category",
+    "license",
+    "distribution",
+    "compatibility",
+    "security"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 3
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "publisher": {
+      "type": "string"
+    },
+    "source": {
+      "type": "object",
+      "required": [
+        "repo",
+        "path"
+      ],
+      "properties": {
+        "repo": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "category": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "license": {
+      "type": "object",
+      "required": [
+        "spdx",
+        "redistributable",
+        "status"
+      ],
+      "properties": {
+        "spdx": {
+          "type": "string"
+        },
+        "redistributable": {
+          "type": "boolean"
+        },
+        "status": {
+          "enum": [
+            "verified",
+            "unknown",
+            "review-required"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "distribution": {
+      "enum": [
+        "bundled",
+        "source-direct",
+        "review-required",
+        "blocked"
+      ]
+    },
+    "compatibility": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "security": {
+      "type": "object",
+      "required": [
+        "network",
+        "shell",
+        "credentials"
+      ],
+      "properties": {
+        "network": {
+          "type": "boolean"
+        },
+        "shell": {
+          "type": "boolean"
+        },
+        "credentials": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
