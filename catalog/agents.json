@@ -1,5 +1,6 @@
 {
-  "schema_version": "0.1",
+  "schema_version": "0.2",
+  "generated_at": "2026-10-01",
   "agents": [
     {
       "id": "claude-code",
@@ -23,7 +24,9 @@
       "id": "cursor",
       "displayName": "Cursor",
       "nativeSkillDirs": [
+        ".agents/skills",
         ".cursor/skills",
+        "~/.agents/skills",
         "~/.cursor/skills"
       ],
       "pluginSupport": true
@@ -41,7 +44,13 @@
       "id": "github-copilot",
       "displayName": "GitHub Copilot",
       "nativeSkillDirs": [
-        ".github/skills"
+        ".github/skills",
+        ".agents/skills",
+        ".claude/skills"
+      ],
+      "userSkillDirs": [
+        "~/.copilot/skills",
+        "~/.agents/skills"
       ],
       "pluginSupport": true
     },
@@ -49,7 +58,8 @@
       "id": "generic-agent",
       "displayName": "Generic Agent Skills",
       "nativeSkillDirs": [
-        ".agents/skills"
+        ".agents/skills",
+        "~/.agents/skills"
       ],
       "pluginSupport": false
     }
