@@ -202,3 +202,16 @@ export function toInstallChoices(searchResult,agent,{scope="project"}={}) {
     };
   });
 }
+
+export function summarizeInstallPlan(searchResult,agent,{scope="project"}={}) {
+  const choices=toInstallChoices(searchResult,agent,{scope});
+  return {
+    agent,
+    scope,
+    total:choices.length,
+    ready:choices.filter(x=>x.action==="install"),
+    remote:choices.filter(x=>x.action==="source-direct"||x.action==="marketplace"||x.action==="configuration"),
+    review:choices.filter(x=>x.action==="adapter-pending"),
+    unsupported:choices.filter(x=>x.action==="unsupported")
+  };
+}
