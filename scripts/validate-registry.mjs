@@ -2,7 +2,9 @@ import fs from "node:fs";
 
 const data = JSON.parse(fs.readFileSync("catalog/skills.json", "utf8"));
 const bundlesPath = "catalog/bundles.json";
+const lockPath = "catalog/skills.lock.json";
 const bundlesData = fs.existsSync(bundlesPath) ? JSON.parse(fs.readFileSync(bundlesPath, "utf8")) : {bundles:{}};
+const lockData = fs.existsSync(lockPath) ? JSON.parse(fs.readFileSync(lockPath, "utf8")) : {skills:[]};
 
 const allowed = new Set(["bundled", "source-direct", "review-required", "blocked"]);
 if (!Array.isArray(data.skills)) throw new Error("catalog.skills must be an array");
@@ -41,4 +43,17 @@ for (const name of bundleNames) {
   }
 }
 
-console.log("Registry valid:", data.skills.length, "skills;", bundleNames.length, "bundles");
+const locked = new Map((lockData.skills ?? []).map((item) => [item.id, item]));
+for (const skill of data.skills.filter((s) => s.distribution === "bundled")) {
+  const item = locked.get(skill.id);
+  if (!item) throw new Error("Bundled skill missing from lockfile: " + skill.id);
+  if (item.revision !== skill.source.revision) throw new Error("Lockfile revision mismatch: " + skill.id);
+}
+for (const item of lockData.skills ?? []) {
+  const skill = data.skills.find((s) => s.id === item.id);
+  if (!skill) throw new Error("Lockfile references unknown skill: " + item.id);
+  if (skill.distribution !== "bundled") throw new Error("Lockfile contains non-bundled skill: " + item.id);
+}
+
+console.log("Registry valid:", data.skills.length, "skills;", bundleNames.length, "bundles;", locked.size, "locked");
+
