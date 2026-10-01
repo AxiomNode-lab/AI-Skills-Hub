@@ -2,7 +2,7 @@ import { confirm, select } from "@inquirer/prompts";
 import fs from "node:fs";
 import path from "node:path";
 import { readInstallRecords, removeInstallRecord } from "../../../installer/src/state.mjs";
-import { removeMCPServer } from "../../../installer/src/adapters/MCPAdapter.mjs";
+import { getMCPConfigPath, removeMCPServer } from "../../../installer/src/adapters/MCPAdapter.mjs";
 import { resolveInstallRoot } from "../../../installer/src/targets.mjs";
 
 function safeInside(root, candidate) {
@@ -44,7 +44,14 @@ export async function uninstallCommand(options = {}) {
 
   try {
     if (record.type === "mcp-server") {
-      removeMCPServer(record.destination, record.name || record.skill_id);
+      const expectedConfig = path.resolve(
+        getMCPConfigPath(record.agent, scope, process.cwd())
+      );
+      const recordedConfig = path.resolve(record.destination);
+      if (expectedConfig !== recordedConfig) {
+        throw new Error("Refusing to modify an MCP configuration outside the expected agent scope.");
+      }
+      removeMCPServer(recordedConfig, record.name || record.skill_id);
     } else {
       const root = resolveInstallRoot(record.agent || "agent-skills", scope, process.cwd());
       const destination = path.resolve(record.destination);
