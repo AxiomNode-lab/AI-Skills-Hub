@@ -97,9 +97,11 @@ export async function addCommand(query, options = {}) {
       return;
     }
 
+    let confirmed = Boolean(options.yes);
+
     if (
       ["source-direct", "marketplace", "configuration"].includes(selected.action)
-      && !options.yes
+      && !confirmed
     ) {
       const proceed = await confirm({
         message: `This action uses an external installer or modifies agent configuration. Continue with ${selected.name}?`,
@@ -109,6 +111,7 @@ export async function addCommand(query, options = {}) {
         console.log("Installation aborted.");
         return;
       }
+      confirmed = true;
     }
 
     const capability = searchResult.results.find((entry) => entry.item.id === selected.id)?.item;
@@ -121,7 +124,7 @@ export async function addCommand(query, options = {}) {
       agent,
       scope: options.scope || "project",
       cwd: process.cwd(),
-      confirmed: Boolean(options.yes),
+      confirmed,
       env: {}
     });
 
