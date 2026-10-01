@@ -16,6 +16,7 @@ jobs:
           node-version: 20
       - run: node scripts/materialize-approved.mjs --all
       - run: node scripts/validate-registry.mjs
+      - run: node scripts/validate-materialized.mjs
       - run: node scripts/audit-registry.mjs
       - name: Commit materialized skills
         run: |
