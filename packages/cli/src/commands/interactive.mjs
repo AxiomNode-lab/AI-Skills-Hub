@@ -15,21 +15,11 @@ function searchCapabilities(query, capabilities) {
 }
 
 export async function interactiveCommand() {
-  console.log(`
-      █████╗ ██╗    ███████╗██╗  ██╗██╗██╗     ██╗     ███████╗    ██╗  ██╗██╗   ██╗██████╗ 
-     ██╔══██╗██║    ██╔════╝██║ ██╔╝██║██║     ██║     ██╔════╝    ██║  ██║██║   ██║██╔══██╗
-     ███████║██║    ███████╗█████╔╝ ██║██║     ██║     ███████╗    ███████║██║   ██║██████╔╝
-     ██╔══██║██║    ╚════██║██╔═██╗ ██║██║     ██║     ╚════██║    ██╔══██║██║   ██║██╔══██╗
-     ██║  ██║██║    ███████║██║  ██╗██║███████╗███████╗███████║    ██║  ██║╚██████╔╝██████╔╝
-     ╚═╝  ╚═╝╚═╝    ╚══════╝╚═╝  ╚═╝╚═╝╚══════╝╚══════╝╚══════╝    ╚═╝  ╚═╝ ╚═════╝ ╚═════╝ 
-                                                                                        
-                    Enterprise AI Capability & Package Manager (v0.2.0)
-                    Backed by AxiomNode-lab
-  `);
-  console.log("───────────────────────────────────────────────────────────────────────────────────\n");
+  console.log("AI Skills Hub CLI v0.2.0");
+  console.log("────────────────────────\n");
 
-  // 1. Detect Agents
-  console.log("🔍 Scanning system for AI Agents...");
+  // Detect Agents
+  console.log("Scanning system for AI Agents...");
   const detectedAgents = await detectAgents();
   
   if (detectedAgents.length === 0) {

@@ -146,12 +146,8 @@ export async function checkForUpdates() {
     if (response.ok) {
       const remotePkg = await response.json();
       if (remotePkg.version && remotePkg.version !== localVersion) {
-        console.log(`\n╭──────────────────────────────────────────────────────────╮`);
-        console.log(`│                                                          │`);
-        console.log(`│   🚀 Update available! ${localVersion} → ${remotePkg.version}                   │`);
-        console.log(`│   Run 'git pull' to get the latest enterprise features.  │`);
-        console.log(`│                                                          │`);
-        console.log(`╰──────────────────────────────────────────────────────────╯\n`);
+        console.log(`\n📦 Update available: ${localVersion} → ${remotePkg.version}`);
+        console.log(`Run 'git pull' to update.\n`);
       }
     }
   } catch (e) {
