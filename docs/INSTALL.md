@@ -22,3 +22,14 @@ Non-redistributable or not-yet-released Skills are never vendored into this repo
     pnpm validate
     pnpm audit
     pnpm test
+
+
+## Optional semantic AI search
+
+Set these environment variables to enable model-based reranking without changing the remote discovery fallback:
+
+    AI_DISCOVERY_BASE_URL=https://your-openai-compatible-endpoint/v1
+    AI_DISCOVERY_MODEL=your-model
+    AI_DISCOVERY_API_KEY=optional-secret
+
+Only public Skill metadata is sent to the reranker.
