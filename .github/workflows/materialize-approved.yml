@@ -15,21 +15,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.4.1
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22.x
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
       - run: node scripts/materialize-approved.mjs --all
-      - run: node scripts/validate-registry.mjs
-      - run: node scripts/validate-materialized.mjs
-      - run: node scripts/audit-registry.mjs
+      - run: pnpm validate-all
       - name: Commit materialized skills
+        shell: bash
         run: |
+          set -euo pipefail
           if git diff --quiet; then
             echo "No materialization changes."
             exit 0
           fi
           git config user.name "ai-skills-hub-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add skills catalog/skills.json catalog/materialized-manifests
+          git add skills catalog/
           git commit -m "chore: materialize approved skills"
           git push
