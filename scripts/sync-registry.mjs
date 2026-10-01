@@ -161,6 +161,14 @@ registry.skills.sort((a,b)=>a.id.localeCompare(b.id));
 registry.generated_at=new Date().toISOString();
 fs.writeFileSync(registryFile,JSON.stringify(registry,null,2)+"\n");
 
+const bundlesFile=path.join(ROOT,"catalog/bundles.json");
+if(fs.existsSync(bundlesFile)){
+  const bundles=JSON.parse(fs.readFileSync(bundlesFile,"utf8"));
+  bundles.bundles= bundles.bundles ?? {};
+  bundles.bundles["@all"]=registry.skills.map((s)=>s.id);
+  fs.writeFileSync(bundlesFile,JSON.stringify(bundles,null,2)+"\n");
+}
+
 const bundled=registry.skills.filter((s)=>s.distribution==="bundled").sort((a,b)=>a.id.localeCompare(b.id));
 const lock={
   lockfile_version:1,
