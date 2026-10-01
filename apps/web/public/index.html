@@ -24,6 +24,7 @@
       <p class="search-hint" id="search-status">Local registry + remote sources</p>
       <div class="filter-row">
         <select id="agent"><option value="">All agents</option></select>
+        <select id="type"><option value="">All capability types</option><option value="skill">Skills</option><option value="mcp-server">MCP Servers</option><option value="agent-plugin">Agent Plugins</option><option value="cli-tool">CLI Tools</option></select>
         <select id="distribution"><option value="">All distribution states</option><option value="bundled">Bundled</option><option value="source-direct">Source-direct</option><option value="review-required">Review required</option><option value="blocked">Blocked</option></select>
         <select id="category"><option value="">All categories</option></select>
         <button id="clear" type="button">Clear</button>
@@ -35,7 +36,7 @@
     <section>
       <div class="section-head">
         <div>
-          <h2>Curated catalog</h2>
+          <h2>Capabilities</h2>
           <p id="count" class="muted"></p>
         </div>
       </div>
