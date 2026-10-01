@@ -1,8 +1,13 @@
 import fs from "node:fs";
 import path from "node:path";
 
-export function loadRegistry(file = "catalog/skills.json") {
-  return JSON.parse(fs.readFileSync(path.resolve(file), "utf8"));
+export function loadRegistry(file = "catalog/skills.json", bundlesFile = "catalog/bundles.json") {
+  const registry = JSON.parse(fs.readFileSync(path.resolve(file), "utf8"));
+  if (fs.existsSync(path.resolve(bundlesFile))) {
+    const bundles = JSON.parse(fs.readFileSync(path.resolve(bundlesFile), "utf8"));
+    registry.bundles = bundles.bundles ?? {};
+  }
+  return registry;
 }
 
 export function indexSkills(registry) {
@@ -21,7 +26,9 @@ export function resolveBundle(registry, bundleName) {
 }
 
 export function filterForAgent(skills, agent) {
-  return skills.filter((skill) => skill.compatibility.includes("agent-skills") || skill.compatibility.includes(agent));
+  return skills.filter((skill) =>
+    skill.compatibility.includes("agent-skills") || skill.compatibility.includes(agent)
+  );
 }
 
 export function summarize(skills) {
