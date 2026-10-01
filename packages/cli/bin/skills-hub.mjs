@@ -18,6 +18,14 @@ function flag(name) {
 }
 
 
+const aiConfig = process.env.AI_DISCOVERY_BASE_URL && process.env.AI_DISCOVERY_MODEL
+  ? {
+      baseUrl: process.env.AI_DISCOVERY_BASE_URL,
+      model: process.env.AI_DISCOVERY_MODEL,
+      apiKey: process.env.AI_DISCOVERY_API_KEY
+    }
+  : undefined;
+
 async function mapConcurrent(items, limit, worker) {
   const results = new Array(items.length);
   let cursor = 0;
@@ -94,7 +102,8 @@ if (command === "discover") {
     agent,
     limit: 20,
     token: process.env.GITHUB_TOKEN,
-    remote: !args.includes("--no-remote")
+    remote: !args.includes("--no-remote"),
+    ai: aiConfig
   });
   console.log(JSON.stringify({ ...result, choices: toInstallChoices(result, agent) }, null, 2));
   process.exit(0);
