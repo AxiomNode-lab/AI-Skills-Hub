@@ -2,39 +2,58 @@
 
 Generated from repository state on 2026-10-01.
 
+## Product direction
+
+AI Skills Hub is a unified AI Agent capability hub: one project for discovery, compatibility, provenance, security review, and installation instead of asking users to visit separate skill/tool repositories one by one.
+
+## Discovery
+
+- Local registry search with agent-aware ranking.
+- Semantic external discovery through skills.sh.
+- Approved GitHub source discovery fallback.
+- Remote results remain metadata-only until local policy review.
+- Optional LLM semantic reranking through an OpenAI-compatible endpoint.
+- Five-minute local discovery cache.
+- Arabic/English technical intent hints for common queries.
+
+## Installation
+
+- One-command natural-language add flow.
+- Verified bundled artifacts install from the local registry.
+- Source-direct artifacts use the upstream skills installer as a bridge.
+- Remote execution requires explicit --remote opt-in.
+- Bundle installation can run concurrently with bounded workers.
+- Atomic install state and tamper detection.
+
 ## Catalog
 
-- 54 normalized Skill records
-- 21 distribution-bundled candidates
-- 4 source-direct proprietary Anthropic document Skills
-- 29 review-required records
-- 0 materialized Skills at this point; 21 are bundle-eligible candidates
-- 11 tracked sources/standards (7 Skill sources + 4 ecosystem standards/docs)
+- 61 normalized Skill records.
+- 19 bundled candidates.
+- 9 source-direct records.
+- 33 review-required records.
+- 0 materialized Skills at this point.
+- 0 release-eligible Skills at this point.
+- 12 tracked sources/providers/standards.
+- 7 bundles.
 
-## Implemented
+## Trust pipeline
 
-- Agent Skills registry schema
-- Bundle resolution
-- License-state model
-- Security capability scanner
-- GitHub immutable-revision ingestion
-- Deterministic lockfile
-- Native installer core
-- Agent target adapters
-- Static discovery Web UI
-- Registry API with filtering/pagination
-- Agent Plugins export
-- MCP Skills server foundation
-- CI validation and source-sync workflows
+- Artifact-level license evidence.
+- Immutable source revisions.
+- SHA-256 integrity records.
+- Explainable heuristic security findings.
+- Release gates shared by registry, materializer, installer, and plugin export.
+- Source, agent, schema, workspace, and static validation in CI.
 
 ## Current limitation
 
-Bundle eligibility is separate from materialization and release eligibility. The bundled candidate set is not yet copied into the repository, so native registry installation is intentionally blocked until the materialization workflow completes.
+The discovery layer can locate remote Skills that are not yet in the local catalog, but their local trust state is intentionally conservative. A remote discovery result is not promoted to bundled content automatically.
 
-## Next release blockers
+Materialization and release eligibility remain separate from catalog discovery.
 
-- Complete artifact-level license review for review-required sources.
-- Materialize and integrity-verify approved bundled artifacts.
-- Add deduplication/fork lineage.
-- Add evaluation harnesses and quality signals.
-- Add native updater/rollback and content-addressed cache.
+## Next major implementation
+
+- Expand the unified registry beyond Skills into MCP servers, Agent Plugins, and CLI tools using tested installation adapters.
+- Add dependency graphs and eval-based quality signals.
+- Add content-addressed snapshot downloads for released first-party bundles.
+- Add update/rollback transactions and signed release attestations.
