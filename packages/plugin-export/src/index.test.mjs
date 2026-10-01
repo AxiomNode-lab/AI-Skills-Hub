@@ -65,8 +65,8 @@ test("export rejects unverified release state even when materialized",()=>{
   assert.throws(() => exportPortablePlugin({
     outputDir:path.join(temp,"out"),
     manifest:buildPortablePluginManifest({name:"example-plugin",description:"Example"}),
-    skills:[{...skill,release:{status:"pending"},security:{scan_status:"verified",risk:"none"}}
-  ]),/release gates/);
+    skills:[{...skill,release:{status:"pending"},security:{scan_status:"verified",risk:"none"}}]
+  }),/release gates/);
 });
 
 test("export accepts only release-eligible bundled artifacts",()=>{
