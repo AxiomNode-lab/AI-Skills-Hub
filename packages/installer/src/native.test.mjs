@@ -30,7 +30,11 @@ test("native install copies a materialized skill into the agent root", () => {
     name:"example-skill",
     distribution:"bundled",
     materialized:true,
-    materialized_root:src
+    materialized_root:src,
+    release:{status:"eligible"},
+    license:{spdx:"MIT",redistributable:true,status:"verified"},
+    source:{repo:"test/repo",path:"skills/example-skill",revision:"0000000000000000000000000000000000000000"},
+    security:{scan_status:"verified",risk:"none"}
   };
   const result=installMaterializedSkill(skill,{cwd:temp,agent:"codex"});
   assert.equal(result.action,"installed");
