@@ -64,7 +64,7 @@ export function handleRpc(request){
     if(method==="skills/list"){
       const entries=skills.map(entryFor).filter(Boolean);
       const p=page(entries,params.cursor);
-      return jsonRpc(id,{resultType:"complete",skills:p.chunk,nextCursor:p.next,ttlMs:TTL,cacheScope:"public"});
+      return jsonRpc(id,{resultType:"complete",skills:p.chunk,...(p.next?{nextCursor:p.next}:{}),ttlMs:TTL,cacheScope:"public"});
     }
     if(method==="skills/get"){
       const target=String(params.uri??"");
@@ -103,7 +103,12 @@ export function handleRpc(request){
         const rel=path.relative(root,path.join(dir,e.name)).split(path.sep).join("/");
         resources.push({uri:uriFor(skill,rel),name:e.name,mimeType:e.isDirectory()?"inode/directory":mimeFor(e.name)});
       }
-      return jsonRpc(id,{resultType:"complete",resources});
+      resources.sort((a,b)=>a.uri.localeCompare(b.uri));
+      const offset=params.cursor?Number.parseInt(Buffer.from(String(params.cursor),"base64url").toString("utf8"),10):0;
+      const limit=50;
+      const chunk=resources.slice(offset,offset+limit);
+      const next=offset+limit<resources.length?Buffer.from(String(offset+limit)).toString("base64url"):undefined;
+      return jsonRpc(id,{resultType:"complete",resources:chunk,...(next?{nextCursor:next}:{}),ttlMs:TTL,cacheScope:"public"});
     }
     return error(id,-32601,"Method not found: "+method);
   }catch(e){return error(id,-32603,e.message);}
