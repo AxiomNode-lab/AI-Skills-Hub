@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ai-skills-hub.dev/schemas/registry.v0.2.schema.json",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "generated_at",
+    "policy_version",
+    "skills"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "0.2"
+    },
+    "generated_at": {
+      "type": "string"
+    },
+    "policy_version": {
+      "type": "string"
+    },
+    "skills": {
+      "type": "array",
+      "items": {
+        "$ref": "skill.v0.2.schema.json"
+      }
+    }
+  }
+}
