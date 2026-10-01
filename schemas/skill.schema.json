@@ -3,6 +3,7 @@
   "$id": "https://ai-skills-hub.dev/schemas/skill.v0.2.schema.json",
   "type": "object",
   "required": [
+    "artifact_type",
     "id",
     "name",
     "publisher",
@@ -236,6 +237,9 @@
     "quality": {
       "type": "object",
       "additionalProperties": true
+    },
+    "artifact_type": {
+      "const": "skill"
     }
   }
 }
