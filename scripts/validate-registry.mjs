@@ -14,7 +14,7 @@ for (const skill of data.skills) {
   if (ids.has(skill.id)) throw new Error("Duplicate skill id: " + skill.id);
   ids.add(skill.id);
 
-  for (const field of ["id","name","publisher","source","category","license","distribution","compatibility","security","materialized"]) {
+  for (const field of ["id","name","publisher","source","category","license","distribution","compatibility","security","materialized","release"]) {
     if (!(field in skill)) throw new Error(skill.id + " missing " + field);
   }
 
@@ -29,6 +29,14 @@ for (const skill of data.skills) {
   }
 
   if (typeof skill.materialized !== "boolean") throw new Error(skill.id + " invalid materialized flag");
+  if (!["pending","eligible","hold"].includes(skill.release?.status)) throw new Error(skill.id + " invalid release status");
+  if (!Array.isArray(skill.release?.reasons)) throw new Error(skill.id + " invalid release reasons");
+  if (skill.distribution !== "bundled" && skill.release.status === "eligible") {
+    throw new Error(skill.id + " non-bundled skill cannot be release-eligible");
+  }
+  if (skill.materialized && skill.release.status !== "eligible") {
+    throw new Error(skill.id + " materialized skill must be release-eligible");
+  }
 
   if (!["verified","pending","review-required"].includes(skill.security.scan_status)) {
     throw new Error(skill.id + " invalid security scan status");

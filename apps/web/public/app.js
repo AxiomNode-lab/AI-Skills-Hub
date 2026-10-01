@@ -32,11 +32,13 @@ function render() {
   count.textContent = items.length + " results";
   skillsEl.innerHTML = items.map((s) => {
     const chips = s.category.map((c) => '<span class="chip">' + escapeHtml(c) + '</span>').join("");
+    const risk = escapeHtml(s.security.risk ?? "pending");
+    const release = escapeHtml(s.release?.status ?? "pending");
     return '<article class="card"><h3>' + escapeHtml(s.name) + '</h3>' +
       '<div class="meta">' + escapeHtml(s.publisher) + ' · ' + escapeHtml(s.license.spdx) + '</div>' +
       '<div class="chips">' + chips + '</div>' +
       '<div class="badges"><span class="badge">' + escapeHtml(s.distribution) + '</span>' +
-      '<span class="badge">' + escapeHtml(s.security.scan_status) + '</span></div></article>';
+      '<span class="badge">' + release + '</span><span class="badge">risk:' + risk + '</span></div></article>';
   }).join("");
 }
 search.addEventListener("input",render);

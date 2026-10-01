@@ -147,6 +147,7 @@ for (const skill of targets) {
     credentials:scanResult.capabilities.credentials,
     findings:scanResult.findings
   };
+  skill.release = {status:"eligible", reasons:[]};
   console.log("Materialized " + skill.id + " (" + materializedFiles.length + " files, " + totalBytes + " bytes)");
 }
 
