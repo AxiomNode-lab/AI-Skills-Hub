@@ -3,6 +3,9 @@ import os from "node:os";
 import path from "node:path";
 import { cacheKey, readCache, writeCache } from "./cache.mjs";
 import { rerankWithModel } from "./rerank.mjs";
+import { searchMcpRegistry } from "./mcp-registry.mjs";
+import { searchNpmTools } from "./npm.mjs";
+import { searchAgentPlugins } from "./plugins.mjs";
 
 const norm = (v) => String(v ?? "").toLowerCase().trim();
 const ARABIC_HINTS = new Map([
@@ -131,7 +134,10 @@ export async function hybridSearch(registry,query,opts={}) {
   if (opts.remote === false) return {query,agent:opts.agent ?? null,remote_searched:false,results:local};
   const remoteJobs=[
     searchSkillsSh(query,{...opts,source:(opts.sources ?? []).find(s=>s.id==="skills.sh")}),
-    searchRemote(query,opts)
+    searchRemote(query,opts),
+    searchMcpRegistry(expandQuery(query),opts),
+    searchNpmTools(expandQuery(query),opts),
+    searchAgentPlugins(expandQuery(query),opts)
   ];
   const settled=await Promise.allSettled(remoteJobs);
   const remote=settled.filter(x=>x.status==="fulfilled").flatMap(x=>x.value);
