@@ -1,7 +1,7 @@
 import { select, checkbox, confirm, input, Separator } from "@inquirer/prompts";
 import { detectAgents } from "../../../installer/src/detector.mjs";
 import { loadRegistry, filterForAgent } from "@ai-skills-hub/core";
-import { searchRegistry } from "@ai-skills-hub/discovery";
+import { searchRegistry, buildAdapterPlan } from "@ai-skills-hub/discovery";
 import { installCapability } from "../install-executor.mjs";
 import { resolveDependencies, checkPrerequisites } from "../utils.mjs";
 
@@ -93,11 +93,7 @@ export async function interactiveCommand() {
   const resolvedPlans = [];
 
   for (const cap of finalInstallList) {
-    const result = await installCapability(cap, {
-      agent: selectedAgentId,
-      scope: "project",
-      confirmed: false
-    });
+    const result = buildAdapterPlan(cap, selectedAgentId, { scope: "project" });
     resolvedPlans.push({ cap, result });
   }
 
