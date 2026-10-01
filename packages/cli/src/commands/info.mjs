@@ -1,5 +1,6 @@
 import { readLocalCapabilities } from "../utils.mjs";
 import fs from "node:fs/promises";
+import path from "node:path";
 
 export async function infoCommand(id, options = {}) {
   if (!id) {
@@ -17,11 +18,11 @@ export async function infoCommand(id, options = {}) {
 
   const output = { ...cap };
   if (cap.artifact_type === "skill" && cap.materialized_root) {
-    const skillPath = new URL("./SKILL.md", "file://" + cap.materialized_root.replace(/\\/g, "/").replace(/\/$/, "") + "/");
+    const skillPath = path.join(path.resolve(cap.materialized_root), "SKILL.md");
     try {
       output.skill_content = await fs.readFile(skillPath, "utf8");
     } catch {
-      output.skill_content = undefined;
+      // Materialized content is optional metadata.
     }
   }
 
