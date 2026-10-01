@@ -16,6 +16,8 @@ function hash(bytes){return crypto.createHash("sha256").update(bytes).digest("he
 
 export async function materializeSkill(skill,{root="vendor/skills",token,fetchImpl=fetch}={}){
   if(skill.distribution!=="bundled") throw new Error("Skill is not bundled: "+skill.id);
+  if(skill.release?.status!=="eligible") throw new Error("Skill has not passed registry release gates: "+skill.id);
+  if(skill.security?.scan_status!=="verified" || skill.security?.risk==="high") throw new Error("Skill has not passed security release gates: "+skill.id);
   if(!skill.license?.redistributable || skill.license?.status!=="verified") throw new Error("Skill is not redistribution-eligible: "+skill.id);
   if(!/^[0-9a-f]{40}$/.test(skill.source?.revision??"")) throw new Error("Skill has no immutable source revision: "+skill.id);
 
