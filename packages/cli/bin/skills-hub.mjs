@@ -3,6 +3,7 @@ import { loadRegistry, resolveBundle, filterForAgent } from "@ai-skills-hub/core
 import { buildInstallPlan } from "@ai-skills-hub/installer";
 import { installMaterializedSkill, verifyInstalledSkill, doctorInstalledSkills, uninstallSkillRecord } from "@ai-skills-hub/installer/native";
 import { hybridSearch, toInstallChoices } from "@ai-skills-hub/discovery";
+import { buildAdapterPlan } from "@ai-skills-hub/discovery/adapters";
 import fs from "node:fs";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
@@ -39,6 +40,36 @@ async function mapConcurrent(items, limit, worker) {
   }
   await Promise.all(Array.from({length:Math.min(limit,Math.max(1,items.length))}, run));
   return results;
+}
+
+async function executeChoice(choice, agent, scope) {
+  if (choice.action === "install") {
+    const skill = registry.skills.find((s) => s.id === choice.id);
+    return installMaterializedSkill(skill, {agent,scope,overwrite:false,persistState:true});
+  }
+
+  if (choice.action === "configuration") {
+    const target = choice.target;
+    if (!target || !choice.config) throw new Error("Configuration adapter returned no target/config");
+    const output = target.startsWith("~")
+      ? target.replace("~", process.env.HOME ?? "")
+      : target;
+    fs.mkdirSync(requireDir(output), {recursive:true});
+    const existing = fs.existsSync(output) ? JSON.parse(fs.readFileSync(output,"utf8")) : {mcpServers:{}};
+    existing.mcpServers = {...(existing.mcpServers ?? {}), ...(choice.config.mcpServers ?? {})};
+    fs.writeFileSync(output, JSON.stringify(existing,null,2)+"\n",{mode:0o600});
+    return {id:choice.id,action:"configured",target:output};
+  }
+
+  if (!choice.argv) throw new Error("Adapter has no executable command");
+  const result = await execFileAsync(choice.argv[0], choice.argv.slice(1), {
+    env:process.env,cwd:process.cwd(),maxBuffer:4*1024*1024
+  });
+  return {id:choice.id,action:"executed",adapter:choice.adapter,stdout:result.stdout};
+}
+
+function requireDir(file) {
+  return file.endsWith("/") ? file.slice(0,-1) : file.substring(0,file.lastIndexOf("/") > 0 ? file.lastIndexOf("/") : 1);
 }
 
 async function executeSourceBridge(skill, agent) {
@@ -139,13 +170,7 @@ if (command === "add") {
   }
 
   if (selected.action === "install") {
-    const skill = registry.skills.find((s) => s.id === selected.id);
-    const result = installMaterializedSkill(skill, {
-      agent,
-      scope: "project",
-      overwrite: false,
-      persistState: true
-    });
+    const result = await executeChoice(selected, agent, "project");
     console.log(JSON.stringify({query,selected,result},null,2));
     process.exit(0);
   }
@@ -154,18 +179,17 @@ if (command === "add") {
     console.log(JSON.stringify({
       query,
       selected,
-      next_step: "Re-run with --remote to execute the upstream installer."
+      next_step: "Re-run with --remote to execute this adapter."
     },null,2));
     process.exit(3);
   }
 
-  const skill = registry.skills.find((s) => s.id === selected.id) ?? {
-    id:selected.id,
-    name:selected.name,
-    source:selected.source,
-    distribution:"source-direct"
-  };
-  const result = await executeSourceBridge(skill, agent);
+  if (selected.action === "adapter-pending" || selected.action === "unsupported") {
+    console.error(JSON.stringify({query,selected},null,2));
+    process.exit(4);
+  }
+
+  const result = await executeChoice(selected, agent, "project");
   console.log(JSON.stringify({query,selected,result},null,2));
   process.exit(0);
 }
