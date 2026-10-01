@@ -1,5 +1,5 @@
 {
-  "schema_version": "0.1",
+  "schema_version": "0.2",
   "sources": [
     {
       "id": "anthropics/skills",
@@ -26,7 +26,8 @@
       "default_branch": "main",
       "official": true,
       "priority": "official",
-      "repository_license": "MIT"
+      "repository_claimed_license": "MIT",
+      "notes": "README states MIT; current tree has no top-level LICENSE file, so registry entries remain review-required until independently verified."
     },
     {
       "id": "trailofbits/skills",
@@ -54,7 +55,8 @@
       "default_branch": "main",
       "official": true,
       "priority": "official",
-      "repository_license": "MIT"
+      "repository_license": "MIT",
+      "notes": "Nested plugin/skill licensing is reviewed independently."
     },
     {
       "id": "github/awesome-copilot",
@@ -64,6 +66,36 @@
       "official": true,
       "priority": "community-curated",
       "repository_license": "MIT"
+    },
+    {
+      "id": "agentskills/agentskills",
+      "kind": "standard",
+      "url": "https://github.com/agentskills/agentskills",
+      "standard": "Agent Skills",
+      "status": "current-reference"
+    },
+    {
+      "id": "agentplugins/agent-plugins-spec",
+      "kind": "standard",
+      "url": "https://github.com/agentplugins/agent-plugins-spec",
+      "standard": "Agent Plugins",
+      "version": "1.0.0",
+      "status": "published"
+    },
+    {
+      "id": "modelcontextprotocol/ext-skills",
+      "kind": "standard",
+      "url": "https://github.com/modelcontextprotocol/ext-skills",
+      "standard": "MCP Skills Extension",
+      "identifier": "io.modelcontextprotocol/skills",
+      "status": "final"
+    },
+    {
+      "id": "openai/plugins",
+      "kind": "documentation",
+      "url": "https://developers.openai.com/plugins/concepts/plugins",
+      "standard": "OpenAI Plugins",
+      "status": "current-documentation"
     }
   ]
 }
