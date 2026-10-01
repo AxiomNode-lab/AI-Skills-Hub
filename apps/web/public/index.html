@@ -17,9 +17,11 @@
       </div>
       <h1>Find the right Skill.<br><span>Know what you are installing.</span></h1>
       <p class="lede">A provenance-first registry for AI Agent Skills with license, compatibility, and security visibility.</p>
-      <div class="search-row">
-        <input id="search" placeholder="Search skills, publishers, categories…" autocomplete="off" spellcheck="false">
+      <div class="search-row search-box">
+        <input id="search" placeholder="Describe what you need… e.g. “PDF tools for Codex”" autocomplete="off" spellcheck="false">
+        <button id="discover" type="button">Discover</button>
       </div>
+      <p class="search-hint" id="search-status">Local registry + remote sources</p>
       <div class="filter-row">
         <select id="agent"><option value="">All agents</option></select>
         <select id="distribution"><option value="">All distribution states</option><option value="bundled">Bundled</option><option value="source-direct">Source-direct</option><option value="review-required">Review required</option><option value="blocked">Blocked</option></select>
