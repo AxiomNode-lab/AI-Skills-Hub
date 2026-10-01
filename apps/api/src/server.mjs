@@ -1,6 +1,5 @@
 import http from "node:http";
-import fs from "node:fs";
-import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { loadRegistry, resolveBundle, filterForAgent } from "../../../packages/core/src/index.mjs";
 
 const PORT = Number(process.env.PORT ?? 8787);
@@ -96,7 +95,7 @@ export function createServer() {
   });
 }
 
-if (process.argv[1] && path.resolve(process.argv[1]) === path.resolve(new URL(import.meta.url).pathname)) {
+if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
   createServer().listen(PORT, () => {
     console.log("AI Skills Hub API listening on http://localhost:" + PORT);
   });
