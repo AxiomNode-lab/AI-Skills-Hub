@@ -62,3 +62,58 @@ test("skills.sh results retain install URL and provenance",async()=>{
   });
   assert.equal(result[0].item.source.install_url,"https://github.com/owner/repo");
 });
+
+test("MCP Registry provider normalizes a remote HTTP server",async()=>{
+  const fakeFetch=async()=>({
+    ok:true,
+    json:async()=>({servers:[{
+      server:{
+        name:"io.example/docs",
+        title:"Docs MCP",
+        description:"Search documentation",
+        version:"1.0.0",
+        repository:{url:"https://github.com/example/docs",source:"github"},
+        remotes:[{type:"streamable-http",url:"https://example.com/mcp"}]
+      },
+      _meta:{"io.modelcontextprotocol.registry/official":{status:"active"}}
+    }]})
+  });
+  const {searchMcpRegistry}=await import("../packages/discovery/src/mcp-registry.mjs");
+  const result=await searchMcpRegistry("docs",{limit:5,fetchImpl:fakeFetch,cacheDir:"/tmp/aih-mcp-test-"+process.pid});
+  assert.equal(result[0].item.artifact_type,"mcp-server");
+  assert.equal(result[0].item.installation.url,"https://example.com/mcp");
+});
+
+test("npm provider returns AI CLI candidates only",async()=>{
+  const fakeFetch=async()=>({
+    ok:true,
+    json:async()=>({objects:[{
+      package:{
+        name:"demo-ai-cli",
+        version:"1.2.3",
+        description:"AI agent command line tool",
+        keywords:["ai","cli"],
+        publisher:{username:"demo"},
+        links:{npm:"https://npmjs.com/package/demo-ai-cli"}
+      }
+    }]})
+  });
+  const {searchNpmTools}=await import("../packages/discovery/src/npm.mjs");
+  const result=await searchNpmTools("demo",{limit:5,fetchImpl:fakeFetch,cacheDir:"/tmp/aih-npm-test-"+process.pid});
+  assert.equal(result[0].item.artifact_type,"cli-tool");
+  assert.equal(result[0].item.source.package,"demo-ai-cli");
+});
+
+test("plugin discovery normalizes a portable Agent Plugin",async()=>{
+  const fakeFetch=async()=>({
+    ok:true,
+    json:async()=>({items:[{
+      path:"plugins/demo/plugin.json",
+      repository:{full_name:"demo/plugins",default_branch:"main"}
+    }]})
+  });
+  const {searchAgentPlugins}=await import("../packages/discovery/src/plugins.mjs");
+  const result=await searchAgentPlugins("demo",{limit:5,fetchImpl:fakeFetch,cacheDir:"/tmp/aih-plugin-test-"+process.pid});
+  assert.equal(result[0].item.artifact_type,"agent-plugin");
+  assert.equal(result[0].item.source.repo,"demo/plugins");
+});
