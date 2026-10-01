@@ -128,3 +128,24 @@ test("MCP discovery broadens natural-language queries to useful tokens",async()=
   await searchMcpRegistry("PDF tools for Codex",{limit:5,fetchImpl:fakeFetch,cacheDir:"/tmp/aih-mcp-broad-"+process.pid});
   assert.ok(calls.length >= 2);
 });
+
+test("unified adapter plan marks npm CLI tools executable with npx",async()=>{
+  const {buildAdapterPlan}=await import("../packages/discovery/src/adapters.mjs");
+  const plan=buildAdapterPlan({
+    artifact_type:"cli-tool",
+    name:"demo-ai-cli",
+    source:{package:"demo-ai-cli"}
+  },"codex");
+  assert.equal(plan.action,"source-direct");
+  assert.deepEqual(plan.argv,["npx","--yes","demo-ai-cli"]);
+});
+
+test("unsupported MCP transport remains pending",async()=>{
+  const {buildAdapterPlan}=await import("../packages/discovery/src/adapters.mjs");
+  const plan=buildAdapterPlan({
+    artifact_type:"mcp-server",
+    name:"unknown",
+    installation:{method:"unknown"}
+  },"codex");
+  assert.equal(plan.action,"adapter-pending");
+});
