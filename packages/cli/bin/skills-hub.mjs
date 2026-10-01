@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { loadRegistry, resolveBundle, filterForAgent } from "@ai-skills-hub/core";
 import { buildInstallPlan } from "@ai-skills-hub/installer";
-import { installMaterializedSkill } from "@ai-skills-hub/installer/native";
+import { installMaterializedSkill, verifyInstalledSkill, doctorInstalledSkills, uninstallSkillRecord } from "@ai-skills-hub/installer/native";
 
 const [, , command, ...args] = process.argv;
 const registry = loadRegistry();
@@ -28,6 +28,9 @@ Usage:
   skills-hub plan <bundle-or-skill> [--agent <agent>]
   skills-hub install <bundle-or-skill> --agent <agent> [--scope project|user] [--overwrite]
   skills-hub audit
+  skills-hub doctor [--scope project|user]
+  skills-hub remove <skill-id> [--scope project|user] [--force]
+  skills-hub update <bundle-or-skill> --agent <agent> [--scope project|user]
 `);
   process.exit(0);
 }
@@ -151,6 +154,78 @@ if (command === "install") {
   }, null, 2));
 
   process.exit(failed ? 2 : 0);
+}
+
+if (command === "doctor") {
+  const scope = flag("--scope") ?? "project";
+  if (!["project","user"].includes(scope)) {
+    console.error("Invalid scope:", scope);
+    process.exit(1);
+  }
+  const { doctorInstalledSkills } = await import("@ai-skills-hub/installer/native");
+  const results = doctorInstalledSkills({scope});
+  console.log(JSON.stringify({
+    scope,
+    total:results.length,
+    healthy:results.filter((r)=>r.ok).length,
+    unhealthy:results.filter((r)=>!r.ok).length,
+    results
+  }, null, 2));
+  process.exit(results.some((r)=>!r.ok) ? 2 : 0);
+}
+
+if (command === "remove") {
+  const skillId = args[0];
+  const scope = flag("--scope") ?? "project";
+  const force = args.includes("--force");
+  if (!skillId) {
+    console.error("Missing skill id.");
+    process.exit(1);
+  }
+  try {
+    const result = uninstallSkillRecord(skillId,{scope,force});
+    console.log(JSON.stringify(result,null,2));
+  } catch(error) {
+    console.error(error.message);
+    process.exit(2);
+  }
+  process.exit(0);
+}
+
+if (command === "update") {
+  const target = args[0];
+  const agent = flag("--agent");
+  const scope = flag("--scope") ?? "project";
+  if (!target || !agent) {
+    console.error("Usage: skills-hub update <bundle-or-skill> --agent <agent> [--scope project|user]");
+    process.exit(1);
+  }
+  const skills = selectedSkills(target, agent);
+  const plan = buildInstallPlan(skills, agent);
+  const results = [];
+
+  for (const item of plan) {
+    if (item.action !== "install") {
+      results.push({id:item.id,action:item.action,reason:item.reason ?? null});
+      continue;
+    }
+    try {
+      results.push(installMaterializedSkill(
+        skills.find((s)=>s.id===item.id),
+        {agent,scope,overwrite:true}
+      ));
+    } catch(error) {
+      results.push({id:item.id,action:"error",error:error.message});
+    }
+  }
+
+  console.log(JSON.stringify({
+    target,agent,scope,
+    updated:results.filter((r)=>r.action==="installed").length,
+    skipped:results.filter((r)=>r.action!=="installed").length,
+    results
+  },null,2));
+  process.exit(results.some((r)=>r.action==="error") ? 2 : 0);
 }
 
 if (command === "audit") {
