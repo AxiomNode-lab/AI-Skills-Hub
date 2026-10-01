@@ -3,7 +3,6 @@ import { loadRegistry, resolveBundle, filterForAgent } from "@ai-skills-hub/core
 import { buildInstallPlan } from "@ai-skills-hub/installer";
 import { installMaterializedSkill, verifyInstalledSkill, doctorInstalledSkills, uninstallSkillRecord } from "@ai-skills-hub/installer/native";
 import { hybridSearch, toInstallChoices } from "@ai-skills-hub/discovery";
-import { buildAdapterPlan } from "@ai-skills-hub/discovery/adapters";
 import fs from "node:fs";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
@@ -98,7 +97,7 @@ if (!command || command === "help") {
 Usage:
   skills-hub search <term>
   skills-hub discover <natural-language-query> --agent <agent> [--no-remote]
-  skills-hub add <natural-language-query> --agent <agent> [--remote] [--index <n>]
+  skills-hub add <natural-language-query> --agent <agent> [--scope project|user] [--remote] [--index <n>]
   skills-hub info <skill-id>
   skills-hub targets
   skills-hub plan <bundle-or-skill> [--agent <agent>]
@@ -123,8 +122,9 @@ if (command === "search") {
 }
 
 if (command === "discover") {
-  const query = args[0];
   const agent = flag("--agent") ?? "agent-skills";
+  const ignoredFlags = new Set(["--agent","--no-remote"]);
+  const query = args.filter((value,index) => !ignoredFlags.has(value) && args[index - 1] !== "--agent").join(" ").trim();
   if (!query) {
     console.error("Missing discovery query.");
     process.exit(1);
@@ -144,6 +144,11 @@ if (command === "discover") {
 
 if (command === "add") {
   const agent = flag("--agent") ?? "agent-skills";
+  const scope = flag("--scope") ?? "project";
+  if (!["project","user"].includes(scope)) {
+    console.error("Invalid scope:", scope);
+    process.exit(1);
+  }
   const selectedIndex = Math.max(1, Number(flag("--index") ?? "1"));
   const ignoredFlags = new Set(["--agent","--index","--remote","--no-remote"]);
   const query = args.filter((value,index) =>
@@ -172,7 +177,7 @@ if (command === "add") {
   }
 
   if (selected.action === "install") {
-    const result = await executeChoice(selected, agent, "project");
+    const result = await executeChoice(selected, agent, scope);
     console.log(JSON.stringify({query,selected,result},null,2));
     process.exit(0);
   }
@@ -181,7 +186,8 @@ if (command === "add") {
     console.log(JSON.stringify({
       query,
       selected,
-      next_step: "Re-run with --remote to execute this adapter."
+      next_step: "Re-run with --remote to execute this adapter.",
+      scope
     },null,2));
     process.exit(3);
   }
@@ -191,7 +197,7 @@ if (command === "add") {
     process.exit(4);
   }
 
-  const result = await executeChoice(selected, agent, "project");
+  const result = await executeChoice(selected, agent, scope);
   console.log(JSON.stringify({query,selected,result},null,2));
   process.exit(0);
 }
