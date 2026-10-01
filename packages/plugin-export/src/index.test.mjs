@@ -15,7 +15,10 @@ const skillFixture = (temp) => {
     publisher:"Example Publisher",
     materialized:true,
     materialized_root:source,
-    license:{spdx:"Apache-2.0"},
+    distribution:"bundled",
+    release:{status:"eligible"},
+    security:{scan_status:"verified",risk:"none"},
+    license:{spdx:"Apache-2.0",redistributable:true,status:"verified"},
     source:{repo:"example/repo",path:"skills/example",revision:"a".repeat(40)}
   };
 };
