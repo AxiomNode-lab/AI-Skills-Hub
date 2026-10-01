@@ -19,6 +19,7 @@ export function buildAdapterPlan(item, agent, { scope="project" } = {}) {
       action:"source-direct",
       status:"implemented",
       adapter:"skills-cli",
+      argv:["npx","--yes","skills","add",url,"--skill",name,"--agent",agent,"-y"],
       command:["npx","--yes","skills","add",url,"--skill",name,"--agent",agent,"-y"].join(" ")
     };
   }
@@ -31,6 +32,7 @@ export function buildAdapterPlan(item, agent, { scope="project" } = {}) {
       if (agent === "codex") {
         return {
           artifact_type:type,action:"source-direct",status:"implemented",adapter:"codex-mcp",
+          argv:["codex","mcp","add",name,"--url",install.url],
           command:["codex","mcp","add",name,"--url",install.url].join(" ")
         };
       }
@@ -38,12 +40,14 @@ export function buildAdapterPlan(item, agent, { scope="project" } = {}) {
         const transport = install.type === "sse" ? "sse" : "http";
         return {
           artifact_type:type,action:"source-direct",status:"implemented",adapter:"claude-mcp",
+          argv:["claude","mcp","add","--transport",transport,name,install.url,"--scope",installScope],
           command:["claude","mcp","add","--transport",transport,name,install.url,"--scope",installScope].join(" ")
         };
       }
       if (agent === "cursor") {
         return {
           artifact_type:type,action:"configuration",status:"implemented",adapter:"cursor-mcp-json",
+          argv:null,
           command:null,
           config:{
             mcpServers:{
@@ -67,12 +71,14 @@ export function buildAdapterPlan(item, agent, { scope="project" } = {}) {
       if (agent === "codex") {
         return {
           artifact_type:type,action:"source-direct",status:"implemented",adapter:"codex-mcp",
+          argv:["codex","mcp","add",name,"--",runtime,...args],
           command:["codex","mcp","add",name,"--",runtime,...args].join(" ")
         };
       }
       if (agent === "claude-code") {
         return {
           artifact_type:type,action:"source-direct",status:"implemented",adapter:"claude-mcp",
+          argv:["claude","mcp","add",name,"--scope",installScope,"--",runtime,...args],
           command:["claude","mcp","add",name,"--scope",installScope,"--",runtime,...args].join(" ")
         };
       }
@@ -107,6 +113,7 @@ export function buildAdapterPlan(item, agent, { scope="project" } = {}) {
         action:"marketplace",
         status:"implemented",
         adapter:"codex-plugin-marketplace",
+        argv:["codex","plugin","marketplace","add",item.source.repo],
         command:["codex","plugin","marketplace","add",item.source.repo].join(" "),
         note:"Adds the plugin marketplace; plugin installation is then selected by the client."
       };
@@ -128,6 +135,7 @@ export function buildAdapterPlan(item, agent, { scope="project" } = {}) {
       action:"source-direct",
       status:"implemented",
       adapter:"npm-package",
+      argv:["npx","--yes",pkg],
       command:["npx","--yes",pkg].join(" ")
     };
   }
