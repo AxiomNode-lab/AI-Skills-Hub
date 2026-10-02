@@ -56,7 +56,15 @@ Local search requires a case-insensitive phrase or keyword match in a capability
 
 ### 4. Install a Capability
 
-Local installation requires a bundled, materialized skill with `release: eligible` and compatibility with the selected agent. The current catalog has **534 skills: 501 review-required, 13 source-direct, 20 blocked, and 0 bundled**. None are materialized or release-eligible (snapshot: 2026-10-02; see [current status](docs/STATUS.md)).
+Local installation requires a bundled, materialized skill with `release: eligible` and compatibility with the selected agent. The current catalog has **534 skills: 499 review-required, 12 source-direct, 20 blocked, and 3 bundled**. The three bundled skills are materialized and release-eligible (snapshot: 2026-10-02; see [current status](docs/STATUS.md)).
+
+The first verified local skills are `anthropics/frontend-design`, `anthropics/brand-guidelines`, and `anthropics/internal-comms`. See [release evidence and SHA-256 manifests](docs/VERIFIED-LOCAL-SKILLS.md). From the repository root, install them into the project with:
+
+~~~bash
+node packages/cli/bin/skills-hub.mjs install anthropics/frontend-design,anthropics/brand-guidelines,anthropics/internal-comms --agent codex --scope project --json
+~~~
+
+Expected: `success: true`, three successful items, files under `.agents/skills/`, and a project installation record. Installation and file integrity were tested; task performance was not.
 
 Inspect a real catalog entry and your project's installation records:
 

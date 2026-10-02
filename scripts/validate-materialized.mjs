@@ -2,6 +2,7 @@
 import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
+import { verifyReviewedDirectory, sha256 } from "../packages/materializer/src/reviewed.mjs";
 
 const root=process.cwd();
 const registry=JSON.parse(fs.readFileSync(path.join(root,"catalog/skills.json"),"utf8"));
@@ -54,6 +55,19 @@ for(const skill of registry.skills.filter((s)=>s.materialized)){
     const manifest=JSON.parse(fs.readFileSync(manifestPath,"utf8"));
     if(manifest.skill_id!==skill.id) throw new Error("manifest skill id mismatch");
     if(manifest.source?.revision!==skill.source.revision) throw new Error("manifest revision mismatch");
+    if(manifest.source?.repo!==skill.source.repo || manifest.source?.path!==skill.source.path) throw new Error("manifest source mismatch");
+    if(manifest.review){
+      const reviewBytes=fs.readFileSync(path.resolve(manifest.review.path));
+      if(sha256(reviewBytes)!==manifest.review.sha256) throw new Error("release review hash mismatch");
+      if(skill.license.evidence!==manifest.review.path) throw new Error("license review reference mismatch");
+      const scan=verifyReviewedDirectory(skill,JSON.parse(reviewBytes),rootDir);
+      if(skill.security.risk!==scan.risk) throw new Error("reviewed risk mismatch");
+      for(const [key,value] of Object.entries(scan.capabilities)){
+        if(skill.security[key]!==value) throw new Error("reviewed capability mismatch: "+key);
+      }
+    }else if(skill.license.evidence?.startsWith("catalog/reviews/")){
+      throw new Error("reviewed release is missing bound review evidence");
+    }
 
     const files=walkFiles(rootDir);
     let totalBytes=0;

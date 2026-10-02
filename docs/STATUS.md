@@ -6,13 +6,13 @@ Repository snapshot: 2026-10-02. Counts below come from `catalog/skills.json`, `
 
 | Distribution | Records |
 | --- | ---: |
-| bundled | 0 |
-| source-direct | 13 |
-| review-required | 501 |
+| bundled | 3 |
+| source-direct | 12 |
+| review-required | 499 |
 | blocked | 20 |
 | **Total** | **534** |
 
-All 534 records have `release.status: hold`; none are materialized or release-eligible. There are 7 bundle definitions and 15 source/provider/standard records. The local contract treats these as Skills: 61 explicitly declare `artifact_type: skill`, and 473 omit it and use the default. The catalog currently contains no explicit MCP server, Agent Plugin, or CLI tool records.
+531 records have `release.status: hold`; 3 are materialized and release-eligible: `anthropics/frontend-design`, `anthropics/brand-guidelines`, and `anthropics/internal-comms`. [Release evidence](VERIFIED-LOCAL-SKILLS.md) records their pinned provenance, file-level license decisions, scans, and hashes. Installation success is not task-performance evaluation. There are 7 bundle definitions and 15 source/provider/standard records. The local contract treats these as Skills: 63 explicitly declare `artifact_type: skill`, and 471 omit it and use the default. The catalog currently contains no explicit MCP server, Agent Plugin, or CLI tool records.
 
 Reproduce the distribution counts from the repository root:
 
@@ -27,7 +27,7 @@ node -e "const c=require('./catalog/skills.json'); console.log('total',c.skills.
 - `search` searches the local catalog. A phrase or keyword must match before agent/status ranking bonuses apply. `--agent` filters compatibility.
 - `info` and `search` separate catalog availability from verified Hub installation state. `list` reads installation records for the selected scope and agent, not the catalog.
 - `install` accepts explicit IDs, checks skill compatibility and distribution/release gates, and reports every outcome. JSON success requires all requested installations and resolved dependencies to succeed; incomplete requests exit 1.
-- Eligible materialized bundles use the native installer. None are available in the current catalog. Source-direct skills require explicit external-install consent; review and blocked states are not overridden by `--yes`.
+- Eligible materialized bundles use the native installer. Three reviewed text-only skills are available in the current catalog. Source-direct skills require explicit external-install consent; review and blocked states are not overridden by `--yes`.
 - `add` accepts a Git URL (cloned into `capabilities-library` for review) or starts interactive hybrid discovery. Remote queries do not require a `--remote` flag; the CLI has no such option. Selection and external execution are separate steps.
 - The no-command flow browses/searches compatible catalog entries interactively. Installs are sequential, not parallel.
 - `create`, `sync`, and interactive `uninstall` are also available. See `node packages/cli/bin/skills-hub.mjs help` and [installation](INSTALLATION.md).

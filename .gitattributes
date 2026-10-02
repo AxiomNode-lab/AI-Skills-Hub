@@ -1,0 +1,6 @@
+# Preserve the exact upstream bytes covered by release SHA-256 manifests.
+skills/** -text
+# Reviews are also hashed by their corresponding materialization manifests.
+catalog/reviews/*.json -text
+# Preserve the reviewed upstream trailing space (line 4), not a local edit.
+skills/anthropics/internal-comms/examples/3p-updates.md whitespace=-blank-at-eol
