@@ -58,7 +58,7 @@ function runtimeName(value) {
   return normalized;
 }
 
-function buildServerConfig(capability, env = {}) {
+function buildServerConfig(capability, agent, env = {}) {
   const installation = capability.installation;
   if (!installation || typeof installation !== "object") {
     throw new Error(
@@ -78,7 +78,6 @@ function buildServerConfig(capability, env = {}) {
     }
 
     const config = {
-      type: installation.type === "sse" ? "sse" : "http",
       url: url.toString()
     };
 
@@ -108,10 +107,13 @@ function buildServerConfig(capability, env = {}) {
     }
 
     const server = {
-      type: "local",
       command: runtime,
       args: runtime === "npx" ? ["-y", packageSpec, ...args] : [packageSpec, ...args]
     };
+
+    if (agent === "cursor") {
+      server.type = "stdio";
+    }
 
     if (Object.keys(env).length) server.env = { ...env };
     return server;
@@ -180,7 +182,7 @@ export class MCPAdapter {
     const configPath = options.configPath ?? getMCPConfigPath(agent, scope, cwd);
     const name = serverName(this.capability);
     const config = readConfig(configPath);
-    config.mcpServers[name] = buildServerConfig(this.capability, options.env ?? {});
+    config.mcpServers[name] = buildServerConfig(this.capability, agent, options.env ?? {});
     atomicWriteJson(configPath, config);
 
     return {
