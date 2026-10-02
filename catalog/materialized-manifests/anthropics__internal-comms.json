@@ -1,0 +1,82 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "anthropics/internal-comms",
+  "source": {
+    "repo": "anthropics/skills",
+    "path": "skills/internal-comms",
+    "revision": "8a1541c4a3ffa5a20a5a91de0dcf3f0bab1d1ef4"
+  },
+  "review": {
+    "path": "catalog/reviews/anthropics__internal-comms.json",
+    "sha256": "5d8fafdbb3dc70509c536f9dfada845a515db5ab000bb007704edbc5f9e422a1"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": false,
+      "network": true,
+      "credentials": false,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": false,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "network-access",
+        "line": 4,
+        "evidence": "http://",
+        "context": "                        http://www.apache.org/licenses/",
+        "file": "LICENSE.txt"
+      },
+      {
+        "type": "network-access",
+        "line": 196,
+        "evidence": "http://",
+        "context": "       http://www.apache.org/licenses/LICENSE-2.0",
+        "file": "LICENSE.txt"
+      }
+    ],
+    "total_bytes": 22393
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "bc6b3af2f331cbc7fb0da1344efb2cbe5877a31498b4d70dbc7000f3405a1362",
+      "bytes": 11345,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "067b7587a344a928fc6534ef66b1bcd591fc7c26d207ea7ca3334aeb678d6475",
+      "bytes": 1511,
+      "mode": "100644"
+    },
+    {
+      "path": "examples/3p-updates.md",
+      "sha256": "087e4363c0f3513728a7e695eeb9ead5c3ecd12a4681b59340691180e65b68fc",
+      "bytes": 3274,
+      "mode": "100644"
+    },
+    {
+      "path": "examples/company-newsletter.md",
+      "sha256": "30f81cfbdb03858a006169c72169024089c7c5d3d32611d337782da4f38c86b5",
+      "bytes": 3295,
+      "mode": "100644"
+    },
+    {
+      "path": "examples/faq-answers.md",
+      "sha256": "5ecd3356cd6666937f2ebefa753253edfdbdca15e368d07baf398bfcced72484",
+      "bytes": 2366,
+      "mode": "100644"
+    },
+    {
+      "path": "examples/general-comms.md",
+      "sha256": "4d3a4bb198a77626bcf018e96b2b45a2dbabed172d4ade0fcd70d23ae8a47a47",
+      "bytes": 602,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 22393
+}

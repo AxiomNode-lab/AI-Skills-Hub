@@ -106,23 +106,23 @@
       "publisher": "anthropics",
       "source": {
         "repo": "anthropics/skills",
-        "path": "skills/brand-guidelines/SKILL.md",
+        "path": "skills/brand-guidelines",
         "revision": "8a1541c4a3ffa5a20a5a91de0dcf3f0bab1d1ef4",
+        "state": "present",
         "revision_type": "git-commit",
-        "url": "https://github.com/anthropics/skills/tree/8a1541c4a3ffa5a20a5a91de0dcf3f0bab1d1ef4/skills/brand-guidelines/SKILL.md",
-        "state": "present"
+        "url": "https://github.com/anthropics/skills/tree/8a1541c4a3ffa5a20a5a91de0dcf3f0bab1d1ef4/skills/brand-guidelines"
       },
       "category": [
         "agents",
         "engineering"
       ],
       "license": {
-        "spdx": "Complete terms in LICENSE.txt",
-        "redistributable": false,
-        "status": "review-required",
-        "evidence": "skills/brand-guidelines/SKILL.md"
+        "spdx": "Apache-2.0",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "catalog/reviews/anthropics__brand-guidelines.json"
       },
-      "distribution": "review-required",
+      "distribution": "bundled",
       "compatibility": [
         "agent-skills",
         "claude-code",
@@ -131,23 +131,45 @@
       ],
       "security": {
         "scan_status": "verified",
-        "risk": "none",
-        "network": false,
+        "risk": "low",
         "shell": false,
-        "credentials": false
+        "network": true,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false,
+        "filesystem_write": true,
+        "encoded_content": false,
+        "findings": [
+          {
+            "type": "network-access",
+            "line": 4,
+            "evidence": "http://",
+            "context": "                        http://www.apache.org/licenses/",
+            "file": "LICENSE.txt"
+          },
+          {
+            "type": "network-access",
+            "line": 196,
+            "evidence": "http://",
+            "context": "       http://www.apache.org/licenses/LICENSE-2.0",
+            "file": "LICENSE.txt"
+          }
+        ],
+        "review": "catalog/reviews/anthropics__brand-guidelines.json"
       },
-      "materialized": false,
+      "materialized": true,
       "release": {
-        "status": "hold",
-        "reasons": [
-          "manual-review-required"
-        ]
+        "status": "eligible",
+        "reasons": []
       },
       "integrity": {
         "upstream_skill_sha256": "1120b3769e2985cefb3d25be981b1f914abeba57ae079b83c20c666c164fa9fe",
         "last_ingested_revision": "8a1541c4a3ffa5a20a5a91de0dcf3f0bab1d1ef4"
       },
-      "description": "Applies Anthropic's official brand colors and typography to any sort of artifact that may benefit from having Anthropic's look-and-feel. Use it when brand colors or style guidelines, visual formatting, or company design standards apply."
+      "description": "Applies Anthropic's official brand colors and typography to any sort of artifact that may benefit from having Anthropic's look-and-feel. Use it when brand colors or style guidelines, visual formatting, or company design standards apply.",
+      "artifact_type": "skill",
+      "materialized_root": "skills/anthropics/brand-guidelines",
+      "materialized_files": 2
     },
     {
       "id": "anthropics/canvas-design",
@@ -398,73 +420,23 @@
       "publisher": "Anthropic",
       "source": {
         "repo": "anthropics/skills",
-        "path": "skills/frontend-design/SKILL.md",
+        "path": "skills/frontend-design",
         "revision": "8a1541c4a3ffa5a20a5a91de0dcf3f0bab1d1ef4",
+        "state": "present",
         "revision_type": "git-commit",
-        "url": "https://github.com/anthropics/skills/tree/8a1541c4a3ffa5a20a5a91de0dcf3f0bab1d1ef4/skills/frontend-design/SKILL.md",
-        "state": "present"
+        "url": "https://github.com/anthropics/skills/tree/8a1541c4a3ffa5a20a5a91de0dcf3f0bab1d1ef4/skills/frontend-design"
       },
       "category": [
         "frontend",
         "design"
       ],
       "license": {
-        "spdx": "Complete terms in LICENSE.txt",
-        "redistributable": false,
-        "status": "review-required",
-        "evidence": "skills/frontend-design/SKILL.md"
+        "spdx": "Apache-2.0",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "catalog/reviews/anthropics__frontend-design.json"
       },
-      "distribution": "source-direct",
-      "compatibility": [
-        "agent-skills",
-        "claude-code",
-        "codex",
-        "cursor"
-      ],
-      "security": {
-        "scan_status": "review-required",
-        "network": false,
-        "shell": false,
-        "credentials": false,
-        "risk": "low"
-      },
-      "materialized": false,
-      "release": {
-        "status": "hold",
-        "reasons": [
-          "non-redistributable"
-        ]
-      },
-      "integrity": {
-        "upstream_skill_sha256": "d91970639e9f5c37682ac7ab60094d35f1c7c1f38d731bd56396563aee10c1d3",
-        "last_ingested_revision": "8a1541c4a3ffa5a20a5a91de0dcf3f0bab1d1ef4"
-      },
-      "artifact_type": "skill",
-      "description": "Guidance for distinctive, intentional visual design when building new UI or reshaping an existing one. Helps with aesthetic direction, typography, and making choices that don't read as templated defaults."
-    },
-    {
-      "id": "anthropics/internal-comms",
-      "name": "internal-comms",
-      "publisher": "anthropics",
-      "source": {
-        "repo": "anthropics/skills",
-        "path": "skills/internal-comms/SKILL.md",
-        "revision": "8a1541c4a3ffa5a20a5a91de0dcf3f0bab1d1ef4",
-        "revision_type": "git-commit",
-        "url": "https://github.com/anthropics/skills/tree/8a1541c4a3ffa5a20a5a91de0dcf3f0bab1d1ef4/skills/internal-comms/SKILL.md",
-        "state": "present"
-      },
-      "category": [
-        "agents",
-        "engineering"
-      ],
-      "license": {
-        "spdx": "Complete terms in LICENSE.txt",
-        "redistributable": false,
-        "status": "review-required",
-        "evidence": "skills/internal-comms/SKILL.md"
-      },
-      "distribution": "review-required",
+      "distribution": "bundled",
       "compatibility": [
         "agent-skills",
         "claude-code",
@@ -473,23 +445,116 @@
       ],
       "security": {
         "scan_status": "verified",
-        "risk": "none",
-        "network": false,
+        "risk": "low",
         "shell": false,
-        "credentials": false
+        "network": true,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false,
+        "filesystem_write": true,
+        "encoded_content": false,
+        "findings": [
+          {
+            "type": "network-access",
+            "line": 4,
+            "evidence": "http://",
+            "context": "                        http://www.apache.org/licenses/",
+            "file": "LICENSE.txt"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 59,
+            "evidence": "remove",
+            "context": "Spend your boldness in one place. Let one element be the memorable thing, keep everything around it quiet and disciplined, and cut any decoration that does not serve the brief. Build to a quality floor without announcing it: responsive down",
+            "file": "SKILL.md"
+          }
+        ],
+        "review": "catalog/reviews/anthropics__frontend-design.json"
       },
-      "materialized": false,
+      "materialized": true,
       "release": {
-        "status": "hold",
-        "reasons": [
-          "manual-review-required"
-        ]
+        "status": "eligible",
+        "reasons": []
+      },
+      "integrity": {
+        "upstream_skill_sha256": "d91970639e9f5c37682ac7ab60094d35f1c7c1f38d731bd56396563aee10c1d3",
+        "last_ingested_revision": "8a1541c4a3ffa5a20a5a91de0dcf3f0bab1d1ef4"
+      },
+      "artifact_type": "skill",
+      "description": "Guidance for distinctive, intentional visual design when building new UI or reshaping an existing one. Helps with aesthetic direction, typography, and making choices that don't read as templated defaults.",
+      "materialized_root": "skills/anthropics/frontend-design",
+      "materialized_files": 2
+    },
+    {
+      "id": "anthropics/internal-comms",
+      "name": "internal-comms",
+      "publisher": "anthropics",
+      "source": {
+        "repo": "anthropics/skills",
+        "path": "skills/internal-comms",
+        "revision": "8a1541c4a3ffa5a20a5a91de0dcf3f0bab1d1ef4",
+        "state": "present",
+        "revision_type": "git-commit",
+        "url": "https://github.com/anthropics/skills/tree/8a1541c4a3ffa5a20a5a91de0dcf3f0bab1d1ef4/skills/internal-comms"
+      },
+      "category": [
+        "agents",
+        "engineering"
+      ],
+      "license": {
+        "spdx": "Apache-2.0",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "catalog/reviews/anthropics__internal-comms.json"
+      },
+      "distribution": "bundled",
+      "compatibility": [
+        "agent-skills",
+        "claude-code",
+        "codex",
+        "cursor"
+      ],
+      "security": {
+        "scan_status": "verified",
+        "risk": "medium",
+        "shell": false,
+        "network": true,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false,
+        "filesystem_write": false,
+        "encoded_content": false,
+        "findings": [
+          {
+            "type": "network-access",
+            "line": 4,
+            "evidence": "http://",
+            "context": "                        http://www.apache.org/licenses/",
+            "file": "LICENSE.txt"
+          },
+          {
+            "type": "network-access",
+            "line": 196,
+            "evidence": "http://",
+            "context": "       http://www.apache.org/licenses/LICENSE-2.0",
+            "file": "LICENSE.txt"
+          }
+        ],
+        "review": "catalog/reviews/anthropics__internal-comms.json"
+      },
+      "materialized": true,
+      "release": {
+        "status": "eligible",
+        "reasons": []
       },
       "integrity": {
         "upstream_skill_sha256": "067b7587a344a928fc6534ef66b1bcd591fc7c26d207ea7ca3334aeb678d6475",
         "last_ingested_revision": "8a1541c4a3ffa5a20a5a91de0dcf3f0bab1d1ef4"
       },
-      "description": "A set of resources to help me write all kinds of internal communications, using the formats that my company likes to use. Claude should use this skill whenever asked to write some sort of internal communications (status reports, leadership updates, 3P updates, company newsletters, FAQs, incident reports, project updates, etc.)."
+      "description": "A set of resources to help me write all kinds of internal communications, using the formats that my company likes to use. Claude should use this skill whenever asked to write some sort of internal communications (status reports, leadership updates, 3P updates, company newsletters, FAQs, incident reports, project updates, etc.).",
+      "artifact_type": "skill",
+      "materialized_root": "skills/anthropics/internal-comms",
+      "materialized_files": 6
     },
     {
       "id": "anthropics/mcp-builder",

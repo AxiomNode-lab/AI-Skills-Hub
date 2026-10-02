@@ -1,0 +1,86 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "anthropics/brand-guidelines",
+  "status": "approved",
+  "reviewed_on": "2026-10-02",
+  "reviewer": "AI-assisted artifact review in phase four; not an independent security certification",
+  "source": {
+    "repo": "anthropics/skills",
+    "path": "skills/brand-guidelines",
+    "revision": "8a1541c4a3ffa5a20a5a91de0dcf3f0bab1d1ef4"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "skills/brand-guidelines",
+    "url": "https://api.github.com/repos/anthropics/skills/git/trees/8a1541c4a3ffa5a20a5a91de0dcf3f0bab1d1ef4?recursive=1",
+    "notes": "Non-truncated pinned tree inspected. The complete subtree is listed below; no symlink, submodule, ancestor NOTICE, or nested licensing override was found."
+  },
+  "license": {
+    "spdx": "Apache-2.0",
+    "redistributable": true,
+    "path": "LICENSE.txt",
+    "url": "https://github.com/anthropics/skills/blob/8a1541c4a3ffa5a20a5a91de0dcf3f0bab1d1ef4/skills/brand-guidelines/LICENSE.txt",
+    "scope_reason": "SKILL.md frontmatter expressly refers to this folder-local LICENSE.txt. All resource files were individually read for conflicting terms and provenance. The local Apache grant covers this artifact; no repository-wide license assumption is used.",
+    "obligations": [
+      "Redistribute the original LICENSE.txt with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files; no extra upstream NOTICE exists in scope.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "low",
+    "blocking_findings": [],
+    "capabilities": {
+      "network": false,
+      "filesystem_write": true
+    },
+    "notes": [
+      "Read the complete two-file subtree. Only SKILL.md and its Apache LICENSE.txt are distributed. No fonts, logos, images, or third-party code are bundled.",
+      "Poppins/Lora are optional existing fonts; Arial/Georgia fallbacks are stated. The instructions mention python-pptx RGBColor, but no Python code or package dependency is shipped or auto-installed. A later PowerPoint task needs its own reviewed runtime.",
+      "Brand names identify upstream. Apache section 6 does not grant trademark rights or endorsement. Installation is not a license to impersonate Anthropic. Task output quality and cross-tool operation remain unevaluated."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "bc6b3af2f331cbc7fb0da1344efb2cbe5877a31498b4d70dbc7000f3405a1362",
+      "bytes": 11345,
+      "mode": "100644",
+      "git_blob": "4f881c52d1f72f4cfb720e339e2d35c3058d01a9",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "The artifact-local license text is retained without modification.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 4,
+          "evidence": "http://",
+          "context": "                        http://www.apache.org/licenses/",
+          "disposition": "accepted",
+          "reason": "License attribution URL is documentation, not an instruction to fetch or execute."
+        },
+        {
+          "type": "network-access",
+          "line": 196,
+          "evidence": "http://",
+          "context": "       http://www.apache.org/licenses/LICENSE-2.0",
+          "disposition": "accepted",
+          "reason": "License attribution URL is documentation, not an instruction to fetch or execute."
+        }
+      ]
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "1120b3769e2985cefb3d25be981b1f914abeba57ae079b83c20c666c164fa9fe",
+      "bytes": 2235,
+      "mode": "100644",
+      "git_blob": "47c72c607bdb5dd81bdea5de2b5e4f3992a5fd59",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "This file expressly references the co-located LICENSE.txt in its frontmatter.",
+      "findings": []
+    }
+  ]
+}

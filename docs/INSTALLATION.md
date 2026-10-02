@@ -15,7 +15,7 @@ node packages/cli/bin/skills-hub.mjs list --agent codex --scope project --json
 
 ## Current catalog outcomes
 
-As of 2026-10-02 the catalog contains 534 skills: 501 review-required, 13 source-direct, 20 blocked, and no bundled skills. All releases are on hold; there are no materialized or release-eligible skills. See [current status](STATUS.md) for a reproducible count command.
+As of 2026-10-02 the catalog contains 534 skills: 499 review-required, 12 source-direct, 20 blocked, and 3 bundled skills. The bundled skills are materialized and release-eligible; the other 531 releases remain on hold. See [current status](STATUS.md) for a reproducible count command.
 
 This real blocked entry demonstrates a refused installation without changing files:
 
@@ -28,7 +28,7 @@ Expected: exit code **1**, `success: false`, item `status: blocked`, `installed:
 This source-direct entry demonstrates the external confirmation gate without executing an installer:
 
 ```bash
-node packages/cli/bin/skills-hub.mjs install anthropics/frontend-design --agent codex --scope project --json
+node packages/cli/bin/skills-hub.mjs install anthropics/mcp-builder --agent codex --scope project --json
 ```
 
 Expected: exit code **1**, `success: false`, item `status: confirmation-required`, `requires_confirmation: true`, and `reason: explicit_confirmation_required`. Explicitly adding `--yes` authorizes the external installer. Its destination and scope behavior depend on that adapter; do not assume every external tool honors the Hub's scope option.
@@ -39,7 +39,15 @@ Use `install` followed by one existing capability ID, or comma-separated IDs, an
 
 Supported options are `--agent`, `--scope project|user`, `--yes` (or `-y`), and `--json` where supported. Noninteractive JSON is supported by `search`, `info`, `list`, and `install`. `add`, `create`, and `uninstall` include interactive flows rather than equivalent JSON automation interfaces.
 
-Local installation requires a compatible, bundled, materialized skill with `release.status: eligible`. An unreleased bundle is held with `bundle_not_released`; review-required skills are held with `manual_review_required`. No current catalog entry qualifies for a successful native install. Automated tests exercise native success using local temporary project fixtures.
+Local installation requires a compatible, bundled, materialized skill with `release.status: eligible`. An unreleased bundle is held with `bundle_not_released`; review-required skills are held with `manual_review_required`. The three reviewed local releases now qualify. Their actual packaged files, resources, and installation records are tested in temporary projects inside the workspace.
+
+~~~bash
+node packages/cli/bin/skills-hub.mjs install anthropics/frontend-design,anthropics/brand-guidelines,anthropics/internal-comms --agent codex --scope project --json
+node packages/cli/bin/skills-hub.mjs info anthropics/frontend-design --agent codex --json
+node packages/cli/bin/skills-hub.mjs list --agent codex --scope project --json
+~~~
+
+Expected: install returns `success: true`; each skill has `SKILL.md` and `LICENSE.txt` under `.agents/skills/<name>/`, with four additional `examples/*.md` files for internal-comms. The project `.ai-skills-hub/installed.json` records each source revision and file hash. `info`/`list` show `installed` after verification. See [review evidence and limitations](VERIFIED-LOCAL-SKILLS.md); no actual task-quality claim is made.
 
 `install --json` returns `success: true` only when every requested item and resolved dependency installs. Otherwise it returns false, individual outcomes and reasons, and exit code 1. Successful items in a mixed request are retained, not rolled back. Marketplace registration alone is not a completed plugin installation.
 

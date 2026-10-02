@@ -17,3 +17,5 @@ A Skill is eligible for public bundled distribution only when all gates pass:
 Popularity is a discovery signal, not a trust or safety approval.
 
 The materializer additionally refuses symlinks, path traversal, oversized files, and skills without a root SKILL.md.
+
+For the initial text-only reviewed releases, `scripts/release-reviewed.mjs` uses artifact-specific decisions in `catalog/reviews/`. Every Markdown/text file must have local Apache-2.0 coverage, SHA-256 and Git blob identity, and resolved scan findings at the pinned revision. Preparation leaves the catalog unchanged until staged files verify; only then are the files, bound review manifest, and eligible record published. The existing eligible-only materializer gate is unchanged. Blocked records cannot be promoted by this workflow, and high-risk scanner findings cannot be waived by a review. Run lock generation and `validate-all` before committing a release. See [the first release evidence](VERIFIED-LOCAL-SKILLS.md).
