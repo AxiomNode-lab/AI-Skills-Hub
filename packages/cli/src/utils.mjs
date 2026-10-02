@@ -2,7 +2,7 @@ import fs from "node:fs/promises";
 import fsSync from "node:fs";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
-import { loadRegistry } from "@ai-skills-hub/core";
+import { hubHome, loadRegistry } from "@ai-skills-hub/core";
 
 function executableCandidates(command) {
   const value = String(command ?? "").trim();
@@ -70,11 +70,8 @@ export async function fileExists(p) {
 }
 
 export function readLocalCapabilities() {
-  const registryPath = path.resolve(process.cwd(), "catalog", "skills.json");
-  const bundlesPath = path.resolve(process.cwd(), "catalog", "bundles.json");
-
   try {
-    const registry = loadRegistry(registryPath, bundlesPath);
+    const registry = loadRegistry();
     if (!Array.isArray(registry.skills)) {
       throw new Error("catalog/skills.json does not contain a skills array");
     }
@@ -108,8 +105,9 @@ export function resolveDependencies(selectedIds, allCapabilities) {
 }
 
 export async function checkForUpdates() {
+  if (process.env.SKILLS_HUB_NO_UPDATE_CHECK || process.env.CI || !process.stdout.isTTY) return;
   try {
-    const localPkgPath = path.resolve(process.cwd(), "package.json");
+    const localPkgPath = path.join(hubHome(), "package.json");
     if (!(await fileExists(localPkgPath))) return;
 
     const localPkg = JSON.parse(await fs.readFile(localPkgPath, "utf8"));

@@ -28,7 +28,7 @@ export async function interactiveCommand() {
     }))
   });
 
-  const registry = loadRegistry("catalog/skills.json", "catalog/bundles.json");
+  const registry = loadRegistry();
   const agentCapabilities = filterForAgent(registry.skills, selectedAgentId);
 
   if (agentCapabilities.length === 0) {

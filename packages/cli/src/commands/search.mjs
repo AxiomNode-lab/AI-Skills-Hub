@@ -3,10 +3,7 @@ import { loadRegistry } from "@ai-skills-hub/core";
 import { statusReader, printCapabilityStatus } from "../capability-status.mjs";
 
 export function searchCommand(query, options = {}) {
-  const registry = loadRegistry(
-    "catalog/skills.json",
-    "catalog/bundles.json"
-  );
+  const registry = loadRegistry();
 
   const readStatus = statusReader(options);
   const results = searchRegistry(registry, query || "", {

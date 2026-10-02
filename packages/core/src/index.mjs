@@ -1,7 +1,22 @@
 import fs from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 
-export function loadRegistry(file = "catalog/skills.json", bundlesFile = "catalog/bundles.json") {
+// The Hub's catalog and materialized skills ship with the Hub, not with the
+// project being installed into. SKILLS_HUB_HOME points at another Hub checkout.
+export function hubHome(env = process.env) {
+  return path.resolve(env.SKILLS_HUB_HOME || fileURLToPath(new URL("../../../", import.meta.url)));
+}
+
+export function catalogPath(name, env = process.env) {
+  return path.join(hubHome(env), "catalog", name);
+}
+
+export function resolveHubPath(value, env = process.env) {
+  return path.isAbsolute(value) ? value : path.resolve(hubHome(env), value);
+}
+
+export function loadRegistry(file = catalogPath("skills.json"), bundlesFile = catalogPath("bundles.json")) {
   const registry = JSON.parse(fs.readFileSync(path.resolve(file), "utf8"));
   if (fs.existsSync(path.resolve(bundlesFile))) {
     const bundles = JSON.parse(fs.readFileSync(path.resolve(bundlesFile), "utf8"));
