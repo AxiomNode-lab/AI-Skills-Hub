@@ -42,7 +42,7 @@ test("MCP get_skill returns SKILL.md only for released skills", () => {
   const released = rpc("tools/call", { name: "get_skill", arguments: { id: "anthropics/frontend-design", agent: "codex" } }).result.structuredContent;
   assert.match(released.skill_md, /^---/);
   assert.equal(released.install, "skills-hub install anthropics/frontend-design --agent codex");
-  const held = rpc("tools/call", { name: "get_skill", arguments: { id: "anthropics/academy-guide" } }).result.structuredContent;
+  const held = rpc("tools/call", { name: "get_skill", arguments: { id: "anthropics/canvas-design" } }).result.structuredContent;
   assert.equal(held.skill_md, null);
   assert.deepEqual(held.files, []);
   assert.equal(rpc("tools/call", { name: "get_skill", arguments: { id: "nope/nope" } }).result.isError, true);
@@ -58,7 +58,7 @@ test("MCP resources expose only files of released skills and reject traversal", 
   assert.match(rpc("resources/read", { uri }).result.contents[0].text, /name: internal-comms/);
   for (const bad of [
     "skillshub://skills/anthropics/internal-comms/../../../package.json",
-    "skillshub://skills/anthropics/academy-guide/SKILL.md",
+    "skillshub://skills/anthropics/canvas-design/SKILL.md",
     "file:///etc/passwd"
   ]) assert.equal(rpc("resources/read", { uri: bad }).error.code, -32002, bad);
   assert.equal(rpc("no/such").error.code, -32601);

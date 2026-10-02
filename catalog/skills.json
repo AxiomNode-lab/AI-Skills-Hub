@@ -8,23 +8,23 @@
       "publisher": "anthropics",
       "source": {
         "repo": "anthropics/skills",
-        "path": "skills/academy-guide/SKILL.md",
+        "path": "skills/academy-guide",
         "revision": "8a1541c4a3ffa5a20a5a91de0dcf3f0bab1d1ef4",
+        "state": "present",
         "revision_type": "git-commit",
-        "url": "https://github.com/anthropics/skills/tree/8a1541c4a3ffa5a20a5a91de0dcf3f0bab1d1ef4/skills/academy-guide/SKILL.md",
-        "state": "present"
+        "url": "https://github.com/anthropics/skills/tree/8a1541c4a3ffa5a20a5a91de0dcf3f0bab1d1ef4/skills/academy-guide"
       },
       "category": [
         "agents",
         "engineering"
       ],
       "license": {
-        "spdx": "Complete terms in LICENSE.txt",
-        "redistributable": false,
-        "status": "review-required",
-        "evidence": "skills/academy-guide/SKILL.md"
+        "spdx": "Apache-2.0",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "catalog/reviews/anthropics__academy-guide.json"
       },
-      "distribution": "review-required",
+      "distribution": "bundled",
       "compatibility": [
         "agent-skills",
         "claude-code",
@@ -32,24 +32,123 @@
         "cursor"
       ],
       "security": {
-        "scan_status": "review-required",
+        "scan_status": "verified",
         "risk": "low",
-        "network": true,
         "shell": false,
-        "credentials": false
+        "network": true,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false,
+        "filesystem_write": false,
+        "encoded_content": false,
+        "findings": [
+          {
+            "type": "network-access",
+            "line": 4,
+            "evidence": "http://",
+            "context": "                        http://www.apache.org/licenses/",
+            "file": "LICENSE.txt"
+          },
+          {
+            "type": "network-access",
+            "line": 196,
+            "evidence": "http://",
+            "context": "       http://www.apache.org/licenses/LICENSE-2.0",
+            "file": "LICENSE.txt"
+          },
+          {
+            "type": "network-access",
+            "line": 30,
+            "evidence": "https://",
+            "context": "All content lives on [Claude Academy](https://academy.claude.com),",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 40,
+            "evidence": "https://",
+            "context": "surface: [Claude](https://academy.claude.com/claude),",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 41,
+            "evidence": "https://",
+            "context": "[Claude Code](https://academy.claude.com/code),",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 42,
+            "evidence": "https://",
+            "context": "[Claude Cowork](https://academy.claude.com/cowork),",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 43,
+            "evidence": "https://",
+            "context": "[AI Fluency](https://academy.claude.com/fluency), and the",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 44,
+            "evidence": "https://",
+            "context": "[developer platform](https://academy.claude.com/platform). When a user",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 90,
+            "evidence": "https://",
+            "context": "   to the [resources library](https://academy.claude.com/resources) for",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 101,
+            "evidence": "https://",
+            "context": "   `https://academy.claude.com/` plus its path: `/courses/{slug}` for",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 115,
+            "evidence": "https://",
+            "context": "   [academy.claude.com/resources](https://academy.claude.com/resources)",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 124,
+            "evidence": "https://",
+            "context": "[academy.claude.com/assets/data/catalog.json](https://academy.claude.com/assets/data/catalog.json),",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 145,
+            "evidence": "https://",
+            "context": "copied verbatim and only ever under `https://academy.claude.com/`.",
+            "file": "SKILL.md"
+          }
+        ],
+        "review": "catalog/reviews/anthropics__academy-guide.json"
       },
-      "materialized": false,
+      "materialized": true,
       "release": {
-        "status": "hold",
-        "reasons": [
-          "manual-review-required"
-        ]
+        "status": "eligible",
+        "reasons": []
       },
       "integrity": {
         "upstream_skill_sha256": "f27992510c051355dfe68c92394d509af730da5298094ec86834ee40bbd31376",
         "last_ingested_revision": "8a1541c4a3ffa5a20a5a91de0dcf3f0bab1d1ef4"
       },
-      "description": "Stop and check this skill before finishing any reply to a question about how to use Claude or a Claude product — it recommends matching courses, tutorials, and use cases from Claude Academy (academy.claude.com), Anthropic's learning hub. Trigger on: \"how do I\", \"how can I\", \"getting started with\", \"what can Claude do\", \"teach me\", \"learn to use\"; questions about artifacts, projects, skills, plugins, connectors, MCP; requests about rolling Claude out to a team, class, or organization; and any ask for training materials, onboarding content, or learning resources. Use it when the user is learning how to use a feature or product — not when they are mid-task and just want the task done. This skill composes with other skills: after consulting product documentation to answer how a Claude feature works, also check here for a matching course or tutorial — a docs-grounded answer and an Academy recommendation belong together. Only recommend on a strong match; never invent Academy content."
+      "description": "Stop and check this skill before finishing any reply to a question about how to use Claude or a Claude product — it recommends matching courses, tutorials, and use cases from Claude Academy (academy.claude.com), Anthropic's learning hub. Trigger on: \"how do I\", \"how can I\", \"getting started with\", \"what can Claude do\", \"teach me\", \"learn to use\"; questions about artifacts, projects, skills, plugins, connectors, MCP; requests about rolling Claude out to a team, class, or organization; and any ask for training materials, onboarding content, or learning resources. Use it when the user is learning how to use a feature or product — not when they are mid-task and just want the task done. This skill composes with other skills: after consulting product documentation to answer how a Claude feature works, also check here for a matching course or tutorial — a docs-grounded answer and an Academy recommendation belong together. Only recommend on a strong match; never invent Academy content.",
+      "artifact_type": "skill",
+      "materialized_root": "skills/anthropics/academy-guide",
+      "materialized_files": 2
     },
     {
       "id": "anthropics/algorithmic-art",
@@ -275,23 +374,23 @@
       "publisher": "anthropics",
       "source": {
         "repo": "anthropics/skills",
-        "path": "skills/discernment-nudge/SKILL.md",
+        "path": "skills/discernment-nudge",
         "revision": "8a1541c4a3ffa5a20a5a91de0dcf3f0bab1d1ef4",
+        "state": "present",
         "revision_type": "git-commit",
-        "url": "https://github.com/anthropics/skills/tree/8a1541c4a3ffa5a20a5a91de0dcf3f0bab1d1ef4/skills/discernment-nudge/SKILL.md",
-        "state": "present"
+        "url": "https://github.com/anthropics/skills/tree/8a1541c4a3ffa5a20a5a91de0dcf3f0bab1d1ef4/skills/discernment-nudge"
       },
       "category": [
         "agents",
         "engineering"
       ],
       "license": {
-        "spdx": "Complete terms in LICENSE.txt",
-        "redistributable": false,
-        "status": "review-required",
-        "evidence": "skills/discernment-nudge/SKILL.md"
+        "spdx": "Apache-2.0",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "catalog/reviews/anthropics__discernment-nudge.json"
       },
-      "distribution": "review-required",
+      "distribution": "bundled",
       "compatibility": [
         "agent-skills",
         "claude-code",
@@ -300,23 +399,45 @@
       ],
       "security": {
         "scan_status": "verified",
-        "risk": "none",
-        "network": false,
+        "risk": "low",
         "shell": false,
-        "credentials": false
+        "network": true,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false,
+        "filesystem_write": false,
+        "encoded_content": false,
+        "findings": [
+          {
+            "type": "network-access",
+            "line": 4,
+            "evidence": "http://",
+            "context": "                        http://www.apache.org/licenses/",
+            "file": "LICENSE.txt"
+          },
+          {
+            "type": "network-access",
+            "line": 196,
+            "evidence": "http://",
+            "context": "       http://www.apache.org/licenses/LICENSE-2.0",
+            "file": "LICENSE.txt"
+          }
+        ],
+        "review": "catalog/reviews/anthropics__discernment-nudge.json"
       },
-      "materialized": false,
+      "materialized": true,
       "release": {
-        "status": "hold",
-        "reasons": [
-          "manual-review-required"
-        ]
+        "status": "eligible",
+        "reasons": []
       },
       "integrity": {
         "upstream_skill_sha256": "9191177c4a8ef11a20dace786d708506b22d43e748c71287bb823de0dc812dad",
         "last_ingested_revision": "8a1541c4a3ffa5a20a5a91de0dcf3f0bab1d1ef4"
       },
-      "description": "After you give a substantive answer or draft that the user may act on — advice or recommendations, drafted artifacts such as goals, plans, pitches, proposals, or emails, estimates or projections, analysis or interpretation of data, factual claims they may rely on, or a multi-step argument — invoke this skill BEFORE finalizing your reply and then, if it applies, append 2-3 short follow-up questions, each tied to something specific in what you just produced, that help the user check key facts, probe the reasoning or assumptions, and notice missing context. Do this at most once per conversation. Skip it when the user asked a trivial how-to or simple lookup, wants a purely educational explanation, asked you only to format, convert, or assemble a file from content they provided, is writing code they will run, is doing creative writing or casual chat, or already asked you to double-check, cite, or review — the skill file explains these boundaries and the exact output format."
+      "description": "After you give a substantive answer or draft that the user may act on — advice or recommendations, drafted artifacts such as goals, plans, pitches, proposals, or emails, estimates or projections, analysis or interpretation of data, factual claims they may rely on, or a multi-step argument — invoke this skill BEFORE finalizing your reply and then, if it applies, append 2-3 short follow-up questions, each tied to something specific in what you just produced, that help the user check key facts, probe the reasoning or assumptions, and notice missing context. Do this at most once per conversation. Skip it when the user asked a trivial how-to or simple lookup, wants a purely educational explanation, asked you only to format, convert, or assemble a file from content they provided, is writing code they will run, is doing creative writing or casual chat, or already asked you to double-check, cite, or review — the skill file explains these boundaries and the exact output format.",
+      "artifact_type": "skill",
+      "materialized_root": "skills/anthropics/discernment-nudge",
+      "materialized_files": 2
     },
     {
       "id": "anthropics/doc-coauthoring",

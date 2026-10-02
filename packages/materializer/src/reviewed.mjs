@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
 import { scanText, riskLevel } from "../../security/src/index.mjs";
+import { parseFrontmatter } from "../../core/src/index.mjs";
 
 export const sha256 = bytes => crypto.createHash("sha256").update(bytes).digest("hex");
 const riskOrder = ["none", "low", "medium", "high"];
@@ -76,12 +77,10 @@ export function verifyReviewedDirectory(skill, review, directory) {
     for (const key of Object.keys(capabilities)) capabilities[key] ||= scan.capabilities[key];
   }
   const skillText = fs.readFileSync(path.join(root, "SKILL.md"), "utf8");
-  const frontmatter = skillText.match(/^---\r?\n([\s\S]*?)\r?\n---/);
-  const fields = Object.fromEntries((frontmatter?.[1] ?? "").split(/\r?\n/).map(line => {
-    const index = line.indexOf(":");
-    return [line.slice(0, index), line.slice(index + 1).trim()];
-  }));
-  if (fields.name !== skill.name || !fields.description || fields.description.length > 1024 || fields.license !== `Complete terms in ${review.license.path}`) fail("Invalid licensed skill frontmatter");
+  const fields = parseFrontmatter(skillText);
+  const description = fields.description?.trim() ?? "";
+  if (/^[>|][+-]?\d*$/.test(description)) fail("Unparsed frontmatter description");
+  if (fields.name !== skill.name || !description || description.length > 1024 || fields.license !== `Complete terms in ${review.license.path}`) fail("Invalid licensed skill frontmatter");
   const license = fs.readFileSync(path.join(root, review.license.path), "utf8");
   if (!/Apache License\s+Version 2\.0/.test(license) || !license.includes("Grant of Copyright License") || !license.includes("Redistribution.")) fail("Local Apache license text missing");
   const rawRisk = riskLevel({ findings });
