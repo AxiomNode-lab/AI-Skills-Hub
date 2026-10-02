@@ -117,6 +117,29 @@ pnpm cli
 
 Use the `Space` bar to select capabilities and `Enter` to confirm.
 
+### 6. Use It From Your Own Project
+
+The CLI reads the catalog from the Hub checkout, wherever it is run, and installs into the current directory. Point it at your clone once:
+
+```bash
+alias skills-hub="node /path/to/AI-Skills-Hub/packages/cli/bin/skills-hub.mjs"
+cd ~/my-project
+skills-hub search "frontend design" --agent claude-code
+skills-hub install anthropics/frontend-design --agent claude-code
+```
+
+`SKILLS_HUB_HOME` selects a different Hub checkout. `SKILLS_HUB_NO_UPDATE_CHECK=1` disables the version check, which is also skipped in CI and when output is not a terminal.
+
+### 7. Give Your Agent the Catalog (MCP)
+
+`skills-hub mcp` runs a read-only MCP server over stdio. Agents get `search_skills` and `get_skill` tools, and can read the files of released skills as resources. Nothing is installed through MCP.
+
+```bash
+claude mcp add skills-hub -- node /path/to/AI-Skills-Hub/packages/cli/bin/skills-hub.mjs mcp
+```
+
+`skills-hub serve` exposes the same catalog as a read-only HTTP API on `127.0.0.1:8787`, with an MCP endpoint at `POST /mcp`. See [MCP](docs/MCP.md) for Codex and other clients, and [API](docs/API.md) for routes.
+
 ---
 
 ## Architecture

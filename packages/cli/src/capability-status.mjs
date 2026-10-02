@@ -1,14 +1,7 @@
+import { catalogAvailability } from "@ai-skills-hub/core";
 import { readInstallRecords, verifyInstallRecord } from "../../installer/src/state.mjs";
 
-export function catalogAvailability(cap) {
-  if (cap.distribution === "blocked") return { status: "blocked", reason: "registry_blocked" };
-  if (cap.distribution === "review-required") return { status: "review-required", reason: "manual_review_required" };
-  if (cap.distribution === "source-direct") return { status: "source-direct", reason: "external_confirmation_required" };
-  if (cap.distribution === "bundled" && cap.materialized && cap.release?.status === "eligible") {
-    return { status: "eligible", reason: "release_eligible_materialized_bundle" };
-  }
-  return { status: "catalog-only", reason: cap.distribution === "bundled" ? "bundle_not_released" : "no_local_installation_plan" };
-}
+export { catalogAvailability };
 
 export function recordedInstallation(record) {
   const base = { agent: record.agent, scope: record.scope, destination: record.destination ?? null };

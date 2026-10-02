@@ -2,6 +2,22 @@
 
 All notable changes to AI Skills Hub are documented here.
 
+## Unreleased
+
+### Added
+- `skills-hub mcp` (stdio) and `skills-hub serve` (HTTP) run a read-only catalog server with `search_skills` and `get_skill` MCP tools, released-skill file resources, and the `/api` routes in docs/API.md.
+- `parseFrontmatter` in `@ai-skills-hub/core` reads folded and literal YAML block scalars.
+- `scripts/repair-descriptions.mjs` re-reads broken descriptions from pinned, hash-verified upstream files.
+
+### Fixed
+- The CLI resolves the catalog and materialized skills from the Hub root (or `SKILLS_HUB_HOME`), so it works inside any project instead of only the Hub checkout.
+- 107 catalog descriptions stored as bare `>`/`|` indicators were repaired from their pinned upstream SKILL.md files.
+- The update check reads the Hub's own version, and is skipped in CI, non-TTY output, and with `SKILLS_HUB_NO_UPDATE_CHECK`.
+- `info` exits 1 for a missing or unknown ID.
+
+### Corrected
+- The 0.2.0 notes below listed a registry API, MCP server, and browser catalog that were not present in the repository. The API and MCP server now exist; the browser catalog does not.
+
 ## 0.2.0 — 2026-10-01
 
 ### Added

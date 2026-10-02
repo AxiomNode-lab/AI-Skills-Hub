@@ -30,6 +30,8 @@ node -e "const c=require('./catalog/skills.json'); console.log('total',c.skills.
 - Eligible materialized bundles use the native installer. Three reviewed text-only skills are available in the current catalog. Source-direct skills require explicit external-install consent; review and blocked states are not overridden by `--yes`.
 - `add` accepts a Git URL (cloned into `capabilities-library` for review) or starts interactive hybrid discovery. Remote queries do not require a `--remote` flag; the CLI has no such option. Selection and external execution are separate steps.
 - The no-command flow browses/searches compatible catalog entries interactively. Installs are sequential, not parallel.
+- The CLI resolves the catalog and materialized skills from the Hub root (or `SKILLS_HUB_HOME`) and installs relative to the current directory, so it can be run inside any project.
+- `mcp` (stdio) and `serve` (HTTP, `127.0.0.1:8787` by default) run a read-only catalog server: `search_skills` and `get_skill` MCP tools, released-skill file resources, and the routes in [API](API.md). No browser catalog exists yet.
 - `create`, `sync`, and interactive `uninstall` are also available. See `node packages/cli/bin/skills-hub.mjs help` and [installation](INSTALLATION.md).
 
 ## Library capabilities and limits
