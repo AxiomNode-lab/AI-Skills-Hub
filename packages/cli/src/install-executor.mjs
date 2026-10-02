@@ -2,6 +2,7 @@ import { execFileSync } from "node:child_process";
 import { buildAdapterPlan } from "@ai-skills-hub/discovery";
 import { getAdapter } from "../../installer/src/adapters/index.mjs";
 import { writeInstallRecord } from "../../installer/src/state.mjs";
+import { buildInstallPlan } from "../../installer/src/index.mjs";
 
 const TRUSTED_BINARIES = new Set(["npx", "pnpm", "codex", "claude", "copilot"]);
 
@@ -116,12 +117,19 @@ export async function installCapability(
     scope = "project",
     cwd = process.cwd(),
     confirmed = false,
-    env = {}
+    env = {},
+    json = false
   } = {}
 ) {
   if (!agent) throw new Error("Target agent is required.");
 
-  const plan = buildAdapterPlan(capability, agent, { scope });
+  let plan = buildAdapterPlan(capability, agent, { scope });
+  if ((capability.artifact_type ?? capability.type ?? "skill") === "skill") {
+    const [policy] = buildInstallPlan([{
+      ...capability, license: capability.license ?? {}, source: capability.source ?? {}
+    }], agent);
+    if (policy.action !== "source-direct") plan = policy;
+  }
 
   if (["incompatible", "blocked", "adapter-pending", "unsupported"].includes(plan.action)) {
     return { ...plan, action: plan.action, installed: false };
@@ -161,13 +169,14 @@ export async function installCapability(
     assertSafeExternalPlan(plan, agent);
     execFileSync(plan.argv[0], plan.argv.slice(1), {
       cwd,
-      stdio: "inherit",
+      stdio: json ? ["ignore", "pipe", "pipe"] : "inherit",
       env: { ...process.env, ...env }
     });
 
     return {
       ...plan,
-      installed: true,
+      installed: plan.action !== "marketplace",
+      reason: plan.action === "marketplace" ? "marketplace_added_plugin_installation_pending" : null,
       external: true,
       destination: null
     };

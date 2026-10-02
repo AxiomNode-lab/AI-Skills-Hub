@@ -1,6 +1,7 @@
 import { readLocalCapabilities } from "../utils.mjs";
 import fs from "node:fs/promises";
 import path from "node:path";
+import { statusReader, printCapabilityStatus } from "../capability-status.mjs";
 
 export async function infoCommand(id, options = {}) {
   if (!id) {
@@ -16,7 +17,7 @@ export async function infoCommand(id, options = {}) {
     return;
   }
 
-  const output = { ...cap };
+  const output = { ...cap, hub_status: statusReader(options)(cap) };
   if (cap.artifact_type === "skill" && cap.materialized_root) {
     const skillPath = path.join(path.resolve(cap.materialized_root), "SKILL.md");
     try {
@@ -34,6 +35,7 @@ export async function infoCommand(id, options = {}) {
   console.log("==========================================");
   console.log(` ID:           ${cap.id}`);
   console.log(` Name:         ${cap.name}`);
+  printCapabilityStatus(output.hub_status);
   console.log(` Type:         ${cap.artifact_type || cap.type || "skill"}`);
   console.log(` Publisher:    ${cap.publisher || "N/A"}`);
   console.log(` Distribution: ${cap.distribution}`);
