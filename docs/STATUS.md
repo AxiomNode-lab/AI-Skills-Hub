@@ -6,13 +6,13 @@ Repository snapshot: 2026-10-02. Counts below come from `catalog/skills.json`, `
 
 | Distribution | Records |
 | --- | ---: |
-| bundled | 5 |
+| bundled | 27 |
 | source-direct | 12 |
-| review-required | 497 |
+| review-required | 475 |
 | blocked | 20 |
 | **Total** | **534** |
 
-529 records have `release.status: hold`; 5 are materialized and release-eligible: `anthropics/frontend-design`, `anthropics/brand-guidelines`, `anthropics/internal-comms`, `anthropics/academy-guide`, and `anthropics/discernment-nudge`. [Release evidence](VERIFIED-LOCAL-SKILLS.md) records their pinned provenance, file-level license decisions, scans, and hashes. Installation success is not task-performance evaluation. There are 7 bundle definitions and 15 source/provider/standard records. The local contract treats these as Skills: 65 explicitly declare `artifact_type: skill`, and 469 omit it and use the default. The catalog currently contains no explicit MCP server, Agent Plugin, or CLI tool records.
+507 records have `release.status: hold`; 27 are materialized and release-eligible: five Anthropic skills under skill-local Apache-2.0 licenses and 22 from microsoft/skills, obra/superpowers, and K-Dense under a repository-root MIT license (see the [license policy](LICENSE-POLICY.md)). [Release evidence](VERIFIED-LOCAL-SKILLS.md) records their pinned provenance, file-level license decisions, scans, and hashes. Installation success is not task-performance evaluation. There are 7 bundle definitions and 15 source/provider/standard records. The local contract treats these as Skills: 87 explicitly declare `artifact_type: skill`, and 447 omit it and use the default. The catalog currently contains no explicit MCP server, Agent Plugin, or CLI tool records.
 
 Reproduce the distribution counts from the repository root:
 
@@ -27,7 +27,7 @@ node -e "const c=require('./catalog/skills.json'); console.log('total',c.skills.
 - `search` searches the local catalog. A phrase or keyword must match before agent/status ranking bonuses apply. `--agent` filters compatibility.
 - `info` and `search` separate catalog availability from verified Hub installation state. `list` reads installation records for the selected scope and agent, not the catalog.
 - `install` accepts explicit IDs, checks skill compatibility and distribution/release gates, and reports every outcome. JSON success requires all requested installations and resolved dependencies to succeed; incomplete requests exit 1.
-- Eligible materialized bundles use the native installer. Five reviewed text-only skills are available in the current catalog. Source-direct skills require explicit external-install consent; review and blocked states are not overridden by `--yes`.
+- Eligible materialized bundles use the native installer. 27 reviewed text-only skills are available in the current catalog. Source-direct skills require explicit external-install consent; review and blocked states are not overridden by `--yes`.
 - `add` accepts a Git URL (cloned into `capabilities-library` for review) or starts interactive hybrid discovery. Remote queries do not require a `--remote` flag; the CLI has no such option. Selection and external execution are separate steps.
 - The no-command flow browses/searches compatible catalog entries interactively. Installs are sequential, not parallel.
 - The CLI resolves the catalog and materialized skills from the Hub root (or `SKILLS_HUB_HOME`) and installs relative to the current directory, so it can be run inside any project.

@@ -104,7 +104,9 @@ for (const skill of released) {
       assert.equal(result.status, 0, result.stdout + result.stderr);
       return JSON.parse(result.stdout);
     };
-    const installed = run("install", skill.id, "--agent", "codex", "--scope", "project");
+    // Install for Codex when the catalog lists it, otherwise for the generic Agent Skills target.
+    const agent = skill.compatibility.includes("codex") ? "codex" : "agent-skills";
+    const installed = run("install", skill.id, "--agent", agent, "--scope", "project");
     assert.equal(installed.success, true);
     const target = path.join(cwd, ".agents", "skills", skill.name);
     assert.equal(installed.results[0].destination, target);
@@ -119,10 +121,10 @@ for (const skill of released) {
     assert.equal(record.source.revision, skill.source.revision);
     assert.equal(record.files.length, manifest.materialized_files.length);
     assert.equal(verifyInstallRecord(record).ok, true);
-    assert.equal(run("info", skill.id, "--agent", "codex").hub_status.installation.status, "installed");
-    assert.equal(run("list", "--agent", "codex")[0].hub_status.installation.status, "installed");
+    assert.equal(run("info", skill.id, "--agent", agent).hub_status.installation.status, "installed");
+    assert.equal(run("list", "--agent", agent)[0].hub_status.installation.status, "installed");
     fs.appendFileSync(path.join(target, "SKILL.md"), "\nchanged\n");
     assert.equal(verifyInstallRecord(record).ok, false);
-    assert.equal(run("list", "--agent", "codex")[0].hub_status.installation.status, "unverified");
+    assert.equal(run("list", "--agent", agent)[0].hub_status.installation.status, "unverified");
   });
 }

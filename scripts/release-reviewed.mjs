@@ -23,7 +23,7 @@ const manifest = {
   schema_version: "0.2", skill_id: id, source: review.source,
   review: { path: reviewPath, sha256: sha256(reviewBytes) },
   security_scan: staged.security,
-  materialized_files: review.files.map(({ path, sha256, bytes, mode }) => ({ path, sha256, bytes, mode })),
+  materialized_files: review.files.map(({ path, sha256, bytes, mode, attached, source_path }) => ({ path, sha256, bytes, mode, ...(attached ? { attached, source_path } : {}) })),
   total_bytes: staged.security.total_bytes
 };
 fs.mkdirSync("catalog/materialized-manifests", { recursive: true });
@@ -31,10 +31,10 @@ fs.writeFileSync("catalog/materialized-manifests/" + id.replaceAll("/", "__") + 
 // Publish eligibility only after the files and their evidence exist and verify.
 Object.assign(skill, {
   artifact_type: "skill", source: { ...review.source, state: "present", revision_type: "git-commit", url: `https://github.com/${review.source.repo}/tree/${review.source.revision}/${review.source.path}` },
-  license: { spdx: "Apache-2.0", redistributable: true, status: "verified", evidence: reviewPath },
+  license: { spdx: review.license.spdx, redistributable: true, status: "verified", scope: review.license.scope ?? "skill-local", evidence: reviewPath },
   distribution: "bundled", materialized: true, materialized_root: destination.split(path.sep).join("/"), materialized_files: review.files.length,
   security: { scan_status: "verified", risk: staged.security.risk, ...staged.security.capabilities, findings: staged.security.findings, review: reviewPath },
-  integrity: { upstream_skill_sha256: review.files.find(file => file.path === "SKILL.md").sha256, last_ingested_revision: review.source.revision },
+  integrity: { upstream_skill_sha256: review.files.find(file => file.path === "SKILL.md" && !file.attached).sha256, last_ingested_revision: review.source.revision },
   release: { status: "eligible", reasons: [] }
 });
 fs.writeFileSync(registryPath, JSON.stringify(registry, null, 2) + "\n");

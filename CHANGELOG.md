@@ -8,6 +8,9 @@ All notable changes to AI Skills Hub are documented here.
 - `skills-hub mcp` (stdio) and `skills-hub serve` (HTTP) run a read-only catalog server with `search_skills` and `get_skill` MCP tools, released-skill file resources, and the `/api` routes in docs/API.md.
 - `parseFrontmatter` in `@ai-skills-hub/core` reads folded and literal YAML block scalars.
 - `scripts/repair-descriptions.mjs` re-reads broken descriptions from pinned, hash-verified upstream files.
+- `scripts/draft-review.mjs` drafts a release review from a pinned Git tree; drafts cannot pass the release gate until a reviewer approves every finding.
+- Repository-root MIT licenses can cover a skill under the conditions in docs/LICENSE-POLICY.md; the root license ships with the skill as an attached `LICENSE.txt`.
+- 24 more reviewed skills are released: `anthropics/academy-guide`, `anthropics/discernment-nudge`, and 22 MIT skills from microsoft/skills, obra/superpowers, and K-Dense (27 installable in total).
 
 ### Fixed
 - The CLI resolves the catalog and materialized skills from the Hub root (or `SKILLS_HUB_HOME`), so it works inside any project instead of only the Hub checkout.

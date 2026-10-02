@@ -1,0 +1,94 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "microsoft/azure-communication-callingserver-java",
+  "status": "approved",
+  "reviewed_on": "2026-10-02",
+  "reviewer": "AI-assisted artifact review; not an independent security certification",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/azure-sdk-java/skills/azure-communication-callingserver-java",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": ".github/plugins/azure-sdk-java/skills/azure-communication-callingserver-java",
+    "url": "https://api.github.com/repos/microsoft/skills/git/trees/84d8eaa8ae95930f55cdceb3e27196c795dab038?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/microsoft/skills/blob/84d8eaa8ae95930f55cdceb3e27196c795dab038/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        ".github",
+        ".github/plugins",
+        ".github/plugins/azure-sdk-java",
+        ".github/plugins/azure-sdk-java/skills",
+        ".github/plugins/azure-sdk-java/skills/azure-communication-callingserver-java"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT License with its copyright notice, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares license MIT, consistent with the root license. Every file was read in full; no third-party copyright notice, other license grant, or copied third-party text was found. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "low",
+    "blocking_findings": [],
+    "capabilities": {
+      "network": false,
+      "filesystem_write": false
+    },
+    "notes": [
+      "Read SKILL.md and references/examples.md in full. Migration notes from the deprecated CallingServer Java SDK to Call Automation: Maven snippets and Java samples with a '<connection-string>' placeholder.",
+      "No commands to run, credentials, or downloads. references/examples.md ends with a relative link to a sibling skill (../callautomation/SKILL.md) that is not part of this artifact; the link will not resolve after installation, which affects only that pointer."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "git_blob": "79656060de00aa4659ad2c276d5be8830664d544",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry the copyright and permission notice.",
+      "findings": []
+    },
+    {
+      "path": "references/examples.md",
+      "sha256": "6588c0ca75d41645f10111e96909f9b0b89770795a67963686e4f1c8a9f8112c",
+      "bytes": 2586,
+      "mode": "100644",
+      "git_blob": "d4f277dfd7f298baf635375ee948ccb8bb034300",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "15e43981fbfcc9b9da3ca63e55a6953a5201626c7135fee578fc3224825440ea",
+      "bytes": 2864,
+      "mode": "100644",
+      "git_blob": "c2bde1986d3ace215f6a28e923e5399326a9882e",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": []
+    }
+  ]
+}

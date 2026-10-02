@@ -2254,11 +2254,11 @@
       "publisher": "K-Dense-AI",
       "source": {
         "repo": "K-Dense-AI/scientific-agent-skills",
-        "path": "skills/consciousness-council/SKILL.md",
+        "path": "skills/consciousness-council",
         "revision": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+        "state": "present",
         "revision_type": "git-commit",
-        "url": "https://github.com/K-Dense-AI/scientific-agent-skills/tree/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/consciousness-council/SKILL.md",
-        "state": "present"
+        "url": "https://github.com/K-Dense-AI/scientific-agent-skills/tree/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/consciousness-council"
       },
       "category": [
         "research"
@@ -2267,31 +2267,82 @@
         "spdx": "MIT",
         "redistributable": true,
         "status": "verified",
-        "evidence": "skills/consciousness-council/SKILL.md"
+        "scope": "repository",
+        "evidence": "catalog/reviews/kdense__consciousness-council.json"
       },
-      "distribution": "review-required",
+      "distribution": "bundled",
       "compatibility": [
         "agent-skills"
       ],
       "security": {
-        "scan_status": "review-required",
+        "scan_status": "verified",
         "risk": "low",
-        "network": true,
         "shell": false,
-        "credentials": false
+        "network": true,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false,
+        "filesystem_write": true,
+        "encoded_content": false,
+        "findings": [
+          {
+            "type": "filesystem-write",
+            "line": 50,
+            "evidence": "remove",
+            "context": "| 11  | **The Minimalist** | Simplification, constraint-seeking     | \"What can we remove?\"                        | Can oversimplify complex problems         |",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 172,
+            "evidence": "https://",
+            "context": "This specific prompt workflow and its optional scoring have not been benchmarked for decision accuracy. Multi-agent studies do not directly validate several voices generated in one conversation. [Baltaji et al. (2024)](https://arxiv.org/abs",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 172,
+            "evidence": "https://",
+            "context": "This specific prompt workflow and its optional scoring have not been benchmarked for decision accuracy. Multi-agent studies do not directly validate several voices generated in one conversation. [Baltaji et al. (2024)](https://arxiv.org/abs",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 176,
+            "evidence": "https://",
+            "context": "Originally created by [AHK Strategies](https://www.ahkstrategies.net/), with inspiration from [MindBook](https://themindbook.app/). The [current MindBook FAQ](https://themindbook.app/help), reviewed 2026-09-30, distinguishes its 12-archetyp",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 176,
+            "evidence": "https://",
+            "context": "Originally created by [AHK Strategies](https://www.ahkstrategies.net/), with inspiration from [MindBook](https://themindbook.app/). The [current MindBook FAQ](https://themindbook.app/help), reviewed 2026-09-30, distinguishes its 12-archetyp",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 176,
+            "evidence": "https://",
+            "context": "Originally created by [AHK Strategies](https://www.ahkstrategies.net/), with inspiration from [MindBook](https://themindbook.app/). The [current MindBook FAQ](https://themindbook.app/help), reviewed 2026-09-30, distinguishes its 12-archetyp",
+            "file": "SKILL.md"
+          }
+        ],
+        "review": "catalog/reviews/kdense__consciousness-council.json"
       },
-      "materialized": false,
+      "materialized": true,
       "release": {
-        "status": "hold",
-        "reasons": [
-          "manual-review-required"
-        ]
+        "status": "eligible",
+        "reasons": []
       },
       "integrity": {
         "upstream_skill_sha256": "84b5eb07e5459cc110d7d6f63be48a7a01d374ec618da8e293a88b1d037c0c8c",
         "last_ingested_revision": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298"
       },
-      "description": "Structures a multi-perspective council exercise for decisions, research trade-offs, and creative challenges. Simulates thinking archetypes, separates evidence from assumptions and values, and synthesizes a conditional recommendation. Use when the user requests a council, panel, devil's advocate analysis, \"mind council\", or deliberate comparison of perspectives on a difficult choice."
+      "description": "Structures a multi-perspective council exercise for decisions, research trade-offs, and creative challenges. Simulates thinking archetypes, separates evidence from assumptions and values, and synthesizes a conditional recommendation. Use when the user requests a council, panel, devil's advocate analysis, \"mind council\", or deliberate comparison of perspectives on a difficult choice.",
+      "artifact_type": "skill",
+      "materialized_root": "skills/kdense/consciousness-council",
+      "materialized_files": 3
     },
     {
       "id": "kdense/dask",
@@ -2664,11 +2715,11 @@
       "publisher": "K-Dense-AI",
       "source": {
         "repo": "K-Dense-AI/scientific-agent-skills",
-        "path": "skills/dhdna-profiler/SKILL.md",
+        "path": "skills/dhdna-profiler",
         "revision": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+        "state": "present",
         "revision_type": "git-commit",
-        "url": "https://github.com/K-Dense-AI/scientific-agent-skills/tree/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/dhdna-profiler/SKILL.md",
-        "state": "present"
+        "url": "https://github.com/K-Dense-AI/scientific-agent-skills/tree/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/skills/dhdna-profiler"
       },
       "category": [
         "research"
@@ -2677,31 +2728,103 @@
         "spdx": "MIT",
         "redistributable": true,
         "status": "verified",
-        "evidence": "skills/dhdna-profiler/SKILL.md"
+        "scope": "repository",
+        "evidence": "catalog/reviews/kdense__dhdna-profiler.json"
       },
-      "distribution": "review-required",
+      "distribution": "bundled",
       "compatibility": [
         "agent-skills"
       ],
       "security": {
-        "scan_status": "review-required",
+        "scan_status": "verified",
         "risk": "low",
-        "network": true,
         "shell": false,
-        "credentials": false
+        "network": true,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false,
+        "filesystem_write": true,
+        "encoded_content": false,
+        "findings": [
+          {
+            "type": "network-access",
+            "line": 23,
+            "evidence": "https://",
+            "context": "The [IDNA v2 preprint](https://doi.org/10.5281/zenodo.18807387), section **2**, introduces the fourth-string temporal-attractor theory. This theoretical extension is not a validated longitudinal measurement or forecasting procedure. A time ",
+            "file": "references/advanced-profiling.md"
+          },
+          {
+            "type": "network-access",
+            "line": 47,
+            "evidence": "https://",
+            "context": "Reviewed September 30, 2026 against the [publisher's twelve public dimensions](https://www.ahkstrategies.net/dhdna), the [DHDNA preprint record](https://zenodo.org/records/18736629) and PDF (section 6.3), and the [IDNA v2 record](https://ze",
+            "file": "references/advanced-profiling.md"
+          },
+          {
+            "type": "network-access",
+            "line": 47,
+            "evidence": "https://",
+            "context": "Reviewed September 30, 2026 against the [publisher's twelve public dimensions](https://www.ahkstrategies.net/dhdna), the [DHDNA preprint record](https://zenodo.org/records/18736629) and PDF (section 6.3), and the [IDNA v2 record](https://ze",
+            "file": "references/advanced-profiling.md"
+          },
+          {
+            "type": "network-access",
+            "line": 47,
+            "evidence": "https://",
+            "context": "Reviewed September 30, 2026 against the [publisher's twelve public dimensions](https://www.ahkstrategies.net/dhdna), the [DHDNA preprint record](https://zenodo.org/records/18736629) and PDF (section 6.3), and the [IDNA v2 record](https://ze",
+            "file": "references/advanced-profiling.md"
+          },
+          {
+            "type": "network-access",
+            "line": 20,
+            "evidence": "https://",
+            "context": "The [current publisher page](https://www.ahkstrategies.net/dhdna) names twelve public dimensions as a design vocabulary. The table below maps those names to the existing skill's annotation labels. The observation criteria and score anchors ",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 22,
+            "evidence": "https://",
+            "context": "The [DHDNA preprint](https://doi.org/10.5281/zenodo.18736629), *DHDNA: A Framework for Ethical Digital Identity as Inheritable Heritage* (February 23, 2026), states in section 6.3 that validation was limited to internal testing. The [IDNA v",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 22,
+            "evidence": "https://",
+            "context": "The [DHDNA preprint](https://doi.org/10.5281/zenodo.18736629), *DHDNA: A Framework for Ethical Digital Identity as Inheritable Heritage* (February 23, 2026), states in section 6.3 that validation was limited to internal testing. The [IDNA v",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 136,
+            "evidence": "https://",
+            "context": "Original skill author: [AHK Strategies](https://www.ahkstrategies.net/). Related product: [MindBook](https://themindbook.app/). These public links are references, not service integrations. The skill's MIT license does not relicense the link",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 136,
+            "evidence": "https://",
+            "context": "Original skill author: [AHK Strategies](https://www.ahkstrategies.net/). Related product: [MindBook](https://themindbook.app/). These public links are references, not service integrations. The skill's MIT license does not relicense the link",
+            "file": "SKILL.md"
+          }
+        ],
+        "review": "catalog/reviews/kdense__dhdna-profiler.json"
       },
-      "materialized": false,
+      "materialized": true,
       "release": {
-        "status": "hold",
-        "reasons": [
-          "manual-review-required"
-        ]
+        "status": "eligible",
+        "reasons": []
       },
       "integrity": {
         "upstream_skill_sha256": "55cbc0e142ec3e6e6427c601391aeb38b8de6a83897082f46154f5c8273ccf50",
         "last_ingested_revision": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298"
       },
-      "description": "Applies the DHDNA framework as an exploratory rubric for reasoning and writing patterns in supplied text. Used for explicit requests for DHDNA, cognitive-style reflection, a thinking-pattern profile, or comparisons of textual reasoning. Scores describe evidence in the sample, not validated psychological traits or personal identity."
+      "description": "Applies the DHDNA framework as an exploratory rubric for reasoning and writing patterns in supplied text. Used for explicit requests for DHDNA, cognitive-style reflection, a thinking-pattern profile, or comparisons of textual reasoning. Scores describe evidence in the sample, not validated psychological traits or personal identity.",
+      "artifact_type": "skill",
+      "materialized_root": "skills/kdense/dhdna-profiler",
+      "materialized_files": 3
     },
     {
       "id": "kdense/diffdock",
@@ -11180,11 +11303,11 @@
       "publisher": "microsoft",
       "source": {
         "repo": "microsoft/skills",
-        "path": ".github/plugins/azure-sdk-java/skills/azure-communication-callingserver-java/SKILL.md",
+        "path": ".github/plugins/azure-sdk-java/skills/azure-communication-callingserver-java",
         "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038",
+        "state": "present",
         "revision_type": "git-commit",
-        "url": "https://github.com/microsoft/skills/tree/84d8eaa8ae95930f55cdceb3e27196c795dab038/.github/plugins/azure-sdk-java/skills/azure-communication-callingserver-java/SKILL.md",
-        "state": "present"
+        "url": "https://github.com/microsoft/skills/tree/84d8eaa8ae95930f55cdceb3e27196c795dab038/.github/plugins/azure-sdk-java/skills/azure-communication-callingserver-java"
       },
       "category": [
         "github",
@@ -11194,9 +11317,10 @@
         "spdx": "MIT",
         "redistributable": true,
         "status": "verified",
-        "evidence": ".github/plugins/azure-sdk-java/skills/azure-communication-callingserver-java/SKILL.md"
+        "scope": "repository",
+        "evidence": "catalog/reviews/microsoft__azure-communication-callingserver-java.json"
       },
-      "distribution": "review-required",
+      "distribution": "bundled",
       "compatibility": [
         "agent-skills",
         "github-copilot",
@@ -11205,23 +11329,30 @@
       ],
       "security": {
         "scan_status": "verified",
-        "risk": "none",
-        "network": false,
+        "risk": "low",
         "shell": false,
-        "credentials": false
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false,
+        "filesystem_write": false,
+        "encoded_content": false,
+        "findings": [],
+        "review": "catalog/reviews/microsoft__azure-communication-callingserver-java.json"
       },
-      "materialized": false,
+      "materialized": true,
       "release": {
-        "status": "hold",
-        "reasons": [
-          "manual-review-required"
-        ]
+        "status": "eligible",
+        "reasons": []
       },
       "integrity": {
         "upstream_skill_sha256": "15e43981fbfcc9b9da3ca63e55a6953a5201626c7135fee578fc3224825440ea",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "Azure Communication Services CallingServer (legacy) Java SDK. Note - This SDK is deprecated. Use azure-communication-callautomation instead for new projects. Only use this skill when maintaining legacy code."
+      "description": "Azure Communication Services CallingServer (legacy) Java SDK. Note - This SDK is deprecated. Use azure-communication-callautomation instead for new projects. Only use this skill when maintaining legacy code.",
+      "artifact_type": "skill",
+      "materialized_root": "skills/microsoft/azure-communication-callingserver-java",
+      "materialized_files": 3
     },
     {
       "id": "microsoft/azure-communication-chat-java",
@@ -14417,11 +14548,11 @@
       "publisher": "microsoft",
       "source": {
         "repo": "microsoft/skills",
-        "path": ".github/plugins/azure-sdk-java/skills/azure-monitor-opentelemetry-exporter-java/SKILL.md",
+        "path": ".github/plugins/azure-sdk-java/skills/azure-monitor-opentelemetry-exporter-java",
         "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038",
+        "state": "present",
         "revision_type": "git-commit",
-        "url": "https://github.com/microsoft/skills/tree/84d8eaa8ae95930f55cdceb3e27196c795dab038/.github/plugins/azure-sdk-java/skills/azure-monitor-opentelemetry-exporter-java/SKILL.md",
-        "state": "present"
+        "url": "https://github.com/microsoft/skills/tree/84d8eaa8ae95930f55cdceb3e27196c795dab038/.github/plugins/azure-sdk-java/skills/azure-monitor-opentelemetry-exporter-java"
       },
       "category": [
         "github",
@@ -14431,9 +14562,10 @@
         "spdx": "MIT",
         "redistributable": true,
         "status": "verified",
-        "evidence": ".github/plugins/azure-sdk-java/skills/azure-monitor-opentelemetry-exporter-java/SKILL.md"
+        "scope": "repository",
+        "evidence": "catalog/reviews/microsoft__azure-monitor-opentelemetry-exporter-java.json"
       },
-      "distribution": "review-required",
+      "distribution": "bundled",
       "compatibility": [
         "agent-skills",
         "github-copilot",
@@ -14441,24 +14573,172 @@
         "cursor"
       ],
       "security": {
-        "scan_status": "review-required",
+        "scan_status": "verified",
         "risk": "low",
-        "network": true,
         "shell": true,
-        "credentials": false
+        "network": true,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false,
+        "filesystem_write": true,
+        "encoded_content": false,
+        "findings": [
+          {
+            "type": "filesystem-write",
+            "line": 15,
+            "evidence": "Remove",
+            "context": "### Remove (Deprecated)",
+            "file": "references/examples.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 18,
+            "evidence": "REMOVE",
+            "context": "<!-- REMOVE THIS -->",
+            "file": "references/examples.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 39,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "references/examples.md"
+          },
+          {
+            "type": "network-access",
+            "line": 40,
+            "evidence": "https://",
+            "context": "APPLICATIONINSIGHTS_CONNECTION_STRING=InstrumentationKey=xxx;IngestionEndpoint=https://xxx.in.applicationinsights.azure.com/",
+            "file": "references/examples.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 168,
+            "evidence": "Remove",
+            "context": "4. Remove manual span processor registration (unless custom processors needed)",
+            "file": "references/examples.md"
+          },
+          {
+            "type": "network-access",
+            "line": 175,
+            "evidence": "https://",
+            "context": "| Migration Guide | https://github.com/Azure/azure-sdk-for-java/blob/main/sdk/monitor/azure-monitor-opentelemetry-exporter/MIGRATION.md |",
+            "file": "references/examples.md"
+          },
+          {
+            "type": "network-access",
+            "line": 176,
+            "evidence": "https://",
+            "context": "| Autoconfigure Package | https://central.sonatype.com/artifact/com.azure/azure-monitor-opentelemetry-autoconfigure |",
+            "file": "references/examples.md"
+          },
+          {
+            "type": "network-access",
+            "line": 177,
+            "evidence": "https://",
+            "context": "| OpenTelemetry Java | https://opentelemetry.io/docs/languages/java/ |",
+            "file": "references/examples.md"
+          },
+          {
+            "type": "network-access",
+            "line": 178,
+            "evidence": "https://",
+            "context": "| Application Insights | https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview |",
+            "file": "references/examples.md"
+          },
+          {
+            "type": "network-access",
+            "line": 18,
+            "evidence": "https://",
+            "context": "> See [Migration Guide](https://github.com/Azure/azure-sdk-for-java/blob/main/sdk/monitor/azure-monitor-opentelemetry-exporter/MIGRATION.md) for detailed instructions.",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 44,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 45,
+            "evidence": "https://",
+            "context": "APPLICATIONINSIGHTS_CONNECTION_STRING=InstrumentationKey=xxx;IngestionEndpoint=https://xxx.in.applicationinsights.azure.com/",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 254,
+            "evidence": "Remove",
+            "context": "   <!-- Remove -->",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 267,
+            "evidence": "https://",
+            "context": "2. Update initialization code per [Migration Guide](https://github.com/Azure/azure-sdk-for-java/blob/main/sdk/monitor/azure-monitor-opentelemetry-exporter/MIGRATION.md)",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 283,
+            "evidence": "https://",
+            "context": "| Maven Package | https://central.sonatype.com/artifact/com.azure/azure-monitor-opentelemetry-exporter |",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 284,
+            "evidence": "https://",
+            "context": "| GitHub | https://github.com/Azure/azure-sdk-for-java/tree/main/sdk/monitor/azure-monitor-opentelemetry-exporter |",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 285,
+            "evidence": "https://",
+            "context": "| Migration Guide | https://github.com/Azure/azure-sdk-for-java/blob/main/sdk/monitor/azure-monitor-opentelemetry-exporter/MIGRATION.md |",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 286,
+            "evidence": "https://",
+            "context": "| Autoconfigure Package | https://central.sonatype.com/artifact/com.azure/azure-monitor-opentelemetry-autoconfigure |",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 287,
+            "evidence": "https://",
+            "context": "| OpenTelemetry Java | https://opentelemetry.io/docs/languages/java/ |",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 288,
+            "evidence": "https://",
+            "context": "| Application Insights | https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview |",
+            "file": "SKILL.md"
+          }
+        ],
+        "review": "catalog/reviews/microsoft__azure-monitor-opentelemetry-exporter-java.json"
       },
-      "materialized": false,
+      "materialized": true,
       "release": {
-        "status": "hold",
-        "reasons": [
-          "manual-review-required"
-        ]
+        "status": "eligible",
+        "reasons": []
       },
       "integrity": {
         "upstream_skill_sha256": "2ecdd3db79950efc38de599e90887a41f34e9a670949b9be8e6708578dbad6df",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "Azure Monitor OpenTelemetry Exporter for Java. Export OpenTelemetry traces, metrics, and logs to Azure Monitor/Application Insights. Triggers: \"AzureMonitorExporter java\", \"opentelemetry azure java\", \"application insights java otel\", \"azure monitor tracing java\". Note: This package is DEPRECATED. Migrate to azure-monitor-opentelemetry-autoconfigure."
+      "description": "Azure Monitor OpenTelemetry Exporter for Java. Export OpenTelemetry traces, metrics, and logs to Azure Monitor/Application Insights. Triggers: \"AzureMonitorExporter java\", \"opentelemetry azure java\", \"application insights java otel\", \"azure monitor tracing java\". Note: This package is DEPRECATED. Migrate to azure-monitor-opentelemetry-autoconfigure.",
+      "artifact_type": "skill",
+      "materialized_root": "skills/microsoft/azure-monitor-opentelemetry-exporter-java",
+      "materialized_files": 3
     },
     {
       "id": "microsoft/azure-monitor-opentelemetry-exporter-py",
@@ -17549,11 +17829,11 @@
       "publisher": "microsoft",
       "source": {
         "repo": "microsoft/skills",
-        "path": ".github/skills/github-issue-creator/SKILL.md",
+        "path": ".github/skills/github-issue-creator",
         "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038",
+        "state": "present",
         "revision_type": "git-commit",
-        "url": "https://github.com/microsoft/skills/tree/84d8eaa8ae95930f55cdceb3e27196c795dab038/.github/skills/github-issue-creator/SKILL.md",
-        "state": "present"
+        "url": "https://github.com/microsoft/skills/tree/84d8eaa8ae95930f55cdceb3e27196c795dab038/.github/skills/github-issue-creator"
       },
       "category": [
         "github",
@@ -17563,9 +17843,10 @@
         "spdx": "MIT",
         "redistributable": true,
         "status": "verified",
-        "evidence": "LICENSE"
+        "scope": "repository",
+        "evidence": "catalog/reviews/microsoft__github-issue-creator.json"
       },
-      "distribution": "review-required",
+      "distribution": "bundled",
       "compatibility": [
         "agent-skills",
         "github-copilot",
@@ -17574,23 +17855,30 @@
       ],
       "security": {
         "scan_status": "verified",
-        "risk": "none",
-        "network": false,
+        "risk": "low",
         "shell": false,
-        "credentials": false
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false,
+        "filesystem_write": true,
+        "encoded_content": false,
+        "findings": [],
+        "review": "catalog/reviews/microsoft__github-issue-creator.json"
       },
-      "materialized": false,
+      "materialized": true,
       "release": {
-        "status": "hold",
-        "reasons": [
-          "manual-review-required"
-        ]
+        "status": "eligible",
+        "reasons": []
       },
       "integrity": {
         "upstream_skill_sha256": "b6515408456d0eccf77ebd8418aec34f3f0ccdf25919a9486da24a8d0f029da8",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "Convert raw notes, error logs, voice dictation, or screenshots into crisp GitHub-flavored markdown issue reports. Use when the user pastes bug info, error messages, or informal descriptions and wants a structured GitHub issue. Supports images/GIFs for visual evidence."
+      "description": "Convert raw notes, error logs, voice dictation, or screenshots into crisp GitHub-flavored markdown issue reports. Use when the user pastes bug info, error messages, or informal descriptions and wants a structured GitHub issue. Supports images/GIFs for visual evidence.",
+      "artifact_type": "skill",
+      "materialized_root": "skills/microsoft/github-issue-creator",
+      "materialized_files": 2
     },
     {
       "id": "microsoft/install-atk",
@@ -17598,11 +17886,11 @@
       "publisher": "microsoft",
       "source": {
         "repo": "microsoft/skills",
-        "path": ".github/plugins/microsoft-365-agents-toolkit/skills/install-atk/SKILL.md",
+        "path": ".github/plugins/microsoft-365-agents-toolkit/skills/install-atk",
         "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038",
+        "state": "present",
         "revision_type": "git-commit",
-        "url": "https://github.com/microsoft/skills/tree/84d8eaa8ae95930f55cdceb3e27196c795dab038/.github/plugins/microsoft-365-agents-toolkit/skills/install-atk/SKILL.md",
-        "state": "present"
+        "url": "https://github.com/microsoft/skills/tree/84d8eaa8ae95930f55cdceb3e27196c795dab038/.github/plugins/microsoft-365-agents-toolkit/skills/install-atk"
       },
       "category": [
         "github",
@@ -17612,9 +17900,10 @@
         "spdx": "MIT",
         "redistributable": true,
         "status": "verified",
-        "evidence": "LICENSE"
+        "scope": "repository",
+        "evidence": "catalog/reviews/microsoft__install-atk.json"
       },
-      "distribution": "review-required",
+      "distribution": "bundled",
       "compatibility": [
         "agent-skills",
         "github-copilot",
@@ -17622,24 +17911,53 @@
         "cursor"
       ],
       "security": {
-        "scan_status": "review-required",
-        "risk": "low",
-        "network": false,
+        "scan_status": "verified",
+        "risk": "medium",
         "shell": true,
-        "credentials": false
+        "network": true,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": true,
+        "filesystem_write": true,
+        "encoded_content": false,
+        "findings": [
+          {
+            "type": "shell-execution",
+            "line": 17,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 47,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 56,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          }
+        ],
+        "review": "catalog/reviews/microsoft__install-atk.json"
       },
-      "materialized": false,
+      "materialized": true,
       "release": {
-        "status": "hold",
-        "reasons": [
-          "manual-review-required"
-        ]
+        "status": "eligible",
+        "reasons": []
       },
       "integrity": {
         "upstream_skill_sha256": "86498df46a34070e105af3f9283cb3a51f6c4c5cb489bceb092a2566efbbb527",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "Install or update the M365 Agents Toolkit (ATK) CLI and VS Code extension. Triggers: \"install atk\", \"update atk\", \"install agents toolkit\", \"update agents toolkit\", \"install the toolkit\", \"setup atk\", \"get atk\", \"install atk cli\", \"install atk extension\", \"install atk vsix\", \"update the vs code extension\", \"install latest atk\", \"upgrade atk\""
+      "description": "Install or update the M365 Agents Toolkit (ATK) CLI and VS Code extension. Triggers: \"install atk\", \"update atk\", \"install agents toolkit\", \"update agents toolkit\", \"install the toolkit\", \"setup atk\", \"get atk\", \"install atk cli\", \"install atk extension\", \"install atk vsix\", \"update the vs code extension\", \"install latest atk\", \"upgrade atk\"",
+      "artifact_type": "skill",
+      "materialized_root": "skills/microsoft/install-atk",
+      "materialized_files": 2
     },
     {
       "id": "microsoft/kql",
@@ -17941,11 +18259,11 @@
       "publisher": "microsoft",
       "source": {
         "repo": "microsoft/skills",
-        "path": ".github/plugins/azure-sdk-dotnet/skills/microsoft-azure-webjobs-extensions-authentication-events-dotnet/SKILL.md",
+        "path": ".github/plugins/azure-sdk-dotnet/skills/microsoft-azure-webjobs-extensions-authentication-events-dotnet",
         "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038",
+        "state": "present",
         "revision_type": "git-commit",
-        "url": "https://github.com/microsoft/skills/tree/84d8eaa8ae95930f55cdceb3e27196c795dab038/.github/plugins/azure-sdk-dotnet/skills/microsoft-azure-webjobs-extensions-authentication-events-dotnet/SKILL.md",
-        "state": "present"
+        "url": "https://github.com/microsoft/skills/tree/84d8eaa8ae95930f55cdceb3e27196c795dab038/.github/plugins/azure-sdk-dotnet/skills/microsoft-azure-webjobs-extensions-authentication-events-dotnet"
       },
       "category": [
         "github",
@@ -17955,9 +18273,10 @@
         "spdx": "MIT",
         "redistributable": true,
         "status": "verified",
-        "evidence": ".github/plugins/azure-sdk-dotnet/skills/microsoft-azure-webjobs-extensions-authentication-events-dotnet/SKILL.md"
+        "scope": "repository",
+        "evidence": "catalog/reviews/microsoft__microsoft-azure-webjobs-extensions-authentication-events-dotnet.json"
       },
-      "distribution": "review-required",
+      "distribution": "bundled",
       "compatibility": [
         "agent-skills",
         "github-copilot",
@@ -17965,24 +18284,81 @@
         "cursor"
       ],
       "security": {
-        "scan_status": "review-required",
+        "scan_status": "verified",
         "risk": "low",
-        "network": true,
         "shell": true,
-        "credentials": false
+        "network": true,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": true,
+        "filesystem_write": false,
+        "encoded_content": false,
+        "findings": [
+          {
+            "type": "shell-execution",
+            "line": 16,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 121,
+            "evidence": "https://",
+            "context": "        var response = await _httpClient.GetAsync($\"https://api.example.com/users/{userId}\");",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 439,
+            "evidence": "https://",
+            "context": "| NuGet Package | https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.AuthenticationEvents |",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 440,
+            "evidence": "https://",
+            "context": "| Custom Extensions Overview | https://learn.microsoft.com/entra/identity-platform/custom-extension-overview |",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 441,
+            "evidence": "https://",
+            "context": "| Token Issuance Events | https://learn.microsoft.com/entra/identity-platform/custom-extension-tokenissuancestart-setup |",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 442,
+            "evidence": "https://",
+            "context": "| Attribute Collection Events | https://learn.microsoft.com/entra/identity-platform/custom-extension-attribute-collection |",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 443,
+            "evidence": "https://",
+            "context": "| GitHub Source | https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/entra/Microsoft.Azure.WebJobs.Extensions.AuthenticationEvents |",
+            "file": "SKILL.md"
+          }
+        ],
+        "review": "catalog/reviews/microsoft__microsoft-azure-webjobs-extensions-authentication-events-dotnet.json"
       },
-      "materialized": false,
+      "materialized": true,
       "release": {
-        "status": "hold",
-        "reasons": [
-          "manual-review-required"
-        ]
+        "status": "eligible",
+        "reasons": []
       },
       "integrity": {
         "upstream_skill_sha256": "b14e4f567c11c8c2a9d06baefc9095ab1cf7ec8e0f5851f271d77d4491ca86e4",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "Microsoft Entra Authentication Events SDK for .NET. Azure Functions triggers for custom authentication extensions. Use for token enrichment, custom claims, attribute collection, and OTP customization in Entra ID. Triggers: \"Authentication Events\", \"WebJobsAuthenticationEventsTrigger\", \"OnTokenIssuanceStart\", \"OnAttributeCollectionStart\", \"custom claims\", \"token enrichment\", \"Entra custom extension\", \"authentication extension\"."
+      "description": "Microsoft Entra Authentication Events SDK for .NET. Azure Functions triggers for custom authentication extensions. Use for token enrichment, custom claims, attribute collection, and OTP customization in Entra ID. Triggers: \"Authentication Events\", \"WebJobsAuthenticationEventsTrigger\", \"OnTokenIssuanceStart\", \"OnAttributeCollectionStart\", \"custom claims\", \"token enrichment\", \"Entra custom extension\", \"authentication extension\".",
+      "artifact_type": "skill",
+      "materialized_root": "skills/microsoft/microsoft-azure-webjobs-extensions-authentication-events-dotnet",
+      "materialized_files": 2
     },
     {
       "id": "microsoft/microsoft-docs",
@@ -18624,11 +19000,11 @@
       "publisher": "microsoft",
       "source": {
         "repo": "microsoft/skills",
-        "path": ".github/plugins/deep-wiki/skills/wiki-ado-convert/SKILL.md",
+        "path": ".github/plugins/deep-wiki/skills/wiki-ado-convert",
         "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038",
+        "state": "present",
         "revision_type": "git-commit",
-        "url": "https://github.com/microsoft/skills/tree/84d8eaa8ae95930f55cdceb3e27196c795dab038/.github/plugins/deep-wiki/skills/wiki-ado-convert/SKILL.md",
-        "state": "present"
+        "url": "https://github.com/microsoft/skills/tree/84d8eaa8ae95930f55cdceb3e27196c795dab038/.github/plugins/deep-wiki/skills/wiki-ado-convert"
       },
       "category": [
         "github",
@@ -18638,9 +19014,10 @@
         "spdx": "MIT",
         "redistributable": true,
         "status": "verified",
-        "evidence": ".github/plugins/deep-wiki/skills/wiki-ado-convert/SKILL.md"
+        "scope": "repository",
+        "evidence": "catalog/reviews/microsoft__wiki-ado-convert.json"
       },
-      "distribution": "review-required",
+      "distribution": "bundled",
       "compatibility": [
         "agent-skills",
         "github-copilot",
@@ -18648,24 +19025,53 @@
         "cursor"
       ],
       "security": {
-        "scan_status": "review-required",
+        "scan_status": "verified",
         "risk": "low",
+        "shell": true,
         "network": false,
-        "shell": false,
-        "credentials": false
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false,
+        "filesystem_write": true,
+        "encoded_content": false,
+        "findings": [
+          {
+            "type": "filesystem-write",
+            "line": 77,
+            "evidence": "Remove",
+            "context": "Remove `---` delimited YAML blocks at file start. ADO renders these as visible text.",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 177,
+            "evidence": "mkdir",
+            "context": "    await mkdir(dirname(outPath), { recursive: true });",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 178,
+            "evidence": "writeFile",
+            "context": "    await writeFile(outPath, content, 'utf-8');",
+            "file": "SKILL.md"
+          }
+        ],
+        "review": "catalog/reviews/microsoft__wiki-ado-convert.json"
       },
-      "materialized": false,
+      "materialized": true,
       "release": {
-        "status": "hold",
-        "reasons": [
-          "manual-review-required"
-        ]
+        "status": "eligible",
+        "reasons": []
       },
       "integrity": {
         "upstream_skill_sha256": "afb330d4d5b43c470e83693ef73caee21f99c149dd5011f8543c424a751cebc3",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "Converts VitePress/GFM wiki markdown to Azure DevOps Wiki-compatible format. Generates a Node.js build script that transforms Mermaid syntax, strips front matter, fixes links, and outputs ADO-compatible copies to dist/ado-wiki/."
+      "description": "Converts VitePress/GFM wiki markdown to Azure DevOps Wiki-compatible format. Generates a Node.js build script that transforms Mermaid syntax, strips front matter, fixes links, and outputs ADO-compatible copies to dist/ado-wiki/.",
+      "artifact_type": "skill",
+      "materialized_root": "skills/microsoft/wiki-ado-convert",
+      "materialized_files": 2
     },
     {
       "id": "microsoft/wiki-agents-md",
@@ -18722,11 +19128,11 @@
       "publisher": "microsoft",
       "source": {
         "repo": "microsoft/skills",
-        "path": ".github/plugins/deep-wiki/skills/wiki-architect/SKILL.md",
+        "path": ".github/plugins/deep-wiki/skills/wiki-architect",
         "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038",
+        "state": "present",
         "revision_type": "git-commit",
-        "url": "https://github.com/microsoft/skills/tree/84d8eaa8ae95930f55cdceb3e27196c795dab038/.github/plugins/deep-wiki/skills/wiki-architect/SKILL.md",
-        "state": "present"
+        "url": "https://github.com/microsoft/skills/tree/84d8eaa8ae95930f55cdceb3e27196c795dab038/.github/plugins/deep-wiki/skills/wiki-architect"
       },
       "category": [
         "github",
@@ -18736,9 +19142,10 @@
         "spdx": "MIT",
         "redistributable": true,
         "status": "verified",
-        "evidence": ".github/plugins/deep-wiki/skills/wiki-architect/SKILL.md"
+        "scope": "repository",
+        "evidence": "catalog/reviews/microsoft__wiki-architect.json"
       },
-      "distribution": "review-required",
+      "distribution": "bundled",
       "compatibility": [
         "agent-skills",
         "github-copilot",
@@ -18747,23 +19154,30 @@
       ],
       "security": {
         "scan_status": "verified",
-        "risk": "none",
+        "risk": "low",
+        "shell": true,
         "network": false,
-        "shell": false,
-        "credentials": false
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false,
+        "filesystem_write": false,
+        "encoded_content": false,
+        "findings": [],
+        "review": "catalog/reviews/microsoft__wiki-architect.json"
       },
-      "materialized": false,
+      "materialized": true,
       "release": {
-        "status": "hold",
-        "reasons": [
-          "manual-review-required"
-        ]
+        "status": "eligible",
+        "reasons": []
       },
       "integrity": {
         "upstream_skill_sha256": "e439354d8a650cf147ef008222b80e28414c1e295381616639890f901a653226",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "Analyzes code repositories and generates hierarchical documentation structures with onboarding guides. Use when the user wants to create a wiki, generate documentation, map a codebase structure, or understand a project's architecture at a high level."
+      "description": "Analyzes code repositories and generates hierarchical documentation structures with onboarding guides. Use when the user wants to create a wiki, generate documentation, map a codebase structure, or understand a project's architecture at a high level.",
+      "artifact_type": "skill",
+      "materialized_root": "skills/microsoft/wiki-architect",
+      "materialized_files": 2
     },
     {
       "id": "microsoft/wiki-changelog",
@@ -18771,11 +19185,11 @@
       "publisher": "microsoft",
       "source": {
         "repo": "microsoft/skills",
-        "path": ".github/plugins/deep-wiki/skills/wiki-changelog/SKILL.md",
+        "path": ".github/plugins/deep-wiki/skills/wiki-changelog",
         "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038",
+        "state": "present",
         "revision_type": "git-commit",
-        "url": "https://github.com/microsoft/skills/tree/84d8eaa8ae95930f55cdceb3e27196c795dab038/.github/plugins/deep-wiki/skills/wiki-changelog/SKILL.md",
-        "state": "present"
+        "url": "https://github.com/microsoft/skills/tree/84d8eaa8ae95930f55cdceb3e27196c795dab038/.github/plugins/deep-wiki/skills/wiki-changelog"
       },
       "category": [
         "github",
@@ -18785,9 +19199,10 @@
         "spdx": "MIT",
         "redistributable": true,
         "status": "verified",
-        "evidence": ".github/plugins/deep-wiki/skills/wiki-changelog/SKILL.md"
+        "scope": "repository",
+        "evidence": "catalog/reviews/microsoft__wiki-changelog.json"
       },
-      "distribution": "review-required",
+      "distribution": "bundled",
       "compatibility": [
         "agent-skills",
         "github-copilot",
@@ -18796,23 +19211,30 @@
       ],
       "security": {
         "scan_status": "verified",
-        "risk": "none",
+        "risk": "low",
+        "shell": true,
         "network": false,
-        "shell": false,
-        "credentials": false
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false,
+        "filesystem_write": false,
+        "encoded_content": false,
+        "findings": [],
+        "review": "catalog/reviews/microsoft__wiki-changelog.json"
       },
-      "materialized": false,
+      "materialized": true,
       "release": {
-        "status": "hold",
-        "reasons": [
-          "manual-review-required"
-        ]
+        "status": "eligible",
+        "reasons": []
       },
       "integrity": {
         "upstream_skill_sha256": "c2c5da0e585855d44f831859a163ef1fa931df56ec3fb9d6d86ff6929f0a4e9a",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "Analyzes git commit history and generates structured changelogs categorized by change type. Use when the user asks about recent changes, wants a changelog, or needs to understand what changed in the repository."
+      "description": "Analyzes git commit history and generates structured changelogs categorized by change type. Use when the user asks about recent changes, wants a changelog, or needs to understand what changed in the repository.",
+      "artifact_type": "skill",
+      "materialized_root": "skills/microsoft/wiki-changelog",
+      "materialized_files": 2
     },
     {
       "id": "microsoft/wiki-llms-txt",
@@ -18820,11 +19242,11 @@
       "publisher": "microsoft",
       "source": {
         "repo": "microsoft/skills",
-        "path": ".github/plugins/deep-wiki/skills/wiki-llms-txt/SKILL.md",
+        "path": ".github/plugins/deep-wiki/skills/wiki-llms-txt",
         "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038",
+        "state": "present",
         "revision_type": "git-commit",
-        "url": "https://github.com/microsoft/skills/tree/84d8eaa8ae95930f55cdceb3e27196c795dab038/.github/plugins/deep-wiki/skills/wiki-llms-txt/SKILL.md",
-        "state": "present"
+        "url": "https://github.com/microsoft/skills/tree/84d8eaa8ae95930f55cdceb3e27196c795dab038/.github/plugins/deep-wiki/skills/wiki-llms-txt"
       },
       "category": [
         "github",
@@ -18834,9 +19256,10 @@
         "spdx": "MIT",
         "redistributable": true,
         "status": "verified",
-        "evidence": ".github/plugins/deep-wiki/skills/wiki-llms-txt/SKILL.md"
+        "scope": "repository",
+        "evidence": "catalog/reviews/microsoft__wiki-llms-txt.json"
       },
-      "distribution": "review-required",
+      "distribution": "bundled",
       "compatibility": [
         "agent-skills",
         "github-copilot",
@@ -18844,24 +19267,46 @@
         "cursor"
       ],
       "security": {
-        "scan_status": "review-required",
+        "scan_status": "verified",
         "risk": "low",
+        "shell": true,
         "network": true,
-        "shell": false,
-        "credentials": false
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false,
+        "filesystem_write": true,
+        "encoded_content": false,
+        "findings": [
+          {
+            "type": "network-access",
+            "line": 12,
+            "evidence": "https://",
+            "context": "Generate `llms.txt` and `llms-full.txt` files that provide LLM-friendly access to wiki documentation, following the [llms.txt specification](https://llmstxt.org/).",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 34,
+            "evidence": "https://",
+            "context": "The file follows the [llms.txt specification](https://llmstxt.org/):",
+            "file": "SKILL.md"
+          }
+        ],
+        "review": "catalog/reviews/microsoft__wiki-llms-txt.json"
       },
-      "materialized": false,
+      "materialized": true,
       "release": {
-        "status": "hold",
-        "reasons": [
-          "manual-review-required"
-        ]
+        "status": "eligible",
+        "reasons": []
       },
       "integrity": {
         "upstream_skill_sha256": "62f14490deb8e0713eca06ab576f6fe45d081f1cbb9452a45389a9540f39ab69",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "Generates llms.txt and llms-full.txt files for LLM-friendly project documentation following the llms.txt specification. Use when the user wants to create LLM-readable summaries, llms.txt files, or make their wiki accessible to language models."
+      "description": "Generates llms.txt and llms-full.txt files for LLM-friendly project documentation following the llms.txt specification. Use when the user wants to create LLM-readable summaries, llms.txt files, or make their wiki accessible to language models.",
+      "artifact_type": "skill",
+      "materialized_root": "skills/microsoft/wiki-llms-txt",
+      "materialized_files": 2
     },
     {
       "id": "microsoft/wiki-onboarding",
@@ -18869,11 +19314,11 @@
       "publisher": "microsoft",
       "source": {
         "repo": "microsoft/skills",
-        "path": ".github/plugins/deep-wiki/skills/wiki-onboarding/SKILL.md",
+        "path": ".github/plugins/deep-wiki/skills/wiki-onboarding",
         "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038",
+        "state": "present",
         "revision_type": "git-commit",
-        "url": "https://github.com/microsoft/skills/tree/84d8eaa8ae95930f55cdceb3e27196c795dab038/.github/plugins/deep-wiki/skills/wiki-onboarding/SKILL.md",
-        "state": "present"
+        "url": "https://github.com/microsoft/skills/tree/84d8eaa8ae95930f55cdceb3e27196c795dab038/.github/plugins/deep-wiki/skills/wiki-onboarding"
       },
       "category": [
         "github",
@@ -18883,9 +19328,10 @@
         "spdx": "MIT",
         "redistributable": true,
         "status": "verified",
-        "evidence": ".github/plugins/deep-wiki/skills/wiki-onboarding/SKILL.md"
+        "scope": "repository",
+        "evidence": "catalog/reviews/microsoft__wiki-onboarding.json"
       },
-      "distribution": "review-required",
+      "distribution": "bundled",
       "compatibility": [
         "agent-skills",
         "github-copilot",
@@ -18894,23 +19340,30 @@
       ],
       "security": {
         "scan_status": "verified",
-        "risk": "none",
+        "risk": "low",
+        "shell": true,
         "network": false,
-        "shell": false,
-        "credentials": false
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false,
+        "filesystem_write": true,
+        "encoded_content": false,
+        "findings": [],
+        "review": "catalog/reviews/microsoft__wiki-onboarding.json"
       },
-      "materialized": false,
+      "materialized": true,
       "release": {
-        "status": "hold",
-        "reasons": [
-          "manual-review-required"
-        ]
+        "status": "eligible",
+        "reasons": []
       },
       "integrity": {
         "upstream_skill_sha256": "5dde78db7c75f3265025c1410818d25abbed7a0bb3b5fa33c2c25ae0fbe7df50",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "Generates four audience-tailored onboarding guides in an onboarding/ folder — Contributor, Staff Engineer, Executive, and Product Manager. Use when the user wants onboarding documentation for a codebase."
+      "description": "Generates four audience-tailored onboarding guides in an onboarding/ folder — Contributor, Staff Engineer, Executive, and Product Manager. Use when the user wants onboarding documentation for a codebase.",
+      "artifact_type": "skill",
+      "materialized_root": "skills/microsoft/wiki-onboarding",
+      "materialized_files": 2
     },
     {
       "id": "microsoft/wiki-page-writer",
@@ -18918,11 +19371,11 @@
       "publisher": "microsoft",
       "source": {
         "repo": "microsoft/skills",
-        "path": ".github/plugins/deep-wiki/skills/wiki-page-writer/SKILL.md",
+        "path": ".github/plugins/deep-wiki/skills/wiki-page-writer",
         "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038",
+        "state": "present",
         "revision_type": "git-commit",
-        "url": "https://github.com/microsoft/skills/tree/84d8eaa8ae95930f55cdceb3e27196c795dab038/.github/plugins/deep-wiki/skills/wiki-page-writer/SKILL.md",
-        "state": "present"
+        "url": "https://github.com/microsoft/skills/tree/84d8eaa8ae95930f55cdceb3e27196c795dab038/.github/plugins/deep-wiki/skills/wiki-page-writer"
       },
       "category": [
         "github",
@@ -18932,9 +19385,10 @@
         "spdx": "MIT",
         "redistributable": true,
         "status": "verified",
-        "evidence": ".github/plugins/deep-wiki/skills/wiki-page-writer/SKILL.md"
+        "scope": "repository",
+        "evidence": "catalog/reviews/microsoft__wiki-page-writer.json"
       },
-      "distribution": "review-required",
+      "distribution": "bundled",
       "compatibility": [
         "agent-skills",
         "github-copilot",
@@ -18943,23 +19397,30 @@
       ],
       "security": {
         "scan_status": "verified",
-        "risk": "none",
+        "risk": "low",
+        "shell": true,
         "network": false,
-        "shell": false,
-        "credentials": false
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false,
+        "filesystem_write": true,
+        "encoded_content": false,
+        "findings": [],
+        "review": "catalog/reviews/microsoft__wiki-page-writer.json"
       },
-      "materialized": false,
+      "materialized": true,
       "release": {
-        "status": "hold",
-        "reasons": [
-          "manual-review-required"
-        ]
+        "status": "eligible",
+        "reasons": []
       },
       "integrity": {
         "upstream_skill_sha256": "f1270ea4123116e846bf2dc7a53a9e396ed43d694cdb7be22b9a35da9a40feb6",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "Generates rich technical documentation pages with dark-mode Mermaid diagrams, source code citations, and first-principles depth. Use when writing documentation, generating wiki pages, creating technical deep-dives, or documenting specific components or systems."
+      "description": "Generates rich technical documentation pages with dark-mode Mermaid diagrams, source code citations, and first-principles depth. Use when writing documentation, generating wiki pages, creating technical deep-dives, or documenting specific components or systems.",
+      "artifact_type": "skill",
+      "materialized_root": "skills/microsoft/wiki-page-writer",
+      "materialized_files": 2
     },
     {
       "id": "microsoft/wiki-qa",
@@ -18967,11 +19428,11 @@
       "publisher": "microsoft",
       "source": {
         "repo": "microsoft/skills",
-        "path": ".github/plugins/deep-wiki/skills/wiki-qa/SKILL.md",
+        "path": ".github/plugins/deep-wiki/skills/wiki-qa",
         "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038",
+        "state": "present",
         "revision_type": "git-commit",
-        "url": "https://github.com/microsoft/skills/tree/84d8eaa8ae95930f55cdceb3e27196c795dab038/.github/plugins/deep-wiki/skills/wiki-qa/SKILL.md",
-        "state": "present"
+        "url": "https://github.com/microsoft/skills/tree/84d8eaa8ae95930f55cdceb3e27196c795dab038/.github/plugins/deep-wiki/skills/wiki-qa"
       },
       "category": [
         "github",
@@ -18981,9 +19442,10 @@
         "spdx": "MIT",
         "redistributable": true,
         "status": "verified",
-        "evidence": ".github/plugins/deep-wiki/skills/wiki-qa/SKILL.md"
+        "scope": "repository",
+        "evidence": "catalog/reviews/microsoft__wiki-qa.json"
       },
-      "distribution": "review-required",
+      "distribution": "bundled",
       "compatibility": [
         "agent-skills",
         "github-copilot",
@@ -18992,23 +19454,30 @@
       ],
       "security": {
         "scan_status": "verified",
-        "risk": "none",
+        "risk": "low",
+        "shell": true,
         "network": false,
-        "shell": false,
-        "credentials": false
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false,
+        "filesystem_write": false,
+        "encoded_content": false,
+        "findings": [],
+        "review": "catalog/reviews/microsoft__wiki-qa.json"
       },
-      "materialized": false,
+      "materialized": true,
       "release": {
-        "status": "hold",
-        "reasons": [
-          "manual-review-required"
-        ]
+        "status": "eligible",
+        "reasons": []
       },
       "integrity": {
         "upstream_skill_sha256": "e509864c9561b98dc3f6e9d8bf80824f07a1fe78978dea9ed849959c34b6f7b4",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "Answers questions about a code repository using source file analysis. Use when the user asks a question about how something works, wants to understand a component, or needs help navigating the codebase."
+      "description": "Answers questions about a code repository using source file analysis. Use when the user asks a question about how something works, wants to understand a component, or needs help navigating the codebase.",
+      "artifact_type": "skill",
+      "materialized_root": "skills/microsoft/wiki-qa",
+      "materialized_files": 2
     },
     {
       "id": "microsoft/wiki-researcher",
@@ -19016,11 +19485,11 @@
       "publisher": "microsoft",
       "source": {
         "repo": "microsoft/skills",
-        "path": ".github/plugins/deep-wiki/skills/wiki-researcher/SKILL.md",
+        "path": ".github/plugins/deep-wiki/skills/wiki-researcher",
         "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038",
+        "state": "present",
         "revision_type": "git-commit",
-        "url": "https://github.com/microsoft/skills/tree/84d8eaa8ae95930f55cdceb3e27196c795dab038/.github/plugins/deep-wiki/skills/wiki-researcher/SKILL.md",
-        "state": "present"
+        "url": "https://github.com/microsoft/skills/tree/84d8eaa8ae95930f55cdceb3e27196c795dab038/.github/plugins/deep-wiki/skills/wiki-researcher"
       },
       "category": [
         "research"
@@ -19029,9 +19498,10 @@
         "spdx": "MIT",
         "redistributable": true,
         "status": "verified",
-        "evidence": ".github/plugins/deep-wiki/skills/wiki-researcher/SKILL.md"
+        "scope": "repository",
+        "evidence": "catalog/reviews/microsoft__wiki-researcher.json"
       },
-      "distribution": "review-required",
+      "distribution": "bundled",
       "compatibility": [
         "agent-skills",
         "github-copilot",
@@ -19040,23 +19510,30 @@
       ],
       "security": {
         "scan_status": "verified",
-        "risk": "none",
+        "risk": "low",
+        "shell": true,
         "network": false,
-        "shell": false,
-        "credentials": false
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false,
+        "filesystem_write": false,
+        "encoded_content": false,
+        "findings": [],
+        "review": "catalog/reviews/microsoft__wiki-researcher.json"
       },
-      "materialized": false,
+      "materialized": true,
       "release": {
-        "status": "hold",
-        "reasons": [
-          "manual-review-required"
-        ]
+        "status": "eligible",
+        "reasons": []
       },
       "integrity": {
         "upstream_skill_sha256": "3793d737ccb3e2c24d2de919f19ef59c35cc73598be8fdc8eb69693820ae29b5",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "Conducts multi-turn iterative deep research on specific topics within a codebase with zero tolerance for shallow analysis. Use when the user wants an in-depth investigation, needs to understand how something works across multiple files, or asks for comprehensive analysis of a specific system or pattern."
+      "description": "Conducts multi-turn iterative deep research on specific topics within a codebase with zero tolerance for shallow analysis. Use when the user wants an in-depth investigation, needs to understand how something works across multiple files, or asks for comprehensive analysis of a specific system or pattern.",
+      "artifact_type": "skill",
+      "materialized_root": "skills/microsoft/wiki-researcher",
+      "materialized_files": 2
     },
     {
       "id": "microsoft/wiki-vitepress",
@@ -19262,11 +19739,11 @@
       "publisher": "obra",
       "source": {
         "repo": "obra/superpowers",
-        "path": "skills/dispatching-parallel-agents/SKILL.md",
+        "path": "skills/dispatching-parallel-agents",
         "revision": "8ca22dba9a94f28898bbce59f2537ff4d87c747d",
+        "state": "present",
         "revision_type": "git-commit",
-        "url": "https://github.com/obra/superpowers/tree/8ca22dba9a94f28898bbce59f2537ff4d87c747d/skills/dispatching-parallel-agents/SKILL.md",
-        "state": "present"
+        "url": "https://github.com/obra/superpowers/tree/8ca22dba9a94f28898bbce59f2537ff4d87c747d/skills/dispatching-parallel-agents"
       },
       "category": [
         "agents",
@@ -19276,9 +19753,10 @@
         "spdx": "MIT",
         "redistributable": true,
         "status": "verified",
-        "evidence": "LICENSE"
+        "scope": "repository",
+        "evidence": "catalog/reviews/obra__dispatching-parallel-agents.json"
       },
-      "distribution": "review-required",
+      "distribution": "bundled",
       "compatibility": [
         "agent-skills",
         "claude-code",
@@ -19288,23 +19766,30 @@
       ],
       "security": {
         "scan_status": "verified",
-        "risk": "none",
-        "network": false,
+        "risk": "low",
         "shell": false,
-        "credentials": false
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false,
+        "filesystem_write": false,
+        "encoded_content": false,
+        "findings": [],
+        "review": "catalog/reviews/obra__dispatching-parallel-agents.json"
       },
-      "materialized": false,
+      "materialized": true,
       "release": {
-        "status": "hold",
-        "reasons": [
-          "manual-review-required"
-        ]
+        "status": "eligible",
+        "reasons": []
       },
       "integrity": {
         "upstream_skill_sha256": "1968923066f3b707eb01d1992cdf4c42284c3855f70253b9cd5000ff45fca13c",
         "last_ingested_revision": "8ca22dba9a94f28898bbce59f2537ff4d87c747d"
       },
-      "description": "Use when facing 2+ independent tasks that can be worked on without shared state or sequential dependencies"
+      "description": "Use when facing 2+ independent tasks that can be worked on without shared state or sequential dependencies",
+      "artifact_type": "skill",
+      "materialized_root": "skills/obra/dispatching-parallel-agents",
+      "materialized_files": 2
     },
     {
       "id": "obra/executing-plans",
@@ -19362,11 +19847,11 @@
       "publisher": "obra",
       "source": {
         "repo": "obra/superpowers",
-        "path": "skills/finishing-a-development-branch/SKILL.md",
+        "path": "skills/finishing-a-development-branch",
         "revision": "8ca22dba9a94f28898bbce59f2537ff4d87c747d",
+        "state": "present",
         "revision_type": "git-commit",
-        "url": "https://github.com/obra/superpowers/tree/8ca22dba9a94f28898bbce59f2537ff4d87c747d/skills/finishing-a-development-branch/SKILL.md",
-        "state": "present"
+        "url": "https://github.com/obra/superpowers/tree/8ca22dba9a94f28898bbce59f2537ff4d87c747d/skills/finishing-a-development-branch"
       },
       "category": [
         "workflow",
@@ -19376,9 +19861,10 @@
         "spdx": "MIT",
         "redistributable": true,
         "status": "verified",
-        "evidence": "LICENSE"
+        "scope": "repository",
+        "evidence": "catalog/reviews/obra__finishing-a-development-branch.json"
       },
-      "distribution": "review-required",
+      "distribution": "bundled",
       "compatibility": [
         "agent-skills",
         "claude-code",
@@ -19387,24 +19873,130 @@
         "opencode"
       ],
       "security": {
-        "scan_status": "review-required",
-        "risk": "low",
-        "network": false,
+        "scan_status": "verified",
+        "risk": "medium",
         "shell": true,
-        "credentials": false
+        "network": true,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false,
+        "filesystem_write": true,
+        "encoded_content": false,
+        "findings": [
+          {
+            "type": "shell-execution",
+            "line": 30,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 88,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 107,
+            "evidence": "delete",
+            "context": "delete the branch:",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 109,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 115,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 138,
+            "evidence": "delete",
+            "context": "This will permanently delete:",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 148,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 153,
+            "evidence": "delete",
+            "context": "Then clean up the worktree (Step 6) and force-delete the branch:",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 155,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 172,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 173,
+            "evidence": "remove",
+            "context": "git worktree remove \"$WORKTREE_PATH\"",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 182,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 193,
+            "evidence": "Delete",
+            "context": "3. Delete them (unrecoverable)",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 198,
+            "evidence": "remove",
+            "context": "Carry out the choice, then remove the worktree.",
+            "file": "SKILL.md"
+          }
+        ],
+        "review": "catalog/reviews/obra__finishing-a-development-branch.json"
       },
-      "materialized": false,
+      "materialized": true,
       "release": {
-        "status": "hold",
-        "reasons": [
-          "manual-review-required"
-        ]
+        "status": "eligible",
+        "reasons": []
       },
       "integrity": {
         "upstream_skill_sha256": "8db5a922b242dd4e1bf824cb91c13b3e8d8e8a86d6ceaf7f0774eb9cce909d65",
         "last_ingested_revision": "8ca22dba9a94f28898bbce59f2537ff4d87c747d"
       },
-      "description": "Use when implementation is complete, all tests pass, and you need to decide how to integrate the work"
+      "description": "Use when implementation is complete, all tests pass, and you need to decide how to integrate the work",
+      "artifact_type": "skill",
+      "materialized_root": "skills/obra/finishing-a-development-branch",
+      "materialized_files": 2
     },
     {
       "id": "obra/receiving-code-review",
@@ -19412,11 +20004,11 @@
       "publisher": "obra",
       "source": {
         "repo": "obra/superpowers",
-        "path": "skills/receiving-code-review/SKILL.md",
+        "path": "skills/receiving-code-review",
         "revision": "8ca22dba9a94f28898bbce59f2537ff4d87c747d",
+        "state": "present",
         "revision_type": "git-commit",
-        "url": "https://github.com/obra/superpowers/tree/8ca22dba9a94f28898bbce59f2537ff4d87c747d/skills/receiving-code-review/SKILL.md",
-        "state": "present"
+        "url": "https://github.com/obra/superpowers/tree/8ca22dba9a94f28898bbce59f2537ff4d87c747d/skills/receiving-code-review"
       },
       "category": [
         "workflow",
@@ -19426,9 +20018,10 @@
         "spdx": "MIT",
         "redistributable": true,
         "status": "verified",
-        "evidence": "LICENSE"
+        "scope": "repository",
+        "evidence": "catalog/reviews/obra__receiving-code-review.json"
       },
-      "distribution": "review-required",
+      "distribution": "bundled",
       "compatibility": [
         "agent-skills",
         "claude-code",
@@ -19437,24 +20030,74 @@
         "opencode"
       ],
       "security": {
-        "scan_status": "review-required",
+        "scan_status": "verified",
         "risk": "low",
-        "network": false,
         "shell": false,
-        "credentials": false
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false,
+        "filesystem_write": true,
+        "encoded_content": false,
+        "findings": [
+          {
+            "type": "filesystem-write",
+            "line": 94,
+            "evidence": "Remove",
+            "context": "  IF unused: \"This endpoint isn't called. Remove it (YAGNI)?\"",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 148,
+            "evidence": "DELETE",
+            "context": "**If you catch yourself about to write \"Thanks\":** DELETE IT. State the fix instead.",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 180,
+            "evidence": "Remove",
+            "context": "Reviewer: \"Remove legacy code\"",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 181,
+            "evidence": "remove",
+            "context": "❌ \"You're absolutely right! Let me remove that...\"",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 186,
+            "evidence": "Remove",
+            "context": "Reviewer: \"Remove legacy code\"",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 193,
+            "evidence": "Remove",
+            "context": "✅ \"Grepped codebase - nothing calls this endpoint. Remove it (YAGNI)? Or is there usage I'm missing?\"",
+            "file": "SKILL.md"
+          }
+        ],
+        "review": "catalog/reviews/obra__receiving-code-review.json"
       },
-      "materialized": false,
+      "materialized": true,
       "release": {
-        "status": "hold",
-        "reasons": [
-          "manual-review-required"
-        ]
+        "status": "eligible",
+        "reasons": []
       },
       "integrity": {
         "upstream_skill_sha256": "091df1629510af1b92fc4abd6f96732ebedb4cb2c0f3457e8f2740b0504a2438",
         "last_ingested_revision": "8ca22dba9a94f28898bbce59f2537ff4d87c747d"
       },
-      "description": "Use when receiving code review feedback, before implementing suggestions, especially if feedback seems unclear or technically questionable - requires technical rigor and verification, not performative agreement or blind implementation"
+      "description": "Use when receiving code review feedback, before implementing suggestions, especially if feedback seems unclear or technically questionable - requires technical rigor and verification, not performative agreement or blind implementation",
+      "artifact_type": "skill",
+      "materialized_root": "skills/obra/receiving-code-review",
+      "materialized_files": 2
     },
     {
       "id": "obra/requesting-code-review",
@@ -19462,11 +20105,11 @@
       "publisher": "obra",
       "source": {
         "repo": "obra/superpowers",
-        "path": "skills/requesting-code-review/SKILL.md",
+        "path": "skills/requesting-code-review",
         "revision": "8ca22dba9a94f28898bbce59f2537ff4d87c747d",
+        "state": "present",
         "revision_type": "git-commit",
-        "url": "https://github.com/obra/superpowers/tree/8ca22dba9a94f28898bbce59f2537ff4d87c747d/skills/requesting-code-review/SKILL.md",
-        "state": "present"
+        "url": "https://github.com/obra/superpowers/tree/8ca22dba9a94f28898bbce59f2537ff4d87c747d/skills/requesting-code-review"
       },
       "category": [
         "workflow",
@@ -19476,9 +20119,10 @@
         "spdx": "MIT",
         "redistributable": true,
         "status": "verified",
-        "evidence": "LICENSE"
+        "scope": "repository",
+        "evidence": "catalog/reviews/obra__requesting-code-review.json"
       },
-      "distribution": "review-required",
+      "distribution": "bundled",
       "compatibility": [
         "agent-skills",
         "claude-code",
@@ -19487,24 +20131,46 @@
         "opencode"
       ],
       "security": {
-        "scan_status": "review-required",
+        "scan_status": "verified",
         "risk": "low",
-        "network": false,
         "shell": true,
-        "credentials": false
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false,
+        "filesystem_write": false,
+        "encoded_content": false,
+        "findings": [
+          {
+            "type": "shell-execution",
+            "line": 28,
+            "evidence": "bash",
+            "context": "    ```bash",
+            "file": "code-reviewer.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 27,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          }
+        ],
+        "review": "catalog/reviews/obra__requesting-code-review.json"
       },
-      "materialized": false,
+      "materialized": true,
       "release": {
-        "status": "hold",
-        "reasons": [
-          "manual-review-required"
-        ]
+        "status": "eligible",
+        "reasons": []
       },
       "integrity": {
         "upstream_skill_sha256": "cfcee1b06774e7c0517f1e09be1a11f2d5680257072723e709ddbcf7e08b795a",
         "last_ingested_revision": "8ca22dba9a94f28898bbce59f2537ff4d87c747d"
       },
-      "description": "Use when completing tasks, implementing major features, or before merging to verify work meets requirements"
+      "description": "Use when completing tasks, implementing major features, or before merging to verify work meets requirements",
+      "artifact_type": "skill",
+      "materialized_root": "skills/obra/requesting-code-review",
+      "materialized_files": 3
     },
     {
       "id": "obra/subagent-driven-development",
@@ -20332,11 +20998,11 @@
       "publisher": "obra",
       "source": {
         "repo": "obra/superpowers",
-        "path": "skills/test-driven-development/SKILL.md",
+        "path": "skills/test-driven-development",
         "revision": "8ca22dba9a94f28898bbce59f2537ff4d87c747d",
+        "state": "present",
         "revision_type": "git-commit",
-        "url": "https://github.com/obra/superpowers/tree/8ca22dba9a94f28898bbce59f2537ff4d87c747d/skills/test-driven-development/SKILL.md",
-        "state": "present"
+        "url": "https://github.com/obra/superpowers/tree/8ca22dba9a94f28898bbce59f2537ff4d87c747d/skills/test-driven-development"
       },
       "category": [
         "workflow",
@@ -20346,9 +21012,10 @@
         "spdx": "MIT",
         "redistributable": true,
         "status": "verified",
-        "evidence": "LICENSE"
+        "scope": "repository",
+        "evidence": "catalog/reviews/obra__test-driven-development.json"
       },
-      "distribution": "review-required",
+      "distribution": "bundled",
       "compatibility": [
         "agent-skills",
         "claude-code",
@@ -20357,24 +21024,130 @@
         "opencode"
       ],
       "security": {
-        "scan_status": "review-required",
+        "scan_status": "verified",
         "risk": "low",
-        "network": false,
         "shell": true,
-        "credentials": false
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false,
+        "filesystem_write": true,
+        "encoded_content": false,
+        "findings": [
+          {
+            "type": "filesystem-write",
+            "line": 37,
+            "evidence": "Delete",
+            "context": "Write code before the test? Delete it. Start over.",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 43,
+            "evidence": "Delete",
+            "context": "- Delete means delete",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 43,
+            "evidence": "delete",
+            "context": "- Delete means delete",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 117,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 172,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 198,
+            "evidence": "Remove",
+            "context": "- Remove duplication",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 231,
+            "evidence": "Delete",
+            "context": "| \"Keep as reference, write tests first\" | You'll adapt it. That's testing after. Delete means delete. |",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 231,
+            "evidence": "delete",
+            "context": "| \"Keep as reference, write tests first\" | You'll adapt it. That's testing after. Delete means delete. |",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 254,
+            "evidence": "Delete",
+            "context": "**All of these mean: Delete code. Start over with TDD.**",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 269,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 285,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 86,
+            "evidence": "delete",
+            "context": "are checking, unmock it or delete the assertion.",
+            "file": "writing-good-tests.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 147,
+            "evidence": "delete",
+            "context": "    Unmock it or delete the assertion.",
+            "file": "writing-good-tests.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 195,
+            "evidence": "remove",
+            "context": "- An assertion checks a `*-mock` test ID, or fails if you remove the mock",
+            "file": "writing-good-tests.md"
+          }
+        ],
+        "review": "catalog/reviews/obra__test-driven-development.json"
       },
-      "materialized": false,
+      "materialized": true,
       "release": {
-        "status": "hold",
-        "reasons": [
-          "manual-review-required"
-        ]
+        "status": "eligible",
+        "reasons": []
       },
       "integrity": {
         "upstream_skill_sha256": "64b03fce4aee5a97a93160cea8111f3ba13a17b7c001db4bd5836d67fd10705d",
         "last_ingested_revision": "8ca22dba9a94f28898bbce59f2537ff4d87c747d"
       },
-      "description": "Use when implementing any feature or bugfix, before writing implementation code"
+      "description": "Use when implementing any feature or bugfix, before writing implementation code",
+      "artifact_type": "skill",
+      "materialized_root": "skills/obra/test-driven-development",
+      "materialized_files": 3
     },
     {
       "id": "obra/using-git-worktrees",
@@ -20432,11 +21205,11 @@
       "publisher": "obra",
       "source": {
         "repo": "obra/superpowers",
-        "path": "skills/using-superpowers/SKILL.md",
+        "path": "skills/using-superpowers",
         "revision": "8ca22dba9a94f28898bbce59f2537ff4d87c747d",
+        "state": "present",
         "revision_type": "git-commit",
-        "url": "https://github.com/obra/superpowers/tree/8ca22dba9a94f28898bbce59f2537ff4d87c747d/skills/using-superpowers/SKILL.md",
-        "state": "present"
+        "url": "https://github.com/obra/superpowers/tree/8ca22dba9a94f28898bbce59f2537ff4d87c747d/skills/using-superpowers"
       },
       "category": [
         "workflow",
@@ -20446,9 +21219,10 @@
         "spdx": "MIT",
         "redistributable": true,
         "status": "verified",
-        "evidence": "LICENSE"
+        "scope": "repository",
+        "evidence": "catalog/reviews/obra__using-superpowers.json"
       },
-      "distribution": "review-required",
+      "distribution": "bundled",
       "compatibility": [
         "agent-skills",
         "claude-code",
@@ -20458,23 +21232,52 @@
       ],
       "security": {
         "scan_status": "verified",
-        "risk": "none",
+        "risk": "medium",
+        "shell": true,
         "network": false,
-        "shell": false,
-        "credentials": false
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false,
+        "filesystem_write": false,
+        "encoded_content": false,
+        "findings": [
+          {
+            "type": "shell-execution",
+            "line": 86,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "references/codex-tools.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 11,
+            "evidence": "bash",
+            "context": "| Run a shell command | `bash` |",
+            "file": "references/muse-tools.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 18,
+            "evidence": "bash",
+            "context": "| Task tracking (\"create a todo\", \"mark complete\") | `write_todos` or `bash` task file |",
+            "file": "references/muse-tools.md"
+          }
+        ],
+        "review": "catalog/reviews/obra__using-superpowers.json"
       },
-      "materialized": false,
+      "materialized": true,
       "release": {
-        "status": "hold",
-        "reasons": [
-          "manual-review-required"
-        ]
+        "status": "eligible",
+        "reasons": []
       },
       "integrity": {
         "upstream_skill_sha256": "82c5c8866ad7f5dd4440ce66bd7806ba48a2f13771beae5cf112e53f08fe36ba",
         "last_ingested_revision": "8ca22dba9a94f28898bbce59f2537ff4d87c747d"
       },
-      "description": "Use when starting any conversation - establishes how to find and use skills, requiring skill invocation before ANY response including clarifying questions"
+      "description": "Use when starting any conversation - establishes how to find and use skills, requiring skill invocation before ANY response including clarifying questions",
+      "artifact_type": "skill",
+      "materialized_root": "skills/obra/using-superpowers",
+      "materialized_files": 9
     },
     {
       "id": "obra/verification-before-completion",
@@ -20482,11 +21285,11 @@
       "publisher": "obra",
       "source": {
         "repo": "obra/superpowers",
-        "path": "skills/verification-before-completion/SKILL.md",
+        "path": "skills/verification-before-completion",
         "revision": "8ca22dba9a94f28898bbce59f2537ff4d87c747d",
+        "state": "present",
         "revision_type": "git-commit",
-        "url": "https://github.com/obra/superpowers/tree/8ca22dba9a94f28898bbce59f2537ff4d87c747d/skills/verification-before-completion/SKILL.md",
-        "state": "present"
+        "url": "https://github.com/obra/superpowers/tree/8ca22dba9a94f28898bbce59f2537ff4d87c747d/skills/verification-before-completion"
       },
       "category": [
         "workflow",
@@ -20496,9 +21299,10 @@
         "spdx": "MIT",
         "redistributable": true,
         "status": "verified",
-        "evidence": "LICENSE"
+        "scope": "repository",
+        "evidence": "catalog/reviews/obra__verification-before-completion.json"
       },
-      "distribution": "review-required",
+      "distribution": "bundled",
       "compatibility": [
         "agent-skills",
         "claude-code",
@@ -20508,23 +21312,30 @@
       ],
       "security": {
         "scan_status": "verified",
-        "risk": "none",
-        "network": false,
+        "risk": "low",
         "shell": false,
-        "credentials": false
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false,
+        "filesystem_write": false,
+        "encoded_content": false,
+        "findings": [],
+        "review": "catalog/reviews/obra__verification-before-completion.json"
       },
-      "materialized": false,
+      "materialized": true,
       "release": {
-        "status": "hold",
-        "reasons": [
-          "manual-review-required"
-        ]
+        "status": "eligible",
+        "reasons": []
       },
       "integrity": {
         "upstream_skill_sha256": "2befe7fc55bcadaa3d97dd9e8efeb633d2561c0ebe74c5a8b17c4d9e7e4520b3",
         "last_ingested_revision": "8ca22dba9a94f28898bbce59f2537ff4d87c747d"
       },
-      "description": "Use when about to claim work is complete, fixed, or passing, before committing or creating PRs - requires running verification commands and confirming output before making any success claims; evidence before assertions always"
+      "description": "Use when about to claim work is complete, fixed, or passing, before committing or creating PRs - requires running verification commands and confirming output before making any success claims; evidence before assertions always",
+      "artifact_type": "skill",
+      "materialized_root": "skills/obra/verification-before-completion",
+      "materialized_files": 2
     },
     {
       "id": "obra/writing-plans",

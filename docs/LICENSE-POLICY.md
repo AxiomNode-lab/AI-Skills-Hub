@@ -16,6 +16,13 @@ The artifact is explicitly excluded from distribution.
 
 ## Rules
 - Public visibility does not imply redistribution rights.
-- Repository-level licensing is not automatically sufficient for nested skills.
+- Repository-level licensing is not automatically sufficient for nested skills. A skill-local license governs when one exists.
+- A repository-root **MIT** license may cover a skill only when all of these hold, recorded in the skill's review:
+  - the root file is the full MIT License text with its copyright notice;
+  - no LICENSE, COPYING, or NOTICE file exists at the repository root besides it, in any directory on the path to the skill, or inside the skill;
+  - the skill's frontmatter declares no license, or declares MIT;
+  - every file was read and contains no third-party copyright notice, other license grant, or copied third-party text;
+  - a byte-exact copy of the root license ships with the skill as `LICENSE.txt` (an attached file listed in the review and the materialization manifest).
+- No other license is accepted from the repository root. Apache-2.0 is accepted only from a skill-local license file.
 - Preserve upstream copyright and attribution notices when redistribution is allowed.
 - Pin provenance before publishing a bundled artifact.
