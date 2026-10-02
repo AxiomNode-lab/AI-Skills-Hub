@@ -41,6 +41,7 @@ test("MCP adapter writes Cursor configuration atomically", async () => {
   assert.equal(result.destination, path.join(dir, ".cursor", "mcp.json"));
   const config = JSON.parse(fs.readFileSync(result.destination, "utf8"));
   assert.equal(config.mcpServers.docs.url, "https://example.com/mcp");
+  assert.equal("type" in config.mcpServers.docs, false);
   assert.equal(fs.existsSync(result.destination + ".tmp"), false);
 });
 
@@ -67,4 +68,30 @@ test("MCP adapter rejects symbolic-link configuration targets", async () => {
     adapter.install({ agent: "cursor", scope: "project", cwd: dir }),
     /symbolic-link/
   );
+});
+
+
+test("MCP adapter writes Cursor stdio transport metadata for package servers", async () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "ai-skills-hub-mcp-"));
+  const adapter = new MCPAdapter({
+    id: "demo/local",
+    name: "local",
+    type: "mcp-server",
+    installation: {
+      method: "package",
+      runtime: "npx",
+      identifier: "@example/mcp-server",
+      version: "1.2.3"
+    }
+  });
+
+  const result = await adapter.install({
+    agent: "cursor",
+    scope: "project",
+    cwd: dir
+  });
+
+  const config = JSON.parse(fs.readFileSync(result.destination, "utf8"));
+  assert.equal(config.mcpServers.local.type, "stdio");
+  assert.deepEqual(config.mcpServers.local.args, ["-y", "@example/mcp-server@1.2.3"]);
 });
