@@ -16,30 +16,30 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
         with:
-          node-version: 20
-      - run: |
-          node scripts/ingest-github.mjs anthropics/skills main
-          node scripts/ingest-github.mjs obra/superpowers main
-          node scripts/ingest-github.mjs vercel-labs/agent-skills main
-          node scripts/ingest-github.mjs trailofbits/skills main
-          node scripts/ingest-github.mjs K-Dense-AI/scientific-agent-skills main
-          node scripts/ingest-github.mjs microsoft/skills main
-          node scripts/ingest-github.mjs openai/plugins main
-          node scripts/refresh-source-index.mjs
-          node scripts/sync-curated-catalog.mjs
-          node scripts/generate-lockfile.mjs
-      - run: node scripts/validate-registry.mjs
+          version: 10.4.1
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22.x
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Refresh upstream registry metadata
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: pnpm sync-registry
+      - run: pnpm validate-all
       - name: Commit snapshots
+        shell: bash
         run: |
+          set -euo pipefail
           if git diff --quiet; then
             echo "No source metadata changes."
             exit 0
           fi
           git config user.name "ai-skills-hub-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add catalog/ingestion catalog/skills.json catalog/skills.lock.json catalog/source-index.json
+          git add catalog/
           git commit -m "chore: refresh source ingestion snapshots"
           git push

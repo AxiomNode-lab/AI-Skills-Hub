@@ -215,3 +215,5 @@ export function summarizeInstallPlan(searchResult,agent,{scope="project"}={}) {
     unsupported:choices.filter(x=>x.action==="unsupported")
   };
 }
+
+export { buildAdapterPlan } from "./adapters.mjs";

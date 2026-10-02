@@ -1,7 +1,7 @@
 <div align="center">
   <img src="docs/images/logo.jpg" alt="AI Skills Hub Logo" width="300" />
   <h1>AI Skills Hub</h1>
-  <p><strong>A trustworthy, license-aware registry and distribution layer for AI Agent Skills.</strong></p>
+  <p><strong>A license-aware registry and distribution layer for AI Agent Skills.</strong></p>
   
   <p>
     <a href="https://github.com/AxiomNode-lab/AI-Skills-Hub/actions"><img src="https://img.shields.io/github/actions/workflow/status/AxiomNode-lab/AI-Skills-Hub/ci.yml?branch=main&label=Build&style=flat-square" alt="Build Status"></a>
@@ -13,7 +13,7 @@
 
 ## Overview
 
-AI Skills Hub is a secure, verifiable registry for AI Agent capabilities (Agent Skills, MCP Servers, and Developer Plugins). It provides a unified CLI to discover, inspect, and install verified capabilities directly into your favorite agents (e.g., Cursor, Claude Code, GitHub Copilot).
+AI Skills Hub is a license-aware registry and distribution layer for AI Agent capabilities (Agent Skills, MCP Servers, Agent Plugins, and CLI Tools). It provides a unified CLI for discovery, inspection, policy-aware installation, and agent integration.
 
 ## Prerequisites
 
@@ -52,13 +52,13 @@ pnpm cli search "pdf tools" --agent codex
 
 ### 4. Install a Capability
 
-Install a capability from the registry to your agent's local environment. For example, to install `pdf-tool` for Codex:
+Install a capability only when its registry record is marked `release: eligible`. For example:
 
 ```bash
-pnpm cli install pdf-tool --agent codex
+pnpm cli install <release-eligible-id> --agent codex
 ```
 
-*(Note: Capabilities distributed via `source-direct` will execute an installation command, such as `npx`, and require your confirmation.)*
+Capabilities distributed via `source-direct` use an allowlisted external installer plan and require explicit confirmation.
 
 ### 5. Interactive Mode
 
@@ -76,9 +76,20 @@ Use the `Space` bar to select capabilities and `Enter` to confirm.
 
 The AI Skills Hub enforces a strict supply-chain policy:
 - **Registry Source of Truth:** The central catalog (`catalog/skills.json` and `catalog/bundles.json`) defines all approved capabilities.
-- **Materialization:** Bundled skills are fully verified and copied directly into your agent's workspace.
+- **Materialization:** Only release-eligible bundled skills are copied directly into an agent workspace.
 - **Security Check:** High-risk or unverified skills are held in a `review-required` state and cannot bypass release gates.
 
 ## Contributing
 
 We welcome community skills! Please review `AGENTS.md` and `CONTRIBUTING.md` for our inclusion policies before submitting a new capability.
+
+
+### Full Verification
+
+Before committing or publishing changes, run:
+
+```bash
+pnpm validate-all
+```
+
+The command validates the registry, workspace, JavaScript syntax, schema references, lockfile, materialized artifacts, duplicate records, and repository tests.

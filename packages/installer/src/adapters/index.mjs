@@ -4,7 +4,9 @@ import { CLIAdapter } from "./CLIAdapter.mjs";
 import { PluginAdapter } from "./PluginAdapter.mjs";
 
 export function getAdapter(capability) {
-  switch (capability.type) {
+  const type = capability.type ?? capability.artifact_type ?? "skill";
+
+  switch (type) {
     case "mcp-server":
       return new MCPAdapter(capability);
     case "cli-tool":

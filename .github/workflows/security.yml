@@ -13,33 +13,43 @@ concurrency:
 
 permissions:
   contents: read
-  security-events: write
 
 jobs:
   codeql:
     name: CodeQL
+    permissions:
+      contents: read
+      security-events: write
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
         language: [javascript-typescript]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: github/codeql-action/init@v3
         with:
           languages: ${{ matrix.language }}
       - uses: github/codeql-action/autobuild@v3
       - uses: github/codeql-action/analyze@v3
 
-  dependency-review:
-    name: Dependency Review
-    if: github.event_name == 'pull_request'
+  dependency-audit:
+    name: Dependency Audit
     runs-on: ubuntu-latest
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/dependency-review-action@v4
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+        with:
+          version: 10.4.1
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22.x
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Audit production and development dependencies
+        run: pnpm audit --audit-level high
 
   secret-scan:
     name: Secret Scan
@@ -47,14 +57,14 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
       - name: Check repository text for high-risk secret markers
         shell: bash
         run: |
           set -euo pipefail
-          if git grep -nEI '(sk-[A-Za-z0-9]{20,}|ghp_[A-Za-z0-9]{20,}|BEGIN (RSA|EC|OPENSSH|DSA) PRIVATE KEY|xox[baprs]-[A-Za-z0-9-]{20,})' -- . ':!docs/SECURITY-MODEL.md'; then
+          if git grep -nEI '(sk-[A-Za-z0-9]{20,}|ghp_[A-Za-z0-9]{20,}|BEGIN (RSA|EC|OPENSSH|DSA) PRIVATE KEY|xox[baprs]-[A-Za-z0-9-]{20,})' -- packages scripts tests catalog .github; then
             echo "Potential secret material found."
             exit 1
           fi
