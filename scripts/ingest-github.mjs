@@ -3,6 +3,7 @@ import crypto from "node:crypto";
 import fs from "node:fs";
 import { scanText, riskLevel } from "../packages/security/src/index.mjs";
 import { classifyLicense, normalizeLicense } from "../packages/licenses/src/index.mjs";
+import { parseFrontmatter } from "../packages/core/src/index.mjs";
 
 const [, , repo, ref = "main"] = process.argv;
 if (!repo) {
@@ -139,16 +140,7 @@ for (const item of skillPaths) {
 
   const skillSha = crypto.createHash("sha256").update(body).digest("hex");
   const scan = scanText(body);
-  const lines = body.split(/\r?\n/);
-  const frontmatter = {};
-
-  if (lines[0]?.trim() === "---") {
-    for (const line of lines.slice(1, 80)) {
-      if (line.trim() === "---") break;
-      const match = line.match(/^([A-Za-z0-9_-]+):\s*(.+)$/);
-      if (match) frontmatter[match[1]] = match[2].trim().replace(/^['"]|['"]$/g, "");
-    }
-  }
+  const frontmatter = parseFrontmatter(body);
 
   const license = await licenseEvidenceFor(item, frontmatter.license ?? null, item);
   const capabilityScan = {
@@ -162,7 +154,7 @@ for (const item of skillPaths) {
   result.discovered_skills.push({
     path: item,
     name: frontmatter.name ?? item.split("/").slice(-2, -1)[0],
-    description: frontmatter.description ?? null,
+    description: frontmatter.description?.trim() || null,
     skill_sha256: skillSha,
     license,
     security: { scan_status: scan.findings.length ? "review-required" : "verified", risk: riskLevel(scan), capabilities: scan.capabilities, findings: scan.findings },

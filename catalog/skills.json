@@ -49,7 +49,7 @@
         "upstream_skill_sha256": "f27992510c051355dfe68c92394d509af730da5298094ec86834ee40bbd31376",
         "last_ingested_revision": "8a1541c4a3ffa5a20a5a91de0dcf3f0bab1d1ef4"
       },
-      "description": ">"
+      "description": "Stop and check this skill before finishing any reply to a question about how to use Claude or a Claude product — it recommends matching courses, tutorials, and use cases from Claude Academy (academy.claude.com), Anthropic's learning hub. Trigger on: \"how do I\", \"how can I\", \"getting started with\", \"what can Claude do\", \"teach me\", \"learn to use\"; questions about artifacts, projects, skills, plugins, connectors, MCP; requests about rolling Claude out to a team, class, or organization; and any ask for training materials, onboarding content, or learning resources. Use it when the user is learning how to use a feature or product — not when they are mid-task and just want the task done. This skill composes with other skills: after consulting product documentation to answer how a Claude feature works, also check here for a matching course or tutorial — a docs-grounded answer and an Academy recommendation belong together. Only recommend on a strong match; never invent Academy content."
     },
     {
       "id": "anthropics/algorithmic-art",
@@ -267,7 +267,7 @@
         "upstream_skill_sha256": "9aac10d9ffb8778c5b7c0b9ec612b3915e83065feb92763c8231469e9fbc29c9",
         "last_ingested_revision": "8a1541c4a3ffa5a20a5a91de0dcf3f0bab1d1ef4"
       },
-      "description": "|-"
+      "description": "Reference for the Claude API / Anthropic SDK — model ids, pricing, params, streaming, tool use, MCP, agents, caching, token counting, model migration. TRIGGER — read BEFORE opening the target file; don't skip because it \"looks like a one-liner\" — whenever: the prompt names Claude/Anthropic in any form (Claude, Anthropic, Fable, Opus, Sonnet, Haiku, `anthropic`, `@anthropic-ai`, `claude-*`, `us.anthropic.*`, `[1m]`); the user asks about an LLM (pricing/model choice/limits/caching) — never answer from memory; OR the task is LLM-shaped with provider unstated (agent/MCP/tool-definition/multi-agent/RAG/LLM-judge/computer-use; generate/summarize/extract/classify/rewrite/converse over NL; debugging refusals/cutoffs/streaming/tool-calls/tokens). SKIP only when another provider is being worked on (overrides all triggers): OpenAI/GPT/Gemini/Llama/Mistral/Cohere/Ollama named in the query; OR `grep -rE 'openai|langchain_openai|google.generativeai|genai|mistralai|cohere|ollama'` over the project hits (run this grep FIRST if no provider named — don't Read the file)."
     },
     {
       "id": "anthropics/discernment-nudge",
@@ -316,7 +316,7 @@
         "upstream_skill_sha256": "9191177c4a8ef11a20dace786d708506b22d43e748c71287bb823de0dc812dad",
         "last_ingested_revision": "8a1541c4a3ffa5a20a5a91de0dcf3f0bab1d1ef4"
       },
-      "description": ">"
+      "description": "After you give a substantive answer or draft that the user may act on — advice or recommendations, drafted artifacts such as goals, plans, pitches, proposals, or emails, estimates or projections, analysis or interpretation of data, factual claims they may rely on, or a multi-step argument — invoke this skill BEFORE finalizing your reply and then, if it applies, append 2-3 short follow-up questions, each tied to something specific in what you just produced, that help the user check key facts, probe the reasoning or assumptions, and notice missing context. Do this at most once per conversation. Skip it when the user asked a trivial how-to or simple lookup, wants a purely educational explanation, asked you only to format, convert, or assemble a file from content they provided, is writing code they will run, is doing creative writing or casual chat, or already asked you to double-check, cite, or review — the skill file explains these boundaries and the exact output format."
     },
     {
       "id": "anthropics/doc-coauthoring",
@@ -1625,7 +1625,7 @@
         "upstream_skill_sha256": "e1ae63105ccc2e4da7c40e8a2f40d031dd8f2a77270be626df780f0c39eb0b1b",
         "last_ingested_revision": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298"
       },
-      "description": ">"
+      "description": "Organizes, queries, validates, and converts Brain Imaging Data Structure (BIDS) datasets. Supports organizing neuroscience and biomedical data (MRI, EEG, MEG, iEEG, PET, microscopy, NIRS, motion capture, EMG, MR spectroscopy, behavioral), querying BIDS layouts, validating compliance, converting DICOM to BIDS, writing metadata sidecars, or creating BIDS derivatives."
     },
     {
       "id": "kdense/biopython",
@@ -5190,7 +5190,7 @@
         "upstream_skill_sha256": "6a7c0a90c42e899e818de866e843cf60d5434422fa69b910a7db9a06f25240e9",
         "last_ingested_revision": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298"
       },
-      "description": ">"
+      "description": "Queries the 1000 Genomes Project dataset (3,202 whole-genome-sequenced individuals, GRCh38) at the level of individual participants. Use when a question is about individuals or variants in the 1000 Genomes Project cohort: which individuals carry variants matching specific criteria in a gene or region, which individuals are homozygous-reference at a position, which variants exist in the dataset or carried by specified individuals in a gene or region, the relatedness between two specified individuals. Variants are returned with 1000 Genomes allele frequencies (AF), gnomAD v4.1 exome and genome AF, AlphaMissense score, and HGVSp annotations."
     },
     {
       "id": "kdense/ontology-term-resolution",
@@ -6950,7 +6950,7 @@
         "upstream_skill_sha256": "82dec36c7294674f33d9b6003e523d1dc4da33ed1c7427dc4e53731119fc5f74",
         "last_ingested_revision": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298"
       },
-      "description": ">-"
+      "description": "Manages Zotero reference libraries using the pyzotero Python client: retrieves, creates, updates, and deletes items, collections, tags, and attachments via the Zotero Web API v3 or local API. Applies when working with Zotero libraries programmatically, managing bibliographic references, exporting citations, searching library contents, uploading PDF attachments, or building research automation workflows that integrate with Zotero."
     },
     {
       "id": "kdense/qiime2-amplicon",
@@ -9334,7 +9334,7 @@
         "upstream_skill_sha256": "108f198e45b9cd7029768e149f0cd58b0ef5b58efd66ce61c0b2698f69860c26",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure AI Agents Persistent SDK for .NET. Low-level SDK for creating and managing AI agents with threads, messages, runs, and tools. Use for agent CRUD, conversation threads, streaming responses, function calling, file search, and code interpreter. Triggers: \"PersistentAgentsClient\", \"persistent agents\", \"agent threads\", \"agent runs\", \"streaming agents\", \"function calling agents .NET\"."
     },
     {
       "id": "microsoft/azure-ai-agents-persistent-java",
@@ -9383,7 +9383,7 @@
         "upstream_skill_sha256": "02ddb9920cf6432b1bac4ff90564365878a1b7341cda4afa989e795458e6978c",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure AI Agents Persistent SDK for Java. Low-level SDK for creating and managing AI agents with threads, messages, runs, and tools. Triggers: \"PersistentAgentsClient\", \"persistent agents java\", \"agent threads java\", \"agent runs java\", \"streaming agents java\"."
     },
     {
       "id": "microsoft/azure-ai-anomalydetector-java",
@@ -9530,7 +9530,7 @@
         "upstream_skill_sha256": "a87b5c2b469ddb77776770d12b7a3a1a481c72af6300b6aac96887825df063fb",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure AI Content Safety SDK for Python. Use for detecting harmful content in text and images with multi-severity classification. Triggers: \"azure-ai-contentsafety\", \"ContentSafetyClient\", \"content moderation\", \"harmful content\", \"text analysis\", \"image analysis\"."
     },
     {
       "id": "microsoft/azure-ai-contentsafety-ts",
@@ -9628,7 +9628,7 @@
         "upstream_skill_sha256": "3bb3d811f73db5724d3d64d572819a43467803e3e15ce20024845e9bb0a534a7",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure AI Content Understanding SDK for Python. Use for multimodal content extraction from documents, images, audio, and video. Triggers: \"azure-ai-contentunderstanding\", \"ContentUnderstandingClient\", \"multimodal analysis\", \"document extraction\", \"video analysis\", \"audio transcription\"."
     },
     {
       "id": "microsoft/azure-ai-document-intelligence-dotnet",
@@ -9677,7 +9677,7 @@
         "upstream_skill_sha256": "1001dec59391d6c024c21d74db6f99cbf92c9ff868e18cd2d57cde4ea743c5d6",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure AI Document Intelligence SDK for .NET. Extract text, tables, and structured data from documents using prebuilt and custom models. Use for invoice processing, receipt extraction, ID document analysis, and custom document models. Triggers: \"Document Intelligence\", \"DocumentIntelligenceClient\", \"form recognizer\", \"invoice extraction\", \"receipt OCR\", \"document analysis .NET\"."
     },
     {
       "id": "microsoft/azure-ai-document-intelligence-ts",
@@ -9775,7 +9775,7 @@
         "upstream_skill_sha256": "7fbec12baeb4ccefe06786137317afb1bc7cf310362f0a38085d1ff9858b129b",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure AI Document Intelligence SDK for Java (com.azure:azure-ai-documentintelligence). Use for extracting text, tables, key-value pairs from documents, receipts, invoices, IDs, or building custom document models. Triggers: \"document intelligence java\", \"form recognizer java\", \"extract text from PDF java\", \"OCR document java\", \"analyze invoice receipt java\", \"custom document model java\", \"document classification java\"."
     },
     {
       "id": "microsoft/azure-ai-language-conversations-py",
@@ -9873,7 +9873,7 @@
         "upstream_skill_sha256": "07491b57acea5747c3474bc1401e4813ce292dcf35658b33512aebd73d21609f",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure Machine Learning SDK v2 for Python. Use for ML workspaces, jobs, models, datasets, compute, and pipelines. Triggers: \"azure-ai-ml\", \"MLClient\", \"workspace\", \"model registry\", \"training jobs\", \"datasets\"."
     },
     {
       "id": "microsoft/azure-ai-openai-dotnet",
@@ -9924,7 +9924,7 @@
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
       "artifact_type": "skill",
-      "description": "|"
+      "description": "Azure OpenAI SDK for .NET. Client library for Azure OpenAI and OpenAI services. Use for chat completions, embeddings, image generation, audio transcription, and assistants. Triggers: \"Azure OpenAI\", \"AzureOpenAIClient\", \"ChatClient\", \"chat completions .NET\", \"GPT-4\", \"embeddings\", \"DALL-E\", \"Whisper\", \"OpenAI .NET\"."
     },
     {
       "id": "microsoft/azure-ai-projects-dotnet",
@@ -9973,7 +9973,7 @@
         "upstream_skill_sha256": "c928d09ea1c62c55b4582e53582e3f8a97fa7df84a6102be8e33aba9b1926058",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure AI Projects SDK for .NET. High-level client for Azure AI Foundry projects including agents, connections, datasets, deployments, evaluations, and indexes. Use for AI Foundry project management, versioned agents, and orchestration. Triggers: \"AI Projects\", \"AIProjectClient\", \"Foundry project\", \"versioned agents\", \"evaluations\", \"datasets\", \"connections\", \"deployments .NET\"."
     },
     {
       "id": "microsoft/azure-ai-projects-java",
@@ -10022,7 +10022,7 @@
         "upstream_skill_sha256": "43679ee1835646c49366ded8024246d57478a1591f75e08933ef7702c5e2a16d",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure AI Projects SDK for Java. High-level SDK for Azure AI Foundry project management including connections, datasets, indexes, and evaluations. Triggers: \"AIProjectClient java\", \"azure ai projects java\", \"Foundry project java\", \"ConnectionsClient\", \"DatasetsClient\", \"IndexesClient\"."
     },
     {
       "id": "microsoft/azure-ai-projects-py",
@@ -10169,7 +10169,7 @@
         "upstream_skill_sha256": "6d4a9cbb3889a3dd6beca505dbc6c240454a7432f9460195c68f9b54f0a89396",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure AI Text Analytics SDK for sentiment analysis, entity recognition, key phrases, language detection, PII, and healthcare NLP. Use for natural language processing on text. Triggers: \"text analytics\", \"sentiment analysis\", \"entity recognition\", \"key phrase\", \"PII detection\", \"TextAnalyticsClient\"."
     },
     {
       "id": "microsoft/azure-ai-transcription-py",
@@ -10218,7 +10218,7 @@
         "upstream_skill_sha256": "3e2f90f372f71323b46d9f2988f955dc8e3722a9306fcd2f6b29a8bc15babf8a",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure AI Transcription SDK for Python. Use for real-time and batch speech-to-text transcription with timestamps and diarization. Triggers: \"transcription\", \"speech to text\", \"Azure AI Transcription\", \"TranscriptionClient\"."
     },
     {
       "id": "microsoft/azure-ai-translation-document-py",
@@ -10267,7 +10267,7 @@
         "upstream_skill_sha256": "6dd015ac34065253ff022f579a3c5af02aed4e495a587895acbe7a33f1c8205d",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure AI Document Translation SDK for batch translation of documents with format preservation. Use for translating Word, PDF, Excel, PowerPoint, and other document formats at scale. Triggers: \"document translation\", \"batch translation\", \"translate documents\", \"DocumentTranslationClient\"."
     },
     {
       "id": "microsoft/azure-ai-translation-text-py",
@@ -10316,7 +10316,7 @@
         "upstream_skill_sha256": "d0560012981e8e97f68c2eb69a1ad0875ec87a4d9e1f5c59fc6366b1d78dae06",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure AI Text Translation SDK for real-time text translation, transliteration, language detection, and dictionary lookup. Use for translating text content in applications. Triggers: \"text translation\", \"translator\", \"translate text\", \"transliterate\", \"TextTranslationClient\"."
     },
     {
       "id": "microsoft/azure-ai-translation-ts",
@@ -10463,7 +10463,7 @@
         "upstream_skill_sha256": "b6bcdb76e29ccc125741a75a07f0f65ee971086749a72a87d0b83c20bf9f6ea5",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure AI Vision Image Analysis SDK for captions, tags, objects, OCR, people detection, and smart cropping. Use for computer vision and image understanding tasks. Triggers: \"image analysis\", \"computer vision\", \"OCR\", \"object detection\", \"ImageAnalysisClient\", \"image caption\"."
     },
     {
       "id": "microsoft/azure-ai-voicelive-dotnet",
@@ -10512,7 +10512,7 @@
         "upstream_skill_sha256": "3731d251910cb49587a0a83839e532fb1e70baa7750824d35b2a5e545c38da7a",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure AI Voice Live SDK for .NET. Build real-time voice AI applications with bidirectional WebSocket communication. Use for voice assistants, conversational AI, real-time speech-to-speech, and voice-enabled chatbots. Triggers: \"voice live\", \"real-time voice\", \"VoiceLiveClient\", \"VoiceLiveSession\", \"voice assistant .NET\", \"bidirectional audio\", \"speech-to-speech\"."
     },
     {
       "id": "microsoft/azure-ai-voicelive-java",
@@ -10561,7 +10561,7 @@
         "upstream_skill_sha256": "78ae78efd24e6742b80d83f2578f1b50560c017a51a00fa21a401d9310db9538",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure AI VoiceLive SDK for Java. Real-time bidirectional voice conversations with AI assistants using WebSocket. Triggers: \"VoiceLiveClient java\", \"voice assistant java\", \"real-time voice java\", \"audio streaming java\", \"voice activity detection java\"."
     },
     {
       "id": "microsoft/azure-ai-voicelive-py",
@@ -10659,7 +10659,7 @@
         "upstream_skill_sha256": "d288827a7769dba34a4154b0981feee766ecefcd64ccd5e052f21d5e064d4d04",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure AI Voice Live SDK for JavaScript/TypeScript. Build real-time voice AI applications with bidirectional WebSocket communication. Use for voice assistants, conversational AI, real-time speech-to-speech, and voice-enabled chatbots in Node.js or browser environments. Triggers: \"voice live\", \"real-time voice\", \"VoiceLiveClient\", \"VoiceLiveSession\", \"voice assistant TypeScript\", \"bidirectional audio\", \"speech-to-speech JavaScript\"."
     },
     {
       "id": "microsoft/azure-aigateway",
@@ -10855,7 +10855,7 @@
         "upstream_skill_sha256": "e50e155ebeb050ed77d8d3ed17bc0ddbec46bb09830fa926bca53b4cc4ac99bf",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure App Configuration SDK for Java. Centralized application configuration management with key-value settings, feature flags, and snapshots. Triggers: \"ConfigurationClient java\", \"app configuration java\", \"feature flag java\", \"configuration setting java\", \"azure config java\"."
     },
     {
       "id": "microsoft/azure-appconfiguration-py",
@@ -10904,7 +10904,7 @@
         "upstream_skill_sha256": "4ac56c42ed0d45adf51f98f4b4150290ab98c22c2f5b7fe367f8746d48e670f3",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure App Configuration SDK for Python. Use for centralized configuration management, feature flags, and dynamic settings. Triggers: \"azure-appconfiguration\", \"AzureAppConfigurationClient\", \"feature flags\", \"configuration\", \"key-value settings\"."
     },
     {
       "id": "microsoft/azure-appconfiguration-ts",
@@ -11394,7 +11394,7 @@
         "upstream_skill_sha256": "a64ad3c273875782b51595a54968d108eaa7081dd7007bf3c3cb05040aaf7456",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|-"
+      "description": "Azure Batch SDK for Java. Run large-scale parallel and HPC batch jobs with pools, jobs, tasks, and compute nodes. Triggers: \"BatchClient java\", \"azure batch java\", \"batch pool java\", \"batch job java\", \"HPC java\", \"parallel computing java\"."
     },
     {
       "id": "microsoft/azure-containerregistry-py",
@@ -11443,7 +11443,7 @@
         "upstream_skill_sha256": "15bb9f18c67f30940b36edd5a2c050c05153ce2b3626d8ebf55604a9fbe946b2",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure Container Registry SDK for Python. Use for managing container images, artifacts, and repositories. Triggers: \"azure-containerregistry\", \"ContainerRegistryClient\", \"container images\", \"docker registry\", \"ACR\"."
     },
     {
       "id": "microsoft/azure-cosmos-db-py",
@@ -11541,7 +11541,7 @@
         "upstream_skill_sha256": "44598c07681d06e88d7a26ad5a11e18170ea5cf65c1457a2bce5742dad9bbbbf",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure Cosmos DB SDK for Java. NoSQL database operations with global distribution, multi-model support, and reactive patterns. Triggers: \"CosmosClient java\", \"CosmosAsyncClient\", \"cosmos database java\", \"cosmosdb java\", \"document database java\"."
     },
     {
       "id": "microsoft/azure-cosmos-py",
@@ -11590,7 +11590,7 @@
         "upstream_skill_sha256": "7b3c8cbbee11c4900cec94db00927a60f69d002385194df953af665768281925",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure Cosmos DB SDK for Python (NoSQL API). Use for document CRUD, queries, containers, and globally distributed data. Triggers: \"cosmos db\", \"CosmosClient\", \"container\", \"document\", \"NoSQL\", \"partition key\"."
     },
     {
       "id": "microsoft/azure-cosmos-rust",
@@ -11639,7 +11639,7 @@
         "upstream_skill_sha256": "1e50ff1d6b290ba30644fb6c501802d0c689b2df0e8ed8aaab14f4f57fa5e4cd",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure Cosmos DB library for Rust (NoSQL API). Document CRUD, containers, and globally distributed data. Triggers: \"cosmos db rust\", \"CosmosClient rust\", \"document crud rust\", \"NoSQL rust\", \"partition key rust\"."
     },
     {
       "id": "microsoft/azure-cosmos-ts",
@@ -11688,7 +11688,7 @@
         "upstream_skill_sha256": "352aefc8d088cdc851baf3a38d60124bbf77bc0f273c2522500967d5bd515da2",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure Cosmos DB JavaScript/TypeScript SDK (@azure/cosmos) for data plane operations. Use for CRUD operations on documents, queries, bulk operations, and container management. Triggers: \"Cosmos DB\", \"@azure/cosmos\", \"CosmosClient\", \"document CRUD\", \"NoSQL queries\", \"bulk operations\", \"partition key\", \"container.items\"."
     },
     {
       "id": "microsoft/azure-cost-analysis",
@@ -11834,7 +11834,7 @@
         "upstream_skill_sha256": "e28e8908e2a19511abab4ede57bfb967e75dba99b92b242c97c0eb23d729cc7a",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure Tables SDK for Python (Storage and Cosmos DB). Use for NoSQL key-value storage, entity CRUD, and batch operations. Triggers: \"table storage\", \"TableServiceClient\", \"TableClient\", \"entities\", \"PartitionKey\", \"RowKey\"."
     },
     {
       "id": "microsoft/azure-deploy",
@@ -12030,7 +12030,7 @@
         "upstream_skill_sha256": "898e9dd9acece95418989c09e3e9824fbe81c8ecb3bb4279003edff334f63e24",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure Event Grid SDK for .NET. Client library for publishing and consuming events with Azure Event Grid. Use for event-driven architectures, pub/sub messaging, CloudEvents, and EventGridEvents. Triggers: \"Event Grid\", \"EventGridPublisherClient\", \"CloudEvent\", \"EventGridEvent\", \"publish events .NET\", \"event-driven\", \"pub/sub\"."
     },
     {
       "id": "microsoft/azure-eventgrid-java",
@@ -12128,7 +12128,7 @@
         "upstream_skill_sha256": "9c216f29155345129844628e6137de6d3593690e9ce6bae80e543aff84fbb933",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure Event Grid SDK for Python. Use for publishing events, handling CloudEvents, and event-driven architectures. Triggers: \"event grid\", \"EventGridPublisherClient\", \"CloudEvent\", \"EventGridEvent\", \"publish events\"."
     },
     {
       "id": "microsoft/azure-eventhub-dotnet",
@@ -12177,7 +12177,7 @@
         "upstream_skill_sha256": "f9b30ce076b96ee944e8863b553d48851a6ffaf6ab0e94acff72745b41ccf686",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure Event Hubs SDK for .NET. Use for high-throughput event streaming: sending events (EventHubProducerClient, EventHubBufferedProducerClient), receiving events (EventProcessorClient with checkpointing), partition management, and real-time data ingestion. Triggers: \"Event Hubs\", \"event streaming\", \"EventHubProducerClient\", \"EventProcessorClient\", \"send events\", \"receive events\", \"checkpointing\", \"partition\"."
     },
     {
       "id": "microsoft/azure-eventhub-java",
@@ -12275,7 +12275,7 @@
         "upstream_skill_sha256": "fd26cd3d54d9e92d3d8989b0c2be8f54ab140f41837ba1f4a03da40659f64d03",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure Event Hubs SDK for Python streaming. Use for high-throughput event ingestion, producers, consumers, and checkpointing. Triggers: \"event hubs\", \"EventHubProducerClient\", \"EventHubConsumerClient\", \"streaming\", \"partitions\"."
     },
     {
       "id": "microsoft/azure-eventhub-rust",
@@ -12324,7 +12324,7 @@
         "upstream_skill_sha256": "ebfc903a96b4aa25c2ef83021ef90e02306ce56cf01943244f4bc3f4f3980278",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure Event Hubs library for Rust. Send and receive events for streaming data ingestion and batch processing. Triggers: \"event hubs rust\", \"ProducerClient rust\", \"ConsumerClient rust\", \"send event rust\", \"streaming rust\", \"eventhub rust\"."
     },
     {
       "id": "microsoft/azure-eventhub-ts",
@@ -12424,7 +12424,7 @@
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
       "artifact_type": "skill",
-      "description": "|"
+      "description": "Azure Identity library for .NET. Authentication library for Azure SDK clients using Microsoft Entra ID. Use for DefaultAzureCredential, managed identity, service principals, and developer credentials. Triggers: \"Azure Identity\", \"DefaultAzureCredential\", \"ManagedIdentityCredential\", \"ClientSecretCredential\", \"authentication .NET\", \"Azure auth\", \"credential chain\"."
     },
     {
       "id": "microsoft/azure-identity-java",
@@ -12522,7 +12522,7 @@
         "upstream_skill_sha256": "b10709c8cadc23134bfee415010f9f0292e39f06c216df3f3dd6fc826897414c",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure Identity SDK for Python authentication with Microsoft Entra ID. Use for DefaultAzureCredential, managed identity, service principals, and token caching. Triggers: \"azure-identity\", \"DefaultAzureCredential\", \"authentication\", \"managed identity\", \"service principal\", \"credential\"."
     },
     {
       "id": "microsoft/azure-identity-rust",
@@ -12571,7 +12571,7 @@
         "upstream_skill_sha256": "a8012a1c4324eee8b38daf43ce1f6400ecb3fa8c64763399f4247155627024ac",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure Identity library for Rust. Microsoft Entra ID authentication for all Azure SDK clients. Triggers: \"azure identity rust\", \"DeveloperToolsCredential\", \"authentication rust\", \"managed identity rust\", \"credential rust\", \"Entra ID rust\"."
     },
     {
       "id": "microsoft/azure-identity-ts",
@@ -12669,7 +12669,7 @@
         "upstream_skill_sha256": "f98f25489aec42b2fd43856ad9766982a35d9ec39d28a7d51f4bc3b29ffd1f1e",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure Key Vault Certificates library for Rust. Create, manage, and use X.509 certificates including self-signed and CA-issued. Triggers: \"keyvault certificates rust\", \"CertificateClient rust\", \"create certificate rust\", \"self-signed certificate rust\", \"X.509 rust\"."
     },
     {
       "id": "microsoft/azure-keyvault-keys-rust",
@@ -12718,7 +12718,7 @@
         "upstream_skill_sha256": "24e1f152af7ecb5dbb37a84456b596c1ebc78773b9e1f1e32e4b223931a9a2c0",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure Key Vault Keys library for Rust. Create, manage, and use cryptographic keys including RSA, EC, and HSM-protected keys. Triggers: \"keyvault keys rust\", \"KeyClient rust\", \"create key rust\", \"encrypt rust\", \"wrap key rust\", \"sign rust\"."
     },
     {
       "id": "microsoft/azure-keyvault-keys-ts",
@@ -12816,7 +12816,7 @@
         "upstream_skill_sha256": "5300434b6d8025604bfb4e16514b27d1e380255f0a587c65d000cbdf59248ce1",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure Key Vault SDK for Python. Use for secrets, keys, and certificates management with secure storage. Triggers: \"key vault\", \"SecretClient\", \"KeyClient\", \"CertificateClient\", \"secrets\", \"encryption keys\"."
     },
     {
       "id": "microsoft/azure-keyvault-secrets-rust",
@@ -12865,7 +12865,7 @@
         "upstream_skill_sha256": "d246f8bf17b28cca1e9d06548bb64e71b0945ea5aadfdfb3e1327e7bff30c7a2",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure Key Vault Secrets library for Rust. Store and retrieve secrets, passwords, and API keys. Triggers: \"keyvault secrets rust\", \"SecretClient rust\", \"get secret rust\", \"set secret rust\", \"list secrets rust\"."
     },
     {
       "id": "microsoft/azure-keyvault-secrets-ts",
@@ -13406,7 +13406,7 @@
         "upstream_skill_sha256": "81c4043ecf3d0b86a31468de4d37ee5109052cd58ca757bf3c035c493118b869",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure Maps SDK for .NET. Location-based services including geocoding, routing, rendering, geolocation, and weather. Use for address search, directions, map tiles, IP geolocation, and weather data. Triggers: \"Azure Maps\", \"MapsSearchClient\", \"MapsRoutingClient\", \"MapsRenderingClient\", \"geocoding .NET\", \"route directions\", \"map tiles\", \"geolocation\"."
     },
     {
       "id": "microsoft/azure-messaging",
@@ -13553,7 +13553,7 @@
         "upstream_skill_sha256": "c44dffb388765c125899343027db5276366a5c11b5993b11b07acb06ce235527",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure Web PubSub Service SDK for Python. Use for real-time messaging, WebSocket connections, and pub/sub patterns. Triggers: \"azure-messaging-webpubsubservice\", \"WebPubSubServiceClient\", \"real-time\", \"WebSocket\", \"pub/sub\"."
     },
     {
       "id": "microsoft/azure-mgmt-apicenter-dotnet",
@@ -13602,7 +13602,7 @@
         "upstream_skill_sha256": "e902c513aee8662f55c2d3d36b6e38da6dc174198942858e95980c2173635b06",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure API Center SDK for .NET. Centralized API inventory management with governance, versioning, and discovery. Use for creating API services, workspaces, APIs, versions, definitions, environments, deployments, and metadata schemas. Triggers: \"API Center\", \"ApiCenterService\", \"ApiCenterWorkspace\", \"ApiCenterApi\", \"API inventory\", \"API governance\", \"API versioning\", \"API catalog\", \"API discovery\"."
     },
     {
       "id": "microsoft/azure-mgmt-apicenter-py",
@@ -13651,7 +13651,7 @@
         "upstream_skill_sha256": "1f6aa252243b60aad3dd879b24e9fcba51b6833861baa5ee97b74ff2f0b3a726",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure API Center Management SDK for Python. Use for managing API inventory, metadata, and governance across your organization. Triggers: \"azure-mgmt-apicenter\", \"ApiCenterMgmtClient\", \"API Center\", \"API inventory\", \"API governance\"."
     },
     {
       "id": "microsoft/azure-mgmt-apimanagement-dotnet",
@@ -13700,7 +13700,7 @@
         "upstream_skill_sha256": "71718aef3ae2343f90c9db33dee8ed9cbe146e66128c624cac069bf23d2083fe",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure Resource Manager SDK for API Management in .NET. Use for MANAGEMENT PLANE operations: creating/managing APIM services, APIs, products, subscriptions, policies, users, groups, gateways, and backends via Azure Resource Manager. Triggers: \"API Management\", \"APIM service\", \"create APIM\", \"manage APIs\", \"ApiManagementServiceResource\", \"API policies\", \"APIM products\", \"APIM subscriptions\"."
     },
     {
       "id": "microsoft/azure-mgmt-apimanagement-py",
@@ -13749,7 +13749,7 @@
         "upstream_skill_sha256": "f81c64f9313e75483ab37a657556eb9a9dfaa5c82d733e96bab7289ab78c4860",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure API Management SDK for Python. Use for managing APIM services, APIs, products, subscriptions, and policies. Triggers: \"azure-mgmt-apimanagement\", \"ApiManagementClient\", \"APIM\", \"API gateway\", \"API Management\"."
     },
     {
       "id": "microsoft/azure-mgmt-applicationinsights-dotnet",
@@ -13798,7 +13798,7 @@
         "upstream_skill_sha256": "ef6c083b7ddabc0c89856e6755914b2619f93efb8948e70f1bcc458c1126ecca",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure Application Insights SDK for .NET. Application performance monitoring and observability resource management. Use for creating Application Insights components, web tests, workbooks, analytics items, and API keys. Triggers: \"Application Insights\", \"ApplicationInsights\", \"App Insights\", \"APM\", \"application monitoring\", \"web tests\", \"availability tests\", \"workbooks\"."
     },
     {
       "id": "microsoft/azure-mgmt-arizeaiobservabilityeval-dotnet",
@@ -13896,7 +13896,7 @@
         "upstream_skill_sha256": "63b889425dca9f3584ba88f509374ede0364ee48d71616c52902c44bc1882691",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure Resource Manager SDK for Bot Service in .NET. Management plane operations for creating and managing Azure Bot resources, channels (Teams, DirectLine, Slack), and connection settings. Triggers: \"Bot Service\", \"BotResource\", \"Azure Bot\", \"DirectLine channel\", \"Teams channel\", \"bot management .NET\", \"create bot\"."
     },
     {
       "id": "microsoft/azure-mgmt-botservice-py",
@@ -13945,7 +13945,7 @@
         "upstream_skill_sha256": "39f0df196360a96e17b32f32481c696943e1176f19e8ec1f8de4942299db82c2",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|-"
+      "description": "Azure Bot Service Management SDK for Python. Use for creating, managing, and configuring Azure Bot Service resources. Triggers: \"azure-mgmt-botservice\", \"AzureBotService\", \"bot management\", \"conversational AI\", \"bot channels\"."
     },
     {
       "id": "microsoft/azure-mgmt-fabric-dotnet",
@@ -13994,7 +13994,7 @@
         "upstream_skill_sha256": "88fcd541f96a973d546da7f0d06db97df5cc9b8e1a99a4790458a6ef2abbf74d",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure Resource Manager SDK for Fabric in .NET. Use for MANAGEMENT PLANE operations: provisioning, scaling, suspending/resuming Microsoft Fabric capacities, checking name availability, and listing SKUs via Azure Resource Manager. Triggers: \"Fabric capacity\", \"create capacity\", \"suspend capacity\", \"resume capacity\", \"Fabric SKU\", \"provision Fabric\", \"ARM Fabric\", \"FabricCapacityResource\"."
     },
     {
       "id": "microsoft/azure-mgmt-fabric-py",
@@ -14043,7 +14043,7 @@
         "upstream_skill_sha256": "0f746e9585020361bef8893f523c07782e200840da2770f7bff85290e939954c",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|-"
+      "description": "Azure Fabric Management SDK for Python. Use for managing Microsoft Fabric capacities and resources. Triggers: \"azure-mgmt-fabric\", \"FabricMgmtClient\", \"Fabric capacity\", \"Microsoft Fabric\", \"Power BI capacity\"."
     },
     {
       "id": "microsoft/azure-mgmt-mongodbatlas-dotnet",
@@ -14141,7 +14141,7 @@
         "upstream_skill_sha256": "f39181f45fd5882cc12cd513c22760f7c1d399ac4568d22e7bbf5e44311a89db",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure Weights & Biases SDK for .NET. ML experiment tracking and model management via Azure Marketplace. Use for creating W&B instances, managing SSO, marketplace integration, and ML observability. Triggers: \"Weights and Biases\", \"W&B\", \"WeightsAndBiases\", \"ML experiment tracking\", \"model registry\", \"experiment management\", \"wandb\"."
     },
     {
       "id": "microsoft/azure-microsoft-playwright-testing-ts",
@@ -14239,7 +14239,7 @@
         "upstream_skill_sha256": "edc52c6adc3d7503cfce4bee6fca0357f98f003b3555b4b2867daace43210f5f",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure Monitor Ingestion SDK for Java. Send custom logs to Azure Monitor via Data Collection Rules (DCR) and Data Collection Endpoints (DCE). Triggers: \"LogsIngestionClient java\", \"azure monitor ingestion java\", \"custom logs java\", \"DCR java\", \"data collection rule java\"."
     },
     {
       "id": "microsoft/azure-monitor-ingestion-py",
@@ -14288,7 +14288,7 @@
         "upstream_skill_sha256": "e9686a6ef133b735704d1f677fb926857a056b8b1bb80e085d495d9136c52eae",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure Monitor Ingestion SDK for Python. Use for sending custom logs to Log Analytics workspace via Logs Ingestion API. Triggers: \"azure-monitor-ingestion\", \"LogsIngestionClient\", \"custom logs\", \"DCR\", \"data collection rule\", \"Log Analytics\"."
     },
     {
       "id": "microsoft/azure-monitor-opentelemetry-exporter-java",
@@ -14337,7 +14337,7 @@
         "upstream_skill_sha256": "2ecdd3db79950efc38de599e90887a41f34e9a670949b9be8e6708578dbad6df",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure Monitor OpenTelemetry Exporter for Java. Export OpenTelemetry traces, metrics, and logs to Azure Monitor/Application Insights. Triggers: \"AzureMonitorExporter java\", \"opentelemetry azure java\", \"application insights java otel\", \"azure monitor tracing java\". Note: This package is DEPRECATED. Migrate to azure-monitor-opentelemetry-autoconfigure."
     },
     {
       "id": "microsoft/azure-monitor-opentelemetry-exporter-py",
@@ -14386,7 +14386,7 @@
         "upstream_skill_sha256": "0442148cb6e845b4c682e1adf7e253fef2dab295a47a48da210d91970205178b",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure Monitor OpenTelemetry Exporter for Python. Use for low-level OpenTelemetry export to Application Insights. Triggers: \"azure-monitor-opentelemetry-exporter\", \"AzureMonitorTraceExporter\", \"AzureMonitorMetricExporter\", \"AzureMonitorLogExporter\"."
     },
     {
       "id": "microsoft/azure-monitor-opentelemetry-py",
@@ -14435,7 +14435,7 @@
         "upstream_skill_sha256": "5f3da3c631f76fe4a52a159c8eb055e54819eb6fd5269803b4106773a70f98fd",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure Monitor OpenTelemetry Distro for Python. Use for one-line Application Insights setup with auto-instrumentation. Triggers: \"azure-monitor-opentelemetry\", \"configure_azure_monitor\", \"Application Insights\", \"OpenTelemetry distro\", \"auto-instrumentation\"."
     },
     {
       "id": "microsoft/azure-monitor-opentelemetry-ts",
@@ -14533,7 +14533,7 @@
         "upstream_skill_sha256": "924066d2c6056b8e528fc8b7654b91646c4c37717dd10a96e7545fe244733a06",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure Monitor Query SDK for Java. Execute Kusto queries against Log Analytics workspaces and query metrics from Azure resources. Triggers: \"LogsQueryClient java\", \"MetricsQueryClient java\", \"kusto query java\", \"log analytics java\", \"azure monitor query java\". Note: This package is deprecated. Migrate to azure-monitor-query-logs and azure-monitor-query-metrics."
     },
     {
       "id": "microsoft/azure-monitor-query-py",
@@ -14582,7 +14582,7 @@
         "upstream_skill_sha256": "02a36d349fa9ce1b194f032975ad82cd04d95598059f6d14902872162688edbd",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure Monitor Query SDK for Python. Use for querying Log Analytics workspaces and Azure Monitor metrics. Triggers: \"azure-monitor-query\", \"LogsQueryClient\", \"MetricsQueryClient\", \"Log Analytics\", \"Kusto queries\", \"Azure metrics\"."
     },
     {
       "id": "microsoft/azure-postgres-ts",
@@ -14631,7 +14631,7 @@
         "upstream_skill_sha256": "b2098d835acf3cf6cee62ae79044c0180aee037231ef0afa1589fed1fc9c4ab3",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Connect to Azure Database for PostgreSQL Flexible Server from Node.js/TypeScript using the pg (node-postgres) package. Use for PostgreSQL queries, connection pooling, transactions, and Microsoft Entra ID (passwordless) authentication. Triggers: \"PostgreSQL\", \"postgres\", \"pg client\", \"node-postgres\", \"Azure PostgreSQL connection\", \"PostgreSQL TypeScript\", \"pg Pool\", \"passwordless postgres\"."
     },
     {
       "id": "microsoft/azure-prepare",
@@ -14876,7 +14876,7 @@
         "upstream_skill_sha256": "d44c0e53406799c89d0bb75def5eb150b21447405aa8df6c5596e577678a7f3f",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure Resource Manager SDK for Cosmos DB in .NET. Use for MANAGEMENT PLANE operations: creating/managing Cosmos DB accounts, databases, containers, throughput settings, and RBAC via Azure Resource Manager. NOT for data plane operations (CRUD on documents) - use Microsoft.Azure.Cosmos for that. Triggers: \"Cosmos DB account\", \"create Cosmos account\", \"manage Cosmos resources\", \"ARM Cosmos\", \"CosmosDBAccountResource\", \"provision Cosmos DB\"."
     },
     {
       "id": "microsoft/azure-resource-manager-durabletask-dotnet",
@@ -14925,7 +14925,7 @@
         "upstream_skill_sha256": "9e993db6caaba2620cf6232aa350619634ad104e61473f28e640091d39d8675b",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure Resource Manager SDK for Durable Task Scheduler in .NET. Use for MANAGEMENT PLANE operations: creating/managing Durable Task Schedulers, Task Hubs, and retention policies via Azure Resource Manager. Triggers: \"Durable Task Scheduler\", \"create scheduler\", \"task hub\", \"DurableTaskSchedulerResource\", \"provision Durable Task\", \"orchestration scheduler\"."
     },
     {
       "id": "microsoft/azure-resource-manager-mysql-dotnet",
@@ -14974,7 +14974,7 @@
         "upstream_skill_sha256": "b84da3a18d7e44d9598c9462a085638a7e0a8b4cfe020767ef844321960e346e",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure MySQL Flexible Server SDK for .NET. Database management for MySQL Flexible Server deployments. Use for creating servers, databases, firewall rules, configurations, backups, and high availability. Triggers: \"MySQL\", \"MySqlFlexibleServer\", \"MySQL Flexible Server\", \"Azure Database for MySQL\", \"MySQL database management\", \"MySQL firewall\", \"MySQL backup\"."
     },
     {
       "id": "microsoft/azure-resource-manager-playwright-dotnet",
@@ -15023,7 +15023,7 @@
         "upstream_skill_sha256": "019b205f338274a141a25801d9d4320a9d2e65e44f175a2012ede29d58c374d2",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure Resource Manager SDK for Microsoft Playwright Testing in .NET. Use for MANAGEMENT PLANE operations: creating/managing Playwright Testing workspaces, checking name availability, and managing workspace quotas via Azure Resource Manager. NOT for running Playwright tests - use Azure.Developer.MicrosoftPlaywrightTesting.NUnit for that. Triggers: \"Playwright workspace\", \"create Playwright Testing workspace\", \"manage Playwright resources\", \"ARM Playwright\", \"PlaywrightWorkspaceResource\", \"provision Playwright Testing\"."
     },
     {
       "id": "microsoft/azure-resource-manager-postgresql-dotnet",
@@ -15072,7 +15072,7 @@
         "upstream_skill_sha256": "53303c564f27e2ccbcef3f8d35a8ac5d8f0cac18745ec2aba9bd91ba8c27200a",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure PostgreSQL Flexible Server SDK for .NET. Database management for PostgreSQL Flexible Server deployments. Use for creating servers, databases, firewall rules, configurations, backups, and high availability. Triggers: \"PostgreSQL\", \"PostgreSqlFlexibleServer\", \"PostgreSQL Flexible Server\", \"Azure Database for PostgreSQL\", \"PostgreSQL database management\", \"PostgreSQL firewall\", \"PostgreSQL backup\", \"Postgres\"."
     },
     {
       "id": "microsoft/azure-resource-manager-redis-dotnet",
@@ -15121,7 +15121,7 @@
         "upstream_skill_sha256": "8d60556c55795f4ccaca1907e108e98d7469ff64bea8aaa62cb9b8a19615e024",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure Resource Manager SDK for Redis in .NET. Use for MANAGEMENT PLANE operations: creating/managing Azure Cache for Redis instances, firewall rules, access keys, patch schedules, linked servers (geo-replication), and private endpoints via Azure Resource Manager. NOT for data plane operations (get/set keys, pub/sub) - use StackExchange.Redis for that. Triggers: \"Redis cache\", \"create Redis\", \"manage Redis\", \"ARM Redis\", \"RedisResource\", \"provision Redis\", \"Azure Cache for Redis\"."
     },
     {
       "id": "microsoft/azure-resource-manager-sql-dotnet",
@@ -15170,7 +15170,7 @@
         "upstream_skill_sha256": "95f952b72a93affd41483f7a44f1bb4043942794fc1d3ed070cde247e2cf1854",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure Resource Manager SDK for Azure SQL in .NET. Use for MANAGEMENT PLANE operations: creating/managing SQL servers, databases, elastic pools, firewall rules, and failover groups via Azure Resource Manager. NOT for data plane operations (executing queries) - use Microsoft.Data.SqlClient for that. Triggers: \"SQL server\", \"create SQL database\", \"manage SQL resources\", \"ARM SQL\", \"SqlServerResource\", \"provision Azure SQL\", \"elastic pool\", \"firewall rule\"."
     },
     {
       "id": "microsoft/azure-resource-visualizer",
@@ -15270,7 +15270,7 @@
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
       "artifact_type": "skill",
-      "description": "|"
+      "description": "Azure AI Search SDK for .NET (Azure.Search.Documents). Use for building search applications with full-text, vector, semantic, and hybrid search. Covers SearchClient (queries, document CRUD), SearchIndexClient (index management), and SearchIndexerClient (indexers, skillsets). Triggers: \"Azure Search .NET\", \"SearchClient\", \"SearchIndexClient\", \"vector search C#\", \"semantic search .NET\", \"hybrid search\", \"Azure.Search.Documents\"."
     },
     {
       "id": "microsoft/azure-search-documents-py",
@@ -15319,7 +15319,7 @@
         "upstream_skill_sha256": "4a8d46e6e8def539b71987804fdc2d0946948e6e332c98ca831eeaea9e596401",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure AI Search SDK for Python. Use for vector search, hybrid search, semantic ranking, indexing, and skillsets. Triggers: \"azure-search-documents\", \"SearchClient\", \"SearchIndexClient\", \"vector search\", \"hybrid search\", \"semantic search\"."
     },
     {
       "id": "microsoft/azure-search-documents-ts",
@@ -15416,7 +15416,7 @@
         "upstream_skill_sha256": "68d52c6b0b786508071895979907eab932b92bfd55eee35ac30f018acafe23e5",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure Key Vault Keys SDK for .NET. Client library for managing cryptographic keys in Azure Key Vault and Managed HSM. Use for key creation, rotation, encryption, decryption, signing, and verification. Triggers: \"Key Vault keys\", \"KeyClient\", \"CryptographyClient\", \"RSA key\", \"EC key\", \"encrypt decrypt .NET\", \"key rotation\", \"HSM\"."
     },
     {
       "id": "microsoft/azure-security-keyvault-keys-java",
@@ -15561,7 +15561,7 @@
         "upstream_skill_sha256": "6a16e0ef96cb683daaf6787e488fc65fbfd69d9b220fdb1b4ef5ecee9d36e9ba",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure Service Bus SDK for .NET. Enterprise messaging with queues, topics, subscriptions, and sessions. Use for reliable message delivery, pub/sub patterns, dead letter handling, and background processing. Triggers: \"Service Bus\", \"ServiceBusClient\", \"ServiceBusSender\", \"ServiceBusReceiver\", \"ServiceBusProcessor\", \"message queue\", \"pub/sub .NET\", \"dead letter queue\"."
     },
     {
       "id": "microsoft/azure-servicebus-py",
@@ -15610,7 +15610,7 @@
         "upstream_skill_sha256": "6d1905fe12c4c84a3e4520ee6c03d21b205111b0c394c14e4a0d5bb322c94435",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure Service Bus SDK for Python messaging. Use for queues, topics, subscriptions, and enterprise messaging patterns. Triggers: \"service bus\", \"ServiceBusClient\", \"queue\", \"topic\", \"subscription\", \"message broker\"."
     },
     {
       "id": "microsoft/azure-servicebus-ts",
@@ -15708,7 +15708,7 @@
         "upstream_skill_sha256": "e19f62d6ccb67623f28c72715cab0b8ee8b378b9d2a2bcd0d848241c8b3af5df",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|-"
+      "description": "Azure Speech to Text REST API for short audio (Python). Use for simple speech recognition of audio files up to 60 seconds without the Speech SDK. Triggers: \"speech to text REST\", \"short audio transcription\", \"speech recognition REST API\", \"STT REST\", \"recognize speech REST\". DO NOT USE FOR: Long audio (>60 seconds), real-time streaming, batch transcription, custom speech models, speech translation. Use Speech SDK or Batch Transcription API instead."
     },
     {
       "id": "microsoft/azure-storage",
@@ -15855,7 +15855,7 @@
         "upstream_skill_sha256": "036cde228f87b9e6aacbd3ec317bd504cb5639e04aec81f1b3ef631a9b240622",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure Blob Storage SDK for Python. Use for uploading, downloading, listing blobs, managing containers, and blob lifecycle. Triggers: \"blob storage\", \"BlobServiceClient\", \"ContainerClient\", \"BlobClient\", \"upload blob\", \"download blob\"."
     },
     {
       "id": "microsoft/azure-storage-blob-rust",
@@ -15904,7 +15904,7 @@
         "upstream_skill_sha256": "6750e050df436fe23223dfe4cacaf9067f3d16ed10f6b9137453b0cb7bcd0b9b",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure Blob Storage library for Rust. Upload, download, and manage blobs and containers. Triggers: \"blob storage rust\", \"BlobClient rust\", \"upload blob rust\", \"download blob rust\", \"storage container rust\", \"BlobServiceClient rust\"."
     },
     {
       "id": "microsoft/azure-storage-blob-ts",
@@ -15953,7 +15953,7 @@
         "upstream_skill_sha256": "180a75a03963329bd2671651ab1b90ab7e21c1307e7f822a3f649d5bebf367d1",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure Blob Storage JavaScript/TypeScript SDK (@azure/storage-blob) for blob operations. Use for uploading, downloading, listing, and managing blobs and containers. Supports block blobs, append blobs, page blobs, SAS tokens, and streaming. Triggers: \"blob storage\", \"@azure/storage-blob\", \"BlobServiceClient\", \"ContainerClient\", \"upload blob\", \"download blob\", \"SAS token\", \"block blob\"."
     },
     {
       "id": "microsoft/azure-storage-file-datalake-py",
@@ -16002,7 +16002,7 @@
         "upstream_skill_sha256": "a8a7321f17a1097d0c418cf1e57b3c8758f25e986fb4f35f8de408f6d8c43d95",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure Data Lake Storage Gen2 SDK for Python. Use for hierarchical file systems, big data analytics, and file/directory operations. Triggers: \"data lake\", \"DataLakeServiceClient\", \"FileSystemClient\", \"ADLS Gen2\", \"hierarchical namespace\"."
     },
     {
       "id": "microsoft/azure-storage-file-share-py",
@@ -16051,7 +16051,7 @@
         "upstream_skill_sha256": "428aed569ce9865e7629c565eff62cedbcdb1155533603ed9aa75f888d8c8730",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|-"
+      "description": "Azure Storage File Share SDK for Python. Use for SMB file shares, directories, and file operations in the cloud. Triggers: \"azure-storage-file-share\", \"ShareServiceClient\", \"ShareClient\", \"file share\", \"SMB\"."
     },
     {
       "id": "microsoft/azure-storage-file-share-ts",
@@ -16100,7 +16100,7 @@
         "upstream_skill_sha256": "9a0e4d4a1940c40420d292b311bf23c62e7b855506459984382d9dfcae3f140f",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure File Share JavaScript/TypeScript SDK (@azure/storage-file-share) for SMB file share operations. Use for creating shares, managing directories, uploading/downloading files, and handling file metadata. Supports Azure Files SMB protocol scenarios. Triggers: \"file share\", \"@azure/storage-file-share\", \"ShareServiceClient\", \"ShareClient\", \"SMB\", \"Azure Files\"."
     },
     {
       "id": "microsoft/azure-storage-queue-py",
@@ -16149,7 +16149,7 @@
         "upstream_skill_sha256": "7a348472e13aaafa5d631b39dc9198d5b90123ea00b4cac4d359cbcaf886bc45",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure Queue Storage SDK for Python. Use for reliable message queuing, task distribution, and asynchronous processing. Triggers: \"queue storage\", \"QueueServiceClient\", \"QueueClient\", \"message queue\", \"dequeue\"."
     },
     {
       "id": "microsoft/azure-storage-queue-rust",
@@ -16198,7 +16198,7 @@
         "upstream_skill_sha256": "75f05006d817cfd262462fda75d0e0a4495d90665cbf79e37f83fe7d96a68c3d",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure Queue Storage library for Rust. Send, receive, and manage queue messages. Triggers: \"queue storage rust\", \"QueueClient rust\", \"send message rust\", \"receive messages rust\", \"QueueServiceClient rust\", \"queue rust\"."
     },
     {
       "id": "microsoft/azure-storage-queue-ts",
@@ -16247,7 +16247,7 @@
         "upstream_skill_sha256": "9b8fd8572cc134d45d4a7efdaca82a9628a26dd1bc4f2b51935b79fc9baa27c3",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Azure Queue Storage JavaScript/TypeScript SDK (@azure/storage-queue) for message queue operations. Use for sending, receiving, peeking, and deleting messages in queues. Supports visibility timeout, message encoding, and batch operations. Triggers: \"queue storage\", \"@azure/storage-queue\", \"QueueServiceClient\", \"QueueClient\", \"send message\", \"receive message\", \"dequeue\", \"visibility timeout\"."
     },
     {
       "id": "microsoft/azure-upgrade",
@@ -16492,7 +16492,7 @@
         "upstream_skill_sha256": "6087d00943083bd26c5b025597a8e56c034b6c6263b0a4c0fcfa23722a1461db",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": ">-"
+      "description": "Transform the agent into a Cloud Solution Architect following Azure Architecture Center best practices. Use when designing cloud architectures, reviewing system designs, selecting architecture styles, applying cloud design patterns, making technology choices, or conducting Well-Architected Framework reviews."
     },
     {
       "id": "microsoft/continual-learning",
@@ -16884,7 +16884,7 @@
         "upstream_skill_sha256": "4694de74b7a67f15c59ea9a6af7d916920380b7ab54b201f6e37ab24e04ca12d",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Sysinternals DebugView CLI (DbgViewCli) for capturing and analyzing usermode and kernel-mode Windows debug output from the command line. USE FOR: capturing OutputDebugString output, kernel DbgPrint/KdPrint capture, boot-time debug logging, remote debug monitoring, filtering debug output by PID or process name, crash dump analysis, automated debug capture with bounded execution. DO NOT USE FOR: non-Windows platforms, application-level logging frameworks (log4j, serilog), Azure Monitor or cloud telemetry, ETW tracing (use WPR/xperf instead), user-mode crash dumps (use WinDbg). Triggers: \"debug output\", \"DbgView\", \"DebugView\", \"kernel debug\", \"capture debug logs\", \"boot logging\", \"OutputDebugString\", \"DbgPrint\", \"KdPrint\", \"remote debug monitor\", \"debug capture CLI\"."
     },
     {
       "id": "microsoft/declarative-agent-developer",
@@ -16933,7 +16933,7 @@
         "upstream_skill_sha256": "13d2af8dd44cca049c8ebf8a8880cca304fc3dc419c926ef146dba35b14df412",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": ">"
+      "description": "Create, build, deploy, and localize declarative agents for M365 Copilot and Teams. USE THIS SKILL for ANY task involving a declarative agent — including localization, scaffolding, editing manifests, adding capabilities, and deploying. Localization requires tokenized manifests and language files that only this skill knows how to produce. Triggers: \"create agent\", \"create a declarative agent\", \"new declarative agent\", \"scaffold an agent\", \"new agent project\", \"add a capability\", \"add a plugin\", \"configure my agent\", \"deploy my agent\", \"fix my agent manifest\", \"edit my agent\", \"localize my agent\", \"add localization\", \"translate my agent\", \"multi-language agent\", \"add an API plugin\", \"add an MCP plugin\", \"add OAuth to my plugin\", \"review instructions\", \"improve instructions\", \"fix my instructions\""
     },
     {
       "id": "microsoft/deploy",
@@ -17128,7 +17128,7 @@
         "upstream_skill_sha256": "f002fdcfca1affe824a0e39dee0ebe000473a38663a4182d8b0484520ac36c38",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Microsoft Entra Agent ID (preview) for creating OAuth2-capable AI agent identities via Microsoft Graph beta API. Covers Agent Identity Blueprints, BlueprintPrincipals, Agent Identities, required permissions, sponsors, and Workload Identity Federation. Includes Microsoft Entra SDK for AgentID (containerized sidecar) for polyglot agent authentication (Docker/Kubernetes), 3P agent integration, autonomous and interactive agent patterns. Triggers: \"agent identity\", \"agent id\", \"Agent Identity Blueprint\", \"BlueprintPrincipal\", \"entra agent\", \"agent identity provisioning\", \"Graph agent identity\", \"entra sidecar\", \"agent id sidecar\", \"auth sidecar\", \"3P agent\", \"third-party agent identity\", \"polyglot agent auth\"."
     },
     {
       "id": "microsoft/entra-app-registration",
@@ -17372,7 +17372,7 @@
         "upstream_skill_sha256": "639b68cdc6f9b4cdd66a111851555afee2eb82d4de37bf9cbad3be845bb00c2d",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": ">"
+      "description": "Review and create distinctive, production-grade frontend interfaces with high design quality and design system compliance. Evaluates using three pillars: frictionless insight-to-action, quality craft, and trustworthy building. USE FOR: PR reviews, design reviews, accessibility audits, design system compliance checks, creative frontend design, UI code review, component reviews, responsive design checks, theme testing, and creating memorable UI. DO NOT USE FOR: Backend API reviews, database schema reviews, infrastructure or DevOps work, pure business logic without UI, or non-frontend code."
     },
     {
       "id": "microsoft/frontend-ui-dark-ts",
@@ -17518,7 +17518,7 @@
         "upstream_skill_sha256": "86498df46a34070e105af3f9283cb3a51f6c4c5cb489bceb092a2566efbbb527",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": ">"
+      "description": "Install or update the M365 Agents Toolkit (ATK) CLI and VS Code extension. Triggers: \"install atk\", \"update atk\", \"install agents toolkit\", \"update agents toolkit\", \"install the toolkit\", \"setup atk\", \"get atk\", \"install atk cli\", \"install atk extension\", \"install atk vsix\", \"update the vs code extension\", \"install latest atk\", \"upgrade atk\""
     },
     {
       "id": "microsoft/kql",
@@ -17616,7 +17616,7 @@
         "upstream_skill_sha256": "5a1da9a62088eb7518937e1cba1d66e5a644083d82a22aa51f242f5915ca21ee",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": ">"
+      "description": "Use this skill when a user wants to create, run, or analyze evaluation suites for Microsoft 365 Copilot declarative agents with the public @microsoft/m365-copilot-eval CLI. Trigger on intents such as \"evaluate my agent\", \"test my agent\", \"run my evals\", \"create eval prompts\", \"add multi-turn tests\", \"tune evaluator thresholds\", \"why is my agent failing\", or \"set up eval environment variables\"."
     },
     {
       "id": "microsoft/m365-agents-dotnet",
@@ -17665,7 +17665,7 @@
         "upstream_skill_sha256": "1f29376692b66b1bfc1f3d7074457eb7c4f3606ae9e32f56c2aba600bca8503b",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Microsoft 365 Agents SDK for .NET. Build multichannel agents for Teams/M365/Copilot Studio with ASP.NET Core hosting, AgentApplication routing, and MSAL-based auth. Triggers: \"Microsoft 365 Agents SDK\", \"Microsoft.Agents\", \"AddAgentApplicationOptions\", \"AgentApplication\", \"AddAgentAspNetAuthentication\", \"Copilot Studio client\", \"IAgentHttpAdapter\"."
     },
     {
       "id": "microsoft/m365-agents-py",
@@ -17714,7 +17714,7 @@
         "upstream_skill_sha256": "cd3b4a536bab82b795960a3ba728bf74345729a6cb278a50913639d5d77609a0",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Microsoft 365 Agents SDK for Python. Build multichannel agents for Teams/M365/Copilot Studio with aiohttp hosting, AgentApplication routing, streaming responses, and MSAL-based auth. Triggers: \"Microsoft 365 Agents SDK\", \"microsoft_agents\", \"AgentApplication\", \"start_agent_process\", \"TurnContext\", \"Copilot Studio client\", \"CloudAdapter\"."
     },
     {
       "id": "microsoft/m365-agents-ts",
@@ -17763,7 +17763,7 @@
         "upstream_skill_sha256": "6e4d92ab2e19baa8136419195394789218c2a9157ddd87100cf352870b379bdc",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Microsoft 365 Agents SDK for TypeScript/Node.js. Build multichannel agents for Teams/M365/Copilot Studio with AgentApplication routing, Express hosting, streaming responses, and Copilot Studio client integration. Triggers: \"Microsoft 365 Agents SDK\", \"@microsoft/agents-hosting\", \"AgentApplication\", \"startServer\", \"streamingResponse\", \"Copilot Studio client\", \"@microsoft/agents-copilotstudio-client\"."
     },
     {
       "id": "microsoft/mcp-builder",
@@ -18495,7 +18495,7 @@
         "upstream_skill_sha256": "b24d0babae9e85054d30765abca0043a2c310ba7dc980d1da258c39b87f8cd12",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
-      "description": "|"
+      "description": "Build MCP servers for Copilot Chat using the OpenAI Apps SDK or MCP Apps SDK widget rendering support (any language). Use this skill when: - Creating MCP servers that integrate with M365 Copilot declarative agents - Building rich interactive widgets (React + Fluent UI) that render in Copilot Chat - Implementing tools that return structuredContent for widget rendering - Adapting an existing MCP server to support Copilot widget rendering - Setting up devtunnels for localhost MCP server exposure - Configuring mcpPlugin.json manifests with RemoteMCPServer runtime Do NOT use this skill for general agent development (scaffolding, manifests, deployment) — use declarative-agent-developer instead. This skill is ONLY for MCP server + widget development. Triggers: \"MCP server for Copilot\", \"OpenAI Apps SDK\", \"Copilot widget\", \"structuredContent\", \"MCP plugin\", \"devtunnels MCP\", \"OAI app\", \"widget rendering\", \"UI widget\""
     },
     {
       "id": "microsoft/wiki-ado-convert",
@@ -21035,7 +21035,7 @@
         "upstream_skill_sha256": "164ab881bfc63e77c782cfc6b67b2bb6887695425d3654c6c4d498004392b1f7",
         "last_ingested_revision": "82fe8226252622fa807643bdca1710901198553a"
       },
-      "description": ">"
+      "description": "Augments Trailmark code graphs with external audit findings from SARIF static analysis results, weAudit annotation files, and version-gated Trailmark 0.4.x binary-analysis graph exports. Maps findings to graph nodes by file and line overlap, creates severity-based subgraphs, and enables cross-referencing findings with pre-analysis data (blast radius, taint, etc.). Use when projecting SARIF results onto a code graph, overlaying weAudit annotations, importing binary graph findings, cross-referencing Semgrep, CodeQL, or binary-analysis findings with call graph data, or visualizing audit findings in the context of code structure."
     },
     {
       "id": "trailofbits/audit-context-building",
@@ -21511,7 +21511,7 @@
         "last_ingested_revision": "82fe8226252622fa807643bdca1710901198553a"
       },
       "artifact_type": "skill",
-      "description": ">-"
+      "description": "Scans a codebase for security vulnerabilities using CodeQL's interprocedural data flow and taint tracking analysis. Triggers on \"run codeql\", \"codeql scan\", \"build codeql database\", \"SAST scan\", \"taint analysis\", \"dataflow analysis\", or \"find vulnerabilities in this repo\". Covers Python, JavaScript/TypeScript, Go, Java/Kotlin, C/C++, C#, Ruby, and Swift. Supports \"run all\" (security-and-quality + security-experimental) and \"important only\" (high-precision) scan modes, and creates data extension models for project-specific sources and sinks. For fast single-file pattern matching, or when no build is available for a compiled language, use the semgrep skill; to parse SARIF that already exists rather than produce it, use the sarif-parsing skill."
     },
     {
       "id": "trailofbits/constant-time-analysis",
@@ -21846,7 +21846,7 @@
         "upstream_skill_sha256": "1d2397bd08607b686122078afe8d2742cca2a46f19c8e924e54f5886136d1053",
         "last_ingested_revision": "82fe8226252622fa807643bdca1710901198553a"
       },
-      "description": ">"
+      "description": "Generates Mermaid diagrams from Trailmark code graphs. Produces call graphs, class hierarchies, module dependency maps, containment diagrams, complexity heatmaps, and attack surface data flow visualizations. Use when visualizing code architecture, drawing call graphs, generating class diagrams, creating dependency maps, producing complexity heatmaps, or visualizing data flow and attack surface paths as Mermaid diagrams."
     },
     {
       "id": "trailofbits/differential-review",
@@ -22466,7 +22466,7 @@
         "upstream_skill_sha256": "009055f8ad529fd9fa3bfe58c510fae79cf81d8b3d16b31b27a86ec248797618",
         "last_ingested_revision": "82fe8226252622fa807643bdca1710901198553a"
       },
-      "description": ">"
+      "description": "Compares Trailmark code graphs at two source code snapshots (git commits, tags, or directories) to surface security-relevant structural changes. Detects new attack paths, complexity shifts, blast radius growth, taint propagation changes, and privilege boundary modifications that text diffs miss. Use when comparing code between commits or tags, analyzing structural evolution, detecting attack surface growth, reviewing what changed between audit snapshots, or finding security-relevant changes that text diffs miss."
     },
     {
       "id": "trailofbits/guidelines-advisor",
@@ -23124,7 +23124,7 @@
         "upstream_skill_sha256": "33b604f4d7d62eab393d710edb98b18505fcbe079c07c9428daa018f29439b54",
         "last_ingested_revision": "82fe8226252622fa807643bdca1710901198553a"
       },
-      "description": ">"
+      "description": "Validates security patches with reproducible baseline-versus-patched evidence, including original exploits, root-cause variants, behavior preservation, regressions, and newly introduced security failures. Use after a patch exists and before accepting, merging, or reporting it as fixed; also use when an AI-generated patch, remediation commit, pull request, or proposed upstream fix needs adversarial post-patch validation across any language."
     },
     {
       "id": "trailofbits/pr-improver",
@@ -23453,7 +23453,7 @@
         "upstream_skill_sha256": "cc5f008f40ffb8a1ae03ebd32d7234de43e828293955a0bc251b76ba249554fa",
         "last_ingested_revision": "82fe8226252622fa807643bdca1710901198553a"
       },
-      "description": ">-"
+      "description": "Parses and processes SARIF files from static analysis tools like CodeQL, Semgrep, or other scanners. Triggers on \"parse sarif\", \"read scan results\", \"aggregate findings\", \"deduplicate alerts\", or \"process sarif output\". Handles filtering, deduplication, format conversion, and CI/CD integration of SARIF data. Does NOT run scans — use the Semgrep or CodeQL skills for that."
     },
     {
       "id": "trailofbits/second-opinion",
@@ -23600,7 +23600,7 @@
         "last_ingested_revision": "82fe8226252622fa807643bdca1710901198553a"
       },
       "artifact_type": "skill",
-      "description": ">-"
+      "description": "Runs a Semgrep security scan over a codebase: detects languages, selects rulesets, presents the plan for explicit approval, then runs every approved ruleset through scripts/run-scans.sh, which batches the semgrep processes and writes scans.json, and merges the output to SARIF. Supports two scan modes, \"run all\" for full ruleset coverage and \"important only\" for security findings at medium-to-high confidence and impact. Uses Semgrep Pro for cross-file taint analysis when it is available. Use when asked to scan code for vulnerabilities, run a security audit with Semgrep, find bugs, or perform static analysis. For the same scan without the approval gate, use the /static-analysis:semgrep-scan workflow."
     },
     {
       "id": "trailofbits/semgrep-rule-creator",
@@ -24593,7 +24593,7 @@
         "upstream_skill_sha256": "b033c02d83f65b19b96c79e70fbf7cee58e51c8cbdd8f81d907ad2351a1433db",
         "last_ingested_revision": "82fe8226252622fa807643bdca1710901198553a"
       },
-      "description": ">-"
+      "description": "This skill should be used when the user asks to \"triage a vulnerability report\", \"assess a CVE\", \"evaluate a bug bounty submission\", \"decide if a finding is valid\", \"review a security finding\", \"dismiss a vulnerability\", \"should we fix this CVE\", \"prioritize a vulnerability report\", or needs to determine whether an incoming vulnerability report warrants investigation. Applies 7 brocards (rules of thumb) to systematically accept, dismiss, or request more information on vulnerability reports, or needs to filter raw findings from agentic vulnerability discovery pipelines before human review."
     },
     {
       "id": "trailofbits/writing-lean-proofs",
@@ -24734,7 +24734,7 @@
         "upstream_skill_sha256": "c23ee1aeabf26318e25e00903ef8f31c2de294d796c230081ce8bcf95a668f7c",
         "last_ingested_revision": "82fe8226252622fa807643bdca1710901198553a"
       },
-      "description": ">"
+      "description": "Guides authoring of high-quality YARA-X detection rules for malware identification. Use when writing, reviewing, or optimizing YARA rules. Covers naming conventions, string selection, performance optimization, migration from legacy YARA, and false positive reduction. Triggers on: YARA, YARA-X, malware detection, threat hunting, IOC, signature, crx module, dex module."
     },
     {
       "id": "trailofbits/zeroize-audit",
