@@ -9,7 +9,55 @@ const registry={skills:[
 
 test("natural language query ranks token matches",()=>{
   const result=searchRegistry(registry,"pdf documents",{agent:"codex",limit:5});
-  assert.equal(result[0].item.id,"demo/pdf-tool");
+  assert.deepEqual(result.map(x=>x.item.id),["demo/pdf-tool"]);
+});
+
+test("local search excludes unmatched queries regardless of ranking bonuses",()=>{
+  for (const agent of [undefined,"codex"]) {
+    for (const query of ["zzzz-no-such-capability-93821","unfindable nonexistent phrase","","   "]) {
+      assert.deepEqual(searchRegistry(registry,query,{agent}),[],`${query} / ${agent}`);
+    }
+  }
+});
+
+test("local search preserves phrase, keyword, and metadata matches",()=>{
+  for (const query of ["CREATE AND PROCESS","pdf documents","pdf nonexistent","documents","demo/pdf-tool"]) {
+    assert.deepEqual(searchRegistry(registry,query).map(x=>x.item.id),["demo/pdf-tool"],query);
+  }
+  for (const field of ["id","name","publisher","description","category","tags"]) {
+    const item={id:"sample",name:"sample",[field]:["category","tags"].includes(field)?["needle"]:"needle"};
+    assert.deepEqual(searchRegistry({skills:[item]},"needle").map(x=>x.item),[item],field);
+  }
+});
+
+test("local search ranks text matches by relevance and status before applying the limit",()=>{
+  const skills=[
+    {id:"plain",name:"alpha",description:"needle"},
+    {id:"bundled",name:"beta",description:"needle",distribution:"bundled"},
+    {id:"eligible",name:"gamma",description:"needle",release:{status:"eligible"}},
+    {id:"exact",name:"needle"},
+    {id:"unrelated",name:"other",distribution:"bundled",release:{status:"eligible"}}
+  ];
+  const results=searchRegistry({skills},"needle");
+  assert.deepEqual(results.map(x=>x.item.id),["exact","eligible","bundled","plain"]);
+  assert.ok(results.every((x,i)=>i===0 || results[i-1].score>x.score));
+  assert.deepEqual(searchRegistry({skills},"needle",{limit:2}),results.slice(0,2));
+});
+
+test("local search keeps deterministic alphabetical ordering for equal scores",()=>{
+  const skills=[{id:"b",name:"beta",tags:["needle"]},{id:"a",name:"alpha",tags:["needle"]}];
+  assert.deepEqual(searchRegistry({skills},"needle").map(x=>x.item.id),["a","b"]);
+});
+
+test("agent filtering and compatibility bonuses only apply to textual matches",()=>{
+  const skills=[
+    {id:"generic",name:"alpha",tags:["needle"],compatibility:["agent-skills"]},
+    {id:"explicit",name:"beta",tags:["needle"],compatibility:["generic-agent","codex"]},
+    {id:"unrelated",name:"other",compatibility:["generic-agent","codex"],release:{status:"eligible"},distribution:"bundled"}
+  ];
+  assert.deepEqual(searchRegistry({skills},"needle",{agent:"generic-agent"}).map(x=>x.item.id),["explicit","generic"]);
+  assert.deepEqual(searchRegistry({skills},"needle",{agent:"codex"}).map(x=>x.item.id),["explicit"]);
+  assert.deepEqual(searchRegistry({skills},"needle",{agent:"claude-code"}),[]);
 });
 
 test("released bundle becomes local install choice",()=>{

@@ -50,6 +50,8 @@ You can search for capabilities using natural language or keywords via the CLI:
 pnpm cli search "pdf tools" --agent codex
 ```
 
+Local search requires a case-insensitive phrase or keyword match in a capability's ID, name, publisher, description, categories, or tags. Multi-word queries can match individual keywords. `--agent` restricts results to compatible capabilities; compatibility and status scores rank textual matches only. Unmatched or empty queries return no results: a message in normal output, or `[]` with `--json`.
+
 ### 4. Install a Capability
 
 Install a capability only when its registry record is marked `release: eligible`. For example:

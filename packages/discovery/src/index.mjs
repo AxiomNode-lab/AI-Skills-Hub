@@ -27,7 +27,7 @@ function expandQuery(value) {
 
 const words = (v) => norm(v).split(/[^a-z0-9@._/-]+/).filter(Boolean);
 
-function score(query, item, agent) {
+function score(query, item, agent, { requireTextMatch = false } = {}) {
   const q = norm(expandQuery(query));
   const hay = norm([item.id,item.name,item.publisher,item.description,...(item.category ?? []),...(item.tags ?? [])].join(" "));
   let n = 0;
@@ -37,6 +37,8 @@ function score(query, item, agent) {
   if (norm(item.name).startsWith(q)) n += 50;
   if (hay.includes(q)) n += 30;
   for (const w of words(q)) n += norm(item.name).includes(w) ? 18 : hay.includes(w) ? 6 : 0;
+  // Local relevance must come from text, before compatibility and status bonuses.
+  if (requireTextMatch && (!q || n === 0)) return 0;
   if (agent && (item.compatibility ?? []).includes(agent)) n += 20;
   if (item.release?.status === "eligible") n += 12;
   if (item.distribution === "bundled") n += 8;
@@ -46,7 +48,7 @@ function score(query, item, agent) {
 
 export function searchRegistry(registry, query, { agent, limit=20 }={}) {
   const source = agent ? filterForAgent(registry.skills, agent) : registry.skills;
-  return source.map(item => ({ item, score: score(query,item,agent), origin:"registry" }))
+  return source.map(item => ({ item, score: score(query,item,agent,{ requireTextMatch: true }), origin:"registry" }))
     .filter(x => x.score > 0).sort((a,b)=>b.score-a.score || a.item.name.localeCompare(b.item.name)).slice(0,limit);
 }
 
