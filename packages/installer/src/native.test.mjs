@@ -7,13 +7,13 @@ import { resolveInstallRoot, normalizeSkillDirectory } from "./targets.mjs";
 import { installMaterializedSkill } from "./native.mjs";
 
 test("codex prefers portable .agents/skills project root", () => {
-  const cwd="/tmp/project";
-  assert.equal(resolveInstallRoot("codex","project",cwd),"/tmp/project/.agents/skills");
+  const cwd=path.join(os.tmpdir(),"project");
+  assert.equal(resolveInstallRoot("codex","project",cwd),path.join(cwd,".agents","skills"));
 });
 
 test("cursor prefers portable .agents/skills project root", () => {
-  const cwd="/tmp/project";
-  assert.equal(resolveInstallRoot("cursor","project",cwd),"/tmp/project/.agents/skills");
+  const cwd=path.join(os.tmpdir(),"project");
+  assert.equal(resolveInstallRoot("cursor","project",cwd),path.join(cwd,".agents","skills"));
 });
 
 test("invalid skill names are refused", () => {

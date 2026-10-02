@@ -21,6 +21,8 @@ AI Skills Hub is a license-aware registry and distribution layer for AI Agent ca
 - **pnpm** >= 10.4.1
 - **Git**
 
+The repository pins pnpm 10.4.1. In Windows PowerShell, use `pnpm.cmd` if execution policy blocks `pnpm.ps1`; no execution-policy change is needed.
+
 ## Quick Start
 
 ### 1. Download and Install
@@ -54,13 +56,18 @@ Local search requires a case-insensitive phrase or keyword match in a capability
 
 ### 4. Install a Capability
 
-Local installation requires a bundled, materialized skill with `release: eligible` and compatibility with the selected agent. For example:
+Local installation requires a bundled, materialized skill with `release: eligible` and compatibility with the selected agent. The current catalog has **534 skills: 501 review-required, 13 source-direct, 20 blocked, and 0 bundled**. None are materialized or release-eligible (snapshot: 2026-10-02; see [current status](docs/STATUS.md)).
+
+Inspect a real catalog entry and your project's installation records:
 
 ```bash
-pnpm cli install <release-eligible-id> --agent codex
+node packages/cli/bin/skills-hub.mjs info obra/superpowers/brainstorming --agent codex --json
+node packages/cli/bin/skills-hub.mjs list --agent codex --scope project --json
 ```
 
 Capabilities distributed via `source-direct` use an allowlisted external installer plan and require explicit confirmation.
+
+See [installation commands and expected outcomes](docs/INSTALLATION.md). The CLI installs explicit IDs (comma-separated for multiple IDs); it does not expand bundle aliases such as `@core` and has no `plan` command or `--remote` option.
 
 `search` and `info` show catalog availability separately from installation. Their JSON output adds `hub_status` while preserving the original distribution, release, and security metadata:
 
@@ -107,9 +114,9 @@ Use the `Space` bar to select capabilities and `Enter` to confirm.
 ## Architecture
 
 The AI Skills Hub enforces a strict supply-chain policy:
-- **Registry Source of Truth:** The central catalog (`catalog/skills.json` and `catalog/bundles.json`) defines all approved capabilities.
+- **Registry Source of Truth:** The central catalog (`catalog/skills.json` and `catalog/bundles.json`) records indexed capabilities and their policy states; inclusion is not approval.
 - **Materialization:** Only release-eligible bundled skills are copied directly into an agent workspace.
-- **Security Check:** High-risk or unverified skills are held in a `review-required` state and cannot bypass release gates.
+- **Security Check:** Distribution and release gates prevent blocked, review-required, and unreleased bundled skills from being installed.
 
 ## Contributing
 
@@ -124,4 +131,6 @@ Before committing or publishing changes, run:
 pnpm validate-all
 ```
 
-The command validates the registry, workspace, JavaScript syntax, schema references, lockfile, materialized artifacts, duplicate records, and repository tests.
+The command validates the registry, workspace, JavaScript syntax, schema references, lockfile, materialized artifacts, duplicate records, and repository tests. It runs the project duplicate-report script with `pnpm run dedupe` (plain `pnpm dedupe` is a package-manager command).
+
+`pnpm test` uses a Node-based runner that discovers `.test.mjs` files under `tests/` and `packages/` without shell glob expansion, prints TAP totals, and fails if no test files or no passing tests execute. CI runs `pnpm validate-all` on Windows and Linux with Node 22. On Windows, only the symbolic-link protection test may skip when the OS denies creation of its test link; its skip message explains the permission requirement. Application failures are not converted into skips.

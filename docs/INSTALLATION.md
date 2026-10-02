@@ -1,23 +1,65 @@
 # Installation
 
-## Preview
+Run commands from the repository root after `pnpm install --frozen-lockfile`, using Node.js 22 or later. The repository pins pnpm 10.4.1; on Windows PowerShell, use `pnpm.cmd` if `pnpm.ps1` is blocked by execution policy. The direct Node commands below avoid package-manager banners when consuming JSON.
 
-~~~bash
-skills-hub plan @core --agent codex
-~~~
+## Inspect before installing
 
-## Native installation
+```bash
+node packages/cli/bin/skills-hub.mjs help
+node packages/cli/bin/skills-hub.mjs search brainstorming --agent codex --json
+node packages/cli/bin/skills-hub.mjs info obra/superpowers/brainstorming --agent codex --json
+node packages/cli/bin/skills-hub.mjs list --agent codex --scope project --json
+```
 
-Verified and materialized Skills can be installed locally without resolving a moving upstream branch:
+`search` and `info` describe indexed capabilities. Their `hub_status.availability` reports catalog-only, review-required, eligible, source-direct, or blocked. `hub_status.installation` separately reports verified `installed`, `unverified`, or `not-recorded`. `list` returns Hub installation records in the selected scope, filtered by agent when requested. Catalog metadata alone never establishes installation.
 
-~~~bash
-skills-hub install @core --agent codex --scope project
-~~~
+## Current catalog outcomes
 
-Supported target roots are adapter-defined. The current portable-first mapping uses project .agents/skills where the target supports it, with client-specific fallbacks such as .claude/skills, .cursor/skills, and .github/skills.
+As of 2026-10-02 the catalog contains 534 skills: 501 review-required, 13 source-direct, 20 blocked, and no bundled skills. All releases are on hold; there are no materialized or release-eligible skills. See [current status](STATUS.md) for a reproducible count command.
 
-User-scope installation is supported by the adapter layer.
+This real blocked entry demonstrates a refused installation without changing files:
 
-The installer refuses non-materialized artifacts. For bundled-but-not-yet-materialized Skills it reports a source bridge in the plan instead of silently pretending local reproducible content is available.
+```bash
+node packages/cli/bin/skills-hub.mjs install obra/superpowers/brainstorming --agent codex --scope project --json
+```
 
-Source-direct and review-required Skills are not silently mirrored or executed.
+Expected: exit code **1**, `success: false`, item `status: blocked`, `installed: false`, and `reason: registry_blocked`. The catalog release reason is `upstream-skill-missing`; adding `--yes` does not override the block.
+
+This source-direct entry demonstrates the external confirmation gate without executing an installer:
+
+```bash
+node packages/cli/bin/skills-hub.mjs install anthropics/frontend-design --agent codex --scope project --json
+```
+
+Expected: exit code **1**, `success: false`, item `status: confirmation-required`, `requires_confirmation: true`, and `reason: explicit_confirmation_required`. Explicitly adding `--yes` authorizes the external installer. Its destination and scope behavior depend on that adapter; do not assume every external tool honors the Hub's scope option.
+
+## Supported install interface
+
+Use `install` followed by one existing capability ID, or comma-separated IDs, and `--agent`. The CLI does not expand bundle aliases such as `@core`. There is no `plan` command and no `--remote`, `--overwrite`, or `--force` CLI option; preview policy using `info`.
+
+Supported options are `--agent`, `--scope project|user`, `--yes` (or `-y`), and `--json` where supported. Noninteractive JSON is supported by `search`, `info`, `list`, and `install`. `add`, `create`, and `uninstall` include interactive flows rather than equivalent JSON automation interfaces.
+
+Local installation requires a compatible, bundled, materialized skill with `release.status: eligible`. An unreleased bundle is held with `bundle_not_released`; review-required skills are held with `manual_review_required`. No current catalog entry qualifies for a successful native install. Automated tests exercise native success using local temporary project fixtures.
+
+`install --json` returns `success: true` only when every requested item and resolved dependency installs. Otherwise it returns false, individual outcomes and reasons, and exit code 1. Successful items in a mixed request are retained, not rolled back. Marketplace registration alone is not a completed plugin installation.
+
+## Native destinations and state
+
+| Agent | Default project skill directory |
+| --- | --- |
+| Codex, Cursor, generic Agent Skills | `.agents/skills` |
+| Claude Code | `.claude/skills` |
+| GitHub Copilot | `.github/skills` |
+
+The native installer uses the configured primary directory; it does not dynamically try every fallback directory. `--scope user` uses adapter-defined home-directory paths. The default is project scope.
+
+Hub-managed skill records live in `.ai-skills-hub/installed.json` under the project root, or under the home directory for user scope. File hashes are checked before displaying `installed`. Missing or modified files and records without verifiable file evidence display `unverified`. External installations may not have Hub records and therefore may not appear in `list`.
+
+## Verification
+
+```bash
+pnpm test
+pnpm validate-all
+```
+
+Tests install local fixtures only in temporary project directories. The cross-platform runner prints discovered file counts and TAP results, and fails if no test files or no passing tests execute. On Windows without symlink privileges, the single MCP symlink protection test records an explicit skip; other errors remain failures.
