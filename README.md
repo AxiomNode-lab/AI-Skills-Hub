@@ -1,7 +1,7 @@
 <div align="center">
   <img src="docs/images/logo.jpg" alt="AI Skills Hub Logo" width="300" />
   <h1>AI Skills Hub</h1>
-  <p><strong>A trustworthy, license-aware registry and distribution layer for AI Agent Skills.</strong></p>
+  <p><strong>A license-aware registry and distribution layer for AI Agent Skills.</strong></p>
   
   <p>
     <a href="https://github.com/AxiomNode-lab/AI-Skills-Hub/actions"><img src="https://img.shields.io/github/actions/workflow/status/AxiomNode-lab/AI-Skills-Hub/ci.yml?branch=main&label=Build&style=flat-square" alt="Build Status"></a>
