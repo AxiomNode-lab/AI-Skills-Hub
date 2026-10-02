@@ -45,13 +45,21 @@ test("MCP adapter writes Cursor configuration atomically", async () => {
   assert.equal(fs.existsSync(result.destination + ".tmp"), false);
 });
 
-test("MCP adapter rejects symbolic-link configuration targets", async () => {
+test("MCP adapter rejects symbolic-link configuration targets", async (t) => {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), "ai-skills-hub-mcp-"));
   const cursorDir = path.join(dir, ".cursor");
   fs.mkdirSync(cursorDir, { recursive: true });
   const target = path.join(dir, "real.json");
   fs.writeFileSync(target, JSON.stringify({ mcpServers: {} }));
-  fs.symlinkSync(target, path.join(cursorDir, "mcp.json"));
+  try {
+    fs.symlinkSync(target, path.join(cursorDir, "mcp.json"));
+  } catch (error) {
+    if (process.platform === "win32" && ["EPERM", "EACCES"].includes(error.code)) {
+      t.skip(`Windows cannot create the test symlink (${error.code}); enable Developer Mode or grant symbolic-link permission to run this protection check.`);
+      return;
+    }
+    throw error;
+  }
 
   const adapter = new MCPAdapter({
     id: "demo/docs",

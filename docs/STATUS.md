@@ -1,83 +1,61 @@
 # Current Status
 
-Generated from repository state on 2026-10-01.
-
-## Product direction
-
-AI Skills Hub is a unified AI Agent capability hub. A user describes the capability they need; the Hub searches local and remote registries, understands the target agent, resolves the installation adapter, and returns the safest available path.
-
-## Capability types
-
-- Skill
-- MCP server
-- Agent Plugin
-- CLI tool
-
-Agent Plugins v1 standardizes Skills and MCP servers as portable plugin components; client-specific plugin behavior stays in client extensions. citeturn244495search0
-
-## Discovery
-
-- Local registry search with agent-aware ranking.
-- Semantic external discovery through skills.sh.
-- Official MCP Registry discovery.
-- Approved GitHub Skill discovery.
-- GitHub Agent Plugin discovery.
-- npm AI/CLI package discovery.
-- Optional LLM semantic reranking through an OpenAI-compatible endpoint.
-- Five-minute local cache for repeated remote lookups.
-- Arabic/English technical intent hints for common queries.
-
-The skills.sh API provides semantic multi-word search, stable skill IDs, install URLs, and hashes/files on detail endpoints; its CLI can be invoked with npx. citeturn922916search0turn922916search1
-
-The Official MCP Registry exposes a read-only listing API at registry.modelcontextprotocol.io and supports search plus cursor pagination for aggregators. citeturn506255search0turn506255search3
-
-## Installation
-
-- One-command natural-language add flow.
-- Verified local Skill artifacts install from the registry.
-- Source-direct Skills use the upstream skills CLI bridge.
-- Codex MCP servers can be registered directly from remote URL or package metadata.
-- Claude Code MCP servers can be registered directly from remote URL or package metadata.
-- Cursor MCP servers are written to mcp.json.
-- GitHub Copilot MCP servers can be written to its portable mcp-config.json format.
-- Codex Agent Plugin sources can be added as plugin marketplaces.
-- npm CLI tools can be added as project dependencies.
-- Remote execution requires explicit --remote.
-- Batched local installs use bounded parallelism.
-- Installation state uses atomic writes and tamper detection.
-
-Current agent-specific MCP configuration paths and commands are based on current vendor documentation for Codex, Claude Code, Cursor, and GitHub Copilot. citeturn719988search3turn416853search0turn719988search7turn719988search9
+Repository snapshot: 2026-10-02. Counts below come from `catalog/skills.json`, `catalog/bundles.json`, and `catalog/sources.json`, not from installed files or remote search results.
 
 ## Catalog
 
-- 61 normalized Skill records with explicit artifact_type=skill.
-- 19 bundled candidates.
-- 9 source-direct records.
-- 33 review-required records.
-- 0 materialized Skills at this point.
-- 0 release-eligible Skills at this point.
-- 15 tracked sources/providers/standards.
+| Distribution | Records |
+| --- | ---: |
+| bundled | 0 |
+| source-direct | 13 |
+| review-required | 501 |
+| blocked | 20 |
+| **Total** | **534** |
 
-## Trust pipeline
+All 534 records have `release.status: hold`; none are materialized or release-eligible. There are 7 bundle definitions and 15 source/provider/standard records. The local contract treats these as Skills: 61 explicitly declare `artifact_type: skill`, and 473 omit it and use the default. The catalog currently contains no explicit MCP server, Agent Plugin, or CLI tool records.
 
-Discovery is not trust.
+Reproduce the distribution counts from the repository root:
 
-- Artifact-level license evidence.
-- Immutable source revisions where available.
-- SHA-256 integrity records for released artifacts.
-- Explainable heuristic security findings.
-- Release gates shared by registry, materializer, installer, and plugin export.
-- Source, agent, schema, workspace, static, and capability validation in CI.
+```bash
+node -e "const c=require('./catalog/skills.json'); console.log('total',c.skills.length); for(const s of ['bundled','source-direct','review-required','blocked']) console.log(s,c.skills.filter(x=>x.distribution===s).length)"
+```
 
-## Current limitation
+`obra/superpowers/brainstorming` is currently blocked with release reason `upstream-skill-missing`. Its presence in search results is not permission to install it.
 
-Remote discovery is intentionally metadata-first. A capability found in an external registry is not silently copied into the repository and is not treated as locally trusted.
+## Implemented CLI behavior
 
-Plugin installation remains client-specific outside the portable Agent Plugins v1 contract. The Hub can discover plugin packages and prepare supported marketplace/configuration actions without pretending every client exposes the same installer.
+- `search` searches the local catalog. A phrase or keyword must match before agent/status ranking bonuses apply. `--agent` filters compatibility.
+- `info` and `search` separate catalog availability from verified Hub installation state. `list` reads installation records for the selected scope and agent, not the catalog.
+- `install` accepts explicit IDs, checks skill compatibility and distribution/release gates, and reports every outcome. JSON success requires all requested installations and resolved dependencies to succeed; incomplete requests exit 1.
+- Eligible materialized bundles use the native installer. None are available in the current catalog. Source-direct skills require explicit external-install consent; review and blocked states are not overridden by `--yes`.
+- `add` accepts a Git URL (cloned into `capabilities-library` for review) or starts interactive hybrid discovery. Remote queries do not require a `--remote` flag; the CLI has no such option. Selection and external execution are separate steps.
+- The no-command flow browses/searches compatible catalog entries interactively. Installs are sequential, not parallel.
+- `create`, `sync`, and interactive `uninstall` are also available. See `node packages/cli/bin/skills-hub.mjs help` and [installation](INSTALLATION.md).
 
-## Next major implementation
+## Library capabilities and limits
 
-- Persist capability records for approved MCP, Plugin, and CLI artifacts in the local catalog.
-- Add capability dependency graphs and evaluation signals.
-- Add content-addressed snapshot downloads and artifact caching.
-- Add update/rollback transactions and signed release attestations.
+The discovery package includes skills.sh, MCP Registry, GitHub, npm, and plugin providers, a cache, query hints, and optional model reranking. These are implementation capabilities, not a guarantee that every upstream service is reachable. The CLI does not expose every library option; for example, it has no model-reranking flags, and `add` does not supply configured GitHub sources.
+
+Adapter code supports MCP configuration/external commands, npm project dependencies, and adding a Codex plugin marketplace. Adding a marketplace does not install the plugin. These remote artifact types are not currently persisted as approved records in the local catalog.
+
+Installation state is written atomically. Managed skill file hashes support verification; missing or changed files display `unverified`. External installers do not automatically produce verified Hub skill records, so `not-recorded` is not proof that no external installation exists. Existing state stores one record per skill ID within each scope.
+
+## Verification
+
+`pnpm validate-all` checks workspace exports, JavaScript syntax, schema references, the generated lockfile, registry policy, materialized integrity, the project duplicate report, and tests. `pnpm run dedupe` is the project report command; `pnpm dedupe` is the package-manager command.
+
+`pnpm test` discovers test files explicitly and rejects runs with no files or no passing tests. CI runs the same validation on `ubuntu-latest` and `windows-latest` with Node 22. Path assertions use native path construction. The MCP symlink test skips only if Windows denies creating the fixture link with `EPERM` or `EACCES`; when creation succeeds, the protection assertion must pass.
+
+Source/agent validation and the local capability contract can also be checked directly:
+
+```bash
+node scripts/validate-sources.mjs
+node scripts/validate-capability-contract.mjs
+```
+
+## Remaining work
+
+- Review and release eligible artifacts with artifact-level license evidence and immutable source revisions.
+- Persist approved MCP, Plugin, and CLI records in the local catalog.
+- Add stronger dependency planning, evaluation signals, artifact caching, and update/rollback transactions.
+- Extend installation evidence for external adapters and multiple agents without treating catalog inclusion as trust.
