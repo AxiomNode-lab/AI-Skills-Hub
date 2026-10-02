@@ -39,6 +39,10 @@ export async function syncCommand() {
         : `Successfully synced ${syncCount} capabilities.`
     );
   } catch (error) {
+    if (error?.code === "ENOENT") {
+      console.log("No Git-linked capabilities found in capabilities-library/.");
+      return;
+    }
     console.error(`Failed to read capabilities cache: ${error.message}`);
   }
 }
