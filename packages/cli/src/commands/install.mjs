@@ -2,33 +2,55 @@ import { readLocalCapabilities, resolveDependencies } from "../utils.mjs";
 import { installCapability } from "../install-executor.mjs";
 
 export async function installCommand(ids, options = {}) {
+  const report = (results, error = null) => {
+    const success = !error && results.length > 0 && results.every(result => result.installed === true);
+    if (!success) process.exitCode = 1;
+    const output = { success, results, ...(error ? { error } : {}) };
+    if (options.json) console.log(JSON.stringify(output, null, 2));
+    else {
+      if (error) console.error(`Error: ${error}`);
+      for (const result of results) {
+        if (result.installed) console.log(`Installed ${result.id}.`);
+        else console.error(`${result.status}: ${result.id}: ${result.reason}${result.requires_confirmation ? ". Re-run with --yes to confirm." : ""}`);
+      }
+      console.log(success ? "Installation complete." : "Installation incomplete; not all requested capabilities were installed.");
+    }
+    return output;
+  };
+  const invalidRequest = (reason) => report(
+    (Array.isArray(ids) ? ids : []).map(id => ({ id, status: "skipped", installed: false, reason })), reason
+  );
   if (!Array.isArray(ids) || ids.length === 0) {
-    console.error("Error: You must specify at least one capability ID to install.");
-    return;
+    return invalidRequest("You must specify at least one capability ID to install.");
   }
 
   const agent = options.agent;
   if (!agent) {
-    console.error("Error: You must specify the target agent using --agent <id>.");
-    return;
+    return invalidRequest("You must specify the target agent using --agent <id>.");
   }
 
   const scope = options.scope || "project";
   if (!["project", "user"].includes(scope)) {
-    console.error("Error: --scope must be either 'project' or 'user'.");
-    return;
+    return invalidRequest("--scope must be either 'project' or 'user'.");
   }
 
-  const allCapabilities = readLocalCapabilities();
-  const missing = ids.filter((id) => !allCapabilities.find((c) => c.id === id));
-  if (missing.length > 0) {
-    console.error(`Error: Capabilities not found: ${missing.join(", ")}`);
-    return;
+  let allCapabilities;
+  try {
+    allCapabilities = readLocalCapabilities();
+  } catch (error) {
+    return invalidRequest(error.message);
   }
-
   const finalInstallList = resolveDependencies(ids, allCapabilities);
+  const requested = [...new Set([...ids, ...finalInstallList.flatMap(cap => cap.dependencies ?? [])])];
+  const missing = requested.filter((id) => !allCapabilities.find((c) => c.id === id));
+  if (missing.length > 0) {
+    return report(requested.map(id => ({
+      id, status: missing.includes(id) ? "not-found" : "skipped", installed: false,
+      reason: missing.includes(id) ? "capability_not_found" : "request_contains_missing_capabilities"
+    })));
+  }
+
   const results = [];
-  let hasErrors = false;
 
   for (const cap of finalInstallList) {
     try {
@@ -37,41 +59,24 @@ export async function installCommand(ids, options = {}) {
         scope,
         cwd: process.cwd(),
         confirmed: options.yes === true,
-        env: {}
+        env: {},
+        json: options.json === true
       });
 
-      const status = result.installed ? "success" : result.action;
+      const status = result.installed === true ? "success" : result.requires_confirmation ? "confirmation-required" : result.action;
       results.push({
         id: cap.id,
         status,
-        reason: result.reason ?? null,
+        installed: result.installed === true,
+        requires_confirmation: result.requires_confirmation === true,
+        reason: result.reason ?? (result.installed === true ? null : result.action),
         destination: result.destination ?? null
       });
 
-      if (!result.installed) {
-        if (result.requires_confirmation) {
-          hasErrors = true;
-          if (!options.json) {
-            console.error(
-              `Installation of ${cap.id} requires explicit consent. Re-run with --yes.`
-            );
-          }
-        } else if (!options.json) {
-          console.error(`Skipped ${cap.id}: ${result.reason ?? result.action}`);
-        }
-      } else if (!options.json) {
-        console.log(`Installed ${cap.id}.`);
-      }
     } catch (error) {
-      hasErrors = true;
-      results.push({ id: cap.id, status: "error", message: error.message });
-      if (!options.json) console.error(`Failed to install ${cap.id}: ${error.message}`);
+      results.push({ id: cap.id, status: "error", installed: false, reason: error.message, message: error.message });
     }
   }
 
-  if (options.json) {
-    console.log(JSON.stringify({ success: !hasErrors, results }, null, 2));
-  } else {
-    console.log(hasErrors ? "Finished with errors." : "Installation complete.");
-  }
+  return report(results);
 }

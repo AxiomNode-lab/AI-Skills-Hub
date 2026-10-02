@@ -29,8 +29,8 @@ function parseOptions(argsArray) {
 }
 
 async function main() {
-  await checkForUpdates();
   const { options, positional } = parseOptions(args);
+  if (!options.json) await checkForUpdates();
 
   switch (command) {
     case "create":

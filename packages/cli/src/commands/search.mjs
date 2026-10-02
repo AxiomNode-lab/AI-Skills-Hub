@@ -1,5 +1,6 @@
 import { searchRegistry } from "@ai-skills-hub/discovery";
 import { loadRegistry } from "@ai-skills-hub/core";
+import { statusReader, printCapabilityStatus } from "../capability-status.mjs";
 
 export function searchCommand(query, options = {}) {
   const registry = loadRegistry(
@@ -7,10 +8,11 @@ export function searchCommand(query, options = {}) {
     "catalog/bundles.json"
   );
 
+  const readStatus = statusReader(options);
   const results = searchRegistry(registry, query || "", {
     agent: options.agent || undefined,
     limit: options.limit || 50
-  }).map(({ item, score }) => ({ ...item, _score: score }));
+  }).map(({ item, score }) => ({ ...item, _score: score, hub_status: readStatus(item) }));
 
   if (options.json) {
     console.log(JSON.stringify(results, null, 2));
@@ -26,6 +28,7 @@ export function searchCommand(query, options = {}) {
   for (const cap of results) {
     console.log(`ID: ${cap.id}`);
     console.log(`Name: ${cap.name}`);
+    printCapabilityStatus(cap.hub_status);
     console.log(`Type: ${cap.artifact_type || cap.type || "skill"}`);
     console.log(`Distribution: ${cap.distribution}`);
     console.log(`Release: ${cap.release?.status || "unknown"}`);

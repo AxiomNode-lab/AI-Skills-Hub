@@ -54,13 +54,43 @@ Local search requires a case-insensitive phrase or keyword match in a capability
 
 ### 4. Install a Capability
 
-Install a capability only when its registry record is marked `release: eligible`. For example:
+Local installation requires a bundled, materialized skill with `release: eligible` and compatibility with the selected agent. For example:
 
 ```bash
 pnpm cli install <release-eligible-id> --agent codex
 ```
 
 Capabilities distributed via `source-direct` use an allowlisted external installer plan and require explicit confirmation.
+
+`search` and `info` show catalog availability separately from installation. Their JSON output adds `hub_status` while preserving the original distribution, release, and security metadata:
+
+| Availability | Meaning |
+| --- | --- |
+| `catalog-only` | Indexed, but no released local artifact is ready to install. |
+| `review-required` | Manual review is required; `--yes` does not bypass it. |
+| `eligible` | A bundled, materialized skill has passed the catalog release gate; this does not mean it is installed or compatible with every agent. |
+| `source-direct` | An external installation route requires explicit consent with `--yes`. |
+| `blocked` | Registry policy blocks installation. |
+
+Installation status is based on `.ai-skills-hub/installed.json` in the selected scope, filtered by `--agent` when supplied. `installed` means the recorded skill files were verified against their hashes. `unverified` means a record exists but the files have changed, are missing, or cannot be verified. `not-recorded` means no matching Hub record exists; externally managed installations may still exist. `list` reads these records, not the catalog, and displays their verification status. The default scope is `project`; `--scope user` selects the user's Hub state. These read-only checks never promote a skill's approval or release state.
+
+`install --json` returns `success: true` only if every requested capability and resolved dependency was installed. Skips, review/release holds, missing IDs, confirmation requests, and execution errors return `success: false` with per-item `status`, `installed`, and `reason`, and exit code 1. Mixed outcomes remain visible; successful installations are not rolled back. Adding a plugin marketplace alone is not a completed plugin installation. External installer success reports execution of its installation command; it does not create verified local skill records.
+
+For example, an unreleased bundled skill returns:
+
+```json
+{
+  "success": false,
+  "results": [{
+    "id": "example/unreleased-skill",
+    "status": "hold",
+    "installed": false,
+    "requires_confirmation": false,
+    "reason": "bundle_not_released",
+    "destination": null
+  }]
+}
+```
 
 ### 5. Interactive Mode
 

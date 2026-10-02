@@ -6,7 +6,6 @@ export class SkillAdapter {
   }
 
   async install(options) {
-    const { agent, scope, overwrite, force } = options;
-    return installMaterializedSkill(this.capability, { agent, scope, overwrite, force });
+    return installMaterializedSkill(this.capability, options);
   }
 }
