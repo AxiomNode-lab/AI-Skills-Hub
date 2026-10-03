@@ -46,3 +46,21 @@ test("catalog descriptions are not bare YAML block indicators",()=>{
   const broken=loadRegistry().skills.filter(skill=>/^[>|][+-]?\d*$/.test(String(skill.description??"").trim()));
   assert.deepEqual(broken.map(skill=>skill.id),[]);
 });
+
+test("frontmatter preserves YAML scalar semantics and quoted license keys", () => {
+  assert.equal(parseFrontmatter('---\n"license": Proprietary\n---').license, "Proprietary");
+  assert.equal(parseFrontmatter('---\ndescription: "a  b" # comment\n---').description, "a  b");
+  assert.equal(parseFrontmatter('---\ndescription: |+\n  text\n\n---').description, "text\n\n");
+  assert.equal(parseFrontmatter('---\ndescription: >2-\n  first\n  second\n---').description, "first second");
+});
+
+test("frontmatter rejects ambiguous licensing and unsafe or malformed YAML", () => {
+  for (const body of [
+    'license:\n  spdx: Proprietary', 'license: [MIT, Proprietary]', 'license:',
+    'license: false', 'license: MIT\nlicense: Proprietary',
+    'license: !custom MIT', 'license: &grant MIT', 'license: *grant',
+    '<<: {license: Proprietary}', 'description: "unterminated',
+    '__proto__: value', 'description: x\n\tbad: indentation'
+  ]) assert.throws(() => parseFrontmatter(`---\n${body}\n---`), undefined, body);
+  assert.throws(() => parseFrontmatter('---\nlicense: MIT'), /Unclosed/);
+});

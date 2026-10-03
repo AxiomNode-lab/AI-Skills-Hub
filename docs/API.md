@@ -23,4 +23,8 @@ curl "http://127.0.0.1:8787/api/skills?q=frontend%20design&agent=codex"
 
 Each item has `availability` (`eligible`, `source-direct`, `review-required`, `blocked`, or `catalog-only`) and `install`, which is a CLI command only for eligible skills. Catalog inclusion is not approval.
 
-Responses send `access-control-allow-origin: *` because the data is public catalog metadata. Other methods return 405. Request bodies on `/mcp` are limited to 1 MiB.
+Requests must use the listening IP (or a loopback alias when listening locally) and port in `Host`. Browser requests must have the matching HTTP origin; other origins, including `null`, receive 403. Cross-origin CORS access is not enabled. Non-browser clients may omit `Origin`. This local server has no authentication and should not be exposed as a public service.
+
+Other methods return 405. MCP posts require `Content-Type: application/json`; unsupported protocol versions, malformed parameters, invalid pagination and malformed URL escapes are rejected. Request bodies on `/mcp` are limited to 1 MiB (413 when exceeded).
+
+Before serving content, the server verifies the bound release review, complete inventory and file hashes. Extra, missing or modified files, unresolved review evidence, paths outside the Hub, and symlinks/junctions anywhere below the Hub root suppress all content for that artifact. Its normalized catalog metadata remains available. The bytes returned are the bytes whose hashes were checked for the request.

@@ -10,9 +10,10 @@ All notable changes to AI Skills Hub are documented here.
 - `scripts/repair-descriptions.mjs` re-reads broken descriptions from pinned, hash-verified upstream files.
 - `scripts/draft-review.mjs` drafts a release review from a pinned Git tree; drafts cannot pass the release gate until a reviewer approves every finding.
 - Repository-root MIT licenses can cover a skill under the conditions in docs/LICENSE-POLICY.md; the root license ships with the skill as an attached `LICENSE.txt`.
-- 163 more reviewed skills are released: `anthropics/academy-guide`, `anthropics/discernment-nudge`, and 161 MIT skills from microsoft/skills, obra/superpowers, and K-Dense (166 installable in total). Eight reviewed candidates were not released; reasons are in docs/VERIFIED-LOCAL-SKILLS.md.
+- 23 more reviewed skills are released: `anthropics/academy-guide`, `anthropics/discernment-nudge`, and 21 MIT skills from microsoft/skills, obra/superpowers, and K-Dense (26 installable in total). The later 139-skill proposal and `obra/using-superpowers` remain held pending independent instruction/dependency review; evidence is in docs/VERIFIED-LOCAL-SKILLS.md.
 
 ### Fixed
+- Release validation rejects eligible skills whose declared skill dependencies are missing, blocked, held, or not materialized.
 - The CLI resolves the catalog and materialized skills from the Hub root (or `SKILLS_HUB_HOME`), so it works inside any project instead of only the Hub checkout.
 - 107 catalog descriptions stored as bare `>`/`|` indicators were repaired from their pinned upstream SKILL.md files.
 - The update check reads the Hub's own version, and is skipped in CI, non-TTY output, and with `SKILLS_HUB_NO_UPDATE_CHECK`.

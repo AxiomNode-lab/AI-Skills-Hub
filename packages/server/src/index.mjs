@@ -5,12 +5,14 @@ import readline from "node:readline";
 import {
   catalogAvailability,
   filterForAgent,
+  hubHome,
   loadRegistry,
   resolveBundle,
   resolveHubPath,
   summarize
 } from "@ai-skills-hub/core";
 import { searchRegistry } from "@ai-skills-hub/discovery";
+import { sha256, verifyReviewedDirectory } from "../../materializer/src/reviewed.mjs";
 
 export const SERVER_INFO = { name: "ai-skills-hub", version: "0.2.0" };
 const PROTOCOL_VERSIONS = ["2025-06-18", "2025-03-26", "2024-11-05"];
@@ -52,28 +54,46 @@ export function skillSummary(skill) {
   };
 }
 
-// Lists the regular files of a released skill. Symbolic links and paths outside
-// the materialized root are never served.
-export function skillFiles(skill) {
-  if (!isEligible(skill) || !skill.materialized_root) return [];
-  const root = resolveHubPath(skill.materialized_root);
-  const files = [];
-  const walk = (dir) => {
-    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-      const full = path.join(dir, entry.name);
-      if (entry.isDirectory()) walk(full);
-      else if (entry.isFile()) files.push(path.relative(root, full).split(path.sep).join("/"));
+function checkedHubPath(value) {
+  const home = hubHome();
+  const full = resolveHubPath(value);
+  const relative = path.relative(home, full);
+  if (!relative || relative === ".." || relative.startsWith(".." + path.sep) || path.isAbsolute(relative)) throw new Error("Path outside Hub");
+  let current = home;
+  for (const part of relative.split(path.sep)) {
+    current = path.join(current, part);
+    if (fs.lstatSync(current).isSymbolicLink()) throw new Error("Symlinks are forbidden");
+  }
+  return full;
+}
+
+// Fail closed and return the exact bytes verified during this request. Catalog
+// eligibility alone is not authorization to expose arbitrary local files.
+function verifiedContents(skill) {
+  if (!isEligible(skill) || !skill.materialized_root || !/^[a-z0-9._-]+\/[a-z0-9-]+$/.test(skill.id)) return new Map();
+  if (skill.license?.status !== "verified" || skill.license.redistributable !== true || skill.security?.scan_status !== "verified" || skill.security.risk === "high") return new Map();
+  try {
+    const root = checkedHubPath(skill.materialized_root);
+    const manifest = JSON.parse(fs.readFileSync(checkedHubPath(`catalog/materialized-manifests/${skill.id.replaceAll("/", "__")}.json`)));
+    if (manifest.skill_id !== skill.id || manifest.source.repo !== skill.source.repo || manifest.source.revision !== skill.source.revision || manifest.source.path !== skill.source.path || manifest.review?.path !== skill.license.evidence) throw new Error("Release manifest mismatch");
+    const reviewBytes = fs.readFileSync(checkedHubPath(manifest.review.path));
+    if (sha256(reviewBytes) !== manifest.review.sha256) throw new Error("Release review mismatch");
+    const review = JSON.parse(reviewBytes);
+    verifyReviewedDirectory(skill, review, root);
+    const contents = new Map();
+    for (const file of review.files) {
+      const bytes = fs.readFileSync(checkedHubPath(path.join(root, file.path)));
+      if (sha256(bytes) !== file.sha256 || bytes.length !== file.bytes) throw new Error("Released file changed");
+      contents.set(file.path, new TextDecoder("utf-8", { fatal: true }).decode(bytes));
     }
-  };
-  if (fs.existsSync(root)) walk(root);
-  return files.sort();
+    return contents;
+  } catch {
+    return new Map();
+  }
 }
 
-function readSkillFile(skill, relative) {
-  if (!skillFiles(skill).includes(relative)) return null;
-  return fs.readFileSync(path.join(resolveHubPath(skill.materialized_root), ...relative.split("/")), "utf8");
-}
-
+export const skillFiles = skill => [...verifiedContents(skill).keys()].sort();
+const readSkillFile = (skill, relative) => verifiedContents(skill).get(relative) ?? null;
 const mimeType = (file) => (file.endsWith(".md") ? "text/markdown" : "text/plain");
 
 export function createCatalog(registry = loadRegistry()) {
@@ -88,13 +108,14 @@ export function createCatalog(registry = loadRegistry()) {
   function detail(id, { agent } = {}) {
     const skill = byId.get(id);
     if (!skill) return null;
-    const files = skillFiles(skill);
+    const contents = verifiedContents(skill);
+    const files = [...contents.keys()].sort();
     return {
       ...skillSummary(skill),
       install: installCommand(skill, agent),
       dependencies: skill.dependencies ?? [],
       files: files.map((file) => ({ path: file, uri: RESOURCE_PREFIX + skill.id + "/" + file })),
-      skill_md: files.includes("SKILL.md") ? readSkillFile(skill, "SKILL.md") : null
+      skill_md: contents.get("SKILL.md") ?? null
     };
   }
 
@@ -183,10 +204,11 @@ function rpcError(id, code, message) {
 
 // Handles one JSON-RPC message; returns null for notifications.
 export function handleMcpMessage(catalog, message) {
-  if (!message || message.jsonrpc !== "2.0" || typeof message.method !== "string") {
+  if (!message || Array.isArray(message) || message.jsonrpc !== "2.0" || typeof message.method !== "string" || (message.id !== undefined && typeof message.id !== "string" && !(typeof message.id === "number" && Number.isFinite(message.id)))) {
     return rpcError(message?.id, -32600, "Invalid Request");
   }
   const { id, method, params = {} } = message;
+  if (!params || typeof params !== "object" || Array.isArray(params)) return rpcError(id, -32602, "params must be an object");
   if (id === undefined || id === null) return null;
   const ok = (result) => ({ jsonrpc: "2.0", id, result });
 
@@ -206,8 +228,12 @@ export function handleMcpMessage(catalog, message) {
       return ok({ tools: TOOLS });
     case "tools/call": {
       const args = params.arguments ?? {};
+      if (!args || typeof args !== "object" || Array.isArray(args)) return rpcError(id, -32602, "arguments must be an object");
+      if (args.agent !== undefined && (typeof args.agent !== "string" || !/^[a-z0-9-]+$/.test(args.agent))) return ok(toolResult({ error: "agent must be an identifier" }, true));
       if (params.name === "search_skills") {
         if (typeof args.query !== "string") return ok(toolResult({ error: "query must be a string" }, true));
+        if (args.limit !== undefined && (!Number.isInteger(args.limit) || args.limit < 1 || args.limit > MAX_LIMIT)) return ok(toolResult({ error: "limit must be an integer from 1 to 100" }, true));
+        if (args.installable_only !== undefined && typeof args.installable_only !== "boolean") return ok(toolResult({ error: "installable_only must be a boolean" }, true));
         return ok(toolResult(catalog.search(args)));
       }
       if (params.name === "get_skill") {
@@ -233,7 +259,6 @@ function sendJson(res, status, body, extraHeaders = {}) {
   const payload = body === undefined ? "" : JSON.stringify(body);
   res.writeHead(status, {
     "content-type": "application/json; charset=utf-8",
-    "access-control-allow-origin": "*",
     "x-content-type-options": "nosniff",
     ...extraHeaders
   });
@@ -244,11 +269,14 @@ function readBody(req) {
   return new Promise((resolve, reject) => {
     const chunks = [];
     let size = 0;
+    let oversized = false;
     req.on("data", (chunk) => {
+      if (oversized) return;
       size += chunk.length;
       if (size > MAX_BODY_BYTES) {
+        oversized = true;
+        chunks.length = 0;
         reject(Object.assign(new Error("Request body too large"), { status: 413 }));
-        req.destroy();
       } else chunks.push(chunk);
     });
     req.on("end", () => resolve(Buffer.concat(chunks).toString("utf8")));
@@ -258,6 +286,10 @@ function readBody(req) {
 
 function handleApi(catalog, url, res) {
   const params = Object.fromEntries(url.searchParams);
+  for (const [key, min, max] of [["limit", 1, MAX_LIMIT], ["offset", 0, Number.MAX_SAFE_INTEGER]]) {
+    if (params[key] !== undefined && (!/^\d+$/.test(params[key]) || !Number.isSafeInteger(Number(params[key])) || Number(params[key]) < min || Number(params[key]) > max)) return sendJson(res, 400, { error: `invalid_${key}` });
+  }
+  if (params.agent !== undefined && !/^[a-z0-9-]+$/.test(params.agent)) return sendJson(res, 400, { error: "invalid_agent" });
   const route = url.pathname.replace(/\/+$/, "") || "/";
   if (route === "/api/health") {
     return sendJson(res, 200, { status: "ok", skills: catalog.registry.skills.length, eligible: catalog.registry.skills.filter(isEligible).length });
@@ -290,6 +322,14 @@ export function createHubServer({ registry } = {}) {
   const catalog = createCatalog(registry);
   return http.createServer(async (req, res) => {
     try {
+      const address = req.socket.localAddress;
+      const host = address?.includes(":") ? `[${address}]` : address;
+      const authorities = new Set([`${host}:${req.socket.localPort}`]);
+      if (["127.0.0.1", "::1", "::ffff:127.0.0.1"].includes(address)) {
+        for (const name of ["localhost", "127.0.0.1", "[::1]"]) authorities.add(`${name}:${req.socket.localPort}`);
+      }
+      if (!authorities.has(req.headers.host)) return sendJson(res, 403, { error: "untrusted_host" });
+      if (req.headers.origin !== undefined && ![...authorities].some(authority => req.headers.origin === `http://${authority}`)) return sendJson(res, 403, { error: "untrusted_origin" });
       const url = new URL(req.url, "http://localhost");
       if (req.method === "OPTIONS") {
         return sendJson(res, 204, undefined, {
@@ -299,6 +339,8 @@ export function createHubServer({ registry } = {}) {
       }
       if (url.pathname === "/mcp") {
         if (req.method !== "POST") return sendJson(res, 405, { error: "method_not_allowed" }, { allow: "POST" });
+        if (req.headers["mcp-protocol-version"] && !PROTOCOL_VERSIONS.includes(req.headers["mcp-protocol-version"])) return sendJson(res, 400, { error: "unsupported_protocol_version" });
+        if (req.headers["content-type"]?.split(";")[0].trim().toLowerCase() !== "application/json") return sendJson(res, 415, { error: "unsupported_media_type" });
         let message;
         try {
           message = JSON.parse(await readBody(req));
@@ -315,7 +357,7 @@ export function createHubServer({ registry } = {}) {
       }
       return handleApi(catalog, url, res);
     } catch (error) {
-      return sendJson(res, 500, { error: "internal_error", message: error.message });
+      return sendJson(res, error instanceof URIError ? 400 : 500, { error: error instanceof URIError ? "invalid_path_encoding" : "internal_error" });
     }
   });
 }

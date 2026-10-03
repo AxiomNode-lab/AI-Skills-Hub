@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { isAlias, isMap, isScalar, parseDocument, visit } from "yaml";
 
 // The Hub's catalog and materialized skills ship with the Hub, not with the
 // project being installed into. SKILLS_HUB_HOME points at another Hub checkout.
@@ -72,72 +73,26 @@ export function summarize(skills) {
   }, { total: 0 });
 }
 
-function unquote(value) {
-  if (value.length >= 2 && value.startsWith("'") && value.endsWith("'")) return value.slice(1, -1).replaceAll("''", "'");
-  if (value.length >= 2 && value.startsWith('"') && value.endsWith('"')) {
-    return value.slice(1, -1).replace(/\\(["\\nt])/g, (_, c) => ({ n: "\n", t: "\t" })[c] ?? c);
-  }
-  return value;
-}
-
-const indentOf = (line) => line.match(/^ */)[0].length;
-
-// Reads top-level scalar fields from SKILL.md YAML frontmatter, including
-// folded (>) and literal (|) block scalars and indented plain continuations.
-// Nested mappings and sequences are skipped; this is metadata, not a full YAML parser.
+// Parse YAML without executing custom types or resolving aliases. A malformed
+// declaration must never disappear and be mistaken for an absent license.
 export function parseFrontmatter(text) {
   const lines = String(text ?? "").replace(/^\uFEFF/, "").split(/\r?\n/);
   const fields = {};
   if (lines[0]?.trim() !== "---") return fields;
   const end = lines.findIndex((line, i) => i > 0 && /^(---|\.\.\.)\s*$/.test(line));
-  const body = lines.slice(1, end === -1 ? lines.length : end);
-
-  for (let i = 0; i < body.length; i += 1) {
-    const match = body[i].match(/^([A-Za-z0-9_-]+):(?:\s+(.*))?$/);
-    if (!match) continue;
-    const [, key, rawValue = ""] = match;
-    const value = /^["']/.test(rawValue.trim()) ? rawValue.trim() : rawValue.replace(/\s+#.*$/, "").trim();
-    const continuation = [];
-    while (i + 1 < body.length && (body[i + 1].trim() === "" || indentOf(body[i + 1]) > 0)) {
-      continuation.push(body[i + 1]);
-      i += 1;
-    }
-    while (continuation.length && continuation.at(-1).trim() === "") continuation.pop();
-
-    const block = value.match(/^([>|])([+-]?)\d*$/);
-    if (block) {
-      const nonBlank = continuation.filter((line) => line.trim());
-      const indent = nonBlank.length ? Math.min(...nonBlank.map(indentOf)) : 0;
-      const content = continuation.map((line) => line.slice(indent));
-      let result;
-      if (block[1] === "|") result = content.join("\n");
-      else {
-        result = "";
-        for (const line of content) {
-          if (line === "") result += "\n";
-          else if (/^\s/.test(line)) result += (result && !result.endsWith("\n") ? "\n" : "") + line + "\n";
-          else result += (result && !result.endsWith("\n") ? " " : "") + line;
-        }
-        result = result.replace(/\n$/, "");
-      }
-      fields[key] = block[2] === "-" ? result.replace(/\n+$/, "") : result + "\n";
-      continue;
-    }
-
-    if (value === "") {
-      // A nested mapping or sequence; only scalar fields are extracted.
-      if (!continuation.some((line) => line.trim())) fields[key] = "";
-      continue;
-    }
-
-    if (/^["']/.test(value) && !(value.length > 1 && value.endsWith(value[0]))) {
-      // A quoted scalar spanning several lines.
-      fields[key] = unquote([value, ...continuation.map((line) => line.trim())].join(" ").replace(/\s+/g, " "));
-      continue;
-    }
-
-    const plain = [value, ...continuation.map((line) => line.trim()).filter(Boolean)].join(" ");
-    fields[key] = continuation.length ? plain : unquote(value);
+  if (end === -1) throw new Error("Unclosed YAML frontmatter");
+  const document = parseDocument(lines.slice(1, end).join("\n") + "\n", { version: "1.2", uniqueKeys: true });
+  if (document.errors.length || document.warnings.length) throw new Error("Invalid YAML frontmatter: " + (document.errors[0] ?? document.warnings[0]).message);
+  if (!isMap(document.contents)) throw new Error("Frontmatter must be a mapping");
+  visit(document, (_key, node) => {
+    if (isAlias(node) || node?.anchor || (node?.tag && node.tag !== "tag:yaml.org,2002:str")) throw new Error("Frontmatter aliases, anchors and custom tags are forbidden");
+    if (isMap(node) && node.items.some(pair => pair.key?.value === "<<")) throw new Error("Frontmatter merge keys are forbidden");
+  });
+  for (const { key, value } of document.contents.items) {
+    if (!isScalar(key) || typeof key.value !== "string" || ["__proto__", "constructor", "prototype"].includes(key.value)) throw new Error("Invalid frontmatter key");
+    if (["name", "description", "license"].includes(key.value) && (!isScalar(value) || typeof value.value !== "string" || !value.value.trim())) throw new Error(`Frontmatter ${key.value} must be a non-empty string`);
+    // Other nested metadata stays outside the scalar metadata contract.
+    if (isScalar(value)) fields[key.value] = value.value;
   }
   return fields;
 }

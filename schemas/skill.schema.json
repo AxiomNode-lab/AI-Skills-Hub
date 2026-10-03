@@ -123,6 +123,14 @@
         "type": "string"
       }
     },
+    "dependencies": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9._-]+(?:/[a-z0-9._-]+)+$"
+      },
+      "uniqueItems": true
+    },
     "security": {
       "type": "object",
       "required": [
