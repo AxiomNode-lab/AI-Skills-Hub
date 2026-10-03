@@ -1,5 +1,6 @@
 import { readLocalCapabilities, resolveDependencies } from "../utils.mjs";
 import { installCapability } from "../install-executor.mjs";
+import { paint } from "../ui.mjs";
 
 export async function installCommand(ids, options = {}) {
   const report = (results, error = null) => {
@@ -8,12 +9,12 @@ export async function installCommand(ids, options = {}) {
     const output = { success, results, ...(error ? { error } : {}) };
     if (options.json) console.log(JSON.stringify(output, null, 2));
     else {
-      if (error) console.error(`Error: ${error}`);
+      if (error) console.error(paint("red", `Error: ${error}`, process.stderr));
       for (const result of results) {
-        if (result.installed) console.log(`Installed ${result.id}.`);
-        else console.error(`${result.status}: ${result.id}: ${result.reason}${result.requires_confirmation ? ". Re-run with --yes to confirm." : ""}`);
+        if (result.installed) console.log(`${paint("green", "✔")} Installed ${result.id}${result.destination ? paint("dim", ` → ${result.destination}`) : ""}`);
+        else console.error(`${paint("red", "✖", process.stderr)} ${result.status}: ${result.id}: ${result.reason}${result.requires_confirmation ? ". Re-run with --yes to confirm." : ""}`);
       }
-      console.log(success ? "Installation complete." : "Installation incomplete; not all requested capabilities were installed.");
+      console.log(success ? paint("green", "Installation complete.") : paint("yellow", "Installation incomplete; not all requested capabilities were installed."));
     }
     return output;
   };

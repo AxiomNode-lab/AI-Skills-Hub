@@ -46,10 +46,18 @@ pnpm test
 
 ### 3. Discover Capabilities
 
-You can search for capabilities using natural language or keywords via the CLI:
+List what you can install right now, optionally for one agent and with a keyword:
+
+```bash
+pnpm cli available --agent claude-code
+pnpm cli available design --agent codex
+```
+
+`available` shows only released skills that `install` accepts, grouped by publisher with their reviewed risk. To search the whole catalog, including skills that are still under review or blocked, use `search`:
 
 ```bash
 pnpm cli search "pdf tools" --agent codex
+pnpm cli search "pdf tools" --installable
 ```
 
 Local search requires a case-insensitive phrase or keyword match in a capability's ID, name, publisher, description, categories, or tags. Multi-word queries can match individual keywords. `--agent` restricts results to compatible capabilities; compatibility and status scores rank textual matches only. Unmatched or empty queries return no results: a message in normal output, or `[]` with `--json`.
@@ -115,7 +123,22 @@ Alternatively, you can browse and install capabilities using the interactive UI:
 pnpm cli
 ```
 
-Use the `Space` bar to select capabilities and `Enter` to confirm.
+It lists the supported agents and marks the ones found on this machine (Claude Code, Codex, Cursor, GitHub Copilot, OpenCode, detected by their command on `PATH` or their configuration folder, on Linux, macOS, and Windows). Browsing shows installable skills by default; the whole catalog is a separate option. Use the arrow keys, `Space` to select, and `Enter` to confirm.
+
+### Supported agents
+
+| Agent | `--agent` | Project skills folder | User skills folder (`--scope user`) |
+| --- | --- | --- | --- |
+| Claude Code | `claude-code` | `.claude/skills` | `~/.claude/skills` |
+| Codex | `codex` | `.agents/skills` | `~/.agents/skills` |
+| Cursor | `cursor` | `.agents/skills` | `~/.cursor/skills` |
+| GitHub Copilot | `github-copilot` | `.github/skills` | `~/.copilot/skills` |
+| OpenCode | `opencode` | `.opencode/skills` | `~/.config/opencode/skills` |
+| Any Agent Skills client | `agent-skills` | `.agents/skills` | `~/.agents/skills` |
+
+A skill can be installed for an agent when the catalog lists that agent, or when it is an Agent Skills format skill (`SKILL.md` with name and description) and the agent loads that format; `available --agent` labels the second case "Agent Skills format". MCP servers, plugins, and other artifacts need an explicit listing.
+
+Output uses color in a terminal; set `NO_COLOR=1` to turn it off or `FORCE_COLOR=1` to force it. JSON output never contains color codes.
 
 ### 6. Use It From Your Own Project
 

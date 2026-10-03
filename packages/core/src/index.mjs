@@ -45,12 +45,49 @@ export function resolveBundle(registry, bundleName) {
   });
 }
 
+// Agents that load skills in the open Agent Skills format (a directory with
+// SKILL.md and name/description frontmatter). See catalog/agents.json.
+export const AGENT_SKILLS_STANDARD_AGENTS = ["claude-code", "codex", "cursor", "github-copilot", "opencode", "generic-agent", "agent-skills"];
+
+// Why a capability can be used with an agent: "listed" when the catalog names the
+// agent, "standard" when it is an Agent Skills format skill and the agent loads
+// that format. Returns null when neither holds. Non-skill artifacts need a listing.
+export function compatibilityBasis(skill, agent) {
+  const listed = new Set(skill.compatibility ?? []);
+  if (listed.has(agent)) return "listed";
+  const isSkill = (skill.artifact_type ?? skill.type ?? "skill") === "skill";
+  if (isSkill && listed.has("agent-skills") && AGENT_SKILLS_STANDARD_AGENTS.includes(agent)) return "standard";
+  return null;
+}
+
 export function filterForAgent(skills, agent) {
-  return skills.filter((skill) => {
-    const compatibility = new Set(skill.compatibility ?? []);
-    return compatibility.has(agent)
-      || (agent === "generic-agent" && compatibility.has("agent-skills"));
-  });
+  return skills.filter((skill) => compatibilityBasis(skill, agent) !== null);
+}
+
+// Searches PATH (honoring PATHEXT on Windows) for an executable.
+export function findExecutable(command, env = process.env) {
+  const value = String(command ?? "").trim();
+  if (!value) return null;
+  const isPath = value.includes("/") || value.includes("\\") || path.isAbsolute(value);
+  const entries = isPath ? [""] : (env.PATH ?? env.Path ?? "").split(path.delimiter).filter(Boolean);
+  const extensions = process.platform === "win32"
+    ? (env.PATHEXT ?? ".EXE;.CMD;.BAT;.COM").split(";").filter(Boolean)
+    : [];
+  const hasExtension = extensions.some((ext) => value.toLowerCase().endsWith(ext.toLowerCase()));
+  const names = process.platform === "win32" && !hasExtension ? [value, ...extensions.map((ext) => value + ext)] : [value];
+  for (const entry of entries) {
+    for (const name of names) {
+      const candidate = entry ? path.join(entry, name) : name;
+      try {
+        if (!fs.statSync(candidate).isFile()) continue;
+        if (process.platform !== "win32") fs.accessSync(candidate, fs.constants.X_OK);
+        return candidate;
+      } catch {
+        // Not present or not executable.
+      }
+    }
+  }
+  return null;
 }
 
 // Whether the catalog offers a local install. This never reflects installation state.

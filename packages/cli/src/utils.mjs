@@ -1,41 +1,10 @@
 import fs from "node:fs/promises";
-import fsSync from "node:fs";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
-import { hubHome, loadRegistry } from "@ai-skills-hub/core";
-
-function executableCandidates(command) {
-  const value = String(command ?? "").trim();
-  if (!value) return [];
-
-  const isPath = value.includes("/") || value.includes("\\") || path.isAbsolute(value);
-  if (isPath) return [value];
-
-  const pathEntries = (process.env.PATH ?? "").split(path.delimiter).filter(Boolean);
-  if (process.platform !== "win32") {
-    return pathEntries.map((entry) => path.join(entry, value));
-  }
-
-  const extensions = (process.env.PATHEXT ?? ".EXE;.CMD;.BAT;.COM")
-    .split(";")
-    .filter(Boolean);
-  const hasExtension = extensions.some((ext) => value.toLowerCase().endsWith(ext.toLowerCase()));
-  const names = hasExtension ? [value] : [value, ...extensions.map((ext) => value + ext)];
-  return pathEntries.flatMap((entry) => names.map((name) => path.join(entry, name)));
-}
+import { findExecutable, hubHome, loadRegistry } from "@ai-skills-hub/core";
 
 export function isExecutableAvailable(command) {
-  return executableCandidates(command).some((candidate) => {
-    try {
-      const stat = fsSync.statSync(candidate);
-      if (!stat.isFile()) return false;
-      if (process.platform === "win32") return true;
-      fsSync.accessSync(candidate, fsSync.constants.X_OK);
-      return true;
-    } catch {
-      return false;
-    }
-  });
+  return findExecutable(command) !== null;
 }
 
 export function checkPrerequisites(prerequisites) {

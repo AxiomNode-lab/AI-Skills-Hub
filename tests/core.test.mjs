@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { loadRegistry, resolveBundle, filterForAgent, findSkill, parseFrontmatter } from "../packages/core/src/index.mjs";
+import { loadRegistry, resolveBundle, filterForAgent, findSkill, parseFrontmatter, compatibilityBasis } from "../packages/core/src/index.mjs";
 
 test("registry contains no broken bundle references",()=>{
   const registry=loadRegistry();
@@ -14,11 +14,14 @@ test("skill identity resolves by id and name",()=>{
   assert.equal(findSkill(registry,skill.name)?.id,skill.id);
 });
 
-test("generic Agent Skills compatibility does not leak into named agents",()=>{
-  const registry=loadRegistry();
-  const docs=resolveBundle(registry,"@documents");
-  assert.equal(filterForAgent(docs,"codex").length,0);
-  assert.ok(filterForAgent(docs,"claude-code").length>=1);
+test("Agent Skills format skills are compatible with standard agents only",()=>{
+  const skill={id:"a/b",name:"b",compatibility:["agent-skills"]};
+  for(const agent of ["claude-code","codex","cursor","github-copilot","opencode","generic-agent"]) assert.equal(compatibilityBasis(skill,agent),"standard",agent);
+  assert.equal(compatibilityBasis({...skill,compatibility:["agent-skills","codex"]},"codex"),"listed");
+  assert.equal(compatibilityBasis(skill,"some-other-agent"),null);
+  assert.equal(compatibilityBasis({...skill,artifact_type:"mcp-server"},"codex"),null);
+  assert.equal(compatibilityBasis({...skill,compatibility:["claude-code"]},"codex"),null);
+  assert.equal(filterForAgent([skill],"claude-code").length,1);
 });
 
 test("@all bundle is a catalog snapshot with no unknown ids",()=>{

@@ -8,6 +8,7 @@ import { searchCommand } from "../src/commands/search.mjs";
 import { infoCommand } from "../src/commands/info.mjs";
 import { listCommand } from "../src/commands/list.mjs";
 import { installCommand } from "../src/commands/install.mjs";
+import { availableCommand } from "../src/commands/available.mjs";
 import { checkForUpdates } from "../src/utils.mjs";
 import { createHubServer, runStdioServer } from "@ai-skills-hub/server";
 
@@ -20,6 +21,7 @@ function parseOptions(argsArray) {
   for (let i = 0; i < argsArray.length; i += 1) {
     const arg = argsArray[i];
     if (arg === "--json") options.json = true;
+    else if (arg === "--installable") options.installable = true;
     else if (arg === "--yes" || arg === "-y") options.yes = true;
     else if (arg === "--agent" && i + 1 < argsArray.length) options.agent = argsArray[++i];
     else if (arg === "--scope" && i + 1 < argsArray.length) options.scope = argsArray[++i];
@@ -54,6 +56,9 @@ async function main() {
       break;
     case "info":
       await infoCommand(positional[0], options);
+      break;
+    case "available":
+      await availableCommand(positional[0], options);
       break;
     case "list":
       await listCommand(options);
@@ -91,7 +96,8 @@ Commands:
   add <url|query>         Add a Git repository or discover a capability
   sync                    Update Git-linked local capabilities
   uninstall               Remove an installed capability
-  search <query>          Search the local registry
+  available [query]       List skills you can install now (filter with --agent)
+  search <query>          Search the whole local registry (--installable to filter)
   info <id>               Show capability metadata
   list                    List installed capabilities
   install <id[,id...]>    Install release-eligible or explicitly approved external capabilities
@@ -103,8 +109,15 @@ Options:
   --scope <project|user>  Installation scope
   --yes                   Confirm external installer/configuration operations
   --json                  Output machine-readable JSON where supported
+  --installable           search: only skills that can be installed now
   --port <n>              serve: port (default 8787)
   --host <addr>           serve: bind address (default 127.0.0.1)
+
+Agents: claude-code, codex, cursor, github-copilot, opencode, agent-skills (generic)
+
+Start here:
+  skills-hub available --agent claude-code
+  skills-hub install anthropics/frontend-design --agent claude-code
       `);
       break;
     default:

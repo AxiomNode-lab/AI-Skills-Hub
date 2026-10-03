@@ -1,6 +1,7 @@
 import { searchRegistry } from "@ai-skills-hub/discovery";
 import { loadRegistry } from "@ai-skills-hub/core";
 import { statusReader, printCapabilityStatus } from "../capability-status.mjs";
+import { paint } from "../ui.mjs";
 
 export function searchCommand(query, options = {}) {
   const registry = loadRegistry();
@@ -9,7 +10,8 @@ export function searchCommand(query, options = {}) {
   const results = searchRegistry(registry, query || "", {
     agent: options.agent || undefined,
     limit: options.limit || 50
-  }).map(({ item, score }) => ({ ...item, _score: score, hub_status: readStatus(item) }));
+  }).map(({ item, score }) => ({ ...item, _score: score, hub_status: readStatus(item) }))
+    .filter((item) => !options.installable || item.hub_status.availability.status === "eligible");
 
   if (options.json) {
     console.log(JSON.stringify(results, null, 2));
@@ -23,7 +25,7 @@ export function searchCommand(query, options = {}) {
 
   console.log(`Found ${results.length} capabilities:\n`);
   for (const cap of results) {
-    console.log(`ID: ${cap.id}`);
+    console.log(`ID: ${paint("bold", cap.id)}`);
     console.log(`Name: ${cap.name}`);
     printCapabilityStatus(cap.hub_status);
     console.log(`Type: ${cap.artifact_type || cap.type || "skill"}`);

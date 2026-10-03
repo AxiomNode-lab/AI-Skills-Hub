@@ -12,7 +12,16 @@ All notable changes to AI Skills Hub are documented here.
 - Repository-root MIT licenses can cover a skill under the conditions in docs/LICENSE-POLICY.md; the root license ships with the skill as an attached `LICENSE.txt`.
 - 163 more reviewed skills are released: `anthropics/academy-guide`, `anthropics/discernment-nudge`, and 161 MIT skills from microsoft/skills, obra/superpowers, and K-Dense (166 installable in total). Eight reviewed candidates were not released; reasons are in docs/VERIFIED-LOCAL-SKILLS.md.
 
+- `skills-hub available [query] --agent <id>` lists installable skills; `search --installable` filters search results.
+- Terminal colors (respecting `NO_COLOR`/`FORCE_COLOR`), a publisher-grouped interactive list that defaults to installable skills, and an OpenCode install target.
+- `pnpm verify-upstream` (also in CI) re-downloads every released file from GitHub at its pinned commit and checks SHA-256.
+
+### Changed
+- Agent Skills format skills now install for every agent that loads the format (Claude Code, Codex, Cursor, GitHub Copilot, OpenCode); previously most were limited by a per-source guess, so Claude Code saw 19 of 166 released skills.
+
 ### Fixed
+- Agent detection works on Windows (no `which`), detects Codex, Cursor, GitHub Copilot, and OpenCode locally, and no longer offers Docker container IDs that had no install target.
+- The interactive installer computed its plan differently from the installer and warned about external installers for local installs.
 - The CLI resolves the catalog and materialized skills from the Hub root (or `SKILLS_HUB_HOME`), so it works inside any project instead of only the Hub checkout.
 - 107 catalog descriptions stored as bare `>`/`|` indicators were repaired from their pinned upstream SKILL.md files.
 - The update check reads the Hub's own version, and is skipped in CI, non-TTY output, and with `SKILLS_HUB_NO_UPDATE_CHECK`.

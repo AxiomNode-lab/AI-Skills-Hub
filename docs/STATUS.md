@@ -32,6 +32,9 @@ node -e "const c=require('./catalog/skills.json'); console.log('total',c.skills.
 - The no-command flow browses/searches compatible catalog entries interactively. Installs are sequential, not parallel.
 - The CLI resolves the catalog and materialized skills from the Hub root (or `SKILLS_HUB_HOME`) and installs relative to the current directory, so it can be run inside any project.
 - `mcp` (stdio) and `serve` (HTTP, `127.0.0.1:8787` by default) run a read-only catalog server: `search_skills` and `get_skill` MCP tools, released-skill file resources, and the routes in [API](API.md). No browser catalog exists yet.
+- `available [query] --agent <id>` lists exactly the skills `install` accepts. `search --installable` filters search results the same way.
+- Agent detection looks for each agent's command on `PATH` (with `PATHEXT` on Windows) or its configuration folder, and the interactive flow lists every supported agent with detected ones marked. Agent Skills format skills install for every agent that loads the format; see the README's supported-agent table.
+- `pnpm verify-upstream` re-downloads every file of every released skill from GitHub at its pinned commit and compares SHA-256; CI runs it on Linux. On 2026-10-03 all 669 files matched, and all 534 catalog records resolved to an existing SKILL.md at their pinned commits.
 - `create`, `sync`, and interactive `uninstall` are also available. See `node packages/cli/bin/skills-hub.mjs help` and [installation](INSTALLATION.md).
 
 ## Library capabilities and limits
