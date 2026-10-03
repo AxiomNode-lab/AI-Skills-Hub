@@ -10,9 +10,11 @@ const allowed = new Set(["bundled", "source-direct", "review-required", "blocked
 if (!Array.isArray(data.skills)) throw new Error("catalog.skills must be an array");
 
 const ids = new Set();
+const skillsById = new Map();
 for (const skill of data.skills) {
   if (ids.has(skill.id)) throw new Error("Duplicate skill id: " + skill.id);
   ids.add(skill.id);
+  skillsById.set(skill.id, skill);
 
   for (const field of ["id","name","publisher","source","category","license","distribution","compatibility","security","materialized","release"]) {
     if (!(field in skill)) throw new Error(skill.id + " missing " + field);
@@ -32,6 +34,9 @@ for (const skill of data.skills) {
   }
 
   if (typeof skill.materialized !== "boolean") throw new Error(skill.id + " invalid materialized flag");
+  if (skill.dependencies !== undefined && (!Array.isArray(skill.dependencies) || new Set(skill.dependencies).size !== skill.dependencies.length)) {
+    throw new Error(skill.id + " invalid dependencies");
+  }
   if (!["pending","eligible","hold"].includes(skill.release?.status)) throw new Error(skill.id + " invalid release status");
   if (!Array.isArray(skill.release?.reasons)) throw new Error(skill.id + " invalid release reasons");
   if (!skill.integrity || typeof skill.integrity !== "object") throw new Error(skill.id + " missing integrity metadata");
@@ -50,6 +55,16 @@ for (const skill of data.skills) {
 
   if (!["verified","pending","review-required"].includes(skill.security.scan_status)) {
     throw new Error(skill.id + " invalid security scan status");
+  }
+}
+
+for (const skill of data.skills) {
+  for (const dependencyId of skill.dependencies ?? []) {
+    const dependency = skillsById.get(dependencyId);
+    if (!dependency) throw new Error(skill.id + " references unknown dependency: " + dependencyId);
+    if (skill.release.status === "eligible" && (dependency.release?.status !== "eligible" || dependency.materialized !== true || dependency.distribution !== "bundled")) {
+      throw new Error(skill.id + " release dependency is not eligible: " + dependencyId);
+    }
   }
 }
 

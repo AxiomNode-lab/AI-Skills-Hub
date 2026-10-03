@@ -10,7 +10,7 @@ import { verifyInstallRecord } from "../packages/installer/src/state.mjs";
 
 const repoRoot = process.cwd();
 const registry = JSON.parse(fs.readFileSync("catalog/skills.json", "utf8"));
-const released = registry.skills.filter(skill => skill.license.evidence?.startsWith("catalog/reviews/"));
+const released = registry.skills.filter(skill => skill.release?.status === "eligible" && skill.materialized && skill.license.evidence?.startsWith("catalog/reviews/"));
 const first = released.find(skill => skill.id === "anthropics/frontend-design");
 const review = JSON.parse(fs.readFileSync(first.license.evidence, "utf8"));
 function tempProject(t) {
