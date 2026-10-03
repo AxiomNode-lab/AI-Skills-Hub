@@ -42,6 +42,16 @@ Installation state is written atomically. Managed skill file hashes support veri
 
 ## Verification
 
+Behavioral probes for the three local skills are recorded separately in the
+[evaluation report](../evaluations/skills/results/2026-10-02.md). Project installs
+and file checks passed, but the actual Codex sessions could not read the skill
+instructions because execution policy blocked the commands. All three tasks are
+`not-run`; instruction use and task quality remain unproven. The evaluation guide
+includes synthetic fixtures, replay commands and a pending independent human rubric.
+A follow-up synthetic preflight on 2026-10-03 reproduced the project-local read
+rejection, so no paid case was repeated; the runner now gates cases on a proven
+read/write/read preflight.
+
 `pnpm validate-all` checks workspace exports, JavaScript syntax, schema references, the generated lockfile, registry policy, materialized integrity, the project duplicate report, and tests. `pnpm run dedupe` is the project report command; `pnpm dedupe` is the package-manager command.
 
 `pnpm test` discovers test files explicitly and rejects runs with no files or no passing tests. CI runs the same validation on `ubuntu-latest` and `windows-latest` with Node 22. Path assertions use native path construction. The MCP symlink test skips only if Windows denies creating the fixture link with `EPERM` or `EACCES`; when creation succeeds, the protection assertion must pass.
