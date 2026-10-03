@@ -1,0 +1,610 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "microsoft/azure-ai-voicelive-py",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/azure-sdk-python/skills/azure-ai-voicelive-py",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "review": {
+    "path": "catalog/reviews/microsoft__azure-ai-voicelive-py.json",
+    "sha256": "191d9016a031e7a9628d3bc903baf6573cbf553686948b2d23efe2d51253916b"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "encoded_content": true
+    },
+    "findings": [
+      {
+        "type": "credential-access",
+        "line": 25,
+        "evidence": "credential",
+        "context": "    credential: Union[AzureKeyCredential, AsyncTokenCredential],",
+        "file": "references/api-reference.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 42,
+        "evidence": "credential",
+        "context": "| `credential` | `AzureKeyCredential` or `AsyncTokenCredential` | Yes | Authentication credential |",
+        "file": "references/api-reference.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 42,
+        "evidence": "credential",
+        "context": "| `credential` | `AzureKeyCredential` or `AsyncTokenCredential` | Yes | Authentication credential |",
+        "file": "references/api-reference.md"
+      },
+      {
+        "type": "network-access",
+        "line": 49,
+        "evidence": "https://",
+        "context": "| `credential_scopes` | `List[str]` | No | OAuth scopes (default: `[\"https://ai.azure.com/.default\"]`) |",
+        "file": "references/api-reference.md"
+      },
+      {
+        "type": "encoded-content",
+        "line": 167,
+        "evidence": "Base64",
+        "context": "    audio: str,  # Base64-encoded audio",
+        "file": "references/api-reference.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 230,
+        "evidence": "delete",
+        "context": "async def delete(",
+        "file": "references/api-reference.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 235,
+        "evidence": "Delete",
+        "context": "    \"\"\"Delete a conversation item.\"\"\"",
+        "file": "references/api-reference.md"
+      },
+      {
+        "type": "encoded-content",
+        "line": 263,
+        "evidence": "base64",
+        "context": "        {\"type\": \"input_audio\", \"audio\": \"base64...\"},",
+        "file": "references/api-reference.md"
+      },
+      {
+        "type": "encoded-content",
+        "line": 265,
+        "evidence": "base64",
+        "context": "        {\"type\": \"audio\", \"audio\": \"base64...\", \"transcript\": \"...\"}",
+        "file": "references/api-reference.md"
+      },
+      {
+        "type": "encoded-content",
+        "line": 22,
+        "evidence": "base64",
+        "context": "import base64",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "network-access",
+        "line": 28,
+        "evidence": "https://",
+        "context": "        endpoint=\"https://eastus.api.cognitive.microsoft.com\",",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 29,
+        "evidence": "credential",
+        "context": "        credential=AzureKeyCredential(\"YOUR_KEY\"),",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "encoded-content",
+        "line": 63,
+        "evidence": "base64",
+        "context": "                    audio = base64.b64decode(event.delta)",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "encoded-content",
+        "line": 76,
+        "evidence": "base64",
+        "context": "        b64 = base64.b64encode(chunk).decode()",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "encoded-content",
+        "line": 91,
+        "evidence": "base64",
+        "context": "import base64",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "network-access",
+        "line": 153,
+        "evidence": "https://",
+        "context": "        endpoint=\"https://eastus.api.cognitive.microsoft.com\",",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 154,
+        "evidence": "credential",
+        "context": "        credential=AzureKeyCredential(\"YOUR_KEY\"),",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "encoded-content",
+        "line": 182,
+        "evidence": "base64",
+        "context": "                    audio = base64.b64decode(event.delta)",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "encoded-content",
+        "line": 200,
+        "evidence": "base64",
+        "context": "import base64",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "network-access",
+        "line": 206,
+        "evidence": "https://",
+        "context": "        endpoint=\"https://eastus.api.cognitive.microsoft.com\",",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 207,
+        "evidence": "credential",
+        "context": "        credential=AzureKeyCredential(\"YOUR_KEY\"),",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "encoded-content",
+        "line": 227,
+        "evidence": "base64",
+        "context": "                b64 = base64.b64encode(chunk).decode()",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "encoded-content",
+        "line": 237,
+        "evidence": "base64",
+        "context": "                    audio = base64.b64decode(event.delta)",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "encoded-content",
+        "line": 253,
+        "evidence": "base64",
+        "context": "import base64",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "network-access",
+        "line": 260,
+        "evidence": "https://",
+        "context": "        endpoint=\"https://eastus.api.cognitive.microsoft.com\",",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 261,
+        "evidence": "credential",
+        "context": "        credential=AzureKeyCredential(\"YOUR_KEY\"),",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "encoded-content",
+        "line": 279,
+        "evidence": "base64",
+        "context": "            b64 = base64.b64encode(chunk).decode()",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "encoded-content",
+        "line": 296,
+        "evidence": "base64",
+        "context": "                    response_audio.extend(base64.b64decode(event.delta))",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "encoded-content",
+        "line": 322,
+        "evidence": "base64",
+        "context": "import base64",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "network-access",
+        "line": 328,
+        "evidence": "https://",
+        "context": "        endpoint=\"https://eastus.api.cognitive.microsoft.com\",",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 329,
+        "evidence": "credential",
+        "context": "        credential=AzureKeyCredential(\"YOUR_KEY\"),",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "encoded-content",
+        "line": 362,
+        "evidence": "base64",
+        "context": "                        audio = base64.b64decode(event.delta)",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "encoded-content",
+        "line": 376,
+        "evidence": "base64",
+        "context": "import base64",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "network-access",
+        "line": 382,
+        "evidence": "https://",
+        "context": "        endpoint=\"https://eastus.api.cognitive.microsoft.com\",",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 383,
+        "evidence": "credential",
+        "context": "        credential=AzureKeyCredential(\"YOUR_KEY\"),",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "encoded-content",
+        "line": 412,
+        "evidence": "base64",
+        "context": "                audio = base64.b64decode(event.delta)",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "network-access",
+        "line": 434,
+        "evidence": "https://",
+        "context": "        endpoint=\"https://eastus.api.cognitive.microsoft.com\",",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 435,
+        "evidence": "credential",
+        "context": "        credential=AzureKeyCredential(\"YOUR_KEY\"),",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "network-access",
+        "line": 477,
+        "evidence": "https://",
+        "context": "        endpoint=\"https://eastus.api.cognitive.microsoft.com\",",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 478,
+        "evidence": "credential",
+        "context": "        credential=AzureKeyCredential(\"YOUR_KEY\"),",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "encoded-content",
+        "line": 519,
+        "evidence": "base64",
+        "context": "import base64",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "network-access",
+        "line": 525,
+        "evidence": "https://",
+        "context": "        endpoint=\"https://eastus.api.cognitive.microsoft.com\",",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 526,
+        "evidence": "credential",
+        "context": "        credential=AzureKeyCredential(\"YOUR_KEY\"),",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 141,
+        "evidence": "delete",
+        "context": "    CONVERSATION_ITEM_DELETE = \"conversation.item.delete\"",
+        "file": "references/models.md"
+      },
+      {
+        "type": "encoded-content",
+        "line": 215,
+        "evidence": "Base64",
+        "context": "    audio: str  # Base64-encoded audio",
+        "file": "references/models.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 244,
+        "evidence": "delete",
+        "context": "    type: Literal[\"conversation.item.delete\"]",
+        "file": "references/models.md"
+      },
+      {
+        "type": "encoded-content",
+        "line": 373,
+        "evidence": "Base64",
+        "context": "    delta: str  # Base64-encoded audio",
+        "file": "references/models.md"
+      },
+      {
+        "type": "encoded-content",
+        "line": 529,
+        "evidence": "Base64",
+        "context": "    audio: str  # Base64",
+        "file": "references/models.md"
+      },
+      {
+        "type": "encoded-content",
+        "line": 544,
+        "evidence": "Base64",
+        "context": "    audio: str  # Base64",
+        "file": "references/models.md"
+      },
+      {
+        "type": "encoded-content",
+        "line": 553,
+        "evidence": "base64",
+        "context": "    base64: Optional[str]",
+        "file": "references/models.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 722,
+        "evidence": "credential",
+        "context": "    credential: Optional[str]",
+        "file": "references/models.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 17,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 18,
+        "evidence": "pip install",
+        "context": "pip install azure-ai-voicelive aiohttp azure-identity",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 23,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 24,
+        "evidence": "https://",
+        "context": "AZURE_COGNITIVE_SERVICES_ENDPOINT=https://<region>.api.cognitive.microsoft.com  # Required for all auth methods",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 26,
+        "evidence": "api-key",
+        "context": "AZURE_COGNITIVE_SERVICES_KEY=<api-key>  # Only required for the legacy API-key auth path below",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 26,
+        "evidence": "API-key",
+        "context": "AZURE_COGNITIVE_SERVICES_KEY=<api-key>  # Only required for the legacy API-key auth path below",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 35,
+        "evidence": "credential",
+        "context": ">    - Production: set `AZURE_TOKEN_CREDENTIALS=prod` (or `AZURE_TOKEN_CREDENTIALS=<specific_credential>`) to constrain the credential chain to production-safe credentials.",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 38,
+        "evidence": "credential",
+        "context": ">    - Async: `async with <Client>(...) as client:` **and** `async with DefaultAzureCredential() as credential:` (from `azure.identity.aio`)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 48,
+        "evidence": "credential",
+        "context": "# Or use a specific credential directly in production:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 49,
+        "evidence": "credential",
+        "context": "# See https://learn.microsoft.com/python/api/overview/azure/identity-readme?view=azure-python#credential-classes",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 49,
+        "evidence": "https://",
+        "context": "# See https://learn.microsoft.com/python/api/overview/azure/identity-readme?view=azure-python#credential-classes",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 50,
+        "evidence": "credential",
+        "context": "# credential = ManagedIdentityCredential()",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 52,
+        "evidence": "credential",
+        "context": "async with DefaultAzureCredential(require_envvar=True) as credential:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 55,
+        "evidence": "credential",
+        "context": "        credential=credential,",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 55,
+        "evidence": "credential",
+        "context": "        credential=credential,",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 57,
+        "evidence": "https://",
+        "context": "        credential_scopes=[\"https://cognitiveservices.azure.com/.default\"]",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 62,
+        "evidence": "API Key",
+        "context": "### Legacy: API Key (existing keyed deployments)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 73,
+        "evidence": "credential",
+        "context": "    credential=AzureKeyCredential(os.environ[\"AZURE_COGNITIVE_SERVICES_KEY\"]),",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 90,
+        "evidence": "credential",
+        "context": "        credential=DefaultAzureCredential(),",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 92,
+        "evidence": "https://",
+        "context": "        credential_scopes=[\"https://cognitiveservices.azure.com/.default\"]",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 124,
+        "evidence": "delete",
+        "context": "| `conn.conversation` | Conversation state | `item.create()`, `item.delete()`, `item.truncate()` |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "encoded-content",
+        "line": 163,
+        "evidence": "Base64",
+        "context": "### Send Audio (Base64 PCM16)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "encoded-content",
+        "line": 166,
+        "evidence": "base64",
+        "context": "import base64",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "encoded-content",
+        "line": 170,
+        "evidence": "base64",
+        "context": "b64_audio = base64.b64encode(audio_chunk).decode()",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "encoded-content",
+        "line": 180,
+        "evidence": "base64",
+        "context": "        audio_bytes = base64.b64decode(event.delta)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "encoded-content",
+        "line": 215,
+        "evidence": "base64",
+        "context": "            audio = base64.b64decode(event.delta)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 333,
+        "evidence": "credential",
+        "context": "2. **Always use context managers for clients and async credentials.** Wrap every connection in `async with connect(...) as conn:`. For async `DefaultAzureCredential` from `azure.identity.aio`, also use `async with credential:` so tokens and",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 57395
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/api-reference.md",
+      "sha256": "09d1fde82ca8c571a17f7c492bcf220ddbe44e133d71496851cb03fd333b9c1d",
+      "bytes": 8910,
+      "mode": "100644"
+    },
+    {
+      "path": "references/examples.md",
+      "sha256": "5f9c9cf8ef6dd5895a4e86e5fa022592ffac2b410f4d601cc32b37e9313afe5e",
+      "bytes": 17345,
+      "mode": "100644"
+    },
+    {
+      "path": "references/models.md",
+      "sha256": "6e150bbb15bb19ba010015b4f2ba0f6ae5024eae67f7f5d11bd67e6364ba782b",
+      "bytes": 18415,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "8a765d22c122b71f8726aded787a45e248ed3823fdf373cc041d3adc2a5814f5",
+      "bytes": 11585,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 57395
+}

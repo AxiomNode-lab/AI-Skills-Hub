@@ -1,0 +1,1066 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "microsoft/agent-framework-azure-ai-py",
+  "status": "approved",
+  "reviewed_on": "2026-10-02",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/azure-sdk-python/skills/agent-framework-azure-ai-py",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": ".github/plugins/azure-sdk-python/skills/agent-framework-azure-ai-py",
+    "url": "https://api.github.com/repos/microsoft/skills/git/trees/84d8eaa8ae95930f55cdceb3e27196c795dab038?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/microsoft/skills/blob/84d8eaa8ae95930f55cdceb3e27196c795dab038/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        ".github",
+        ".github/plugins",
+        ".github/plugins/azure-sdk-python",
+        ".github/plugins/azure-sdk-python/skills",
+        ".github/plugins/azure-sdk-python/skills/agent-framework-azure-ai-py"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT License with its copyright notice, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file; frontmatter declares MIT with Microsoft as author. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "medium",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "package_install": true,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md and references/advanced.md, references/mcp.md, references/threads.md, references/tools.md in full. Python guide for the Microsoft Agent Framework (agent-framework-azure-ai) on Azure AI Foundry: AzureAIAgentsProvider, function tools, hosted code interpreter/file search/Bing tools, MCP tools, threads, streaming, structured outputs, OpenAPI tools, retries and logging.",
+      "Tells the agent to `pip install agent-framework --pre` or `agent-framework-azure-ai --pre` (SKILL.md:31,34; unpinned pre-release) and samples authenticate with AzureCliCredential/DefaultAzureCredential to create persistent agents, upload files and create vector stores in the user's own Foundry project; threads.md:71-83 writes a conversation-ID JSON file. Medium because of the pre-release package install and live-service credential use; acceptable because the packages are Microsoft's official SDK and all calls target the user's own Azure project with Entra ID auth.",
+      "MCP samples set approval_mode=\"never_require\" (references/mcp.md:37,53,64,81,291), which lets the hosted agent call remote MCP tools without approval in the user's generated app; mcp.md:76-99 documents always_require and per-tool approval as alternatives. Bearer placeholders (\"your-api-key\") appear in header samples; advanced.md:490 enables DEBUG logging which can log request details. Created agents/threads/vector stores persist server-side and are not cleaned up in samples."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "git_blob": "79656060de00aa4659ad2c276d5be8830664d544",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry the copyright and permission notice.",
+      "findings": []
+    },
+    {
+      "path": "references/advanced.md",
+      "sha256": "668490db8d62ffcd5a75ab657a96d1b2986d1811626c1975a3b8217e428a1282",
+      "bytes": 13356,
+      "mode": "100644",
+      "git_blob": "13ac0fe8b0ec5dbf1eeeb17d64ad963f96a043f2",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "credential-access",
+          "line": 24,
+          "evidence": "credential",
+          "context": "    AzureCliCredential() as credential,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 25,
+          "evidence": "credential",
+          "context": "    AzureAIAgentsProvider(credential=credential) as provider,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 25,
+          "evidence": "credential",
+          "context": "    AzureAIAgentsProvider(credential=credential) as provider,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 161,
+          "evidence": "credential",
+          "context": "    AzureCliCredential() as credential,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 162,
+          "evidence": "credential",
+          "context": "    AzureAIAgentsProvider(credential=credential) as provider,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 162,
+          "evidence": "credential",
+          "context": "    AzureAIAgentsProvider(credential=credential) as provider,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 170,
+          "evidence": "https://",
+          "context": "            base_url=\"https://api.weather.example.com\",",
+          "disposition": "accepted",
+          "reason": "Microsoft Learn links, the Learn MCP endpoint, and example.com/placeholder Foundry and MCP URLs in sample code that the user's app would connect to; the skill does not instruct the agent to fetch them."
+        },
+        {
+          "type": "network-access",
+          "line": 182,
+          "evidence": "https://",
+          "context": "    spec=\"https://api.example.com/openapi.json\",",
+          "disposition": "accepted",
+          "reason": "Microsoft Learn links, the Learn MCP endpoint, and example.com/placeholder Foundry and MCP URLs in sample code that the user's app would connect to; the skill does not instruct the agent to fetch them."
+        },
+        {
+          "type": "network-access",
+          "line": 183,
+          "evidence": "https://",
+          "context": "    base_url=\"https://api.example.com\",",
+          "disposition": "accepted",
+          "reason": "Microsoft Learn links, the Learn MCP endpoint, and example.com/placeholder Foundry and MCP URLs in sample code that the user's app would connect to; the skill does not instruct the agent to fetch them."
+        },
+        {
+          "type": "credential-access",
+          "line": 185,
+          "evidence": "api-key",
+          "context": "        \"Authorization\": \"Bearer your-api-key\",",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 203,
+          "evidence": "credential",
+          "context": "    AzureCliCredential() as credential,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 204,
+          "evidence": "credential",
+          "context": "    AzureAIAgentsProvider(credential=credential) as provider,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 204,
+          "evidence": "credential",
+          "context": "    AzureAIAgentsProvider(credential=credential) as provider,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 229,
+          "evidence": "credential",
+          "context": "    AzureCliCredential() as credential,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 230,
+          "evidence": "credential",
+          "context": "    AgentsClient(endpoint=endpoint, credential=credential) as agents_client,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 230,
+          "evidence": "credential",
+          "context": "    AgentsClient(endpoint=endpoint, credential=credential) as agents_client,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 313,
+          "evidence": "credential",
+          "context": "    credential=credential,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 313,
+          "evidence": "credential",
+          "context": "    credential=credential,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 314,
+          "evidence": "https://",
+          "context": "    project_endpoint=\"https://my-project.services.ai.azure.com/api/projects/my-project-id\",",
+          "disposition": "accepted",
+          "reason": "Microsoft Learn links, the Learn MCP endpoint, and example.com/placeholder Foundry and MCP URLs in sample code that the user's app would connect to; the skill does not instruct the agent to fetch them."
+        },
+        {
+          "type": "credential-access",
+          "line": 328,
+          "evidence": "credential",
+          "context": "    credential=credential,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 328,
+          "evidence": "credential",
+          "context": "    credential=credential,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 343,
+          "evidence": "credential",
+          "context": "    AzureCliCredential() as credential,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 344,
+          "evidence": "credential",
+          "context": "    AzureAIAgentsProvider(credential=credential) as provider,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 344,
+          "evidence": "credential",
+          "context": "    AzureAIAgentsProvider(credential=credential) as provider,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 363,
+          "evidence": "credential",
+          "context": "    AzureCliCredential() as credential,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 364,
+          "evidence": "credential",
+          "context": "    AgentsClient(endpoint=endpoint, credential=credential) as agents_client,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 364,
+          "evidence": "credential",
+          "context": "    AgentsClient(endpoint=endpoint, credential=credential) as agents_client,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 440,
+          "evidence": "credential",
+          "context": "    AzureCliCredential() as credential,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 441,
+          "evidence": "credential",
+          "context": "    AzureAIAgentsProvider(credential=credential) as provider,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 441,
+          "evidence": "credential",
+          "context": "    AzureAIAgentsProvider(credential=credential) as provider,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 453,
+          "evidence": "credential",
+          "context": "    async with AzureAIAgentsProvider(credential=credential) as provider:",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 453,
+          "evidence": "credential",
+          "context": "    async with AzureAIAgentsProvider(credential=credential) as provider:",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        }
+      ]
+    },
+    {
+      "path": "references/mcp.md",
+      "sha256": "bf8a6075f84f1496200b64692c555dfcd6ff62cc57ae81694ec4427cad461907",
+      "bytes": 7779,
+      "mode": "100644",
+      "git_blob": "7dce0bcd2a9c144591bd56b8915751f503dadef5",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "credential-access",
+          "line": 28,
+          "evidence": "credential",
+          "context": "    AzureCliCredential() as credential,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 29,
+          "evidence": "credential",
+          "context": "    AzureAIAgentsProvider(credential=credential) as provider,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 29,
+          "evidence": "credential",
+          "context": "    AzureAIAgentsProvider(credential=credential) as provider,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 36,
+          "evidence": "https://",
+          "context": "            url=\"https://learn.microsoft.com/api/mcp\",",
+          "disposition": "accepted",
+          "reason": "Microsoft Learn links, the Learn MCP endpoint, and example.com/placeholder Foundry and MCP URLs in sample code that the user's app would connect to; the skill does not instruct the agent to fetch them."
+        },
+        {
+          "type": "network-access",
+          "line": 52,
+          "evidence": "https://",
+          "context": "    url=\"https://learn.microsoft.com/api/mcp\",",
+          "disposition": "accepted",
+          "reason": "Microsoft Learn links, the Learn MCP endpoint, and example.com/placeholder Foundry and MCP URLs in sample code that the user's app would connect to; the skill does not instruct the agent to fetch them."
+        },
+        {
+          "type": "network-access",
+          "line": 63,
+          "evidence": "https://",
+          "context": "    url=\"https://my-mcp-server.example.com/mcp\",",
+          "disposition": "accepted",
+          "reason": "Microsoft Learn links, the Learn MCP endpoint, and example.com/placeholder Foundry and MCP URLs in sample code that the user's app would connect to; the skill does not instruct the agent to fetch them."
+        },
+        {
+          "type": "credential-access",
+          "line": 66,
+          "evidence": "api-key",
+          "context": "        \"Authorization\": \"Bearer your-api-key\",",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 80,
+          "evidence": "https://",
+          "context": "    url=\"https://safe-mcp.example.com/mcp\",",
+          "disposition": "accepted",
+          "reason": "Microsoft Learn links, the Learn MCP endpoint, and example.com/placeholder Foundry and MCP URLs in sample code that the user's app would connect to; the skill does not instruct the agent to fetch them."
+        },
+        {
+          "type": "network-access",
+          "line": 87,
+          "evidence": "https://",
+          "context": "    url=\"https://sensitive-mcp.example.com/mcp\",",
+          "disposition": "accepted",
+          "reason": "Microsoft Learn links, the Learn MCP endpoint, and example.com/placeholder Foundry and MCP URLs in sample code that the user's app would connect to; the skill does not instruct the agent to fetch them."
+        },
+        {
+          "type": "network-access",
+          "line": 94,
+          "evidence": "https://",
+          "context": "    url=\"https://mcp.example.com/mcp\",",
+          "disposition": "accepted",
+          "reason": "Microsoft Learn links, the Learn MCP endpoint, and example.com/placeholder Foundry and MCP URLs in sample code that the user's app would connect to; the skill does not instruct the agent to fetch them."
+        },
+        {
+          "type": "credential-access",
+          "line": 116,
+          "evidence": "credential",
+          "context": "    AzureCliCredential() as credential,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 119,
+          "evidence": "https://",
+          "context": "        url=\"https://learn.microsoft.com/api/mcp\",",
+          "disposition": "accepted",
+          "reason": "Microsoft Learn links, the Learn MCP endpoint, and example.com/placeholder Foundry and MCP URLs in sample code that the user's app would connect to; the skill does not instruct the agent to fetch them."
+        },
+        {
+          "type": "credential-access",
+          "line": 121,
+          "evidence": "credential",
+          "context": "    AzureAIAgentsProvider(credential=credential) as provider,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 121,
+          "evidence": "credential",
+          "context": "    AzureAIAgentsProvider(credential=credential) as provider,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 153,
+          "evidence": "https://",
+          "context": "        url=\"https://api.github.com/mcp\",",
+          "disposition": "accepted",
+          "reason": "Microsoft Learn links, the Learn MCP endpoint, and example.com/placeholder Foundry and MCP URLs in sample code that the user's app would connect to; the skill does not instruct the agent to fetch them."
+        },
+        {
+          "type": "credential-access",
+          "line": 156,
+          "evidence": "credential",
+          "context": "    AzureAIAgentsProvider(credential=credential) as provider,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 156,
+          "evidence": "credential",
+          "context": "    AzureAIAgentsProvider(credential=credential) as provider,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 169,
+          "evidence": "credential",
+          "context": "    AzureCliCredential() as credential,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 172,
+          "evidence": "https://",
+          "context": "        url=\"https://learn.microsoft.com/api/mcp\",",
+          "disposition": "accepted",
+          "reason": "Microsoft Learn links, the Learn MCP endpoint, and example.com/placeholder Foundry and MCP URLs in sample code that the user's app would connect to; the skill does not instruct the agent to fetch them."
+        },
+        {
+          "type": "network-access",
+          "line": 176,
+          "evidence": "https://",
+          "context": "        url=\"https://api.github.com/mcp\",",
+          "disposition": "accepted",
+          "reason": "Microsoft Learn links, the Learn MCP endpoint, and example.com/placeholder Foundry and MCP URLs in sample code that the user's app would connect to; the skill does not instruct the agent to fetch them."
+        },
+        {
+          "type": "credential-access",
+          "line": 179,
+          "evidence": "credential",
+          "context": "    AzureAIAgentsProvider(credential=credential) as provider,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 179,
+          "evidence": "credential",
+          "context": "    AzureAIAgentsProvider(credential=credential) as provider,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 231,
+          "evidence": "credential",
+          "context": "    AzureCliCredential() as credential,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 234,
+          "evidence": "https://",
+          "context": "        url=\"https://internal-api.company.com/mcp\",",
+          "disposition": "accepted",
+          "reason": "Microsoft Learn links, the Learn MCP endpoint, and example.com/placeholder Foundry and MCP URLs in sample code that the user's app would connect to; the skill does not instruct the agent to fetch them."
+        },
+        {
+          "type": "credential-access",
+          "line": 236,
+          "evidence": "credential",
+          "context": "    AzureAIAgentsProvider(credential=credential) as provider,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 236,
+          "evidence": "credential",
+          "context": "    AzureAIAgentsProvider(credential=credential) as provider,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 262,
+          "evidence": "https://",
+          "context": "        url=\"https://mcp.example.com\",",
+          "disposition": "accepted",
+          "reason": "Microsoft Learn links, the Learn MCP endpoint, and example.com/placeholder Foundry and MCP URLs in sample code that the user's app would connect to; the skill does not instruct the agent to fetch them."
+        }
+      ]
+    },
+    {
+      "path": "references/threads.md",
+      "sha256": "8e83cb3f805747e04c257b04ae3667fa1cba07182fbb76bba3127f61d88b422b",
+      "bytes": 7911,
+      "mode": "100644",
+      "git_blob": "610cd60477871bc2cfbee0f5cebe62fea34d99b7",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "credential-access",
+          "line": 23,
+          "evidence": "credential",
+          "context": "    AzureCliCredential() as credential,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 24,
+          "evidence": "credential",
+          "context": "    AzureAIAgentsProvider(credential=credential) as provider,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 24,
+          "evidence": "credential",
+          "context": "    AzureAIAgentsProvider(credential=credential) as provider,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 161,
+          "evidence": "credential",
+          "context": "    AzureCliCredential() as credential,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 162,
+          "evidence": "credential",
+          "context": "    AzureAIAgentsProvider(credential=credential) as provider,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 162,
+          "evidence": "credential",
+          "context": "    AzureAIAgentsProvider(credential=credential) as provider,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 212,
+          "evidence": "credential",
+          "context": "        AzureCliCredential() as credential,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 213,
+          "evidence": "credential",
+          "context": "        AzureAIAgentsProvider(credential=credential) as provider,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 213,
+          "evidence": "credential",
+          "context": "        AzureAIAgentsProvider(credential=credential) as provider,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        }
+      ]
+    },
+    {
+      "path": "references/tools.md",
+      "sha256": "a9f45871f4fdbdd7097afd3e47a7ab13590ab044e41ce6d74a64fa56cab54155",
+      "bytes": 7468,
+      "mode": "100644",
+      "git_blob": "832a87b97c04d649e8dc3a8869a4e3c211a602ce",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "credential-access",
+          "line": 17,
+          "evidence": "credential",
+          "context": "    AzureCliCredential() as credential,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 18,
+          "evidence": "credential",
+          "context": "    AzureAIAgentsProvider(credential=credential) as provider,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 18,
+          "evidence": "credential",
+          "context": "    AzureAIAgentsProvider(credential=credential) as provider,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 72,
+          "evidence": "credential",
+          "context": "    AzureCliCredential() as credential,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 73,
+          "evidence": "credential",
+          "context": "    AgentsClient(endpoint=endpoint, credential=credential) as agents_client,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 73,
+          "evidence": "credential",
+          "context": "    AgentsClient(endpoint=endpoint, credential=credential) as agents_client,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 141,
+          "evidence": "credential",
+          "context": "    AzureCliCredential() as credential,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 142,
+          "evidence": "credential",
+          "context": "    AzureAIAgentsProvider(credential=credential) as provider,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 142,
+          "evidence": "credential",
+          "context": "    AzureAIAgentsProvider(credential=credential) as provider,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 220,
+          "evidence": "credential",
+          "context": "    AzureCliCredential() as credential,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 221,
+          "evidence": "credential",
+          "context": "    AgentsClient(endpoint=endpoint, credential=credential) as agents_client,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 221,
+          "evidence": "credential",
+          "context": "    AgentsClient(endpoint=endpoint, credential=credential) as agents_client,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        }
+      ]
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "d79a8fefd6753474846e72b926437d7bbcddef5cd3f4fb89fb7c03f38ac4434e",
+      "bytes": 12289,
+      "mode": "100644",
+      "git_blob": "98b28f5cc1f34e68cf9ed7f0e1bda6dec04dda0c",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 29,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks with the pip install commands and environment-variable exports using placeholder values."
+        },
+        {
+          "type": "package-install",
+          "line": 31,
+          "evidence": "pip install",
+          "context": "pip install agent-framework --pre",
+          "disposition": "accepted",
+          "reason": "`pip install agent-framework --pre` / `pip install agent-framework-azure-ai --pre` install Microsoft's official pre-release SDK from PyPI (unpinned)."
+        },
+        {
+          "type": "package-install",
+          "line": 34,
+          "evidence": "pip install",
+          "context": "pip install agent-framework-azure-ai --pre",
+          "disposition": "accepted",
+          "reason": "`pip install agent-framework --pre` / `pip install agent-framework-azure-ai --pre` install Microsoft's official pre-release SDK from PyPI (unpinned)."
+        },
+        {
+          "type": "shell-execution",
+          "line": 39,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash-fenced block exporting environment variables with placeholder values; no command beyond export is run."
+        },
+        {
+          "type": "network-access",
+          "line": 40,
+          "evidence": "https://",
+          "context": "export AZURE_AI_PROJECT_ENDPOINT=\"https://<project>.services.ai.azure.com/api/projects/<project-id>\"  # Required for all auth methods",
+          "disposition": "accepted",
+          "reason": "Microsoft Learn links, the Learn MCP endpoint, and example.com/placeholder Foundry and MCP URLs in sample code that the user's app would connect to; the skill does not instruct the agent to fetch them."
+        },
+        {
+          "type": "credential-access",
+          "line": 52,
+          "evidence": "credential",
+          "context": ">    - Production: set `AZURE_TOKEN_CREDENTIALS=prod` (or `AZURE_TOKEN_CREDENTIALS=<specific_credential>`) to constrain the credential chain to production-safe credentials.",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 55,
+          "evidence": "credential",
+          "context": ">    - Async: `async with <Client>(...) as client:` **and** `async with DefaultAzureCredential() as credential:` (from `azure.identity.aio`)",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 63,
+          "evidence": "credential",
+          "context": "credential = AzureCliCredential()",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 67,
+          "evidence": "credential",
+          "context": "credential = DefaultAzureCredential(require_envvar=True)",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 68,
+          "evidence": "credential",
+          "context": "# Or use a specific credential directly in production:",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 69,
+          "evidence": "credential",
+          "context": "# See https://learn.microsoft.com/python/api/overview/azure/identity-readme?view=azure-python#credential-classes",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 69,
+          "evidence": "https://",
+          "context": "# See https://learn.microsoft.com/python/api/overview/azure/identity-readme?view=azure-python#credential-classes",
+          "disposition": "accepted",
+          "reason": "Microsoft Learn links, the Learn MCP endpoint, and example.com/placeholder Foundry and MCP URLs in sample code that the user's app would connect to; the skill does not instruct the agent to fetch them."
+        },
+        {
+          "type": "credential-access",
+          "line": 70,
+          "evidence": "credential",
+          "context": "# credential = ManagedIdentityCredential()",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 84,
+          "evidence": "credential",
+          "context": "        AzureCliCredential() as credential,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 85,
+          "evidence": "credential",
+          "context": "        AzureAIAgentsProvider(credential=credential) as provider,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 85,
+          "evidence": "credential",
+          "context": "        AzureAIAgentsProvider(credential=credential) as provider,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 119,
+          "evidence": "credential",
+          "context": "        AzureCliCredential() as credential,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 120,
+          "evidence": "credential",
+          "context": "        AzureAIAgentsProvider(credential=credential) as provider,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 120,
+          "evidence": "credential",
+          "context": "        AzureAIAgentsProvider(credential=credential) as provider,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 145,
+          "evidence": "credential",
+          "context": "        AzureCliCredential() as credential,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 146,
+          "evidence": "credential",
+          "context": "        AzureAIAgentsProvider(credential=credential) as provider,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 146,
+          "evidence": "credential",
+          "context": "        AzureAIAgentsProvider(credential=credential) as provider,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 166,
+          "evidence": "credential",
+          "context": "        AzureCliCredential() as credential,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 167,
+          "evidence": "credential",
+          "context": "        AzureAIAgentsProvider(credential=credential) as provider,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 167,
+          "evidence": "credential",
+          "context": "        AzureAIAgentsProvider(credential=credential) as provider,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 189,
+          "evidence": "credential",
+          "context": "        AzureCliCredential() as credential,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 190,
+          "evidence": "credential",
+          "context": "        AzureAIAgentsProvider(credential=credential) as provider,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 190,
+          "evidence": "credential",
+          "context": "        AzureAIAgentsProvider(credential=credential) as provider,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 230,
+          "evidence": "credential",
+          "context": "        AzureCliCredential() as credential,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 231,
+          "evidence": "credential",
+          "context": "        AzureAIAgentsProvider(credential=credential) as provider,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 231,
+          "evidence": "credential",
+          "context": "        AzureAIAgentsProvider(credential=credential) as provider,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 292,
+          "evidence": "credential",
+          "context": "        AzureCliCredential() as credential,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 295,
+          "evidence": "https://",
+          "context": "            url=\"https://learn.microsoft.com/api/mcp\",",
+          "disposition": "accepted",
+          "reason": "Microsoft Learn links, the Learn MCP endpoint, and example.com/placeholder Foundry and MCP URLs in sample code that the user's app would connect to; the skill does not instruct the agent to fetch them."
+        },
+        {
+          "type": "credential-access",
+          "line": 297,
+          "evidence": "credential",
+          "context": "        AzureAIAgentsProvider(credential=credential) as provider,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 297,
+          "evidence": "credential",
+          "context": "        AzureAIAgentsProvider(credential=credential) as provider,",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 351,
+          "evidence": "credential",
+          "context": "2. **Always use context managers for clients and async credentials.** Wrap every client in `with Client(...) as client:` (sync) or `async with Client(...) as client:` (async). For async `DefaultAzureCredential` from `azure.identity.aio`, al",
+          "disposition": "accepted",
+          "reason": "AzureCliCredential/DefaultAzureCredential/ManagedIdentityCredential usage, environment-variable names (AZURE_AI_PROJECT_ENDPOINT, BING_CONNECTION_ID) and placeholder Bearer headers in sample code; no instruction to read, print, or send real secrets."
+        }
+      ]
+    }
+  ]
+}

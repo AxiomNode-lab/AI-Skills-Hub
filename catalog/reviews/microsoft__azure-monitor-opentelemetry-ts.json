@@ -1,0 +1,234 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "microsoft/azure-monitor-opentelemetry-ts",
+  "status": "approved",
+  "reviewed_on": "2026-10-02",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/azure-sdk-typescript/skills/azure-monitor-opentelemetry-ts",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": ".github/plugins/azure-sdk-typescript/skills/azure-monitor-opentelemetry-ts",
+    "url": "https://api.github.com/repos/microsoft/skills/git/trees/84d8eaa8ae95930f55cdceb3e27196c795dab038?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/microsoft/skills/blob/84d8eaa8ae95930f55cdceb3e27196c795dab038/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        ".github",
+        ".github/plugins",
+        ".github/plugins/azure-sdk-typescript",
+        ".github/plugins/azure-sdk-typescript/skills",
+        ".github/plugins/azure-sdk-typescript/skills/azure-monitor-opentelemetry-ts"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT License with its copyright notice, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file; frontmatter declares license: MIT consistent with the repository-root license. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "medium",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": false,
+      "package_install": true,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md (330 lines) in full; it is the only file in source. Guidance and TypeScript samples for @azure/monitor-opentelemetry, the low-level exporters, and @azure/monitor-ingestion: auto-instrumentation, custom traces/metrics/logs, sampling, span processors, and shutdown.",
+      "Tells the agent to `npm install` three official @azure packages (SKILL.md:19-25) and configure an Application Insights connection string and DefaultAzureCredential for log ingestion (SKILL.md:31, 218); the instrumented app sends telemetry to the user's Azure Monitor resource. The agent itself does not handle real secrets: credential and service calls live in sample code for the user's application. Medium for the package installs and live-credential/telemetry configuration; acceptable because packages are official Azure SDK packages and telemetry goes to the user's own resource as part of their task.",
+      "Auto-instrumentation can export request data (HTTP, database calls) to Application Insights; users should review what is captured for privacy. Offline storage path (SKILL.md:77) is a placeholder. No external-file dependencies."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "git_blob": "79656060de00aa4659ad2c276d5be8830664d544",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry the copyright and permission notice.",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "330aa4ea6110ffca30ef3a8e227d60fe6a3e44ee44b25560b1b5aade427dc476",
+      "bytes": 8962,
+      "mode": "100644",
+      "git_blob": "538f028b72746103fa2314ba625acad23c934fce",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 17,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Fenced ```bash blocks hold npm install commands, an environment-variable example, and the documented `node --import @azure/monitor-opentelemetry/loader` start command for the user's app."
+        },
+        {
+          "type": "package-install",
+          "line": 19,
+          "evidence": "npm install",
+          "context": "npm install @azure/monitor-opentelemetry",
+          "disposition": "accepted",
+          "reason": "`npm install` of the official @azure/monitor-opentelemetry, @azure/monitor-opentelemetry-exporter, and @azure/monitor-ingestion packages."
+        },
+        {
+          "type": "package-install",
+          "line": 22,
+          "evidence": "npm install",
+          "context": "npm install @azure/monitor-opentelemetry-exporter",
+          "disposition": "accepted",
+          "reason": "`npm install` of the official @azure/monitor-opentelemetry, @azure/monitor-opentelemetry-exporter, and @azure/monitor-ingestion packages."
+        },
+        {
+          "type": "package-install",
+          "line": 25,
+          "evidence": "npm install",
+          "context": "npm install @azure/monitor-ingestion",
+          "disposition": "accepted",
+          "reason": "`npm install` of the official @azure/monitor-opentelemetry, @azure/monitor-opentelemetry-exporter, and @azure/monitor-ingestion packages."
+        },
+        {
+          "type": "shell-execution",
+          "line": 30,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Fenced ```bash blocks hold npm install commands, an environment-variable example, and the documented `node --import @azure/monitor-opentelemetry/loader` start command for the user's app."
+        },
+        {
+          "type": "credential-access",
+          "line": 44,
+          "evidence": "process.env",
+          "context": "    connectionString: process.env.APPLICATIONINSIGHTS_CONNECTION_STRING",
+          "disposition": "accepted",
+          "reason": "APPLICATIONINSIGHTS_CONNECTION_STRING read from process.env and DefaultAzureCredential/ManagedIdentityCredential in sample code; no instruction to print or transmit secrets beyond configuring the user's own exporter."
+        },
+        {
+          "type": "shell-execution",
+          "line": 55,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Fenced ```bash blocks hold npm install commands, an environment-variable example, and the documented `node --import @azure/monitor-opentelemetry/loader` start command for the user's app."
+        },
+        {
+          "type": "credential-access",
+          "line": 76,
+          "evidence": "process.env",
+          "context": "    connectionString: process.env.APPLICATIONINSIGHTS_CONNECTION_STRING,",
+          "disposition": "accepted",
+          "reason": "APPLICATIONINSIGHTS_CONNECTION_STRING read from process.env and DefaultAzureCredential/ManagedIdentityCredential in sample code; no instruction to print or transmit secrets beyond configuring the user's own exporter."
+        },
+        {
+          "type": "credential-access",
+          "line": 162,
+          "evidence": "process.env",
+          "context": "  connectionString: process.env.APPLICATIONINSIGHTS_CONNECTION_STRING",
+          "disposition": "accepted",
+          "reason": "APPLICATIONINSIGHTS_CONNECTION_STRING read from process.env and DefaultAzureCredential/ManagedIdentityCredential in sample code; no instruction to print or transmit secrets beyond configuring the user's own exporter."
+        },
+        {
+          "type": "credential-access",
+          "line": 180,
+          "evidence": "process.env",
+          "context": "  connectionString: process.env.APPLICATIONINSIGHTS_CONNECTION_STRING",
+          "disposition": "accepted",
+          "reason": "APPLICATIONINSIGHTS_CONNECTION_STRING read from process.env and DefaultAzureCredential/ManagedIdentityCredential in sample code; no instruction to print or transmit secrets beyond configuring the user's own exporter."
+        },
+        {
+          "type": "credential-access",
+          "line": 198,
+          "evidence": "process.env",
+          "context": "  connectionString: process.env.APPLICATIONINSIGHTS_CONNECTION_STRING",
+          "disposition": "accepted",
+          "reason": "APPLICATIONINSIGHTS_CONNECTION_STRING read from process.env and DefaultAzureCredential/ManagedIdentityCredential in sample code; no instruction to print or transmit secrets beyond configuring the user's own exporter."
+        },
+        {
+          "type": "network-access",
+          "line": 213,
+          "evidence": "https://",
+          "context": "const endpoint = \"https://<dce>.ingest.monitor.azure.com\";",
+          "disposition": "accepted",
+          "reason": "A Microsoft Learn identity link and a placeholder https://<dce>.ingest.monitor.azure.com endpoint; SDK traffic goes to the user's own Azure Monitor resource."
+        },
+        {
+          "type": "credential-access",
+          "line": 218,
+          "evidence": "credential",
+          "context": "const credential = new DefaultAzureCredential({requiredEnvVars: [\"AZURE_TOKEN_CREDENTIALS\"]});",
+          "disposition": "accepted",
+          "reason": "APPLICATIONINSIGHTS_CONNECTION_STRING read from process.env and DefaultAzureCredential/ManagedIdentityCredential in sample code; no instruction to print or transmit secrets beyond configuring the user's own exporter."
+        },
+        {
+          "type": "credential-access",
+          "line": 219,
+          "evidence": "credential",
+          "context": "// Or use a specific credential directly in production:",
+          "disposition": "accepted",
+          "reason": "APPLICATIONINSIGHTS_CONNECTION_STRING read from process.env and DefaultAzureCredential/ManagedIdentityCredential in sample code; no instruction to print or transmit secrets beyond configuring the user's own exporter."
+        },
+        {
+          "type": "credential-access",
+          "line": 220,
+          "evidence": "credential",
+          "context": "// See https://learn.microsoft.com/javascript/api/overview/azure/identity-readme?view=azure-node-latest#credential-classes",
+          "disposition": "accepted",
+          "reason": "APPLICATIONINSIGHTS_CONNECTION_STRING read from process.env and DefaultAzureCredential/ManagedIdentityCredential in sample code; no instruction to print or transmit secrets beyond configuring the user's own exporter."
+        },
+        {
+          "type": "network-access",
+          "line": 220,
+          "evidence": "https://",
+          "context": "// See https://learn.microsoft.com/javascript/api/overview/azure/identity-readme?view=azure-node-latest#credential-classes",
+          "disposition": "accepted",
+          "reason": "A Microsoft Learn identity link and a placeholder https://<dce>.ingest.monitor.azure.com endpoint; SDK traffic goes to the user's own Azure Monitor resource."
+        },
+        {
+          "type": "credential-access",
+          "line": 221,
+          "evidence": "credential",
+          "context": "// const credential = new ManagedIdentityCredential();",
+          "disposition": "accepted",
+          "reason": "APPLICATIONINSIGHTS_CONNECTION_STRING read from process.env and DefaultAzureCredential/ManagedIdentityCredential in sample code; no instruction to print or transmit secrets beyond configuring the user's own exporter."
+        },
+        {
+          "type": "credential-access",
+          "line": 223,
+          "evidence": "credential",
+          "context": "const client = new LogsIngestionClient(endpoint, credential);",
+          "disposition": "accepted",
+          "reason": "APPLICATIONINSIGHTS_CONNECTION_STRING read from process.env and DefaultAzureCredential/ManagedIdentityCredential in sample code; no instruction to print or transmit secrets beyond configuring the user's own exporter."
+        }
+      ]
+    }
+  ]
+}

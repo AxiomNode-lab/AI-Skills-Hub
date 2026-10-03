@@ -1,0 +1,144 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "microsoft/azure-servicebus-dotnet",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/azure-sdk-dotnet/skills/azure-servicebus-dotnet",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "review": {
+    "path": "catalog/reviews/microsoft__azure-servicebus-dotnet.json",
+    "sha256": "44a83a70a05775dc9cf97c8e8702838756f3406031b85e5d234c3788cb442f49"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "shell-execution",
+        "line": 18,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 27,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 35,
+        "evidence": "Credential",
+        "context": "### Microsoft Entra Token Credential",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 43,
+        "evidence": "credential",
+        "context": "var credential = new DefaultAzureCredential(",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 46,
+        "evidence": "credential",
+        "context": "// Or use a specific credential directly in production:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 47,
+        "evidence": "credential",
+        "context": "// See https://learn.microsoft.com/dotnet/api/overview/azure/identity-readme?view=azure-dotnet#credential-classes",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 47,
+        "evidence": "https://",
+        "context": "// See https://learn.microsoft.com/dotnet/api/overview/azure/identity-readme?view=azure-dotnet#credential-classes",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 48,
+        "evidence": "credential",
+        "context": "// var credential = new ManagedIdentityCredential();",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 49,
+        "evidence": "credential",
+        "context": "await using ServiceBusClient client = new(fullyQualifiedNamespace, credential);",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 261,
+        "evidence": "Delete",
+        "context": "// Delete",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 341,
+        "evidence": "https://",
+        "context": "| NuGet Package | https://www.nuget.org/packages/Azure.Messaging.ServiceBus |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 342,
+        "evidence": "https://",
+        "context": "| API Reference | https://learn.microsoft.com/dotnet/api/azure.messaging.servicebus |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 343,
+        "evidence": "https://",
+        "context": "| GitHub Source | https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/servicebus/Azure.Messaging.ServiceBus |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 344,
+        "evidence": "https://",
+        "context": "| Troubleshooting | https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/servicebus/Azure.Messaging.ServiceBus/TROUBLESHOOTING.md |",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 12305
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "6a16e0ef96cb683daaf6787e488fc65fbfd69d9b220fdb1b4ef5ecee9d36e9ba",
+      "bytes": 11165,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 12305
+}

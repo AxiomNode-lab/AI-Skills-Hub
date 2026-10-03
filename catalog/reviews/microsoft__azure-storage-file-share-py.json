@@ -1,0 +1,314 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "microsoft/azure-storage-file-share-py",
+  "status": "approved",
+  "reviewed_on": "2026-10-02",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/azure-sdk-python/skills/azure-storage-file-share-py",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": ".github/plugins/azure-sdk-python/skills/azure-storage-file-share-py",
+    "url": "https://api.github.com/repos/microsoft/skills/git/trees/84d8eaa8ae95930f55cdceb3e27196c795dab038?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/microsoft/skills/blob/84d8eaa8ae95930f55cdceb3e27196c795dab038/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        ".github",
+        ".github/plugins",
+        ".github/plugins/azure-sdk-python",
+        ".github/plugins/azure-sdk-python/skills",
+        ".github/plugins/azure-sdk-python/skills/azure-storage-file-share-py"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT License with its copyright notice, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file; frontmatter declares MIT. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "medium",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": true,
+      "network": false,
+      "credentials": false,
+      "package_install": true,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md, references/capabilities.md and references/non-hero-scenarios.md in full. Python samples for azure-storage-file-share: DefaultAzureCredential auth, share/directory/file CRUD, range operations, snapshots and async clients.",
+      "Medium only because SKILL.md:19 has `pip install azure-storage-file-share` (official PyPI package). Create/delete/upload/download calls are sample code for the user's application against their own storage account; the skill does not tell the agent to run them.",
+      "Reference files duplicate SKILL.md sections (snapshots, async client, client table); all links are internal and resolve. Minor: the auth sample at SKILL.md:53 uses os.environ without importing os."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "git_blob": "79656060de00aa4659ad2c276d5be8830664d544",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry the copyright and permission notice.",
+      "findings": []
+    },
+    {
+      "path": "references/capabilities.md",
+      "sha256": "983c7542e01a5a82cba7d83b6765e9f5bac84861806f59d2947955afe2f81c3b",
+      "bytes": 1410,
+      "mode": "100644",
+      "git_blob": "6044d9b17bd96639d834dc35370768dee2f4ba3c",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 32,
+          "evidence": "delete",
+          "context": "- Include cleanup/delete paths for created resources in examples.",
+          "disposition": "accepted",
+          "reason": "Matches are 'Delete Share/Directory/File' headings for SDK calls on the user's Azure file share and a checklist line about cleanup paths in examples; the agent is not told to delete local or remote data."
+        }
+      ]
+    },
+    {
+      "path": "references/non-hero-scenarios.md",
+      "sha256": "858429a6b5543b6487bc72f633bc080f97d06340c268c3681f5c4e18271ddd03",
+      "bytes": 1234,
+      "mode": "100644",
+      "git_blob": "e43eab1fb0fec8b725c3b7b3b35b4f80c0494e97",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "credential-access",
+          "line": 31,
+          "evidence": "credential",
+          "context": "    async with DefaultAzureCredential() as credential:",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential construction and passing credential= to clients in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 32,
+          "evidence": "credential",
+          "context": "        async with ShareServiceClient(account_url, credential=credential) as service:",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential construction and passing credential= to clients in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 32,
+          "evidence": "credential",
+          "context": "        async with ShareServiceClient(account_url, credential=credential) as service:",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential construction and passing credential= to clients in sample code; no instruction to read, print, or send real secrets."
+        }
+      ]
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "428aed569ce9865e7629c565eff62cedbcdb1155533603ed9aa75f888d8c8730",
+      "bytes": 7257,
+      "mode": "100644",
+      "git_blob": "5adf7ad61c2304d8ba4ef3f02b2db7e9fff993db",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 18,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Fenced ```bash blocks contain only the pip install command and environment-variable placeholders."
+        },
+        {
+          "type": "package-install",
+          "line": 19,
+          "evidence": "pip install",
+          "context": "pip install azure-storage-file-share",
+          "disposition": "accepted",
+          "reason": "`pip install azure-storage-file-share` installs the official Azure SDK package from PyPI."
+        },
+        {
+          "type": "shell-execution",
+          "line": 24,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Fenced ```bash blocks contain only the pip install command and environment-variable placeholders."
+        },
+        {
+          "type": "network-access",
+          "line": 25,
+          "evidence": "https://",
+          "context": "AZURE_STORAGE_ACCOUNT_URL=https://<account>.file.core.windows.net  # Required for Entra ID auth",
+          "disposition": "accepted",
+          "reason": "Placeholder storage URLs (https://<account>.file.core.windows.net, an account.file.core.windows.net copy source) and a Microsoft Learn doc link; nothing is fetched by the agent."
+        },
+        {
+          "type": "credential-access",
+          "line": 35,
+          "evidence": "credential",
+          "context": ">    - Production: set `AZURE_TOKEN_CREDENTIALS=prod` (or `AZURE_TOKEN_CREDENTIALS=<specific_credential>`) to constrain the credential chain to production-safe credentials.",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential construction and passing credential= to clients in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 38,
+          "evidence": "credential",
+          "context": ">    - Async: `async with <Client>(...) as client:` **and** `async with DefaultAzureCredential() as credential:` (from `azure.identity.aio`)",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential construction and passing credential= to clients in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 47,
+          "evidence": "credential",
+          "context": "credential = DefaultAzureCredential(require_envvar=True)",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential construction and passing credential= to clients in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 48,
+          "evidence": "credential",
+          "context": "# Or use a specific credential directly in production:",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential construction and passing credential= to clients in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 49,
+          "evidence": "credential",
+          "context": "# See https://learn.microsoft.com/python/api/overview/azure/identity-readme?view=azure-python#credential-classes",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential construction and passing credential= to clients in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 49,
+          "evidence": "https://",
+          "context": "# See https://learn.microsoft.com/python/api/overview/azure/identity-readme?view=azure-python#credential-classes",
+          "disposition": "accepted",
+          "reason": "Placeholder storage URLs (https://<account>.file.core.windows.net, an account.file.core.windows.net copy source) and a Microsoft Learn doc link; nothing is fetched by the agent."
+        },
+        {
+          "type": "credential-access",
+          "line": 50,
+          "evidence": "credential",
+          "context": "# credential = ManagedIdentityCredential()",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential construction and passing credential= to clients in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 54,
+          "evidence": "credential",
+          "context": "    credential=credential",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential construction and passing credential= to clients in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 54,
+          "evidence": "credential",
+          "context": "    credential=credential",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential construction and passing credential= to clients in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 81,
+          "evidence": "Delete",
+          "context": "### Delete Share",
+          "disposition": "accepted",
+          "reason": "Matches are 'Delete Share/Directory/File' headings for SDK calls on the user's Azure file share and a checklist line about cleanup paths in examples; the agent is not told to delete local or remote data."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 111,
+          "evidence": "Delete",
+          "context": "### Delete Directory",
+          "disposition": "accepted",
+          "reason": "Matches are 'Delete Share/Directory/File' headings for SDK calls on the user's Azure file share and a checklist line about cleanup paths in examples; the agent is not told to delete local or remote data."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 163,
+          "evidence": "Delete",
+          "context": "### Delete File",
+          "disposition": "accepted",
+          "reason": "Matches are 'Delete Share/Directory/File' headings for SDK calls on the user's Azure file share and a checklist line about cleanup paths in examples; the agent is not told to delete local or remote data."
+        },
+        {
+          "type": "network-access",
+          "line": 172,
+          "evidence": "https://",
+          "context": "source_url = \"https://account.file.core.windows.net/share/source.txt\"",
+          "disposition": "accepted",
+          "reason": "Placeholder storage URLs (https://<account>.file.core.windows.net, an account.file.core.windows.net copy source) and a Microsoft Learn doc link; nothing is fetched by the agent."
+        },
+        {
+          "type": "credential-access",
+          "line": 219,
+          "evidence": "credential",
+          "context": "    async with DefaultAzureCredential() as credential:",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential construction and passing credential= to clients in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 220,
+          "evidence": "credential",
+          "context": "        async with ShareServiceClient(account_url, credential=credential) as service:",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential construction and passing credential= to clients in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 220,
+          "evidence": "credential",
+          "context": "        async with ShareServiceClient(account_url, credential=credential) as service:",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential construction and passing credential= to clients in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 239,
+          "evidence": "credential",
+          "context": "2. **Always use context managers for clients and async credentials.** Wrap every client in `with ShareServiceClient(...) as client:` (sync) or `async with ShareServiceClient(...) as client:` (async). For async `DefaultAzureCredential` from ",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential construction and passing credential= to clients in sample code; no instruction to read, print, or send real secrets."
+        }
+      ]
+    }
+  ]
+}

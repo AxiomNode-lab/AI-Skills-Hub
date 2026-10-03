@@ -1,0 +1,261 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "microsoft/azure-mgmt-botservice-py",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/azure-sdk-python/skills/azure-mgmt-botservice-py",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "review": {
+    "path": "catalog/reviews/microsoft__azure-mgmt-botservice-py.json",
+    "sha256": "a32acf7011f7be8107c38083acc413929600bfc56ea854a8f0dad25d687d89a7"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "filesystem-write",
+        "line": 18,
+        "evidence": "Delete",
+        "context": "- `Delete Bot`: Dedicated example and implementation notes.  ",
+        "file": "references/capabilities.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 19,
+        "evidence": "delete",
+        "context": "  See: [`non-hero-scenarios.md#delete-bot`](non-hero-scenarios.md#delete-bot)",
+        "file": "references/capabilities.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 19,
+        "evidence": "delete",
+        "context": "  See: [`non-hero-scenarios.md#delete-bot`](non-hero-scenarios.md#delete-bot)",
+        "file": "references/capabilities.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 44,
+        "evidence": "delete",
+        "context": "- Include cleanup/delete paths for created resources in examples.",
+        "file": "references/capabilities.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 19,
+        "evidence": "Delete",
+        "context": "## Delete Bot",
+        "file": "references/non-hero-scenarios.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 22,
+        "evidence": "delete",
+        "context": "client.bots.delete(",
+        "file": "references/non-hero-scenarios.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 18,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 19,
+        "evidence": "pip install",
+        "context": "pip install azure-mgmt-botservice",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 20,
+        "evidence": "pip install",
+        "context": "pip install azure-identity",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 25,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 37,
+        "evidence": "credential",
+        "context": ">    - Production: set `AZURE_TOKEN_CREDENTIALS=prod` (or `AZURE_TOKEN_CREDENTIALS=<specific_credential>`) to constrain the credential chain to production-safe credentials.",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 40,
+        "evidence": "credential",
+        "context": ">    - Async: `async with <Client>(...) as client:` **and** `async with DefaultAzureCredential() as credential:` (from `azure.identity.aio`)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 50,
+        "evidence": "credential",
+        "context": "credential = DefaultAzureCredential(require_envvar=True)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 51,
+        "evidence": "credential",
+        "context": "# Or use a specific credential directly in production:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 52,
+        "evidence": "credential",
+        "context": "# See https://learn.microsoft.com/python/api/overview/azure/identity-readme?view=azure-python#credential-classes",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 52,
+        "evidence": "https://",
+        "context": "# See https://learn.microsoft.com/python/api/overview/azure/identity-readme?view=azure-python#credential-classes",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 53,
+        "evidence": "credential",
+        "context": "# credential = ManagedIdentityCredential()",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 56,
+        "evidence": "credential",
+        "context": "    credential=credential,",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 56,
+        "evidence": "credential",
+        "context": "    credential=credential,",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 74,
+        "evidence": "credential",
+        "context": "credential = DefaultAzureCredential()",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 76,
+        "evidence": "credential",
+        "context": "    credential=credential,",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 76,
+        "evidence": "credential",
+        "context": "    credential=credential,",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 89,
+        "evidence": "https://",
+        "context": "                endpoint=\"https://my-bot-app.azurewebsites.net/api/messages\",",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 143,
+        "evidence": "Delete",
+        "context": "## Delete Bot",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 146,
+        "evidence": "delete",
+        "context": "client.bots.delete(",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 284,
+        "evidence": "secret",
+        "context": "            client_secret=\"<oauth-client-secret>\",",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 337,
+        "evidence": "credential",
+        "context": "2. **Always use context managers for clients and async credentials.** Wrap every client in `with Client(...) as client:` (sync) or `async with Client(...) as client:` (async). For async `DefaultAzureCredential` from `azure.identity.aio`, al",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 338,
+        "evidence": "credential",
+        "context": "3. **Use `DefaultAzureCredential`** for code that runs locally. Use a specific token credential for code that runs in Azure.",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 340,
+        "evidence": "Secret",
+        "context": "5. **Store MSA App ID/Secret securely** — use Key Vault",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 18719
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/capabilities.md",
+      "sha256": "4b58e52b13d3ddf96e2df47c7b6cef7f137940bba0a414cc10eea457c7d3167b",
+      "bytes": 2327,
+      "mode": "100644"
+    },
+    {
+      "path": "references/non-hero-scenarios.md",
+      "sha256": "69056c37c243e48b74cf50558793c5b9a36b07bcde5056aeba65b812bafa27f7",
+      "bytes": 4981,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "39f0df196360a96e17b32f32481c696943e1176f19e8ec1f8de4942299db82c2",
+      "bytes": 10271,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 18719
+}

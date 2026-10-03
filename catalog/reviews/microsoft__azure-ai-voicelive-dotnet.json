@@ -1,0 +1,258 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "microsoft/azure-ai-voicelive-dotnet",
+  "status": "approved",
+  "reviewed_on": "2026-10-02",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/azure-sdk-dotnet/skills/azure-ai-voicelive-dotnet",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": ".github/plugins/azure-sdk-dotnet/skills/azure-ai-voicelive-dotnet",
+    "url": "https://api.github.com/repos/microsoft/skills/git/trees/84d8eaa8ae95930f55cdceb3e27196c795dab038?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/microsoft/skills/blob/84d8eaa8ae95930f55cdceb3e27196c795dab038/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        ".github",
+        ".github/plugins",
+        ".github/plugins/azure-sdk-dotnet",
+        ".github/plugins/azure-sdk-dotnet/skills",
+        ".github/plugins/azure-sdk-dotnet/skills/azure-ai-voicelive-dotnet"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT License with its copyright notice, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found; frontmatter declares MIT with Microsoft as author. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "medium",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": true,
+      "network": false,
+      "credentials": false,
+      "package_install": true,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md in full (the only file). .NET reference for Azure.AI.VoiceLive: Entra or API-key client auth, WebSocket session start/configuration, semantic VAD, event processing, user messages, function calling, voices, models, audio format and error handling.",
+      "Medium only because SKILL.md:19-21 (and the table at SKILL.md:264-266) give `dotnet add package` commands for NuGet packages (Azure.AI.VoiceLive, Azure.Identity, the community NAudio library, optional Microsoft.CognitiveServices.Speech; unpinned). All service calls are C# sample code for the user's application; the agent is not told to call the service, read secrets, or run anything else.",
+      "SKILL.md:61 shows AzureKeyCredential with a literal placeholder \"your-api-key\" (best practice at SKILL.md:235 says never hardcode keys). Apps built from it stream user audio to the user's Azure resource."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "git_blob": "79656060de00aa4659ad2c276d5be8830664d544",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry the copyright and permission notice.",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "3731d251910cb49587a0a83839e532fb1e70baa7750824d35b2a5e545c38da7a",
+      "bytes": 9165,
+      "mode": "100644",
+      "git_blob": "82e101da3649c7f560fff5ac2f96f7e75268e6e1",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 18,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks with the `dotnet add package` commands and an environment-variable listing with placeholder values."
+        },
+        {
+          "type": "shell-execution",
+          "line": 28,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash-fenced block listing environment variable names with placeholder values; no command is executed."
+        },
+        {
+          "type": "network-access",
+          "line": 29,
+          "evidence": "https://",
+          "context": "AZURE_VOICELIVE_ENDPOINT=https://<resource>.services.ai.azure.com/  # Required: Voice Live endpoint",
+          "disposition": "accepted",
+          "reason": "Placeholder Voice Live/Cognitive Services endpoints in sample code and NuGet/Learn/GitHub reference links; nothing is fetched by instruction."
+        },
+        {
+          "type": "credential-access",
+          "line": 32,
+          "evidence": "api-key",
+          "context": "AZURE_VOICELIVE_API_KEY=<your-api-key>  # Only required for AzureKeyCredential auth",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential and an AzureKeyCredential with a placeholder key in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 38,
+          "evidence": "Credential",
+          "context": "### Microsoft Entra Token Credential",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential and an AzureKeyCredential with a placeholder key in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 44,
+          "evidence": "https://",
+          "context": "Uri endpoint = new Uri(\"https://your-resource.cognitiveservices.azure.com\");",
+          "disposition": "accepted",
+          "reason": "Placeholder Voice Live/Cognitive Services endpoints in sample code and NuGet/Learn/GitHub reference links; nothing is fetched by instruction."
+        },
+        {
+          "type": "credential-access",
+          "line": 46,
+          "evidence": "credential",
+          "context": "var credential = new DefaultAzureCredential(",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential and an AzureKeyCredential with a placeholder key in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 49,
+          "evidence": "credential",
+          "context": "// Or use a specific credential directly in production:",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential and an AzureKeyCredential with a placeholder key in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 50,
+          "evidence": "credential",
+          "context": "// See https://learn.microsoft.com/dotnet/api/overview/azure/identity-readme?view=azure-dotnet#credential-classes",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential and an AzureKeyCredential with a placeholder key in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 50,
+          "evidence": "https://",
+          "context": "// See https://learn.microsoft.com/dotnet/api/overview/azure/identity-readme?view=azure-dotnet#credential-classes",
+          "disposition": "accepted",
+          "reason": "Placeholder Voice Live/Cognitive Services endpoints in sample code and NuGet/Learn/GitHub reference links; nothing is fetched by instruction."
+        },
+        {
+          "type": "credential-access",
+          "line": 51,
+          "evidence": "credential",
+          "context": "// var credential = new ManagedIdentityCredential();",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential and an AzureKeyCredential with a placeholder key in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 52,
+          "evidence": "credential",
+          "context": "VoiceLiveClient client = new VoiceLiveClient(endpoint, credential);",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential and an AzureKeyCredential with a placeholder key in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 57,
+          "evidence": "API Key",
+          "context": "### API Key",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential and an AzureKeyCredential with a placeholder key in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 60,
+          "evidence": "https://",
+          "context": "Uri endpoint = new Uri(\"https://your-resource.cognitiveservices.azure.com\");",
+          "disposition": "accepted",
+          "reason": "Placeholder Voice Live/Cognitive Services endpoints in sample code and NuGet/Learn/GitHub reference links; nothing is fetched by instruction."
+        },
+        {
+          "type": "credential-access",
+          "line": 61,
+          "evidence": "credential",
+          "context": "AzureKeyCredential credential = new AzureKeyCredential(\"your-api-key\");",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential and an AzureKeyCredential with a placeholder key in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 61,
+          "evidence": "api-key",
+          "context": "AzureKeyCredential credential = new AzureKeyCredential(\"your-api-key\");",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential and an AzureKeyCredential with a placeholder key in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 62,
+          "evidence": "credential",
+          "context": "VoiceLiveClient client = new VoiceLiveClient(endpoint, credential);",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential and an AzureKeyCredential with a placeholder key in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 272,
+          "evidence": "https://",
+          "context": "| NuGet Package | https://www.nuget.org/packages/Azure.AI.VoiceLive |",
+          "disposition": "accepted",
+          "reason": "Placeholder Voice Live/Cognitive Services endpoints in sample code and NuGet/Learn/GitHub reference links; nothing is fetched by instruction."
+        },
+        {
+          "type": "network-access",
+          "line": 273,
+          "evidence": "https://",
+          "context": "| API Reference | https://learn.microsoft.com/dotnet/api/azure.ai.voicelive |",
+          "disposition": "accepted",
+          "reason": "Placeholder Voice Live/Cognitive Services endpoints in sample code and NuGet/Learn/GitHub reference links; nothing is fetched by instruction."
+        },
+        {
+          "type": "network-access",
+          "line": 274,
+          "evidence": "https://",
+          "context": "| GitHub Source | https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/ai/Azure.AI.VoiceLive |",
+          "disposition": "accepted",
+          "reason": "Placeholder Voice Live/Cognitive Services endpoints in sample code and NuGet/Learn/GitHub reference links; nothing is fetched by instruction."
+        },
+        {
+          "type": "network-access",
+          "line": 275,
+          "evidence": "https://",
+          "context": "| Quickstart | https://learn.microsoft.com/azure/ai-services/speech-service/voice-live-quickstart |",
+          "disposition": "accepted",
+          "reason": "Placeholder Voice Live/Cognitive Services endpoints in sample code and NuGet/Learn/GitHub reference links; nothing is fetched by instruction."
+        }
+      ]
+    }
+  ]
+}

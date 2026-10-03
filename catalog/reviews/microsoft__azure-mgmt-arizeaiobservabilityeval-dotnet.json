@@ -1,0 +1,194 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "microsoft/azure-mgmt-arizeaiobservabilityeval-dotnet",
+  "status": "approved",
+  "reviewed_on": "2026-10-02",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/azure-sdk-dotnet/skills/azure-mgmt-arizeaiobservabilityeval-dotnet",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": ".github/plugins/azure-sdk-dotnet/skills/azure-mgmt-arizeaiobservabilityeval-dotnet",
+    "url": "https://api.github.com/repos/microsoft/skills/git/trees/84d8eaa8ae95930f55cdceb3e27196c795dab038?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/microsoft/skills/blob/84d8eaa8ae95930f55cdceb3e27196c795dab038/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        ".github",
+        ".github/plugins",
+        ".github/plugins/azure-sdk-dotnet",
+        ".github/plugins/azure-sdk-dotnet/skills",
+        ".github/plugins/azure-sdk-dotnet/skills/azure-mgmt-arizeaiobservabilityeval-dotnet"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT License with its copyright notice, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file; frontmatter declares license: MIT consistent with the repository-root license. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "medium",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": false,
+      "package_install": true,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md (237 lines) in full; it is the only file in source. Guidance and C# samples for Azure.ResourceManager.ArizeAIObservabilityEval: create, get, list, update, and delete Arize AI organizations through Azure Resource Manager and Azure Marketplace.",
+      "Tells the agent to run `dotnet add package ... --version 1.0.0` (SKILL.md:18, pinned official NuGet package) and uses the developer's real Azure credentials (DefaultAzureCredential, optional service-principal env vars at SKILL.md:36-38) to create, update, and delete ARM resources (SKILL.md:106, 161, 168). The agent itself does not handle real secrets: credential and service calls live in sample code for the user's application. Medium for the package install and state-changing live-cloud operations; acceptable because the package is official and pinned, and every operation targets the user's own subscription as part of the requested task.",
+      "Creating an organization provisions an Azure Marketplace offer (SKILL.md:82-94) that can incur charges; DeleteAsync (SKILL.md:168) is shown without a confirmation step, so agents should confirm with the user before running create/delete against a real subscription. Sample user details (John Doe, john.doe@example.com) are placeholders."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "git_blob": "79656060de00aa4659ad2c276d5be8830664d544",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry the copyright and permission notice.",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "511734ed1e019e27b301693309e426985f15ae71d1d14697c6eadbaf7416ddf9",
+      "bytes": 7963,
+      "mode": "100644",
+      "git_blob": "7a820d75e857d1140484b0fe93301bf232f19109",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 17,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Fenced ```bash blocks hold the pinned `dotnet add package` install command and an environment-variable listing."
+        },
+        {
+          "type": "shell-execution",
+          "line": 33,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Fenced ```bash blocks hold the pinned `dotnet add package` install command and an environment-variable listing."
+        },
+        {
+          "type": "credential-access",
+          "line": 38,
+          "evidence": "secret",
+          "context": "AZURE_CLIENT_SECRET=<your-client-secret> # For service principal auth (optional)",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential SDK classes and placeholder AZURE_TENANT_ID/CLIENT_ID/CLIENT_SECRET environment-variable names; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 49,
+          "evidence": "credential",
+          "context": "var credential = new DefaultAzureCredential(",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential SDK classes and placeholder AZURE_TENANT_ID/CLIENT_ID/CLIENT_SECRET environment-variable names; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 52,
+          "evidence": "credential",
+          "context": "// Or use a specific credential directly in production:",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential SDK classes and placeholder AZURE_TENANT_ID/CLIENT_ID/CLIENT_SECRET environment-variable names; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 53,
+          "evidence": "credential",
+          "context": "// See https://learn.microsoft.com/dotnet/api/overview/azure/identity-readme?view=azure-dotnet#credential-classes",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential SDK classes and placeholder AZURE_TENANT_ID/CLIENT_ID/CLIENT_SECRET environment-variable names; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 53,
+          "evidence": "https://",
+          "context": "// See https://learn.microsoft.com/dotnet/api/overview/azure/identity-readme?view=azure-dotnet#credential-classes",
+          "disposition": "accepted",
+          "reason": "Links to Microsoft Learn, NuGet, the Azure SDK GitHub repo, and arize.com; the skill does not instruct fetching them, and SDK calls go to Azure Resource Manager in the user's subscription."
+        },
+        {
+          "type": "credential-access",
+          "line": 54,
+          "evidence": "credential",
+          "context": "// var credential = new ManagedIdentityCredential();",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential SDK classes and placeholder AZURE_TENANT_ID/CLIENT_ID/CLIENT_SECRET environment-variable names; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 55,
+          "evidence": "credential",
+          "context": "var armClient = new ArmClient(credential);",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential SDK classes and placeholder AZURE_TENANT_ID/CLIENT_ID/CLIENT_SECRET environment-variable names; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 164,
+          "evidence": "Delete",
+          "context": "### Delete an Organization",
+          "disposition": "accepted",
+          "reason": "'Delete' is the heading for the ARM DeleteAsync example on an Arize organization resource, not a local file deletion."
+        },
+        {
+          "type": "network-access",
+          "line": 235,
+          "evidence": "https://",
+          "context": "- [NuGet Package](https://www.nuget.org/packages/Azure.ResourceManager.ArizeAIObservabilityEval)",
+          "disposition": "accepted",
+          "reason": "Links to Microsoft Learn, NuGet, the Azure SDK GitHub repo, and arize.com; the skill does not instruct fetching them, and SDK calls go to Azure Resource Manager in the user's subscription."
+        },
+        {
+          "type": "network-access",
+          "line": 236,
+          "evidence": "https://",
+          "context": "- [Azure SDK for .NET](https://github.com/Azure/azure-sdk-for-net)",
+          "disposition": "accepted",
+          "reason": "Links to Microsoft Learn, NuGet, the Azure SDK GitHub repo, and arize.com; the skill does not instruct fetching them, and SDK calls go to Azure Resource Manager in the user's subscription."
+        },
+        {
+          "type": "network-access",
+          "line": 237,
+          "evidence": "https://",
+          "context": "- [Arize AI](https://arize.com/)",
+          "disposition": "accepted",
+          "reason": "Links to Microsoft Learn, NuGet, the Azure SDK GitHub repo, and arize.com; the skill does not instruct fetching them, and SDK calls go to Azure Resource Manager in the user's subscription."
+        }
+      ]
+    }
+  ]
+}
