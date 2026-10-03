@@ -48,6 +48,9 @@ and file checks passed, but the actual Codex sessions could not read the skill
 instructions because execution policy blocked the commands. All three tasks are
 `not-run`; instruction use and task quality remain unproven. The evaluation guide
 includes synthetic fixtures, replay commands and a pending independent human rubric.
+A follow-up synthetic preflight on 2026-10-03 reproduced the project-local read
+rejection, so no paid case was repeated; the runner now gates cases on a proven
+read/write/read preflight.
 
 `pnpm validate-all` checks workspace exports, JavaScript syntax, schema references, the generated lockfile, registry policy, materialized integrity, the project duplicate report, and tests. `pnpm run dedupe` is the project report command; `pnpm dedupe` is the package-manager command.
 

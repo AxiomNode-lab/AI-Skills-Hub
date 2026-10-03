@@ -5,6 +5,7 @@ import { spawnSync } from 'node:child_process';
 import { verifyReviewedDirectory } from '../../packages/materializer/src/reviewed.mjs';
 import { verifyInstallRecord } from '../../packages/installer/src/state.mjs';
 import { hash, readEvidence, executionStatus, checkOutput } from './checks.mjs';
+import { runPreflight } from './preflight.mjs';
 
 const repo = fileURLToPath(new URL('../../', import.meta.url));
 const args = process.argv.slice(2);
@@ -22,7 +23,13 @@ const json = (file, value) => fs.writeFileSync(file, JSON.stringify(value, null,
 const cli = path.join(repo, 'packages/cli/bin/skills-hub.mjs');
 const version = spawnSync(process.execPath, [codexJs, '--version'], { encoding: 'utf8' });
 console.log(`Evaluation artifacts: ${run}`);
-for (const fixture of cases) {
+const preflight = runPreflight(codexJs, run);
+console.log(`Preflight: ${preflight.summary.status}`);
+if (preflight.summary.status !== 'passed') {
+  console.error(`Evaluation cases were not started. Inspect ${path.join(preflight.project, 'preflight-result.json')}`);
+  process.exitCode = 2;
+}
+for (const fixture of preflight.summary.status === 'passed' ? cases : []) {
   const project = path.join(run, fixture.name);
   fs.mkdirSync(project);
   const skill = registry.skills.find(s => s.id === fixture.skill);

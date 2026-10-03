@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { readEvidence, executionStatus, checkOutput } from '../scripts/evaluations/checks.mjs';
+import { runPreflight } from '../scripts/evaluations/preflight.mjs';
 
 const event = (command, output, code = 0) => ({ type: 'item.completed', item: { id: 'read-1', type: 'command_execution', status: 'completed', command, aggregated_output: output, exit_code: code } });
 test('usage evidence rejects self-reports, path mentions and failed or partial reads', () => {
@@ -21,11 +22,32 @@ test('usage evidence accepts complete successful reads on Windows and POSIX', ()
 });
 test('execution classification separates startup failure, incomplete execution and completion', () => {
   assert.equal(executionStatus([{ type: 'thread.started' }, { type: 'turn.failed' }], 1), 'not-run');
-  assert.equal(executionStatus([event('cat task.txt', 'task')], 1), 'incomplete');
+  assert.equal(executionStatus([event('node build.mjs', 'built')], 1), 'incomplete');
   assert.equal(executionStatus([{ type: 'turn.completed' }], 0), 'not-run');
-  assert.equal(executionStatus([event('cat task.txt', 'task'), { type: 'turn.completed' }], 0), 'completed');
+  assert.equal(executionStatus([event('node build.mjs', 'built'), { type: 'turn.completed' }], 0), 'completed');
   assert.equal(executionStatus([event('cat task.txt', 'blocked', 1), { type: 'turn.completed' }], 0), 'not-run');
   assert.notEqual(executionStatus([{ type: 'turn.completed' }], 1), 'completed');
+});
+test('successful instruction reads alone are not task execution', () => {
+  const completed = { type: 'turn.completed' };
+  assert.equal(executionStatus([event('Get-Content -Raw .agents/skills/example/SKILL.md', 'instructions'), completed], 0), 'not-run');
+  assert.equal(executionStatus([event('cat .agents/skills/example/SKILL.md', 'instructions'), completed], 0), 'not-run');
+  assert.equal(executionStatus([{ type: 'item.completed', item: { type: 'file_change', status: 'completed' } }, completed], 0), 'completed');
+});
+test('policy-blocked preflight fails closed before evaluations', t => {
+  const root = project(t);
+  const fakeCodex = path.join(root, 'fake-codex.mjs');
+  fs.writeFileSync(fakeCodex, `
+process.stdout.write(JSON.stringify({ type: 'thread.started', thread_id: 'synthetic' }) + '\\n');
+process.stdout.write(JSON.stringify({ type: 'turn.completed' }) + '\\n');
+process.stderr.write('exec_command rejected: blocked by policy\\n');
+`);
+  const { summary } = runPreflight(fakeCodex, root, 10000);
+  assert.equal(summary.status, 'blocked-by-policy');
+  assert.equal(summary.checks.session_completed, true);
+  assert.equal(summary.checks.instruction_read, false);
+  assert.equal(summary.checks.proof_written, false);
+  assert.equal(summary.checks.proof_read, false);
 });
 function project(t) {
   const parent = path.resolve('.ai-skills-hub');

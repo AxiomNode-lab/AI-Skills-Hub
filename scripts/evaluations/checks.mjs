@@ -19,10 +19,20 @@ export function readEvidence(events, project, name, relative, expectedText) {
   }).map(item => ({ item_id: item.id, path: target, content_sha256: hash(Buffer.from(expectedText)) }));
 }
 
+// Read-only inspection is necessary setup, but it is not execution of the task.
+// Keep this deliberately conservative: an ambiguous command does not upgrade a
+// completed chat turn into a completed behavioral probe.
+function isReadOnlyCommand(command = '') {
+  const normalized = command.replaceAll('\\', '/').toLowerCase();
+  const reads = /\bget-content\b|(^|[;&|]\s*)cat\s|\breadfile\b|\bread_text\b/.test(normalized);
+  const writes = /\bset-content\b|\badd-content\b|\bout-file\b|\bnew-item\b|\bcopy-item\b|\bmove-item\b|\bremove-item\b|(^|[^>])>(?!>)/.test(normalized);
+  return reads && !writes;
+}
+
 export function executionStatus(events, processStatus) {
   const completed = events.some(e => e.type === 'turn.completed');
   const action = events.some(e => e.type === 'item.completed' && (
-    (e.item?.type === 'command_execution' && e.item.exit_code === 0 && e.item.status === 'completed') ||
+    (e.item?.type === 'command_execution' && e.item.exit_code === 0 && e.item.status === 'completed' && !isReadOnlyCommand(e.item.command)) ||
     (e.item?.type === 'file_change' && e.item.status === 'completed')
   ));
   return !action ? 'not-run' : completed && processStatus === 0 ? 'completed' : 'incomplete';

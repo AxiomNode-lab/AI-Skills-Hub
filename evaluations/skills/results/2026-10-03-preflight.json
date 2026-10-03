@@ -1,0 +1,52 @@
+{
+  "kind": "synthetic-policy-preflight",
+  "started": "2026-10-03T14:14:38.846Z",
+  "finished": "2026-10-03T14:15:13.532Z",
+  "platform": "win32",
+  "codex_version": "codex-cli 0.153.0",
+  "status": "blocked-by-policy",
+  "command": [
+    "exec",
+    "--ignore-user-config",
+    "--ephemeral",
+    "--sandbox",
+    "workspace-write",
+    "-c",
+    "web_search=\"disabled\"",
+    "-c",
+    "features.apps=false",
+    "-c",
+    "features.multi_agent=false",
+    "--json",
+    "--color",
+    "never",
+    "-C",
+    "<project>",
+    "-"
+  ],
+  "process": {
+    "exit_code": 0,
+    "signal": null,
+    "error": null,
+    "session_completed": true
+  },
+  "checks": {
+    "instruction_read": false,
+    "proof_written": false,
+    "proof_read": false
+  },
+  "diagnostic": "Get-Content -LiteralPath '.agents/skills/synthetic-preflight/SKILL.md' -Raw rejected: blocked by policy",
+  "raw_evidence": {
+    "local_directory": ".ai-skills-hub/evaluations/preflight-hmyyAG",
+    "prompt_file_sha256": "82ab7df5b92f2214da3318b00c9f6d5768cbac6607b7017b107d4275dafc7884",
+    "trace_sha256": "5228764c5f6e367519974d9c0017722ed6b1ab993251f3ae74a7e0624a63ca4e",
+    "stderr_sha256": "022c5d694df75ec216b13f6e00dbf3f60d6ca34f6d2c67e035541117a0c7e655",
+    "instruction_sha256": "f0ec44e7e31699eaed82bddf35b25f86ed1ae517fd858d486a653792a937414a"
+  },
+  "evaluation_cases_started": 0,
+  "case_statuses": {
+    "frontend-design": { "agent": "not-run", "usage": "unproven", "output": "not-run", "human_review": "pending" },
+    "brand-guidelines": { "agent": "not-run", "usage": "unproven", "output": "not-run", "human_review": "pending" },
+    "internal-comms": { "agent": "not-run", "usage": "unproven", "output": "not-run", "human_review": "pending" }
+  }
+}

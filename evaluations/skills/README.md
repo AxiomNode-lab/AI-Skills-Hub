@@ -19,7 +19,7 @@ model service; the no-network requirement applies to task tools and artifacts.
 | --- | --- | --- |
 | Source files | Eligible bundled record, reviewed inventory and hashes | Installation or behavior |
 | Project install | CLI `success: true`, reviewed destination bytes, install record, `info` and `list` | Instruction loading |
-| Execution | Successful command/file action and completed turn in actual CLI JSONL | Use of a specific skill or good output |
+| Execution | Successful non-read command or file change and completed turn in actual CLI JSONL | Use of a specific skill or good output |
 | Loading | Successful full instruction read with matching returned content; internal-comms also needs `examples/3p-updates.md` | Comprehension or causal benefit |
 | Output | Actual agent artifact, static checks, browser measurements where applicable | Visual/writing quality or improvement over a baseline |
 | Human review | Named reviewer, date, inspected artifacts, per-criterion verdict and reasons | Generalization from a single task |
@@ -41,6 +41,7 @@ reproducibility. It does not alter authentication, personal settings or user ski
 
 ```sh
 pnpm validate-materialized
+node scripts/evaluations/preflight.mjs --codex-js /absolute/path/to/@openai/codex/bin/codex.js
 node scripts/evaluations/run.mjs --case all --codex-js /absolute/path/to/@openai/codex/bin/codex.js
 node --test tests/behavior-evaluations.test.mjs
 pnpm validate-all
@@ -50,6 +51,12 @@ On Windows, use `pnpm.cmd` if PowerShell blocks `pnpm.ps1`. The recorded CLI pat
 was the npm installation's `node_modules/@openai/codex/bin/codex.js`. Pass it as a
 quoted argument when it contains spaces. `--case` also accepts any one of the
 three fixture names. No global CLI install or package download is performed.
+
+The standalone preflight creates a synthetic nested project and requires a complete
+instruction read, an exact project-local write, and a successful readback. The
+runner repeats that gate before starting any fixed case and exits nonzero without
+starting a case if the gate fails. This is intentionally a live model request, so
+run it once for diagnosis and do not retry paid cases after a policy failure.
 
 The runner creates a fresh directory under ignored `.ai-skills-hub/evaluations/`:
 each task gets a separate nested Git project, its one installed skill, synthetic
@@ -114,7 +121,9 @@ ratings. These single task probes only establish whether a usable path exists.
 
 ## Results
 
-See [the recorded run](results/2026-10-02.md). No positive performance claim should
-be inferred from the three eligible catalog entries or the automated test count.
+See [the recorded run](results/2026-10-02.md) and its
+[follow-up policy preflight](results/2026-10-03-preflight.md). No positive
+performance claim should be inferred from the three eligible catalog entries or
+the automated test count.
 
 CLI behavior reference: [OpenAI non-interactive mode documentation](https://learn.chatgpt.com/docs/non-interactive-mode).
