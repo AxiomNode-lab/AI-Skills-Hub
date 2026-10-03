@@ -138,9 +138,19 @@ test("held skills keep their review record but ship no files and are refused by 
     assert.equal(skill.materialized_root, undefined, skill.id);
     assert.ok(skill.release.reasons.length > 0, skill.id);
   }
+  // A hold backed by an independent review must match that review's recorded decision.
+  for (const skill of held.filter(s => s.release.evidence)) {
+    const audit = JSON.parse(fs.readFileSync(skill.release.evidence, "utf8"));
+    const entry = [...audit.skills, ...(audit.corrections ?? [])].find(e => e.id === skill.id);
+    assert.equal(entry?.decision, "hold", skill.id);
+    assert.deepEqual(skill.release.reasons, [entry.hold_reason], skill.id);
+    assert.equal(fs.existsSync(path.join("skills", ...skill.id.split("/"))), false, skill.id);
+  }
   const retired = held.find(skill => skill.id === "microsoft/azure-ai-anomalydetector-java");
   assert.deepEqual(retired?.release.reasons, ["upstream-service-retired"]);
-  assert.equal(fs.existsSync("skills/microsoft/azure-ai-anomalydetector-java"), false);
+  for (const id of ["microsoft/azure-communication-sms-java", "microsoft/azure-communication-chat-java"]) {
+    assert.deepEqual(held.find(skill => skill.id === id)?.release.reasons, ["upstream-service-retiring"], id);
+  }
   const cwd = tempProject(t);
   const result = spawnSync(process.execPath, [path.join(repoRoot, "packages/cli/bin/skills-hub.mjs"), "install", retired.id, "--agent", "codex", "--json"], { cwd, encoding: "utf8", env: { ...process.env, SKILLS_HUB_HOME: repoRoot } });
   assert.notEqual(result.status, 0, result.stdout);

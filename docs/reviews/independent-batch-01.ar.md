@@ -2,6 +2,8 @@
 
 تاريخ المراجعة: 2026-10-03. هذه أول دفعة صغيرة قابلة للتتبع من المهارات الـ139 التي أعادها PR #11 إلى `review-required` بسبب `independent-instruction-review-incomplete`. السجل الآلي الكامل لكل مهارة وكل ملف وبصمته في [independent-batch-01.json](independent-batch-01.json).
 
+> **تصحيح (الدفعة 3):** هذه الدفعة لم تفحص حالة الخدمات. بعد ذلك تبيّن أن Microsoft أعلنت في سبتمبر 2026 إيقاف Azure Communication Services Chat، فعُلّقت `azure-communication-chat-java`، وبقيت `azure-communication-common-java` مُصدَرة مع ملاحظة. التفاصيل والدليل في [الدفعة 3](independent-batch-03.ar.md).
+
 هذه مراجعة بمساعدة AI قرأت كل ملف كاملًا. ليست شهادة أمنية، ولا تقييم أداء، ولم تُشغَّل أمثلة SDK أو تُتصل بخدمات Azure.
 
 ## لماذا هذه الدفعة أولًا

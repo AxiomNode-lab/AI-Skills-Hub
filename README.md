@@ -64,9 +64,9 @@ Local search requires a case-insensitive phrase or keyword match in a capability
 
 ### 4. Install a Capability
 
-Local installation requires a bundled, materialized skill with `release: eligible` and compatibility with the selected agent. The current catalog has **534 skills: 337 review-required, 12 source-direct, 20 blocked, and 165 bundled**. The 165 bundled skills are materialized and release-eligible (snapshot: 2026-10-03; see [current status](docs/STATUS.md)).
+Local installation requires a bundled, materialized skill with `release: eligible` and compatibility with the selected agent. The current catalog has **534 skills: 339 review-required, 12 source-direct, 20 blocked, and 163 bundled**. The 163 bundled skills are materialized and release-eligible (snapshot: 2026-10-03; see [current status](docs/STATUS.md)).
 
-They are five Anthropic skills under skill-local Apache-2.0 licenses and 160 skills from microsoft/skills, obra/superpowers, and K-Dense under a repository-root MIT license that ships with each skill. See [release evidence and SHA-256 manifests](docs/VERIFIED-LOCAL-SKILLS.md). Find them with `search --json` (`hub_status.availability.status` is `eligible`). From the repository root, install three of them into the project with:
+They are five Anthropic skills under skill-local Apache-2.0 licenses and 158 skills from microsoft/skills, obra/superpowers, and K-Dense under a repository-root MIT license that ships with each skill. See [release evidence and SHA-256 manifests](docs/VERIFIED-LOCAL-SKILLS.md). Find them with `search --json` (`hub_status.availability.status` is `eligible`). From the repository root, install three of them into the project with:
 
 ~~~bash
 node packages/cli/bin/skills-hub.mjs install anthropics/frontend-design,anthropics/brand-guidelines,anthropics/internal-comms --agent codex --scope project --json

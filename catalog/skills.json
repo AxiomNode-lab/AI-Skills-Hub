@@ -31147,7 +31147,7 @@
         "scope": "repository",
         "evidence": "catalog/reviews/microsoft__azure-communication-chat-java.json"
       },
-      "distribution": "bundled",
+      "distribution": "review-required",
       "compatibility": [
         "agent-skills",
         "github-copilot",
@@ -31343,19 +31343,20 @@
         ],
         "review": "catalog/reviews/microsoft__azure-communication-chat-java.json"
       },
-      "materialized": true,
+      "materialized": false,
       "release": {
-        "status": "eligible",
-        "reasons": []
+        "status": "hold",
+        "reasons": [
+          "upstream-service-retiring"
+        ],
+        "evidence": "docs/reviews/independent-batch-03.json"
       },
       "integrity": {
         "upstream_skill_sha256": "6b4cf495990c027f146f4dab11b17a2d04c21e67fcf96af26ad56260f7a764fd",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
       "description": "Build real-time chat applications with Azure Communication Services Chat Java SDK. Use when implementing chat threads, messaging, participants, read receipts, typing notifications, or real-time chat features.",
-      "artifact_type": "skill",
-      "materialized_root": "skills/microsoft/azure-communication-chat-java",
-      "materialized_files": 3
+      "artifact_type": "skill"
     },
     {
       "id": "microsoft/azure-communication-common-java",
@@ -31788,7 +31789,7 @@
         "scope": "repository",
         "evidence": "catalog/reviews/microsoft__azure-communication-sms-java.json"
       },
-      "distribution": "bundled",
+      "distribution": "review-required",
       "compatibility": [
         "agent-skills",
         "github-copilot",
@@ -31984,19 +31985,20 @@
         ],
         "review": "catalog/reviews/microsoft__azure-communication-sms-java.json"
       },
-      "materialized": true,
+      "materialized": false,
       "release": {
-        "status": "eligible",
-        "reasons": []
+        "status": "hold",
+        "reasons": [
+          "upstream-service-retiring"
+        ],
+        "evidence": "docs/reviews/independent-batch-03.json"
       },
       "integrity": {
         "upstream_skill_sha256": "78116489577296fe710c3dbd1f50e55536f612b71b26db2d5f56ddb8bc9b95ae",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
       "description": "Send SMS messages with Azure Communication Services SMS Java SDK. Use when implementing SMS notifications, alerts, OTP delivery, bulk messaging, or delivery reports.",
-      "artifact_type": "skill",
-      "materialized_root": "skills/microsoft/azure-communication-sms-java",
-      "materialized_files": 3
+      "artifact_type": "skill"
     },
     {
       "id": "microsoft/azure-compliance",
