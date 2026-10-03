@@ -1,26 +1,33 @@
 # Behavior evaluation preflight — 2026-10-03
 
 The synthetic preflight reached the model service under the same nested Codex
-execution flags as the three fixed cases. The nested process could not complete
-the first project-local read. Managed execution policy rejected:
+execution flags as the three fixed cases. It tested project-local writing,
+readback and instruction loading as independent steps. Managed execution policy
+rejected all three commands:
 
 ```powershell
+Set-Content -LiteralPath 'proof.txt' -Value 'PROJECT-WRITE-OK' -Encoding ascii
+Get-Content -LiteralPath 'proof.txt' -Raw
 Get-Content -LiteralPath '.agents/skills/synthetic-preflight/SKILL.md' -Raw
 ```
 
 The exact stderr result was `rejected: blocked by policy`. The process still
 emitted `turn.completed` and exited 0, but it recorded no successful tool event
-and did not create `proof.txt`. This confirms that process success and a completed
-turn are not task execution evidence. Outer network access was permitted so the
-process could reach the configured model service; no nested policy, user setting,
-skill installation scope, or sandbox flag was changed.
+and did not create `proof.txt`. This confirms that this nested process could
+neither write nor read inside its temporary project under the active managed
+policy, and that process success and a completed turn are not task execution
+evidence. Outer network access was permitted so the process could reach the
+configured model service; no nested policy, user setting, skill installation
+scope, or sandbox flag was changed.
 
 The first diagnostic launch was excluded because the outer sandbox prevented all
-model-service connections and it timed out before a model turn. After fixing the
-synthetic fixture's missing frontmatter, the definitive launch above completed in
-34.7 seconds. Its raw trace, stderr, prompt and temporary project remain locally
-under ignored `.ai-skills-hub/evaluations/preflight-hmyyAG/`. Their hashes and the
-redacted invocation are in [the machine-readable record](2026-10-03-preflight.json).
+model-service connections and it timed out before a model turn. An intermediate
+fixture put the write after the denied instruction read, so it could not isolate
+write permission and is not the recorded result. The final independent-step
+launch above completed in 33.4 seconds. Its raw trace, stderr, prompt and temporary
+project remain locally under ignored
+`.ai-skills-hub/evaluations/preflight-4NPAQr/`. Their hashes and the redacted
+invocation are in [the machine-readable record](2026-10-03-preflight.json).
 
 ## Decision and case status
 

@@ -1,7 +1,7 @@
 {
   "kind": "synthetic-policy-preflight",
-  "started": "2026-10-03T14:14:38.846Z",
-  "finished": "2026-10-03T14:15:13.532Z",
+  "started": "2026-10-03T14:24:20.090Z",
+  "finished": "2026-10-03T14:24:53.473Z",
   "platform": "win32",
   "codex_version": "codex-cli 0.153.0",
   "status": "blocked-by-policy",
@@ -35,13 +35,17 @@
     "proof_written": false,
     "proof_read": false
   },
-  "diagnostic": "Get-Content -LiteralPath '.agents/skills/synthetic-preflight/SKILL.md' -Raw rejected: blocked by policy",
+  "diagnostics": [
+    "Set-Content -LiteralPath 'proof.txt' -Value 'PROJECT-WRITE-OK' -Encoding ascii rejected: blocked by policy",
+    "Get-Content -LiteralPath 'proof.txt' -Raw rejected: blocked by policy",
+    "Get-Content -LiteralPath '.agents/skills/synthetic-preflight/SKILL.md' -Raw rejected: blocked by policy"
+  ],
   "raw_evidence": {
-    "local_directory": ".ai-skills-hub/evaluations/preflight-hmyyAG",
-    "prompt_file_sha256": "82ab7df5b92f2214da3318b00c9f6d5768cbac6607b7017b107d4275dafc7884",
-    "trace_sha256": "5228764c5f6e367519974d9c0017722ed6b1ab993251f3ae74a7e0624a63ca4e",
-    "stderr_sha256": "022c5d694df75ec216b13f6e00dbf3f60d6ca34f6d2c67e035541117a0c7e655",
-    "instruction_sha256": "f0ec44e7e31699eaed82bddf35b25f86ed1ae517fd858d486a653792a937414a"
+    "local_directory": ".ai-skills-hub/evaluations/preflight-4NPAQr",
+    "prompt_file_sha256": "67085633c0623f95fb7e0e2e5ed8d1bb247702d00f188d58b55f08035aff3728",
+    "trace_sha256": "0bed434849eb64be5ce3bd3f24090e37b3eeb18dcf5897390c7895b2fc917f7b",
+    "stderr_sha256": "25a0543e537ed1786fac76d9173ebab7610bb789fe10e3c343fdfbfd51d37800",
+    "instruction_sha256": "5273bced72417c94c42c86fefa3a8b08e2854408af4d30912d4ca012744ab44"
   },
   "evaluation_cases_started": 0,
   "case_statuses": {

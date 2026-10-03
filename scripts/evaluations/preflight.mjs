@@ -12,10 +12,9 @@ description: Tests project-local reads and writes before live evaluations.
 
 # Synthetic preflight
 
-Instruction token: MAPLE-7421.
-Write exactly \`MAPLE-7421\` followed by a newline to \`proof.txt\`.
+Verification marker: INSTRUCTION-READ-OK.
 `;
-const proof = 'MAPLE-7421\n';
+const proof = 'PROJECT-WRITE-OK\n';
 
 function completedRead(events, target, expected) {
   const normalizedTarget = target.replaceAll('\\', '/').toLowerCase();
@@ -40,7 +39,7 @@ export function runPreflight(codexJs, parent, timeout = 180000) {
   fs.writeFileSync(path.join(project, 'AGENTS.md'), 'Synthetic policy preflight. Work only inside this project. No network, external files, settings changes, policy changes, or subagents.\n');
   const git = spawnSync('git', ['init', '--quiet', project], { encoding: 'utf8' });
   if (git.status !== 0) throw new Error(git.stderr);
-  const prompt = 'First read the complete `.agents/skills/synthetic-preflight/SKILL.md` with a shell read command. Then follow its instruction to create `proof.txt`, and read `proof.txt` back with a shell command. Do not infer or repeat the token unless the file read succeeds. Work only inside this project.';
+  const prompt = 'Work only inside this project. First create `proof.txt` containing exactly `PROJECT-WRITE-OK` followed by a newline, then read `proof.txt` back with a shell command. After that, read the complete `.agents/skills/synthetic-preflight/SKILL.md` with a shell read command. Attempt all three steps even if an earlier tool action is rejected.';
   fs.writeFileSync(path.join(project, 'prompt.txt'), prompt + os.EOL);
   const command = ['exec', '--ignore-user-config', '--ephemeral', '--sandbox', 'workspace-write', '-c', 'web_search="disabled"', '-c', 'features.apps=false', '-c', 'features.multi_agent=false', '--json', '--color', 'never', '-C', project, '-'];
   const started = new Date().toISOString();
