@@ -73,10 +73,9 @@ test("available lists only installable skills, per agent, without color codes wh
   const { result } = run(t, ["available", "--json"]);
   assert.equal(result.status, 0, result.stderr);
   const all = JSON.parse(result.stdout);
-  assert.ok(all.length >= 166);
   const catalog = JSON.parse(fs.readFileSync(fileURLToPath(new URL("../catalog/skills.json", import.meta.url)), "utf8"));
-  const eligible = new Set(catalog.skills.filter(s => s.release.status === "eligible").map(s => s.id));
-  assert.ok(all.every(skill => eligible.has(skill.id)));
+  const eligible = catalog.skills.filter(s => s.release.status === "eligible" && s.materialized && s.distribution === "bundled").map(s => s.id).sort();
+  assert.deepEqual(all.map(skill => skill.id).sort(), eligible);
 
   const claude = JSON.parse(run(t, ["available", "--agent", "claude-code", "--json"]).result.stdout);
   assert.equal(claude.length, all.length, "every released Agent Skills format skill installs for Claude Code");
