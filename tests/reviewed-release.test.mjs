@@ -10,7 +10,9 @@ import { verifyInstallRecord } from "../packages/installer/src/state.mjs";
 
 const repoRoot = process.cwd();
 const registry = JSON.parse(fs.readFileSync("catalog/skills.json", "utf8"));
-const released = registry.skills.filter(skill => skill.license.evidence?.startsWith("catalog/reviews/"));
+const reviewed = registry.skills.filter(skill => skill.license.evidence?.startsWith("catalog/reviews/"));
+// A skill can carry an approved artifact review and still be held (for example after an instruction review).
+const released = reviewed.filter(skill => skill.release?.status === "eligible" && skill.materialized);
 const first = released.find(skill => skill.id === "anthropics/frontend-design");
 const review = JSON.parse(fs.readFileSync(first.license.evidence, "utf8"));
 function tempProject(t) {
@@ -128,3 +130,19 @@ for (const skill of released) {
     assert.equal(run("list", "--agent", agent)[0].hub_status.installation.status, "unverified");
   });
 }
+
+test("held skills keep their review record but ship no files and are refused by install", t => {
+  const held = reviewed.filter(skill => skill.release?.status === "hold");
+  for (const skill of held) {
+    assert.equal(skill.materialized, false, skill.id);
+    assert.equal(skill.materialized_root, undefined, skill.id);
+    assert.ok(skill.release.reasons.length > 0, skill.id);
+  }
+  const retired = held.find(skill => skill.id === "microsoft/azure-ai-anomalydetector-java");
+  assert.deepEqual(retired?.release.reasons, ["upstream-service-retired"]);
+  assert.equal(fs.existsSync("skills/microsoft/azure-ai-anomalydetector-java"), false);
+  const cwd = tempProject(t);
+  const result = spawnSync(process.execPath, [path.join(repoRoot, "packages/cli/bin/skills-hub.mjs"), "install", retired.id, "--agent", "codex", "--json"], { cwd, encoding: "utf8", env: { ...process.env, SKILLS_HUB_HOME: repoRoot } });
+  assert.notEqual(result.status, 0, result.stdout);
+  assert.equal(fs.existsSync(path.join(cwd, ".agents")), false);
+});

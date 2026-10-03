@@ -17,6 +17,8 @@ All notable changes to AI Skills Hub are documented here.
 - `pnpm verify-upstream` (also in CI) re-downloads every released file from GitHub at its pinned commit and checks SHA-256.
 
 ### Changed
+- `microsoft/azure-ai-anomalydetector-java` is held with reason `upstream-service-retired` (Microsoft retired the service on 2026-10-01) and no longer ships; 165 skills are installable. `info` now prints release hold reasons.
+- Independent instruction reviews of 20 microsoft/skills SDK skills are recorded in docs/reviews/independent-batch-01 and -02.
 - Agent Skills format skills now install for every agent that loads the format (Claude Code, Codex, Cursor, GitHub Copilot, OpenCode); previously most were limited by a per-source guess, so Claude Code saw 19 of 166 released skills.
 
 ### Fixed

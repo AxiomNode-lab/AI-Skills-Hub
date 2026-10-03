@@ -23064,7 +23064,7 @@
         "scope": "repository",
         "evidence": "catalog/reviews/microsoft__azure-ai-anomalydetector-java.json"
       },
-      "distribution": "bundled",
+      "distribution": "review-required",
       "compatibility": [
         "agent-skills",
         "github-copilot",
@@ -23330,19 +23330,20 @@
         ],
         "review": "catalog/reviews/microsoft__azure-ai-anomalydetector-java.json"
       },
-      "materialized": true,
+      "materialized": false,
       "release": {
-        "status": "eligible",
-        "reasons": []
+        "status": "hold",
+        "reasons": [
+          "upstream-service-retired"
+        ],
+        "evidence": "docs/reviews/independent-batch-02.json"
       },
       "integrity": {
         "upstream_skill_sha256": "e39cb5855a4e4240e037110b74abcc1b850e28761d95c668ac0568b64ca40d6e",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
       "description": "Build anomaly detection applications with Azure AI Anomaly Detector SDK for Java. Use when implementing univariate/multivariate anomaly detection, time-series analysis, or AI-powered monitoring.",
-      "artifact_type": "skill",
-      "materialized_root": "skills/microsoft/azure-ai-anomalydetector-java",
-      "materialized_files": 3
+      "artifact_type": "skill"
     },
     {
       "id": "microsoft/azure-ai-contentsafety-java",
