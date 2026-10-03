@@ -14,6 +14,14 @@ import { createHubServer, runStdioServer } from "@ai-skills-hub/server";
 
 const [, , command, ...args] = process.argv;
 
+class UsageError extends Error {}
+
+function integerOption(name, value, min, max) {
+  const number = Number(value);
+  if (!/^\d+$/.test(value) || number < min || number > max) throw new UsageError(`${name} must be an integer from ${min} to ${max}`);
+  return number;
+}
+
 function parseOptions(argsArray) {
   const options = { json: false, yes: false, agent: null, scope: "project", port: 8787, host: "127.0.0.1" };
   const positional = [];
@@ -25,8 +33,10 @@ function parseOptions(argsArray) {
     else if (arg === "--yes" || arg === "-y") options.yes = true;
     else if (arg === "--agent" && i + 1 < argsArray.length) options.agent = argsArray[++i];
     else if (arg === "--scope" && i + 1 < argsArray.length) options.scope = argsArray[++i];
-    else if (arg === "--port" && i + 1 < argsArray.length) options.port = Number(argsArray[++i]);
+    else if (arg === "--port" && i + 1 < argsArray.length) options.port = integerOption("--port", argsArray[++i], 0, 65535);
     else if (arg === "--host" && i + 1 < argsArray.length) options.host = argsArray[++i];
+    else if (arg === "--limit" && i + 1 < argsArray.length) options.limit = integerOption("--limit", argsArray[++i], 1, 1000);
+    else if (arg.startsWith("-") && arg !== "-") throw new UsageError(`Unknown or incomplete option: ${arg}`);
     else positional.push(arg);
   }
 
@@ -110,6 +120,7 @@ Options:
   --yes                   Confirm external installer/configuration operations
   --json                  Output machine-readable JSON where supported
   --installable           search: only skills that can be installed now
+  --limit <n>             search: maximum results (default 50)
   --port <n>              serve: port (default 8787)
   --host <addr>           serve: bind address (default 127.0.0.1)
 
@@ -130,6 +141,10 @@ Start here:
 }
 
 main().catch((error) => {
+  if (error instanceof UsageError) {
+    console.error(`${error.message}. Run 'skills-hub help' for usage.`);
+    process.exit(2);
+  }
   console.error("Fatal error:", error);
   process.exit(1);
 });

@@ -71,11 +71,14 @@ test("MCP stdio transport answers line-delimited requests", async () => {
   let text = "";
   output.on("data", chunk => { text += chunk; });
   const done = runStdioServer({ input, output });
-  input.end('{"jsonrpc":"2.0","id":7,"method":"ping"}\nnot json\n');
+  input.end('{"jsonrpc":"2.0","id":7,"method":"ping"}\nnot json\n{"jsonrpc":"2.0","id":8,"method":"initialize","params":null}\n');
   await done;
-  const [ping, parseError] = text.trim().split("\n").map(line => JSON.parse(line));
+  const [ping, parseError, failed] = text.trim().split("\n").map(line => JSON.parse(line));
   assert.deepEqual(ping, { jsonrpc: "2.0", id: 7, result: {} });
   assert.equal(parseError.error.code, -32700);
+  // A request that fails while being handled keeps its id and is not a parse error.
+  assert.equal(failed.id, 8);
+  assert.ok(failed.error && failed.error.code !== -32700, JSON.stringify(failed));
 });
 
 test("HTTP API serves health, filtered skills, details, and bundles", async t => {

@@ -1,5 +1,5 @@
 import { searchRegistry } from "@ai-skills-hub/discovery";
-import { loadRegistry } from "@ai-skills-hub/core";
+import { catalogAvailability, loadRegistry } from "@ai-skills-hub/core";
 import { statusReader, printCapabilityStatus } from "../capability-status.mjs";
 import { paint } from "../ui.mjs";
 
@@ -7,11 +7,14 @@ export function searchCommand(query, options = {}) {
   const registry = loadRegistry();
 
   const readStatus = statusReader(options);
-  const results = searchRegistry(registry, query || "", {
+  // Narrow the pool before ranking so the limit applies to installable matches.
+  const pool = options.installable
+    ? { ...registry, skills: registry.skills.filter((skill) => catalogAvailability(skill).status === "eligible") }
+    : registry;
+  const results = searchRegistry(pool, query || "", {
     agent: options.agent || undefined,
     limit: options.limit || 50
-  }).map(({ item, score }) => ({ ...item, _score: score, hub_status: readStatus(item) }))
-    .filter((item) => !options.installable || item.hub_status.availability.status === "eligible");
+  }).map(({ item, score }) => ({ ...item, _score: score, hub_status: readStatus(item) }));
 
   if (options.json) {
     console.log(JSON.stringify(results, null, 2));

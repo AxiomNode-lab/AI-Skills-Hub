@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { resolveHubPath } from "@ai-skills-hub/core";
 import os from "node:os";
 
 export class CLIAdapter {
@@ -26,7 +27,7 @@ export class CLIAdapter {
       throw new Error(`Security Violation: Executable path '${executable}' contains path traversal or absolute path attempts. Only paths relative to the capability directory are allowed.`);
     }
 
-    const sourcePath = path.join(this.capability.materialized_root, executable);
+    const sourcePath = path.join(resolveHubPath(this.capability.materialized_root), executable);
     if (!fs.existsSync(sourcePath)) {
       throw new Error(`Executable not found at ${sourcePath}`);
     }

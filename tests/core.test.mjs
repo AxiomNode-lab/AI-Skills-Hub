@@ -16,7 +16,13 @@ test("skill identity resolves by id and name",()=>{
 
 test("Agent Skills format skills are compatible with standard agents only",()=>{
   const skill={id:"a/b",name:"b",compatibility:["agent-skills"]};
-  for(const agent of ["claude-code","codex","cursor","github-copilot","opencode","generic-agent"]) assert.equal(compatibilityBasis(skill,agent),"standard",agent);
+  for(const agent of ["claude-code","codex","cursor","github-copilot","copilot","opencode"]) assert.equal(compatibilityBasis(skill,agent),"standard",agent);
+  // A generic agent accepts anything listed for agent-skills, of any artifact type.
+  assert.equal(compatibilityBasis(skill,"generic-agent"),"listed");
+  assert.equal(compatibilityBasis({...skill,artifact_type:"cli-tool"},"generic-agent"),"listed");
+  // External installers need an explicit listing; only bundled files rely on the format.
+  for(const distribution of ["source-direct","review-required","blocked"]) assert.equal(compatibilityBasis({...skill,distribution},"codex"),null,distribution);
+  assert.equal(compatibilityBasis({...skill,distribution:"source-direct",compatibility:["agent-skills","codex"]},"codex"),"listed");
   assert.equal(compatibilityBasis({...skill,compatibility:["agent-skills","codex"]},"codex"),"listed");
   assert.equal(compatibilityBasis(skill,"some-other-agent"),null);
   assert.equal(compatibilityBasis({...skill,artifact_type:"mcp-server"},"codex"),null);

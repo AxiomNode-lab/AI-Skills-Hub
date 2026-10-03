@@ -47,16 +47,19 @@ export function resolveBundle(registry, bundleName) {
 
 // Agents that load skills in the open Agent Skills format (a directory with
 // SKILL.md and name/description frontmatter). See catalog/agents.json.
-export const AGENT_SKILLS_STANDARD_AGENTS = ["claude-code", "codex", "cursor", "github-copilot", "opencode", "generic-agent", "agent-skills"];
+export const AGENT_SKILLS_STANDARD_AGENTS = ["claude-code", "codex", "cursor", "github-copilot", "copilot", "opencode", "generic-agent", "agent-skills"];
 
 // Why a capability can be used with an agent: "listed" when the catalog names the
-// agent, "standard" when it is an Agent Skills format skill and the agent loads
-// that format. Returns null when neither holds. Non-skill artifacts need a listing.
+// agent (a generic agent accepts anything listed for "agent-skills"), "standard"
+// when it is a bundled Agent Skills format skill, which the Hub copies itself, and
+// the agent loads that format. Returns null when neither holds. Non-skill
+// artifacts and external installers need an explicit listing.
 export function compatibilityBasis(skill, agent) {
   const listed = new Set(skill.compatibility ?? []);
-  if (listed.has(agent)) return "listed";
+  if (listed.has(agent) || (agent === "generic-agent" && listed.has("agent-skills"))) return "listed";
   const isSkill = (skill.artifact_type ?? skill.type ?? "skill") === "skill";
-  if (isSkill && listed.has("agent-skills") && AGENT_SKILLS_STANDARD_AGENTS.includes(agent)) return "standard";
+  const bundled = (skill.distribution ?? "bundled") === "bundled";
+  if (isSkill && bundled && listed.has("agent-skills") && AGENT_SKILLS_STANDARD_AGENTS.includes(agent)) return "standard";
   return null;
 }
 

@@ -95,6 +95,26 @@ test("search --installable hides skills that cannot be installed", t => {
   assert.ok(installable.every(s => s.hub_status.availability.status === "eligible"));
 });
 
+test("search --installable ranks only installable skills, so --limit counts installable matches", t => {
+  // For "review" the two best matches are not released; filtering after the
+  // limit used to return nothing.
+  const top = JSON.parse(run(t, ["search", "review", "--limit", "2", "--json"]).result.stdout);
+  assert.ok(top.every(s => s.hub_status.availability.status !== "eligible"));
+  const installable = JSON.parse(run(t, ["available", "review", "--json"]).result.stdout);
+  assert.ok(installable.length >= 2);
+  const limited = JSON.parse(run(t, ["search", "review", "--installable", "--limit", "2", "--json"]).result.stdout);
+  assert.equal(limited.length, 2);
+  assert.ok(limited.every(s => s.hub_status.availability.status === "eligible"));
+});
+
+test("unknown or invalid options fail with a usage error instead of becoming search text", t => {
+  for (const args of [["search", "pdf", "--agnet", "codex"], ["search", "pdf", "--limit", "0"], ["serve", "--port", "http"]]) {
+    const { result } = run(t, args);
+    assert.equal(result.status, 2, args.join(" "));
+    assert.match(result.stderr, /skills-hub help/);
+  }
+});
+
 test("a Microsoft skill installs for Claude Code into .claude/skills via the Agent Skills format", t => {
   const { cwd, result } = run(t, ["install", "microsoft/wiki-qa", "--agent", "claude-code", "--json"]);
   assert.equal(result.status, 0, result.stdout + result.stderr);

@@ -23,6 +23,10 @@ All notable changes to AI Skills Hub are documented here.
 - Agent Skills format skills now install for every agent that loads the format (Claude Code, Codex, Cursor, GitHub Copilot, OpenCode); previously most were limited by a per-source guess, so Claude Code saw 19 of 166 released skills.
 
 ### Fixed
+- `search --installable` filters before ranking, so installable matches below the top results are no longer dropped; `search --limit <n>` works, and unknown or invalid options exit with a usage error instead of becoming search text.
+- Agent Skills format compatibility applies only to bundled skills the Hub installs itself; external installers need an explicit agent listing, and `generic-agent` again accepts any artifact listed for `agent-skills`.
+- Plugin and CLI tool adapters read materialized files from the Hub root, like skills.
+- The MCP server answers a request that fails during handling with an internal error for that request id instead of a parse error.
 - Agent detection works on Windows (no `which`), detects Codex, Cursor, GitHub Copilot, and OpenCode locally, and no longer offers Docker container IDs that had no install target.
 - The interactive installer computed its plan differently from the installer and warned about external installers for local installs.
 - The CLI resolves the catalog and materialized skills from the Hub root (or `SKILLS_HUB_HOME`), so it works inside any project instead of only the Hub checkout.

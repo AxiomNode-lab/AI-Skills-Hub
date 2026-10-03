@@ -307,7 +307,7 @@ export function createHubServer({ registry } = {}) {
           return sendJson(res, 400, rpcError(null, -32700, "Parse error"));
         }
         if (Array.isArray(message)) return sendJson(res, 400, rpcError(null, -32600, "Batch requests are not supported"));
-        const response = handleMcpMessage(catalog, message);
+        const response = handleSafely(catalog, message);
         return response ? sendJson(res, 200, response) : sendJson(res, 202, undefined);
       }
       if (req.method !== "GET" && req.method !== "HEAD") {
@@ -321,17 +321,30 @@ export function createHubServer({ registry } = {}) {
 }
 
 // MCP stdio transport: one JSON-RPC message per line on stdin and stdout.
+// A failure while handling a valid request is an internal error for that
+// request id, never a parse error the client cannot correlate.
+function handleSafely(catalog, message) {
+  try {
+    return handleMcpMessage(catalog, message);
+  } catch {
+    const id = message?.id;
+    return id === undefined || id === null ? null : rpcError(id, -32603, "Internal error");
+  }
+}
+
 export function runStdioServer({ registry, input = process.stdin, output = process.stdout } = {}) {
   const catalog = createCatalog(registry);
   const lines = readline.createInterface({ input, crlfDelay: Infinity });
   lines.on("line", (line) => {
     if (!line.trim()) return;
-    let response;
+    let message;
     try {
-      response = handleMcpMessage(catalog, JSON.parse(line));
+      message = JSON.parse(line);
     } catch {
-      response = rpcError(null, -32700, "Parse error");
+      output.write(JSON.stringify(rpcError(null, -32700, "Parse error")) + "\n");
+      return;
     }
+    const response = handleSafely(catalog, message);
     if (response) output.write(JSON.stringify(response) + "\n");
   });
   return new Promise((resolve) => lines.on("close", resolve));
