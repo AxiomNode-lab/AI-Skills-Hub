@@ -1,0 +1,130 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "unitone/forensics-checklist",
+  "source": {
+    "repo": "UnitOneAI/SecuritySkills",
+    "path": "skills/incident-response/forensics-checklist",
+    "revision": "70bc259bb01abb3015ad2ad859ad5253cbf0bcab"
+  },
+  "review": {
+    "path": "catalog/reviews/unitone__forensics-checklist.json",
+    "sha256": "a01ad4b7617e8d1b83676017ed37c918d8af51b70de06ab9846b0a357809c60d"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": false,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "shell-execution",
+        "line": 128,
+        "evidence": "\nsudo",
+        "context": "# Using LiME (Linux Memory Extractor)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 274,
+        "evidence": "credential",
+        "context": "| Authentication logs (Windows Security, `/var/log/auth.log`) | Login attempts, credential use, privilege escalation | Rotation typically 7-30 days |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 490,
+        "evidence": "https://",
+        "context": "1. **NIST SP 800-86** -- Guide to Integrating Forensic Techniques into Incident Response -- https://csrc.nist.gov/publications/detail/sp/800-86/final",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 491,
+        "evidence": "https://",
+        "context": "2. **RFC 3227** -- Guidelines for Evidence Collection and Archiving -- https://www.rfc-editor.org/rfc/rfc3227",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 492,
+        "evidence": "https://",
+        "context": "3. **NIST SP 800-61 Rev 2** -- Computer Security Incident Handling Guide -- https://csrc.nist.gov/publications/detail/sp/800-61/rev-2/final",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 493,
+        "evidence": "https://",
+        "context": "4. **ISO/IEC 27037:2012** -- Guidelines for Identification, Collection, Acquisition and Preservation of Digital Evidence -- https://www.iso.org/standard/44381.html",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 494,
+        "evidence": "https://",
+        "context": "5. **SANS Digital Forensics and Incident Response** -- https://www.sans.org/digital-forensics-incident-response/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 495,
+        "evidence": "https://",
+        "context": "6. **Volatility 3 Framework** -- https://github.com/volatilityfoundation/volatility3",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 496,
+        "evidence": "https://",
+        "context": "7. **The Sleuth Kit / Autopsy** -- https://www.sleuthkit.org/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 497,
+        "evidence": "https://",
+        "context": "8. **ACSC Digital Forensics Guide** -- https://www.cyber.gov.au/resources-business-and-government/essential-cyber-security/publications/digital-forensics",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 498,
+        "evidence": "https://",
+        "context": "9. **SWGDE Best Practices for Computer Forensics** -- https://www.swgde.org/documents",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 499,
+        "evidence": "https://",
+        "context": "10. **AWS Security Incident Response Guide** -- https://docs.aws.amazon.com/whitepapers/latest/aws-security-incident-response-guide/",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 28319
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "66eb5ec637cc578833ddcbc870dbf46c6718fd83e985fad5f0f5cf30d60cf47d",
+      "bytes": 1067,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "02a1613dff39938cddfb2ed410947c684a2c6553496ebcc91f448e890ad09359",
+      "bytes": 27252,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 28319
+}

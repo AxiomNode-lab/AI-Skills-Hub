@@ -1,0 +1,394 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "sentry/claude-settings-audit",
+  "status": "draft",
+  "reviewed_on": null,
+  "reviewer": null,
+  "source": {
+    "repo": "getsentry/skills",
+    "path": "skills/claude-settings-audit",
+    "revision": "d18b7aa8ba878354e5c348310230e652f7690f9c"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "skills/claude-settings-audit",
+    "url": "https://api.github.com/repos/getsentry/skills/git/trees/d18b7aa8ba878354e5c348310230e652f7690f9c?recursive=1",
+    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+  },
+  "license": {
+    "spdx": "Apache-2.0",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/getsentry/skills/blob/d18b7aa8ba878354e5c348310230e652f7690f9c/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "skills",
+        "skills/claude-settings-audit"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte."
+    ]
+  },
+  "content_review": {
+    "status": "pending",
+    "risk": "unknown",
+    "blocking_findings": [],
+    "capabilities": {},
+    "notes": []
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "96e78a9ce85795b117c8929887bdb78f88bf23f7b85a31f0872cde4dff7e92cd",
+      "bytes": 10785,
+      "mode": "100644",
+      "git_blob": "753a6c03c60a9232405d05170bd3ad3cab49a1ef",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 3,
+          "evidence": "http://",
+          "context": "                        http://www.apache.org/licenses/",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 184,
+          "evidence": "http://",
+          "context": "       http://www.apache.org/licenses/LICENSE-2.0",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "53e0964b7a98c351e6d3dda055abb33ec5e2c287eebd4c74485b60312be9dfa9",
+      "bytes": 11924,
+      "mode": "100644",
+      "git_blob": "3955ad0abd2fc61917f4c447dc9f45a7a53f925c",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 3,
+          "evidence": "bash",
+          "context": "description: Analyze a repository to generate recommended Claude Code settings.json permissions. Use when setting up a new project, auditing existing settings, or determining which read-only bash commands to allow. Detects tech stack, build",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 14,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 51,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 63,
+          "evidence": "Bash",
+          "context": "  \"Bash(ls:*)\",",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 64,
+          "evidence": "Bash",
+          "context": "  \"Bash(pwd:*)\",",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 65,
+          "evidence": "Bash",
+          "context": "  \"Bash(find:*)\",",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 66,
+          "evidence": "Bash",
+          "context": "  \"Bash(file:*)\",",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 67,
+          "evidence": "Bash",
+          "context": "  \"Bash(stat:*)\",",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 68,
+          "evidence": "Bash",
+          "context": "  \"Bash(wc:*)\",",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 69,
+          "evidence": "Bash",
+          "context": "  \"Bash(head:*)\",",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 70,
+          "evidence": "Bash",
+          "context": "  \"Bash(tail:*)\",",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 71,
+          "evidence": "Bash",
+          "context": "  \"Bash(cat:*)\",",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 72,
+          "evidence": "Bash",
+          "context": "  \"Bash(tree:*)\",",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 73,
+          "evidence": "Bash",
+          "context": "  \"Bash(git status:*)\",",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 74,
+          "evidence": "Bash",
+          "context": "  \"Bash(git log:*)\",",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 75,
+          "evidence": "Bash",
+          "context": "  \"Bash(git diff:*)\",",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 76,
+          "evidence": "Bash",
+          "context": "  \"Bash(git show:*)\",",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 77,
+          "evidence": "Bash",
+          "context": "  \"Bash(git branch:*)\",",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 78,
+          "evidence": "Bash",
+          "context": "  \"Bash(git remote:*)\",",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 79,
+          "evidence": "Bash",
+          "context": "  \"Bash(git tag:*)\",",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 80,
+          "evidence": "Bash",
+          "context": "  \"Bash(git stash list:*)\",",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 81,
+          "evidence": "Bash",
+          "context": "  \"Bash(git rev-parse:*)\",",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 82,
+          "evidence": "Bash",
+          "context": "  \"Bash(gh pr view:*)\",",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 83,
+          "evidence": "Bash",
+          "context": "  \"Bash(gh pr list:*)\",",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 84,
+          "evidence": "Bash",
+          "context": "  \"Bash(gh pr checks:*)\",",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 85,
+          "evidence": "Bash",
+          "context": "  \"Bash(gh pr diff:*)\",",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 86,
+          "evidence": "Bash",
+          "context": "  \"Bash(gh issue view:*)\",",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 87,
+          "evidence": "Bash",
+          "context": "  \"Bash(gh issue list:*)\",",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 88,
+          "evidence": "Bash",
+          "context": "  \"Bash(gh run view:*)\",",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 89,
+          "evidence": "Bash",
+          "context": "  \"Bash(gh run list:*)\",",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 90,
+          "evidence": "Bash",
+          "context": "  \"Bash(gh run logs:*)\",",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 91,
+          "evidence": "Bash",
+          "context": "  \"Bash(gh repo view:*)\",",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 92,
+          "evidence": "Bash",
+          "context": "  \"Bash(gh api:*)\"",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 165,
+          "evidence": "secret",
+          "context": "  \"Skill(sentry-skills:secret-serialization)\",",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 211,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 224,
+          "evidence": "https://",
+          "context": "      \"url\": \"https://mcp.sentry.dev/mcp/{org-slug}/{project-slug}\"",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 302,
+          "evidence": "sh",
+          "context": "- **Custom scripts** - Never include project scripts that may have side effects (e.g., `./scripts/deploy.sh`)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 304,
+          "evidence": "delete",
+          "context": "- **Commands that modify state** - No install, build, run, write, or delete commands",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    }
+  ]
+}

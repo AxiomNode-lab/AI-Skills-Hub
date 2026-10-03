@@ -16,6 +16,7 @@ All notable changes to AI Skills Hub are documented here.
 - Terminal colors (respecting `NO_COLOR`/`FORCE_COLOR`), a publisher-grouped interactive list that defaults to installable skills, and an OpenCode install target.
 - `pnpm verify-upstream` (also in CI) re-downloads every released file from GitHub at its pinned commit and checks SHA-256.
 
+- 50 programming skills released after full review: 2 from supabase/agent-skills, 20 from addyosmani/agent-skills, and 28 from UnitOneAI/SecuritySkills (212 installable in total). 21 were excluded with reasons in docs/VERIFIED-LOCAL-SKILLS.md, including three that cite a look-alike domain for KrebsOnSecurity and one that reproduces Google's CC BY engineering-practices text without attribution.
 - Seven programming-focused sources: supabase/agent-skills and getsentry/skills (official), addyosmani/agent-skills, wshobson/agents, UnitOneAI/SecuritySkills, BagelHole/DevOps-Security-Agent-Skills, and aaron-he-zhu/seo-geo-claude-skills (472 records, all review-required until reviewed).
 - `scripts/ingest-github.mjs --checkout <clone>` ingests from a pinned local clone when the GitHub API is unavailable; `scripts/sync-registry.mjs --source <repo> --no-fetch` syncs only the named sources from existing ingestion files.
 - A repository-root Apache-2.0 license can cover a skill under the same conditions as MIT, with no NOTICE file applying (docs/LICENSE-POLICY.md).

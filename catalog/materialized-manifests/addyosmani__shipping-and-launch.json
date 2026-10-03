@@ -1,0 +1,53 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "addyosmani/shipping-and-launch",
+  "source": {
+    "repo": "addyosmani/agent-skills",
+    "path": "skills/shipping-and-launch",
+    "revision": "1401c8b8030e023baeebb31781a6653fe8e93026"
+  },
+  "review": {
+    "path": "catalog/reviews/addyosmani__shipping-and-launch.json",
+    "sha256": "a3bdd02fba856a95e70533a4f4f7bd5532f64c579d4b79f460c9c6d1c0baf56f"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": false,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "filesystem-write",
+        "line": 101,
+        "evidence": "Remove",
+        "context": "5. CLEAN UP                 → Remove flag and dead code path after full rollout",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 12477
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "6f202f8bd568cd730dbb2b0d1f8e243bc74c2fa1f64dbce9b2c7ea08bd5c9fd7",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "1055d25dfe6cfeb6ae31eba3e2328fd0e7c66b285f0e44c40f67c77a59813281",
+      "bytes": 11409,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 12477
+}

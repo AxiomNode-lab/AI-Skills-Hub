@@ -1,0 +1,170 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "sentry/document-api-endpoint",
+  "status": "draft",
+  "reviewed_on": null,
+  "reviewer": null,
+  "source": {
+    "repo": "getsentry/skills",
+    "path": "skills/document-api-endpoint",
+    "revision": "d18b7aa8ba878354e5c348310230e652f7690f9c"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "skills/document-api-endpoint",
+    "url": "https://api.github.com/repos/getsentry/skills/git/trees/d18b7aa8ba878354e5c348310230e652f7690f9c?recursive=1",
+    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+  },
+  "license": {
+    "spdx": "Apache-2.0",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/getsentry/skills/blob/d18b7aa8ba878354e5c348310230e652f7690f9c/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "skills",
+        "skills/document-api-endpoint"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte."
+    ]
+  },
+  "content_review": {
+    "status": "pending",
+    "risk": "unknown",
+    "blocking_findings": [],
+    "capabilities": {},
+    "notes": []
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "96e78a9ce85795b117c8929887bdb78f88bf23f7b85a31f0872cde4dff7e92cd",
+      "bytes": 10785,
+      "mode": "100644",
+      "git_blob": "753a6c03c60a9232405d05170bd3ad3cab49a1ef",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 3,
+          "evidence": "http://",
+          "context": "                        http://www.apache.org/licenses/",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 184,
+          "evidence": "http://",
+          "context": "       http://www.apache.org/licenses/LICENSE-2.0",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "40c7592cdfbef2e02bf004133446d7a9c85e98f9fd653d3cee689f3bba4bf7a9",
+      "bytes": 4473,
+      "mode": "100644",
+      "git_blob": "ba51054fc733a50c7429e9ecbd2eedad1419c28a",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 8,
+          "evidence": "https://",
+          "context": "Add or fix OpenAPI docs for a Sentry endpoint with drf-spectacular. Full reference is at https://develop.sentry.dev/backend/api/public/, the most useful section to you will be https://develop.sentry.dev/backend/api/public/#5-method-decorato",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 8,
+          "evidence": "https://",
+          "context": "Add or fix OpenAPI docs for a Sentry endpoint with drf-spectacular. Full reference is at https://develop.sentry.dev/backend/api/public/, the most useful section to you will be https://develop.sentry.dev/backend/api/public/#5-method-decorato",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 15,
+          "evidence": "remove",
+          "context": "4. If a legacy `api-docs/paths/**/*.json` covers the path, remove it (see lesson 4).",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 22,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 23,
+          "evidence": "curl",
+          "context": "curl -s -H \"Authorization: Bearer $TOKEN\" \"https://us.sentry.io/api/0/<endpoint>\" | jq 'keys'",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 23,
+          "evidence": "https://",
+          "context": "curl -s -H \"Authorization: Bearer $TOKEN\" \"https://us.sentry.io/api/0/<endpoint>\" | jq 'keys'",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 33,
+          "evidence": "Delete",
+          "context": "Delete the `api-docs/paths/**/*.json` file AND its `$ref` in `api-docs/openapi.json`. drf-spectacular's `APPEND_PATHS` does not merge HTTP methods, so once any method on a path uses `@extend_schema`, all *legacy* methods on that path vanish",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 40,
+          "evidence": "Remove",
+          "context": "- Remove the method from `API_OWNERSHIP_ALLOWLIST_DONT_MODIFY` in the same change as the flip.",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 41,
+          "evidence": "delete",
+          "context": "- If the endpoint is redundant or being renamed, delete or deprecate the old version in its own change first, then stack the publish on top.",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 48,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "addyosmani/observability-and-instrumentation",
+  "source": {
+    "repo": "addyosmani/agent-skills",
+    "path": "skills/observability-and-instrumentation",
+    "revision": "1401c8b8030e023baeebb31781a6653fe8e93026"
+  },
+  "review": {
+    "path": "catalog/reviews/addyosmani__observability-and-instrumentation.json",
+    "sha256": "43941ec97dee0c0ca1a699e3a70733f4f04d4b45a5f0d8b74a9c9ebeeaf83784"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": false,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "credential-access",
+        "line": 101,
+        "evidence": "process.env",
+        "context": "// CLI invocation        -> runLog('cli', process.env.RUN_ID ?? crypto.randomUUID())",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 167,
+        "evidence": "delete",
+        "context": "1. **It must be actionable.** If the response is \"ignore it, it self-heals\", delete the alert.",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 15016
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "6f202f8bd568cd730dbb2b0d1f8e243bc74c2fa1f64dbce9b2c7ea08bd5c9fd7",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "e7fcb0820306d46268de9594d676ad98e35040858926c412b7000faa52a61f87",
+      "bytes": 13948,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 15016
+}

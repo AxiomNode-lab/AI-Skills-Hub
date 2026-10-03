@@ -1,0 +1,256 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "unitone/agentic-top-10",
+  "source": {
+    "repo": "UnitOneAI/SecuritySkills",
+    "path": "skills/ai-security/agentic-top-10",
+    "revision": "70bc259bb01abb3015ad2ad859ad5253cbf0bcab"
+  },
+  "review": {
+    "path": "catalog/reviews/unitone__agentic-top-10.json",
+    "sha256": "13267ea1515dda59ddf5241e5aaf17230f52d8d4fa6337b6ba978daff8d0764c"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": false,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "credential-access",
+        "line": 65,
+        "evidence": "credential",
+        "context": "| Permission model | IAM configs, role definitions, credential stores | Reveals whether least-privilege is enforced |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 84,
+        "evidence": "delete",
+        "context": "- Tool registrations that grant broad capabilities (e.g., an agent meant to query a database also has write/delete access).",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 153,
+        "evidence": "credential",
+        "context": "- Token or credential stores accessible to the agent runtime without additional authentication.",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 165,
+        "evidence": "credential",
+        "context": "5. Use hardware-backed credential stores (HSMs, TEEs) for high-privilege operations, requiring out-of-band approval for access.",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 378,
+        "evidence": "API key",
+        "context": "- Agents sharing a single service account or API key.",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 387,
+        "evidence": "API key",
+        "context": "In a 2024 incident disclosed at Black Hat, a penetration tester compromised an enterprise's agentic workflow system by extracting an API key from the agent's environment that was shared across all agents in the deployment. Because all agent",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 392,
+        "evidence": "credential",
+        "context": "2. Implement credential rotation with a maximum lifetime of hours, not days.",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 396,
+        "evidence": "credential",
+        "context": "6. Never pass credentials through the agent's context window. Use credential brokers or secret managers with just-in-time provisioning.",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 396,
+        "evidence": "secret",
+        "context": "6. Never pass credentials through the agent's context window. Use credential brokers or secret managers with just-in-time provisioning.",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 401,
+        "evidence": "credential",
+        "context": "- OWASP LLM Top 10 2025: LLM02 — Sensitive Information Disclosure (credential exposure)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 402,
+        "evidence": "credential",
+        "context": "- MITRE ATLAS: AML.T0040 — ML Model Inference API Access (credential abuse)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 411,
+        "evidence": "credential",
+        "context": "Enumerate all agents, their tools, their permissions, their memory stores, their communication channels, and their credential sources. Use `Glob` and `Grep` to find:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 419,
+        "evidence": "Credential",
+        "context": "# Credential and permission configurations",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 420,
+        "evidence": "api_key",
+        "context": "Grep: \"api_key|API_KEY|secret|credential|password|token\" in **/*.{py,ts,js,env,yaml,yml}",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 420,
+        "evidence": "API_KEY",
+        "context": "Grep: \"api_key|API_KEY|secret|credential|password|token\" in **/*.{py,ts,js,env,yaml,yml}",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 420,
+        "evidence": "secret",
+        "context": "Grep: \"api_key|API_KEY|secret|credential|password|token\" in **/*.{py,ts,js,env,yaml,yml}",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 420,
+        "evidence": "credential",
+        "context": "Grep: \"api_key|API_KEY|secret|credential|password|token\" in **/*.{py,ts,js,env,yaml,yml}",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 435,
+        "evidence": "https://",
+        "context": "For practical validation of OWASP Agentic AI risks against concrete exploits, use the **fabraix/playground** open-source exploit library (https://github.com/fabraix/playground). This provides consolidated AI agent exploit PoCs that can be u",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 543,
+        "evidence": "https://",
+        "context": "**Important:** Readers should verify specific control IDs and category numbering against the latest published version at [genai.owasp.org](https://genai.owasp.org). The OWASP GenAI project actively maintains and revises its guidance. The ca",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 559,
+        "evidence": "https://",
+        "context": "MITRE ATLAS (Adversarial Threat Landscape for AI Systems) provides a knowledge base of adversary tactics and techniques against AI systems. It extends the ATT&CK framework into the ML/AI domain. Relevant technique IDs are mapped in each thr",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 563,
+        "evidence": "https://",
+        "context": "The NIST AI RMF provides a structured approach to AI risk management organized around four functions: GOVERN, MAP, MEASURE, and MANAGE. Subcategory mappings in this skill use the AI RMF Playbook suggested action numbering format (e.g., GOVE",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 563,
+        "evidence": "https://",
+        "context": "The NIST AI RMF provides a structured approach to AI risk management organized around four functions: GOVERN, MAP, MEASURE, and MANAGE. Subcategory mappings in this skill use the AI RMF Playbook suggested action numbering format (e.g., GOVE",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 619,
+        "evidence": "https://",
+        "context": "1. OWASP GenAI Security Project — [genai.owasp.org](https://genai.owasp.org)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 620,
+        "evidence": "https://",
+        "context": "2. OWASP Top 10 for LLM Applications 2025 — [owasp.org/www-project-top-10-for-large-language-model-applications](https://owasp.org/www-project-top-10-for-large-language-model-applications/)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 621,
+        "evidence": "https://",
+        "context": "3. MITRE ATLAS — [atlas.mitre.org](https://atlas.mitre.org)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 622,
+        "evidence": "https://",
+        "context": "4. NIST AI Risk Management Framework 1.0 — [nist.gov/aiframework](https://www.nist.gov/aiframework)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 623,
+        "evidence": "https://",
+        "context": "5. Rehberger, J. \"Prompt Injection: Exfiltrating ChatGPT/Bing Chat Data via Images\" (2023) — [embracethered.com](https://embracethered.com)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 626,
+        "evidence": "https://",
+        "context": "8. OWASP Application Security Verification Standard (ASVS) — [owasp.org/www-project-application-security-verification-standard](https://owasp.org/www-project-application-security-verification-standard/)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 628,
+        "evidence": "https://",
+        "context": "10. NIST SP 800-53 Rev. 5, Security and Privacy Controls — [nist.gov](https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 629,
+        "evidence": "https://",
+        "context": "11. fabraix/playground — Open-source AI agent red-team exploit library with PoCs for OWASP Agentic AI Top 10 risks — https://github.com/fabraix/playground",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 43506
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "66eb5ec637cc578833ddcbc870dbf46c6718fd83e985fad5f0f5cf30d60cf47d",
+      "bytes": 1067,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "af7918a2b518a8a591fdb3e6851ab52cea0c9ef626881f683f015dbac1b2deb1",
+      "bytes": 42439,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 43506
+}
