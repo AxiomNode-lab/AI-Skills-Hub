@@ -1,0 +1,379 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "kdense/paperzilla",
+  "status": "approved",
+  "reviewed_on": "2026-10-02",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "K-Dense-AI/scientific-agent-skills",
+    "path": "skills/paperzilla",
+    "revision": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "skills/paperzilla",
+    "url": "https://api.github.com/repos/K-Dense-AI/scientific-agent-skills/git/trees/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE.md",
+    "url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/LICENSE.md",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "skills",
+        "skills/paperzilla"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE.md is the MIT License with its copyright notice, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in either file; Paperzilla docs and GitHub source are linked only, and the skill declares license: MIT. A byte-exact copy of LICENSE.md ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "medium",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "package_install": true,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md and references/cli-contracts.md in full. Vendor-authored (skill-author: Paperzilla Inc) guide to the `pz` 0.7.1 CLI: list projects, browse/search project feeds with careful pagination, read canonical papers and recommendations (JSON/markdown), leave recommendation feedback, and generate Atom feed URLs; the reference maps each command to the HTTP routes it uses.",
+      "Medium: install commands use the vendor's Homebrew tap or Scoop bucket (SKILL.md:44, 54-55; unpinned) and, only if Homebrew 6 rejects the formula, `brew trust --formula paperzilla-ai/tap/pz` scoped to that single formula (SKILL.md:47-49); `pz login` uses an email OTP and stores session tokens in ~/.paperzilla/tokens.json (SKILL.md:89-97, cli-contracts.md:10-15); all commands call paperzilla.ai with the user's session. `pz feedback` changes account data and is gated on user request (SKILL.md:198); `--atom` can create a feed token. Acceptable because it is the user's own account and service, there is no curl|sh installer, and the skill warns not to send tokens to an arbitrary PZ_API_URL, not to log/publish Atom URLs, and never to export the tokens file (SKILL.md:227-244, cli-contracts.md:26-27, 79-81).",
+      "Users must hold a Paperzilla account with CLI access; the skill notes 0.7.1 requires login even for canonical papers despite online docs. Linux install and source builds are pointers to official docs/repo, not bundled. The `brew trust` step relaxes a Homebrew trust check for one formula; users should decide whether to allow it."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE.md",
+      "sha256": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "eb246475fd5a66b9bb56176f3a718984632dd98d",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry the copyright and permission notice.",
+      "findings": []
+    },
+    {
+      "path": "references/cli-contracts.md",
+      "sha256": "97a67f038e81f4fc7b65ab034e75103b16d8207692b080bbe8994072d5bead16",
+      "bytes": 7339,
+      "mode": "100644",
+      "git_blob": "ebd82d3ede6b6507e8d65af1fc651887a019c355",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "credential-access",
+          "line": 12,
+          "evidence": "access_token",
+          "context": "`access_token`, `refresh_token`, and `expires_in`. Refresh uses",
+          "disposition": "accepted",
+          "reason": "Describes the CLI's OTP login, access/refresh tokens and Atom feed-token semantics with advice to keep them out of logs and exports; the agent is not told to read, print, or transmit tokens."
+        },
+        {
+          "type": "network-access",
+          "line": 26,
+          "evidence": "https://",
+          "context": "The default base URL is `https://paperzilla.ai`. `PZ_API_URL` replaces it; do not",
+          "disposition": "accepted",
+          "reason": "paperzilla.ai default API URL, the vendor Scoop bucket on GitHub, and Paperzilla docs/GitHub source links; live network use happens through the pz CLI against the user's account."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 50,
+          "evidence": "DELETE",
+          "context": "| `feedback clear {recommendation}` | `DELETE /api/project-papers/{recommendation}/feedback` | Backend 204; CLI `--json` supplies a `project_paper_ref`/`cleared` envelope. |",
+          "disposition": "accepted",
+          "reason": "Matched DELETE in the HTTP method for `pz feedback clear`, a server-side removal of the user's own feedback, not a local file deletion."
+        },
+        {
+          "type": "credential-access",
+          "line": 79,
+          "evidence": "credential",
+          "context": "- Atom output contains a credential, not an ordinary public paper link. Browse",
+          "disposition": "accepted",
+          "reason": "Describes the CLI's OTP login, access/refresh tokens and Atom feed-token semantics with advice to keep them out of logs and exports; the agent is not told to read, print, or transmit tokens."
+        },
+        {
+          "type": "network-access",
+          "line": 95,
+          "evidence": "https://",
+          "context": "- [CLI guide](https://docs.paperzilla.ai/guides/cli)",
+          "disposition": "accepted",
+          "reason": "paperzilla.ai default API URL, the vendor Scoop bucket on GitHub, and Paperzilla docs/GitHub source links; live network use happens through the pz CLI against the user's account."
+        },
+        {
+          "type": "network-access",
+          "line": 96,
+          "evidence": "https://",
+          "context": "- [Quickstart](https://docs.paperzilla.ai/guides/cli-getting-started)",
+          "disposition": "accepted",
+          "reason": "paperzilla.ai default API URL, the vendor Scoop bucket on GitHub, and Paperzilla docs/GitHub source links; live network use happens through the pz CLI against the user's account."
+        },
+        {
+          "type": "network-access",
+          "line": 97,
+          "evidence": "https://",
+          "context": "- [Public integration scope](https://docs.paperzilla.ai/api-reference/introduction)",
+          "disposition": "accepted",
+          "reason": "paperzilla.ai default API URL, the vendor Scoop bucket on GitHub, and Paperzilla docs/GitHub source links; live network use happens through the pz CLI against the user's account."
+        },
+        {
+          "type": "credential-access",
+          "line": 98,
+          "evidence": "credential",
+          "context": "- [Atom route and credential semantics](https://docs.paperzilla.ai/api-reference/rss-atom-feed)",
+          "disposition": "accepted",
+          "reason": "Describes the CLI's OTP login, access/refresh tokens and Atom feed-token semantics with advice to keep them out of logs and exports; the agent is not told to read, print, or transmit tokens."
+        },
+        {
+          "type": "network-access",
+          "line": 98,
+          "evidence": "https://",
+          "context": "- [Atom route and credential semantics](https://docs.paperzilla.ai/api-reference/rss-atom-feed)",
+          "disposition": "accepted",
+          "reason": "paperzilla.ai default API URL, the vendor Scoop bucket on GitHub, and Paperzilla docs/GitHub source links; live network use happens through the pz CLI against the user's account."
+        },
+        {
+          "type": "network-access",
+          "line": 99,
+          "evidence": "https://",
+          "context": "- [v0.7.1 release](https://github.com/paperzilla-ai/pz/releases/tag/v0.7.1)",
+          "disposition": "accepted",
+          "reason": "paperzilla.ai default API URL, the vendor Scoop bucket on GitHub, and Paperzilla docs/GitHub source links; live network use happens through the pz CLI against the user's account."
+        },
+        {
+          "type": "network-access",
+          "line": 100,
+          "evidence": "https://",
+          "context": "- [CLI command source](https://github.com/paperzilla-ai/pz/tree/v0.7.1/cmd)",
+          "disposition": "accepted",
+          "reason": "paperzilla.ai default API URL, the vendor Scoop bucket on GitHub, and Paperzilla docs/GitHub source links; live network use happens through the pz CLI against the user's account."
+        },
+        {
+          "type": "network-access",
+          "line": 101,
+          "evidence": "https://",
+          "context": "- [HTTP client, auth, endpoints and schemas](https://github.com/paperzilla-ai/pz/tree/v0.7.1/internal/api)",
+          "disposition": "accepted",
+          "reason": "paperzilla.ai default API URL, the vendor Scoop bucket on GitHub, and Paperzilla docs/GitHub source links; live network use happens through the pz CLI against the user's account."
+        },
+        {
+          "type": "network-access",
+          "line": 102,
+          "evidence": "https://",
+          "context": "- [Session storage](https://github.com/paperzilla-ai/pz/blob/v0.7.1/internal/config/tokens.go)",
+          "disposition": "accepted",
+          "reason": "paperzilla.ai default API URL, the vendor Scoop bucket on GitHub, and Paperzilla docs/GitHub source links; live network use happens through the pz CLI against the user's account."
+        }
+      ]
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "f1b5feb3c76ce064803e5d44757f0fc468bf670499015b9c6a9d487fca699771",
+      "bytes": 9302,
+      "mode": "100644",
+      "git_blob": "027f88dd90716c309591c45ab93d1c2743950761",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 43,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks run brew/scoop installs, `pz update`, `pz login`, and read-oriented pz project/feed/paper/rec commands plus user-requested `pz feedback` changes."
+        },
+        {
+          "type": "shell-execution",
+          "line": 53,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Adds the vendor's Scoop bucket from GitHub and installs pz (unpinned package-manager install)."
+        },
+        {
+          "type": "network-access",
+          "line": 54,
+          "evidence": "https://",
+          "context": "scoop bucket add paperzilla-ai https://github.com/paperzilla-ai/scoop-bucket",
+          "disposition": "accepted",
+          "reason": "paperzilla.ai default API URL, the vendor Scoop bucket on GitHub, and Paperzilla docs/GitHub source links; live network use happens through the pz CLI against the user's account."
+        },
+        {
+          "type": "network-access",
+          "line": 61,
+          "evidence": "https://",
+          "context": "- https://docs.paperzilla.ai/guides/cli-getting-started",
+          "disposition": "accepted",
+          "reason": "paperzilla.ai default API URL, the vendor Scoop bucket on GitHub, and Paperzilla docs/GitHub source links; live network use happens through the pz CLI against the user's account."
+        },
+        {
+          "type": "network-access",
+          "line": 66,
+          "evidence": "https://",
+          "context": "- https://github.com/paperzilla-ai/pz",
+          "disposition": "accepted",
+          "reason": "paperzilla.ai default API URL, the vendor Scoop bucket on GitHub, and Paperzilla docs/GitHub source links; live network use happens through the pz CLI against the user's account."
+        },
+        {
+          "type": "shell-execution",
+          "line": 72,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks run brew/scoop installs, `pz update`, `pz login`, and read-oriented pz project/feed/paper/rec commands plus user-requested `pz feedback` changes."
+        },
+        {
+          "type": "shell-execution",
+          "line": 78,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks run brew/scoop installs, `pz update`, `pz login`, and read-oriented pz project/feed/paper/rec commands plus user-requested `pz feedback` changes."
+        },
+        {
+          "type": "shell-execution",
+          "line": 89,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks run brew/scoop installs, `pz update`, `pz login`, and read-oriented pz project/feed/paper/rec commands plus user-requested `pz feedback` changes."
+        },
+        {
+          "type": "shell-execution",
+          "line": 109,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks run brew/scoop installs, `pz update`, `pz login`, and read-oriented pz project/feed/paper/rec commands plus user-requested `pz feedback` changes."
+        },
+        {
+          "type": "shell-execution",
+          "line": 115,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks run brew/scoop installs, `pz update`, `pz login`, and read-oriented pz project/feed/paper/rec commands plus user-requested `pz feedback` changes."
+        },
+        {
+          "type": "shell-execution",
+          "line": 124,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks run brew/scoop installs, `pz update`, `pz login`, and read-oriented pz project/feed/paper/rec commands plus user-requested `pz feedback` changes."
+        },
+        {
+          "type": "shell-execution",
+          "line": 137,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks run brew/scoop installs, `pz update`, `pz login`, and read-oriented pz project/feed/paper/rec commands plus user-requested `pz feedback` changes."
+        },
+        {
+          "type": "shell-execution",
+          "line": 159,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks run brew/scoop installs, `pz update`, `pz login`, and read-oriented pz project/feed/paper/rec commands plus user-requested `pz feedback` changes."
+        },
+        {
+          "type": "shell-execution",
+          "line": 176,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks run brew/scoop installs, `pz update`, `pz login`, and read-oriented pz project/feed/paper/rec commands plus user-requested `pz feedback` changes."
+        },
+        {
+          "type": "shell-execution",
+          "line": 184,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks run brew/scoop installs, `pz update`, `pz login`, and read-oriented pz project/feed/paper/rec commands plus user-requested `pz feedback` changes."
+        },
+        {
+          "type": "shell-execution",
+          "line": 191,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "pz feedback commands mutate recommendation feedback in the user's account; the skill gates them on the user's request."
+        },
+        {
+          "type": "network-access",
+          "line": 213,
+          "evidence": "https://",
+          "context": "[official CLI documentation](https://github.com/paperzilla-ai/pz).",
+          "disposition": "accepted",
+          "reason": "paperzilla.ai default API URL, the vendor Scoop bucket on GitHub, and Paperzilla docs/GitHub source links; live network use happens through the pz CLI against the user's account."
+        },
+        {
+          "type": "shell-execution",
+          "line": 237,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks run brew/scoop installs, `pz update`, `pz login`, and read-oriented pz project/feed/paper/rec commands plus user-requested `pz feedback` changes."
+        },
+        {
+          "type": "network-access",
+          "line": 238,
+          "evidence": "https://",
+          "context": "export PZ_API_URL=\"https://paperzilla.ai\"",
+          "disposition": "accepted",
+          "reason": "paperzilla.ai default API URL, the vendor Scoop bucket on GitHub, and Paperzilla docs/GitHub source links; live network use happens through the pz CLI against the user's account."
+        },
+        {
+          "type": "network-access",
+          "line": 251,
+          "evidence": "https://",
+          "context": "- Docs: https://docs.paperzilla.ai/guides/cli",
+          "disposition": "accepted",
+          "reason": "paperzilla.ai default API URL, the vendor Scoop bucket on GitHub, and Paperzilla docs/GitHub source links; live network use happens through the pz CLI against the user's account."
+        },
+        {
+          "type": "network-access",
+          "line": 252,
+          "evidence": "https://",
+          "context": "- Quickstart: https://docs.paperzilla.ai/guides/cli-getting-started",
+          "disposition": "accepted",
+          "reason": "paperzilla.ai default API URL, the vendor Scoop bucket on GitHub, and Paperzilla docs/GitHub source links; live network use happens through the pz CLI against the user's account."
+        },
+        {
+          "type": "network-access",
+          "line": 253,
+          "evidence": "https://",
+          "context": "- Repo: https://github.com/paperzilla-ai/pz",
+          "disposition": "accepted",
+          "reason": "paperzilla.ai default API URL, the vendor Scoop bucket on GitHub, and Paperzilla docs/GitHub source links; live network use happens through the pz CLI against the user's account."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,368 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "microsoft/copilot-sdk",
+  "status": "approved",
+  "reviewed_on": "2026-10-02",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/skills/copilot-sdk",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": ".github/skills/copilot-sdk",
+    "url": "https://api.github.com/repos/microsoft/skills/git/trees/84d8eaa8ae95930f55cdceb3e27196c795dab038?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/microsoft/skills/blob/84d8eaa8ae95930f55cdceb3e27196c795dab038/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        ".github",
+        ".github/skills",
+        ".github/skills/copilot-sdk"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT License with its copyright notice, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found; the SDK, CLI and MCP projects are linked, not copied. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "medium",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": true,
+      "network": false,
+      "credentials": false,
+      "package_install": true,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md (the only file, 904 lines) in full. Reference for the GitHub Copilot SDK across Node.js, Python, Go and .NET: client/session/message pattern, streaming, custom tools, hooks, MCP server configuration, authentication, BYOK providers, session persistence, custom agents, skills, permission handlers and deployment patterns.",
+      "Medium because the installation table (SKILL.md:20-23) gives `npm install @github/copilot-sdk`, `pip install github-copilot-sdk`, `go get` and `dotnet add package` for the official GitHub SDK packages, and debugging tips run `npx @modelcontextprotocol/inspector` (SKILL.md:447) and `copilot --headless` (SKILL.md:748). Everything else is sample code for the user's application; tokens and BYOK API keys are read from environment variables in that code, never printed or sent elsewhere by the agent.",
+      "Users should note that some samples are permissive by design: the onPermissionRequest example approves all non-shell requests and onUserInputRequest always answers 'yes' (SKILL.md:708-718), and MCP examples launch unpinned `npx -y` servers with tools [\"*\"] (SKILL.md:381-394, 697); these should be tightened in production. The 'tools/list' missing-path signal is the MCP JSON-RPC method name, not a file. No external file dependencies or hidden content."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "git_blob": "79656060de00aa4659ad2c276d5be8830664d544",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry the copyright and permission notice.",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "9bec8025d0ccf14b3c2f66754966781ba42d08a57b86b103bb9ef98d9f05c58b",
+      "bytes": 28557,
+      "mode": "100644",
+      "git_blob": "79f42cd0aef9a7a660f96668bc547d998e2485b4",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "package-install",
+          "line": 20,
+          "evidence": "npm install",
+          "context": "| Node.js | `@github/copilot-sdk` | `npm install @github/copilot-sdk` |",
+          "disposition": "accepted",
+          "reason": "Installation table rows `npm install @github/copilot-sdk` and `pip install github-copilot-sdk` for the official GitHub Copilot SDK packages."
+        },
+        {
+          "type": "package-install",
+          "line": 21,
+          "evidence": "pip install",
+          "context": "| Python | `github-copilot-sdk` | `pip install github-copilot-sdk` |",
+          "disposition": "accepted",
+          "reason": "Installation table rows `npm install @github/copilot-sdk` and `pip install github-copilot-sdk` for the official GitHub Copilot SDK packages."
+        },
+        {
+          "type": "shell-execution",
+          "line": 252,
+          "evidence": "bash",
+          "context": "            if ([\"shell\", \"bash\"].includes(input.toolName)) {",
+          "disposition": "accepted",
+          "reason": "Bash blocks for testing an MCP server over stdin, running MCP Inspector, and starting `copilot --headless --port 4321`; plus the word 'shell'/'bash' inside hook sample code that denies shell tools."
+        },
+        {
+          "type": "shell-execution",
+          "line": 352,
+          "evidence": "bash",
+          "context": "    if input_data[\"toolName\"] in [\"shell\", \"bash\"]:",
+          "disposition": "accepted",
+          "reason": "Bash blocks for testing an MCP server over stdin, running MCP Inspector, and starting `copilot --headless --port 4321`; plus the word 'shell'/'bash' inside hook sample code that denies shell tools."
+        },
+        {
+          "type": "network-access",
+          "line": 404,
+          "evidence": "https://",
+          "context": "            url: \"https://api.githubcopilot.com/mcp/\",",
+          "disposition": "accepted",
+          "reason": "Provider base URLs (OpenAI, Azure, Anthropic, localhost Ollama), the GitHub MCP endpoint in sample config, and documentation links to GitHub and modelcontextprotocol.io; the agent is not told to fetch them."
+        },
+        {
+          "type": "shell-execution",
+          "line": 440,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks for testing an MCP server over stdin, running MCP Inspector, and starting `copilot --headless --port 4321`; plus the word 'shell'/'bash' inside hook sample code that denies shell tools."
+        },
+        {
+          "type": "shell-execution",
+          "line": 446,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks for testing an MCP server over stdin, running MCP Inspector, and starting `copilot --headless --port 4321`; plus the word 'shell'/'bash' inside hook sample code that denies shell tools."
+        },
+        {
+          "type": "credential-access",
+          "line": 471,
+          "evidence": "process.env",
+          "context": "const client = new CopilotClient({ githubToken: process.env.GITHUB_TOKEN });",
+          "disposition": "accepted",
+          "reason": "GITHUB_TOKEN/OPENAI_API_KEY/AZURE_OPENAI_KEY/ANTHROPIC_API_KEY read via process.env in sample client/provider config, DefaultAzureCredential for BYOK bearer tokens, and a Vault/K8s Secrets recommendation; no instruction to read, print or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 506,
+          "evidence": "apiKey",
+          "context": "provider: { type: \"openai\", baseUrl: \"https://api.openai.com/v1\", apiKey: process.env.OPENAI_API_KEY }",
+          "disposition": "accepted",
+          "reason": "GITHUB_TOKEN/OPENAI_API_KEY/AZURE_OPENAI_KEY/ANTHROPIC_API_KEY read via process.env in sample client/provider config, DefaultAzureCredential for BYOK bearer tokens, and a Vault/K8s Secrets recommendation; no instruction to read, print or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 506,
+          "evidence": "process.env",
+          "context": "provider: { type: \"openai\", baseUrl: \"https://api.openai.com/v1\", apiKey: process.env.OPENAI_API_KEY }",
+          "disposition": "accepted",
+          "reason": "GITHUB_TOKEN/OPENAI_API_KEY/AZURE_OPENAI_KEY/ANTHROPIC_API_KEY read via process.env in sample client/provider config, DefaultAzureCredential for BYOK bearer tokens, and a Vault/K8s Secrets recommendation; no instruction to read, print or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 506,
+          "evidence": "https://",
+          "context": "provider: { type: \"openai\", baseUrl: \"https://api.openai.com/v1\", apiKey: process.env.OPENAI_API_KEY }",
+          "disposition": "accepted",
+          "reason": "Provider base URLs (OpenAI, Azure, Anthropic, localhost Ollama), the GitHub MCP endpoint in sample config, and documentation links to GitHub and modelcontextprotocol.io; the agent is not told to fetch them."
+        },
+        {
+          "type": "network-access",
+          "line": 513,
+          "evidence": "https://",
+          "context": "    baseUrl: \"https://your-resource.openai.azure.com/openai/v1/\",",
+          "disposition": "accepted",
+          "reason": "Provider base URLs (OpenAI, Azure, Anthropic, localhost Ollama), the GitHub MCP endpoint in sample config, and documentation links to GitHub and modelcontextprotocol.io; the agent is not told to fetch them."
+        },
+        {
+          "type": "credential-access",
+          "line": 514,
+          "evidence": "apiKey",
+          "context": "    apiKey: process.env.FOUNDRY_API_KEY,",
+          "disposition": "accepted",
+          "reason": "GITHUB_TOKEN/OPENAI_API_KEY/AZURE_OPENAI_KEY/ANTHROPIC_API_KEY read via process.env in sample client/provider config, DefaultAzureCredential for BYOK bearer tokens, and a Vault/K8s Secrets recommendation; no instruction to read, print or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 514,
+          "evidence": "process.env",
+          "context": "    apiKey: process.env.FOUNDRY_API_KEY,",
+          "disposition": "accepted",
+          "reason": "GITHUB_TOKEN/OPENAI_API_KEY/AZURE_OPENAI_KEY/ANTHROPIC_API_KEY read via process.env in sample client/provider config, DefaultAzureCredential for BYOK bearer tokens, and a Vault/K8s Secrets recommendation; no instruction to read, print or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 523,
+          "evidence": "https://",
+          "context": "    baseUrl: \"https://my-resource.openai.azure.com\",  // Just the host — no /openai/v1",
+          "disposition": "accepted",
+          "reason": "Provider base URLs (OpenAI, Azure, Anthropic, localhost Ollama), the GitHub MCP endpoint in sample config, and documentation links to GitHub and modelcontextprotocol.io; the agent is not told to fetch them."
+        },
+        {
+          "type": "credential-access",
+          "line": 524,
+          "evidence": "apiKey",
+          "context": "    apiKey: process.env.AZURE_OPENAI_KEY,",
+          "disposition": "accepted",
+          "reason": "GITHUB_TOKEN/OPENAI_API_KEY/AZURE_OPENAI_KEY/ANTHROPIC_API_KEY read via process.env in sample client/provider config, DefaultAzureCredential for BYOK bearer tokens, and a Vault/K8s Secrets recommendation; no instruction to read, print or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 524,
+          "evidence": "process.env",
+          "context": "    apiKey: process.env.AZURE_OPENAI_KEY,",
+          "disposition": "accepted",
+          "reason": "GITHUB_TOKEN/OPENAI_API_KEY/AZURE_OPENAI_KEY/ANTHROPIC_API_KEY read via process.env in sample client/provider config, DefaultAzureCredential for BYOK bearer tokens, and a Vault/K8s Secrets recommendation; no instruction to read, print or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 531,
+          "evidence": "apiKey",
+          "context": "provider: { type: \"anthropic\", baseUrl: \"https://api.anthropic.com\", apiKey: process.env.ANTHROPIC_API_KEY }",
+          "disposition": "accepted",
+          "reason": "GITHUB_TOKEN/OPENAI_API_KEY/AZURE_OPENAI_KEY/ANTHROPIC_API_KEY read via process.env in sample client/provider config, DefaultAzureCredential for BYOK bearer tokens, and a Vault/K8s Secrets recommendation; no instruction to read, print or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 531,
+          "evidence": "process.env",
+          "context": "provider: { type: \"anthropic\", baseUrl: \"https://api.anthropic.com\", apiKey: process.env.ANTHROPIC_API_KEY }",
+          "disposition": "accepted",
+          "reason": "GITHUB_TOKEN/OPENAI_API_KEY/AZURE_OPENAI_KEY/ANTHROPIC_API_KEY read via process.env in sample client/provider config, DefaultAzureCredential for BYOK bearer tokens, and a Vault/K8s Secrets recommendation; no instruction to read, print or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 531,
+          "evidence": "https://",
+          "context": "provider: { type: \"anthropic\", baseUrl: \"https://api.anthropic.com\", apiKey: process.env.ANTHROPIC_API_KEY }",
+          "disposition": "accepted",
+          "reason": "Provider base URLs (OpenAI, Azure, Anthropic, localhost Ollama), the GitHub MCP endpoint in sample config, and documentation links to GitHub and modelcontextprotocol.io; the agent is not told to fetch them."
+        },
+        {
+          "type": "network-access",
+          "line": 536,
+          "evidence": "http://",
+          "context": "provider: { type: \"openai\", baseUrl: \"http://localhost:11434/v1\" }",
+          "disposition": "accepted",
+          "reason": "Provider base URLs (OpenAI, Azure, Anthropic, localhost Ollama), the GitHub MCP endpoint in sample config, and documentation links to GitHub and modelcontextprotocol.io; the agent is not told to fetch them."
+        },
+        {
+          "type": "credential-access",
+          "line": 545,
+          "evidence": "apiKey",
+          "context": "| `apiKey` | string | API key (optional for local providers) |",
+          "disposition": "accepted",
+          "reason": "GITHUB_TOKEN/OPENAI_API_KEY/AZURE_OPENAI_KEY/ANTHROPIC_API_KEY read via process.env in sample client/provider config, DefaultAzureCredential for BYOK bearer tokens, and a Vault/K8s Secrets recommendation; no instruction to read, print or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 545,
+          "evidence": "API key",
+          "context": "| `apiKey` | string | API key (optional for local providers) |",
+          "disposition": "accepted",
+          "reason": "GITHUB_TOKEN/OPENAI_API_KEY/AZURE_OPENAI_KEY/ANTHROPIC_API_KEY read via process.env in sample client/provider config, DefaultAzureCredential for BYOK bearer tokens, and a Vault/K8s Secrets recommendation; no instruction to read, print or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 546,
+          "evidence": "apiKey",
+          "context": "| `bearerToken` | string | Bearer token auth (takes precedence over apiKey) |",
+          "disposition": "accepted",
+          "reason": "GITHUB_TOKEN/OPENAI_API_KEY/AZURE_OPENAI_KEY/ANTHROPIC_API_KEY read via process.env in sample client/provider config, DefaultAzureCredential for BYOK bearer tokens, and a Vault/K8s Secrets recommendation; no instruction to read, print or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 558,
+          "evidence": "credential",
+          "context": "credential = DefaultAzureCredential()",
+          "disposition": "accepted",
+          "reason": "GITHUB_TOKEN/OPENAI_API_KEY/AZURE_OPENAI_KEY/ANTHROPIC_API_KEY read via process.env in sample client/provider config, DefaultAzureCredential for BYOK bearer tokens, and a Vault/K8s Secrets recommendation; no instruction to read, print or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 559,
+          "evidence": "credential",
+          "context": "token = credential.get_token(\"https://cognitiveservices.azure.com/.default\").token",
+          "disposition": "accepted",
+          "reason": "GITHUB_TOKEN/OPENAI_API_KEY/AZURE_OPENAI_KEY/ANTHROPIC_API_KEY read via process.env in sample client/provider config, DefaultAzureCredential for BYOK bearer tokens, and a Vault/K8s Secrets recommendation; no instruction to read, print or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 559,
+          "evidence": "https://",
+          "context": "token = credential.get_token(\"https://cognitiveservices.azure.com/.default\").token",
+          "disposition": "accepted",
+          "reason": "Provider base URLs (OpenAI, Azure, Anthropic, localhost Ollama), the GitHub MCP endpoint in sample config, and documentation links to GitHub and modelcontextprotocol.io; the agent is not told to fetch them."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 604,
+          "evidence": "Delete",
+          "context": "await client.deleteSession(\"user-123-task-456\");         // Delete from storage",
+          "disposition": "accepted",
+          "reason": "Match is the `client.deleteSession(...)` sample (SKILL.md:604) that deletes a Copilot session from SDK storage in the user's application."
+        },
+        {
+          "type": "shell-execution",
+          "line": 747,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks for testing an MCP server over stdin, running MCP Inspector, and starting `copilot --headless --port 4321`; plus the word 'shell'/'bash' inside hook sample code that denies shell tools."
+        },
+        {
+          "type": "credential-access",
+          "line": 798,
+          "evidence": "Secret",
+          "context": "- Secret management: use Vault/K8s Secrets for tokens",
+          "disposition": "accepted",
+          "reason": "GITHUB_TOKEN/OPENAI_API_KEY/AZURE_OPENAI_KEY/ANTHROPIC_API_KEY read via process.env in sample client/provider config, DefaultAzureCredential for BYOK bearer tokens, and a Vault/K8s Secrets recommendation; no instruction to read, print or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 900,
+          "evidence": "https://",
+          "context": "- [GitHub Copilot SDK](https://github.com/github/copilot-sdk)",
+          "disposition": "accepted",
+          "reason": "Provider base URLs (OpenAI, Azure, Anthropic, localhost Ollama), the GitHub MCP endpoint in sample config, and documentation links to GitHub and modelcontextprotocol.io; the agent is not told to fetch them."
+        },
+        {
+          "type": "network-access",
+          "line": 901,
+          "evidence": "https://",
+          "context": "- [Copilot CLI Installation](https://docs.github.com/en/copilot/how-tos/set-up/install-copilot-cli)",
+          "disposition": "accepted",
+          "reason": "Provider base URLs (OpenAI, Azure, Anthropic, localhost Ollama), the GitHub MCP endpoint in sample config, and documentation links to GitHub and modelcontextprotocol.io; the agent is not told to fetch them."
+        },
+        {
+          "type": "network-access",
+          "line": 902,
+          "evidence": "https://",
+          "context": "- [MCP Protocol Specification](https://modelcontextprotocol.io)",
+          "disposition": "accepted",
+          "reason": "Provider base URLs (OpenAI, Azure, Anthropic, localhost Ollama), the GitHub MCP endpoint in sample config, and documentation links to GitHub and modelcontextprotocol.io; the agent is not told to fetch them."
+        },
+        {
+          "type": "network-access",
+          "line": 903,
+          "evidence": "https://",
+          "context": "- [MCP Servers Directory](https://github.com/modelcontextprotocol/servers)",
+          "disposition": "accepted",
+          "reason": "Provider base URLs (OpenAI, Azure, Anthropic, localhost Ollama), the GitHub MCP endpoint in sample config, and documentation links to GitHub and modelcontextprotocol.io; the agent is not told to fetch them."
+        },
+        {
+          "type": "network-access",
+          "line": 904,
+          "evidence": "https://",
+          "context": "- [GitHub MCP Server](https://github.com/github/github-mcp-server)",
+          "disposition": "accepted",
+          "reason": "Provider base URLs (OpenAI, Azure, Anthropic, localhost Ollama), the GitHub MCP endpoint in sample config, and documentation links to GitHub and modelcontextprotocol.io; the agent is not told to fetch them."
+        }
+      ]
+    }
+  ]
+}

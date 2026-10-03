@@ -1,0 +1,921 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "kdense/research-grants",
+  "status": "approved",
+  "reviewed_on": "2026-10-02",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "K-Dense-AI/scientific-agent-skills",
+    "path": "skills/research-grants",
+    "revision": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "skills/research-grants",
+    "url": "https://api.github.com/repos/K-Dense-AI/scientific-agent-skills/git/trees/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE.md",
+    "url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/LICENSE.md",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "skills",
+        "skills/research-grants"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE.md is the MIT License with its copyright notice, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file; frontmatter declares MIT, and the short NSF definition quote (broader_impacts.md:14) and agency links are citations of US government sources. A byte-exact copy of LICENSE.md ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "medium",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "package_install": false,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md, references/README.md, nsf_guidelines.md, nih_guidelines.md, doe_guidelines.md, darpa_guidelines.md, nstc_guidelines.md, core_components.md, review_criteria.md, writing_principles.md, proposal_types_and_resubmission.md, specific_aims_guide.md, broader_impacts.md, and assets/budget_justification_template.md, nih_specific_aims_template.md, nsf_project_summary_template.md in full. Grant-writing guidance for NSF, NIH, DOE, DARPA and Taiwan NSTC: requirement matrices, review criteria, aims pages, broader impacts, budgets and resubmissions, with repeated cautions to verify current calls, preserve investigator authorship (NIH AI policy) and never invent data or commitments.",
+      "Mostly guidance that shapes drafts and critiques. Medium because SKILL.md:71-75 shows an optional command that runs `skills/scientific-schematics/scripts/generate_schematic.py` with OPENROUTER_API_KEY, sending the prompt to the third-party OpenRouter API (disclosed at SKILL.md:77), and SKILL.md:322-337 tells the agent to fetch arXiv and add a citation of the K-Dense paper to the user's manuscript/report and tell the user. Acceptable: the schematic step is explicitly optional and disclosed, the skill works fully without it, the citation insertion is disclosed to the user, and no destructive or hidden actions are requested.",
+      "The scientific-schematics script lives in another skill and is not bundled; without that skill installed, the optional figure command will fail (alternatives like matplotlib are offered). Users should review the self-citation step before it modifies a proposal, and avoid sending unpublished or controlled proposal content to OpenRouter (darpa_guidelines.md:104-108 warns the same). Dated agency facts (reviewed 2026-10-01) will go stale."
+    ]
+  },
+  "files": [
+    {
+      "path": "assets/budget_justification_template.md",
+      "sha256": "a65ce61ac86ff3971f64d735854f8b9b53af93d3c0614e7c391d908c8b28ff45",
+      "bytes": 7414,
+      "mode": "100644",
+      "git_blob": "929a1ec66c9c369b740337549066a6aa6b9fd715",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 22,
+          "evidence": "https://",
+          "context": "modular personnel narrative. See [NIH budget guidance](https://grants.nih.gov/grants/developing_budget.htm).",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "network-access",
+          "line": 82,
+          "evidence": "https://",
+          "context": "require purchasing gold open access: [NIH's policy](https://grants.nih.gov/policy-and-compliance/policy-topics/public-access)",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "network-access",
+          "line": 94,
+          "evidence": "https://",
+          "context": "checking the [current NIH structure](https://www.grants.nih.gov/policy-and-compliance/policy-topics/subawards)",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "network-access",
+          "line": 103,
+          "evidence": "https://",
+          "context": "[exception to revised MTDC rules](https://grants.nih.gov/grants/guide/notice-files/NOT-OD-26-072.html)",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 138,
+          "evidence": "Delete",
+          "context": "Delete worksheet instructions and hypothetical examples before preparing the final",
+          "disposition": "accepted",
+          "reason": "Words like 'Delete'/'Remove' tell the user to strip worksheet instructions and placeholders from their own draft (README.md:26, budget_justification_template.md:138, nsf_project_summary_template.md:40), not to delete files."
+        }
+      ]
+    },
+    {
+      "path": "assets/nih_specific_aims_template.md",
+      "sha256": "f960b6410bf6c4a8ebfcb23d069ccdaae5692c38b61d55662ce21a06eaa49696",
+      "bytes": 3118,
+      "mode": "100644",
+      "git_blob": "67c5367130d91cb9697a3d2997d22a3e64f2be7c",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 4,
+          "evidence": "https://",
+          "context": "verify the [NOFO and page-limit table](https://grants.nih.gov/grants-process/write-application/how-to-apply-application-guide/page-limits).",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "network-access",
+          "line": 8,
+          "evidence": "https://",
+          "context": "[its application policy](https://grants.nih.gov/grants/policy/nihgps/HTML5/section_2/2.3.7_policies_affecting_applications.htm).",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "network-access",
+          "line": 54,
+          "evidence": "https://",
+          "context": "Follow [NIH attachment formatting](https://www.grants.nih.gov/grants-process/write-application/how-to-apply-application-guide/format-attachments):",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        }
+      ]
+    },
+    {
+      "path": "assets/nsf_project_summary_template.md",
+      "sha256": "a8c5c638df67fa54f8bb8ab8c4d92bc9a10c471afcbf73e15b6e173c33d8c788",
+      "bytes": 2571,
+      "mode": "100644",
+      "git_blob": "f46cd8b0721c217be26eaad9c41a01116da3f1c2",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 4,
+          "evidence": "https://",
+          "context": "[current supplemented PAPPG](https://www.nsf.gov/policies/pappg) unless the solicitation",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "network-access",
+          "line": 33,
+          "evidence": "https://",
+          "context": "\"five-pillar\" formula. Follow [current NSF priorities](https://www.nsf.gov/updates-on-priorities)",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 40,
+          "evidence": "Remove",
+          "context": "- Remove all placeholders, advice and sample text not grounded in the applicant's plan.",
+          "disposition": "accepted",
+          "reason": "Words like 'Delete'/'Remove' tell the user to strip worksheet instructions and placeholders from their own draft (README.md:26, budget_justification_template.md:138, nsf_project_summary_template.md:40), not to delete files."
+        }
+      ]
+    },
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE.md",
+      "sha256": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "eb246475fd5a66b9bb56176f3a718984632dd98d",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry the copyright and permission notice.",
+      "findings": []
+    },
+    {
+      "path": "references/broader_impacts.md",
+      "sha256": "de888b798004a3c0174d8dfd99626c8654a9ca53f78e2dcd4d2e242bed9873e1",
+      "bytes": 24394,
+      "mode": "100644",
+      "git_blob": "52a41cf96e0872ea839ff2a7928b6f530ae53b77",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 5,
+          "evidence": "https://",
+          "context": "Replace them with verified applicant plans. Follow [current NSF priorities](https://www.nsf.gov/updates-on-priorities)",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "network-access",
+          "line": 20,
+          "evidence": "https://",
+          "context": "These five groupings are drafting aids, not a mandatory NSF taxonomy. Choose a credible benefit, through the research itself or associated activities, and explain resources, timelines and assessment. See [NSF broader-impact guidance](https:",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "network-access",
+          "line": 380,
+          "evidence": "https://",
+          "context": "- **NSF Broader Impacts Website**: https://www.nsf.gov/funding/learn/broader-impacts",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "network-access",
+          "line": 381,
+          "evidence": "https://",
+          "context": "- **Applicable requirements**: https://www.nsf.gov/policies/pappg",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        }
+      ]
+    },
+    {
+      "path": "references/core_components.md",
+      "sha256": "73b5915fa8fb905949233d3e2cdc118525ac9b448cb0fb05407ee3d7ecf44cdb",
+      "bytes": 16469,
+      "mode": "100644",
+      "git_blob": "cfac6c7d2e68374399157a0233732bc79fe558ca",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "references/darpa_guidelines.md",
+      "sha256": "f7bc5c2d0b461275599a157a074a90b71169415ebdeea3417549952b09598fc6",
+      "bytes": 7145,
+      "mode": "100644",
+      "git_blob": "1980af9e5b1988d61bdc286a48e5f86a4b07bc75",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 5,
+          "evidence": "https://",
+          "context": "because it is basic science: the [BAA guidance](https://www.darpa.mil/research/opportunities/baa)",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "network-access",
+          "line": 10,
+          "evidence": "https://",
+          "context": "Start from [DARPA research opportunities](https://www.darpa.mil/work-with-us/opportunities)",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "network-access",
+          "line": 11,
+          "evidence": "https://",
+          "context": "and the official [SAM.gov](https://sam.gov/) record. Retrieve the solicitation,",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "network-access",
+          "line": 18,
+          "evidence": "https://",
+          "context": "[In May 2026](https://www.darpa.mil/news/2026/what-is-in-name-darpa-reflecting-enduring-mission-future-focus),",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "network-access",
+          "line": 29,
+          "evidence": "https://",
+          "context": "Use the [Heilmeier Catechism](https://www.darpa.mil/about/heilmeier-catechism) to organize",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        }
+      ]
+    },
+    {
+      "path": "references/doe_guidelines.md",
+      "sha256": "79e4afebf7fb71dabfc661144913d0d6af9583072e52b8405a67f2932b5ac5d7",
+      "bytes": 7713,
+      "mode": "100644",
+      "git_blob": "25fa91cdbe59ea6eeb12b312284174583c15c958",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 17,
+          "evidence": "https://",
+          "context": "Use [SC funding listings](https://science.osti.gov/grants/FOAs/Open) and the",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "network-access",
+          "line": 18,
+          "evidence": "https://",
+          "context": "[closed-call archive](https://science.osti.gov/grants/FOAs/Closed) to distinguish status.",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "network-access",
+          "line": 22,
+          "evidence": "https://",
+          "context": "DOE announced [CMEI program realignment in January 2026](https://www.energy.gov/cmei/articles/energy-department-announces-realignment-critical-minerals-and-energy-innovation).",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "network-access",
+          "line": 30,
+          "evidence": "https://",
+          "context": "- [Grants.gov](https://www.grants.gov/) hosts federal opportunities and application",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "network-access",
+          "line": 32,
+          "evidence": "https://",
+          "context": "- [PAMS](https://pamspublic.science.energy.gov/) is SC's management system. Do not send",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "network-access",
+          "line": 34,
+          "evidence": "https://",
+          "context": "- A verified **historical example**, [DE-FOA-0003600 Amendment 000001](https://science.osti.gov/bes/-/media/grants/pdf/foas/2026/DE-FOA-0003600-000001.pdf),",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "network-access",
+          "line": 37,
+          "evidence": "https://",
+          "context": "- [ARPA-E eXCHANGE](https://arpa-e-foa.energy.gov/) is the application portal;",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "network-access",
+          "line": 39,
+          "evidence": "https://",
+          "context": "- [CMEI eXCHANGE](https://eere-exchange.energy.gov/) carries opportunity-specific",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "network-access",
+          "line": 75,
+          "evidence": "https://",
+          "context": "DOE Common Forms through SciENcv under [DOE's Common Forms guidance](https://www.energy.gov/ia/common-forms-sciencv).",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "network-access",
+          "line": 84,
+          "evidence": "https://",
+          "context": "opportunity and [SC policy guidance](https://science.osti.gov/grants/Policy-and-Guidance).",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "network-access",
+          "line": 93,
+          "evidence": "https://",
+          "context": "  [MAGNITO FAQ](https://arpa-e.energy.gov/sites/default/files/2025-11/DE-FOA-0003590%20MAGNITO%20FOA%20FAQ%20-%204f.pdf)",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        }
+      ]
+    },
+    {
+      "path": "references/nih_guidelines.md",
+      "sha256": "ff3f8dda0a2f77743401b44caff6c4f94471fb0348e2d4abf4f7b86e8874f285",
+      "bytes": 13591,
+      "mode": "100644",
+      "git_blob": "159bf8c318afe79c1516c293a5af96a492919770",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 5,
+          "evidence": "https://",
+          "context": "2025, [Grants.gov is the official source of NIH funding opportunities](https://www.grants.nih.gov/funding/explore-nih-opportunities);",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "network-access",
+          "line": 11,
+          "evidence": "https://",
+          "context": "[NIH policy](https://grants.nih.gov/grants/policy/nihgps/HTML5/section_2/2.3.7_policies_affecting_applications.htm)",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "network-access",
+          "line": 26,
+          "evidence": "https://",
+          "context": "[simplified review framework](https://www.grants.nih.gov/policy-and-compliance/policy-topics/peer-review/simplifying-review/framework):",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "network-access",
+          "line": 42,
+          "evidence": "https://",
+          "context": "[NOT-OD-26-114](https://grants.nih.gov/grants/guide/notice-files/NOT-OD-26-114.html)",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "network-access",
+          "line": 52,
+          "evidence": "https://",
+          "context": "Use the [current page-limit table](https://grants.nih.gov/grants-process/write-application/how-to-apply-application-guide/page-limits)",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "network-access",
+          "line": 77,
+          "evidence": "https://",
+          "context": "Follow [attachment requirements](https://www.grants.nih.gov/grants-process/write-application/how-to-apply-application-guide/format-attachments):",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "network-access",
+          "line": 89,
+          "evidence": "https://",
+          "context": "Use [SciENcv for the Biographical Sketch Common Form and NIH Supplement](https://www.grants.nih.gov/grants-process/write-application/forms-directory/biographical-sketch-common-form)",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "network-access",
+          "line": 99,
+          "evidence": "https://",
+          "context": "[NOT-OD-26-046](https://grants.nih.gov/grants/guide/notice-files/NOT-OD-26-046.html).",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "network-access",
+          "line": 100,
+          "evidence": "https://",
+          "context": "[NOT-OD-26-100](https://grants.nih.gov/grants/guide/notice-files/NOT-OD-26-100.html)",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "network-access",
+          "line": 111,
+          "evidence": "https://",
+          "context": "- **R21:** exploratory/developmental; the [activity-code guidance](https://www.grants.nih.gov/funding/activity-codes/r21)",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "network-access",
+          "line": 124,
+          "evidence": "https://",
+          "context": "[NOT-OD-26-098](https://grants.nih.gov/grants/guide/notice-files/NOT-OD-26-098.html)",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "network-access",
+          "line": 132,
+          "evidence": "https://",
+          "context": "applications, [modular budgets](https://grants.nih.gov/grants/developing_budget.htm)",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "network-access",
+          "line": 140,
+          "evidence": "https://",
+          "context": "[NOT-OD-26-038](https://grants.nih.gov/grants/guide/notice-files/NOT-OD-26-038.html).",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "network-access",
+          "line": 141,
+          "evidence": "https://",
+          "context": "The September 28 [continuing-resolution notice](https://grants.nih.gov/grants/guide/notice-files/NOT-OD-26-131.html)",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "network-access",
+          "line": 149,
+          "evidence": "https://",
+          "context": "subaward threshold automatically: [NOT-OD-26-072](https://grants.nih.gov/grants/guide/notice-files/NOT-OD-26-072.html)",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "network-access",
+          "line": 156,
+          "evidence": "https://",
+          "context": "applications. Consult the [current subaward policy](https://www.grants.nih.gov/policy-and-compliance/policy-topics/subawards)",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "network-access",
+          "line": 157,
+          "evidence": "https://",
+          "context": "and [PF5 instructions](https://grants.nih.gov/funding/activity-codes/pf5) for eligible",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "network-access",
+          "line": 164,
+          "evidence": "https://",
+          "context": "[standard-date table](https://www.grants.nih.gov/grants-process/submit/submission-policies/standard-due-dates).",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "network-access",
+          "line": 179,
+          "evidence": "https://",
+          "context": "[NOT-OD-26-094](https://grants.nih.gov/grants/guide/notice-files/NOT-OD-26-094.html)",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "network-access",
+          "line": 190,
+          "evidence": "https://",
+          "context": "accepts resubmissions. Follow the [resubmission policy](https://grants.nih.gov/grants-process/submit/submission-policies/resubmission-applications),",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        }
+      ]
+    },
+    {
+      "path": "references/nsf_guidelines.md",
+      "sha256": "78fe17b0e5798767e6ff9074f28d6b8d154dbe256b9d36dcbdaa78fbd6b73f24",
+      "bytes": 7963,
+      "mode": "100644",
+      "git_blob": "214dd3206fbe08ac49c56ca9a860a9f80f32182b",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 4,
+          "evidence": "https://",
+          "context": "before the base PAPPG. The [current PAPPG index](https://www.nsf.gov/policies/pappg)",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "network-access",
+          "line": 6,
+          "evidence": "https://",
+          "context": "[Supplement 1](https://www.nsf.gov/policies/document/pappg24-1-supplement-1)",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "network-access",
+          "line": 7,
+          "evidence": "https://",
+          "context": "and [Supplement 2](https://www.nsf.gov/policies/document/pappg24-1-supplement-2)",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "network-access",
+          "line": 14,
+          "evidence": "https://",
+          "context": "[funding search](https://www.nsf.gov/funding/opportunities) for current opportunities;",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "network-access",
+          "line": 20,
+          "evidence": "https://",
+          "context": "[Intellectual Merit and Broader Impacts](https://www.nsf.gov/policies/pappg/24-1/ch-3-proposal-processing-review)",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "network-access",
+          "line": 32,
+          "evidence": "https://",
+          "context": "Under [PAPPG Chapter II](https://www.nsf.gov/policies/pappg/24-1/ch-2-proposal-preparation),",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "network-access",
+          "line": 91,
+          "evidence": "https://",
+          "context": "[CAREER NSF 22-586](https://www.nsf.gov/funding/opportunities/career-faculty-early-career-development-program/nsf22-586/solicitation)",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        }
+      ]
+    },
+    {
+      "path": "references/nstc_guidelines.md",
+      "sha256": "852b3bdcd990a17b9164680b4bf344f0800e551d4126310531f7c1d2be7f6c35",
+      "bytes": 7660,
+      "mode": "100644",
+      "git_blob": "d5f619c65d2cd4f4f1db01fcb791b0360a144d83",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 5,
+          "evidence": "https://",
+          "context": "[research-project area](https://www.nstc.gov.tw/folksonomy/list/3555dc27-f75a-491d-b9b2-ab66c156801f?l=ch)",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "network-access",
+          "line": 6,
+          "evidence": "https://",
+          "context": "and the applicable call in the [solicitation directory](https://www.nstc.gov.tw/folksonomy/rfpList).",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "network-access",
+          "line": 14,
+          "evidence": "https://",
+          "context": "2. Retrieve the current [common forms](https://www.nstc.gov.tw/folksonomy/list/6c0b309f-518b-4613-a142-44af89109251?l=ch),",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "network-access",
+          "line": 17,
+          "evidence": "https://",
+          "context": "3. Read the [research-project operating rules, revised April 10, 2026](https://www.nstc.gov.tw/folksonomy/detail/2572b81b-2188-4fc5-af55-c2efac89c610).",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "network-access",
+          "line": 28,
+          "evidence": "https://",
+          "context": "[Humanities division](https://www.nstc.gov.tw/folksonomy/list/dea8c5cc-acd5-46d0-8dcb-15cfd8072e5d?l=ch)",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "network-access",
+          "line": 29,
+          "evidence": "https://",
+          "context": "and [Engineering division](https://www.nstc.gov.tw/folksonomy/list/49ec3266-51af-4527-be73-fe5e10d0cf13?l=ch)",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "network-access",
+          "line": 103,
+          "evidence": "https://",
+          "context": "access. The [NSTC academic-ethics rules](https://law.nstc.gov.tw/LawContent.aspx?id=FL044283)",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        }
+      ]
+    },
+    {
+      "path": "references/proposal_types_and_resubmission.md",
+      "sha256": "267d3c8688407620c3cf633a0b4e18730c4d65b5380531796d1e8b4a4da9db1f",
+      "bytes": 3252,
+      "mode": "100644",
+      "git_blob": "7d20c7f18791464b79d6df254830a0b7f2edb3bd",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 28,
+          "evidence": "https://",
+          "context": "Follow [NIH resubmission policy](https://grants.nih.gov/grants-process/submit/submission-policies/resubmission-applications)",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        }
+      ]
+    },
+    {
+      "path": "references/README.md",
+      "sha256": "c1dc961d3ea576cd4d06e76a47d1a4236b7e9d77bf90a612302125938db9bc5c",
+      "bytes": 2493,
+      "mode": "100644",
+      "git_blob": "ee83e1df72372b48afaa7d68d04aad3bb2061486",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 26,
+          "evidence": "Delete",
+          "context": "NSF Project Summary, NIH Specific Aims, and budget justification. Delete instructions",
+          "disposition": "accepted",
+          "reason": "Words like 'Delete'/'Remove' tell the user to strip worksheet instructions and placeholders from their own draft (README.md:26, budget_justification_template.md:138, nsf_project_summary_template.md:40), not to delete files."
+        }
+      ]
+    },
+    {
+      "path": "references/review_criteria.md",
+      "sha256": "e6d6b9822ee6cb744eff39a79a7502c3ce6668c76ae49a5f652793421e81a458",
+      "bytes": 2858,
+      "mode": "100644",
+      "git_blob": "98f8ec16550218740f26d510d62d73eef41378b9",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 10,
+          "evidence": "https://",
+          "context": "[Intellectual Merit and Broader Impacts](https://www.nsf.gov/policies/pappg/24-1/ch-3-proposal-processing-review)",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "network-access",
+          "line": 19,
+          "evidence": "https://",
+          "context": "[simplified framework](https://www.grants.nih.gov/policy-and-compliance/policy-topics/peer-review/simplifying-review/framework)",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        }
+      ]
+    },
+    {
+      "path": "references/specific_aims_guide.md",
+      "sha256": "f0bb4f76ceac2db418cdc556869cab16d9bccbc2ad0568894fd5a086a6e796a2",
+      "bytes": 21099,
+      "mode": "100644",
+      "git_blob": "bb41afdf82bb5b7f58de71900c9077a927df3d90",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 7,
+          "evidence": "https://",
+          "context": "[NIH application policy](https://grants.nih.gov/grants/policy/nihgps/HTML5/section_2/2.3.7_policies_affecting_applications.htm)",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "network-access",
+          "line": 18,
+          "evidence": "https://",
+          "context": "**Line spacing**: At most six lines per vertical inch; at most 15 characters per horizontal inch. See [NIH attachment rules](https://www.grants.nih.gov/grants-process/write-application/how-to-apply-application-guide/format-attachments).",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        }
+      ]
+    },
+    {
+      "path": "references/writing_principles.md",
+      "sha256": "718b079d8f93df8ce4bd44767b3d794ddde7ebe5901a9957caf7b2ace9c5bda8",
+      "bytes": 3590,
+      "mode": "100644",
+      "git_blob": "f0ee0b4593f62e54b7bbeb469bd2bc2e80c5decc",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "3ca7ea8075bbe8008389660cc4a5769d66ac9ec638f3f61a955a5d7b20aeba85",
+      "bytes": 17328,
+      "mode": "100644",
+      "git_blob": "2c936ee59af1bf40481e073574e93636d857ba70",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 4,
+          "evidence": "Bash",
+          "context": "allowed-tools: Read Write Edit Bash",
+          "disposition": "accepted",
+          "reason": "SKILL.md:4 lists Bash in allowed-tools and SKILL.md:73 is a bash block running an optional schematic script from another skill; no other commands."
+        },
+        {
+          "type": "network-access",
+          "line": 50,
+          "evidence": "https://",
+          "context": "editing of investigator-authored material. [NIH policy](https://grants.nih.gov/grants/policy/nihgps/HTML5/section_2/2.3.7_policies_affecting_applications.htm)",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "shell-execution",
+          "line": 73,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "SKILL.md:4 lists Bash in allowed-tools and SKILL.md:73 is a bash block running an optional schematic script from another skill; no other commands."
+        },
+        {
+          "type": "network-access",
+          "line": 77,
+          "evidence": "https://",
+          "context": "**Disclosure:** AI schematic generation sends your prompt to [OpenRouter](https://openrouter.ai/) (a third-party API). Do not include unpublished sensitive details unless that transmission is appropriate for your project.",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "network-access",
+          "line": 87,
+          "evidence": "https://",
+          "context": "- Use the [current PAPPG index](https://www.nsf.gov/policies/pappg), effective supplements and solicitation; as reviewed, NSF 24-1 is supplemented by NSF 26-200 and 26-202",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "network-access",
+          "line": 103,
+          "evidence": "https://",
+          "context": "- For eligible applications, modular budgets use **$25,000 increments**, up to **$250,000 in direct costs per budget period**, excluding consortium F&A; verify the NOFO and organization eligibility. See [NIH budget guidance](https://grants.",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "network-access",
+          "line": 104,
+          "evidence": "https://",
+          "context": "- NIH permits **one resubmission (A1)** of an unfunded application, within 37 months of the initial application due date when the NOFO permits resubmissions; see [resubmission policy](https://grants.nih.gov/grants-process/submit/submission-",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "network-access",
+          "line": 330,
+          "evidence": "https://",
+          "context": "> https://doi.org/10.48550/arXiv.2609.00065",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "network-access",
+          "line": 332,
+          "evidence": "https://",
+          "context": "Always cite the current version. The DOI and https://arxiv.org/abs/2609.00065 resolve to the",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "network-access",
+          "line": 334,
+          "evidence": "https://",
+          "context": "available, fetch https://arxiv.org/abs/2609.00065 (or",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        },
+        {
+          "type": "network-access",
+          "line": 335,
+          "evidence": "http://",
+          "context": "http://export.arxiv.org/api/query?id_list=2609.00065) before writing the reference and take",
+          "disposition": "accepted",
+          "reason": "Links to official agency pages (nsf.gov, grants.nih.gov, energy.gov, darpa.mil, nstc.gov.tw, sam.gov) and arXiv for verification and citation; the only active network use is optional schematic generation via OpenRouter and fetching the arXiv record for the citation."
+        }
+      ]
+    }
+  ]
+}

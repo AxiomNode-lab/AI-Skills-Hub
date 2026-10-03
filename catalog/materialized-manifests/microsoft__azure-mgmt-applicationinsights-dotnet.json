@@ -1,0 +1,249 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "microsoft/azure-mgmt-applicationinsights-dotnet",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/azure-sdk-dotnet/skills/azure-mgmt-applicationinsights-dotnet",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "review": {
+    "path": "catalog/reviews/microsoft__azure-mgmt-applicationinsights-dotnet.json",
+    "sha256": "c416d5f5fa5704e21c85823f5e5d2308d47dc60b98357bff5d5b69e55b361719"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "shell-execution",
+        "line": 18,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 28,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 43,
+        "evidence": "credential",
+        "context": "var credential = new DefaultAzureCredential(",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 46,
+        "evidence": "credential",
+        "context": "// Or use a specific credential directly in production:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 47,
+        "evidence": "credential",
+        "context": "// See https://learn.microsoft.com/dotnet/api/overview/azure/identity-readme?view=azure-dotnet#credential-classes",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 47,
+        "evidence": "https://",
+        "context": "// See https://learn.microsoft.com/dotnet/api/overview/azure/identity-readme?view=azure-dotnet#credential-classes",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 48,
+        "evidence": "credential",
+        "context": "// var credential = new ManagedIdentityCredential();",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 49,
+        "evidence": "credential",
+        "context": "ArmClient client = new ArmClient(credential);",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 130,
+        "evidence": "API Key",
+        "context": "### 3. Create API Key",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 138,
+        "evidence": "API key",
+        "context": "// API key for reading telemetry",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 149,
+        "evidence": "apiKey",
+        "context": "ApplicationInsightsComponentApiKeyResource apiKey = await apiKeys",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 152,
+        "evidence": "API Key",
+        "context": "Console.WriteLine($\"API Key Name: {apiKey.Data.Name}\");",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 152,
+        "evidence": "apiKey",
+        "context": "Console.WriteLine($\"API Key Name: {apiKey.Data.Name}\");",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 153,
+        "evidence": "API Key",
+        "context": "Console.WriteLine($\"API Key: {apiKey.Data.ApiKey}\"); // Only shown once!",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 153,
+        "evidence": "apiKey",
+        "context": "Console.WriteLine($\"API Key: {apiKey.Data.ApiKey}\"); // Only shown once!",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 153,
+        "evidence": "ApiKey",
+        "context": "Console.WriteLine($\"API Key: {apiKey.Data.ApiKey}\"); // Only shown once!",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 185,
+        "evidence": "http://",
+        "context": "                     xmlns=\"http://microsoft.com/schemas/VisualStudio/TeamTest/2010\">",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 187,
+        "evidence": "https://",
+        "context": "                    <Request Method=\"GET\" Version=\"1.1\" Url=\"https://myapp.example.com\" ",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 230,
+        "evidence": "http://",
+        "context": "                     xmlns=\"http://microsoft.com/schemas/VisualStudio/TeamTest/2010\">",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 232,
+        "evidence": "https://",
+        "context": "                    <Request Method=\"GET\" Version=\"1.1\" Url=\"https://myapp.example.com/login\" ",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 234,
+        "evidence": "https://",
+        "context": "                    <Request Method=\"POST\" Version=\"1.1\" Url=\"https://myapp.example.com/api/auth\" ",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 375,
+        "evidence": "Delete",
+        "context": "### 10. Delete Resources",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 378,
+        "evidence": "Delete",
+        "context": "// Delete Application Insights component",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 383,
+        "evidence": "Delete",
+        "context": "// Delete web test",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 395,
+        "evidence": "API key",
+        "context": "| `ApplicationInsightsComponentApiKeyResource` | API key for programmatic access |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 495,
+        "evidence": "https://",
+        "context": "| NuGet Package | https://www.nuget.org/packages/Azure.ResourceManager.ApplicationInsights |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 496,
+        "evidence": "https://",
+        "context": "| API Reference | https://learn.microsoft.com/dotnet/api/azure.resourcemanager.applicationinsights |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 497,
+        "evidence": "https://",
+        "context": "| Product Documentation | https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 498,
+        "evidence": "https://",
+        "context": "| GitHub Source | https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/applicationinsights/Azure.ResourceManager.ApplicationInsights |",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 19415
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "ef6c083b7ddabc0c89856e6755914b2619f93efb8948e70f1bcc458c1126ecca",
+      "bytes": 18275,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 19415
+}

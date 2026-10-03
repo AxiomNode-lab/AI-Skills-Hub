@@ -1,0 +1,353 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "microsoft/azure-ai-vision-imageanalysis-java",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/azure-sdk-java/skills/azure-ai-vision-imageanalysis-java",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "review": {
+    "path": "catalog/reviews/microsoft__azure-ai-vision-imageanalysis-java.json",
+    "sha256": "21ef2147e068149bdfe7cbfc9cbd042aa12e0796198938ff88a07ba7dfb79745"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": false,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "credential-access",
+        "line": 41,
+        "evidence": "API Key",
+        "context": "### With API Key",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 46,
+        "evidence": "credential",
+        "context": "import com.azure.core.credential.KeyCredential;",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 53,
+        "evidence": "credential",
+        "context": "    .credential(new KeyCredential(key))",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 64,
+        "evidence": "credential",
+        "context": "    .credential(new DefaultAzureCredentialBuilder().build())",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 75,
+        "evidence": "credential",
+        "context": "    .credential(new DefaultAzureCredentialBuilder().build())",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "network-access",
+        "line": 121,
+        "evidence": "https://",
+        "context": "String imageUrl = \"https://example.com/photo.jpg\";",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "network-access",
+        "line": 183,
+        "evidence": "https://",
+        "context": "String documentUrl = \"https://example.com/receipt.jpg\";",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "network-access",
+        "line": 205,
+        "evidence": "https://",
+        "context": "String imageUrl = \"https://example.com/street-scene.jpg\";",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "network-access",
+        "line": 242,
+        "evidence": "https://",
+        "context": "String imageUrl = \"https://example.com/nature.jpg\";",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "network-access",
+        "line": 273,
+        "evidence": "https://",
+        "context": "String imageUrl = \"https://example.com/group-photo.jpg\";",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "network-access",
+        "line": 302,
+        "evidence": "https://",
+        "context": "String imageUrl = \"https://example.com/landscape.jpg\";",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "network-access",
+        "line": 342,
+        "evidence": "https://",
+        "context": "String imageUrl = \"https://example.com/complex-scene.jpg\";",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "network-access",
+        "line": 367,
+        "evidence": "https://",
+        "context": "String imageUrl = \"https://example.com/photo.jpg\";",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 429,
+        "evidence": "credential",
+        "context": "    .credential(new DefaultAzureCredentialBuilder().build())",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "network-access",
+        "line": 432,
+        "evidence": "https://",
+        "context": "String imageUrl = \"https://example.com/photo.jpg\";",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "network-access",
+        "line": 458,
+        "evidence": "https://",
+        "context": "    \"https://example.com/image1.jpg\",",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "network-access",
+        "line": 459,
+        "evidence": "https://",
+        "context": "    \"https://example.com/image2.jpg\",",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "network-access",
+        "line": 460,
+        "evidence": "https://",
+        "context": "    \"https://example.com/image3.jpg\"",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 508,
+        "evidence": "API key",
+        "context": "            System.err.println(\"Unauthorized - check API key\");",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 546,
+        "evidence": "credential",
+        "context": "            .credential(new DefaultAzureCredentialBuilder().build())",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "network-access",
+        "line": 675,
+        "evidence": "https://",
+        "context": "        String imageUrl = \"https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/landmark.jpg\";",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 689,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "network-access",
+        "line": 690,
+        "evidence": "https://",
+        "context": "VISION_ENDPOINT=https://<resource>.cognitiveservices.azure.com/",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 691,
+        "evidence": "api-key",
+        "context": "VISION_KEY=<your-api-key>",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 695,
+        "evidence": "secret",
+        "context": "AZURE_CLIENT_SECRET=<service-principal-secret>",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "network-access",
+        "line": 707,
+        "evidence": "https://",
+        "context": "Caption and Dense Captions require GPU-supported regions. Check [supported regions](https://learn.microsoft.com/azure/ai-services/computer-vision/concept-describe-images-40) before deployment.",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 27,
+        "evidence": "API Key",
+        "context": "### With API Key",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 32,
+        "evidence": "credential",
+        "context": "import com.azure.core.credential.KeyCredential;",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 39,
+        "evidence": "credential",
+        "context": "    .credential(new KeyCredential(key))",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 50,
+        "evidence": "credential",
+        "context": "    .credential(new KeyCredential(key))",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 57,
+        "evidence": "credential",
+        "context": "import com.azure.core.credential.TokenCredential;",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 62,
+        "evidence": "credential",
+        "context": "TokenCredential credential = new DefaultAzureCredentialBuilder()",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 65,
+        "evidence": "credential",
+        "context": "// Or use a specific credential directly in production:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 66,
+        "evidence": "credential",
+        "context": "// See https://learn.microsoft.com/java/api/overview/azure/identity-readme?view=azure-java-stable#credential-classes",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 66,
+        "evidence": "https://",
+        "context": "// See https://learn.microsoft.com/java/api/overview/azure/identity-readme?view=azure-java-stable#credential-classes",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 67,
+        "evidence": "credential",
+        "context": "// TokenCredential credential = new ManagedIdentityCredentialBuilder().build();",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 71,
+        "evidence": "credential",
+        "context": "    .credential(credential)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 71,
+        "evidence": "credential",
+        "context": "    .credential(credential)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 114,
+        "evidence": "https://",
+        "context": "    \"https://example.com/image.jpg\",",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 280,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 281,
+        "evidence": "https://",
+        "context": "VISION_ENDPOINT=https://<resource>.cognitiveservices.azure.com/ # Required for all auth methods",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 282,
+        "evidence": "api-key",
+        "context": "VISION_KEY=<your-api-key> # Only required for AzureKeyCredential auth",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 294,
+        "evidence": "https://",
+        "context": "Caption and Dense Captions require GPU-supported regions. Check [supported regions](https://learn.microsoft.com/azure/ai-services/computer-vision/concept-describe-images-40) before deployment.",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 31990
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/examples.md",
+      "sha256": "63ae8aa36a41e956d5721fba66fee1d0c14eaca2210984cd09cdef4b207aa2c3",
+      "bytes": 22120,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "ea209e06fc0dc906227ed226f6ea7a73c2352ae0aac251c9e1f30bbc0455ae37",
+      "bytes": 8730,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 31990
+}

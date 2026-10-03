@@ -1,0 +1,333 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "kdense/cellxgene-census",
+  "status": "approved",
+  "reviewed_on": "2026-10-02",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "K-Dense-AI/scientific-agent-skills",
+    "path": "skills/cellxgene-census",
+    "revision": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "skills/cellxgene-census",
+    "url": "https://api.github.com/repos/K-Dense-AI/scientific-agent-skills/git/trees/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE.md",
+    "url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/LICENSE.md",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "skills",
+        "skills/cellxgene-census"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE.md is the MIT License with its copyright notice, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file; frontmatter declares MIT and CZI/TileDB/Scanpy docs are linked, not copied. A byte-exact copy of LICENSE.md ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "medium",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md and references/api_access.md, census_schema.md, common_patterns.md, core_workflow_patterns.md in full. Python guidance for querying the public CZ CELLxGENE Census (TileDB-SOMA) for single-cell/spatial metadata, expression slices, embeddings and source H5AD lookups, with careful notes on version pinning, primary-data filtering and statistical pitfalls.",
+      "Medium because SKILL.md:42-55 has the agent run `uv pip install` of cellxgene-census==1.18.0 (pinned) and an unpinned `tiledbsoma-ml`, and SKILL.md:319-334 tells the agent to fetch arXiv and add a K-Dense citation to the user's manuscript/report and tell the user. Acceptable: the packages are the official CZI SDKs from PyPI, data access is anonymous public HTTPS/S3 with no credentials, the optional bulk H5AD download is commented out and refuses to overwrite files (api_access.md:64-68), and the citation step is disclosed.",
+      "Queries can be very large; the skill repeatedly advises estimating size first. Some examples reference user-supplied callbacks (process_batch, model, num_epochs) and an optional separately installed scanorama; these are illustrative, not missing bundled files."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE.md",
+      "sha256": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "eb246475fd5a66b9bb56176f3a718984632dd98d",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry the copyright and permission notice.",
+      "findings": []
+    },
+    {
+      "path": "references/api_access.md",
+      "sha256": "231a947443ea6bd1f3b827951a4db2603a2dc203908f59bfeb24ca55a8f913a9",
+      "bytes": 5917,
+      "mode": "100644",
+      "git_blob": "9ec6d29e06436e2aea0c15882538f6c626ae5c21",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 16,
+          "evidence": "https://",
+          "context": "| Build directory | `https://census.cellxgene.cziscience.com/cellxgene-census/v1/release.json`; JSON aliases and release descriptors, resolved by `get_census_version_description` / `get_census_version_directory` |",
+          "disposition": "accepted",
+          "reason": "Links to CZI Census docs, release/mirror/embedding manifests, the public us-west-2 S3 bucket, PyPI, Scanpy docs and arXiv; the SDK reads public Census data anonymously over HTTPS/S3 as the skill's core function."
+        },
+        {
+          "type": "network-access",
+          "line": 17,
+          "evidence": "https://",
+          "context": "| Mirrors | `https://census.cellxgene.cziscience.com/cellxgene-census/v1/mirrors.json`; JSON default mirror and base URI configuration |",
+          "disposition": "accepted",
+          "reason": "Links to CZI Census docs, release/mirror/embedding manifests, the public us-west-2 S3 bucket, PyPI, Scanpy docs and arXiv; the SDK reads public Census data anonymously over HTTPS/S3 as the skill's core function."
+        },
+        {
+          "type": "network-access",
+          "line": 20,
+          "evidence": "https://",
+          "context": "| Embedding manifest | `https://contrib.cellxgene.cziscience.com/contrib/cell-census/contributions.json`; SDK filters contributions by exact build, organism, and embedding type |",
+          "disposition": "accepted",
+          "reason": "Links to CZI Census docs, release/mirror/embedding manifests, the public us-west-2 S3 bucket, PyPI, Scanpy docs and arXiv; the SDK reads public Census data anonymously over HTTPS/S3 as the skill's core function."
+        },
+        {
+          "type": "network-access",
+          "line": 97,
+          "evidence": "https://",
+          "context": "- [Python API](https://chanzuckerberg.github.io/cellxgene-census/python-api.html)",
+          "disposition": "accepted",
+          "reason": "Links to CZI Census docs, release/mirror/embedding manifests, the public us-west-2 S3 bucket, PyPI, Scanpy docs and arXiv; the SDK reads public Census data anonymously over HTTPS/S3 as the skill's core function."
+        },
+        {
+          "type": "network-access",
+          "line": 98,
+          "evidence": "https://",
+          "context": "- [SDK release metadata](https://pypi.org/project/cellxgene-census/1.18.0/)",
+          "disposition": "accepted",
+          "reason": "Links to CZI Census docs, release/mirror/embedding manifests, the public us-west-2 S3 bucket, PyPI, Scanpy docs and arXiv; the SDK reads public Census data anonymously over HTTPS/S3 as the skill's core function."
+        },
+        {
+          "type": "network-access",
+          "line": 99,
+          "evidence": "https://",
+          "context": "- [Data releases](https://chanzuckerberg.github.io/cellxgene-census/cellxgene_census_docsite_data_release_info.html)",
+          "disposition": "accepted",
+          "reason": "Links to CZI Census docs, release/mirror/embedding manifests, the public us-west-2 S3 bucket, PyPI, Scanpy docs and arXiv; the SDK reads public Census data anonymously over HTTPS/S3 as the skill's core function."
+        },
+        {
+          "type": "network-access",
+          "line": 100,
+          "evidence": "https://",
+          "context": "- [Installation](https://chanzuckerberg.github.io/cellxgene-census/cellxgene_census_docsite_installation.html)",
+          "disposition": "accepted",
+          "reason": "Links to CZI Census docs, release/mirror/embedding manifests, the public us-west-2 S3 bucket, PyPI, Scanpy docs and arXiv; the SDK reads public Census data anonymously over HTTPS/S3 as the skill's core function."
+        },
+        {
+          "type": "network-access",
+          "line": 101,
+          "evidence": "https://",
+          "context": "- [Schema](https://github.com/chanzuckerberg/cellxgene-census/blob/main/docs/cellxgene_census_schema.md)",
+          "disposition": "accepted",
+          "reason": "Links to CZI Census docs, release/mirror/embedding manifests, the public us-west-2 S3 bucket, PyPI, Scanpy docs and arXiv; the SDK reads public Census data anonymously over HTTPS/S3 as the skill's core function."
+        },
+        {
+          "type": "network-access",
+          "line": 102,
+          "evidence": "https://",
+          "context": "- [Spatial tutorial](https://chanzuckerberg.github.io/cellxgene-census/notebooks/api_demo/census_spatial.html)",
+          "disposition": "accepted",
+          "reason": "Links to CZI Census docs, release/mirror/embedding manifests, the public us-west-2 S3 bucket, PyPI, Scanpy docs and arXiv; the SDK reads public Census data anonymously over HTTPS/S3 as the skill's core function."
+        },
+        {
+          "type": "network-access",
+          "line": 103,
+          "evidence": "https://",
+          "context": "- [TileDB-SOMA-ML](https://single-cell-data.github.io/TileDB-SOMA-ML/)",
+          "disposition": "accepted",
+          "reason": "Links to CZI Census docs, release/mirror/embedding manifests, the public us-west-2 S3 bucket, PyPI, Scanpy docs and arXiv; the SDK reads public Census data anonymously over HTTPS/S3 as the skill's core function."
+        },
+        {
+          "type": "network-access",
+          "line": 104,
+          "evidence": "https://",
+          "context": "- [Sparse mean/variance](https://chanzuckerberg.github.io/cellxgene-census/_autosummary/cellxgene_census.experimental.pp.mean_variance.html)",
+          "disposition": "accepted",
+          "reason": "Links to CZI Census docs, release/mirror/embedding manifests, the public us-west-2 S3 bucket, PyPI, Scanpy docs and arXiv; the SDK reads public Census data anonymously over HTTPS/S3 as the skill's core function."
+        },
+        {
+          "type": "network-access",
+          "line": 105,
+          "evidence": "https://",
+          "context": "- [Scanpy Scanorama wrapper](https://scanpy.readthedocs.io/en/stable/generated/scanpy.external.pp.scanorama_integrate.html)",
+          "disposition": "accepted",
+          "reason": "Links to CZI Census docs, release/mirror/embedding manifests, the public us-west-2 S3 bucket, PyPI, Scanpy docs and arXiv; the SDK reads public Census data anonymously over HTTPS/S3 as the skill's core function."
+        }
+      ]
+    },
+    {
+      "path": "references/census_schema.md",
+      "sha256": "4ddd1a51d473f2402cef91cda2c94cd148837df0e56ce684614d3d0c845b5fb1",
+      "bytes": 9491,
+      "mode": "100644",
+      "git_blob": "2b6df3a2a326a7253d57125dd28d3796c7c53dc6",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 13,
+          "evidence": "https://",
+          "context": "- Sources: [official schema](https://github.com/chanzuckerberg/cellxgene-census/blob/main/docs/cellxgene_census_schema.md) and [release notes](https://chanzuckerberg.github.io/cellxgene-census/cellxgene_census_docsite_data_release_info.html",
+          "disposition": "accepted",
+          "reason": "Links to CZI Census docs, release/mirror/embedding manifests, the public us-west-2 S3 bucket, PyPI, Scanpy docs and arXiv; the SDK reads public Census data anonymously over HTTPS/S3 as the skill's core function."
+        },
+        {
+          "type": "network-access",
+          "line": 13,
+          "evidence": "https://",
+          "context": "- Sources: [official schema](https://github.com/chanzuckerberg/cellxgene-census/blob/main/docs/cellxgene_census_schema.md) and [release notes](https://chanzuckerberg.github.io/cellxgene-census/cellxgene_census_docsite_data_release_info.html",
+          "disposition": "accepted",
+          "reason": "Links to CZI Census docs, release/mirror/embedding manifests, the public us-west-2 S3 bucket, PyPI, Scanpy docs and arXiv; the SDK reads public Census data anonymously over HTTPS/S3 as the skill's core function."
+        }
+      ]
+    },
+    {
+      "path": "references/common_patterns.md",
+      "sha256": "0421a761bfccb08419ce14ffffcf3100618aeab84c3a1329cdc7fb136585525f",
+      "bytes": 15522,
+      "mode": "100644",
+      "git_blob": "54ffd62c8bc99672fddcf88a9aa95b9714c34818",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "references/core_workflow_patterns.md",
+      "sha256": "28580f45bfeba8c2b1594006956cbd92c7c2c5211fa58fc667bb51bf81b4d455",
+      "bytes": 10990,
+      "mode": "100644",
+      "git_blob": "e9cc6b4dbaf1ba5080b6e4359043b7f2f176ec0b",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "123b66d6701c7c0587d0a615a2394caee52e62745b3fd31176381ea64aaa794a",
+      "bytes": 13648,
+      "mode": "100644",
+      "git_blob": "e0caaab56be37dce020cf3c28a4b98061013e827",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 4,
+          "evidence": "Bash",
+          "context": "allowed-tools: Read Write Edit Bash",
+          "disposition": "accepted",
+          "reason": "SKILL.md:4 grants Bash and the only bash blocks (SKILL.md:42-55) are `uv pip install` commands for the Census SDK and its extras."
+        },
+        {
+          "type": "shell-execution",
+          "line": 42,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "SKILL.md:4 grants Bash and the only bash blocks (SKILL.md:42-55) are `uv pip install` commands for the Census SDK and its extras."
+        },
+        {
+          "type": "package-install",
+          "line": 43,
+          "evidence": "pip install",
+          "context": "uv pip install \"cellxgene-census==1.18.0\"",
+          "disposition": "accepted",
+          "reason": "`uv pip install` of the official cellxgene-census==1.18.0 (plus spatial extra) and an unpinned tiledbsoma-ml from PyPI, required to use the SDK."
+        },
+        {
+          "type": "shell-execution",
+          "line": 47,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "SKILL.md:4 grants Bash and the only bash blocks (SKILL.md:42-55) are `uv pip install` commands for the Census SDK and its extras."
+        },
+        {
+          "type": "package-install",
+          "line": 48,
+          "evidence": "pip install",
+          "context": "uv pip install \"cellxgene-census[spatial]==1.18.0\"",
+          "disposition": "accepted",
+          "reason": "`uv pip install` of the official cellxgene-census==1.18.0 (plus spatial extra) and an unpinned tiledbsoma-ml from PyPI, required to use the SDK."
+        },
+        {
+          "type": "shell-execution",
+          "line": 53,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "SKILL.md:4 grants Bash and the only bash blocks (SKILL.md:42-55) are `uv pip install` commands for the Census SDK and its extras."
+        },
+        {
+          "type": "package-install",
+          "line": 54,
+          "evidence": "pip install",
+          "context": "uv pip install \"cellxgene-census==1.18.0\" tiledbsoma-ml",
+          "disposition": "accepted",
+          "reason": "Installs the pinned cellxgene-census plus an unpinned tiledbsoma-ml (official single-cell-data project) for the optional PyTorch workflow."
+        },
+        {
+          "type": "network-access",
+          "line": 327,
+          "evidence": "https://",
+          "context": "> https://doi.org/10.48550/arXiv.2609.00065",
+          "disposition": "accepted",
+          "reason": "Links to CZI Census docs, release/mirror/embedding manifests, the public us-west-2 S3 bucket, PyPI, Scanpy docs and arXiv; the SDK reads public Census data anonymously over HTTPS/S3 as the skill's core function."
+        },
+        {
+          "type": "network-access",
+          "line": 329,
+          "evidence": "https://",
+          "context": "Always cite the current version. The DOI and https://arxiv.org/abs/2609.00065 resolve to the",
+          "disposition": "accepted",
+          "reason": "Links to CZI Census docs, release/mirror/embedding manifests, the public us-west-2 S3 bucket, PyPI, Scanpy docs and arXiv; the SDK reads public Census data anonymously over HTTPS/S3 as the skill's core function."
+        },
+        {
+          "type": "network-access",
+          "line": 331,
+          "evidence": "https://",
+          "context": "available, fetch https://arxiv.org/abs/2609.00065 (or",
+          "disposition": "accepted",
+          "reason": "Links to CZI Census docs, release/mirror/embedding manifests, the public us-west-2 S3 bucket, PyPI, Scanpy docs and arXiv; the SDK reads public Census data anonymously over HTTPS/S3 as the skill's core function."
+        },
+        {
+          "type": "network-access",
+          "line": 332,
+          "evidence": "http://",
+          "context": "http://export.arxiv.org/api/query?id_list=2609.00065) before writing the reference and take",
+          "disposition": "accepted",
+          "reason": "Links to CZI Census docs, release/mirror/embedding manifests, the public us-west-2 S3 bucket, PyPI, Scanpy docs and arXiv; the SDK reads public Census data anonymously over HTTPS/S3 as the skill's core function."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,382 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "microsoft/azure-eventgrid-java",
+  "status": "approved",
+  "reviewed_on": "2026-10-02",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/azure-sdk-java/skills/azure-eventgrid-java",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": ".github/plugins/azure-sdk-java/skills/azure-eventgrid-java",
+    "url": "https://api.github.com/repos/microsoft/skills/git/trees/84d8eaa8ae95930f55cdceb3e27196c795dab038?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/microsoft/skills/blob/84d8eaa8ae95930f55cdceb3e27196c795dab038/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        ".github",
+        ".github/plugins",
+        ".github/plugins/azure-sdk-java",
+        ".github/plugins/azure-sdk-java/skills",
+        ".github/plugins/azure-sdk-java/skills/azure-eventgrid-java"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT License with its copyright notice, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file; front matter declares license: MIT with Microsoft as author. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "low",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": false,
+      "network": false,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md and references/examples.md in full. Java reference for com.azure:azure-messaging-eventgrid: publisher clients with AzureKeyCredential or DefaultAzureCredential, publishing EventGridEvent/CloudEvent/custom-schema events (sync, async, batch), parsing received events and system events, namespace pull delivery (receive/acknowledge/reject/release), and error handling.",
+      "No shell commands, installers, or agent-side network access: installation is a Maven dependency snippet for the user's pom.xml, the bash fence lists placeholder environment variables, and keys are placeholders or System.getenv lookups in the user's code.",
+      "SKILL.md pins azure-messaging-eventgrid 4.27.0 while references/examples.md:21 uses 4.32.0-beta.1 (a beta). references/examples.md:24 is an XML comment label inside the Maven fence, not hidden instructions. Publishing samples send events to the user's own topic only when their code runs."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "git_blob": "79656060de00aa4659ad2c276d5be8830664d544",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry the copyright and permission notice.",
+      "findings": []
+    },
+    {
+      "path": "references/examples.md",
+      "sha256": "9990c43884a9950dd0bbe3db6aa0a91424f0c41ae9a010dcef83cb59c0440b21",
+      "bytes": 14215,
+      "mode": "100644",
+      "git_blob": "4188b9ca4b56de7c53f54bd6df2b3d5d1665cc5f",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "credential-access",
+          "line": 44,
+          "evidence": "credential",
+          "context": "    .credential(new DefaultAzureCredentialBuilder().build())",
+          "disposition": "accepted",
+          "reason": "AzureKeyCredential with placeholders (\"<access-key>\", \"<key for the endpoint>\") or System.getenv(\"AZURE_EVENTGRID_*_KEY\") and DefaultAzureCredential in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 55,
+          "evidence": "credential",
+          "context": "    .credential(new DefaultAzureCredentialBuilder().build())",
+          "disposition": "accepted",
+          "reason": "AzureKeyCredential with placeholders (\"<access-key>\", \"<key for the endpoint>\") or System.getenv(\"AZURE_EVENTGRID_*_KEY\") and DefaultAzureCredential in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 62,
+          "evidence": "credential",
+          "context": "import com.azure.core.credential.AzureKeyCredential;",
+          "disposition": "accepted",
+          "reason": "AzureKeyCredential with placeholders (\"<access-key>\", \"<key for the endpoint>\") or System.getenv(\"AZURE_EVENTGRID_*_KEY\") and DefaultAzureCredential in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 66,
+          "evidence": "credential",
+          "context": "    .credential(new AzureKeyCredential(System.getenv(\"AZURE_EVENTGRID_CLOUDEVENT_KEY\")))",
+          "disposition": "accepted",
+          "reason": "AzureKeyCredential with placeholders (\"<access-key>\", \"<key for the endpoint>\") or System.getenv(\"AZURE_EVENTGRID_*_KEY\") and DefaultAzureCredential in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 73,
+          "evidence": "credential",
+          "context": "import com.azure.core.credential.AzureKeyCredential;",
+          "disposition": "accepted",
+          "reason": "AzureKeyCredential with placeholders (\"<access-key>\", \"<key for the endpoint>\") or System.getenv(\"AZURE_EVENTGRID_*_KEY\") and DefaultAzureCredential in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 88,
+          "evidence": "credential",
+          "context": "            .credential(new AzureKeyCredential(System.getenv(\"AZURE_EVENTGRID_CLOUDEVENT_KEY\")))",
+          "disposition": "accepted",
+          "reason": "AzureKeyCredential with placeholders (\"<access-key>\", \"<key for the endpoint>\") or System.getenv(\"AZURE_EVENTGRID_*_KEY\") and DefaultAzureCredential in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 93,
+          "evidence": "https://",
+          "context": "        CloudEvent cloudEventStr = new CloudEvent(\"https://com.example.myapp\", \"User.Created.Text\",",
+          "disposition": "accepted",
+          "reason": "Placeholder topic endpoint, a Microsoft Learn link, and \"https://com.example.myapp\" used as a CloudEvent source identifier; the agent is not told to fetch anything."
+        },
+        {
+          "type": "network-access",
+          "line": 98,
+          "evidence": "https://",
+          "context": "        CloudEvent cloudEventModel = new CloudEvent(\"https://com.example.myapp\", \"User.Created.Object\",",
+          "disposition": "accepted",
+          "reason": "Placeholder topic endpoint, a Microsoft Learn link, and \"https://com.example.myapp\" used as a CloudEvent source identifier; the agent is not told to fetch anything."
+        },
+        {
+          "type": "network-access",
+          "line": 103,
+          "evidence": "https://",
+          "context": "        CloudEvent cloudEventBytes = new CloudEvent(\"https://com.example.myapp\", \"User.Created.Binary\",",
+          "disposition": "accepted",
+          "reason": "Placeholder topic endpoint, a Microsoft Learn link, and \"https://com.example.myapp\" used as a CloudEvent source identifier; the agent is not told to fetch anything."
+        },
+        {
+          "type": "credential-access",
+          "line": 124,
+          "evidence": "credential",
+          "context": "import com.azure.core.credential.AzureKeyCredential;",
+          "disposition": "accepted",
+          "reason": "AzureKeyCredential with placeholders (\"<access-key>\", \"<key for the endpoint>\") or System.getenv(\"AZURE_EVENTGRID_*_KEY\") and DefaultAzureCredential in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 137,
+          "evidence": "credential",
+          "context": "            .credential(new AzureKeyCredential(System.getenv(\"AZURE_EVENTGRID_EVENT_KEY\")))",
+          "disposition": "accepted",
+          "reason": "AzureKeyCredential with placeholders (\"<access-key>\", \"<key for the endpoint>\") or System.getenv(\"AZURE_EVENTGRID_*_KEY\") and DefaultAzureCredential in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 170,
+          "evidence": "credential",
+          "context": "import com.azure.core.credential.AzureKeyCredential;",
+          "disposition": "accepted",
+          "reason": "AzureKeyCredential with placeholders (\"<access-key>\", \"<key for the endpoint>\") or System.getenv(\"AZURE_EVENTGRID_*_KEY\") and DefaultAzureCredential in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 186,
+          "evidence": "credential",
+          "context": "            .credential(new AzureKeyCredential(\"<key for the endpoint>\"))",
+          "disposition": "accepted",
+          "reason": "AzureKeyCredential with placeholders (\"<access-key>\", \"<key for the endpoint>\") or System.getenv(\"AZURE_EVENTGRID_*_KEY\") and DefaultAzureCredential in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 213,
+          "evidence": "credential",
+          "context": "import com.azure.core.credential.AzureKeyCredential;",
+          "disposition": "accepted",
+          "reason": "AzureKeyCredential with placeholders (\"<access-key>\", \"<key for the endpoint>\") or System.getenv(\"AZURE_EVENTGRID_*_KEY\") and DefaultAzureCredential in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 228,
+          "evidence": "credential",
+          "context": "            .credential(new AzureKeyCredential(System.getenv(\"AZURE_EVENTGRID_CLOUDEVENT_KEY\")))",
+          "disposition": "accepted",
+          "reason": "AzureKeyCredential with placeholders (\"<access-key>\", \"<key for the endpoint>\") or System.getenv(\"AZURE_EVENTGRID_*_KEY\") and DefaultAzureCredential in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 233,
+          "evidence": "https://",
+          "context": "        CloudEvent cloudEventModel = new CloudEvent(\"https://com.example.myapp\", \"User.Created.Object\",",
+          "disposition": "accepted",
+          "reason": "Placeholder topic endpoint, a Microsoft Learn link, and \"https://com.example.myapp\" used as a CloudEvent source identifier; the agent is not told to fetch anything."
+        },
+        {
+          "type": "network-access",
+          "line": 237,
+          "evidence": "https://",
+          "context": "        CloudEvent cloudEventBytes = new CloudEvent(\"https://com.example.myapp\", \"User.Created.Binary\",",
+          "disposition": "accepted",
+          "reason": "Placeholder topic endpoint, a Microsoft Learn link, and \"https://com.example.myapp\" used as a CloudEvent source identifier; the agent is not told to fetch anything."
+        },
+        {
+          "type": "credential-access",
+          "line": 261,
+          "evidence": "credential",
+          "context": "import com.azure.core.credential.AzureKeyCredential;",
+          "disposition": "accepted",
+          "reason": "AzureKeyCredential with placeholders (\"<access-key>\", \"<key for the endpoint>\") or System.getenv(\"AZURE_EVENTGRID_*_KEY\") and DefaultAzureCredential in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 274,
+          "evidence": "credential",
+          "context": "            .credential(new AzureKeyCredential(System.getenv(\"AZURE_EVENTGRID_EVENT_KEY\")))",
+          "disposition": "accepted",
+          "reason": "AzureKeyCredential with placeholders (\"<access-key>\", \"<key for the endpoint>\") or System.getenv(\"AZURE_EVENTGRID_*_KEY\") and DefaultAzureCredential in sample code for the user's app; no instruction to read, print, or send real secrets."
+        }
+      ]
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "55f7bee669c8c15e804990b6a5c8a31a8063db0c22e594cba802f4c0e274e792",
+      "bytes": 9240,
+      "mode": "100644",
+      "git_blob": "75586f26f80854bd65a750a06de00ceb6ff3eb38",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "credential-access",
+          "line": 32,
+          "evidence": "credential",
+          "context": "import com.azure.core.credential.AzureKeyCredential;",
+          "disposition": "accepted",
+          "reason": "AzureKeyCredential with placeholders (\"<access-key>\", \"<key for the endpoint>\") or System.getenv(\"AZURE_EVENTGRID_*_KEY\") and DefaultAzureCredential in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 34,
+          "evidence": "API Key",
+          "context": "// With API Key",
+          "disposition": "accepted",
+          "reason": "AzureKeyCredential with placeholders (\"<access-key>\", \"<key for the endpoint>\") or System.getenv(\"AZURE_EVENTGRID_*_KEY\") and DefaultAzureCredential in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 37,
+          "evidence": "credential",
+          "context": "    .credential(new AzureKeyCredential(\"<access-key>\"))",
+          "disposition": "accepted",
+          "reason": "AzureKeyCredential with placeholders (\"<access-key>\", \"<key for the endpoint>\") or System.getenv(\"AZURE_EVENTGRID_*_KEY\") and DefaultAzureCredential in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 43,
+          "evidence": "credential",
+          "context": "    .credential(new AzureKeyCredential(\"<access-key>\"))",
+          "disposition": "accepted",
+          "reason": "AzureKeyCredential with placeholders (\"<access-key>\", \"<key for the endpoint>\") or System.getenv(\"AZURE_EVENTGRID_*_KEY\") and DefaultAzureCredential in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 50,
+          "evidence": "credential",
+          "context": "import com.azure.core.credential.TokenCredential;",
+          "disposition": "accepted",
+          "reason": "AzureKeyCredential with placeholders (\"<access-key>\", \"<key for the endpoint>\") or System.getenv(\"AZURE_EVENTGRID_*_KEY\") and DefaultAzureCredential in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 56,
+          "evidence": "credential",
+          "context": "TokenCredential credential = new DefaultAzureCredentialBuilder()",
+          "disposition": "accepted",
+          "reason": "AzureKeyCredential with placeholders (\"<access-key>\", \"<key for the endpoint>\") or System.getenv(\"AZURE_EVENTGRID_*_KEY\") and DefaultAzureCredential in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 59,
+          "evidence": "credential",
+          "context": "// Or use a specific credential directly in production:",
+          "disposition": "accepted",
+          "reason": "AzureKeyCredential with placeholders (\"<access-key>\", \"<key for the endpoint>\") or System.getenv(\"AZURE_EVENTGRID_*_KEY\") and DefaultAzureCredential in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 60,
+          "evidence": "credential",
+          "context": "// See https://learn.microsoft.com/java/api/overview/azure/identity-readme?view=azure-java-stable#credential-classes",
+          "disposition": "accepted",
+          "reason": "AzureKeyCredential with placeholders (\"<access-key>\", \"<key for the endpoint>\") or System.getenv(\"AZURE_EVENTGRID_*_KEY\") and DefaultAzureCredential in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 60,
+          "evidence": "https://",
+          "context": "// See https://learn.microsoft.com/java/api/overview/azure/identity-readme?view=azure-java-stable#credential-classes",
+          "disposition": "accepted",
+          "reason": "Placeholder topic endpoint, a Microsoft Learn link, and \"https://com.example.myapp\" used as a CloudEvent source identifier; the agent is not told to fetch anything."
+        },
+        {
+          "type": "credential-access",
+          "line": 61,
+          "evidence": "credential",
+          "context": "// TokenCredential credential = new ManagedIdentityCredentialBuilder().build();",
+          "disposition": "accepted",
+          "reason": "AzureKeyCredential with placeholders (\"<access-key>\", \"<key for the endpoint>\") or System.getenv(\"AZURE_EVENTGRID_*_KEY\") and DefaultAzureCredential in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 65,
+          "evidence": "credential",
+          "context": "    .credential(credential)",
+          "disposition": "accepted",
+          "reason": "AzureKeyCredential with placeholders (\"<access-key>\", \"<key for the endpoint>\") or System.getenv(\"AZURE_EVENTGRID_*_KEY\") and DefaultAzureCredential in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 65,
+          "evidence": "credential",
+          "context": "    .credential(credential)",
+          "disposition": "accepted",
+          "reason": "AzureKeyCredential with placeholders (\"<access-key>\", \"<key for the endpoint>\") or System.getenv(\"AZURE_EVENTGRID_*_KEY\") and DefaultAzureCredential in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 76,
+          "evidence": "credential",
+          "context": "    .credential(new AzureKeyCredential(\"<access-key>\"))",
+          "disposition": "accepted",
+          "reason": "AzureKeyCredential with placeholders (\"<access-key>\", \"<key for the endpoint>\") or System.getenv(\"AZURE_EVENTGRID_*_KEY\") and DefaultAzureCredential in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 254,
+          "evidence": "credential",
+          "context": "    .credential(new AzureKeyCredential(\"<key>\"))",
+          "disposition": "accepted",
+          "reason": "AzureKeyCredential with placeholders (\"<access-key>\", \"<key for the endpoint>\") or System.getenv(\"AZURE_EVENTGRID_*_KEY\") and DefaultAzureCredential in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "shell-execution",
+          "line": 300,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "The only bash fence (SKILL.md:300) lists placeholder environment variables; no commands are run."
+        },
+        {
+          "type": "network-access",
+          "line": 301,
+          "evidence": "https://",
+          "context": "EVENT_GRID_TOPIC_ENDPOINT=https://<topic-name>.<region>.eventgrid.azure.net/api/events  # Required for all auth methods",
+          "disposition": "accepted",
+          "reason": "Placeholder topic endpoint, a Microsoft Learn link, and \"https://com.example.myapp\" used as a CloudEvent source identifier; the agent is not told to fetch anything."
+        }
+      ]
+    }
+  ]
+}

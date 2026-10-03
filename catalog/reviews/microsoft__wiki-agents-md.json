@@ -1,0 +1,146 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "microsoft/wiki-agents-md",
+  "status": "approved",
+  "reviewed_on": "2026-10-02",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/deep-wiki/skills/wiki-agents-md",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": ".github/plugins/deep-wiki/skills/wiki-agents-md",
+    "url": "https://api.github.com/repos/microsoft/skills/git/trees/84d8eaa8ae95930f55cdceb3e27196c795dab038?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/microsoft/skills/blob/84d8eaa8ae95930f55cdceb3e27196c795dab038/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        ".github",
+        ".github/plugins",
+        ".github/plugins/deep-wiki",
+        ".github/plugins/deep-wiki/skills",
+        ".github/plugins/deep-wiki/skills/wiki-agents-md"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT License with its copyright notice, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "medium",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": true,
+      "network": false,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md in full (the skill has no other files). It tells the agent how to generate AGENTS.md context files (build/test commands, structure, code style, boundaries) for a repository's root and pertinent subfolders, plus a fixed one-line CLAUDE.md redirect, only where those files are missing.",
+      "Medium because the agent writes persistent agent-instruction files (AGENTS.md and CLAUDE.md) into potentially many folders of the user's repository, and future coding agents auto-load them. Acceptable because it is the user-requested deliverable, every write is guarded by an existence check with an explicit never-overwrite rule (SKILL.md:23-38, 188-194, 354), content must be grounded in real repo files with no secrets (SKILL.md:228-234, 373), and the only command run is a read-only `ls ... 2>/dev/null`.",
+      "The `<!-- Generated ... Do not edit directly. -->` HTML comment (SKILL.md:347) is visible text inside the generated CLAUDE.md template, not a hidden instruction to the agent. The wiki/ section assumes output from the companion deep-wiki skills, but that is optional and the generator works on any repository."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "git_blob": "79656060de00aa4659ad2c276d5be8830664d544",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry the copyright and permission notice.",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "0345a27f116f3217e121f0ff110f8e92ac9f9c72b1fd7b3e8c61639550db3e63",
+      "bytes": 12946,
+      "mode": "100644",
+      "git_blob": "45e93b32d3d7f2120cb9b3b7f51e9271e3e0189c",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 31,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Read-only `ls AGENTS.md 2>/dev/null` existence checks before writing."
+        },
+        {
+          "type": "package-install",
+          "line": 79,
+          "evidence": "npm install",
+          "context": "npm install          # Install dependencies",
+          "disposition": "accepted",
+          "reason": "`npm install` appears only inside example AGENTS.md content to be written for the user's project, not as a command the agent runs."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 176,
+          "evidence": "Delete",
+          "context": "- 🚫 **Never do:** Commit secrets or credentials. Modify `vendor/` or `node_modules/`. Push directly to `main`. Delete migration files.",
+          "disposition": "accepted",
+          "reason": "Matched 'Delete'/'remove' inside example Boundaries text ('Never do: ... Delete migration files'); the skill's actual writes are new AGENTS.md/CLAUDE.md files guarded by never-overwrite checks."
+        },
+        {
+          "type": "shell-execution",
+          "line": 190,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Read-only `ls AGENTS.md 2>/dev/null` existence checks before writing."
+        },
+        {
+          "type": "package-install",
+          "line": 302,
+          "evidence": "npm install",
+          "context": "- Install: `npm install`",
+          "disposition": "accepted",
+          "reason": "`npm install` appears only inside example AGENTS.md content to be written for the user's project, not as a command the agent runs."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 326,
+          "evidence": "Delete",
+          "context": "- 🚫 **Never do:** Delete generated pages without understanding dependencies, use light-mode colors, remove citation links",
+          "disposition": "accepted",
+          "reason": "Matched 'Delete'/'remove' inside example Boundaries text ('Never do: ... Delete migration files'); the skill's actual writes are new AGENTS.md/CLAUDE.md files guarded by never-overwrite checks."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 326,
+          "evidence": "remove",
+          "context": "- 🚫 **Never do:** Delete generated pages without understanding dependencies, use light-mode colors, remove citation links",
+          "disposition": "accepted",
+          "reason": "Matched 'Delete'/'remove' inside example Boundaries text ('Never do: ... Delete migration files'); the skill's actual writes are new AGENTS.md/CLAUDE.md files guarded by never-overwrite checks."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "microsoft/wiki-agents-md",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/deep-wiki/skills/wiki-agents-md",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "review": {
+    "path": "catalog/reviews/microsoft__wiki-agents-md.json",
+    "sha256": "3c8a0a09a482ba38265d2754a45809d6ff859facdf753e3ff0508e1f6dd813f4"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": false,
+      "credentials": false,
+      "dynamic_execution": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "shell-execution",
+        "line": 31,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 79,
+        "evidence": "npm install",
+        "context": "npm install          # Install dependencies",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 176,
+        "evidence": "Delete",
+        "context": "- 🚫 **Never do:** Commit secrets or credentials. Modify `vendor/` or `node_modules/`. Push directly to `main`. Delete migration files.",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 190,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 302,
+        "evidence": "npm install",
+        "context": "- Install: `npm install`",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 326,
+        "evidence": "Delete",
+        "context": "- 🚫 **Never do:** Delete generated pages without understanding dependencies, use light-mode colors, remove citation links",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 326,
+        "evidence": "remove",
+        "context": "- 🚫 **Never do:** Delete generated pages without understanding dependencies, use light-mode colors, remove citation links",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 14086
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "0345a27f116f3217e121f0ff110f8e92ac9f9c72b1fd7b3e8c61639550db3e63",
+      "bytes": 12946,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 14086
+}

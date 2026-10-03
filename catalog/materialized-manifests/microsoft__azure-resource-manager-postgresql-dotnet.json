@@ -1,0 +1,158 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "microsoft/azure-resource-manager-postgresql-dotnet",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/azure-sdk-dotnet/skills/azure-resource-manager-postgresql-dotnet",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "review": {
+    "path": "catalog/reviews/microsoft__azure-resource-manager-postgresql-dotnet.json",
+    "sha256": "6ff53d85fb74569dfaa42edf9b791db2076d7390c6bef48fa0c67b00763bed1c"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "shell-execution",
+        "line": 18,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 30,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 46,
+        "evidence": "credential",
+        "context": "var credential = new DefaultAzureCredential(",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 49,
+        "evidence": "credential",
+        "context": "// Or use a specific credential directly in production:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 50,
+        "evidence": "credential",
+        "context": "// See https://learn.microsoft.com/dotnet/api/overview/azure/identity-readme?view=azure-dotnet#credential-classes",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 50,
+        "evidence": "https://",
+        "context": "// See https://learn.microsoft.com/dotnet/api/overview/azure/identity-readme?view=azure-dotnet#credential-classes",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 51,
+        "evidence": "credential",
+        "context": "// var credential = new ManagedIdentityCredential();",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 52,
+        "evidence": "credential",
+        "context": "ArmClient client = new ArmClient(credential);",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 313,
+        "evidence": "Delete",
+        "context": "### 11. Delete Server",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 417,
+        "evidence": "credential",
+        "context": "var credential = new DefaultAzureCredential();",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 418,
+        "evidence": "credential",
+        "context": "var token = await credential.GetTokenAsync(",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 419,
+        "evidence": "https://",
+        "context": "    new TokenRequestContext(new[] { \"https://ossrdbms-aad.database.windows.net/.default\" }));",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 441,
+        "evidence": "https://",
+        "context": "| NuGet Package | https://www.nuget.org/packages/Azure.ResourceManager.PostgreSql |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 442,
+        "evidence": "https://",
+        "context": "| API Reference | https://learn.microsoft.com/dotnet/api/azure.resourcemanager.postgresql |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 443,
+        "evidence": "https://",
+        "context": "| Product Documentation | https://learn.microsoft.com/azure/postgresql/flexible-server/ |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 444,
+        "evidence": "https://",
+        "context": "| GitHub Source | https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/postgresql/Azure.ResourceManager.PostgreSql |",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 17145
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "53303c564f27e2ccbcef3f8d35a8ac5d8f0cac18745ec2aba9bd91ba8c27200a",
+      "bytes": 16005,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 17145
+}

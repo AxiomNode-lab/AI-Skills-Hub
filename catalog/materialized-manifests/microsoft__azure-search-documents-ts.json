@@ -1,0 +1,296 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "microsoft/azure-search-documents-ts",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/azure-sdk-typescript/skills/azure-search-documents-ts",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "review": {
+    "path": "catalog/reviews/microsoft__azure-search-documents-ts.json",
+    "sha256": "2fd5dfc88aeb9868489124e5c4243f6d3f54326453eb097210ed0dd1b2355b69"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "network-access",
+        "line": 5,
+        "evidence": "https://",
+        "context": "**Source**: [Azure SDK for JS - search-documents](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/search/search-documents)",
+        "file": "references/semantic-ranking.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 11,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/semantic-ranking.md"
+      },
+      {
+        "type": "package-install",
+        "line": 12,
+        "evidence": "npm install",
+        "context": "npm install @azure/search-documents @azure/identity",
+        "file": "references/semantic-ranking.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 68,
+        "evidence": "process.env",
+        "context": "  process.env[\"AZURE_SEARCH_ENDPOINT\"]!,",
+        "file": "references/semantic-ranking.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 315,
+        "evidence": "credential",
+        "context": "const indexClient = new SearchIndexClient(endpoint, credential);",
+        "file": "references/semantic-ranking.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 372,
+        "evidence": "process.env",
+        "context": "    process.env[\"AZURE_SEARCH_ENDPOINT\"]!,",
+        "file": "references/semantic-ranking.md"
+      },
+      {
+        "type": "network-access",
+        "line": 468,
+        "evidence": "https://",
+        "context": "- [Official Documentation](https://learn.microsoft.com/azure/search/semantic-search-overview)",
+        "file": "references/semantic-ranking.md"
+      },
+      {
+        "type": "network-access",
+        "line": 5,
+        "evidence": "https://",
+        "context": "**Source**: [Azure SDK for JS - search-documents](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/search/search-documents)",
+        "file": "references/vector-search.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 11,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/vector-search.md"
+      },
+      {
+        "type": "package-install",
+        "line": 12,
+        "evidence": "npm install",
+        "context": "npm install @azure/search-documents @azure/identity",
+        "file": "references/vector-search.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 23,
+        "evidence": "credential",
+        "context": "const credential = new DefaultAzureCredential();",
+        "file": "references/vector-search.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 24,
+        "evidence": "process.env",
+        "context": "const endpoint = process.env[\"AZURE_SEARCH_ENDPOINT\"]!;",
+        "file": "references/vector-search.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 30,
+        "evidence": "credential",
+        "context": "  credential",
+        "file": "references/vector-search.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 34,
+        "evidence": "credential",
+        "context": "const indexClient = new SearchIndexClient(endpoint, credential);",
+        "file": "references/vector-search.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 73,
+        "evidence": "credential",
+        "context": "const searchClient = new SearchClient<Product>(endpoint, \"products\", credential);",
+        "file": "references/vector-search.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 305,
+        "evidence": "credential",
+        "context": "const indexClient = new SearchIndexClient(endpoint, credential);",
+        "file": "references/vector-search.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 348,
+        "evidence": "process.env",
+        "context": "          resourceUri: process.env[\"AZURE_OPENAI_ENDPOINT\"]!,",
+        "file": "references/vector-search.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 378,
+        "evidence": "process.env",
+        "context": "    process.env[\"AZURE_SEARCH_ENDPOINT\"]!,",
+        "file": "references/vector-search.md"
+      },
+      {
+        "type": "network-access",
+        "line": 438,
+        "evidence": "https://",
+        "context": "- [Official Samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/search/search-documents/samples)",
+        "file": "references/vector-search.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 17,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 18,
+        "evidence": "npm install",
+        "context": "npm install @azure/search-documents @azure/identity",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 23,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 24,
+        "evidence": "https://",
+        "context": "AZURE_SEARCH_ENDPOINT=https://<service-name>.search.windows.net",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 36,
+        "evidence": "process.env",
+        "context": "const endpoint = process.env.AZURE_SEARCH_ENDPOINT!;",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 37,
+        "evidence": "process.env",
+        "context": "const indexName = process.env.AZURE_SEARCH_INDEX_NAME!;",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 39,
+        "evidence": "credential",
+        "context": "const credential = new DefaultAzureCredential({requiredEnvVars: [\"AZURE_TOKEN_CREDENTIALS\"]});",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 40,
+        "evidence": "credential",
+        "context": "// Or use a specific credential directly in production:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 41,
+        "evidence": "credential",
+        "context": "// See https://learn.microsoft.com/javascript/api/overview/azure/identity-readme?view=azure-node-latest#credential-classes",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 41,
+        "evidence": "https://",
+        "context": "// See https://learn.microsoft.com/javascript/api/overview/azure/identity-readme?view=azure-node-latest#credential-classes",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 42,
+        "evidence": "credential",
+        "context": "// const credential = new ManagedIdentityCredential();",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 45,
+        "evidence": "credential",
+        "context": "const searchClient = new SearchClient(endpoint, indexName, credential);",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 48,
+        "evidence": "credential",
+        "context": "const indexClient = new SearchIndexClient(endpoint, credential);",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 242,
+        "evidence": "delete",
+        "context": "// Batch upload, merge, delete",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 246,
+        "evidence": "delete",
+        "context": "  { delete: { id: \"3\" } },",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 29769
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/semantic-ranking.md",
+      "sha256": "f66727d9092c553595e5c91792731fed21ee466c9c787bfb547e20abba05cdb3",
+      "bytes": 11400,
+      "mode": "100644"
+    },
+    {
+      "path": "references/vector-search.md",
+      "sha256": "573a6bd823708a2267e1adb8e8555591d4210748235e4a93401eaf35819e3d58",
+      "bytes": 9993,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "b6a0a3f657d9b31b7eb59363f9bc10b688f99b1de035f581bfd765d3edc8d654",
+      "bytes": 7236,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 29769
+}

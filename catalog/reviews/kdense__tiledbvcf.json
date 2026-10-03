@@ -1,0 +1,299 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "kdense/tiledbvcf",
+  "status": "approved",
+  "reviewed_on": "2026-10-02",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "K-Dense-AI/scientific-agent-skills",
+    "path": "skills/tiledbvcf",
+    "revision": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "skills/tiledbvcf",
+    "url": "https://api.github.com/repos/K-Dense-AI/scientific-agent-skills/git/trees/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE.md",
+    "url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/LICENSE.md",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "skills",
+        "skills/tiledbvcf"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE.md is the MIT License with its copyright notice, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file; frontmatter declares MIT. API names and option strings from TileDB-VCF are cited with links, not copied text. A byte-exact copy of LICENSE.md ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "medium",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "package_install": true,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md and references/verification.md in full. Guide to TileDB-VCF 0.40.3 for genomic variant storage: Conda install, bcftools compression/indexing, dataset creation and incremental ingestion, coordinate-correct region/sample queries, export, cohort statistics/QC, object storage and TileDB Cloud distributed read/ingest.",
+      "Medium because SKILL.md:40-46 tells the agent to create a Conda environment from the official tiledb and conda-forge channels with pinned versions, SKILL.md:226 to install tiledb-cloud==0.14.4, and the CLI/Python examples write local datasets and exports (cohort/, exported/, variants.tsv). TileDB Cloud use needs a TILEDB_REST_TOKEN supplied via the environment; the skill explicitly says not to embed tokens in code or print configuration (SKILL.md:228-229) and labels the cloud ingest as an illustrative mutating job for authorized tasks only (SKILL.md:255). Acceptable: pinned official packages, user-directed genomics work, and no secret exposure.",
+      "references/verification.md:24 mentions repository-level tests in tests/tiledbvcf/ outside the skill; they are provenance notes, not needed to use the skill. Cloud examples were not executed end-to-end upstream (SKILL.md:223-224)."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE.md",
+      "sha256": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "eb246475fd5a66b9bb56176f3a718984632dd98d",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry the copyright and permission notice.",
+      "findings": []
+    },
+    {
+      "path": "references/verification.md",
+      "sha256": "a721c33ca3895e407563a55abc8423883f608bfbe186a516215e1790104ba6e1",
+      "bytes": 6119,
+      "mode": "100644",
+      "git_blob": "a21b725ca55b5ff1454f1ff603cde78a799de35b",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 7,
+          "evidence": "https://",
+          "context": "The [official TileDB channel metadata](https://api.anaconda.org/package/tiledb/tiledbvcf-py)",
+          "disposition": "accepted",
+          "reason": "Documentation links to TileDB GitHub/docs, PyPI, Anaconda and the bcftools manual plus the default api.tiledb.com service base; network use is limited to package installation and the user's own optional TileDB Cloud/object-storage calls."
+        },
+        {
+          "type": "network-access",
+          "line": 9,
+          "evidence": "https://",
+          "context": "[PyPI tiledbvcf metadata](https://pypi.org/pypi/tiledbvcf/json) and the",
+          "disposition": "accepted",
+          "reason": "Documentation links to TileDB GitHub/docs, PyPI, Anaconda and the bcftools manual plus the default api.tiledb.com service base; network use is limited to package installation and the user's own optional TileDB Cloud/object-storage calls."
+        },
+        {
+          "type": "network-access",
+          "line": 34,
+          "evidence": "https://",
+          "context": "- [Released Python Dataset source](https://github.com/TileDB-Inc/TileDB-VCF/blob/0.40.3/apis/python/src/tiledbvcf/dataset.py)",
+          "disposition": "accepted",
+          "reason": "Documentation links to TileDB GitHub/docs, PyPI, Anaconda and the bcftools manual plus the default api.tiledb.com service base; network use is limited to package installation and the user's own optional TileDB Cloud/object-storage calls."
+        },
+        {
+          "type": "network-access",
+          "line": 39,
+          "evidence": "https://",
+          "context": "- [Native in-memory exporter](https://github.com/TileDB-Inc/TileDB-VCF/blob/0.40.3/libtiledbvcf/src/read/in_memory_exporter.cc)",
+          "disposition": "accepted",
+          "reason": "Documentation links to TileDB GitHub/docs, PyPI, Anaconda and the bcftools manual plus the default api.tiledb.com service base; network use is limited to package installation and the user's own optional TileDB Cloud/object-storage calls."
+        },
+        {
+          "type": "network-access",
+          "line": 56,
+          "evidence": "https://",
+          "context": "The [published 0.14.4 wheel](https://pypi.org/pypi/tiledb-cloud/0.14.4/json),",
+          "disposition": "accepted",
+          "reason": "Documentation links to TileDB GitHub/docs, PyPI, Anaconda and the bcftools manual plus the default api.tiledb.com service base; network use is limited to package installation and the user's own optional TileDB Cloud/object-storage calls."
+        },
+        {
+          "type": "network-access",
+          "line": 62,
+          "evidence": "https://",
+          "context": "The default service base is `https://api.tiledb.com`; a configured deployment host",
+          "disposition": "accepted",
+          "reason": "Documentation links to TileDB GitHub/docs, PyPI, Anaconda and the bcftools manual plus the default api.tiledb.com service base; network use is limited to package installation and the user's own optional TileDB Cloud/object-storage calls."
+        },
+        {
+          "type": "credential-access",
+          "line": 64,
+          "evidence": "API-KEY",
+          "context": "`X-TILEDB-REST-API-KEY` header. `tiledb.cloud.Config()` propagates the authenticated",
+          "disposition": "accepted",
+          "reason": "Describes how the TileDB Cloud SDK reads TILEDB_REST_TOKEN and cloud provider credential chains, with explicit guidance not to embed or print tokens; no instruction to read, print, or send secrets elsewhere."
+        },
+        {
+          "type": "credential-access",
+          "line": 76,
+          "evidence": "API-key",
+          "context": "These submission calls use API-key or basic authentication and have no pagination",
+          "disposition": "accepted",
+          "reason": "Describes how the TileDB Cloud SDK reads TILEDB_REST_TOKEN and cloud provider credential chains, with explicit guidance not to embed or print tokens; no instruction to read, print, or send secrets elsewhere."
+        },
+        {
+          "type": "network-access",
+          "line": 91,
+          "evidence": "https://",
+          "context": "- [Data model](https://tiledb-inc.github.io/TileDB-VCF/documentation/data-model.html)",
+          "disposition": "accepted",
+          "reason": "Documentation links to TileDB GitHub/docs, PyPI, Anaconda and the bcftools manual plus the default api.tiledb.com service base; network use is limited to package installation and the user's own optional TileDB Cloud/object-storage calls."
+        },
+        {
+          "type": "network-access",
+          "line": 92,
+          "evidence": "https://",
+          "context": "- [Released CLI option definitions](https://github.com/TileDB-Inc/TileDB-VCF/blob/0.40.3/libtiledbvcf/src/cli/tiledbvcf.cc)",
+          "disposition": "accepted",
+          "reason": "Documentation links to TileDB GitHub/docs, PyPI, Anaconda and the bcftools manual plus the default api.tiledb.com service base; network use is limited to package installation and the user's own optional TileDB Cloud/object-storage calls."
+        },
+        {
+          "type": "network-access",
+          "line": 93,
+          "evidence": "https://",
+          "context": "- [Released QC wrapper](https://github.com/TileDB-Inc/TileDB-VCF/blob/0.40.3/apis/python/src/tiledbvcf/sample_qc.py)",
+          "disposition": "accepted",
+          "reason": "Documentation links to TileDB GitHub/docs, PyPI, Anaconda and the bcftools manual plus the default api.tiledb.com service base; network use is limited to package installation and the user's own optional TileDB Cloud/object-storage calls."
+        },
+        {
+          "type": "network-access",
+          "line": 94,
+          "evidence": "https://",
+          "context": "- [Released allele-frequency wrapper](https://github.com/TileDB-Inc/TileDB-VCF/blob/0.40.3/apis/python/src/tiledbvcf/allele_frequency.py)",
+          "disposition": "accepted",
+          "reason": "Documentation links to TileDB GitHub/docs, PyPI, Anaconda and the bcftools manual plus the default api.tiledb.com service base; network use is limited to package installation and the user's own optional TileDB Cloud/object-storage calls."
+        },
+        {
+          "type": "network-access",
+          "line": 95,
+          "evidence": "https://",
+          "context": "- [bcftools manual](https://samtools.github.io/bcftools/bcftools.html)",
+          "disposition": "accepted",
+          "reason": "Documentation links to TileDB GitHub/docs, PyPI, Anaconda and the bcftools manual plus the default api.tiledb.com service base; network use is limited to package installation and the user's own optional TileDB Cloud/object-storage calls."
+        }
+      ]
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "38e55a6962e14637e82f60be8e53e6d87c78f1a7874b9f832f442a038942f7d5",
+      "bytes": 13900,
+      "mode": "100644",
+      "git_blob": "3900052a467fdb7d0a06aa48641f6f5422cf636e",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 39,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks for conda environment creation, bcftools compress/index, and tiledbvcf CLI create/store/list/stat/export on user-supplied VCFs."
+        },
+        {
+          "type": "shell-execution",
+          "line": 68,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks for conda environment creation, bcftools compress/index, and tiledbvcf CLI create/store/list/stat/export on user-supplied VCFs."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 155,
+          "evidence": "mkdir",
+          "context": "Path(\"exported\").mkdir(exist_ok=True)",
+          "disposition": "accepted",
+          "reason": "Python example creates a local 'exported' directory for VCF export output; writes stay within the user's working data."
+        },
+        {
+          "type": "shell-execution",
+          "line": 173,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks for conda environment creation, bcftools compress/index, and tiledbvcf CLI create/store/list/stat/export on user-supplied VCFs."
+        },
+        {
+          "type": "credential-access",
+          "line": 221,
+          "evidence": "credential",
+          "context": "provider's credential chain or scoped configuration, and verify access to both",
+          "disposition": "accepted",
+          "reason": "Describes how the TileDB Cloud SDK reads TILEDB_REST_TOKEN and cloud provider credential chains, with explicit guidance not to embed or print tokens; no instruction to read, print, or send secrets elsewhere."
+        },
+        {
+          "type": "credential-access",
+          "line": 267,
+          "evidence": "credential",
+          "context": "patterns apply to `search_uri`. Registration requires the access credential name",
+          "disposition": "accepted",
+          "reason": "Describes how the TileDB Cloud SDK reads TILEDB_REST_TOKEN and cloud provider credential chains, with explicit guidance not to embed or print tokens; no instruction to read, print, or send secrets elsewhere."
+        },
+        {
+          "type": "network-access",
+          "line": 276,
+          "evidence": "https://",
+          "context": "- [TileDB-VCF 0.40.3 release](https://github.com/TileDB-Inc/TileDB-VCF/releases/tag/0.40.3)",
+          "disposition": "accepted",
+          "reason": "Documentation links to TileDB GitHub/docs, PyPI, Anaconda and the bcftools manual plus the default api.tiledb.com service base; network use is limited to package installation and the user's own optional TileDB Cloud/object-storage calls."
+        },
+        {
+          "type": "network-access",
+          "line": 277,
+          "evidence": "https://",
+          "context": "- [Dataset API](https://tiledb-inc.github.io/TileDB-VCF/documentation/reference/Dataset.html)",
+          "disposition": "accepted",
+          "reason": "Documentation links to TileDB GitHub/docs, PyPI, Anaconda and the bcftools manual plus the default api.tiledb.com service base; network use is limited to package installation and the user's own optional TileDB Cloud/object-storage calls."
+        },
+        {
+          "type": "network-access",
+          "line": 278,
+          "evidence": "https://",
+          "context": "- [Ingestion](https://tiledb-inc.github.io/TileDB-VCF/documentation/how-to/ingest-samples.html)",
+          "disposition": "accepted",
+          "reason": "Documentation links to TileDB GitHub/docs, PyPI, Anaconda and the bcftools manual plus the default api.tiledb.com service base; network use is limited to package installation and the user's own optional TileDB Cloud/object-storage calls."
+        },
+        {
+          "type": "network-access",
+          "line": 279,
+          "evidence": "https://",
+          "context": "- [Large queries](https://tiledb-inc.github.io/TileDB-VCF/documentation/how-to/handle-large-queries.html)",
+          "disposition": "accepted",
+          "reason": "Documentation links to TileDB GitHub/docs, PyPI, Anaconda and the bcftools manual plus the default api.tiledb.com service base; network use is limited to package installation and the user's own optional TileDB Cloud/object-storage calls."
+        },
+        {
+          "type": "network-access",
+          "line": 280,
+          "evidence": "https://",
+          "context": "- [Cloud storage](https://tiledb-inc.github.io/TileDB-VCF/documentation/how-to/work-with-cloud-object-stores.html)",
+          "disposition": "accepted",
+          "reason": "Documentation links to TileDB GitHub/docs, PyPI, Anaconda and the bcftools manual plus the default api.tiledb.com service base; network use is limited to package installation and the user's own optional TileDB Cloud/object-storage calls."
+        },
+        {
+          "type": "network-access",
+          "line": 281,
+          "evidence": "https://",
+          "context": "- [TileDB Cloud client release](https://pypi.org/project/tiledb-cloud/0.14.4/)",
+          "disposition": "accepted",
+          "reason": "Documentation links to TileDB GitHub/docs, PyPI, Anaconda and the bcftools manual plus the default api.tiledb.com service base; network use is limited to package installation and the user's own optional TileDB Cloud/object-storage calls."
+        }
+      ]
+    }
+  ]
+}

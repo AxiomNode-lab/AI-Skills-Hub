@@ -1,0 +1,238 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "microsoft/azure-cosmos-java",
+  "status": "approved",
+  "reviewed_on": "2026-10-02",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/azure-sdk-java/skills/azure-cosmos-java",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": ".github/plugins/azure-sdk-java/skills/azure-cosmos-java",
+    "url": "https://api.github.com/repos/microsoft/skills/git/trees/84d8eaa8ae95930f55cdceb3e27196c795dab038?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/microsoft/skills/blob/84d8eaa8ae95930f55cdceb3e27196c795dab038/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        ".github",
+        ".github/plugins",
+        ".github/plugins/azure-sdk-java",
+        ".github/plugins/azure-sdk-java/skills",
+        ".github/plugins/azure-sdk-java/skills/azure-cosmos-java"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT License with its copyright notice, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file; front matter declares license: MIT with Microsoft as author. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "low",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": false,
+      "network": false,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md and references/examples.md in full. Java reference for the Azure Cosmos DB NoSQL SDK (com.azure:azure-cosmos): sync/async client creation with key or DefaultAzureCredential, database/container creation and deletion, item CRUD, parameterized and paged SQL queries, consistency levels, RU charges, and error handling.",
+      "No shell commands, installers, or agent-side network access: installation is a Maven/BOM snippet for the user's pom.xml, the bash fence lists placeholder environment variables, and keys come from placeholders or System.getenv(\"COSMOS_KEY\") in the user's code.",
+      "Accuracy caveats: the Maven snippet uses <version>LATEST</version> and a {bom_version} placeholder (unpinned), SKILL.md:114-115 calls `.map` on the sync client's createDatabaseIfNotExists result, and SKILL.md:183-190 declares an @status query parameter without binding it. Database/container/item delete samples affect the user's Cosmos account only when their code runs."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "git_blob": "79656060de00aa4659ad2c276d5be8830664d544",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry the copyright and permission notice.",
+      "findings": []
+    },
+    {
+      "path": "references/examples.md",
+      "sha256": "d885f9aa0ddc03e07ad85d054a933514a2f649ba1ed1fd3f32ffa53086c6d16b",
+      "bytes": 11991,
+      "mode": "100644",
+      "git_blob": "dd58f7121e5a41e464084bd6ca50fc0b770a3c47",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "credential-access",
+          "line": 99,
+          "evidence": "credential",
+          "context": "    .credential(new DefaultAzureCredentialBuilder().build())",
+          "disposition": "accepted",
+          "reason": "One DefaultAzureCredentialBuilder sample (examples.md:99) for the user's app; key auth elsewhere uses placeholders or System.getenv, with no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 122,
+          "evidence": "Delete",
+          "context": "// Delete database",
+          "disposition": "accepted",
+          "reason": "Hits are Cosmos DB service deletions (database.delete, container.delete, deleteItem) and '// Delete' comments in sample code, not local file operations."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 123,
+          "evidence": "delete",
+          "context": "CosmosDatabaseResponse deleteResponse = database.delete(new CosmosDatabaseRequestOptions());",
+          "disposition": "accepted",
+          "reason": "Hits are Cosmos DB service deletions (database.delete, container.delete, deleteItem) and '// Delete' comments in sample code, not local file operations."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 124,
+          "evidence": "delete",
+          "context": "System.out.println(\"Status code for database delete: \" + deleteResponse.getStatusCode());",
+          "disposition": "accepted",
+          "reason": "Hits are Cosmos DB service deletions (database.delete, container.delete, deleteItem) and '// Delete' comments in sample code, not local file operations."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 154,
+          "evidence": "Delete",
+          "context": "// Delete container",
+          "disposition": "accepted",
+          "reason": "Hits are Cosmos DB service deletions (database.delete, container.delete, deleteItem) and '// Delete' comments in sample code, not local file operations."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 155,
+          "evidence": "delete",
+          "context": "container.delete();",
+          "disposition": "accepted",
+          "reason": "Hits are Cosmos DB service deletions (database.delete, container.delete, deleteItem) and '// Delete' comments in sample code, not local file operations."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 229,
+          "evidence": "DELETE",
+          "context": "// ============ DELETE ============",
+          "disposition": "accepted",
+          "reason": "Hits are Cosmos DB service deletions (database.delete, container.delete, deleteItem) and '// Delete' comments in sample code, not local file operations."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 277,
+          "evidence": "Delete",
+          "context": "        // Delete that item",
+          "disposition": "accepted",
+          "reason": "Hits are Cosmos DB service deletions (database.delete, container.delete, deleteItem) and '// Delete' comments in sample code, not local file operations."
+        }
+      ]
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "44598c07681d06e88d7a26ad5a11e18170ea5cf65c1457a2bce5742dad9bbbbf",
+      "bytes": 7499,
+      "mode": "100644",
+      "git_blob": "21a14dce1c668ef29e3267b262be6123533eb92e",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 52,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "The only bash fence (SKILL.md:52) lists placeholder environment variables; no commands are run."
+        },
+        {
+          "type": "network-access",
+          "line": 53,
+          "evidence": "https://",
+          "context": "COSMOS_ENDPOINT=https://<account>.documents.azure.com:443/",
+          "disposition": "accepted",
+          "reason": "A placeholder Cosmos endpoint and a reference-link table to Maven Central, Azure SDK docs, Microsoft Learn and Azure-Samples on GitHub; the agent is not told to fetch them."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 167,
+          "evidence": "Delete",
+          "context": "        // Delete",
+          "disposition": "accepted",
+          "reason": "Hits are Cosmos DB service deletions (database.delete, container.delete, deleteItem) and '// Delete' comments in sample code, not local file operations."
+        },
+        {
+          "type": "network-access",
+          "line": 257,
+          "evidence": "https://",
+          "context": "| Maven Package | https://central.sonatype.com/artifact/com.azure/azure-cosmos |",
+          "disposition": "accepted",
+          "reason": "A placeholder Cosmos endpoint and a reference-link table to Maven Central, Azure SDK docs, Microsoft Learn and Azure-Samples on GitHub; the agent is not told to fetch them."
+        },
+        {
+          "type": "network-access",
+          "line": 258,
+          "evidence": "https://",
+          "context": "| API Documentation | https://azuresdkdocs.z19.web.core.windows.net/java/azure-cosmos/latest/index.html |",
+          "disposition": "accepted",
+          "reason": "A placeholder Cosmos endpoint and a reference-link table to Maven Central, Azure SDK docs, Microsoft Learn and Azure-Samples on GitHub; the agent is not told to fetch them."
+        },
+        {
+          "type": "network-access",
+          "line": 259,
+          "evidence": "https://",
+          "context": "| Product Docs | https://learn.microsoft.com/azure/cosmos-db/ |",
+          "disposition": "accepted",
+          "reason": "A placeholder Cosmos endpoint and a reference-link table to Maven Central, Azure SDK docs, Microsoft Learn and Azure-Samples on GitHub; the agent is not told to fetch them."
+        },
+        {
+          "type": "network-access",
+          "line": 260,
+          "evidence": "https://",
+          "context": "| Samples | https://github.com/Azure-Samples/azure-cosmos-java-sql-api-samples |",
+          "disposition": "accepted",
+          "reason": "A placeholder Cosmos endpoint and a reference-link table to Maven Central, Azure SDK docs, Microsoft Learn and Azure-Samples on GitHub; the agent is not told to fetch them."
+        },
+        {
+          "type": "network-access",
+          "line": 261,
+          "evidence": "https://",
+          "context": "| Performance Guide | https://learn.microsoft.com/azure/cosmos-db/performance-tips-java-sdk-v4-sql |",
+          "disposition": "accepted",
+          "reason": "A placeholder Cosmos endpoint and a reference-link table to Maven Central, Azure SDK docs, Microsoft Learn and Azure-Samples on GitHub; the agent is not told to fetch them."
+        },
+        {
+          "type": "network-access",
+          "line": 262,
+          "evidence": "https://",
+          "context": "| Troubleshooting | https://learn.microsoft.com/azure/cosmos-db/troubleshoot-java-sdk-v4-sql |",
+          "disposition": "accepted",
+          "reason": "A placeholder Cosmos endpoint and a reference-link table to Maven Central, Azure SDK docs, Microsoft Learn and Azure-Samples on GitHub; the agent is not told to fetch them."
+        }
+      ]
+    }
+  ]
+}
