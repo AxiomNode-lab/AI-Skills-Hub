@@ -48557,7 +48557,7 @@
         "scope": "repository",
         "evidence": "catalog/reviews/microsoft__azure-monitor-query-py.json"
       },
-      "distribution": "bundled",
+      "distribution": "review-required",
       "compatibility": [
         "agent-skills",
         "github-copilot",
@@ -48690,19 +48690,20 @@
         ],
         "review": "catalog/reviews/microsoft__azure-monitor-query-py.json"
       },
-      "materialized": true,
+      "materialized": false,
       "release": {
-        "status": "eligible",
-        "reasons": []
+        "status": "hold",
+        "reasons": [
+          "upstream-api-removed"
+        ],
+        "evidence": "docs/reviews/independent-batch-04.json"
       },
       "integrity": {
         "upstream_skill_sha256": "02a36d349fa9ce1b194f032975ad82cd04d95598059f6d14902872162688edbd",
         "last_ingested_revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
       },
       "description": "Azure Monitor Query SDK for Python. Use for querying Log Analytics workspaces and Azure Monitor metrics. Triggers: \"azure-monitor-query\", \"LogsQueryClient\", \"MetricsQueryClient\", \"Log Analytics\", \"Kusto queries\", \"Azure metrics\".",
-      "artifact_type": "skill",
-      "materialized_root": "skills/microsoft/azure-monitor-query-py",
-      "materialized_files": 4
+      "artifact_type": "skill"
     },
     {
       "id": "microsoft/azure-postgres-ts",

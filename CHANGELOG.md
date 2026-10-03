@@ -18,7 +18,8 @@ All notable changes to AI Skills Hub are documented here.
 
 ### Changed
 - `microsoft/azure-ai-anomalydetector-java` is held with reason `upstream-service-retired` (Microsoft retired the service on 2026-10-01) and no longer ships; 165 skills are installable. `info` now prints release hold reasons.
-- Independent instruction reviews of 30 microsoft/skills skills are recorded in docs/reviews/independent-batch-01 to -03.
+- Independent instruction reviews of 40 microsoft/skills skills are recorded in docs/reviews/independent-batch-01 to -04.
+- `microsoft/azure-monitor-query-py` is held with reason `upstream-api-removed`: its unpinned package dropped the metrics clients it documents; 162 skills are installable.
 - `microsoft/azure-communication-sms-java` and `microsoft/azure-communication-chat-java` are held with reason `upstream-service-retiring` (Azure Communication Services SMS and Chat are closed to new customers and retire on 2028-09-30); 163 skills are installable.
 - Agent Skills format skills now install for every agent that loads the format (Claude Code, Codex, Cursor, GitHub Copilot, OpenCode); previously most were limited by a per-source guess, so Claude Code saw 19 of 166 released skills.
 
