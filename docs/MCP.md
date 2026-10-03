@@ -14,7 +14,9 @@ AI Skills Hub runs a read-only MCP server so an agent can search the catalog and
 
 ## Resources
 
-Every file of a materialized, release-eligible skill is listed as `skillshub://skills/<id>/<path>` and can be read with `resources/read`. Only regular files inside the skill's materialized root are served. Held, review-required, source-direct, and blocked skills are never exposed as content; their normalized metadata remains searchable.
+Every verified file of a materialized, release-eligible skill is listed as `skillshub://skills/<id>/<path>` and can be read with `resources/read`. The server checks the bound review, inventory and hashes on each content request and refuses symlinks/junctions, including the materialized root and its ancestors below the Hub. A changed or unverifiable artifact exposes no file content. Held, review-required, source-direct, and blocked skills are never exposed as content; their normalized metadata remains searchable.
+
+HTTP clients must send JSON with `Content-Type: application/json`. The HTTP transport checks `Host` and browser `Origin`, rejects unsupported protocol headers and validates tool argument types. See [API](API.md) for the local transport boundary.
 
 ## Client configuration
 

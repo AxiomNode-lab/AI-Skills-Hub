@@ -81,6 +81,25 @@ test("a high-risk instruction is blocked even when an approval claims it is acce
   assert.throws(() => verifyReviewedDirectory(first, changed, dir), /High-risk scanner/);
 });
 
+test("reviewed release cannot erase a conflicting nested or quoted license declaration", t => {
+  const skill = registry.skills.find(s => s.id === "microsoft/wiki-qa");
+  const original = JSON.parse(fs.readFileSync(skill.license.evidence, "utf8"));
+  const dir = tempProject(t);
+  fs.cpSync(skill.materialized_root, dir, { recursive: true });
+  for (const declaration of ['license:\n  spdx: Proprietary', '"license": Proprietary', 'license: MIT\nlicense: Proprietary']) {
+    const text = `---\nname: ${skill.name}\ndescription: Example\n${declaration}\n---\n`;
+    const bytes = Buffer.from(text);
+    fs.writeFileSync(path.join(dir, "SKILL.md"), bytes);
+    const review = structuredClone(original);
+    Object.assign(review.files.find(f => f.path === "SKILL.md"), {
+      bytes: bytes.length, sha256: sha256(bytes),
+      git_blob: crypto.createHash("sha1").update(Buffer.from(`blob ${bytes.length}\0`)).update(bytes).digest("hex"),
+      findings: []
+    });
+    assert.throws(() => verifyReviewedDirectory(skill, review, dir), /license|YAML/);
+  }
+});
+
 test("materialized validation rejects modified approval evidence", t => {
   const dir = tempProject(t);
   fs.mkdirSync(path.join(dir, "catalog", "materialized-manifests"), { recursive: true });

@@ -3,8 +3,8 @@ name: CI
 on:
   push:
     branches: ["main"]
+  # Also verify correction PRs targeting an open feature branch.
   pull_request:
-    branches: ["main"]
 
 permissions:
   contents: read

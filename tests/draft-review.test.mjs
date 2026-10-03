@@ -5,11 +5,11 @@ import os from "node:os";
 import path from "node:path";
 import { execFileSync, spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
-import { prepareReviewedSkill, validateReleaseReview } from "../packages/materializer/src/reviewed.mjs";
+import { detectLicense, prepareReviewedSkill, validateReleaseReview } from "../packages/materializer/src/reviewed.mjs";
 
 const script = fileURLToPath(new URL("../scripts/draft-review.mjs", import.meta.url));
 const APACHE = "Apache License\nVersion 2.0, January 2004\nhttp://www.apache.org/licenses/\n2. Grant of Copyright License.\n4. Redistribution.\n";
-const MIT = "MIT License\n\nCopyright (c) 2025 Example\n\nPermission is hereby granted, free of charge, to any person obtaining a copy.\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n";
+const MIT = fs.readFileSync(new URL("../LICENSE", import.meta.url), "utf8").replace(/\r\n/g, "\n");
 const SKILL = (license) => `---\nname: demo\ndescription: Demo skill\n${license ? `license: ${license}\n` : ""}---\nSee https://example.com\n`;
 
 // files: repository-relative path -> contents
@@ -86,7 +86,15 @@ test("draft-review refuses code, missing licenses, nested notices, and conflicti
     [{ "skills/demo/SKILL.md": SKILL(null) }, /No skill-local or repository-root license/],
     [{ "LICENSE": APACHE, "skills/demo/SKILL.md": SKILL(null) }, /not MIT/],
     [{ "LICENSE": MIT, "skills/NOTICE": "Other terms\n", "skills/demo/SKILL.md": SKILL(null) }, /Nested license/],
-    [{ "LICENSE": MIT, "skills/demo/SKILL.md": SKILL("Apache-2.0") }, /declares a different license/]
+    [{ "LICENSE": MIT, "skills/demo/SKILL.md": SKILL("Apache-2.0") }, /declares a different license/],
+    [{ "LICENSE": MIT, "skills/demo/SKILL.md": SKILL("\n  spdx: Proprietary") }, /license must be a non-empty string/],
+    [{ "LICENSE": MIT, "skills/demo/SKILL.md": SKILL(null).replace("---\nSee", '"license": Proprietary\n---\nSee') }, /declares a different license/]
   ];
   for (const [files, expected] of cases) assert.match(fixture(t, files).run().stderr, expected);
+});
+
+test("MIT detection rejects incomplete grants and added restrictions", () => {
+  assert.equal(detectLicense(MIT), "MIT");
+  assert.equal(detectLicense(MIT.slice(0, MIT.indexOf('THE SOFTWARE IS PROVIDED'))), null);
+  assert.equal(detectLicense(MIT + '\nNon-commercial use only.\n'), null);
 });

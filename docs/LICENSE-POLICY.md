@@ -26,3 +26,5 @@ The artifact is explicitly excluded from distribution.
 - No other license is accepted from the repository root. Apache-2.0 is accepted only from a skill-local license file.
 - Preserve upstream copyright and attribution notices when redistribution is allowed.
 - Pin provenance before publishing a bundled artifact.
+- The MIT release check requires the complete permission, notice and disclaimer text, allowing whitespace and a final-period variation. A truncated grant or additional restriction is not recognized as MIT by this workflow; unfamiliar variants require a separate review.
+- Frontmatter uses strict YAML 1.2 parsing. Duplicate keys, aliases, anchors, merge keys, custom tags, malformed YAML and unclosed frontmatter are rejected. When present, `name`, `description` and `license` must be non-empty strings; a mapping or sequence license is never treated as an absent declaration. Scalar quoting, indentation and block chomping retain their YAML meaning. Other nested metadata is not extracted into scalar catalog fields.
