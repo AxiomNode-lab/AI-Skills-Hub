@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { resolveHubPath } from "../../core/src/index.mjs";
 
 export function validatePluginName(name) {
   if (!/^[a-z0-9][a-z0-9._-]*$/.test(name)) {
@@ -66,7 +67,7 @@ export function exportPortablePlugin({outputDir,manifest,skills=[]}) {
       throw new Error("Cannot export skill that has not passed registry release gates: " + skill.id);
     }
     const dest=path.join(root,"skills",skill.name);
-    fs.cpSync(path.resolve(skill.materialized_root),dest,{recursive:true,dereference:true});
+    fs.cpSync(resolveHubPath(skill.materialized_root),dest,{recursive:true,dereference:true});
   }
 
   fs.writeFileSync(path.join(root,"THIRD-PARTY-NOTICES.md"),thirdPartyNotices(skills));

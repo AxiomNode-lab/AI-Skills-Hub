@@ -122,3 +122,23 @@ test("a Microsoft skill installs for Claude Code into .claude/skills via the Age
   assert.ok(fs.existsSync(path.join(cwd, ".claude", "skills", "wiki-qa", "SKILL.md")));
   assert.ok(fs.existsSync(path.join(cwd, ".claude", "skills", "wiki-qa", "LICENSE.txt")));
 });
+
+test("the update check is cached for a day so commands do not wait on the network each time", async t => {
+  const { checkForUpdates } = await import("../packages/cli/src/utils.mjs");
+  const cacheFile = path.join(temp(t, "hub-update-"), "update-check.json");
+  let calls = 0;
+  const fetchImpl = async () => { calls += 1; return { ok: true, json: async () => ({ version: "999.0.0" }) }; };
+  const logs = [];
+  const log = console.log;
+  console.log = (...args) => logs.push(args.join(" "));
+  t.after(() => { console.log = log; });
+  const run = (now) => checkForUpdates({ env: {}, isTTY: true, fetchImpl, now, cacheFile });
+  await run(1_000);
+  await run(1_000 + 60_000);
+  assert.equal(calls, 1, "a fresh cache answers without fetching");
+  await run(1_000 + 25 * 60 * 60 * 1000);
+  assert.equal(calls, 2, "a stale cache fetches again");
+  assert.ok(logs.some(line => line.includes("999.0.0")));
+  await checkForUpdates({ env: {}, isTTY: false, fetchImpl, now: 0, cacheFile });
+  assert.equal(calls, 2, "non-interactive output never checks");
+});

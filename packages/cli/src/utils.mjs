@@ -1,5 +1,6 @@
 import fs from "node:fs/promises";
 import path from "node:path";
+import os from "node:os";
 import { execFileSync } from "node:child_process";
 import { findExecutable, hubHome, loadRegistry } from "@ai-skills-hub/core";
 
@@ -73,26 +74,41 @@ export function resolveDependencies(selectedIds, allCapabilities) {
     .filter(Boolean);
 }
 
-export async function checkForUpdates() {
-  if (process.env.SKILLS_HUB_NO_UPDATE_CHECK || process.env.CI || !process.stdout.isTTY) return;
+const UPDATE_CHECK_TTL_MS = 24 * 60 * 60 * 1000;
+
+// Prints a notice when a newer Hub version exists. The remote version is cached
+// for a day so commands do not wait on the network every time they start.
+export async function checkForUpdates({
+  env = process.env,
+  isTTY = process.stdout.isTTY,
+  fetchImpl = fetch,
+  now = Date.now(),
+  cacheFile = path.join(os.homedir(), ".cache", "ai-skills-hub", "update-check.json")
+} = {}) {
+  if (env.SKILLS_HUB_NO_UPDATE_CHECK || env.CI || !isTTY) return;
   try {
     const localPkgPath = path.join(hubHome(), "package.json");
     if (!(await fileExists(localPkgPath))) return;
+    const localVersion = JSON.parse(await fs.readFile(localPkgPath, "utf8")).version;
 
-    const localPkg = JSON.parse(await fs.readFile(localPkgPath, "utf8"));
-    const localVersion = localPkg.version;
+    let latest = null;
+    try {
+      const cached = JSON.parse(await fs.readFile(cacheFile, "utf8"));
+      if (now - cached.checked_at < UPDATE_CHECK_TTL_MS) latest = cached.latest ?? null;
+      else throw new Error("stale");
+    } catch {
+      const response = await fetchImpl(
+        "https://raw.githubusercontent.com/AxiomNode-lab/AI-Skills-Hub/main/package.json",
+        { signal: AbortSignal.timeout(1500) }
+      );
+      if (response.ok) latest = (await response.json()).version ?? null;
+      await fs.mkdir(path.dirname(cacheFile), { recursive: true });
+      await fs.writeFile(cacheFile, JSON.stringify({ checked_at: now, latest }));
+    }
 
-    const response = await fetch(
-      "https://raw.githubusercontent.com/AxiomNode-lab/AI-Skills-Hub/main/package.json",
-      { signal: AbortSignal.timeout(1500) }
-    );
-
-    if (response.ok) {
-      const remotePkg = await response.json();
-      if (remotePkg.version && remotePkg.version !== localVersion) {
-        console.log(`\nUpdate available: ${localVersion} -> ${remotePkg.version}`);
-        console.log("Run 'git pull' to update.\n");
-      }
+    if (latest && latest !== localVersion) {
+      console.log(`\nUpdate available: ${localVersion} -> ${latest}`);
+      console.log("Run 'git pull' to update.\n");
     }
   } catch {
     // Version checks are best-effort and must never block the CLI.

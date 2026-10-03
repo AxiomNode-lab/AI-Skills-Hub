@@ -1,8 +1,9 @@
 import { select, checkbox, confirm, input, Separator } from "@inquirer/prompts";
 import { detectAgents } from "../../../installer/src/detector.mjs";
 import { catalogAvailability, filterForAgent, loadRegistry } from "@ai-skills-hub/core";
+import { searchRegistry } from "@ai-skills-hub/discovery";
 import { installableSkills } from "./available.mjs";
-import { availabilityText, paint, truncate } from "../ui.mjs";
+import { availabilityText, groupByPublisher, paint, truncate } from "../ui.mjs";
 import { installCapability, planCapability } from "../install-executor.mjs";
 import { resolveDependencies, checkPrerequisites } from "../utils.mjs";
 
@@ -18,7 +19,7 @@ export async function interactiveCommand() {
   const selectedAgentId = await select({
     message: "Which AI agent should the skills be installed for?",
     choices: agents.map((agent) => ({
-      name: agent.detected && agent.evidence ? `${agent.name} ${paint("green", "✔ detected")}` : agent.name,
+      name: agent.evidence ? `${agent.name} ${paint("green", "✔ detected")}` : agent.name,
       value: agent.id,
       description: agent.evidence ? `Found: ${agent.evidence}` : agent.id === "agent-skills" ? "Installs to .agents/skills, read by Codex, Cursor, Copilot and other Agent Skills clients" : "Not detected on this machine; you can still install for it"
     }))
@@ -38,7 +39,9 @@ export async function interactiveCommand() {
   let candidates = installable;
   if (searchMode === "search") {
     const query = await input({ message: "Search query:" });
-    candidates = installableSkills(registry, { agent: selectedAgentId, query });
+    // Search within the installable list already computed for this agent.
+    const matched = new Set(searchRegistry({ skills: installable }, query, { limit: Infinity }).map(({ item }) => item.id));
+    candidates = installable.filter((skill) => matched.has(skill.id));
   } else if (searchMode === "all") {
     candidates = filterForAgent(registry.skills, selectedAgentId);
   }
@@ -50,18 +53,15 @@ export async function interactiveCommand() {
 
   // Group by publisher so long lists stay navigable.
   const choices = [];
-  let publisher = null;
-  for (const cap of [...candidates].sort((a, b) => a.id.localeCompare(b.id))) {
-    const owner = cap.id.split("/")[0];
-    if (owner !== publisher) {
-      publisher = owner;
-      choices.push(new Separator(paint("cyan", `── ${owner} ──`)));
+  for (const [owner, group] of groupByPublisher(candidates)) {
+    choices.push(new Separator(paint("cyan", `── ${owner} ──`)));
+    for (const cap of group) {
+      choices.push({
+        name: displayName(cap),
+        value: cap.id,
+        description: `${truncate(cap.description || "No description.", 220)} (${cap.security?.risk || "unknown"} risk)`
+      });
     }
-    choices.push({
-      name: displayName(cap),
-      value: cap.id,
-      description: `${truncate(cap.description || "No description.", 220)} (${cap.security?.risk || "unknown"} risk)`
-    });
   }
 
   const selectedIds = await checkbox({

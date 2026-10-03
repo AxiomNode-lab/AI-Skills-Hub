@@ -2,7 +2,6 @@ import { catalogAvailability } from "@ai-skills-hub/core";
 import { availabilityLabel, installationLabel } from "./ui.mjs";
 import { readInstallRecords, verifyInstallRecord } from "../../installer/src/state.mjs";
 
-export { catalogAvailability };
 
 export function recordedInstallation(record) {
   const base = { agent: record.agent, scope: record.scope, destination: record.destination ?? null };

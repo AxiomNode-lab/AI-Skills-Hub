@@ -26,6 +26,8 @@ All notable changes to AI Skills Hub are documented here.
 - `search --installable` filters before ranking, so installable matches below the top results are no longer dropped; `search --limit <n>` works, and unknown or invalid options exit with a usage error instead of becoming search text.
 - Agent Skills format compatibility applies only to bundled skills the Hub installs itself; external installers need an explicit agent listing, and `generic-agent` again accepts any artifact listed for `agent-skills`.
 - Plugin and CLI tool adapters read materialized files from the Hub root, like skills.
+- The update check is cached for a day instead of waiting on GitHub at the start of every interactive command; the server module loads only for `mcp` and `serve`.
+- `plugin-export` reads materialized skills from the Hub root.
 - The MCP server answers a request that fails during handling with an internal error for that request id instead of a parse error.
 - Agent detection works on Windows (no `which`), detects Codex, Cursor, GitHub Copilot, and OpenCode locally, and no longer offers Docker container IDs that had no install target.
 - The interactive installer computed its plan differently from the installer and warned about external installers for local installs.

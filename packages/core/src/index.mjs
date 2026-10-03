@@ -94,6 +94,12 @@ export function findExecutable(command, env = process.env) {
 }
 
 // Whether the catalog offers a local install. This never reflects installation state.
+// True when `install` accepts the capability: the single definition the CLI,
+// search filters and listings share.
+export function isInstallable(cap) {
+  return catalogAvailability(cap).status === "eligible";
+}
+
 export function catalogAvailability(cap) {
   if (cap.distribution === "blocked") return { status: "blocked", reason: "registry_blocked" };
   if (cap.distribution === "review-required") return { status: "review-required", reason: "manual_review_required" };

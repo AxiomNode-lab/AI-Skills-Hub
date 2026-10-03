@@ -10,7 +10,6 @@ import { listCommand } from "../src/commands/list.mjs";
 import { installCommand } from "../src/commands/install.mjs";
 import { availableCommand } from "../src/commands/available.mjs";
 import { checkForUpdates } from "../src/utils.mjs";
-import { createHubServer, runStdioServer } from "@ai-skills-hub/server";
 
 const [, , command, ...args] = process.argv;
 
@@ -77,14 +76,11 @@ async function main() {
       await installCommand(positional[0]?.split(",") || [], options);
       break;
     case "mcp":
-      await runStdioServer();
+      await (await import("@ai-skills-hub/server")).runStdioServer();
       break;
     case "serve": {
-      if (!Number.isInteger(options.port) || options.port < 0 || options.port > 65535) {
-        console.error("Error: --port must be an integer between 0 and 65535.");
-        process.exitCode = 1;
-        break;
-      }
+      // Loaded on demand so other commands do not pay for the server module.
+      const { createHubServer } = await import("@ai-skills-hub/server");
       const server = createHubServer();
       server.listen(options.port, options.host, () => {
         const { port } = server.address();

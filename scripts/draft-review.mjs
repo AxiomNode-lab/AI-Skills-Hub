@@ -5,13 +5,12 @@
 // set each finding's disposition and reason, write content notes and the
 // license scope reason, and change both statuses to "approved".
 // Usage: node scripts/draft-review.mjs <id> <checkout-at-revision> [--force]
-import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
 import { scanText } from "../packages/security/src/index.mjs";
 import { parseFrontmatter } from "../packages/core/src/index.mjs";
-import { detectLicense } from "../packages/materializer/src/reviewed.mjs";
+import { detectLicense, sha256 } from "../packages/materializer/src/reviewed.mjs";
 
 const [id, checkout] = process.argv.slice(2).filter((arg) => !arg.startsWith("--"));
 const force = process.argv.includes("--force");
@@ -82,7 +81,7 @@ const describe = (entry, relative, extra = {}) => {
   return {
     path: relative,
     ...extra,
-    sha256: crypto.createHash("sha256").update(bytes).digest("hex"),
+    sha256: sha256(bytes),
     bytes: bytes.length,
     mode: "100644",
     git_blob: entry.blob,

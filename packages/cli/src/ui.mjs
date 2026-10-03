@@ -23,11 +23,7 @@ const AVAILABILITY = {
   blocked: ["red", "blocked"]
 };
 
-const INSTALLATION = {
-  installed: ["green", "installed"],
-  unverified: ["yellow", "changed or missing files"],
-  "not-recorded": ["gray", "not installed by the Hub"]
-};
+const INSTALLATION_STYLE = { installed: "green", unverified: "yellow", "not-recorded": "gray" };
 
 // The status keyword, colored (scripts and docs match on the keyword).
 export function availabilityLabel(status, stream) {
@@ -35,7 +31,18 @@ export function availabilityLabel(status, stream) {
 }
 
 export function installationLabel(status, stream) {
-  return paint((INSTALLATION[status] ?? ["gray"])[0], status, stream);
+  return paint(INSTALLATION_STYLE[status] ?? "gray", status, stream);
+}
+
+// Sorts by id and splits into [publisher, skills] groups for listings.
+export function groupByPublisher(skills) {
+  const groups = new Map();
+  for (const skill of [...skills].sort((a, b) => a.id.localeCompare(b.id))) {
+    const owner = skill.id.split("/")[0];
+    if (!groups.has(owner)) groups.set(owner, []);
+    groups.get(owner).push(skill);
+  }
+  return [...groups];
 }
 
 // Plain-language description of a status, for interactive lists.

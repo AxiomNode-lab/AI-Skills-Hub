@@ -32,12 +32,12 @@ function isDirectory(candidate) {
 // agents first, followed by the generic Agent Skills target (always available).
 export async function detectAgents({ env = process.env, home = os.homedir() } = {}) {
   const agents = agentSpecs(home, env).map(({ id, name, commands, dirs }) => {
-    const executable = commands.map((command) => findExecutable(command, env)).find(Boolean) ?? null;
-    const directory = executable ? null : dirs.find(isDirectory) ?? null;
-    const evidence = executable ?? directory;
-    return { id, name, type: "local", detected: Boolean(evidence), evidence };
+    let evidence = null;
+    for (const command of commands) if ((evidence = findExecutable(command, env))) break;
+    evidence ??= dirs.find(isDirectory) ?? null;
+    return { id, name, detected: Boolean(evidence), evidence };
   });
   agents.sort((a, b) => Number(b.detected) - Number(a.detected));
-  agents.push({ id: "agent-skills", name: "Agent Skills (generic .agents/skills)", type: "local", detected: true, evidence: null });
+  agents.push({ id: "agent-skills", name: "Agent Skills (generic .agents/skills)", detected: true, evidence: null });
   return agents;
 }
