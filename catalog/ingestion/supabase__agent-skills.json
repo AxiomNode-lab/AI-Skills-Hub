@@ -1,0 +1,257 @@
+{
+  "schema_version": "0.2",
+  "source": {
+    "repo": "supabase/agent-skills",
+    "ref": "main",
+    "revision": "c9be0e931b7930f7d02126d04774d904c381e7d7",
+    "revision_type": "git-commit",
+    "tree_sha": "f0caa69c2816cd975288ca33797eb8cfbcec0a1c"
+  },
+  "discovered_skills": [
+    {
+      "path": "skills/supabase-postgres-best-practices/SKILL.md",
+      "name": "supabase-postgres-best-practices",
+      "description": "Postgres best practices maintained by Supabase, for Postgres running anywhere. Load this skill BEFORE writing or changing anything that lives in a Postgres database: creating or altering tables and columns (including choosing column types), schema design, migrations and declarative schema files, RLS policies and the tests that verify them, indexes, triggers, database functions, queues and scheduled jobs (pg_cron, pgmq), vector/semantic search (pgvector), and restoring dumps (pg_restore) or importing data. Also load it when diagnosing slow queries, high CPU, timeouts, EXPLAIN plans, connection exhaustion, locking, bloat, or rows visible to the wrong user or tenant. This is not just a performance guide — schema, migration, security, and SQL authoring tasks need these rules too, even for a one-column change or a single query.",
+      "skill_sha256": "ad65e776f45e761bafc609d3f506c77c1032225aa65e0c4c02f241b8071e5855",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_type": "skill-frontmatter",
+        "evidence_path": "skills/supabase-postgres-best-practices/SKILL.md"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "capabilities": {
+          "shell": false,
+          "network": true,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "network-access",
+            "line": 60,
+            "evidence": "https://",
+            "context": "- https://www.postgresql.org/docs/current/"
+          },
+          {
+            "type": "network-access",
+            "line": 61,
+            "evidence": "https://",
+            "context": "- https://supabase.com/docs"
+          },
+          {
+            "type": "network-access",
+            "line": 62,
+            "evidence": "https://",
+            "context": "- https://wiki.postgresql.org/wiki/Performance_Optimization"
+          },
+          {
+            "type": "network-access",
+            "line": 63,
+            "evidence": "https://",
+            "context": "- https://supabase.com/docs/guides/database/overview"
+          },
+          {
+            "type": "network-access",
+            "line": 64,
+            "evidence": "https://",
+            "context": "- https://supabase.com/docs/guides/auth/row-level-security"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": true,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/supabase/SKILL.md",
+      "name": "supabase",
+      "description": "Use when doing ANY task involving Supabase. Triggers: Supabase products (Database, Auth, Edge Functions, Realtime, Storage, Vectors, Cron, Queues); client libraries and SSR integrations (supabase-js, @supabase/ssr) in Next.js, React, SvelteKit, Astro, Remix; auth issues (login, logout, sessions, JWT, cookies, getSession, getUser, getClaims, RLS); Supabase CLI or MCP server; schema changes, migrations, declarative schemas, security audits, Postgres extensions (pg_graphql, pg_cron, pg_vector); debugging and troubleshooting errors or unexpected behavior on Supabase projects (HTTP errors, Postgres errors, RLS surprises, permission denied, schema cache issues, timeouts, Edge Function crashes, Realtime drops, Storage failures) and reading or querying logs (Logs Explorer, ClickHouse).",
+      "skill_sha256": "697e0e949f97621c6fc1784169eb3ccbf673747d6bb8299a52962d3d84d93dc6",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "medium",
+        "capabilities": {
+          "shell": true,
+          "network": true,
+          "credentials": true,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "network-access",
+            "line": 16,
+            "evidence": "https://",
+            "context": "First, fetch `https://supabase.com/changelog.md` (a lightweight summary index — not a heavy pull), scan for `breaking-change` tags relevant to your task, and follow the linked page for any that apply. Then look up the relevant topic using t"
+          },
+          {
+            "type": "network-access",
+            "line": 24,
+            "evidence": "https://",
+            "context": "**4. Exposing tables to the Data API:** Depending on the user's [Data API settings](https://supabase.com/dashboard/project/<ref>/integrations/data_api/settings), newly created tables may not be automatically exposed via the Data (REST) API."
+          },
+          {
+            "type": "network-access",
+            "line": 28,
+            "evidence": "https://",
+            "context": "When a user reports a SQL-created table is unexpectedly inaccessible, check their Data API settings and whether the roles have been granted access via explicit `GRANT` SQL. When granting public (`anon`/`authenticated`) access, always enable"
+          },
+          {
+            "type": "network-access",
+            "line": 31,
+            "evidence": "https://",
+            "context": "Enable RLS on every table in any exposed schema, which includes `public` by default. This is critical in Supabase because tables in exposed schemas can be reachable through the Data API when the `anon`/`authenticated` roles have access (see"
+          },
+          {
+            "type": "credential-access",
+            "line": 41,
+            "evidence": "API key",
+            "context": "- **API key and client exposure**"
+          },
+          {
+            "type": "credential-access",
+            "line": 42,
+            "evidence": "secret",
+            "context": "  - **Never expose the `service_role` or secret key in public clients.** Prefer publishable keys for frontend code. Legacy `anon` keys are only for compatibility. In Next.js, any `NEXT_PUBLIC_` env var is sent to the browser."
+          },
+          {
+            "type": "credential-access",
+            "line": 43,
+            "evidence": "access token",
+            "context": "  - **Use scoped personal access tokens for the Management API, CLI, and MCP server.** A classic personal access token carries the user's full account access, on every organization and project. For scripts, CI, and agents, have the user cre"
+          },
+          {
+            "type": "network-access",
+            "line": 43,
+            "evidence": "https://",
+            "context": "  - **Use scoped personal access tokens for the Management API, CLI, and MCP server.** A classic personal access token carries the user's full account access, on every organization and project. For scripts, CI, and agents, have the user cre"
+          },
+          {
+            "type": "network-access",
+            "line": 74,
+            "evidence": "https://",
+            "context": "  - **Always pin package versions and commit lockfiles** when installing Supabase packages (`supabase-js`, `@supabase/ssr`, `supabase-py`, etc.). See the [npm security guide](https://supabase.com/docs/guides/security/npm-security.md) for th"
+          },
+          {
+            "type": "network-access",
+            "line": 76,
+            "evidence": "https://",
+            "context": "For any security concern not covered above, fetch the Supabase product security index: `https://supabase.com/docs/guides/security/product-security.md`"
+          },
+          {
+            "type": "shell-execution",
+            "line": 82,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "credential-access",
+            "line": 92,
+            "evidence": "access token",
+            "context": "- The browser flow of `supabase login` creates a classic token with full account access. In CI, set `SUPABASE_ACCESS_TOKEN` to a scoped personal access token instead. It takes precedence over any saved login. Commands that connect with the "
+          },
+          {
+            "type": "network-access",
+            "line": 95,
+            "evidence": "https://",
+            "context": "**Version check and upgrade:** Run `supabase --version` to check. For CLI changelogs and version-specific features, consult the [CLI documentation](https://supabase.com/docs/reference/cli/introduction) or [GitHub releases](https://github.co"
+          },
+          {
+            "type": "network-access",
+            "line": 95,
+            "evidence": "https://",
+            "context": "**Version check and upgrade:** Run `supabase --version` to check. For CLI changelogs and version-specific features, consult the [CLI documentation](https://supabase.com/docs/reference/cli/introduction) or [GitHub releases](https://github.co"
+          },
+          {
+            "type": "network-access",
+            "line": 99,
+            "evidence": "https://",
+            "context": "For setup instructions, server URL, and configuration, see the [MCP setup guide](https://supabase.com/docs/guides/getting-started/mcp)."
+          },
+          {
+            "type": "network-access",
+            "line": 104,
+            "evidence": "curl",
+            "context": "   `curl -so /dev/null -w \"%{http_code}\" https://mcp.supabase.com/mcp`"
+          },
+          {
+            "type": "network-access",
+            "line": 104,
+            "evidence": "https://",
+            "context": "   `curl -so /dev/null -w \"%{http_code}\" https://mcp.supabase.com/mcp`"
+          },
+          {
+            "type": "network-access",
+            "line": 108,
+            "evidence": "https://",
+            "context": "   Verify the project root has a valid `.mcp.json` with the correct server URL. If missing, create one pointing to `https://mcp.supabase.com/mcp`."
+          },
+          {
+            "type": "credential-access",
+            "line": 112,
+            "evidence": "access token",
+            "context": "   In CI or other environments where the browser flow can't run, pass a scoped personal access token in the `Authorization: Bearer` header instead."
+          },
+          {
+            "type": "credential-access",
+            "line": 115,
+            "evidence": "access token",
+            "context": "   If a tool fails with \"You do not have permission to perform this action\" while using a scoped personal access token, the token lacks that tool's permission or the project is outside the token's scope. Check the tool's required permission"
+          },
+          {
+            "type": "network-access",
+            "line": 115,
+            "evidence": "https://",
+            "context": "   If a tool fails with \"You do not have permission to perform this action\" while using a scoped personal access token, the token lacks that tool's permission or the project is outside the token's scope. Check the tool's required permission"
+          },
+          {
+            "type": "network-access",
+            "line": 131,
+            "evidence": "https://",
+            "context": "Use this when `supabase/schemas/` exists or `config.toml` sets `schema_paths`. Edit the desired schema state in those files, then generate and review the migration. Do not start by hand-writing a migration. See the [Declarative database sch"
+          },
+          {
+            "type": "network-access",
+            "line": 150,
+            "evidence": "https://",
+            "context": "When you get an error on a Supabase-related request, for example an error code from the Supabase REST API, Postgres database, or PostgREST, an empty result, getting blocked by RLS unexpectedly, or an error from a Supabase service like Auth,"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": true,
+        "credentials": true,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    }
+  ],
+  "license_files": [
+    {
+      "path": "LICENSE",
+      "sha256": "b65e575eb4f04a13c187d64e958321298e2ab84d67aa8428819f362056ba292c",
+      "preview": "MIT License Copyright (c) 2026 Supabase Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in"
+    }
+  ],
+  "warnings": []
+}

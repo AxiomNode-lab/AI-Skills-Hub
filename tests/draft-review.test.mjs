@@ -75,16 +75,27 @@ test("a repository-root MIT license is attached and released byte-for-byte", t =
   const extra = structuredClone(review);
   extra.license.ancestor_check.overrides = ["skills/NOTICE"];
   assert.throws(() => validateReleaseReview(f.skill, extra), /nested license/);
-  const apache = structuredClone(review);
-  apache.license.spdx = "Apache-2.0";
-  assert.throws(() => validateReleaseReview(f.skill, apache), /Only MIT/);
+  const other = structuredClone(review);
+  other.license.spdx = "GPL-3.0";
+  assert.throws(() => validateReleaseReview(f.skill, other), /license review required/);
+});
+
+test("a repository-root Apache-2.0 license is attached when no NOTICE applies", t => {
+  const f = fixture(t, { "LICENSE": APACHE, "skills/demo/SKILL.md": SKILL("Apache-2.0"), "skills/demo/notes.md": "Notes\n" });
+  assert.equal(f.run().status, 0);
+  const review = approve(f.review());
+  assert.deepEqual([review.license.spdx, review.license.scope, review.license.source_path], ["Apache-2.0", "repository", "LICENSE"]);
+  const staged = prepareReviewedSkill(f.skill, review, path.join(f.upstream, "skills", "demo"), path.join(f.root, "staging"));
+  assert.equal(fs.readFileSync(path.join(staged.target, "LICENSE.txt"), "utf8"), APACHE);
 });
 
 test("draft-review refuses code, missing licenses, nested notices, and conflicting declarations", t => {
   const cases = [
     [{ "skills/demo/SKILL.md": SKILL("Complete terms in LICENSE.txt"), "skills/demo/LICENSE.txt": APACHE, "skills/demo/helper.py": "print('x')\n" }, /Only non-executable text packages/],
     [{ "skills/demo/SKILL.md": SKILL(null) }, /No skill-local or repository-root license/],
-    [{ "LICENSE": APACHE, "skills/demo/SKILL.md": SKILL(null) }, /not MIT/],
+    [{ "LICENSE": "GNU GENERAL PUBLIC LICENSE\nVersion 3\n", "skills/demo/SKILL.md": SKILL(null) }, /neither MIT nor Apache-2.0/],
+    [{ "LICENSE": APACHE, "NOTICE": "Example notice\n", "skills/demo/SKILL.md": SKILL(null) }, /Nested license/],
+    [{ "LICENSE": APACHE, "skills/demo/SKILL.md": SKILL("MIT") }, /declares a different license/],
     [{ "LICENSE": MIT, "skills/NOTICE": "Other terms\n", "skills/demo/SKILL.md": SKILL(null) }, /Nested license/],
     [{ "LICENSE": MIT, "skills/demo/SKILL.md": SKILL("Apache-2.0") }, /declares a different license/]
   ];

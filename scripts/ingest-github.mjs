@@ -5,11 +5,19 @@ import { scanText, riskLevel } from "../packages/security/src/index.mjs";
 import { classifyLicense, normalizeLicense } from "../packages/licenses/src/index.mjs";
 import { parseFrontmatter } from "../packages/core/src/index.mjs";
 
-const [, , repo, ref = "main"] = process.argv;
-if (!repo) {
-  console.error("Usage: node scripts/ingest-github.mjs <owner/repo> [ref]");
+import { execFileSync } from "node:child_process";
+
+const argv = process.argv.slice(2);
+const checkoutIndex = argv.indexOf("--checkout");
+// --checkout <dir>: read the tree and files from a local clone at its HEAD commit
+// instead of the GitHub API (for environments where the API is unavailable).
+const checkout = checkoutIndex === -1 ? null : argv.splice(checkoutIndex, 2)[1];
+const [repo, ref = "main"] = argv;
+if (!repo || (checkoutIndex !== -1 && !checkout)) {
+  console.error("Usage: node scripts/ingest-github.mjs <owner/repo> [ref] [--checkout <clone-dir>]");
   process.exit(1);
 }
+const git = (...args) => execFileSync("git", ["-C", checkout, ...args], { encoding: "utf8", maxBuffer: 256 * 1024 * 1024 });
 
 const token = process.env.GITHUB_TOKEN;
 const baseHeaders = {
@@ -56,6 +64,13 @@ const api = async (url) => {
 };
 
 const raw = async (filePath) => {
+  if (checkout) {
+    try {
+      return git("show", `${revision}:${filePath}`);
+    } catch {
+      return null;
+    }
+  }
   const encodedPath = filePath.split("/").map(encodeURIComponent).join("/");
   const url = "https://raw.githubusercontent.com/" + repo + "/" + revision + "/" + encodedPath;
   const res = await fetchWithRetry(url, { headers: { "user-agent": baseHeaders["user-agent"], ...(token ? {authorization:"Bearer "+token} : {}) } });
@@ -63,11 +78,27 @@ const raw = async (filePath) => {
   return res.text();
 };
 
-const commitList = await api("https://api.github.com/repos/" + repo + "/commits?sha=" + encodeURIComponent(ref) + "&per_page=1");
-const revision = commitList[0]?.sha;
-if (!revision) throw new Error("Unable to resolve ref to an immutable commit.");
-
-const tree = await api("https://api.github.com/repos/" + repo + "/git/trees/" + revision + "?recursive=1");
+let revision;
+let tree;
+if (checkout) {
+  revision = git("rev-parse", "HEAD").trim();
+  const origin = git("remote", "get-url", "origin").trim().replace(/\.git$/, "");
+  if (!origin.toLowerCase().endsWith("/" + repo.toLowerCase())) throw new Error(`Checkout origin ${origin} is not ${repo}`);
+  tree = {
+    sha: git("rev-parse", "HEAD^{tree}").trim(),
+    truncated: false,
+    tree: git("ls-tree", "-r", "--full-tree", revision).split("\n").filter(Boolean).map((line) => {
+      const [meta, file] = line.split("\t");
+      const [mode, type] = meta.split(" ");
+      return { path: file, mode, type };
+    })
+  };
+} else {
+  const commitList = await api("https://api.github.com/repos/" + repo + "/commits?sha=" + encodeURIComponent(ref) + "&per_page=1");
+  revision = commitList[0]?.sha;
+  if (!revision) throw new Error("Unable to resolve ref to an immutable commit.");
+  tree = await api("https://api.github.com/repos/" + repo + "/git/trees/" + revision + "?recursive=1");
+}
 if (tree.truncated) {
   console.error("GitHub returned a truncated tree; refuse unsafe partial ingestion.");
   process.exit(2);

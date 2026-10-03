@@ -8,11 +8,11 @@ Repository snapshot: 2026-10-03. Counts below come from `catalog/skills.json`, `
 | --- | ---: |
 | bundled | 162 |
 | source-direct | 12 |
-| review-required | 340 |
+| review-required | 812 |
 | blocked | 20 |
-| **Total** | **534** |
+| **Total** | **1006** |
 
-372 records have `release.status: hold`; 162 are materialized and release-eligible: five Anthropic skills under skill-local Apache-2.0 licenses and 157 from microsoft/skills, obra/superpowers, and K-Dense under a repository-root MIT license (see the [license policy](LICENSE-POLICY.md)). [Release evidence](VERIFIED-LOCAL-SKILLS.md) records their pinned provenance, file-level license decisions, scans, and hashes. Installation success is not task-performance evaluation. There are 7 bundle definitions and 15 source/provider/standard records. The local contract treats these as Skills: 221 explicitly declare `artifact_type: skill`, and 313 omit it and use the default. The catalog currently contains no explicit MCP server, Agent Plugin, or CLI tool records.
+844 records have `release.status: hold`; 162 are materialized and release-eligible: five Anthropic skills under skill-local Apache-2.0 licenses and 157 from microsoft/skills, obra/superpowers, and K-Dense under a repository-root MIT license (see the [license policy](LICENSE-POLICY.md)). [Release evidence](VERIFIED-LOCAL-SKILLS.md) records their pinned provenance, file-level license decisions, scans, and hashes. Installation success is not task-performance evaluation. There are 7 bundle definitions and 22 source/provider/standard records. The local contract treats these as Skills: 221 explicitly declare `artifact_type: skill`, and 785 omit it and use the default. The catalog currently contains no explicit MCP server, Agent Plugin, or CLI tool records.
 
 Reproduce the distribution counts from the repository root:
 
@@ -34,7 +34,7 @@ node -e "const c=require('./catalog/skills.json'); console.log('total',c.skills.
 - `mcp` (stdio) and `serve` (HTTP, `127.0.0.1:8787` by default) run a read-only catalog server: `search_skills` and `get_skill` MCP tools, released-skill file resources, and the routes in [API](API.md). No browser catalog exists yet.
 - `available [query] --agent <id>` lists exactly the skills `install` accepts. `search --installable` filters search results the same way.
 - Agent detection looks for each agent's command on `PATH` (with `PATHEXT` on Windows) or its configuration folder, and the interactive flow lists every supported agent with detected ones marked. Agent Skills format skills install for every agent that loads the format; see the README's supported-agent table.
-- `pnpm verify-upstream` re-downloads every file of every released skill from GitHub at its pinned commit and compares SHA-256; CI runs it on Linux. On 2026-10-03 all 656 files of the 162 released skills matched, and all 534 catalog records resolved to an existing SKILL.md at their pinned commits.
+- `pnpm verify-upstream` re-downloads every file of every released skill from GitHub at its pinned commit and compares SHA-256; CI runs it on Linux. On 2026-10-03 all 656 files of the 162 released skills matched, and all 534 catalog records that existed then resolved to an existing SKILL.md at their pinned commits. The 472 records from the seven sources added on 2026-10-03 were ingested from pinned clones.
 - `create`, `sync`, and interactive `uninstall` are also available. See `node packages/cli/bin/skills-hub.mjs help` and [installation](INSTALLATION.md).
 
 ## Library capabilities and limits

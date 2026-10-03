@@ -43,9 +43,9 @@ const blob = (hash) => Buffer.from(execFileSync("git", ["-C", checkout, "cat-fil
 const LICENSE_FILE = /(^|\/)(LICEN[CS]E|COPYING|NOTICE)[^/]*$/i;
 const local = entries.find((entry) => /^LICENSE(\.txt|\.md)?$/i.test(path.posix.relative(sourcePath, entry.file)));
 
-// A skill-local license (Apache-2.0 or MIT) governs the skill. Otherwise only an
-// MIT license at the repository root is accepted, and only when no nested
-// license, copying, or notice file sits on the path from the root to the skill.
+// A skill-local license (Apache-2.0 or MIT) governs the skill. Otherwise an MIT
+// or Apache-2.0 license at the repository root is accepted, only when no nested
+// license, copying, or notice file sits at the root or on the path to the skill.
 let license;
 let attached = null;
 if (local) {
@@ -57,19 +57,21 @@ if (local) {
   const rootLicense = tree.find((file) => /^LICEN[CS]E(\.txt|\.md)?$/i.test(file));
   if (!rootLicense) throw new Error("No skill-local or repository-root license file");
   const rootEntry = git("ls-tree", "--full-tree", "HEAD", "--", rootLicense).split(/\s+/);
-  if (detectLicense(blob(rootEntry[2]).toString("utf8")) !== "MIT") {
-    throw new Error("Repository-root license is not MIT; only skill-local licenses are accepted for this repository");
+  const rootSpdx = detectLicense(blob(rootEntry[2]).toString("utf8"));
+  if (!["MIT", "Apache-2.0"].includes(rootSpdx)) {
+    throw new Error("Repository-root license is neither MIT nor Apache-2.0; only skill-local licenses are accepted for this repository");
   }
   const ancestors = new Set(sourcePath.split("/").map((_, i, parts) => parts.slice(0, i + 1).join("/")));
   const overrides = tree.filter((file) => LICENSE_FILE.test(file) && file !== rootLicense
     && (!file.includes("/") || ancestors.has(path.posix.dirname(file)) || file.startsWith(sourcePath + "/")));
   if (overrides.length) throw new Error("Nested license, copying, or notice files apply to this skill: " + overrides.join(", "));
   const declared = parseFrontmatter(blob(entries.find((entry) => entry.file === sourcePath + "/SKILL.md").blob).toString("utf8")).license?.trim();
-  if (declared && !/^MIT(?: License)?$/i.test(declared)) throw new Error(`SKILL.md declares a different license: ${declared}`);
+  const declaredOk = rootSpdx === "MIT" ? /^MIT(?: License)?$/i : /^Apache(?:[- ]License)?[- ]2\.0$/i;
+  if (declared && !declaredOk.test(declared)) throw new Error(`SKILL.md declares a different license: ${declared}`);
   const target = "LICENSE.txt";
   if (entries.some((entry) => path.posix.relative(sourcePath, entry.file).toLowerCase() === target.toLowerCase())) throw new Error("Attached license path collides with an upstream file");
   license = {
-    spdx: "MIT", scope: "repository", path: target, source_path: rootLicense,
+    spdx: rootSpdx, scope: "repository", path: target, source_path: rootLicense,
     url: `https://github.com/${skill.source.repo}/blob/${revision}/${rootLicense}`,
     ancestor_check: { complete: true, overrides: [], checked: [...ancestors] }
   };

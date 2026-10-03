@@ -23,6 +23,7 @@ The artifact is explicitly excluded from distribution.
   - the skill's frontmatter declares no license, or declares MIT;
   - every file was read and contains no third-party copyright notice, other license grant, or copied third-party text;
   - a byte-exact copy of the root license ships with the skill as `LICENSE.txt` (an attached file listed in the review and the materialization manifest).
-- No other license is accepted from the repository root. Apache-2.0 is accepted only from a skill-local license file.
+- A repository-root **Apache-2.0** license may cover a skill under the same conditions (adopted 2026-10-03 for official engineering sources such as getsentry/skills): the root file is the Apache License 2.0 text; no LICENSE, COPYING, or NOTICE file exists at the root besides it, on the path, or inside the skill, so there is no NOTICE content that section 4(d) would require the Hub to carry; the frontmatter declares no license or Apache-2.0; every file was read with no third-party notice or copied text; and a byte-exact copy of the root license ships as `LICENSE.txt`. The Hub never modifies upstream files, so section 4(b) does not apply.
+- No other license is accepted from the repository root.
 - Preserve upstream copyright and attribution notices when redistribution is allowed.
 - Pin provenance before publishing a bundled artifact.

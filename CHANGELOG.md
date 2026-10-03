@@ -16,6 +16,10 @@ All notable changes to AI Skills Hub are documented here.
 - Terminal colors (respecting `NO_COLOR`/`FORCE_COLOR`), a publisher-grouped interactive list that defaults to installable skills, and an OpenCode install target.
 - `pnpm verify-upstream` (also in CI) re-downloads every released file from GitHub at its pinned commit and checks SHA-256.
 
+- Seven programming-focused sources: supabase/agent-skills and getsentry/skills (official), addyosmani/agent-skills, wshobson/agents, UnitOneAI/SecuritySkills, BagelHole/DevOps-Security-Agent-Skills, and aaron-he-zhu/seo-geo-claude-skills (472 records, all review-required until reviewed).
+- `scripts/ingest-github.mjs --checkout <clone>` ingests from a pinned local clone when the GitHub API is unavailable; `scripts/sync-registry.mjs --source <repo> --no-fetch` syncs only the named sources from existing ingestion files.
+- A repository-root Apache-2.0 license can cover a skill under the same conditions as MIT, with no NOTICE file applying (docs/LICENSE-POLICY.md).
+
 ### Changed
 - `microsoft/azure-ai-anomalydetector-java` is held with reason `upstream-service-retired` (Microsoft retired the service on 2026-10-01) and no longer ships; 165 skills are installable. `info` now prints release hold reasons.
 - Independent instruction reviews of 40 microsoft/skills skills are recorded in docs/reviews/independent-batch-01 to -04.

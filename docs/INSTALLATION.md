@@ -15,7 +15,7 @@ node packages/cli/bin/skills-hub.mjs list --agent codex --scope project --json
 
 ## Current catalog outcomes
 
-As of 2026-10-03 the catalog contains 534 skills: 340 review-required, 12 source-direct, 20 blocked, and 162 bundled skills. The bundled skills are materialized and release-eligible; the other 372 releases remain on hold. See [current status](STATUS.md) for a reproducible count command.
+As of 2026-10-03 the catalog contains 1006 skills: 812 review-required, 12 source-direct, 20 blocked, and 162 bundled skills. The bundled skills are materialized and release-eligible; the other 844 releases remain on hold. See [current status](STATUS.md) for a reproducible count command.
 
 This real blocked entry demonstrates a refused installation without changing files:
 
