@@ -1,0 +1,274 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "bagelhole/windows-server",
+  "status": "draft",
+  "reviewed_on": null,
+  "reviewer": null,
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "infrastructure/servers/windows-server",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "infrastructure/servers/windows-server",
+    "url": "https://api.github.com/repos/BagelHole/DevOps-Security-Agent-Skills/git/trees/0365f57a079b1332f95cf26e31dd2d5332a8399f?recursive=1",
+    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/BagelHole/DevOps-Security-Agent-Skills/blob/0365f57a079b1332f95cf26e31dd2d5332a8399f/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "infrastructure",
+        "infrastructure/servers",
+        "infrastructure/servers/windows-server"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte."
+    ]
+  },
+  "content_review": {
+    "status": "pending",
+    "risk": "unknown",
+    "blocking_findings": [],
+    "capabilities": {},
+    "notes": []
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "67c5c5cbb12cafb1515e449748866bd40da7dec9",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "df29d44f6a8670e19e2b1dfe5b679cc15a8c0c01c64338795eef7f77a7ab3d73",
+      "bytes": 10933,
+      "mode": "100644",
+      "git_blob": "1e3264d4e2e3c53fd03a38539a2186f75bcfdb9d",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 3,
+          "evidence": "PowerShell",
+          "context": "description: Administer Windows Server systems. Manage IIS, Active Directory, and PowerShell automation. Use when administering Windows infrastructure.",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 12,
+          "evidence": "PowerShell",
+          "context": "Windows Server management and PowerShell automation for production workloads including IIS web hosting, Active Directory domain services, and system maintenance.",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 19,
+          "evidence": "PowerShell",
+          "context": "- Automating administrative tasks with PowerShell",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 26,
+          "evidence": "PowerShell",
+          "context": "- PowerShell 5.1+ (built-in) or PowerShell 7+ installed",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 26,
+          "evidence": "PowerShell",
+          "context": "- PowerShell 5.1+ (built-in) or PowerShell 7+ installed",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 30,
+          "evidence": "PowerShell",
+          "context": "## PowerShell Administration Essentials",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 32,
+          "evidence": "powershell",
+          "context": "```powershell",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 33,
+          "evidence": "PowerShell",
+          "context": "# Check PowerShell version",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 63,
+          "evidence": "PowerShell",
+          "context": "# PowerShell remoting to another server",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 64,
+          "evidence": "Credential",
+          "context": "Enter-PSSession -ComputerName server02 -Credential (Get-Credential)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 64,
+          "evidence": "Credential",
+          "context": "Enter-PSSession -ComputerName server02 -Credential (Get-Credential)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 72,
+          "evidence": "powershell",
+          "context": "```powershell",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 94,
+          "evidence": "Remove",
+          "context": "# Remove a feature",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 100,
+          "evidence": "powershell",
+          "context": "```powershell",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 148,
+          "evidence": "https://",
+          "context": "  <action type=\"Redirect\" url=\"https://{HTTP_HOST}/{R:1}\" redirectType=\"Permanent\" />",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 155,
+          "evidence": "powershell",
+          "context": "```powershell",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 201,
+          "evidence": "powershell",
+          "context": "```powershell",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 202,
+          "evidence": "PowerShell",
+          "context": "# Install the PSWindowsUpdate module (from PowerShell Gallery)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 218,
+          "evidence": "powershell",
+          "context": "$action  = New-ScheduledTaskAction -Execute \"powershell.exe\" `",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 225,
+          "evidence": "http://",
+          "context": "# WUServer = http://wsus.corp.example.com:8530",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 226,
+          "evidence": "http://",
+          "context": "# WUStatusServer = http://wsus.corp.example.com:8530",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 231,
+          "evidence": "powershell",
+          "context": "```powershell",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 264,
+          "evidence": "powershell",
+          "context": "```powershell",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 266,
+          "evidence": "powershell",
+          "context": "$action  = New-ScheduledTaskAction -Execute \"powershell.exe\" `",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 278,
+          "evidence": "remove",
+          "context": "# Disable and remove a task",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    }
+  ]
+}

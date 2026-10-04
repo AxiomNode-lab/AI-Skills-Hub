@@ -1,0 +1,170 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "bagelhole/vector-database-ops",
+  "status": "draft",
+  "reviewed_on": null,
+  "reviewer": null,
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "infrastructure/databases/vector-database-ops",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "infrastructure/databases/vector-database-ops",
+    "url": "https://api.github.com/repos/BagelHole/DevOps-Security-Agent-Skills/git/trees/0365f57a079b1332f95cf26e31dd2d5332a8399f?recursive=1",
+    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/BagelHole/DevOps-Security-Agent-Skills/blob/0365f57a079b1332f95cf26e31dd2d5332a8399f/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "infrastructure",
+        "infrastructure/databases",
+        "infrastructure/databases/vector-database-ops"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte."
+    ]
+  },
+  "content_review": {
+    "status": "pending",
+    "risk": "unknown",
+    "blocking_findings": [],
+    "capabilities": {},
+    "notes": []
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "67c5c5cbb12cafb1515e449748866bd40da7dec9",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "c9e8f6f8a31ef3a184c4ee5c4bc4605cc0b8666529bf9569e9ac409c8e42b13e",
+      "bytes": 8509,
+      "mode": "100644",
+      "git_blob": "f38d81fd7a43025e040fd62813986bc54c5e5852",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 35,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 85,
+          "evidence": "http://",
+          "context": "client = QdrantClient(\"http://localhost:6333\")",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 185,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 189,
+          "evidence": "secret",
+          "context": "  -e POSTGRES_PASSWORD=secret \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 226,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 228,
+          "evidence": "curl",
+          "context": "curl -X POST \"http://localhost:6333/collections/documents/snapshots\"",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 228,
+          "evidence": "http://",
+          "context": "curl -X POST \"http://localhost:6333/collections/documents/snapshots\"",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 230,
+          "evidence": "curl",
+          "context": "curl -O \"http://localhost:6333/collections/documents/snapshots/documents-snapshot.snapshot\"",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 230,
+          "evidence": "http://",
+          "context": "curl -O \"http://localhost:6333/collections/documents/snapshots/documents-snapshot.snapshot\"",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 232,
+          "evidence": "curl",
+          "context": "curl -X POST \"http://localhost:6333/collections/documents/snapshots/recover\" \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 232,
+          "evidence": "http://",
+          "context": "curl -X POST \"http://localhost:6333/collections/documents/snapshots/recover\" \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 279,
+          "evidence": "delete",
+          "context": "- Snapshot before any bulk delete or migration operation.",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    }
+  ]
+}

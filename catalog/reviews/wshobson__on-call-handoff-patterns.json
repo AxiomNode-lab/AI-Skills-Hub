@@ -1,0 +1,158 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "wshobson/on-call-handoff-patterns",
+  "status": "draft",
+  "reviewed_on": null,
+  "reviewer": null,
+  "source": {
+    "repo": "wshobson/agents",
+    "path": "plugins/incident-response/skills/on-call-handoff-patterns",
+    "revision": "156b7a5e7a8b93642628a339ee4039c925b34c7f"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "plugins/incident-response/skills/on-call-handoff-patterns",
+    "url": "https://api.github.com/repos/wshobson/agents/git/trees/156b7a5e7a8b93642628a339ee4039c925b34c7f?recursive=1",
+    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/wshobson/agents/blob/156b7a5e7a8b93642628a339ee4039c925b34c7f/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "plugins",
+        "plugins/incident-response",
+        "plugins/incident-response/skills",
+        "plugins/incident-response/skills/on-call-handoff-patterns"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte."
+    ]
+  },
+  "content_review": {
+    "status": "pending",
+    "risk": "unknown",
+    "blocking_findings": [],
+    "capabilities": {},
+    "notes": []
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "f89abb55d9f073f38f1703e4518f0613c788c6174be7f13b8dfe48a1c076c746",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "326f0a55c96e672fedf9d807ca043c00df05ba0e",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "references/details.md",
+      "sha256": "7270323f269f96af621686db8ac558315b5c5ff42cd719866070d8aabc9827ff",
+      "bytes": 6276,
+      "mode": "100644",
+      "git_blob": "de0e8df3db7083d5be89043cf79532f69fef780d",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 45,
+          "evidence": "https://",
+          "context": "- Dashboard: [API Latency](https://grafana/d/api-latency)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 69,
+          "evidence": "https://",
+          "context": "- Dashboard: [Auth Service Memory](https://grafana/d/auth-memory)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 70,
+          "evidence": "https://",
+          "context": "- Analysis doc: [Memory Investigation](https://docs/eng-1235)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 81,
+          "evidence": "https://",
+          "context": "- **Postmortem**: [POSTMORTEM-89](https://docs/postmortem-89)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 149,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 166,
+          "evidence": "https://",
+          "context": "- [Runbooks](https://wiki/runbooks)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 167,
+          "evidence": "https://",
+          "context": "- [Service Catalog](https://wiki/services)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 168,
+          "evidence": "https://",
+          "context": "- [Incident Slack](https://slack.com/incidents)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 169,
+          "evidence": "https://",
+          "context": "- [PagerDuty](https://pagerduty.com/schedules)",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "46d03bf3a2922e77d0393dc6c0f0342056a25af15bee7c7523b0adc6d1e5d49e",
+      "bytes": 3701,
+      "mode": "100644",
+      "git_blob": "fac98d35f10b3e6b1b1fdca485c7fe6613b3cc29",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    }
+  ]
+}

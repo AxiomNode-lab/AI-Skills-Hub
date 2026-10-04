@@ -1,0 +1,342 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "bagelhole/jenkins",
+  "status": "draft",
+  "reviewed_on": null,
+  "reviewer": null,
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "devops/ci-cd/jenkins",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "devops/ci-cd/jenkins",
+    "url": "https://api.github.com/repos/BagelHole/DevOps-Security-Agent-Skills/git/trees/0365f57a079b1332f95cf26e31dd2d5332a8399f?recursive=1",
+    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/BagelHole/DevOps-Security-Agent-Skills/blob/0365f57a079b1332f95cf26e31dd2d5332a8399f/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "devops",
+        "devops/ci-cd",
+        "devops/ci-cd/jenkins"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte."
+    ]
+  },
+  "content_review": {
+    "status": "pending",
+    "risk": "unknown",
+    "blocking_findings": [],
+    "capabilities": {},
+    "notes": []
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "67c5c5cbb12cafb1515e449748866bd40da7dec9",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "references/pipeline-syntax.md",
+      "sha256": "916a986100e443db91348d1ca29d7d91aaed57e1db55450a6a09ddfb1dacb43d",
+      "bytes": 2451,
+      "mode": "100644",
+      "git_blob": "694f34e62b2c014e00f7f0cd863fa97bdd2855be",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 23,
+          "evidence": "sh",
+          "context": "                sh 'make build'",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 31,
+          "evidence": "sh",
+          "context": "                        sh 'make test-unit'",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 36,
+          "evidence": "sh",
+          "context": "                        sh 'make test-integration'",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 47,
+          "evidence": "sh",
+          "context": "                sh 'make deploy'",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 77,
+          "evidence": "sh",
+          "context": "            sh 'make build'",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 82,
+          "evidence": "sh",
+          "context": "                sh 'make deploy'",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 104,
+          "evidence": "sh",
+          "context": "                    sh config.buildCommand ?: 'make build'",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 126,
+          "evidence": "sh",
+          "context": "    sh 'docker login -u $DOCKER_USER -p $DOCKER_PASS'",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "f99e39055a9f2414be63ac16512c8807fb15a7c90992562f9d77b037c81803a4",
+      "bytes": 9255,
+      "mode": "100644",
+      "git_blob": "e36d16978d93a417ed426f97c4ff708944ab7ea3",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 46,
+          "evidence": "sh",
+          "context": "                sh 'npm ci'",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 47,
+          "evidence": "sh",
+          "context": "                sh 'npm run build'",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 53,
+          "evidence": "sh",
+          "context": "                sh 'npm test'",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 67,
+          "evidence": "sh",
+          "context": "                sh './deploy.sh'",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 67,
+          "evidence": "sh",
+          "context": "                sh './deploy.sh'",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 97,
+          "evidence": "sh",
+          "context": "                sh 'npm ci && npm run build'",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 132,
+          "evidence": "sh",
+          "context": "                    sh 'npm ci && npm run build'",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 148,
+          "evidence": "sh",
+          "context": "                sh 'make build'",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 173,
+          "evidence": "sh",
+          "context": "                sh \"deploy.sh ${params.ENVIRONMENT}\"",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 173,
+          "evidence": "sh",
+          "context": "                sh \"deploy.sh ${params.ENVIRONMENT}\"",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 203,
+          "evidence": "https://",
+          "context": "                    sh 'git push https://${GH_USER}:${GH_TOKEN}@github.com/repo.git'",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 203,
+          "evidence": "sh",
+          "context": "                    sh 'git push https://${GH_USER}:${GH_TOKEN}@github.com/repo.git'",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 222,
+          "evidence": "sh",
+          "context": "                        sh 'npm run test:unit'",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 227,
+          "evidence": "sh",
+          "context": "                        sh 'npm run test:integration'",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 232,
+          "evidence": "sh",
+          "context": "                        sh 'npm run test:e2e'",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 266,
+          "evidence": "sh",
+          "context": "        sh 'npm ci'",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 267,
+          "evidence": "sh",
+          "context": "        sh 'npm run build'",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 312,
+          "evidence": "sh",
+          "context": "                sh 'npm ci'",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 313,
+          "evidence": "sh",
+          "context": "                sh 'npm run build'",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 318,
+          "evidence": "sh",
+          "context": "            sh 'npm test'",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 323,
+          "evidence": "sh",
+          "context": "                sh './deploy.sh'",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 323,
+          "evidence": "sh",
+          "context": "                sh './deploy.sh'",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 402,
+          "evidence": "sh",
+          "context": "                sh './deploy.sh'",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 402,
+          "evidence": "sh",
+          "context": "                sh './deploy.sh'",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    }
+  ]
+}

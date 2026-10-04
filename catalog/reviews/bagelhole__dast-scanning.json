@@ -1,0 +1,422 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "bagelhole/dast-scanning",
+  "status": "draft",
+  "reviewed_on": null,
+  "reviewer": null,
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "security/scanning/dast-scanning",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "security/scanning/dast-scanning",
+    "url": "https://api.github.com/repos/BagelHole/DevOps-Security-Agent-Skills/git/trees/0365f57a079b1332f95cf26e31dd2d5332a8399f?recursive=1",
+    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/BagelHole/DevOps-Security-Agent-Skills/blob/0365f57a079b1332f95cf26e31dd2d5332a8399f/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "security",
+        "security/scanning",
+        "security/scanning/dast-scanning"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte."
+    ]
+  },
+  "content_review": {
+    "status": "pending",
+    "risk": "unknown",
+    "blocking_findings": [],
+    "capabilities": {},
+    "notes": []
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "67c5c5cbb12cafb1515e449748866bd40da7dec9",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "references/dast-tools.md",
+      "sha256": "5a7f6e756ffd959a243ea1ad93875d82f8fe7257db6e8e8bae374811efa87e02",
+      "bytes": 2257,
+      "mode": "100644",
+      "git_blob": "6414d2afd2092947edfae6eee2dd256696817e2c",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 15,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 17,
+          "evidence": "https://",
+          "context": "docker run -t owasp/zap2docker-stable zap-baseline.py -t https://target.com",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 20,
+          "evidence": "https://",
+          "context": "docker run -t owasp/zap2docker-stable zap-full-scan.py -t https://target.com",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 24,
+          "evidence": "https://",
+          "context": "  -t https://target.com/openapi.json -f openapi",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 33,
+          "evidence": "https://",
+          "context": "      urls: [\"https://target.com\"]",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 37,
+          "evidence": "https://",
+          "context": "          loginUrl: \"https://target.com/login\"",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 54,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 59,
+          "evidence": "https://",
+          "context": "nuclei -u https://target.com",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 62,
+          "evidence": "https://",
+          "context": "nuclei -u https://target.com -t cves/",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 63,
+          "evidence": "https://",
+          "context": "nuclei -u https://target.com -t exposures/",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 66,
+          "evidence": "https://",
+          "context": "nuclei -u https://target.com -severity critical,high",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 69,
+          "evidence": "https://",
+          "context": "nuclei -u https://target.com -json -o results.json",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 95,
+          "evidence": "https://",
+          "context": "    target: 'https://target.com'",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "9c499ad3eb90616a24e9c75684c7216a0bfeade1487f7efc56beb6b1374453ad",
+      "bytes": 9193,
+      "mode": "100644",
+      "git_blob": "fc0995259853b0d28c5c9b5d168cacc8177d05f4",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 44,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 50,
+          "evidence": "sh",
+          "context": "  zap.sh -daemon -host 0.0.0.0 -port 8080 \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 57,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 61,
+          "evidence": "https://",
+          "context": "  zap-baseline.py -t https://target.example.com \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 67,
+          "evidence": "https://",
+          "context": "  zap-baseline.py -t https://target.example.com \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 69,
+          "evidence": "https://",
+          "context": "  --auth-login-url https://target.example.com/login \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 76,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 80,
+          "evidence": "https://",
+          "context": "  zap-full-scan.py -t https://target.example.com \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 87,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 91,
+          "evidence": "https://",
+          "context": "  zap-api-scan.py -t https://target.example.com/openapi.json \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 104,
+          "evidence": "https://",
+          "context": "        - \"https://target.example.com\"",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 106,
+          "evidence": "https://",
+          "context": "        - \"https://target.example.com/.*\"",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 108,
+          "evidence": "https://",
+          "context": "        - \"https://target.example.com/logout.*\"",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 112,
+          "evidence": "https://",
+          "context": "          loginUrl: \"https://target.example.com/login\"",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 153,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 157,
+          "evidence": "sh",
+          "context": "  zap.sh -cmd -autorun /zap/wrk/zap-automation.yaml",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 186,
+          "evidence": "http://",
+          "context": "          target: 'http://localhost:8080'",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 207,
+          "evidence": "mkdir",
+          "context": "    - mkdir -p /zap/wrk/reports",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 225,
+          "evidence": "api_key",
+          "context": "    def __init__(self, api_url, api_key):",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 227,
+          "evidence": "api_key",
+          "context": "        self.headers = {'Authorization': api_key}",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 264,
+          "evidence": "api-key",
+          "context": "scanner = BurpScanner('http://burp:1337', 'api-key')",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 264,
+          "evidence": "http://",
+          "context": "scanner = BurpScanner('http://burp:1337', 'api-key')",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 265,
+          "evidence": "https://",
+          "context": "scan_id = scanner.create_scan('https://target.example.com')",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 280,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 285,
+          "evidence": "https://",
+          "context": "nikto -h https://target.example.com",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 288,
+          "evidence": "https://",
+          "context": "nikto -h https://target.example.com \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 332,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 334,
+          "evidence": "curl",
+          "context": "curl -I https://target.example.com | grep -i \"x-\\|content-security\\|strict\"",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 334,
+          "evidence": "https://",
+          "context": "curl -I https://target.example.com | grep -i \"x-\\|content-security\\|strict\"",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    }
+  ]
+}

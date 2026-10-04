@@ -1,0 +1,234 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "bagelhole/reverse-proxy",
+  "status": "draft",
+  "reviewed_on": null,
+  "reviewer": null,
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "infrastructure/networking/reverse-proxy",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "infrastructure/networking/reverse-proxy",
+    "url": "https://api.github.com/repos/BagelHole/DevOps-Security-Agent-Skills/git/trees/0365f57a079b1332f95cf26e31dd2d5332a8399f?recursive=1",
+    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/BagelHole/DevOps-Security-Agent-Skills/blob/0365f57a079b1332f95cf26e31dd2d5332a8399f/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "infrastructure",
+        "infrastructure/networking",
+        "infrastructure/networking/reverse-proxy"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte."
+    ]
+  },
+  "content_review": {
+    "status": "pending",
+    "risk": "unknown",
+    "blocking_findings": [],
+    "capabilities": {},
+    "notes": []
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "67c5c5cbb12cafb1515e449748866bd40da7dec9",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "30157eddaca577bd57328c79893511b28cd93a69be6084d5329e6b9fe2268141",
+      "bytes": 10607,
+      "mode": "100644",
+      "git_blob": "7e5100b08810a118f653e3009301baeec7076a63",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 38,
+          "evidence": "https://",
+          "context": "    return 301 https://$host$request_uri;",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 62,
+          "evidence": "http://",
+          "context": "        proxy_pass http://127.0.0.1:3000;",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 94,
+          "evidence": "http://",
+          "context": "        proxy_pass http://127.0.0.1:3000;",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 100,
+          "evidence": "http://",
+          "context": "        proxy_pass http://127.0.0.1:8080/;",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 108,
+          "evidence": "http://",
+          "context": "        proxy_pass http://127.0.0.1:8080;",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 148,
+          "evidence": "http://",
+          "context": "        proxy_pass http://127.0.0.1:8080;",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 155,
+          "evidence": "http://",
+          "context": "        proxy_pass http://127.0.0.1:8080;",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 161,
+          "evidence": "http://",
+          "context": "        proxy_pass http://127.0.0.1:3000;",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 186,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 187,
+          "evidence": "\nsudo",
+          "context": "# Install certbot with nginx plugin",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 190,
+          "evidence": "\nsudo",
+          "context": "# Obtain and install certificate",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 193,
+          "evidence": "\nsudo",
+          "context": "# Auto-renewal is configured via systemd timer",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 196,
+          "evidence": "\nsudo",
+          "context": "# Manual renewal test",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 271,
+          "evidence": "http://",
+          "context": "          - url: \"http://127.0.0.1:3000\"",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 280,
+          "evidence": "http://",
+          "context": "          - url: \"http://127.0.0.1:8080\"",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 345,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 346,
+          "evidence": "\nsudo",
+          "context": "# Test configuration syntax",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 349,
+          "evidence": "\nsudo",
+          "context": "# Reload without downtime",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 352,
+          "evidence": "\nsudo",
+          "context": "# View active connections",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 373,
+          "evidence": "http://",
+          "context": "    proxy_pass http://127.0.0.1:3000;",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    }
+  ]
+}

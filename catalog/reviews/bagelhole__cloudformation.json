@@ -1,0 +1,262 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "bagelhole/cloudformation",
+  "status": "draft",
+  "reviewed_on": null,
+  "reviewer": null,
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "infrastructure/cloud-aws/cloudformation",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "infrastructure/cloud-aws/cloudformation",
+    "url": "https://api.github.com/repos/BagelHole/DevOps-Security-Agent-Skills/git/trees/0365f57a079b1332f95cf26e31dd2d5332a8399f?recursive=1",
+    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/BagelHole/DevOps-Security-Agent-Skills/blob/0365f57a079b1332f95cf26e31dd2d5332a8399f/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "infrastructure",
+        "infrastructure/cloud-aws",
+        "infrastructure/cloud-aws/cloudformation"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte."
+    ]
+  },
+  "content_review": {
+    "status": "pending",
+    "risk": "unknown",
+    "blocking_findings": [],
+    "capabilities": {},
+    "notes": []
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "67c5c5cbb12cafb1515e449748866bd40da7dec9",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "references/cfn-syntax.md",
+      "sha256": "b78f607be7085f2c356dc4a9ba4f0386eefa4321d240561b231665b9dd4de1fc",
+      "bytes": 2064,
+      "mode": "100644",
+      "git_blob": "4eddf05b35b5b413ea09648ff2fc69fce9d74c10",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 91,
+          "evidence": "https://",
+          "context": "      TemplateURL: https://s3.amazonaws.com/bucket/vpc.yaml",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 106,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 118,
+          "evidence": "Delete",
+          "context": "# Delete stack",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 119,
+          "evidence": "delete",
+          "context": "aws cloudformation delete-stack --stack-name mystack",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "6059381f806f35df387ab3e8bbdaa00b9248e8113aa57aaeefe9ca13eee0657a",
+      "bytes": 13791,
+      "mode": "100644",
+      "git_blob": "e13bd41f9282bc306b19a12b769a909e9a64418e",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "package-install",
+          "line": 28,
+          "evidence": "pip install",
+          "context": "- (Optional) `cfn-lint` installed for template validation (`pip install cfn-lint`)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 163,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 197,
+          "evidence": "Delete",
+          "context": "# Delete a stack",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 198,
+          "evidence": "delete",
+          "context": "aws cloudformation delete-stack --stack-name dev-web",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 199,
+          "evidence": "delete",
+          "context": "aws cloudformation wait stack-delete-complete --stack-name dev-web",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 204,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 232,
+          "evidence": "Delete",
+          "context": "# Delete a change set without applying",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 233,
+          "evidence": "delete",
+          "context": "aws cloudformation delete-change-set \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 240,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 280,
+          "evidence": "https://",
+          "context": "      TemplateURL: https://s3.amazonaws.com/my-cfn-templates/network.yaml",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 292,
+          "evidence": "https://",
+          "context": "      TemplateURL: https://s3.amazonaws.com/my-cfn-templates/database.yaml",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 302,
+          "evidence": "https://",
+          "context": "      TemplateURL: https://s3.amazonaws.com/my-cfn-templates/app.yaml",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 316,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 372,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 392,
+          "evidence": "Delete",
+          "context": "        \"Action\": \"Update:Delete\",",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 402,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 437,
+          "evidence": "Delete",
+          "context": "| Delete fails - resource in use | Dependent resource outside the stack | Remove the dependency first; check for SG references |",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 437,
+          "evidence": "Remove",
+          "context": "| Delete fails - resource in use | Dependent resource outside the stack | Remove the dependency first; check for SG references |",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    }
+  ]
+}

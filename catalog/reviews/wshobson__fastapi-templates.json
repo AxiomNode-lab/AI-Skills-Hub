@@ -1,0 +1,151 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "wshobson/fastapi-templates",
+  "status": "draft",
+  "reviewed_on": null,
+  "reviewer": null,
+  "source": {
+    "repo": "wshobson/agents",
+    "path": "plugins/api-scaffolding/skills/fastapi-templates",
+    "revision": "156b7a5e7a8b93642628a339ee4039c925b34c7f"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "plugins/api-scaffolding/skills/fastapi-templates",
+    "url": "https://api.github.com/repos/wshobson/agents/git/trees/156b7a5e7a8b93642628a339ee4039c925b34c7f?recursive=1",
+    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/wshobson/agents/blob/156b7a5e7a8b93642628a339ee4039c925b34c7f/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "plugins",
+        "plugins/api-scaffolding",
+        "plugins/api-scaffolding/skills",
+        "plugins/api-scaffolding/skills/fastapi-templates"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte."
+    ]
+  },
+  "content_review": {
+    "status": "pending",
+    "risk": "unknown",
+    "blocking_findings": [],
+    "capabilities": {},
+    "notes": []
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "f89abb55d9f073f38f1703e4518f0613c788c6174be7f13b8dfe48a1c076c746",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "326f0a55c96e672fedf9d807ca043c00df05ba0e",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "references/details.md",
+      "sha256": "23bf5358c43675a10e26cb1f949e183d53f17e54118bca45d10a08bb8b218b31",
+      "bytes": 11627,
+      "mode": "100644",
+      "git_blob": "b2683d6c3f0935a932b5a03469e66311cc4ba893",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 158,
+          "evidence": "delete",
+          "context": "    async def delete(self, db: AsyncSession, id: int) -> bool:",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 159,
+          "evidence": "Delete",
+          "context": "        \"\"\"Delete record.\"\"\"",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 162,
+          "evidence": "delete",
+          "context": "            await db.delete(obj)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 323,
+          "evidence": "delete",
+          "context": "@router.delete(\"/{user_id}\", status_code=status.HTTP_204_NO_CONTENT)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 329,
+          "evidence": "Delete",
+          "context": "    \"\"\"Delete user.\"\"\"",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 333,
+          "evidence": "delete",
+          "context": "    deleted = await user_service.repository.delete(db, user_id)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 354,
+          "evidence": "access token",
+          "context": "    \"\"\"Create JWT access token.\"\"\"",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "92d4394d030080ded938cf247eb79885ed4b467a6c5b60cd94bb569cf6ea2b17",
+      "bytes": 3804,
+      "mode": "100644",
+      "git_blob": "bd8a2abb9f97c4e6c9863efb60528c3338468fa8",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 116,
+          "evidence": "http://",
+          "context": "    async with AsyncClient(app=app, base_url=\"http://test\") as client:",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    }
+  ]
+}

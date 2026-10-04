@@ -1,0 +1,210 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "bagelhole/zero-trust",
+  "status": "draft",
+  "reviewed_on": null,
+  "reviewer": null,
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "security/network/zero-trust",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "security/network/zero-trust",
+    "url": "https://api.github.com/repos/BagelHole/DevOps-Security-Agent-Skills/git/trees/0365f57a079b1332f95cf26e31dd2d5332a8399f?recursive=1",
+    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/BagelHole/DevOps-Security-Agent-Skills/blob/0365f57a079b1332f95cf26e31dd2d5332a8399f/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "security",
+        "security/network",
+        "security/network/zero-trust"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte."
+    ]
+  },
+  "content_review": {
+    "status": "pending",
+    "risk": "unknown",
+    "blocking_findings": [],
+    "capabilities": {},
+    "notes": []
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "67c5c5cbb12cafb1515e449748866bd40da7dec9",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "c3b1f0bd15c7d6b5da1acceb4ff49bbc726e790f88dcf955899cac71816d9e87",
+      "bytes": 11971,
+      "mode": "100644",
+      "git_blob": "1cf24b361daa122d3d3fc751c61e544f3cac5af5",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 65,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 67,
+          "evidence": "curl",
+          "context": "curl -X POST \"https://api.cloudflare.com/client/v4/accounts/${ACCOUNT_ID}/access/apps\" \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 67,
+          "evidence": "https://",
+          "context": "curl -X POST \"https://api.cloudflare.com/client/v4/accounts/${ACCOUNT_ID}/access/apps\" \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 80,
+          "evidence": "curl",
+          "context": "curl -X POST \"https://api.cloudflare.com/client/v4/accounts/${ACCOUNT_ID}/access/apps/${APP_ID}/policies\" \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 80,
+          "evidence": "https://",
+          "context": "curl -X POST \"https://api.cloudflare.com/client/v4/accounts/${ACCOUNT_ID}/access/apps/${APP_ID}/policies\" \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 98,
+          "evidence": "curl",
+          "context": "curl -X POST \"https://api.cloudflare.com/client/v4/accounts/${ACCOUNT_ID}/devices/posture\" \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 98,
+          "evidence": "https://",
+          "context": "curl -X POST \"https://api.cloudflare.com/client/v4/accounts/${ACCOUNT_ID}/devices/posture\" \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 177,
+          "evidence": "https://",
+          "context": "            - --oidc-issuer-url=https://accounts.google.com",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 179,
+          "evidence": "secret",
+          "context": "            - --client-secret=$(CLIENT_SECRET)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 181,
+          "evidence": "http://",
+          "context": "            - --upstream=http://internal-service.default.svc:8080",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 183,
+          "evidence": "secret",
+          "context": "            - --cookie-secret=$(COOKIE_SECRET)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 188,
+          "evidence": "access-token",
+          "context": "            - --pass-access-token=true",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 202,
+          "evidence": "secret",
+          "context": "                  key: client-secret",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 207,
+          "evidence": "secret",
+          "context": "                  key: cookie-secret",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 217,
+          "evidence": "https://",
+          "context": "    nginx.ingress.kubernetes.io/auth-url: \"https://auth.example.com/oauth2/auth\"",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 218,
+          "evidence": "https://",
+          "context": "    nginx.ingress.kubernetes.io/auth-signin: \"https://auth.example.com/oauth2/start?rd=$scheme://$host$request_uri\"",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 426,
+          "evidence": "secret",
+          "context": "| mTLS connections failing | Certificate expired or wrong CA | Check cert expiry with `istioctl proxy-config secret`; verify CA chain |",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    }
+  ]
+}

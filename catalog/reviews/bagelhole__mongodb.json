@@ -1,0 +1,314 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "bagelhole/mongodb",
+  "status": "draft",
+  "reviewed_on": null,
+  "reviewer": null,
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "infrastructure/databases/mongodb",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "infrastructure/databases/mongodb",
+    "url": "https://api.github.com/repos/BagelHole/DevOps-Security-Agent-Skills/git/trees/0365f57a079b1332f95cf26e31dd2d5332a8399f?recursive=1",
+    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/BagelHole/DevOps-Security-Agent-Skills/blob/0365f57a079b1332f95cf26e31dd2d5332a8399f/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "infrastructure",
+        "infrastructure/databases",
+        "infrastructure/databases/mongodb"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte."
+    ]
+  },
+  "content_review": {
+    "status": "pending",
+    "risk": "unknown",
+    "blocking_findings": [],
+    "capabilities": {},
+    "notes": []
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "67c5c5cbb12cafb1515e449748866bd40da7dec9",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "81aa71477d9e0471fea81e3ee97f1bf8d896ede6be9d013eff168e1cfc778300",
+      "bytes": 10089,
+      "mode": "100644",
+      "git_blob": "a856fc89fddec8df0d45134e96ac10ed02f3a49d",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 24,
+          "evidence": " sudo",
+          "context": "- Root or sudo access for package installation.",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 29,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 31,
+          "evidence": "curl",
+          "context": "curl -fsSL https://www.mongodb.org/static/pgp/server-7.0.asc | \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 31,
+          "evidence": "https://",
+          "context": "curl -fsSL https://www.mongodb.org/static/pgp/server-7.0.asc | \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 32,
+          "evidence": " sudo",
+          "context": "  sudo gpg -o /usr/share/keyrings/mongodb-server-7.0.gpg --dearmor",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 34,
+          "evidence": "https://",
+          "context": "  https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/7.0 multiverse\" | \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 35,
+          "evidence": " sudo",
+          "context": "  sudo tee /etc/apt/sources.list.d/mongodb-org-7.0.list",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 35,
+          "evidence": "\nsudo",
+          "context": "  sudo tee /etc/apt/sources.list.d/mongodb-org-7.0.list",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 36,
+          "evidence": "\nsudo",
+          "context": "sudo apt update",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 39,
+          "evidence": "\nsudo",
+          "context": "# Start and enable",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 81,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 81,
+          "evidence": "\nsudo",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 117,
+          "evidence": "Delete",
+          "context": "// Delete",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 135,
+          "evidence": "delete",
+          "context": "// TTL index — auto-delete documents after 30 days",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 217,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "encoded-content",
+          "line": 219,
+          "evidence": "base64",
+          "context": "openssl rand -base64 756 > /etc/mongodb-keyfile",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 219,
+          "evidence": "\nchmod",
+          "context": "openssl rand -base64 756 > /etc/mongodb-keyfile",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 250,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 252,
+          "evidence": "secret",
+          "context": "mongodump --uri=\"mongodb://admin:secret@localhost:27017\" --out=/backups/full_$(date +%F)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 255,
+          "evidence": "secret",
+          "context": "mongodump --uri=\"mongodb://myapp:secret@localhost:27017/mydb\" --out=/backups/mydb_$(date +%F)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 258,
+          "evidence": "secret",
+          "context": "mongodump --uri=\"mongodb://admin:secret@localhost:27017\" --gzip --out=/backups/gz_$(date +%F)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 261,
+          "evidence": "secret",
+          "context": "mongorestore --uri=\"mongodb://admin:secret@localhost:27017\" /backups/full_2025-01-15/",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 264,
+          "evidence": "secret",
+          "context": "mongorestore --uri=\"mongodb://admin:secret@localhost:27017\" \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 268,
+          "evidence": "secret",
+          "context": "mongorestore --uri=\"mongodb://admin:secret@localhost:27017\" --gzip /backups/gz_2025-01-15/",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 285,
+          "evidence": "secret",
+          "context": "      MONGO_INITDB_ROOT_PASSWORD: secret",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 331,
+          "evidence": "secret",
+          "context": "      mongosh --host mongo1 -u admin -p secret --authenticationDatabase admin --eval '",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 348,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "encoded-content",
+          "line": 350,
+          "evidence": "base64",
+          "context": "openssl rand -base64 756 > mongo-keyfile",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 350,
+          "evidence": "\nchmod",
+          "context": "openssl rand -base64 756 > mongo-keyfile",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 356,
+          "evidence": "secret",
+          "context": "mongosh \"mongodb://admin:secret@127.0.0.1:27017/?replicaSet=rs0&authSource=admin\"",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    }
+  ]
+}
