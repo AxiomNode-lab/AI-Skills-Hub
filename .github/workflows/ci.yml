@@ -32,3 +32,5 @@ jobs:
       - name: Verify released skills against upstream GitHub sources
         if: matrix.os == 'ubuntu-latest'
         run: pnpm verify-upstream
+      - name: Build, pack and run the npm package outside the repository
+        run: pnpm e2e:package

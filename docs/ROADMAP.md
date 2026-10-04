@@ -26,7 +26,7 @@
 - [x] explicit source ingestion allowlist
 - [x] scheduled registry sync workflow
 - [x] release gate for security-verified materialized Skills
-- [x] YAML block-scalar frontmatter parsing
+- [x] strict YAML 1.2 frontmatter parsing (fails closed)
 - [ ] SPDX parser with exception handling
 - [ ] deeper script/reference/assets static analysis
 - [ ] dependency and package manifest inspection
@@ -41,6 +41,11 @@
 - [x] source-direct bridge
 - [x] native materialized installer
 - [x] plugin.json package generation
+- [x] standalone npm package (`@axiomnode-lab/skills-hub`) with tarball E2E
+- [x] `update` to the released revision (no rollback transactions)
+- [x] non-interactive `uninstall <id>`
+- [x] manifest-verified native installs
+- [ ] first npm release via trusted publishing
 - [ ] update/rollback transactions
 - [ ] isolated extraction sandbox
 - [ ] signed release artifacts

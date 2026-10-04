@@ -2,7 +2,21 @@
 
 All notable changes to AI Skills Hub are documented here.
 
-## Unreleased
+## 0.3.0-beta.1 (unreleased)
+
+First npm release candidate: `npx @axiomnode-lab/skills-hub`.
+
+### Highlights
+- One user-facing npm package, `@axiomnode-lab/skills-hub` (binary `skills-hub`), built by `scripts/build-package.mjs` with the catalog and every released skill; `pnpm e2e:package` installs the packed tarball in a temporary project and runs it there, through `npx` and a global install. CI runs it on Linux and Windows.
+- `skills-hub update [id]` (`--dry-run`, `--force`), non-interactive `uninstall <id>`, `--version`, `--force`.
+- `.github/workflows/release.yml`: tag-driven publishing with npm trusted publishing and provenance; `docs/RELEASING.md`.
+- Native installs verify the released artifact against its manifest and write exactly the verified bytes; reinstalling the same revision is a no-op; unmanaged or edited folders are replaced only with `--force`; dependencies install before dependents.
+- Exit codes are 0/1/2 (success, failed operation, usage error); `--json` usage errors are JSON. No command off a terminal prints help instead of prompting.
+- The update check asks the npm registry, compares versions numerically, and is skipped in development checkouts.
+- Ported from PR #11: strict YAML frontmatter parsing, exact MIT text in the release gate, per-request verified serving with `Host`/`Origin` checks and no wildcard CORS, and released dependencies must be released. `obra/using-superpowers` is held (`required-skill-not-released`).
+- Internal workspace packages are private.
+- `add` no longer reports "Successfully installed" for adapter-pending, confirmation-required or other non-installs; its Git path accepts only https/SSH.
+- Install and uninstall refuse paths through symlinks; `sync` failures exit 1.
 
 ### Added
 - `skills-hub mcp` (stdio) and `skills-hub serve` (HTTP) run a read-only catalog server with `search_skills` and `get_skill` MCP tools, released-skill file resources, and the `/api` routes in docs/API.md.

@@ -18,7 +18,7 @@ The artifact is explicitly excluded from distribution.
 - Public visibility does not imply redistribution rights.
 - Repository-level licensing is not automatically sufficient for nested skills. A skill-local license governs when one exists.
 - A repository-root **MIT** license may cover a skill only when all of these hold, recorded in the skill's review:
-  - the root file is the full MIT License text with its copyright notice;
+  - the root file is the complete standard MIT License text after a copyright line, compared exactly after whitespace normalization (an edited, partial or reworded grant is rejected);
   - no LICENSE, COPYING, or NOTICE file exists at the repository root besides it, in any directory on the path to the skill, or inside the skill;
   - the skill's frontmatter declares no license, or declares MIT;
   - every file was read and contains no third-party copyright notice, other license grant, or copied third-party text;
