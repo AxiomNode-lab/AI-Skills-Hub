@@ -98,6 +98,7 @@ for(const source of sourceEntries){
 
 // Ids already held by a record at the same upstream path are claimed first, so
 // a new path with the same skill name cannot take them over, whatever the order.
+const drift=[];
 const claimedIds=new Set();
 for(const {source,item} of discovered){
   const existing=existingBySource.get(sourceKeyOf(source.repo,item.path));
@@ -122,7 +123,15 @@ for(const {source,item,revision} of discovered){
   claimedIds.add(stableId);
   // A reviewed record stays pinned to the revision its review covers; a newer
   // upstream commit needs a new review, not a metadata overwrite.
-  if(skill?.license?.evidence?.startsWith("catalog/reviews/")) continue;
+  if(skill?.license?.evidence?.startsWith("catalog/reviews/")){
+    if(skill.source.revision!==revision) drift.push({
+      id:skill.id,
+      pinned_revision:skill.source.revision,
+      upstream_revision:revision,
+      skill_md_changed:item.skill_sha256!==skill.integrity?.upstream_skill_sha256
+    });
+    continue;
+  }
   if(!skill){
     skill={
       id:stableId,
@@ -227,6 +236,14 @@ for (const skill of registry.skills) {
     reasons: ["upstream-skill-missing"]
   };
 }
+
+// Reviewed releases whose upstream moved on: candidates for a new review.
+const driftFile=path.join(ROOT,"catalog/reports/release-drift.json");
+const driftById=new Map((fs.existsSync(driftFile)?JSON.parse(fs.readFileSync(driftFile,"utf8")).skills:[]).map((d)=>[d.id,d]));
+for(const skill of registry.skills) if(sourceEntries.some((s)=>s.repo===skill.source?.repo)) driftById.delete(skill.id);
+for(const d of drift) driftById.set(d.id,d);
+fs.mkdirSync(path.dirname(driftFile),{recursive:true});
+fs.writeFileSync(driftFile,JSON.stringify({skills:[...driftById.values()].sort((a,b)=>a.id.localeCompare(b.id))},null,2)+"\n");
 
 registry.skills.sort((a,b)=>a.id.localeCompare(b.id));
 const nextSnapshot = JSON.stringify({

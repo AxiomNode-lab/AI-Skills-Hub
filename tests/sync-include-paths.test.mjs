@@ -37,7 +37,8 @@ function syncFixture(t, { source, skills, discovered }) {
   fs.writeFileSync(path.join(dir, "catalog", "ingestion", source.repo.replace("/", "__") + ".json"), JSON.stringify({ source: { revision: "b".repeat(40) }, discovered_skills: discovered }));
   const result = spawnSync(process.execPath, [script, "--no-fetch"], { cwd: dir, encoding: "utf8" });
   assert.equal(result.status, 0, result.stderr);
-  return { ...JSON.parse(fs.readFileSync(path.join(dir, "catalog", "skills.json"), "utf8")), stderr: result.stderr };
+  const drift = JSON.parse(fs.readFileSync(path.join(dir, "catalog", "reports", "release-drift.json"), "utf8")).skills;
+  return { ...JSON.parse(fs.readFileSync(path.join(dir, "catalog", "skills.json"), "utf8")), drift, stderr: result.stderr };
 }
 const entry = (name, p) => ({ name, path: p, description: name, skill_sha256: "0".repeat(64), license: { spdx: "NOASSERTION" } });
 const record = (id, p) => ({ id, name: id.split("/")[1], publisher: "example", source: { repo: "example/mixed-skills", path: p, revision: "a".repeat(40) }, license: { spdx: "MIT", redistributable: false, status: "review-required" }, distribution: "review-required", compatibility: ["agent-skills"], security: {}, release: { status: "hold", reasons: ["manual_review_required"] } });
@@ -72,10 +73,12 @@ test("a reviewed, released record stays pinned when upstream moves to a new revi
     distribution: "bundled", materialized: true, materialized_root: "skills/example/foo",
     release: { status: "eligible", reasons: [] }
   };
-  const { skills } = syncFixture(t, {
+  const { skills, drift } = syncFixture(t, {
     source: { repo: "example/mixed-skills" },
     skills: [released],
     discovered: [entry("foo", "skills/foo/SKILL.md")]
   });
   assert.deepEqual(skills, [released]);
+  // The newer upstream revision is reported for a new review.
+  assert.deepEqual(drift, [{ id: "example/foo", pinned_revision: "a".repeat(40), upstream_revision: "b".repeat(40), skill_md_changed: true }]);
 });

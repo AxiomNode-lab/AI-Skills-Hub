@@ -24,13 +24,8 @@ All notable changes to AI Skills Hub are documented here.
 - `scripts/ingest-github.mjs --checkout <clone>` ingests from a pinned local clone when the GitHub API is unavailable; `scripts/sync-registry.mjs --source <repo> --no-fetch` syncs only the named sources from existing ingestion files.
 - A repository-root Apache-2.0 license can cover a skill under the same conditions as MIT, with no NOTICE file applying (docs/LICENSE-POLICY.md).
 
-### Fixed
-- `sync-registry` no longer rewrites reviewed, released records: they stay pinned to the reviewed revision until a new review. Before this, the nightly Source Sync reset 330 of 385 released skills (directory vs `SKILL.md` path forms) and failed validation.
-- `sync-registry`: records outside a source's `include_paths` are left unchanged instead of being blocked as missing; an existing record keeps its id when a new upstream path has the same skill name, regardless of order.
-- `ingest-github --checkout` and `draft-review` read `git ls-tree -z`, so paths with non-ASCII or special characters are found; `--checkout` refuses a ref that does not name the checked-out commit.
-- `draft-review` refuses a skill-local license when a NOTICE, COPYING, or second license file also applies.
-- `parseFrontmatter` reads plain scalars starting on the next line, comments after quoted values, indentation indicators before chomping (`>2-`), and blank lines inside plain scalars.
-- HTTP MCP endpoint rejects non-loopback `Origin` headers, returns 413 instead of resetting the connection, and no longer echoes internal error messages; file lists are read once per server.
+- `release.notices` (kind, text, evidence) are shown by `info`, printed after `install`, and returned in `install --json` and the server's skill summaries. 13 released skills carry one: 11 K-Dense skills that add a citation of K-Dense's paper to deliverables, and the Azure Vision Image Analysis (retires 2028-09-25) and Call Automation (breaking changes after 2028-09-30) skills.
+- `sync-registry` writes `catalog/reports/release-drift.json`: released skills whose upstream moved past the reviewed revision, and whether SKILL.md changed.
 
 ### Changed
 - `microsoft/azure-ai-anomalydetector-java` is held with reason `upstream-service-retired` (Microsoft retired the service on 2026-10-01) and no longer ships; 165 skills are installable. `info` now prints release hold reasons.
@@ -40,6 +35,12 @@ All notable changes to AI Skills Hub are documented here.
 - Agent Skills format skills now install for every agent that loads the format (Claude Code, Codex, Cursor, GitHub Copilot, OpenCode); previously most were limited by a per-source guess, so Claude Code saw 19 of 166 released skills.
 
 ### Fixed
+- `sync-registry` no longer rewrites reviewed, released records: they stay pinned to the reviewed revision until a new review. Before this, the nightly Source Sync reset 330 of 385 released skills (directory vs `SKILL.md` path forms) and failed validation.
+- `sync-registry`: records outside a source's `include_paths` are left unchanged instead of being blocked as missing; an existing record keeps its id when a new upstream path has the same skill name, regardless of order.
+- `ingest-github --checkout` and `draft-review` read `git ls-tree -z`, so paths with non-ASCII or special characters are found; `--checkout` refuses a ref that does not name the checked-out commit.
+- `draft-review` refuses a skill-local license when a NOTICE, COPYING, or second license file also applies.
+- `parseFrontmatter` reads plain scalars starting on the next line, comments after quoted values, indentation indicators before chomping (`>2-`), and blank lines inside plain scalars.
+- HTTP MCP endpoint rejects non-loopback `Origin` headers, returns 413 instead of resetting the connection, and no longer echoes internal error messages; file lists are read once per server.
 - `search --installable` filters before ranking, so installable matches below the top results are no longer dropped; `search --limit <n>` works, and unknown or invalid options exit with a usage error instead of becoming search text.
 - Agent Skills format compatibility applies only to bundled skills the Hub installs itself; external installers need an explicit agent listing, and `generic-agent` again accepts any artifact listed for `agent-skills`.
 - Plugin and CLI tool adapters read materialized files from the Hub root, like skills.

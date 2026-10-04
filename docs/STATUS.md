@@ -14,6 +14,8 @@ Repository snapshot: 2026-10-04. Counts below come from `catalog/skills.json`, `
 
 637 records are not release-eligible; 385 are materialized and release-eligible: five Anthropic skills under skill-local Apache-2.0 licenses, 354 under a repository-root MIT license from microsoft/skills, obra/superpowers, K-Dense, and the programming sources supabase/agent-skills, addyosmani/agent-skills, UnitOneAI/SecuritySkills, wshobson/agents, and BagelHole/DevOps-Security-Agent-Skills, and 26 under a repository-root Apache-2.0 license from getsentry/skills and the SEO/GEO skills of aaron-he-zhu/aaron-marketing-skills (see the [license policy](LICENSE-POLICY.md)). [Release evidence](VERIFIED-LOCAL-SKILLS.md) records their pinned provenance, file-level license decisions, scans, and hashes. Installation success is not task-performance evaluation. There are 7 bundle definitions and 23 source/provider/standard records. The local contract treats these as Skills: 444 explicitly declare `artifact_type: skill`, and 578 omit it and use the default. The catalog currently contains no explicit MCP server, Agent Plugin, or CLI tool records.
 
+Released skills stay pinned to the commit their review covers. The nightly source sync lists any whose upstream has moved on in `catalog/reports/release-drift.json`; those need a new review before their files change. Thirteen released skills carry a `release.notices` entry that `info` and `install` print: a disclosed self-citation behavior (11 K-Dense skills) or a dated service retirement (two microsoft/skills skills).
+
 Reproduce the distribution counts from the repository root:
 
 ```bash

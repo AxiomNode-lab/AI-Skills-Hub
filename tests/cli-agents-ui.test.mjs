@@ -142,3 +142,15 @@ test("the update check is cached for a day so commands do not wait on the networ
   await checkForUpdates({ env: {}, isTTY: false, fetchImpl, now: 0, cacheFile });
   assert.equal(calls, 2, "non-interactive output never checks");
 });
+
+test("release notices are listed by info and returned by install", t => {
+  const cwd = fs.mkdtempSync(path.join(os.tmpdir(), "hub-notice-"));
+  t.after(() => fs.rmSync(cwd, { recursive: true, force: true }));
+  const env = { ...process.env, SKILLS_HUB_HOME: path.dirname(path.dirname(path.dirname(path.dirname(cli)))), SKILLS_HUB_NO_UPDATE_CHECK: "1" };
+  const run = (...args) => spawnSync(process.execPath, [cli, ...args], { cwd, env, encoding: "utf8" });
+  const info = run("info", "microsoft/azure-ai-vision-imageanalysis-java");
+  assert.match(info.stdout, /Notice:\s+Microsoft retires the Azure Vision Image Analysis API on 2028-09-25/);
+  const installed = JSON.parse(run("install", "kdense/vaex", "--agent", "agent-skills", "--scope", "project", "--json").stdout);
+  assert.equal(installed.results[0].installed, true);
+  assert.equal(installed.results[0].notices[0].kind, "behavior");
+});

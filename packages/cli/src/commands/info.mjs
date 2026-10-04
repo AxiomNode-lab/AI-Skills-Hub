@@ -44,6 +44,7 @@ export async function infoCommand(id, options = {}) {
   console.log(` Distribution: ${cap.distribution}`);
   const releaseReasons = cap.release?.reasons?.length ? ` (${cap.release.reasons.join(", ")})` : "";
   console.log(` Release:      ${cap.release?.status || "unknown"}${releaseReasons}`);
+  for (const notice of cap.release?.notices ?? []) console.log(` Notice:       ${notice.text}`);
   console.log(` Security:     ${cap.security?.risk || "unknown"} / ${cap.security?.scan_status || "unknown"}`);
   console.log(` Description:  ${cap.description || "N/A"}`);
   if (cap.dependencies?.length) console.log(` Dependencies: ${cap.dependencies.join(", ")}`);

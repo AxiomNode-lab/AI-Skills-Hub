@@ -42,7 +42,7 @@ export function skillSummary(skill) {
       redistributable: skill.license?.redistributable === true
     },
     security: { risk: skill.security?.risk ?? "unknown", scan_status: skill.security?.scan_status ?? "unknown" },
-    release: { status: skill.release?.status ?? "unknown", reasons: skill.release?.reasons ?? [] },
+    release: { status: skill.release?.status ?? "unknown", reasons: skill.release?.reasons ?? [], notices: skill.release?.notices ?? [] },
     source: {
       repo: skill.source?.repo ?? null,
       revision: skill.source?.revision ?? null,

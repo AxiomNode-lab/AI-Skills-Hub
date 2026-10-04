@@ -11,8 +11,10 @@ export async function installCommand(ids, options = {}) {
     else {
       if (error) console.error(paint("red", `Error: ${error}`, process.stderr));
       for (const result of results) {
-        if (result.installed) console.log(`${paint("green", "✔")} Installed ${result.id}${result.destination ? paint("dim", ` → ${result.destination}`) : ""}`);
-        else console.error(`${paint("red", "✖", process.stderr)} ${result.status}: ${result.id}: ${result.reason}${result.requires_confirmation ? ". Re-run with --yes to confirm." : ""}`);
+        if (result.installed) {
+          console.log(`${paint("green", "✔")} Installed ${result.id}${result.destination ? paint("dim", ` → ${result.destination}`) : ""}`);
+          for (const notice of result.notices ?? []) console.log(`  ${paint("yellow", "⚠ Notice:")} ${notice.text}`);
+        } else console.error(`${paint("red", "✖", process.stderr)} ${result.status}: ${result.id}: ${result.reason}${result.requires_confirmation ? ". Re-run with --yes to confirm." : ""}`);
       }
       console.log(success ? paint("green", "Installation complete.") : paint("yellow", "Installation incomplete; not all requested capabilities were installed."));
     }
@@ -71,7 +73,8 @@ export async function installCommand(ids, options = {}) {
         installed: result.installed === true,
         requires_confirmation: result.requires_confirmation === true,
         reason: result.reason ?? (result.installed === true ? null : result.action),
-        destination: result.destination ?? null
+        destination: result.destination ?? null,
+        notices: cap.release?.notices ?? []
       });
 
     } catch (error) {
