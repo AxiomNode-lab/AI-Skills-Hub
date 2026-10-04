@@ -209,3 +209,31 @@ test("dependencies resolve before dependents, and a cycle is an error", async ()
   assert.deepEqual(resolveDependencies(["a", "d"], caps).map(c => c.id), ["c", "b", "a", "d"]);
   assert.throws(() => resolveDependencies(["x"], [{ id: "x", dependencies: ["y"] }, { id: "y", dependencies: ["x"] }]), /cycle: x -> y -> x/);
 });
+
+test("install and uninstall refuse an install path that goes through a symlink", t => {
+  const h = hub(t);
+  h.release("alpha");
+  const outside = fs.mkdtempSync(path.join(os.tmpdir(), "hub-outside-"));
+  t.after(() => fs.rmSync(outside, { recursive: true, force: true }));
+  fs.symlinkSync(outside, path.join(h.project, ".agents"), process.platform === "win32" ? "junction" : "dir");
+  const result = h.run("install", "test/alpha", "--agent", "codex", "--json");
+  assert.equal(result.status, 1);
+  assert.match(result.json.results[0].reason, /symbolic link/);
+  assert.deepEqual(fs.readdirSync(outside), []);
+
+  // A record whose root became a symlink after install is not followed on uninstall.
+  fs.unlinkSync(path.join(h.project, ".agents"));
+  assert.equal(h.run("install", "test/alpha", "--agent", "codex", "--json").status, 0);
+  fs.renameSync(path.join(h.project, ".agents"), path.join(outside, "real-agents"));
+  fs.symlinkSync(path.join(outside, "real-agents"), path.join(h.project, ".agents"), process.platform === "win32" ? "junction" : "dir");
+  assert.equal(h.run("uninstall", "test/alpha", "--force", "--json").status, 1);
+  assert.ok(fs.existsSync(path.join(outside, "real-agents", "skills", "alpha", "SKILL.md")));
+});
+
+test("bundle aliases are refused with an explicit reason, never expanded", t => {
+  const h = hub(t);
+  h.release("alpha");
+  const result = h.run("install", "@frontend", "--agent", "codex", "--json");
+  assert.equal(result.status, 1);
+  assert.equal(result.json.results[0].reason, "bundle_aliases_not_supported");
+});

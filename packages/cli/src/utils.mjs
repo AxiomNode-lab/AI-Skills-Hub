@@ -1,7 +1,6 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import os from "node:os";
-import { execFileSync } from "node:child_process";
 import { findExecutable, loadRegistry, packageRoot } from "@ai-skills-hub/core";
 
 export function isExecutableAvailable(command) {
@@ -17,17 +16,6 @@ export function checkPrerequisites(prerequisites) {
     if (!value || !isExecutableAvailable(value)) missing.push(value || "<empty>");
   }
   return { missing };
-}
-
-export async function autoSyncCapability(capPath) {
-  if (!capPath) return;
-  const gitDir = path.join(capPath, ".git");
-  try {
-    await fs.access(gitDir);
-    execFileSync("git", ["pull", "--ff-only"], { cwd: capPath, stdio: "ignore" });
-  } catch {
-    // Not a Git repository or the update could not be applied cleanly.
-  }
 }
 
 export async function fileExists(p) {

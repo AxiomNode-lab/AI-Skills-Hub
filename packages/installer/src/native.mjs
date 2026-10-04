@@ -1,5 +1,6 @@
 import crypto from "node:crypto";
 import fs from "node:fs";
+import os from "node:os";
 import path from "node:path";
 import { resolveHubPath } from "@ai-skills-hub/core";
 import { normalizeSkillDirectory, resolveInstallRoot } from "./targets.mjs";
@@ -10,6 +11,27 @@ import {
   readInstallRecords,
   verifyInstallRecord
 } from "./state.mjs";
+
+// Refuses a target reached through a symlink or junction: every existing
+// component from the scope base (project or home directory) down to the
+// target must be a real directory, so an install or uninstall cannot be
+// redirected outside the project by a planted link such as .agents -> /etc.
+export function assertNoSymlinkPath(base, target) {
+  const relative = path.relative(path.resolve(base), path.resolve(target));
+  if (relative.startsWith("..") || path.isAbsolute(relative)) throw new Error("Install target is outside its scope: " + target);
+  let current = path.resolve(base);
+  for (const part of relative.split(path.sep).filter(Boolean)) {
+    current = path.join(current, part);
+    let stat;
+    try {
+      stat = fs.lstatSync(current);
+    } catch (error) {
+      if (error.code === "ENOENT") return;
+      throw error;
+    }
+    if (stat.isSymbolicLink()) throw new Error("Refusing to follow a symbolic link in the install path: " + current);
+  }
+}
 
 function safeInside(root, candidate) {
   const r = path.resolve(root);
@@ -96,6 +118,7 @@ export function installMaterializedSkill(skill, options = {}) {
   const root = resolveInstallRoot(agent, scope, cwd);
   const destination = normalizeSkillDirectory(root, skill.name);
   if (!safeInside(root, destination)) throw new Error("Unsafe installation path");
+  assertNoSymlinkPath(scope === "user" ? os.homedir() : cwd, destination);
 
   if (fs.existsSync(destination)) {
     if (!overwrite) {
@@ -166,6 +189,7 @@ export function uninstallSkillRecord(skillId, options = {}) {
   if (!safeInside(root, destination) || path.dirname(destination) !== path.resolve(root)) {
     throw new Error("Unsafe recorded destination");
   }
+  assertNoSymlinkPath(scope === "user" ? os.homedir() : cwd, destination);
 
   if (!force) {
     const verification = verifyInstallRecord(record);

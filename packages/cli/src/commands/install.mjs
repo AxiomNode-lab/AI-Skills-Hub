@@ -17,6 +17,7 @@ export async function installCommand(ids, options = {}) {
           for (const notice of result.notices ?? []) console.log(`  ${paint("yellow", "⚠ Notice:")} ${notice.text}`);
         } else {
           console.error(`${paint("red", "✖", process.stderr)} ${result.status}: ${result.id}: ${result.reason}${result.requires_confirmation ? ". Re-run with --yes to confirm." : ""}`);
+          if (result.command) console.error(`  Command that --yes would run: ${result.command.map((part) => (/^[\w@./:=-]+$/.test(part) ? part : JSON.stringify(part))).join(" ")}`);
           // Shown before the user confirms with --yes.
           if (result.requires_confirmation) for (const notice of result.notices ?? []) console.error(`  ${paint("yellow", "⚠ Notice:", process.stderr)} ${notice.text}`);
         }
@@ -57,7 +58,8 @@ export async function installCommand(ids, options = {}) {
   if (missing.length > 0) {
     return report(requested.map(id => ({
       id, status: missing.includes(id) ? "not-found" : "skipped", installed: false,
-      reason: missing.includes(id) ? "capability_not_found" : "request_contains_missing_capabilities"
+      // Bundle aliases (@name) are catalog groupings only; install takes skill IDs.
+      reason: !missing.includes(id) ? "request_contains_missing_capabilities" : id.startsWith("@") ? "bundle_aliases_not_supported" : "capability_not_found"
     })));
   }
 
@@ -94,6 +96,8 @@ export async function installCommand(ids, options = {}) {
         requires_confirmation: result.requires_confirmation === true,
         reason: result.reason ?? (result.installed === true ? null : result.action),
         destination: result.destination ?? null,
+        // The exact external command --yes would run, shown before consent.
+        ...(result.requires_confirmation && Array.isArray(result.argv) ? { command: result.argv } : {}),
         notices: cap.release?.notices ?? []
       });
 

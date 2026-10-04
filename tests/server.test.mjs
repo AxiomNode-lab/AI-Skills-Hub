@@ -129,3 +129,24 @@ test("HTTP MCP endpoint refuses cross-site origins and answers oversized bodies 
   assert.equal((await big.json()).error, "Request body too large");
 });
 
+
+test("skills-hub mcp writes only JSON-RPC to stdout and negotiates supported protocol versions", async () => {
+  const { spawnSync } = await import("node:child_process");
+  const { fileURLToPath } = await import("node:url");
+  const cliPath = fileURLToPath(new URL("../packages/cli/bin/skills-hub.mjs", import.meta.url));
+  const input = [
+    { jsonrpc: "2.0", id: 1, method: "initialize", params: { protocolVersion: "2025-03-26", capabilities: {}, clientInfo: { name: "t", version: "1" } } },
+    { jsonrpc: "2.0", method: "notifications/initialized" },
+    { jsonrpc: "2.0", id: 2, method: "initialize", params: { protocolVersion: "1999-01-01" } },
+    { jsonrpc: "2.0", id: 3, method: "tools/call", params: { name: "search_skills", arguments: { query: "frontend design", limit: 2 } } }
+  ].map(m => JSON.stringify(m)).join("\n") + "\nnot json\n";
+  // A TTY-like environment would trigger the update check on other commands; mcp must not print it.
+  const result = spawnSync(process.execPath, [cliPath, "mcp"], { input, encoding: "utf8", env: { ...process.env, SKILLS_HUB_NO_UPDATE_CHECK: "" } });
+  const lines = result.stdout.trim().split("\n");
+  const messages = lines.map(line => JSON.parse(line));
+  assert.equal(messages.length, 4, result.stdout);
+  assert.equal(messages[0].result.protocolVersion, "2025-03-26");
+  assert.equal(messages[1].result.protocolVersion, "2025-06-18", "unsupported versions get the latest supported one");
+  assert.ok(messages[2].result.structuredContent.items.length > 0);
+  assert.equal(messages[3].error.code, -32700);
+});

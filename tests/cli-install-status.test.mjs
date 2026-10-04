@@ -99,6 +99,9 @@ test("external installation requires consent and never executes without it", t =
   assert.equal(result.results[0].status, "confirmation-required");
   assert.equal(result.results[0].requires_confirmation, true);
   assert.equal(result.results[0].reason, "explicit_confirmation_required");
+  // The exact command is shown before consent: an allowlisted binary and an argument vector.
+  assert.ok(Array.isArray(result.results[0].command) && result.results[0].command.length > 1, JSON.stringify(result.results[0]));
+  assert.ok(["npx", "pnpm", "codex", "claude", "copilot"].includes(result.results[0].command[0]));
   assert.equal(fs.existsSync(path.join(f.cwd, "external-call.json")), false);
   assert.deepEqual(f.json(["list"]), []);
 });
