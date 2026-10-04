@@ -1,9 +1,9 @@
 {
   "schema_version": "0.1",
   "skill_id": "harperaa/security-prompts-auth",
-  "status": "draft",
-  "reviewed_on": null,
-  "reviewer": null,
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
   "source": {
     "repo": "harperaa/secure-claude-skills",
     "path": "security-prompts/auth-authorization",
@@ -13,7 +13,7 @@
     "complete": true,
     "scope": "security-prompts/auth-authorization",
     "url": "https://api.github.com/repos/harperaa/secure-claude-skills/git/trees/c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223?recursive=1",
-    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
   },
   "license": {
     "spdx": "MIT",
@@ -30,18 +30,33 @@
       ]
     },
     "redistributable": true,
-    "scope_reason": "",
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file; Clerk APIs are named only as short calls. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
     "obligations": [
       "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
-      "Preserve all upstream text and notices byte-for-byte."
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
     ]
   },
   "content_review": {
-    "status": "pending",
-    "risk": "unknown",
+    "status": "approved",
+    "risk": "low",
     "blocking_findings": [],
-    "capabilities": {},
-    "notes": []
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md and 01_rbac_implementation.md, 02_permissions.md, 03_ownership.md, 04_auth_testing.md in full. The skill provides prompt templates and inline TypeScript patterns for role-based access control, granular permissions, ownership checks, and authorization testing in a Next.js + Clerk (+ Convex) app, stressing server-side checks, default deny, and negative tests.",
+      "Following it makes the agent create or modify authorization code in the user's project (middleware.ts, lib/rbac.ts, admin endpoints) and optionally curl the user's localhost app with placeholder bearer tokens (04_auth_testing.md:85-97). No installs, secret handling, or remote services.",
+      "Template dependence: written for the Secure Vibe Coding OS starter and its files (@middleware.ts, @convex/http.ts, @lib/clerk.ts at 01_rbac_implementation.md:90-93), but the templates describe what to build (lib/rbac.ts, role utilities, webhook role assignment) and the core patterns are given inline in SKILL.md:300-503, so they work in any Next.js + Clerk project. Pointers to sibling skills (prompt-engineering, threat-modeling) and `.claude/skills/security/...` install paths are optional.",
+      "Minor technical caveats: reading `sessionClaims.publicMetadata.role` requires customizing the Clerk session token to include public metadata; newer Clerk versions make `auth()` async; `Response.redirect(\"/unauthorized\")` at SKILL.md:324 needs an absolute URL. None of these weaken the security guidance."
+    ]
   },
   "files": [
     {
@@ -52,7 +67,7 @@
       "git_blob": "0d86076c66360fbd6160ce3e5519bbfe06d63c49",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": []
     },
     {
@@ -63,7 +78,7 @@
       "git_blob": "15d217ee1ed40d2cd5607120c8676cdefe9f95ad",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": []
     },
     {
@@ -74,7 +89,7 @@
       "git_blob": "f1b4a259c995e971b1943c9c46561ffce98c5aae",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": []
     },
     {
@@ -85,55 +100,55 @@
       "git_blob": "2ff5333e170c2c0b4fafdb0b28ce8e140a265ec5",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "network-access",
           "line": 73,
           "evidence": "curl",
           "context": "- How to test via curl or Postman",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "curl against http://localhost:3000/admin with placeholder [USER_TOKEN]/[ADMIN_TOKEN] to check the user's own app returns 403/200."
         },
         {
           "type": "shell-execution",
           "line": 85,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "A bash test-script template containing only the localhost curl checks."
         },
         {
           "type": "network-access",
           "line": 87,
           "evidence": "curl",
           "context": "curl http://localhost:3000/admin \\",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "curl against http://localhost:3000/admin with placeholder [USER_TOKEN]/[ADMIN_TOKEN] to check the user's own app returns 403/200."
         },
         {
           "type": "network-access",
           "line": 87,
           "evidence": "http://",
           "context": "curl http://localhost:3000/admin \\",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "curl against http://localhost:3000/admin with placeholder [USER_TOKEN]/[ADMIN_TOKEN] to check the user's own app returns 403/200."
         },
         {
           "type": "network-access",
           "line": 92,
           "evidence": "curl",
           "context": "curl http://localhost:3000/admin \\",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "curl against http://localhost:3000/admin with placeholder [USER_TOKEN]/[ADMIN_TOKEN] to check the user's own app returns 403/200."
         },
         {
           "type": "network-access",
           "line": 92,
           "evidence": "http://",
           "context": "curl http://localhost:3000/admin \\",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "curl against http://localhost:3000/admin with placeholder [USER_TOKEN]/[ADMIN_TOKEN] to check the user's own app returns 403/200."
         }
       ]
     },
@@ -147,7 +162,7 @@
       "git_blob": "346d6fb05afd34a37fb0b156a612166534ffc7d9",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
       "findings": []
     },
     {
@@ -158,71 +173,71 @@
       "git_blob": "0f8b33fbacabd6002838c29bd90ee39e5ce96751",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "filesystem-write",
           "line": 54,
           "evidence": "delete",
           "context": "- `users.read`, `users.write`, `users.delete`",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "The word 'delete' appears in permission names, role matrices, and HTTP DELETE handler examples in application code; no local file deletion is instructed."
         },
         {
           "type": "filesystem-write",
           "line": 197,
           "evidence": "delete",
           "context": "- admin: All user access + create/edit/delete posts, moderate comments",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "The word 'delete' appears in permission names, role matrices, and HTTP DELETE handler examples in application code; no local file deletion is instructed."
         },
         {
           "type": "filesystem-write",
           "line": 258,
           "evidence": "delete",
           "context": "- Admin: Most permissions, cannot delete workspace",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "The word 'delete' appears in permission names, role matrices, and HTTP DELETE handler examples in application code; no local file deletion is instructed."
         },
         {
           "type": "filesystem-write",
           "line": 343,
           "evidence": "DELETE",
           "context": "export async function DELETE(req: Request) {",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "The word 'delete' appears in permission names, role matrices, and HTTP DELETE handler examples in application code; no local file deletion is instructed."
         },
         {
           "type": "filesystem-write",
           "line": 350,
           "evidence": "Delete",
           "context": "  // Delete logic",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "The word 'delete' appears in permission names, role matrices, and HTTP DELETE handler examples in application code; no local file deletion is instructed."
         },
         {
           "type": "filesystem-write",
           "line": 382,
           "evidence": "delete",
           "context": "test(\"non-admin cannot delete posts\", async () => {",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "The word 'delete' appears in permission names, role matrices, and HTTP DELETE handler examples in application code; no local file deletion is instructed."
         },
         {
           "type": "filesystem-write",
           "line": 383,
           "evidence": "DELETE",
           "context": "  const response = await DELETE(\"/api/posts/123\", {",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "The word 'delete' appears in permission names, role matrices, and HTTP DELETE handler examples in application code; no local file deletion is instructed."
         },
         {
           "type": "filesystem-write",
           "line": 453,
           "evidence": "DELETE",
           "context": "export async function DELETE(req: Request) {",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "The word 'delete' appears in permission names, role matrices, and HTTP DELETE handler examples in application code; no local file deletion is instructed."
         }
       ]
     }

@@ -1,9 +1,9 @@
 {
   "schema_version": "0.1",
   "skill_id": "harperaa/security-headers",
-  "status": "draft",
-  "reviewed_on": null,
-  "reviewer": null,
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
   "source": {
     "repo": "harperaa/secure-claude-skills",
     "path": "security-headers",
@@ -13,7 +13,7 @@
     "complete": true,
     "scope": "security-headers",
     "url": "https://api.github.com/repos/harperaa/secure-claude-skills/git/trees/c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223?recursive=1",
-    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
   },
   "license": {
     "spdx": "MIT",
@@ -29,18 +29,33 @@
       ]
     },
     "redistributable": true,
-    "scope_reason": "",
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found; Mozilla, OWASP Secure Headers Project and MDN are linked, not reproduced. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
     "obligations": [
       "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
-      "Preserve all upstream text and notices byte-for-byte."
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
     ]
   },
   "content_review": {
-    "status": "pending",
-    "risk": "unknown",
+    "status": "approved",
+    "risk": "low",
     "blocking_findings": [],
-    "capabilities": {},
-    "notes": []
+    "capabilities": {
+      "shell": true,
+      "network": false,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md (397 lines) in full. Explains and configures browser security headers (CSP, X-Frame-Options DENY, nosniff, production-only HSTS, X-Robots-Tag on /dashboard) in a Next.js clerkMiddleware, with the complete middleware.ts code included (SKILL.md:195-250), so it is self-contained apart from the Clerk/Convex/Stripe stack it assumes.",
+      "Following it, the agent edits middleware.ts and may run 'curl -I' against localhost or the user's own deployed site and suggest online header checkers; no installs, secrets or remote scripts. CSP origins are built from public NEXT_PUBLIC_* environment variables, not secrets.",
+      "Security caveats a user should know: the default script-src includes 'unsafe-inline' and 'unsafe-eval' (SKILL.md:60, 214); the trade-off is disclosed (94) and a nonce-based alternative is offered (334-338), but with these directives CSP gives little XSS protection, so the claims that CSP would have stopped Magecart (27) and that connect-src prevents data exfiltration 'even if XSS bypasses sanitization' (97, 367) are overstated (img-src allows any https: origin). Prefer the nonce approach where possible.",
+      "Minor inaccuracies: the nosniff example (133-139) implies an <img> tag could execute script; the Scott Helme statistic (24) is unverified; includeSubDomains HSTS should be enabled only once all subdomains serve HTTPS."
+    ]
   },
   "files": [
     {
@@ -53,7 +68,7 @@
       "git_blob": "346d6fb05afd34a37fb0b156a612166534ffc7d9",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
       "findings": []
     },
     {
@@ -64,423 +79,423 @@
       "git_blob": "6574c10b5faf7f082732a8f1a876797f5fde09cd",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "credential-access",
           "line": 50,
           "evidence": "process.env",
           "context": "const clerkDomain = process.env.NEXT_PUBLIC_CLERK_FRONTEND_API_URL",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "process.env reads are NEXT_PUBLIC_CLERK_FRONTEND_API_URL, NEXT_PUBLIC_CONVEX_URL, NEXT_PUBLIC_CDN_URL and NODE_ENV used to build CSP origins and gate HSTS; these are public configuration values, not secrets."
         },
         {
           "type": "credential-access",
           "line": 51,
           "evidence": "process.env",
           "context": "  ? new URL(process.env.NEXT_PUBLIC_CLERK_FRONTEND_API_URL).origin",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "process.env reads are NEXT_PUBLIC_CLERK_FRONTEND_API_URL, NEXT_PUBLIC_CONVEX_URL, NEXT_PUBLIC_CDN_URL and NODE_ENV used to build CSP origins and gate HSTS; these are public configuration values, not secrets."
         },
         {
           "type": "credential-access",
           "line": 54,
           "evidence": "process.env",
           "context": "const convexDomain = process.env.NEXT_PUBLIC_CONVEX_URL",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "process.env reads are NEXT_PUBLIC_CLERK_FRONTEND_API_URL, NEXT_PUBLIC_CONVEX_URL, NEXT_PUBLIC_CDN_URL and NODE_ENV used to build CSP origins and gate HSTS; these are public configuration values, not secrets."
         },
         {
           "type": "credential-access",
           "line": 55,
           "evidence": "process.env",
           "context": "  ? new URL(process.env.NEXT_PUBLIC_CONVEX_URL).origin",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "process.env reads are NEXT_PUBLIC_CLERK_FRONTEND_API_URL, NEXT_PUBLIC_CONVEX_URL, NEXT_PUBLIC_CDN_URL and NODE_ENV used to build CSP origins and gate HSTS; these are public configuration values, not secrets."
         },
         {
           "type": "network-access",
           "line": 60,
           "evidence": "https://",
           "context": "  `script-src 'self' 'unsafe-inline' 'unsafe-eval' ${clerkDomain} https://js.stripe.com`,",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "URLs are CSP allow-list origins (Stripe, Google Analytics), example domains, and reference links to securityheaders.com, Mozilla Observatory, SSL Labs, MDN and OWASP; the agent is not told to fetch anything except optional header checks of the user's own site."
         },
         {
           "type": "network-access",
           "line": 62,
           "evidence": "https://",
           "context": "  `connect-src 'self' ${clerkDomain} ${convexDomain} https://api.stripe.com`,",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "URLs are CSP allow-list origins (Stripe, Google Analytics), example domains, and reference links to securityheaders.com, Mozilla Observatory, SSL Labs, MDN and OWASP; the agent is not told to fetch anything except optional header checks of the user's own site."
         },
         {
           "type": "network-access",
           "line": 63,
           "evidence": "https://",
           "context": "  `frame-src 'self' ${clerkDomain} https://js.stripe.com https://hooks.stripe.com`,",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "URLs are CSP allow-list origins (Stripe, Google Analytics), example domains, and reference links to securityheaders.com, Mozilla Observatory, SSL Labs, MDN and OWASP; the agent is not told to fetch anything except optional header checks of the user's own site."
         },
         {
           "type": "network-access",
           "line": 63,
           "evidence": "https://",
           "context": "  `frame-src 'self' ${clerkDomain} https://js.stripe.com https://hooks.stripe.com`,",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "URLs are CSP allow-list origins (Stripe, Google Analytics), example domains, and reference links to securityheaders.com, Mozilla Observatory, SSL Labs, MDN and OWASP; the agent is not told to fetch anything except optional header checks of the user's own site."
         },
         {
           "type": "credential-access",
           "line": 84,
           "evidence": "process.env",
           "context": "const clerkDomain = process.env.NEXT_PUBLIC_CLERK_FRONTEND_API_URL",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "process.env reads are NEXT_PUBLIC_CLERK_FRONTEND_API_URL, NEXT_PUBLIC_CONVEX_URL, NEXT_PUBLIC_CDN_URL and NODE_ENV used to build CSP origins and gate HSTS; these are public configuration values, not secrets."
         },
         {
           "type": "credential-access",
           "line": 85,
           "evidence": "process.env",
           "context": "  ? new URL(process.env.NEXT_PUBLIC_CLERK_FRONTEND_API_URL).origin",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "process.env reads are NEXT_PUBLIC_CLERK_FRONTEND_API_URL, NEXT_PUBLIC_CONVEX_URL, NEXT_PUBLIC_CDN_URL and NODE_ENV used to build CSP origins and gate HSTS; these are public configuration values, not secrets."
         },
         {
           "type": "filesystem-write",
           "line": 104,
           "evidence": "Delete",
           "context": "Attacker embeds your \"Delete Account\" button in an invisible iframe overlay on a game site. Users think they're clicking \"Play Game\" but actually click \"Delete Account.\"",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "'Delete'/'remove' matches are a clickjacking 'Delete Account' scenario and prose about removing HSTS, not file operations."
         },
         {
           "type": "filesystem-write",
           "line": 104,
           "evidence": "Delete",
           "context": "Attacker embeds your \"Delete Account\" button in an invisible iframe overlay on a game site. Users think they're clicking \"Play Game\" but actually click \"Delete Account.\"",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "'Delete'/'remove' matches are a clickjacking 'Delete Account' scenario and prose about removing HSTS, not file operations."
         },
         {
           "type": "network-access",
           "line": 146,
           "evidence": "https://",
           "context": "User types \"yourapp.com\" (no https://). Browser initially requests HTTP. Attacker intercepts, serves fake HTTP version, steals credentials.",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "URLs are CSP allow-list origins (Stripe, Google Analytics), example domains, and reference links to securityheaders.com, Mozilla Observatory, SSL Labs, MDN and OWASP; the agent is not told to fetch anything except optional header checks of the user's own site."
         },
         {
           "type": "credential-access",
           "line": 150,
           "evidence": "process.env",
           "context": "if (process.env.NODE_ENV === 'production') {",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "process.env reads are NEXT_PUBLIC_CLERK_FRONTEND_API_URL, NEXT_PUBLIC_CONVEX_URL, NEXT_PUBLIC_CDN_URL and NODE_ENV used to build CSP origins and gate HSTS; these are public configuration values, not secrets."
         },
         {
           "type": "filesystem-write",
           "line": 166,
           "evidence": "remove",
           "context": "**Important:** Once HSTS is set for a domain, browsers remember it. If you need to remove it, you must:",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "'Delete'/'remove' matches are a clickjacking 'Delete Account' scenario and prose about removing HSTS, not file operations."
         },
         {
           "type": "credential-access",
           "line": 203,
           "evidence": "process.env",
           "context": "  const clerkDomain = process.env.NEXT_PUBLIC_CLERK_FRONTEND_API_URL",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "process.env reads are NEXT_PUBLIC_CLERK_FRONTEND_API_URL, NEXT_PUBLIC_CONVEX_URL, NEXT_PUBLIC_CDN_URL and NODE_ENV used to build CSP origins and gate HSTS; these are public configuration values, not secrets."
         },
         {
           "type": "credential-access",
           "line": 204,
           "evidence": "process.env",
           "context": "    ? new URL(process.env.NEXT_PUBLIC_CLERK_FRONTEND_API_URL).origin",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "process.env reads are NEXT_PUBLIC_CLERK_FRONTEND_API_URL, NEXT_PUBLIC_CONVEX_URL, NEXT_PUBLIC_CDN_URL and NODE_ENV used to build CSP origins and gate HSTS; these are public configuration values, not secrets."
         },
         {
           "type": "credential-access",
           "line": 207,
           "evidence": "process.env",
           "context": "  const convexDomain = process.env.NEXT_PUBLIC_CONVEX_URL",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "process.env reads are NEXT_PUBLIC_CLERK_FRONTEND_API_URL, NEXT_PUBLIC_CONVEX_URL, NEXT_PUBLIC_CDN_URL and NODE_ENV used to build CSP origins and gate HSTS; these are public configuration values, not secrets."
         },
         {
           "type": "credential-access",
           "line": 208,
           "evidence": "process.env",
           "context": "    ? new URL(process.env.NEXT_PUBLIC_CONVEX_URL).origin",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "process.env reads are NEXT_PUBLIC_CLERK_FRONTEND_API_URL, NEXT_PUBLIC_CONVEX_URL, NEXT_PUBLIC_CDN_URL and NODE_ENV used to build CSP origins and gate HSTS; these are public configuration values, not secrets."
         },
         {
           "type": "network-access",
           "line": 214,
           "evidence": "https://",
           "context": "    `script-src 'self' 'unsafe-inline' 'unsafe-eval' ${clerkDomain} https://js.stripe.com`,",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "URLs are CSP allow-list origins (Stripe, Google Analytics), example domains, and reference links to securityheaders.com, Mozilla Observatory, SSL Labs, MDN and OWASP; the agent is not told to fetch anything except optional header checks of the user's own site."
         },
         {
           "type": "network-access",
           "line": 216,
           "evidence": "https://",
           "context": "    `connect-src 'self' ${clerkDomain} ${convexDomain} https://api.stripe.com`,",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "URLs are CSP allow-list origins (Stripe, Google Analytics), example domains, and reference links to securityheaders.com, Mozilla Observatory, SSL Labs, MDN and OWASP; the agent is not told to fetch anything except optional header checks of the user's own site."
         },
         {
           "type": "network-access",
           "line": 217,
           "evidence": "https://",
           "context": "    `frame-src 'self' ${clerkDomain} https://js.stripe.com https://hooks.stripe.com`,",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "URLs are CSP allow-list origins (Stripe, Google Analytics), example domains, and reference links to securityheaders.com, Mozilla Observatory, SSL Labs, MDN and OWASP; the agent is not told to fetch anything except optional header checks of the user's own site."
         },
         {
           "type": "network-access",
           "line": 217,
           "evidence": "https://",
           "context": "    `frame-src 'self' ${clerkDomain} https://js.stripe.com https://hooks.stripe.com`,",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "URLs are CSP allow-list origins (Stripe, Google Analytics), example domains, and reference links to securityheaders.com, Mozilla Observatory, SSL Labs, MDN and OWASP; the agent is not told to fetch anything except optional header checks of the user's own site."
         },
         {
           "type": "credential-access",
           "line": 232,
           "evidence": "process.env",
           "context": "  if (process.env.NODE_ENV === 'production') {",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "process.env reads are NEXT_PUBLIC_CLERK_FRONTEND_API_URL, NEXT_PUBLIC_CONVEX_URL, NEXT_PUBLIC_CDN_URL and NODE_ENV used to build CSP origins and gate HSTS; these are public configuration values, not secrets."
         },
         {
           "type": "shell-execution",
           "line": 256,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks are read-only 'curl -I' header checks against localhost or the user's own deployed domain."
         },
         {
           "type": "network-access",
           "line": 257,
           "evidence": "curl",
           "context": "curl -I http://localhost:3000",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "URLs are CSP allow-list origins (Stripe, Google Analytics), example domains, and reference links to securityheaders.com, Mozilla Observatory, SSL Labs, MDN and OWASP; the agent is not told to fetch anything except optional header checks of the user's own site."
         },
         {
           "type": "network-access",
           "line": 257,
           "evidence": "http://",
           "context": "curl -I http://localhost:3000",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "URLs are CSP allow-list origins (Stripe, Google Analytics), example domains, and reference links to securityheaders.com, Mozilla Observatory, SSL Labs, MDN and OWASP; the agent is not told to fetch anything except optional header checks of the user's own site."
         },
         {
           "type": "shell-execution",
           "line": 267,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks are read-only 'curl -I' header checks against localhost or the user's own deployed domain."
         },
         {
           "type": "network-access",
           "line": 269,
           "evidence": "curl",
           "context": "curl -I https://yourapp.com",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "URLs are CSP allow-list origins (Stripe, Google Analytics), example domains, and reference links to securityheaders.com, Mozilla Observatory, SSL Labs, MDN and OWASP; the agent is not told to fetch anything except optional header checks of the user's own site."
         },
         {
           "type": "network-access",
           "line": 269,
           "evidence": "https://",
           "context": "curl -I https://yourapp.com",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "URLs are CSP allow-list origins (Stripe, Google Analytics), example domains, and reference links to securityheaders.com, Mozilla Observatory, SSL Labs, MDN and OWASP; the agent is not told to fetch anything except optional header checks of the user's own site."
         },
         {
           "type": "shell-execution",
           "line": 277,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks are read-only 'curl -I' header checks against localhost or the user's own deployed domain."
         },
         {
           "type": "network-access",
           "line": 278,
           "evidence": "curl",
           "context": "curl -I http://localhost:3000/dashboard",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "URLs are CSP allow-list origins (Stripe, Google Analytics), example domains, and reference links to securityheaders.com, Mozilla Observatory, SSL Labs, MDN and OWASP; the agent is not told to fetch anything except optional header checks of the user's own site."
         },
         {
           "type": "network-access",
           "line": 278,
           "evidence": "http://",
           "context": "curl -I http://localhost:3000/dashboard",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "URLs are CSP allow-list origins (Stripe, Google Analytics), example domains, and reference links to securityheaders.com, Mozilla Observatory, SSL Labs, MDN and OWASP; the agent is not told to fetch anything except optional header checks of the user's own site."
         },
         {
           "type": "network-access",
           "line": 287,
           "evidence": "https://",
           "context": "- **Security Headers:** https://securityheaders.com/",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "URLs are CSP allow-list origins (Stripe, Google Analytics), example domains, and reference links to securityheaders.com, Mozilla Observatory, SSL Labs, MDN and OWASP; the agent is not told to fetch anything except optional header checks of the user's own site."
         },
         {
           "type": "network-access",
           "line": 288,
           "evidence": "https://",
           "context": "- **Mozilla Observatory:** https://observatory.mozilla.org/",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "URLs are CSP allow-list origins (Stripe, Google Analytics), example domains, and reference links to securityheaders.com, Mozilla Observatory, SSL Labs, MDN and OWASP; the agent is not told to fetch anything except optional header checks of the user's own site."
         },
         {
           "type": "network-access",
           "line": 289,
           "evidence": "https://",
           "context": "- **SSL Labs:** https://www.ssllabs.com/ssltest/",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "URLs are CSP allow-list origins (Stripe, Google Analytics), example domains, and reference links to securityheaders.com, Mozilla Observatory, SSL Labs, MDN and OWASP; the agent is not told to fetch anything except optional header checks of the user's own site."
         },
         {
           "type": "network-access",
           "line": 303,
           "evidence": "https://",
           "context": "  `script-src 'self' 'unsafe-inline' 'unsafe-eval' ${clerkDomain} https://js.stripe.com https://www.googletagmanager.com https://www.google-analytics.com`,",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "URLs are CSP allow-list origins (Stripe, Google Analytics), example domains, and reference links to securityheaders.com, Mozilla Observatory, SSL Labs, MDN and OWASP; the agent is not told to fetch anything except optional header checks of the user's own site."
         },
         {
           "type": "network-access",
           "line": 303,
           "evidence": "https://",
           "context": "  `script-src 'self' 'unsafe-inline' 'unsafe-eval' ${clerkDomain} https://js.stripe.com https://www.googletagmanager.com https://www.google-analytics.com`,",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "URLs are CSP allow-list origins (Stripe, Google Analytics), example domains, and reference links to securityheaders.com, Mozilla Observatory, SSL Labs, MDN and OWASP; the agent is not told to fetch anything except optional header checks of the user's own site."
         },
         {
           "type": "network-access",
           "line": 303,
           "evidence": "https://",
           "context": "  `script-src 'self' 'unsafe-inline' 'unsafe-eval' ${clerkDomain} https://js.stripe.com https://www.googletagmanager.com https://www.google-analytics.com`,",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "URLs are CSP allow-list origins (Stripe, Google Analytics), example domains, and reference links to securityheaders.com, Mozilla Observatory, SSL Labs, MDN and OWASP; the agent is not told to fetch anything except optional header checks of the user's own site."
         },
         {
           "type": "network-access",
           "line": 305,
           "evidence": "https://",
           "context": "  `connect-src 'self' ${clerkDomain} ${convexDomain} https://api.stripe.com https://www.google-analytics.com https://analytics.google.com`,",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "URLs are CSP allow-list origins (Stripe, Google Analytics), example domains, and reference links to securityheaders.com, Mozilla Observatory, SSL Labs, MDN and OWASP; the agent is not told to fetch anything except optional header checks of the user's own site."
         },
         {
           "type": "network-access",
           "line": 305,
           "evidence": "https://",
           "context": "  `connect-src 'self' ${clerkDomain} ${convexDomain} https://api.stripe.com https://www.google-analytics.com https://analytics.google.com`,",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "URLs are CSP allow-list origins (Stripe, Google Analytics), example domains, and reference links to securityheaders.com, Mozilla Observatory, SSL Labs, MDN and OWASP; the agent is not told to fetch anything except optional header checks of the user's own site."
         },
         {
           "type": "network-access",
           "line": 305,
           "evidence": "https://",
           "context": "  `connect-src 'self' ${clerkDomain} ${convexDomain} https://api.stripe.com https://www.google-analytics.com https://analytics.google.com`,",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "URLs are CSP allow-list origins (Stripe, Google Analytics), example domains, and reference links to securityheaders.com, Mozilla Observatory, SSL Labs, MDN and OWASP; the agent is not told to fetch anything except optional header checks of the user's own site."
         },
         {
           "type": "credential-access",
           "line": 313,
           "evidence": "process.env",
           "context": "const cdnDomain = process.env.NEXT_PUBLIC_CDN_URL",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "process.env reads are NEXT_PUBLIC_CLERK_FRONTEND_API_URL, NEXT_PUBLIC_CONVEX_URL, NEXT_PUBLIC_CDN_URL and NODE_ENV used to build CSP origins and gate HSTS; these are public configuration values, not secrets."
         },
         {
           "type": "credential-access",
           "line": 314,
           "evidence": "process.env",
           "context": "  ? new URL(process.env.NEXT_PUBLIC_CDN_URL).origin",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "process.env reads are NEXT_PUBLIC_CLERK_FRONTEND_API_URL, NEXT_PUBLIC_CONVEX_URL, NEXT_PUBLIC_CDN_URL and NODE_ENV used to build CSP origins and gate HSTS; these are public configuration values, not secrets."
         },
         {
           "type": "encoded-content",
           "line": 336,
           "evidence": "base64",
           "context": "const nonce = crypto.randomBytes(16).toString('base64');",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "base64 appears in a CSP nonce generation snippet (crypto.randomBytes(16).toString('base64')); there is no encoded payload."
         },
         {
           "type": "network-access",
           "line": 348,
           "evidence": "https://",
           "context": "`img-src 'self' data: https://gravatar.com https://images.yourapp.com`",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "URLs are CSP allow-list origins (Stripe, Google Analytics), example domains, and reference links to securityheaders.com, Mozilla Observatory, SSL Labs, MDN and OWASP; the agent is not told to fetch anything except optional header checks of the user's own site."
         },
         {
           "type": "network-access",
           "line": 348,
           "evidence": "https://",
           "context": "`img-src 'self' data: https://gravatar.com https://images.yourapp.com`",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "URLs are CSP allow-list origins (Stripe, Google Analytics), example domains, and reference links to securityheaders.com, Mozilla Observatory, SSL Labs, MDN and OWASP; the agent is not told to fetch anything except optional header checks of the user's own site."
         },
         {
           "type": "network-access",
           "line": 386,
           "evidence": "https://",
           "context": "- Mozilla Security Headers Guide: https://infosec.mozilla.org/guidelines/web_security",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "URLs are CSP allow-list origins (Stripe, Google Analytics), example domains, and reference links to securityheaders.com, Mozilla Observatory, SSL Labs, MDN and OWASP; the agent is not told to fetch anything except optional header checks of the user's own site."
         },
         {
           "type": "network-access",
           "line": 387,
           "evidence": "https://",
           "context": "- OWASP Secure Headers Project: https://owasp.org/www-project-secure-headers/",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "URLs are CSP allow-list origins (Stripe, Google Analytics), example domains, and reference links to securityheaders.com, Mozilla Observatory, SSL Labs, MDN and OWASP; the agent is not told to fetch anything except optional header checks of the user's own site."
         },
         {
           "type": "network-access",
           "line": 388,
           "evidence": "https://",
           "context": "- Content Security Policy: https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "URLs are CSP allow-list origins (Stripe, Google Analytics), example domains, and reference links to securityheaders.com, Mozilla Observatory, SSL Labs, MDN and OWASP; the agent is not told to fetch anything except optional header checks of the user's own site."
         },
         {
           "type": "network-access",
           "line": 389,
           "evidence": "https://",
           "context": "- HSTS Specification: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "URLs are CSP allow-list origins (Stripe, Google Analytics), example domains, and reference links to securityheaders.com, Mozilla Observatory, SSL Labs, MDN and OWASP; the agent is not told to fetch anything except optional header checks of the user's own site."
         },
         {
           "type": "network-access",
           "line": 390,
           "evidence": "https://",
           "context": "- Security Headers Checker: https://securityheaders.com/",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "URLs are CSP allow-list origins (Stripe, Google Analytics), example domains, and reference links to securityheaders.com, Mozilla Observatory, SSL Labs, MDN and OWASP; the agent is not told to fetch anything except optional header checks of the user's own site."
         }
       ]
     }

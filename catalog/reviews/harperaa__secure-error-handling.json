@@ -1,9 +1,9 @@
 {
   "schema_version": "0.1",
   "skill_id": "harperaa/secure-error-handling",
-  "status": "draft",
-  "reviewed_on": null,
-  "reviewer": null,
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
   "source": {
     "repo": "harperaa/secure-claude-skills",
     "path": "error-handling",
@@ -13,7 +13,7 @@
     "complete": true,
     "scope": "error-handling",
     "url": "https://api.github.com/repos/harperaa/secure-claude-skills/git/trees/c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223?recursive=1",
-    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
   },
   "license": {
     "spdx": "MIT",
@@ -29,18 +29,33 @@
       ]
     },
     "redistributable": true,
-    "scope_reason": "",
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found; OWASP, MDN and Node.js docs are linked only. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
     "obligations": [
       "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
-      "Preserve all upstream text and notices byte-for-byte."
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
     ]
   },
   "content_review": {
-    "status": "pending",
-    "risk": "unknown",
+    "status": "approved",
+    "risk": "low",
     "blocking_findings": [],
-    "capabilities": {},
-    "notes": []
+    "capabilities": {
+      "shell": false,
+      "network": false,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md (791 lines) in full. Guidance for environment-aware API error responses in Next.js (generic messages in production, details only in development), with the full lib/errorHandler.ts helper code included (SKILL.md:474-547), logging/redaction advice and client-side error display.",
+      "No commands, installs, credentials, or network access; it only shapes the user's own code. Sample code reads process.env.STRIPE_SECRET_KEY / NODE_ENV the normal way and explicitly says never to log secrets or environment variables.",
+      "Template dependence: the core helper is shipped inline, so the skill works in any Next.js project; examples also import validateRequest, idSchema/updateProfileSchema, withRateLimit and withCsrf from the Secure Vibe Coding OS starter, which are not included (see the sibling input-validation, rate-limiting and csrf-protection skills). Optional pointers to auth-security and security-testing skills.",
+      "Minor caveats: handleApiError logs the whole error object (SKILL.md:478) in production, slightly at odds with 'never log full stack traces' (575); the shallow safelog redaction only covers top-level keys; the Equifax 'detailed error messages' claim (SKILL.md:42-43) and the SANS '74%' statistic (40) are unverified."
+    ]
   },
   "files": [
     {
@@ -53,7 +68,7 @@
       "git_blob": "346d6fb05afd34a37fb0b156a612166534ffc7d9",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
       "findings": []
     },
     {
@@ -64,151 +79,151 @@
       "git_blob": "d7930c0a61f10452761d9124e3ac8e1f7c1e88b2",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "credential-access",
           "line": 28,
           "evidence": "API key",
           "context": "Stripe API error: Invalid API key format",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Matches are an example error string ('Invalid API key format'), process.env.STRIPE_SECRET_KEY / NODE_ENV in sample code, and a labelled bad-logging example plus a redaction list naming secret/apiKey; nothing tells the agent to read or reveal real secrets."
         },
         {
           "type": "filesystem-write",
           "line": 261,
           "evidence": "DELETE",
           "context": "export async function DELETE(",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "'delete' matches are an HTTP DELETE route handler and db.posts.delete in sample application code, not file operations by the agent."
         },
         {
           "type": "filesystem-write",
           "line": 283,
           "evidence": "delete",
           "context": "    // Only post owner can delete",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "'delete' matches are an HTTP DELETE route handler and db.posts.delete in sample application code, not file operations by the agent."
         },
         {
           "type": "filesystem-write",
           "line": 285,
           "evidence": "delete",
           "context": "      return handleForbiddenError('Only the post author can delete this post');",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "'delete' matches are an HTTP DELETE route handler and db.posts.delete in sample application code, not file operations by the agent."
         },
         {
           "type": "filesystem-write",
           "line": 288,
           "evidence": "delete",
           "context": "    await db.posts.delete({ id: postId });",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "'delete' matches are an HTTP DELETE route handler and db.posts.delete in sample application code, not file operations by the agent."
         },
         {
           "type": "filesystem-write",
           "line": 293,
           "evidence": "delete",
           "context": "    return handleApiError(error, 'delete-post');",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "'delete' matches are an HTTP DELETE route handler and db.posts.delete in sample application code, not file operations by the agent."
         },
         {
           "type": "credential-access",
           "line": 309,
           "evidence": "process.env",
           "context": "const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Matches are an example error string ('Invalid API key format'), process.env.STRIPE_SECRET_KEY / NODE_ENV in sample code, and a labelled bad-logging example plus a redaction list naming secret/apiKey; nothing tells the agent to read or reveal real secrets."
         },
         {
           "type": "credential-access",
           "line": 480,
           "evidence": "process.env",
           "context": "  if (process.env.NODE_ENV === 'production') {",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Matches are an example error string ('Invalid API key format'), process.env.STRIPE_SECRET_KEY / NODE_ENV in sample code, and a labelled bad-logging example plus a redaction list naming secret/apiKey; nothing tells the agent to read or reveal real secrets."
         },
         {
           "type": "credential-access",
           "line": 574,
           "evidence": "process.env",
           "context": "- Environment variables (`process.env`)",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Matches are an example error string ('Invalid API key format'), process.env.STRIPE_SECRET_KEY / NODE_ENV in sample code, and a labelled bad-logging example plus a redaction list naming secret/apiKey; nothing tells the agent to read or reveal real secrets."
         },
         {
           "type": "credential-access",
           "line": 593,
           "evidence": "apiKey",
           "context": "  apiKey: stripeKey,      // ❌ Never log secrets",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Matches are an example error string ('Invalid API key format'), process.env.STRIPE_SECRET_KEY / NODE_ENV in sample code, and a labelled bad-logging example plus a redaction list naming secret/apiKey; nothing tells the agent to read or reveal real secrets."
         },
         {
           "type": "credential-access",
           "line": 604,
           "evidence": "secret",
           "context": "  'password', 'token', 'secret', 'apiKey', 'ssn',",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Matches are an example error string ('Invalid API key format'), process.env.STRIPE_SECRET_KEY / NODE_ENV in sample code, and a labelled bad-logging example plus a redaction list naming secret/apiKey; nothing tells the agent to read or reveal real secrets."
         },
         {
           "type": "credential-access",
           "line": 604,
           "evidence": "apiKey",
           "context": "  'password', 'token', 'secret', 'apiKey', 'ssn',",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Matches are an example error string ('Invalid API key format'), process.env.STRIPE_SECRET_KEY / NODE_ENV in sample code, and a labelled bad-logging example plus a redaction list naming secret/apiKey; nothing tells the agent to read or reveal real secrets."
         },
         {
           "type": "credential-access",
           "line": 639,
           "evidence": "process.env",
           "context": "    environment: process.env.NODE_ENV",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Matches are an example error string ('Invalid API key format'), process.env.STRIPE_SECRET_KEY / NODE_ENV in sample code, and a labelled bad-logging example plus a redaction list naming secret/apiKey; nothing tells the agent to read or reveal real secrets."
         },
         {
           "type": "credential-access",
           "line": 642,
           "evidence": "process.env",
           "context": "  if (process.env.NODE_ENV === 'production') {",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Matches are an example error string ('Invalid API key format'), process.env.STRIPE_SECRET_KEY / NODE_ENV in sample code, and a labelled bad-logging example plus a redaction list naming secret/apiKey; nothing tells the agent to read or reveal real secrets."
         },
         {
           "type": "network-access",
           "line": 781,
           "evidence": "https://",
           "context": "- OWASP Error Handling Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Error_Handling_Cheat_Sheet.html",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Reference links to OWASP, MDN and Node.js documentation; the skill does not instruct fetching them."
         },
         {
           "type": "network-access",
           "line": 782,
           "evidence": "https://",
           "context": "- OWASP Top 10 2021 - A04 Insecure Design: https://owasp.org/Top10/A04_2021-Insecure_Design/",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Reference links to OWASP, MDN and Node.js documentation; the skill does not instruct fetching them."
         },
         {
           "type": "network-access",
           "line": 783,
           "evidence": "https://",
           "context": "- HTTP Status Codes: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Reference links to OWASP, MDN and Node.js documentation; the skill does not instruct fetching them."
         },
         {
           "type": "network-access",
           "line": 784,
           "evidence": "https://",
           "context": "- Node.js Error Handling: https://nodejs.org/api/errors.html",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Reference links to OWASP, MDN and Node.js documentation; the skill does not instruct fetching them."
         }
       ]
     }

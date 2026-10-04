@@ -24345,11 +24345,11 @@
       "publisher": "harperaa",
       "source": {
         "repo": "harperaa/secure-claude-skills",
-        "path": "dependency-security/SKILL.md",
+        "path": "dependency-security",
         "revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223",
+        "state": "present",
         "revision_type": "git-commit",
-        "url": "https://github.com/harperaa/secure-claude-skills/tree/c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223/dependency-security/SKILL.md",
-        "state": "present"
+        "url": "https://github.com/harperaa/secure-claude-skills/tree/c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223/dependency-security"
       },
       "category": [
         "security"
@@ -24358,31 +24358,320 @@
         "spdx": "MIT",
         "redistributable": true,
         "status": "verified",
-        "evidence": "LICENSE"
+        "scope": "repository",
+        "evidence": "catalog/reviews/harperaa__dependency-supply-chain-security.json"
       },
-      "distribution": "review-required",
+      "distribution": "bundled",
       "compatibility": [
         "agent-skills"
       ],
       "security": {
-        "scan_status": "review-required",
+        "scan_status": "verified",
         "risk": "medium",
-        "network": true,
         "shell": true,
-        "credentials": false
+        "network": true,
+        "credentials": true,
+        "dynamic_execution": false,
+        "package_install": true,
+        "filesystem_write": true,
+        "encoded_content": false,
+        "findings": [
+          {
+            "type": "shell-execution",
+            "line": 52,
+            "evidence": "sh",
+            "context": "- `scripts/security-check.sh` - Runs npm audit + shows outdated packages",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 59,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 72,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 81,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 83,
+            "evidence": "bash",
+            "context": "bash scripts/security-check.sh",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 83,
+            "evidence": "sh",
+            "context": "bash scripts/security-check.sh",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 107,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 119,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 139,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "package-install",
+            "line": 144,
+            "evidence": "npm install",
+            "context": "npm install package-name@1.2.3",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 154,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 181,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 196,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 198,
+            "evidence": "https://",
+            "context": "# https://nextjs.org/docs/upgrading",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "package-install",
+            "line": 204,
+            "evidence": "npm install",
+            "context": "npm install next@latest react@latest react-dom@latest",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 229,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 242,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 259,
+            "evidence": "https://",
+            "context": "1. **Check npm page:** https://www.npmjs.com/package/PACKAGE_NAME",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 282,
+            "evidence": "bash",
+            "context": "   ```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "package-install",
+            "line": 283,
+            "evidence": "npm install",
+            "context": "   npm install new-package",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 289,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "package-install",
+            "line": 294,
+            "evidence": "npm install",
+            "context": "npm install",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 325,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 345,
+            "evidence": "bash",
+            "context": "   ```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 347,
+            "evidence": "https://",
+            "context": "   @mycompany:registry=https://npm.mycompany.com",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 352,
+            "evidence": "sh",
+            "context": "## Scripts/security-check.sh",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 354,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 355,
+            "evidence": "bash",
+            "context": "#!/bin/bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 385,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "package-install",
+            "line": 386,
+            "evidence": "npm install",
+            "context": "npm install -g snyk",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 394,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 465,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 502,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 522,
+            "evidence": "bash",
+            "context": "bash scripts/security-check.sh",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 522,
+            "evidence": "sh",
+            "context": "bash scripts/security-check.sh",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 530,
+            "evidence": "https://",
+            "context": "- npm Audit Documentation: https://docs.npmjs.com/cli/v8/commands/npm-audit",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 531,
+            "evidence": "https://",
+            "context": "- OWASP Dependency Check: https://owasp.org/www-project-dependency-check/",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 532,
+            "evidence": "https://",
+            "context": "- Sonatype Supply Chain Report: https://www.sonatype.com/state-of-the-software-supply-chain",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 533,
+            "evidence": "https://",
+            "context": "- Snyk: https://snyk.io/",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 534,
+            "evidence": "https://",
+            "context": "- GitHub Dependabot: https://docs.github.com/en/code-security/dependabot",
+            "file": "SKILL.md"
+          }
+        ],
+        "review": "catalog/reviews/harperaa__dependency-supply-chain-security.json"
       },
-      "materialized": false,
+      "materialized": true,
       "release": {
-        "status": "hold",
-        "reasons": [
-          "manual-review-required"
-        ]
+        "status": "eligible",
+        "reasons": []
       },
       "integrity": {
         "upstream_skill_sha256": "5a5a4af825fead404c479411c923c35a1ea5b8aaac484b343a4c65f75a0f860f",
         "last_ingested_revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223"
       },
-      "description": "Manage dependencies and supply chain security to prevent vulnerable or malicious packages. Use this skill when you need to audit dependencies, update packages, check for vulnerabilities, understand supply chain attacks, or maintain dependency security. Triggers include \"dependencies\", \"npm audit\", \"supply chain\", \"package security\", \"vulnerability\", \"npm update\", \"security audit\", \"outdated packages\"."
+      "description": "Manage dependencies and supply chain security to prevent vulnerable or malicious packages. Use this skill when you need to audit dependencies, update packages, check for vulnerabilities, understand supply chain attacks, or maintain dependency security. Triggers include \"dependencies\", \"npm audit\", \"supply chain\", \"package security\", \"vulnerability\", \"npm update\", \"security audit\", \"outdated packages\".",
+      "artifact_type": "skill",
+      "materialized_root": "skills/harperaa/dependency-supply-chain-security",
+      "materialized_files": 2
     },
     {
       "id": "harperaa/information-leakage-hardcoded-secrets-ai-code",
@@ -24660,11 +24949,11 @@
       "publisher": "harperaa",
       "source": {
         "repo": "harperaa/secure-claude-skills",
-        "path": "error-handling/SKILL.md",
+        "path": "error-handling",
         "revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223",
+        "state": "present",
         "revision_type": "git-commit",
-        "url": "https://github.com/harperaa/secure-claude-skills/tree/c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223/error-handling/SKILL.md",
-        "state": "present"
+        "url": "https://github.com/harperaa/secure-claude-skills/tree/c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223/error-handling"
       },
       "category": [
         "general"
@@ -24673,31 +24962,166 @@
         "spdx": "MIT",
         "redistributable": true,
         "status": "verified",
-        "evidence": "LICENSE"
+        "scope": "repository",
+        "evidence": "catalog/reviews/harperaa__secure-error-handling.json"
       },
-      "distribution": "review-required",
+      "distribution": "bundled",
       "compatibility": [
         "agent-skills"
       ],
       "security": {
-        "scan_status": "review-required",
+        "scan_status": "verified",
         "risk": "medium",
-        "network": true,
         "shell": false,
-        "credentials": true
+        "network": true,
+        "credentials": true,
+        "dynamic_execution": false,
+        "package_install": false,
+        "filesystem_write": true,
+        "encoded_content": false,
+        "findings": [
+          {
+            "type": "credential-access",
+            "line": 28,
+            "evidence": "API key",
+            "context": "Stripe API error: Invalid API key format",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 261,
+            "evidence": "DELETE",
+            "context": "export async function DELETE(",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 283,
+            "evidence": "delete",
+            "context": "    // Only post owner can delete",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 285,
+            "evidence": "delete",
+            "context": "      return handleForbiddenError('Only the post author can delete this post');",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 288,
+            "evidence": "delete",
+            "context": "    await db.posts.delete({ id: postId });",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 293,
+            "evidence": "delete",
+            "context": "    return handleApiError(error, 'delete-post');",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 309,
+            "evidence": "process.env",
+            "context": "const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 480,
+            "evidence": "process.env",
+            "context": "  if (process.env.NODE_ENV === 'production') {",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 574,
+            "evidence": "process.env",
+            "context": "- Environment variables (`process.env`)",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 593,
+            "evidence": "apiKey",
+            "context": "  apiKey: stripeKey,      // ❌ Never log secrets",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 604,
+            "evidence": "secret",
+            "context": "  'password', 'token', 'secret', 'apiKey', 'ssn',",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 604,
+            "evidence": "apiKey",
+            "context": "  'password', 'token', 'secret', 'apiKey', 'ssn',",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 639,
+            "evidence": "process.env",
+            "context": "    environment: process.env.NODE_ENV",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 642,
+            "evidence": "process.env",
+            "context": "  if (process.env.NODE_ENV === 'production') {",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 781,
+            "evidence": "https://",
+            "context": "- OWASP Error Handling Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Error_Handling_Cheat_Sheet.html",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 782,
+            "evidence": "https://",
+            "context": "- OWASP Top 10 2021 - A04 Insecure Design: https://owasp.org/Top10/A04_2021-Insecure_Design/",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 783,
+            "evidence": "https://",
+            "context": "- HTTP Status Codes: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 784,
+            "evidence": "https://",
+            "context": "- Node.js Error Handling: https://nodejs.org/api/errors.html",
+            "file": "SKILL.md"
+          }
+        ],
+        "review": "catalog/reviews/harperaa__secure-error-handling.json"
       },
-      "materialized": false,
+      "materialized": true,
       "release": {
-        "status": "hold",
-        "reasons": [
-          "manual-review-required"
-        ]
+        "status": "eligible",
+        "reasons": []
       },
       "integrity": {
         "upstream_skill_sha256": "7417062d89948ebb5c7ce7d439e279b3bcb4f9b743b2de9eb2b4622411b51019",
         "last_ingested_revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223"
       },
-      "description": "Implement secure error handling to prevent information leakage and provide appropriate error responses. Use this skill when you need to handle errors in API routes, prevent stack trace exposure, implement environment-aware error messages, or use the error handler utilities. Triggers include \"error handling\", \"handle errors\", \"error messages\", \"information leakage\", \"stack trace\", \"handleApiError\", \"production errors\", \"error responses\"."
+      "description": "Implement secure error handling to prevent information leakage and provide appropriate error responses. Use this skill when you need to handle errors in API routes, prevent stack trace exposure, implement environment-aware error messages, or use the error handler utilities. Triggers include \"error handling\", \"handle errors\", \"error messages\", \"information leakage\", \"stack trace\", \"handleApiError\", \"production errors\", \"error responses\".",
+      "artifact_type": "skill",
+      "materialized_root": "skills/harperaa/secure-error-handling",
+      "materialized_files": 2
     },
     {
       "id": "harperaa/security-architecture-overview",
@@ -24750,11 +25174,11 @@
       "publisher": "harperaa",
       "source": {
         "repo": "harperaa/secure-claude-skills",
-        "path": "security-headers/SKILL.md",
+        "path": "security-headers",
         "revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223",
+        "state": "present",
         "revision_type": "git-commit",
-        "url": "https://github.com/harperaa/secure-claude-skills/tree/c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223/security-headers/SKILL.md",
-        "state": "present"
+        "url": "https://github.com/harperaa/secure-claude-skills/tree/c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223/security-headers"
       },
       "category": [
         "security"
@@ -24763,31 +25187,404 @@
         "spdx": "MIT",
         "redistributable": true,
         "status": "verified",
-        "evidence": "LICENSE"
+        "scope": "repository",
+        "evidence": "catalog/reviews/harperaa__security-headers.json"
       },
-      "distribution": "review-required",
+      "distribution": "bundled",
       "compatibility": [
         "agent-skills"
       ],
       "security": {
-        "scan_status": "review-required",
+        "scan_status": "verified",
         "risk": "medium",
-        "network": true,
         "shell": true,
-        "credentials": true
+        "network": true,
+        "credentials": true,
+        "dynamic_execution": false,
+        "package_install": false,
+        "filesystem_write": true,
+        "encoded_content": true,
+        "findings": [
+          {
+            "type": "credential-access",
+            "line": 50,
+            "evidence": "process.env",
+            "context": "const clerkDomain = process.env.NEXT_PUBLIC_CLERK_FRONTEND_API_URL",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 51,
+            "evidence": "process.env",
+            "context": "  ? new URL(process.env.NEXT_PUBLIC_CLERK_FRONTEND_API_URL).origin",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 54,
+            "evidence": "process.env",
+            "context": "const convexDomain = process.env.NEXT_PUBLIC_CONVEX_URL",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 55,
+            "evidence": "process.env",
+            "context": "  ? new URL(process.env.NEXT_PUBLIC_CONVEX_URL).origin",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 60,
+            "evidence": "https://",
+            "context": "  `script-src 'self' 'unsafe-inline' 'unsafe-eval' ${clerkDomain} https://js.stripe.com`,",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 62,
+            "evidence": "https://",
+            "context": "  `connect-src 'self' ${clerkDomain} ${convexDomain} https://api.stripe.com`,",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 63,
+            "evidence": "https://",
+            "context": "  `frame-src 'self' ${clerkDomain} https://js.stripe.com https://hooks.stripe.com`,",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 63,
+            "evidence": "https://",
+            "context": "  `frame-src 'self' ${clerkDomain} https://js.stripe.com https://hooks.stripe.com`,",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 84,
+            "evidence": "process.env",
+            "context": "const clerkDomain = process.env.NEXT_PUBLIC_CLERK_FRONTEND_API_URL",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 85,
+            "evidence": "process.env",
+            "context": "  ? new URL(process.env.NEXT_PUBLIC_CLERK_FRONTEND_API_URL).origin",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 104,
+            "evidence": "Delete",
+            "context": "Attacker embeds your \"Delete Account\" button in an invisible iframe overlay on a game site. Users think they're clicking \"Play Game\" but actually click \"Delete Account.\"",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 104,
+            "evidence": "Delete",
+            "context": "Attacker embeds your \"Delete Account\" button in an invisible iframe overlay on a game site. Users think they're clicking \"Play Game\" but actually click \"Delete Account.\"",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 146,
+            "evidence": "https://",
+            "context": "User types \"yourapp.com\" (no https://). Browser initially requests HTTP. Attacker intercepts, serves fake HTTP version, steals credentials.",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 150,
+            "evidence": "process.env",
+            "context": "if (process.env.NODE_ENV === 'production') {",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 166,
+            "evidence": "remove",
+            "context": "**Important:** Once HSTS is set for a domain, browsers remember it. If you need to remove it, you must:",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 203,
+            "evidence": "process.env",
+            "context": "  const clerkDomain = process.env.NEXT_PUBLIC_CLERK_FRONTEND_API_URL",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 204,
+            "evidence": "process.env",
+            "context": "    ? new URL(process.env.NEXT_PUBLIC_CLERK_FRONTEND_API_URL).origin",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 207,
+            "evidence": "process.env",
+            "context": "  const convexDomain = process.env.NEXT_PUBLIC_CONVEX_URL",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 208,
+            "evidence": "process.env",
+            "context": "    ? new URL(process.env.NEXT_PUBLIC_CONVEX_URL).origin",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 214,
+            "evidence": "https://",
+            "context": "    `script-src 'self' 'unsafe-inline' 'unsafe-eval' ${clerkDomain} https://js.stripe.com`,",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 216,
+            "evidence": "https://",
+            "context": "    `connect-src 'self' ${clerkDomain} ${convexDomain} https://api.stripe.com`,",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 217,
+            "evidence": "https://",
+            "context": "    `frame-src 'self' ${clerkDomain} https://js.stripe.com https://hooks.stripe.com`,",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 217,
+            "evidence": "https://",
+            "context": "    `frame-src 'self' ${clerkDomain} https://js.stripe.com https://hooks.stripe.com`,",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 232,
+            "evidence": "process.env",
+            "context": "  if (process.env.NODE_ENV === 'production') {",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 256,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 257,
+            "evidence": "curl",
+            "context": "curl -I http://localhost:3000",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 257,
+            "evidence": "http://",
+            "context": "curl -I http://localhost:3000",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 267,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 269,
+            "evidence": "curl",
+            "context": "curl -I https://yourapp.com",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 269,
+            "evidence": "https://",
+            "context": "curl -I https://yourapp.com",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 277,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 278,
+            "evidence": "curl",
+            "context": "curl -I http://localhost:3000/dashboard",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 278,
+            "evidence": "http://",
+            "context": "curl -I http://localhost:3000/dashboard",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 287,
+            "evidence": "https://",
+            "context": "- **Security Headers:** https://securityheaders.com/",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 288,
+            "evidence": "https://",
+            "context": "- **Mozilla Observatory:** https://observatory.mozilla.org/",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 289,
+            "evidence": "https://",
+            "context": "- **SSL Labs:** https://www.ssllabs.com/ssltest/",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 303,
+            "evidence": "https://",
+            "context": "  `script-src 'self' 'unsafe-inline' 'unsafe-eval' ${clerkDomain} https://js.stripe.com https://www.googletagmanager.com https://www.google-analytics.com`,",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 303,
+            "evidence": "https://",
+            "context": "  `script-src 'self' 'unsafe-inline' 'unsafe-eval' ${clerkDomain} https://js.stripe.com https://www.googletagmanager.com https://www.google-analytics.com`,",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 303,
+            "evidence": "https://",
+            "context": "  `script-src 'self' 'unsafe-inline' 'unsafe-eval' ${clerkDomain} https://js.stripe.com https://www.googletagmanager.com https://www.google-analytics.com`,",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 305,
+            "evidence": "https://",
+            "context": "  `connect-src 'self' ${clerkDomain} ${convexDomain} https://api.stripe.com https://www.google-analytics.com https://analytics.google.com`,",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 305,
+            "evidence": "https://",
+            "context": "  `connect-src 'self' ${clerkDomain} ${convexDomain} https://api.stripe.com https://www.google-analytics.com https://analytics.google.com`,",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 305,
+            "evidence": "https://",
+            "context": "  `connect-src 'self' ${clerkDomain} ${convexDomain} https://api.stripe.com https://www.google-analytics.com https://analytics.google.com`,",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 313,
+            "evidence": "process.env",
+            "context": "const cdnDomain = process.env.NEXT_PUBLIC_CDN_URL",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 314,
+            "evidence": "process.env",
+            "context": "  ? new URL(process.env.NEXT_PUBLIC_CDN_URL).origin",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "encoded-content",
+            "line": 336,
+            "evidence": "base64",
+            "context": "const nonce = crypto.randomBytes(16).toString('base64');",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 348,
+            "evidence": "https://",
+            "context": "`img-src 'self' data: https://gravatar.com https://images.yourapp.com`",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 348,
+            "evidence": "https://",
+            "context": "`img-src 'self' data: https://gravatar.com https://images.yourapp.com`",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 386,
+            "evidence": "https://",
+            "context": "- Mozilla Security Headers Guide: https://infosec.mozilla.org/guidelines/web_security",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 387,
+            "evidence": "https://",
+            "context": "- OWASP Secure Headers Project: https://owasp.org/www-project-secure-headers/",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 388,
+            "evidence": "https://",
+            "context": "- Content Security Policy: https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 389,
+            "evidence": "https://",
+            "context": "- HSTS Specification: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 390,
+            "evidence": "https://",
+            "context": "- Security Headers Checker: https://securityheaders.com/",
+            "file": "SKILL.md"
+          }
+        ],
+        "review": "catalog/reviews/harperaa__security-headers.json"
       },
-      "materialized": false,
+      "materialized": true,
       "release": {
-        "status": "hold",
-        "reasons": [
-          "manual-review-required"
-        ]
+        "status": "eligible",
+        "reasons": []
       },
       "integrity": {
         "upstream_skill_sha256": "9074c79143952e06dfcedcb03d570357d24aa7133d6cea9dca83ae43dcf5e0fa",
         "last_ingested_revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223"
       },
-      "description": "Configure security headers to defend against clickjacking, XSS, MIME confusion, and SSL stripping attacks. Use this skill when you need to set up Content-Security-Policy, X-Frame-Options, HSTS, configure middleware headers, or understand browser security features. Triggers include \"security headers\", \"CSP\", \"content security policy\", \"X-Frame-Options\", \"HSTS\", \"clickjacking\", \"MIME confusion\", \"middleware headers\"."
+      "description": "Configure security headers to defend against clickjacking, XSS, MIME confusion, and SSL stripping attacks. Use this skill when you need to set up Content-Security-Policy, X-Frame-Options, HSTS, configure middleware headers, or understand browser security features. Triggers include \"security headers\", \"CSP\", \"content security policy\", \"X-Frame-Options\", \"HSTS\", \"clickjacking\", \"MIME confusion\", \"middleware headers\".",
+      "artifact_type": "skill",
+      "materialized_root": "skills/harperaa/security-headers",
+      "materialized_files": 2
     },
     {
       "id": "harperaa/security-operations-deployment",
@@ -24795,11 +25592,11 @@
       "publisher": "harperaa",
       "source": {
         "repo": "harperaa/secure-claude-skills",
-        "path": "security-operations/SKILL.md",
+        "path": "security-operations",
         "revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223",
+        "state": "present",
         "revision_type": "git-commit",
-        "url": "https://github.com/harperaa/secure-claude-skills/tree/c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223/security-operations/SKILL.md",
-        "state": "present"
+        "url": "https://github.com/harperaa/secure-claude-skills/tree/c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223/security-operations"
       },
       "category": [
         "security"
@@ -24808,31 +25605,397 @@
         "spdx": "MIT",
         "redistributable": true,
         "status": "verified",
-        "evidence": "LICENSE"
+        "scope": "repository",
+        "evidence": "catalog/reviews/harperaa__security-operations-deployment.json"
       },
-      "distribution": "review-required",
+      "distribution": "bundled",
       "compatibility": [
         "agent-skills"
       ],
       "security": {
-        "scan_status": "review-required",
+        "scan_status": "verified",
         "risk": "medium",
-        "network": true,
         "shell": true,
-        "credentials": true
+        "network": true,
+        "credentials": true,
+        "dynamic_execution": false,
+        "package_install": true,
+        "filesystem_write": true,
+        "encoded_content": false,
+        "findings": [
+          {
+            "type": "filesystem-write",
+            "line": 34,
+            "evidence": "DELETE",
+            "context": "- All POST/PUT/DELETE operations",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 78,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 87,
+            "evidence": "https://",
+            "context": "NEXT_PUBLIC_CLERK_FRONTEND_API_URL=https://your-app.clerk.accounts.dev",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 91,
+            "evidence": "https://",
+            "context": "NEXT_PUBLIC_CONVEX_URL=https://...convex.cloud",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 97,
+            "evidence": "Secret",
+            "context": "# Optional: Clerk Webhook Secret",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 103,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 111,
+            "evidence": "https://",
+            "context": "NEXT_PUBLIC_CLERK_FRONTEND_API_URL=https://your-app.clerk.accounts.com",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 115,
+            "evidence": "https://",
+            "context": "NEXT_PUBLIC_CONVEX_URL=https://...convex.cloud",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 121,
+            "evidence": "Secret",
+            "context": "# Optional: Clerk Webhook Secret (production)",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 127,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 141,
+            "evidence": "secret",
+            "context": "- Store production secrets in hosting platform's secret manager",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 166,
+            "evidence": "process.env",
+            "context": "  const missing = requiredEnvVars.filter(v => !process.env[v]);",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 172,
+            "evidence": "secret",
+            "context": "  // Validate secret lengths",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 173,
+            "evidence": "process.env",
+            "context": "  if (process.env.CSRF_SECRET && process.env.CSRF_SECRET.length < 32) {",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 173,
+            "evidence": "process.env",
+            "context": "  if (process.env.CSRF_SECRET && process.env.CSRF_SECRET.length < 32) {",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 177,
+            "evidence": "process.env",
+            "context": "  if (process.env.SESSION_SECRET && process.env.SESSION_SECRET.length < 32) {",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 177,
+            "evidence": "process.env",
+            "context": "  if (process.env.SESSION_SECRET && process.env.SESSION_SECRET.length < 32) {",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 216,
+            "evidence": "curl",
+            "context": "- [ ] Security headers verified (`curl -I https://yourapp.com`)",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 216,
+            "evidence": "https://",
+            "context": "- [ ] Security headers verified (`curl -I https://yourapp.com`)",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 231,
+            "evidence": "DELETE",
+            "context": "- [ ] All POST/PUT/DELETE routes have CSRF protection",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 251,
+            "evidence": "curl",
+            "context": "- [ ] Security headers checked: `curl -I https://yourapp.com`",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 251,
+            "evidence": "https://",
+            "context": "- [ ] Security headers checked: `curl -I https://yourapp.com`",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 257,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 261,
+            "evidence": "api_key",
+            "context": "grep -r \"api_key.*=\" . --exclude-dir=node_modules",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 268,
+            "evidence": "bash",
+            "context": "bash scripts/security-check.sh",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 268,
+            "evidence": "sh",
+            "context": "bash scripts/security-check.sh",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 289,
+            "evidence": "credential",
+            "context": "- 429s on login endpoints → credential stuffing attempt",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 349,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 351,
+            "evidence": "https://",
+            "context": "https://vercel.com/your-project/logs",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 380,
+            "evidence": "process.env",
+            "context": "    environment: process.env.NODE_ENV,",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 385,
+            "evidence": "process.env",
+            "context": "  if (process.env.NODE_ENV === 'production') {",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 467,
+            "evidence": "sh",
+            "context": "- `scripts/security-check.sh` - Dependency audit",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 468,
+            "evidence": "sh",
+            "context": "- `scripts/security-test.sh` - Comprehensive security test suite (if created)",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 478,
+            "evidence": "https://",
+            "context": "- OWASP Top 10 2021: https://owasp.org/www-project-top-ten/",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 479,
+            "evidence": "https://",
+            "context": "- OWASP Cheat Sheet Series: https://cheatsheetseries.owasp.org",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 480,
+            "evidence": "https://",
+            "context": "- OWASP API Security Top 10: https://owasp.org/www-project-api-security/",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 483,
+            "evidence": "https://",
+            "context": "- Next.js Security: https://nextjs.org/docs/app/guides/security",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 484,
+            "evidence": "https://",
+            "context": "- Clerk Security: https://clerk.com/docs/security",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 485,
+            "evidence": "https://",
+            "context": "- Convex Security: https://docs.convex.dev/production/hosting/authentication",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 486,
+            "evidence": "https://",
+            "context": "- Stripe Security: https://stripe.com/docs/security",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 489,
+            "evidence": "https://",
+            "context": "- Security Headers Scanner: https://securityheaders.com/",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 490,
+            "evidence": "https://",
+            "context": "- Mozilla Observatory: https://observatory.mozilla.org/",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 491,
+            "evidence": "https://",
+            "context": "- SSL Labs Test: https://www.ssllabs.com/ssltest/",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 509,
+            "evidence": "bash",
+            "context": "- Full security audit: `bash scripts/security-check.sh`",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 509,
+            "evidence": "sh",
+            "context": "- Full security audit: `bash scripts/security-check.sh`",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 513,
+            "evidence": "https://",
+            "context": "- Check security headers: https://securityheaders.com/",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 526,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 538,
+            "evidence": "bash",
+            "context": "bash scripts/security-check.sh",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 538,
+            "evidence": "sh",
+            "context": "bash scripts/security-check.sh",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 545,
+            "evidence": "curl",
+            "context": "curl -I https://yourapp.com",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 545,
+            "evidence": "https://",
+            "context": "curl -I https://yourapp.com",
+            "file": "SKILL.md"
+          }
+        ],
+        "review": "catalog/reviews/harperaa__security-operations-deployment.json"
       },
-      "materialized": false,
+      "materialized": true,
       "release": {
-        "status": "hold",
-        "reasons": [
-          "manual-review-required"
-        ]
+        "status": "eligible",
+        "reasons": []
       },
       "integrity": {
         "upstream_skill_sha256": "a90a68cd7161373f13d77a223070ec2d4bde3765ec53836898b9d7a66ab2162c",
         "last_ingested_revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223"
       },
-      "description": "Operational security guidance for deployment, monitoring, and maintenance. Use this skill when you need to understand which middlewares to apply, configure environment variables, monitor security post-deployment, or follow the pre-deployment checklist. Triggers include \"security operations\", \"deployment security\", \"security monitoring\", \"environment variables\", \"when to use middleware\", \"pre-deployment\", \"security checklist\", \"production security\"."
+      "description": "Operational security guidance for deployment, monitoring, and maintenance. Use this skill when you need to understand which middlewares to apply, configure environment variables, monitor security post-deployment, or follow the pre-deployment checklist. Triggers include \"security operations\", \"deployment security\", \"security monitoring\", \"environment variables\", \"when to use middleware\", \"pre-deployment\", \"security checklist\", \"production security\".",
+      "artifact_type": "skill",
+      "materialized_root": "skills/harperaa/security-operations-deployment",
+      "materialized_files": 2
     },
     {
       "id": "harperaa/security-prompts",
@@ -24885,11 +26048,11 @@
       "publisher": "harperaa",
       "source": {
         "repo": "harperaa/secure-claude-skills",
-        "path": "security-prompts/auth-authorization/SKILL.md",
+        "path": "security-prompts/auth-authorization",
         "revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223",
+        "state": "present",
         "revision_type": "git-commit",
-        "url": "https://github.com/harperaa/secure-claude-skills/tree/c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223/security-prompts/auth-authorization/SKILL.md",
-        "state": "present"
+        "url": "https://github.com/harperaa/secure-claude-skills/tree/c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223/security-prompts/auth-authorization"
       },
       "category": [
         "security"
@@ -24898,31 +26061,138 @@
         "spdx": "MIT",
         "redistributable": true,
         "status": "verified",
-        "evidence": "LICENSE"
+        "scope": "repository",
+        "evidence": "catalog/reviews/harperaa__security-prompts-auth.json"
       },
-      "distribution": "review-required",
+      "distribution": "bundled",
       "compatibility": [
         "agent-skills"
       ],
       "security": {
-        "scan_status": "review-required",
+        "scan_status": "verified",
         "risk": "low",
-        "network": false,
-        "shell": false,
-        "credentials": false
+        "shell": true,
+        "network": true,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false,
+        "filesystem_write": true,
+        "encoded_content": false,
+        "findings": [
+          {
+            "type": "network-access",
+            "line": 73,
+            "evidence": "curl",
+            "context": "- How to test via curl or Postman",
+            "file": "04_auth_testing.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 85,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "04_auth_testing.md"
+          },
+          {
+            "type": "network-access",
+            "line": 87,
+            "evidence": "curl",
+            "context": "curl http://localhost:3000/admin \\",
+            "file": "04_auth_testing.md"
+          },
+          {
+            "type": "network-access",
+            "line": 87,
+            "evidence": "http://",
+            "context": "curl http://localhost:3000/admin \\",
+            "file": "04_auth_testing.md"
+          },
+          {
+            "type": "network-access",
+            "line": 92,
+            "evidence": "curl",
+            "context": "curl http://localhost:3000/admin \\",
+            "file": "04_auth_testing.md"
+          },
+          {
+            "type": "network-access",
+            "line": 92,
+            "evidence": "http://",
+            "context": "curl http://localhost:3000/admin \\",
+            "file": "04_auth_testing.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 54,
+            "evidence": "delete",
+            "context": "- `users.read`, `users.write`, `users.delete`",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 197,
+            "evidence": "delete",
+            "context": "- admin: All user access + create/edit/delete posts, moderate comments",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 258,
+            "evidence": "delete",
+            "context": "- Admin: Most permissions, cannot delete workspace",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 343,
+            "evidence": "DELETE",
+            "context": "export async function DELETE(req: Request) {",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 350,
+            "evidence": "Delete",
+            "context": "  // Delete logic",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 382,
+            "evidence": "delete",
+            "context": "test(\"non-admin cannot delete posts\", async () => {",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 383,
+            "evidence": "DELETE",
+            "context": "  const response = await DELETE(\"/api/posts/123\", {",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 453,
+            "evidence": "DELETE",
+            "context": "export async function DELETE(req: Request) {",
+            "file": "SKILL.md"
+          }
+        ],
+        "review": "catalog/reviews/harperaa__security-prompts-auth.json"
       },
-      "materialized": false,
+      "materialized": true,
       "release": {
-        "status": "hold",
-        "reasons": [
-          "manual-review-required"
-        ]
+        "status": "eligible",
+        "reasons": []
       },
       "integrity": {
         "upstream_skill_sha256": "47d0b4ad34238226b59266a349f9b23889fd6ccaf13fe94875f699fae7f32ad0",
         "last_ingested_revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223"
       },
-      "description": "Authentication and authorization prompt templates for RBAC implementation, permissions systems, ownership verification, and authorization testing. Use when setting up roles, implementing access control, or testing authorization logic. Triggers include \"RBAC\", \"role-based access\", \"permissions\", \"ownership\", \"authorization\", \"access control\", \"user roles\", \"auth testing\"."
+      "description": "Authentication and authorization prompt templates for RBAC implementation, permissions systems, ownership verification, and authorization testing. Use when setting up roles, implementing access control, or testing authorization logic. Triggers include \"RBAC\", \"role-based access\", \"permissions\", \"ownership\", \"authorization\", \"access control\", \"user roles\", \"auth testing\".",
+      "artifact_type": "skill",
+      "materialized_root": "skills/harperaa/security-prompts-auth",
+      "materialized_files": 6
     },
     {
       "id": "harperaa/security-prompts-controls",
@@ -25020,11 +26290,11 @@
       "publisher": "harperaa",
       "source": {
         "repo": "harperaa/secure-claude-skills",
-        "path": "security-prompts/threat-modeling/SKILL.md",
+        "path": "security-prompts/threat-modeling",
         "revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223",
+        "state": "present",
         "revision_type": "git-commit",
-        "url": "https://github.com/harperaa/secure-claude-skills/tree/c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223/security-prompts/threat-modeling/SKILL.md",
-        "state": "present"
+        "url": "https://github.com/harperaa/secure-claude-skills/tree/c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223/security-prompts/threat-modeling"
       },
       "category": [
         "security"
@@ -25033,31 +26303,124 @@
         "spdx": "MIT",
         "redistributable": true,
         "status": "verified",
-        "evidence": "LICENSE"
+        "scope": "repository",
+        "evidence": "catalog/reviews/harperaa__security-prompts-threat-modeling.json"
       },
-      "distribution": "review-required",
+      "distribution": "bundled",
       "compatibility": [
         "agent-skills"
       ],
       "security": {
         "scan_status": "verified",
-        "risk": "none",
-        "network": false,
-        "shell": false,
-        "credentials": false
+        "risk": "medium",
+        "shell": true,
+        "network": true,
+        "credentials": true,
+        "dynamic_execution": false,
+        "package_install": false,
+        "filesystem_write": true,
+        "encoded_content": false,
+        "findings": [
+          {
+            "type": "credential-access",
+            "line": 64,
+            "evidence": "Credential",
+            "context": "- Credential management?",
+            "file": "03_architecture_impact.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 99,
+            "evidence": "credential",
+            "context": "- Risks: Redis vulnerabilities, credential theft, network exposure",
+            "file": "03_architecture_impact.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 161,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "05_security_tests.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 59,
+            "evidence": "API Key",
+            "context": "**5. API Key Security**:",
+            "file": "07_payment_security.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 61,
+            "evidence": "secret",
+            "context": "- Are publishable and secret keys used correctly?",
+            "file": "07_payment_security.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 83,
+            "evidence": "secret",
+            "context": "- ❌ Exposing secret API keys client-side",
+            "file": "07_payment_security.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 100,
+            "evidence": "Secret",
+            "context": "- [ ] Secret key used server-side only",
+            "file": "07_payment_security.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 132,
+            "evidence": "Secret",
+            "context": "- 🚨 Secret keys exposed",
+            "file": "07_payment_security.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 159,
+            "evidence": "secret",
+            "context": "- ❌ Expose secret keys client-side",
+            "file": "07_payment_security.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 164,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "07_payment_security.md"
+          },
+          {
+            "type": "network-access",
+            "line": 166,
+            "evidence": "curl",
+            "context": "curl -X POST http://localhost:3000/api/webhooks/stripe \\",
+            "file": "07_payment_security.md"
+          },
+          {
+            "type": "network-access",
+            "line": 166,
+            "evidence": "http://",
+            "context": "curl -X POST http://localhost:3000/api/webhooks/stripe \\",
+            "file": "07_payment_security.md"
+          }
+        ],
+        "review": "catalog/reviews/harperaa__security-prompts-threat-modeling.json"
       },
-      "materialized": false,
+      "materialized": true,
       "release": {
-        "status": "hold",
-        "reasons": [
-          "manual-review-required"
-        ]
+        "status": "eligible",
+        "reasons": []
       },
       "integrity": {
         "upstream_skill_sha256": "1affbca2989abc173ea403746df43733c573510d06405fec7bad7b5d191f65db",
         "last_ingested_revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223"
       },
-      "description": "Security analysis and threat modeling prompt templates for STRIDE analysis, code review, OWASP compliance, and vulnerability assessment. Use for security planning, pre-deployment reviews, and ongoing threat assessment. Triggers include \"STRIDE\", \"threat model\", \"security review\", \"code review\", \"OWASP\", \"payment security\", \"security analysis\", \"vulnerability assessment\"."
+      "description": "Security analysis and threat modeling prompt templates for STRIDE analysis, code review, OWASP compliance, and vulnerability assessment. Use for security planning, pre-deployment reviews, and ongoing threat assessment. Triggers include \"STRIDE\", \"threat model\", \"security review\", \"code review\", \"OWASP\", \"payment security\", \"security analysis\", \"vulnerability assessment\".",
+      "artifact_type": "skill",
+      "materialized_root": "skills/harperaa/security-prompts-threat-modeling",
+      "materialized_files": 10
     },
     {
       "id": "harperaa/security-testing-verification",
@@ -25065,11 +26428,11 @@
       "publisher": "harperaa",
       "source": {
         "repo": "harperaa/secure-claude-skills",
-        "path": "security-testing/SKILL.md",
+        "path": "security-testing",
         "revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223",
+        "state": "present",
         "revision_type": "git-commit",
-        "url": "https://github.com/harperaa/secure-claude-skills/tree/c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223/security-testing/SKILL.md",
-        "state": "present"
+        "url": "https://github.com/harperaa/secure-claude-skills/tree/c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223/security-testing"
       },
       "category": [
         "security"
@@ -25078,31 +26441,761 @@
         "spdx": "MIT",
         "redistributable": true,
         "status": "verified",
-        "evidence": "LICENSE"
+        "scope": "repository",
+        "evidence": "catalog/reviews/harperaa__security-testing-verification.json"
       },
-      "distribution": "review-required",
+      "distribution": "bundled",
       "compatibility": [
         "agent-skills"
       ],
       "security": {
-        "scan_status": "review-required",
-        "risk": "low",
-        "network": true,
+        "scan_status": "verified",
+        "risk": "medium",
         "shell": true,
-        "credentials": false
+        "network": true,
+        "credentials": false,
+        "dynamic_execution": true,
+        "package_install": true,
+        "filesystem_write": true,
+        "encoded_content": false,
+        "findings": [
+          {
+            "type": "shell-execution",
+            "line": 16,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 46,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 50,
+            "evidence": "curl",
+            "context": "  curl -s -o /dev/null -w \"%{http_code}\\n\" \\",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 51,
+            "evidence": "http://",
+            "context": "    http://localhost:3000/api/test-rate-limit",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 62,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 65,
+            "evidence": "curl",
+            "context": "  curl http://localhost:3000/api/test-rate-limit",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 65,
+            "evidence": "http://",
+            "context": "  curl http://localhost:3000/api/test-rate-limit",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 72,
+            "evidence": "curl",
+            "context": "curl http://localhost:3000/api/test-rate-limit",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 72,
+            "evidence": "http://",
+            "context": "curl http://localhost:3000/api/test-rate-limit",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 81,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 82,
+            "evidence": "curl",
+            "context": "curl -X POST http://localhost:3000/api/example-protected \\",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 82,
+            "evidence": "http://",
+            "context": "curl -X POST http://localhost:3000/api/example-protected \\",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 94,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 96,
+            "evidence": "curl",
+            "context": "TOKEN=$(curl -s http://localhost:3000/api/csrf \\",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 96,
+            "evidence": "http://",
+            "context": "TOKEN=$(curl -s http://localhost:3000/api/csrf \\",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 100,
+            "evidence": "curl",
+            "context": "curl -X POST http://localhost:3000/api/example-protected \\",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 100,
+            "evidence": "http://",
+            "context": "curl -X POST http://localhost:3000/api/example-protected \\",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 111,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 113,
+            "evidence": "curl",
+            "context": "TOKEN=$(curl -s http://localhost:3000/api/csrf \\",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 113,
+            "evidence": "http://",
+            "context": "TOKEN=$(curl -s http://localhost:3000/api/csrf \\",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 117,
+            "evidence": "curl",
+            "context": "curl -X POST http://localhost:3000/api/example-protected \\",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 117,
+            "evidence": "http://",
+            "context": "curl -X POST http://localhost:3000/api/example-protected \\",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 123,
+            "evidence": "curl",
+            "context": "curl -X POST http://localhost:3000/api/example-protected \\",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 123,
+            "evidence": "http://",
+            "context": "curl -X POST http://localhost:3000/api/example-protected \\",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 133,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 134,
+            "evidence": "curl",
+            "context": "curl -X POST http://localhost:3000/api/example-protected \\",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 134,
+            "evidence": "http://",
+            "context": "curl -X POST http://localhost:3000/api/example-protected \\",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 149,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 151,
+            "evidence": "curl",
+            "context": "curl -X POST http://localhost:3000/api/example-protected \\",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 151,
+            "evidence": "http://",
+            "context": "curl -X POST http://localhost:3000/api/example-protected \\",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 163,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 165,
+            "evidence": "curl",
+            "context": "curl -X POST http://localhost:3000/api/example-protected \\",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 165,
+            "evidence": "http://",
+            "context": "curl -X POST http://localhost:3000/api/example-protected \\",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 181,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 182,
+            "evidence": "curl",
+            "context": "curl -X POST http://localhost:3000/api/contact \\",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 182,
+            "evidence": "http://",
+            "context": "curl -X POST http://localhost:3000/api/contact \\",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 202,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 203,
+            "evidence": "curl",
+            "context": "curl -X POST http://localhost:3000/api/contact \\",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 203,
+            "evidence": "http://",
+            "context": "curl -X POST http://localhost:3000/api/contact \\",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 216,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 217,
+            "evidence": "curl",
+            "context": "curl -I http://localhost:3000",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 217,
+            "evidence": "http://",
+            "context": "curl -I http://localhost:3000",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 228,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 230,
+            "evidence": "curl",
+            "context": "curl -I http://localhost:3000 | grep \"Content-Security-Policy\"",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 230,
+            "evidence": "http://",
+            "context": "curl -I http://localhost:3000 | grep \"Content-Security-Policy\"",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 240,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 242,
+            "evidence": "curl",
+            "context": "curl -I https://yourapp.com | grep \"Strict-Transport-Security\"",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 242,
+            "evidence": "https://",
+            "context": "curl -I https://yourapp.com | grep \"Strict-Transport-Security\"",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 250,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 251,
+            "evidence": "curl",
+            "context": "curl -I http://localhost:3000/dashboard",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 251,
+            "evidence": "http://",
+            "context": "curl -I http://localhost:3000/dashboard",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 261,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 263,
+            "evidence": "curl",
+            "context": "curl http://localhost:3000/api/protected-endpoint",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 263,
+            "evidence": "http://",
+            "context": "curl http://localhost:3000/api/protected-endpoint",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 274,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 276,
+            "evidence": "curl",
+            "context": "curl http://localhost:3000/api/protected-endpoint \\",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 276,
+            "evidence": "http://",
+            "context": "curl http://localhost:3000/api/protected-endpoint \\",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 284,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 286,
+            "evidence": "curl",
+            "context": "curl http://localhost:3000/api/posts/user-abc-post-123 \\",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 286,
+            "evidence": "http://",
+            "context": "curl http://localhost:3000/api/posts/user-abc-post-123 \\",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 298,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 300,
+            "evidence": "curl",
+            "context": "curl http://localhost:3000/api/premium/generate \\",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 300,
+            "evidence": "http://",
+            "context": "curl http://localhost:3000/api/premium/generate \\",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 314,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 319,
+            "evidence": "curl",
+            "context": "curl http://localhost:3000/api/error-test",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 319,
+            "evidence": "http://",
+            "context": "curl http://localhost:3000/api/error-test",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 330,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 332,
+            "evidence": "curl",
+            "context": "curl http://localhost:3000/api/error-test",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 332,
+            "evidence": "http://",
+            "context": "curl http://localhost:3000/api/error-test",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 347,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 357,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 366,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 375,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 376,
+            "evidence": "bash",
+            "context": "bash scripts/security-check.sh",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 376,
+            "evidence": "sh",
+            "context": "bash scripts/security-check.sh",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 388,
+            "evidence": "https://",
+            "context": "**Tool:** https://securityheaders.com/",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 405,
+            "evidence": "https://",
+            "context": "**Tool:** https://observatory.mozilla.org/",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 421,
+            "evidence": "https://",
+            "context": "**Tool:** https://www.ssllabs.com/ssltest/",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 474,
+            "evidence": "DELETE",
+            "context": "- [ ] All POST/PUT/DELETE routes have CSRF protection",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 493,
+            "evidence": "curl",
+            "context": "- [ ] Check security headers: `curl -I https://yourapp.com`",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 493,
+            "evidence": "https://",
+            "context": "- [ ] Check security headers: `curl -I https://yourapp.com`",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 506,
+            "evidence": "sh",
+            "context": "### security-test.sh",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 510,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 511,
+            "evidence": "bash",
+            "context": "#!/bin/bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 559,
+            "evidence": "curl",
+            "context": "run_test \"X-Frame-Options\" \"curl -I http://localhost:3000\" \"X-Frame-Options: DENY\"",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 559,
+            "evidence": "http://",
+            "context": "run_test \"X-Frame-Options\" \"curl -I http://localhost:3000\" \"X-Frame-Options: DENY\"",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 560,
+            "evidence": "curl",
+            "context": "run_test \"X-Content-Type-Options\" \"curl -I http://localhost:3000\" \"X-Content-Type-Options: nosniff\"",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 560,
+            "evidence": "http://",
+            "context": "run_test \"X-Content-Type-Options\" \"curl -I http://localhost:3000\" \"X-Content-Type-Options: nosniff\"",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 561,
+            "evidence": "curl",
+            "context": "run_test \"Content-Security-Policy\" \"curl -I http://localhost:3000\" \"Content-Security-Policy\"",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 561,
+            "evidence": "http://",
+            "context": "run_test \"Content-Security-Policy\" \"curl -I http://localhost:3000\" \"Content-Security-Policy\"",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 579,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 580,
+            "evidence": "bash",
+            "context": "bash scripts/security-test.sh",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 580,
+            "evidence": "sh",
+            "context": "bash scripts/security-test.sh",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 627,
+            "evidence": "http://",
+            "context": "        run: npx wait-on http://localhost:3000",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 630,
+            "evidence": "bash",
+            "context": "        run: bash scripts/security-test.sh",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 630,
+            "evidence": "sh",
+            "context": "        run: bash scripts/security-test.sh",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 666,
+            "evidence": "delete",
+            "context": "   <form action=\"http://localhost:3000/api/delete-account\" method=\"POST\">",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 666,
+            "evidence": "http://",
+            "context": "   <form action=\"http://localhost:3000/api/delete-account\" method=\"POST\">",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 704,
+            "evidence": "https://",
+            "context": "- OWASP Testing Guide: https://owasp.org/www-project-web-security-testing-guide/",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 705,
+            "evidence": "https://",
+            "context": "- Security Headers Scanner: https://securityheaders.com/",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 706,
+            "evidence": "https://",
+            "context": "- Mozilla Observatory: https://observatory.mozilla.org/",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 707,
+            "evidence": "https://",
+            "context": "- SSL Labs: https://www.ssllabs.com/ssltest/",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 708,
+            "evidence": "https://",
+            "context": "- npm Audit: https://docs.npmjs.com/cli/v8/commands/npm-audit",
+            "file": "SKILL.md"
+          }
+        ],
+        "review": "catalog/reviews/harperaa__security-testing-verification.json"
       },
-      "materialized": false,
+      "materialized": true,
       "release": {
-        "status": "hold",
-        "reasons": [
-          "manual-review-required"
-        ]
+        "status": "eligible",
+        "reasons": []
       },
       "integrity": {
         "upstream_skill_sha256": "da1833a7d80ac2c1c8be7d9a46b56850e103d867afc0ce981502f16533fbf877",
         "last_ingested_revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223"
       },
-      "description": "Test security features and verify implementation before deployment. Use this skill when you need to test CSRF protection, rate limiting, input validation, verify security headers, run security audits, or check the pre-deployment security checklist. Triggers include \"test security\", \"security testing\", \"verify security\", \"security checklist\", \"pre-deployment\", \"test CSRF\", \"test rate limit\", \"security verification\"."
+      "description": "Test security features and verify implementation before deployment. Use this skill when you need to test CSRF protection, rate limiting, input validation, verify security headers, run security audits, or check the pre-deployment security checklist. Triggers include \"test security\", \"security testing\", \"verify security\", \"security checklist\", \"pre-deployment\", \"test CSRF\", \"test rate limit\", \"security verification\".",
+      "artifact_type": "skill",
+      "materialized_root": "skills/harperaa/security-testing-verification",
+      "materialized_files": 2
     },
     {
       "id": "harperaa/supply-chain-dependency-risks-ai-code",

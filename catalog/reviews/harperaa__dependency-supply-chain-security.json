@@ -1,9 +1,9 @@
 {
   "schema_version": "0.1",
   "skill_id": "harperaa/dependency-supply-chain-security",
-  "status": "draft",
-  "reviewed_on": null,
-  "reviewer": null,
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
   "source": {
     "repo": "harperaa/secure-claude-skills",
     "path": "dependency-security",
@@ -13,7 +13,7 @@
     "complete": true,
     "scope": "dependency-security",
     "url": "https://api.github.com/repos/harperaa/secure-claude-skills/git/trees/c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223?recursive=1",
-    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
   },
   "license": {
     "spdx": "MIT",
@@ -29,18 +29,32 @@
       ]
     },
     "redistributable": true,
-    "scope_reason": "",
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found; Sonatype/Snyk statistics are cited, and npm, OWASP, Snyk and GitHub docs are linked only. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
     "obligations": [
       "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
-      "Preserve all upstream text and notices byte-for-byte."
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
     ]
   },
   "content_review": {
-    "status": "pending",
-    "risk": "unknown",
+    "status": "approved",
+    "risk": "medium",
     "blocking_findings": [],
-    "capabilities": {},
-    "notes": []
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "package_install": true,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md (541 lines) in full; it is the only file. A dependency and supply-chain security guide for npm projects: npm audit/outdated, safe vs. forced fixes, monthly update routine, major framework upgrades on a branch, lockfiles and integrity, vetting new packages, typosquatting and dependency-confusion defenses (.npmrc scoped registries), Snyk, Dependabot, and CI audit gates.",
+      "Risk is medium because it has the agent install and update packages (`npm update`, `npm audit fix`, `npm install next@latest ...`, `npm install -g snyk`), commit lockfile changes and create branches (SKILL.md:107-223), authenticate Snyk with the user's account (`snyk auth`, `snyk monitor` sends the dependency graph to Snyk; SKILL.md:383-403), and add a CI workflow that uses a SNYK_TOKEN repository secret (SKILL.md:407-445). These are standard dependency-maintenance steps on the user's own project from official registries; `npm audit fix --force` is clearly flagged as risky with a test-before-commit procedure, so it is acceptable.",
+      "Self-contained: the `scripts/security-check.sh` it refers to (SKILL.md:52, 83, 522) is reproduced in full at SKILL.md:352-379, so the user can create it. The 'Current Status' section (SKILL.md:34-48: Next.js 15.5.4, 0 vulnerabilities) describes the Secure Vibe Coding OS starter at the time of writing, not the user's project. Minor inaccuracies: `npm audit fix` is described as never breaking (semver-minor updates can still break), and the CI example pins Node 18, which is end-of-life."
+    ]
   },
   "files": [
     {
@@ -53,7 +67,7 @@
       "git_blob": "346d6fb05afd34a37fb0b156a612166534ffc7d9",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
       "findings": []
     },
     {
@@ -64,327 +78,327 @@
       "git_blob": "69088aad82ad967f93fbe93d1c007c93ca468aaa",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "shell-execution",
           "line": 52,
           "evidence": "sh",
           "context": "- `scripts/security-check.sh` - Runs npm audit + shows outdated packages",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks for npm audit/outdated/update/ci, git branch and commit of lockfile changes, Snyk CLI usage, and the bundled security-check.sh script."
         },
         {
           "type": "shell-execution",
           "line": 59,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks for npm audit/outdated/update/ci, git branch and commit of lockfile changes, Snyk CLI usage, and the bundled security-check.sh script."
         },
         {
           "type": "shell-execution",
           "line": 72,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks for npm audit/outdated/update/ci, git branch and commit of lockfile changes, Snyk CLI usage, and the bundled security-check.sh script."
         },
         {
           "type": "shell-execution",
           "line": 81,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks for npm audit/outdated/update/ci, git branch and commit of lockfile changes, Snyk CLI usage, and the bundled security-check.sh script."
         },
         {
           "type": "shell-execution",
           "line": 83,
           "evidence": "bash",
           "context": "bash scripts/security-check.sh",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks for npm audit/outdated/update/ci, git branch and commit of lockfile changes, Snyk CLI usage, and the bundled security-check.sh script."
         },
         {
           "type": "shell-execution",
           "line": 83,
           "evidence": "sh",
           "context": "bash scripts/security-check.sh",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks for npm audit/outdated/update/ci, git branch and commit of lockfile changes, Snyk CLI usage, and the bundled security-check.sh script."
         },
         {
           "type": "shell-execution",
           "line": 107,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks for npm audit/outdated/update/ci, git branch and commit of lockfile changes, Snyk CLI usage, and the bundled security-check.sh script."
         },
         {
           "type": "shell-execution",
           "line": 119,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks for npm audit/outdated/update/ci, git branch and commit of lockfile changes, Snyk CLI usage, and the bundled security-check.sh script."
         },
         {
           "type": "shell-execution",
           "line": 139,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks for npm audit/outdated/update/ci, git branch and commit of lockfile changes, Snyk CLI usage, and the bundled security-check.sh script."
         },
         {
           "type": "package-install",
           "line": 144,
           "evidence": "npm install",
           "context": "npm install package-name@1.2.3",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "npm install/update commands for the user's own dependencies, a global Snyk CLI install, and a framework upgrade to next@latest on a separate branch."
         },
         {
           "type": "shell-execution",
           "line": 154,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks for npm audit/outdated/update/ci, git branch and commit of lockfile changes, Snyk CLI usage, and the bundled security-check.sh script."
         },
         {
           "type": "shell-execution",
           "line": 181,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks for npm audit/outdated/update/ci, git branch and commit of lockfile changes, Snyk CLI usage, and the bundled security-check.sh script."
         },
         {
           "type": "shell-execution",
           "line": 196,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks for npm audit/outdated/update/ci, git branch and commit of lockfile changes, Snyk CLI usage, and the bundled security-check.sh script."
         },
         {
           "type": "network-access",
           "line": 198,
           "evidence": "https://",
           "context": "# https://nextjs.org/docs/upgrading",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Links to npm, Next.js, OWASP, Sonatype, Snyk and GitHub documentation and a placeholder private-registry URL in an .npmrc example; package commands contact the npm registry."
         },
         {
           "type": "package-install",
           "line": 204,
           "evidence": "npm install",
           "context": "npm install next@latest react@latest react-dom@latest",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Installs next/react/react-dom @latest, unpinned, but on a dedicated upgrade branch with tests before merging."
         },
         {
           "type": "shell-execution",
           "line": 229,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks for npm audit/outdated/update/ci, git branch and commit of lockfile changes, Snyk CLI usage, and the bundled security-check.sh script."
         },
         {
           "type": "shell-execution",
           "line": 242,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks for npm audit/outdated/update/ci, git branch and commit of lockfile changes, Snyk CLI usage, and the bundled security-check.sh script."
         },
         {
           "type": "network-access",
           "line": 259,
           "evidence": "https://",
           "context": "1. **Check npm page:** https://www.npmjs.com/package/PACKAGE_NAME",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Links to npm, Next.js, OWASP, Sonatype, Snyk and GitHub documentation and a placeholder private-registry URL in an .npmrc example; package commands contact the npm registry."
         },
         {
           "type": "shell-execution",
           "line": 282,
           "evidence": "bash",
           "context": "   ```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks for npm audit/outdated/update/ci, git branch and commit of lockfile changes, Snyk CLI usage, and the bundled security-check.sh script."
         },
         {
           "type": "package-install",
           "line": 283,
           "evidence": "npm install",
           "context": "   npm install new-package",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "npm install/update commands for the user's own dependencies, a global Snyk CLI install, and a framework upgrade to next@latest on a separate branch."
         },
         {
           "type": "shell-execution",
           "line": 289,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks for npm audit/outdated/update/ci, git branch and commit of lockfile changes, Snyk CLI usage, and the bundled security-check.sh script."
         },
         {
           "type": "package-install",
           "line": 294,
           "evidence": "npm install",
           "context": "npm install",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "npm install/update commands for the user's own dependencies, a global Snyk CLI install, and a framework upgrade to next@latest on a separate branch."
         },
         {
           "type": "shell-execution",
           "line": 325,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks for npm audit/outdated/update/ci, git branch and commit of lockfile changes, Snyk CLI usage, and the bundled security-check.sh script."
         },
         {
           "type": "shell-execution",
           "line": 345,
           "evidence": "bash",
           "context": "   ```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks for npm audit/outdated/update/ci, git branch and commit of lockfile changes, Snyk CLI usage, and the bundled security-check.sh script."
         },
         {
           "type": "network-access",
           "line": 347,
           "evidence": "https://",
           "context": "   @mycompany:registry=https://npm.mycompany.com",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Links to npm, Next.js, OWASP, Sonatype, Snyk and GitHub documentation and a placeholder private-registry URL in an .npmrc example; package commands contact the npm registry."
         },
         {
           "type": "shell-execution",
           "line": 352,
           "evidence": "sh",
           "context": "## Scripts/security-check.sh",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks for npm audit/outdated/update/ci, git branch and commit of lockfile changes, Snyk CLI usage, and the bundled security-check.sh script."
         },
         {
           "type": "shell-execution",
           "line": 354,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks for npm audit/outdated/update/ci, git branch and commit of lockfile changes, Snyk CLI usage, and the bundled security-check.sh script."
         },
         {
           "type": "shell-execution",
           "line": 355,
           "evidence": "bash",
           "context": "#!/bin/bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks for npm audit/outdated/update/ci, git branch and commit of lockfile changes, Snyk CLI usage, and the bundled security-check.sh script."
         },
         {
           "type": "shell-execution",
           "line": 385,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks for npm audit/outdated/update/ci, git branch and commit of lockfile changes, Snyk CLI usage, and the bundled security-check.sh script."
         },
         {
           "type": "package-install",
           "line": 386,
           "evidence": "npm install",
           "context": "npm install -g snyk",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Global install of the Snyk CLI followed by `snyk auth`, which links the user's Snyk account; user-account credential use and a reason for medium risk."
         },
         {
           "type": "shell-execution",
           "line": 394,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks for npm audit/outdated/update/ci, git branch and commit of lockfile changes, Snyk CLI usage, and the bundled security-check.sh script."
         },
         {
           "type": "shell-execution",
           "line": 465,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks for npm audit/outdated/update/ci, git branch and commit of lockfile changes, Snyk CLI usage, and the bundled security-check.sh script."
         },
         {
           "type": "shell-execution",
           "line": 502,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks for npm audit/outdated/update/ci, git branch and commit of lockfile changes, Snyk CLI usage, and the bundled security-check.sh script."
         },
         {
           "type": "shell-execution",
           "line": 522,
           "evidence": "bash",
           "context": "bash scripts/security-check.sh",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks for npm audit/outdated/update/ci, git branch and commit of lockfile changes, Snyk CLI usage, and the bundled security-check.sh script."
         },
         {
           "type": "shell-execution",
           "line": 522,
           "evidence": "sh",
           "context": "bash scripts/security-check.sh",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks for npm audit/outdated/update/ci, git branch and commit of lockfile changes, Snyk CLI usage, and the bundled security-check.sh script."
         },
         {
           "type": "network-access",
           "line": 530,
           "evidence": "https://",
           "context": "- npm Audit Documentation: https://docs.npmjs.com/cli/v8/commands/npm-audit",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Links to npm, Next.js, OWASP, Sonatype, Snyk and GitHub documentation and a placeholder private-registry URL in an .npmrc example; package commands contact the npm registry."
         },
         {
           "type": "network-access",
           "line": 531,
           "evidence": "https://",
           "context": "- OWASP Dependency Check: https://owasp.org/www-project-dependency-check/",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Links to npm, Next.js, OWASP, Sonatype, Snyk and GitHub documentation and a placeholder private-registry URL in an .npmrc example; package commands contact the npm registry."
         },
         {
           "type": "network-access",
           "line": 532,
           "evidence": "https://",
           "context": "- Sonatype Supply Chain Report: https://www.sonatype.com/state-of-the-software-supply-chain",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Links to npm, Next.js, OWASP, Sonatype, Snyk and GitHub documentation and a placeholder private-registry URL in an .npmrc example; package commands contact the npm registry."
         },
         {
           "type": "network-access",
           "line": 533,
           "evidence": "https://",
           "context": "- Snyk: https://snyk.io/",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Links to npm, Next.js, OWASP, Sonatype, Snyk and GitHub documentation and a placeholder private-registry URL in an .npmrc example; package commands contact the npm registry."
         },
         {
           "type": "network-access",
           "line": 534,
           "evidence": "https://",
           "context": "- GitHub Dependabot: https://docs.github.com/en/code-security/dependabot",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Links to npm, Next.js, OWASP, Sonatype, Snyk and GitHub documentation and a placeholder private-registry URL in an .npmrc example; package commands contact the npm registry."
         }
       ]
     }

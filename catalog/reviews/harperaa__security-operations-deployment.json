@@ -1,9 +1,9 @@
 {
   "schema_version": "0.1",
   "skill_id": "harperaa/security-operations-deployment",
-  "status": "draft",
-  "reviewed_on": null,
-  "reviewer": null,
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
   "source": {
     "repo": "harperaa/secure-claude-skills",
     "path": "security-operations",
@@ -13,7 +13,7 @@
     "complete": true,
     "scope": "security-operations",
     "url": "https://api.github.com/repos/harperaa/secure-claude-skills/git/trees/c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223?recursive=1",
-    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
   },
   "license": {
     "spdx": "MIT",
@@ -29,18 +29,33 @@
       ]
     },
     "redistributable": true,
-    "scope_reason": "",
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found; OWASP and vendor docs are linked, not reproduced. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
     "obligations": [
       "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
-      "Preserve all upstream text and notices byte-for-byte."
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
     ]
   },
   "content_review": {
-    "status": "pending",
-    "risk": "unknown",
+    "status": "approved",
+    "risk": "medium",
     "blocking_findings": [],
-    "capabilities": {},
-    "notes": []
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": false,
+      "package_install": true,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md (578 lines) in full; it is the only file. Operational security guidance for a Next.js/Clerk/Convex app: a decision guide for when to apply rate limiting and CSRF, environment-variable and secret-generation practices, startup config validation, a pre-deployment checklist, post-deployment monitoring signals and alert thresholds, and a daily/weekly/monthly/quarterly maintenance schedule.",
+      "Risk is medium because the checklists and quick-reference commands have the agent run `npm audit`, `npm outdated`, `npm update` (changes dependencies), `npm run build` / `NODE_ENV=production npm start`, `curl -I` against the user's deployed site, and generate local secrets with node's crypto (SKILL.md:127-133, 257-273, 503-553). Each acts on the user's own project and deployment, and nothing reads, prints, or transmits existing secrets (the grep checks only look for hardcoded key prefixes), so this is acceptable.",
+      "Template dependence: the middleware decision guide refers to withRateLimit()/withCsrf() from the Secure Vibe Coding OS starter, and the checklist calls starter files `scripts/test-rate-limit.js`, `scripts/security-check.sh`, `app/api/csrf/route.ts`, `docs/security/SECURITY_IMPLEMENTATION.md` (SKILL.md:214, 248, 268, 456, 463-473, 509, 537-538) that are not included. The decisions (which routes need rate limiting/CSRF/auth), env-var practices, monitoring and maintenance guidance still apply in any project; those script steps will simply be unavailable outside the starter.",
+      "Minor caveats: the decision matrix marks public read-only APIs as needing no rate limit (SKILL.md:65), unlike other skills in the collection; `clientIp` in the logging example has no guidance on trusted-proxy IP derivation; `git status | grep .env.local` will not show an ignored file. Reference links to OWASP, Next.js, Clerk, Convex, Stripe and header scanners are documentation only."
+    ]
   },
   "files": [
     {
@@ -53,7 +68,7 @@
       "git_blob": "346d6fb05afd34a37fb0b156a612166534ffc7d9",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
       "findings": []
     },
     {
@@ -64,415 +79,415 @@
       "git_blob": "deaf36f0fc1db46128244f0ec18eb1d1769c297f",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "filesystem-write",
           "line": 34,
           "evidence": "DELETE",
           "context": "- All POST/PUT/DELETE operations",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "DELETE refers to HTTP methods requiring CSRF protection; no file deletion."
         },
         {
           "type": "shell-execution",
           "line": 78,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks for npm audit/outdated/update/build/start, grep secret checks, secret generation, and starter scripts under scripts/ that are not bundled."
         },
         {
           "type": "network-access",
           "line": 87,
           "evidence": "https://",
           "context": "NEXT_PUBLIC_CLERK_FRONTEND_API_URL=https://your-app.clerk.accounts.dev",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Documentation links, placeholder service URLs in env templates, and `curl -I https://yourapp.com` to check the user's own security headers."
         },
         {
           "type": "network-access",
           "line": 91,
           "evidence": "https://",
           "context": "NEXT_PUBLIC_CONVEX_URL=https://...convex.cloud",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Documentation links, placeholder service URLs in env templates, and `curl -I https://yourapp.com` to check the user's own security headers."
         },
         {
           "type": "credential-access",
           "line": 97,
           "evidence": "Secret",
           "context": "# Optional: Clerk Webhook Secret",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Environment-variable templates with placeholder values (pk_test_..., sk_live_..., whsec_...), secret-generation commands, and grep checks for hardcoded key prefixes; no instruction to read, print, or send real secrets."
         },
         {
           "type": "shell-execution",
           "line": 103,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks for npm audit/outdated/update/build/start, grep secret checks, secret generation, and starter scripts under scripts/ that are not bundled."
         },
         {
           "type": "network-access",
           "line": 111,
           "evidence": "https://",
           "context": "NEXT_PUBLIC_CLERK_FRONTEND_API_URL=https://your-app.clerk.accounts.com",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Documentation links, placeholder service URLs in env templates, and `curl -I https://yourapp.com` to check the user's own security headers."
         },
         {
           "type": "network-access",
           "line": 115,
           "evidence": "https://",
           "context": "NEXT_PUBLIC_CONVEX_URL=https://...convex.cloud",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Documentation links, placeholder service URLs in env templates, and `curl -I https://yourapp.com` to check the user's own security headers."
         },
         {
           "type": "credential-access",
           "line": 121,
           "evidence": "Secret",
           "context": "# Optional: Clerk Webhook Secret (production)",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Environment-variable templates with placeholder values (pk_test_..., sk_live_..., whsec_...), secret-generation commands, and grep checks for hardcoded key prefixes; no instruction to read, print, or send real secrets."
         },
         {
           "type": "shell-execution",
           "line": 127,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks for npm audit/outdated/update/build/start, grep secret checks, secret generation, and starter scripts under scripts/ that are not bundled."
         },
         {
           "type": "credential-access",
           "line": 141,
           "evidence": "secret",
           "context": "- Store production secrets in hosting platform's secret manager",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Environment-variable templates with placeholder values (pk_test_..., sk_live_..., whsec_...), secret-generation commands, and grep checks for hardcoded key prefixes; no instruction to read, print, or send real secrets."
         },
         {
           "type": "credential-access",
           "line": 166,
           "evidence": "process.env",
           "context": "  const missing = requiredEnvVars.filter(v => !process.env[v]);",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Environment-variable templates with placeholder values (pk_test_..., sk_live_..., whsec_...), secret-generation commands, and grep checks for hardcoded key prefixes; no instruction to read, print, or send real secrets."
         },
         {
           "type": "credential-access",
           "line": 172,
           "evidence": "secret",
           "context": "  // Validate secret lengths",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Environment-variable templates with placeholder values (pk_test_..., sk_live_..., whsec_...), secret-generation commands, and grep checks for hardcoded key prefixes; no instruction to read, print, or send real secrets."
         },
         {
           "type": "credential-access",
           "line": 173,
           "evidence": "process.env",
           "context": "  if (process.env.CSRF_SECRET && process.env.CSRF_SECRET.length < 32) {",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Environment-variable templates with placeholder values (pk_test_..., sk_live_..., whsec_...), secret-generation commands, and grep checks for hardcoded key prefixes; no instruction to read, print, or send real secrets."
         },
         {
           "type": "credential-access",
           "line": 173,
           "evidence": "process.env",
           "context": "  if (process.env.CSRF_SECRET && process.env.CSRF_SECRET.length < 32) {",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Environment-variable templates with placeholder values (pk_test_..., sk_live_..., whsec_...), secret-generation commands, and grep checks for hardcoded key prefixes; no instruction to read, print, or send real secrets."
         },
         {
           "type": "credential-access",
           "line": 177,
           "evidence": "process.env",
           "context": "  if (process.env.SESSION_SECRET && process.env.SESSION_SECRET.length < 32) {",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Environment-variable templates with placeholder values (pk_test_..., sk_live_..., whsec_...), secret-generation commands, and grep checks for hardcoded key prefixes; no instruction to read, print, or send real secrets."
         },
         {
           "type": "credential-access",
           "line": 177,
           "evidence": "process.env",
           "context": "  if (process.env.SESSION_SECRET && process.env.SESSION_SECRET.length < 32) {",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Environment-variable templates with placeholder values (pk_test_..., sk_live_..., whsec_...), secret-generation commands, and grep checks for hardcoded key prefixes; no instruction to read, print, or send real secrets."
         },
         {
           "type": "network-access",
           "line": 216,
           "evidence": "curl",
           "context": "- [ ] Security headers verified (`curl -I https://yourapp.com`)",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Documentation links, placeholder service URLs in env templates, and `curl -I https://yourapp.com` to check the user's own security headers."
         },
         {
           "type": "network-access",
           "line": 216,
           "evidence": "https://",
           "context": "- [ ] Security headers verified (`curl -I https://yourapp.com`)",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Documentation links, placeholder service URLs in env templates, and `curl -I https://yourapp.com` to check the user's own security headers."
         },
         {
           "type": "filesystem-write",
           "line": 231,
           "evidence": "DELETE",
           "context": "- [ ] All POST/PUT/DELETE routes have CSRF protection",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "DELETE refers to HTTP methods requiring CSRF protection; no file deletion."
         },
         {
           "type": "network-access",
           "line": 251,
           "evidence": "curl",
           "context": "- [ ] Security headers checked: `curl -I https://yourapp.com`",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Documentation links, placeholder service URLs in env templates, and `curl -I https://yourapp.com` to check the user's own security headers."
         },
         {
           "type": "network-access",
           "line": 251,
           "evidence": "https://",
           "context": "- [ ] Security headers checked: `curl -I https://yourapp.com`",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Documentation links, placeholder service URLs in env templates, and `curl -I https://yourapp.com` to check the user's own security headers."
         },
         {
           "type": "shell-execution",
           "line": 257,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks for npm audit/outdated/update/build/start, grep secret checks, secret generation, and starter scripts under scripts/ that are not bundled."
         },
         {
           "type": "credential-access",
           "line": 261,
           "evidence": "api_key",
           "context": "grep -r \"api_key.*=\" . --exclude-dir=node_modules",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Environment-variable templates with placeholder values (pk_test_..., sk_live_..., whsec_...), secret-generation commands, and grep checks for hardcoded key prefixes; no instruction to read, print, or send real secrets."
         },
         {
           "type": "shell-execution",
           "line": 268,
           "evidence": "bash",
           "context": "bash scripts/security-check.sh",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Runs `scripts/security-check.sh`, a starter-repository script not shipped with this skill; the step is unavailable outside the starter."
         },
         {
           "type": "shell-execution",
           "line": 268,
           "evidence": "sh",
           "context": "bash scripts/security-check.sh",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Runs `scripts/security-check.sh`, a starter-repository script not shipped with this skill; the step is unavailable outside the starter."
         },
         {
           "type": "credential-access",
           "line": 289,
           "evidence": "credential",
           "context": "- 429s on login endpoints → credential stuffing attempt",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Environment-variable templates with placeholder values (pk_test_..., sk_live_..., whsec_...), secret-generation commands, and grep checks for hardcoded key prefixes; no instruction to read, print, or send real secrets."
         },
         {
           "type": "shell-execution",
           "line": 349,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks for npm audit/outdated/update/build/start, grep secret checks, secret generation, and starter scripts under scripts/ that are not bundled."
         },
         {
           "type": "network-access",
           "line": 351,
           "evidence": "https://",
           "context": "https://vercel.com/your-project/logs",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Documentation links, placeholder service URLs in env templates, and `curl -I https://yourapp.com` to check the user's own security headers."
         },
         {
           "type": "credential-access",
           "line": 380,
           "evidence": "process.env",
           "context": "    environment: process.env.NODE_ENV,",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Environment-variable templates with placeholder values (pk_test_..., sk_live_..., whsec_...), secret-generation commands, and grep checks for hardcoded key prefixes; no instruction to read, print, or send real secrets."
         },
         {
           "type": "credential-access",
           "line": 385,
           "evidence": "process.env",
           "context": "  if (process.env.NODE_ENV === 'production') {",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Environment-variable templates with placeholder values (pk_test_..., sk_live_..., whsec_...), secret-generation commands, and grep checks for hardcoded key prefixes; no instruction to read, print, or send real secrets."
         },
         {
           "type": "shell-execution",
           "line": 467,
           "evidence": "sh",
           "context": "- `scripts/security-check.sh` - Dependency audit",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks for npm audit/outdated/update/build/start, grep secret checks, secret generation, and starter scripts under scripts/ that are not bundled."
         },
         {
           "type": "shell-execution",
           "line": 468,
           "evidence": "sh",
           "context": "- `scripts/security-test.sh` - Comprehensive security test suite (if created)",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks for npm audit/outdated/update/build/start, grep secret checks, secret generation, and starter scripts under scripts/ that are not bundled."
         },
         {
           "type": "network-access",
           "line": 478,
           "evidence": "https://",
           "context": "- OWASP Top 10 2021: https://owasp.org/www-project-top-ten/",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Documentation links, placeholder service URLs in env templates, and `curl -I https://yourapp.com` to check the user's own security headers."
         },
         {
           "type": "network-access",
           "line": 479,
           "evidence": "https://",
           "context": "- OWASP Cheat Sheet Series: https://cheatsheetseries.owasp.org",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Documentation links, placeholder service URLs in env templates, and `curl -I https://yourapp.com` to check the user's own security headers."
         },
         {
           "type": "network-access",
           "line": 480,
           "evidence": "https://",
           "context": "- OWASP API Security Top 10: https://owasp.org/www-project-api-security/",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Documentation links, placeholder service URLs in env templates, and `curl -I https://yourapp.com` to check the user's own security headers."
         },
         {
           "type": "network-access",
           "line": 483,
           "evidence": "https://",
           "context": "- Next.js Security: https://nextjs.org/docs/app/guides/security",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Documentation links, placeholder service URLs in env templates, and `curl -I https://yourapp.com` to check the user's own security headers."
         },
         {
           "type": "network-access",
           "line": 484,
           "evidence": "https://",
           "context": "- Clerk Security: https://clerk.com/docs/security",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Documentation links, placeholder service URLs in env templates, and `curl -I https://yourapp.com` to check the user's own security headers."
         },
         {
           "type": "network-access",
           "line": 485,
           "evidence": "https://",
           "context": "- Convex Security: https://docs.convex.dev/production/hosting/authentication",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Documentation links, placeholder service URLs in env templates, and `curl -I https://yourapp.com` to check the user's own security headers."
         },
         {
           "type": "network-access",
           "line": 486,
           "evidence": "https://",
           "context": "- Stripe Security: https://stripe.com/docs/security",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Documentation links, placeholder service URLs in env templates, and `curl -I https://yourapp.com` to check the user's own security headers."
         },
         {
           "type": "network-access",
           "line": 489,
           "evidence": "https://",
           "context": "- Security Headers Scanner: https://securityheaders.com/",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Documentation links, placeholder service URLs in env templates, and `curl -I https://yourapp.com` to check the user's own security headers."
         },
         {
           "type": "network-access",
           "line": 490,
           "evidence": "https://",
           "context": "- Mozilla Observatory: https://observatory.mozilla.org/",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Documentation links, placeholder service URLs in env templates, and `curl -I https://yourapp.com` to check the user's own security headers."
         },
         {
           "type": "network-access",
           "line": 491,
           "evidence": "https://",
           "context": "- SSL Labs Test: https://www.ssllabs.com/ssltest/",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Documentation links, placeholder service URLs in env templates, and `curl -I https://yourapp.com` to check the user's own security headers."
         },
         {
           "type": "shell-execution",
           "line": 509,
           "evidence": "bash",
           "context": "- Full security audit: `bash scripts/security-check.sh`",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Monthly audit step pointing to the unbundled starter script `scripts/security-check.sh`."
         },
         {
           "type": "shell-execution",
           "line": 509,
           "evidence": "sh",
           "context": "- Full security audit: `bash scripts/security-check.sh`",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Monthly audit step pointing to the unbundled starter script `scripts/security-check.sh`."
         },
         {
           "type": "network-access",
           "line": 513,
           "evidence": "https://",
           "context": "- Check security headers: https://securityheaders.com/",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Documentation links, placeholder service URLs in env templates, and `curl -I https://yourapp.com` to check the user's own security headers."
         },
         {
           "type": "shell-execution",
           "line": 526,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks for npm audit/outdated/update/build/start, grep secret checks, secret generation, and starter scripts under scripts/ that are not bundled."
         },
         {
           "type": "shell-execution",
           "line": 538,
           "evidence": "bash",
           "context": "bash scripts/security-check.sh",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Runs `scripts/security-check.sh`, a starter-repository script not shipped with this skill."
         },
         {
           "type": "shell-execution",
           "line": 538,
           "evidence": "sh",
           "context": "bash scripts/security-check.sh",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Runs `scripts/security-check.sh`, a starter-repository script not shipped with this skill."
         },
         {
           "type": "network-access",
           "line": 545,
           "evidence": "curl",
           "context": "curl -I https://yourapp.com",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Documentation links, placeholder service URLs in env templates, and `curl -I https://yourapp.com` to check the user's own security headers."
         },
         {
           "type": "network-access",
           "line": 545,
           "evidence": "https://",
           "context": "curl -I https://yourapp.com",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Documentation links, placeholder service URLs in env templates, and `curl -I https://yourapp.com` to check the user's own security headers."
         }
       ]
     }
