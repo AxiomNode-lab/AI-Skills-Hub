@@ -25,6 +25,7 @@ All notable changes to AI Skills Hub are documented here.
 - A repository-root Apache-2.0 license can cover a skill under the same conditions as MIT, with no NOTICE file applying (docs/LICENSE-POLICY.md).
 
 ### Fixed
+- `sync-registry` no longer rewrites reviewed, released records: they stay pinned to the reviewed revision until a new review. Before this, the nightly Source Sync reset 330 of 385 released skills (directory vs `SKILL.md` path forms) and failed validation.
 - `sync-registry`: records outside a source's `include_paths` are left unchanged instead of being blocked as missing; an existing record keeps its id when a new upstream path has the same skill name, regardless of order.
 - `ingest-github --checkout` and `draft-review` read `git ls-tree -z`, so paths with non-ASCII or special characters are found; `--checkout` refuses a ref that does not name the checked-out commit.
 - `draft-review` refuses a skill-local license when a NOTICE, COPYING, or second license file also applies.

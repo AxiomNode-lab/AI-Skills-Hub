@@ -20,7 +20,7 @@ Reproduce the distribution counts from the repository root:
 node -e "const c=require('./catalog/skills.json'); console.log('total',c.skills.length); for(const s of ['bundled','source-direct','review-required','blocked']) console.log(s,c.skills.filter(x=>x.distribution===s).length)"
 ```
 
-`obra/superpowers/brainstorming` is currently blocked with release reason `upstream-skill-missing`. Its presence in search results is not permission to install it. The 20 `seo-geo/*` records are blocked with `upstream-moved`: every SKILL.md in aaron-he-zhu/seo-geo-claude-skills only says the skill moved to aaron-he-zhu/aaron-marketing-skills, which is now ingested for its `seo-geo/` subtree only (`include_paths`).
+`obra/superpowers/brainstorming` and seven other `obra/superpowers/*` records are blocked with release reason `upstream-skill-missing`. Each is a legacy duplicate of an `obra/<name>` record for the same upstream path; the skill files exist at the pinned commit, and the reason was recorded when sync compared directory paths with `SKILL.md` paths. The blocks stay because the `obra/<name>` records are the live entries. Their presence in search results is not permission to install them. The 20 `seo-geo/*` records are blocked with `upstream-moved`: every SKILL.md in aaron-he-zhu/seo-geo-claude-skills only says the skill moved to aaron-he-zhu/aaron-marketing-skills, which is now ingested for its `seo-geo/` subtree only (`include_paths`).
 
 ## Implemented CLI behavior
 

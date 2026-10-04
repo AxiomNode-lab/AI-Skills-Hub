@@ -64,3 +64,18 @@ test("a new upstream path cannot take over the id of a record whose path still e
     assert.match(stderr, /duplicate skill id example\/foo at example\/mixed-skills:a\/foo/);
   }
 });
+
+test("a reviewed, released record stays pinned when upstream moves to a new revision", t => {
+  const released = {
+    ...record("example/foo", "skills/foo"),
+    license: { spdx: "MIT", redistributable: true, status: "verified", scope: "repository", evidence: "catalog/reviews/example__foo.json" },
+    distribution: "bundled", materialized: true, materialized_root: "skills/example/foo",
+    release: { status: "eligible", reasons: [] }
+  };
+  const { skills } = syncFixture(t, {
+    source: { repo: "example/mixed-skills" },
+    skills: [released],
+    discovered: [entry("foo", "skills/foo/SKILL.md")]
+  });
+  assert.deepEqual(skills, [released]);
+});

@@ -77,7 +77,10 @@ function releaseFor(skill){
   return reasons.length?{status:"pending",reasons}:{status:"eligible",reasons:[]};
 }
 
-const existingBySource=new Map(registry.skills.map((s)=>[s.source.repo+":"+s.source.path,s]));
+// Released records name the skill directory, ingestion names its SKILL.md.
+const sourceKeyOf=(repo,skillPath)=>repo+":"+skillPath.replace(/\/SKILL\.md$/i,"");
+// When a blocked legacy record shares a path with a live one, the live one wins.
+const existingBySource=new Map([...registry.skills].sort((a,b)=>(b.distribution==="blocked")-(a.distribution==="blocked")).map((s)=>[sourceKeyOf(s.source.repo,s.source.path),s]));
 const existingById=new Map(registry.skills.map((s)=>[s.id,s]));
 const seenSourceKeys=new Set();
 const discovered=[];
@@ -97,11 +100,11 @@ for(const source of sourceEntries){
 // a new path with the same skill name cannot take them over, whatever the order.
 const claimedIds=new Set();
 for(const {source,item} of discovered){
-  const existing=existingBySource.get(source.repo+":"+item.path);
+  const existing=existingBySource.get(sourceKeyOf(source.repo,item.path));
   if(existing) claimedIds.add(existing.id);
 }
 for(const {source,item,revision} of discovered){
-  const sourceKey=source.repo+":"+item.path;
+  const sourceKey=sourceKeyOf(source.repo,item.path);
   seenSourceKeys.add(sourceKey);
   let skill=existingBySource.get(sourceKey);
   const namespace=namespaceByRepo[source.repo]??source.repo.split("/")[0].toLowerCase().replace(/[^a-z0-9-]/g,"-");
@@ -117,6 +120,9 @@ for(const {source,item,revision} of discovered){
     skill = byId;
   }
   claimedIds.add(stableId);
+  // A reviewed record stays pinned to the revision its review covers; a newer
+  // upstream commit needs a new review, not a metadata overwrite.
+  if(skill?.license?.evidence?.startsWith("catalog/reviews/")) continue;
   if(!skill){
     skill={
       id:stableId,
@@ -207,7 +213,7 @@ for (const skill of registry.skills) {
   // Records outside include_paths were not looked for, so they are not missing.
   if (!inScope(source, skill.source.path)) continue;
 
-  const sourceKey = sourceRepo + ":" + skill.source.path;
+  const sourceKey = sourceKeyOf(sourceRepo, skill.source.path);
   if (seenSourceKeys.has(sourceKey)) continue;
 
   skill.source = {
