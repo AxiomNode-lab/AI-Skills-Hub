@@ -1,0 +1,354 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "microsoft/azure-storage-file-share-ts",
+  "status": "approved",
+  "reviewed_on": "2026-10-02",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/azure-sdk-typescript/skills/azure-storage-file-share-ts",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": ".github/plugins/azure-sdk-typescript/skills/azure-storage-file-share-ts",
+    "url": "https://api.github.com/repos/microsoft/skills/git/trees/84d8eaa8ae95930f55cdceb3e27196c795dab038?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/microsoft/skills/blob/84d8eaa8ae95930f55cdceb3e27196c795dab038/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        ".github",
+        ".github/plugins",
+        ".github/plugins/azure-sdk-typescript",
+        ".github/plugins/azure-sdk-typescript/skills",
+        ".github/plugins/azure-sdk-typescript/skills/azure-storage-file-share-ts"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT License with its copyright notice, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file; frontmatter declares license: MIT consistent with the repository-root MIT license. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "medium",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": false,
+      "package_install": true,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md (505 lines) in full; it is the only file. Reference for @azure/storage-file-share in TypeScript: connection-string, shared-key, Entra ID and SAS auth; share/directory/file CRUD; uploads/downloads; ranges; snapshots; SAS generation; error handling.",
+      "The only command is `npm install @azure/storage-file-share @azure/identity` (line 19) for the user's project, which is why the risk is medium; both are official Azure SDK packages. All other content is sample application code that reads placeholder env vars (AZURE_STORAGE_ACCOUNT_KEY, AZURE_STORAGE_CONNECTION_STRING, AZURE_STORAGE_SAS_TOKEN) inside the user's program; the agent is not told to read, print, or send secrets.",
+      "Samples delete shares, directories, files and snapshots (lines 131, 181, 284, 375) and read/write local paths like /path/to/local/file.txt only when the user's code runs. Best practice 1 (line 484) recommends connection strings for simplicity, which is weaker than the Entra ID guidance elsewhere; users should prefer DefaultAzureCredential/ManagedIdentityCredential in production."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "git_blob": "79656060de00aa4659ad2c276d5be8830664d544",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry the copyright and permission notice.",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "9a0e4d4a1940c40420d292b311bf23c62e7b855506459984382d9dfcae3f140f",
+      "bytes": 12845,
+      "mode": "100644",
+      "git_blob": "ba358bca21670775d73dce057668e8784624662b",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 18,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Two bash fences: the npm install line (18) and a placeholder environment-variable listing (27)."
+        },
+        {
+          "type": "package-install",
+          "line": 19,
+          "evidence": "npm install",
+          "context": "npm install @azure/storage-file-share @azure/identity",
+          "disposition": "accepted",
+          "reason": "`npm install @azure/storage-file-share @azure/identity` (line 19) installs official SDK packages for the user's project."
+        },
+        {
+          "type": "shell-execution",
+          "line": 27,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Two bash fences: the npm install line (18) and a placeholder environment-variable listing (27)."
+        },
+        {
+          "type": "credential-access",
+          "line": 43,
+          "evidence": "process.env",
+          "context": "  process.env.AZURE_STORAGE_CONNECTION_STRING!",
+          "disposition": "accepted",
+          "reason": "Sample code reads storage account name/key, connection string and SAS token from env vars and builds StorageSharedKeyCredential/DefaultAzureCredential inside the user's application; no instruction for the agent to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 52,
+          "evidence": "process.env",
+          "context": "const accountName = process.env.AZURE_STORAGE_ACCOUNT_NAME!;",
+          "disposition": "accepted",
+          "reason": "Sample code reads storage account name/key, connection string and SAS token from env vars and builds StorageSharedKeyCredential/DefaultAzureCredential inside the user's application; no instruction for the agent to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 53,
+          "evidence": "process.env",
+          "context": "const accountKey = process.env.AZURE_STORAGE_ACCOUNT_KEY!;",
+          "disposition": "accepted",
+          "reason": "Sample code reads storage account name/key, connection string and SAS token from env vars and builds StorageSharedKeyCredential/DefaultAzureCredential inside the user's application; no instruction for the agent to read, print, or transmit secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 57,
+          "evidence": "https://",
+          "context": "  `https://${accountName}.file.core.windows.net`,",
+          "disposition": "accepted",
+          "reason": "Template service URLs (https://${accountName}.file.core.windows.net, an example copy-source URL) and a Microsoft Learn link; nothing tells the agent to fetch them."
+        },
+        {
+          "type": "credential-access",
+          "line": 62,
+          "evidence": "Credential",
+          "context": "### Microsoft Entra Token Credential",
+          "disposition": "accepted",
+          "reason": "Sample code reads storage account name/key, connection string and SAS token from env vars and builds StorageSharedKeyCredential/DefaultAzureCredential inside the user's application; no instruction for the agent to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 69,
+          "evidence": "credential",
+          "context": "const credential = new DefaultAzureCredential({requiredEnvVars: [\"AZURE_TOKEN_CREDENTIALS\"]});",
+          "disposition": "accepted",
+          "reason": "Sample code reads storage account name/key, connection string and SAS token from env vars and builds StorageSharedKeyCredential/DefaultAzureCredential inside the user's application; no instruction for the agent to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 70,
+          "evidence": "credential",
+          "context": "// Or use a specific credential directly in production:",
+          "disposition": "accepted",
+          "reason": "Sample code reads storage account name/key, connection string and SAS token from env vars and builds StorageSharedKeyCredential/DefaultAzureCredential inside the user's application; no instruction for the agent to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 71,
+          "evidence": "credential",
+          "context": "// See https://learn.microsoft.com/javascript/api/overview/azure/identity-readme?view=azure-node-latest#credential-classes",
+          "disposition": "accepted",
+          "reason": "Sample code reads storage account name/key, connection string and SAS token from env vars and builds StorageSharedKeyCredential/DefaultAzureCredential inside the user's application; no instruction for the agent to read, print, or transmit secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 71,
+          "evidence": "https://",
+          "context": "// See https://learn.microsoft.com/javascript/api/overview/azure/identity-readme?view=azure-node-latest#credential-classes",
+          "disposition": "accepted",
+          "reason": "Template service URLs (https://${accountName}.file.core.windows.net, an example copy-source URL) and a Microsoft Learn link; nothing tells the agent to fetch them."
+        },
+        {
+          "type": "credential-access",
+          "line": 72,
+          "evidence": "credential",
+          "context": "// const credential = new ManagedIdentityCredential();",
+          "disposition": "accepted",
+          "reason": "Sample code reads storage account name/key, connection string and SAS token from env vars and builds StorageSharedKeyCredential/DefaultAzureCredential inside the user's application; no instruction for the agent to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 74,
+          "evidence": "process.env",
+          "context": "const accountName = process.env.AZURE_STORAGE_ACCOUNT_NAME!;",
+          "disposition": "accepted",
+          "reason": "Sample code reads storage account name/key, connection string and SAS token from env vars and builds StorageSharedKeyCredential/DefaultAzureCredential inside the user's application; no instruction for the agent to read, print, or transmit secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 76,
+          "evidence": "https://",
+          "context": "  `https://${accountName}.file.core.windows.net`,",
+          "disposition": "accepted",
+          "reason": "Template service URLs (https://${accountName}.file.core.windows.net, an example copy-source URL) and a Microsoft Learn link; nothing tells the agent to fetch them."
+        },
+        {
+          "type": "credential-access",
+          "line": 77,
+          "evidence": "credential",
+          "context": "  credential",
+          "disposition": "accepted",
+          "reason": "Sample code reads storage account name/key, connection string and SAS token from env vars and builds StorageSharedKeyCredential/DefaultAzureCredential inside the user's application; no instruction for the agent to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 86,
+          "evidence": "process.env",
+          "context": "const accountName = process.env.AZURE_STORAGE_ACCOUNT_NAME!;",
+          "disposition": "accepted",
+          "reason": "Sample code reads storage account name/key, connection string and SAS token from env vars and builds StorageSharedKeyCredential/DefaultAzureCredential inside the user's application; no instruction for the agent to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 87,
+          "evidence": "process.env",
+          "context": "const sasToken = process.env.AZURE_STORAGE_SAS_TOKEN!;",
+          "disposition": "accepted",
+          "reason": "Sample code reads storage account name/key, connection string and SAS token from env vars and builds StorageSharedKeyCredential/DefaultAzureCredential inside the user's application; no instruction for the agent to read, print, or transmit secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 90,
+          "evidence": "https://",
+          "context": "  `https://${accountName}.file.core.windows.net${sasToken}`",
+          "disposition": "accepted",
+          "reason": "Template service URLs (https://${accountName}.file.core.windows.net, an example copy-source URL) and a Microsoft Learn link; nothing tells the agent to fetch them."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 128,
+          "evidence": "Delete",
+          "context": "### Delete Share",
+          "disposition": "accepted",
+          "reason": "Hits are Azure Files service deletions (share/directory/file/snapshot delete, deleteIfExists) and the 'd' (delete) letter in a SAS permission string; these are remote storage operations in sample code, not instructions for the agent to delete local files."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 131,
+          "evidence": "delete",
+          "context": "await shareClient.delete();",
+          "disposition": "accepted",
+          "reason": "Hits are Azure Files service deletions (share/directory/file/snapshot delete, deleteIfExists) and the 'd' (delete) letter in a SAS permission string; these are remote storage operations in sample code, not instructions for the agent to delete local files."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 133,
+          "evidence": "Delete",
+          "context": "// Delete if exists",
+          "disposition": "accepted",
+          "reason": "Hits are Azure Files service deletions (share/directory/file/snapshot delete, deleteIfExists) and the 'd' (delete) letter in a SAS permission string; these are remote storage operations in sample code, not instructions for the agent to delete local files."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 178,
+          "evidence": "Delete",
+          "context": "### Delete Directory",
+          "disposition": "accepted",
+          "reason": "Hits are Azure Files service deletions (share/directory/file/snapshot delete, deleteIfExists) and the 'd' (delete) letter in a SAS permission string; these are remote storage operations in sample code, not instructions for the agent to delete local files."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 181,
+          "evidence": "delete",
+          "context": "await directoryClient.delete();",
+          "disposition": "accepted",
+          "reason": "Hits are Azure Files service deletions (share/directory/file/snapshot delete, deleteIfExists) and the 'd' (delete) letter in a SAS permission string; these are remote storage operations in sample code, not instructions for the agent to delete local files."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 183,
+          "evidence": "Delete",
+          "context": "// Delete if exists",
+          "disposition": "accepted",
+          "reason": "Hits are Azure Files service deletions (share/directory/file/snapshot delete, deleteIfExists) and the 'd' (delete) letter in a SAS permission string; these are remote storage operations in sample code, not instructions for the agent to delete local files."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 280,
+          "evidence": "Delete",
+          "context": "### Delete File",
+          "disposition": "accepted",
+          "reason": "Hits are Azure Files service deletions (share/directory/file/snapshot delete, deleteIfExists) and the 'd' (delete) letter in a SAS permission string; these are remote storage operations in sample code, not instructions for the agent to delete local files."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 284,
+          "evidence": "delete",
+          "context": "await fileClient.delete();",
+          "disposition": "accepted",
+          "reason": "Hits are Azure Files service deletions (share/directory/file/snapshot delete, deleteIfExists) and the 'd' (delete) letter in a SAS permission string; these are remote storage operations in sample code, not instructions for the agent to delete local files."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 286,
+          "evidence": "Delete",
+          "context": "// Delete if exists",
+          "disposition": "accepted",
+          "reason": "Hits are Azure Files service deletions (share/directory/file/snapshot delete, deleteIfExists) and the 'd' (delete) letter in a SAS permission string; these are remote storage operations in sample code, not instructions for the agent to delete local files."
+        },
+        {
+          "type": "network-access",
+          "line": 293,
+          "evidence": "https://",
+          "context": "const sourceUrl = \"https://account.file.core.windows.net/share/source.txt\";",
+          "disposition": "accepted",
+          "reason": "Template service URLs (https://${accountName}.file.core.windows.net, an example copy-source URL) and a Microsoft Learn link; nothing tells the agent to fetch them."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 372,
+          "evidence": "Delete",
+          "context": "### Delete Snapshot",
+          "disposition": "accepted",
+          "reason": "Hits are Azure Files service deletions (share/directory/file/snapshot delete, deleteIfExists) and the 'd' (delete) letter in a SAS permission string; these are remote storage operations in sample code, not instructions for the agent to delete local files."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 375,
+          "evidence": "delete",
+          "context": "await shareClient.delete({ deleteSnapshots: \"include\" });",
+          "disposition": "accepted",
+          "reason": "Hits are Azure Files service deletions (share/directory/file/snapshot delete, deleteIfExists) and the 'd' (delete) letter in a SAS permission string; these are remote storage operations in sample code, not instructions for the agent to delete local files."
+        },
+        {
+          "type": "network-access",
+          "line": 401,
+          "evidence": "https://",
+          "context": "const sasUrl = `https://${accountName}.file.core.windows.net/my-share/my-directory/my-file.txt?${sasToken}`;",
+          "disposition": "accepted",
+          "reason": "Template service URLs (https://${accountName}.file.core.windows.net, an example copy-source URL) and a Microsoft Learn link; nothing tells the agent to fetch them."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 412,
+          "evidence": "delete",
+          "context": "    permissions: ShareSASPermissions.parse(\"rcwdl\"), // read, create, write, delete, list",
+          "disposition": "accepted",
+          "reason": "Hits are Azure Files service deletions (share/directory/file/snapshot delete, deleteIfExists) and the 'd' (delete) letter in a SAS permission string; these are remote storage operations in sample code, not instructions for the agent to delete local files."
+        }
+      ]
+    }
+  ]
+}

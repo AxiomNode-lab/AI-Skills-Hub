@@ -1,0 +1,162 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "bagelhole/load-balancing",
+  "status": "draft",
+  "reviewed_on": null,
+  "reviewer": null,
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "infrastructure/networking/load-balancing",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "infrastructure/networking/load-balancing",
+    "url": "https://api.github.com/repos/BagelHole/DevOps-Security-Agent-Skills/git/trees/0365f57a079b1332f95cf26e31dd2d5332a8399f?recursive=1",
+    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/BagelHole/DevOps-Security-Agent-Skills/blob/0365f57a079b1332f95cf26e31dd2d5332a8399f/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "infrastructure",
+        "infrastructure/networking",
+        "infrastructure/networking/load-balancing"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte."
+    ]
+  },
+  "content_review": {
+    "status": "pending",
+    "risk": "unknown",
+    "blocking_findings": [],
+    "capabilities": {},
+    "notes": []
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "67c5c5cbb12cafb1515e449748866bd40da7dec9",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "d71115181a13abb31b79527493fc0fab195c6e4727e716ac3e765c10bf1425fb",
+      "bytes": 11131,
+      "mode": "100644",
+      "git_blob": "0266c2a993d6cbedcbcafc229674b8bff7da3d16",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 44,
+          "evidence": "https://",
+          "context": "    return 301 https://$host$request_uri;",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 57,
+          "evidence": "http://",
+          "context": "        proxy_pass http://app_backend;",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 198,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 202,
+          "evidence": "\nsudo",
+          "context": "# Reload without dropping connections",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 206,
+          "evidence": " sudo",
+          "context": "echo \"show stat\" | sudo socat stdio /var/run/haproxy/admin.sock",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 209,
+          "evidence": " sudo",
+          "context": "echo \"set server web_servers/web1 state drain\" | sudo socat stdio /var/run/haproxy/admin.sock",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 212,
+          "evidence": " sudo",
+          "context": "echo \"set server web_servers/web1 state maint\" | sudo socat stdio /var/run/haproxy/admin.sock",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 215,
+          "evidence": " sudo",
+          "context": "echo \"set server web_servers/web1 state ready\" | sudo socat stdio /var/run/haproxy/admin.sock",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 222,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 267,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 275,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    }
+  ]
+}

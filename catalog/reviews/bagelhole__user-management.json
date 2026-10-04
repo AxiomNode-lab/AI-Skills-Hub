@@ -1,0 +1,522 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "bagelhole/user-management",
+  "status": "draft",
+  "reviewed_on": null,
+  "reviewer": null,
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "infrastructure/servers/user-management",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "infrastructure/servers/user-management",
+    "url": "https://api.github.com/repos/BagelHole/DevOps-Security-Agent-Skills/git/trees/0365f57a079b1332f95cf26e31dd2d5332a8399f?recursive=1",
+    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/BagelHole/DevOps-Security-Agent-Skills/blob/0365f57a079b1332f95cf26e31dd2d5332a8399f/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "infrastructure",
+        "infrastructure/servers",
+        "infrastructure/servers/user-management"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte."
+    ]
+  },
+  "content_review": {
+    "status": "pending",
+    "risk": "unknown",
+    "blocking_findings": [],
+    "capabilities": {},
+    "notes": []
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "67c5c5cbb12cafb1515e449748866bd40da7dec9",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "88a97ad41bbf9927455a5c1429838af1c56d2077be29aa9bbdcddedc4f2b0d0a",
+      "bytes": 10445,
+      "mode": "100644",
+      "git_blob": "fac8f632dd299662eb5aa21829c5886055970271",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 3,
+          "evidence": " sudo",
+          "context": "description: Manage users, groups, and permissions on Linux systems. Configure sudo and access controls. Use when managing system access.",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 12,
+          "evidence": " sudo",
+          "context": "Manage users, groups, permissions, sudo access, PAM modules, and LDAP integration on Linux systems. Includes practical scripts for bulk user operations and access auditing.",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 17,
+          "evidence": " sudo",
+          "context": "- Configuring sudo access with fine-grained privilege controls",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 25,
+          "evidence": " sudo",
+          "context": "- Root or sudo access on the target system",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 35,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 37,
+          "evidence": "bash",
+          "context": "useradd -m -s /bin/bash -c \"Jane Smith\" jsmith",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 43,
+          "evidence": "bash",
+          "context": "useradd -m -s /bin/bash -u 1500 -g developers -c \"Deploy Account\" deploy",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 49,
+          "evidence": "bash",
+          "context": "useradd -m -s /bin/bash -e 2025-12-31 -c \"Contractor - Bob Lee\" blee",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 52,
+          "evidence": "bash",
+          "context": "useradd -m -s /bin/bash -G docker,developers,ssh-users -c \"Dev User\" devuser",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 57,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 59,
+          "evidence": " sudo",
+          "context": "usermod -aG sudo jsmith",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 63,
+          "evidence": "zsh",
+          "context": "usermod -s /bin/zsh jsmith",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 92,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 93,
+          "evidence": "Remove",
+          "context": "# Remove a user and their home directory",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 96,
+          "evidence": "Remove",
+          "context": "# Remove a user but keep their home directory (for auditing)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 105,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 117,
+          "evidence": "Remove",
+          "context": "# Remove a user from a group",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 120,
+          "evidence": "remove",
+          "context": "# Set group administrators (can add/remove members without root)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 123,
+          "evidence": "Delete",
+          "context": "# Delete a group",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 137,
+          "evidence": " Sudo",
+          "context": "## Sudo Configuration",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 139,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 153,
+          "evidence": " sudo",
+          "context": "# Allow a deploy user full sudo with no password",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 165,
+          "evidence": " sudo",
+          "context": "# Log all sudo commands to a dedicated file",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 173,
+          "evidence": " sudo",
+          "context": "# Require password for sudo even if user has NOPASSWD elsewhere",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 177,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 181,
+          "evidence": " sudo",
+          "context": "# Check what sudo permissions a user has",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 181,
+          "evidence": "\nsudo",
+          "context": "# Check what sudo permissions a user has",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 184,
+          "evidence": " sudo",
+          "context": "# Test a specific sudo command as a user",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 184,
+          "evidence": "\nsudo",
+          "context": "# Test a specific sudo command as a user",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 185,
+          "evidence": "sh",
+          "context": "sudo -u myapp /opt/myapp/bin/healthcheck.sh",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 190,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 191,
+          "evidence": "\nchmod",
+          "context": "# Standard permissions",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 192,
+          "evidence": "\nchmod",
+          "context": "chmod 755 /opt/myapp           # rwxr-xr-x",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 193,
+          "evidence": "\nchmod",
+          "context": "chmod 640 /etc/myapp.conf      # rw-r-----",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 194,
+          "evidence": "sh",
+          "context": "chmod u+x script.sh            # Add execute for owner",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 194,
+          "evidence": "\nchmod",
+          "context": "chmod u+x script.sh            # Add execute for owner",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 195,
+          "evidence": "\nchmod",
+          "context": "chmod g+w shared-dir/          # Add write for group",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 196,
+          "evidence": "Remove",
+          "context": "chmod o-rwx private-file       # Remove all permissions for others",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 202,
+          "evidence": "\nchmod",
+          "context": "# Set the SGID bit (new files inherit group ownership)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 205,
+          "evidence": "delete",
+          "context": "# Set the sticky bit (only owner can delete their files)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 205,
+          "evidence": "\nchmod",
+          "context": "# Set the sticky bit (only owner can delete their files)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 221,
+          "evidence": "Remove",
+          "context": "# Remove a specific ACL entry",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 224,
+          "evidence": "Remove",
+          "context": "# Remove all ACLs",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 230,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 232,
+          "evidence": " sudo",
+          "context": "# Each file controls auth for a specific service (sshd, login, sudo, etc.)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 266,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 295,
+          "evidence": " sudo",
+          "context": "# Grant sudo to an AD group",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 303,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 304,
+          "evidence": "bash",
+          "context": "#!/bin/bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 305,
+          "evidence": "sh",
+          "context": "# bulk-create-users.sh",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 307,
+          "evidence": "bash",
+          "context": "# Example: jsmith,Jane Smith,developers;docker,/bin/bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "encoded-content",
+          "line": 325,
+          "evidence": "base64",
+          "context": "  temp_pass=$(openssl rand -base64 12)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 335,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 339,
+          "evidence": " sudo",
+          "context": "# List users with sudo access",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 340,
+          "evidence": " sudo",
+          "context": "getent group sudo wheel 2>/dev/null",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 354,
+          "evidence": " sudo",
+          "context": "| \"not in sudoers\" error | `sudo -l -U username` | Add user to sudo group or create sudoers.d file |",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    }
+  ]
+}

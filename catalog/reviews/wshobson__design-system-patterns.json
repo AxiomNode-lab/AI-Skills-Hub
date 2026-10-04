@@ -1,0 +1,274 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "wshobson/design-system-patterns",
+  "status": "draft",
+  "reviewed_on": null,
+  "reviewer": null,
+  "source": {
+    "repo": "wshobson/agents",
+    "path": "plugins/ui-design/skills/design-system-patterns",
+    "revision": "156b7a5e7a8b93642628a339ee4039c925b34c7f"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "plugins/ui-design/skills/design-system-patterns",
+    "url": "https://api.github.com/repos/wshobson/agents/git/trees/156b7a5e7a8b93642628a339ee4039c925b34c7f?recursive=1",
+    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/wshobson/agents/blob/156b7a5e7a8b93642628a339ee4039c925b34c7f/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "plugins",
+        "plugins/ui-design",
+        "plugins/ui-design/skills",
+        "plugins/ui-design/skills/design-system-patterns"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte."
+    ]
+  },
+  "content_review": {
+    "status": "pending",
+    "risk": "unknown",
+    "blocking_findings": [],
+    "capabilities": {},
+    "notes": []
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "f89abb55d9f073f38f1703e4518f0613c788c6174be7f13b8dfe48a1c076c746",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "326f0a55c96e672fedf9d807ca043c00df05ba0e",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "references/component-architecture.md",
+      "sha256": "84dc16ed581c1ad72e34b93ba84bcfa9223d30f9c42eb7e36654bbbe8daefc61",
+      "bytes": 15293,
+      "mode": "100644",
+      "git_blob": "5a7deef7dd7f3df8ed22cf5d92ac63cd8c243c64",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 54,
+          "evidence": "delete",
+          "context": "          next.delete(id);",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 614,
+          "evidence": "https://",
+          "context": "- [Radix UI Primitives](https://www.radix-ui.com/primitives)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 615,
+          "evidence": "https://",
+          "context": "- [Headless UI](https://headlessui.com/)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 616,
+          "evidence": "https://",
+          "context": "- [Class Variance Authority](https://cva.style/docs)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 617,
+          "evidence": "https://",
+          "context": "- [React Aria](https://react-spectrum.adobe.com/react-aria/)",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "references/design-tokens.md",
+      "sha256": "44bd27e26f072a3facd6cd841140d403805106c9c5d5e39fc33bf6ffccf8af64",
+      "bytes": 11269,
+      "mode": "100644",
+      "git_blob": "0044dbf2fe21eef7355dda47ca5763359850074f",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "dynamic-execution",
+          "line": 327,
+          "evidence": "function (",
+          "context": "  formatter: function ({ dictionary, options }) {",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 377,
+          "evidence": "Remove",
+          "context": "6. **Remove**: After deprecation period",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 417,
+          "evidence": "https://",
+          "context": "- [Design Tokens W3C Community Group](https://design-tokens.github.io/community-group/)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 418,
+          "evidence": "https://",
+          "context": "- [Style Dictionary](https://amzn.github.io/style-dictionary/)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 419,
+          "evidence": "https://",
+          "context": "- [Tokens Studio](https://tokens.studio/)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 420,
+          "evidence": "https://",
+          "context": "- [Open Props](https://open-props.style/)",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "references/details.md",
+      "sha256": "1f1792e8b20c24c2be2acd46e7da85928578d108006594f3ae35d93f9108ff6d",
+      "bytes": 5566,
+      "mode": "100644",
+      "git_blob": "eb3387bd25c3e18d20a89e1d8fca3f12aca413a2",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 77,
+          "evidence": "remove",
+          "context": "      root.classList.remove(\"light\", \"dark\");",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "references/theming-architecture.md",
+      "sha256": "24c9efec7c809a4d6797e6a11bc66ce08c5d708211caac14266ce5754c83cc75",
+      "bytes": 12365,
+      "mode": "100644",
+      "git_blob": "6614a6505b76a959f47c52b522cc535fe5109725",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 199,
+          "evidence": "Remove",
+          "context": "        // Remove after a tick",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 207,
+          "evidence": "remove",
+          "context": "        root.classList.remove(\"light\", \"dark\");",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "dynamic-execution",
+          "line": 441,
+          "evidence": "function(",
+          "context": "  (function() {",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 518,
+          "evidence": "https://",
+          "context": "- [Web.dev: prefers-color-scheme](https://web.dev/prefers-color-scheme/)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 519,
+          "evidence": "https://",
+          "context": "- [CSS Color Scheme](https://developer.mozilla.org/en-US/docs/Web/CSS/color-scheme)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 520,
+          "evidence": "https://",
+          "context": "- [next-themes](https://github.com/pacocoursey/next-themes)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 521,
+          "evidence": "https://",
+          "context": "- [Radix UI Colors](https://www.radix-ui.com/colors)",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "618355f0e6c6ba8ca5d231035c9da18302fe6894aedce565743e9181b6c928ee",
+      "bytes": 4003,
+      "mode": "100644",
+      "git_blob": "6c1763c811e37a918938dbd6e18b7d5a38bcf46a",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    }
+  ]
+}

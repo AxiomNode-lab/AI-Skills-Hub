@@ -1,0 +1,367 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "kdense/molecular-dynamics",
+  "status": "approved",
+  "reviewed_on": "2026-10-02",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "K-Dense-AI/scientific-agent-skills",
+    "path": "skills/molecular-dynamics",
+    "revision": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "skills/molecular-dynamics",
+    "url": "https://api.github.com/repos/K-Dense-AI/scientific-agent-skills/git/trees/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE.md",
+    "url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/LICENSE.md",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "skills",
+        "skills/molecular-dynamics"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE.md is the MIT License with its copyright notice, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file; OpenMM/MDAnalysis papers are cited by PMID and docs are linked. A byte-exact copy of LICENSE.md ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "medium",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md, references/system_preparation.md and references/mdanalysis_analysis.md in full. Python examples for setting up, minimizing, equilibrating and running OpenMM simulations and analysing trajectories (RMSD, RMSF, contacts, PCA, H-bonds, free-energy surfaces) with MDAnalysis.",
+      "Medium because it tells the agent to install packages: version-pinned `uv pip install openmm==8.6.1 MDAnalysis==2.10.0` plus unpinned matplotlib/pandas into a dedicated venv (SKILL.md:28-29), and optional unpinned `conda install -c conda-forge pdbfixer` / `mamba create ... openff-toolkit` (system_preparation.md:16, 48) flagged as illustrative. These are well-known scientific packages from PyPI/conda-forge installed into isolated environments, so it remains acceptable.",
+      "Code writes local outputs (minimized.pdb, *_log.txt, *_traj.dcd, checkpoints, PNG plots) and advises unique output prefixes to avoid overwriting; simulation itself runs offline. No credentials or data transmission."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE.md",
+      "sha256": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "eb246475fd5a66b9bb56176f3a718984632dd98d",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry the copyright and permission notice.",
+      "findings": []
+    },
+    {
+      "path": "references/mdanalysis_analysis.md",
+      "sha256": "cdeb94230969b89a3e046de3edf964469ef5b23c695c8aed58045876fabbcccf",
+      "bytes": 9393,
+      "mode": "100644",
+      "git_blob": "dce66446204196e7951ea5f1cc7a63fd16f11184",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 253,
+          "evidence": "https://",
+          "context": "- [RMSD/RMSF](https://docs.mdanalysis.org/2.10.0/documentation_pages/analysis/rms.html)",
+          "disposition": "accepted",
+          "reason": "Links to OpenMM, MDAnalysis, OpenFF, PDBFixer, GROMACS and related documentation/releases; the skill does not instruct fetching them beyond package installation."
+        },
+        {
+          "type": "network-access",
+          "line": 254,
+          "evidence": "https://",
+          "context": "- [Alignment](https://docs.mdanalysis.org/2.10.0/documentation_pages/analysis/align.html)",
+          "disposition": "accepted",
+          "reason": "Links to OpenMM, MDAnalysis, OpenFF, PDBFixer, GROMACS and related documentation/releases; the skill does not instruct fetching them beyond package installation."
+        },
+        {
+          "type": "network-access",
+          "line": 255,
+          "evidence": "https://",
+          "context": "- [PCA](https://docs.mdanalysis.org/2.10.0/documentation_pages/analysis/pca.html)",
+          "disposition": "accepted",
+          "reason": "Links to OpenMM, MDAnalysis, OpenFF, PDBFixer, GROMACS and related documentation/releases; the skill does not instruct fetching them beyond package installation."
+        },
+        {
+          "type": "network-access",
+          "line": 256,
+          "evidence": "https://",
+          "context": "- [DSSP](https://docs.mdanalysis.org/2.10.0/documentation_pages/analysis/dssp.html)",
+          "disposition": "accepted",
+          "reason": "Links to OpenMM, MDAnalysis, OpenFF, PDBFixer, GROMACS and related documentation/releases; the skill does not instruct fetching them beyond package installation."
+        },
+        {
+          "type": "network-access",
+          "line": 257,
+          "evidence": "https://",
+          "context": "- [Hydrogen bonds](https://docs.mdanalysis.org/2.10.0/documentation_pages/analysis/hydrogenbonds.html)",
+          "disposition": "accepted",
+          "reason": "Links to OpenMM, MDAnalysis, OpenFF, PDBFixer, GROMACS and related documentation/releases; the skill does not instruct fetching them beyond package installation."
+        },
+        {
+          "type": "network-access",
+          "line": 258,
+          "evidence": "https://",
+          "context": "- [Groups and selections](https://docs.mdanalysis.org/2.10.0/documentation_pages/core/groups.html)",
+          "disposition": "accepted",
+          "reason": "Links to OpenMM, MDAnalysis, OpenFF, PDBFixer, GROMACS and related documentation/releases; the skill does not instruct fetching them beyond package installation."
+        },
+        {
+          "type": "network-access",
+          "line": 259,
+          "evidence": "https://",
+          "context": "- [Distances and periodic boxes](https://docs.mdanalysis.org/2.10.0/documentation_pages/lib/distances.html)",
+          "disposition": "accepted",
+          "reason": "Links to OpenMM, MDAnalysis, OpenFF, PDBFixer, GROMACS and related documentation/releases; the skill does not instruct fetching them beyond package installation."
+        },
+        {
+          "type": "network-access",
+          "line": 260,
+          "evidence": "https://",
+          "context": "- [Units](https://docs.mdanalysis.org/2.10.0/documentation_pages/units.html)",
+          "disposition": "accepted",
+          "reason": "Links to OpenMM, MDAnalysis, OpenFF, PDBFixer, GROMACS and related documentation/releases; the skill does not instruct fetching them beyond package installation."
+        }
+      ]
+    },
+    {
+      "path": "references/system_preparation.md",
+      "sha256": "4fd12453719685cfc406544fb2bbd573225019a407403ad250f90ca37e56e615",
+      "bytes": 4889,
+      "mode": "100644",
+      "git_blob": "cd1a5ea5b6ec24b88aca4bb27048af812a762a11",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 34,
+          "evidence": "writeFile",
+          "context": "        PDBFile.writeFile(fixer.topology, fixer.positions, handle, keepIds=True)",
+          "disposition": "accepted",
+          "reason": "Example code writes simulation outputs (PDB, DCD, logs, checkpoints, plots) to user-chosen local paths."
+        },
+        {
+          "type": "package-install",
+          "line": 47,
+          "evidence": "pip install",
+          "context": "not declare the complete dependency stack; a bare pip install is insufficient.",
+          "disposition": "accepted",
+          "reason": "Prose explaining that a bare pip install is insufficient for OpenFF; not an install instruction."
+        },
+        {
+          "type": "network-access",
+          "line": 77,
+          "evidence": "https://",
+          "context": "- [OpenMM running simulations and force-field inventory](https://docs.openmm.org/latest/userguide/application/02_running_sims.html)",
+          "disposition": "accepted",
+          "reason": "Links to OpenMM, MDAnalysis, OpenFF, PDBFixer, GROMACS and related documentation/releases; the skill does not instruct fetching them beyond package installation."
+        },
+        {
+          "type": "network-access",
+          "line": 78,
+          "evidence": "https://",
+          "context": "- [Modeller and solvent semantics](https://docs.openmm.org/latest/api-python/generated/openmm.app.modeller.Modeller.html)",
+          "disposition": "accepted",
+          "reason": "Links to OpenMM, MDAnalysis, OpenFF, PDBFixer, GROMACS and related documentation/releases; the skill does not instruct fetching them beyond package installation."
+        },
+        {
+          "type": "network-access",
+          "line": 79,
+          "evidence": "https://",
+          "context": "- [Simulation and restart APIs](https://docs.openmm.org/latest/api-python/generated/openmm.app.simulation.Simulation.html)",
+          "disposition": "accepted",
+          "reason": "Links to OpenMM, MDAnalysis, OpenFF, PDBFixer, GROMACS and related documentation/releases; the skill does not instruct fetching them beyond package installation."
+        },
+        {
+          "type": "network-access",
+          "line": 80,
+          "evidence": "https://",
+          "context": "- [Barostat Context parameters](https://docs.openmm.org/latest/api-python/generated/openmm.openmm.MonteCarloBarostat.html)",
+          "disposition": "accepted",
+          "reason": "Links to OpenMM, MDAnalysis, OpenFF, PDBFixer, GROMACS and related documentation/releases; the skill does not instruct fetching them beyond package installation."
+        },
+        {
+          "type": "network-access",
+          "line": 81,
+          "evidence": "https://",
+          "context": "- [PDBFixer 1.12 release](https://github.com/openmm/pdbfixer/releases/tag/v1.12)",
+          "disposition": "accepted",
+          "reason": "Links to OpenMM, MDAnalysis, OpenFF, PDBFixer, GROMACS and related documentation/releases; the skill does not instruct fetching them beyond package installation."
+        },
+        {
+          "type": "network-access",
+          "line": 82,
+          "evidence": "https://",
+          "context": "- [PDBFixer manual](https://github.com/openmm/pdbfixer/blob/v1.12/Manual.html)",
+          "disposition": "accepted",
+          "reason": "Links to OpenMM, MDAnalysis, OpenFF, PDBFixer, GROMACS and related documentation/releases; the skill does not instruct fetching them beyond package installation."
+        },
+        {
+          "type": "network-access",
+          "line": 83,
+          "evidence": "https://",
+          "context": "- [OpenFF installation](https://docs.openforcefield.org/projects/toolkit/en/stable/installation.html)",
+          "disposition": "accepted",
+          "reason": "Links to OpenMM, MDAnalysis, OpenFF, PDBFixer, GROMACS and related documentation/releases; the skill does not instruct fetching them beyond package installation."
+        },
+        {
+          "type": "network-access",
+          "line": 84,
+          "evidence": "https://",
+          "context": "- [OpenFF ForceField API](https://docs.openforcefield.org/projects/toolkit/en/stable/api/generated/openff.toolkit.typing.engines.smirnoff.ForceField.html)",
+          "disposition": "accepted",
+          "reason": "Links to OpenMM, MDAnalysis, OpenFF, PDBFixer, GROMACS and related documentation/releases; the skill does not instruct fetching them beyond package installation."
+        },
+        {
+          "type": "network-access",
+          "line": 85,
+          "evidence": "https://",
+          "context": "- [OpenFF force-field releases](https://github.com/openforcefield/openff-forcefields/releases)",
+          "disposition": "accepted",
+          "reason": "Links to OpenMM, MDAnalysis, OpenFF, PDBFixer, GROMACS and related documentation/releases; the skill does not instruct fetching them beyond package installation."
+        },
+        {
+          "type": "network-access",
+          "line": 86,
+          "evidence": "https://",
+          "context": "- [NAGL installation](https://docs.openforcefield.org/projects/nagl/en/stable/installation.html)",
+          "disposition": "accepted",
+          "reason": "Links to OpenMM, MDAnalysis, OpenFF, PDBFixer, GROMACS and related documentation/releases; the skill does not instruct fetching them beyond package installation."
+        }
+      ]
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "1efb31165ec1477b37c31394ba04b5fb280d44db8907afdf2a956e48487f1136",
+      "bytes": 18971,
+      "mode": "100644",
+      "git_blob": "e1a81a09291e33467dee3fda41c4581b8db7fe18",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 18,
+          "evidence": "https://",
+          "context": "- **OpenMM** (https://openmm.org/): High-performance MD simulation engine with GPU support, Python API, and flexible force field support",
+          "disposition": "accepted",
+          "reason": "Links to OpenMM, MDAnalysis, OpenFF, PDBFixer, GROMACS and related documentation/releases; the skill does not instruct fetching them beyond package installation."
+        },
+        {
+          "type": "network-access",
+          "line": 19,
+          "evidence": "https://",
+          "context": "- **MDAnalysis** (https://mdanalysis.org/): Python library for reading, writing, and analyzing MD trajectories from all major simulation packages",
+          "disposition": "accepted",
+          "reason": "Links to OpenMM, MDAnalysis, OpenFF, PDBFixer, GROMACS and related documentation/releases; the skill does not instruct fetching them beyond package installation."
+        },
+        {
+          "type": "shell-execution",
+          "line": 27,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "A bash block creating the uv virtual environment and installing the pinned packages."
+        },
+        {
+          "type": "package-install",
+          "line": 29,
+          "evidence": "pip install",
+          "context": "uv pip install --python .venv-md/bin/python \"openmm==8.6.1\" \"MDAnalysis==2.10.0\" matplotlib pandas",
+          "disposition": "accepted",
+          "reason": "Pinned `uv pip install` of OpenMM/MDAnalysis into a dedicated venv, and an OpenFF note that a bare pip install is insufficient."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 121,
+          "evidence": "remove",
+          "context": "    Energy minimize the system to remove steric clashes.",
+          "disposition": "accepted",
+          "reason": "Matched the word 'remove' in a docstring ('remove steric clashes'); no file deletion."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 157,
+          "evidence": "writeFile",
+          "context": "        PDBFile.writeFile(simulation.topology, state.getPositions(), f)",
+          "disposition": "accepted",
+          "reason": "Example code writes simulation outputs (PDB, DCD, logs, checkpoints, plots) to user-chosen local paths."
+        },
+        {
+          "type": "network-access",
+          "line": 470,
+          "evidence": "https://",
+          "context": "- **OpenMM documentation**: https://openmm.org/documentation.html",
+          "disposition": "accepted",
+          "reason": "Links to OpenMM, MDAnalysis, OpenFF, PDBFixer, GROMACS and related documentation/releases; the skill does not instruct fetching them beyond package installation."
+        },
+        {
+          "type": "network-access",
+          "line": 471,
+          "evidence": "https://",
+          "context": "- **MDAnalysis user guide**: https://docs.mdanalysis.org/",
+          "disposition": "accepted",
+          "reason": "Links to OpenMM, MDAnalysis, OpenFF, PDBFixer, GROMACS and related documentation/releases; the skill does not instruct fetching them beyond package installation."
+        },
+        {
+          "type": "network-access",
+          "line": 472,
+          "evidence": "https://",
+          "context": "- **GROMACS** (alternative MD engine): https://manual.gromacs.org/",
+          "disposition": "accepted",
+          "reason": "Links to OpenMM, MDAnalysis, OpenFF, PDBFixer, GROMACS and related documentation/releases; the skill does not instruct fetching them beyond package installation."
+        },
+        {
+          "type": "network-access",
+          "line": 473,
+          "evidence": "https://",
+          "context": "- **NAMD** (alternative): https://www.ks.uiuc.edu/Research/namd/",
+          "disposition": "accepted",
+          "reason": "Links to OpenMM, MDAnalysis, OpenFF, PDBFixer, GROMACS and related documentation/releases; the skill does not instruct fetching them beyond package installation."
+        },
+        {
+          "type": "network-access",
+          "line": 474,
+          "evidence": "https://",
+          "context": "- **CHARMM-GUI** (web-based system builder): https://charmm-gui.org/",
+          "disposition": "accepted",
+          "reason": "Links to OpenMM, MDAnalysis, OpenFF, PDBFixer, GROMACS and related documentation/releases; the skill does not instruct fetching them beyond package installation."
+        },
+        {
+          "type": "network-access",
+          "line": 475,
+          "evidence": "https://",
+          "context": "- **AmberTools** (free Amber tools): https://ambermd.org/AmberTools.php",
+          "disposition": "accepted",
+          "reason": "Links to OpenMM, MDAnalysis, OpenFF, PDBFixer, GROMACS and related documentation/releases; the skill does not instruct fetching them beyond package installation."
+        }
+      ]
+    }
+  ]
+}

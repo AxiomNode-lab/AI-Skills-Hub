@@ -1,0 +1,429 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "obra/diagnosing-superpowers",
+  "status": "approved",
+  "reviewed_on": "2026-10-02",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "obra/superpowers",
+    "path": "skills/diagnosing-superpowers",
+    "revision": "8ca22dba9a94f28898bbce59f2537ff4d87c747d"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "skills/diagnosing-superpowers",
+    "url": "https://api.github.com/repos/obra/superpowers/git/trees/8ca22dba9a94f28898bbce59f2537ff4d87c747d?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/obra/superpowers/blob/8ca22dba9a94f28898bbce59f2537ff4d87c747d/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "skills",
+        "skills/diagnosing-superpowers"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT License with its copyright notice, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file; the 'PROPRIETARY' signals are a redaction category for user-named terms, not a rights notice. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "medium",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md, references/context-safety.md, github-issues.md, redaction-policy.md, session-discovery.md, templates/bundle-README.md, case.md, issue.md, report.md, and prompts/analyst-common.md, cost-and-time.md, plan-adherence.md, quality-evidence.md, repeated-work.md, request-conflicts.md, scrub.md, scrub-audit.md, similar-session.md, skill-timeline.md, stumbles.md in full. Diagnoses a misbehaving superpowers agent session: after intake with the user, it reads session transcripts on disk read-only, dispatches analyst subagents per dimension, writes a cited report, and optionally files a GitHub issue or builds a scrubbed export bundle.",
+      "Medium: runs bounded shell reads (wc, awk, sed, jq) over local transcript files, creates a workspace under ~/.superpowers/diagnosing-superpowers/<session-id>/ (SKILL.md:33), searches obra/superpowers issues via `gh` or the public GitHub API with curl, and can run `gh issue create` and zip/tar a bundle. Acceptable because session files are strictly read-only (SKILL.md:90, context-safety.md:22), issue creation happens only after the user approves the exact text (SKILL.md:52-53,101-103; github-issues.md:26-27), bundles are built only on request, scrubbed per redaction-policy.md with an independent audit, and archived only after the user sees the scrub log (SKILL.md:55-66).",
+      "Session transcripts are privacy-sensitive (prompts, code, possibly secrets); the skill redacts secrets to `<SECRET-n>` placeholders and states that scrubbing can miss things and the user must review every file before sharing (SKILL.md:65-66). All referenced references/, templates/ and prompts/ files are present in the directory."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "a37e0e9697144819e1d965176ac4ae5bc3fa02d11e7812036bbcadf6dafe2400",
+      "bytes": 1070,
+      "mode": "100644",
+      "git_blob": "abf0390320aa14406af7a520b9b0739fdda9bf08",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry the copyright and permission notice.",
+      "findings": []
+    },
+    {
+      "path": "prompts/analyst-common.md",
+      "sha256": "88801c36070be2a54a8a9a29632b01ab21db053e2e76ee49b5252a9b74ca4090",
+      "bytes": 1582,
+      "mode": "100644",
+      "git_blob": "d7c4033065f1390b4bb681a5d81968cd2190867d",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "prompts/cost-and-time.md",
+      "sha256": "fe97a66d4db3b436816ef82694bda413b522b3a862dd41978da01e358fffecc4",
+      "bytes": 1640,
+      "mode": "100644",
+      "git_blob": "fb9cc0a196e504d7dac46f4a6b5bfe059d34f7db",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "prompts/plan-adherence.md",
+      "sha256": "1dcbab82033598a2e9c9ee42e950d4b1822d2c871c02cef9e102cdd5cbbda113",
+      "bytes": 1637,
+      "mode": "100644",
+      "git_blob": "aaaeac740e9fd65f587025d5e29df1f9a7681e34",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "prompts/quality-evidence.md",
+      "sha256": "749d11cf678f379ed77a29274cad456634e0284aa523639a1a214a9f2b986eb1",
+      "bytes": 1476,
+      "mode": "100644",
+      "git_blob": "26ca5643dc940d67caaa6dcb1791b0473d3c999e",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 10,
+          "evidence": "bash",
+          "context": "   `cargo test`, `go test`, `bats`, `bash tests/…`, or the project's runner",
+          "disposition": "accepted",
+          "reason": "Bash blocks for bounded transcript inspection (wc/awk in context-safety.md:10-12), test-command patterns the analyst looks for (quality-evidence.md:10), and gh/curl issue search and gated `gh issue create` (github-issues.md:9-31)."
+        }
+      ]
+    },
+    {
+      "path": "prompts/repeated-work.md",
+      "sha256": "895027f2dfa4b1b8bcdb7ac9aec8d45a80bff212fad6ec6cad5ab38fa68322f5",
+      "bytes": 1469,
+      "mode": "100644",
+      "git_blob": "da2645a4164c8ac4e6ff894de37a3da3e7da061a",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "prompts/request-conflicts.md",
+      "sha256": "e800e38d8b7752c212c76c5c3ed75cd78b749684263ea0c313586f26af6f4b5c",
+      "bytes": 1011,
+      "mode": "100644",
+      "git_blob": "4532236e754ae22e1f9f41a1ed6e6c462f04ac38",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "prompts/scrub-audit.md",
+      "sha256": "5cc48f05a7f81f5f7e05e0c7ceafc0fb8774bcaf75fe88dcb5c7e408026c70ad",
+      "bytes": 1363,
+      "mode": "100644",
+      "git_blob": "12e8e6d39a5a62a3b6f8f0cfbc970ed8a0054a38",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "prompts/scrub.md",
+      "sha256": "854cb3320cc5377b493cea2f72519d67983464882db68a0f408a7d0a0f040b8c",
+      "bytes": 1471,
+      "mode": "100644",
+      "git_blob": "d4f8dd6429678ea960d9b10f9647d77644dbc121",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "prompts/similar-session.md",
+      "sha256": "b190f713b463df2bb5ec3914647e204074d1bd50643a53159db6d13cace916c1",
+      "bytes": 1711,
+      "mode": "100644",
+      "git_blob": "d012001d25ead6f885b229edf3cbd2f0f8ca8de9",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "prompts/skill-timeline.md",
+      "sha256": "45d604d583b57a77b9033eced8eb875ef342af70fcd66cf7d15c6dc89964890f",
+      "bytes": 1646,
+      "mode": "100644",
+      "git_blob": "ecbe21d113d7d34bf3c9d18720f19d88d31cd070",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "prompts/stumbles.md",
+      "sha256": "1f2d1f048aff7b8b400006301f1ce8c232ecc7e9d5f705af27a849b2c03ea2e7",
+      "bytes": 1330,
+      "mode": "100644",
+      "git_blob": "22b3705fc29dbe88c6a9a9639ce348b83b14712e",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "references/context-safety.md",
+      "sha256": "e6be2bd3495f454d4bedee9484d728d245d1fa656e11fc4ceec5693c16e4730a",
+      "bytes": 990,
+      "mode": "100644",
+      "git_blob": "be09ed84fb5c30b770f3700b723c64adbe4f09ae",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 10,
+          "evidence": "bash",
+          "context": "   ```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks for bounded transcript inspection (wc/awk in context-safety.md:10-12), test-command patterns the analyst looks for (quality-evidence.md:10), and gh/curl issue search and gated `gh issue create` (github-issues.md:9-31)."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 22,
+          "evidence": "delete",
+          "context": "4. **Read-only.** Never modify, move, or delete a session file.",
+          "disposition": "accepted",
+          "reason": "'delete'/'Remove' appear in read-only rules forbidding modifying or deleting session files (SKILL.md:90, context-safety.md:22) and in a producer instruction to remove stale statements from the bundle's own README (bundle-README.md:66); writes are limited to the skill's workspace and bundle copies."
+        }
+      ]
+    },
+    {
+      "path": "references/github-issues.md",
+      "sha256": "a656f5e15b21c7a200c39c038f5ede74b9d6ea3ceeb90f39af7e930c8d8424d6",
+      "bytes": 1644,
+      "mode": "100644",
+      "git_blob": "e9a27a16a44b4a86b4f382b4bca467a69acd78ac",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 4,
+          "evidence": "curl",
+          "context": "limits, and JSON. Fall back to the public API with curl, then to a URL",
+          "disposition": "accepted",
+          "reason": "GitHub search and issue URLs for obra/superpowers (github-issues.md) used to find duplicates and, after explicit approval, file an issue."
+        },
+        {
+          "type": "shell-execution",
+          "line": 9,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks for bounded transcript inspection (wc/awk in context-safety.md:10-12), test-command patterns the analyst looks for (quality-evidence.md:10), and gh/curl issue search and gated `gh issue create` (github-issues.md:9-31)."
+        },
+        {
+          "type": "shell-execution",
+          "line": 16,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks for bounded transcript inspection (wc/awk in context-safety.md:10-12), test-command patterns the analyst looks for (quality-evidence.md:10), and gh/curl issue search and gated `gh issue create` (github-issues.md:9-31)."
+        },
+        {
+          "type": "network-access",
+          "line": 17,
+          "evidence": "curl",
+          "context": "curl -s -H \"Accept: application/vnd.github+json\" \\",
+          "disposition": "accepted",
+          "reason": "GitHub search and issue URLs for obra/superpowers (github-issues.md) used to find duplicates and, after explicit approval, file an issue."
+        },
+        {
+          "type": "network-access",
+          "line": 18,
+          "evidence": "https://",
+          "context": "  \"https://api.github.com/search/issues?q=repo:obra/superpowers+is:issue+<url-encoded terms>&per_page=10\" \\",
+          "disposition": "accepted",
+          "reason": "GitHub search and issue URLs for obra/superpowers (github-issues.md) used to find duplicates and, after explicit approval, file an issue."
+        },
+        {
+          "type": "network-access",
+          "line": 22,
+          "evidence": "curl",
+          "context": "Without curl, hand over `https://github.com/obra/superpowers/issues?q=<terms>`.",
+          "disposition": "accepted",
+          "reason": "GitHub search and issue URLs for obra/superpowers (github-issues.md) used to find duplicates and, after explicit approval, file an issue."
+        },
+        {
+          "type": "network-access",
+          "line": 22,
+          "evidence": "https://",
+          "context": "Without curl, hand over `https://github.com/obra/superpowers/issues?q=<terms>`.",
+          "disposition": "accepted",
+          "reason": "GitHub search and issue URLs for obra/superpowers (github-issues.md) used to find duplicates and, after explicit approval, file an issue."
+        },
+        {
+          "type": "shell-execution",
+          "line": 29,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks for bounded transcript inspection (wc/awk in context-safety.md:10-12), test-command patterns the analyst looks for (quality-evidence.md:10), and gh/curl issue search and gated `gh issue create` (github-issues.md:9-31)."
+        },
+        {
+          "type": "network-access",
+          "line": 43,
+          "evidence": "https://",
+          "context": "https://github.com/obra/superpowers/issues/new?template=diagnosis_report.md&title=<url-encoded title>&body=<url-encoded body>",
+          "disposition": "accepted",
+          "reason": "GitHub search and issue URLs for obra/superpowers (github-issues.md) used to find duplicates and, after explicit approval, file an issue."
+        }
+      ]
+    },
+    {
+      "path": "references/redaction-policy.md",
+      "sha256": "96b16f47074838fe2d7e609577d6f8b0ad460f8378b281a3f96ee23cb5a08bde",
+      "bytes": 2243,
+      "mode": "100644",
+      "git_blob": "c80b6232abef32fa1868b70585203b6e623380d6",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "credential-access",
+          "line": 11,
+          "evidence": "SECRET",
+          "context": "| Secrets | `<SECRET-n>` | API keys, tokens, passwords, bearer strings, private keys, anything assigned to a variable named like `*_KEY`, `*_TOKEN`, `*_SECRET`, `PASSWORD`, `Authorization` |",
+          "disposition": "accepted",
+          "reason": "`<SECRET-n>` is the redaction placeholder for API keys and tokens found in transcripts (redaction-policy.md:11, bundle-README.md:50); the skill removes secrets rather than reading or transmitting them."
+        }
+      ]
+    },
+    {
+      "path": "references/session-discovery.md",
+      "sha256": "6d1dced083e5d978448a78df298cf515531b0eb39b2854a4a2afbffeb69a7435",
+      "bytes": 1859,
+      "mode": "100644",
+      "git_blob": "d069ff8b975e31997dd3196b53d95d261c6b24af",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "5a652f8132cc901eb5ca61f89157839f87a2f20aed037fc7a2b51051bc37cd19",
+      "bytes": 6904,
+      "mode": "100644",
+      "git_blob": "f1d479fbc49e29b1984ef5ffa00ad20334445a14",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 90,
+          "evidence": "delete",
+          "context": "- **Read-only.** Never modify, move, or delete a session file.",
+          "disposition": "accepted",
+          "reason": "'delete'/'Remove' appear in read-only rules forbidding modifying or deleting session files (SKILL.md:90, context-safety.md:22) and in a producer instruction to remove stale statements from the bundle's own README (bundle-README.md:66); writes are limited to the skill's workspace and bundle copies."
+        }
+      ]
+    },
+    {
+      "path": "templates/bundle-README.md",
+      "sha256": "2e6ddc6b106028d5ebd00a50ad93a77111d675c219ee1273cd0857869e8d51ec",
+      "bytes": 3672,
+      "mode": "100644",
+      "git_blob": "c469b157b511c073abc787b102e5383637cb0cf2",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "credential-access",
+          "line": 50,
+          "evidence": "SECRET",
+          "context": "Placeholders look like `<EMAIL-1>`, `<PERSON-2>`, `<SECRET-3>`, `<HOST-4>`,",
+          "disposition": "accepted",
+          "reason": "`<SECRET-n>` is the redaction placeholder for API keys and tokens found in transcripts (redaction-policy.md:11, bundle-README.md:50); the skill removes secrets rather than reading or transmitting them."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 66,
+          "evidence": "Remove",
+          "context": "Remove stale export statements; distinguish bundle preparation from archive",
+          "disposition": "accepted",
+          "reason": "'delete'/'Remove' appear in read-only rules forbidding modifying or deleting session files (SKILL.md:90, context-safety.md:22) and in a producer instruction to remove stale statements from the bundle's own README (bundle-README.md:66); writes are limited to the skill's workspace and bundle copies."
+        }
+      ]
+    },
+    {
+      "path": "templates/case.md",
+      "sha256": "597892462be83bc478536ec91f7c285f6dd25d119c560734a3a180fe8471301d",
+      "bytes": 2983,
+      "mode": "100644",
+      "git_blob": "c1a182beefa64a5f92ff33074aa8b7246d33c205",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "templates/issue.md",
+      "sha256": "8f28dbfe60602f77dda76d81815cb4e2dce7d3e2a93348890e1581be8310ac1f",
+      "bytes": 1851,
+      "mode": "100644",
+      "git_blob": "d76c0c88a18655f5dbfa9a951945c11c8a221a2e",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "templates/report.md",
+      "sha256": "38295d0fd785e8608f330815c59ebd7047942002ec7085aecbed54681f56b0c1",
+      "bytes": 2359,
+      "mode": "100644",
+      "git_blob": "1ab721204f1d92b27385828b06713dc0605ace7a",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": []
+    }
+  ]
+}

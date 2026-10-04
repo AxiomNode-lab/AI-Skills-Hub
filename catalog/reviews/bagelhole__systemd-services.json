@@ -1,0 +1,170 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "bagelhole/systemd-services",
+  "status": "draft",
+  "reviewed_on": null,
+  "reviewer": null,
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "infrastructure/servers/systemd-services",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "infrastructure/servers/systemd-services",
+    "url": "https://api.github.com/repos/BagelHole/DevOps-Security-Agent-Skills/git/trees/0365f57a079b1332f95cf26e31dd2d5332a8399f?recursive=1",
+    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/BagelHole/DevOps-Security-Agent-Skills/blob/0365f57a079b1332f95cf26e31dd2d5332a8399f/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "infrastructure",
+        "infrastructure/servers",
+        "infrastructure/servers/systemd-services"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte."
+    ]
+  },
+  "content_review": {
+    "status": "pending",
+    "risk": "unknown",
+    "blocking_findings": [],
+    "capabilities": {},
+    "notes": []
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "67c5c5cbb12cafb1515e449748866bd40da7dec9",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "1a543961b5c4296442da5b3578a3d25c3b1365fa6c778079b67ec2a09131bdf5",
+      "bytes": 9157,
+      "mode": "100644",
+      "git_blob": "2eb7afd6c2343d5bf4aacd83a74015ad68ef85f1",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 26,
+          "evidence": " sudo",
+          "context": "- Root or sudo access for creating system-level unit files",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 36,
+          "evidence": "https://",
+          "context": "Documentation=https://docs.example.com/myapp",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 55,
+          "evidence": "sh",
+          "context": "ExecStartPost=/opt/myapp/bin/healthcheck.sh",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 57,
+          "evidence": "sh",
+          "context": "ExecStop=/opt/myapp/bin/graceful-stop.sh",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 90,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 176,
+          "evidence": "sh",
+          "context": "ExecStart=/usr/local/bin/run-backup.sh",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 183,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 236,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 249,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 295,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 297,
+          "evidence": "mkdir",
+          "context": "mkdir -p /etc/systemd/system/myapp.service.d/",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 319,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    }
+  ]
+}

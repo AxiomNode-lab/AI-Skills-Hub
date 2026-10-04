@@ -1,0 +1,138 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "bagelhole/penetration-testing",
+  "status": "draft",
+  "reviewed_on": null,
+  "reviewer": null,
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "security/operations/penetration-testing",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "security/operations/penetration-testing",
+    "url": "https://api.github.com/repos/BagelHole/DevOps-Security-Agent-Skills/git/trees/0365f57a079b1332f95cf26e31dd2d5332a8399f?recursive=1",
+    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/BagelHole/DevOps-Security-Agent-Skills/blob/0365f57a079b1332f95cf26e31dd2d5332a8399f/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "security",
+        "security/operations",
+        "security/operations/penetration-testing"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte."
+    ]
+  },
+  "content_review": {
+    "status": "pending",
+    "risk": "unknown",
+    "blocking_findings": [],
+    "capabilities": {},
+    "notes": []
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "67c5c5cbb12cafb1515e449748866bd40da7dec9",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "ba7dd50cc897a3aba8c121bd7080e730569380d41b1b9020f852dfc5c6e494df",
+      "bytes": 2106,
+      "mode": "100644",
+      "git_blob": "18a8de60beb095944326192591f1bc72259623ef",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 46,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 60,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 65,
+          "evidence": "https://",
+          "context": "nikto -h https://target.com",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 66,
+          "evidence": "https://",
+          "context": "dirb https://target.com",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 74,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 76,
+          "evidence": "http://",
+          "context": "sqlmap -u \"http://target.com/page?id=1\"",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 82,
+          "evidence": "curl",
+          "context": "curl \"http://target.com/file?path=../../../etc/passwd\"",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 82,
+          "evidence": "http://",
+          "context": "curl \"http://target.com/file?path=../../../etc/passwd\"",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    }
+  ]
+}

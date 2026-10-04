@@ -19,7 +19,7 @@ The user describes the desired capability. The Hub resolves the rest.
 3. Agent Plugin — portable package; Agent Plugins v1 defines Skills and MCP servers inside the package.
 4. CLI Tool — executable/package-based developer capability.
 
-Agent Plugins v1 requires root plugin.json and discovers Skills from skills/ and MCP servers from mcp.json. Client-specific behavior is namespaced under extensions. citeturn244495search0
+Agent Plugins v1 requires root plugin.json and discovers Skills from skills/ and MCP servers from mcp.json. Client-specific behavior is namespaced under extensions.
 
 ## Data flow
 
@@ -43,11 +43,11 @@ Normalized metadata, compatibility, trust state, provenance, install state, and 
 
 ### Semantic External Discovery
 
-skills.sh provides semantic search for multi-word queries and stable IDs/install URLs. The Hub uses it as a discovery index; discovered content stays remote until trust gates pass. citeturn922916search0
+skills.sh provides semantic search for multi-word queries and stable IDs/install URLs. The Hub uses it as a discovery index; discovered content stays remote until trust gates pass.
 
 ### MCP Registry
 
-The official MCP Registry exposes GET /v0.1/servers with search and cursor pagination. Aggregators are expected to persist a downstream copy rather than depend on the registry as durable storage. citeturn506255search0turn506255search3
+The official MCP Registry exposes GET /v0.1/servers with search and cursor pagination. Aggregators are expected to persist a downstream copy rather than depend on the registry as durable storage.
 
 ### GitHub
 

@@ -1,0 +1,346 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "kdense/scientific-critical-thinking",
+  "source": {
+    "repo": "K-Dense-AI/scientific-agent-skills",
+    "path": "skills/scientific-critical-thinking",
+    "revision": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298"
+  },
+  "review": {
+    "path": "catalog/reviews/kdense__scientific-critical-thinking.json",
+    "sha256": "40a67c4cc9736eca70a1acb4a1e554bf554466d86b7a782fdbebd8998510ce34"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "filesystem-write",
+        "line": 203,
+        "evidence": "remove",
+        "context": "measured variable can induce collider bias or remove part of the effect through a mediator;",
+        "file": "references/common_biases.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 270,
+        "evidence": "remove",
+        "context": "  not itself remove attrition bias",
+        "file": "references/experimental_design.md"
+      },
+      {
+        "type": "network-access",
+        "line": 12,
+        "evidence": "https://",
+        "context": "| [Cochrane Handbook, chapter 8](https://www.cochrane.org/authors/handbooks-and-manuals/handbook/current/chapter-08) | RoB 2 is result-specific; assignment versus adherence and trial variant matter. Overall judgments use domain rules, not a",
+        "file": "references/review_sources.md"
+      },
+      {
+        "type": "network-access",
+        "line": 13,
+        "evidence": "https://",
+        "context": "| [ROBINS-I V2 developers](https://www.riskofbias.info/welcome/robins-i-v2) | November 2025 V2 is still labelled draft, for follow-up/cohort intervention studies. It differs from ROBINS-I 2016; name the version. |",
+        "file": "references/review_sources.md"
+      },
+      {
+        "type": "network-access",
+        "line": 14,
+        "evidence": "https://",
+        "context": "| [QUADAS-3 developers](https://www.bristol.ac.uk/population-health-sciences/projects/quadas/quadas-3/) | Current recommended diagnostic accuracy tool, published February 2026; listed download v1.2. Assessment is per accuracy estimate, with",
+        "file": "references/review_sources.md"
+      },
+      {
+        "type": "network-access",
+        "line": 15,
+        "evidence": "https://",
+        "context": "| [AMSTAR 2 developers](https://amstar.ca/Amstar-2.php) | Appraises systematic reviews of healthcare interventions; critical domains determine confidence, not a summed score. |",
+        "file": "references/review_sources.md"
+      },
+      {
+        "type": "network-access",
+        "line": 16,
+        "evidence": "https://",
+        "context": "| [PEDro scale](https://pedro.org.au/english/resources/pedro-scale/) | Physiotherapy-trial appraisal scale; eligibility item is not part of the total. Not equivalent to RoB 2 or a GRADE certainty rating. |",
+        "file": "references/review_sources.md"
+      },
+      {
+        "type": "network-access",
+        "line": 17,
+        "evidence": "https://",
+        "context": "| [Newcastle-Ottawa Scale developers](https://ohri.ca/en/who-we-are/core-facilities-and-platforms/ottawa-methods-centre/newcastle-ottawa-scale) | Cohort/case-control forms address selection, comparability, and outcome/exposure ascertainment",
+        "file": "references/review_sources.md"
+      },
+      {
+        "type": "network-access",
+        "line": 18,
+        "evidence": "https://",
+        "context": "| [CASP checklists](https://casp-uk.net/casp-tools-checklists/) | Separate appraisal checklists by design; use the matching current form. |",
+        "file": "references/review_sources.md"
+      },
+      {
+        "type": "network-access",
+        "line": 19,
+        "evidence": "https://",
+        "context": "| [CONSORT/SPIRIT developers](https://www.consort-spirit.org/) and [extensions](https://www.consort-spirit.org/extensions) | Core trial-results and protocol guidance is CONSORT 2025/SPIRIT 2025. Some applicable extensions still reference ol",
+        "file": "references/review_sources.md"
+      },
+      {
+        "type": "network-access",
+        "line": 19,
+        "evidence": "https://",
+        "context": "| [CONSORT/SPIRIT developers](https://www.consort-spirit.org/) and [extensions](https://www.consort-spirit.org/extensions) | Core trial-results and protocol guidance is CONSORT 2025/SPIRIT 2025. Some applicable extensions still reference ol",
+        "file": "references/review_sources.md"
+      },
+      {
+        "type": "network-access",
+        "line": 20,
+        "evidence": "https://",
+        "context": "| [STROBE developers](https://www.strobe-statement.org/) | Cohort, case-control, and cross-sectional reporting; explicitly not a study-quality assessment instrument. |",
+        "file": "references/review_sources.md"
+      },
+      {
+        "type": "network-access",
+        "line": 21,
+        "evidence": "https://",
+        "context": "| [PRISMA 2020 developers](https://www.prisma-statement.org/prisma-2020) | Systematic-review reporting checklist, expanded checklist, and flow diagrams; not a bias or certainty score. |",
+        "file": "references/review_sources.md"
+      },
+      {
+        "type": "network-access",
+        "line": 22,
+        "evidence": "https://",
+        "context": "| [STARD guidance](https://www.equator-network.org/reporting-guidelines/stard/) | STARD 2015 for diagnostic accuracy reports; STARD-AI is a 2025 extension for AI studies. |",
+        "file": "references/review_sources.md"
+      },
+      {
+        "type": "network-access",
+        "line": 23,
+        "evidence": "https://",
+        "context": "| [COREQ guidance](https://www.equator-network.org/reporting-guidelines/coreq/) | Qualitative interviews and focus groups; not all qualitative designs indiscriminately. |",
+        "file": "references/review_sources.md"
+      },
+      {
+        "type": "network-access",
+        "line": 24,
+        "evidence": "https://",
+        "context": "| [CARE developers](https://www.care-statement.org/) | Case-report guidance developed in 2013 with 2017 explanation; reporting does not identify a comparative treatment effect. |",
+        "file": "references/review_sources.md"
+      },
+      {
+        "type": "network-access",
+        "line": 25,
+        "evidence": "https://",
+        "context": "| [GRADE Book principles](https://book.gradepro.org/guideline/principles-for-assessing-the-certainty-of-interventions) | Current chapter dated August 2025: outcome-level certainty relative to explicit thresholds/ranges, absolute effects, al",
+        "file": "references/review_sources.md"
+      },
+      {
+        "type": "network-access",
+        "line": 26,
+        "evidence": "https://",
+        "context": "| [GRADE Book overview](https://book.gradepro.org/guideline/overview-of-the-grade-approach) | Updated May 2026; intervention, diagnostic, prognosis, exposure, and values applications differ. The intervention design hierarchy is not universa",
+        "file": "references/review_sources.md"
+      },
+      {
+        "type": "network-access",
+        "line": 27,
+        "evidence": "https://",
+        "context": "| [GRADE recommendations](https://book.gradepro.org/guideline/grade-recommendations) | Updated March 2026: recommendation direction/strength requires a separate evidence-to-decision rationale and context. |",
+        "file": "references/review_sources.md"
+      },
+      {
+        "type": "network-access",
+        "line": 28,
+        "evidence": "https://",
+        "context": "| [Cochrane Handbook, chapter 14](https://www.cochrane.org/authors/handbooks-and-manuals/handbook/current/chapter-14) | Practical Summary of Findings and ROBINS-I/GRADE integration; preserve outcome/comparison scope and explicit domain expl",
+        "file": "references/review_sources.md"
+      },
+      {
+        "type": "network-access",
+        "line": 37,
+        "evidence": "https://",
+        "context": "- [ASA p-value statement](https://www.amstat.org/asa/files/pdfs/p-valuestatement.pdf):",
+        "file": "references/review_sources.md"
+      },
+      {
+        "type": "network-access",
+        "line": 40,
+        "evidence": "https://",
+        "context": "- [Greenland et al., statistical misinterpretations](https://link.springer.com/article/10.1007/s10654-016-0149-3):",
+        "file": "references/review_sources.md"
+      },
+      {
+        "type": "network-access",
+        "line": 43,
+        "evidence": "https://",
+        "context": "- [Hernán and Robins, Causal Inference: What If](https://miguelhernan.org/whatifbook):",
+        "file": "references/review_sources.md"
+      },
+      {
+        "type": "network-access",
+        "line": 46,
+        "evidence": "https://",
+        "context": "- [Cochrane Handbook, chapter 13](https://www.cochrane.org/authors/handbooks-and-manuals/handbook/current/chapter-13):",
+        "file": "references/review_sources.md"
+      },
+      {
+        "type": "network-access",
+        "line": 49,
+        "evidence": "https://",
+        "context": "- [ARRIVE 2.0 experimental-unit explanation](https://arriveguidelines.org/arrive-guidelines/study-design/1b/explanation):",
+        "file": "references/review_sources.md"
+      },
+      {
+        "type": "network-access",
+        "line": 52,
+        "evidence": "https://",
+        "context": "- [FDA multiple-endpoints guidance](https://www.fda.gov/regulatory-information/search-fda-guidance-documents/multiple-endpoints-clinical-trials):",
+        "file": "references/review_sources.md"
+      },
+      {
+        "type": "network-access",
+        "line": 55,
+        "evidence": "https://",
+        "context": "- [WMA Declaration of Helsinki](https://www.wma.net/policies-post/wma-declaration-of-helsinki/):",
+        "file": "references/review_sources.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 153,
+        "evidence": "remove",
+        "context": "  realized groups or remove later selection, non-adherence, measurement, or attrition bias.",
+        "file": "references/scientific_method.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 300,
+        "evidence": "Remove",
+        "context": "- Remove redundant predictors",
+        "file": "references/statistical_pitfalls.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 71,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 78,
+        "evidence": "https://",
+        "context": "**Disclosure:** AI schematic generation sends your prompt to [OpenRouter](https://openrouter.ai/) (a third-party API). Do not include unpublished sensitive details unless that transmission is appropriate for your project.",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 139,
+        "evidence": "https://",
+        "context": "For RoB 2, identify the specific result: outcome, time point, intervention comparison, numerical estimate, and effect of assignment versus adherence. Use the variant for individually randomized, cluster, or crossover trials; record signalli",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 228,
+        "evidence": "https://",
+        "context": "> https://doi.org/10.48550/arXiv.2609.00065",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 230,
+        "evidence": "https://",
+        "context": "Always cite the current version. The DOI and https://arxiv.org/abs/2609.00065 resolve to the",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 232,
+        "evidence": "https://",
+        "context": "available, fetch https://arxiv.org/abs/2609.00065 (or",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 233,
+        "evidence": "http://",
+        "context": "http://export.arxiv.org/api/query?id_list=2609.00065) before writing the reference and take",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 134227
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE.md"
+    },
+    {
+      "path": "references/common_biases.md",
+      "sha256": "641e8e8e6dfadac1643ea8691b7d3e4e58cf013f134cd42c71301878096a5a39",
+      "bytes": 12368,
+      "mode": "100644"
+    },
+    {
+      "path": "references/core_capabilities.md",
+      "sha256": "0f337b96aa2d7453433a17824368fbd0638b9469d4f90a5fd23f4167c9dee180",
+      "bytes": 16975,
+      "mode": "100644"
+    },
+    {
+      "path": "references/evidence_hierarchy.md",
+      "sha256": "534fbe991ecfb2d162f755004dc528118ce74a78862917c2911595a522d76e6c",
+      "bytes": 17435,
+      "mode": "100644"
+    },
+    {
+      "path": "references/experimental_design.md",
+      "sha256": "eca7e42025393984c07676f3d4bc354d217e5604dc2209c76215d31953a7c74c",
+      "bytes": 18227,
+      "mode": "100644"
+    },
+    {
+      "path": "references/logical_fallacies.md",
+      "sha256": "becfc5bfac7b831dca67cc442cd0fcb42d8eea527a6fc2921c1b704e592ff593",
+      "bytes": 18659,
+      "mode": "100644"
+    },
+    {
+      "path": "references/review_sources.md",
+      "sha256": "71e75106f36f3e69b28959ad1fec503ccdb21b7f5361ab230173e4812accbf62",
+      "bytes": 7557,
+      "mode": "100644"
+    },
+    {
+      "path": "references/scientific_method.md",
+      "sha256": "5aa925b97c7a916f819dafc8b42a9c24e4bd3eb2836594e724f1e7f9ae75ea0f",
+      "bytes": 7641,
+      "mode": "100644"
+    },
+    {
+      "path": "references/statistical_pitfalls.md",
+      "sha256": "0c43204a0a81110cfeb7c982fa4caa89f274bdcebf096e09e5adfccf31241cb9",
+      "bytes": 21151,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "563af70571b7dcd6a96bf2e303bedfdcba623b4e9f082d58f04aacbc961fdae4",
+      "bytes": 13146,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 134227
+}

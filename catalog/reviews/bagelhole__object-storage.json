@@ -1,0 +1,298 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "bagelhole/object-storage",
+  "status": "draft",
+  "reviewed_on": null,
+  "reviewer": null,
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "infrastructure/storage/object-storage",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "infrastructure/storage/object-storage",
+    "url": "https://api.github.com/repos/BagelHole/DevOps-Security-Agent-Skills/git/trees/0365f57a079b1332f95cf26e31dd2d5332a8399f?recursive=1",
+    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/BagelHole/DevOps-Security-Agent-Skills/blob/0365f57a079b1332f95cf26e31dd2d5332a8399f/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "infrastructure",
+        "infrastructure/storage",
+        "infrastructure/storage/object-storage"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte."
+    ]
+  },
+  "content_review": {
+    "status": "pending",
+    "risk": "unknown",
+    "blocking_findings": [],
+    "capabilities": {},
+    "notes": []
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "67c5c5cbb12cafb1515e449748866bd40da7dec9",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "650289d4c1f7e84736cb50a3e1bd5c92e526cdfc3d30badf54201f2346fd229a",
+      "bytes": 9919,
+      "mode": "100644",
+      "git_blob": "15feaf861131979082c5e3e3f4ffa87b6a54cdf7",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 35,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 48,
+          "evidence": "Delete",
+          "context": "# Delete an empty bucket",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 51,
+          "evidence": "Delete",
+          "context": "# Delete a bucket and ALL its contents (destructive)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 57,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 71,
+          "evidence": "delete",
+          "context": "aws s3 sync ./build/ s3://my-app-assets-prod/static/ --delete",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 85,
+          "evidence": "delete",
+          "context": "# Recursive delete of a prefix",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 91,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 109,
+          "evidence": "Delete",
+          "context": "# Delete a specific version permanently",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 110,
+          "evidence": "delete",
+          "context": "aws s3api delete-object \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 118,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 167,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 215,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 232,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 240,
+          "evidence": "secret",
+          "context": "  -e MINIO_ROOT_PASSWORD=minio-secret-key-change-me \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 256,
+          "evidence": "secret",
+          "context": "      MINIO_ROOT_PASSWORD: minio-secret-key-change-me",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 257,
+          "evidence": "https://",
+          "context": "      MINIO_BROWSER_REDIRECT_URL: https://minio-console.example.com",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 280,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 286,
+          "evidence": "curl",
+          "context": "curl -s http://localhost:9000/minio/health/live",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 286,
+          "evidence": "http://",
+          "context": "curl -s http://localhost:9000/minio/health/live",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 291,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 293,
+          "evidence": "curl",
+          "context": "curl -O https://dl.min.io/client/mc/release/linux-amd64/mc",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 293,
+          "evidence": "https://",
+          "context": "curl -O https://dl.min.io/client/mc/release/linux-amd64/mc",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 293,
+          "evidence": "\nchmod",
+          "context": "curl -O https://dl.min.io/client/mc/release/linux-amd64/mc",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 297,
+          "evidence": "secret",
+          "context": "mc alias set myminio http://localhost:9000 minioadmin minio-secret-key-change-me",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 297,
+          "evidence": "http://",
+          "context": "mc alias set myminio http://localhost:9000 minioadmin minio-secret-key-change-me",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 300,
+          "evidence": "https://",
+          "context": "mc alias set aws https://s3.amazonaws.com AKIAEXAMPLE SECRETKEYEXAMPLE",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 331,
+          "evidence": "secret",
+          "context": "mc admin user svcacct add myminio minioadmin --access-key myapp-key --secret-key myapp-secret",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 331,
+          "evidence": "secret",
+          "context": "mc admin user svcacct add myminio minioadmin --access-key myapp-key --secret-key myapp-secret",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    }
+  ]
+}

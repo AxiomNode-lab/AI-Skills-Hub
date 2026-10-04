@@ -1,0 +1,455 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "wshobson/bash-defensive-patterns",
+  "status": "draft",
+  "reviewed_on": null,
+  "reviewer": null,
+  "source": {
+    "repo": "wshobson/agents",
+    "path": "plugins/shell-scripting/skills/bash-defensive-patterns",
+    "revision": "156b7a5e7a8b93642628a339ee4039c925b34c7f"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "plugins/shell-scripting/skills/bash-defensive-patterns",
+    "url": "https://api.github.com/repos/wshobson/agents/git/trees/156b7a5e7a8b93642628a339ee4039c925b34c7f?recursive=1",
+    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/wshobson/agents/blob/156b7a5e7a8b93642628a339ee4039c925b34c7f/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "plugins",
+        "plugins/shell-scripting",
+        "plugins/shell-scripting/skills",
+        "plugins/shell-scripting/skills/bash-defensive-patterns"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte."
+    ]
+  },
+  "content_review": {
+    "status": "pending",
+    "risk": "unknown",
+    "blocking_findings": [],
+    "capabilities": {},
+    "notes": []
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "f89abb55d9f073f38f1703e4518f0613c788c6174be7f13b8dfe48a1c076c746",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "326f0a55c96e672fedf9d807ca043c00df05ba0e",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "references/details.md",
+      "sha256": "3ce9ec046f260da3b349f3df1b7b3a0474adb7bf9e10175a0ea4aea7bb3bd877",
+      "bytes": 9770,
+      "mode": "100644",
+      "git_blob": "ac39cf9c2d848cca103aa6874e8db5be952e601e",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 1,
+          "evidence": "bash",
+          "context": "# bash-defensive-patterns — detailed patterns and worked examples",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 7,
+          "evidence": "bash",
+          "context": "Enable bash strict mode at the start of every script to catch errors early.",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 9,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 10,
+          "evidence": "bash",
+          "context": "#!/bin/bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 25,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 26,
+          "evidence": "bash",
+          "context": "#!/bin/bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "destructive-operation",
+          "line": 30,
+          "evidence": "rm -rf",
+          "context": "trap 'echo \"Cleaning up...\"; rm -rf \"$TMPDIR\"' EXIT",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 30,
+          "evidence": "rm -rf",
+          "context": "trap 'echo \"Cleaning up...\"; rm -rf \"$TMPDIR\"' EXIT",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 40,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 55,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 70,
+          "evidence": "Bash",
+          "context": "Use `[[ ]]` for Bash-specific features, `[ ]` for POSIX.",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 72,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 73,
+          "evidence": "Bash",
+          "context": "# Bash - safer",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 93,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 94,
+          "evidence": "bash",
+          "context": "#!/bin/bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 106,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 107,
+          "evidence": "bash",
+          "context": "#!/bin/bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 132,
+          "evidence": "mkdir",
+          "context": "    mkdir -p \"$output_dir\" || { echo \"ERROR: Cannot create output_dir\" >&2; return 1; }",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 146,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 147,
+          "evidence": "bash",
+          "context": "#!/bin/bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "destructive-operation",
+          "line": 150,
+          "evidence": "rm -rf",
+          "context": "trap 'rm -rf -- \"$TMPDIR\"' EXIT",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 150,
+          "evidence": "rm -rf",
+          "context": "trap 'rm -rf -- \"$TMPDIR\"' EXIT",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 167,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 168,
+          "evidence": "bash",
+          "context": "#!/bin/bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 230,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 231,
+          "evidence": "bash",
+          "context": "#!/bin/bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 262,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 263,
+          "evidence": "bash",
+          "context": "#!/bin/bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 300,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 301,
+          "evidence": "bash",
+          "context": "#!/bin/bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 351,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 352,
+          "evidence": "bash",
+          "context": "#!/bin/bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 364,
+          "evidence": "mkdir",
+          "context": "    mkdir -p \"$dir\" || {",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 390,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 391,
+          "evidence": "bash",
+          "context": "#!/bin/bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 415,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 416,
+          "evidence": "bash",
+          "context": "#!/bin/bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 440,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 441,
+          "evidence": "bash",
+          "context": "#!/bin/bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 477,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 478,
+          "evidence": "bash",
+          "context": "#!/bin/bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 483,
+          "evidence": "curl",
+          "context": "    local -a required=(\"jq\" \"curl\" \"git\")",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "741b42d1fa3167f2131a17f3e0fe891e93be4fc87aa3c19e1de5fd26d763f711",
+      "bytes": 1991,
+      "mode": "100644",
+      "git_blob": "1cb79f63668b7833e6a1377ab957578d84f9d410",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 2,
+          "evidence": "bash",
+          "context": "name: bash-defensive-patterns",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 3,
+          "evidence": "Bash",
+          "context": "description: Master defensive Bash programming techniques for production-grade scripts. Use when writing robust shell scripts, CI/CD pipelines, or system utilities requiring fault tolerance and safety.",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 6,
+          "evidence": "Bash",
+          "context": "# Bash Defensive Patterns",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 8,
+          "evidence": "Bash",
+          "context": "Comprehensive guidance for writing production-ready Bash scripts using defensive programming techniques, error handling, and safety best practices to prevent common pitfalls and ensure reliability.",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    }
+  ]
+}

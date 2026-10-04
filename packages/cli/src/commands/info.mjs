@@ -1,11 +1,13 @@
 import { readLocalCapabilities } from "../utils.mjs";
 import fs from "node:fs/promises";
+import { resolveHubPath } from "@ai-skills-hub/core";
 import path from "node:path";
 import { statusReader, printCapabilityStatus } from "../capability-status.mjs";
 
 export async function infoCommand(id, options = {}) {
   if (!id) {
     console.error("Error: Capability ID is required.");
+    process.exitCode = 1;
     return;
   }
 
@@ -14,12 +16,13 @@ export async function infoCommand(id, options = {}) {
 
   if (!cap) {
     console.error(`Error: Capability '${id}' not found.`);
+    process.exitCode = 1;
     return;
   }
 
   const output = { ...cap, hub_status: statusReader(options)(cap) };
   if (cap.artifact_type === "skill" && cap.materialized_root) {
-    const skillPath = path.join(path.resolve(cap.materialized_root), "SKILL.md");
+    const skillPath = path.join(resolveHubPath(cap.materialized_root), "SKILL.md");
     try {
       output.skill_content = await fs.readFile(skillPath, "utf8");
     } catch {
@@ -39,7 +42,8 @@ export async function infoCommand(id, options = {}) {
   console.log(` Type:         ${cap.artifact_type || cap.type || "skill"}`);
   console.log(` Publisher:    ${cap.publisher || "N/A"}`);
   console.log(` Distribution: ${cap.distribution}`);
-  console.log(` Release:      ${cap.release?.status || "unknown"}`);
+  const releaseReasons = cap.release?.reasons?.length ? ` (${cap.release.reasons.join(", ")})` : "";
+  console.log(` Release:      ${cap.release?.status || "unknown"}${releaseReasons}`);
   console.log(` Security:     ${cap.security?.risk || "unknown"} / ${cap.security?.scan_status || "unknown"}`);
   console.log(` Description:  ${cap.description || "N/A"}`);
   if (cap.dependencies?.length) console.log(` Dependencies: ${cap.dependencies.join(", ")}`);

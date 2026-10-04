@@ -1,0 +1,289 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "microsoft/azure-ai-voicelive-ts",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/azure-sdk-typescript/skills/azure-ai-voicelive-ts",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "review": {
+    "path": "catalog/reviews/microsoft__azure-ai-voicelive-ts.json",
+    "sha256": "8b899312bbb273df99c89266c2148f8ad6ce3c5680c00f6e44baa6e90babca72"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "network-access",
+        "line": 435,
+        "evidence": "https://",
+        "context": "- [Azure Voice Live Samples](https://github.com/microsoft-foundry/voicelive-samples)",
+        "file": "references/audio-streaming.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 345,
+        "evidence": "delete",
+        "context": "    pendingCalls.delete(callId);",
+        "file": "references/function-calling.md"
+      },
+      {
+        "type": "network-access",
+        "line": 500,
+        "evidence": "https://",
+        "context": "- [Azure Voice Live API Reference](https://learn.microsoft.com/javascript/api/@azure/ai-voicelive)",
+        "file": "references/function-calling.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 18,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 19,
+        "evidence": "npm install",
+        "context": "npm install @azure/ai-voicelive @azure/identity",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 21,
+        "evidence": "npm install",
+        "context": "npm install @types/node",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 32,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 33,
+        "evidence": "https://",
+        "context": "AZURE_VOICELIVE_ENDPOINT=https://<resource>.cognitiveservices.azure.com",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 34,
+        "evidence": "API key",
+        "context": "# Optional: API key if not using Entra ID",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 35,
+        "evidence": "api-key",
+        "context": "AZURE_VOICELIVE_API_KEY=<your-api-key>",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 43,
+        "evidence": "Credential",
+        "context": "### Microsoft Entra Token Credential (Recommended)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 50,
+        "evidence": "credential",
+        "context": "const credential = new DefaultAzureCredential({requiredEnvVars: [\"AZURE_TOKEN_CREDENTIALS\"]});",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 51,
+        "evidence": "credential",
+        "context": "// Or use a specific credential directly in production:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 52,
+        "evidence": "credential",
+        "context": "// See https://learn.microsoft.com/javascript/api/overview/azure/identity-readme?view=azure-node-latest#credential-classes",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 52,
+        "evidence": "https://",
+        "context": "// See https://learn.microsoft.com/javascript/api/overview/azure/identity-readme?view=azure-node-latest#credential-classes",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 53,
+        "evidence": "credential",
+        "context": "// const credential = new ManagedIdentityCredential();",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 54,
+        "evidence": "https://",
+        "context": "const endpoint = \"https://your-resource.cognitiveservices.azure.com\";",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 56,
+        "evidence": "credential",
+        "context": "const client = new VoiceLiveClient(endpoint, credential);",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 59,
+        "evidence": "API Key",
+        "context": "### API Key",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 65,
+        "evidence": "https://",
+        "context": "const endpoint = \"https://your-resource.cognitiveservices.azure.com\";",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 66,
+        "evidence": "credential",
+        "context": "const credential = new AzureKeyCredential(\"your-api-key\");",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 66,
+        "evidence": "api-key",
+        "context": "const credential = new AzureKeyCredential(\"your-api-key\");",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 68,
+        "evidence": "credential",
+        "context": "const client = new VoiceLiveClient(endpoint, credential);",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 89,
+        "evidence": "credential",
+        "context": "const credential = new DefaultAzureCredential({requiredEnvVars: [\"AZURE_TOKEN_CREDENTIALS\"]});",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 90,
+        "evidence": "process.env",
+        "context": "const endpoint = process.env.AZURE_VOICELIVE_ENDPOINT!;",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 93,
+        "evidence": "credential",
+        "context": "const client = new VoiceLiveClient(endpoint, credential);",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 442,
+        "evidence": "credential",
+        "context": "// Use browser-compatible credential",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 443,
+        "evidence": "credential",
+        "context": "const credential = new InteractiveBrowserCredential({",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 448,
+        "evidence": "credential",
+        "context": "const client = new VoiceLiveClient(endpoint, credential);",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 471,
+        "evidence": "https://",
+        "context": "| npm Package | https://www.npmjs.com/package/@azure/ai-voicelive |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 472,
+        "evidence": "https://",
+        "context": "| GitHub Source | https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/ai/ai-voicelive |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 473,
+        "evidence": "https://",
+        "context": "| Samples | https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/ai/ai-voicelive/samples |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 474,
+        "evidence": "https://",
+        "context": "| API Reference | https://learn.microsoft.com/javascript/api/@azure/ai-voicelive |",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 41350
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/audio-streaming.md",
+      "sha256": "7fa9be894cc0043c427cc8c953d1b2891b49bef19ba3aacdaa3bcaccb5c02e11",
+      "bytes": 12563,
+      "mode": "100644"
+    },
+    {
+      "path": "references/function-calling.md",
+      "sha256": "900325ee0cdcfbee67075da41a6f1bd1358200dece473ee58ac904e19dab6d4c",
+      "bytes": 13808,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "d288827a7769dba34a4154b0981feee766ecefcd64ccd5e052f21d5e064d4d04",
+      "bytes": 13839,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 41350
+}

@@ -1,0 +1,202 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "bagelhole/azure-devops",
+  "status": "draft",
+  "reviewed_on": null,
+  "reviewer": null,
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "devops/ci-cd/azure-devops",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "devops/ci-cd/azure-devops",
+    "url": "https://api.github.com/repos/BagelHole/DevOps-Security-Agent-Skills/git/trees/0365f57a079b1332f95cf26e31dd2d5332a8399f?recursive=1",
+    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/BagelHole/DevOps-Security-Agent-Skills/blob/0365f57a079b1332f95cf26e31dd2d5332a8399f/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "devops",
+        "devops/ci-cd",
+        "devops/ci-cd/azure-devops"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte."
+    ]
+  },
+  "content_review": {
+    "status": "pending",
+    "risk": "unknown",
+    "blocking_findings": [],
+    "capabilities": {},
+    "notes": []
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "67c5c5cbb12cafb1515e449748866bd40da7dec9",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "847957d6a32ac782e6dea7f2f71d0531b74be4a0468d287967c10cba7852ad99",
+      "bytes": 8444,
+      "mode": "100644",
+      "git_blob": "5a0f671636a3ad429bf85a8fbbfbf4fef00af162",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "credential-access",
+          "line": 211,
+          "evidence": "Secret",
+          "context": "### Secret Variables",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 220,
+          "evidence": "secret",
+          "context": "      echo \"Using secret\"",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 221,
+          "evidence": "sh",
+          "context": "      ./deploy.sh",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 223,
+          "evidence": "API_KEY",
+          "context": "      API_KEY: $(mySecret)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 298,
+          "evidence": "sh",
+          "context": "                - script: ./deploy.sh staging",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 320,
+          "evidence": "sh",
+          "context": "            - script: ./deploy.sh",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 380,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 382,
+          "evidence": "mkdir",
+          "context": "mkdir myagent && cd myagent",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 383,
+          "evidence": "curl",
+          "context": "curl -o vsts-agent.tar.gz https://vstsagentpackage.azureedge.net/agent/3.227.2/vsts-agent-linux-x64-3.227.2.tar.gz",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 383,
+          "evidence": "https://",
+          "context": "curl -o vsts-agent.tar.gz https://vstsagentpackage.azureedge.net/agent/3.227.2/vsts-agent-linux-x64-3.227.2.tar.gz",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 387,
+          "evidence": "https://",
+          "context": "./config.sh --url https://dev.azure.com/myorg --auth pat --token PAT_TOKEN --pool default",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 387,
+          "evidence": "sh",
+          "context": "./config.sh --url https://dev.azure.com/myorg --auth pat --token PAT_TOKEN --pool default",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 389,
+          "evidence": "\nsudo",
+          "context": "# Run as service",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 390,
+          "evidence": "sh",
+          "context": "sudo ./svc.sh install",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 390,
+          "evidence": "\nsudo",
+          "context": "sudo ./svc.sh install",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 391,
+          "evidence": "sh",
+          "context": "sudo ./svc.sh start",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,312 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "unitone/privileged-access",
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "UnitOneAI/SecuritySkills",
+    "path": "skills/identity/privileged-access",
+    "revision": "70bc259bb01abb3015ad2ad859ad5253cbf0bcab"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "skills/identity/privileged-access",
+    "url": "https://api.github.com/repos/UnitOneAI/SecuritySkills/git/trees/70bc259bb01abb3015ad2ad859ad5253cbf0bcab?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/UnitOneAI/SecuritySkills/blob/70bc259bb01abb3015ad2ad859ad5253cbf0bcab/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "skills",
+        "skills/identity",
+        "skills/identity/privileged-access"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT License with its copyright notice, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice or other license grant found; NIST SP 800-53 (public domain) and CIS Controls v8 are referenced by control ID and short title with paraphrased descriptions, not reproduced verbatim. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "low",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": false,
+      "network": false,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md in full (single-file skill). Read-only (allowed-tools: Read, Grep, Glob) Privileged Access Management review covering privileged account inventory, PAM tooling, JIT access, break-glass procedures, session recording, and credential vaulting, mapped to NIST SP 800-53 AC-6 and CIS Controls v8 5.x/6.5.",
+      "No commands, installs, credentials, or network access. The skill explicitly forbids executing privilege changes or credential rotations and forbids outputting or exfiltrating real credentials (SKILL.md:50-58, 475-484). The 'injection-like phrase' signal is this hardening text quoting 'ignore previous instructions' as something to flag, not obey.",
+      "SKILL.md:468 links to ../../../schemas/finding.schema.json (optional JSON output format, file not shipped). SKILL.md:44 and 499-507 name sibling skills (identity/iam-review.md, access-review.md, rbac-design.md, zero-trust-assessment.md, compliance/soc2-gap.md) as optional chaining pointers; they are not bundled. CIS Controls v8 and NIST control IDs appear with short titles and paraphrased descriptions only; the 74% DBIR statistic at SKILL.md:64 is cited with attribution."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "66eb5ec637cc578833ddcbc870dbf46c6718fd83e985fad5f0f5cf30d60cf47d",
+      "bytes": 1067,
+      "mode": "100644",
+      "git_blob": "5a98cb233448adff07bef15917961275c76572dc",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry the copyright and permission notice.",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "a84add29b90c88c98b2df8694978806bbe8d8b0b7c25bcf04bef8a9405b8bb9d",
+      "bytes": 29674,
+      "mode": "100644",
+      "git_blob": "c9e1cfddf1c229ab578183917d56c6ec92cb865f",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "credential-access",
+          "line": 7,
+          "evidence": "credential",
+          "context": "  recording, and credential vaulting. Produces findings with severity, framework",
+          "disposition": "accepted",
+          "reason": "'credential'/'Secret' are the subject of the PAM assessment (vaulting, rotation, break-glass); the skill reviews how credentials are managed and explicitly forbids displaying or exfiltrating actual secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 39,
+          "evidence": "credential",
+          "context": "- Assessing credential vaulting and secrets management practices",
+          "disposition": "accepted",
+          "reason": "'credential'/'Secret' are the subject of the PAM assessment (vaulting, rotation, break-glass); the skill reviews how credentials are managed and explicitly forbids displaying or exfiltrating actual secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 40,
+          "evidence": "credential",
+          "context": "- Investigating incidents involving privileged credential compromise",
+          "disposition": "accepted",
+          "reason": "'credential'/'Secret' are the subject of the PAM assessment (vaulting, rotation, break-glass); the skill reviews how credentials are managed and explicitly forbids displaying or exfiltrating actual secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 52,
+          "evidence": "credential",
+          "context": "- Do NOT execute privilege changes or credential rotations. This skill is read-only assessment.",
+          "disposition": "accepted",
+          "reason": "'credential'/'Secret' are the subject of the PAM assessment (vaulting, rotation, break-glass); the skill reviews how credentials are managed and explicitly forbids displaying or exfiltrating actual secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 64,
+          "evidence": "credential",
+          "context": "Privileged accounts are the primary target in 74% of breaches involving credential misuse (Verizon DBIR). NIST SP 800-53 AC-6 mandates employing the principle of least privilege, authorizing only the access necessary for users to accomplish",
+          "disposition": "accepted",
+          "reason": "'credential'/'Secret' are the subject of the PAM assessment (vaulting, rotation, break-glass); the skill reviews how credentials are managed and explicitly forbids displaying or exfiltrating actual secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 64,
+          "evidence": "credential",
+          "context": "Privileged accounts are the primary target in 74% of breaches involving credential misuse (Verizon DBIR). NIST SP 800-53 AC-6 mandates employing the principle of least privilege, authorizing only the access necessary for users to accomplish",
+          "disposition": "accepted",
+          "reason": "'credential'/'Secret' are the subject of the PAM assessment (vaulting, rotation, break-glass); the skill reviews how credentials are managed and explicitly forbids displaying or exfiltrating actual secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 149,
+          "evidence": "Credential",
+          "context": "| **Credential Vaulting** | Credentials in plaintext/spreadsheets | Vault deployed, partial onboarding | All privileged credentials vaulted | Auto-discovered, auto-onboarded, auto-rotated |",
+          "disposition": "accepted",
+          "reason": "'credential'/'Secret' are the subject of the PAM assessment (vaulting, rotation, break-glass); the skill reviews how credentials are managed and explicitly forbids displaying or exfiltrating actual secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 201,
+          "evidence": "credential",
+          "context": "PAM-JIT-09: Ephemeral credential patterns not used where available (static secrets in pipelines)",
+          "disposition": "accepted",
+          "reason": "'credential'/'Secret' are the subject of the PAM assessment (vaulting, rotation, break-glass); the skill reviews how credentials are managed and explicitly forbids displaying or exfiltrating actual secrets."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 276,
+          "evidence": "delete",
+          "context": "PAM-REC-03: Recordings stored on same system as PAM (admin can delete evidence)",
+          "disposition": "accepted",
+          "reason": "'delete' at SKILL.md:276 is a finding description ('admin can delete evidence'), not an instruction to delete anything."
+        },
+        {
+          "type": "credential-access",
+          "line": 300,
+          "evidence": "Credential",
+          "context": "### Step 6: Credential Vaulting and Secrets Management",
+          "disposition": "accepted",
+          "reason": "'credential'/'Secret' are the subject of the PAM assessment (vaulting, rotation, break-glass); the skill reviews how credentials are managed and explicitly forbids displaying or exfiltrating actual secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 313,
+          "evidence": "credential",
+          "context": "PAM-VAULT-04: No automatic credential rotation after use or on schedule",
+          "disposition": "accepted",
+          "reason": "'credential'/'Secret' are the subject of the PAM assessment (vaulting, rotation, break-glass); the skill reviews how credentials are managed and explicitly forbids displaying or exfiltrating actual secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 318,
+          "evidence": "credential",
+          "context": "PAM-VAULT-09: Vault HA/DR not configured — credential lockout during outage",
+          "disposition": "accepted",
+          "reason": "'credential'/'Secret' are the subject of the PAM assessment (vaulting, rotation, break-glass); the skill reviews how credentials are managed and explicitly forbids displaying or exfiltrating actual secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 321,
+          "evidence": "credential",
+          "context": "PAM-VAULT-12: No secrets scanning in code repositories to detect credential leaks",
+          "disposition": "accepted",
+          "reason": "'credential'/'Secret' are the subject of the PAM assessment (vaulting, rotation, break-glass); the skill reviews how credentials are managed and explicitly forbids displaying or exfiltrating actual secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 324,
+          "evidence": "Credential",
+          "context": "**Credential management hierarchy (prefer top):**",
+          "disposition": "accepted",
+          "reason": "'credential'/'Secret' are the subject of the PAM assessment (vaulting, rotation, break-glass); the skill reviews how credentials are managed and explicitly forbids displaying or exfiltrating actual secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 340,
+          "evidence": "Secret",
+          "context": "| **GCP** | Workload Identity Federation, Secret Manager with rotation | No user-managed service account keys, automatic rotation |",
+          "disposition": "accepted",
+          "reason": "'credential'/'Secret' are the subject of the PAM assessment (vaulting, rotation, break-glass); the skill reviews how credentials are managed and explicitly forbids displaying or exfiltrating actual secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 350,
+          "evidence": "credential",
+          "context": "| **Critical** | Immediate privileged credential exposure or uncontrolled access | Plaintext credentials in code repos; no PAM for production admin; root account with no MFA |",
+          "disposition": "accepted",
+          "reason": "'credential'/'Secret' are the subject of the PAM assessment (vaulting, rotation, break-glass); the skill reviews how credentials are managed and explicitly forbids displaying or exfiltrating actual secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 389,
+          "evidence": "Credential",
+          "context": "| Credential Vaulting | [Not Present/Basic/Mature/Advanced] | [Target] |",
+          "disposition": "accepted",
+          "reason": "'credential'/'Secret' are the subject of the PAM assessment (vaulting, rotation, break-glass); the skill reviews how credentials are managed and explicitly forbids displaying or exfiltrating actual secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 407,
+          "evidence": "Credential",
+          "context": "- Credential Vaulting (Step 6): [count]",
+          "disposition": "accepted",
+          "reason": "'credential'/'Secret' are the subject of the PAM assessment (vaulting, rotation, break-glass); the skill reviews how credentials are managed and explicitly forbids displaying or exfiltrating actual secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 413,
+          "evidence": "credential",
+          "context": "- Immediate (0-7 days): [critical findings — credential exposure, uncontrolled root access]",
+          "disposition": "accepted",
+          "reason": "'credential'/'Secret' are the subject of the PAM assessment (vaulting, rotation, break-glass); the skill reviews how credentials are managed and explicitly forbids displaying or exfiltrating actual secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 445,
+          "evidence": "credential",
+          "context": "| **5.2** | Use Unique Passwords | No credential sharing between accounts or individuals |",
+          "disposition": "accepted",
+          "reason": "'credential'/'Secret' are the subject of the PAM assessment (vaulting, rotation, break-glass); the skill reviews how credentials are managed and explicitly forbids displaying or exfiltrating actual secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 490,
+          "evidence": "https://",
+          "context": "- NIST SP 800-53 Rev. 5, Security and Privacy Controls — AC-6 Least Privilege: https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final",
+          "disposition": "accepted",
+          "reason": "Reference links to NIST, CIS, CISA, Verizon DBIR, and MITRE ATT&CK; the skill does not instruct fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 491,
+          "evidence": "https://",
+          "context": "- CIS Controls v8, Control 5 (Account Management), Control 6 (Access Control Management): https://www.cisecurity.org/controls/v8",
+          "disposition": "accepted",
+          "reason": "Reference links to NIST, CIS, CISA, Verizon DBIR, and MITRE ATT&CK; the skill does not instruct fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 492,
+          "evidence": "https://",
+          "context": "- NIST SP 800-207, Zero Trust Architecture (JIT access principles): https://csrc.nist.gov/publications/detail/sp/800-207/final",
+          "disposition": "accepted",
+          "reason": "Reference links to NIST, CIS, CISA, Verizon DBIR, and MITRE ATT&CK; the skill does not instruct fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 493,
+          "evidence": "https://",
+          "context": "- CISA Privileged Access Management Guidance: https://www.cisa.gov",
+          "disposition": "accepted",
+          "reason": "Reference links to NIST, CIS, CISA, Verizon DBIR, and MITRE ATT&CK; the skill does not instruct fetching them."
+        },
+        {
+          "type": "credential-access",
+          "line": 494,
+          "evidence": "credential",
+          "context": "- Verizon Data Breach Investigations Report (DBIR) — credential misuse statistics: https://www.verizon.com/business/resources/reports/dbir/",
+          "disposition": "accepted",
+          "reason": "'credential'/'Secret' are the subject of the PAM assessment (vaulting, rotation, break-glass); the skill reviews how credentials are managed and explicitly forbids displaying or exfiltrating actual secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 494,
+          "evidence": "https://",
+          "context": "- Verizon Data Breach Investigations Report (DBIR) — credential misuse statistics: https://www.verizon.com/business/resources/reports/dbir/",
+          "disposition": "accepted",
+          "reason": "Reference links to NIST, CIS, CISA, Verizon DBIR, and MITRE ATT&CK; the skill does not instruct fetching them."
+        },
+        {
+          "type": "credential-access",
+          "line": 495,
+          "evidence": "Credential",
+          "context": "- MITRE ATT&CK — Credential Access (TA0006), Privilege Escalation (TA0004): https://attack.mitre.org",
+          "disposition": "accepted",
+          "reason": "'credential'/'Secret' are the subject of the PAM assessment (vaulting, rotation, break-glass); the skill reviews how credentials are managed and explicitly forbids displaying or exfiltrating actual secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 495,
+          "evidence": "https://",
+          "context": "- MITRE ATT&CK — Credential Access (TA0006), Privilege Escalation (TA0004): https://attack.mitre.org",
+          "disposition": "accepted",
+          "reason": "Reference links to NIST, CIS, CISA, Verizon DBIR, and MITRE ATT&CK; the skill does not instruct fetching them."
+        }
+      ]
+    }
+  ]
+}

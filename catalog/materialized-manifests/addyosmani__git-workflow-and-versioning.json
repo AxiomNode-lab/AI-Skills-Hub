@@ -1,0 +1,109 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "addyosmani/git-workflow-and-versioning",
+  "source": {
+    "repo": "addyosmani/agent-skills",
+    "path": "skills/git-workflow-and-versioning",
+    "revision": "1401c8b8030e023baeebb31781a6653fe8e93026"
+  },
+  "review": {
+    "path": "catalog/reviews/addyosmani__git-workflow-and-versioning.json",
+    "sha256": "2bcd7c2ed6643774c54818962e71d0b8f5f9ae44278003196e5026453206a13f"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "filesystem-write",
+        "line": 135,
+        "evidence": "Delete",
+        "context": "- Delete branches after merge",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 151,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 164,
+        "evidence": "remove",
+        "context": "git worktree remove ../project-feature-a",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 170,
+        "evidence": "delete",
+        "context": "- If one experiment fails, delete the worktree — nothing is lost",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 215,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 220,
+        "evidence": "secret",
+        "context": "git diff --staged | grep -i \"password\\|secret\\|api_key\\|token\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 220,
+        "evidence": "api_key",
+        "context": "git diff --staged | grep -i \"password\\|secret\\|api_key\\|token\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 252,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 290,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 15209
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "6f202f8bd568cd730dbb2b0d1f8e243bc74c2fa1f64dbce9b2c7ea08bd5c9fd7",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "b7465d187935c52546d39fdc7bd6ac36d94eda25a9500ef8c18b767d2eb116ea",
+      "bytes": 14141,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 15209
+}

@@ -13,7 +13,13 @@ const previousSnapshot = JSON.stringify({
   policy_version: registry.policy_version,
   skills: registry.skills
 });
-const sourceEntries=sources.sources.filter((s)=>s.kind==="github" && s.repo && s.ingest_enabled === true);
+// --source <owner/repo> (repeatable) limits the sync to those sources, so other
+// sources' records are not touched. --no-fetch uses catalog/ingestion as is.
+const args=process.argv.slice(2);
+const onlySources=args.flatMap((arg,i)=>arg==="--source"&&args[i+1]?[args[i+1]]:[]);
+const noFetch=args.includes("--no-fetch");
+const sourceEntries=sources.sources.filter((s)=>s.kind==="github" && s.repo && s.ingest_enabled === true && (!onlySources.length || onlySources.includes(s.repo)));
+if(onlySources.length && sourceEntries.length!==onlySources.length) throw new Error("Unknown or disabled --source: "+onlySources.filter((r)=>!sourceEntries.some((s)=>s.repo===r)).join(", "));
 
 const namespaceByRepo={
   "anthropics/skills":"anthropics",
@@ -23,7 +29,14 @@ const namespaceByRepo={
   "K-Dense-AI/scientific-agent-skills":"kdense",
   "microsoft/skills":"microsoft",
   "github/awesome-copilot":"github",
-  "openai/plugins":"openai"
+  "openai/plugins":"openai",
+  "addyosmani/agent-skills":"addyosmani",
+  "UnitOneAI/SecuritySkills":"unitone",
+  "getsentry/skills":"sentry",
+  "aaron-he-zhu/seo-geo-claude-skills":"seo-geo",
+  "wshobson/agents":"wshobson",
+  "BagelHole/DevOps-Security-Agent-Skills":"bagelhole",
+  "supabase/agent-skills":"supabase"
 };
 
 function deriveCategory(sourceId,sourcePath){
@@ -66,7 +79,7 @@ const seenSourceKeys=new Set();
 const discovered=[];
 for(const source of sourceEntries){
   const ref=source.default_branch??"main";
-  execFileSync(process.execPath,[path.join(ROOT,"scripts/ingest-github.mjs"),source.repo,ref],{
+  if(!noFetch) execFileSync(process.execPath,[path.join(ROOT,"scripts/ingest-github.mjs"),source.repo,ref],{
     stdio:"inherit",
     env:process.env
   });
@@ -76,6 +89,7 @@ for(const source of sourceEntries){
   for(const item of payload.discovered_skills) discovered.push({source,item,revision:payload.source.revision});
 }
 
+const claimedIds=new Set();
 for(const {source,item,revision} of discovered){
   const sourceKey=source.repo+":"+item.path;
   seenSourceKeys.add(sourceKey);
@@ -83,9 +97,16 @@ for(const {source,item,revision} of discovered){
   const namespace=namespaceByRepo[source.repo]??source.repo.split("/")[0].toLowerCase().replace(/[^a-z0-9-]/g,"-");
   const stableId=skill?.id ?? namespace+"/"+item.name;
   if(!skill) {
-    skill = existingById.get(stableId);
+    // A record whose upstream path moved keeps its id, unless another path in
+    // this sync already claimed it: then two upstream skills share a name.
+    const byId = existingById.get(stableId);
+    if (byId && claimedIds.has(stableId)) {
+      console.warn("Skipping duplicate skill id "+stableId+" at "+sourceKey);
+      continue;
+    }
+    skill = byId;
   }
-  
+  claimedIds.add(stableId);
   if(!skill){
     skill={
       id:stableId,

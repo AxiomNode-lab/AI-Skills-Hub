@@ -1,0 +1,747 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "kdense/datalad",
+  "status": "approved",
+  "reviewed_on": "2026-10-02",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "K-Dense-AI/scientific-agent-skills",
+    "path": "skills/datalad",
+    "revision": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "skills/datalad",
+    "url": "https://api.github.com/repos/K-Dense-AI/scientific-agent-skills/git/trees/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE.md",
+    "url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/LICENSE.md",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "skills",
+        "skills/datalad"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE.md is the MIT License with its copyright notice, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice or license grant over the skill's content; SKILL.md:74-75 only states the licenses of the DataLad and git-annex tools, SKILL.md:324-329 credits an MIT-licensed plugin while stating the text was written independently, and the few quoted phrases are short attributed excerpts of DataLad option help (provenance.md:90-95, 151-155; publishing.md:31-32, 39-40, 174-175) and two handbook fragments (provenance.md:118-119). A byte-exact copy of LICENSE.md ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "medium",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "package_install": true,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md and references/data-access.md, references/provenance.md, references/publishing.md in full. Guides the agent through DataLad/git-annex: cloning and fetching datasets (OpenNeuro, DANDI, datasets.datalad.org), recording provenance with datalad run/rerun/containers-run, saving, dropping content, and publishing to Git plus storage siblings.",
+      "Medium: the agent is told to install packages (`uv pip install git-annex`, pinned `datalad==1.6.5`, `datalad-container==1.2.6` at SKILL.md:55-60), run shell commands that download data, create GitHub repositories and S3 special remotes and `datalad push` (SKILL.md:231-235, publishing.md:136-140) using the user's GitHub token and AWS/DataLad credentials, and drop local annex content. Acceptable because the installs are pinned official PyPI packages, publication examples are labelled illustrative and require the user's own credentials, `datalad drop` is shown with its default availability safety check and the reckless overrides are explained as data-losing (data-access.md:127-133), and the skill tells the agent never to commit credentials (publishing.md:205-206).",
+      "Publishing creates remote resources and can expose data; users should confirm sibling targets and bucket access policy before a push. Mentions that git-annex is AGPL-licensed software (SKILL.md:74-75) and an acknowledgment of an MIT-licensed community plugin that informed topic scope (SKILL.md:324-329); neither is bundled. The optional `bids` related skill (SKILL.md:298) is not required. publishing.md:127-129 only documents what `push -f gitpush` does; no forced push is instructed."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE.md",
+      "sha256": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "eb246475fd5a66b9bb56176f3a718984632dd98d",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry the copyright and permission notice.",
+      "findings": []
+    },
+    {
+      "path": "references/data-access.md",
+      "sha256": "f419bd39ca536562238d7404f0eaa4836c444d38df0cf7121befe936d529b1c7",
+      "bytes": 9714,
+      "mode": "100644",
+      "git_blob": "b8029bf6e2d63b50143d5b422f59131608674e7d",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 7,
+          "evidence": "https://",
+          "context": "| [registry.datalad.org](https://registry.datalad.org) | Search across discovered DataLad and git-annex datasets, indexing URL, dataset ID, branches, tags, and metadata | Search box supports a bare word, a quoted phrase, `AND`/`OR`/`NOT`, a",
+          "disposition": "accepted",
+          "reason": "Links to DataLad docs, handbook, registry, OpenNeuro, DANDI, STAMPED and W3C pages, plus clone/get/push commands that contact remote dataset hosts as part of the user's data task."
+        },
+        {
+          "type": "network-access",
+          "line": 8,
+          "evidence": "https://",
+          "context": "| [datasets.datalad.org](https://datasets.datalad.org) | The DataLad superdataset, a nested collection of curated public datasets | `datalad clone ///` for the superdataset, `datalad clone ///<name>` for one entry |",
+          "disposition": "accepted",
+          "reason": "Links to DataLad docs, handbook, registry, OpenNeuro, DANDI, STAMPED and W3C pages, plus clone/get/push commands that contact remote dataset hosts as part of the user's data task."
+        },
+        {
+          "type": "network-access",
+          "line": 9,
+          "evidence": "https://",
+          "context": "| [OpenNeuroDatasets](https://github.com/OpenNeuroDatasets) | Public BIDS neuroimaging datasets from OpenNeuro, one repository per accession | `datalad clone https://github.com/OpenNeuroDatasets/ds00XXXX.git` |",
+          "disposition": "accepted",
+          "reason": "Links to DataLad docs, handbook, registry, OpenNeuro, DANDI, STAMPED and W3C pages, plus clone/get/push commands that contact remote dataset hosts as part of the user's data task."
+        },
+        {
+          "type": "network-access",
+          "line": 9,
+          "evidence": "https://",
+          "context": "| [OpenNeuroDatasets](https://github.com/OpenNeuroDatasets) | Public BIDS neuroimaging datasets from OpenNeuro, one repository per accession | `datalad clone https://github.com/OpenNeuroDatasets/ds00XXXX.git` |",
+          "disposition": "accepted",
+          "reason": "Links to DataLad docs, handbook, registry, OpenNeuro, DANDI, STAMPED and W3C pages, plus clone/get/push commands that contact remote dataset hosts as part of the user's data task."
+        },
+        {
+          "type": "network-access",
+          "line": 10,
+          "evidence": "https://",
+          "context": "| [dandisets](https://github.com/dandisets) | DANDI archive dandisets, mostly neurophysiology in NWB | `datalad clone https://github.com/dandisets/000XXX.git` |",
+          "disposition": "accepted",
+          "reason": "Links to DataLad docs, handbook, registry, OpenNeuro, DANDI, STAMPED and W3C pages, plus clone/get/push commands that contact remote dataset hosts as part of the user's data task."
+        },
+        {
+          "type": "network-access",
+          "line": 10,
+          "evidence": "https://",
+          "context": "| [dandisets](https://github.com/dandisets) | DANDI archive dandisets, mostly neurophysiology in NWB | `datalad clone https://github.com/dandisets/000XXX.git` |",
+          "disposition": "accepted",
+          "reason": "Links to DataLad docs, handbook, registry, OpenNeuro, DANDI, STAMPED and W3C pages, plus clone/get/push commands that contact remote dataset hosts as part of the user's data task."
+        },
+        {
+          "type": "network-access",
+          "line": 26,
+          "evidence": "http://",
+          "context": "`ria+http://store.datalad.org#~hcp-openaccess`.",
+          "disposition": "accepted",
+          "reason": "Links to DataLad docs, handbook, registry, OpenNeuro, DANDI, STAMPED and W3C pages, plus clone/get/push commands that contact remote dataset hosts as part of the user's data task."
+        },
+        {
+          "type": "network-access",
+          "line": 35,
+          "evidence": "https://",
+          "context": "  the [git worktree workflow with DataLad](https://blog.datalad.org/posts/git-worktree-workflow/)",
+          "disposition": "accepted",
+          "reason": "Links to DataLad docs, handbook, registry, OpenNeuro, DANDI, STAMPED and W3C pages, plus clone/get/push commands that contact remote dataset hosts as part of the user's data task."
+        },
+        {
+          "type": "shell-execution",
+          "line": 85,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash code blocks of datalad and git-annex commands (clone, get, run, rerun, save, push, drop, fsck) that the agent runs in the user's dataset; Bash is in allowed-tools (SKILL.md:6)."
+        },
+        {
+          "type": "shell-execution",
+          "line": 103,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash code blocks of datalad and git-annex commands (clone, get, run, rerun, save, push, drop, fsck) that the agent runs in the user's dataset; Bash is in allowed-tools (SKILL.md:6)."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 135,
+          "evidence": "remove",
+          "context": "The real check is `datalad drop`'s own refusal to remove content it cannot verify",
+          "disposition": "accepted",
+          "reason": "`remove`/`drop` wording describes `datalad drop`/`rm` semantics on the user's own dataset (SKILL.md:263, data-access.md:135, publishing.md:21,27) with the default copy-availability safety check."
+        },
+        {
+          "type": "shell-execution",
+          "line": 138,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash code blocks of datalad and git-annex commands (clone, get, run, rerun, save, push, drop, fsck) that the agent runs in the user's dataset; Bash is in allowed-tools (SKILL.md:6)."
+        },
+        {
+          "type": "shell-execution",
+          "line": 160,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash code blocks of datalad and git-annex commands (clone, get, run, rerun, save, push, drop, fsck) that the agent runs in the user's dataset; Bash is in allowed-tools (SKILL.md:6)."
+        },
+        {
+          "type": "network-access",
+          "line": 177,
+          "evidence": "https://",
+          "context": "[official registry guide](https://blog.datalad.org/posts/registry/). Public dataset",
+          "disposition": "accepted",
+          "reason": "Links to DataLad docs, handbook, registry, OpenNeuro, DANDI, STAMPED and W3C pages, plus clone/get/push commands that contact remote dataset hosts as part of the user's data task."
+        }
+      ]
+    },
+    {
+      "path": "references/provenance.md",
+      "sha256": "d9e56071463c5c118800ff5a800dd58ae5de38d04fc465c119ae0c690fc1c542",
+      "bytes": 14087,
+      "mode": "100644",
+      "git_blob": "365acf208bce7df3bebd85a1b6459eb8cd9b3e38",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 18,
+          "evidence": "https://",
+          "context": "STAMPED (<https://stamped-principles.org>) is the operationalized successor, formalized by",
+          "disposition": "accepted",
+          "reason": "Links to DataLad docs, handbook, registry, OpenNeuro, DANDI, STAMPED and W3C pages, plus clone/get/push commands that contact remote dataset hosts as part of the user's data task."
+        },
+        {
+          "type": "network-access",
+          "line": 42,
+          "evidence": "https://",
+          "context": "<https://checklist.stamped-principles.org> walks the requirements as a MUST/SHOULD/MAY",
+          "disposition": "accepted",
+          "reason": "Links to DataLad docs, handbook, registry, OpenNeuro, DANDI, STAMPED and W3C pages, plus clone/get/push commands that contact remote dataset hosts as part of the user's data task."
+        },
+        {
+          "type": "network-access",
+          "line": 43,
+          "evidence": "https://",
+          "context": "checklist, and <https://examples.stamped-principles.org> collects worked patterns,",
+          "disposition": "accepted",
+          "reason": "Links to DataLad docs, handbook, registry, OpenNeuro, DANDI, STAMPED and W3C pages, plus clone/get/push commands that contact remote dataset hosts as part of the user's data task."
+        },
+        {
+          "type": "shell-execution",
+          "line": 50,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash code blocks of datalad and git-annex commands (clone, get, run, rerun, save, push, drop, fsck) that the agent runs in the user's dataset; Bash is in allowed-tools (SKILL.md:6)."
+        },
+        {
+          "type": "shell-execution",
+          "line": 71,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash code blocks of datalad and git-annex commands (clone, get, run, rerun, save, push, drop, fsck) that the agent runs in the user's dataset; Bash is in allowed-tools (SKILL.md:6)."
+        },
+        {
+          "type": "network-access",
+          "line": 72,
+          "evidence": "https://",
+          "context": "datalad clone -d . https://github.com/OpenNeuroDatasets/ds000001.git inputs/raw",
+          "disposition": "accepted",
+          "reason": "Links to DataLad docs, handbook, registry, OpenNeuro, DANDI, STAMPED and W3C pages, plus clone/get/push commands that contact remote dataset hosts as part of the user's data task."
+        },
+        {
+          "type": "shell-execution",
+          "line": 104,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash code blocks of datalad and git-annex commands (clone, get, run, rerun, save, push, drop, fsck) that the agent runs in the user's dataset; Bash is in allowed-tools (SKILL.md:6)."
+        },
+        {
+          "type": "shell-execution",
+          "line": 166,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash code blocks of datalad and git-annex commands (clone, get, run, rerun, save, push, drop, fsck) that the agent runs in the user's dataset; Bash is in allowed-tools (SKILL.md:6)."
+        },
+        {
+          "type": "network-access",
+          "line": 231,
+          "evidence": "https://",
+          "context": "  <https://www.w3.org/TR/prov-overview/>.",
+          "disposition": "accepted",
+          "reason": "Links to DataLad docs, handbook, registry, OpenNeuro, DANDI, STAMPED and W3C pages, plus clone/get/push commands that contact remote dataset hosts as part of the user's data task."
+        },
+        {
+          "type": "network-access",
+          "line": 233,
+          "evidence": "https://",
+          "context": "  <https://github.com/datalad/datalad-metalad/blob/master/datalad_metalad/extractors/runprov.py>.",
+          "disposition": "accepted",
+          "reason": "Links to DataLad docs, handbook, registry, OpenNeuro, DANDI, STAMPED and W3C pages, plus clone/get/push commands that contact remote dataset hosts as part of the user's data task."
+        },
+        {
+          "type": "network-access",
+          "line": 237,
+          "evidence": "https://",
+          "context": "  <https://bids.neuroimaging.io/extensions/beps/bep_028.html>. Check its current proposal and the adopted BIDS",
+          "disposition": "accepted",
+          "reason": "Links to DataLad docs, handbook, registry, OpenNeuro, DANDI, STAMPED and W3C pages, plus clone/get/push commands that contact remote dataset hosts as part of the user's data task."
+        },
+        {
+          "type": "network-access",
+          "line": 247,
+          "evidence": "https://",
+          "context": "  <https://handbook.datalad.org/en/latest/basics/101-108-run.html>",
+          "disposition": "accepted",
+          "reason": "Links to DataLad docs, handbook, registry, OpenNeuro, DANDI, STAMPED and W3C pages, plus clone/get/push commands that contact remote dataset hosts as part of the user's data task."
+        },
+        {
+          "type": "network-access",
+          "line": 248,
+          "evidence": "https://",
+          "context": "- YODA principles: <https://handbook.datalad.org/en/latest/basics/101-127-yoda.html>",
+          "disposition": "accepted",
+          "reason": "Links to DataLad docs, handbook, registry, OpenNeuro, DANDI, STAMPED and W3C pages, plus clone/get/push commands that contact remote dataset hosts as part of the user's data task."
+        },
+        {
+          "type": "network-access",
+          "line": 249,
+          "evidence": "https://",
+          "context": "- STAMPED principles (operationalized from YODA): <https://stamped-principles.org>",
+          "disposition": "accepted",
+          "reason": "Links to DataLad docs, handbook, registry, OpenNeuro, DANDI, STAMPED and W3C pages, plus clone/get/push commands that contact remote dataset hosts as part of the user's data task."
+        },
+        {
+          "type": "network-access",
+          "line": 250,
+          "evidence": "https://",
+          "context": "  - Compliance checklist: <https://checklist.stamped-principles.org>",
+          "disposition": "accepted",
+          "reason": "Links to DataLad docs, handbook, registry, OpenNeuro, DANDI, STAMPED and W3C pages, plus clone/get/push commands that contact remote dataset hosts as part of the user's data task."
+        },
+        {
+          "type": "network-access",
+          "line": 251,
+          "evidence": "https://",
+          "context": "  - Worked examples and stencils: <https://examples.stamped-principles.org>",
+          "disposition": "accepted",
+          "reason": "Links to DataLad docs, handbook, registry, OpenNeuro, DANDI, STAMPED and W3C pages, plus clone/get/push commands that contact remote dataset hosts as part of the user's data task."
+        },
+        {
+          "type": "network-access",
+          "line": 253,
+          "evidence": "https://",
+          "context": "  <https://docs.datalad.org/projects/container/en/stable/>",
+          "disposition": "accepted",
+          "reason": "Links to DataLad docs, handbook, registry, OpenNeuro, DANDI, STAMPED and W3C pages, plus clone/get/push commands that contact remote dataset hosts as part of the user's data task."
+        }
+      ]
+    },
+    {
+      "path": "references/publishing.md",
+      "sha256": "a5efdceeea8086549917e9e2b3bc526c8c7ec9f1e31a8a438c5e8ba9dd18d6cd",
+      "bytes": 11174,
+      "mode": "100644",
+      "git_blob": "fd5cbc756eb6aa215fbb1451da447e6efa74a7e5",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 21,
+          "evidence": "remove",
+          "context": "    [-r] [-R LEVELS] [--version] [{query|add|remove|configure|enable}]",
+          "disposition": "accepted",
+          "reason": "`remove`/`drop` wording describes `datalad drop`/`rm` semantics on the user's own dataset (SKILL.md:263, data-access.md:135, publishing.md:21,27) with the default copy-availability safety check."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 27,
+          "evidence": "remove",
+          "context": "fresh clone. `remove` de-configures a sibling.",
+          "disposition": "accepted",
+          "reason": "`remove`/`drop` wording describes `datalad drop`/`rm` semantics on the user's own dataset (SKILL.md:263, data-access.md:135, publishing.md:21,27) with the default copy-availability safety check."
+        },
+        {
+          "type": "shell-execution",
+          "line": 76,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash code blocks of datalad and git-annex commands (clone, get, run, rerun, save, push, drop, fsck) that the agent runs in the user's dataset; Bash is in allowed-tools (SKILL.md:6)."
+        },
+        {
+          "type": "shell-execution",
+          "line": 84,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash code blocks of datalad and git-annex commands (clone, get, run, rerun, save, push, drop, fsck) that the agent runs in the user's dataset; Bash is in allowed-tools (SKILL.md:6)."
+        },
+        {
+          "type": "shell-execution",
+          "line": 135,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash code blocks of datalad and git-annex commands (clone, get, run, rerun, save, push, drop, fsck) that the agent runs in the user's dataset; Bash is in allowed-tools (SKILL.md:6)."
+        },
+        {
+          "type": "shell-execution",
+          "line": 155,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash code blocks of datalad and git-annex commands (clone, get, run, rerun, save, push, drop, fsck) that the agent runs in the user's dataset; Bash is in allowed-tools (SKILL.md:6)."
+        },
+        {
+          "type": "network-access",
+          "line": 156,
+          "evidence": "https://",
+          "context": "datalad clone https://github.com/myaccount/mydataset.git /tmp/verify",
+          "disposition": "accepted",
+          "reason": "Links to DataLad docs, handbook, registry, OpenNeuro, DANDI, STAMPED and W3C pages, plus clone/get/push commands that contact remote dataset hosts as part of the user's data task."
+        },
+        {
+          "type": "credential-access",
+          "line": 169,
+          "evidence": "credential",
+          "context": "1. **Interactive.** DataLad prompts when a credential is needed and not available, and",
+          "disposition": "accepted",
+          "reason": "Explains how DataLad resolves credentials (keyring, `datalad.credential.*` config, DATALAD_CREDENTIAL_* and AWS_* environment variables) and that publication needs a GitHub token and S3 credentials; no instruction to read, print or transmit secrets, and it warns never to commit them."
+        },
+        {
+          "type": "credential-access",
+          "line": 171,
+          "evidence": "credential",
+          "context": "2. **Local configuration.** `datalad.credential.<name>.<component>` can supply a",
+          "disposition": "accepted",
+          "reason": "Explains how DataLad resolves credentials (keyring, `datalad.credential.*` config, DATALAD_CREDENTIAL_* and AWS_* environment variables) and that publication needs a GitHub token and S3 credentials; no instruction to read, print or transmit secrets, and it warns never to commit them."
+        },
+        {
+          "type": "credential-access",
+          "line": 177,
+          "evidence": "credential",
+          "context": "   credential names simple and free of underscores so this stays predictable.",
+          "disposition": "accepted",
+          "reason": "Explains how DataLad resolves credentials (keyring, `datalad.credential.*` config, DATALAD_CREDENTIAL_* and AWS_* environment variables) and that publication needs a GitHub token and S3 credentials; no instruction to read, print or transmit secrets, and it warns never to commit them."
+        },
+        {
+          "type": "credential-access",
+          "line": 180,
+          "evidence": "credential",
+          "context": "credential with a new value. That is the fix when a rotated key keeps failing because the",
+          "disposition": "accepted",
+          "reason": "Explains how DataLad resolves credentials (keyring, `datalad.credential.*` config, DATALAD_CREDENTIAL_* and AWS_* environment variables) and that publication needs a GitHub token and S3 credentials; no instruction to read, print or transmit secrets, and it warns never to commit them."
+        },
+        {
+          "type": "credential-access",
+          "line": 183,
+          "evidence": "credential",
+          "context": "For git-annex special remotes on a fresh clone, the credential is not enough on its own.",
+          "disposition": "accepted",
+          "reason": "Explains how DataLad resolves credentials (keyring, `datalad.credential.*` config, DATALAD_CREDENTIAL_* and AWS_* environment variables) and that publication needs a GitHub token and S3 credentials; no instruction to read, print or transmit secrets, and it warns never to commit them."
+        },
+        {
+          "type": "shell-execution",
+          "line": 186,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash code blocks of datalad and git-annex commands (clone, get, run, rerun, save, push, drop, fsck) that the agent runs in the user's dataset; Bash is in allowed-tools (SKILL.md:6)."
+        },
+        {
+          "type": "network-access",
+          "line": 199,
+          "evidence": "https://",
+          "context": "Official contracts: [push](https://docs.datalad.org/en/stable/generated/man/datalad-push.html),",
+          "disposition": "accepted",
+          "reason": "Links to DataLad docs, handbook, registry, OpenNeuro, DANDI, STAMPED and W3C pages, plus clone/get/push commands that contact remote dataset hosts as part of the user's data task."
+        },
+        {
+          "type": "network-access",
+          "line": 200,
+          "evidence": "https://",
+          "context": "[GitHub sibling](https://docs.datalad.org/en/stable/generated/man/datalad-create-sibling-github.html),",
+          "disposition": "accepted",
+          "reason": "Links to DataLad docs, handbook, registry, OpenNeuro, DANDI, STAMPED and W3C pages, plus clone/get/push commands that contact remote dataset hosts as part of the user's data task."
+        },
+        {
+          "type": "network-access",
+          "line": 201,
+          "evidence": "https://",
+          "context": "[RIA](https://docs.datalad.org/en/stable/generated/man/datalad-create-sibling-ria.html),",
+          "disposition": "accepted",
+          "reason": "Links to DataLad docs, handbook, registry, OpenNeuro, DANDI, STAMPED and W3C pages, plus clone/get/push commands that contact remote dataset hosts as part of the user's data task."
+        },
+        {
+          "type": "network-access",
+          "line": 202,
+          "evidence": "https://",
+          "context": "[S3 special remote](https://git-annex.branchable.com/special_remotes/S3/), and",
+          "disposition": "accepted",
+          "reason": "Links to DataLad docs, handbook, registry, OpenNeuro, DANDI, STAMPED and W3C pages, plus clone/get/push commands that contact remote dataset hosts as part of the user's data task."
+        },
+        {
+          "type": "network-access",
+          "line": 203,
+          "evidence": "https://",
+          "context": "[credentials](https://docs.datalad.org/en/stable/design/credentials.html).",
+          "disposition": "accepted",
+          "reason": "Links to DataLad docs, handbook, registry, OpenNeuro, DANDI, STAMPED and W3C pages, plus clone/get/push commands that contact remote dataset hosts as part of the user's data task."
+        },
+        {
+          "type": "credential-access",
+          "line": 206,
+          "evidence": "secret",
+          "context": "published, and a secret in the history is published with it.",
+          "disposition": "accepted",
+          "reason": "Explains how DataLad resolves credentials (keyring, `datalad.credential.*` config, DATALAD_CREDENTIAL_* and AWS_* environment variables) and that publication needs a GitHub token and S3 credentials; no instruction to read, print or transmit secrets, and it warns never to commit them."
+        }
+      ]
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "bb902427db0c501db4187aafd3433eea67fa1071348cf07adcea2558ed49debb",
+      "bytes": 17431,
+      "mode": "100644",
+      "git_blob": "7f54f85b7bedc05794a704c0ebc90683cc41b5f1",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 6,
+          "evidence": "Bash",
+          "context": "allowed-tools: Read Write Edit Bash",
+          "disposition": "accepted",
+          "reason": "Bash code blocks of datalad and git-annex commands (clone, get, run, rerun, save, push, drop, fsck) that the agent runs in the user's dataset; Bash is in allowed-tools (SKILL.md:6)."
+        },
+        {
+          "type": "shell-execution",
+          "line": 52,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash code blocks of datalad and git-annex commands (clone, get, run, rerun, save, push, drop, fsck) that the agent runs in the user's dataset; Bash is in allowed-tools (SKILL.md:6)."
+        },
+        {
+          "type": "package-install",
+          "line": 55,
+          "evidence": "pip install",
+          "context": "uv pip install git-annex",
+          "disposition": "accepted",
+          "reason": "SKILL.md:55-60 installs git-annex and pinned datalad==1.6.5 / datalad-container==1.2.6 from PyPI with uv pip, with system package alternatives."
+        },
+        {
+          "type": "package-install",
+          "line": 59,
+          "evidence": "pip install",
+          "context": "uv pip install \"datalad==1.6.5\"",
+          "disposition": "accepted",
+          "reason": "SKILL.md:55-60 installs git-annex and pinned datalad==1.6.5 / datalad-container==1.2.6 from PyPI with uv pip, with system package alternatives."
+        },
+        {
+          "type": "package-install",
+          "line": 60,
+          "evidence": "pip install",
+          "context": "uv pip install \"datalad-container==1.2.6\"   # only for containers-run",
+          "disposition": "accepted",
+          "reason": "SKILL.md:55-60 installs git-annex and pinned datalad==1.6.5 / datalad-container==1.2.6 from PyPI with uv pip, with system package alternatives."
+        },
+        {
+          "type": "shell-execution",
+          "line": 87,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash code blocks of datalad and git-annex commands (clone, get, run, rerun, save, push, drop, fsck) that the agent runs in the user's dataset; Bash is in allowed-tools (SKILL.md:6)."
+        },
+        {
+          "type": "network-access",
+          "line": 88,
+          "evidence": "https://",
+          "context": "datalad clone https://github.com/OpenNeuroDatasets/ds000001.git",
+          "disposition": "accepted",
+          "reason": "Links to DataLad docs, handbook, registry, OpenNeuro, DANDI, STAMPED and W3C pages, plus clone/get/push commands that contact remote dataset hosts as part of the user's data task."
+        },
+        {
+          "type": "shell-execution",
+          "line": 102,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash code blocks of datalad and git-annex commands (clone, get, run, rerun, save, push, drop, fsck) that the agent runs in the user's dataset; Bash is in allowed-tools (SKILL.md:6)."
+        },
+        {
+          "type": "shell-execution",
+          "line": 123,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash code blocks of datalad and git-annex commands (clone, get, run, rerun, save, push, drop, fsck) that the agent runs in the user's dataset; Bash is in allowed-tools (SKILL.md:6)."
+        },
+        {
+          "type": "shell-execution",
+          "line": 156,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash code blocks of datalad and git-annex commands (clone, get, run, rerun, save, push, drop, fsck) that the agent runs in the user's dataset; Bash is in allowed-tools (SKILL.md:6)."
+        },
+        {
+          "type": "shell-execution",
+          "line": 159,
+          "evidence": "sh",
+          "context": "datalad rerun --script recompute.sh # extract the commands instead of running them",
+          "disposition": "accepted",
+          "reason": "Bash code blocks of datalad and git-annex commands (clone, get, run, rerun, save, push, drop, fsck) that the agent runs in the user's dataset; Bash is in allowed-tools (SKILL.md:6)."
+        },
+        {
+          "type": "shell-execution",
+          "line": 176,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash code blocks of datalad and git-annex commands (clone, get, run, rerun, save, push, drop, fsck) that the agent runs in the user's dataset; Bash is in allowed-tools (SKILL.md:6)."
+        },
+        {
+          "type": "shell-execution",
+          "line": 196,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash code blocks of datalad and git-annex commands (clone, get, run, rerun, save, push, drop, fsck) that the agent runs in the user's dataset; Bash is in allowed-tools (SKILL.md:6)."
+        },
+        {
+          "type": "shell-execution",
+          "line": 211,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash code blocks of datalad and git-annex commands (clone, get, run, rerun, save, push, drop, fsck) that the agent runs in the user's dataset; Bash is in allowed-tools (SKILL.md:6)."
+        },
+        {
+          "type": "shell-execution",
+          "line": 230,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash code blocks of datalad and git-annex commands (clone, get, run, rerun, save, push, drop, fsck) that the agent runs in the user's dataset; Bash is in allowed-tools (SKILL.md:6)."
+        },
+        {
+          "type": "credential-access",
+          "line": 256,
+          "evidence": "credential",
+          "context": "See [publishing.md](references/publishing.md) for RIA stores, special remotes, credential",
+          "disposition": "accepted",
+          "reason": "Explains how DataLad resolves credentials (keyring, `datalad.credential.*` config, DATALAD_CREDENTIAL_* and AWS_* environment variables) and that publication needs a GitHub token and S3 credentials; no instruction to read, print or transmit secrets, and it warns never to commit them."
+        },
+        {
+          "type": "shell-execution",
+          "line": 261,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash code blocks of datalad and git-annex commands (clone, get, run, rerun, save, push, drop, fsck) that the agent runs in the user's dataset; Bash is in allowed-tools (SKILL.md:6)."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 263,
+          "evidence": "remove",
+          "context": "datalad drop sub-01/                      # remove local content, keep the pointer",
+          "disposition": "accepted",
+          "reason": "`remove`/`drop` wording describes `datalad drop`/`rm` semantics on the user's own dataset (SKILL.md:263, data-access.md:135, publishing.md:21,27) with the default copy-availability safety check."
+        },
+        {
+          "type": "credential-access",
+          "line": 294,
+          "evidence": "credential",
+          "context": "  credential handling.",
+          "disposition": "accepted",
+          "reason": "Explains how DataLad resolves credentials (keyring, `datalad.credential.*` config, DATALAD_CREDENTIAL_* and AWS_* environment variables) and that publication needs a GitHub token and S3 credentials; no instruction to read, print or transmit secrets, and it warns never to commit them."
+        },
+        {
+          "type": "network-access",
+          "line": 313,
+          "evidence": "https://",
+          "context": "- DataLad documentation: <https://docs.datalad.org/en/stable/>",
+          "disposition": "accepted",
+          "reason": "Links to DataLad docs, handbook, registry, OpenNeuro, DANDI, STAMPED and W3C pages, plus clone/get/push commands that contact remote dataset hosts as part of the user's data task."
+        },
+        {
+          "type": "network-access",
+          "line": 314,
+          "evidence": "https://",
+          "context": "- DataLad Handbook: <https://handbook.datalad.org/en/latest/>",
+          "disposition": "accepted",
+          "reason": "Links to DataLad docs, handbook, registry, OpenNeuro, DANDI, STAMPED and W3C pages, plus clone/get/push commands that contact remote dataset hosts as part of the user's data task."
+        },
+        {
+          "type": "network-access",
+          "line": 315,
+          "evidence": "https://",
+          "context": "- `datalad run` chapter: <https://handbook.datalad.org/en/latest/basics/101-108-run.html>",
+          "disposition": "accepted",
+          "reason": "Links to DataLad docs, handbook, registry, OpenNeuro, DANDI, STAMPED and W3C pages, plus clone/get/push commands that contact remote dataset hosts as part of the user's data task."
+        },
+        {
+          "type": "network-access",
+          "line": 316,
+          "evidence": "https://",
+          "context": "- YODA principles: <https://handbook.datalad.org/en/latest/basics/101-127-yoda.html>",
+          "disposition": "accepted",
+          "reason": "Links to DataLad docs, handbook, registry, OpenNeuro, DANDI, STAMPED and W3C pages, plus clone/get/push commands that contact remote dataset hosts as part of the user's data task."
+        },
+        {
+          "type": "network-access",
+          "line": 317,
+          "evidence": "https://",
+          "context": "- STAMPED principles (operationalized from YODA): <https://stamped-principles.org>",
+          "disposition": "accepted",
+          "reason": "Links to DataLad docs, handbook, registry, OpenNeuro, DANDI, STAMPED and W3C pages, plus clone/get/push commands that contact remote dataset hosts as part of the user's data task."
+        },
+        {
+          "type": "network-access",
+          "line": 318,
+          "evidence": "https://",
+          "context": "- datalad-container: <https://docs.datalad.org/projects/container/en/stable/>",
+          "disposition": "accepted",
+          "reason": "Links to DataLad docs, handbook, registry, OpenNeuro, DANDI, STAMPED and W3C pages, plus clone/get/push commands that contact remote dataset hosts as part of the user's data task."
+        },
+        {
+          "type": "network-access",
+          "line": 319,
+          "evidence": "https://",
+          "context": "- git-annex: <https://git-annex.branchable.com/>",
+          "disposition": "accepted",
+          "reason": "Links to DataLad docs, handbook, registry, OpenNeuro, DANDI, STAMPED and W3C pages, plus clone/get/push commands that contact remote dataset hosts as part of the user's data task."
+        },
+        {
+          "type": "network-access",
+          "line": 320,
+          "evidence": "https://",
+          "context": "- Dataset registry: <https://registry.datalad.org>",
+          "disposition": "accepted",
+          "reason": "Links to DataLad docs, handbook, registry, OpenNeuro, DANDI, STAMPED and W3C pages, plus clone/get/push commands that contact remote dataset hosts as part of the user's data task."
+        },
+        {
+          "type": "network-access",
+          "line": 325,
+          "evidence": "https://",
+          "context": "[datalad-cli](https://github.com/bcmcpher/my-skills/tree/main/plugins/datalad-cli)",
+          "disposition": "accepted",
+          "reason": "Links to DataLad docs, handbook, registry, OpenNeuro, DANDI, STAMPED and W3C pages, plus clone/get/push commands that contact remote dataset hosts as part of the user's data task."
+        }
+      ]
+    }
+  ]
+}

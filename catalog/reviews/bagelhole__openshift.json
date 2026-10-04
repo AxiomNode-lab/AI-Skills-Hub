@@ -1,0 +1,322 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "bagelhole/openshift",
+  "status": "draft",
+  "reviewed_on": null,
+  "reviewer": null,
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "devops/orchestration/openshift",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "devops/orchestration/openshift",
+    "url": "https://api.github.com/repos/BagelHole/DevOps-Security-Agent-Skills/git/trees/0365f57a079b1332f95cf26e31dd2d5332a8399f?recursive=1",
+    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/BagelHole/DevOps-Security-Agent-Skills/blob/0365f57a079b1332f95cf26e31dd2d5332a8399f/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "devops",
+        "devops/orchestration",
+        "devops/orchestration/openshift"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte."
+    ]
+  },
+  "content_review": {
+    "status": "pending",
+    "risk": "unknown",
+    "blocking_findings": [],
+    "capabilities": {},
+    "notes": []
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "67c5c5cbb12cafb1515e449748866bd40da7dec9",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "6039de50eee3be75dd5262f19137f72cad852b7f7f1e4f23b3e962b53ee074be",
+      "bytes": 8827,
+      "mode": "100644",
+      "git_blob": "6dd6d07fd2717ce887a133b1bbc7f54fc1a00d39",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 33,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 35,
+          "evidence": "https://",
+          "context": "oc login https://api.cluster.example.com:6443 -u admin -p password",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 38,
+          "evidence": "https://",
+          "context": "oc login --token=sha256~xxxx --server=https://api.cluster.example.com:6443",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 51,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 61,
+          "evidence": "Delete",
+          "context": "# Delete project",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 62,
+          "evidence": "delete",
+          "context": "oc delete project myapp",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 69,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 84,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 86,
+          "evidence": "https://",
+          "context": "oc new-app https://github.com/org/myapp.git",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 89,
+          "evidence": "https://",
+          "context": "oc new-app nodejs:18~https://github.com/org/nodejs-app.git",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 92,
+          "evidence": "https://",
+          "context": "oc new-app https://github.com/org/monorepo.git \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 99,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 106,
+          "evidence": "secret",
+          "context": "  -p POSTGRESQL_PASSWORD=secret \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 132,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 176,
+          "evidence": "https://",
+          "context": "      uri: https://github.com/org/myapp.git",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 190,
+          "evidence": "secret",
+          "context": "        secret: webhook-secret",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 190,
+          "evidence": "secret",
+          "context": "        secret: webhook-secret",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 204,
+          "evidence": "https://",
+          "context": "      uri: https://github.com/org/myapp.git",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 223,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 259,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 319,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 325,
+          "evidence": "Secret",
+          "context": "# Create Secret",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 326,
+          "evidence": "secret",
+          "context": "oc create secret generic myapp-secrets \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 337,
+          "evidence": "secret",
+          "context": "oc set env dc/myapp --from=secret/myapp-secrets",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 342,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 372,
+          "evidence": "secret",
+          "context": "  - secret",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 380,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 404,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 435,
+          "evidence": "secret",
+          "context": "**Solution**: Create image pull secret, link to service account",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 437,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 438,
+          "evidence": "secret",
+          "context": "oc create secret docker-registry regcred \\",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    }
+  ]
+}

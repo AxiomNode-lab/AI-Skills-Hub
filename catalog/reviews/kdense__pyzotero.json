@@ -1,0 +1,1030 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "kdense/pyzotero",
+  "status": "approved",
+  "reviewed_on": "2026-10-02",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "K-Dense-AI/scientific-agent-skills",
+    "path": "skills/pyzotero",
+    "revision": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "skills/pyzotero",
+    "url": "https://api.github.com/repos/K-Dense-AI/scientific-agent-skills/git/trees/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE.md",
+    "url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/LICENSE.md",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "skills",
+        "skills/pyzotero"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE.md is the MIT License with its copyright notice, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file; frontmatter declares MIT License and pyzotero/Zotero docs and source are linked, not copied. A byte-exact copy of LICENSE.md ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "medium",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "package_install": true,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md and references/authentication.md, cli.md, collections.md, error-handling.md, exports.md, files-attachments.md, full-text.md, mcp.md, pagination.md, read-api.md, saved-searches.md, search-params.md, tags.md, write-api.md in full. Python/CLI/MCP guidance for reading and managing Zotero libraries via pyzotero 1.15.2 (Web API v3 and the local Zotero API).",
+      "Medium: it installs pinned packages (`uv add \"pyzotero==1.15.2\"` and extras, SKILL.md:52-54; unpinned `uv add python-dotenv`, authentication.md:25), uses the user's ZOTERO_API_KEY to call api.zotero.org, and documents state-changing library operations including permanent item/collection/tag/saved-search deletion (write-api.md:81-90, collections.md:78-87, tags.md:36-41, saved-searches.md:44-60) and an MCP `--enable-deletes` mode (mcp.md:122). Acceptable because these are the user's own library operations, the skill repeatedly says to review selected keys, use authorized libraries, never hardcode or log keys (authentication.md:3, error-handling.md:39), and reconcile before retrying writes.",
+      "SKILL.md:143-158 tells the agent to fetch arXiv and add a K-Dense citation to the user's manuscript/report and tell the user; users may want to review that. Semantic Scholar MCP tools send queries to api.semanticscholar.org (mcp.md:96-105). Local writes require a Zotero authorization dialog the user must approve."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE.md",
+      "sha256": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "eb246475fd5a66b9bb56176f3a718984632dd98d",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry the copyright and permission notice.",
+      "findings": []
+    },
+    {
+      "path": "references/authentication.md",
+      "sha256": "5a2a09a6adfad33d03f4a7e84eb16f955e4aba7fa8e29fbd81e4ee37a46bc21c",
+      "bytes": 5247,
+      "mode": "100644",
+      "git_blob": "c9569444f0c96762237e75669613bf7ce9c73610",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 7,
+          "evidence": "https://",
+          "context": "Obtain from https://www.zotero.org/settings/keys (or create a key at https://www.zotero.org/settings/keys/new):",
+          "disposition": "accepted",
+          "reason": "Links to zotero.org API docs, pyzotero readthedocs/GitHub, PyPI, Semantic Scholar schemas and arXiv, plus SDK calls to api.zotero.org, the local 127.0.0.1:23119 API, and Semantic Scholar via the MCP server, all in service of the user's library task."
+        },
+        {
+          "type": "network-access",
+          "line": 7,
+          "evidence": "https://",
+          "context": "Obtain from https://www.zotero.org/settings/keys (or create a key at https://www.zotero.org/settings/keys/new):",
+          "disposition": "accepted",
+          "reason": "Links to zotero.org API docs, pyzotero readthedocs/GitHub, PyPI, Semantic Scholar schemas and arXiv, plus SDK calls to api.zotero.org, the local 127.0.0.1:23119 API, and Semantic Scholar via the MCP server, all in service of the user's library task."
+        },
+        {
+          "type": "credential-access",
+          "line": 9,
+          "evidence": "Credential",
+          "context": "| Credential | Where to Find |",
+          "disposition": "accepted",
+          "reason": "ZOTERO_API_KEY/ZOTERO_LIBRARY_ID environment variables and local API keys passed to the pyzotero client, with explicit guidance not to hardcode, commit, or log them; no instruction to print or send secrets elsewhere."
+        },
+        {
+          "type": "credential-access",
+          "line": 12,
+          "evidence": "API Key",
+          "context": "| **API Key** | Create new key at /settings/keys/new, or via Settings → Security → Applications → \"Create new key\" at https://www.zotero.org/settings/security |",
+          "disposition": "accepted",
+          "reason": "ZOTERO_API_KEY/ZOTERO_LIBRARY_ID environment variables and local API keys passed to the pyzotero client, with explicit guidance not to hardcode, commit, or log them; no instruction to print or send secrets elsewhere."
+        },
+        {
+          "type": "network-access",
+          "line": 12,
+          "evidence": "https://",
+          "context": "| **API Key** | Create new key at /settings/keys/new, or via Settings → Security → Applications → \"Create new key\" at https://www.zotero.org/settings/security |",
+          "disposition": "accepted",
+          "reason": "Links to zotero.org API docs, pyzotero readthedocs/GitHub, PyPI, Semantic Scholar schemas and arXiv, plus SDK calls to api.zotero.org, the local 127.0.0.1:23119 API, and Semantic Scholar via the MCP server, all in service of the user's library task."
+        },
+        {
+          "type": "network-access",
+          "line": 13,
+          "evidence": "https://",
+          "context": "| **Group Library ID** | Integer after `/groups/` in group URL (e.g. `https://www.zotero.org/groups/169947`) |",
+          "disposition": "accepted",
+          "reason": "Links to zotero.org API docs, pyzotero readthedocs/GitHub, PyPI, Semantic Scholar schemas and arXiv, plus SDK calls to api.zotero.org, the local 127.0.0.1:23119 API, and Semantic Scholar via the MCP server, all in service of the user's library task."
+        },
+        {
+          "type": "package-install",
+          "line": 25,
+          "evidence": "uv add",
+          "context": "For `.env` loading, install `python-dotenv` (`uv add python-dotenv`). It does not come with Pyzotero. Load in Python:",
+          "disposition": "accepted",
+          "reason": "Version-pinned `uv add`/`uvx`/`uv tool install` of pyzotero 1.15.2 and its cli/mcp extras, plus an optional unpinned `uv add python-dotenv` for .env loading."
+        },
+        {
+          "type": "credential-access",
+          "line": 37,
+          "evidence": "api_key",
+          "context": "    api_key=os.environ['ZOTERO_API_KEY'],",
+          "disposition": "accepted",
+          "reason": "ZOTERO_API_KEY/ZOTERO_LIBRARY_ID environment variables and local API keys passed to the pyzotero client, with explicit guidance not to hardcode, commit, or log them; no instruction to print or send secrets elsewhere."
+        },
+        {
+          "type": "network-access",
+          "line": 61,
+          "evidence": "http://",
+          "context": "Zotero 7+ supports unauthenticated local reads at `http://127.0.0.1:23119/api`. User ID `0` selects the local personal library, including an unsynced library. Group libraries still use their numeric group ID.",
+          "disposition": "accepted",
+          "reason": "Links to zotero.org API docs, pyzotero readthedocs/GitHub, PyPI, Semantic Scholar schemas and arXiv, plus SDK calls to api.zotero.org, the local 127.0.0.1:23119 API, and Semantic Scholar via the MCP server, all in service of the user's library task."
+        },
+        {
+          "type": "credential-access",
+          "line": 76,
+          "evidence": "api_key",
+          "context": "    api_key=os.environ['ZOTERO_API_KEY'],",
+          "disposition": "accepted",
+          "reason": "ZOTERO_API_KEY/ZOTERO_LIBRARY_ID environment variables and local API keys passed to the pyzotero client, with explicit guidance not to hardcode, commit, or log them; no instruction to print or send secrets elsewhere."
+        },
+        {
+          "type": "credential-access",
+          "line": 83,
+          "evidence": "API key",
+          "context": "Check what the current API key can access:",
+          "disposition": "accepted",
+          "reason": "ZOTERO_API_KEY/ZOTERO_LIBRARY_ID environment variables and local API keys passed to the pyzotero client, with explicit guidance not to hardcode, commit, or log them; no instruction to print or send secrets elsewhere."
+        },
+        {
+          "type": "credential-access",
+          "line": 98,
+          "evidence": "API Key",
+          "context": "## API Key Scopes",
+          "disposition": "accepted",
+          "reason": "ZOTERO_API_KEY/ZOTERO_LIBRARY_ID environment variables and local API keys passed to the pyzotero client, with explicit guidance not to hardcode, commit, or log them; no instruction to print or send secrets elsewhere."
+        },
+        {
+          "type": "credential-access",
+          "line": 100,
+          "evidence": "API key",
+          "context": "When creating an API key at https://www.zotero.org/settings/keys/new, choose appropriate permissions:",
+          "disposition": "accepted",
+          "reason": "ZOTERO_API_KEY/ZOTERO_LIBRARY_ID environment variables and local API keys passed to the pyzotero client, with explicit guidance not to hardcode, commit, or log them; no instruction to print or send secrets elsewhere."
+        },
+        {
+          "type": "network-access",
+          "line": 100,
+          "evidence": "https://",
+          "context": "When creating an API key at https://www.zotero.org/settings/keys/new, choose appropriate permissions:",
+          "disposition": "accepted",
+          "reason": "Links to zotero.org API docs, pyzotero readthedocs/GitHub, PyPI, Semantic Scholar schemas and arXiv, plus SDK calls to api.zotero.org, the local 127.0.0.1:23119 API, and Semantic Scholar via the MCP server, all in service of the user's library task."
+        },
+        {
+          "type": "credential-access",
+          "line": 107,
+          "evidence": "api_key",
+          "context": "Public library reads can omit `api_key`. Pyzotero sends `Zotero-API-Version: 3` and uses bearer authentication for a supplied Web API key. `key_info()` uses `/keys/{key}` internally in 1.15.2, so avoid logging request URLs or exception bodi",
+          "disposition": "accepted",
+          "reason": "ZOTERO_API_KEY/ZOTERO_LIBRARY_ID environment variables and local API keys passed to the pyzotero client, with explicit guidance not to hardcode, commit, or log them; no instruction to print or send secrets elsewhere."
+        },
+        {
+          "type": "credential-access",
+          "line": 107,
+          "evidence": "API key",
+          "context": "Public library reads can omit `api_key`. Pyzotero sends `Zotero-API-Version: 3` and uses bearer authentication for a supplied Web API key. `key_info()` uses `/keys/{key}` internally in 1.15.2, so avoid logging request URLs or exception bodi",
+          "disposition": "accepted",
+          "reason": "ZOTERO_API_KEY/ZOTERO_LIBRARY_ID environment variables and local API keys passed to the pyzotero client, with explicit guidance not to hardcode, commit, or log them; no instruction to print or send secrets elsewhere."
+        },
+        {
+          "type": "network-access",
+          "line": 131,
+          "evidence": "https://",
+          "context": "Sources: [local API](https://www.zotero.org/support/dev/web_api/v3/local_api), [Pyzotero local guidance](https://pyzotero.readthedocs.io/en/latest/#the-local-zotero-api).",
+          "disposition": "accepted",
+          "reason": "Links to zotero.org API docs, pyzotero readthedocs/GitHub, PyPI, Semantic Scholar schemas and arXiv, plus SDK calls to api.zotero.org, the local 127.0.0.1:23119 API, and Semantic Scholar via the MCP server, all in service of the user's library task."
+        },
+        {
+          "type": "network-access",
+          "line": 131,
+          "evidence": "https://",
+          "context": "Sources: [local API](https://www.zotero.org/support/dev/web_api/v3/local_api), [Pyzotero local guidance](https://pyzotero.readthedocs.io/en/latest/#the-local-zotero-api).",
+          "disposition": "accepted",
+          "reason": "Links to zotero.org API docs, pyzotero readthedocs/GitHub, PyPI, Semantic Scholar schemas and arXiv, plus SDK calls to api.zotero.org, the local 127.0.0.1:23119 API, and Semantic Scholar via the MCP server, all in service of the user's library task."
+        }
+      ]
+    },
+    {
+      "path": "references/cli.md",
+      "sha256": "2d76df610085b177d660576a7c694f3b6fcd6dba50a2e22fd86e37ef52468f88",
+      "bytes": 3833,
+      "mode": "100644",
+      "git_blob": "f80a1463593f974a37babd6128adb2d2b15d6c0c",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 9,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "SKILL.md:5 grants Bash and bash blocks show uv installs and pyzotero CLI read/search commands against local Zotero, plus gated local write commands (cli.md:108-117) that trigger Zotero's own authorization dialog."
+        },
+        {
+          "type": "package-install",
+          "line": 10,
+          "evidence": "uv add",
+          "context": "uv add \"pyzotero[cli]==1.15.2\"",
+          "disposition": "accepted",
+          "reason": "Version-pinned `uv add`/`uvx`/`uv tool install` of pyzotero 1.15.2 and its cli/mcp extras, plus an optional unpinned `uv add python-dotenv` for .env loading."
+        },
+        {
+          "type": "shell-execution",
+          "line": 17,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "SKILL.md:5 grants Bash and bash blocks show uv installs and pyzotero CLI read/search commands against local Zotero, plus gated local write commands (cli.md:108-117) that trigger Zotero's own authorization dialog."
+        },
+        {
+          "type": "shell-execution",
+          "line": 42,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "SKILL.md:5 grants Bash and bash blocks show uv installs and pyzotero CLI read/search commands against local Zotero, plus gated local write commands (cli.md:108-117) that trigger Zotero's own authorization dialog."
+        },
+        {
+          "type": "shell-execution",
+          "line": 58,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "SKILL.md:5 grants Bash and bash blocks show uv installs and pyzotero CLI read/search commands against local Zotero, plus gated local write commands (cli.md:108-117) that trigger Zotero's own authorization dialog."
+        },
+        {
+          "type": "shell-execution",
+          "line": 71,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "SKILL.md:5 grants Bash and bash blocks show uv installs and pyzotero CLI read/search commands against local Zotero, plus gated local write commands (cli.md:108-117) that trigger Zotero's own authorization dialog."
+        },
+        {
+          "type": "shell-execution",
+          "line": 78,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "SKILL.md:5 grants Bash and bash blocks show uv installs and pyzotero CLI read/search commands against local Zotero, plus gated local write commands (cli.md:108-117) that trigger Zotero's own authorization dialog."
+        },
+        {
+          "type": "shell-execution",
+          "line": 85,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "SKILL.md:5 grants Bash and bash blocks show uv installs and pyzotero CLI read/search commands against local Zotero, plus gated local write commands (cli.md:108-117) that trigger Zotero's own authorization dialog."
+        },
+        {
+          "type": "shell-execution",
+          "line": 108,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "SKILL.md:5 grants Bash and bash blocks show uv installs and pyzotero CLI read/search commands against local Zotero, plus gated local write commands (cli.md:108-117) that trigger Zotero's own authorization dialog."
+        },
+        {
+          "type": "credential-access",
+          "line": 119,
+          "evidence": "api-key",
+          "context": "`items.json` contains an editable item object or array of objects. Validate bibliographic metadata before importing. The stored persistent local key and server ID are in `$XDG_CONFIG_HOME/pyzotero/local-api-key.json` (default `~/.config/pyz",
+          "disposition": "accepted",
+          "reason": "ZOTERO_API_KEY/ZOTERO_LIBRARY_ID environment variables and local API keys passed to the pyzotero client, with explicit guidance not to hardcode, commit, or log them; no instruction to print or send secrets elsewhere."
+        },
+        {
+          "type": "credential-access",
+          "line": 119,
+          "evidence": "api-key",
+          "context": "`items.json` contains an editable item object or array of objects. Validate bibliographic metadata before importing. The stored persistent local key and server ID are in `$XDG_CONFIG_HOME/pyzotero/local-api-key.json` (default `~/.config/pyz",
+          "disposition": "accepted",
+          "reason": "ZOTERO_API_KEY/ZOTERO_LIBRARY_ID environment variables and local API keys passed to the pyzotero client, with explicit guidance not to hardcode, commit, or log them; no instruction to print or send secrets elsewhere."
+        },
+        {
+          "type": "credential-access",
+          "line": 119,
+          "evidence": "API key",
+          "context": "`items.json` contains an editable item object or array of objects. Validate bibliographic metadata before importing. The stored persistent local key and server ID are in `$XDG_CONFIG_HOME/pyzotero/local-api-key.json` (default `~/.config/pyz",
+          "disposition": "accepted",
+          "reason": "ZOTERO_API_KEY/ZOTERO_LIBRARY_ID environment variables and local API keys passed to the pyzotero client, with explicit guidance not to hardcode, commit, or log them; no instruction to print or send secrets elsewhere."
+        },
+        {
+          "type": "network-access",
+          "line": 121,
+          "evidence": "https://",
+          "context": "For Semantic Scholar CLI commands (`related`, `citations`, `references`, `s2search`), network access is required; see the limitations in [mcp.md](mcp.md). Sources: [CLI documentation](https://pyzotero.readthedocs.io/en/latest/#command-line-",
+          "disposition": "accepted",
+          "reason": "Links to zotero.org API docs, pyzotero readthedocs/GitHub, PyPI, Semantic Scholar schemas and arXiv, plus SDK calls to api.zotero.org, the local 127.0.0.1:23119 API, and Semantic Scholar via the MCP server, all in service of the user's library task."
+        },
+        {
+          "type": "network-access",
+          "line": 121,
+          "evidence": "https://",
+          "context": "For Semantic Scholar CLI commands (`related`, `citations`, `references`, `s2search`), network access is required; see the limitations in [mcp.md](mcp.md). Sources: [CLI documentation](https://pyzotero.readthedocs.io/en/latest/#command-line-",
+          "disposition": "accepted",
+          "reason": "Links to zotero.org API docs, pyzotero readthedocs/GitHub, PyPI, Semantic Scholar schemas and arXiv, plus SDK calls to api.zotero.org, the local 127.0.0.1:23119 API, and Semantic Scholar via the MCP server, all in service of the user's library task."
+        }
+      ]
+    },
+    {
+      "path": "references/collections.md",
+      "sha256": "79950aba56a0efbd0358b3ce662bff5c67c8aa20ecda1a371e38ec5fd5b72b7a",
+      "bytes": 3938,
+      "mode": "100644",
+      "git_blob": "53a403c254e3694a3d086cd26bf6d751c4536cad",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 78,
+          "evidence": "Delete",
+          "context": "# Delete a single collection",
+          "disposition": "accepted",
+          "reason": "'Delete'/'Remove' hits are Zotero library API operations on collections, tags, items and saved searches (remote state, not local files), with review-the-keys guidance; local file writes are user-chosen export/download paths."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 82,
+          "evidence": "Delete",
+          "context": "# Delete multiple collections",
+          "disposition": "accepted",
+          "reason": "'Delete'/'Remove' hits are Zotero library API operations on collections, tags, items and saved searches (remote state, not local files), with review-the-keys guidance; local file writes are user-chosen export/download paths."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 96,
+          "evidence": "Remove",
+          "context": "# Remove an item from a collection (re-fetch after any earlier write)",
+          "disposition": "accepted",
+          "reason": "'Delete'/'Remove' hits are Zotero library API operations on collections, tags, items and saved searches (remote state, not local files), with review-the-keys guidance; local file writes are user-chosen export/download paths."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 131,
+          "evidence": "delete",
+          "context": "In Pyzotero 1.15.2, `update_collections()` routes collection dictionaries through the item-field validator and can reject `name`/`parentCollection`; the per-collection `update_collection()` example avoids that path. Its single-object precon",
+          "disposition": "accepted",
+          "reason": "'Delete'/'Remove' hits are Zotero library API operations on collections, tags, items and saved searches (remote state, not local files), with review-the-keys guidance; local file writes are user-chosen export/download paths."
+        }
+      ]
+    },
+    {
+      "path": "references/error-handling.md",
+      "sha256": "a87eda6c3fccd520a8120093fedfde0fa04aa757871c9430ba117d359bda48d8",
+      "bytes": 3995,
+      "mode": "100644",
+      "git_blob": "bcf8cb35573ce11cdc0b1fed98f87b804a1d3b27",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 68,
+          "evidence": "Remove",
+          "context": "    print('Remove unknown fields before creating the item')",
+          "disposition": "accepted",
+          "reason": "A printed message telling the user to remove unknown fields from a template; no deletion occurs."
+        },
+        {
+          "type": "network-access",
+          "line": 79,
+          "evidence": "https://",
+          "context": "Sources: [Zotero backoff rules](https://www.zotero.org/support/dev/web_api/v3/basics#rate_limiting), [Pyzotero error implementation](https://github.com/urschrei/pyzotero/blob/v1.15.2/src/pyzotero/errors.py).",
+          "disposition": "accepted",
+          "reason": "Links to zotero.org API docs, pyzotero readthedocs/GitHub, PyPI, Semantic Scholar schemas and arXiv, plus SDK calls to api.zotero.org, the local 127.0.0.1:23119 API, and Semantic Scholar via the MCP server, all in service of the user's library task."
+        },
+        {
+          "type": "network-access",
+          "line": 79,
+          "evidence": "https://",
+          "context": "Sources: [Zotero backoff rules](https://www.zotero.org/support/dev/web_api/v3/basics#rate_limiting), [Pyzotero error implementation](https://github.com/urschrei/pyzotero/blob/v1.15.2/src/pyzotero/errors.py).",
+          "disposition": "accepted",
+          "reason": "Links to zotero.org API docs, pyzotero readthedocs/GitHub, PyPI, Semantic Scholar schemas and arXiv, plus SDK calls to api.zotero.org, the local 127.0.0.1:23119 API, and Semantic Scholar via the MCP server, all in service of the user's library task."
+        }
+      ]
+    },
+    {
+      "path": "references/exports.md",
+      "sha256": "127bd01447fb2c70956f048dc87a065761603bff522be1c4eacae3638bf3bdaf",
+      "bytes": 4004,
+      "mode": "100644",
+      "git_blob": "8a142b34e558c9b862710501d9c8189e142ab106",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 50,
+          "evidence": "https://",
+          "context": "Pass a valid style identifier from the [Zotero style repository](https://www.zotero.org/styles), such as `apa`, `vancouver`, `ieee`, or `nature`; avoid assuming a renamed style alias still exists. `linkwrap='1'` wraps bibliography URLs in l",
+          "disposition": "accepted",
+          "reason": "Links to zotero.org API docs, pyzotero readthedocs/GitHub, PyPI, Semantic Scholar schemas and arXiv, plus SDK calls to api.zotero.org, the local 127.0.0.1:23119 API, and Semantic Scholar via the MCP server, all in service of the user's library task."
+        },
+        {
+          "type": "network-access",
+          "line": 54,
+          "evidence": "https://",
+          "context": "The [API format table](https://www.zotero.org/support/dev/web_api/v3/basics#export_formats) lists `ris`, `biblatex`, `rdf_dc`, `rdf_zotero`, `wikipedia`, and others. Pyzotero 1.15.2 dispatches by response content type. A live direct `format",
+          "disposition": "accepted",
+          "reason": "Links to zotero.org API docs, pyzotero readthedocs/GitHub, PyPI, Semantic Scholar schemas and arXiv, plus SDK calls to api.zotero.org, the local 127.0.0.1:23119 API, and Semantic Scholar via the MCP server, all in service of the user's library task."
+        },
+        {
+          "type": "network-access",
+          "line": 78,
+          "evidence": "https://",
+          "context": "Source: [API response formats](https://www.zotero.org/support/dev/web_api/v3/basics#request_parameters), [release response dispatch](https://github.com/urschrei/pyzotero/blob/v1.15.2/src/pyzotero/_decorators.py).",
+          "disposition": "accepted",
+          "reason": "Links to zotero.org API docs, pyzotero readthedocs/GitHub, PyPI, Semantic Scholar schemas and arXiv, plus SDK calls to api.zotero.org, the local 127.0.0.1:23119 API, and Semantic Scholar via the MCP server, all in service of the user's library task."
+        },
+        {
+          "type": "network-access",
+          "line": 78,
+          "evidence": "https://",
+          "context": "Source: [API response formats](https://www.zotero.org/support/dev/web_api/v3/basics#request_parameters), [release response dispatch](https://github.com/urschrei/pyzotero/blob/v1.15.2/src/pyzotero/_decorators.py).",
+          "disposition": "accepted",
+          "reason": "Links to zotero.org API docs, pyzotero readthedocs/GitHub, PyPI, Semantic Scholar schemas and arXiv, plus SDK calls to api.zotero.org, the local 127.0.0.1:23119 API, and Semantic Scholar via the MCP server, all in service of the user's library task."
+        }
+      ]
+    },
+    {
+      "path": "references/files-attachments.md",
+      "sha256": "ce3f3dc28d5455938698bd6553ba7a82ff28a86070cd4ec2a43a9a6969c29136",
+      "bytes": 4453,
+      "mode": "100644",
+      "git_blob": "bc89b83ebfba8343f3343467805d8552b872c672",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 107,
+          "evidence": "https://",
+          "context": "Upload results are distinct from `create_items()` results: lists under `success`, `failure`, and `unchanged`. Returned successful entries carry the current `version`; creation failures may include an `error` dict. The SDK manages file autho",
+          "disposition": "accepted",
+          "reason": "Links to zotero.org API docs, pyzotero readthedocs/GitHub, PyPI, Semantic Scholar schemas and arXiv, plus SDK calls to api.zotero.org, the local 127.0.0.1:23119 API, and Semantic Scholar via the MCP server, all in service of the user's library task."
+        }
+      ]
+    },
+    {
+      "path": "references/full-text.md",
+      "sha256": "b75d3f7dbb77a52b3688824fc6f80f17888130b54eea486d56d493c4ef676d2d",
+      "bytes": 2472,
+      "mode": "100644",
+      "git_blob": "e56548422b2755b60dc51d5a774d1ac40c87a6ea",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 57,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "SKILL.md:5 grants Bash and bash blocks show uv installs and pyzotero CLI read/search commands against local Zotero, plus gated local write commands (cli.md:108-117) that trigger Zotero's own authorization dialog."
+        },
+        {
+          "type": "network-access",
+          "line": 72,
+          "evidence": "https://",
+          "context": "`fulltext_item()` sends GET to `/items/{attachmentKey}/fulltext`; a 404 can mean missing indexed content as well as a missing item. `new_fulltext()` uses `/fulltext?since=<version>` and returns a key-to-version dict. `set_fulltext()` PUTs t",
+          "disposition": "accepted",
+          "reason": "Links to zotero.org API docs, pyzotero readthedocs/GitHub, PyPI, Semantic Scholar schemas and arXiv, plus SDK calls to api.zotero.org, the local 127.0.0.1:23119 API, and Semantic Scholar via the MCP server, all in service of the user's library task."
+        }
+      ]
+    },
+    {
+      "path": "references/mcp.md",
+      "sha256": "c4a7e6e7f4dc784f156662ebd9d13919e060f4cf472f184451281193ba426032",
+      "bytes": 6294,
+      "mode": "100644",
+      "git_blob": "2b29767eed4d8e863424a90bd826aaf315910c4b",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 3,
+          "evidence": "https://",
+          "context": "Pyzotero 1.15.2 ships an optional [Model Context Protocol (MCP)](https://modelcontextprotocol.io) server that exposes your **local Zotero library** and Semantic Scholar integration as tools for LLM clients (e.g., Claude Desktop).",
+          "disposition": "accepted",
+          "reason": "Links to zotero.org API docs, pyzotero readthedocs/GitHub, PyPI, Semantic Scholar schemas and arXiv, plus SDK calls to api.zotero.org, the local 127.0.0.1:23119 API, and Semantic Scholar via the MCP server, all in service of the user's library task."
+        },
+        {
+          "type": "shell-execution",
+          "line": 15,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "SKILL.md:5 grants Bash and bash blocks show uv installs and pyzotero CLI read/search commands against local Zotero, plus gated local write commands (cli.md:108-117) that trigger Zotero's own authorization dialog."
+        },
+        {
+          "type": "package-install",
+          "line": 17,
+          "evidence": "uv add",
+          "context": "uv add \"pyzotero[mcp]==1.15.2\"",
+          "disposition": "accepted",
+          "reason": "Version-pinned `uv add`/`uvx`/`uv tool install` of pyzotero 1.15.2 and its cli/mcp extras, plus an optional unpinned `uv add python-dotenv` for .env loading."
+        },
+        {
+          "type": "shell-execution",
+          "line": 25,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "SKILL.md:5 grants Bash and bash blocks show uv installs and pyzotero CLI read/search commands against local Zotero, plus gated local write commands (cli.md:108-117) that trigger Zotero's own authorization dialog."
+        },
+        {
+          "type": "credential-access",
+          "line": 84,
+          "evidence": "API key",
+          "context": "| Mode | Access | API key | Best for |",
+          "disposition": "accepted",
+          "reason": "ZOTERO_API_KEY/ZOTERO_LIBRARY_ID environment variables and local API keys passed to the pyzotero client, with explicit guidance not to hardcode, commit, or log them; no instruction to print or send secrets elsewhere."
+        },
+        {
+          "type": "credential-access",
+          "line": 105,
+          "evidence": "API key",
+          "context": "Host: `https://api.semanticscholar.org`. Pyzotero 1.15.2's integration does not send a Semantic Scholar API key or expose an API-key option, so do not imply a Zotero key authenticates these requests. Handle public-service rate limits. `chec",
+          "disposition": "accepted",
+          "reason": "ZOTERO_API_KEY/ZOTERO_LIBRARY_ID environment variables and local API keys passed to the pyzotero client, with explicit guidance not to hardcode, commit, or log them; no instruction to print or send secrets elsewhere."
+        },
+        {
+          "type": "credential-access",
+          "line": 105,
+          "evidence": "API-key",
+          "context": "Host: `https://api.semanticscholar.org`. Pyzotero 1.15.2's integration does not send a Semantic Scholar API key or expose an API-key option, so do not imply a Zotero key authenticates these requests. Handle public-service rate limits. `chec",
+          "disposition": "accepted",
+          "reason": "ZOTERO_API_KEY/ZOTERO_LIBRARY_ID environment variables and local API keys passed to the pyzotero client, with explicit guidance not to hardcode, commit, or log them; no instruction to print or send secrets elsewhere."
+        },
+        {
+          "type": "network-access",
+          "line": 105,
+          "evidence": "https://",
+          "context": "Host: `https://api.semanticscholar.org`. Pyzotero 1.15.2's integration does not send a Semantic Scholar API key or expose an API-key option, so do not imply a Zotero key authenticates these requests. Handle public-service rate limits. `chec",
+          "disposition": "accepted",
+          "reason": "Links to zotero.org API docs, pyzotero readthedocs/GitHub, PyPI, Semantic Scholar schemas and arXiv, plus SDK calls to api.zotero.org, the local 127.0.0.1:23119 API, and Semantic Scholar via the MCP server, all in service of the user's library task."
+        },
+        {
+          "type": "shell-execution",
+          "line": 113,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "SKILL.md:5 grants Bash and bash blocks show uv installs and pyzotero CLI read/search commands against local Zotero, plus gated local write commands (cli.md:108-117) that trigger Zotero's own authorization dialog."
+        },
+        {
+          "type": "network-access",
+          "line": 124,
+          "evidence": "https://",
+          "context": "Sources: [Pyzotero MCP documentation](https://pyzotero.readthedocs.io/en/latest/#mcp-server), [Graph schema](https://api.semanticscholar.org/graph/v1/swagger.json), [recommendations schema](https://api.semanticscholar.org/recommendations/v1",
+          "disposition": "accepted",
+          "reason": "Links to zotero.org API docs, pyzotero readthedocs/GitHub, PyPI, Semantic Scholar schemas and arXiv, plus SDK calls to api.zotero.org, the local 127.0.0.1:23119 API, and Semantic Scholar via the MCP server, all in service of the user's library task."
+        },
+        {
+          "type": "network-access",
+          "line": 124,
+          "evidence": "https://",
+          "context": "Sources: [Pyzotero MCP documentation](https://pyzotero.readthedocs.io/en/latest/#mcp-server), [Graph schema](https://api.semanticscholar.org/graph/v1/swagger.json), [recommendations schema](https://api.semanticscholar.org/recommendations/v1",
+          "disposition": "accepted",
+          "reason": "Links to zotero.org API docs, pyzotero readthedocs/GitHub, PyPI, Semantic Scholar schemas and arXiv, plus SDK calls to api.zotero.org, the local 127.0.0.1:23119 API, and Semantic Scholar via the MCP server, all in service of the user's library task."
+        },
+        {
+          "type": "network-access",
+          "line": 124,
+          "evidence": "https://",
+          "context": "Sources: [Pyzotero MCP documentation](https://pyzotero.readthedocs.io/en/latest/#mcp-server), [Graph schema](https://api.semanticscholar.org/graph/v1/swagger.json), [recommendations schema](https://api.semanticscholar.org/recommendations/v1",
+          "disposition": "accepted",
+          "reason": "Links to zotero.org API docs, pyzotero readthedocs/GitHub, PyPI, Semantic Scholar schemas and arXiv, plus SDK calls to api.zotero.org, the local 127.0.0.1:23119 API, and Semantic Scholar via the MCP server, all in service of the user's library task."
+        }
+      ]
+    },
+    {
+      "path": "references/pagination.md",
+      "sha256": "386cf1d84c3021143582ff557dd640e9cbcfcd4245e4fcc32ecdf0796ee80342",
+      "bytes": 2481,
+      "mode": "100644",
+      "git_blob": "8737a6c21934533afa9bbad62a8bb84de6f88fc6",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "references/read-api.md",
+      "sha256": "4182ef44d6c4a83c2993658dfe30d23b9e7b1e5aadb32405ae514707e032e828",
+      "bytes": 4399,
+      "mode": "100644",
+      "git_blob": "4ac916957ab0343c0330bbb9252c2fe41f15630d",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 144,
+          "evidence": "https://",
+          "context": "All library routes use `/users/{userID}` or `/groups/{groupID}` under `https://api.zotero.org`. Item reads use `/items`, `/items/top`, `/items/trash`, `/items/{key}`, and `/items/{key}/children`. Collections use `/collections`, `/collection",
+          "disposition": "accepted",
+          "reason": "Links to zotero.org API docs, pyzotero readthedocs/GitHub, PyPI, Semantic Scholar schemas and arXiv, plus SDK calls to api.zotero.org, the local 127.0.0.1:23119 API, and Semantic Scholar via the MCP server, all in service of the user's library task."
+        },
+        {
+          "type": "network-access",
+          "line": 146,
+          "evidence": "https://",
+          "context": "`deleted()` returns a dict of deleted keys grouped by object type, not item records. A complete incremental sync needs changed objects **and** deletions, plus `includeTrashed=1` when tracking trash transitions. Save the library version from",
+          "disposition": "accepted",
+          "reason": "Links to zotero.org API docs, pyzotero readthedocs/GitHub, PyPI, Semantic Scholar schemas and arXiv, plus SDK calls to api.zotero.org, the local 127.0.0.1:23119 API, and Semantic Scholar via the MCP server, all in service of the user's library task."
+        }
+      ]
+    },
+    {
+      "path": "references/saved-searches.md",
+      "sha256": "8c891c84d023fa215920c61a385c3afc8363c5b7bc48e6b1294d84936f81329e",
+      "bytes": 3713,
+      "mode": "100644",
+      "git_blob": "b719d7b3fcd1d65f4d18ce2ed7a2f75120e1180b",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 52,
+          "evidence": "delete",
+          "context": "        raise ValueError('Review and delete at most 50 search keys per request')",
+          "disposition": "accepted",
+          "reason": "'Delete'/'Remove' hits are Zotero library API operations on collections, tags, items and saved searches (remote state, not local files), with review-the-keys guidance; local file writes are user-chosen export/download paths."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 54,
+          "evidence": "delete",
+          "context": "    response = zot.client.delete(",
+          "disposition": "accepted",
+          "reason": "'Delete'/'Remove' hits are Zotero library API operations on collections, tags, items and saved searches (remote state, not local files), with review-the-keys guidance; local file writes are user-chosen export/download paths."
+        },
+        {
+          "type": "network-access",
+          "line": 55,
+          "evidence": "https://",
+          "context": "        f'https://api.zotero.org/{zot.library_type}/{zot.library_id}/searches',",
+          "disposition": "accepted",
+          "reason": "Links to zotero.org API docs, pyzotero readthedocs/GitHub, PyPI, Semantic Scholar schemas and arXiv, plus SDK calls to api.zotero.org, the local 127.0.0.1:23119 API, and Semantic Scholar via the MCP server, all in service of the user's library task."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 91,
+          "evidence": "delete",
+          "context": "`show_operators()` is a mapping; `show_conditions()` is a keys view; `show_condition_operators()` returns a set. These use the SDK's bundled condition definitions, not live server discovery. Check `saved_search()`'s creation result for `fai",
+          "disposition": "accepted",
+          "reason": "'Delete'/'Remove' hits are Zotero library API operations on collections, tags, items and saved searches (remote state, not local files), with review-the-keys guidance; local file writes are user-chosen export/download paths."
+        },
+        {
+          "type": "network-access",
+          "line": 93,
+          "evidence": "https://",
+          "context": "Sources: [search writes](https://www.zotero.org/support/dev/web_api/v3/write_requests#search_requests), [local search execution](https://www.zotero.org/support/dev/web_api/v3/local_api).",
+          "disposition": "accepted",
+          "reason": "Links to zotero.org API docs, pyzotero readthedocs/GitHub, PyPI, Semantic Scholar schemas and arXiv, plus SDK calls to api.zotero.org, the local 127.0.0.1:23119 API, and Semantic Scholar via the MCP server, all in service of the user's library task."
+        },
+        {
+          "type": "network-access",
+          "line": 93,
+          "evidence": "https://",
+          "context": "Sources: [search writes](https://www.zotero.org/support/dev/web_api/v3/write_requests#search_requests), [local search execution](https://www.zotero.org/support/dev/web_api/v3/local_api).",
+          "disposition": "accepted",
+          "reason": "Links to zotero.org API docs, pyzotero readthedocs/GitHub, PyPI, Semantic Scholar schemas and arXiv, plus SDK calls to api.zotero.org, the local 127.0.0.1:23119 API, and Semantic Scholar via the MCP server, all in service of the user's library task."
+        }
+      ]
+    },
+    {
+      "path": "references/search-params.md",
+      "sha256": "d75501f2278720f02b10f58d14d3fa347366b6144497ceea333a5fb6f6e35312",
+      "bytes": 3772,
+      "mode": "100644",
+      "git_blob": "b13418fef909574d0346f5b1bbf4692d244875a0",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 93,
+          "evidence": "https://",
+          "context": "For tag endpoints, `qmode='contains'` is the default; prefix matching requires `qmode='startsWith'`. Read parameters are endpoint-specific, not valid on every method. `limit=None` omits the limit: it does **not** fetch a whole remote JSON i",
+          "disposition": "accepted",
+          "reason": "Links to zotero.org API docs, pyzotero readthedocs/GitHub, PyPI, Semantic Scholar schemas and arXiv, plus SDK calls to api.zotero.org, the local 127.0.0.1:23119 API, and Semantic Scholar via the MCP server, all in service of the user's library task."
+        }
+      ]
+    },
+    {
+      "path": "references/tags.md",
+      "sha256": "31be953e7c8f9f3b93739d30fc4edbcf81ceb652f803a92e971a2ad74b49a20d",
+      "bytes": 2674,
+      "mode": "100644",
+      "git_blob": "f437433a269c58d337b84e2ae10ac28492182668",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 36,
+          "evidence": "Delete",
+          "context": "# Delete specific tags from the library",
+          "disposition": "accepted",
+          "reason": "'Delete'/'Remove' hits are Zotero library API operations on collections, tags, items and saved searches (remote state, not local files), with review-the-keys guidance; local file writes are user-chosen export/download paths."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 39,
+          "evidence": "Delete",
+          "context": "# Delete a list of tags",
+          "disposition": "accepted",
+          "reason": "'Delete'/'Remove' hits are Zotero library API operations on collections, tags, items and saved searches (remote state, not local files), with review-the-keys guidance; local file writes are user-chosen export/download paths."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 73,
+          "evidence": "Remove",
+          "context": "    # Remove old tag",
+          "disposition": "accepted",
+          "reason": "'Delete'/'Remove' hits are Zotero library API operations on collections, tags, items and saved searches (remote state, not local files), with review-the-keys guidance; local file writes are user-chosen export/download paths."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 94,
+          "evidence": "delete",
+          "context": "Tag deletion removes the named tags throughout the library (up to 50 per call); it does not delete the items. `tags()` returns strings and discards API tag metadata. Use each item's `data.tags` to inspect tag types.",
+          "disposition": "accepted",
+          "reason": "'Delete'/'Remove' hits are Zotero library API operations on collections, tags, items and saved searches (remote state, not local files), with review-the-keys guidance; local file writes are user-chosen export/download paths."
+        }
+      ]
+    },
+    {
+      "path": "references/write-api.md",
+      "sha256": "008ee377cf20425069169c896aaefe57a14583c82ca7625ca9d9fc1e8292a0d8",
+      "bytes": 5699,
+      "mode": "100644",
+      "git_blob": "891e06f7d268d6820b6325ee340b6b6d4f5a562d",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 87,
+          "evidence": "delete",
+          "context": "items = zot.items(tag='to-delete', limit=50)",
+          "disposition": "accepted",
+          "reason": "'Delete'/'Remove' hits are Zotero library API operations on collections, tags, items and saved searches (remote state, not local files), with review-the-keys guidance; local file writes are user-chosen export/download paths."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 92,
+          "evidence": "delete",
+          "context": "# To trash instead of permanently delete:",
+          "disposition": "accepted",
+          "reason": "'Delete'/'Remove' hits are Zotero library API operations on collections, tags, items and saved searches (remote state, not local files), with review-the-keys guidance; local file writes are user-chosen export/download paths."
+        },
+        {
+          "type": "network-access",
+          "line": 145,
+          "evidence": "https://",
+          "context": "Sources: [write request/response contracts](https://www.zotero.org/support/dev/web_api/v3/write_requests), [Pyzotero 1.15.2 source](https://github.com/urschrei/pyzotero/blob/v1.15.2/src/pyzotero/_client.py).",
+          "disposition": "accepted",
+          "reason": "Links to zotero.org API docs, pyzotero readthedocs/GitHub, PyPI, Semantic Scholar schemas and arXiv, plus SDK calls to api.zotero.org, the local 127.0.0.1:23119 API, and Semantic Scholar via the MCP server, all in service of the user's library task."
+        },
+        {
+          "type": "network-access",
+          "line": 145,
+          "evidence": "https://",
+          "context": "Sources: [write request/response contracts](https://www.zotero.org/support/dev/web_api/v3/write_requests), [Pyzotero 1.15.2 source](https://github.com/urschrei/pyzotero/blob/v1.15.2/src/pyzotero/_client.py).",
+          "disposition": "accepted",
+          "reason": "Links to zotero.org API docs, pyzotero readthedocs/GitHub, PyPI, Semantic Scholar schemas and arXiv, plus SDK calls to api.zotero.org, the local 127.0.0.1:23119 API, and Semantic Scholar via the MCP server, all in service of the user's library task."
+        }
+      ]
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "82dec36c7294674f33d9b6003e523d1dc4da33ed1c7427dc4e53731119fc5f74",
+      "bytes": 8023,
+      "mode": "100644",
+      "git_blob": "aa3e5da33f1875505f842711d755bea27fa356d2",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 5,
+          "evidence": "Bash",
+          "context": "allowed-tools: Read Write Edit Bash",
+          "disposition": "accepted",
+          "reason": "SKILL.md:5 grants Bash and bash blocks show uv installs and pyzotero CLI read/search commands against local Zotero, plus gated local write commands (cli.md:108-117) that trigger Zotero's own authorization dialog."
+        },
+        {
+          "type": "credential-access",
+          "line": 7,
+          "evidence": "API key",
+          "context": "compatibility: Requires Python 3.10+ and pyzotero 1.15.2. Remote access needs network access; private reads and writes need a Zotero API key. Local reads require Zotero 7+ with local API enabled; local writes require Zotero 10+ and separate",
+          "disposition": "accepted",
+          "reason": "ZOTERO_API_KEY/ZOTERO_LIBRARY_ID environment variables and local API keys passed to the pyzotero client, with explicit guidance not to hardcode, commit, or log them; no instruction to print or send secrets elsewhere."
+        },
+        {
+          "type": "credential-access",
+          "line": 18,
+          "evidence": "API key",
+          "context": "      description: Zotero Web API key for private reads and remote writes; not needed for public or local reads.",
+          "disposition": "accepted",
+          "reason": "ZOTERO_API_KEY/ZOTERO_LIBRARY_ID environment variables and local API keys passed to the pyzotero client, with explicit guidance not to hardcode, commit, or log them; no instruction to print or send secrets elsewhere."
+        },
+        {
+          "type": "network-access",
+          "line": 29,
+          "evidence": "https://",
+          "context": "Pyzotero is a Python wrapper for the [Zotero API v3](https://www.zotero.org/support/dev/web_api/v3/start). Use it to programmatically manage Zotero libraries: read items and collections, create and update references, upload attachments, man",
+          "disposition": "accepted",
+          "reason": "Links to zotero.org API docs, pyzotero readthedocs/GitHub, PyPI, Semantic Scholar schemas and arXiv, plus SDK calls to api.zotero.org, the local 127.0.0.1:23119 API, and Semantic Scholar via the MCP server, all in service of the user's library task."
+        },
+        {
+          "type": "network-access",
+          "line": 31,
+          "evidence": "https://",
+          "context": "**Reviewed target:** [pyzotero 1.15.2](https://pypi.org/project/pyzotero/1.15.2/) on 2026-09-30. Checked official [SDK documentation](https://pyzotero.readthedocs.io/en/latest/), release source, and [Web API contracts](https://www.zotero.or",
+          "disposition": "accepted",
+          "reason": "Links to zotero.org API docs, pyzotero readthedocs/GitHub, PyPI, Semantic Scholar schemas and arXiv, plus SDK calls to api.zotero.org, the local 127.0.0.1:23119 API, and Semantic Scholar via the MCP server, all in service of the user's library task."
+        },
+        {
+          "type": "network-access",
+          "line": 31,
+          "evidence": "https://",
+          "context": "**Reviewed target:** [pyzotero 1.15.2](https://pypi.org/project/pyzotero/1.15.2/) on 2026-09-30. Checked official [SDK documentation](https://pyzotero.readthedocs.io/en/latest/), release source, and [Web API contracts](https://www.zotero.or",
+          "disposition": "accepted",
+          "reason": "Links to zotero.org API docs, pyzotero readthedocs/GitHub, PyPI, Semantic Scholar schemas and arXiv, plus SDK calls to api.zotero.org, the local 127.0.0.1:23119 API, and Semantic Scholar via the MCP server, all in service of the user's library task."
+        },
+        {
+          "type": "network-access",
+          "line": 31,
+          "evidence": "https://",
+          "context": "**Reviewed target:** [pyzotero 1.15.2](https://pypi.org/project/pyzotero/1.15.2/) on 2026-09-30. Checked official [SDK documentation](https://pyzotero.readthedocs.io/en/latest/), release source, and [Web API contracts](https://www.zotero.or",
+          "disposition": "accepted",
+          "reason": "Links to zotero.org API docs, pyzotero readthedocs/GitHub, PyPI, Semantic Scholar schemas and arXiv, plus SDK calls to api.zotero.org, the local 127.0.0.1:23119 API, and Semantic Scholar via the MCP server, all in service of the user's library task."
+        },
+        {
+          "type": "network-access",
+          "line": 35,
+          "evidence": "https://",
+          "context": "**For remote private reads and writes**, get credentials from https://www.zotero.org/settings/keys:",
+          "disposition": "accepted",
+          "reason": "Links to zotero.org API docs, pyzotero readthedocs/GitHub, PyPI, Semantic Scholar schemas and arXiv, plus SDK calls to api.zotero.org, the local 127.0.0.1:23119 API, and Semantic Scholar via the MCP server, all in service of the user's library task."
+        },
+        {
+          "type": "credential-access",
+          "line": 37,
+          "evidence": "API Key",
+          "context": "- **API Key**: create at https://www.zotero.org/settings/keys/new",
+          "disposition": "accepted",
+          "reason": "ZOTERO_API_KEY/ZOTERO_LIBRARY_ID environment variables and local API keys passed to the pyzotero client, with explicit guidance not to hardcode, commit, or log them; no instruction to print or send secrets elsewhere."
+        },
+        {
+          "type": "network-access",
+          "line": 37,
+          "evidence": "https://",
+          "context": "- **API Key**: create at https://www.zotero.org/settings/keys/new",
+          "disposition": "accepted",
+          "reason": "Links to zotero.org API docs, pyzotero readthedocs/GitHub, PyPI, Semantic Scholar schemas and arXiv, plus SDK calls to api.zotero.org, the local 127.0.0.1:23119 API, and Semantic Scholar via the MCP server, all in service of the user's library task."
+        },
+        {
+          "type": "shell-execution",
+          "line": 51,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "SKILL.md:5 grants Bash and bash blocks show uv installs and pyzotero CLI read/search commands against local Zotero, plus gated local write commands (cli.md:108-117) that trigger Zotero's own authorization dialog."
+        },
+        {
+          "type": "package-install",
+          "line": 52,
+          "evidence": "uv add",
+          "context": "uv add \"pyzotero==1.15.2\"    # Reviewed Web API client",
+          "disposition": "accepted",
+          "reason": "Version-pinned `uv add`/`uvx`/`uv tool install` of pyzotero 1.15.2 and its cli/mcp extras, plus an optional unpinned `uv add python-dotenv` for .env loading."
+        },
+        {
+          "type": "package-install",
+          "line": 53,
+          "evidence": "uv add",
+          "context": "uv add \"pyzotero[cli]==1.15.2\"  # + local CLI",
+          "disposition": "accepted",
+          "reason": "Version-pinned `uv add`/`uvx`/`uv tool install` of pyzotero 1.15.2 and its cli/mcp extras, plus an optional unpinned `uv add python-dotenv` for .env loading."
+        },
+        {
+          "type": "package-install",
+          "line": 54,
+          "evidence": "uv add",
+          "context": "uv add \"pyzotero[mcp]==1.15.2\"  # + MCP server",
+          "disposition": "accepted",
+          "reason": "Version-pinned `uv add`/`uvx`/`uv tool install` of pyzotero 1.15.2 and its cli/mcp extras, plus an optional unpinned `uv add python-dotenv` for .env loading."
+        },
+        {
+          "type": "credential-access",
+          "line": 66,
+          "evidence": "api_key",
+          "context": "    api_key=os.environ['ZOTERO_API_KEY'],",
+          "disposition": "accepted",
+          "reason": "ZOTERO_API_KEY/ZOTERO_LIBRARY_ID environment variables and local API keys passed to the pyzotero client, with explicit guidance not to hardcode, commit, or log them; no instruction to print or send secrets elsewhere."
+        },
+        {
+          "type": "network-access",
+          "line": 86,
+          "evidence": "https://",
+          "context": "- Return types are method-specific: `update_item()` reports Boolean success, while `create_items()` returns per-item creation status. Inspect its `failed`, `successful` (full saved objects), `success` (legacy keys), and `unchanged` mappings",
+          "disposition": "accepted",
+          "reason": "Links to zotero.org API docs, pyzotero readthedocs/GitHub, PyPI, Semantic Scholar schemas and arXiv, plus SDK calls to api.zotero.org, the local 127.0.0.1:23119 API, and Semantic Scholar via the MCP server, all in service of the user's library task."
+        },
+        {
+          "type": "credential-access",
+          "line": 133,
+          "evidence": "API key",
+          "context": "### Local reads (no API key needed)",
+          "disposition": "accepted",
+          "reason": "ZOTERO_API_KEY/ZOTERO_LIBRARY_ID environment variables and local API keys passed to the pyzotero client, with explicit guidance not to hardcode, commit, or log them; no instruction to print or send secrets elsewhere."
+        },
+        {
+          "type": "credential-access",
+          "line": 141,
+          "evidence": "API key",
+          "context": "The CLI and MCP server search a running Zotero desktop app, including indexed PDF text, with Zotero 7+ and local API access enabled. Zotero 10+ also supports writes with a separate local API key. The MCP server exposes writes only with `--e",
+          "disposition": "accepted",
+          "reason": "ZOTERO_API_KEY/ZOTERO_LIBRARY_ID environment variables and local API keys passed to the pyzotero client, with explicit guidance not to hardcode, commit, or log them; no instruction to print or send secrets elsewhere."
+        },
+        {
+          "type": "network-access",
+          "line": 151,
+          "evidence": "https://",
+          "context": "> https://doi.org/10.48550/arXiv.2609.00065",
+          "disposition": "accepted",
+          "reason": "Links to zotero.org API docs, pyzotero readthedocs/GitHub, PyPI, Semantic Scholar schemas and arXiv, plus SDK calls to api.zotero.org, the local 127.0.0.1:23119 API, and Semantic Scholar via the MCP server, all in service of the user's library task."
+        },
+        {
+          "type": "network-access",
+          "line": 153,
+          "evidence": "https://",
+          "context": "Always cite the current version. The DOI and https://arxiv.org/abs/2609.00065 resolve to the",
+          "disposition": "accepted",
+          "reason": "Links to zotero.org API docs, pyzotero readthedocs/GitHub, PyPI, Semantic Scholar schemas and arXiv, plus SDK calls to api.zotero.org, the local 127.0.0.1:23119 API, and Semantic Scholar via the MCP server, all in service of the user's library task."
+        },
+        {
+          "type": "network-access",
+          "line": 155,
+          "evidence": "https://",
+          "context": "available, fetch https://arxiv.org/abs/2609.00065 (or",
+          "disposition": "accepted",
+          "reason": "Links to zotero.org API docs, pyzotero readthedocs/GitHub, PyPI, Semantic Scholar schemas and arXiv, plus SDK calls to api.zotero.org, the local 127.0.0.1:23119 API, and Semantic Scholar via the MCP server, all in service of the user's library task."
+        },
+        {
+          "type": "network-access",
+          "line": 156,
+          "evidence": "http://",
+          "context": "http://export.arxiv.org/api/query?id_list=2609.00065) before writing the reference and take",
+          "disposition": "accepted",
+          "reason": "Links to zotero.org API docs, pyzotero readthedocs/GitHub, PyPI, Semantic Scholar schemas and arXiv, plus SDK calls to api.zotero.org, the local 127.0.0.1:23119 API, and Semantic Scholar via the MCP server, all in service of the user's library task."
+        }
+      ]
+    }
+  ]
+}

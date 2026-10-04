@@ -110,6 +110,19 @@ function assertSafeExternalPlan(plan, agent) {
   }
 }
 
+// The plan installCapability will follow: the registry release policy decides for
+// skills unless it defers to an external source-direct route.
+export function planCapability(capability, agent, { scope = "project" } = {}) {
+  let plan = buildAdapterPlan(capability, agent, { scope });
+  if ((capability.artifact_type ?? capability.type ?? "skill") === "skill") {
+    const [policy] = buildInstallPlan([{
+      ...capability, license: capability.license ?? {}, source: capability.source ?? {}
+    }], agent);
+    if (policy.action !== "source-direct") plan = policy;
+  }
+  return plan;
+}
+
 export async function installCapability(
   capability,
   {
@@ -123,13 +136,7 @@ export async function installCapability(
 ) {
   if (!agent) throw new Error("Target agent is required.");
 
-  let plan = buildAdapterPlan(capability, agent, { scope });
-  if ((capability.artifact_type ?? capability.type ?? "skill") === "skill") {
-    const [policy] = buildInstallPlan([{
-      ...capability, license: capability.license ?? {}, source: capability.source ?? {}
-    }], agent);
-    if (policy.action !== "source-direct") plan = policy;
-  }
+  const plan = planCapability(capability, agent, { scope });
 
   if (["incompatible", "blocked", "adapter-pending", "unsupported"].includes(plan.action)) {
     return { ...plan, action: plan.action, installed: false };

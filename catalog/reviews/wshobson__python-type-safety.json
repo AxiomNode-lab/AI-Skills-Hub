@@ -1,0 +1,110 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "wshobson/python-type-safety",
+  "status": "draft",
+  "reviewed_on": null,
+  "reviewer": null,
+  "source": {
+    "repo": "wshobson/agents",
+    "path": "plugins/python-development/skills/python-type-safety",
+    "revision": "156b7a5e7a8b93642628a339ee4039c925b34c7f"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "plugins/python-development/skills/python-type-safety",
+    "url": "https://api.github.com/repos/wshobson/agents/git/trees/156b7a5e7a8b93642628a339ee4039c925b34c7f?recursive=1",
+    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/wshobson/agents/blob/156b7a5e7a8b93642628a339ee4039c925b34c7f/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "plugins",
+        "plugins/python-development",
+        "plugins/python-development/skills",
+        "plugins/python-development/skills/python-type-safety"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte."
+    ]
+  },
+  "content_review": {
+    "status": "pending",
+    "risk": "unknown",
+    "blocking_findings": [],
+    "capabilities": {},
+    "notes": []
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "f89abb55d9f073f38f1703e4518f0613c788c6174be7f13b8dfe48a1c076c746",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "326f0a55c96e672fedf9d807ca043c00df05ba0e",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "references/details.md",
+      "sha256": "c31ae289ec8de07220ddac57434fb0b764216af8a435dcc078c446d82e6862b5",
+      "bytes": 5862,
+      "mode": "100644",
+      "git_blob": "9bcaab64b55ae9a17822e447355391f0fcf71c74",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 30,
+          "evidence": "delete",
+          "context": "    async def delete(self, id: ID) -> bool:",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 31,
+          "evidence": "Delete",
+          "context": "        \"\"\"Delete entity, return True if existed.\"\"\"",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 46,
+          "evidence": "delete",
+          "context": "    async def delete(self, id: str) -> bool:",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "7798dd109350b73c80bb4642f6e5a0ebaa2ae392484a213d4b44b35e9b4dad66",
+      "bytes": 5763,
+      "mode": "100644",
+      "git_blob": "cce23771e21618d659eba1f7e8b1cd4e75926b0f",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    }
+  ]
+}

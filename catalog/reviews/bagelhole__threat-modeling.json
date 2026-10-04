@@ -1,0 +1,149 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "bagelhole/threat-modeling",
+  "status": "draft",
+  "reviewed_on": null,
+  "reviewer": null,
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "security/operations/threat-modeling",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "security/operations/threat-modeling",
+    "url": "https://api.github.com/repos/BagelHole/DevOps-Security-Agent-Skills/git/trees/0365f57a079b1332f95cf26e31dd2d5332a8399f?recursive=1",
+    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/BagelHole/DevOps-Security-Agent-Skills/blob/0365f57a079b1332f95cf26e31dd2d5332a8399f/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "security",
+        "security/operations",
+        "security/operations/threat-modeling"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte."
+    ]
+  },
+  "content_review": {
+    "status": "pending",
+    "risk": "unknown",
+    "blocking_findings": [],
+    "capabilities": {},
+    "notes": []
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "67c5c5cbb12cafb1515e449748866bd40da7dec9",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "references/threat-model-template.md",
+      "sha256": "203a82a0388ddf6559cc904e07447266cf39d059c1b92e2dd171826c5c1fcfb0",
+      "bytes": 2861,
+      "mode": "100644",
+      "git_blob": "593b004e7e7540e81102f5b315649ec4401673d4",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "fb9025084e74989f235d2a30c7805006f36c0a36d802b97a6ecd0bdadfb2705c",
+      "bytes": 16144,
+      "mode": "100644",
+      "git_blob": "95c2283913f556e24466ea4727dc91b0e696488f",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "credential-access",
+          "line": 36,
+          "evidence": "API key",
+          "context": "| **S**poofing | Pretending to be another user or system | Authentication | MFA, mTLS, API key validation, certificate pinning |",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 57,
+          "evidence": "secret",
+          "context": "    attack_vector: \"Stolen signing key or weak algorithm (HS256 with guessable secret)\"",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 247,
+          "evidence": "Credential",
+          "context": "      name: \"Credential stuffing\"",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 248,
+          "evidence": "credential",
+          "context": "      description: \"Attacker uses leaked credential databases to attempt logins\"",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 250,
+          "evidence": "credential",
+          "context": "      mitigations: [\"MFA\", \"rate limiting\", \"credential breach monitoring\", \"CAPTCHA\"]",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 372,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 381,
+          "evidence": "http://",
+          "context": "# Access at http://localhost:3000",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 384,
+          "evidence": "https://",
+          "context": "# Download from: https://github.com/OWASP/threat-dragon/releases",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    }
+  ]
+}

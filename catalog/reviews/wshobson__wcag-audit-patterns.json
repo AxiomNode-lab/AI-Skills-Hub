@@ -1,0 +1,118 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "wshobson/wcag-audit-patterns",
+  "status": "draft",
+  "reviewed_on": null,
+  "reviewer": null,
+  "source": {
+    "repo": "wshobson/agents",
+    "path": "plugins/accessibility-compliance/skills/wcag-audit-patterns",
+    "revision": "156b7a5e7a8b93642628a339ee4039c925b34c7f"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "plugins/accessibility-compliance/skills/wcag-audit-patterns",
+    "url": "https://api.github.com/repos/wshobson/agents/git/trees/156b7a5e7a8b93642628a339ee4039c925b34c7f?recursive=1",
+    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/wshobson/agents/blob/156b7a5e7a8b93642628a339ee4039c925b34c7f/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "plugins",
+        "plugins/accessibility-compliance",
+        "plugins/accessibility-compliance/skills",
+        "plugins/accessibility-compliance/skills/wcag-audit-patterns"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte."
+    ]
+  },
+  "content_review": {
+    "status": "pending",
+    "risk": "unknown",
+    "blocking_findings": [],
+    "capabilities": {},
+    "notes": []
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "f89abb55d9f073f38f1703e4518f0613c788c6174be7f13b8dfe48a1c076c746",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "326f0a55c96e672fedf9d807ca043c00df05ba0e",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "references/details.md",
+      "sha256": "0a61237ccb4e1b2cba4291f83e0747ad64ac9ba81b37427ee0e648537c9c78d6",
+      "bytes": 9972,
+      "mode": "100644",
+      "git_blob": "297f388b62a7006cc6687b4147d34e17bda399d7",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 394,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 396,
+          "evidence": "https://",
+          "context": "npx @axe-core/cli https://example.com",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 397,
+          "evidence": "https://",
+          "context": "npx pa11y https://example.com",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 398,
+          "evidence": "https://",
+          "context": "lighthouse https://example.com --only-categories=accessibility",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "db263a3405deb95a63175f33da4a9d82d8595599fbee4a81979059b35a7cec40",
+      "bytes": 2511,
+      "mode": "100644",
+      "git_blob": "c071acee41a2a2c7d4df04da7281d193215dfca7",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    }
+  ]
+}

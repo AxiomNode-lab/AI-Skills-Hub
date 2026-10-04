@@ -1,0 +1,144 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "kdense/bgpt-paper-search",
+  "source": {
+    "repo": "K-Dense-AI/scientific-agent-skills",
+    "path": "skills/bgpt-paper-search",
+    "revision": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298"
+  },
+  "review": {
+    "path": "catalog/reviews/kdense__bgpt-paper-search.json",
+    "sha256": "31e8e21d2d0f6734bfe2869d41e2da2b4e80d424b8894cddbcb3ef27e013a3c5"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": false,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": true,
+      "filesystem_write": false,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "credential-access",
+        "line": 5,
+        "evidence": "API key",
+        "context": "compatibility: Requires a configured remote BGPT MCP connection and internet access to bgpt.pro. A stdio bridge additionally needs Node.js/npm. Paid access requires a BGPT API key configured as an Authorization header.",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 9,
+        "evidence": "https://",
+        "context": "  website: https://bgpt.pro/mcp/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 30,
+        "evidence": "https://",
+        "context": "| Streamable HTTP | `https://bgpt.pro/mcp/stream` |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 31,
+        "evidence": "https://",
+        "context": "| SSE | `https://bgpt.pro/mcp/sse` |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 42,
+        "evidence": "https://",
+        "context": "      \"args\": [\"-y\", \"mcp-remote\", \"https://bgpt.pro/mcp/stream\", \"--transport\", \"http-only\"]",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 52,
+        "evidence": "https://",
+        "context": "[the current provider documentation](https://bgpt.pro/mcp/) and live tool schema.",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 55,
+        "evidence": "credential",
+        "context": "in the host's remote-server headers, using its credential storage. For the bridge,",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 56,
+        "evidence": "https://",
+        "context": "[`mcp-remote` supports `--header-file`](https://github.com/punkpeye/mcp-remote#custom-headers)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 57,
+        "evidence": "credential",
+        "context": "with a local credential file. Do not put `api_key` in an MCP tool call: neither",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 57,
+        "evidence": "api_key",
+        "context": "with a local credential file. Do not put `api_key` in an MCP tool call: neither",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 150,
+        "evidence": "https://",
+        "context": "Sources: [provider setup, record formats, and billing](https://bgpt.pro/mcp/),",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 151,
+        "evidence": "https://",
+        "context": "[live MCP endpoint](https://bgpt.pro/mcp/stream),",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 152,
+        "evidence": "https://",
+        "context": "[published BGPT wrapper metadata](https://registry.npmjs.org/bgpt-mcp/latest),",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 153,
+        "evidence": "https://",
+        "context": "and [bridge documentation](https://github.com/punkpeye/mcp-remote).",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 8971
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE.md"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "3b7db6956c13ccf24df151f0905ae579ed58230708a4ba19e6d6fb3bf9d4d6b7",
+      "bytes": 7903,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 8971
+}

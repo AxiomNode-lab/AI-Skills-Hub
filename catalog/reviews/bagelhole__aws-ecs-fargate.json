@@ -1,0 +1,194 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "bagelhole/aws-ecs-fargate",
+  "status": "draft",
+  "reviewed_on": null,
+  "reviewer": null,
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "infrastructure/cloud-aws/aws-ecs-fargate",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "infrastructure/cloud-aws/aws-ecs-fargate",
+    "url": "https://api.github.com/repos/BagelHole/DevOps-Security-Agent-Skills/git/trees/0365f57a079b1332f95cf26e31dd2d5332a8399f?recursive=1",
+    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/BagelHole/DevOps-Security-Agent-Skills/blob/0365f57a079b1332f95cf26e31dd2d5332a8399f/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "infrastructure",
+        "infrastructure/cloud-aws",
+        "infrastructure/cloud-aws/aws-ecs-fargate"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte."
+    ]
+  },
+  "content_review": {
+    "status": "pending",
+    "risk": "unknown",
+    "blocking_findings": [],
+    "capabilities": {},
+    "notes": []
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "67c5c5cbb12cafb1515e449748866bd40da7dec9",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "c4418a0b0eb2f5a83ca8835dd3b26d9d6dbeb9d399e71d3de19d61a64d8b33df",
+      "bytes": 11269,
+      "mode": "100644",
+      "git_blob": "cbde0d6962f2239035243fbeec367fc23a41e7fe",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 33,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 53,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 99,
+          "evidence": "secret",
+          "context": "          \"valueFrom\": \"arn:aws:secretsmanager:us-east-1:123456789012:secret:myapp/db-password\"",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 102,
+          "evidence": "API_KEY",
+          "context": "          \"name\": \"API_KEY\",",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 103,
+          "evidence": "api-key",
+          "context": "          \"valueFrom\": \"arn:aws:ssm:us-east-1:123456789012:parameter/myapp/api-key\"",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 107,
+          "evidence": "curl",
+          "context": "        \"command\": [\"CMD-SHELL\", \"curl -f http://localhost:8080/health || exit 1\"],",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 107,
+          "evidence": "http://",
+          "context": "        \"command\": [\"CMD-SHELL\", \"curl -f http://localhost:8080/health || exit 1\"],",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 130,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 143,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 182,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 206,
+          "evidence": "sh",
+          "context": "  --command \"/bin/sh\"",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 211,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 295,
+          "evidence": "curl",
+          "context": "      command     = [\"CMD-SHELL\", \"curl -f http://localhost:8080/health || exit 1\"]",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 295,
+          "evidence": "http://",
+          "context": "      command     = [\"CMD-SHELL\", \"curl -f http://localhost:8080/health || exit 1\"]",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 335,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    }
+  ]
+}

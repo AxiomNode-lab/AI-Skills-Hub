@@ -1,0 +1,175 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "wshobson/javascript-testing-patterns",
+  "status": "draft",
+  "reviewed_on": null,
+  "reviewer": null,
+  "source": {
+    "repo": "wshobson/agents",
+    "path": "plugins/javascript-typescript/skills/javascript-testing-patterns",
+    "revision": "156b7a5e7a8b93642628a339ee4039c925b34c7f"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "plugins/javascript-typescript/skills/javascript-testing-patterns",
+    "url": "https://api.github.com/repos/wshobson/agents/git/trees/156b7a5e7a8b93642628a339ee4039c925b34c7f?recursive=1",
+    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/wshobson/agents/blob/156b7a5e7a8b93642628a339ee4039c925b34c7f/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "plugins",
+        "plugins/javascript-typescript",
+        "plugins/javascript-typescript/skills",
+        "plugins/javascript-typescript/skills/javascript-testing-patterns"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte."
+    ]
+  },
+  "content_review": {
+    "status": "pending",
+    "risk": "unknown",
+    "blocking_findings": [],
+    "capabilities": {},
+    "notes": []
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "f89abb55d9f073f38f1703e4518f0613c788c6174be7f13b8dfe48a1c076c746",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "326f0a55c96e672fedf9d807ca043c00df05ba0e",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "references/advanced-testing-patterns.md",
+      "sha256": "c7aece88f868bb54b57cc7ea2ca87d3df0868ab32f974c22af247bb047ea353f",
+      "bytes": 12837,
+      "mode": "100644",
+      "git_blob": "b3df847319e08dab0177bfcf07d6459e22ca3ba0",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 432,
+          "evidence": "https://",
+          "context": "      avatar: 'https://example.com/avatar.jpg',",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "d99e1d7344ca7b87395c7e49f6c635ea67fe16d57f4698d72c78d405020f5782",
+      "bytes": 14629,
+      "mode": "100644",
+      "git_blob": "9102d72c46491ba9b36886fc10603e4583e524d9",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 159,
+          "evidence": "delete",
+          "context": "  delete(id: string): boolean {",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 160,
+          "evidence": "delete",
+          "context": "    return this.users.delete(id);",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 218,
+          "evidence": "https://",
+          "context": "    const response = await fetch(`https://api.example.com/users/${id}`);",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 226,
+          "evidence": "https://",
+          "context": "    const response = await fetch(\"https://api.example.com/users\", {",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 262,
+          "evidence": "https://",
+          "context": "      expect(fetch).toHaveBeenCalledWith(\"https://api.example.com/users/1\");",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 288,
+          "evidence": "https://",
+          "context": "        \"https://api.example.com/users\",",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 309,
+          "evidence": "process.env",
+          "context": "    host: process.env.SMTP_HOST,",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 312,
+          "evidence": "process.env",
+          "context": "      user: process.env.SMTP_USER,",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 313,
+          "evidence": "process.env",
+          "context": "      pass: process.env.SMTP_PASS,",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 319,
+          "evidence": "process.env",
+          "context": "      from: process.env.EMAIL_FROM,",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    }
+  ]
+}

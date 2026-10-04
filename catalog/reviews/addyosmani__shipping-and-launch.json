@@ -1,0 +1,95 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "addyosmani/shipping-and-launch",
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "addyosmani/agent-skills",
+    "path": "skills/shipping-and-launch",
+    "revision": "1401c8b8030e023baeebb31781a6653fe8e93026"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "skills/shipping-and-launch",
+    "url": "https://api.github.com/repos/addyosmani/agent-skills/git/trees/1401c8b8030e023baeebb31781a6653fe8e93026?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/addyosmani/agent-skills/blob/1401c8b8030e023baeebb31781a6653fe8e93026/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "skills",
+        "skills/shipping-and-launch"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT License with its copyright notice, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found; WCAG, Core Web Vitals, and audit tools are referenced by name only. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "medium",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md in full (single-file skill). Production-launch guidance: pre-launch checklist (quality, security, performance, accessibility, infrastructure, docs), feature-flag lifecycle, staged canary rollout with advance/hold/rollback thresholds, monitoring, error-budget release gate, and a rollback plan template.",
+      "Rated medium because following it involves state-changing operations on the user's live systems: deploying to staging/production, enabling flags for user cohorts, and the rollback template's `git revert <commit> && git push` (SKILL.md:266); it also has the agent run dependency audits (`npm audit`, `pip-audit`, `cargo audit`, SKILL.md:35). Acceptable because these are the user's own release actions, the skill is invoked when the user is preparing a deploy, and it emphasizes reversibility, staged rollout, and verification rather than unattended changes. Users should still confirm each deploy/push step.",
+      "SKILL.md:281-284 point to ../../references/definition-of-done.md, security-checklist.md, performance-checklist.md, and accessibility-checklist.md, which live outside the skill directory and will not ship; they are 'See Also' pointers and the skill's own checklists are self-contained, so these are optional broken links. SKILL.md:285 references the sibling skill observability-and-instrumentation (also in this shard)."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "6f202f8bd568cd730dbb2b0d1f8e243bc74c2fa1f64dbce9b2c7ea08bd5c9fd7",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "d67778ada6b9cda6227e9130da182c13e73c8b2e",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry the copyright and permission notice.",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "1055d25dfe6cfeb6ae31eba3e2328fd0e7c66b285f0e44c40f67c77a59813281",
+      "bytes": 11409,
+      "mode": "100644",
+      "git_blob": "900ba7f3adc217642c607521edd78609030702ec",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 101,
+          "evidence": "Remove",
+          "context": "5. CLEAN UP                 → Remove flag and dead code path after full rollout",
+          "disposition": "accepted",
+          "reason": "'Remove flag and dead code path after full rollout' is a code clean-up step in the feature-flag lifecycle, not an instruction to delete files outside the user's change."
+        }
+      ]
+    }
+  ]
+}

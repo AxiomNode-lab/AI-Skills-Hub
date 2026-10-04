@@ -1,0 +1,115 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "unitone/aws-review",
+  "source": {
+    "repo": "UnitOneAI/SecuritySkills",
+    "path": "skills/cloud/aws-review",
+    "revision": "70bc259bb01abb3015ad2ad859ad5253cbf0bcab"
+  },
+  "review": {
+    "path": "catalog/reviews/unitone__aws-review.json",
+    "sha256": "5f968311d926099c289f8721e4a37eb6984739b850da269783a8b3d6e3c11bd4"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": false,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "credential-access",
+        "line": 82,
+        "evidence": "credential",
+        "context": "Check for AWS Config rules or Lambda functions enforcing credential rotation:",
+        "file": "benchmark-checklist.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 186,
+        "evidence": "Delete",
+        "context": "### CIS 2.1.2 -- Ensure MFA Delete is enabled on S3 buckets",
+        "file": "benchmark-checklist.md"
+      },
+      {
+        "type": "network-access",
+        "line": 232,
+        "evidence": "https://",
+        "context": "- CIS Amazon Web Services Foundations Benchmark v3.0.0: https://www.cisecurity.org/benchmark/amazon_web_services",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 233,
+        "evidence": "https://",
+        "context": "- AWS Security Best Practices: https://docs.aws.amazon.com/security/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 234,
+        "evidence": "https://",
+        "context": "- AWS IAM Best Practices: https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 235,
+        "evidence": "https://",
+        "context": "- AWS CloudTrail Documentation: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 236,
+        "evidence": "https://",
+        "context": "- AWS Security Hub: https://docs.aws.amazon.com/securityhub/latest/userguide/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 237,
+        "evidence": "https://",
+        "context": "- AWS VPC Security: https://docs.aws.amazon.com/vpc/latest/userguide/security.html",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 238,
+        "evidence": "https://",
+        "context": "- Terraform AWS Provider Documentation: https://registry.terraform.io/providers/hashicorp/aws/latest/docs",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 25602
+  },
+  "materialized_files": [
+    {
+      "path": "benchmark-checklist.md",
+      "sha256": "2347091a07ae260a5be1164be19009548234282ccdaa76b2c8ccf49e53e6e136",
+      "bytes": 13030,
+      "mode": "100644"
+    },
+    {
+      "path": "LICENSE.txt",
+      "sha256": "66eb5ec637cc578833ddcbc870dbf46c6718fd83e985fad5f0f5cf30d60cf47d",
+      "bytes": 1067,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "30a15d1c492f764abbb157728102c3f04ac38fd8cc99fdb53858110a7a6463c1",
+      "bytes": 11505,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 25602
+}

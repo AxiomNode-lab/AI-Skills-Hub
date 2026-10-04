@@ -1,0 +1,162 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "bagelhole/blue-green-deploy",
+  "status": "draft",
+  "reviewed_on": null,
+  "reviewer": null,
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "devops/release/blue-green-deploy",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "devops/release/blue-green-deploy",
+    "url": "https://api.github.com/repos/BagelHole/DevOps-Security-Agent-Skills/git/trees/0365f57a079b1332f95cf26e31dd2d5332a8399f?recursive=1",
+    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/BagelHole/DevOps-Security-Agent-Skills/blob/0365f57a079b1332f95cf26e31dd2d5332a8399f/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "devops",
+        "devops/release",
+        "devops/release/blue-green-deploy"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte."
+    ]
+  },
+  "content_review": {
+    "status": "pending",
+    "risk": "unknown",
+    "blocking_findings": [],
+    "capabilities": {},
+    "notes": []
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "67c5c5cbb12cafb1515e449748866bd40da7dec9",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "e3588835bb2d721a22c81e5662de8b7c842ac1aa00a9703ba38a4f87d190df8a",
+      "bytes": 12623,
+      "mode": "100644",
+      "git_blob": "9fc436bfcc536cc7482df8f23bf31fac60511ec6",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 154,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 155,
+          "evidence": "bash",
+          "context": "#!/bin/bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 156,
+          "evidence": "sh",
+          "context": "# blue-green-switch.sh",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 168,
+          "evidence": "curl",
+          "context": "HEALTH=$(kubectl exec -it deployment/myapp-$NEW_VERSION -- curl -s localhost:8080/health)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 303,
+          "evidence": "http://",
+          "context": "        address: http://prometheus:9090",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 355,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 425,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 426,
+          "evidence": "bash",
+          "context": "#!/bin/bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 427,
+          "evidence": "sh",
+          "context": "# auto-rollback.sh",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 437,
+          "evidence": "curl",
+          "context": "  SUCCESS_RATE=$(curl -s \"http://prometheus:9090/api/v1/query?query=sum(rate(http_requests_total{status=~\\\"2.*\\\"}[5m]))/sum(rate(http_requests_total[5m]))\" | jq -r '.data.result[0].value[1]')",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 437,
+          "evidence": "http://",
+          "context": "  SUCCESS_RATE=$(curl -s \"http://prometheus:9090/api/v1/query?query=sum(rate(http_requests_total{status=~\\\"2.*\\\"}[5m]))/sum(rate(http_requests_total[5m]))\" | jq -r '.data.result[0].value[1]')",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    }
+  ]
+}

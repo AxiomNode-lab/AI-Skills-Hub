@@ -1,0 +1,312 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "unitone/agent-security",
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "UnitOneAI/SecuritySkills",
+    "path": "skills/ai-security/agent-security",
+    "revision": "70bc259bb01abb3015ad2ad859ad5253cbf0bcab"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "skills/ai-security/agent-security",
+    "url": "https://api.github.com/repos/UnitOneAI/SecuritySkills/git/trees/70bc259bb01abb3015ad2ad859ad5253cbf0bcab?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/UnitOneAI/SecuritySkills/blob/70bc259bb01abb3015ad2ad859ad5253cbf0bcab/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "skills",
+        "skills/ai-security",
+        "skills/ai-security/agent-security"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT License with its copyright notice, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found; OWASP Agentic AI and NIST AI RMF are referenced by identifier with one-line paraphrased descriptions. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "low",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": false,
+      "network": false,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md in full (the only file). Defensive, read-only (allowed-tools: Read, Grep, Glob) architecture review of LLM agent systems: permission model, least privilege, HITL gates, blast radius, audit trails, rollback and multi-agent trust, mapped to OWASP Agentic AI categories and NIST AI RMF.",
+      "No commands, installs, credentials, or network access; detection steps are Grep/Glob patterns over the user's own code, and the skill tells the agent not to execute reviewed content or follow embedded instructions.",
+      "Optional out-of-directory link SKILL.md:37 to ../../../schemas/finding.schema.json is used only when JSON output is requested and will not ship. SKILL.md:30 and 77-79 name sibling skills (agentic-top-10, prompt-injection, model-supply-chain) as optional alternatives. SKILL.md:127 recommends the third-party fabraix/playground exploit PoC library for practitioners to validate their own agent controls; it is a pointer, not an instruction for the agent to download or run it. Some 2026 arXiv citations (lines 596-598) were not verified."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "66eb5ec637cc578833ddcbc870dbf46c6718fd83e985fad5f0f5cf30d60cf47d",
+      "bytes": 1067,
+      "mode": "100644",
+      "git_blob": "5a98cb233448adff07bef15917961275c76572dc",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry the copyright and permission notice.",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "3a83761e8787d708f0d1c25f243e0f7dbaf695bb522fb55750ae0c5061d87a3a",
+      "bytes": 44144,
+      "mode": "100644",
+      "git_blob": "37e0a3d2fd6f519921870740f3bf0c71f255885c",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "credential-access",
+          "line": 93,
+          "evidence": "credential",
+          "context": "| Agent identity and credential management | Auth middleware, secret managers, token configs | Exposes credential scope and rotation practices |",
+          "disposition": "accepted",
+          "reason": "Words like credential, secret and process.env appear in review checklists and grep patterns that look for credential-scope problems in the user's code; the skill never reads or prints real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 93,
+          "evidence": "secret",
+          "context": "| Agent identity and credential management | Auth middleware, secret managers, token configs | Exposes credential scope and rotation practices |",
+          "disposition": "accepted",
+          "reason": "Words like credential, secret and process.env appear in review checklists and grep patterns that look for credential-scope problems in the user's code; the skill never reads or prints real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 93,
+          "evidence": "credential",
+          "context": "| Agent identity and credential management | Auth middleware, secret managers, token configs | Exposes credential scope and rotation practices |",
+          "disposition": "accepted",
+          "reason": "Words like credential, secret and process.env appear in review checklists and grep patterns that look for credential-scope problems in the user's code; the skill never reads or prints real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 112,
+          "evidence": "credential",
+          "context": "| **Information System** | Risks to the broader IT environment the agent operates within | Lateral movement, data exfiltration, credential theft, persistent access |",
+          "disposition": "accepted",
+          "reason": "Words like credential, secret and process.env appear in review checklists and grep patterns that look for credential-scope problems in the user's code; the skill never reads or prints real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 127,
+          "evidence": "https://",
+          "context": "For hands-on validation of agent permission boundaries and tool-use attack surface, use the **fabraix/playground** open-source exploit library (https://github.com/fabraix/playground). This provides consolidated AI agent exploit PoCs mapped ",
+          "disposition": "accepted",
+          "reason": "Recommends the fabraix/playground exploit PoC library for authorized red-team validation by the practitioner; the read-only skill does not tell the agent to download or run it."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 145,
+          "evidence": "delete",
+          "context": "- **Permission granularity:** Are tools granted with broad capabilities (e.g., \"database access\" meaning read, write, delete, schema alter) or scoped to specific operations (e.g., \"read-only access to the orders table\")?",
+          "disposition": "accepted",
+          "reason": "'delete' appears in risk tables and review questions (e.g. agent can delete its audit trail); the skill itself performs no writes or deletions."
+        },
+        {
+          "type": "credential-access",
+          "line": 146,
+          "evidence": "Credential",
+          "context": "- **Credential scope:** Does the agent's service identity have cloud IAM permissions beyond what its tools require? Are wildcards present in IAM policies (`*` actions, `*` resources)?",
+          "disposition": "accepted",
+          "reason": "Words like credential, secret and process.env appear in review checklists and grep patterns that look for credential-scope problems in the user's code; the skill never reads or prints real secrets."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 170,
+          "evidence": "delete",
+          "context": "| Agent has write/delete access to production databases without task justification | Critical |",
+          "disposition": "accepted",
+          "reason": "'delete' appears in risk tables and review questions (e.g. agent can delete its audit trail); the skill itself performs no writes or deletions."
+        },
+        {
+          "type": "credential-access",
+          "line": 193,
+          "evidence": "process.env",
+          "context": "**Detection methods:** Search for network restrictions (`network_policy`, `egress`, `allowed_hosts`), file system restrictions (`chroot`, `sandbox`, `allowed_paths`), environment access (`os.environ`, `process.env`), resource limits (`max_t",
+          "disposition": "accepted",
+          "reason": "Words like credential, secret and process.env appear in review checklists and grep patterns that look for credential-scope problems in the user's code; the skill never reads or prints real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 203,
+          "evidence": "secret",
+          "context": "| Secrets | No direct access; tools broker secret access | Agent can read all env vars including secrets |",
+          "disposition": "accepted",
+          "reason": "Words like credential, secret and process.env appear in review checklists and grep patterns that look for credential-scope problems in the user's code; the skill never reads or prints real secrets."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 283,
+          "evidence": "delete",
+          "context": "| Data destruction | What data can it delete or corrupt? | Production data loss |",
+          "disposition": "accepted",
+          "reason": "'delete' appears in risk tables and review questions (e.g. agent can delete its audit trail); the skill itself performs no writes or deletions."
+        },
+        {
+          "type": "credential-access",
+          "line": 295,
+          "evidence": "credential",
+          "context": "| Compromised agent can access cloud metadata endpoint (credential theft) | Critical |",
+          "disposition": "accepted",
+          "reason": "Words like credential, secret and process.env appear in review checklists and grep patterns that look for credential-scope problems in the user's code; the skill never reads or prints real secrets."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 313,
+          "evidence": "delete",
+          "context": "- **Log integrity:** Are logs tamper-evident? Can the agent or an attacker who compromises the agent modify or delete its own audit trail?",
+          "disposition": "accepted",
+          "reason": "'delete' appears in risk tables and review questions (e.g. agent can delete its audit trail); the skill itself performs no writes or deletions."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 341,
+          "evidence": "delete",
+          "context": "| Agent can modify or delete its own audit trail | Critical |",
+          "disposition": "accepted",
+          "reason": "'delete' appears in risk tables and review questions (e.g. agent can delete its audit trail); the skill itself performs no writes or deletions."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 388,
+          "evidence": "DELETE",
+          "context": "| Database writes | INSERT, UPDATE, DELETE | Transaction rollback, soft delete | Point-in-time recovery; logged |",
+          "disposition": "accepted",
+          "reason": "'delete' appears in risk tables and review questions (e.g. agent can delete its audit trail); the skill itself performs no writes or deletions."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 388,
+          "evidence": "delete",
+          "context": "| Database writes | INSERT, UPDATE, DELETE | Transaction rollback, soft delete | Point-in-time recovery; logged |",
+          "disposition": "accepted",
+          "reason": "'delete' appears in risk tables and review questions (e.g. agent can delete its audit trail); the skill itself performs no writes or deletions."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 389,
+          "evidence": "delete",
+          "context": "| File modifications | Create, overwrite, delete | Version history, backup before modify | Previous version retained |",
+          "disposition": "accepted",
+          "reason": "'delete' appears in risk tables and review questions (e.g. agent can delete its audit trail); the skill itself performs no writes or deletions."
+        },
+        {
+          "type": "credential-access",
+          "line": 503,
+          "evidence": "credential",
+          "context": "| [name] | [purpose] | [tool list] | [credential type] | [Yes/No, which actions] | [trust level] |",
+          "disposition": "accepted",
+          "reason": "Words like credential, secret and process.env appear in review checklists and grep patterns that look for credential-scope problems in the user's code; the skill never reads or prints real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 564,
+          "evidence": "https://",
+          "context": "**OWASP Agentic AI Threats:** These threat categories are maintained by the OWASP GenAI Security Project working group. The AG01-AG10 numbering and scope used here reflect the documented threat areas. Verify current numbering and content ag",
+          "disposition": "accepted",
+          "reason": "Reference links to OWASP, NIST, MITRE ATLAS, arXiv and GitHub; the skill does not instruct fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 566,
+          "evidence": "https://",
+          "context": "**NIST AI RMF 1.0:** Published January 2023. Organized around four functions: GOVERN (policies, culture), MAP (context, risk identification), MEASURE (risk analysis), MANAGE (risk response, monitoring). Reference: [nist.gov/aiframework](htt",
+          "disposition": "accepted",
+          "reason": "Reference links to OWASP, NIST, MITRE ATLAS, arXiv and GitHub; the skill does not instruct fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 586,
+          "evidence": "https://",
+          "context": "1. OWASP GenAI Security Project -- Agentic AI Threat Categories -- https://genai.owasp.org",
+          "disposition": "accepted",
+          "reason": "Reference links to OWASP, NIST, MITRE ATLAS, arXiv and GitHub; the skill does not instruct fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 587,
+          "evidence": "https://",
+          "context": "2. OWASP Top 10 for LLM Applications 2025 -- https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+          "disposition": "accepted",
+          "reason": "Reference links to OWASP, NIST, MITRE ATLAS, arXiv and GitHub; the skill does not instruct fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 588,
+          "evidence": "https://",
+          "context": "3. NIST AI Risk Management Framework 1.0 (January 2023) -- https://www.nist.gov/aiframework",
+          "disposition": "accepted",
+          "reason": "Reference links to OWASP, NIST, MITRE ATLAS, arXiv and GitHub; the skill does not instruct fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 589,
+          "evidence": "https://",
+          "context": "4. NIST SP 800-53 Rev. 5 -- Security and Privacy Controls (AC-6: Least Privilege, AU-2: Event Logging, AU-10: Non-repudiation) -- https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final",
+          "disposition": "accepted",
+          "reason": "Reference links to OWASP, NIST, MITRE ATLAS, arXiv and GitHub; the skill does not instruct fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 590,
+          "evidence": "https://",
+          "context": "5. MITRE ATLAS -- Adversarial Threat Landscape for AI Systems -- https://atlas.mitre.org",
+          "disposition": "accepted",
+          "reason": "Reference links to OWASP, NIST, MITRE ATLAS, arXiv and GitHub; the skill does not instruct fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 591,
+          "evidence": "https://",
+          "context": "6. Rehberger, J. \"Prompt Injection: Exfiltrating Data via Tool Calls\" (2023) -- https://embracethered.com",
+          "disposition": "accepted",
+          "reason": "Reference links to OWASP, NIST, MITRE ATLAS, arXiv and GitHub; the skill does not instruct fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 594,
+          "evidence": "https://",
+          "context": "9. OWASP Application Security Verification Standard (ASVS), V14: Configuration -- https://owasp.org/www-project-application-security-verification-standard/",
+          "disposition": "accepted",
+          "reason": "Reference links to OWASP, NIST, MITRE ATLAS, arXiv and GitHub; the skill does not instruct fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 599,
+          "evidence": "https://",
+          "context": "14. fabraix/playground -- Open-source AI agent red-team exploit library for validating agent permission boundaries and tool-use attack surface -- https://github.com/fabraix/playground",
+          "disposition": "accepted",
+          "reason": "Reference entry for the same fabraix/playground library; citation only."
+        }
+      ]
+    }
+  ]
+}

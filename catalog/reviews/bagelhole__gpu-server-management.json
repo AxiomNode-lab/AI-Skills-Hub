@@ -1,0 +1,450 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "bagelhole/gpu-server-management",
+  "status": "draft",
+  "reviewed_on": null,
+  "reviewer": null,
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "infrastructure/servers/gpu-server-management",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "infrastructure/servers/gpu-server-management",
+    "url": "https://api.github.com/repos/BagelHole/DevOps-Security-Agent-Skills/git/trees/0365f57a079b1332f95cf26e31dd2d5332a8399f?recursive=1",
+    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/BagelHole/DevOps-Security-Agent-Skills/blob/0365f57a079b1332f95cf26e31dd2d5332a8399f/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "infrastructure",
+        "infrastructure/servers",
+        "infrastructure/servers/gpu-server-management"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte."
+    ]
+  },
+  "content_review": {
+    "status": "pending",
+    "risk": "unknown",
+    "blocking_findings": [],
+    "capabilities": {},
+    "notes": []
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "67c5c5cbb12cafb1515e449748866bd40da7dec9",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "760971b3b4e34f5fc05452ba1bfa6df83e0871d51606d5b96c7452d142eb3348",
+      "bytes": 7522,
+      "mode": "100644",
+      "git_blob": "c1a27ac72390e23d8467c96cc584d4f0539b8b15",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 27,
+          "evidence": " sudo",
+          "context": "- Root or sudo access",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 32,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 33,
+          "evidence": "Remove",
+          "context": "# Remove old drivers",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 33,
+          "evidence": "\nsudo",
+          "context": "# Remove old drivers",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 34,
+          "evidence": "\nsudo",
+          "context": "sudo apt purge -y 'nvidia*' 'cuda*' 'libcuda*'",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 39,
+          "evidence": "curl",
+          "context": "curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 39,
+          "evidence": "https://",
+          "context": "curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 40,
+          "evidence": " sudo",
+          "context": "  sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 42,
+          "evidence": "curl",
+          "context": "curl -s -L https://nvidia.github.io/libnvidia-container/$distribution/libnvidia-container.list | \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 42,
+          "evidence": "https://",
+          "context": "curl -s -L https://nvidia.github.io/libnvidia-container/$distribution/libnvidia-container.list | \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 43,
+          "evidence": "https://",
+          "context": "  sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 43,
+          "evidence": "https://",
+          "context": "  sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 44,
+          "evidence": " sudo",
+          "context": "  sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 45,
+          "evidence": "\nsudo",
+          "context": "",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 48,
+          "evidence": "\nsudo",
+          "context": "# Install latest driver (560.x as of 2025)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 51,
+          "evidence": "\nsudo",
+          "context": "# Install NVIDIA Container Toolkit (Docker GPU support)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 52,
+          "evidence": "\nsudo",
+          "context": "sudo apt install -y nvidia-container-toolkit",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 53,
+          "evidence": "\nsudo",
+          "context": "sudo nvidia-ctk runtime configure --runtime=docker",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 64,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 65,
+          "evidence": "\nsudo",
+          "context": "# Enable persistence mode (reduces driver initialization latency)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 68,
+          "evidence": "\nsudo",
+          "context": "# Set power limit (reduce heat/noise on inference servers)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 71,
+          "evidence": "\nsudo",
+          "context": "# Disable ECC on inference servers (frees ~6% VRAM, less safe)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 74,
+          "evidence": "\nsudo",
+          "context": "# Enable P2P for multi-GPU NVLink training",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 80,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 89,
+          "evidence": "\nsudo",
+          "context": "# DCGM — production monitoring daemon (for clusters)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 90,
+          "evidence": "\nsudo",
+          "context": "sudo apt install -y datacenter-gpu-manager",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 96,
+          "evidence": "\nsudo",
+          "context": "# Check GPU errors (XID errors — important for stability)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 104,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 128,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 129,
+          "evidence": "\nsudo",
+          "context": "# Enable MIG mode (requires reboot or restart of all processes)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 130,
+          "evidence": "\nsudo",
+          "context": "sudo nvidia-smi -mig 1",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 140,
+          "evidence": "\nsudo",
+          "context": "# Create MIG instances (e.g., 3× 2g.20gb + 1× 2g.20gb = multi-tenant)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 150,
+          "evidence": "\nsudo",
+          "context": "# Disable MIG",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 151,
+          "evidence": "\nsudo",
+          "context": "sudo nvidia-smi mig -i 0 -dci",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 152,
+          "evidence": "\nsudo",
+          "context": "sudo nvidia-smi mig -i 0 -dgi",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 158,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 160,
+          "evidence": " sudo",
+          "context": "echo '* soft nofile 1048576' | sudo tee -a /etc/security/limits.conf",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 161,
+          "evidence": " sudo",
+          "context": "echo '* hard nofile 1048576' | sudo tee -a /etc/security/limits.conf",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 164,
+          "evidence": " sudo",
+          "context": "echo never | sudo tee /sys/kernel/mm/transparent_hugepage/enabled",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 165,
+          "evidence": " sudo",
+          "context": "echo never | sudo tee /sys/kernel/mm/transparent_hugepage/defrag",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 168,
+          "evidence": " sudo",
+          "context": "cat <<'EOF' | sudo tee /etc/rc.local",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 169,
+          "evidence": "bash",
+          "context": "#!/bin/bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 174,
+          "evidence": "\nsudo",
+          "context": "EOF",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 175,
+          "evidence": " chmod",
+          "context": "sudo chmod +x /etc/rc.local",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 177,
+          "evidence": "\nsudo",
+          "context": "# PCIe performance mode",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 178,
+          "evidence": "\nsudo",
+          "context": "sudo nvidia-smi --auto-boost-default=0",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 184,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    }
+  ]
+}

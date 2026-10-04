@@ -1,0 +1,882 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "microsoft/agent-framework-azure-ai-py",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/azure-sdk-python/skills/agent-framework-azure-ai-py",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "review": {
+    "path": "catalog/reviews/microsoft__agent-framework-azure-ai-py.json",
+    "sha256": "d21b432d2c2321ce2dff8375b9ee6c682e20f1accd7c0b32d984b12349851aaa"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "credential-access",
+        "line": 24,
+        "evidence": "credential",
+        "context": "    AzureCliCredential() as credential,",
+        "file": "references/advanced.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 25,
+        "evidence": "credential",
+        "context": "    AzureAIAgentsProvider(credential=credential) as provider,",
+        "file": "references/advanced.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 25,
+        "evidence": "credential",
+        "context": "    AzureAIAgentsProvider(credential=credential) as provider,",
+        "file": "references/advanced.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 161,
+        "evidence": "credential",
+        "context": "    AzureCliCredential() as credential,",
+        "file": "references/advanced.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 162,
+        "evidence": "credential",
+        "context": "    AzureAIAgentsProvider(credential=credential) as provider,",
+        "file": "references/advanced.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 162,
+        "evidence": "credential",
+        "context": "    AzureAIAgentsProvider(credential=credential) as provider,",
+        "file": "references/advanced.md"
+      },
+      {
+        "type": "network-access",
+        "line": 170,
+        "evidence": "https://",
+        "context": "            base_url=\"https://api.weather.example.com\",",
+        "file": "references/advanced.md"
+      },
+      {
+        "type": "network-access",
+        "line": 182,
+        "evidence": "https://",
+        "context": "    spec=\"https://api.example.com/openapi.json\",",
+        "file": "references/advanced.md"
+      },
+      {
+        "type": "network-access",
+        "line": 183,
+        "evidence": "https://",
+        "context": "    base_url=\"https://api.example.com\",",
+        "file": "references/advanced.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 185,
+        "evidence": "api-key",
+        "context": "        \"Authorization\": \"Bearer your-api-key\",",
+        "file": "references/advanced.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 203,
+        "evidence": "credential",
+        "context": "    AzureCliCredential() as credential,",
+        "file": "references/advanced.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 204,
+        "evidence": "credential",
+        "context": "    AzureAIAgentsProvider(credential=credential) as provider,",
+        "file": "references/advanced.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 204,
+        "evidence": "credential",
+        "context": "    AzureAIAgentsProvider(credential=credential) as provider,",
+        "file": "references/advanced.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 229,
+        "evidence": "credential",
+        "context": "    AzureCliCredential() as credential,",
+        "file": "references/advanced.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 230,
+        "evidence": "credential",
+        "context": "    AgentsClient(endpoint=endpoint, credential=credential) as agents_client,",
+        "file": "references/advanced.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 230,
+        "evidence": "credential",
+        "context": "    AgentsClient(endpoint=endpoint, credential=credential) as agents_client,",
+        "file": "references/advanced.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 313,
+        "evidence": "credential",
+        "context": "    credential=credential,",
+        "file": "references/advanced.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 313,
+        "evidence": "credential",
+        "context": "    credential=credential,",
+        "file": "references/advanced.md"
+      },
+      {
+        "type": "network-access",
+        "line": 314,
+        "evidence": "https://",
+        "context": "    project_endpoint=\"https://my-project.services.ai.azure.com/api/projects/my-project-id\",",
+        "file": "references/advanced.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 328,
+        "evidence": "credential",
+        "context": "    credential=credential,",
+        "file": "references/advanced.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 328,
+        "evidence": "credential",
+        "context": "    credential=credential,",
+        "file": "references/advanced.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 343,
+        "evidence": "credential",
+        "context": "    AzureCliCredential() as credential,",
+        "file": "references/advanced.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 344,
+        "evidence": "credential",
+        "context": "    AzureAIAgentsProvider(credential=credential) as provider,",
+        "file": "references/advanced.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 344,
+        "evidence": "credential",
+        "context": "    AzureAIAgentsProvider(credential=credential) as provider,",
+        "file": "references/advanced.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 363,
+        "evidence": "credential",
+        "context": "    AzureCliCredential() as credential,",
+        "file": "references/advanced.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 364,
+        "evidence": "credential",
+        "context": "    AgentsClient(endpoint=endpoint, credential=credential) as agents_client,",
+        "file": "references/advanced.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 364,
+        "evidence": "credential",
+        "context": "    AgentsClient(endpoint=endpoint, credential=credential) as agents_client,",
+        "file": "references/advanced.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 440,
+        "evidence": "credential",
+        "context": "    AzureCliCredential() as credential,",
+        "file": "references/advanced.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 441,
+        "evidence": "credential",
+        "context": "    AzureAIAgentsProvider(credential=credential) as provider,",
+        "file": "references/advanced.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 441,
+        "evidence": "credential",
+        "context": "    AzureAIAgentsProvider(credential=credential) as provider,",
+        "file": "references/advanced.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 453,
+        "evidence": "credential",
+        "context": "    async with AzureAIAgentsProvider(credential=credential) as provider:",
+        "file": "references/advanced.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 453,
+        "evidence": "credential",
+        "context": "    async with AzureAIAgentsProvider(credential=credential) as provider:",
+        "file": "references/advanced.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 28,
+        "evidence": "credential",
+        "context": "    AzureCliCredential() as credential,",
+        "file": "references/mcp.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 29,
+        "evidence": "credential",
+        "context": "    AzureAIAgentsProvider(credential=credential) as provider,",
+        "file": "references/mcp.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 29,
+        "evidence": "credential",
+        "context": "    AzureAIAgentsProvider(credential=credential) as provider,",
+        "file": "references/mcp.md"
+      },
+      {
+        "type": "network-access",
+        "line": 36,
+        "evidence": "https://",
+        "context": "            url=\"https://learn.microsoft.com/api/mcp\",",
+        "file": "references/mcp.md"
+      },
+      {
+        "type": "network-access",
+        "line": 52,
+        "evidence": "https://",
+        "context": "    url=\"https://learn.microsoft.com/api/mcp\",",
+        "file": "references/mcp.md"
+      },
+      {
+        "type": "network-access",
+        "line": 63,
+        "evidence": "https://",
+        "context": "    url=\"https://my-mcp-server.example.com/mcp\",",
+        "file": "references/mcp.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 66,
+        "evidence": "api-key",
+        "context": "        \"Authorization\": \"Bearer your-api-key\",",
+        "file": "references/mcp.md"
+      },
+      {
+        "type": "network-access",
+        "line": 80,
+        "evidence": "https://",
+        "context": "    url=\"https://safe-mcp.example.com/mcp\",",
+        "file": "references/mcp.md"
+      },
+      {
+        "type": "network-access",
+        "line": 87,
+        "evidence": "https://",
+        "context": "    url=\"https://sensitive-mcp.example.com/mcp\",",
+        "file": "references/mcp.md"
+      },
+      {
+        "type": "network-access",
+        "line": 94,
+        "evidence": "https://",
+        "context": "    url=\"https://mcp.example.com/mcp\",",
+        "file": "references/mcp.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 116,
+        "evidence": "credential",
+        "context": "    AzureCliCredential() as credential,",
+        "file": "references/mcp.md"
+      },
+      {
+        "type": "network-access",
+        "line": 119,
+        "evidence": "https://",
+        "context": "        url=\"https://learn.microsoft.com/api/mcp\",",
+        "file": "references/mcp.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 121,
+        "evidence": "credential",
+        "context": "    AzureAIAgentsProvider(credential=credential) as provider,",
+        "file": "references/mcp.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 121,
+        "evidence": "credential",
+        "context": "    AzureAIAgentsProvider(credential=credential) as provider,",
+        "file": "references/mcp.md"
+      },
+      {
+        "type": "network-access",
+        "line": 153,
+        "evidence": "https://",
+        "context": "        url=\"https://api.github.com/mcp\",",
+        "file": "references/mcp.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 156,
+        "evidence": "credential",
+        "context": "    AzureAIAgentsProvider(credential=credential) as provider,",
+        "file": "references/mcp.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 156,
+        "evidence": "credential",
+        "context": "    AzureAIAgentsProvider(credential=credential) as provider,",
+        "file": "references/mcp.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 169,
+        "evidence": "credential",
+        "context": "    AzureCliCredential() as credential,",
+        "file": "references/mcp.md"
+      },
+      {
+        "type": "network-access",
+        "line": 172,
+        "evidence": "https://",
+        "context": "        url=\"https://learn.microsoft.com/api/mcp\",",
+        "file": "references/mcp.md"
+      },
+      {
+        "type": "network-access",
+        "line": 176,
+        "evidence": "https://",
+        "context": "        url=\"https://api.github.com/mcp\",",
+        "file": "references/mcp.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 179,
+        "evidence": "credential",
+        "context": "    AzureAIAgentsProvider(credential=credential) as provider,",
+        "file": "references/mcp.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 179,
+        "evidence": "credential",
+        "context": "    AzureAIAgentsProvider(credential=credential) as provider,",
+        "file": "references/mcp.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 231,
+        "evidence": "credential",
+        "context": "    AzureCliCredential() as credential,",
+        "file": "references/mcp.md"
+      },
+      {
+        "type": "network-access",
+        "line": 234,
+        "evidence": "https://",
+        "context": "        url=\"https://internal-api.company.com/mcp\",",
+        "file": "references/mcp.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 236,
+        "evidence": "credential",
+        "context": "    AzureAIAgentsProvider(credential=credential) as provider,",
+        "file": "references/mcp.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 236,
+        "evidence": "credential",
+        "context": "    AzureAIAgentsProvider(credential=credential) as provider,",
+        "file": "references/mcp.md"
+      },
+      {
+        "type": "network-access",
+        "line": 262,
+        "evidence": "https://",
+        "context": "        url=\"https://mcp.example.com\",",
+        "file": "references/mcp.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 23,
+        "evidence": "credential",
+        "context": "    AzureCliCredential() as credential,",
+        "file": "references/threads.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 24,
+        "evidence": "credential",
+        "context": "    AzureAIAgentsProvider(credential=credential) as provider,",
+        "file": "references/threads.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 24,
+        "evidence": "credential",
+        "context": "    AzureAIAgentsProvider(credential=credential) as provider,",
+        "file": "references/threads.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 161,
+        "evidence": "credential",
+        "context": "    AzureCliCredential() as credential,",
+        "file": "references/threads.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 162,
+        "evidence": "credential",
+        "context": "    AzureAIAgentsProvider(credential=credential) as provider,",
+        "file": "references/threads.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 162,
+        "evidence": "credential",
+        "context": "    AzureAIAgentsProvider(credential=credential) as provider,",
+        "file": "references/threads.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 212,
+        "evidence": "credential",
+        "context": "        AzureCliCredential() as credential,",
+        "file": "references/threads.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 213,
+        "evidence": "credential",
+        "context": "        AzureAIAgentsProvider(credential=credential) as provider,",
+        "file": "references/threads.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 213,
+        "evidence": "credential",
+        "context": "        AzureAIAgentsProvider(credential=credential) as provider,",
+        "file": "references/threads.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 17,
+        "evidence": "credential",
+        "context": "    AzureCliCredential() as credential,",
+        "file": "references/tools.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 18,
+        "evidence": "credential",
+        "context": "    AzureAIAgentsProvider(credential=credential) as provider,",
+        "file": "references/tools.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 18,
+        "evidence": "credential",
+        "context": "    AzureAIAgentsProvider(credential=credential) as provider,",
+        "file": "references/tools.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 72,
+        "evidence": "credential",
+        "context": "    AzureCliCredential() as credential,",
+        "file": "references/tools.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 73,
+        "evidence": "credential",
+        "context": "    AgentsClient(endpoint=endpoint, credential=credential) as agents_client,",
+        "file": "references/tools.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 73,
+        "evidence": "credential",
+        "context": "    AgentsClient(endpoint=endpoint, credential=credential) as agents_client,",
+        "file": "references/tools.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 141,
+        "evidence": "credential",
+        "context": "    AzureCliCredential() as credential,",
+        "file": "references/tools.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 142,
+        "evidence": "credential",
+        "context": "    AzureAIAgentsProvider(credential=credential) as provider,",
+        "file": "references/tools.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 142,
+        "evidence": "credential",
+        "context": "    AzureAIAgentsProvider(credential=credential) as provider,",
+        "file": "references/tools.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 220,
+        "evidence": "credential",
+        "context": "    AzureCliCredential() as credential,",
+        "file": "references/tools.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 221,
+        "evidence": "credential",
+        "context": "    AgentsClient(endpoint=endpoint, credential=credential) as agents_client,",
+        "file": "references/tools.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 221,
+        "evidence": "credential",
+        "context": "    AgentsClient(endpoint=endpoint, credential=credential) as agents_client,",
+        "file": "references/tools.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 29,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 31,
+        "evidence": "pip install",
+        "context": "pip install agent-framework --pre",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 34,
+        "evidence": "pip install",
+        "context": "pip install agent-framework-azure-ai --pre",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 39,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 40,
+        "evidence": "https://",
+        "context": "export AZURE_AI_PROJECT_ENDPOINT=\"https://<project>.services.ai.azure.com/api/projects/<project-id>\"  # Required for all auth methods",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 52,
+        "evidence": "credential",
+        "context": ">    - Production: set `AZURE_TOKEN_CREDENTIALS=prod` (or `AZURE_TOKEN_CREDENTIALS=<specific_credential>`) to constrain the credential chain to production-safe credentials.",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 55,
+        "evidence": "credential",
+        "context": ">    - Async: `async with <Client>(...) as client:` **and** `async with DefaultAzureCredential() as credential:` (from `azure.identity.aio`)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 63,
+        "evidence": "credential",
+        "context": "credential = AzureCliCredential()",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 67,
+        "evidence": "credential",
+        "context": "credential = DefaultAzureCredential(require_envvar=True)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 68,
+        "evidence": "credential",
+        "context": "# Or use a specific credential directly in production:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 69,
+        "evidence": "credential",
+        "context": "# See https://learn.microsoft.com/python/api/overview/azure/identity-readme?view=azure-python#credential-classes",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 69,
+        "evidence": "https://",
+        "context": "# See https://learn.microsoft.com/python/api/overview/azure/identity-readme?view=azure-python#credential-classes",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 70,
+        "evidence": "credential",
+        "context": "# credential = ManagedIdentityCredential()",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 84,
+        "evidence": "credential",
+        "context": "        AzureCliCredential() as credential,",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 85,
+        "evidence": "credential",
+        "context": "        AzureAIAgentsProvider(credential=credential) as provider,",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 85,
+        "evidence": "credential",
+        "context": "        AzureAIAgentsProvider(credential=credential) as provider,",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 119,
+        "evidence": "credential",
+        "context": "        AzureCliCredential() as credential,",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 120,
+        "evidence": "credential",
+        "context": "        AzureAIAgentsProvider(credential=credential) as provider,",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 120,
+        "evidence": "credential",
+        "context": "        AzureAIAgentsProvider(credential=credential) as provider,",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 145,
+        "evidence": "credential",
+        "context": "        AzureCliCredential() as credential,",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 146,
+        "evidence": "credential",
+        "context": "        AzureAIAgentsProvider(credential=credential) as provider,",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 146,
+        "evidence": "credential",
+        "context": "        AzureAIAgentsProvider(credential=credential) as provider,",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 166,
+        "evidence": "credential",
+        "context": "        AzureCliCredential() as credential,",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 167,
+        "evidence": "credential",
+        "context": "        AzureAIAgentsProvider(credential=credential) as provider,",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 167,
+        "evidence": "credential",
+        "context": "        AzureAIAgentsProvider(credential=credential) as provider,",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 189,
+        "evidence": "credential",
+        "context": "        AzureCliCredential() as credential,",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 190,
+        "evidence": "credential",
+        "context": "        AzureAIAgentsProvider(credential=credential) as provider,",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 190,
+        "evidence": "credential",
+        "context": "        AzureAIAgentsProvider(credential=credential) as provider,",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 230,
+        "evidence": "credential",
+        "context": "        AzureCliCredential() as credential,",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 231,
+        "evidence": "credential",
+        "context": "        AzureAIAgentsProvider(credential=credential) as provider,",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 231,
+        "evidence": "credential",
+        "context": "        AzureAIAgentsProvider(credential=credential) as provider,",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 292,
+        "evidence": "credential",
+        "context": "        AzureCliCredential() as credential,",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 295,
+        "evidence": "https://",
+        "context": "            url=\"https://learn.microsoft.com/api/mcp\",",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 297,
+        "evidence": "credential",
+        "context": "        AzureAIAgentsProvider(credential=credential) as provider,",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 297,
+        "evidence": "credential",
+        "context": "        AzureAIAgentsProvider(credential=credential) as provider,",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 351,
+        "evidence": "credential",
+        "context": "2. **Always use context managers for clients and async credentials.** Wrap every client in `with Client(...) as client:` (sync) or `async with Client(...) as client:` (async). For async `DefaultAzureCredential` from `azure.identity.aio`, al",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 49943
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/advanced.md",
+      "sha256": "668490db8d62ffcd5a75ab657a96d1b2986d1811626c1975a3b8217e428a1282",
+      "bytes": 13356,
+      "mode": "100644"
+    },
+    {
+      "path": "references/mcp.md",
+      "sha256": "bf8a6075f84f1496200b64692c555dfcd6ff62cc57ae81694ec4427cad461907",
+      "bytes": 7779,
+      "mode": "100644"
+    },
+    {
+      "path": "references/threads.md",
+      "sha256": "8e83cb3f805747e04c257b04ae3667fa1cba07182fbb76bba3127f61d88b422b",
+      "bytes": 7911,
+      "mode": "100644"
+    },
+    {
+      "path": "references/tools.md",
+      "sha256": "a9f45871f4fdbdd7097afd3e47a7ab13590ab044e41ce6d74a64fa56cab54155",
+      "bytes": 7468,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "d79a8fefd6753474846e72b926437d7bbcddef5cd3f4fb89fb7c03f38ac4434e",
+      "bytes": 12289,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 49943
+}

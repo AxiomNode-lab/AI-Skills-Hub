@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { resolveHubPath } from "@ai-skills-hub/core";
 import { normalizeSkillDirectory, resolveInstallRoot } from "../targets.mjs";
 
 export class PluginAdapter {
@@ -28,7 +29,7 @@ export class PluginAdapter {
     }
 
     fs.mkdirSync(path.dirname(destination), { recursive: true });
-    fs.cpSync(this.capability.materialized_root, destination, {
+    fs.cpSync(resolveHubPath(this.capability.materialized_root), destination, {
       recursive: true,
       force: overwrite,
       errorOnExist: !overwrite,

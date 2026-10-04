@@ -1,0 +1,330 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "bagelhole/cdn-setup",
+  "status": "draft",
+  "reviewed_on": null,
+  "reviewer": null,
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "infrastructure/networking/cdn-setup",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "infrastructure/networking/cdn-setup",
+    "url": "https://api.github.com/repos/BagelHole/DevOps-Security-Agent-Skills/git/trees/0365f57a079b1332f95cf26e31dd2d5332a8399f?recursive=1",
+    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/BagelHole/DevOps-Security-Agent-Skills/blob/0365f57a079b1332f95cf26e31dd2d5332a8399f/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "infrastructure",
+        "infrastructure/networking",
+        "infrastructure/networking/cdn-setup"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte."
+    ]
+  },
+  "content_review": {
+    "status": "pending",
+    "risk": "unknown",
+    "blocking_findings": [],
+    "capabilities": {},
+    "notes": []
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "67c5c5cbb12cafb1515e449748866bd40da7dec9",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "d94b72a47cc2d1ceb19cb1a299153f32e095ca1080fb483beca7ace7e593d093",
+      "bytes": 10953,
+      "mode": "100644",
+      "git_blob": "3939c59d85a6633257e6496f25e3e4e03ccde54e",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 34,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 87,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 164,
+          "evidence": "DELETE",
+          "context": "    allowed_methods  = [\"GET\", \"HEAD\", \"OPTIONS\", \"PUT\", \"POST\", \"PATCH\", \"DELETE\"]",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 199,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 201,
+          "evidence": "curl",
+          "context": "curl -X POST \"https://api.cloudflare.com/client/v4/zones\" \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 201,
+          "evidence": "https://",
+          "context": "curl -X POST \"https://api.cloudflare.com/client/v4/zones\" \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 207,
+          "evidence": "curl",
+          "context": "ZONE_ID=$(curl -s \"https://api.cloudflare.com/client/v4/zones?name=example.com\" \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 207,
+          "evidence": "https://",
+          "context": "ZONE_ID=$(curl -s \"https://api.cloudflare.com/client/v4/zones?name=example.com\" \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 213,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 215,
+          "evidence": "curl",
+          "context": "curl -X POST \"https://api.cloudflare.com/client/v4/zones/$ZONE_ID/rulesets/phases/http_request_cache_settings/entrypoint\" \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 215,
+          "evidence": "https://",
+          "context": "curl -X POST \"https://api.cloudflare.com/client/v4/zones/$ZONE_ID/rulesets/phases/http_request_cache_settings/entrypoint\" \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 236,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 238,
+          "evidence": "curl",
+          "context": "curl -X POST \"https://api.cloudflare.com/client/v4/zones/$ZONE_ID/purge_cache\" \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 238,
+          "evidence": "https://",
+          "context": "curl -X POST \"https://api.cloudflare.com/client/v4/zones/$ZONE_ID/purge_cache\" \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 244,
+          "evidence": "curl",
+          "context": "curl -X POST \"https://api.cloudflare.com/client/v4/zones/$ZONE_ID/purge_cache\" \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 244,
+          "evidence": "https://",
+          "context": "curl -X POST \"https://api.cloudflare.com/client/v4/zones/$ZONE_ID/purge_cache\" \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 247,
+          "evidence": "https://",
+          "context": "  -d '{\"files\":[\"https://example.com/style.css\",\"https://example.com/app.js\"]}'",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 247,
+          "evidence": "https://",
+          "context": "  -d '{\"files\":[\"https://example.com/style.css\",\"https://example.com/app.js\"]}'",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 250,
+          "evidence": "curl",
+          "context": "curl -X POST \"https://api.cloudflare.com/client/v4/zones/$ZONE_ID/purge_cache\" \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 250,
+          "evidence": "https://",
+          "context": "curl -X POST \"https://api.cloudflare.com/client/v4/zones/$ZONE_ID/purge_cache\" \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 253,
+          "evidence": "https://",
+          "context": "  -d '{\"prefixes\":[\"https://example.com/images/\"]}'",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 303,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 305,
+          "evidence": "bash",
+          "context": "#!/bin/bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 307,
+          "evidence": "https://",
+          "context": "  \"https://www.example.com/\"",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 308,
+          "evidence": "https://",
+          "context": "  \"https://www.example.com/products\"",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 309,
+          "evidence": "https://",
+          "context": "  \"https://www.example.com/about\"",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 310,
+          "evidence": "https://",
+          "context": "  \"https://www.example.com/css/main.abc123.css\"",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 311,
+          "evidence": "https://",
+          "context": "  \"https://www.example.com/js/app.def456.js\"",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 315,
+          "evidence": "curl",
+          "context": "  curl -s -o /dev/null -w \"%{http_code} %{time_total}s %{url_effective}\\n\" \"$url\"",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 321,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 323,
+          "evidence": "curl",
+          "context": "curl -sI https://www.example.com/style.css | grep -i -E \"cf-cache|x-cache|age|cache-control\"",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 323,
+          "evidence": "https://",
+          "context": "curl -sI https://www.example.com/style.css | grep -i -E \"cf-cache|x-cache|age|cache-control\"",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    }
+  ]
+}

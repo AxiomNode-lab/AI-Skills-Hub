@@ -10,7 +10,9 @@ import { verifyInstallRecord } from "../packages/installer/src/state.mjs";
 
 const repoRoot = process.cwd();
 const registry = JSON.parse(fs.readFileSync("catalog/skills.json", "utf8"));
-const released = registry.skills.filter(skill => skill.license.evidence?.startsWith("catalog/reviews/"));
+const reviewed = registry.skills.filter(skill => skill.license.evidence?.startsWith("catalog/reviews/"));
+// A skill can carry an approved artifact review and still be held (for example after an instruction review).
+const released = reviewed.filter(skill => skill.release?.status === "eligible" && skill.materialized);
 const first = released.find(skill => skill.id === "anthropics/frontend-design");
 const review = JSON.parse(fs.readFileSync(first.license.evidence, "utf8"));
 function tempProject(t) {
@@ -100,11 +102,13 @@ for (const skill of released) {
     fs.mkdirSync(path.join(cwd, "catalog"));
     fs.writeFileSync(path.join(cwd, "catalog", "skills.json"), JSON.stringify({ skills: [{ ...skill, materialized_root: path.resolve(skill.materialized_root) }] }));
     const run = (...args) => {
-      const result = spawnSync(process.execPath, [path.join(repoRoot, "packages/cli/bin/skills-hub.mjs"), ...args, "--json"], { cwd, encoding: "utf8" });
+      const result = spawnSync(process.execPath, [path.join(repoRoot, "packages/cli/bin/skills-hub.mjs"), ...args, "--json"], { cwd, encoding: "utf8", env: { ...process.env, SKILLS_HUB_HOME: cwd } });
       assert.equal(result.status, 0, result.stdout + result.stderr);
       return JSON.parse(result.stdout);
     };
-    const installed = run("install", skill.id, "--agent", "codex", "--scope", "project");
+    // Install for Codex when the catalog lists it, otherwise for the generic Agent Skills target.
+    const agent = skill.compatibility.includes("codex") ? "codex" : "agent-skills";
+    const installed = run("install", skill.id, "--agent", agent, "--scope", "project");
     assert.equal(installed.success, true);
     const target = path.join(cwd, ".agents", "skills", skill.name);
     assert.equal(installed.results[0].destination, target);
@@ -119,10 +123,36 @@ for (const skill of released) {
     assert.equal(record.source.revision, skill.source.revision);
     assert.equal(record.files.length, manifest.materialized_files.length);
     assert.equal(verifyInstallRecord(record).ok, true);
-    assert.equal(run("info", skill.id, "--agent", "codex").hub_status.installation.status, "installed");
-    assert.equal(run("list", "--agent", "codex")[0].hub_status.installation.status, "installed");
+    assert.equal(run("info", skill.id, "--agent", agent).hub_status.installation.status, "installed");
+    assert.equal(run("list", "--agent", agent)[0].hub_status.installation.status, "installed");
     fs.appendFileSync(path.join(target, "SKILL.md"), "\nchanged\n");
     assert.equal(verifyInstallRecord(record).ok, false);
-    assert.equal(run("list", "--agent", "codex")[0].hub_status.installation.status, "unverified");
+    assert.equal(run("list", "--agent", agent)[0].hub_status.installation.status, "unverified");
   });
 }
+
+test("held skills keep their review record but ship no files and are refused by install", t => {
+  const held = reviewed.filter(skill => skill.release?.status === "hold");
+  for (const skill of held) {
+    assert.equal(skill.materialized, false, skill.id);
+    assert.equal(skill.materialized_root, undefined, skill.id);
+    assert.ok(skill.release.reasons.length > 0, skill.id);
+  }
+  // A hold backed by an independent review must match that review's recorded decision.
+  for (const skill of held.filter(s => s.release.evidence)) {
+    const audit = JSON.parse(fs.readFileSync(skill.release.evidence, "utf8"));
+    const entry = [...audit.skills, ...(audit.corrections ?? [])].find(e => e.id === skill.id);
+    assert.equal(entry?.decision, "hold", skill.id);
+    assert.deepEqual(skill.release.reasons, [entry.hold_reason], skill.id);
+    assert.equal(fs.existsSync(path.join("skills", ...skill.id.split("/"))), false, skill.id);
+  }
+  const retired = held.find(skill => skill.id === "microsoft/azure-ai-anomalydetector-java");
+  assert.deepEqual(retired?.release.reasons, ["upstream-service-retired"]);
+  for (const id of ["microsoft/azure-communication-sms-java", "microsoft/azure-communication-chat-java"]) {
+    assert.deepEqual(held.find(skill => skill.id === id)?.release.reasons, ["upstream-service-retiring"], id);
+  }
+  const cwd = tempProject(t);
+  const result = spawnSync(process.execPath, [path.join(repoRoot, "packages/cli/bin/skills-hub.mjs"), "install", retired.id, "--agent", "codex", "--json"], { cwd, encoding: "utf8", env: { ...process.env, SKILLS_HUB_HOME: repoRoot } });
+  assert.notEqual(result.status, 0, result.stdout);
+  assert.equal(fs.existsSync(path.join(cwd, ".agents")), false);
+});

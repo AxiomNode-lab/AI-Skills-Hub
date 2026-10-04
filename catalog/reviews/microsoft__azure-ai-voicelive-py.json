@@ -1,0 +1,750 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "microsoft/azure-ai-voicelive-py",
+  "status": "approved",
+  "reviewed_on": "2026-10-02",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/azure-sdk-python/skills/azure-ai-voicelive-py",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": ".github/plugins/azure-sdk-python/skills/azure-ai-voicelive-py",
+    "url": "https://api.github.com/repos/microsoft/skills/git/trees/84d8eaa8ae95930f55cdceb3e27196c795dab038?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/microsoft/skills/blob/84d8eaa8ae95930f55cdceb3e27196c795dab038/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        ".github",
+        ".github/plugins",
+        ".github/plugins/azure-sdk-python",
+        ".github/plugins/azure-sdk-python/skills",
+        ".github/plugins/azure-sdk-python/skills/azure-ai-voicelive-py"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT License with its copyright notice, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "medium",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "package_install": true,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md and references/api-reference.md, examples.md, models.md in full. Python reference for the Azure AI Voice Live SDK (azure-ai-voicelive): async WebSocket connection, session configuration, audio streaming, event handling, function calling, avatar and transcription examples, plus API/model type listings.",
+      "Following it means installing PyPI packages (SKILL.md:18 `pip install azure-ai-voicelive aiohttp azure-identity`, unpinned) and running code that connects to a live Azure Cognitive Services endpoint using DefaultAzureCredential or an API key read from the AZURE_COGNITIVE_SERVICES_KEY environment variable. Medium because of the package install and live-service credential use; acceptable because these are the official Microsoft SDK packages, credentials are the user's own for the user's own resource, and the skill steers toward Entra ID over keys.",
+      "references/examples.md uses placeholder `AzureKeyCredential(\"YOUR_KEY\")` and a fixed eastus endpoint in every example, contrary to the SKILL.md advice to prefer DefaultAzureCredential; helper functions such as read_microphone/play_audio are pseudo-code the user must supply. Example at examples.md:311 writes output.pcm in the user's program."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "git_blob": "79656060de00aa4659ad2c276d5be8830664d544",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry the copyright and permission notice.",
+      "findings": []
+    },
+    {
+      "path": "references/api-reference.md",
+      "sha256": "09d1fde82ca8c571a17f7c492bcf220ddbe44e133d71496851cb03fd333b9c1d",
+      "bytes": 8910,
+      "mode": "100644",
+      "git_blob": "2398ede788f0ae17ae64b1e571865febab7539fa",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "credential-access",
+          "line": 25,
+          "evidence": "credential",
+          "context": "    credential: Union[AzureKeyCredential, AsyncTokenCredential],",
+          "disposition": "accepted",
+          "reason": "SDK credential classes (DefaultAzureCredential, AzureKeyCredential, ManagedIdentityCredential), environment-variable names, a placeholder \"YOUR_KEY\" and model field names such as IceServer.credential; no instruction to read, print or send real secrets beyond authenticating the user's own SDK client."
+        },
+        {
+          "type": "credential-access",
+          "line": 42,
+          "evidence": "credential",
+          "context": "| `credential` | `AzureKeyCredential` or `AsyncTokenCredential` | Yes | Authentication credential |",
+          "disposition": "accepted",
+          "reason": "SDK credential classes (DefaultAzureCredential, AzureKeyCredential, ManagedIdentityCredential), environment-variable names, a placeholder \"YOUR_KEY\" and model field names such as IceServer.credential; no instruction to read, print or send real secrets beyond authenticating the user's own SDK client."
+        },
+        {
+          "type": "credential-access",
+          "line": 42,
+          "evidence": "credential",
+          "context": "| `credential` | `AzureKeyCredential` or `AsyncTokenCredential` | Yes | Authentication credential |",
+          "disposition": "accepted",
+          "reason": "SDK credential classes (DefaultAzureCredential, AzureKeyCredential, ManagedIdentityCredential), environment-variable names, a placeholder \"YOUR_KEY\" and model field names such as IceServer.credential; no instruction to read, print or send real secrets beyond authenticating the user's own SDK client."
+        },
+        {
+          "type": "network-access",
+          "line": 49,
+          "evidence": "https://",
+          "context": "| `credential_scopes` | `List[str]` | No | OAuth scopes (default: `[\"https://ai.azure.com/.default\"]`) |",
+          "disposition": "accepted",
+          "reason": "Azure Cognitive Services endpoint placeholders, OAuth scope URLs, and a Microsoft Learn link; the sample code connects to the user's own Voice Live endpoint."
+        },
+        {
+          "type": "encoded-content",
+          "line": 167,
+          "evidence": "Base64",
+          "context": "    audio: str,  # Base64-encoded audio",
+          "disposition": "accepted",
+          "reason": "Base64 encoding/decoding of PCM audio chunks in sample code and type comments; no encoded payloads are embedded in the skill."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 230,
+          "evidence": "delete",
+          "context": "async def delete(",
+          "disposition": "accepted",
+          "reason": "False positive: SDK methods and event names for deleting conversation items (`item.delete`, `conversation.item.delete`), not file operations."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 235,
+          "evidence": "Delete",
+          "context": "    \"\"\"Delete a conversation item.\"\"\"",
+          "disposition": "accepted",
+          "reason": "False positive: SDK methods and event names for deleting conversation items (`item.delete`, `conversation.item.delete`), not file operations."
+        },
+        {
+          "type": "encoded-content",
+          "line": 263,
+          "evidence": "base64",
+          "context": "        {\"type\": \"input_audio\", \"audio\": \"base64...\"},",
+          "disposition": "accepted",
+          "reason": "Base64 encoding/decoding of PCM audio chunks in sample code and type comments; no encoded payloads are embedded in the skill."
+        },
+        {
+          "type": "encoded-content",
+          "line": 265,
+          "evidence": "base64",
+          "context": "        {\"type\": \"audio\", \"audio\": \"base64...\", \"transcript\": \"...\"}",
+          "disposition": "accepted",
+          "reason": "Base64 encoding/decoding of PCM audio chunks in sample code and type comments; no encoded payloads are embedded in the skill."
+        }
+      ]
+    },
+    {
+      "path": "references/examples.md",
+      "sha256": "5f9c9cf8ef6dd5895a4e86e5fa022592ffac2b410f4d601cc32b37e9313afe5e",
+      "bytes": 17345,
+      "mode": "100644",
+      "git_blob": "2ed3848e3c0ad3293001226f9040c90b9ec81dd0",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "encoded-content",
+          "line": 22,
+          "evidence": "base64",
+          "context": "import base64",
+          "disposition": "accepted",
+          "reason": "Base64 encoding/decoding of PCM audio chunks in sample code and type comments; no encoded payloads are embedded in the skill."
+        },
+        {
+          "type": "network-access",
+          "line": 28,
+          "evidence": "https://",
+          "context": "        endpoint=\"https://eastus.api.cognitive.microsoft.com\",",
+          "disposition": "accepted",
+          "reason": "Azure Cognitive Services endpoint placeholders, OAuth scope URLs, and a Microsoft Learn link; the sample code connects to the user's own Voice Live endpoint."
+        },
+        {
+          "type": "credential-access",
+          "line": 29,
+          "evidence": "credential",
+          "context": "        credential=AzureKeyCredential(\"YOUR_KEY\"),",
+          "disposition": "accepted",
+          "reason": "SDK credential classes (DefaultAzureCredential, AzureKeyCredential, ManagedIdentityCredential), environment-variable names, a placeholder \"YOUR_KEY\" and model field names such as IceServer.credential; no instruction to read, print or send real secrets beyond authenticating the user's own SDK client."
+        },
+        {
+          "type": "encoded-content",
+          "line": 63,
+          "evidence": "base64",
+          "context": "                    audio = base64.b64decode(event.delta)",
+          "disposition": "accepted",
+          "reason": "Base64 encoding/decoding of PCM audio chunks in sample code and type comments; no encoded payloads are embedded in the skill."
+        },
+        {
+          "type": "encoded-content",
+          "line": 76,
+          "evidence": "base64",
+          "context": "        b64 = base64.b64encode(chunk).decode()",
+          "disposition": "accepted",
+          "reason": "Base64 encoding/decoding of PCM audio chunks in sample code and type comments; no encoded payloads are embedded in the skill."
+        },
+        {
+          "type": "encoded-content",
+          "line": 91,
+          "evidence": "base64",
+          "context": "import base64",
+          "disposition": "accepted",
+          "reason": "Base64 encoding/decoding of PCM audio chunks in sample code and type comments; no encoded payloads are embedded in the skill."
+        },
+        {
+          "type": "network-access",
+          "line": 153,
+          "evidence": "https://",
+          "context": "        endpoint=\"https://eastus.api.cognitive.microsoft.com\",",
+          "disposition": "accepted",
+          "reason": "Azure Cognitive Services endpoint placeholders, OAuth scope URLs, and a Microsoft Learn link; the sample code connects to the user's own Voice Live endpoint."
+        },
+        {
+          "type": "credential-access",
+          "line": 154,
+          "evidence": "credential",
+          "context": "        credential=AzureKeyCredential(\"YOUR_KEY\"),",
+          "disposition": "accepted",
+          "reason": "SDK credential classes (DefaultAzureCredential, AzureKeyCredential, ManagedIdentityCredential), environment-variable names, a placeholder \"YOUR_KEY\" and model field names such as IceServer.credential; no instruction to read, print or send real secrets beyond authenticating the user's own SDK client."
+        },
+        {
+          "type": "encoded-content",
+          "line": 182,
+          "evidence": "base64",
+          "context": "                    audio = base64.b64decode(event.delta)",
+          "disposition": "accepted",
+          "reason": "Base64 encoding/decoding of PCM audio chunks in sample code and type comments; no encoded payloads are embedded in the skill."
+        },
+        {
+          "type": "encoded-content",
+          "line": 200,
+          "evidence": "base64",
+          "context": "import base64",
+          "disposition": "accepted",
+          "reason": "Base64 encoding/decoding of PCM audio chunks in sample code and type comments; no encoded payloads are embedded in the skill."
+        },
+        {
+          "type": "network-access",
+          "line": 206,
+          "evidence": "https://",
+          "context": "        endpoint=\"https://eastus.api.cognitive.microsoft.com\",",
+          "disposition": "accepted",
+          "reason": "Azure Cognitive Services endpoint placeholders, OAuth scope URLs, and a Microsoft Learn link; the sample code connects to the user's own Voice Live endpoint."
+        },
+        {
+          "type": "credential-access",
+          "line": 207,
+          "evidence": "credential",
+          "context": "        credential=AzureKeyCredential(\"YOUR_KEY\"),",
+          "disposition": "accepted",
+          "reason": "SDK credential classes (DefaultAzureCredential, AzureKeyCredential, ManagedIdentityCredential), environment-variable names, a placeholder \"YOUR_KEY\" and model field names such as IceServer.credential; no instruction to read, print or send real secrets beyond authenticating the user's own SDK client."
+        },
+        {
+          "type": "encoded-content",
+          "line": 227,
+          "evidence": "base64",
+          "context": "                b64 = base64.b64encode(chunk).decode()",
+          "disposition": "accepted",
+          "reason": "Base64 encoding/decoding of PCM audio chunks in sample code and type comments; no encoded payloads are embedded in the skill."
+        },
+        {
+          "type": "encoded-content",
+          "line": 237,
+          "evidence": "base64",
+          "context": "                    audio = base64.b64decode(event.delta)",
+          "disposition": "accepted",
+          "reason": "Base64 encoding/decoding of PCM audio chunks in sample code and type comments; no encoded payloads are embedded in the skill."
+        },
+        {
+          "type": "encoded-content",
+          "line": 253,
+          "evidence": "base64",
+          "context": "import base64",
+          "disposition": "accepted",
+          "reason": "Base64 encoding/decoding of PCM audio chunks in sample code and type comments; no encoded payloads are embedded in the skill."
+        },
+        {
+          "type": "network-access",
+          "line": 260,
+          "evidence": "https://",
+          "context": "        endpoint=\"https://eastus.api.cognitive.microsoft.com\",",
+          "disposition": "accepted",
+          "reason": "Azure Cognitive Services endpoint placeholders, OAuth scope URLs, and a Microsoft Learn link; the sample code connects to the user's own Voice Live endpoint."
+        },
+        {
+          "type": "credential-access",
+          "line": 261,
+          "evidence": "credential",
+          "context": "        credential=AzureKeyCredential(\"YOUR_KEY\"),",
+          "disposition": "accepted",
+          "reason": "SDK credential classes (DefaultAzureCredential, AzureKeyCredential, ManagedIdentityCredential), environment-variable names, a placeholder \"YOUR_KEY\" and model field names such as IceServer.credential; no instruction to read, print or send real secrets beyond authenticating the user's own SDK client."
+        },
+        {
+          "type": "encoded-content",
+          "line": 279,
+          "evidence": "base64",
+          "context": "            b64 = base64.b64encode(chunk).decode()",
+          "disposition": "accepted",
+          "reason": "Base64 encoding/decoding of PCM audio chunks in sample code and type comments; no encoded payloads are embedded in the skill."
+        },
+        {
+          "type": "encoded-content",
+          "line": 296,
+          "evidence": "base64",
+          "context": "                    response_audio.extend(base64.b64decode(event.delta))",
+          "disposition": "accepted",
+          "reason": "Base64 encoding/decoding of PCM audio chunks in sample code and type comments; no encoded payloads are embedded in the skill."
+        },
+        {
+          "type": "encoded-content",
+          "line": 322,
+          "evidence": "base64",
+          "context": "import base64",
+          "disposition": "accepted",
+          "reason": "Base64 encoding/decoding of PCM audio chunks in sample code and type comments; no encoded payloads are embedded in the skill."
+        },
+        {
+          "type": "network-access",
+          "line": 328,
+          "evidence": "https://",
+          "context": "        endpoint=\"https://eastus.api.cognitive.microsoft.com\",",
+          "disposition": "accepted",
+          "reason": "Azure Cognitive Services endpoint placeholders, OAuth scope URLs, and a Microsoft Learn link; the sample code connects to the user's own Voice Live endpoint."
+        },
+        {
+          "type": "credential-access",
+          "line": 329,
+          "evidence": "credential",
+          "context": "        credential=AzureKeyCredential(\"YOUR_KEY\"),",
+          "disposition": "accepted",
+          "reason": "SDK credential classes (DefaultAzureCredential, AzureKeyCredential, ManagedIdentityCredential), environment-variable names, a placeholder \"YOUR_KEY\" and model field names such as IceServer.credential; no instruction to read, print or send real secrets beyond authenticating the user's own SDK client."
+        },
+        {
+          "type": "encoded-content",
+          "line": 362,
+          "evidence": "base64",
+          "context": "                        audio = base64.b64decode(event.delta)",
+          "disposition": "accepted",
+          "reason": "Base64 encoding/decoding of PCM audio chunks in sample code and type comments; no encoded payloads are embedded in the skill."
+        },
+        {
+          "type": "encoded-content",
+          "line": 376,
+          "evidence": "base64",
+          "context": "import base64",
+          "disposition": "accepted",
+          "reason": "Base64 encoding/decoding of PCM audio chunks in sample code and type comments; no encoded payloads are embedded in the skill."
+        },
+        {
+          "type": "network-access",
+          "line": 382,
+          "evidence": "https://",
+          "context": "        endpoint=\"https://eastus.api.cognitive.microsoft.com\",",
+          "disposition": "accepted",
+          "reason": "Azure Cognitive Services endpoint placeholders, OAuth scope URLs, and a Microsoft Learn link; the sample code connects to the user's own Voice Live endpoint."
+        },
+        {
+          "type": "credential-access",
+          "line": 383,
+          "evidence": "credential",
+          "context": "        credential=AzureKeyCredential(\"YOUR_KEY\"),",
+          "disposition": "accepted",
+          "reason": "SDK credential classes (DefaultAzureCredential, AzureKeyCredential, ManagedIdentityCredential), environment-variable names, a placeholder \"YOUR_KEY\" and model field names such as IceServer.credential; no instruction to read, print or send real secrets beyond authenticating the user's own SDK client."
+        },
+        {
+          "type": "encoded-content",
+          "line": 412,
+          "evidence": "base64",
+          "context": "                audio = base64.b64decode(event.delta)",
+          "disposition": "accepted",
+          "reason": "Base64 encoding/decoding of PCM audio chunks in sample code and type comments; no encoded payloads are embedded in the skill."
+        },
+        {
+          "type": "network-access",
+          "line": 434,
+          "evidence": "https://",
+          "context": "        endpoint=\"https://eastus.api.cognitive.microsoft.com\",",
+          "disposition": "accepted",
+          "reason": "Azure Cognitive Services endpoint placeholders, OAuth scope URLs, and a Microsoft Learn link; the sample code connects to the user's own Voice Live endpoint."
+        },
+        {
+          "type": "credential-access",
+          "line": 435,
+          "evidence": "credential",
+          "context": "        credential=AzureKeyCredential(\"YOUR_KEY\"),",
+          "disposition": "accepted",
+          "reason": "SDK credential classes (DefaultAzureCredential, AzureKeyCredential, ManagedIdentityCredential), environment-variable names, a placeholder \"YOUR_KEY\" and model field names such as IceServer.credential; no instruction to read, print or send real secrets beyond authenticating the user's own SDK client."
+        },
+        {
+          "type": "network-access",
+          "line": 477,
+          "evidence": "https://",
+          "context": "        endpoint=\"https://eastus.api.cognitive.microsoft.com\",",
+          "disposition": "accepted",
+          "reason": "Azure Cognitive Services endpoint placeholders, OAuth scope URLs, and a Microsoft Learn link; the sample code connects to the user's own Voice Live endpoint."
+        },
+        {
+          "type": "credential-access",
+          "line": 478,
+          "evidence": "credential",
+          "context": "        credential=AzureKeyCredential(\"YOUR_KEY\"),",
+          "disposition": "accepted",
+          "reason": "SDK credential classes (DefaultAzureCredential, AzureKeyCredential, ManagedIdentityCredential), environment-variable names, a placeholder \"YOUR_KEY\" and model field names such as IceServer.credential; no instruction to read, print or send real secrets beyond authenticating the user's own SDK client."
+        },
+        {
+          "type": "encoded-content",
+          "line": 519,
+          "evidence": "base64",
+          "context": "import base64",
+          "disposition": "accepted",
+          "reason": "Base64 encoding/decoding of PCM audio chunks in sample code and type comments; no encoded payloads are embedded in the skill."
+        },
+        {
+          "type": "network-access",
+          "line": 525,
+          "evidence": "https://",
+          "context": "        endpoint=\"https://eastus.api.cognitive.microsoft.com\",",
+          "disposition": "accepted",
+          "reason": "Azure Cognitive Services endpoint placeholders, OAuth scope URLs, and a Microsoft Learn link; the sample code connects to the user's own Voice Live endpoint."
+        },
+        {
+          "type": "credential-access",
+          "line": 526,
+          "evidence": "credential",
+          "context": "        credential=AzureKeyCredential(\"YOUR_KEY\"),",
+          "disposition": "accepted",
+          "reason": "SDK credential classes (DefaultAzureCredential, AzureKeyCredential, ManagedIdentityCredential), environment-variable names, a placeholder \"YOUR_KEY\" and model field names such as IceServer.credential; no instruction to read, print or send real secrets beyond authenticating the user's own SDK client."
+        }
+      ]
+    },
+    {
+      "path": "references/models.md",
+      "sha256": "6e150bbb15bb19ba010015b4f2ba0f6ae5024eae67f7f5d11bd67e6364ba782b",
+      "bytes": 18415,
+      "mode": "100644",
+      "git_blob": "3c3d66c38f1b90bb6eab33121a527b11c0b5a0ea",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 141,
+          "evidence": "delete",
+          "context": "    CONVERSATION_ITEM_DELETE = \"conversation.item.delete\"",
+          "disposition": "accepted",
+          "reason": "False positive: SDK methods and event names for deleting conversation items (`item.delete`, `conversation.item.delete`), not file operations."
+        },
+        {
+          "type": "encoded-content",
+          "line": 215,
+          "evidence": "Base64",
+          "context": "    audio: str  # Base64-encoded audio",
+          "disposition": "accepted",
+          "reason": "Base64 encoding/decoding of PCM audio chunks in sample code and type comments; no encoded payloads are embedded in the skill."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 244,
+          "evidence": "delete",
+          "context": "    type: Literal[\"conversation.item.delete\"]",
+          "disposition": "accepted",
+          "reason": "False positive: SDK methods and event names for deleting conversation items (`item.delete`, `conversation.item.delete`), not file operations."
+        },
+        {
+          "type": "encoded-content",
+          "line": 373,
+          "evidence": "Base64",
+          "context": "    delta: str  # Base64-encoded audio",
+          "disposition": "accepted",
+          "reason": "Base64 encoding/decoding of PCM audio chunks in sample code and type comments; no encoded payloads are embedded in the skill."
+        },
+        {
+          "type": "encoded-content",
+          "line": 529,
+          "evidence": "Base64",
+          "context": "    audio: str  # Base64",
+          "disposition": "accepted",
+          "reason": "Base64 encoding/decoding of PCM audio chunks in sample code and type comments; no encoded payloads are embedded in the skill."
+        },
+        {
+          "type": "encoded-content",
+          "line": 544,
+          "evidence": "Base64",
+          "context": "    audio: str  # Base64",
+          "disposition": "accepted",
+          "reason": "Base64 encoding/decoding of PCM audio chunks in sample code and type comments; no encoded payloads are embedded in the skill."
+        },
+        {
+          "type": "encoded-content",
+          "line": 553,
+          "evidence": "base64",
+          "context": "    base64: Optional[str]",
+          "disposition": "accepted",
+          "reason": "Base64 encoding/decoding of PCM audio chunks in sample code and type comments; no encoded payloads are embedded in the skill."
+        },
+        {
+          "type": "credential-access",
+          "line": 722,
+          "evidence": "credential",
+          "context": "    credential: Optional[str]",
+          "disposition": "accepted",
+          "reason": "SDK credential classes (DefaultAzureCredential, AzureKeyCredential, ManagedIdentityCredential), environment-variable names, a placeholder \"YOUR_KEY\" and model field names such as IceServer.credential; no instruction to read, print or send real secrets beyond authenticating the user's own SDK client."
+        }
+      ]
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "8a765d22c122b71f8726aded787a45e248ed3823fdf373cc041d3adc2a5814f5",
+      "bytes": 11585,
+      "mode": "100644",
+      "git_blob": "512d0686e39a7be742d99d27a9aac8210abc319d",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 17,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash code blocks for the pip install command and an environment-variable listing."
+        },
+        {
+          "type": "package-install",
+          "line": 18,
+          "evidence": "pip install",
+          "context": "pip install azure-ai-voicelive aiohttp azure-identity",
+          "disposition": "accepted",
+          "reason": "`pip install azure-ai-voicelive aiohttp azure-identity` installs the official SDK and its dependencies from PyPI (unpinned)."
+        },
+        {
+          "type": "shell-execution",
+          "line": 23,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash-fenced block listing environment variable names with placeholder values; no command is executed."
+        },
+        {
+          "type": "network-access",
+          "line": 24,
+          "evidence": "https://",
+          "context": "AZURE_COGNITIVE_SERVICES_ENDPOINT=https://<region>.api.cognitive.microsoft.com  # Required for all auth methods",
+          "disposition": "accepted",
+          "reason": "Azure Cognitive Services endpoint placeholders, OAuth scope URLs, and a Microsoft Learn link; the sample code connects to the user's own Voice Live endpoint."
+        },
+        {
+          "type": "credential-access",
+          "line": 26,
+          "evidence": "api-key",
+          "context": "AZURE_COGNITIVE_SERVICES_KEY=<api-key>  # Only required for the legacy API-key auth path below",
+          "disposition": "accepted",
+          "reason": "SDK credential classes (DefaultAzureCredential, AzureKeyCredential, ManagedIdentityCredential), environment-variable names, a placeholder \"YOUR_KEY\" and model field names such as IceServer.credential; no instruction to read, print or send real secrets beyond authenticating the user's own SDK client."
+        },
+        {
+          "type": "credential-access",
+          "line": 26,
+          "evidence": "API-key",
+          "context": "AZURE_COGNITIVE_SERVICES_KEY=<api-key>  # Only required for the legacy API-key auth path below",
+          "disposition": "accepted",
+          "reason": "SDK credential classes (DefaultAzureCredential, AzureKeyCredential, ManagedIdentityCredential), environment-variable names, a placeholder \"YOUR_KEY\" and model field names such as IceServer.credential; no instruction to read, print or send real secrets beyond authenticating the user's own SDK client."
+        },
+        {
+          "type": "credential-access",
+          "line": 35,
+          "evidence": "credential",
+          "context": ">    - Production: set `AZURE_TOKEN_CREDENTIALS=prod` (or `AZURE_TOKEN_CREDENTIALS=<specific_credential>`) to constrain the credential chain to production-safe credentials.",
+          "disposition": "accepted",
+          "reason": "SDK credential classes (DefaultAzureCredential, AzureKeyCredential, ManagedIdentityCredential), environment-variable names, a placeholder \"YOUR_KEY\" and model field names such as IceServer.credential; no instruction to read, print or send real secrets beyond authenticating the user's own SDK client."
+        },
+        {
+          "type": "credential-access",
+          "line": 38,
+          "evidence": "credential",
+          "context": ">    - Async: `async with <Client>(...) as client:` **and** `async with DefaultAzureCredential() as credential:` (from `azure.identity.aio`)",
+          "disposition": "accepted",
+          "reason": "SDK credential classes (DefaultAzureCredential, AzureKeyCredential, ManagedIdentityCredential), environment-variable names, a placeholder \"YOUR_KEY\" and model field names such as IceServer.credential; no instruction to read, print or send real secrets beyond authenticating the user's own SDK client."
+        },
+        {
+          "type": "credential-access",
+          "line": 48,
+          "evidence": "credential",
+          "context": "# Or use a specific credential directly in production:",
+          "disposition": "accepted",
+          "reason": "SDK credential classes (DefaultAzureCredential, AzureKeyCredential, ManagedIdentityCredential), environment-variable names, a placeholder \"YOUR_KEY\" and model field names such as IceServer.credential; no instruction to read, print or send real secrets beyond authenticating the user's own SDK client."
+        },
+        {
+          "type": "credential-access",
+          "line": 49,
+          "evidence": "credential",
+          "context": "# See https://learn.microsoft.com/python/api/overview/azure/identity-readme?view=azure-python#credential-classes",
+          "disposition": "accepted",
+          "reason": "SDK credential classes (DefaultAzureCredential, AzureKeyCredential, ManagedIdentityCredential), environment-variable names, a placeholder \"YOUR_KEY\" and model field names such as IceServer.credential; no instruction to read, print or send real secrets beyond authenticating the user's own SDK client."
+        },
+        {
+          "type": "network-access",
+          "line": 49,
+          "evidence": "https://",
+          "context": "# See https://learn.microsoft.com/python/api/overview/azure/identity-readme?view=azure-python#credential-classes",
+          "disposition": "accepted",
+          "reason": "Azure Cognitive Services endpoint placeholders, OAuth scope URLs, and a Microsoft Learn link; the sample code connects to the user's own Voice Live endpoint."
+        },
+        {
+          "type": "credential-access",
+          "line": 50,
+          "evidence": "credential",
+          "context": "# credential = ManagedIdentityCredential()",
+          "disposition": "accepted",
+          "reason": "SDK credential classes (DefaultAzureCredential, AzureKeyCredential, ManagedIdentityCredential), environment-variable names, a placeholder \"YOUR_KEY\" and model field names such as IceServer.credential; no instruction to read, print or send real secrets beyond authenticating the user's own SDK client."
+        },
+        {
+          "type": "credential-access",
+          "line": 52,
+          "evidence": "credential",
+          "context": "async with DefaultAzureCredential(require_envvar=True) as credential:",
+          "disposition": "accepted",
+          "reason": "SDK credential classes (DefaultAzureCredential, AzureKeyCredential, ManagedIdentityCredential), environment-variable names, a placeholder \"YOUR_KEY\" and model field names such as IceServer.credential; no instruction to read, print or send real secrets beyond authenticating the user's own SDK client."
+        },
+        {
+          "type": "credential-access",
+          "line": 55,
+          "evidence": "credential",
+          "context": "        credential=credential,",
+          "disposition": "accepted",
+          "reason": "SDK credential classes (DefaultAzureCredential, AzureKeyCredential, ManagedIdentityCredential), environment-variable names, a placeholder \"YOUR_KEY\" and model field names such as IceServer.credential; no instruction to read, print or send real secrets beyond authenticating the user's own SDK client."
+        },
+        {
+          "type": "credential-access",
+          "line": 55,
+          "evidence": "credential",
+          "context": "        credential=credential,",
+          "disposition": "accepted",
+          "reason": "SDK credential classes (DefaultAzureCredential, AzureKeyCredential, ManagedIdentityCredential), environment-variable names, a placeholder \"YOUR_KEY\" and model field names such as IceServer.credential; no instruction to read, print or send real secrets beyond authenticating the user's own SDK client."
+        },
+        {
+          "type": "network-access",
+          "line": 57,
+          "evidence": "https://",
+          "context": "        credential_scopes=[\"https://cognitiveservices.azure.com/.default\"]",
+          "disposition": "accepted",
+          "reason": "Azure Cognitive Services endpoint placeholders, OAuth scope URLs, and a Microsoft Learn link; the sample code connects to the user's own Voice Live endpoint."
+        },
+        {
+          "type": "credential-access",
+          "line": 62,
+          "evidence": "API Key",
+          "context": "### Legacy: API Key (existing keyed deployments)",
+          "disposition": "accepted",
+          "reason": "SDK credential classes (DefaultAzureCredential, AzureKeyCredential, ManagedIdentityCredential), environment-variable names, a placeholder \"YOUR_KEY\" and model field names such as IceServer.credential; no instruction to read, print or send real secrets beyond authenticating the user's own SDK client."
+        },
+        {
+          "type": "credential-access",
+          "line": 73,
+          "evidence": "credential",
+          "context": "    credential=AzureKeyCredential(os.environ[\"AZURE_COGNITIVE_SERVICES_KEY\"]),",
+          "disposition": "accepted",
+          "reason": "SDK credential classes (DefaultAzureCredential, AzureKeyCredential, ManagedIdentityCredential), environment-variable names, a placeholder \"YOUR_KEY\" and model field names such as IceServer.credential; no instruction to read, print or send real secrets beyond authenticating the user's own SDK client."
+        },
+        {
+          "type": "credential-access",
+          "line": 90,
+          "evidence": "credential",
+          "context": "        credential=DefaultAzureCredential(),",
+          "disposition": "accepted",
+          "reason": "SDK credential classes (DefaultAzureCredential, AzureKeyCredential, ManagedIdentityCredential), environment-variable names, a placeholder \"YOUR_KEY\" and model field names such as IceServer.credential; no instruction to read, print or send real secrets beyond authenticating the user's own SDK client."
+        },
+        {
+          "type": "network-access",
+          "line": 92,
+          "evidence": "https://",
+          "context": "        credential_scopes=[\"https://cognitiveservices.azure.com/.default\"]",
+          "disposition": "accepted",
+          "reason": "Azure Cognitive Services endpoint placeholders, OAuth scope URLs, and a Microsoft Learn link; the sample code connects to the user's own Voice Live endpoint."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 124,
+          "evidence": "delete",
+          "context": "| `conn.conversation` | Conversation state | `item.create()`, `item.delete()`, `item.truncate()` |",
+          "disposition": "accepted",
+          "reason": "False positive: SDK methods and event names for deleting conversation items (`item.delete`, `conversation.item.delete`), not file operations."
+        },
+        {
+          "type": "encoded-content",
+          "line": 163,
+          "evidence": "Base64",
+          "context": "### Send Audio (Base64 PCM16)",
+          "disposition": "accepted",
+          "reason": "Base64 encoding/decoding of PCM audio chunks in sample code and type comments; no encoded payloads are embedded in the skill."
+        },
+        {
+          "type": "encoded-content",
+          "line": 166,
+          "evidence": "base64",
+          "context": "import base64",
+          "disposition": "accepted",
+          "reason": "Base64 encoding/decoding of PCM audio chunks in sample code and type comments; no encoded payloads are embedded in the skill."
+        },
+        {
+          "type": "encoded-content",
+          "line": 170,
+          "evidence": "base64",
+          "context": "b64_audio = base64.b64encode(audio_chunk).decode()",
+          "disposition": "accepted",
+          "reason": "Base64 encoding/decoding of PCM audio chunks in sample code and type comments; no encoded payloads are embedded in the skill."
+        },
+        {
+          "type": "encoded-content",
+          "line": 180,
+          "evidence": "base64",
+          "context": "        audio_bytes = base64.b64decode(event.delta)",
+          "disposition": "accepted",
+          "reason": "Base64 encoding/decoding of PCM audio chunks in sample code and type comments; no encoded payloads are embedded in the skill."
+        },
+        {
+          "type": "encoded-content",
+          "line": 215,
+          "evidence": "base64",
+          "context": "            audio = base64.b64decode(event.delta)",
+          "disposition": "accepted",
+          "reason": "Base64 encoding/decoding of PCM audio chunks in sample code and type comments; no encoded payloads are embedded in the skill."
+        },
+        {
+          "type": "credential-access",
+          "line": 333,
+          "evidence": "credential",
+          "context": "2. **Always use context managers for clients and async credentials.** Wrap every connection in `async with connect(...) as conn:`. For async `DefaultAzureCredential` from `azure.identity.aio`, also use `async with credential:` so tokens and",
+          "disposition": "accepted",
+          "reason": "SDK credential classes (DefaultAzureCredential, AzureKeyCredential, ManagedIdentityCredential), environment-variable names, a placeholder \"YOUR_KEY\" and model field names such as IceServer.credential; no instruction to read, print or send real secrets beyond authenticating the user's own SDK client."
+        }
+      ]
+    }
+  ]
+}

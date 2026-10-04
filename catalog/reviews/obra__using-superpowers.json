@@ -1,0 +1,184 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "obra/using-superpowers",
+  "status": "approved",
+  "reviewed_on": "2026-10-02",
+  "reviewer": "AI-assisted artifact review; not an independent security certification",
+  "source": {
+    "repo": "obra/superpowers",
+    "path": "skills/using-superpowers",
+    "revision": "8ca22dba9a94f28898bbce59f2537ff4d87c747d"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "skills/using-superpowers",
+    "url": "https://api.github.com/repos/obra/superpowers/git/trees/8ca22dba9a94f28898bbce59f2537ff4d87c747d?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/obra/superpowers/blob/8ca22dba9a94f28898bbce59f2537ff4d87c747d/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "skills",
+        "skills/using-superpowers"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT License with its copyright notice, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license, so no conflicting declaration exists. Every file was read in full; no third-party copyright notice, other license grant, or copied third-party text was found. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "medium",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": false,
+      "network": false
+    },
+    "notes": [
+      "Read SKILL.md and all seven references/*.md in full. A bootstrap skill that tells the agent to check for and invoke applicable skills before responding, and maps skill actions to the tools of several agent harnesses.",
+      "Risk raised to medium although the scanner rates it low: it is meant to load at the start of every conversation and uses emphatic language to override default behavior. It states that user instructions (CLAUDE.md, AGENTS.md, direct requests) take precedence and tells subagents to ignore it.",
+      "It refers to other superpowers skills (brainstorming, systematic-debugging) that are not part of this artifact; brainstorming is blocked in this catalog. Reference files suggest config.toml settings for the user to add; they do not edit files themselves."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "a37e0e9697144819e1d965176ac4ae5bc3fa02d11e7812036bbcadf6dafe2400",
+      "bytes": 1070,
+      "mode": "100644",
+      "git_blob": "abf0390320aa14406af7a520b9b0739fdda9bf08",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry the copyright and permission notice.",
+      "findings": []
+    },
+    {
+      "path": "references/antigravity-tools.md",
+      "sha256": "4880f6de3da4e32f9659ebe7a72b9e0ebfff04e028c2ed96173f86d0387a04c0",
+      "bytes": 1495,
+      "mode": "100644",
+      "git_blob": "2e1eac90534af6e1f27df4e18410be8a7b442448",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "references/claude-code-tools.md",
+      "sha256": "21479a3fee27448cab8748a3b5687e53bb257883bda9c070426f9a1ab5cebf1b",
+      "bytes": 1469,
+      "mode": "100644",
+      "git_blob": "550b8e456db58b549bfc2bfc6388dcf01b020a14",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "references/codex-tools.md",
+      "sha256": "1a38ad9b188c393052f58d95657a1c35ea6aafc8b5a27f198f3922912f70bbe7",
+      "bytes": 4762,
+      "mode": "100644",
+      "git_blob": "e4488fb224bb0fa0a33e9ac7dc961174e9f0c150",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 86,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Names a host shell tool ('bash') in a tool-mapping table; no command is prescribed."
+        }
+      ]
+    },
+    {
+      "path": "references/gemini-tools.md",
+      "sha256": "62b9157bcb0ee3c6784e3d0da0798ddfa5872f9e0c34bea48f3079dabea71965",
+      "bytes": 4598,
+      "mode": "100644",
+      "git_blob": "b01b65238a50981aeed22ae52ee20f8b55d16b42",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "references/hermes-tools.md",
+      "sha256": "e2185c976a3c87503910e05e2aea58cc89bc8e569bb624b93df9958ac47a9190",
+      "bytes": 1964,
+      "mode": "100644",
+      "git_blob": "0f1fa57bc1b495462e75c6ce11e798245a34987e",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "references/muse-tools.md",
+      "sha256": "5a1da5c575fe18456ca71cd47ebfd8a38c745f8d82a67fe64d5b83080000eeb3",
+      "bytes": 1908,
+      "mode": "100644",
+      "git_blob": "a87d6d83878518ba4f748be8dcd1ac9aad4b99e5",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 11,
+          "evidence": "bash",
+          "context": "| Run a shell command | `bash` |",
+          "disposition": "accepted",
+          "reason": "Names a host shell tool ('bash') in a tool-mapping table; no command is prescribed."
+        },
+        {
+          "type": "shell-execution",
+          "line": 18,
+          "evidence": "bash",
+          "context": "| Task tracking (\"create a todo\", \"mark complete\") | `write_todos` or `bash` task file |",
+          "disposition": "accepted",
+          "reason": "Names a host shell tool ('bash') in a tool-mapping table; no command is prescribed."
+        }
+      ]
+    },
+    {
+      "path": "references/pi-tools.md",
+      "sha256": "703dbc83d23ecab9c6f388460c38abc482e9dee2fe6772a8c7a255152ad3a4d5",
+      "bytes": 1242,
+      "mode": "100644",
+      "git_blob": "0c1f21713a45255ece4144fd2fee353e4ed4f90e",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "82c5c8866ad7f5dd4440ce66bd7806ba48a2f13771beae5cf112e53f08fe36ba",
+      "bytes": 3192,
+      "mode": "100644",
+      "git_blob": "069d578445805a28b8dacbf70cdf045e1673def0",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": []
+    }
+  ]
+}

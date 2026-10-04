@@ -15,7 +15,7 @@ node packages/cli/bin/skills-hub.mjs list --agent codex --scope project --json
 
 ## Current catalog outcomes
 
-As of 2026-10-02 the catalog contains 534 skills: 499 review-required, 12 source-direct, 20 blocked, and 3 bundled skills. The bundled skills are materialized and release-eligible; the other 531 releases remain on hold. See [current status](STATUS.md) for a reproducible count command.
+As of 2026-10-03 the catalog contains 1006 skills: 762 review-required, 12 source-direct, 20 blocked, and 212 bundled skills. The bundled skills are materialized and release-eligible; the other 794 releases remain on hold. See [current status](STATUS.md) for a reproducible count command.
 
 This real blocked entry demonstrates a refused installation without changing files:
 
@@ -39,7 +39,7 @@ Use `install` followed by one existing capability ID, or comma-separated IDs, an
 
 Supported options are `--agent`, `--scope project|user`, `--yes` (or `-y`), and `--json` where supported. Noninteractive JSON is supported by `search`, `info`, `list`, and `install`. `add`, `create`, and `uninstall` include interactive flows rather than equivalent JSON automation interfaces.
 
-Local installation requires a compatible, bundled, materialized skill with `release.status: eligible`. An unreleased bundle is held with `bundle_not_released`; review-required skills are held with `manual_review_required`. The three reviewed local releases now qualify. Their actual packaged files, resources, and installation records are tested in temporary projects inside the workspace.
+Local installation requires a compatible, bundled, materialized skill with `release.status: eligible`. An unreleased bundle is held with `bundle_not_released`; review-required skills are held with `manual_review_required`. The 212 reviewed local releases now qualify; some list only the generic `agent-skills` target, so install them with `--agent agent-skills`. Their actual packaged files, resources, and installation records are tested in temporary projects inside the workspace.
 
 ~~~bash
 node packages/cli/bin/skills-hub.mjs install anthropics/frontend-design,anthropics/brand-guidelines,anthropics/internal-comms --agent codex --scope project --json

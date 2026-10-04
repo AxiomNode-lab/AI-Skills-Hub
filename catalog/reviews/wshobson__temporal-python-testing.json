@@ -1,0 +1,272 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "wshobson/temporal-python-testing",
+  "status": "draft",
+  "reviewed_on": null,
+  "reviewer": null,
+  "source": {
+    "repo": "wshobson/agents",
+    "path": "plugins/backend-development/skills/temporal-python-testing",
+    "revision": "156b7a5e7a8b93642628a339ee4039c925b34c7f"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "plugins/backend-development/skills/temporal-python-testing",
+    "url": "https://api.github.com/repos/wshobson/agents/git/trees/156b7a5e7a8b93642628a339ee4039c925b34c7f?recursive=1",
+    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/wshobson/agents/blob/156b7a5e7a8b93642628a339ee4039c925b34c7f/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "plugins",
+        "plugins/backend-development",
+        "plugins/backend-development/skills",
+        "plugins/backend-development/skills/temporal-python-testing"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte."
+    ]
+  },
+  "content_review": {
+    "status": "pending",
+    "risk": "unknown",
+    "blocking_findings": [],
+    "capabilities": {},
+    "notes": []
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "f89abb55d9f073f38f1703e4518f0613c788c6174be7f13b8dfe48a1c076c746",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "326f0a55c96e672fedf9d807ca043c00df05ba0e",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "resources/integration-testing.md",
+      "sha256": "9c5b5d1ed33b7c3e536c197824f7ac42ae647df7f7369182f66efbc58f9d7ae3",
+      "bytes": 12991,
+      "mode": "100644",
+      "git_blob": "a907a8dd381cc51b15d48cba84b0cd3acfeb541e",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "resources/local-setup.md",
+      "sha256": "d407ca7c4a285d6f2c031b4740a4b8d5bf5840f656c6b68deb2877e00860cc97",
+      "bytes": 12065,
+      "mode": "100644",
+      "git_blob": "3516ec5706983a4fde8e61c22d329e401522ef62",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 48,
+          "evidence": "http://",
+          "context": "      - TEMPORAL_CORS_ORIGINS=http://localhost:3000",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 58,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 69,
+          "evidence": "http://",
+          "context": "open http://localhost:8080",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 305,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 348,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 370,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 372,
+          "evidence": "bash",
+          "context": "#!/bin/bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "package-install",
+          "line": 393,
+          "evidence": "pip install",
+          "context": "\tpip install -r requirements.txt",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "destructive-operation",
+          "line": 417,
+          "evidence": "rm -rf",
+          "context": "\trm -rf .pytest_cache htmlcov .coverage",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 417,
+          "evidence": "rm -rf",
+          "context": "\trm -rf .pytest_cache htmlcov .coverage",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "package-install",
+          "line": 458,
+          "evidence": "pip install",
+          "context": "          pip install -r requirements.txt",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 501,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 502,
+          "evidence": "http://",
+          "context": "# Access Web UI at http://localhost:8080",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 523,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 541,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "resources/replay-testing.md",
+      "sha256": "f7e2e3ae1f1f9d7fbb547bd5639e97cdd7d7ef4bbae9887897520182e4cad51e",
+      "bytes": 12381,
+      "mode": "100644",
+      "git_blob": "b78eceeb5276d6122e420f0ef4df54900f2ad696",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 128,
+          "evidence": "https://",
+          "context": "        response = requests.get(\"https://api.example.com/data\")  # External call!",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "package-install",
+          "line": 251,
+          "evidence": "pip install",
+          "context": "          pip install -r requirements.txt",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "package-install",
+          "line": 252,
+          "evidence": "pip install",
+          "context": "          pip install pytest pytest-asyncio",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 418,
+          "evidence": "remove",
+          "context": "# Phase 2: After all old workflows complete, remove old code",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "resources/unit-testing.md",
+      "sha256": "4fe310c3fb54cc44ab0178983546daa4785f4023ea7f0b92e3418096ddf289a8",
+      "bytes": 8710,
+      "mode": "100644",
+      "git_blob": "29dc99094737a158d25749da0bc43d8293d1d938",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "71810389b45511818642e75ae114f7cc4c9425920f2cdb67714a1137091f2267",
+      "bytes": 4949,
+      "mode": "100644",
+      "git_blob": "7be1f999c64e184a5786c50b8c2a643003e0fde3",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    }
+  ]
+}

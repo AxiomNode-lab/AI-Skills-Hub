@@ -1,0 +1,334 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "microsoft/azure-storage-blob-java",
+  "status": "approved",
+  "reviewed_on": "2026-10-02",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/azure-sdk-java/skills/azure-storage-blob-java",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": ".github/plugins/azure-sdk-java/skills/azure-storage-blob-java",
+    "url": "https://api.github.com/repos/microsoft/skills/git/trees/84d8eaa8ae95930f55cdceb3e27196c795dab038?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/microsoft/skills/blob/84d8eaa8ae95930f55cdceb3e27196c795dab038/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        ".github",
+        ".github/plugins",
+        ".github/plugins/azure-sdk-java",
+        ".github/plugins/azure-sdk-java/skills",
+        ".github/plugins/azure-sdk-java/skills/azure-storage-blob-java"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT License with its copyright notice, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found; frontmatter declares MIT and samples follow Microsoft's own Azure SDK documentation. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "low",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": false,
+      "network": false,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md and references/examples.md in full. Guidance and Java samples for the official Azure Storage Blob SDK (azure-storage-blob 12.33.0): service/container/blob clients, upload/download (data, file, stream), listing, delete, copy, SAS generation, metadata, leases, error handling and proxy config.",
+      "No commands, installs, credentials, or agent-side network access: installation is pinned Maven XML (or the Azure SDK BOM) for the user's pom.xml, the only bash fence lists placeholder environment variables, and all upload/download/delete and credential code (shared key from env vars, SAS, DefaultAzureCredential) runs only in the user's application.",
+      "The complete example in references/examples.md:354-410 creates and then deletes a container in the user's storage account when run, and uses an account key; users should prefer Entra ID auth as the skill recommends. No hidden content or external file dependencies."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "git_blob": "79656060de00aa4659ad2c276d5be8830664d544",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry the copyright and permission notice.",
+      "findings": []
+    },
+    {
+      "path": "references/examples.md",
+      "sha256": "b48214ea380b105c265f75a26fce6d5034329ea78bfe200e07cd0dd34d55b205",
+      "bytes": 11617,
+      "mode": "100644",
+      "git_blob": "47f2f6ba61f60ca0305eadcdf482450d48a14d64",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "credential-access",
+          "line": 55,
+          "evidence": "Credential",
+          "context": "### Using Shared Key Credential",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredentialBuilder, StorageSharedKeyCredential (account name/key from env vars) and SAS-token placeholders passed to SDK builders in sample code; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 62,
+          "evidence": "credential",
+          "context": "StorageSharedKeyCredential credential = new StorageSharedKeyCredential(accountName, accountKey);",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredentialBuilder, StorageSharedKeyCredential (account name/key from env vars) and SAS-token placeholders passed to SDK builders in sample code; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 64,
+          "evidence": "https://",
+          "context": "String endpoint = String.format(\"https://%s.blob.core.windows.net\", accountName);",
+          "disposition": "accepted",
+          "reason": "Placeholder storage endpoints (https://<account>.blob.core.windows.net) and one Microsoft Learn link in a code comment; the skill does not instruct fetching anything."
+        },
+        {
+          "type": "credential-access",
+          "line": 67,
+          "evidence": "credential",
+          "context": "    .credential(credential)",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredentialBuilder, StorageSharedKeyCredential (account name/key from env vars) and SAS-token placeholders passed to SDK builders in sample code; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 67,
+          "evidence": "credential",
+          "context": "    .credential(credential)",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredentialBuilder, StorageSharedKeyCredential (account name/key from env vars) and SAS-token placeholders passed to SDK builders in sample code; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 93,
+          "evidence": "credential",
+          "context": "    .credential(new DefaultAzureCredentialBuilder().build())",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredentialBuilder, StorageSharedKeyCredential (account name/key from env vars) and SAS-token placeholders passed to SDK builders in sample code; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 135,
+          "evidence": "Delete",
+          "context": "### List and Delete Containers",
+          "disposition": "accepted",
+          "reason": "Matches are the 'Delete Blob' / 'List and Delete Containers' sample sections and cleanup calls (blobClient.delete, containerClient.delete) that delete cloud blobs in the user's application, not local files."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 143,
+          "evidence": "Delete",
+          "context": "// Delete container",
+          "disposition": "accepted",
+          "reason": "Matches are the 'Delete Blob' / 'List and Delete Containers' sample sections and cleanup calls (blobClient.delete, containerClient.delete) that delete cloud blobs in the user's application, not local files."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 144,
+          "evidence": "delete",
+          "context": "containerClient.delete();",
+          "disposition": "accepted",
+          "reason": "Matches are the 'Delete Blob' / 'List and Delete Containers' sample sections and cleanup calls (blobClient.delete, containerClient.delete) that delete cloud blobs in the user's application, not local files."
+        },
+        {
+          "type": "credential-access",
+          "line": 369,
+          "evidence": "credential",
+          "context": "        StorageSharedKeyCredential credential = new StorageSharedKeyCredential(accountName, accountKey);",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredentialBuilder, StorageSharedKeyCredential (account name/key from env vars) and SAS-token placeholders passed to SDK builders in sample code; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 370,
+          "evidence": "https://",
+          "context": "        String endpoint = String.format(Locale.ROOT, \"https://%s.blob.core.windows.net\", accountName);",
+          "disposition": "accepted",
+          "reason": "Placeholder storage endpoints (https://<account>.blob.core.windows.net) and one Microsoft Learn link in a code comment; the skill does not instruct fetching anything."
+        },
+        {
+          "type": "credential-access",
+          "line": 374,
+          "evidence": "credential",
+          "context": "            .credential(credential)",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredentialBuilder, StorageSharedKeyCredential (account name/key from env vars) and SAS-token placeholders passed to SDK builders in sample code; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 374,
+          "evidence": "credential",
+          "context": "            .credential(credential)",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredentialBuilder, StorageSharedKeyCredential (account name/key from env vars) and SAS-token placeholders passed to SDK builders in sample code; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 406,
+          "evidence": "delete",
+          "context": "        blobClient.delete();",
+          "disposition": "accepted",
+          "reason": "Matches are the 'Delete Blob' / 'List and Delete Containers' sample sections and cleanup calls (blobClient.delete, containerClient.delete) that delete cloud blobs in the user's application, not local files."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 407,
+          "evidence": "delete",
+          "context": "        containerClient.delete();",
+          "disposition": "accepted",
+          "reason": "Matches are the 'Delete Blob' / 'List and Delete Containers' sample sections and cleanup calls (blobClient.delete, containerClient.delete) that delete cloud blobs in the user's application, not local files."
+        }
+      ]
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "677a18b27f976c62c8cc3276637319bbb581dc2860750941f7ba3b688e0f9f8a",
+      "bytes": 10888,
+      "mode": "100644",
+      "git_blob": "9202207d800886e1fbe56673a54f7f77b723e114",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "credential-access",
+          "line": 48,
+          "evidence": "credential",
+          "context": "import com.azure.core.credential.TokenCredential;",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredentialBuilder, StorageSharedKeyCredential (account name/key from env vars) and SAS-token placeholders passed to SDK builders in sample code; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 54,
+          "evidence": "credential",
+          "context": "TokenCredential credential = new DefaultAzureCredentialBuilder()",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredentialBuilder, StorageSharedKeyCredential (account name/key from env vars) and SAS-token placeholders passed to SDK builders in sample code; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 57,
+          "evidence": "credential",
+          "context": "// Or use a specific credential directly in production:",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredentialBuilder, StorageSharedKeyCredential (account name/key from env vars) and SAS-token placeholders passed to SDK builders in sample code; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 58,
+          "evidence": "credential",
+          "context": "// See https://learn.microsoft.com/java/api/overview/azure/identity-readme?view=azure-java-stable#credential-classes",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredentialBuilder, StorageSharedKeyCredential (account name/key from env vars) and SAS-token placeholders passed to SDK builders in sample code; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 58,
+          "evidence": "https://",
+          "context": "// See https://learn.microsoft.com/java/api/overview/azure/identity-readme?view=azure-java-stable#credential-classes",
+          "disposition": "accepted",
+          "reason": "Placeholder storage endpoints (https://<account>.blob.core.windows.net) and one Microsoft Learn link in a code comment; the skill does not instruct fetching anything."
+        },
+        {
+          "type": "credential-access",
+          "line": 59,
+          "evidence": "credential",
+          "context": "// TokenCredential credential = new ManagedIdentityCredentialBuilder().build();",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredentialBuilder, StorageSharedKeyCredential (account name/key from env vars) and SAS-token placeholders passed to SDK builders in sample code; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 63,
+          "evidence": "credential",
+          "context": "    .credential(credential)",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredentialBuilder, StorageSharedKeyCredential (account name/key from env vars) and SAS-token placeholders passed to SDK builders in sample code; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 63,
+          "evidence": "credential",
+          "context": "    .credential(credential)",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredentialBuilder, StorageSharedKeyCredential (account name/key from env vars) and SAS-token placeholders passed to SDK builders in sample code; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 265,
+          "evidence": "Delete",
+          "context": "### Delete Blob",
+          "disposition": "accepted",
+          "reason": "Matches are the 'Delete Blob' / 'List and Delete Containers' sample sections and cleanup calls (blobClient.delete, containerClient.delete) that delete cloud blobs in the user's application, not local files."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 268,
+          "evidence": "delete",
+          "context": "blobClient.delete();",
+          "disposition": "accepted",
+          "reason": "Matches are the 'Delete Blob' / 'List and Delete Containers' sample sections and cleanup calls (blobClient.delete, containerClient.delete) that delete cloud blobs in the user's application, not local files."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 270,
+          "evidence": "Delete",
+          "context": "// Delete if exists",
+          "disposition": "accepted",
+          "reason": "Matches are the 'Delete Blob' / 'List and Delete Containers' sample sections and cleanup calls (blobClient.delete, containerClient.delete) that delete cloud blobs in the user's application, not local files."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 273,
+          "evidence": "Delete",
+          "context": "// Delete with snapshots",
+          "disposition": "accepted",
+          "reason": "Matches are the 'Delete Blob' / 'List and Delete Containers' sample sections and cleanup calls (blobClient.delete, containerClient.delete) that delete cloud blobs in the user's application, not local files."
+        },
+        {
+          "type": "shell-execution",
+          "line": 391,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "The only bash fence (SKILL.md:391) lists placeholder storage environment variables; no commands are run."
+        },
+        {
+          "type": "network-access",
+          "line": 393,
+          "evidence": "https://",
+          "context": "AZURE_STORAGE_ACCOUNT_URL=https://<account>.blob.core.windows.net  # Required for all auth methods",
+          "disposition": "accepted",
+          "reason": "Placeholder storage endpoints (https://<account>.blob.core.windows.net) and one Microsoft Learn link in a code comment; the skill does not instruct fetching anything."
+        }
+      ]
+    }
+  ]
+}

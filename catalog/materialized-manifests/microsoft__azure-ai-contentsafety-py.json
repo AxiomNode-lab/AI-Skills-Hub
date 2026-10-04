@@ -1,0 +1,212 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "microsoft/azure-ai-contentsafety-py",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/azure-sdk-python/skills/azure-ai-contentsafety-py",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "review": {
+    "path": "catalog/reviews/microsoft__azure-ai-contentsafety-py.json",
+    "sha256": "7de9e74b01fad4633351c22a40b8a5706c583873f7b690dd2ad6c566c1bb2739"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "encoded_content": true
+    },
+    "findings": [
+      {
+        "type": "filesystem-write",
+        "line": 32,
+        "evidence": "delete",
+        "context": "- Include cleanup/delete paths for created resources in examples.",
+        "file": "references/capabilities.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 19,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 20,
+        "evidence": "pip install",
+        "context": "pip install azure-ai-contentsafety",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 25,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 26,
+        "evidence": "https://",
+        "context": "CONTENT_SAFETY_ENDPOINT=https://<resource>.cognitiveservices.azure.com  # Required for all auth methods",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 28,
+        "evidence": "api-key",
+        "context": "CONTENT_SAFETY_KEY=<your-api-key>  # Only required for the legacy API-key auth path below",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 28,
+        "evidence": "API-key",
+        "context": "CONTENT_SAFETY_KEY=<your-api-key>  # Only required for the legacy API-key auth path below",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 37,
+        "evidence": "credential",
+        "context": ">    - Production: set `AZURE_TOKEN_CREDENTIALS=prod` (or `AZURE_TOKEN_CREDENTIALS=<specific_credential>`) to constrain the credential chain to production-safe credentials.",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 40,
+        "evidence": "credential",
+        "context": ">    - Async: `async with <Client>(...) as client:` **and** `async with DefaultAzureCredential() as credential:` (from `azure.identity.aio`)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 51,
+        "evidence": "credential",
+        "context": "credential = DefaultAzureCredential(require_envvar=True)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 52,
+        "evidence": "credential",
+        "context": "# Or use a specific credential directly in production:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 53,
+        "evidence": "credential",
+        "context": "# See https://learn.microsoft.com/python/api/overview/azure/identity-readme?view=azure-python#credential-classes",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 53,
+        "evidence": "https://",
+        "context": "# See https://learn.microsoft.com/python/api/overview/azure/identity-readme?view=azure-python#credential-classes",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 54,
+        "evidence": "credential",
+        "context": "# credential = ManagedIdentityCredential()",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 58,
+        "evidence": "credential",
+        "context": "    credential=credential,",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 58,
+        "evidence": "credential",
+        "context": "    credential=credential,",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 63,
+        "evidence": "API Key",
+        "context": "### Legacy: API Key (existing keyed deployments)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 75,
+        "evidence": "credential",
+        "context": "    credential=AzureKeyCredential(os.environ[\"CONTENT_SAFETY_KEY\"]),",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "encoded-content",
+        "line": 108,
+        "evidence": "base64",
+        "context": "import base64",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "encoded-content",
+        "line": 113,
+        "evidence": "base64",
+        "context": "        image_data = base64.b64encode(f.read()).decode(\"utf-8\")",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 131,
+        "evidence": "https://",
+        "context": "    image=ImageData(blob_url=\"https://example.com/image.jpg\")",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 235,
+        "evidence": "credential",
+        "context": "2. **Always use context managers for clients and async credentials.** Wrap every client in `with ContentSafetyClient(...) as client:` (sync) or `async with ContentSafetyClient(...) as client:` (async). For async `DefaultAzureCredential` fro",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 12470
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/capabilities.md",
+      "sha256": "b3b3a25a652486ee668ada055e3ec03b09e1a01ebac0d4202e374670d6c663a5",
+      "bytes": 1384,
+      "mode": "100644"
+    },
+    {
+      "path": "references/non-hero-scenarios.md",
+      "sha256": "04a4cd123158fc993a4f0abd454200420bbf90546d8122d0b5386ac57aa0fbd3",
+      "bytes": 957,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "a87b5c2b469ddb77776770d12b7a3a1a481c72af6300b6aac96887825df063fb",
+      "bytes": 8989,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 12470
+}

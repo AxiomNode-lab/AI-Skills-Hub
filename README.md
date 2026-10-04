@@ -46,19 +46,27 @@ pnpm test
 
 ### 3. Discover Capabilities
 
-You can search for capabilities using natural language or keywords via the CLI:
+List what you can install right now, optionally for one agent and with a keyword:
+
+```bash
+pnpm cli available --agent claude-code
+pnpm cli available design --agent codex
+```
+
+`available` shows only released skills that `install` accepts, grouped by publisher with their reviewed risk. To search the whole catalog, including skills that are still under review or blocked, use `search`:
 
 ```bash
 pnpm cli search "pdf tools" --agent codex
+pnpm cli search "pdf tools" --installable
 ```
 
 Local search requires a case-insensitive phrase or keyword match in a capability's ID, name, publisher, description, categories, or tags. Multi-word queries can match individual keywords. `--agent` restricts results to compatible capabilities; compatibility and status scores rank textual matches only. Unmatched or empty queries return no results: a message in normal output, or `[]` with `--json`.
 
 ### 4. Install a Capability
 
-Local installation requires a bundled, materialized skill with `release: eligible` and compatibility with the selected agent. The current catalog has **534 skills: 499 review-required, 12 source-direct, 20 blocked, and 3 bundled**. The three bundled skills are materialized and release-eligible (snapshot: 2026-10-02; see [current status](docs/STATUS.md)).
+Local installation requires a bundled, materialized skill with `release: eligible` and compatibility with the selected agent. The current catalog has **1006 skills: 762 review-required, 12 source-direct, 20 blocked, and 212 bundled**. The 212 bundled skills are materialized and release-eligible (snapshot: 2026-10-03; see [current status](docs/STATUS.md)).
 
-The first verified local skills are `anthropics/frontend-design`, `anthropics/brand-guidelines`, and `anthropics/internal-comms`. See [release evidence and SHA-256 manifests](docs/VERIFIED-LOCAL-SKILLS.md). From the repository root, install them into the project with:
+They are five Anthropic skills under skill-local Apache-2.0 licenses and 207 skills under a repository-root MIT license that ships with each skill: microsoft/skills, obra/superpowers, K-Dense, and the programming sources supabase/agent-skills (Postgres and Supabase), addyosmani/agent-skills (API design, CI/CD, testing, performance, shipping), and UnitOneAI/SecuritySkills (application, cloud, and AI security reviews). Try `skills-hub available security --agent claude-code` or `skills-hub available "ci cd"`. See [release evidence and SHA-256 manifests](docs/VERIFIED-LOCAL-SKILLS.md). Find them with `search --json` (`hub_status.availability.status` is `eligible`). From the repository root, install three of them into the project with:
 
 ~~~bash
 node packages/cli/bin/skills-hub.mjs install anthropics/frontend-design,anthropics/brand-guidelines,anthropics/internal-comms --agent codex --scope project --json
@@ -115,7 +123,45 @@ Alternatively, you can browse and install capabilities using the interactive UI:
 pnpm cli
 ```
 
-Use the `Space` bar to select capabilities and `Enter` to confirm.
+It lists the supported agents and marks the ones found on this machine (Claude Code, Codex, Cursor, GitHub Copilot, OpenCode, detected by their command on `PATH` or their configuration folder, on Linux, macOS, and Windows). Browsing shows installable skills by default; the whole catalog is a separate option. Use the arrow keys, `Space` to select, and `Enter` to confirm.
+
+### Supported agents
+
+| Agent | `--agent` | Project skills folder | User skills folder (`--scope user`) |
+| --- | --- | --- | --- |
+| Claude Code | `claude-code` | `.claude/skills` | `~/.claude/skills` |
+| Codex | `codex` | `.agents/skills` | `~/.agents/skills` |
+| Cursor | `cursor` | `.agents/skills` | `~/.cursor/skills` |
+| GitHub Copilot | `github-copilot` | `.github/skills` | `~/.copilot/skills` |
+| OpenCode | `opencode` | `.opencode/skills` | `~/.config/opencode/skills` |
+| Any Agent Skills client | `agent-skills` | `.agents/skills` | `~/.agents/skills` |
+
+A skill can be installed for an agent when the catalog lists that agent, or when it is an Agent Skills format skill (`SKILL.md` with name and description) and the agent loads that format; `available --agent` labels the second case "Agent Skills format". MCP servers, plugins, and other artifacts need an explicit listing.
+
+Output uses color in a terminal; set `NO_COLOR=1` to turn it off or `FORCE_COLOR=1` to force it. JSON output never contains color codes.
+
+### 6. Use It From Your Own Project
+
+The CLI reads the catalog from the Hub checkout, wherever it is run, and installs into the current directory. Point it at your clone once:
+
+```bash
+alias skills-hub="node /path/to/AI-Skills-Hub/packages/cli/bin/skills-hub.mjs"
+cd ~/my-project
+skills-hub search "frontend design" --agent claude-code
+skills-hub install anthropics/frontend-design --agent claude-code
+```
+
+`SKILLS_HUB_HOME` selects a different Hub checkout. `SKILLS_HUB_NO_UPDATE_CHECK=1` disables the version check, which is also skipped in CI and when output is not a terminal.
+
+### 7. Give Your Agent the Catalog (MCP)
+
+`skills-hub mcp` runs a read-only MCP server over stdio. Agents get `search_skills` and `get_skill` tools, and can read the files of released skills as resources. Nothing is installed through MCP.
+
+```bash
+claude mcp add skills-hub -- node /path/to/AI-Skills-Hub/packages/cli/bin/skills-hub.mjs mcp
+```
+
+`skills-hub serve` exposes the same catalog as a read-only HTTP API on `127.0.0.1:8787`, with an MCP endpoint at `POST /mcp`. See [MCP](docs/MCP.md) for Codex and other clients, and [API](docs/API.md) for routes.
 
 ---
 

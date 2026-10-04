@@ -1,0 +1,410 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "microsoft/azure-containerregistry-py",
+  "status": "approved",
+  "reviewed_on": "2026-10-02",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/azure-sdk-python/skills/azure-containerregistry-py",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": ".github/plugins/azure-sdk-python/skills/azure-containerregistry-py",
+    "url": "https://api.github.com/repos/microsoft/skills/git/trees/84d8eaa8ae95930f55cdceb3e27196c795dab038?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/microsoft/skills/blob/84d8eaa8ae95930f55cdceb3e27196c795dab038/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        ".github",
+        ".github/plugins",
+        ".github/plugins/azure-sdk-python",
+        ".github/plugins/azure-sdk-python/skills",
+        ".github/plugins/azure-sdk-python/skills/azure-containerregistry-py"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT License with its copyright notice, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file; frontmatter declares MIT. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "medium",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": true,
+      "network": false,
+      "credentials": false,
+      "package_install": true,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md, references/capabilities.md and references/non-hero-scenarios.md in full. Python samples for azure-containerregistry: Entra/anonymous auth, list/get/update/delete repositories, tags and manifests, download manifests/blobs, async client and an untagged-manifest cleanup loop.",
+      "Medium only because SKILL.md:20 has `pip install azure-containerregistry` (official PyPI package). Delete operations, including the 30-day cleanup loop (SKILL.md:236-247, non-hero-scenarios.md:55-66), are sample code for the user's application, not commands the agent runs; the skill advises locking production images and checking tags before deleting.",
+      "Users adapting the cleanup sample should add their own confirmation/dry-run since it deletes untagged manifests unconditionally. Reference files duplicate SKILL.md sections; all links are internal and resolve."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "git_blob": "79656060de00aa4659ad2c276d5be8830664d544",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry the copyright and permission notice.",
+      "findings": []
+    },
+    {
+      "path": "references/capabilities.md",
+      "sha256": "979d61d84dd9bdd8c33faba7a2ce3af1a6e3c824081b3e3d0ad8cd60f75f0249",
+      "bytes": 1778,
+      "mode": "100644",
+      "git_blob": "bea1d77b279f1edd1a4f17cd97e4ad22b61e8094",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 36,
+          "evidence": "delete",
+          "context": "- Include cleanup/delete paths for created resources in examples.",
+          "disposition": "accepted",
+          "reason": "Matches are 'Delete' headings, table rows and comments for ACR SDK delete_repository/delete_tag/delete_manifest calls on the user's registry in sample code, plus a checklist line; the agent is not told to delete anything itself."
+        }
+      ]
+    },
+    {
+      "path": "references/non-hero-scenarios.md",
+      "sha256": "b919f1e7e42e49b33815c7cbb7737be105b89539364f93b102f50bdf15e645bd",
+      "bytes": 2554,
+      "mode": "100644",
+      "git_blob": "033e8b9f731aaf238e8cc2b9d39962f24d7b7aa1",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 16,
+          "evidence": "Delete",
+          "context": "### Delete Tag",
+          "disposition": "accepted",
+          "reason": "Matches are 'Delete' headings, table rows and comments for ACR SDK delete_repository/delete_tag/delete_manifest calls on the user's registry in sample code, plus a checklist line; the agent is not told to delete anything itself."
+        },
+        {
+          "type": "credential-access",
+          "line": 28,
+          "evidence": "credential",
+          "context": "with DefaultAzureCredential() as credential:",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential construction, credential=None for anonymous MCR access, and passing credential to clients in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 29,
+          "evidence": "credential",
+          "context": "    with ContainerRegistryClient(endpoint, credential) as client:",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential construction, credential=None for anonymous MCR access, and passing credential to clients in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 49,
+          "evidence": "credential",
+          "context": "    async with DefaultAzureCredential() as credential:",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential construction, credential=None for anonymous MCR access, and passing credential to clients in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 50,
+          "evidence": "credential",
+          "context": "        async with ContainerRegistryClient(endpoint, credential) as client:",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential construction, credential=None for anonymous MCR access, and passing credential to clients in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 74,
+          "evidence": "Delete",
+          "context": "| `delete_repository` | Delete repository and all images |",
+          "disposition": "accepted",
+          "reason": "Matches are 'Delete' headings, table rows and comments for ACR SDK delete_repository/delete_tag/delete_manifest calls on the user's registry in sample code, plus a checklist line; the agent is not told to delete anything itself."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 77,
+          "evidence": "Delete",
+          "context": "| `delete_tag` | Delete specific tag |",
+          "disposition": "accepted",
+          "reason": "Matches are 'Delete' headings, table rows and comments for ACR SDK delete_repository/delete_tag/delete_manifest calls on the user's registry in sample code, plus a checklist line; the agent is not told to delete anything itself."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 80,
+          "evidence": "Delete",
+          "context": "| `delete_manifest` | Delete manifest by digest |",
+          "disposition": "accepted",
+          "reason": "Matches are 'Delete' headings, table rows and comments for ACR SDK delete_repository/delete_tag/delete_manifest calls on the user's registry in sample code, plus a checklist line; the agent is not told to delete anything itself."
+        }
+      ]
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "15bb9f18c67f30940b36edd5a2c050c05153ce2b3626d8ebf55604a9fbe946b2",
+      "bytes": 8713,
+      "mode": "100644",
+      "git_blob": "fb6ab982dad6d62a6fbd92b0f32cccf80c600528",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 19,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Fenced ```bash blocks contain only the pip install command and environment-variable placeholders."
+        },
+        {
+          "type": "package-install",
+          "line": 20,
+          "evidence": "pip install",
+          "context": "pip install azure-containerregistry",
+          "disposition": "accepted",
+          "reason": "`pip install azure-containerregistry` installs the official Azure SDK package from PyPI."
+        },
+        {
+          "type": "shell-execution",
+          "line": 25,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Fenced ```bash blocks contain only the pip install command and environment-variable placeholders."
+        },
+        {
+          "type": "network-access",
+          "line": 26,
+          "evidence": "https://",
+          "context": "AZURE_CONTAINERREGISTRY_ENDPOINT=https://<registry-name>.azurecr.io  # Required for all auth methods",
+          "disposition": "accepted",
+          "reason": "Placeholder registry endpoint, the public mcr.microsoft.com endpoint/audience in an anonymous-access sample, and a Microsoft Learn link; nothing is fetched by the agent."
+        },
+        {
+          "type": "credential-access",
+          "line": 36,
+          "evidence": "credential",
+          "context": ">    - Production: set `AZURE_TOKEN_CREDENTIALS=prod` (or `AZURE_TOKEN_CREDENTIALS=<specific_credential>`) to constrain the credential chain to production-safe credentials.",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential construction, credential=None for anonymous MCR access, and passing credential to clients in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 39,
+          "evidence": "credential",
+          "context": ">    - Async: `async with <Client>(...) as client:` **and** `async with DefaultAzureCredential() as credential:` (from `azure.identity.aio`)",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential construction, credential=None for anonymous MCR access, and passing credential to clients in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 51,
+          "evidence": "credential",
+          "context": "credential = DefaultAzureCredential(require_envvar=True)",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential construction, credential=None for anonymous MCR access, and passing credential to clients in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 52,
+          "evidence": "credential",
+          "context": "# Or use a specific credential directly in production:",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential construction, credential=None for anonymous MCR access, and passing credential to clients in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 53,
+          "evidence": "credential",
+          "context": "# See https://learn.microsoft.com/python/api/overview/azure/identity-readme?view=azure-python#credential-classes",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential construction, credential=None for anonymous MCR access, and passing credential to clients in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 53,
+          "evidence": "https://",
+          "context": "# See https://learn.microsoft.com/python/api/overview/azure/identity-readme?view=azure-python#credential-classes",
+          "disposition": "accepted",
+          "reason": "Placeholder registry endpoint, the public mcr.microsoft.com endpoint/audience in an anonymous-access sample, and a Microsoft Learn link; nothing is fetched by the agent."
+        },
+        {
+          "type": "credential-access",
+          "line": 54,
+          "evidence": "credential",
+          "context": "# credential = ManagedIdentityCredential()",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential construction, credential=None for anonymous MCR access, and passing credential to clients in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 58,
+          "evidence": "credential",
+          "context": "    credential=credential",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential construction, credential=None for anonymous MCR access, and passing credential to clients in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 58,
+          "evidence": "credential",
+          "context": "    credential=credential",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential construction, credential=None for anonymous MCR access, and passing credential to clients in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 70,
+          "evidence": "https://",
+          "context": "    endpoint=\"https://mcr.microsoft.com\",",
+          "disposition": "accepted",
+          "reason": "Placeholder registry endpoint, the public mcr.microsoft.com endpoint/audience in an anonymous-access sample, and a Microsoft Learn link; nothing is fetched by the agent."
+        },
+        {
+          "type": "credential-access",
+          "line": 71,
+          "evidence": "credential",
+          "context": "    credential=None,",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential construction, credential=None for anonymous MCR access, and passing credential to clients in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 72,
+          "evidence": "https://",
+          "context": "    audience=\"https://mcr.microsoft.com\"",
+          "disposition": "accepted",
+          "reason": "Placeholder registry endpoint, the public mcr.microsoft.com endpoint/audience in an anonymous-access sample, and a Microsoft Learn link; nothing is fetched by the agent."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 112,
+          "evidence": "Delete",
+          "context": "### Delete Repository",
+          "disposition": "accepted",
+          "reason": "Matches are 'Delete' headings, table rows and comments for ACR SDK delete_repository/delete_tag/delete_manifest calls on the user's registry in sample code, plus a checklist line; the agent is not told to delete anything itself."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 178,
+          "evidence": "Delete",
+          "context": "### Delete Manifest",
+          "disposition": "accepted",
+          "reason": "Matches are 'Delete' headings, table rows and comments for ACR SDK delete_repository/delete_tag/delete_manifest calls on the user's registry in sample code, plus a checklist line; the agent is not told to delete anything itself."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 181,
+          "evidence": "Delete",
+          "context": "# Delete by digest",
+          "disposition": "accepted",
+          "reason": "Matches are 'Delete' headings, table rows and comments for ACR SDK delete_repository/delete_tag/delete_manifest calls on the user's registry in sample code, plus a checklist line; the agent is not told to delete anything itself."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 184,
+          "evidence": "Delete",
+          "context": "# Delete by tag",
+          "disposition": "accepted",
+          "reason": "Matches are 'Delete' headings, table rows and comments for ACR SDK delete_repository/delete_tag/delete_manifest calls on the user's registry in sample code, plus a checklist line; the agent is not told to delete anything itself."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 199,
+          "evidence": "Delete",
+          "context": "### Delete Tag",
+          "disposition": "accepted",
+          "reason": "Matches are 'Delete' headings, table rows and comments for ACR SDK delete_repository/delete_tag/delete_manifest calls on the user's registry in sample code, plus a checklist line; the agent is not told to delete anything itself."
+        },
+        {
+          "type": "credential-access",
+          "line": 230,
+          "evidence": "credential",
+          "context": "    async with DefaultAzureCredential() as credential:",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential construction, credential=None for anonymous MCR access, and passing credential to clients in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 231,
+          "evidence": "credential",
+          "context": "        async with ContainerRegistryClient(endpoint, credential) as client:",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential construction, credential=None for anonymous MCR access, and passing credential to clients in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 255,
+          "evidence": "Delete",
+          "context": "| `delete_repository` | Delete repository and all images |",
+          "disposition": "accepted",
+          "reason": "Matches are 'Delete' headings, table rows and comments for ACR SDK delete_repository/delete_tag/delete_manifest calls on the user's registry in sample code, plus a checklist line; the agent is not told to delete anything itself."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 258,
+          "evidence": "Delete",
+          "context": "| `delete_tag` | Delete specific tag |",
+          "disposition": "accepted",
+          "reason": "Matches are 'Delete' headings, table rows and comments for ACR SDK delete_repository/delete_tag/delete_manifest calls on the user's registry in sample code, plus a checklist line; the agent is not told to delete anything itself."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 261,
+          "evidence": "Delete",
+          "context": "| `delete_manifest` | Delete manifest by digest |",
+          "disposition": "accepted",
+          "reason": "Matches are 'Delete' headings, table rows and comments for ACR SDK delete_repository/delete_tag/delete_manifest calls on the user's registry in sample code, plus a checklist line; the agent is not told to delete anything itself."
+        },
+        {
+          "type": "credential-access",
+          "line": 268,
+          "evidence": "credential",
+          "context": "2. **Always use context managers for clients and async credentials.** Wrap every client in `with Client(...) as client:` (sync) or `async with Client(...) as client:` (async). For async `DefaultAzureCredential` from `azure.identity.aio`, al",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential construction, credential=None for anonymous MCR access, and passing credential to clients in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 270,
+          "evidence": "Delete",
+          "context": "4. **Delete by digest** not tag to avoid orphaned images",
+          "disposition": "accepted",
+          "reason": "Matches are 'Delete' headings, table rows and comments for ACR SDK delete_repository/delete_tag/delete_manifest calls on the user's registry in sample code, plus a checklist line; the agent is not told to delete anything itself."
+        }
+      ]
+    }
+  ]
+}

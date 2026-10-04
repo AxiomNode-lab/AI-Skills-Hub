@@ -1,0 +1,418 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "bagelhole/cloudflare-zero-trust",
+  "status": "draft",
+  "reviewed_on": null,
+  "reviewer": null,
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "infrastructure/cloudflare/cloudflare-zero-trust",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "infrastructure/cloudflare/cloudflare-zero-trust",
+    "url": "https://api.github.com/repos/BagelHole/DevOps-Security-Agent-Skills/git/trees/0365f57a079b1332f95cf26e31dd2d5332a8399f?recursive=1",
+    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/BagelHole/DevOps-Security-Agent-Skills/blob/0365f57a079b1332f95cf26e31dd2d5332a8399f/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "infrastructure",
+        "infrastructure/cloudflare",
+        "infrastructure/cloudflare/cloudflare-zero-trust"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte."
+    ]
+  },
+  "content_review": {
+    "status": "pending",
+    "risk": "unknown",
+    "blocking_findings": [],
+    "capabilities": {},
+    "notes": []
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "67c5c5cbb12cafb1515e449748866bd40da7dec9",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "dbe1f763a8bf2226c7a643afe0dad1ca6cd24aa916d38b04938feb50195510c7",
+      "bytes": 10617,
+      "mode": "100644",
+      "git_blob": "77ff20d27b931517541bafeb82d9ae2ca53c0b83",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 29,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 35,
+          "evidence": "curl",
+          "context": "curl -fsSL https://pkg.cloudflare.com/cloudflare-main.gpg | sudo tee /usr/share/keyrings/cloudflare-main.gpg >/dev/null",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 35,
+          "evidence": "https://",
+          "context": "curl -fsSL https://pkg.cloudflare.com/cloudflare-main.gpg | sudo tee /usr/share/keyrings/cloudflare-main.gpg >/dev/null",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 35,
+          "evidence": " sudo",
+          "context": "curl -fsSL https://pkg.cloudflare.com/cloudflare-main.gpg | sudo tee /usr/share/keyrings/cloudflare-main.gpg >/dev/null",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 36,
+          "evidence": "https://",
+          "context": "echo \"deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/cloudflared $(lsb_release -cs) main\" | sudo tee /etc/apt/sources.list.d/cloudflared.list",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 36,
+          "evidence": " sudo",
+          "context": "echo \"deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/cloudflared $(lsb_release -cs) main\" | sudo tee /etc/apt/sources.list.d/cloudflared.list",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 36,
+          "evidence": "\nsudo",
+          "context": "echo \"deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/cloudflared $(lsb_release -cs) main\" | sudo tee /etc/apt/sources.list.d/cloudflared.list",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 37,
+          "evidence": " sudo",
+          "context": "sudo apt update && sudo apt install -y cloudflared",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 49,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 77,
+          "evidence": "http://",
+          "context": "    service: http://localhost:3000",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 81,
+          "evidence": "http://",
+          "context": "    service: http://localhost:8080",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 91,
+          "evidence": "http://",
+          "context": "    service: http://10.0.0.0/24",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 99,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 103,
+          "evidence": "\nsudo",
+          "context": "# Install as a systemd service",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 104,
+          "evidence": "\nsudo",
+          "context": "sudo cloudflared service install",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 105,
+          "evidence": "\nsudo",
+          "context": "sudo systemctl enable cloudflared",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 152,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 154,
+          "evidence": "curl",
+          "context": "curl -X POST \"https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/access/apps\" \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 154,
+          "evidence": "https://",
+          "context": "curl -X POST \"https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/access/apps\" \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 169,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 171,
+          "evidence": "curl",
+          "context": "curl -X POST \"https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/access/apps/<APP_ID>/policies\" \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 171,
+          "evidence": "https://",
+          "context": "curl -X POST \"https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/access/apps/<APP_ID>/policies\" \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 198,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 200,
+          "evidence": "curl",
+          "context": "curl -X POST \"https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/access/service_tokens\" \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 200,
+          "evidence": "https://",
+          "context": "curl -X POST \"https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/access/service_tokens\" \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 205,
+          "evidence": "Secret",
+          "context": "# Response includes Client ID and Client Secret",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 208,
+          "evidence": "Secret",
+          "context": "# CF-Access-Client-Secret: <CLIENT_SECRET>",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 211,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 213,
+          "evidence": "curl",
+          "context": "curl -H \"CF-Access-Client-Id: $CF_CLIENT_ID\" \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 214,
+          "evidence": "Secret",
+          "context": "     -H \"CF-Access-Client-Secret: $CF_CLIENT_SECRET\" \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 215,
+          "evidence": "https://",
+          "context": "     https://grafana.example.com/api/health",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 238,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 244,
+          "evidence": "https://",
+          "context": "# DoH: https://<UNIQUE_ID>.cloudflare-gateway.com/dns-query",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 249,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 251,
+          "evidence": "curl",
+          "context": "curl -X POST \"https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/gateway/rules\" \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 251,
+          "evidence": "https://",
+          "context": "curl -X POST \"https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/gateway/rules\" \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 276,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 282,
+          "evidence": "https://",
+          "context": "# 1. Install WARP client from https://1.1.1.1",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 287,
+          "evidence": "curl",
+          "context": "curl https://connectivity.cloudflare.com/cdn-cgi/trace",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 287,
+          "evidence": "https://",
+          "context": "curl https://connectivity.cloudflare.com/cdn-cgi/trace",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 293,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 315,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 335,
+          "evidence": "Secret",
+          "context": "| Service token auth fails | Token expired or wrong headers | Regenerate token; use both `CF-Access-Client-Id` and `CF-Access-Client-Secret` |",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    }
+  ]
+}

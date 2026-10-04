@@ -49,7 +49,7 @@ function fixture(t) {
   `);
   const run = (args, extraEnv = {}) => {
     const result = spawnSync(process.execPath, ["--import", pathToFileURL(preload).href, cli, ...args], {
-      cwd, encoding: "utf8", env: { ...process.env, ...extraEnv }
+      cwd, encoding: "utf8", env: { ...process.env, SKILLS_HUB_HOME: cwd, ...extraEnv }
     });
     assert.ifError(result.error);
     return result;

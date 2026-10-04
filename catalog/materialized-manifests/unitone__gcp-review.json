@@ -1,0 +1,199 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "unitone/gcp-review",
+  "source": {
+    "repo": "UnitOneAI/SecuritySkills",
+    "path": "skills/cloud/gcp-review",
+    "revision": "70bc259bb01abb3015ad2ad859ad5253cbf0bcab"
+  },
+  "review": {
+    "path": "catalog/reviews/unitone__gcp-review.json",
+    "sha256": "207ba70d4f5669a1db399e7fce414e319cf5589ffb0b515965c5f5e8d13f16bb"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": false,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "credential-access",
+        "line": 153,
+        "evidence": "Secret",
+        "context": "### CIS 1.18 -- Ensure Secrets Are Not Stored in Cloud Functions Environment Variables by Using Secret Manager",
+        "file": "benchmark-checklist.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 155,
+        "evidence": "Secret",
+        "context": "Check Cloud Functions for secrets in environment variables vs. Secret Manager references:",
+        "file": "benchmark-checklist.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 158,
+        "evidence": "Secret",
+        "context": "# BAD: Secret in env var",
+        "file": "benchmark-checklist.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 161,
+        "evidence": "API_KEY",
+        "context": "    API_KEY = \"hardcoded-secret-value\"",
+        "file": "benchmark-checklist.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 161,
+        "evidence": "secret",
+        "context": "    API_KEY = \"hardcoded-secret-value\"",
+        "file": "benchmark-checklist.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 165,
+        "evidence": "Secret",
+        "context": "# GOOD: Secret Manager reference",
+        "file": "benchmark-checklist.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 168,
+        "evidence": "API_KEY",
+        "context": "    key     = \"API_KEY\"",
+        "file": "benchmark-checklist.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 169,
+        "evidence": "secret",
+        "context": "    secret  = google_secret_manager_secret.api_key.secret_id",
+        "file": "benchmark-checklist.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 169,
+        "evidence": "api_key",
+        "context": "    secret  = google_secret_manager_secret.api_key.secret_id",
+        "file": "benchmark-checklist.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 244,
+        "evidence": "delete",
+        "context": "Filter: `resource.type=\"gce_firewall_rule\" AND (protoPayload.methodName:\"compute.firewalls.patch\" OR protoPayload.methodName:\"compute.firewalls.insert\" OR protoPayload.methodName:\"compute.firewalls.delete\")`",
+        "file": "benchmark-checklist.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 248,
+        "evidence": "delete",
+        "context": "Filter: `resource.type=\"gce_route\" AND (protoPayload.methodName:\"compute.routes.delete\" OR protoPayload.methodName:\"compute.routes.insert\")`",
+        "file": "benchmark-checklist.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 252,
+        "evidence": "delete",
+        "context": "Filter: `resource.type=\"gce_network\" AND (protoPayload.methodName:\"compute.networks.insert\" OR protoPayload.methodName:\"compute.networks.patch\" OR protoPayload.methodName:\"compute.networks.delete\" OR protoPayload.methodName:\"compute.network",
+        "file": "benchmark-checklist.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 260,
+        "evidence": "delete",
+        "context": "Filter: `protoPayload.methodName=\"cloudsql.instances.update\" OR protoPayload.methodName=\"cloudsql.instances.create\" OR protoPayload.methodName=\"cloudsql.instances.delete\"`",
+        "file": "benchmark-checklist.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 174,
+        "evidence": "API key",
+        "context": "| 1 | Identity and Access Management | Corporate credentials, MFA, service account keys, admin privileges, SA role assignments, KMS key access, API key restrictions, Essential Contacts |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 226,
+        "evidence": "https://",
+        "context": "- CIS Google Cloud Platform Foundation Benchmark v2.0.0: https://www.cisecurity.org/benchmark/google_cloud_computing_platform",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 227,
+        "evidence": "https://",
+        "context": "- Google Cloud Security Best Practices: https://cloud.google.com/security/best-practices",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 228,
+        "evidence": "https://",
+        "context": "- Google Cloud IAM Documentation: https://cloud.google.com/iam/docs",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 229,
+        "evidence": "https://",
+        "context": "- Google Cloud Audit Logs: https://cloud.google.com/logging/docs/audit",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 230,
+        "evidence": "https://",
+        "context": "- Google Cloud VPC Documentation: https://cloud.google.com/vpc/docs",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 231,
+        "evidence": "https://",
+        "context": "- Google Cloud SQL Security: https://cloud.google.com/sql/docs/mysql/configure-ssl-instance",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 232,
+        "evidence": "https://",
+        "context": "- Terraform Google Provider Documentation: https://registry.terraform.io/providers/hashicorp/google/latest/docs",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 34215
+  },
+  "materialized_files": [
+    {
+      "path": "benchmark-checklist.md",
+      "sha256": "3bf2f1b559025deb6933c705ed2f828f46364b22527b5bf0570c15dd85edd7c6",
+      "bytes": 21408,
+      "mode": "100644"
+    },
+    {
+      "path": "LICENSE.txt",
+      "sha256": "66eb5ec637cc578833ddcbc870dbf46c6718fd83e985fad5f0f5cf30d60cf47d",
+      "bytes": 1067,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "4b71c68e2f019fc4512d493ce66ed7f62f152e7fffb6fbf17c713b72a2270a1b",
+      "bytes": 11740,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 34215
+}

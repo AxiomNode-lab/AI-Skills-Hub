@@ -1,0 +1,217 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "wshobson/mobile-android-design",
+  "status": "draft",
+  "reviewed_on": null,
+  "reviewer": null,
+  "source": {
+    "repo": "wshobson/agents",
+    "path": "plugins/ui-design/skills/mobile-android-design",
+    "revision": "156b7a5e7a8b93642628a339ee4039c925b34c7f"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "plugins/ui-design/skills/mobile-android-design",
+    "url": "https://api.github.com/repos/wshobson/agents/git/trees/156b7a5e7a8b93642628a339ee4039c925b34c7f?recursive=1",
+    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/wshobson/agents/blob/156b7a5e7a8b93642628a339ee4039c925b34c7f/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "plugins",
+        "plugins/ui-design",
+        "plugins/ui-design/skills",
+        "plugins/ui-design/skills/mobile-android-design"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte."
+    ]
+  },
+  "content_review": {
+    "status": "pending",
+    "risk": "unknown",
+    "blocking_findings": [],
+    "capabilities": {},
+    "notes": []
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "f89abb55d9f073f38f1703e4518f0613c788c6174be7f13b8dfe48a1c076c746",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "326f0a55c96e672fedf9d807ca043c00df05ba0e",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "references/android-navigation.md",
+      "sha256": "6a28f9a113c4af16f9f8581d9d494ed7b278de8c6258cef58e3ecb822707d190",
+      "bytes": 19979,
+      "mode": "100644",
+      "git_blob": "2d77dec09c2969a9c7965c9d13cdd6b19bec48b6",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 451,
+          "evidence": "https://",
+          "context": "                    basePath = \"https://myapp.com/product\"",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 465,
+          "evidence": "https://",
+          "context": "                    basePath = \"https://myapp.com/user\"",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "references/compose-components.md",
+      "sha256": "22d9a47cc8ec4c4bbec36f15cb7a5eea33d5a0b5b6c3ba29378fc37197a8a8a0",
+      "bytes": 23313,
+      "mode": "100644",
+      "git_blob": "3d6ace0636b83a158ef224b2fe0eabfe2e866455",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 91,
+          "evidence": "Delete",
+          "context": "                    Icons.Default.Delete,",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 92,
+          "evidence": "Delete",
+          "context": "                    contentDescription = \"Delete\",",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 377,
+          "evidence": "Delete",
+          "context": "            Text(\"Delete Item?\")",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 380,
+          "evidence": "delete",
+          "context": "            Text(\"Are you sure you want to delete \\\"$itemName\\\"? This action cannot be undone.\")",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 389,
+          "evidence": "Delete",
+          "context": "                Text(\"Delete\")",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 432,
+          "evidence": "Delete",
+          "context": "                Triple(Icons.Default.Delete, \"Delete\", \"delete\")",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 432,
+          "evidence": "Delete",
+          "context": "                Triple(Icons.Default.Delete, \"Delete\", \"delete\")",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 432,
+          "evidence": "delete",
+          "context": "                Triple(Icons.Default.Delete, \"Delete\", \"delete\")",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 440,
+          "evidence": "delete",
+          "context": "                            tint = if (action == \"delete\")",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "references/details.md",
+      "sha256": "854f692ebe2b6adbf42f1406d0e7e1f7bc895ee34baa4ceff1ef1afc9f2dd962",
+      "bytes": 9247,
+      "mode": "100644",
+      "git_blob": "75b178d2ebd6b15d0f82fe6e4b37fe4f84a96e0c",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "references/material3-theming.md",
+      "sha256": "72ba4c1ef77fba5740b039b3f8b3676902967495141e3f40e0b800df3e85da7c",
+      "bytes": 16214,
+      "mode": "100644",
+      "git_blob": "bc8b130f3549b535ff5f910675ca4a319da558d4",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 142,
+          "evidence": "Delete",
+          "context": "            Text(\"Delete\")",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "0a209a1c45585ce0056548cc2f0fd352b7fde5980a3b5dd397a9daf5dff19fe7",
+      "bytes": 3797,
+      "mode": "100644",
+      "git_blob": "daf78dddb4716cecfd80b1046fe8c279c74aa298",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    }
+  ]
+}

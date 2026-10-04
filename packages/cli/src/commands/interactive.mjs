@@ -1,86 +1,73 @@
 import { select, checkbox, confirm, input, Separator } from "@inquirer/prompts";
 import { detectAgents } from "../../../installer/src/detector.mjs";
-import { loadRegistry, filterForAgent } from "@ai-skills-hub/core";
-import { searchRegistry, buildAdapterPlan } from "@ai-skills-hub/discovery";
-import { installCapability } from "../install-executor.mjs";
+import { catalogAvailability, filterForAgent, loadRegistry } from "@ai-skills-hub/core";
+import { searchRegistry } from "@ai-skills-hub/discovery";
+import { installableSkills } from "./available.mjs";
+import { availabilityText, groupByPublisher, paint, truncate } from "../ui.mjs";
+import { installCapability, planCapability } from "../install-executor.mjs";
 import { resolveDependencies, checkPrerequisites } from "../utils.mjs";
 
 function displayName(cap) {
-  return `${cap.name} [${cap.distribution}]`;
+  const status = catalogAvailability(cap).status;
+  return status === "eligible" ? `${cap.name} ${paint("dim", `(${cap.id})`)}` : `${cap.name} ${paint("dim", `(${cap.id})`)} — ${availabilityText(status)}`;
 }
 
 export async function interactiveCommand() {
-  console.log("AI Skills Hub CLI v0.2.0");
-  console.log("----------------------\n");
+  console.log(paint("bold", "AI Skills Hub") + paint("dim", " v0.2.0") + "\n");
 
-  const detectedAgents = await detectAgents();
-  if (detectedAgents.length === 0) {
-    console.log("No supported AI agents detected.");
-    return;
-  }
-
+  const agents = await detectAgents();
   const selectedAgentId = await select({
-    message: "Select the AI agent:",
-    choices: detectedAgents.map((agent) => ({
-      name: agent.name,
+    message: "Which AI agent should the skills be installed for?",
+    choices: agents.map((agent) => ({
+      name: agent.evidence ? `${agent.name} ${paint("green", "✔ detected")}` : agent.name,
       value: agent.id,
-      description: `Type: ${agent.type}`
+      description: agent.evidence ? `Found: ${agent.evidence}` : agent.id === "agent-skills" ? "Installs to .agents/skills, read by Codex, Cursor, Copilot and other Agent Skills clients" : "Not detected on this machine; you can still install for it"
     }))
   });
 
-  const registry = loadRegistry("catalog/skills.json", "catalog/bundles.json");
-  const agentCapabilities = filterForAgent(registry.skills, selectedAgentId);
-
-  if (agentCapabilities.length === 0) {
-    console.log(`No catalog capabilities are compatible with ${selectedAgentId}.`);
-    return;
-  }
-
+  const registry = loadRegistry();
+  const installable = installableSkills(registry, { agent: selectedAgentId });
   const searchMode = await select({
-    message: "How would you like to find capabilities?",
+    message: "How would you like to find skills?",
     choices: [
-      { name: "Browse compatible capabilities", value: "browse" },
-      { name: "Search by keyword or intent", value: "search" }
+      { name: `Browse installable skills (${installable.length})`, value: "browse" },
+      { name: "Search installable skills", value: "search" },
+      { name: "Browse the whole catalog (includes skills that cannot be installed yet)", value: "all" }
     ]
   });
 
-  let candidates = agentCapabilities;
+  let candidates = installable;
   if (searchMode === "search") {
     const query = await input({ message: "Search query:" });
-    candidates = searchRegistry(registry, query, {
-      agent: selectedAgentId,
-      remote: false,
-      limit: 50
-    }).map(({ item }) => item);
+    // Search within the installable list already computed for this agent.
+    const matched = new Set(searchRegistry({ skills: installable }, query, { limit: Infinity }).map(({ item }) => item.id));
+    candidates = installable.filter((skill) => matched.has(skill.id));
+  } else if (searchMode === "all") {
+    candidates = filterForAgent(registry.skills, selectedAgentId);
   }
 
   if (candidates.length === 0) {
-    console.log("No matching capabilities found.");
+    console.log("No matching skills found.");
     return;
   }
 
-  const grouped = [
-    ["Agent Skills", candidates.filter((cap) => (cap.artifact_type || cap.type) === "skill")],
-    ["MCP Servers", candidates.filter((cap) => (cap.artifact_type || cap.type) === "mcp-server")],
-    ["Other Capabilities", candidates.filter((cap) => !["skill", "mcp-server"].includes(cap.artifact_type || cap.type))]
-  ];
-
+  // Group by publisher so long lists stay navigable.
   const choices = [];
-  for (const [label, items] of grouped) {
-    if (!items.length) continue;
-    choices.push(new Separator(`--- ${label} ---`));
-    for (const cap of items) {
+  for (const [owner, group] of groupByPublisher(candidates)) {
+    choices.push(new Separator(paint("cyan", `── ${owner} ──`)));
+    for (const cap of group) {
       choices.push({
         name: displayName(cap),
         value: cap.id,
-        description: `${cap.description || "No description."} Security: ${cap.security?.risk || "unknown"}; release: ${cap.release?.status || "unknown"}`
+        description: `${truncate(cap.description || "No description.", 220)} (${cap.security?.risk || "unknown"} risk)`
       });
     }
   }
 
   const selectedIds = await checkbox({
-    message: "Select capabilities to install:",
+    message: "Select skills to install (space to select, enter to confirm):",
     choices,
+    pageSize: 15,
     required: true
   });
 
@@ -93,7 +80,7 @@ export async function interactiveCommand() {
   const resolvedPlans = [];
 
   for (const cap of finalInstallList) {
-    const result = buildAdapterPlan(cap, selectedAgentId, { scope: "project" });
+    const result = planCapability(cap, selectedAgentId, { scope: "project" });
     resolvedPlans.push({ cap, result });
   }
 
@@ -126,7 +113,7 @@ export async function interactiveCommand() {
   }
 
   const proceed = await confirm({
-    message: `Install ${actionable.length} capability/capabilities to ${selectedAgentId}?`,
+    message: `Install ${actionable.length} ${actionable.length === 1 ? "skill" : "skills"} for ${selectedAgentId}?`,
     default: false
   });
 
@@ -156,7 +143,7 @@ export async function interactiveCommand() {
         console.error(`Skipped ${cap.id}: ${result.reason || result.action}`);
         failures += 1;
       } else {
-        console.log(`Installed ${cap.id}.`);
+        console.log(`${paint("green", "✔")} Installed ${cap.id}`);
       }
     } catch (error) {
       failures += 1;
@@ -164,5 +151,5 @@ export async function interactiveCommand() {
     }
   }
 
-  console.log(failures ? `Finished with ${failures} failure(s).` : "Installation complete.");
+  console.log(failures ? paint("yellow", `Finished with ${failures} failure(s).`) : paint("green", "Installation complete."));
 }

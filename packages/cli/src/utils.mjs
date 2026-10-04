@@ -1,41 +1,11 @@
 import fs from "node:fs/promises";
-import fsSync from "node:fs";
 import path from "node:path";
+import os from "node:os";
 import { execFileSync } from "node:child_process";
-import { loadRegistry } from "@ai-skills-hub/core";
-
-function executableCandidates(command) {
-  const value = String(command ?? "").trim();
-  if (!value) return [];
-
-  const isPath = value.includes("/") || value.includes("\\") || path.isAbsolute(value);
-  if (isPath) return [value];
-
-  const pathEntries = (process.env.PATH ?? "").split(path.delimiter).filter(Boolean);
-  if (process.platform !== "win32") {
-    return pathEntries.map((entry) => path.join(entry, value));
-  }
-
-  const extensions = (process.env.PATHEXT ?? ".EXE;.CMD;.BAT;.COM")
-    .split(";")
-    .filter(Boolean);
-  const hasExtension = extensions.some((ext) => value.toLowerCase().endsWith(ext.toLowerCase()));
-  const names = hasExtension ? [value] : [value, ...extensions.map((ext) => value + ext)];
-  return pathEntries.flatMap((entry) => names.map((name) => path.join(entry, name)));
-}
+import { findExecutable, hubHome, loadRegistry } from "@ai-skills-hub/core";
 
 export function isExecutableAvailable(command) {
-  return executableCandidates(command).some((candidate) => {
-    try {
-      const stat = fsSync.statSync(candidate);
-      if (!stat.isFile()) return false;
-      if (process.platform === "win32") return true;
-      fsSync.accessSync(candidate, fsSync.constants.X_OK);
-      return true;
-    } catch {
-      return false;
-    }
-  });
+  return findExecutable(command) !== null;
 }
 
 export function checkPrerequisites(prerequisites) {
@@ -70,11 +40,8 @@ export async function fileExists(p) {
 }
 
 export function readLocalCapabilities() {
-  const registryPath = path.resolve(process.cwd(), "catalog", "skills.json");
-  const bundlesPath = path.resolve(process.cwd(), "catalog", "bundles.json");
-
   try {
-    const registry = loadRegistry(registryPath, bundlesPath);
+    const registry = loadRegistry();
     if (!Array.isArray(registry.skills)) {
       throw new Error("catalog/skills.json does not contain a skills array");
     }
@@ -107,25 +74,41 @@ export function resolveDependencies(selectedIds, allCapabilities) {
     .filter(Boolean);
 }
 
-export async function checkForUpdates() {
+const UPDATE_CHECK_TTL_MS = 24 * 60 * 60 * 1000;
+
+// Prints a notice when a newer Hub version exists. The remote version is cached
+// for a day so commands do not wait on the network every time they start.
+export async function checkForUpdates({
+  env = process.env,
+  isTTY = process.stdout.isTTY,
+  fetchImpl = fetch,
+  now = Date.now(),
+  cacheFile = path.join(os.homedir(), ".cache", "ai-skills-hub", "update-check.json")
+} = {}) {
+  if (env.SKILLS_HUB_NO_UPDATE_CHECK || env.CI || !isTTY) return;
   try {
-    const localPkgPath = path.resolve(process.cwd(), "package.json");
+    const localPkgPath = path.join(hubHome(), "package.json");
     if (!(await fileExists(localPkgPath))) return;
+    const localVersion = JSON.parse(await fs.readFile(localPkgPath, "utf8")).version;
 
-    const localPkg = JSON.parse(await fs.readFile(localPkgPath, "utf8"));
-    const localVersion = localPkg.version;
+    let latest = null;
+    try {
+      const cached = JSON.parse(await fs.readFile(cacheFile, "utf8"));
+      if (now - cached.checked_at < UPDATE_CHECK_TTL_MS) latest = cached.latest ?? null;
+      else throw new Error("stale");
+    } catch {
+      const response = await fetchImpl(
+        "https://raw.githubusercontent.com/AxiomNode-lab/AI-Skills-Hub/main/package.json",
+        { signal: AbortSignal.timeout(1500) }
+      );
+      if (response.ok) latest = (await response.json()).version ?? null;
+      await fs.mkdir(path.dirname(cacheFile), { recursive: true });
+      await fs.writeFile(cacheFile, JSON.stringify({ checked_at: now, latest }));
+    }
 
-    const response = await fetch(
-      "https://raw.githubusercontent.com/AxiomNode-lab/AI-Skills-Hub/main/package.json",
-      { signal: AbortSignal.timeout(1500) }
-    );
-
-    if (response.ok) {
-      const remotePkg = await response.json();
-      if (remotePkg.version && remotePkg.version !== localVersion) {
-        console.log(`\nUpdate available: ${localVersion} -> ${remotePkg.version}`);
-        console.log("Run 'git pull' to update.\n");
-      }
+    if (latest && latest !== localVersion) {
+      console.log(`\nUpdate available: ${localVersion} -> ${latest}`);
+      console.log("Run 'git pull' to update.\n");
     }
   } catch {
     // Version checks are best-effort and must never block the CLI.

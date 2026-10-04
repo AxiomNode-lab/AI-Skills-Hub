@@ -1,0 +1,367 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "microsoft/azure-compute-batch-java",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/azure-sdk-java/skills/azure-compute-batch-java",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "review": {
+    "path": "catalog/reviews/microsoft__azure-compute-batch-java.json",
+    "sha256": "4c2b3cc9ba48e2701a37b00421a6862e6e09e8ce563571c02eeb4400482fa8ec"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "credential-access",
+        "line": 46,
+        "evidence": "credential",
+        "context": "    .credential(new DefaultAzureCredentialBuilder().build())",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 57,
+        "evidence": "credential",
+        "context": "    .credential(new DefaultAzureCredentialBuilder().build())",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 65,
+        "evidence": "credential",
+        "context": "import com.azure.core.credential.AzureNamedKeyCredential;",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 73,
+        "evidence": "credential",
+        "context": "    .credential(sharedKeyCreds)",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 220,
+        "evidence": "Delete",
+        "context": "### Delete Pool",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 323,
+        "evidence": "Delete",
+        "context": "### Delete Job",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "network-access",
+        "line": 350,
+        "evidence": "https://",
+        "context": "            .setHttpUrl(\"https://storage.blob.core.windows.net/container/process.py?sasToken\")",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "network-access",
+        "line": 353,
+        "evidence": "https://",
+        "context": "            .setHttpUrl(\"https://storage.blob.core.windows.net/container/input.csv?sasToken\")",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "network-access",
+        "line": 359,
+        "evidence": "https://",
+        "context": "                    \"https://storage.blob.core.windows.net/results?sasToken\")",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 433,
+        "evidence": "sh",
+        "context": "batchClient.createTask(\"myJobId\", new BatchTaskCreateParameters(\"setup\", \"setup.sh\"));",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 434,
+        "evidence": "sh",
+        "context": "batchClient.createTask(\"myJobId\", new BatchTaskCreateParameters(\"download\", \"download.sh\"));",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 437,
+        "evidence": "sh",
+        "context": "BatchTaskCreateParameters dependentTask = new BatchTaskCreateParameters(\"process\", \"process.sh\")",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 513,
+        "evidence": "Delete",
+        "context": "### Delete Task",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 577,
+        "evidence": "Remove",
+        "context": "### Remove Node from Pool",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 655,
+        "evidence": "Delete",
+        "context": "### Delete Job Schedule",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 689,
+        "evidence": "Delete",
+        "context": "            System.err.println(\"Pool quota exceeded. Delete unused pools or request quota increase.\");",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 729,
+        "evidence": "credential",
+        "context": "            .credential(new DefaultAzureCredentialBuilder().build())",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 858,
+        "evidence": "delete",
+        "context": "            System.err.println(\"Failed to delete job: \" + e.getMessage());",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 901,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "network-access",
+        "line": 902,
+        "evidence": "https://",
+        "context": "AZURE_BATCH_ENDPOINT=https://<account>.<region>.batch.azure.com",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 908,
+        "evidence": "secret",
+        "context": "AZURE_CLIENT_SECRET=<service-principal-secret>",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 917,
+        "evidence": "delete",
+        "context": "4. **Handle LRO properly** — Pool resize, delete operations are long-running",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 34,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 35,
+        "evidence": "https://",
+        "context": "AZURE_BATCH_ENDPOINT=https://<account>.<region>.batch.azure.com  # Required for all auth methods",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 48,
+        "evidence": "credential",
+        "context": "import com.azure.core.credential.TokenCredential;",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 54,
+        "evidence": "credential",
+        "context": "TokenCredential credential = new DefaultAzureCredentialBuilder()",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 57,
+        "evidence": "credential",
+        "context": "// Or use a specific credential directly in production:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 58,
+        "evidence": "credential",
+        "context": "// See https://learn.microsoft.com/java/api/overview/azure/identity-readme?view=azure-java-stable#credential-classes",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 58,
+        "evidence": "https://",
+        "context": "// See https://learn.microsoft.com/java/api/overview/azure/identity-readme?view=azure-java-stable#credential-classes",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 59,
+        "evidence": "credential",
+        "context": "// TokenCredential credential = new ManagedIdentityCredentialBuilder().build();",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 62,
+        "evidence": "credential",
+        "context": "    .credential(credential)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 62,
+        "evidence": "credential",
+        "context": "    .credential(credential)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 73,
+        "evidence": "credential",
+        "context": "    .credential(credential)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 73,
+        "evidence": "credential",
+        "context": "    .credential(credential)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 81,
+        "evidence": "credential",
+        "context": "import com.azure.core.credential.AzureNamedKeyCredential;",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 88,
+        "evidence": "credential",
+        "context": "    .credential(sharedKeyCreds)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 166,
+        "evidence": "Delete",
+        "context": "### Delete Pool",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 223,
+        "evidence": "Delete",
+        "context": "### Delete Job",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 380,
+        "evidence": "delete",
+        "context": "4. **Handle LRO properly** — Pool resize, delete operations are long-running",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 390,
+        "evidence": "https://",
+        "context": "| Maven Package | https://central.sonatype.com/artifact/com.azure/azure-compute-batch |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 391,
+        "evidence": "https://",
+        "context": "| GitHub | https://github.com/Azure/azure-sdk-for-java/tree/main/sdk/batch/azure-compute-batch |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 392,
+        "evidence": "https://",
+        "context": "| API Documentation | https://learn.microsoft.com/java/api/com.azure.compute.batch |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 393,
+        "evidence": "https://",
+        "context": "| Product Docs | https://learn.microsoft.com/azure/batch/ |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 394,
+        "evidence": "https://",
+        "context": "| REST API | https://learn.microsoft.com/rest/api/batchservice/ |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 395,
+        "evidence": "https://",
+        "context": "| Samples | https://github.com/azure/azure-batch-samples |",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 42322
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/examples.md",
+      "sha256": "a7b10e8de3b432232a85689ae1119eae452513209afb5ef787400b8463c6361b",
+      "bytes": 29268,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "a64ad3c273875782b51595a54968d108eaa7081dd7007bf3c3cb05040aaf7456",
+      "bytes": 11914,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 42322
+}

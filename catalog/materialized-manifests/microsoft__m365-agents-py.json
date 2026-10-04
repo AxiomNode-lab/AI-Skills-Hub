@@ -1,0 +1,227 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "microsoft/m365-agents-py",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/azure-sdk-python/skills/m365-agents-py",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "review": {
+    "path": "catalog/reviews/microsoft__m365-agents-py.json",
+    "sha256": "d31f2a88ad437963c0a20548bbd88e57e158de2eead659cf64b5c427800a017c"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "network-access",
+        "line": 32,
+        "evidence": "https://",
+        "context": "        authority=f\"https://login.microsoftonline.com/{tenant_id}\",",
+        "file": "references/capabilities.md"
+      },
+      {
+        "type": "network-access",
+        "line": 35,
+        "evidence": "https://",
+        "context": "    scopes = [\"https://api.powerplatform.com/.default\"]",
+        "file": "references/capabilities.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 43,
+        "evidence": "access_token",
+        "context": "    return response[\"access_token\"]",
+        "file": "references/capabilities.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 81,
+        "evidence": "delete",
+        "context": "- Include cleanup/delete paths for created resources in examples.",
+        "file": "references/capabilities.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 27,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 28,
+        "evidence": "pip install",
+        "context": "pip install microsoft-agents-hosting-core",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 29,
+        "evidence": "pip install",
+        "context": "pip install microsoft-agents-hosting-aiohttp",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 30,
+        "evidence": "pip install",
+        "context": "pip install microsoft-agents-activity",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 31,
+        "evidence": "pip install",
+        "context": "pip install microsoft-agents-authentication-msal",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 32,
+        "evidence": "pip install",
+        "context": "pip install microsoft-agents-copilotstudio-client",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 33,
+        "evidence": "pip install",
+        "context": "pip install python-dotenv aiohttp",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 38,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 40,
+        "evidence": "secret",
+        "context": "CONNECTIONS__SERVICE_CONNECTION__SETTINGS__CLIENTSECRET=<client-secret>",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 208,
+        "evidence": "https://",
+        "context": "    \"https://cognitiveservices.azure.com/.default\",",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 225,
+        "evidence": "https://",
+        "context": "            type=\"https://schema.org/Message\",",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 272,
+        "evidence": "https://",
+        "context": "                \"https://graph.microsoft.com/v1.0/me\", headers=headers",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 298,
+        "evidence": "https://",
+        "context": "        authority=f\"https://login.microsoftonline.com/{tenant_id}\",",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 301,
+        "evidence": "https://",
+        "context": "    token_request = {\"scopes\": [\"https://api.powerplatform.com/.default\"]}",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 306,
+        "evidence": "access_token",
+        "context": "        return response.get(\"access_token\")",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 309,
+        "evidence": "access_token",
+        "context": "        return response.get(\"access_token\")",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 346,
+        "evidence": "credential",
+        "context": "2. **Always use context managers for clients and async credentials.** Wrap every client in `with Client(...) as client:` (sync) or `async with Client(...) as client:` (async). For async `DefaultAzureCredential` from `azure.identity.aio`, al",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 360,
+        "evidence": "https://",
+        "context": "| Microsoft 365 Agents SDK      | https://learn.microsoft.com/en-us/microsoft-365/agents-sdk/                   |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 361,
+        "evidence": "https://",
+        "context": "| GitHub samples (Python)       | https://github.com/microsoft/Agents-for-python                                |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 362,
+        "evidence": "https://",
+        "context": "| PyPI packages                 | https://pypi.org/search/?q=microsoft-agents                                   |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 363,
+        "evidence": "https://",
+        "context": "| Integrate with Copilot Studio | https://learn.microsoft.com/en-us/microsoft-365/agents-sdk/integrate-with-mcs |",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 17819
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/capabilities.md",
+      "sha256": "a6c0c18b143a8506b60b832ddfe2cb7987ba5c3ea087faf22608da5fd6157713",
+      "bytes": 2825,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "cd3b4a536bab82b795960a3ba728bf74345729a6cb278a50913639d5d77609a0",
+      "bytes": 13854,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 17819
+}

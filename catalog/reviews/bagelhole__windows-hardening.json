@@ -1,0 +1,362 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "bagelhole/windows-hardening",
+  "status": "draft",
+  "reviewed_on": null,
+  "reviewer": null,
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "security/hardening/windows-hardening",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "security/hardening/windows-hardening",
+    "url": "https://api.github.com/repos/BagelHole/DevOps-Security-Agent-Skills/git/trees/0365f57a079b1332f95cf26e31dd2d5332a8399f?recursive=1",
+    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/BagelHole/DevOps-Security-Agent-Skills/blob/0365f57a079b1332f95cf26e31dd2d5332a8399f/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "security",
+        "security/hardening",
+        "security/hardening/windows-hardening"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte."
+    ]
+  },
+  "content_review": {
+    "status": "pending",
+    "risk": "unknown",
+    "blocking_findings": [],
+    "capabilities": {},
+    "notes": []
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "67c5c5cbb12cafb1515e449748866bd40da7dec9",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "46d283f368da2e25067a7662770b6fdf9c682343ca340c9308c6dcde1d572400",
+      "bytes": 24552,
+      "mode": "100644",
+      "git_blob": "7b615a94f38d4035fceda13e4d3dd0043cfd61b5",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 28,
+          "evidence": "PowerShell",
+          "context": "- PowerShell 5.1+ (built into Windows Server)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 34,
+          "evidence": "powershell",
+          "context": "```powershell",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 36,
+          "evidence": "https://",
+          "context": "# Download from: https://www.microsoft.com/en-us/download/details.aspx?id=55319",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 56,
+          "evidence": "powershell",
+          "context": "```powershell",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 64,
+          "evidence": "PowerShell",
+          "context": "# Or configure via PowerShell DSC",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 95,
+          "evidence": "Remove",
+          "context": "# Remove unnecessary local accounts",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 106,
+          "evidence": "PowerShell",
+          "context": "Install-WindowsFeature -Name RSAT-AD-PowerShell",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 116,
+          "evidence": "powershell",
+          "context": "```powershell",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 153,
+          "evidence": "credential",
+          "context": "# Disable LLMNR (prevent credential theft)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 183,
+          "evidence": "powershell",
+          "context": "```powershell",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 262,
+          "evidence": "powershell",
+          "context": "```powershell",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 268,
+          "evidence": "Credential",
+          "context": "auditpol /set /subcategory:\"Credential Validation\" /success:enable /failure:enable",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 308,
+          "evidence": "PowerShell",
+          "context": "# PowerShell Logging (Critical for forensics)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 312,
+          "evidence": "PowerShell",
+          "context": "New-Item -Path \"HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\PowerShell\\ScriptBlockLogging\" -Force",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 313,
+          "evidence": "PowerShell",
+          "context": "Set-ItemProperty -Path \"HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\PowerShell\\ScriptBlockLogging\" `",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 317,
+          "evidence": "PowerShell",
+          "context": "New-Item -Path \"HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\PowerShell\\ModuleLogging\" -Force",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 318,
+          "evidence": "PowerShell",
+          "context": "Set-ItemProperty -Path \"HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\PowerShell\\ModuleLogging\" `",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 320,
+          "evidence": "PowerShell",
+          "context": "New-Item -Path \"HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\PowerShell\\ModuleLogging\\ModuleNames\" -Force",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 321,
+          "evidence": "PowerShell",
+          "context": "Set-ItemProperty -Path \"HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\PowerShell\\ModuleLogging\\ModuleNames\" `",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 325,
+          "evidence": "PowerShell",
+          "context": "New-Item -Path \"HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\PowerShell\\Transcription\" -Force",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 326,
+          "evidence": "PowerShell",
+          "context": "Set-ItemProperty -Path \"HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\PowerShell\\Transcription\" `",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 328,
+          "evidence": "PowerShell",
+          "context": "Set-ItemProperty -Path \"HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\PowerShell\\Transcription\" `",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 330,
+          "evidence": "PowerShell",
+          "context": "Set-ItemProperty -Path \"HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\PowerShell\\Transcription\" `",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 339,
+          "evidence": "powershell",
+          "context": "```powershell",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 384,
+          "evidence": "credential",
+          "context": "# Block credential stealing from LSASS",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 421,
+          "evidence": "powershell",
+          "context": "```powershell",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 455,
+          "evidence": "Credential",
+          "context": "## Credential Guard",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 457,
+          "evidence": "powershell",
+          "context": "```powershell",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 459,
+          "evidence": "Credential",
+          "context": "# Enable Windows Credential Guard",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 474,
+          "evidence": "Credential",
+          "context": "# Verify Credential Guard status",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 481,
+          "evidence": "powershell",
+          "context": "```powershell",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 489,
+          "evidence": "PowerShell",
+          "context": "# Create default executable rules via PowerShell",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 524,
+          "evidence": "powershell",
+          "context": "```powershell",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 585,
+          "evidence": "Credential",
+          "context": "| Credential Guard breaks apps | Legacy auth protocols blocked | Identify apps using NTLM/CredSSP; migrate to Kerberos/modern auth |",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 595,
+          "evidence": "Credential",
+          "context": "- Enable Credential Guard on all compatible hardware",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 598,
+          "evidence": "PowerShell",
+          "context": "- Enable PowerShell script block and module logging on all servers",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    }
+  ]
+}

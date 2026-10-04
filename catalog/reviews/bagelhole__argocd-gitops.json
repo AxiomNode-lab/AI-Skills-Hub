@@ -1,0 +1,422 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "bagelhole/argocd-gitops",
+  "status": "draft",
+  "reviewed_on": null,
+  "reviewer": null,
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "devops/orchestration/argocd-gitops",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "devops/orchestration/argocd-gitops",
+    "url": "https://api.github.com/repos/BagelHole/DevOps-Security-Agent-Skills/git/trees/0365f57a079b1332f95cf26e31dd2d5332a8399f?recursive=1",
+    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/BagelHole/DevOps-Security-Agent-Skills/blob/0365f57a079b1332f95cf26e31dd2d5332a8399f/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "devops",
+        "devops/orchestration",
+        "devops/orchestration/argocd-gitops"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte."
+    ]
+  },
+  "content_review": {
+    "status": "pending",
+    "risk": "unknown",
+    "blocking_findings": [],
+    "capabilities": {},
+    "notes": []
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "67c5c5cbb12cafb1515e449748866bd40da7dec9",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "references/argocd-patterns.md",
+      "sha256": "6157972dc4bc8f46291e33a1e89a241b7e7cdf7e86ac375fcc1ca84e0e9d6258",
+      "bytes": 2075,
+      "mode": "100644",
+      "git_blob": "3135d0cc8ac1c147abbd1b9abbe8ca08837437a9",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 14,
+          "evidence": "https://",
+          "context": "    repoURL: https://github.com/org/repo",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 18,
+          "evidence": "https://",
+          "context": "    server: https://kubernetes.default.svc",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 64,
+          "evidence": "https://",
+          "context": "        repoURL: https://github.com/org/repo",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 75,
+          "evidence": "Secret",
+          "context": "kind: Secret",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 79,
+          "evidence": "secret",
+          "context": "    argocd.argoproj.io/secret-type: cluster",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 82,
+          "evidence": "https://",
+          "context": "  server: https://prod-cluster.example.com",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 110,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "d0310ea76e7cc5df2368084f19e802b82094d0de45751048b036caabe2434fc5",
+      "bytes": 9662,
+      "mode": "100644",
+      "git_blob": "6351b04e9ee5d48ae3f658120a165b9f81378487",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 32,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 37,
+          "evidence": "https://",
+          "context": "kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 40,
+          "evidence": "secret",
+          "context": "kubectl -n argocd get secret argocd-initial-admin-secret \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 40,
+          "evidence": "secret",
+          "context": "kubectl -n argocd get secret argocd-initial-admin-secret \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "encoded-content",
+          "line": 41,
+          "evidence": "base64",
+          "context": "  -o jsonpath=\"{.data.password}\" | base64 -d",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 63,
+          "evidence": "https://",
+          "context": "    repoURL: https://github.com/org/myapp-manifests.git",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 67,
+          "evidence": "https://",
+          "context": "    server: https://kubernetes.default.svc",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 88,
+          "evidence": "https://",
+          "context": "    repoURL: https://github.com/org/myapp-chart.git",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 101,
+          "evidence": "https://",
+          "context": "    server: https://kubernetes.default.svc",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 120,
+          "evidence": "https://",
+          "context": "    repoURL: https://github.com/org/myapp-manifests.git",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 127,
+          "evidence": "https://",
+          "context": "    server: https://kubernetes.default.svc",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 142,
+          "evidence": "https://",
+          "context": "    - https://github.com/org/*",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 145,
+          "evidence": "https://",
+          "context": "      server: https://kubernetes.default.svc",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 175,
+          "evidence": "https://",
+          "context": "        repoURL: https://github.com/org/myapp-manifests.git",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 185,
+          "evidence": "https://",
+          "context": "        repoURL: https://github.com/org/myapp-manifests.git",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 189,
+          "evidence": "https://",
+          "context": "        server: https://kubernetes.default.svc",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 210,
+          "evidence": "https://",
+          "context": "            url: https://prod-cluster.example.com",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 212,
+          "evidence": "https://",
+          "context": "            url: https://staging-cluster.example.com",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 219,
+          "evidence": "https://",
+          "context": "        repoURL: https://github.com/org/myapp-manifests.git",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 240,
+          "evidence": "https://",
+          "context": "              repoURL: https://github.com/org/myapp-manifests.git",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 254,
+          "evidence": "https://",
+          "context": "        repoURL: https://github.com/org/myapp-manifests.git",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 258,
+          "evidence": "https://",
+          "context": "        server: https://kubernetes.default.svc",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 269,
+          "evidence": "Delete",
+          "context": "    prune: true          # Delete resources not in Git",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 312,
+          "evidence": "delete",
+          "context": "    argocd.argoproj.io/hook-delete-policy: HookSucceeded",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 319,
+          "evidence": "sh",
+          "context": "          command: [\"./migrate.sh\"]",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 325,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 344,
+          "evidence": "Delete",
+          "context": "# Delete application",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 345,
+          "evidence": "delete",
+          "context": "argocd app delete myapp",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 358,
+          "evidence": "Secret",
+          "context": "kind: Secret",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 363,
+          "evidence": "secret",
+          "context": "    argocd.argoproj.io/secret-type: repository",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 365,
+          "evidence": "https://",
+          "context": "  url: https://github.com/org/private-repo.git",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 371,
+          "evidence": "Secret",
+          "context": "kind: Secret",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 376,
+          "evidence": "secret",
+          "context": "    argocd.argoproj.io/secret-type: repository",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 420,
+          "evidence": "secret",
+          "context": "**Solution**: Check repository secret, verify URL and credentials",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 438,
+          "evidence": "remove",
+          "context": "- Enable auto-pruning to remove deleted resources",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    }
+  ]
+}
