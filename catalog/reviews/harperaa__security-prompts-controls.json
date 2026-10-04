@@ -1,0 +1,114 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "harperaa/security-prompts-controls",
+  "status": "draft",
+  "reviewed_on": null,
+  "reviewer": null,
+  "source": {
+    "repo": "harperaa/secure-claude-skills",
+    "path": "security-prompts/built-in-controls",
+    "revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "security-prompts/built-in-controls",
+    "url": "https://api.github.com/repos/harperaa/secure-claude-skills/git/trees/c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223?recursive=1",
+    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/harperaa/secure-claude-skills/blob/c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "security-prompts",
+        "security-prompts/built-in-controls"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte."
+    ]
+  },
+  "content_review": {
+    "status": "pending",
+    "risk": "unknown",
+    "blocking_findings": [],
+    "capabilities": {},
+    "notes": []
+  },
+  "files": [
+    {
+      "path": "01_contact_form.md",
+      "sha256": "4b5d349538d76f1a672e90ed4f487d7ea9464804ffb2b37bdfda29e45b24dd65",
+      "bytes": 3287,
+      "mode": "100644",
+      "git_blob": "7661a7f133c7961331a5f763b8ca167088c4a5e7",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "02_authenticated_update.md",
+      "sha256": "56d1d6f167eac7a95f2e50d3005dc735ffb592c58a001083b47dbe5146b39a22",
+      "bytes": 3098,
+      "mode": "100644",
+      "git_blob": "8bf026f6261cdb93029e9359fff8f427e9a9cfe2",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 76,
+          "evidence": "remove",
+          "context": "Add/remove fields in Zod schema",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "03_public_api.md",
+      "sha256": "0ba20f5f6e8a6e852262db5811be3880aa1602a674fdd911cf9866c73be8d99d",
+      "bytes": 2799,
+      "mode": "100644",
+      "git_blob": "3a11fdde9849d3da2549e3fe2e6c10cc033457e3",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "e8f0d88e88dafeb5ba3503df8babaf5ef1c49323d6c1751c09989d29740fa919",
+      "bytes": 1069,
+      "mode": "100644",
+      "git_blob": "346d6fb05afd34a37fb0b156a612166534ffc7d9",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "b395f0bbdfe0596814a46d12f53f3530f96862289d0f456eb9c6826df5455071",
+      "bytes": 12563,
+      "mode": "100644",
+      "git_blob": "fa26f441a4a4a02b0c467e662317aaa15ff4f1f4",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    }
+  ]
+}

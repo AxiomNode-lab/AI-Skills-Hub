@@ -1,0 +1,896 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "harperaa/security-testing-verification",
+  "status": "draft",
+  "reviewed_on": null,
+  "reviewer": null,
+  "source": {
+    "repo": "harperaa/secure-claude-skills",
+    "path": "security-testing",
+    "revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "security-testing",
+    "url": "https://api.github.com/repos/harperaa/secure-claude-skills/git/trees/c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223?recursive=1",
+    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/harperaa/secure-claude-skills/blob/c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "security-testing"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte."
+    ]
+  },
+  "content_review": {
+    "status": "pending",
+    "risk": "unknown",
+    "blocking_findings": [],
+    "capabilities": {},
+    "notes": []
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "e8f0d88e88dafeb5ba3503df8babaf5ef1c49323d6c1751c09989d29740fa919",
+      "bytes": 1069,
+      "mode": "100644",
+      "git_blob": "346d6fb05afd34a37fb0b156a612166534ffc7d9",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "da1833a7d80ac2c1c8be7d9a46b56850e103d867afc0ce981502f16533fbf877",
+      "bytes": 15900,
+      "mode": "100644",
+      "git_blob": "04e3fceea4c278b7164a774fd334efcd078f84e6",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 16,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 46,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 50,
+          "evidence": "curl",
+          "context": "  curl -s -o /dev/null -w \"%{http_code}\\n\" \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 51,
+          "evidence": "http://",
+          "context": "    http://localhost:3000/api/test-rate-limit",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 62,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 65,
+          "evidence": "curl",
+          "context": "  curl http://localhost:3000/api/test-rate-limit",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 65,
+          "evidence": "http://",
+          "context": "  curl http://localhost:3000/api/test-rate-limit",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 72,
+          "evidence": "curl",
+          "context": "curl http://localhost:3000/api/test-rate-limit",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 72,
+          "evidence": "http://",
+          "context": "curl http://localhost:3000/api/test-rate-limit",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 81,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 82,
+          "evidence": "curl",
+          "context": "curl -X POST http://localhost:3000/api/example-protected \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 82,
+          "evidence": "http://",
+          "context": "curl -X POST http://localhost:3000/api/example-protected \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 94,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 96,
+          "evidence": "curl",
+          "context": "TOKEN=$(curl -s http://localhost:3000/api/csrf \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 96,
+          "evidence": "http://",
+          "context": "TOKEN=$(curl -s http://localhost:3000/api/csrf \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 100,
+          "evidence": "curl",
+          "context": "curl -X POST http://localhost:3000/api/example-protected \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 100,
+          "evidence": "http://",
+          "context": "curl -X POST http://localhost:3000/api/example-protected \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 111,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 113,
+          "evidence": "curl",
+          "context": "TOKEN=$(curl -s http://localhost:3000/api/csrf \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 113,
+          "evidence": "http://",
+          "context": "TOKEN=$(curl -s http://localhost:3000/api/csrf \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 117,
+          "evidence": "curl",
+          "context": "curl -X POST http://localhost:3000/api/example-protected \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 117,
+          "evidence": "http://",
+          "context": "curl -X POST http://localhost:3000/api/example-protected \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 123,
+          "evidence": "curl",
+          "context": "curl -X POST http://localhost:3000/api/example-protected \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 123,
+          "evidence": "http://",
+          "context": "curl -X POST http://localhost:3000/api/example-protected \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 133,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 134,
+          "evidence": "curl",
+          "context": "curl -X POST http://localhost:3000/api/example-protected \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 134,
+          "evidence": "http://",
+          "context": "curl -X POST http://localhost:3000/api/example-protected \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 149,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 151,
+          "evidence": "curl",
+          "context": "curl -X POST http://localhost:3000/api/example-protected \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 151,
+          "evidence": "http://",
+          "context": "curl -X POST http://localhost:3000/api/example-protected \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 163,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 165,
+          "evidence": "curl",
+          "context": "curl -X POST http://localhost:3000/api/example-protected \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 165,
+          "evidence": "http://",
+          "context": "curl -X POST http://localhost:3000/api/example-protected \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 181,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 182,
+          "evidence": "curl",
+          "context": "curl -X POST http://localhost:3000/api/contact \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 182,
+          "evidence": "http://",
+          "context": "curl -X POST http://localhost:3000/api/contact \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 202,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 203,
+          "evidence": "curl",
+          "context": "curl -X POST http://localhost:3000/api/contact \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 203,
+          "evidence": "http://",
+          "context": "curl -X POST http://localhost:3000/api/contact \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 216,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 217,
+          "evidence": "curl",
+          "context": "curl -I http://localhost:3000",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 217,
+          "evidence": "http://",
+          "context": "curl -I http://localhost:3000",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 228,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 230,
+          "evidence": "curl",
+          "context": "curl -I http://localhost:3000 | grep \"Content-Security-Policy\"",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 230,
+          "evidence": "http://",
+          "context": "curl -I http://localhost:3000 | grep \"Content-Security-Policy\"",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 240,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 242,
+          "evidence": "curl",
+          "context": "curl -I https://yourapp.com | grep \"Strict-Transport-Security\"",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 242,
+          "evidence": "https://",
+          "context": "curl -I https://yourapp.com | grep \"Strict-Transport-Security\"",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 250,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 251,
+          "evidence": "curl",
+          "context": "curl -I http://localhost:3000/dashboard",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 251,
+          "evidence": "http://",
+          "context": "curl -I http://localhost:3000/dashboard",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 261,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 263,
+          "evidence": "curl",
+          "context": "curl http://localhost:3000/api/protected-endpoint",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 263,
+          "evidence": "http://",
+          "context": "curl http://localhost:3000/api/protected-endpoint",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 274,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 276,
+          "evidence": "curl",
+          "context": "curl http://localhost:3000/api/protected-endpoint \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 276,
+          "evidence": "http://",
+          "context": "curl http://localhost:3000/api/protected-endpoint \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 284,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 286,
+          "evidence": "curl",
+          "context": "curl http://localhost:3000/api/posts/user-abc-post-123 \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 286,
+          "evidence": "http://",
+          "context": "curl http://localhost:3000/api/posts/user-abc-post-123 \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 298,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 300,
+          "evidence": "curl",
+          "context": "curl http://localhost:3000/api/premium/generate \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 300,
+          "evidence": "http://",
+          "context": "curl http://localhost:3000/api/premium/generate \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 314,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 319,
+          "evidence": "curl",
+          "context": "curl http://localhost:3000/api/error-test",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 319,
+          "evidence": "http://",
+          "context": "curl http://localhost:3000/api/error-test",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 330,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 332,
+          "evidence": "curl",
+          "context": "curl http://localhost:3000/api/error-test",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 332,
+          "evidence": "http://",
+          "context": "curl http://localhost:3000/api/error-test",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 347,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 357,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 366,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 375,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 376,
+          "evidence": "bash",
+          "context": "bash scripts/security-check.sh",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 376,
+          "evidence": "sh",
+          "context": "bash scripts/security-check.sh",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 388,
+          "evidence": "https://",
+          "context": "**Tool:** https://securityheaders.com/",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 405,
+          "evidence": "https://",
+          "context": "**Tool:** https://observatory.mozilla.org/",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 421,
+          "evidence": "https://",
+          "context": "**Tool:** https://www.ssllabs.com/ssltest/",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 474,
+          "evidence": "DELETE",
+          "context": "- [ ] All POST/PUT/DELETE routes have CSRF protection",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 493,
+          "evidence": "curl",
+          "context": "- [ ] Check security headers: `curl -I https://yourapp.com`",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 493,
+          "evidence": "https://",
+          "context": "- [ ] Check security headers: `curl -I https://yourapp.com`",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 506,
+          "evidence": "sh",
+          "context": "### security-test.sh",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 510,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 511,
+          "evidence": "bash",
+          "context": "#!/bin/bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 559,
+          "evidence": "curl",
+          "context": "run_test \"X-Frame-Options\" \"curl -I http://localhost:3000\" \"X-Frame-Options: DENY\"",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 559,
+          "evidence": "http://",
+          "context": "run_test \"X-Frame-Options\" \"curl -I http://localhost:3000\" \"X-Frame-Options: DENY\"",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 560,
+          "evidence": "curl",
+          "context": "run_test \"X-Content-Type-Options\" \"curl -I http://localhost:3000\" \"X-Content-Type-Options: nosniff\"",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 560,
+          "evidence": "http://",
+          "context": "run_test \"X-Content-Type-Options\" \"curl -I http://localhost:3000\" \"X-Content-Type-Options: nosniff\"",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 561,
+          "evidence": "curl",
+          "context": "run_test \"Content-Security-Policy\" \"curl -I http://localhost:3000\" \"Content-Security-Policy\"",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 561,
+          "evidence": "http://",
+          "context": "run_test \"Content-Security-Policy\" \"curl -I http://localhost:3000\" \"Content-Security-Policy\"",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 579,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 580,
+          "evidence": "bash",
+          "context": "bash scripts/security-test.sh",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 580,
+          "evidence": "sh",
+          "context": "bash scripts/security-test.sh",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 627,
+          "evidence": "http://",
+          "context": "        run: npx wait-on http://localhost:3000",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 630,
+          "evidence": "bash",
+          "context": "        run: bash scripts/security-test.sh",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 630,
+          "evidence": "sh",
+          "context": "        run: bash scripts/security-test.sh",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 666,
+          "evidence": "delete",
+          "context": "   <form action=\"http://localhost:3000/api/delete-account\" method=\"POST\">",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 666,
+          "evidence": "http://",
+          "context": "   <form action=\"http://localhost:3000/api/delete-account\" method=\"POST\">",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 704,
+          "evidence": "https://",
+          "context": "- OWASP Testing Guide: https://owasp.org/www-project-web-security-testing-guide/",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 705,
+          "evidence": "https://",
+          "context": "- Security Headers Scanner: https://securityheaders.com/",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 706,
+          "evidence": "https://",
+          "context": "- Mozilla Observatory: https://observatory.mozilla.org/",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 707,
+          "evidence": "https://",
+          "context": "- SSL Labs: https://www.ssllabs.com/ssltest/",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 708,
+          "evidence": "https://",
+          "context": "- npm Audit: https://docs.npmjs.com/cli/v8/commands/npm-audit",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    }
+  ]
+}

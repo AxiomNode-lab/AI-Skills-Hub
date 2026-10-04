@@ -1,0 +1,230 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "harperaa/security-prompts-auth",
+  "status": "draft",
+  "reviewed_on": null,
+  "reviewer": null,
+  "source": {
+    "repo": "harperaa/secure-claude-skills",
+    "path": "security-prompts/auth-authorization",
+    "revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "security-prompts/auth-authorization",
+    "url": "https://api.github.com/repos/harperaa/secure-claude-skills/git/trees/c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223?recursive=1",
+    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/harperaa/secure-claude-skills/blob/c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "security-prompts",
+        "security-prompts/auth-authorization"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte."
+    ]
+  },
+  "content_review": {
+    "status": "pending",
+    "risk": "unknown",
+    "blocking_findings": [],
+    "capabilities": {},
+    "notes": []
+  },
+  "files": [
+    {
+      "path": "01_rbac_implementation.md",
+      "sha256": "e6a9129a811126314ba12f33fab00d98c92361da72eee61547c1334be52f2740",
+      "bytes": 4022,
+      "mode": "100644",
+      "git_blob": "0d86076c66360fbd6160ce3e5519bbfe06d63c49",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "02_permissions.md",
+      "sha256": "fb5b53b6ffe50b95eb1faaa271e19f735d6b31033b039b8ece86b30be352efa7",
+      "bytes": 3640,
+      "mode": "100644",
+      "git_blob": "15d217ee1ed40d2cd5607120c8676cdefe9f95ad",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "03_ownership.md",
+      "sha256": "4679d180147640a4f7f4aba944fd992aa2f04c89f07fdaef8855e1a864817225",
+      "bytes": 2695,
+      "mode": "100644",
+      "git_blob": "f1b4a259c995e971b1943c9c46561ffce98c5aae",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "04_auth_testing.md",
+      "sha256": "68c638b4fc2c78f73bfe6424cffe655dd30bd3ad66de5f05ab76833f09f18d0d",
+      "bytes": 3802,
+      "mode": "100644",
+      "git_blob": "2ff5333e170c2c0b4fafdb0b28ce8e140a265ec5",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 73,
+          "evidence": "curl",
+          "context": "- How to test via curl or Postman",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 85,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 87,
+          "evidence": "curl",
+          "context": "curl http://localhost:3000/admin \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 87,
+          "evidence": "http://",
+          "context": "curl http://localhost:3000/admin \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 92,
+          "evidence": "curl",
+          "context": "curl http://localhost:3000/admin \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 92,
+          "evidence": "http://",
+          "context": "curl http://localhost:3000/admin \\",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "e8f0d88e88dafeb5ba3503df8babaf5ef1c49323d6c1751c09989d29740fa919",
+      "bytes": 1069,
+      "mode": "100644",
+      "git_blob": "346d6fb05afd34a37fb0b156a612166534ffc7d9",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "47d0b4ad34238226b59266a349f9b23889fd6ccaf13fe94875f699fae7f32ad0",
+      "bytes": 13959,
+      "mode": "100644",
+      "git_blob": "0f8b33fbacabd6002838c29bd90ee39e5ce96751",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 54,
+          "evidence": "delete",
+          "context": "- `users.read`, `users.write`, `users.delete`",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 197,
+          "evidence": "delete",
+          "context": "- admin: All user access + create/edit/delete posts, moderate comments",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 258,
+          "evidence": "delete",
+          "context": "- Admin: Most permissions, cannot delete workspace",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 343,
+          "evidence": "DELETE",
+          "context": "export async function DELETE(req: Request) {",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 350,
+          "evidence": "Delete",
+          "context": "  // Delete logic",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 382,
+          "evidence": "delete",
+          "context": "test(\"non-admin cannot delete posts\", async () => {",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 383,
+          "evidence": "DELETE",
+          "context": "  const response = await DELETE(\"/api/posts/123\", {",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 453,
+          "evidence": "DELETE",
+          "context": "export async function DELETE(req: Request) {",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    }
+  ]
+}

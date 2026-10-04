@@ -41,7 +41,8 @@ const namespaceByRepo={
   "wshobson/agents":"wshobson",
   "BagelHole/DevOps-Security-Agent-Skills":"bagelhole",
   "supabase/agent-skills":"supabase",
-  "j4flmao/agent-skills":"j4flmao"
+  "j4flmao/agent-skills":"j4flmao",
+  "harperaa/secure-claude-skills":"harperaa"
 };
 
 function deriveCategory(sourceId,sourcePath){

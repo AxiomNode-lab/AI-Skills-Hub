@@ -1,6 +1,6 @@
 {
   "schema_version": "0.2",
-  "generated_at": "2026-10-04T14:48:16.083Z",
+  "generated_at": "2026-10-04T18:20:38.122Z",
   "skills": [
     {
       "id": "aaron-seo/competitor-analysis",
@@ -24158,6 +24158,1041 @@
       "artifact_type": "skill",
       "materialized_root": "skills/bagelhole/zero-trust",
       "materialized_files": 2
+    },
+    {
+      "id": "harperaa/authentication-authorization-clerk",
+      "name": "authentication-authorization-clerk",
+      "publisher": "harperaa",
+      "source": {
+        "repo": "harperaa/secure-claude-skills",
+        "path": "auth-security/SKILL.md",
+        "revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223",
+        "revision_type": "git-commit",
+        "url": "https://github.com/harperaa/secure-claude-skills/tree/c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223/auth-security/SKILL.md",
+        "state": "present"
+      },
+      "category": [
+        "security"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "LICENSE"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills"
+      ],
+      "security": {
+        "scan_status": "review-required",
+        "risk": "medium",
+        "network": true,
+        "shell": true,
+        "credentials": true
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": "a23b33278d5efa36b4d046d8f876b7633f45bfac21a3453014f0ca3aac60021c",
+        "last_ingested_revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223"
+      },
+      "description": "Implement secure authentication and authorization using Clerk. Use this skill when you need to authenticate users, protect routes, check permissions, implement subscription-based access control, or integrate Clerk with your application. Triggers include \"authentication\", \"auth\", \"authorization\", \"Clerk\", \"protect route\", \"check user\", \"sign in\", \"session\", \"permissions\", \"subscription access\"."
+    },
+    {
+      "id": "harperaa/authentication-authorization-vulnerabilities-ai-code",
+      "name": "authentication-authorization-vulnerabilities-ai-code",
+      "publisher": "harperaa",
+      "source": {
+        "repo": "harperaa/secure-claude-skills",
+        "path": "security-awareness/auth-vulnerabilities/SKILL.md",
+        "revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223",
+        "revision_type": "git-commit",
+        "url": "https://github.com/harperaa/secure-claude-skills/tree/c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223/security-awareness/auth-vulnerabilities/SKILL.md",
+        "state": "present"
+      },
+      "category": [
+        "security"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "LICENSE"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills"
+      ],
+      "security": {
+        "scan_status": "review-required",
+        "risk": "medium",
+        "network": true,
+        "shell": false,
+        "credentials": true
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": "bf10053254bdfd01cda18d3ed07472472204339bf358a4e1babe78fb36a75676",
+        "last_ingested_revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223"
+      },
+      "description": "Understand authentication and authorization defects in AI-generated code including insecure password storage, broken session management, and access control bypasses. Use this skill when you need to learn about auth vulnerabilities in AI code, understand why AI suggests MD5/plaintext passwords, recognize broken session patterns, or identify access control gaps. Triggers include \"auth vulnerabilities AI\", \"password storage AI\", \"session management\", \"broken access control\", \"authentication defects\", \"MD5 passwords\", \"session hijacking\", \"authorization bypass\"."
+    },
+    {
+      "id": "harperaa/business-logic-flaws-ai-generated-code",
+      "name": "business-logic-flaws-ai-generated-code",
+      "publisher": "harperaa",
+      "source": {
+        "repo": "harperaa/secure-claude-skills",
+        "path": "security-awareness/business-logic-flaws/SKILL.md",
+        "revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223",
+        "revision_type": "git-commit",
+        "url": "https://github.com/harperaa/secure-claude-skills/tree/c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223/security-awareness/business-logic-flaws/SKILL.md",
+        "state": "present"
+      },
+      "category": [
+        "security"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "LICENSE"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills"
+      ],
+      "security": {
+        "scan_status": "verified",
+        "risk": "none",
+        "network": false,
+        "shell": false,
+        "credentials": false
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": "4beb06e19ddbcb508c3e0b46098b28cd021d0c9ecc5fec467233893681969a5d",
+        "last_ingested_revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223"
+      },
+      "description": "Understand business logic vulnerabilities in AI code including race conditions, integer overflow, and calculation errors that pass functional tests but create security holes. Use this skill when you need to learn about race conditions in AI code, understand integer overflow vulnerabilities, recognize business logic security flaws, or identify calculation errors. Triggers include \"race conditions\", \"business logic vulnerabilities\", \"integer overflow\", \"race condition AI\", \"flash sale security\", \"concurrent access\", \"negative totals\", \"calculation errors\"."
+    },
+    {
+      "id": "harperaa/csrf-protection",
+      "name": "csrf-protection",
+      "publisher": "harperaa",
+      "source": {
+        "repo": "harperaa/secure-claude-skills",
+        "path": "csrf-protection/SKILL.md",
+        "revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223",
+        "revision_type": "git-commit",
+        "url": "https://github.com/harperaa/secure-claude-skills/tree/c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223/csrf-protection/SKILL.md",
+        "state": "present"
+      },
+      "category": [
+        "general"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "LICENSE"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills"
+      ],
+      "security": {
+        "scan_status": "review-required",
+        "risk": "medium",
+        "network": true,
+        "shell": true,
+        "credentials": true
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": "f179dc8609da088a6e1bf7a728c2e43913311357354e180246a1d630a003f2ca",
+        "last_ingested_revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223"
+      },
+      "description": "Implement Cross-Site Request Forgery (CSRF) protection for API routes. Use this skill when you need to protect POST/PUT/DELETE endpoints, implement token validation, prevent cross-site attacks, or secure form submissions. Triggers include \"CSRF\", \"cross-site request forgery\", \"protect form\", \"token validation\", \"withCsrf\", \"CSRF token\", \"session fixation\"."
+    },
+    {
+      "id": "harperaa/dependency-supply-chain-security",
+      "name": "dependency-supply-chain-security",
+      "publisher": "harperaa",
+      "source": {
+        "repo": "harperaa/secure-claude-skills",
+        "path": "dependency-security/SKILL.md",
+        "revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223",
+        "revision_type": "git-commit",
+        "url": "https://github.com/harperaa/secure-claude-skills/tree/c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223/dependency-security/SKILL.md",
+        "state": "present"
+      },
+      "category": [
+        "security"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "LICENSE"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills"
+      ],
+      "security": {
+        "scan_status": "review-required",
+        "risk": "medium",
+        "network": true,
+        "shell": true,
+        "credentials": false
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": "5a5a4af825fead404c479411c923c35a1ea5b8aaac484b343a4c65f75a0f860f",
+        "last_ingested_revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223"
+      },
+      "description": "Manage dependencies and supply chain security to prevent vulnerable or malicious packages. Use this skill when you need to audit dependencies, update packages, check for vulnerabilities, understand supply chain attacks, or maintain dependency security. Triggers include \"dependencies\", \"npm audit\", \"supply chain\", \"package security\", \"vulnerability\", \"npm update\", \"security audit\", \"outdated packages\"."
+    },
+    {
+      "id": "harperaa/information-leakage-hardcoded-secrets-ai-code",
+      "name": "information-leakage-hardcoded-secrets-ai-code",
+      "publisher": "harperaa",
+      "source": {
+        "repo": "harperaa/secure-claude-skills",
+        "path": "security-awareness/information-leakage/SKILL.md",
+        "revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223",
+        "revision_type": "git-commit",
+        "url": "https://github.com/harperaa/secure-claude-skills/tree/c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223/security-awareness/information-leakage/SKILL.md",
+        "state": "present"
+      },
+      "category": [
+        "security"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "LICENSE"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills"
+      ],
+      "security": {
+        "scan_status": "review-required",
+        "risk": "medium",
+        "network": true,
+        "shell": true,
+        "credentials": true
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": "0f1e2d63dc6eeb3b7ae6e2525d38bd4f34869a44535abe2a5485682359f92363",
+        "last_ingested_revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223"
+      },
+      "description": "Understand how AI-generated code exposes sensitive information through hardcoded credentials and verbose logging. Use this skill when you need to learn about hardcoded secrets in AI code, understand logging vulnerabilities, recognize exposed API keys, or prevent information disclosure. Triggers include \"hardcoded credentials\", \"hardcoded secrets\", \"API keys in code\", \"information leakage\", \"verbose logging\", \"exposed secrets\", \"AWS keys\", \"logging vulnerabilities\", \"sensitive data logs\"."
+    },
+    {
+      "id": "harperaa/injection-vulnerabilities-ai-generated-code",
+      "name": "injection-vulnerabilities-ai-generated-code",
+      "publisher": "harperaa",
+      "source": {
+        "repo": "harperaa/secure-claude-skills",
+        "path": "security-awareness/injection-vulnerabilities/SKILL.md",
+        "revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223",
+        "revision_type": "git-commit",
+        "url": "https://github.com/harperaa/secure-claude-skills/tree/c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223/security-awareness/injection-vulnerabilities/SKILL.md",
+        "state": "present"
+      },
+      "category": [
+        "security"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "LICENSE"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills"
+      ],
+      "security": {
+        "scan_status": "review-required",
+        "risk": "high",
+        "network": true,
+        "shell": true,
+        "credentials": true
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": "c4c01ef724da49ecabc6c4efa02cbf546955943d93b98a08ce9a1e3c4c16f066",
+        "last_ingested_revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223"
+      },
+      "description": "Understand how AI generates SQL injection, command injection, and XSS vulnerabilities. Use this skill when you need to learn about injection attack patterns in AI code, see real-world examples of injection vulnerabilities, understand why AI generates insecure database queries, or recognize vulnerable code patterns. Triggers include \"SQL injection AI\", \"command injection\", \"XSS vulnerabilities\", \"injection attacks\", \"AI database queries\", \"shell injection\", \"cross-site scripting AI code\"."
+    },
+    {
+      "id": "harperaa/input-validation-xss-prevention",
+      "name": "input-validation-xss-prevention",
+      "publisher": "harperaa",
+      "source": {
+        "repo": "harperaa/secure-claude-skills",
+        "path": "input-validation/SKILL.md",
+        "revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223",
+        "revision_type": "git-commit",
+        "url": "https://github.com/harperaa/secure-claude-skills/tree/c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223/input-validation/SKILL.md",
+        "state": "present"
+      },
+      "category": [
+        "general"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "LICENSE"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills"
+      ],
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "network": true,
+        "shell": true,
+        "credentials": false
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": "a786e83d31d2868da9b06ae5175b1618180cb08194bac701a1fb2782e0443d67",
+        "last_ingested_revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223"
+      },
+      "description": "Validate and sanitize user input to prevent XSS, injection attacks, and ensure data quality. Use this skill when you need to validate forms, sanitize user input, prevent cross-site scripting, use Zod schemas, or handle any user-generated content. Triggers include \"input validation\", \"validate input\", \"XSS\", \"cross-site scripting\", \"sanitize\", \"Zod\", \"injection prevention\", \"validateRequest\", \"safeTextSchema\", \"user input security\"."
+    },
+    {
+      "id": "harperaa/payment-security-clerk-billing-stripe",
+      "name": "payment-security-clerk-billing-stripe",
+      "publisher": "harperaa",
+      "source": {
+        "repo": "harperaa/secure-claude-skills",
+        "path": "payment-security/SKILL.md",
+        "revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223",
+        "revision_type": "git-commit",
+        "url": "https://github.com/harperaa/secure-claude-skills/tree/c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223/payment-security/SKILL.md",
+        "state": "present"
+      },
+      "category": [
+        "security"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "LICENSE"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills"
+      ],
+      "security": {
+        "scan_status": "review-required",
+        "risk": "medium",
+        "network": true,
+        "shell": true,
+        "credentials": true
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": "1fab271d91eb0a590a1e2b15252c51365498d33ed990169223c52ebb4b96fec7",
+        "last_ingested_revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223"
+      },
+      "description": "Implement secure payments using Clerk Billing and Stripe without ever touching card data. Use this skill when you need to set up subscription payments, handle webhooks, implement payment gating, understand PCI-DSS compliance, or integrate Stripe Checkout. Triggers include \"payment\", \"Stripe\", \"Clerk Billing\", \"subscription\", \"PCI-DSS\", \"credit card\", \"payment security\", \"checkout\", \"webhook\", \"billing\"."
+    },
+    {
+      "id": "harperaa/rate-limiting",
+      "name": "rate-limiting",
+      "publisher": "harperaa",
+      "source": {
+        "repo": "harperaa/secure-claude-skills",
+        "path": "rate-limiting/SKILL.md",
+        "revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223",
+        "revision_type": "git-commit",
+        "url": "https://github.com/harperaa/secure-claude-skills/tree/c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223/rate-limiting/SKILL.md",
+        "state": "present"
+      },
+      "category": [
+        "general"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "LICENSE"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills"
+      ],
+      "security": {
+        "scan_status": "review-required",
+        "risk": "medium",
+        "network": true,
+        "shell": true,
+        "credentials": true
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": "3ae8f36dd3c2b92f38fbf377993335e2691d312e87724f2aff97c9f08512ebfb",
+        "last_ingested_revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223"
+      },
+      "description": "Implement rate limiting to prevent brute force attacks, spam, and resource abuse. Use this skill when you need to protect endpoints from automated attacks, prevent API abuse, limit request frequency, or control infrastructure costs. Triggers include \"rate limiting\", \"rate limit\", \"brute force\", \"prevent spam\", \"API abuse\", \"resource exhaustion\", \"DoS\", \"withRateLimit\", \"too many requests\", \"429 error\"."
+    },
+    {
+      "id": "harperaa/resource-exhaustion-dos-ai-generated-code",
+      "name": "resource-exhaustion-dos-ai-generated-code",
+      "publisher": "harperaa",
+      "source": {
+        "repo": "harperaa/secure-claude-skills",
+        "path": "security-awareness/resource-exhaustion/SKILL.md",
+        "revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223",
+        "revision_type": "git-commit",
+        "url": "https://github.com/harperaa/secure-claude-skills/tree/c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223/security-awareness/resource-exhaustion/SKILL.md",
+        "state": "present"
+      },
+      "category": [
+        "security"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "LICENSE"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills"
+      ],
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "network": true,
+        "shell": true,
+        "credentials": false
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": "a731ba12add12a38c5b4c45d96be7ff43b27d580652b7141a79ccd1a8cf5c4ab",
+        "last_ingested_revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223"
+      },
+      "description": "Understand resource exhaustion and denial of service vulnerabilities in AI code including unbounded loops, missing rate limits, and uncontrolled resource consumption. Use this skill when you need to learn about DoS vulnerabilities in AI code, understand resource limits, recognize unbounded operations, or prevent resource exhaustion. Triggers include \"resource exhaustion\", \"DoS vulnerabilities\", \"denial of service\", \"unbounded resources\", \"API cost protection\", \"memory exhaustion\", \"uncontrolled consumption\", \"rate limiting DoS\"."
+    },
+    {
+      "id": "harperaa/secure-error-handling",
+      "name": "secure-error-handling",
+      "publisher": "harperaa",
+      "source": {
+        "repo": "harperaa/secure-claude-skills",
+        "path": "error-handling/SKILL.md",
+        "revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223",
+        "revision_type": "git-commit",
+        "url": "https://github.com/harperaa/secure-claude-skills/tree/c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223/error-handling/SKILL.md",
+        "state": "present"
+      },
+      "category": [
+        "general"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "LICENSE"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills"
+      ],
+      "security": {
+        "scan_status": "review-required",
+        "risk": "medium",
+        "network": true,
+        "shell": false,
+        "credentials": true
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": "7417062d89948ebb5c7ce7d439e279b3bcb4f9b743b2de9eb2b4622411b51019",
+        "last_ingested_revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223"
+      },
+      "description": "Implement secure error handling to prevent information leakage and provide appropriate error responses. Use this skill when you need to handle errors in API routes, prevent stack trace exposure, implement environment-aware error messages, or use the error handler utilities. Triggers include \"error handling\", \"handle errors\", \"error messages\", \"information leakage\", \"stack trace\", \"handleApiError\", \"production errors\", \"error responses\"."
+    },
+    {
+      "id": "harperaa/security-architecture-overview",
+      "name": "security-architecture-overview",
+      "publisher": "harperaa",
+      "source": {
+        "repo": "harperaa/secure-claude-skills",
+        "path": "security-overview/SKILL.md",
+        "revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223",
+        "revision_type": "git-commit",
+        "url": "https://github.com/harperaa/secure-claude-skills/tree/c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223/security-overview/SKILL.md",
+        "state": "present"
+      },
+      "category": [
+        "security"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "LICENSE"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills"
+      ],
+      "security": {
+        "scan_status": "review-required",
+        "risk": "medium",
+        "network": true,
+        "shell": false,
+        "credentials": true
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": "2a6388c1097cc6e15e8ce485346c61cc901de58acdb481fa650ec90fd4473fe1",
+        "last_ingested_revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223"
+      },
+      "description": "Understand the defense-in-depth security architecture of Secure Vibe Coding OS. Use this skill when you need to understand the overall security approach, the 5-layer security stack, OWASP scoring, or when to use other security skills. Triggers include \"security architecture\", \"defense in depth\", \"security layers\", \"how does security work\", \"OWASP score\", \"security overview\", \"security principles\"."
+    },
+    {
+      "id": "harperaa/security-headers",
+      "name": "security-headers",
+      "publisher": "harperaa",
+      "source": {
+        "repo": "harperaa/secure-claude-skills",
+        "path": "security-headers/SKILL.md",
+        "revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223",
+        "revision_type": "git-commit",
+        "url": "https://github.com/harperaa/secure-claude-skills/tree/c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223/security-headers/SKILL.md",
+        "state": "present"
+      },
+      "category": [
+        "security"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "LICENSE"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills"
+      ],
+      "security": {
+        "scan_status": "review-required",
+        "risk": "medium",
+        "network": true,
+        "shell": true,
+        "credentials": true
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": "9074c79143952e06dfcedcb03d570357d24aa7133d6cea9dca83ae43dcf5e0fa",
+        "last_ingested_revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223"
+      },
+      "description": "Configure security headers to defend against clickjacking, XSS, MIME confusion, and SSL stripping attacks. Use this skill when you need to set up Content-Security-Policy, X-Frame-Options, HSTS, configure middleware headers, or understand browser security features. Triggers include \"security headers\", \"CSP\", \"content security policy\", \"X-Frame-Options\", \"HSTS\", \"clickjacking\", \"MIME confusion\", \"middleware headers\"."
+    },
+    {
+      "id": "harperaa/security-operations-deployment",
+      "name": "security-operations-deployment",
+      "publisher": "harperaa",
+      "source": {
+        "repo": "harperaa/secure-claude-skills",
+        "path": "security-operations/SKILL.md",
+        "revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223",
+        "revision_type": "git-commit",
+        "url": "https://github.com/harperaa/secure-claude-skills/tree/c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223/security-operations/SKILL.md",
+        "state": "present"
+      },
+      "category": [
+        "security"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "LICENSE"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills"
+      ],
+      "security": {
+        "scan_status": "review-required",
+        "risk": "medium",
+        "network": true,
+        "shell": true,
+        "credentials": true
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": "a90a68cd7161373f13d77a223070ec2d4bde3765ec53836898b9d7a66ab2162c",
+        "last_ingested_revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223"
+      },
+      "description": "Operational security guidance for deployment, monitoring, and maintenance. Use this skill when you need to understand which middlewares to apply, configure environment variables, monitor security post-deployment, or follow the pre-deployment checklist. Triggers include \"security operations\", \"deployment security\", \"security monitoring\", \"environment variables\", \"when to use middleware\", \"pre-deployment\", \"security checklist\", \"production security\"."
+    },
+    {
+      "id": "harperaa/security-prompts",
+      "name": "security-prompts",
+      "publisher": "harperaa",
+      "source": {
+        "repo": "harperaa/secure-claude-skills",
+        "path": "security-prompts/SKILL.md",
+        "revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223",
+        "revision_type": "git-commit",
+        "url": "https://github.com/harperaa/secure-claude-skills/tree/c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223/security-prompts/SKILL.md",
+        "state": "present"
+      },
+      "category": [
+        "security"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "LICENSE"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills"
+      ],
+      "security": {
+        "scan_status": "verified",
+        "risk": "none",
+        "network": false,
+        "shell": false,
+        "credentials": false
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": "12dd80b8893d0be7571a1bbb85ac74f9c7f8c3ac6af79068c5510c7d36e29a05",
+        "last_ingested_revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223"
+      },
+      "description": "Library of battle-tested security prompt templates for secure feature implementation. Use when implementing forms, endpoints, authentication, authorization, file uploads, or conducting security reviews. Triggers include \"security prompt\", \"secure form\", \"RBAC\", \"threat model\", \"STRIDE\", \"admin endpoint\", \"file upload\", \"security testing\", \"code review\", \"OWASP\"."
+    },
+    {
+      "id": "harperaa/security-prompts-auth",
+      "name": "security-prompts-auth",
+      "publisher": "harperaa",
+      "source": {
+        "repo": "harperaa/secure-claude-skills",
+        "path": "security-prompts/auth-authorization/SKILL.md",
+        "revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223",
+        "revision_type": "git-commit",
+        "url": "https://github.com/harperaa/secure-claude-skills/tree/c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223/security-prompts/auth-authorization/SKILL.md",
+        "state": "present"
+      },
+      "category": [
+        "security"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "LICENSE"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills"
+      ],
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "network": false,
+        "shell": false,
+        "credentials": false
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": "47d0b4ad34238226b59266a349f9b23889fd6ccaf13fe94875f699fae7f32ad0",
+        "last_ingested_revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223"
+      },
+      "description": "Authentication and authorization prompt templates for RBAC implementation, permissions systems, ownership verification, and authorization testing. Use when setting up roles, implementing access control, or testing authorization logic. Triggers include \"RBAC\", \"role-based access\", \"permissions\", \"ownership\", \"authorization\", \"access control\", \"user roles\", \"auth testing\"."
+    },
+    {
+      "id": "harperaa/security-prompts-controls",
+      "name": "security-prompts-controls",
+      "publisher": "harperaa",
+      "source": {
+        "repo": "harperaa/secure-claude-skills",
+        "path": "security-prompts/built-in-controls/SKILL.md",
+        "revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223",
+        "revision_type": "git-commit",
+        "url": "https://github.com/harperaa/secure-claude-skills/tree/c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223/security-prompts/built-in-controls/SKILL.md",
+        "state": "present"
+      },
+      "category": [
+        "security"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "LICENSE"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills"
+      ],
+      "security": {
+        "scan_status": "verified",
+        "risk": "none",
+        "network": false,
+        "shell": false,
+        "credentials": false
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": "b395f0bbdfe0596814a46d12f53f3530f96862289d0f456eb9c6826df5455071",
+        "last_ingested_revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223"
+      },
+      "description": "Simple security prompt templates for quick implementations using existing Secure Vibe Coding OS utilities. Use for straightforward features like contact forms, authenticated updates, and public APIs. Triggers include \"contact form\", \"simple form\", \"authenticated update\", \"user update\", \"public API\", \"read-only API\", \"quick secure implementation\"."
+    },
+    {
+      "id": "harperaa/security-prompts-engineering",
+      "name": "security-prompts-engineering",
+      "publisher": "harperaa",
+      "source": {
+        "repo": "harperaa/secure-claude-skills",
+        "path": "security-prompts/prompt-engineering/SKILL.md",
+        "revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223",
+        "revision_type": "git-commit",
+        "url": "https://github.com/harperaa/secure-claude-skills/tree/c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223/security-prompts/prompt-engineering/SKILL.md",
+        "state": "present"
+      },
+      "category": [
+        "security"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "LICENSE"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills"
+      ],
+      "security": {
+        "scan_status": "verified",
+        "risk": "none",
+        "network": false,
+        "shell": false,
+        "credentials": false
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": "b18f408d1f5fdebc482a59ba9cccf6c85457d911bda076591be962ba2cb7361a",
+        "last_ingested_revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223"
+      },
+      "description": "Comprehensive security prompt templates for implementing secure features with multiple security layers. Use for complex implementations like forms, authenticated endpoints, public APIs, admin features, file uploads, middleware composition, and security testing. Triggers include \"secure form\", \"authenticated endpoint\", \"public endpoint\", \"admin action\", \"file upload\", \"composable middleware\", \"security testing\", \"new security control\"."
+    },
+    {
+      "id": "harperaa/security-prompts-threat-modeling",
+      "name": "security-prompts-threat-modeling",
+      "publisher": "harperaa",
+      "source": {
+        "repo": "harperaa/secure-claude-skills",
+        "path": "security-prompts/threat-modeling/SKILL.md",
+        "revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223",
+        "revision_type": "git-commit",
+        "url": "https://github.com/harperaa/secure-claude-skills/tree/c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223/security-prompts/threat-modeling/SKILL.md",
+        "state": "present"
+      },
+      "category": [
+        "security"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "LICENSE"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills"
+      ],
+      "security": {
+        "scan_status": "verified",
+        "risk": "none",
+        "network": false,
+        "shell": false,
+        "credentials": false
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": "1affbca2989abc173ea403746df43733c573510d06405fec7bad7b5d191f65db",
+        "last_ingested_revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223"
+      },
+      "description": "Security analysis and threat modeling prompt templates for STRIDE analysis, code review, OWASP compliance, and vulnerability assessment. Use for security planning, pre-deployment reviews, and ongoing threat assessment. Triggers include \"STRIDE\", \"threat model\", \"security review\", \"code review\", \"OWASP\", \"payment security\", \"security analysis\", \"vulnerability assessment\"."
+    },
+    {
+      "id": "harperaa/security-testing-verification",
+      "name": "security-testing-verification",
+      "publisher": "harperaa",
+      "source": {
+        "repo": "harperaa/secure-claude-skills",
+        "path": "security-testing/SKILL.md",
+        "revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223",
+        "revision_type": "git-commit",
+        "url": "https://github.com/harperaa/secure-claude-skills/tree/c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223/security-testing/SKILL.md",
+        "state": "present"
+      },
+      "category": [
+        "security"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "LICENSE"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills"
+      ],
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "network": true,
+        "shell": true,
+        "credentials": false
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": "da1833a7d80ac2c1c8be7d9a46b56850e103d867afc0ce981502f16533fbf877",
+        "last_ingested_revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223"
+      },
+      "description": "Test security features and verify implementation before deployment. Use this skill when you need to test CSRF protection, rate limiting, input validation, verify security headers, run security audits, or check the pre-deployment security checklist. Triggers include \"test security\", \"security testing\", \"verify security\", \"security checklist\", \"pre-deployment\", \"test CSRF\", \"test rate limit\", \"security verification\"."
+    },
+    {
+      "id": "harperaa/supply-chain-dependency-risks-ai-code",
+      "name": "supply-chain-dependency-risks-ai-code",
+      "publisher": "harperaa",
+      "source": {
+        "repo": "harperaa/secure-claude-skills",
+        "path": "security-awareness/supply-chain-risks/SKILL.md",
+        "revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223",
+        "revision_type": "git-commit",
+        "url": "https://github.com/harperaa/secure-claude-skills/tree/c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223/security-awareness/supply-chain-risks/SKILL.md",
+        "state": "present"
+      },
+      "category": [
+        "security"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "LICENSE"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills"
+      ],
+      "security": {
+        "scan_status": "review-required",
+        "risk": "medium",
+        "network": true,
+        "shell": true,
+        "credentials": true
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": "47f85fba62c597acac4cabb9d4a2bc99f2b53381de927a4e493f848ec76649ce",
+        "last_ingested_revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223"
+      },
+      "description": "Understand supply chain vulnerabilities and dependency risks in AI-generated code including outdated packages, malicious packages, and dependency confusion attacks. Use this skill when you need to learn about vulnerable dependencies in AI code, understand supply chain attacks, recognize typosquatting, or identify outdated package suggestions. Triggers include \"supply chain attacks\", \"dependency vulnerabilities\", \"outdated packages\", \"malicious npm packages\", \"typosquatting\", \"dependency confusion\", \"vulnerable dependencies AI\", \"npm security\"."
+    },
+    {
+      "id": "harperaa/vibe-coding-security-awareness-overview",
+      "name": "vibe-coding-security-awareness-overview",
+      "publisher": "harperaa",
+      "source": {
+        "repo": "harperaa/secure-claude-skills",
+        "path": "security-awareness/awareness-overview/SKILL.md",
+        "revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223",
+        "revision_type": "git-commit",
+        "url": "https://github.com/harperaa/secure-claude-skills/tree/c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223/security-awareness/awareness-overview/SKILL.md",
+        "state": "present"
+      },
+      "category": [
+        "security"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "LICENSE"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills"
+      ],
+      "security": {
+        "scan_status": "review-required",
+        "risk": "medium",
+        "network": true,
+        "shell": false,
+        "credentials": true
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": "12f762e0fe47b846536f332b16a723a7447b3992512bf1ed660c3d6fe84a7a95",
+        "last_ingested_revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223"
+      },
+      "description": "Understand the security risks inherent in AI-generated code and vibe coding. Use this skill when you need to understand why AI generates insecure code, statistics on vulnerabilities, real-world breach examples, or overall security awareness for AI-assisted development. Triggers include \"vibe coding security\", \"AI code security\", \"AI vulnerabilities\", \"security risks AI code\", \"why AI insecure\", \"AI security awareness\", \"AI generated code risks\"."
     },
     {
       "id": "j4flmao/ai-content-optimization",

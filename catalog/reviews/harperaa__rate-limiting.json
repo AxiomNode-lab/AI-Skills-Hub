@@ -1,0 +1,248 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "harperaa/rate-limiting",
+  "status": "draft",
+  "reviewed_on": null,
+  "reviewer": null,
+  "source": {
+    "repo": "harperaa/secure-claude-skills",
+    "path": "rate-limiting",
+    "revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "rate-limiting",
+    "url": "https://api.github.com/repos/harperaa/secure-claude-skills/git/trees/c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223?recursive=1",
+    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/harperaa/secure-claude-skills/blob/c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "rate-limiting"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte."
+    ]
+  },
+  "content_review": {
+    "status": "pending",
+    "risk": "unknown",
+    "blocking_findings": [],
+    "capabilities": {},
+    "notes": []
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "e8f0d88e88dafeb5ba3503df8babaf5ef1c49323d6c1751c09989d29740fa919",
+      "bytes": 1069,
+      "mode": "100644",
+      "git_blob": "346d6fb05afd34a37fb0b156a612166534ffc7d9",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "3ae8f36dd3c2b92f38fbf377993335e2691d312e87724f2aff97c9f08512ebfb",
+      "bytes": 20028,
+      "mode": "100644",
+      "git_blob": "15e9eef732b85a5acb38df11e018b8ba92085f35",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "credential-access",
+          "line": 22,
+          "evidence": "Credential",
+          "context": "**Zoom Credential Stuffing (2020):**",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 312,
+          "evidence": "delete",
+          "context": "      rateLimitStore.delete(key);",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 477,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 480,
+          "evidence": "curl",
+          "context": "  curl -X POST https://yourapp.com/api/login \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 480,
+          "evidence": "https://",
+          "context": "  curl -X POST https://yourapp.com/api/login \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 513,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 516,
+          "evidence": "curl",
+          "context": "  curl -X POST https://yourapp.com/api/summarize \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 516,
+          "evidence": "https://",
+          "context": "  curl -X POST https://yourapp.com/api/summarize \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 541,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 545,
+          "evidence": "curl",
+          "context": "  curl -s -o /dev/null -w \"%{http_code}\\n\" \\",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 546,
+          "evidence": "http://",
+          "context": "    http://localhost:3000/api/test-rate-limit",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 565,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 586,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 589,
+          "evidence": "curl",
+          "context": "  curl http://localhost:3000/api/test-rate-limit",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 589,
+          "evidence": "http://",
+          "context": "  curl http://localhost:3000/api/test-rate-limit",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 596,
+          "evidence": "curl",
+          "context": "curl http://localhost:3000/api/test-rate-limit",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 596,
+          "evidence": "http://",
+          "context": "curl http://localhost:3000/api/test-rate-limit",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 656,
+          "evidence": "process.env",
+          "context": "const redis = new Redis(process.env.REDIS_URL);",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 707,
+          "evidence": "Credential",
+          "context": "✅ **Credential stuffing** - Automated login attempts",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 730,
+          "evidence": "https://",
+          "context": "- OWASP API Security Top 10 - Unrestricted Resource Consumption: https://owasp.org/API-Security/editions/2023/en/0xa4-unrestricted-resource-consumption/",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 731,
+          "evidence": "https://",
+          "context": "- Rate Limiting Best Practices: https://cloud.google.com/architecture/rate-limiting-strategies-techniques",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 732,
+          "evidence": "https://",
+          "context": "- HTTP 429 Status Code: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    }
+  ]
+}
