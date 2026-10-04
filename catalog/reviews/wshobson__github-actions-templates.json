@@ -1,9 +1,9 @@
 {
   "schema_version": "0.1",
   "skill_id": "wshobson/github-actions-templates",
-  "status": "draft",
-  "reviewed_on": null,
-  "reviewer": null,
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
   "source": {
     "repo": "wshobson/agents",
     "path": "plugins/cicd-automation/skills/github-actions-templates",
@@ -13,7 +13,7 @@
     "complete": true,
     "scope": "plugins/cicd-automation/skills/github-actions-templates",
     "url": "https://api.github.com/repos/wshobson/agents/git/trees/156b7a5e7a8b93642628a339ee4039c925b34c7f?recursive=1",
-    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
   },
   "license": {
     "spdx": "MIT",
@@ -32,18 +32,32 @@
       ]
     },
     "redistributable": true,
-    "scope_reason": "",
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
     "obligations": [
       "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
-      "Preserve all upstream text and notices byte-for-byte."
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
     ]
   },
   "content_review": {
-    "status": "pending",
-    "risk": "unknown",
+    "status": "approved",
+    "risk": "low",
     "blocking_findings": [],
-    "capabilities": {},
-    "notes": []
+    "capabilities": {
+      "shell": false,
+      "network": false,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md in full (single-file skill). The skill provides GitHub Actions workflow templates: Node test matrix with coverage upload, Docker build/push to GHCR, EKS deployment, Python matrix build, reusable workflows, Trivy/Snyk security scanning and an approval-gated production deployment with Slack notification.",
+      "Low: the agent writes workflow YAML into the user's repository; the commands inside (npm ci, pip install -r requirements.txt, kubectl apply, docker push) run later in the user's CI, not by the agent, and secrets are referenced only through ${{ secrets.* }}. Third-party actions are pinned to versions (e.g. trivy-action@0.28.0, snyk/actions/node@0.4.0).",
+      "Review before adopting: Pattern 3 (SKILL.md:120-157) deploys to the production EKS cluster on every push to main without an environment approval and uses long-lived AWS access keys rather than OIDC role assumption. Related skills (gitlab-ci-patterns, deployment-pipeline-design, secrets-management) are named as optional reading only."
+    ]
   },
   "files": [
     {
@@ -56,7 +70,7 @@
       "git_blob": "326f0a55c96e672fedf9d807ca043c00df05ba0e",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
       "findings": []
     },
     {
@@ -67,39 +81,39 @@
       "git_blob": "d8a3d05497c3a46b2452d1f887895b5dc7bcab1d",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "credential-access",
           "line": 140,
           "evidence": "secret",
           "context": "          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "SKILL.md:140 passes ${{ secrets.AWS_SECRET_ACCESS_KEY }} to aws-actions/configure-aws-credentials inside a workflow template; the agent never reads or handles the secret value."
         },
         {
           "type": "package-install",
           "line": 185,
           "evidence": "pip install",
           "context": "          python -m pip install --upgrade pip",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "SKILL.md:185-186 `pip install --upgrade pip` and `pip install -r requirements.txt` are steps inside a CI workflow template that run on GitHub's runners, not commands for the agent."
         },
         {
           "type": "package-install",
           "line": 186,
           "evidence": "pip install",
           "context": "          pip install -r requirements.txt",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "SKILL.md:185-186 `pip install --upgrade pip` and `pip install -r requirements.txt` are steps inside a CI workflow template that run on GitHub's runners, not commands for the agent."
         },
         {
           "type": "network-access",
           "line": 296,
           "evidence": "https://",
           "context": "      url: https://app.example.com",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "The placeholder environment URL https://app.example.com in the production deployment template."
         }
       ]
     }

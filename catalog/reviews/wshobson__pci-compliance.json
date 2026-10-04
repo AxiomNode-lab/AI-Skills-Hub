@@ -1,9 +1,9 @@
 {
   "schema_version": "0.1",
   "skill_id": "wshobson/pci-compliance",
-  "status": "draft",
-  "reviewed_on": null,
-  "reviewer": null,
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
   "source": {
     "repo": "wshobson/agents",
     "path": "plugins/payment-processing/skills/pci-compliance",
@@ -13,7 +13,7 @@
     "complete": true,
     "scope": "plugins/payment-processing/skills/pci-compliance",
     "url": "https://api.github.com/repos/wshobson/agents/git/trees/156b7a5e7a8b93642628a339ee4039c925b34c7f?recursive=1",
-    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
   },
   "license": {
     "spdx": "MIT",
@@ -32,18 +32,32 @@
       ]
     },
     "redistributable": true,
-    "scope_reason": "",
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found. PCI DSS (a proprietary standard) is referenced only by short requirement headings, level thresholds and SAQ names, which are paraphrased summaries rather than verbatim control text. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
     "obligations": [
       "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
-      "Preserve all upstream text and notices byte-for-byte."
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
     ]
   },
   "content_review": {
-    "status": "pending",
-    "risk": "unknown",
+    "status": "approved",
+    "risk": "low",
     "blocking_findings": [],
-    "capabilities": {},
-    "notes": []
+    "capabilities": {
+      "shell": false,
+      "network": false,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md and references/details.md in full. The skill summarizes PCI DSS (the 12 requirement headings, merchant levels, SAQ types) and gives Python samples for data minimization and log masking, processor tokenization, a Fernet token vault, AES-GCM encryption at rest, secure cookies/HTTPS, role-gated access, audit logging, Luhn validation and a compliance checklist.",
+      "No commands, installs, credentials, or network access; samples are application code with placeholder Stripe keys (pk_..., sk_...).",
+      "The 12-requirement list (SKILL.md:20-50) is a set of one-line headings in PCI DSS v3.2.1 wording, not reproduced standard text; v4.0 renamed several requirements, so verify against the current standard. The tokenization sample uses Stripe's legacy Tokens/Charges APIs; `sanitize_input` is an empty stub; the AES-GCM usage generates a throwaway key (SKILL.md:251), so real deployments need managed keys. This is guidance, not a compliance attestation."
+    ]
   },
   "files": [
     {
@@ -56,7 +70,7 @@
       "git_blob": "326f0a55c96e672fedf9d807ca043c00df05ba0e",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
       "findings": []
     },
     {
@@ -67,23 +81,23 @@
       "git_blob": "28fa98be5242f3581565e8639000bea1770a0740",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "filesystem-write",
           "line": 91,
           "evidence": "Remove",
           "context": "    # Remove spaces and dashes",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Matches are 'Remove' code comments and dict.pop calls that strip prohibited fields from in-memory data or the token vault, not file deletion."
         },
         {
           "type": "filesystem-write",
           "line": 115,
           "evidence": "Remove",
           "context": "    # Remove special characters",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Matches are 'Remove' code comments and dict.pop calls that strip prohibited fields from in-memory data or the token vault, not file deletion."
         }
       ]
     },
@@ -95,39 +109,39 @@
       "git_blob": "b44dbb3db2b047fbd6cce36212d3c54d8cbd7ba2",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "filesystem-write",
           "line": 84,
           "evidence": "Remove",
           "context": "        \"\"\"Remove sensitive data from logs.\"\"\"",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Matches are 'Remove' code comments and dict.pop calls that strip prohibited fields from in-memory data or the token vault, not file deletion."
         },
         {
           "type": "filesystem-write",
           "line": 92,
           "evidence": "Remove",
           "context": "        # Remove prohibited data",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Matches are 'Remove' code comments and dict.pop calls that strip prohibited fields from in-memory data or the token vault, not file deletion."
         },
         {
           "type": "credential-access",
           "line": 142,
           "evidence": "api_key",
           "context": "        stripe.api_key = \"sk_...\"",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Placeholder `stripe.api_key = \"sk_...\"` in a sample charge function; no real secret is read or sent."
         },
         {
           "type": "filesystem-write",
           "line": 207,
           "evidence": "Remove",
           "context": "        \"\"\"Remove token from vault.\"\"\"",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Matches are 'Remove' code comments and dict.pop calls that strip prohibited fields from in-memory data or the token vault, not file deletion."
         }
       ]
     }

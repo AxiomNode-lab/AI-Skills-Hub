@@ -1,9 +1,9 @@
 {
   "schema_version": "0.1",
   "skill_id": "wshobson/dependency-upgrade",
-  "status": "draft",
-  "reviewed_on": null,
-  "reviewer": null,
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
   "source": {
     "repo": "wshobson/agents",
     "path": "plugins/framework-migration/skills/dependency-upgrade",
@@ -13,7 +13,7 @@
     "complete": true,
     "scope": "plugins/framework-migration/skills/dependency-upgrade",
     "url": "https://api.github.com/repos/wshobson/agents/git/trees/156b7a5e7a8b93642628a339ee4039c925b34c7f?recursive=1",
-    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
   },
   "license": {
     "spdx": "MIT",
@@ -32,18 +32,32 @@
       ]
     },
     "redistributable": true,
-    "scope_reason": "",
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in the file; commands, configs and test snippets are short original examples, and codemods are referenced by URL rather than copied. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
     "obligations": [
       "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
-      "Preserve all upstream text and notices byte-for-byte."
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
     ]
   },
   "content_review": {
-    "status": "pending",
-    "risk": "unknown",
+    "status": "approved",
+    "risk": "medium",
     "blocking_findings": [],
-    "capabilities": {},
-    "notes": []
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "dynamic_execution": true,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md in full (single-file skill). The skill guides major dependency upgrades in JavaScript projects: semver review, npm/yarn audit and outdated checks, a compatibility matrix, a staged one-major-at-a-time upgrade plan, codemods, a sample migration script, test layers, Renovate/Dependabot configs, a rollback script and lock-file/peer-dependency/workspace commands.",
+      "Medium: following it has the agent run package installers (npm install <pkg>@latest, npm audit fix, npx npm-check-updates -u, npm install --force/--legacy-peer-deps), run `npx jscodeshift` with transforms fetched from the reactjs/react-codemod master branch (SKILL.md:175-181), rewrite source files in place (SKILL.md:186-210), and run git stash/commit/`branch -D` in the rollback script (SKILL.md:313-333). Acceptable because these change only the user's own project for the upgrade they requested, the codemods come from the official React project with a `--dry` preview shown, and the staged approach runs tests after each step; review diffs and pin a codemod commit where possible.",
+      "Users should know: `npm install --force`/`--legacy-peer-deps` (SKILL.md:354-357) bypass peer-dependency safety; the rollback script's `git stash` leaves local changes stashed and `git branch -D` discards the upgrade branch on failure; the Renovate example automerges minor/patch updates."
+    ]
   },
   "files": [
     {
@@ -56,7 +70,7 @@
       "git_blob": "326f0a55c96e672fedf9d807ca043c00df05ba0e",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
       "findings": []
     },
     {
@@ -67,239 +81,239 @@
       "git_blob": "88aa04a8df13e5382f79ab86364a2f219177d6a5",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "shell-execution",
           "line": 38,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with npm/yarn/npx commands to audit, upgrade, test and codemod the user's project, plus a rollback shell script (labelled rollback.sh) using git and npm."
         },
         {
           "type": "shell-execution",
           "line": 55,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with npm/yarn/npx commands to audit, upgrade, test and codemod the user's project, plus a rollback shell script (labelled rollback.sh) using git and npm."
         },
         {
           "type": "shell-execution",
           "line": 101,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with npm/yarn/npx commands to audit, upgrade, test and codemod the user's project, plus a rollback shell script (labelled rollback.sh) using git and npm."
         },
         {
           "type": "shell-execution",
           "line": 119,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with npm/yarn/npx commands to audit, upgrade, test and codemod the user's project, plus a rollback shell script (labelled rollback.sh) using git and npm."
         },
         {
           "type": "package-install",
           "line": 123,
           "evidence": "npm install",
           "context": "npm install typescript@latest",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "npm/yarn install commands that upgrade the project's own dependencies one step at a time, including @latest, --force and --legacy-peer-deps variants."
         },
         {
           "type": "package-install",
           "line": 130,
           "evidence": "npm install",
           "context": "npm install react@17 react-dom@17",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "npm/yarn install commands that upgrade the project's own dependencies one step at a time, including @latest, --force and --legacy-peer-deps variants."
         },
         {
           "type": "package-install",
           "line": 136,
           "evidence": "npm install",
           "context": "npm install react-router-dom@6",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "npm/yarn install commands that upgrade the project's own dependencies one step at a time, including @latest, --force and --legacy-peer-deps variants."
         },
         {
           "type": "shell-execution",
           "line": 163,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with npm/yarn/npx commands to audit, upgrade, test and codemod the user's project, plus a rollback shell script (labelled rollback.sh) using git and npm."
         },
         {
           "type": "network-access",
           "line": 165,
           "evidence": "curl",
           "context": "curl https://raw.githubusercontent.com/facebook/react/master/CHANGELOG.md",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Read-only fetch of the React CHANGELOG for breaking-change review."
         },
         {
           "type": "network-access",
           "line": 165,
           "evidence": "https://",
           "context": "curl https://raw.githubusercontent.com/facebook/react/master/CHANGELOG.md",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Read-only fetch of the React CHANGELOG for breaking-change review."
         },
         {
           "type": "shell-execution",
           "line": 170,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with npm/yarn/npx commands to audit, upgrade, test and codemod the user's project, plus a rollback shell script (labelled rollback.sh) using git and npm."
         },
         {
           "type": "network-access",
           "line": 175,
           "evidence": "https://",
           "context": "npx jscodeshift -t https://raw.githubusercontent.com/reactjs/react-codemod/master/transforms/rename-unsafe-lifecycles.js src/",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Downloads and runs an unpinned codemod transform from the react-codemod master branch over src/; official upstream, preview with --dry first."
         },
         {
           "type": "network-access",
           "line": 178,
           "evidence": "https://",
           "context": "npx jscodeshift -t https://raw.githubusercontent.com/reactjs/react-codemod/master/transforms/rename-unsafe-lifecycles.js --parser=tsx src/",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "curl reads the React CHANGELOG, and jscodeshift `-t` arguments are raw.githubusercontent.com URLs of official react-codemod transforms that jscodeshift downloads and executes."
         },
         {
           "type": "network-access",
           "line": 181,
           "evidence": "https://",
           "context": "npx jscodeshift -t https://raw.githubusercontent.com/reactjs/react-codemod/master/transforms/rename-unsafe-lifecycles.js --dry src/",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "curl reads the React CHANGELOG, and jscodeshift `-t` arguments are raw.githubusercontent.com URLs of official react-codemod transforms that jscodeshift downloads and executes."
         },
         {
           "type": "filesystem-write",
           "line": 207,
           "evidence": "writeFileSync",
           "context": "    fs.writeFileSync(file, content);",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "A sample migration script overwrites the user's .tsx files with writeFileSync after regex replacements of deprecated React APIs."
         },
         {
           "type": "package-install",
           "line": 221,
           "evidence": "npm install",
           "context": "npm install @testing-library/react@latest",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "npm/yarn install commands that upgrade the project's own dependencies one step at a time, including @latest, --force and --legacy-peer-deps variants."
         },
         {
           "type": "shell-execution",
           "line": 313,
           "evidence": "sh",
           "context": "// rollback.sh",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with npm/yarn/npx commands to audit, upgrade, test and codemod the user's project, plus a rollback shell script (labelled rollback.sh) using git and npm."
         },
         {
           "type": "shell-execution",
           "line": 314,
           "evidence": "bash",
           "context": "#!/bin/bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with npm/yarn/npx commands to audit, upgrade, test and codemod the user's project, plus a rollback shell script (labelled rollback.sh) using git and npm."
         },
         {
           "type": "package-install",
           "line": 321,
           "evidence": "npm install",
           "context": "npm install package@latest",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "npm/yarn install commands that upgrade the project's own dependencies one step at a time, including @latest, --force and --legacy-peer-deps variants."
         },
         {
           "type": "package-install",
           "line": 332,
           "evidence": "npm install",
           "context": "  npm install  # Restore from package-lock.json",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "npm/yarn install commands that upgrade the project's own dependencies one step at a time, including @latest, --force and --legacy-peer-deps variants."
         },
         {
           "type": "shell-execution",
           "line": 340,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with npm/yarn/npx commands to audit, upgrade, test and codemod the user's project, plus a rollback shell script (labelled rollback.sh) using git and npm."
         },
         {
           "type": "package-install",
           "line": 342,
           "evidence": "npm install",
           "context": "npm install --package-lock-only  # Update lock file only",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "npm/yarn install commands that upgrade the project's own dependencies one step at a time, including @latest, --force and --legacy-peer-deps variants."
         },
         {
           "type": "package-install",
           "line": 346,
           "evidence": "yarn install",
           "context": "yarn install --frozen-lockfile  # CI mode",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "npm/yarn install commands that upgrade the project's own dependencies one step at a time, including @latest, --force and --legacy-peer-deps variants."
         },
         {
           "type": "shell-execution",
           "line": 352,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with npm/yarn/npx commands to audit, upgrade, test and codemod the user's project, plus a rollback shell script (labelled rollback.sh) using git and npm."
         },
         {
           "type": "package-install",
           "line": 354,
           "evidence": "npm install",
           "context": "npm install --legacy-peer-deps  # Ignore peer deps",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "npm/yarn install commands that upgrade the project's own dependencies one step at a time, including @latest, --force and --legacy-peer-deps variants."
         },
         {
           "type": "package-install",
           "line": 357,
           "evidence": "npm install",
           "context": "npm install --force",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "npm/yarn install commands that upgrade the project's own dependencies one step at a time, including @latest, --force and --legacy-peer-deps variants."
         },
         {
           "type": "shell-execution",
           "line": 362,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with npm/yarn/npx commands to audit, upgrade, test and codemod the user's project, plus a rollback shell script (labelled rollback.sh) using git and npm."
         },
         {
           "type": "package-install",
           "line": 364,
           "evidence": "npm install",
           "context": "npm install --workspaces",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "npm/yarn install commands that upgrade the project's own dependencies one step at a time, including @latest, --force and --legacy-peer-deps variants."
         },
         {
           "type": "package-install",
           "line": 367,
           "evidence": "npm install",
           "context": "npm install package@latest --workspace=packages/app",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "npm/yarn install commands that upgrade the project's own dependencies one step at a time, including @latest, --force and --legacy-peer-deps variants."
         }
       ]
     }

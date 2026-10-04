@@ -1,0 +1,179 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "bagelhole/ssl-tls-management",
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "security/network/ssl-tls-management",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "review": {
+    "path": "catalog/reviews/bagelhole__ssl-tls-management.json",
+    "sha256": "7be5f5b4361dd570f2f9cf0c480c4e3d0922073f2302c0b7f15590e59506fff2"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "shell-execution",
+        "line": 37,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 64,
+        "evidence": "pip install",
+        "context": "pip install certbot-dns-cloudflare",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 67,
+        "evidence": "\nchmod",
+        "context": "EOF",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 78,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 112,
+        "evidence": "mkdir",
+        "context": "mkdir -p /etc/letsencrypt/renewal-hooks/deploy",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 113,
+        "evidence": "sh",
+        "context": "cat > /etc/letsencrypt/renewal-hooks/deploy/reload-services.sh << 'HOOK'",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 114,
+        "evidence": "bash",
+        "context": "#!/bin/bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 118,
+        "evidence": "\nchmod",
+        "context": "HOOK",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 119,
+        "evidence": "sh",
+        "context": "chmod +x /etc/letsencrypt/renewal-hooks/deploy/reload-services.sh",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 126,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 128,
+        "evidence": "https://",
+        "context": "helm repo add jetstack https://charts.jetstack.io",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 153,
+        "evidence": "https://",
+        "context": "    server: https://acme-staging-v02.api.letsencrypt.org/directory",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 169,
+        "evidence": "https://",
+        "context": "    server: https://acme-v02.api.letsencrypt.org/directory",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 185,
+        "evidence": "https://",
+        "context": "    server: https://acme-v02.api.letsencrypt.org/directory",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 267,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 371,
+        "evidence": "https://",
+        "context": "    return 301 https://$host$request_uri;",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 398,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 399,
+        "evidence": "bash",
+        "context": "#!/bin/bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 400,
+        "evidence": "sh",
+        "context": "# cert-monitor.sh - Monitor certificate expiration across hosts",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 14263
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "5ef7ac7d8cb5fd1037f8f9f15b5368161e189dce25a59047b7bd7c95280ec5d3",
+      "bytes": 13195,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 14263
+}

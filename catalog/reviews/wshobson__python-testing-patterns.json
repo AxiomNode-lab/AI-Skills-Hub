@@ -1,9 +1,9 @@
 {
   "schema_version": "0.1",
   "skill_id": "wshobson/python-testing-patterns",
-  "status": "draft",
-  "reviewed_on": null,
-  "reviewer": null,
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
   "source": {
     "repo": "wshobson/agents",
     "path": "plugins/python-development/skills/python-testing-patterns",
@@ -13,7 +13,7 @@
     "complete": true,
     "scope": "plugins/python-development/skills/python-testing-patterns",
     "url": "https://api.github.com/repos/wshobson/agents/git/trees/156b7a5e7a8b93642628a339ee4039c925b34c7f?recursive=1",
-    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
   },
   "license": {
     "spdx": "MIT",
@@ -32,18 +32,32 @@
       ]
     },
     "redistributable": true,
-    "scope_reason": "",
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
     "obligations": [
       "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
-      "Preserve all upstream text and notices byte-for-byte."
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
     ]
   },
   "content_review": {
-    "status": "pending",
-    "risk": "unknown",
+    "status": "approved",
+    "risk": "medium",
     "blocking_findings": [],
-    "capabilities": {},
-    "notes": []
+    "capabilities": {
+      "shell": true,
+      "network": false,
+      "credentials": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md, references/details.md and references/advanced-patterns.md in full. The skill teaches pytest patterns: AAA structure, fixtures, parametrization, unittest.mock, freezegun, markers, async tests, monkeypatch, tmp_path, Hypothesis, SQLAlchemy in-memory tests, CI config and coverage.",
+      "The only command the skill presents for the agent to run is 'pip install pytest-cov' followed by pytest coverage runs (SKILL.md:261-276); pip install also appears inside an example GitHub Actions workflow (advanced-patterns.md:354-355). Medium only because of that package install; it is a well-known PyPI test plugin installed into the user's own test environment, and everything else is sample test code that writes to the user's test files.",
+      "No credentials, remote services, or behavior overrides. Cross-links between SKILL.md and the two reference files all resolve inside the skill directory."
+    ]
   },
   "files": [
     {
@@ -56,7 +70,7 @@
       "git_blob": "326f0a55c96e672fedf9d807ca043c00df05ba0e",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
       "findings": []
     },
     {
@@ -67,63 +81,63 @@
       "git_blob": "da186a91e60c44339a28ddb3b6ce478b7d23af64",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "network-access",
           "line": 21,
           "evidence": "https://",
           "context": "    result = await fetch_data(\"https://api.example.com\")",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "https://api.example.com placeholder URLs in sample code whose requests are mocked with unittest.mock.patch; nothing is fetched."
         },
         {
           "type": "network-access",
           "line": 22,
           "evidence": "https://",
           "context": "    assert result[\"url\"] == \"https://api.example.com\"",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "https://api.example.com placeholder URLs in sample code whose requests are mocked with unittest.mock.patch; nothing is fetched."
         },
         {
           "type": "credential-access",
           "line": 86,
           "evidence": "api_key",
           "context": "        self.api_key = \"production-key\"",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Dummy api_key values ('test-key', 'production-key') in fixtures and a monkeypatch example; no real secrets are read."
         },
         {
           "type": "credential-access",
           "line": 89,
           "evidence": "api_key",
           "context": "        return self.api_key",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Dummy api_key values ('test-key', 'production-key') in fixtures and a monkeypatch example; no real secrets are read."
         },
         {
           "type": "credential-access",
           "line": 95,
           "evidence": "api_key",
           "context": "    monkeypatch.setattr(config, \"api_key\", \"test-key\")",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Dummy api_key values ('test-key', 'production-key') in fixtures and a monkeypatch example; no real secrets are read."
         },
         {
           "type": "package-install",
           "line": 354,
           "evidence": "pip install",
           "context": "          pip install -e \".[dev]\"",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "pip install pytest-cov in the coverage section and pip install lines inside an example CI workflow."
         },
         {
           "type": "package-install",
           "line": 355,
           "evidence": "pip install",
           "context": "          pip install pytest pytest-cov",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "pip install pytest-cov in the coverage section and pip install lines inside an example CI workflow."
         }
       ]
     },
@@ -135,47 +149,47 @@
       "git_blob": "9b1647467d5fb7401ac3a6b109c9b75c1512bf6d",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "credential-access",
           "line": 120,
           "evidence": "api_key",
           "context": "        \"api_key\": \"test-key\",",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Dummy api_key values ('test-key', 'production-key') in fixtures and a monkeypatch example; no real secrets are read."
         },
         {
           "type": "network-access",
           "line": 219,
           "evidence": "https://",
           "context": "    client = APIClient(\"https://api.example.com\")",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "https://api.example.com placeholder URLs in sample code whose requests are mocked with unittest.mock.patch; nothing is fetched."
         },
         {
           "type": "network-access",
           "line": 230,
           "evidence": "https://",
           "context": "        mock_get.assert_called_once_with(\"https://api.example.com/users/1\")",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "https://api.example.com placeholder URLs in sample code whose requests are mocked with unittest.mock.patch; nothing is fetched."
         },
         {
           "type": "network-access",
           "line": 235,
           "evidence": "https://",
           "context": "    client = APIClient(\"https://api.example.com\")",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "https://api.example.com placeholder URLs in sample code whose requests are mocked with unittest.mock.patch; nothing is fetched."
         },
         {
           "type": "network-access",
           "line": 248,
           "evidence": "https://",
           "context": "    client = APIClient(\"https://api.example.com\")",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "https://api.example.com placeholder URLs in sample code whose requests are mocked with unittest.mock.patch; nothing is fetched."
         }
       ]
     },
@@ -187,23 +201,23 @@
       "git_blob": "4fe8a4245c55e9e79e70b5f75ab387e2349f91dc",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "shell-execution",
           "line": 261,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "A bash fence listing pip install and pytest --cov commands for running the user's tests."
         },
         {
           "type": "package-install",
           "line": 263,
           "evidence": "pip install",
           "context": "pip install pytest-cov",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "pip install pytest-cov in the coverage section and pip install lines inside an example CI workflow."
         }
       ]
     }

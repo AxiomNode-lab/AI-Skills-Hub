@@ -1,9 +1,9 @@
 {
   "schema_version": "0.1",
   "skill_id": "wshobson/sast-configuration",
-  "status": "draft",
-  "reviewed_on": null,
-  "reviewer": null,
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
   "source": {
     "repo": "wshobson/agents",
     "path": "plugins/security-scanning/skills/sast-configuration",
@@ -13,7 +13,7 @@
     "complete": true,
     "scope": "plugins/security-scanning/skills/sast-configuration",
     "url": "https://api.github.com/repos/wshobson/agents/git/trees/156b7a5e7a8b93642628a339ee4039c925b34c7f?recursive=1",
-    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
   },
   "license": {
     "spdx": "MIT",
@@ -32,18 +32,32 @@
       ]
     },
     "redistributable": true,
-    "scope_reason": "",
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found; PCI-DSS and SOC 2 are only named, and Semgrep rule-pack names are short identifiers. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
     "obligations": [
       "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
-      "Preserve all upstream text and notices byte-for-byte."
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
     ]
   },
   "content_review": {
-    "status": "pending",
-    "risk": "unknown",
+    "status": "approved",
+    "risk": "medium",
     "blocking_findings": [],
-    "capabilities": {},
-    "notes": []
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md in full (the only file). The skill gives an overview of setting up SAST with Semgrep, SonarQube and CodeQL: quick-start commands, a GitHub Actions step, a pre-commit hook, best practices, a sample custom Semgrep rule, a PCI-focused scan, troubleshooting and a tool comparison.",
+      "Medium: the Basic Setup (SKILL.md:57-67) has the agent `pip install semgrep`, run `semgrep --config=auto` (which downloads rules from the Semgrep registry), start a SonarQube container from a pinned image (sonarqube:10.8-community), and `gh extension install github/gh-codeql`. Acceptable because these are the tools' standard, read-only scanning setups run on the user's own code at their request; nothing touches credentials beyond the user's existing gh login, and no destructive commands appear.",
+      "Broken references, not required for the skill to work: `./scripts/run-sast.sh` (SKILL.md:127) and `references/semgrep-rules.md` (SKILL.md:133) are not in the skill directory; the Basic Setup section already provides working commands, so the agent should use those. Related Skills (SKILL.md:173-174) link to sibling skills ../stride-analysis-patterns/ and ../threat-mitigation-mapping/ as optional reading only."
+    ]
   },
   "files": [
     {
@@ -56,7 +70,7 @@
       "git_blob": "326f0a55c96e672fedf9d807ca043c00df05ba0e",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
       "findings": []
     },
     {
@@ -67,79 +81,79 @@
       "git_blob": "9d6f85c082fd0062b3ecc42f40c32723e017b554",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "shell-execution",
           "line": 57,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks that install and run SAST tools (semgrep, SonarQube container, CodeQL) against the user's code, plus a reference to a non-bundled ./scripts/run-sast.sh helper."
         },
         {
           "type": "package-install",
           "line": 59,
           "evidence": "pip install",
           "context": "pip install semgrep",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "`pip install semgrep` from PyPI as the Semgrep quick-start step."
         },
         {
           "type": "shell-execution",
           "line": 86,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks that install and run SAST tools (semgrep, SonarQube container, CodeQL) against the user's code, plus a reference to a non-bundled ./scripts/run-sast.sh helper."
         },
         {
           "type": "network-access",
           "line": 88,
           "evidence": "https://",
           "context": "- repo: https://github.com/returntocorp/semgrep",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "The official Semgrep GitHub repository URL as the source in a pre-commit hook config pinned to rev v1.45.0."
         },
         {
           "type": "shell-execution",
           "line": 126,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks that install and run SAST tools (semgrep, SonarQube container, CodeQL) against the user's code, plus a reference to a non-bundled ./scripts/run-sast.sh helper."
         },
         {
           "type": "shell-execution",
           "line": 127,
           "evidence": "sh",
           "context": "./scripts/run-sast.sh --setup --language python --tools semgrep,sonarqube",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Invokes ./scripts/run-sast.sh, which is not shipped with the skill; the command will fail and the Basic Setup commands should be used instead."
         },
         {
           "type": "credential-access",
           "line": 135,
           "evidence": "secret",
           "context": "  - id: hardcoded-jwt-secret",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "The id and message of a sample Semgrep rule that detects hardcoded JWT secrets; no secret is read or used."
         },
         {
           "type": "credential-access",
           "line": 137,
           "evidence": "secret",
           "context": "    message: JWT secret should not be hardcoded",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "The id and message of a sample Semgrep rule that detects hardcoded JWT secrets; no secret is read or used."
         },
         {
           "type": "shell-execution",
           "line": 143,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks that install and run SAST tools (semgrep, SonarQube container, CodeQL) against the user's code, plus a reference to a non-bundled ./scripts/run-sast.sh helper."
         }
       ]
     }

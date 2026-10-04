@@ -1,9 +1,9 @@
 {
   "schema_version": "0.1",
   "skill_id": "bagelhole/sops-encryption",
-  "status": "draft",
-  "reviewed_on": null,
-  "reviewer": null,
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
   "source": {
     "repo": "BagelHole/DevOps-Security-Agent-Skills",
     "path": "security/secrets/sops-encryption",
@@ -13,7 +13,7 @@
     "complete": true,
     "scope": "security/secrets/sops-encryption",
     "url": "https://api.github.com/repos/BagelHole/DevOps-Security-Agent-Skills/git/trees/0365f57a079b1332f95cf26e31dd2d5332a8399f?recursive=1",
-    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
   },
   "license": {
     "spdx": "MIT",
@@ -31,18 +31,32 @@
       ]
     },
     "redistributable": true,
-    "scope_reason": "",
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found; examples are short original snippets. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
     "obligations": [
       "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
-      "Preserve all upstream text and notices byte-for-byte."
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
     ]
   },
   "content_review": {
-    "status": "pending",
-    "risk": "unknown",
+    "status": "approved",
+    "risk": "medium",
     "blocking_findings": [],
-    "capabilities": {},
-    "notes": []
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "package_install": true,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md in full; it is the only file. Short SOPS guide: installing sops, encrypting/decrypting/editing files with AWS KMS or PGP keys, a .sops.yaml creation-rules example, a SOPS-encrypted Kubernetes Secret, and best practices.",
+      "Following it can make the agent install sops via brew or by downloading the v3.8.0 release binary from GitHub and moving it into /usr/local/bin (SKILL.md:34-36), and run sops commands that use the user's KMS/PGP keys; 'sops --decrypt' prints decrypted secrets to stdout (SKILL.md:46). Medium because it installs a downloaded binary and handles real secrets with the user's keys; acceptable because the download is version-pinned from the official repository (no checksum shown), nothing is piped to a shell, and decrypting is part of the user's own secret-management task.",
+      "KMS ARNs and the PGP fingerprint are placeholders; the ArgoCD/ksops section is a comment only. Related Skills (SKILL.md:99-100) link to sibling skills (../hashicorp-vault/, ../../../devops/orchestration/argocd-gitops/) that do not ship with this skill; optional. Frontmatter declares license: MIT."
+    ]
   },
   "files": [
     {
@@ -55,7 +69,7 @@
       "git_blob": "67c5c5cbb12cafb1515e449748866bd40da7dec9",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
       "findings": []
     },
     {
@@ -66,71 +80,71 @@
       "git_blob": "c4c518303ac3997a60d5a84796e0759bc809cc2f",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "shell-execution",
           "line": 29,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with brew/wget/chmod/mv install steps and sops encrypt/decrypt commands."
         },
         {
           "type": "network-access",
           "line": 34,
           "evidence": "wget",
           "context": "wget https://github.com/getsops/sops/releases/download/v3.8.0/sops-v3.8.0.linux.amd64",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "wget of the version-pinned sops v3.8.0 Linux binary from the getsops GitHub releases page."
         },
         {
           "type": "network-access",
           "line": 34,
           "evidence": "https://",
           "context": "wget https://github.com/getsops/sops/releases/download/v3.8.0/sops-v3.8.0.linux.amd64",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "wget of the version-pinned sops v3.8.0 Linux binary from the getsops GitHub releases page."
         },
         {
           "type": "shell-execution",
           "line": 34,
           "evidence": "\nchmod",
           "context": "wget https://github.com/getsops/sops/releases/download/v3.8.0/sops-v3.8.0.linux.amd64",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with brew/wget/chmod/mv install steps and sops encrypt/decrypt commands."
         },
         {
           "type": "shell-execution",
           "line": 41,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with brew/wget/chmod/mv install steps and sops encrypt/decrypt commands."
         },
         {
           "type": "credential-access",
           "line": 71,
           "evidence": "secret",
           "context": "# encrypted secret",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "A SOPS-encrypted Kubernetes Secret example with placeholder ciphertext; sops operations use the user's own KMS/PGP keys."
         },
         {
           "type": "credential-access",
           "line": 73,
           "evidence": "Secret",
           "context": "kind: Secret",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "A SOPS-encrypted Kubernetes Secret example with placeholder ciphertext; sops operations use the user's own KMS/PGP keys."
         },
         {
           "type": "shell-execution",
           "line": 84,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with brew/wget/chmod/mv install steps and sops encrypt/decrypt commands."
         }
       ]
     }

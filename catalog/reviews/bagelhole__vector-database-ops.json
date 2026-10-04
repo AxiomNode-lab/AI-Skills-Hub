@@ -1,9 +1,9 @@
 {
   "schema_version": "0.1",
   "skill_id": "bagelhole/vector-database-ops",
-  "status": "draft",
-  "reviewed_on": null,
-  "reviewer": null,
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
   "source": {
     "repo": "BagelHole/DevOps-Security-Agent-Skills",
     "path": "infrastructure/databases/vector-database-ops",
@@ -13,7 +13,7 @@
     "complete": true,
     "scope": "infrastructure/databases/vector-database-ops",
     "url": "https://api.github.com/repos/BagelHole/DevOps-Security-Agent-Skills/git/trees/0365f57a079b1332f95cf26e31dd2d5332a8399f?recursive=1",
-    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
   },
   "license": {
     "spdx": "MIT",
@@ -31,18 +31,32 @@
       ]
     },
     "redistributable": true,
-    "scope_reason": "",
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: License metadata says MIT; no third-party copyright notice, other license grant, or copied third-party text found; config, SQL, and client snippets are short examples. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
     "obligations": [
       "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
-      "Preserve all upstream text and notices byte-for-byte."
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
     ]
   },
   "content_review": {
-    "status": "pending",
-    "risk": "unknown",
+    "status": "approved",
+    "risk": "medium",
     "blocking_findings": [],
-    "capabilities": {},
-    "notes": []
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "package_install": false,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md in full. The skill compares vector databases and covers Qdrant deployment, collection and payload-index management, filtered search, pgvector schema and indexes, Weaviate compose with API-key auth, snapshot/pg_dump backup and restore, and performance tuning.",
+      "Following it can make the agent start Docker containers, create collections and indexes, run snapshot/restore via the Qdrant REST API, and run pg_dump/pg_restore against the user's databases (SKILL.md:226-241). These operate on databases the user is setting up and include no deletes; the skill advises snapshotting before bulk deletes (SKILL.md:279). Medium risk because restores overwrite data and should be confirmed with the user.",
+      "The Qdrant 'Production Deployment' docker run (SKILL.md:35-50) publishes ports 6333/6334 with no API key and uses the :latest tag, and pgvector uses POSTGRES_PASSWORD=secret on a published port; users should add a Qdrant API key, pin images, and use real secrets before production. Related-skill links (../../local-ai/rag-infrastructure/, ../, ../postgresql/ at SKILL.md:283-285) are optional pointers."
+    ]
   },
   "files": [
     {
@@ -55,7 +69,7 @@
       "git_blob": "67c5c5cbb12cafb1515e449748866bd40da7dec9",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
       "findings": []
     },
     {
@@ -66,103 +80,103 @@
       "git_blob": "f38d81fd7a43025e040fd62813986bc54c5e5852",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "shell-execution",
           "line": 35,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "docker run, curl to the local Qdrant API, and pg_dump/pg_restore commands for databases the user deploys."
         },
         {
           "type": "network-access",
           "line": 85,
           "evidence": "http://",
           "context": "client = QdrantClient(\"http://localhost:6333\")",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "localhost Qdrant REST and client URLs for collection management and snapshot backup/restore; no remote content is fetched."
         },
         {
           "type": "shell-execution",
           "line": 185,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "docker run, curl to the local Qdrant API, and pg_dump/pg_restore commands for databases the user deploys."
         },
         {
           "type": "credential-access",
           "line": 189,
           "evidence": "secret",
           "context": "  -e POSTGRES_PASSWORD=secret \\",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Placeholder POSTGRES_PASSWORD=secret in a pgvector docker run (SKILL.md:189); no instruction to read, print, or send real secrets."
         },
         {
           "type": "shell-execution",
           "line": 226,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "docker run, curl to the local Qdrant API, and pg_dump/pg_restore commands for databases the user deploys."
         },
         {
           "type": "network-access",
           "line": 228,
           "evidence": "curl",
           "context": "curl -X POST \"http://localhost:6333/collections/documents/snapshots\"",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "localhost Qdrant REST and client URLs for collection management and snapshot backup/restore; no remote content is fetched."
         },
         {
           "type": "network-access",
           "line": 228,
           "evidence": "http://",
           "context": "curl -X POST \"http://localhost:6333/collections/documents/snapshots\"",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "localhost Qdrant REST and client URLs for collection management and snapshot backup/restore; no remote content is fetched."
         },
         {
           "type": "network-access",
           "line": 230,
           "evidence": "curl",
           "context": "curl -O \"http://localhost:6333/collections/documents/snapshots/documents-snapshot.snapshot\"",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "localhost Qdrant REST and client URLs for collection management and snapshot backup/restore; no remote content is fetched."
         },
         {
           "type": "network-access",
           "line": 230,
           "evidence": "http://",
           "context": "curl -O \"http://localhost:6333/collections/documents/snapshots/documents-snapshot.snapshot\"",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "localhost Qdrant REST and client URLs for collection management and snapshot backup/restore; no remote content is fetched."
         },
         {
           "type": "network-access",
           "line": 232,
           "evidence": "curl",
           "context": "curl -X POST \"http://localhost:6333/collections/documents/snapshots/recover\" \\",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "localhost Qdrant REST and client URLs for collection management and snapshot backup/restore; no remote content is fetched."
         },
         {
           "type": "network-access",
           "line": 232,
           "evidence": "http://",
           "context": "curl -X POST \"http://localhost:6333/collections/documents/snapshots/recover\" \\",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "localhost Qdrant REST and client URLs for collection management and snapshot backup/restore; no remote content is fetched."
         },
         {
           "type": "filesystem-write",
           "line": 279,
           "evidence": "delete",
           "context": "- Snapshot before any bulk delete or migration operation.",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "The hit is the best-practice line \"Snapshot before any bulk delete or migration operation\" (SKILL.md:279), advice rather than a delete command."
         }
       ]
     }

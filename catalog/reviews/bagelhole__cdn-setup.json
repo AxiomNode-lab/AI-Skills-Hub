@@ -1,9 +1,9 @@
 {
   "schema_version": "0.1",
   "skill_id": "bagelhole/cdn-setup",
-  "status": "draft",
-  "reviewed_on": null,
-  "reviewer": null,
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
   "source": {
     "repo": "BagelHole/DevOps-Security-Agent-Skills",
     "path": "infrastructure/networking/cdn-setup",
@@ -13,7 +13,7 @@
     "complete": true,
     "scope": "infrastructure/networking/cdn-setup",
     "url": "https://api.github.com/repos/BagelHole/DevOps-Security-Agent-Skills/git/trees/0365f57a079b1332f95cf26e31dd2d5332a8399f?recursive=1",
-    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
   },
   "license": {
     "spdx": "MIT",
@@ -31,18 +31,32 @@
       ]
     },
     "redistributable": true,
-    "scope_reason": "",
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found; frontmatter declares license: MIT. Managed cache-policy IDs are short AWS identifiers, not copied documentation. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
     "obligations": [
       "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
-      "Preserve all upstream text and notices byte-for-byte."
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
     ]
   },
   "content_review": {
-    "status": "pending",
-    "risk": "unknown",
+    "status": "approved",
+    "risk": "medium",
     "blocking_findings": [],
-    "capabilities": {},
-    "notes": []
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "package_install": false,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md in full (the only file). The skill covers CDN configuration: CloudFront distributions via CLI and Terraform, invalidations, CloudFront Functions, Cloudflare zone setup, cache rules and purges via the Cloudflare API, origin nginx cache headers, cache warming and cache-hit monitoring.",
+      "Medium: following it has the agent call live services with the user's credentials: AWS CLI to create a distribution and invalidations, and curl to the Cloudflare v4 API with `Authorization: Bearer $CF_API_TOKEN` to add a zone, set cache rules and purge cache, including `purge_everything` (SKILL.md:238-241). Acceptable because these act on the user's own CDN for the task they asked for; purging only causes cache misses, the token is read from an environment variable and sent only to api.cloudflare.com, and there are no delete or security-disabling steps.",
+      "Users should confirm full purges and `/*` invalidations, which can raise origin load and cost (the skill itself warns at SKILL.md:93, 351). Related Skills (SKILL.md:355-358) link to sibling skills ../dns-management/, ../reverse-proxy/, ../load-balancing/ and ../../cloudflare/cloudflare-pages/ as optional reading only."
+    ]
   },
   "files": [
     {
@@ -55,7 +69,7 @@
       "git_blob": "67c5c5cbb12cafb1515e449748866bd40da7dec9",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
       "findings": []
     },
     {
@@ -66,263 +80,263 @@
       "git_blob": "3939c59d85a6633257e6496f25e3e4e03ccde54e",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "shell-execution",
           "line": 34,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with AWS CLI and curl commands that configure, invalidate, warm and inspect the user's own CDN."
         },
         {
           "type": "shell-execution",
           "line": 87,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with AWS CLI and curl commands that configure, invalidate, warm and inspect the user's own CDN."
         },
         {
           "type": "filesystem-write",
           "line": 164,
           "evidence": "DELETE",
           "context": "    allowed_methods  = [\"GET\", \"HEAD\", \"OPTIONS\", \"PUT\", \"POST\", \"PATCH\", \"DELETE\"]",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "The word DELETE is an HTTP method in a CloudFront `allowed_methods` list for API pass-through, not a file or resource deletion."
         },
         {
           "type": "shell-execution",
           "line": 199,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with AWS CLI and curl commands that configure, invalidate, warm and inspect the user's own CDN."
         },
         {
           "type": "network-access",
           "line": 201,
           "evidence": "curl",
           "context": "curl -X POST \"https://api.cloudflare.com/client/v4/zones\" \\",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "curl calls to the Cloudflare v4 API using $CF_API_TOKEN, plus cache-warming and header checks against placeholder example.com URLs."
         },
         {
           "type": "network-access",
           "line": 201,
           "evidence": "https://",
           "context": "curl -X POST \"https://api.cloudflare.com/client/v4/zones\" \\",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "curl calls to the Cloudflare v4 API using $CF_API_TOKEN, plus cache-warming and header checks against placeholder example.com URLs."
         },
         {
           "type": "network-access",
           "line": 207,
           "evidence": "curl",
           "context": "ZONE_ID=$(curl -s \"https://api.cloudflare.com/client/v4/zones?name=example.com\" \\",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "curl calls to the Cloudflare v4 API using $CF_API_TOKEN, plus cache-warming and header checks against placeholder example.com URLs."
         },
         {
           "type": "network-access",
           "line": 207,
           "evidence": "https://",
           "context": "ZONE_ID=$(curl -s \"https://api.cloudflare.com/client/v4/zones?name=example.com\" \\",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "curl calls to the Cloudflare v4 API using $CF_API_TOKEN, plus cache-warming and header checks against placeholder example.com URLs."
         },
         {
           "type": "shell-execution",
           "line": 213,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with AWS CLI and curl commands that configure, invalidate, warm and inspect the user's own CDN."
         },
         {
           "type": "network-access",
           "line": 215,
           "evidence": "curl",
           "context": "curl -X POST \"https://api.cloudflare.com/client/v4/zones/$ZONE_ID/rulesets/phases/http_request_cache_settings/entrypoint\" \\",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "curl calls to the Cloudflare v4 API using $CF_API_TOKEN, plus cache-warming and header checks against placeholder example.com URLs."
         },
         {
           "type": "network-access",
           "line": 215,
           "evidence": "https://",
           "context": "curl -X POST \"https://api.cloudflare.com/client/v4/zones/$ZONE_ID/rulesets/phases/http_request_cache_settings/entrypoint\" \\",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "curl calls to the Cloudflare v4 API using $CF_API_TOKEN, plus cache-warming and header checks against placeholder example.com URLs."
         },
         {
           "type": "shell-execution",
           "line": 236,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with AWS CLI and curl commands that configure, invalidate, warm and inspect the user's own CDN."
         },
         {
           "type": "network-access",
           "line": 238,
           "evidence": "curl",
           "context": "curl -X POST \"https://api.cloudflare.com/client/v4/zones/$ZONE_ID/purge_cache\" \\",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "curl calls to the Cloudflare v4 API using $CF_API_TOKEN, plus cache-warming and header checks against placeholder example.com URLs."
         },
         {
           "type": "network-access",
           "line": 238,
           "evidence": "https://",
           "context": "curl -X POST \"https://api.cloudflare.com/client/v4/zones/$ZONE_ID/purge_cache\" \\",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "curl calls to the Cloudflare v4 API using $CF_API_TOKEN, plus cache-warming and header checks against placeholder example.com URLs."
         },
         {
           "type": "network-access",
           "line": 244,
           "evidence": "curl",
           "context": "curl -X POST \"https://api.cloudflare.com/client/v4/zones/$ZONE_ID/purge_cache\" \\",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "curl calls to the Cloudflare v4 API using $CF_API_TOKEN, plus cache-warming and header checks against placeholder example.com URLs."
         },
         {
           "type": "network-access",
           "line": 244,
           "evidence": "https://",
           "context": "curl -X POST \"https://api.cloudflare.com/client/v4/zones/$ZONE_ID/purge_cache\" \\",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "curl calls to the Cloudflare v4 API using $CF_API_TOKEN, plus cache-warming and header checks against placeholder example.com URLs."
         },
         {
           "type": "network-access",
           "line": 247,
           "evidence": "https://",
           "context": "  -d '{\"files\":[\"https://example.com/style.css\",\"https://example.com/app.js\"]}'",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "example.com URLs inside a purge request body naming which files to purge, not a fetch."
         },
         {
           "type": "network-access",
           "line": 247,
           "evidence": "https://",
           "context": "  -d '{\"files\":[\"https://example.com/style.css\",\"https://example.com/app.js\"]}'",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "example.com URLs inside a purge request body naming which files to purge, not a fetch."
         },
         {
           "type": "network-access",
           "line": 250,
           "evidence": "curl",
           "context": "curl -X POST \"https://api.cloudflare.com/client/v4/zones/$ZONE_ID/purge_cache\" \\",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "curl calls to the Cloudflare v4 API using $CF_API_TOKEN, plus cache-warming and header checks against placeholder example.com URLs."
         },
         {
           "type": "network-access",
           "line": 250,
           "evidence": "https://",
           "context": "curl -X POST \"https://api.cloudflare.com/client/v4/zones/$ZONE_ID/purge_cache\" \\",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "curl calls to the Cloudflare v4 API using $CF_API_TOKEN, plus cache-warming and header checks against placeholder example.com URLs."
         },
         {
           "type": "network-access",
           "line": 253,
           "evidence": "https://",
           "context": "  -d '{\"prefixes\":[\"https://example.com/images/\"]}'",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "example.com prefix inside a purge request body, not a fetch."
         },
         {
           "type": "shell-execution",
           "line": 303,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with AWS CLI and curl commands that configure, invalidate, warm and inspect the user's own CDN."
         },
         {
           "type": "shell-execution",
           "line": 305,
           "evidence": "bash",
           "context": "#!/bin/bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with AWS CLI and curl commands that configure, invalidate, warm and inspect the user's own CDN."
         },
         {
           "type": "network-access",
           "line": 307,
           "evidence": "https://",
           "context": "  \"https://www.example.com/\"",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "curl calls to the Cloudflare v4 API using $CF_API_TOKEN, plus cache-warming and header checks against placeholder example.com URLs."
         },
         {
           "type": "network-access",
           "line": 308,
           "evidence": "https://",
           "context": "  \"https://www.example.com/products\"",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "curl calls to the Cloudflare v4 API using $CF_API_TOKEN, plus cache-warming and header checks against placeholder example.com URLs."
         },
         {
           "type": "network-access",
           "line": 309,
           "evidence": "https://",
           "context": "  \"https://www.example.com/about\"",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "curl calls to the Cloudflare v4 API using $CF_API_TOKEN, plus cache-warming and header checks against placeholder example.com URLs."
         },
         {
           "type": "network-access",
           "line": 310,
           "evidence": "https://",
           "context": "  \"https://www.example.com/css/main.abc123.css\"",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "curl calls to the Cloudflare v4 API using $CF_API_TOKEN, plus cache-warming and header checks against placeholder example.com URLs."
         },
         {
           "type": "network-access",
           "line": 311,
           "evidence": "https://",
           "context": "  \"https://www.example.com/js/app.def456.js\"",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "curl calls to the Cloudflare v4 API using $CF_API_TOKEN, plus cache-warming and header checks against placeholder example.com URLs."
         },
         {
           "type": "network-access",
           "line": 315,
           "evidence": "curl",
           "context": "  curl -s -o /dev/null -w \"%{http_code} %{time_total}s %{url_effective}\\n\" \"$url\"",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "curl calls to the Cloudflare v4 API using $CF_API_TOKEN, plus cache-warming and header checks against placeholder example.com URLs."
         },
         {
           "type": "shell-execution",
           "line": 321,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with AWS CLI and curl commands that configure, invalidate, warm and inspect the user's own CDN."
         },
         {
           "type": "network-access",
           "line": 323,
           "evidence": "curl",
           "context": "curl -sI https://www.example.com/style.css | grep -i -E \"cf-cache|x-cache|age|cache-control\"",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "curl calls to the Cloudflare v4 API using $CF_API_TOKEN, plus cache-warming and header checks against placeholder example.com URLs."
         },
         {
           "type": "network-access",
           "line": 323,
           "evidence": "https://",
           "context": "curl -sI https://www.example.com/style.css | grep -i -E \"cf-cache|x-cache|age|cache-control\"",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "curl calls to the Cloudflare v4 API using $CF_API_TOKEN, plus cache-warming and header checks against placeholder example.com URLs."
         }
       ]
     }

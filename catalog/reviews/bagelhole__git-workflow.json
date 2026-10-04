@@ -1,9 +1,9 @@
 {
   "schema_version": "0.1",
   "skill_id": "bagelhole/git-workflow",
-  "status": "draft",
-  "reviewed_on": null,
-  "reviewer": null,
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
   "source": {
     "repo": "BagelHole/DevOps-Security-Agent-Skills",
     "path": "devops/release/git-workflow",
@@ -13,7 +13,7 @@
     "complete": true,
     "scope": "devops/release/git-workflow",
     "url": "https://api.github.com/repos/BagelHole/DevOps-Security-Agent-Skills/git/trees/0365f57a079b1332f95cf26e31dd2d5332a8399f?recursive=1",
-    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
   },
   "license": {
     "spdx": "MIT",
@@ -31,18 +31,32 @@
       ]
     },
     "redistributable": true,
-    "scope_reason": "",
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found; frontmatter declares license: MIT. Conventional Commits types are summarized, not copied. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
     "obligations": [
       "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
-      "Preserve all upstream text and notices byte-for-byte."
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
     ]
   },
   "content_review": {
-    "status": "pending",
-    "risk": "unknown",
+    "status": "approved",
+    "risk": "medium",
     "blocking_findings": [],
-    "capabilities": {},
-    "notes": []
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md in full (the only file). The skill explains trunk-based development, GitHub Flow and GitFlow, Conventional Commits, PR templates, branch protection, CODEOWNERS, pre-commit/Husky/commitlint hooks, tagged releases, changelog generation, rebase/merge/cherry-pick and common fixes.",
+      "Medium: example commands would have the agent perform state-changing git operations in the user's repository, including merging and pushing directly to main (SKILL.md:57-61), `git push --force-with-lease` after rebase (SKILL.md:370), pushing tags and `gh release create` (SKILL.md:340-349), `git config --global commit.template` (SKILL.md:183), `git reset HEAD~1` (SKILL.md:418), and `npx conventional-changelog` which downloads an npm package (SKILL.md:356). Acceptable because these are ordinary, documented developer workflows on the user's own repository; users should confirm pushes, force-pushes and releases before the agent runs them.",
+      "The only HTML comment (SKILL.md:191) is a file-path label `<!-- .github/pull_request_template.md -->` inside a fenced PR-template example; it carries no instructions. No hidden Unicode. Related Skills (SKILL.md:433-435) link to sibling skills ../semantic-versioning/, ../feature-flags/ and ../../ci-cd/github-actions/ as optional reading only."
+    ]
   },
   "files": [
     {
@@ -55,7 +69,7 @@
       "git_blob": "67c5c5cbb12cafb1515e449748866bd40da7dec9",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
       "findings": []
     },
     {
@@ -66,127 +80,127 @@
       "git_blob": "18371b2c5694b9eb85833f15668644c509433e8c",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "shell-execution",
           "line": 42,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks of git, git-flow, gh and npx commands, plus a sample pre-commit hook that runs the project's own lint and test scripts."
         },
         {
           "type": "shell-execution",
           "line": 81,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks of git, git-flow, gh and npx commands, plus a sample pre-commit hook that runs the project's own lint and test scripts."
         },
         {
           "type": "filesystem-write",
           "line": 91,
           "evidence": "Delete",
           "context": "# Delete branch after merge",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Prose and comments advising to delete merged branches or remove debug statements; no file deletion commands beyond `git branch -d` of a merged feature branch."
         },
         {
           "type": "shell-execution",
           "line": 112,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks of git, git-flow, gh and npx commands, plus a sample pre-commit hook that runs the project's own lint and test scripts."
         },
         {
           "type": "shell-execution",
           "line": 155,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks of git, git-flow, gh and npx commands, plus a sample pre-commit hook that runs the project's own lint and test scripts."
         },
         {
           "type": "shell-execution",
           "line": 169,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks of git, git-flow, gh and npx commands, plus a sample pre-commit hook that runs the project's own lint and test scripts."
         },
         {
           "type": "shell-execution",
           "line": 273,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks of git, git-flow, gh and npx commands, plus a sample pre-commit hook that runs the project's own lint and test scripts."
         },
         {
           "type": "shell-execution",
           "line": 274,
           "evidence": "sh",
           "context": "#!/bin/sh",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks of git, git-flow, gh and npx commands, plus a sample pre-commit hook that runs the project's own lint and test scripts."
         },
         {
           "type": "filesystem-write",
           "line": 293,
           "evidence": "Remove",
           "context": "  echo \"Remove debug statements before committing.\"",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Prose and comments advising to delete merged branches or remove debug statements; no file deletion commands beyond `git branch -d` of a merged feature branch."
         },
         {
           "type": "shell-execution",
           "line": 338,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks of git, git-flow, gh and npx commands, plus a sample pre-commit hook that runs the project's own lint and test scripts."
         },
         {
           "type": "shell-execution",
           "line": 354,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks of git, git-flow, gh and npx commands, plus a sample pre-commit hook that runs the project's own lint and test scripts."
         },
         {
           "type": "shell-execution",
           "line": 366,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks of git, git-flow, gh and npx commands, plus a sample pre-commit hook that runs the project's own lint and test scripts."
         },
         {
           "type": "shell-execution",
           "line": 383,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks of git, git-flow, gh and npx commands, plus a sample pre-commit hook that runs the project's own lint and test scripts."
         },
         {
           "type": "shell-execution",
           "line": 396,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks of git, git-flow, gh and npx commands, plus a sample pre-commit hook that runs the project's own lint and test scripts."
         },
         {
           "type": "filesystem-write",
           "line": 429,
           "evidence": "Delete",
           "context": "- Delete branches after merge",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Prose and comments advising to delete merged branches or remove debug statements; no file deletion commands beyond `git branch -d` of a merged feature branch."
         }
       ]
     }

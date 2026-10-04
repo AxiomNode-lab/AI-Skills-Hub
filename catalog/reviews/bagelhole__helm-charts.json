@@ -1,9 +1,9 @@
 {
   "schema_version": "0.1",
   "skill_id": "bagelhole/helm-charts",
-  "status": "draft",
-  "reviewed_on": null,
-  "reviewer": null,
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
   "source": {
     "repo": "BagelHole/DevOps-Security-Agent-Skills",
     "path": "devops/orchestration/helm-charts",
@@ -13,7 +13,7 @@
     "complete": true,
     "scope": "devops/orchestration/helm-charts",
     "url": "https://api.github.com/repos/BagelHole/DevOps-Security-Agent-Skills/git/trees/0365f57a079b1332f95cf26e31dd2d5332a8399f?recursive=1",
-    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
   },
   "license": {
     "spdx": "MIT",
@@ -31,18 +31,32 @@
       ]
     },
     "redistributable": true,
-    "scope_reason": "",
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found; the _helpers.tpl sample resembles helm create scaffolding but is a short, generic template snippet. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
     "obligations": [
       "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
-      "Preserve all upstream text and notices byte-for-byte."
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
     ]
   },
   "content_review": {
-    "status": "pending",
-    "risk": "unknown",
+    "status": "approved",
+    "risk": "medium",
     "blocking_findings": [],
-    "capabilities": {},
-    "notes": []
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "package_install": true,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md and references/helm-commands.md in full. Helm guide: chart layout, Chart.yaml/values.yaml, deployment/helper/ingress templates, install/upgrade/rollback/uninstall, chart development, repositories, hooks, tests, library charts, and OCI registries.",
+      "Following it can make the agent run helm commands that install, upgrade, roll back, and uninstall releases in whatever cluster kubectl points to, add chart repositories and install third-party charts (bitnami/postgresql), and log in/push to an OCI registry. Medium because these change cluster state and pull remote charts; acceptable because they are standard Helm workflows for the user's own cluster, with --dry-run and helm template shown for previewing, and nothing that disables security controls.",
+      "references/helm-commands.md:24 adds the deprecated charts.helm.sh/stable repository. The Related Skills section (SKILL.md:443-445) links to sibling skills (../kubernetes-ops/, ../argocd-gitops/, ../kustomize/) that do not ship with this skill; optional. Frontmatter declares license: MIT."
+    ]
   },
   "files": [
     {
@@ -55,7 +69,7 @@
       "git_blob": "67c5c5cbb12cafb1515e449748866bd40da7dec9",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
       "findings": []
     },
     {
@@ -66,71 +80,71 @@
       "git_blob": "4709c7f36f41823ee642b0cc6556e346e6156c17",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "shell-execution",
           "line": 5,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with helm commands; scanner also matched 'sh' inside helm.sh annotations and template text."
         },
         {
           "type": "shell-execution",
           "line": 21,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with helm commands; scanner also matched 'sh' inside helm.sh annotations and template text."
         },
         {
           "type": "network-access",
           "line": 23,
           "evidence": "https://",
           "context": "helm repo add bitnami https://charts.bitnami.com/bitnami",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Helm repository URLs (charts.bitnami.com, charts.helm.sh) and a busybox wget in a Helm test pod that probes the user's service."
         },
         {
           "type": "network-access",
           "line": 24,
           "evidence": "https://",
           "context": "helm repo add stable https://charts.helm.sh/stable",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Helm repository URLs (charts.bitnami.com, charts.helm.sh) and a busybox wget in a Helm test pod that probes the user's service."
         },
         {
           "type": "shell-execution",
           "line": 24,
           "evidence": "sh",
           "context": "helm repo add stable https://charts.helm.sh/stable",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with helm commands; scanner also matched 'sh' inside helm.sh annotations and template text."
         },
         {
           "type": "shell-execution",
           "line": 36,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with helm commands; scanner also matched 'sh' inside helm.sh annotations and template text."
         },
         {
           "type": "shell-execution",
           "line": 54,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with helm commands; scanner also matched 'sh' inside helm.sh annotations and template text."
         },
         {
           "type": "shell-execution",
           "line": 69,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with helm commands; scanner also matched 'sh' inside helm.sh annotations and template text."
         }
       ]
     },
@@ -142,167 +156,167 @@
       "git_blob": "153bafff7ac9ed5164364b1eeb8dd85f9cae90e0",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "credential-access",
           "line": 41,
           "evidence": "secret",
           "context": "│   ├── secret.yaml",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "The word 'secret' in a chart tree (secret.yaml) and a secretKeyRef in a deployment template; no real secrets are read."
         },
         {
           "type": "network-access",
           "line": 67,
           "evidence": "https://",
           "context": "    repository: \"https://charts.bitnami.com/bitnami\"",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Helm repository URLs (charts.bitnami.com, charts.helm.sh) and a busybox wget in a Helm test pod that probes the user's service."
         },
         {
           "type": "shell-execution",
           "line": 177,
           "evidence": "sh",
           "context": "helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version }}",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with helm commands; scanner also matched 'sh' inside helm.sh annotations and template text."
         },
         {
           "type": "shell-execution",
           "line": 241,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with helm commands; scanner also matched 'sh' inside helm.sh annotations and template text."
         },
         {
           "type": "shell-execution",
           "line": 262,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with helm commands; scanner also matched 'sh' inside helm.sh annotations and template text."
         },
         {
           "type": "shell-execution",
           "line": 281,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with helm commands; scanner also matched 'sh' inside helm.sh annotations and template text."
         },
         {
           "type": "shell-execution",
           "line": 300,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with helm commands; scanner also matched 'sh' inside helm.sh annotations and template text."
         },
         {
           "type": "network-access",
           "line": 302,
           "evidence": "https://",
           "context": "helm repo add bitnami https://charts.bitnami.com/bitnami",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Helm repository URLs (charts.bitnami.com, charts.helm.sh) and a busybox wget in a Helm test pod that probes the user's service."
         },
         {
           "type": "shell-execution",
           "line": 329,
           "evidence": "sh",
           "context": "    \"helm.sh/hook\": pre-install,pre-upgrade",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with helm commands; scanner also matched 'sh' inside helm.sh annotations and template text."
         },
         {
           "type": "shell-execution",
           "line": 330,
           "evidence": "sh",
           "context": "    \"helm.sh/hook-weight\": \"-5\"",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with helm commands; scanner also matched 'sh' inside helm.sh annotations and template text."
         },
         {
           "type": "filesystem-write",
           "line": 331,
           "evidence": "delete",
           "context": "    \"helm.sh/hook-delete-policy\": hook-succeeded",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Scanner matched 'delete' in the helm.sh/hook-delete-policy annotation, which cleans up a completed hook Job, not local files."
         },
         {
           "type": "shell-execution",
           "line": 331,
           "evidence": "sh",
           "context": "    \"helm.sh/hook-delete-policy\": hook-succeeded",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with helm commands; scanner also matched 'sh' inside helm.sh annotations and template text."
         },
         {
           "type": "shell-execution",
           "line": 338,
           "evidence": "sh",
           "context": "        command: [\"./migrate.sh\"]",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with helm commands; scanner also matched 'sh' inside helm.sh annotations and template text."
         },
         {
           "type": "shell-execution",
           "line": 351,
           "evidence": "sh",
           "context": "    \"helm.sh/hook\": test",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with helm commands; scanner also matched 'sh' inside helm.sh annotations and template text."
         },
         {
           "type": "network-access",
           "line": 354,
           "evidence": "wget",
           "context": "    - name: wget",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Helm repository URLs (charts.bitnami.com, charts.helm.sh) and a busybox wget in a Helm test pod that probes the user's service."
         },
         {
           "type": "network-access",
           "line": 356,
           "evidence": "wget",
           "context": "      command: ['wget']",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Helm repository URLs (charts.bitnami.com, charts.helm.sh) and a busybox wget in a Helm test pod that probes the user's service."
         },
         {
           "type": "shell-execution",
           "line": 361,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with helm commands; scanner also matched 'sh' inside helm.sh annotations and template text."
         },
         {
           "type": "shell-execution",
           "line": 386,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with helm commands; scanner also matched 'sh' inside helm.sh annotations and template text."
         },
         {
           "type": "shell-execution",
           "line": 414,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with helm commands; scanner also matched 'sh' inside helm.sh annotations and template text."
         },
         {
           "type": "shell-execution",
           "line": 426,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with helm commands; scanner also matched 'sh' inside helm.sh annotations and template text."
         }
       ]
     }

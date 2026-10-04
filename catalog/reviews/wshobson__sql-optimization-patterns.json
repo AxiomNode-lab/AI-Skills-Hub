@@ -1,9 +1,9 @@
 {
   "schema_version": "0.1",
   "skill_id": "wshobson/sql-optimization-patterns",
-  "status": "draft",
-  "reviewed_on": null,
-  "reviewer": null,
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
   "source": {
     "repo": "wshobson/agents",
     "path": "plugins/developer-essentials/skills/sql-optimization-patterns",
@@ -13,7 +13,7 @@
     "complete": true,
     "scope": "plugins/developer-essentials/skills/sql-optimization-patterns",
     "url": "https://api.github.com/repos/wshobson/agents/git/trees/156b7a5e7a8b93642628a339ee4039c925b34c7f?recursive=1",
-    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
   },
   "license": {
     "spdx": "MIT",
@@ -32,18 +32,32 @@
       ]
     },
     "redistributable": true,
-    "scope_reason": "",
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
     "obligations": [
       "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
-      "Preserve all upstream text and notices byte-for-byte."
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
     ]
   },
   "content_review": {
-    "status": "pending",
-    "risk": "unknown",
+    "status": "approved",
+    "risk": "low",
     "blocking_findings": [],
-    "capabilities": {},
-    "notes": []
+    "capabilities": {
+      "shell": false,
+      "network": false,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md and references/details.md in full. SQL performance guidance: reading EXPLAIN plans, index types, query rewrites (N+1, cursor pagination, aggregates, subqueries, batching), materialized views, partitioning, maintenance, and pg_stat monitoring queries.",
+      "No shell commands, installs, credentials, or network access. The SQL examples include state-changing statements (CREATE INDEX, UPDATE, VACUUM FULL, REINDEX, SET enable_nestloop) that the user would run against their own database; VACUUM FULL is flagged as locking the table (SKILL.md:164).",
+      "Users should apply index and maintenance statements deliberately on production databases; none are presented as steps the agent should run unprompted."
+    ]
   },
   "files": [
     {
@@ -56,7 +70,7 @@
       "git_blob": "326f0a55c96e672fedf9d807ca043c00df05ba0e",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
       "findings": []
     },
     {
@@ -67,7 +81,7 @@
       "git_blob": "d3ae7ec791754881b8d9a812185c11e17a25a006",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": []
     },
     {
@@ -78,15 +92,15 @@
       "git_blob": "c3aff4f18a5ec34fba65b8ba869b2eeabbfb58e1",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "filesystem-write",
           "line": 173,
           "evidence": "DELETE",
           "context": "- **Over-Indexing**: Each index slows down INSERT/UPDATE/DELETE",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Scanner matched 'DELETE' in a pitfall bullet noting that indexes slow INSERT/UPDATE/DELETE; there is no file or data deletion instruction."
         }
       ]
     }

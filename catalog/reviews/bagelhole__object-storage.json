@@ -1,9 +1,9 @@
 {
   "schema_version": "0.1",
   "skill_id": "bagelhole/object-storage",
-  "status": "draft",
-  "reviewed_on": null,
-  "reviewer": null,
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
   "source": {
     "repo": "BagelHole/DevOps-Security-Agent-Skills",
     "path": "infrastructure/storage/object-storage",
@@ -13,7 +13,7 @@
     "complete": true,
     "scope": "infrastructure/storage/object-storage",
     "url": "https://api.github.com/repos/BagelHole/DevOps-Security-Agent-Skills/git/trees/0365f57a079b1332f95cf26e31dd2d5332a8399f?recursive=1",
-    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
   },
   "license": {
     "spdx": "MIT",
@@ -31,18 +31,32 @@
       ]
     },
     "redistributable": true,
-    "scope_reason": "",
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: License metadata says MIT; no third-party copyright notice, other license grant, or copied third-party text found; commands and policy JSON are short configuration examples. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
     "obligations": [
       "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
-      "Preserve all upstream text and notices byte-for-byte."
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
     ]
   },
   "content_review": {
-    "status": "pending",
-    "risk": "unknown",
+    "status": "approved",
+    "risk": "medium",
     "blocking_findings": [],
-    "capabilities": {},
-    "notes": []
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "package_install": true,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md in full. The skill is a command reference for AWS S3 (buckets, copy/sync, versioning, bucket policies, lifecycle rules, logging) and self-hosted MinIO (docker run/compose, mc client operations).",
+      "Following it can make the agent run state-changing commands against real storage using the user's configured AWS/MinIO credentials, including destructive ones: aws s3 rb --force (SKILL.md:52, labelled destructive), aws s3 rm --recursive (:86), aws s3 sync --delete (:71), and permanent version deletion (:110-113). These are listed as reference operations for tasks the user asks for, not as steps the agent should run on its own, so medium risk is acceptable; destructive commands should be confirmed with the user.",
+      "SKILL.md:293-294 downloads the mc binary from dl.min.io without checksum verification and moves it into /usr/local/bin; users should verify the download. Credentials in examples are placeholders (minioadmin / minio-secret-key-change-me, AKIAEXAMPLE). The bucket policy grants public read only to the static/ prefix. Related skills are named in plain text only."
+    ]
   },
   "files": [
     {
@@ -55,7 +69,7 @@
       "git_blob": "67c5c5cbb12cafb1515e449748866bd40da7dec9",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
       "findings": []
     },
     {
@@ -66,231 +80,231 @@
       "git_blob": "15feaf861131979082c5e3e3f4ffa87b6a54cdf7",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "shell-execution",
           "line": 35,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "aws s3/s3api, docker, curl, and mc commands for managing buckets and a MinIO server, presented as a reference for the user's own storage."
         },
         {
           "type": "filesystem-write",
           "line": 48,
           "evidence": "Delete",
           "context": "# Delete an empty bucket",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Hits are S3 bucket/object delete operations (rb, rm --recursive, sync --delete, delete-object); the force-delete is explicitly labelled destructive and none are prescribed as automatic steps."
         },
         {
           "type": "filesystem-write",
           "line": 51,
           "evidence": "Delete",
           "context": "# Delete a bucket and ALL its contents (destructive)",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Hits are S3 bucket/object delete operations (rb, rm --recursive, sync --delete, delete-object); the force-delete is explicitly labelled destructive and none are prescribed as automatic steps."
         },
         {
           "type": "shell-execution",
           "line": 57,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "aws s3/s3api, docker, curl, and mc commands for managing buckets and a MinIO server, presented as a reference for the user's own storage."
         },
         {
           "type": "filesystem-write",
           "line": 71,
           "evidence": "delete",
           "context": "aws s3 sync ./build/ s3://my-app-assets-prod/static/ --delete",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Hits are S3 bucket/object delete operations (rb, rm --recursive, sync --delete, delete-object); the force-delete is explicitly labelled destructive and none are prescribed as automatic steps."
         },
         {
           "type": "filesystem-write",
           "line": 85,
           "evidence": "delete",
           "context": "# Recursive delete of a prefix",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Hits are S3 bucket/object delete operations (rb, rm --recursive, sync --delete, delete-object); the force-delete is explicitly labelled destructive and none are prescribed as automatic steps."
         },
         {
           "type": "shell-execution",
           "line": 91,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "aws s3/s3api, docker, curl, and mc commands for managing buckets and a MinIO server, presented as a reference for the user's own storage."
         },
         {
           "type": "filesystem-write",
           "line": 109,
           "evidence": "Delete",
           "context": "# Delete a specific version permanently",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Hits are S3 bucket/object delete operations (rb, rm --recursive, sync --delete, delete-object); the force-delete is explicitly labelled destructive and none are prescribed as automatic steps."
         },
         {
           "type": "filesystem-write",
           "line": 110,
           "evidence": "delete",
           "context": "aws s3api delete-object \\",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Hits are S3 bucket/object delete operations (rb, rm --recursive, sync --delete, delete-object); the force-delete is explicitly labelled destructive and none are prescribed as automatic steps."
         },
         {
           "type": "shell-execution",
           "line": 118,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "aws s3/s3api, docker, curl, and mc commands for managing buckets and a MinIO server, presented as a reference for the user's own storage."
         },
         {
           "type": "shell-execution",
           "line": 167,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "aws s3/s3api, docker, curl, and mc commands for managing buckets and a MinIO server, presented as a reference for the user's own storage."
         },
         {
           "type": "shell-execution",
           "line": 215,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "aws s3/s3api, docker, curl, and mc commands for managing buckets and a MinIO server, presented as a reference for the user's own storage."
         },
         {
           "type": "shell-execution",
           "line": 232,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "aws s3/s3api, docker, curl, and mc commands for managing buckets and a MinIO server, presented as a reference for the user's own storage."
         },
         {
           "type": "credential-access",
           "line": 240,
           "evidence": "secret",
           "context": "  -e MINIO_ROOT_PASSWORD=minio-secret-key-change-me \\",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Placeholder MinIO root password and service-account keys and AWS example keys in docker and mc alias commands; no instruction to read, print, or send real secrets."
         },
         {
           "type": "credential-access",
           "line": 256,
           "evidence": "secret",
           "context": "      MINIO_ROOT_PASSWORD: minio-secret-key-change-me",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Placeholder MinIO root password and service-account keys and AWS example keys in docker and mc alias commands; no instruction to read, print, or send real secrets."
         },
         {
           "type": "network-access",
           "line": 257,
           "evidence": "https://",
           "context": "      MINIO_BROWSER_REDIRECT_URL: https://minio-console.example.com",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Local MinIO health-check curl, the dl.min.io mc download, an example console redirect URL, and S3 endpoint URLs for mc aliases."
         },
         {
           "type": "shell-execution",
           "line": 280,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "aws s3/s3api, docker, curl, and mc commands for managing buckets and a MinIO server, presented as a reference for the user's own storage."
         },
         {
           "type": "network-access",
           "line": 286,
           "evidence": "curl",
           "context": "curl -s http://localhost:9000/minio/health/live",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Local MinIO health-check curl, the dl.min.io mc download, an example console redirect URL, and S3 endpoint URLs for mc aliases."
         },
         {
           "type": "network-access",
           "line": 286,
           "evidence": "http://",
           "context": "curl -s http://localhost:9000/minio/health/live",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Local MinIO health-check curl, the dl.min.io mc download, an example console redirect URL, and S3 endpoint URLs for mc aliases."
         },
         {
           "type": "shell-execution",
           "line": 291,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "aws s3/s3api, docker, curl, and mc commands for managing buckets and a MinIO server, presented as a reference for the user's own storage."
         },
         {
           "type": "network-access",
           "line": 293,
           "evidence": "curl",
           "context": "curl -O https://dl.min.io/client/mc/release/linux-amd64/mc",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Downloads the mc binary from dl.min.io without a pinned version or checksum and installs it to /usr/local/bin; it is not piped to a shell, but users should verify it."
         },
         {
           "type": "network-access",
           "line": 293,
           "evidence": "https://",
           "context": "curl -O https://dl.min.io/client/mc/release/linux-amd64/mc",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Downloads the mc binary from dl.min.io without a pinned version or checksum and installs it to /usr/local/bin; it is not piped to a shell, but users should verify it."
         },
         {
           "type": "shell-execution",
           "line": 293,
           "evidence": "\nchmod",
           "context": "curl -O https://dl.min.io/client/mc/release/linux-amd64/mc",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "aws s3/s3api, docker, curl, and mc commands for managing buckets and a MinIO server, presented as a reference for the user's own storage."
         },
         {
           "type": "credential-access",
           "line": 297,
           "evidence": "secret",
           "context": "mc alias set myminio http://localhost:9000 minioadmin minio-secret-key-change-me",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Placeholder MinIO root password and service-account keys and AWS example keys in docker and mc alias commands; no instruction to read, print, or send real secrets."
         },
         {
           "type": "network-access",
           "line": 297,
           "evidence": "http://",
           "context": "mc alias set myminio http://localhost:9000 minioadmin minio-secret-key-change-me",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Local MinIO health-check curl, the dl.min.io mc download, an example console redirect URL, and S3 endpoint URLs for mc aliases."
         },
         {
           "type": "network-access",
           "line": 300,
           "evidence": "https://",
           "context": "mc alias set aws https://s3.amazonaws.com AKIAEXAMPLE SECRETKEYEXAMPLE",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Local MinIO health-check curl, the dl.min.io mc download, an example console redirect URL, and S3 endpoint URLs for mc aliases."
         },
         {
           "type": "credential-access",
           "line": 331,
           "evidence": "secret",
           "context": "mc admin user svcacct add myminio minioadmin --access-key myapp-key --secret-key myapp-secret",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Placeholder MinIO root password and service-account keys and AWS example keys in docker and mc alias commands; no instruction to read, print, or send real secrets."
         },
         {
           "type": "credential-access",
           "line": 331,
           "evidence": "secret",
           "context": "mc admin user svcacct add myminio minioadmin --access-key myapp-key --secret-key myapp-secret",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Placeholder MinIO root password and service-account keys and AWS example keys in docker and mc alias commands; no instruction to read, print, or send real secrets."
         }
       ]
     }

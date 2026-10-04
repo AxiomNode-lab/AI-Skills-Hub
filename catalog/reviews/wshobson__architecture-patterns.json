@@ -1,9 +1,9 @@
 {
   "schema_version": "0.1",
   "skill_id": "wshobson/architecture-patterns",
-  "status": "draft",
-  "reviewed_on": null,
-  "reviewer": null,
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
   "source": {
     "repo": "wshobson/agents",
     "path": "plugins/backend-development/skills/architecture-patterns",
@@ -13,7 +13,7 @@
     "complete": true,
     "scope": "plugins/backend-development/skills/architecture-patterns",
     "url": "https://api.github.com/repos/wshobson/agents/git/trees/156b7a5e7a8b93642628a339ee4039c925b34c7f?recursive=1",
-    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
   },
   "license": {
     "spdx": "MIT",
@@ -32,18 +32,32 @@
       ]
     },
     "redistributable": true,
-    "scope_reason": "",
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file; pattern names (Clean Architecture, DDD) are cited, not copied. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
     "obligations": [
       "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
-      "Preserve all upstream text and notices byte-for-byte."
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
     ]
   },
   "content_review": {
-    "status": "pending",
-    "risk": "unknown",
+    "status": "approved",
+    "risk": "low",
     "blocking_findings": [],
-    "capabilities": {},
-    "notes": []
+    "capabilities": {
+      "shell": true,
+      "network": false,
+      "credentials": false,
+      "package_install": true,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md and references/advanced-patterns.md, references/details.md in full. The skill explains Clean Architecture, Hexagonal (ports and adapters), Onion and DDD patterns with Python examples for entities, use cases, repositories, ACLs, domain events and in-memory test adapters.",
+      "The only command is an optional dependency-graph check (advanced-patterns.md:387-389) that installs and runs pydeps locally; it is read-only analysis of the user's own code, so risk stays low. All other content is sample code for the user's project.",
+      "Related Skills (SKILL.md:159-164) name sibling skills (microservices-patterns, cqrs-implementation, saga-orchestration, event-store-design) as optional reading without links; nothing outside the directory is required."
+    ]
   },
   "files": [
     {
@@ -56,7 +70,7 @@
       "git_blob": "326f0a55c96e672fedf9d807ca043c00df05ba0e",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
       "findings": []
     },
     {
@@ -67,23 +81,23 @@
       "git_blob": "a83dc097a6758fc849b6da3692be62a02812f437",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "shell-execution",
           "line": 387,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "One optional bash block running pydeps to visualise import dependencies of the user's code."
         },
         {
           "type": "package-install",
           "line": 388,
           "evidence": "pip install",
           "context": "# Install: pip install pydeps",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "A comment telling the user to `pip install pydeps` for the optional dependency-graph check."
         }
       ]
     },
@@ -95,63 +109,63 @@
       "git_blob": "7b98690c602ac710938c4f99f6c5fc612b3911ad",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "filesystem-write",
           "line": 79,
           "evidence": "delete",
           "context": "    async def delete(self, user_id: str) -> bool: ...",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Repository `delete` methods and a parameterised SQL DELETE in sample adapter code, not instructions to delete files."
         },
         {
           "type": "filesystem-write",
           "line": 157,
           "evidence": "delete",
           "context": "    async def delete(self, user_id: str) -> bool:",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Repository `delete` methods and a parameterised SQL DELETE in sample adapter code, not instructions to delete files."
         },
         {
           "type": "filesystem-write",
           "line": 159,
           "evidence": "DELETE",
           "context": "            result = await conn.execute(\"DELETE FROM users WHERE id = $1\", user_id)",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Repository `delete` methods and a parameterised SQL DELETE in sample adapter code, not instructions to delete files."
         },
         {
           "type": "filesystem-write",
           "line": 160,
           "evidence": "DELETE",
           "context": "            return result == \"DELETE 1\"",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Repository `delete` methods and a parameterised SQL DELETE in sample adapter code, not instructions to delete files."
         },
         {
           "type": "credential-access",
           "line": 241,
           "evidence": "api_key",
           "context": "    def __init__(self, api_key: str):",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "A Stripe adapter sample takes an api_key constructor argument; no real key is present and the agent is not told to read or use secrets."
         },
         {
           "type": "credential-access",
           "line": 243,
           "evidence": "api_key",
           "context": "        stripe.api_key = api_key",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "A Stripe adapter sample takes an api_key constructor argument; no real key is present and the agent is not told to read or use secrets."
         },
         {
           "type": "credential-access",
           "line": 243,
           "evidence": "api_key",
           "context": "        stripe.api_key = api_key",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "A Stripe adapter sample takes an api_key constructor argument; no real key is present and the agent is not told to read or use secrets."
         }
       ]
     },
@@ -163,15 +177,15 @@
       "git_blob": "d893cabeab6a84c17bd0dd4ea9f56b3c4d02c0f5",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "filesystem-write",
           "line": 101,
           "evidence": "delete",
           "context": "    async def delete(self, user_id: str) -> bool:",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Repository `delete` methods and a parameterised SQL DELETE in sample adapter code, not instructions to delete files."
         }
       ]
     }

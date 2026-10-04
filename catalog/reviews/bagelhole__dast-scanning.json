@@ -1,9 +1,9 @@
 {
   "schema_version": "0.1",
   "skill_id": "bagelhole/dast-scanning",
-  "status": "draft",
-  "reviewed_on": null,
-  "reviewer": null,
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
   "source": {
     "repo": "BagelHole/DevOps-Security-Agent-Skills",
     "path": "security/scanning/dast-scanning",
@@ -13,7 +13,7 @@
     "complete": true,
     "scope": "security/scanning/dast-scanning",
     "url": "https://api.github.com/repos/BagelHole/DevOps-Security-Agent-Skills/git/trees/0365f57a079b1332f95cf26e31dd2d5332a8399f?recursive=1",
-    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
   },
   "license": {
     "spdx": "MIT",
@@ -31,18 +31,32 @@
       ]
     },
     "redistributable": true,
-    "scope_reason": "",
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file; the tool-license column (Apache 2.0, MIT, GPL, Commercial) describes the external tools and grants nothing for this content, and OWASP Top 10 is referenced only by category names. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
     "obligations": [
       "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
-      "Preserve all upstream text and notices byte-for-byte."
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
     ]
   },
   "content_review": {
-    "status": "pending",
-    "risk": "unknown",
+    "status": "approved",
+    "risk": "medium",
     "blocking_findings": [],
-    "capabilities": {},
-    "notes": []
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "package_install": true,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md and references/dast-tools.md in full. The skill covers dynamic application security testing of a running web app or API with OWASP ZAP (Docker baseline/full/API scans, automation framework), Burp Suite's REST API, Nikto, Nuclei, CI integration (GitHub Actions, GitLab), a security-header check and OWASP Top 10 finding categories.",
+      "Medium: following it has the agent pull and run scanner containers, apt-get install nikto, `go install` nuclei@latest, and send active scan traffic (spidering, active scans, XSS/SQLi test inputs) to a target URL, optionally with test login credentials. Acceptable because it is defensive assessment guidance whose prerequisites require testing authorization (SKILL.md:27) and that recommends staging over production (SKILL.md:386, references/dast-tools.md:101); the agent should only scan targets the user owns or is authorized to test.",
+      "Users should know: the ZAP daemon example (SKILL.md:46-52) binds the API on 0.0.0.0 and allows all addresses, so restrict it outside a local test box; reference examples use the deprecated owasp/zap2docker-stable image; `target.example.com`/`target.com` and the credentials (user/pass, password123, api-key) are placeholders. Related Skills (SKILL.md:397-399) link to sibling skills ../sast-scanning/, ../../operations/penetration-testing/, ../../network/waf-setup/ as optional reading only."
+    ]
   },
   "files": [
     {
@@ -55,7 +69,7 @@
       "git_blob": "67c5c5cbb12cafb1515e449748866bd40da7dec9",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
       "findings": []
     },
     {
@@ -66,111 +80,111 @@
       "git_blob": "6414d2afd2092947edfae6eee2dd256696817e2c",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "shell-execution",
           "line": 15,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks run ZAP containers, Nikto, Nuclei and curl against a scan target; the `sh` hits are zap.sh launcher invocations."
         },
         {
           "type": "network-access",
           "line": 17,
           "evidence": "https://",
           "context": "docker run -t owasp/zap2docker-stable zap-baseline.py -t https://target.com",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Scan targets are placeholder hosts (target.example.com, target.com, localhost, burp:1337) the user replaces with an authorized app; one curl -I fetches response headers from the target."
         },
         {
           "type": "network-access",
           "line": 20,
           "evidence": "https://",
           "context": "docker run -t owasp/zap2docker-stable zap-full-scan.py -t https://target.com",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Scan targets are placeholder hosts (target.example.com, target.com, localhost, burp:1337) the user replaces with an authorized app; one curl -I fetches response headers from the target."
         },
         {
           "type": "network-access",
           "line": 24,
           "evidence": "https://",
           "context": "  -t https://target.com/openapi.json -f openapi",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Scan targets are placeholder hosts (target.example.com, target.com, localhost, burp:1337) the user replaces with an authorized app; one curl -I fetches response headers from the target."
         },
         {
           "type": "network-access",
           "line": 33,
           "evidence": "https://",
           "context": "      urls: [\"https://target.com\"]",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Scan targets are placeholder hosts (target.example.com, target.com, localhost, burp:1337) the user replaces with an authorized app; one curl -I fetches response headers from the target."
         },
         {
           "type": "network-access",
           "line": 37,
           "evidence": "https://",
           "context": "          loginUrl: \"https://target.com/login\"",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Scan targets are placeholder hosts (target.example.com, target.com, localhost, burp:1337) the user replaces with an authorized app; one curl -I fetches response headers from the target."
         },
         {
           "type": "shell-execution",
           "line": 54,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks run ZAP containers, Nikto, Nuclei and curl against a scan target; the `sh` hits are zap.sh launcher invocations."
         },
         {
           "type": "network-access",
           "line": 59,
           "evidence": "https://",
           "context": "nuclei -u https://target.com",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Scan targets are placeholder hosts (target.example.com, target.com, localhost, burp:1337) the user replaces with an authorized app; one curl -I fetches response headers from the target."
         },
         {
           "type": "network-access",
           "line": 62,
           "evidence": "https://",
           "context": "nuclei -u https://target.com -t cves/",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Scan targets are placeholder hosts (target.example.com, target.com, localhost, burp:1337) the user replaces with an authorized app; one curl -I fetches response headers from the target."
         },
         {
           "type": "network-access",
           "line": 63,
           "evidence": "https://",
           "context": "nuclei -u https://target.com -t exposures/",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Scan targets are placeholder hosts (target.example.com, target.com, localhost, burp:1337) the user replaces with an authorized app; one curl -I fetches response headers from the target."
         },
         {
           "type": "network-access",
           "line": 66,
           "evidence": "https://",
           "context": "nuclei -u https://target.com -severity critical,high",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Scan targets are placeholder hosts (target.example.com, target.com, localhost, burp:1337) the user replaces with an authorized app; one curl -I fetches response headers from the target."
         },
         {
           "type": "network-access",
           "line": 69,
           "evidence": "https://",
           "context": "nuclei -u https://target.com -json -o results.json",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Scan targets are placeholder hosts (target.example.com, target.com, localhost, burp:1337) the user replaces with an authorized app; one curl -I fetches response headers from the target."
         },
         {
           "type": "network-access",
           "line": 95,
           "evidence": "https://",
           "context": "    target: 'https://target.com'",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Scan targets are placeholder hosts (target.example.com, target.com, localhost, burp:1337) the user replaces with an authorized app; one curl -I fetches response headers from the target."
         }
       ]
     },
@@ -182,239 +196,239 @@
       "git_blob": "fc0995259853b0d28c5c9b5d168cacc8177d05f4",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "shell-execution",
           "line": 44,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks run ZAP containers, Nikto, Nuclei and curl against a scan target; the `sh` hits are zap.sh launcher invocations."
         },
         {
           "type": "shell-execution",
           "line": 50,
           "evidence": "sh",
           "context": "  zap.sh -daemon -host 0.0.0.0 -port 8080 \\",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Starts a ZAP daemon whose API accepts connections from any address (api.addrs regex .*); keep it on an isolated host or restrict the address list."
         },
         {
           "type": "shell-execution",
           "line": 57,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks run ZAP containers, Nikto, Nuclei and curl against a scan target; the `sh` hits are zap.sh launcher invocations."
         },
         {
           "type": "network-access",
           "line": 61,
           "evidence": "https://",
           "context": "  zap-baseline.py -t https://target.example.com \\",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Scan targets are placeholder hosts (target.example.com, target.com, localhost, burp:1337) the user replaces with an authorized app; one curl -I fetches response headers from the target."
         },
         {
           "type": "network-access",
           "line": 67,
           "evidence": "https://",
           "context": "  zap-baseline.py -t https://target.example.com \\",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Scan targets are placeholder hosts (target.example.com, target.com, localhost, burp:1337) the user replaces with an authorized app; one curl -I fetches response headers from the target."
         },
         {
           "type": "network-access",
           "line": 69,
           "evidence": "https://",
           "context": "  --auth-login-url https://target.example.com/login \\",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Scan targets are placeholder hosts (target.example.com, target.com, localhost, burp:1337) the user replaces with an authorized app; one curl -I fetches response headers from the target."
         },
         {
           "type": "shell-execution",
           "line": 76,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks run ZAP containers, Nikto, Nuclei and curl against a scan target; the `sh` hits are zap.sh launcher invocations."
         },
         {
           "type": "network-access",
           "line": 80,
           "evidence": "https://",
           "context": "  zap-full-scan.py -t https://target.example.com \\",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Scan targets are placeholder hosts (target.example.com, target.com, localhost, burp:1337) the user replaces with an authorized app; one curl -I fetches response headers from the target."
         },
         {
           "type": "shell-execution",
           "line": 87,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks run ZAP containers, Nikto, Nuclei and curl against a scan target; the `sh` hits are zap.sh launcher invocations."
         },
         {
           "type": "network-access",
           "line": 91,
           "evidence": "https://",
           "context": "  zap-api-scan.py -t https://target.example.com/openapi.json \\",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Scan targets are placeholder hosts (target.example.com, target.com, localhost, burp:1337) the user replaces with an authorized app; one curl -I fetches response headers from the target."
         },
         {
           "type": "network-access",
           "line": 104,
           "evidence": "https://",
           "context": "        - \"https://target.example.com\"",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Scan targets are placeholder hosts (target.example.com, target.com, localhost, burp:1337) the user replaces with an authorized app; one curl -I fetches response headers from the target."
         },
         {
           "type": "network-access",
           "line": 106,
           "evidence": "https://",
           "context": "        - \"https://target.example.com/.*\"",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Scan targets are placeholder hosts (target.example.com, target.com, localhost, burp:1337) the user replaces with an authorized app; one curl -I fetches response headers from the target."
         },
         {
           "type": "network-access",
           "line": 108,
           "evidence": "https://",
           "context": "        - \"https://target.example.com/logout.*\"",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Scan targets are placeholder hosts (target.example.com, target.com, localhost, burp:1337) the user replaces with an authorized app; one curl -I fetches response headers from the target."
         },
         {
           "type": "network-access",
           "line": 112,
           "evidence": "https://",
           "context": "          loginUrl: \"https://target.example.com/login\"",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Scan targets are placeholder hosts (target.example.com, target.com, localhost, burp:1337) the user replaces with an authorized app; one curl -I fetches response headers from the target."
         },
         {
           "type": "shell-execution",
           "line": 153,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks run ZAP containers, Nikto, Nuclei and curl against a scan target; the `sh` hits are zap.sh launcher invocations."
         },
         {
           "type": "shell-execution",
           "line": 157,
           "evidence": "sh",
           "context": "  zap.sh -cmd -autorun /zap/wrk/zap-automation.yaml",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks run ZAP containers, Nikto, Nuclei and curl against a scan target; the `sh` hits are zap.sh launcher invocations."
         },
         {
           "type": "network-access",
           "line": 186,
           "evidence": "http://",
           "context": "          target: 'http://localhost:8080'",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Scan targets are placeholder hosts (target.example.com, target.com, localhost, burp:1337) the user replaces with an authorized app; one curl -I fetches response headers from the target."
         },
         {
           "type": "filesystem-write",
           "line": 207,
           "evidence": "mkdir",
           "context": "    - mkdir -p /zap/wrk/reports",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Creates a local reports directory inside the GitLab CI scanner job."
         },
         {
           "type": "credential-access",
           "line": 225,
           "evidence": "api_key",
           "context": "    def __init__(self, api_url, api_key):",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Burp API key parameter and placeholder value in a sample client; no instruction to read, print or send real secrets."
         },
         {
           "type": "credential-access",
           "line": 227,
           "evidence": "api_key",
           "context": "        self.headers = {'Authorization': api_key}",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Burp API key parameter and placeholder value in a sample client; no instruction to read, print or send real secrets."
         },
         {
           "type": "credential-access",
           "line": 264,
           "evidence": "api-key",
           "context": "scanner = BurpScanner('http://burp:1337', 'api-key')",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Burp API key parameter and placeholder value in a sample client; no instruction to read, print or send real secrets."
         },
         {
           "type": "network-access",
           "line": 264,
           "evidence": "http://",
           "context": "scanner = BurpScanner('http://burp:1337', 'api-key')",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Scan targets are placeholder hosts (target.example.com, target.com, localhost, burp:1337) the user replaces with an authorized app; one curl -I fetches response headers from the target."
         },
         {
           "type": "network-access",
           "line": 265,
           "evidence": "https://",
           "context": "scan_id = scanner.create_scan('https://target.example.com')",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Scan targets are placeholder hosts (target.example.com, target.com, localhost, burp:1337) the user replaces with an authorized app; one curl -I fetches response headers from the target."
         },
         {
           "type": "shell-execution",
           "line": 280,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks run ZAP containers, Nikto, Nuclei and curl against a scan target; the `sh` hits are zap.sh launcher invocations."
         },
         {
           "type": "network-access",
           "line": 285,
           "evidence": "https://",
           "context": "nikto -h https://target.example.com",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Scan targets are placeholder hosts (target.example.com, target.com, localhost, burp:1337) the user replaces with an authorized app; one curl -I fetches response headers from the target."
         },
         {
           "type": "network-access",
           "line": 288,
           "evidence": "https://",
           "context": "nikto -h https://target.example.com \\",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Scan targets are placeholder hosts (target.example.com, target.com, localhost, burp:1337) the user replaces with an authorized app; one curl -I fetches response headers from the target."
         },
         {
           "type": "shell-execution",
           "line": 332,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks run ZAP containers, Nikto, Nuclei and curl against a scan target; the `sh` hits are zap.sh launcher invocations."
         },
         {
           "type": "network-access",
           "line": 334,
           "evidence": "curl",
           "context": "curl -I https://target.example.com | grep -i \"x-\\|content-security\\|strict\"",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Scan targets are placeholder hosts (target.example.com, target.com, localhost, burp:1337) the user replaces with an authorized app; one curl -I fetches response headers from the target."
         },
         {
           "type": "network-access",
           "line": 334,
           "evidence": "https://",
           "context": "curl -I https://target.example.com | grep -i \"x-\\|content-security\\|strict\"",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Scan targets are placeholder hosts (target.example.com, target.com, localhost, burp:1337) the user replaces with an authorized app; one curl -I fetches response headers from the target."
         }
       ]
     }

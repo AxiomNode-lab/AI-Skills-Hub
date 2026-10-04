@@ -1,9 +1,9 @@
 {
   "schema_version": "0.1",
   "skill_id": "bagelhole/cloudflare-zero-trust",
-  "status": "draft",
-  "reviewed_on": null,
-  "reviewer": null,
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
   "source": {
     "repo": "BagelHole/DevOps-Security-Agent-Skills",
     "path": "infrastructure/cloudflare/cloudflare-zero-trust",
@@ -13,7 +13,7 @@
     "complete": true,
     "scope": "infrastructure/cloudflare/cloudflare-zero-trust",
     "url": "https://api.github.com/repos/BagelHole/DevOps-Security-Agent-Skills/git/trees/0365f57a079b1332f95cf26e31dd2d5332a8399f?recursive=1",
-    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
   },
   "license": {
     "spdx": "MIT",
@@ -31,18 +31,32 @@
       ]
     },
     "redistributable": true,
-    "scope_reason": "",
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found; API calls and configs are short examples, not copied Cloudflare documentation. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
     "obligations": [
       "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
-      "Preserve all upstream text and notices byte-for-byte."
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
     ]
   },
   "content_review": {
-    "status": "pending",
-    "risk": "unknown",
+    "status": "approved",
+    "risk": "medium",
     "blocking_findings": [],
-    "capabilities": {},
-    "notes": []
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "package_install": true,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md in full; it is the only file. Cloudflare Zero Trust guidance: installing cloudflared, creating and routing a Cloudflare Tunnel, ingress config, running it under systemd/Docker, Access applications and policies via the Cloudflare API, service tokens, device posture, Gateway DNS filtering, WARP enrollment/split tunnels and browser SSH.",
+      "Following it installs cloudflared (brew, Cloudflare's signed apt repository, or docker pull at SKILL.md:32-40), authenticates with `cloudflared tunnel login`, creates tunnels and DNS CNAME records, installs a systemd service, and calls the live Cloudflare API with $CF_API_TOKEN to create Access apps, policies, service tokens and Gateway rules (SKILL.md:154-260). Medium because it uses real account credentials and changes the user's Cloudflare and DNS configuration; acceptable because every action is within the user's own Zero Trust setup that the skill is invoked for, with placeholder IDs the user must supply.",
+      "The sample ingress for the internal wiki sets `originRequest: noTLSVerify: true` (SKILL.md:82-83) without explanation; the origin is plain http://localhost:8080 so it has no effect there, but users should not copy it to HTTPS origins. Service-token secrets are environment variables/placeholders. Related Skills links (SKILL.md:342-345: ../cloudflare-workers/, ../../networking/dns-management/, ../../networking/reverse-proxy/, ../../networking/service-mesh/) are optional pointers that do not ship with this skill. Frontmatter declares license: MIT."
+    ]
   },
   "files": [
     {
@@ -55,7 +69,7 @@
       "git_blob": "67c5c5cbb12cafb1515e449748866bd40da7dec9",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
       "findings": []
     },
     {
@@ -66,351 +80,351 @@
       "git_blob": "77ff20d27b931517541bafeb82d9ae2ca53c0b83",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "shell-execution",
           "line": 29,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences holding cloudflared install, tunnel, systemctl, docker and Cloudflare API curl commands for the user's own account."
         },
         {
           "type": "network-access",
           "line": 35,
           "evidence": "curl",
           "context": "curl -fsSL https://pkg.cloudflare.com/cloudflare-main.gpg | sudo tee /usr/share/keyrings/cloudflare-main.gpg >/dev/null",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Fetches Cloudflare's apt signing key into a keyring and adds a signed-by repository; this is a verified package source, not a script piped to a shell."
         },
         {
           "type": "network-access",
           "line": 35,
           "evidence": "https://",
           "context": "curl -fsSL https://pkg.cloudflare.com/cloudflare-main.gpg | sudo tee /usr/share/keyrings/cloudflare-main.gpg >/dev/null",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Fetches Cloudflare's apt signing key into a keyring and adds a signed-by repository; this is a verified package source, not a script piped to a shell."
         },
         {
           "type": "shell-execution",
           "line": 35,
           "evidence": " sudo",
           "context": "curl -fsSL https://pkg.cloudflare.com/cloudflare-main.gpg | sudo tee /usr/share/keyrings/cloudflare-main.gpg >/dev/null",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences holding cloudflared install, tunnel, systemctl, docker and Cloudflare API curl commands for the user's own account."
         },
         {
           "type": "network-access",
           "line": 36,
           "evidence": "https://",
           "context": "echo \"deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/cloudflared $(lsb_release -cs) main\" | sudo tee /etc/apt/sources.list.d/cloudflared.list",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Cloudflare API endpoints called with the user's API token, Cloudflare's apt repository key, a connectivity trace URL, and localhost/placeholder origin URLs in tunnel ingress config."
         },
         {
           "type": "shell-execution",
           "line": 36,
           "evidence": " sudo",
           "context": "echo \"deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/cloudflared $(lsb_release -cs) main\" | sudo tee /etc/apt/sources.list.d/cloudflared.list",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences holding cloudflared install, tunnel, systemctl, docker and Cloudflare API curl commands for the user's own account."
         },
         {
           "type": "shell-execution",
           "line": 36,
           "evidence": "\nsudo",
           "context": "echo \"deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/cloudflared $(lsb_release -cs) main\" | sudo tee /etc/apt/sources.list.d/cloudflared.list",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences holding cloudflared install, tunnel, systemctl, docker and Cloudflare API curl commands for the user's own account."
         },
         {
           "type": "shell-execution",
           "line": 37,
           "evidence": " sudo",
           "context": "sudo apt update && sudo apt install -y cloudflared",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences holding cloudflared install, tunnel, systemctl, docker and Cloudflare API curl commands for the user's own account."
         },
         {
           "type": "shell-execution",
           "line": 49,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences holding cloudflared install, tunnel, systemctl, docker and Cloudflare API curl commands for the user's own account."
         },
         {
           "type": "network-access",
           "line": 77,
           "evidence": "http://",
           "context": "    service: http://localhost:3000",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Cloudflare API endpoints called with the user's API token, Cloudflare's apt repository key, a connectivity trace URL, and localhost/placeholder origin URLs in tunnel ingress config."
         },
         {
           "type": "network-access",
           "line": 81,
           "evidence": "http://",
           "context": "    service: http://localhost:8080",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Cloudflare API endpoints called with the user's API token, Cloudflare's apt repository key, a connectivity trace URL, and localhost/placeholder origin URLs in tunnel ingress config."
         },
         {
           "type": "network-access",
           "line": 91,
           "evidence": "http://",
           "context": "    service: http://10.0.0.0/24",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Cloudflare API endpoints called with the user's API token, Cloudflare's apt repository key, a connectivity trace URL, and localhost/placeholder origin URLs in tunnel ingress config."
         },
         {
           "type": "shell-execution",
           "line": 99,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences holding cloudflared install, tunnel, systemctl, docker and Cloudflare API curl commands for the user's own account."
         },
         {
           "type": "shell-execution",
           "line": 103,
           "evidence": "\nsudo",
           "context": "# Install as a systemd service",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences holding cloudflared install, tunnel, systemctl, docker and Cloudflare API curl commands for the user's own account."
         },
         {
           "type": "shell-execution",
           "line": 104,
           "evidence": "\nsudo",
           "context": "sudo cloudflared service install",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences holding cloudflared install, tunnel, systemctl, docker and Cloudflare API curl commands for the user's own account."
         },
         {
           "type": "shell-execution",
           "line": 105,
           "evidence": "\nsudo",
           "context": "sudo systemctl enable cloudflared",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences holding cloudflared install, tunnel, systemctl, docker and Cloudflare API curl commands for the user's own account."
         },
         {
           "type": "shell-execution",
           "line": 152,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences holding cloudflared install, tunnel, systemctl, docker and Cloudflare API curl commands for the user's own account."
         },
         {
           "type": "network-access",
           "line": 154,
           "evidence": "curl",
           "context": "curl -X POST \"https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/access/apps\" \\",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Cloudflare API endpoints called with the user's API token, Cloudflare's apt repository key, a connectivity trace URL, and localhost/placeholder origin URLs in tunnel ingress config."
         },
         {
           "type": "network-access",
           "line": 154,
           "evidence": "https://",
           "context": "curl -X POST \"https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/access/apps\" \\",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Cloudflare API endpoints called with the user's API token, Cloudflare's apt repository key, a connectivity trace URL, and localhost/placeholder origin URLs in tunnel ingress config."
         },
         {
           "type": "shell-execution",
           "line": 169,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences holding cloudflared install, tunnel, systemctl, docker and Cloudflare API curl commands for the user's own account."
         },
         {
           "type": "network-access",
           "line": 171,
           "evidence": "curl",
           "context": "curl -X POST \"https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/access/apps/<APP_ID>/policies\" \\",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Cloudflare API endpoints called with the user's API token, Cloudflare's apt repository key, a connectivity trace URL, and localhost/placeholder origin URLs in tunnel ingress config."
         },
         {
           "type": "network-access",
           "line": 171,
           "evidence": "https://",
           "context": "curl -X POST \"https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/access/apps/<APP_ID>/policies\" \\",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Cloudflare API endpoints called with the user's API token, Cloudflare's apt repository key, a connectivity trace URL, and localhost/placeholder origin URLs in tunnel ingress config."
         },
         {
           "type": "shell-execution",
           "line": 198,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences holding cloudflared install, tunnel, systemctl, docker and Cloudflare API curl commands for the user's own account."
         },
         {
           "type": "network-access",
           "line": 200,
           "evidence": "curl",
           "context": "curl -X POST \"https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/access/service_tokens\" \\",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Cloudflare API endpoints called with the user's API token, Cloudflare's apt repository key, a connectivity trace URL, and localhost/placeholder origin URLs in tunnel ingress config."
         },
         {
           "type": "network-access",
           "line": 200,
           "evidence": "https://",
           "context": "curl -X POST \"https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/access/service_tokens\" \\",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Cloudflare API endpoints called with the user's API token, Cloudflare's apt repository key, a connectivity trace URL, and localhost/placeholder origin URLs in tunnel ingress config."
         },
         {
           "type": "credential-access",
           "line": 205,
           "evidence": "Secret",
           "context": "# Response includes Client ID and Client Secret",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Cloudflare Access service-token client ID/secret shown as placeholders and $CF_CLIENT_SECRET environment variables; nothing is printed or sent beyond the user's own service."
         },
         {
           "type": "credential-access",
           "line": 208,
           "evidence": "Secret",
           "context": "# CF-Access-Client-Secret: <CLIENT_SECRET>",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Cloudflare Access service-token client ID/secret shown as placeholders and $CF_CLIENT_SECRET environment variables; nothing is printed or sent beyond the user's own service."
         },
         {
           "type": "shell-execution",
           "line": 211,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences holding cloudflared install, tunnel, systemctl, docker and Cloudflare API curl commands for the user's own account."
         },
         {
           "type": "network-access",
           "line": 213,
           "evidence": "curl",
           "context": "curl -H \"CF-Access-Client-Id: $CF_CLIENT_ID\" \\",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Cloudflare API endpoints called with the user's API token, Cloudflare's apt repository key, a connectivity trace URL, and localhost/placeholder origin URLs in tunnel ingress config."
         },
         {
           "type": "credential-access",
           "line": 214,
           "evidence": "Secret",
           "context": "     -H \"CF-Access-Client-Secret: $CF_CLIENT_SECRET\" \\",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Cloudflare Access service-token client ID/secret shown as placeholders and $CF_CLIENT_SECRET environment variables; nothing is printed or sent beyond the user's own service."
         },
         {
           "type": "network-access",
           "line": 215,
           "evidence": "https://",
           "context": "     https://grafana.example.com/api/health",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Cloudflare API endpoints called with the user's API token, Cloudflare's apt repository key, a connectivity trace URL, and localhost/placeholder origin URLs in tunnel ingress config."
         },
         {
           "type": "shell-execution",
           "line": 238,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences holding cloudflared install, tunnel, systemctl, docker and Cloudflare API curl commands for the user's own account."
         },
         {
           "type": "network-access",
           "line": 244,
           "evidence": "https://",
           "context": "# DoH: https://<UNIQUE_ID>.cloudflare-gateway.com/dns-query",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Cloudflare API endpoints called with the user's API token, Cloudflare's apt repository key, a connectivity trace URL, and localhost/placeholder origin URLs in tunnel ingress config."
         },
         {
           "type": "shell-execution",
           "line": 249,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences holding cloudflared install, tunnel, systemctl, docker and Cloudflare API curl commands for the user's own account."
         },
         {
           "type": "network-access",
           "line": 251,
           "evidence": "curl",
           "context": "curl -X POST \"https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/gateway/rules\" \\",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Cloudflare API endpoints called with the user's API token, Cloudflare's apt repository key, a connectivity trace URL, and localhost/placeholder origin URLs in tunnel ingress config."
         },
         {
           "type": "network-access",
           "line": 251,
           "evidence": "https://",
           "context": "curl -X POST \"https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/gateway/rules\" \\",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Cloudflare API endpoints called with the user's API token, Cloudflare's apt repository key, a connectivity trace URL, and localhost/placeholder origin URLs in tunnel ingress config."
         },
         {
           "type": "shell-execution",
           "line": 276,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences holding cloudflared install, tunnel, systemctl, docker and Cloudflare API curl commands for the user's own account."
         },
         {
           "type": "network-access",
           "line": 282,
           "evidence": "https://",
           "context": "# 1. Install WARP client from https://1.1.1.1",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Cloudflare API endpoints called with the user's API token, Cloudflare's apt repository key, a connectivity trace URL, and localhost/placeholder origin URLs in tunnel ingress config."
         },
         {
           "type": "network-access",
           "line": 287,
           "evidence": "curl",
           "context": "curl https://connectivity.cloudflare.com/cdn-cgi/trace",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Cloudflare API endpoints called with the user's API token, Cloudflare's apt repository key, a connectivity trace URL, and localhost/placeholder origin URLs in tunnel ingress config."
         },
         {
           "type": "network-access",
           "line": 287,
           "evidence": "https://",
           "context": "curl https://connectivity.cloudflare.com/cdn-cgi/trace",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Cloudflare API endpoints called with the user's API token, Cloudflare's apt repository key, a connectivity trace URL, and localhost/placeholder origin URLs in tunnel ingress config."
         },
         {
           "type": "shell-execution",
           "line": 293,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences holding cloudflared install, tunnel, systemctl, docker and Cloudflare API curl commands for the user's own account."
         },
         {
           "type": "shell-execution",
           "line": 315,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences holding cloudflared install, tunnel, systemctl, docker and Cloudflare API curl commands for the user's own account."
         },
         {
           "type": "credential-access",
           "line": 335,
           "evidence": "Secret",
           "context": "| Service token auth fails | Token expired or wrong headers | Regenerate token; use both `CF-Access-Client-Id` and `CF-Access-Client-Secret` |",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Cloudflare Access service-token client ID/secret shown as placeholders and $CF_CLIENT_SECRET environment variables; nothing is printed or sent beyond the user's own service."
         }
       ]
     }

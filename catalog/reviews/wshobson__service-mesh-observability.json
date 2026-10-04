@@ -1,9 +1,9 @@
 {
   "schema_version": "0.1",
   "skill_id": "wshobson/service-mesh-observability",
-  "status": "draft",
-  "reviewed_on": null,
-  "reviewer": null,
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
   "source": {
     "repo": "wshobson/agents",
     "path": "plugins/cloud-infrastructure/skills/service-mesh-observability",
@@ -13,7 +13,7 @@
     "complete": true,
     "scope": "plugins/cloud-infrastructure/skills/service-mesh-observability",
     "url": "https://api.github.com/repos/wshobson/agents/git/trees/156b7a5e7a8b93642628a339ee4039c925b34c7f?recursive=1",
-    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
   },
   "license": {
     "spdx": "MIT",
@@ -32,18 +32,32 @@
       ]
     },
     "redistributable": true,
-    "scope_reason": "",
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file; manifests, PromQL and dashboard JSON are short original configuration examples. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
     "obligations": [
       "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
-      "Preserve all upstream text and notices byte-for-byte."
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
     ]
   },
   "content_review": {
-    "status": "pending",
-    "risk": "unknown",
+    "status": "approved",
+    "risk": "medium",
     "blocking_findings": [],
-    "capabilities": {},
-    "notes": []
+    "capabilities": {
+      "shell": true,
+      "network": false,
+      "credentials": false,
+      "package_install": true,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md and references/details.md in full. The skill explains observability for Istio/Linkerd meshes (golden signals, sampling guidance) and provides templates: Prometheus scrape config and ServiceMonitor, PromQL queries, Jaeger and Kiali manifests, an OpenTelemetry Collector config, a Grafana dashboard JSON and PrometheusRule alerts.",
+      "Medium: the one shell block (references/details.md:118-137) installs the Linkerd viz extension into the user's cluster via `linkerd viz install | kubectl apply -f -` and runs read-only linkerd viz inspection commands (top, routes, tap, edges). Acceptable because it installs a standard extension in the user's own mesh; everything else is configuration the user applies themselves.",
+      "Users should know: the Kiali template uses `auth.strategy: anonymous` with access to all namespaces and the OTel Jaeger exporter sets `tls.insecure: true`; these are dev-oriented defaults to tighten before production. Tracing sampling is 100% in the Jaeger example, with the skill advising 1-10% in production."
+    ]
   },
   "files": [
     {
@@ -56,7 +70,7 @@
       "git_blob": "326f0a55c96e672fedf9d807ca043c00df05ba0e",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
       "findings": []
     },
     {
@@ -67,39 +81,39 @@
       "git_blob": "726fba554263a843a0ab994384ab39790c6a8ae8",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "shell-execution",
           "line": 118,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "One bash block that installs the Linkerd viz extension with kubectl apply and runs linkerd viz observability commands against the user's mesh."
         },
         {
           "type": "network-access",
           "line": 217,
           "evidence": "http://",
           "context": "      url: http://prometheus.istio-system:9090",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "In-cluster service URLs (prometheus, jaeger-query, grafana in istio-system) in the Kiali config; the skill does not instruct fetching them."
         },
         {
           "type": "network-access",
           "line": 219,
           "evidence": "http://",
           "context": "      url: http://jaeger-query.istio-system:16686",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "In-cluster service URLs (prometheus, jaeger-query, grafana in istio-system) in the Kiali config; the skill does not instruct fetching them."
         },
         {
           "type": "network-access",
           "line": 221,
           "evidence": "http://",
           "context": "      url: http://grafana.istio-system:3000",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "In-cluster service URLs (prometheus, jaeger-query, grafana in istio-system) in the Kiali config; the skill does not instruct fetching them."
         }
       ]
     },
@@ -111,7 +125,7 @@
       "git_blob": "47e78bc6f0b19fb2216ee3693b1dbed0d17fd793",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": []
     }
   ]

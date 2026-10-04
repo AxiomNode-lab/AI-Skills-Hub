@@ -1,9 +1,9 @@
 {
   "schema_version": "0.1",
   "skill_id": "bagelhole/gpu-server-management",
-  "status": "draft",
-  "reviewed_on": null,
-  "reviewer": null,
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
   "source": {
     "repo": "BagelHole/DevOps-Security-Agent-Skills",
     "path": "infrastructure/servers/gpu-server-management",
@@ -13,7 +13,7 @@
     "complete": true,
     "scope": "infrastructure/servers/gpu-server-management",
     "url": "https://api.github.com/repos/BagelHole/DevOps-Security-Agent-Skills/git/trees/0365f57a079b1332f95cf26e31dd2d5332a8399f?recursive=1",
-    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
   },
   "license": {
     "spdx": "MIT",
@@ -31,18 +31,32 @@
       ]
     },
     "redistributable": true,
-    "scope_reason": "",
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found; commands are short original examples. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
     "obligations": [
       "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
-      "Preserve all upstream text and notices byte-for-byte."
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
     ]
   },
   "content_review": {
-    "status": "pending",
-    "risk": "unknown",
+    "status": "approved",
+    "risk": "medium",
     "blocking_findings": [],
-    "capabilities": {},
-    "notes": []
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md in full; it is the only file. NVIDIA GPU server guide: driver/CUDA/container-toolkit installation on Ubuntu, post-install nvidia-smi settings, health monitoring with DCGM, a DCGM Prometheus exporter, MIG partitioning, kernel/OS tuning, topology checks, and common issues.",
+      "Following it can make the agent run many sudo commands: purge existing NVIDIA/CUDA packages (SKILL.md:34), add NVIDIA's signed apt repository and install drivers/toolkits, reconfigure and restart Docker, change GPU power/ECC/MIG/boost settings, append to /etc/security/limits.conf, and write /etc/rc.local with tee (SKILL.md:168-175), which overwrites any existing file. Medium because these are privileged host and hardware changes; acceptable because they are the standard setup steps for a GPU server the user is provisioning, the repository is added with a GPG keyring and signed-by (not a piped script), and nothing disables OS security controls.",
+      "Users should note: disabling ECC (SKILL.md:72) is labelled 'less safe' and is optional; overwriting /etc/rc.local and purging drivers should be confirmed on an existing server; the DCGM exporter runs the unpinned :latest image with SYS_ADMIN (SKILL.md:106-112). Related Skills (SKILL.md:218-221) link to skills outside this directory (../../local-ai/vllm-server/, ../../local-ai/llm-fine-tuning/, ../../../security/hardening/linux-hardening/, ../../../devops/observability/prometheus-grafana/); optional. Frontmatter declares license: MIT."
+    ]
   },
   "files": [
     {
@@ -55,7 +69,7 @@
       "git_blob": "67c5c5cbb12cafb1515e449748866bd40da7dec9",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
       "findings": []
     },
     {
@@ -66,383 +80,383 @@
       "git_blob": "c1a27ac72390e23d8467c96cc584d4f0539b8b15",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "shell-execution",
           "line": 27,
           "evidence": " sudo",
           "context": "- Root or sudo access",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with sudo apt, nvidia-smi, dcgmi, docker, and tee/chmod commands for configuring the user's GPU server; scanner also matched 'sh' in words such as 'refresh'."
         },
         {
           "type": "shell-execution",
           "line": 32,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with sudo apt, nvidia-smi, dcgmi, docker, and tee/chmod commands for configuring the user's GPU server; scanner also matched 'sh' in words such as 'refresh'."
         },
         {
           "type": "filesystem-write",
           "line": 33,
           "evidence": "Remove",
           "context": "# Remove old drivers",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Precedes 'sudo apt purge -y nvidia* cuda* libcuda*', which removes existing GPU drivers; appropriate for a fresh install but should be confirmed on a server already in use."
         },
         {
           "type": "shell-execution",
           "line": 33,
           "evidence": "\nsudo",
           "context": "# Remove old drivers",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with sudo apt, nvidia-smi, dcgmi, docker, and tee/chmod commands for configuring the user's GPU server; scanner also matched 'sh' in words such as 'refresh'."
         },
         {
           "type": "shell-execution",
           "line": 34,
           "evidence": "\nsudo",
           "context": "sudo apt purge -y 'nvidia*' 'cuda*' 'libcuda*'",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with sudo apt, nvidia-smi, dcgmi, docker, and tee/chmod commands for configuring the user's GPU server; scanner also matched 'sh' in words such as 'refresh'."
         },
         {
           "type": "network-access",
           "line": 39,
           "evidence": "curl",
           "context": "curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | \\",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "curl of NVIDIA's apt GPG key and repository list from nvidia.github.io to configure a signed apt source; nothing is executed as a script."
         },
         {
           "type": "network-access",
           "line": 39,
           "evidence": "https://",
           "context": "curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | \\",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "curl of NVIDIA's apt GPG key and repository list from nvidia.github.io to configure a signed apt source; nothing is executed as a script."
         },
         {
           "type": "shell-execution",
           "line": 40,
           "evidence": " sudo",
           "context": "  sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with sudo apt, nvidia-smi, dcgmi, docker, and tee/chmod commands for configuring the user's GPU server; scanner also matched 'sh' in words such as 'refresh'."
         },
         {
           "type": "network-access",
           "line": 42,
           "evidence": "curl",
           "context": "curl -s -L https://nvidia.github.io/libnvidia-container/$distribution/libnvidia-container.list | \\",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "curl of NVIDIA's apt GPG key and repository list from nvidia.github.io to configure a signed apt source; nothing is executed as a script."
         },
         {
           "type": "network-access",
           "line": 42,
           "evidence": "https://",
           "context": "curl -s -L https://nvidia.github.io/libnvidia-container/$distribution/libnvidia-container.list | \\",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "curl of NVIDIA's apt GPG key and repository list from nvidia.github.io to configure a signed apt source; nothing is executed as a script."
         },
         {
           "type": "network-access",
           "line": 43,
           "evidence": "https://",
           "context": "  sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | \\",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "curl of NVIDIA's apt GPG key and repository list from nvidia.github.io to configure a signed apt source; nothing is executed as a script."
         },
         {
           "type": "network-access",
           "line": 43,
           "evidence": "https://",
           "context": "  sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | \\",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "curl of NVIDIA's apt GPG key and repository list from nvidia.github.io to configure a signed apt source; nothing is executed as a script."
         },
         {
           "type": "shell-execution",
           "line": 44,
           "evidence": " sudo",
           "context": "  sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with sudo apt, nvidia-smi, dcgmi, docker, and tee/chmod commands for configuring the user's GPU server; scanner also matched 'sh' in words such as 'refresh'."
         },
         {
           "type": "shell-execution",
           "line": 45,
           "evidence": "\nsudo",
           "context": "",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with sudo apt, nvidia-smi, dcgmi, docker, and tee/chmod commands for configuring the user's GPU server; scanner also matched 'sh' in words such as 'refresh'."
         },
         {
           "type": "shell-execution",
           "line": 48,
           "evidence": "\nsudo",
           "context": "# Install latest driver (560.x as of 2025)",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with sudo apt, nvidia-smi, dcgmi, docker, and tee/chmod commands for configuring the user's GPU server; scanner also matched 'sh' in words such as 'refresh'."
         },
         {
           "type": "shell-execution",
           "line": 51,
           "evidence": "\nsudo",
           "context": "# Install NVIDIA Container Toolkit (Docker GPU support)",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with sudo apt, nvidia-smi, dcgmi, docker, and tee/chmod commands for configuring the user's GPU server; scanner also matched 'sh' in words such as 'refresh'."
         },
         {
           "type": "shell-execution",
           "line": 52,
           "evidence": "\nsudo",
           "context": "sudo apt install -y nvidia-container-toolkit",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with sudo apt, nvidia-smi, dcgmi, docker, and tee/chmod commands for configuring the user's GPU server; scanner also matched 'sh' in words such as 'refresh'."
         },
         {
           "type": "shell-execution",
           "line": 53,
           "evidence": "\nsudo",
           "context": "sudo nvidia-ctk runtime configure --runtime=docker",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with sudo apt, nvidia-smi, dcgmi, docker, and tee/chmod commands for configuring the user's GPU server; scanner also matched 'sh' in words such as 'refresh'."
         },
         {
           "type": "shell-execution",
           "line": 64,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with sudo apt, nvidia-smi, dcgmi, docker, and tee/chmod commands for configuring the user's GPU server; scanner also matched 'sh' in words such as 'refresh'."
         },
         {
           "type": "shell-execution",
           "line": 65,
           "evidence": "\nsudo",
           "context": "# Enable persistence mode (reduces driver initialization latency)",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with sudo apt, nvidia-smi, dcgmi, docker, and tee/chmod commands for configuring the user's GPU server; scanner also matched 'sh' in words such as 'refresh'."
         },
         {
           "type": "shell-execution",
           "line": 68,
           "evidence": "\nsudo",
           "context": "# Set power limit (reduce heat/noise on inference servers)",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with sudo apt, nvidia-smi, dcgmi, docker, and tee/chmod commands for configuring the user's GPU server; scanner also matched 'sh' in words such as 'refresh'."
         },
         {
           "type": "shell-execution",
           "line": 71,
           "evidence": "\nsudo",
           "context": "# Disable ECC on inference servers (frees ~6% VRAM, less safe)",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with sudo apt, nvidia-smi, dcgmi, docker, and tee/chmod commands for configuring the user's GPU server; scanner also matched 'sh' in words such as 'refresh'."
         },
         {
           "type": "shell-execution",
           "line": 74,
           "evidence": "\nsudo",
           "context": "# Enable P2P for multi-GPU NVLink training",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with sudo apt, nvidia-smi, dcgmi, docker, and tee/chmod commands for configuring the user's GPU server; scanner also matched 'sh' in words such as 'refresh'."
         },
         {
           "type": "shell-execution",
           "line": 80,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with sudo apt, nvidia-smi, dcgmi, docker, and tee/chmod commands for configuring the user's GPU server; scanner also matched 'sh' in words such as 'refresh'."
         },
         {
           "type": "shell-execution",
           "line": 89,
           "evidence": "\nsudo",
           "context": "# DCGM — production monitoring daemon (for clusters)",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with sudo apt, nvidia-smi, dcgmi, docker, and tee/chmod commands for configuring the user's GPU server; scanner also matched 'sh' in words such as 'refresh'."
         },
         {
           "type": "shell-execution",
           "line": 90,
           "evidence": "\nsudo",
           "context": "sudo apt install -y datacenter-gpu-manager",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with sudo apt, nvidia-smi, dcgmi, docker, and tee/chmod commands for configuring the user's GPU server; scanner also matched 'sh' in words such as 'refresh'."
         },
         {
           "type": "shell-execution",
           "line": 96,
           "evidence": "\nsudo",
           "context": "# Check GPU errors (XID errors — important for stability)",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with sudo apt, nvidia-smi, dcgmi, docker, and tee/chmod commands for configuring the user's GPU server; scanner also matched 'sh' in words such as 'refresh'."
         },
         {
           "type": "shell-execution",
           "line": 104,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with sudo apt, nvidia-smi, dcgmi, docker, and tee/chmod commands for configuring the user's GPU server; scanner also matched 'sh' in words such as 'refresh'."
         },
         {
           "type": "shell-execution",
           "line": 128,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with sudo apt, nvidia-smi, dcgmi, docker, and tee/chmod commands for configuring the user's GPU server; scanner also matched 'sh' in words such as 'refresh'."
         },
         {
           "type": "shell-execution",
           "line": 129,
           "evidence": "\nsudo",
           "context": "# Enable MIG mode (requires reboot or restart of all processes)",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with sudo apt, nvidia-smi, dcgmi, docker, and tee/chmod commands for configuring the user's GPU server; scanner also matched 'sh' in words such as 'refresh'."
         },
         {
           "type": "shell-execution",
           "line": 130,
           "evidence": "\nsudo",
           "context": "sudo nvidia-smi -mig 1",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with sudo apt, nvidia-smi, dcgmi, docker, and tee/chmod commands for configuring the user's GPU server; scanner also matched 'sh' in words such as 'refresh'."
         },
         {
           "type": "shell-execution",
           "line": 140,
           "evidence": "\nsudo",
           "context": "# Create MIG instances (e.g., 3× 2g.20gb + 1× 2g.20gb = multi-tenant)",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with sudo apt, nvidia-smi, dcgmi, docker, and tee/chmod commands for configuring the user's GPU server; scanner also matched 'sh' in words such as 'refresh'."
         },
         {
           "type": "shell-execution",
           "line": 150,
           "evidence": "\nsudo",
           "context": "# Disable MIG",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with sudo apt, nvidia-smi, dcgmi, docker, and tee/chmod commands for configuring the user's GPU server; scanner also matched 'sh' in words such as 'refresh'."
         },
         {
           "type": "shell-execution",
           "line": 151,
           "evidence": "\nsudo",
           "context": "sudo nvidia-smi mig -i 0 -dci",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with sudo apt, nvidia-smi, dcgmi, docker, and tee/chmod commands for configuring the user's GPU server; scanner also matched 'sh' in words such as 'refresh'."
         },
         {
           "type": "shell-execution",
           "line": 152,
           "evidence": "\nsudo",
           "context": "sudo nvidia-smi mig -i 0 -dgi",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with sudo apt, nvidia-smi, dcgmi, docker, and tee/chmod commands for configuring the user's GPU server; scanner also matched 'sh' in words such as 'refresh'."
         },
         {
           "type": "shell-execution",
           "line": 158,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with sudo apt, nvidia-smi, dcgmi, docker, and tee/chmod commands for configuring the user's GPU server; scanner also matched 'sh' in words such as 'refresh'."
         },
         {
           "type": "shell-execution",
           "line": 160,
           "evidence": " sudo",
           "context": "echo '* soft nofile 1048576' | sudo tee -a /etc/security/limits.conf",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with sudo apt, nvidia-smi, dcgmi, docker, and tee/chmod commands for configuring the user's GPU server; scanner also matched 'sh' in words such as 'refresh'."
         },
         {
           "type": "shell-execution",
           "line": 161,
           "evidence": " sudo",
           "context": "echo '* hard nofile 1048576' | sudo tee -a /etc/security/limits.conf",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with sudo apt, nvidia-smi, dcgmi, docker, and tee/chmod commands for configuring the user's GPU server; scanner also matched 'sh' in words such as 'refresh'."
         },
         {
           "type": "shell-execution",
           "line": 164,
           "evidence": " sudo",
           "context": "echo never | sudo tee /sys/kernel/mm/transparent_hugepage/enabled",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with sudo apt, nvidia-smi, dcgmi, docker, and tee/chmod commands for configuring the user's GPU server; scanner also matched 'sh' in words such as 'refresh'."
         },
         {
           "type": "shell-execution",
           "line": 165,
           "evidence": " sudo",
           "context": "echo never | sudo tee /sys/kernel/mm/transparent_hugepage/defrag",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with sudo apt, nvidia-smi, dcgmi, docker, and tee/chmod commands for configuring the user's GPU server; scanner also matched 'sh' in words such as 'refresh'."
         },
         {
           "type": "shell-execution",
           "line": 168,
           "evidence": " sudo",
           "context": "cat <<'EOF' | sudo tee /etc/rc.local",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with sudo apt, nvidia-smi, dcgmi, docker, and tee/chmod commands for configuring the user's GPU server; scanner also matched 'sh' in words such as 'refresh'."
         },
         {
           "type": "shell-execution",
           "line": 169,
           "evidence": "bash",
           "context": "#!/bin/bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with sudo apt, nvidia-smi, dcgmi, docker, and tee/chmod commands for configuring the user's GPU server; scanner also matched 'sh' in words such as 'refresh'."
         },
         {
           "type": "shell-execution",
           "line": 174,
           "evidence": "\nsudo",
           "context": "EOF",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with sudo apt, nvidia-smi, dcgmi, docker, and tee/chmod commands for configuring the user's GPU server; scanner also matched 'sh' in words such as 'refresh'."
         },
         {
           "type": "shell-execution",
           "line": 175,
           "evidence": " chmod",
           "context": "sudo chmod +x /etc/rc.local",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with sudo apt, nvidia-smi, dcgmi, docker, and tee/chmod commands for configuring the user's GPU server; scanner also matched 'sh' in words such as 'refresh'."
         },
         {
           "type": "shell-execution",
           "line": 177,
           "evidence": "\nsudo",
           "context": "# PCIe performance mode",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with sudo apt, nvidia-smi, dcgmi, docker, and tee/chmod commands for configuring the user's GPU server; scanner also matched 'sh' in words such as 'refresh'."
         },
         {
           "type": "shell-execution",
           "line": 178,
           "evidence": "\nsudo",
           "context": "sudo nvidia-smi --auto-boost-default=0",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with sudo apt, nvidia-smi, dcgmi, docker, and tee/chmod commands for configuring the user's GPU server; scanner also matched 'sh' in words such as 'refresh'."
         },
         {
           "type": "shell-execution",
           "line": 184,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with sudo apt, nvidia-smi, dcgmi, docker, and tee/chmod commands for configuring the user's GPU server; scanner also matched 'sh' in words such as 'refresh'."
         }
       ]
     }

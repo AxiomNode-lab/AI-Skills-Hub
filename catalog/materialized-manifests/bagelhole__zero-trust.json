@@ -1,0 +1,165 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "bagelhole/zero-trust",
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "security/network/zero-trust",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "review": {
+    "path": "catalog/reviews/bagelhole__zero-trust.json",
+    "sha256": "e8c9230a99916f5ee67fc3bc641daa63ce463b717d5690f5fd81e7aeb8c718f7"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "shell-execution",
+        "line": 65,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 67,
+        "evidence": "curl",
+        "context": "curl -X POST \"https://api.cloudflare.com/client/v4/accounts/${ACCOUNT_ID}/access/apps\" \\",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 67,
+        "evidence": "https://",
+        "context": "curl -X POST \"https://api.cloudflare.com/client/v4/accounts/${ACCOUNT_ID}/access/apps\" \\",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 80,
+        "evidence": "curl",
+        "context": "curl -X POST \"https://api.cloudflare.com/client/v4/accounts/${ACCOUNT_ID}/access/apps/${APP_ID}/policies\" \\",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 80,
+        "evidence": "https://",
+        "context": "curl -X POST \"https://api.cloudflare.com/client/v4/accounts/${ACCOUNT_ID}/access/apps/${APP_ID}/policies\" \\",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 98,
+        "evidence": "curl",
+        "context": "curl -X POST \"https://api.cloudflare.com/client/v4/accounts/${ACCOUNT_ID}/devices/posture\" \\",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 98,
+        "evidence": "https://",
+        "context": "curl -X POST \"https://api.cloudflare.com/client/v4/accounts/${ACCOUNT_ID}/devices/posture\" \\",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 177,
+        "evidence": "https://",
+        "context": "            - --oidc-issuer-url=https://accounts.google.com",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 179,
+        "evidence": "secret",
+        "context": "            - --client-secret=$(CLIENT_SECRET)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 181,
+        "evidence": "http://",
+        "context": "            - --upstream=http://internal-service.default.svc:8080",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 183,
+        "evidence": "secret",
+        "context": "            - --cookie-secret=$(COOKIE_SECRET)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 188,
+        "evidence": "access-token",
+        "context": "            - --pass-access-token=true",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 202,
+        "evidence": "secret",
+        "context": "                  key: client-secret",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 207,
+        "evidence": "secret",
+        "context": "                  key: cookie-secret",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 217,
+        "evidence": "https://",
+        "context": "    nginx.ingress.kubernetes.io/auth-url: \"https://auth.example.com/oauth2/auth\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 218,
+        "evidence": "https://",
+        "context": "    nginx.ingress.kubernetes.io/auth-signin: \"https://auth.example.com/oauth2/start?rd=$scheme://$host$request_uri\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 426,
+        "evidence": "secret",
+        "context": "| mTLS connections failing | Certificate expired or wrong CA | Check cert expiry with `istioctl proxy-config secret`; verify CA chain |",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 13039
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "c3b1f0bd15c7d6b5da1acceb4ff49bbc726e790f88dcf955899cac71816d9e87",
+      "bytes": 11971,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 13039
+}

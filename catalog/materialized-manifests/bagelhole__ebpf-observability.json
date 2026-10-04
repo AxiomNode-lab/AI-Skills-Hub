@@ -1,0 +1,760 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "bagelhole/ebpf-observability",
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "devops/observability/ebpf-observability",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "review": {
+    "path": "catalog/reviews/bagelhole__ebpf-observability.json",
+    "sha256": "a7069bb8671022810ade97f2b9354a677dc80dc3ab21faa8ab69bc033a5edc45"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": false,
+      "dynamic_execution": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "shell-execution",
+        "line": 45,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 55,
+        "evidence": "\nsudo",
+        "context": "# If not mounted, mount it",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 60,
+        "evidence": "\nsudo",
+        "context": "# Should return 1; if not:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 66,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 67,
+        "evidence": "\nsudo",
+        "context": "# Ubuntu/Debian -- install bpftrace, bcc tools, and libbpf",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 68,
+        "evidence": "\nsudo",
+        "context": "sudo apt-get update",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 71,
+        "evidence": "\nsudo",
+        "context": "# Fedora/RHEL",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 74,
+        "evidence": "\nsudo",
+        "context": "# Verify bpftrace works",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 86,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 88,
+        "evidence": "https://",
+        "context": "helm repo add cilium https://helm.cilium.io/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 109,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 111,
+        "evidence": "curl",
+        "context": "CILIUM_CLI_VERSION=$(curl -s https://raw.githubusercontent.com/cilium/cilium-cli/main/stable.txt)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 111,
+        "evidence": "https://",
+        "context": "CILIUM_CLI_VERSION=$(curl -s https://raw.githubusercontent.com/cilium/cilium-cli/main/stable.txt)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 112,
+        "evidence": "curl",
+        "context": "curl -L --remote-name \"https://github.com/cilium/cilium-cli/releases/download/${CILIUM_CLI_VERSION}/cilium-linux-amd64.tar.gz\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 112,
+        "evidence": "https://",
+        "context": "curl -L --remote-name \"https://github.com/cilium/cilium-cli/releases/download/${CILIUM_CLI_VERSION}/cilium-linux-amd64.tar.gz\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 112,
+        "evidence": "\nsudo",
+        "context": "curl -L --remote-name \"https://github.com/cilium/cilium-cli/releases/download/${CILIUM_CLI_VERSION}/cilium-linux-amd64.tar.gz\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 117,
+        "evidence": "curl",
+        "context": "HUBBLE_VERSION=$(curl -s https://raw.githubusercontent.com/cilium/hubble/master/stable.txt)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 117,
+        "evidence": "https://",
+        "context": "HUBBLE_VERSION=$(curl -s https://raw.githubusercontent.com/cilium/hubble/master/stable.txt)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 118,
+        "evidence": "curl",
+        "context": "curl -L --remote-name \"https://github.com/cilium/hubble/releases/download/${HUBBLE_VERSION}/hubble-linux-amd64.tar.gz\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 118,
+        "evidence": "https://",
+        "context": "curl -L --remote-name \"https://github.com/cilium/hubble/releases/download/${HUBBLE_VERSION}/hubble-linux-amd64.tar.gz\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 118,
+        "evidence": "\nsudo",
+        "context": "curl -L --remote-name \"https://github.com/cilium/hubble/releases/download/${HUBBLE_VERSION}/hubble-linux-amd64.tar.gz\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 125,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 150,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 154,
+        "evidence": "http://",
+        "context": "# Access at http://localhost:12000 -- provides a real-time service dependency map",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 165,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 166,
+        "evidence": "https://",
+        "context": "helm repo add cilium https://helm.cilium.io/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 175,
+        "evidence": "curl",
+        "context": "curl -LO \"https://github.com/cilium/tetragon/releases/latest/download/tetra-linux-amd64.tar.gz\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 175,
+        "evidence": "https://",
+        "context": "curl -LO \"https://github.com/cilium/tetragon/releases/latest/download/tetra-linux-amd64.tar.gz\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 175,
+        "evidence": "\nsudo",
+        "context": "curl -LO \"https://github.com/cilium/tetragon/releases/latest/download/tetra-linux-amd64.tar.gz\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 197,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 233,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 271,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 309,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 321,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 322,
+        "evidence": "\nsudo",
+        "context": "# Trace read() syscall latency distribution (microseconds)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 326,
+        "evidence": "delete",
+        "context": "    delete(@start[tid]);",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 329,
+        "evidence": "\nsudo",
+        "context": "# Top 10 slowest syscalls by total time",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 333,
+        "evidence": "delete",
+        "context": "    delete(@start[tid]);",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 339,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 340,
+        "evidence": "\nsudo",
+        "context": "# Trace DNS queries via UDP port 53 sends",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 350,
+        "evidence": "\nsudo",
+        "context": "# Count DNS queries by source process",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 360,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 361,
+        "evidence": "\nsudo",
+        "context": "# Trace TCP retransmits with source/destination",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 374,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 375,
+        "evidence": "\nsudo",
+        "context": "# Block I/O latency histogram by device",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 379,
+        "evidence": "delete",
+        "context": "    delete(@start[args->dev, args->sector]);",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 382,
+        "evidence": "\nsudo",
+        "context": "# Top processes by disk I/O bytes",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 390,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 391,
+        "evidence": "\nsudo",
+        "context": "# Trace process exec inside containers (cgroup-filtered)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 396,
+        "evidence": "\nsudo",
+        "context": "# Memory allocation hotspots per container",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 409,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 411,
+        "evidence": "curl",
+        "context": "kubectl exec -n kube-system ds/cilium -- curl -s http://localhost:9965/metrics | head -50",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 411,
+        "evidence": "http://",
+        "context": "kubectl exec -n kube-system ds/cilium -- curl -s http://localhost:9965/metrics | head -50",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 437,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 439,
+        "evidence": "https://",
+        "context": "helm repo add ebpf-exporter https://cloudflare.github.io/ebpf_exporter",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 482,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 521,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 551,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 564,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 571,
+        "evidence": "\nsudo",
+        "context": "# DNS latency analysis with bpftrace",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 575,
+        "evidence": "delete",
+        "context": "    delete(@start[tid]);",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 583,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 646,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 729,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 736,
+        "evidence": "curl",
+        "context": "  curl -X POST -H \"Content-Type: application/json\" -d @- https://siem.internal/api/events",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 736,
+        "evidence": "https://",
+        "context": "  curl -X POST -H \"Content-Type: application/json\" -d @- https://siem.internal/api/events",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 747,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 749,
+        "evidence": "https://",
+        "context": "helm repo add parca https://parca-dev.github.io/helm-charts",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 764,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 766,
+        "evidence": "https://",
+        "context": "helm repo add grafana https://grafana.github.io/helm-charts",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 778,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 779,
+        "evidence": "\nsudo",
+        "context": "# Sample kernel and user stacks at 99Hz for 30 seconds",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 783,
+        "evidence": "\nsudo",
+        "context": "# Using perf with BPF for flame graphs",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 784,
+        "evidence": "\nsudo",
+        "context": "sudo perf record -F 99 -a -g -- sleep 30",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 788,
+        "evidence": "https://",
+        "context": "git clone https://github.com/brendangregg/FlameGraph.git",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 795,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 796,
+        "evidence": "\nsudo",
+        "context": "# Trace off-CPU time to find where threads are blocked",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 805,
+        "evidence": "delete",
+        "context": "      delete(@block_start[tid]);",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 813,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 814,
+        "evidence": "\nsudo",
+        "context": "# Track memory allocations not freed",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 821,
+        "evidence": "\nsudo",
+        "context": "# Per-process heap growth tracking",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 836,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 837,
+        "evidence": "\nsudo",
+        "context": "# Get verbose verifier output",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 849,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 854,
+        "evidence": "https://",
+        "context": "# https://github.com/aquasecurity/btfhub",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 855,
+        "evidence": "wget",
+        "context": "wget \"https://github.com/aquasecurity/btfhub-archive/raw/main/ubuntu/22.04/x86_64/$(uname -r).btf.tar.xz\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 855,
+        "evidence": "https://",
+        "context": "wget \"https://github.com/aquasecurity/btfhub-archive/raw/main/ubuntu/22.04/x86_64/$(uname -r).btf.tar.xz\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 861,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 875,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 891,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 905,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 906,
+        "evidence": "\nsudo",
+        "context": "# List all loaded BPF programs and their run time",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 907,
+        "evidence": "\nsudo",
+        "context": "sudo bpftool prog show",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 910,
+        "evidence": "\nsudo",
+        "context": "# Check map memory usage",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 911,
+        "evidence": "\nsudo",
+        "context": "sudo bpftool map show",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 914,
+        "evidence": "\nsudo",
+        "context": "# If a program is consuming too much CPU, check its run count and time",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 917,
+        "evidence": "\nsudo",
+        "context": "# Detach a misbehaving program",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 923,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 924,
+        "evidence": "\nsudo",
+        "context": "# Quick check: which eBPF features your kernel supports",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 927,
+        "evidence": "\nsudo",
+        "context": "# Check specific program types",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 930,
+        "evidence": "\nsudo",
+        "context": "# Check available map types",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 933,
+        "evidence": "\nsudo",
+        "context": "# Check available helper functions",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 26388
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "ad86539dd7bf9670dc19ea3d09fd835e9660da2329b53ba1d3c5a6fd7864d7cf",
+      "bytes": 25320,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 26388
+}

@@ -1,9 +1,9 @@
 {
   "schema_version": "0.1",
   "skill_id": "wshobson/database-migration",
-  "status": "draft",
-  "reviewed_on": null,
-  "reviewer": null,
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
   "source": {
     "repo": "wshobson/agents",
     "path": "plugins/framework-migration/skills/database-migration",
@@ -13,7 +13,7 @@
     "complete": true,
     "scope": "plugins/framework-migration/skills/database-migration",
     "url": "https://api.github.com/repos/wshobson/agents/git/trees/156b7a5e7a8b93642628a339ee4039c925b34c7f?recursive=1",
-    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
   },
   "license": {
     "spdx": "MIT",
@@ -32,18 +32,32 @@
       ]
     },
     "redistributable": true,
-    "scope_reason": "",
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file; the migration snippets are short original examples. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
     "obligations": [
       "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
-      "Preserve all upstream text and notices byte-for-byte."
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
     ]
   },
   "content_review": {
-    "status": "pending",
-    "risk": "unknown",
+    "status": "approved",
+    "risk": "low",
     "blocking_findings": [],
-    "capabilities": {},
-    "notes": []
+    "capabilities": {
+      "shell": false,
+      "network": false,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md and references/details.md in full. The skill gives migration code patterns for Sequelize, TypeORM and Prisma: adding/renaming/retyping columns, data transformations, transaction- and backup-table-based rollback, expand/contract zero-downtime phases and dialect-aware cross-database migrations.",
+      "No direct commands, installs, credentials, or network access: the only run instructions are ORM CLI invocations in code comments (e.g. `npx sequelize-cli db:migrate`, `npx prisma migrate deploy`) that the user runs against their own database.",
+      "Users should know: several examples drop columns or tables in `up` (e.g. SKILL.md:186, 234, 319 and references/details.md:36) and the checkpoint rollback recreates `users` via CREATE TABLE AS, which loses indexes/constraints; review and back up before applying migrations to production data."
+    ]
   },
   "files": [
     {
@@ -56,7 +70,7 @@
       "git_blob": "326f0a55c96e672fedf9d807ca043c00df05ba0e",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
       "findings": []
     },
     {
@@ -67,15 +81,15 @@
       "git_blob": "7227108dc6def628707d14e3bc19ea679d1fa5a3",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "filesystem-write",
           "line": 33,
           "evidence": "Remove",
           "context": "// Phase 5: Remove old column",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Matches are 'Remove old column' comments describing a schema migration step in the user's own migration code, not file deletion."
         }
       ]
     },
@@ -87,15 +101,15 @@
       "git_blob": "c5a4e4273866a7dd4e8bfd09ab2224300ac06475",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "filesystem-write",
           "line": 152,
           "evidence": "Remove",
           "context": "// Step 3: Remove old column",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Matches are 'Remove old column' comments describing a schema migration step in the user's own migration code, not file deletion."
         }
       ]
     }

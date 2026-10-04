@@ -1,0 +1,59 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "wshobson/python-observability",
+  "source": {
+    "repo": "wshobson/agents",
+    "path": "plugins/python-development/skills/python-observability",
+    "revision": "156b7a5e7a8b93642628a339ee4039c925b34c7f"
+  },
+  "review": {
+    "path": "catalog/reviews/wshobson__python-observability.json",
+    "sha256": "210289a0eb3e39108674d5a7b1a8252d6c9dabc42b1df1565f7c26bc1624f2d7"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "low",
+    "capabilities": {
+      "shell": false,
+      "network": true,
+      "credentials": false,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": false,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "network-access",
+        "line": 144,
+        "evidence": "https://",
+        "context": "**Note:** OpenTelemetry is actively evolving. Check the [official Python documentation](https://opentelemetry.io/docs/languages/python/) for the latest API patterns and best practices.",
+        "file": "references/details.md"
+      }
+    ],
+    "total_bytes": 13199
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "f89abb55d9f073f38f1703e4518f0613c788c6174be7f13b8dfe48a1c076c746",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/details.md",
+      "sha256": "38ec551a90f38896a24437e149bac7bc980234970821a505b3f80555d787fbfe",
+      "bytes": 5033,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "bf547d6ee0284ce20bbe521af3e40d53ca9481634dfeaaf16f25c88de6828f56",
+      "bytes": 7098,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 13199
+}

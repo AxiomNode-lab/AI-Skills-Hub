@@ -1,0 +1,249 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "wshobson/dependency-upgrade",
+  "source": {
+    "repo": "wshobson/agents",
+    "path": "plugins/framework-migration/skills/dependency-upgrade",
+    "revision": "156b7a5e7a8b93642628a339ee4039c925b34c7f"
+  },
+  "review": {
+    "path": "catalog/reviews/wshobson__dependency-upgrade.json",
+    "sha256": "d7382055a46bbb0101891f1c91aedf35c97e239ba9d01188340adc29d3cdae74"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": false,
+      "dynamic_execution": true,
+      "package_install": true,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "shell-execution",
+        "line": 38,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 55,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 101,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 119,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 123,
+        "evidence": "npm install",
+        "context": "npm install typescript@latest",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 130,
+        "evidence": "npm install",
+        "context": "npm install react@17 react-dom@17",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 136,
+        "evidence": "npm install",
+        "context": "npm install react-router-dom@6",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 163,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 165,
+        "evidence": "curl",
+        "context": "curl https://raw.githubusercontent.com/facebook/react/master/CHANGELOG.md",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 165,
+        "evidence": "https://",
+        "context": "curl https://raw.githubusercontent.com/facebook/react/master/CHANGELOG.md",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 170,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 175,
+        "evidence": "https://",
+        "context": "npx jscodeshift -t https://raw.githubusercontent.com/reactjs/react-codemod/master/transforms/rename-unsafe-lifecycles.js src/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 178,
+        "evidence": "https://",
+        "context": "npx jscodeshift -t https://raw.githubusercontent.com/reactjs/react-codemod/master/transforms/rename-unsafe-lifecycles.js --parser=tsx src/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 181,
+        "evidence": "https://",
+        "context": "npx jscodeshift -t https://raw.githubusercontent.com/reactjs/react-codemod/master/transforms/rename-unsafe-lifecycles.js --dry src/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 207,
+        "evidence": "writeFileSync",
+        "context": "    fs.writeFileSync(file, content);",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 221,
+        "evidence": "npm install",
+        "context": "npm install @testing-library/react@latest",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 313,
+        "evidence": "sh",
+        "context": "// rollback.sh",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 314,
+        "evidence": "bash",
+        "context": "#!/bin/bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 321,
+        "evidence": "npm install",
+        "context": "npm install package@latest",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 332,
+        "evidence": "npm install",
+        "context": "  npm install  # Restore from package-lock.json",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 340,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 342,
+        "evidence": "npm install",
+        "context": "npm install --package-lock-only  # Update lock file only",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 346,
+        "evidence": "yarn install",
+        "context": "yarn install --frozen-lockfile  # CI mode",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 352,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 354,
+        "evidence": "npm install",
+        "context": "npm install --legacy-peer-deps  # Ignore peer deps",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 357,
+        "evidence": "npm install",
+        "context": "npm install --force",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 362,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 364,
+        "evidence": "npm install",
+        "context": "npm install --workspaces",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 367,
+        "evidence": "npm install",
+        "context": "npm install package@latest --workspace=packages/app",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 8692
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "f89abb55d9f073f38f1703e4518f0613c788c6174be7f13b8dfe48a1c076c746",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "4cf4ff9b0520bca4092cce3981af6a064bbd904788375ce1b6ae4d866dea8d8d",
+      "bytes": 7624,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 8692
+}

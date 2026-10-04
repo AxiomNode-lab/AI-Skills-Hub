@@ -1,9 +1,9 @@
 {
   "schema_version": "0.1",
   "skill_id": "wshobson/accessibility-compliance",
-  "status": "draft",
-  "reviewed_on": null,
-  "reviewer": null,
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
   "source": {
     "repo": "wshobson/agents",
     "path": "plugins/ui-design/skills/accessibility-compliance",
@@ -13,7 +13,7 @@
     "complete": true,
     "scope": "plugins/ui-design/skills/accessibility-compliance",
     "url": "https://api.github.com/repos/wshobson/agents/git/trees/156b7a5e7a8b93642628a339ee4039c925b34c7f?recursive=1",
-    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
   },
   "license": {
     "spdx": "MIT",
@@ -32,18 +32,32 @@
       ]
     },
     "redistributable": true,
-    "scope_reason": "",
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file; W3C WCAG/ARIA and Apple/Android docs are only linked and criteria are paraphrased. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
     "obligations": [
       "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
-      "Preserve all upstream text and notices byte-for-byte."
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
     ]
   },
   "content_review": {
-    "status": "pending",
-    "risk": "unknown",
+    "status": "approved",
+    "risk": "low",
     "blocking_findings": [],
-    "capabilities": {},
-    "notes": []
+    "capabilities": {
+      "shell": false,
+      "network": false,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md and references/details.md, references/wcag-guidelines.md, references/aria-patterns.md, references/mobile-accessibility.md in full. The skill gives WCAG 2.2, ARIA, keyboard and mobile (React, React Native, SwiftUI, Compose, Android XML) accessibility patterns as sample UI code and checklists.",
+      "No commands, installs, credentials, or network access; the guidance only shapes the user's own UI code and audit replies.",
+      "The 'HTML comment' signal in references/mobile-accessibility.md (lines 290, 299, 316, 447, 453) is ordinary XML code comments inside Android layout samples, not hidden instructions. WCAG success criteria are cited by number with short paraphrased descriptions, not quoted text. No hidden Unicode found."
+    ]
   },
   "files": [
     {
@@ -56,7 +70,7 @@
       "git_blob": "326f0a55c96e672fedf9d807ca043c00df05ba0e",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
       "findings": []
     },
     {
@@ -67,31 +81,31 @@
       "git_blob": "6ccce17f24bfeae2c394fde23fd8b9afdf6f7f3a",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "network-access",
           "line": 565,
           "evidence": "https://",
           "context": "- [WAI-ARIA Authoring Practices](https://www.w3.org/WAI/ARIA/apg/)",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Resource links to W3C WAI, Apple, Android and React Native accessibility documentation; the skill does not instruct fetching them."
         },
         {
           "type": "network-access",
           "line": 566,
           "evidence": "https://",
           "context": "- [ARIA in HTML](https://www.w3.org/TR/html-aria/)",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Resource links to W3C WAI, Apple, Android and React Native accessibility documentation; the skill does not instruct fetching them."
         },
         {
           "type": "network-access",
           "line": 567,
           "evidence": "https://",
           "context": "- [Using ARIA](https://www.w3.org/TR/using-aria/)",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Resource links to W3C WAI, Apple, Android and React Native accessibility documentation; the skill does not instruct fetching them."
         }
       ]
     },
@@ -103,7 +117,7 @@
       "git_blob": "b8109d6deb00ff2159f5ca287662ae1309f21fa5",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": []
     },
     {
@@ -114,103 +128,103 @@
       "git_blob": "de8f837cb1bcfe6d6df0453b420dc99f49f5838e",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "filesystem-write",
           "line": 358,
           "evidence": "delete",
           "context": "      accessibilityActions={[{ name: \"delete\", label: \"Delete item\" }]}",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "The words delete/remove appear in UI sample code (a 'Delete item' button label, removeEventListener, subscription.remove()) and the best-practice 'don't remove focus styles'; no file deletion or write is instructed."
         },
         {
           "type": "filesystem-write",
           "line": 358,
           "evidence": "Delete",
           "context": "      accessibilityActions={[{ name: \"delete\", label: \"Delete item\" }]}",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "The words delete/remove appear in UI sample code (a 'Delete item' button label, removeEventListener, subscription.remove()) and the best-practice 'don't remove focus styles'; no file deletion or write is instructed."
         },
         {
           "type": "filesystem-write",
           "line": 360,
           "evidence": "delete",
           "context": "        if (event.nativeEvent.actionName === \"delete\") {",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "The words delete/remove appear in UI sample code (a 'Delete item' button label, removeEventListener, subscription.remove()) and the best-practice 'don't remove focus styles'; no file deletion or write is instructed."
         },
         {
           "type": "filesystem-write",
           "line": 369,
           "evidence": "Delete",
           "context": "            accessibilityLabel=\"Delete\"",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "The words delete/remove appear in UI sample code (a 'Delete item' button label, removeEventListener, subscription.remove()) and the best-practice 'don't remove focus styles'; no file deletion or write is instructed."
         },
         {
           "type": "filesystem-write",
           "line": 371,
           "evidence": "Delete",
           "context": "            <Text>Delete</Text>",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "The words delete/remove appear in UI sample code (a 'Delete item' button label, removeEventListener, subscription.remove()) and the best-practice 'don't remove focus styles'; no file deletion or write is instructed."
         },
         {
           "type": "filesystem-write",
           "line": 380,
           "evidence": "Delete",
           "context": "        accessibilityLabel={`Delete ${item.title}`}",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "The words delete/remove appear in UI sample code (a 'Delete item' button label, removeEventListener, subscription.remove()) and the best-practice 'don't remove focus styles'; no file deletion or write is instructed."
         },
         {
           "type": "filesystem-write",
           "line": 384,
           "evidence": "Delete",
           "context": "        <Text>Delete</Text>",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "The words delete/remove appear in UI sample code (a 'Delete item' button label, removeEventListener, subscription.remove()) and the best-practice 'don't remove focus styles'; no file deletion or write is instructed."
         },
         {
           "type": "filesystem-write",
           "line": 408,
           "evidence": "remove",
           "context": "    return () => subscription.remove();",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "The words delete/remove appear in UI sample code (a 'Delete item' button label, removeEventListener, subscription.remove()) and the best-practice 'don't remove focus styles'; no file deletion or write is instructed."
         },
         {
           "type": "network-access",
           "line": 535,
           "evidence": "https://",
           "context": "- [Apple Accessibility Programming Guide](https://developer.apple.com/accessibility/)",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Resource links to W3C WAI, Apple, Android and React Native accessibility documentation; the skill does not instruct fetching them."
         },
         {
           "type": "network-access",
           "line": 536,
           "evidence": "https://",
           "context": "- [Android Accessibility Developer Guide](https://developer.android.com/guide/topics/ui/accessibility)",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Resource links to W3C WAI, Apple, Android and React Native accessibility documentation; the skill does not instruct fetching them."
         },
         {
           "type": "network-access",
           "line": 537,
           "evidence": "https://",
           "context": "- [React Native Accessibility](https://reactnative.dev/docs/accessibility)",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Resource links to W3C WAI, Apple, Android and React Native accessibility documentation; the skill does not instruct fetching them."
         },
         {
           "type": "network-access",
           "line": 538,
           "evidence": "https://",
           "context": "- [Mobile Accessibility WCAG](https://www.w3.org/TR/mobile-accessibility-mapping/)",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Resource links to W3C WAI, Apple, Android and React Native accessibility documentation; the skill does not instruct fetching them."
         }
       ]
     },
@@ -222,39 +236,39 @@
       "git_blob": "9f28f31d6af0d95a7aa9372a4d6cf8fd078292c7",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "filesystem-write",
           "line": 42,
           "evidence": "Delete",
           "context": "<button aria-label=\"Delete item\">",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "The words delete/remove appear in UI sample code (a 'Delete item' button label, removeEventListener, subscription.remove()) and the best-practice 'don't remove focus styles'; no file deletion or write is instructed."
         },
         {
           "type": "network-access",
           "line": 643,
           "evidence": "https://",
           "context": "- [WCAG 2.2 Quick Reference](https://www.w3.org/WAI/WCAG22/quickref/)",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Resource links to W3C WAI, Apple, Android and React Native accessibility documentation; the skill does not instruct fetching them."
         },
         {
           "type": "network-access",
           "line": 644,
           "evidence": "https://",
           "context": "- [Understanding WCAG 2.2](https://www.w3.org/WAI/WCAG22/Understanding/)",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Resource links to W3C WAI, Apple, Android and React Native accessibility documentation; the skill does not instruct fetching them."
         },
         {
           "type": "network-access",
           "line": 645,
           "evidence": "https://",
           "context": "- [Techniques for WCAG 2.2](https://www.w3.org/WAI/WCAG22/Techniques/)",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Resource links to W3C WAI, Apple, Android and React Native accessibility documentation; the skill does not instruct fetching them."
         }
       ]
     },
@@ -266,15 +280,15 @@
       "git_blob": "d77b1c59d48d18efcccaf921ee35ea55206c5f45",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "filesystem-write",
           "line": 30,
           "evidence": "remove",
           "context": "4. **Don't Disable Focus Styles**: Style them, don't remove them",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "The words delete/remove appear in UI sample code (a 'Delete item' button label, removeEventListener, subscription.remove()) and the best-practice 'don't remove focus styles'; no file deletion or write is instructed."
         }
       ]
     }

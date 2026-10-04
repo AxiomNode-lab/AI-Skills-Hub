@@ -64,7 +64,7 @@ Local search requires a case-insensitive phrase or keyword match in a capability
 
 ### 4. Install a Capability
 
-Local installation requires a bundled, materialized skill with `release: eligible` and compatibility with the selected agent. The current catalog has **1022 skills: 732 review-required, 12 source-direct, 40 blocked, and 238 bundled**. The 238 bundled skills are materialized and release-eligible (snapshot: 2026-10-04; see [current status](docs/STATUS.md)).
+Local installation requires a bundled, materialized skill with `release: eligible` and compatibility with the selected agent. The current catalog has **1022 skills: 585 review-required, 12 source-direct, 40 blocked, and 385 bundled**. The 385 bundled skills are materialized and release-eligible (snapshot: 2026-10-04; see [current status](docs/STATUS.md)).
 
 They are five Anthropic skills under skill-local Apache-2.0 licenses and 207 skills under a repository-root MIT license that ships with each skill: microsoft/skills, obra/superpowers, K-Dense, and the programming sources supabase/agent-skills (Postgres and Supabase), addyosmani/agent-skills (API design, CI/CD, testing, performance, shipping), and UnitOneAI/SecuritySkills (application, cloud, and AI security reviews). Try `skills-hub available security --agent claude-code` or `skills-hub available "ci cd"`. See [release evidence and SHA-256 manifests](docs/VERIFIED-LOCAL-SKILLS.md). Find them with `search --json` (`hub_status.availability.status` is `eligible`). From the repository root, install three of them into the project with:
 

@@ -1,0 +1,109 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "wshobson/python-code-style",
+  "source": {
+    "repo": "wshobson/agents",
+    "path": "plugins/python-development/skills/python-code-style",
+    "revision": "156b7a5e7a8b93642628a339ee4039c925b34c7f"
+  },
+  "review": {
+    "path": "catalog/reviews/wshobson__python-code-style.json",
+    "sha256": "059c13d0f265107963689cb3bcee46e587ef31cb7335f61a96644a44394272b9"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "shell-execution",
+        "line": 39,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 41,
+        "evidence": "pip install",
+        "context": "pip install ruff mypy",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 84,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 156,
+        "evidence": "https://",
+        "context": "API_BASE_URL = \"https://api.example.com\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 307,
+        "evidence": "bash",
+        "context": "\\`\\`\\`bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 308,
+        "evidence": "pip install",
+        "context": "pip install myproject",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 316,
+        "evidence": "api_key",
+        "context": "client = Client(api_key=\"...\")",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 326,
+        "evidence": "bash",
+        "context": "\\`\\`\\`bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 327,
+        "evidence": "pip install",
+        "context": "pip install -e \".[dev]\"",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 9038
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "f89abb55d9f073f38f1703e4518f0613c788c6174be7f13b8dfe48a1c076c746",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "82699eefa7996bf06bbf85219f547eae0140a181ee3699444e2cbd665b7caba7",
+      "bytes": 7970,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 9038
+}

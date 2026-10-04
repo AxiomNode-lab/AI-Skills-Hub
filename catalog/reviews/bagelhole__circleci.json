@@ -1,9 +1,9 @@
 {
   "schema_version": "0.1",
   "skill_id": "bagelhole/circleci",
-  "status": "draft",
-  "reviewed_on": null,
-  "reviewer": null,
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
   "source": {
     "repo": "BagelHole/DevOps-Security-Agent-Skills",
     "path": "devops/ci-cd/circleci",
@@ -13,7 +13,7 @@
     "complete": true,
     "scope": "devops/ci-cd/circleci",
     "url": "https://api.github.com/repos/BagelHole/DevOps-Security-Agent-Skills/git/trees/0365f57a079b1332f95cf26e31dd2d5332a8399f?recursive=1",
-    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
   },
   "license": {
     "spdx": "MIT",
@@ -31,18 +31,32 @@
       ]
     },
     "redistributable": true,
-    "scope_reason": "",
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found; frontmatter declares `license: MIT`, consistent with the repository root. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
     "obligations": [
       "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
-      "Preserve all upstream text and notices byte-for-byte."
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
     ]
   },
   "content_review": {
-    "status": "pending",
-    "risk": "unknown",
+    "status": "approved",
+    "risk": "low",
     "blocking_findings": [],
-    "capabilities": {},
-    "notes": []
+    "capabilities": {
+      "shell": false,
+      "network": false,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md in full (the only file). CircleCI configuration guidance: a `.circleci/config.yml` build-test-deploy pipeline, executors, caching, workspaces, test splitting, sequential/parallel/approval/scheduled workflows, branch and tag filters, version-pinned orbs, Docker builds, contexts, artifacts and resource classes.",
+      "The agent only writes CI configuration into the user's repo (SKILL.md:31); it is not told to run commands, install packages, or call services itself. The pipelines it writes do run deploy steps (`./deploy.sh`, `kubectl apply -f k8s/`, `aws s3 sync`) inside CircleCI with secrets from project settings or contexts, which is the user's intended CI behaviour.",
+      "Several sample pipelines deploy automatically on main without an approval gate (SKILL.md:88-93, 314); the 'Manual Approval' pattern (243-256) is available for production. `./deploy.sh` is a placeholder for the user's own script. Related Skills links `../github-actions/`, `../../containers/docker-management/`, `../../../infrastructure/cloud-aws/aws-ecs-fargate/` (SKILL.md:448-450) are optional sibling skills that do not ship with this one."
+    ]
   },
   "files": [
     {
@@ -55,7 +69,7 @@
       "git_blob": "67c5c5cbb12cafb1515e449748866bd40da7dec9",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
       "findings": []
     },
     {
@@ -66,23 +80,23 @@
       "git_blob": "358bd6f6bcc10811002f56b340d64bc60faee2bd",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "shell-execution",
           "line": 79,
           "evidence": "sh",
           "context": "          command: ./deploy.sh",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "`./deploy.sh` (SKILL.md:79, 183) is a run step inside the CircleCI config that executes in CI, not a command the agent runs locally."
         },
         {
           "type": "shell-execution",
           "line": 183,
           "evidence": "sh",
           "context": "      - run: ./deploy.sh",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "`./deploy.sh` (SKILL.md:79, 183) is a run step inside the CircleCI config that executes in CI, not a command the agent runs locally."
         }
       ]
     }

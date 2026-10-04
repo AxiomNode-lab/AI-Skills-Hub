@@ -1,9 +1,9 @@
 {
   "schema_version": "0.1",
   "skill_id": "wshobson/fastapi-templates",
-  "status": "draft",
-  "reviewed_on": null,
-  "reviewer": null,
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
   "source": {
     "repo": "wshobson/agents",
     "path": "plugins/api-scaffolding/skills/fastapi-templates",
@@ -13,7 +13,7 @@
     "complete": true,
     "scope": "plugins/api-scaffolding/skills/fastapi-templates",
     "url": "https://api.github.com/repos/wshobson/agents/git/trees/156b7a5e7a8b93642628a339ee4039c925b34c7f?recursive=1",
-    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
   },
   "license": {
     "spdx": "MIT",
@@ -32,18 +32,32 @@
       ]
     },
     "redistributable": true,
-    "scope_reason": "",
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
     "obligations": [
       "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
-      "Preserve all upstream text and notices byte-for-byte."
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
     ]
   },
   "content_review": {
-    "status": "pending",
-    "risk": "unknown",
+    "status": "approved",
+    "risk": "low",
     "blocking_findings": [],
-    "capabilities": {},
-    "notes": []
+    "capabilities": {
+      "shell": false,
+      "network": false,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md and references/details.md in full. The skill gives a FastAPI project layout and sample code for settings, async SQLAlchemy sessions, repository/service layers, JWT auth, and pytest fixtures.",
+      "No commands, installs, credentials, or network access by the agent; it only shapes the user's application code. Settings read DATABASE_URL and SECRET_KEY from the user's own .env via pydantic-settings.",
+      "Users should know the sample CORS setup (details.md:29-35) combines allow_origins=['*'] with allow_credentials=True, which is not suitable for production as written."
+    ]
   },
   "files": [
     {
@@ -56,7 +70,7 @@
       "git_blob": "326f0a55c96e672fedf9d807ca043c00df05ba0e",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
       "findings": []
     },
     {
@@ -67,63 +81,63 @@
       "git_blob": "b2683d6c3f0935a932b5a03469e66311cc4ba893",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "filesystem-write",
           "line": 158,
           "evidence": "delete",
           "context": "    async def delete(self, db: AsyncSession, id: int) -> bool:",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Hits are 'delete' in sample repository methods and a DELETE endpoint operating on the app's database rows; nothing tells the agent to delete files."
         },
         {
           "type": "filesystem-write",
           "line": 159,
           "evidence": "Delete",
           "context": "        \"\"\"Delete record.\"\"\"",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Hits are 'delete' in sample repository methods and a DELETE endpoint operating on the app's database rows; nothing tells the agent to delete files."
         },
         {
           "type": "filesystem-write",
           "line": 162,
           "evidence": "delete",
           "context": "            await db.delete(obj)",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Hits are 'delete' in sample repository methods and a DELETE endpoint operating on the app's database rows; nothing tells the agent to delete files."
         },
         {
           "type": "filesystem-write",
           "line": 323,
           "evidence": "delete",
           "context": "@router.delete(\"/{user_id}\", status_code=status.HTTP_204_NO_CONTENT)",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Hits are 'delete' in sample repository methods and a DELETE endpoint operating on the app's database rows; nothing tells the agent to delete files."
         },
         {
           "type": "filesystem-write",
           "line": 329,
           "evidence": "Delete",
           "context": "    \"\"\"Delete user.\"\"\"",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Hits are 'delete' in sample repository methods and a DELETE endpoint operating on the app's database rows; nothing tells the agent to delete files."
         },
         {
           "type": "filesystem-write",
           "line": 333,
           "evidence": "delete",
           "context": "    deleted = await user_service.repository.delete(db, user_id)",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Hits are 'delete' in sample repository methods and a DELETE endpoint operating on the app's database rows; nothing tells the agent to delete files."
         },
         {
           "type": "credential-access",
           "line": 354,
           "evidence": "access token",
           "context": "    \"\"\"Create JWT access token.\"\"\"",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "The hit is the \"Create JWT access token\" docstring in sample auth code (details.md:354) that signs tokens with the app SECRET_KEY from its own settings; no instruction to read, print, or send real secrets."
         }
       ]
     },
@@ -135,15 +149,15 @@
       "git_blob": "bd8a2abb9f97c4e6c9863efb60528c3338468fa8",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "network-access",
           "line": 116,
           "evidence": "http://",
           "context": "    async with AsyncClient(app=app, base_url=\"http://test\") as client:",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "http://test base URL for the in-process httpx test client in SKILL.md; no fetch instruction."
         }
       ]
     }

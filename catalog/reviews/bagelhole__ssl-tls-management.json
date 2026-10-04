@@ -1,9 +1,9 @@
 {
   "schema_version": "0.1",
   "skill_id": "bagelhole/ssl-tls-management",
-  "status": "draft",
-  "reviewed_on": null,
-  "reviewer": null,
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
   "source": {
     "repo": "BagelHole/DevOps-Security-Agent-Skills",
     "path": "security/network/ssl-tls-management",
@@ -13,7 +13,7 @@
     "complete": true,
     "scope": "security/network/ssl-tls-management",
     "url": "https://api.github.com/repos/BagelHole/DevOps-Security-Agent-Skills/git/trees/0365f57a079b1332f95cf26e31dd2d5332a8399f?recursive=1",
-    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
   },
   "license": {
     "spdx": "MIT",
@@ -31,18 +31,32 @@
       ]
     },
     "redistributable": true,
-    "scope_reason": "",
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found; nginx/Apache cipher settings and cert-manager YAML are short configuration snippets. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
     "obligations": [
       "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
-      "Preserve all upstream text and notices byte-for-byte."
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
     ]
   },
   "content_review": {
-    "status": "pending",
-    "risk": "unknown",
+    "status": "approved",
+    "risk": "medium",
     "blocking_findings": [],
-    "capabilities": {},
-    "notes": []
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "package_install": true,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md in full; it is the only file. Certificate management reference: certbot issuance and renewal (systemd timer, deploy hooks), cert-manager Helm install pinned to v1.14.0 with ClusterIssuers/Certificates, OpenSSL key/CSR/inspection commands, hardened nginx/Apache TLS configs, an expiry-monitoring script and Prometheus alerts.",
+      "Following it can make the agent run root commands that install packages (apt, pip install certbot-dns-cloudflare), write files under /etc/systemd/system and /etc/letsencrypt, enable a timer, reload nginx/haproxy, install a Helm chart into a cluster, and contact Let's Encrypt and remote hosts with openssl s_client. Medium because these change real server and cluster state and use a DNS-provider API token; acceptable because the file is a command reference for the user's own TLS setup, the token is a placeholder written with chmod 600 (SKILL.md:65-68), staging issuers are recommended first, and every config tightens rather than weakens TLS.",
+      "Users should note that `certbot --agree-tos` (SKILL.md:49) accepts the Let's Encrypt subscriber agreement on their behalf, the HSTS header with includeSubDomains and preload (SKILL.md:361, :392) is hard to roll back, and `openssl pkcs12 ... -nodes` (SKILL.md:322) writes an unencrypted private key. Related Skills links (SKILL.md:484-486: ../../secrets/hashicorp-vault/, ../waf-setup/, ../zero-trust/) are optional pointers that do not ship with this skill. Frontmatter declares license: MIT."
+    ]
   },
   "files": [
     {
@@ -55,7 +69,7 @@
       "git_blob": "67c5c5cbb12cafb1515e449748866bd40da7dec9",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
       "findings": []
     },
     {
@@ -66,159 +80,159 @@
       "git_blob": "94ef4ccbcf32030e85b3bcb4acfb09287d965e67",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "shell-execution",
           "line": 37,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with certbot, systemctl, helm, kubectl and openssl commands for the user's servers, plus heredoc-created hook scripts and chmod."
         },
         {
           "type": "package-install",
           "line": 64,
           "evidence": "pip install",
           "context": "pip install certbot-dns-cloudflare",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "`pip install certbot-dns-cloudflare` installs the Certbot Cloudflare DNS plugin for wildcard issuance."
         },
         {
           "type": "shell-execution",
           "line": 67,
           "evidence": "\nchmod",
           "context": "EOF",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with certbot, systemctl, helm, kubectl and openssl commands for the user's servers, plus heredoc-created hook scripts and chmod."
         },
         {
           "type": "shell-execution",
           "line": 78,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with certbot, systemctl, helm, kubectl and openssl commands for the user's servers, plus heredoc-created hook scripts and chmod."
         },
         {
           "type": "filesystem-write",
           "line": 112,
           "evidence": "mkdir",
           "context": "mkdir -p /etc/letsencrypt/renewal-hooks/deploy",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "`mkdir -p /etc/letsencrypt/renewal-hooks/deploy` before writing a reload hook script for certificate renewal."
         },
         {
           "type": "shell-execution",
           "line": 113,
           "evidence": "sh",
           "context": "cat > /etc/letsencrypt/renewal-hooks/deploy/reload-services.sh << 'HOOK'",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with certbot, systemctl, helm, kubectl and openssl commands for the user's servers, plus heredoc-created hook scripts and chmod."
         },
         {
           "type": "shell-execution",
           "line": 114,
           "evidence": "bash",
           "context": "#!/bin/bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with certbot, systemctl, helm, kubectl and openssl commands for the user's servers, plus heredoc-created hook scripts and chmod."
         },
         {
           "type": "shell-execution",
           "line": 118,
           "evidence": "\nchmod",
           "context": "HOOK",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with certbot, systemctl, helm, kubectl and openssl commands for the user's servers, plus heredoc-created hook scripts and chmod."
         },
         {
           "type": "shell-execution",
           "line": 119,
           "evidence": "sh",
           "context": "chmod +x /etc/letsencrypt/renewal-hooks/deploy/reload-services.sh",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with certbot, systemctl, helm, kubectl and openssl commands for the user's servers, plus heredoc-created hook scripts and chmod."
         },
         {
           "type": "shell-execution",
           "line": 126,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with certbot, systemctl, helm, kubectl and openssl commands for the user's servers, plus heredoc-created hook scripts and chmod."
         },
         {
           "type": "network-access",
           "line": 128,
           "evidence": "https://",
           "context": "helm repo add jetstack https://charts.jetstack.io",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Helm repo URL for jetstack charts, Let's Encrypt ACME directory URLs in ClusterIssuer YAML, and an https redirect in nginx config; network use is the intended ACME/Helm workflow."
         },
         {
           "type": "network-access",
           "line": 153,
           "evidence": "https://",
           "context": "    server: https://acme-staging-v02.api.letsencrypt.org/directory",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Helm repo URL for jetstack charts, Let's Encrypt ACME directory URLs in ClusterIssuer YAML, and an https redirect in nginx config; network use is the intended ACME/Helm workflow."
         },
         {
           "type": "network-access",
           "line": 169,
           "evidence": "https://",
           "context": "    server: https://acme-v02.api.letsencrypt.org/directory",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Helm repo URL for jetstack charts, Let's Encrypt ACME directory URLs in ClusterIssuer YAML, and an https redirect in nginx config; network use is the intended ACME/Helm workflow."
         },
         {
           "type": "network-access",
           "line": 185,
           "evidence": "https://",
           "context": "    server: https://acme-v02.api.letsencrypt.org/directory",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Helm repo URL for jetstack charts, Let's Encrypt ACME directory URLs in ClusterIssuer YAML, and an https redirect in nginx config; network use is the intended ACME/Helm workflow."
         },
         {
           "type": "shell-execution",
           "line": 267,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with certbot, systemctl, helm, kubectl and openssl commands for the user's servers, plus heredoc-created hook scripts and chmod."
         },
         {
           "type": "network-access",
           "line": 371,
           "evidence": "https://",
           "context": "    return 301 https://$host$request_uri;",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Helm repo URL for jetstack charts, Let's Encrypt ACME directory URLs in ClusterIssuer YAML, and an https redirect in nginx config; network use is the intended ACME/Helm workflow."
         },
         {
           "type": "shell-execution",
           "line": 398,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with certbot, systemctl, helm, kubectl and openssl commands for the user's servers, plus heredoc-created hook scripts and chmod."
         },
         {
           "type": "shell-execution",
           "line": 399,
           "evidence": "bash",
           "context": "#!/bin/bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with certbot, systemctl, helm, kubectl and openssl commands for the user's servers, plus heredoc-created hook scripts and chmod."
         },
         {
           "type": "shell-execution",
           "line": 400,
           "evidence": "sh",
           "context": "# cert-monitor.sh - Monitor certificate expiration across hosts",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with certbot, systemctl, helm, kubectl and openssl commands for the user's servers, plus heredoc-created hook scripts and chmod."
         }
       ]
     }

@@ -1,9 +1,9 @@
 {
   "schema_version": "0.1",
   "skill_id": "wshobson/async-python-patterns",
-  "status": "draft",
-  "reviewed_on": null,
-  "reviewer": null,
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
   "source": {
     "repo": "wshobson/agents",
     "path": "plugins/python-development/skills/async-python-patterns",
@@ -13,7 +13,7 @@
     "complete": true,
     "scope": "plugins/python-development/skills/async-python-patterns",
     "url": "https://api.github.com/repos/wshobson/agents/git/trees/156b7a5e7a8b93642628a339ee4039c925b34c7f?recursive=1",
-    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
   },
   "license": {
     "spdx": "MIT",
@@ -32,18 +32,32 @@
       ]
     },
     "redistributable": true,
-    "scope_reason": "",
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
     "obligations": [
       "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
-      "Preserve all upstream text and notices byte-for-byte."
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
     ]
   },
   "content_review": {
-    "status": "pending",
-    "risk": "unknown",
+    "status": "approved",
+    "risk": "low",
     "blocking_findings": [],
-    "capabilities": {},
-    "notes": []
+    "capabilities": {
+      "shell": false,
+      "network": false,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md and references/details.md in full. The skill teaches asyncio fundamentals (coroutines, tasks, gather, timeouts, cancellation), advanced patterns (async context managers/iterators, producer-consumer, semaphores, locks), aiohttp/httpx usage and how to avoid blocking the event loop.",
+      "No commands, installs, credentials, or network access for the agent; examples are Python snippets for the user's code, with example.com and httpbin.org URLs as placeholders.",
+      "Caveat: the simulated AsyncDB example (details.md:265-267) builds SQL with f-strings; it uses a fake client, but users should switch to parameterised queries with a real driver."
+    ]
   },
   "files": [
     {
@@ -56,7 +70,7 @@
       "git_blob": "326f0a55c96e672fedf9d807ca043c00df05ba0e",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
       "findings": []
     },
     {
@@ -67,63 +81,63 @@
       "git_blob": "475eb9ae56926df1e66c59c79770cfacfcda25ab",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "network-access",
           "line": 67,
           "evidence": "https://",
           "context": "    async for page_data in fetch_pages(\"https://api.example.com/items\", 3):",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Placeholder URLs (api.example.com, httpbin.org) inside sample async HTTP code; the agent is not instructed to call them."
         },
         {
           "type": "network-access",
           "line": 150,
           "evidence": "https://",
           "context": "    urls = [f\"https://api.example.com/item/{i}\" for i in range(20)]",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Placeholder URLs (api.example.com, httpbin.org) inside sample async HTTP code; the agent is not instructed to call them."
         },
         {
           "type": "network-access",
           "line": 231,
           "evidence": "https://",
           "context": "        \"https://httpbin.org/delay/1\",",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Placeholder URLs (api.example.com, httpbin.org) inside sample async HTTP code; the agent is not instructed to call them."
         },
         {
           "type": "network-access",
           "line": 232,
           "evidence": "https://",
           "context": "        \"https://httpbin.org/delay/2\",",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Placeholder URLs (api.example.com, httpbin.org) inside sample async HTTP code; the agent is not instructed to call them."
         },
         {
           "type": "network-access",
           "line": 233,
           "evidence": "https://",
           "context": "        \"https://httpbin.org/status/404\",",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Placeholder URLs (api.example.com, httpbin.org) inside sample async HTTP code; the agent is not instructed to call them."
         },
         {
           "type": "filesystem-write",
           "line": 321,
           "evidence": "remove",
           "context": "        self.clients.remove(websocket)",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "A Python set.remove call in a simulated WebSocket server, not a file operation."
         },
         {
           "type": "network-access",
           "line": 358,
           "evidence": "https://",
           "context": "        tasks = [session.get(f\"https://api.example.com/item/{i}\") for i in range(50)]",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Placeholder URLs (api.example.com, httpbin.org) inside sample async HTTP code; the agent is not instructed to call them."
         }
       ]
     },
@@ -135,23 +149,23 @@
       "git_blob": "0814e85b222e0085bb71fc96d6bae6f83846089a",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "network-access",
           "line": 103,
           "evidence": "https://",
           "context": "    result = await fetch_data(\"https://api.example.com\")",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Placeholder URLs (api.example.com, httpbin.org) inside sample async HTTP code; the agent is not instructed to call them."
         },
         {
           "type": "network-access",
           "line": 287,
           "evidence": "https://",
           "context": "    result = await fetch_data(\"https://api.example.com\")",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Placeholder URLs (api.example.com, httpbin.org) inside sample async HTTP code; the agent is not instructed to call them."
         }
       ]
     }

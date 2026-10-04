@@ -1,9 +1,9 @@
 {
   "schema_version": "0.1",
   "skill_id": "bagelhole/load-balancing",
-  "status": "draft",
-  "reviewed_on": null,
-  "reviewer": null,
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
   "source": {
     "repo": "BagelHole/DevOps-Security-Agent-Skills",
     "path": "infrastructure/networking/load-balancing",
@@ -13,7 +13,7 @@
     "complete": true,
     "scope": "infrastructure/networking/load-balancing",
     "url": "https://api.github.com/repos/BagelHole/DevOps-Security-Agent-Skills/git/trees/0365f57a079b1332f95cf26e31dd2d5332a8399f?recursive=1",
-    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
   },
   "license": {
     "spdx": "MIT",
@@ -31,18 +31,32 @@
       ]
     },
     "redistributable": true,
-    "scope_reason": "",
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found; frontmatter declares `license: MIT`, consistent with the repository root. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
     "obligations": [
       "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
-      "Preserve all upstream text and notices byte-for-byte."
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
     ]
   },
   "content_review": {
-    "status": "pending",
-    "risk": "unknown",
+    "status": "approved",
+    "risk": "medium",
     "blocking_findings": [],
-    "capabilities": {},
-    "notes": []
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "package_install": false,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md in full (the only file). Load-balancer configuration: nginx upstreams (round-robin, weighted/backup, ip_hash) with TLS termination, a full HAProxy config with health checks and stats, HAProxy runtime management, AWS ALB/NLB creation with the aws CLI, an ALB in Terraform, an algorithm table and troubleshooting.",
+      "Medium because it has the agent change live infrastructure: `sudo systemctl reload haproxy` and drain/maint/ready via the admin socket (SKILL.md:198-215), and `aws elbv2 create-load-balancer/create-target-group/register-targets/create-listener` using the user's AWS credentials (222-290). Acceptable: these create or reconfigure load balancers the user asked to set up, the HAProxy section validates config with `haproxy -c` before reload, the Terraform sets `enable_deletion_protection = true`, and nothing deletes resources or weakens TLS (TLS 1.2+/1.3 policies throughout).",
+      "All IDs, ARNs, subnets and hostnames are placeholders. The NLB example creates an internet-facing TCP:5432 (PostgreSQL) target group without a security group (SKILL.md:277-290); users should not expose a database that way without network restrictions. Related Skills links `../reverse-proxy/`, `../dns-management/`, `../cdn-setup/`, `../service-mesh/` (SKILL.md:384-387) are optional sibling skills that do not ship with this one."
+    ]
   },
   "files": [
     {
@@ -55,7 +69,7 @@
       "git_blob": "67c5c5cbb12cafb1515e449748866bd40da7dec9",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
       "findings": []
     },
     {
@@ -66,95 +80,95 @@
       "git_blob": "0266c2a993d6cbedcbcafc229674b8bff7da3d16",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "network-access",
           "line": 44,
           "evidence": "https://",
           "context": "    return 301 https://$host$request_uri;",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "`https://$host$request_uri` redirect and `http://app_backend` proxy_pass are nginx config values, not fetches."
         },
         {
           "type": "network-access",
           "line": 57,
           "evidence": "http://",
           "context": "        proxy_pass http://app_backend;",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "`https://$host$request_uri` redirect and `http://app_backend` proxy_pass are nginx config values, not fetches."
         },
         {
           "type": "shell-execution",
           "line": 198,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "```bash fences for HAProxy validation/reload, `sudo socat` admin-socket commands, and aws elbv2 CLI calls that create and inspect load balancers."
         },
         {
           "type": "shell-execution",
           "line": 202,
           "evidence": "\nsudo",
           "context": "# Reload without dropping connections",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "```bash fences for HAProxy validation/reload, `sudo socat` admin-socket commands, and aws elbv2 CLI calls that create and inspect load balancers."
         },
         {
           "type": "shell-execution",
           "line": 206,
           "evidence": " sudo",
           "context": "echo \"show stat\" | sudo socat stdio /var/run/haproxy/admin.sock",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "```bash fences for HAProxy validation/reload, `sudo socat` admin-socket commands, and aws elbv2 CLI calls that create and inspect load balancers."
         },
         {
           "type": "shell-execution",
           "line": 209,
           "evidence": " sudo",
           "context": "echo \"set server web_servers/web1 state drain\" | sudo socat stdio /var/run/haproxy/admin.sock",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "```bash fences for HAProxy validation/reload, `sudo socat` admin-socket commands, and aws elbv2 CLI calls that create and inspect load balancers."
         },
         {
           "type": "shell-execution",
           "line": 212,
           "evidence": " sudo",
           "context": "echo \"set server web_servers/web1 state maint\" | sudo socat stdio /var/run/haproxy/admin.sock",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "```bash fences for HAProxy validation/reload, `sudo socat` admin-socket commands, and aws elbv2 CLI calls that create and inspect load balancers."
         },
         {
           "type": "shell-execution",
           "line": 215,
           "evidence": " sudo",
           "context": "echo \"set server web_servers/web1 state ready\" | sudo socat stdio /var/run/haproxy/admin.sock",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "```bash fences for HAProxy validation/reload, `sudo socat` admin-socket commands, and aws elbv2 CLI calls that create and inspect load balancers."
         },
         {
           "type": "shell-execution",
           "line": 222,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "```bash fences for HAProxy validation/reload, `sudo socat` admin-socket commands, and aws elbv2 CLI calls that create and inspect load balancers."
         },
         {
           "type": "shell-execution",
           "line": 267,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "```bash fences for HAProxy validation/reload, `sudo socat` admin-socket commands, and aws elbv2 CLI calls that create and inspect load balancers."
         },
         {
           "type": "shell-execution",
           "line": 275,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "```bash fences for HAProxy validation/reload, `sudo socat` admin-socket commands, and aws elbv2 CLI calls that create and inspect load balancers."
         }
       ]
     }

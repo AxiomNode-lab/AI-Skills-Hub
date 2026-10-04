@@ -1,9 +1,9 @@
 {
   "schema_version": "0.1",
   "skill_id": "bagelhole/aws-ecs-fargate",
-  "status": "draft",
-  "reviewed_on": null,
-  "reviewer": null,
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
   "source": {
     "repo": "BagelHole/DevOps-Security-Agent-Skills",
     "path": "infrastructure/cloud-aws/aws-ecs-fargate",
@@ -13,7 +13,7 @@
     "complete": true,
     "scope": "infrastructure/cloud-aws/aws-ecs-fargate",
     "url": "https://api.github.com/repos/BagelHole/DevOps-Security-Agent-Skills/git/trees/0365f57a079b1332f95cf26e31dd2d5332a8399f?recursive=1",
-    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
   },
   "license": {
     "spdx": "MIT",
@@ -31,18 +31,32 @@
       ]
     },
     "redistributable": true,
-    "scope_reason": "",
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found; frontmatter declares license: MIT, consistent with the repository root. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
     "obligations": [
       "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
-      "Preserve all upstream text and notices byte-for-byte."
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
     ]
   },
   "content_review": {
-    "status": "pending",
-    "risk": "unknown",
+    "status": "approved",
+    "risk": "medium",
     "blocking_findings": [],
-    "capabilities": {},
-    "notes": []
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "package_install": false,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md in full (the only file). The skill is a reference for running containers on Amazon ECS/Fargate: cluster creation, ECR push, task definitions, services behind an ALB, rolling deployments, ECS Exec, auto scaling, a Terraform equivalent, log viewing and a troubleshooting table.",
+      "Medium: following it has the agent run AWS CLI and Docker commands with the user's configured AWS credentials that create clusters, ECR repositories, log groups and services, push images, force new deployments, register scaling policies, deregister an old task definition revision (SKILL.md:138) and open an interactive shell in a running task (SKILL.md:201-206). Acceptable because these are standard deployment steps for the user's own workload; there are no delete-cluster/delete-service commands, no firewall or security-control changes, and ECR login uses --password-stdin (SKILL.md:61-62).",
+      "Examples use placeholder account 123456789012 and a cluster literally named 'production'; users should substitute their own names and confirm before running deployment commands against real environments. Prerequisites and Related Skills (SKILL.md:29, 368-372) link to sibling skills ../aws-vpc/, ../aws-iam/, ../terraform-aws/ and ../../../devops/containers/{docker-management,container-registries}/ as optional reading only."
+    ]
   },
   "files": [
     {
@@ -55,7 +69,7 @@
       "git_blob": "67c5c5cbb12cafb1515e449748866bd40da7dec9",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
       "findings": []
     },
     {
@@ -66,127 +80,127 @@
       "git_blob": "cbde0d6962f2239035243fbeec367fc23a41e7fe",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "shell-execution",
           "line": 33,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks of AWS CLI and Docker commands for creating, deploying, scaling and inspecting the user's own ECS services, plus an ECS Exec `/bin/sh` session for debugging a task."
         },
         {
           "type": "shell-execution",
           "line": 53,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks of AWS CLI and Docker commands for creating, deploying, scaling and inspecting the user's own ECS services, plus an ECS Exec `/bin/sh` session for debugging a task."
         },
         {
           "type": "credential-access",
           "line": 99,
           "evidence": "secret",
           "context": "          \"valueFrom\": \"arn:aws:secretsmanager:us-east-1:123456789012:secret:myapp/db-password\"",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Task-definition `secrets` entries that reference Secrets Manager/SSM ARNs by placeholder account ID; no secret values are present and the agent is not told to read or print them."
         },
         {
           "type": "credential-access",
           "line": 102,
           "evidence": "API_KEY",
           "context": "          \"name\": \"API_KEY\",",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Task-definition `secrets` entries that reference Secrets Manager/SSM ARNs by placeholder account ID; no secret values are present and the agent is not told to read or print them."
         },
         {
           "type": "credential-access",
           "line": 103,
           "evidence": "api-key",
           "context": "          \"valueFrom\": \"arn:aws:ssm:us-east-1:123456789012:parameter/myapp/api-key\"",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Task-definition `secrets` entries that reference Secrets Manager/SSM ARNs by placeholder account ID; no secret values are present and the agent is not told to read or print them."
         },
         {
           "type": "network-access",
           "line": 107,
           "evidence": "curl",
           "context": "        \"command\": [\"CMD-SHELL\", \"curl -f http://localhost:8080/health || exit 1\"],",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Container health checks that curl the container's own http://localhost:8080/health endpoint inside the task."
         },
         {
           "type": "network-access",
           "line": 107,
           "evidence": "http://",
           "context": "        \"command\": [\"CMD-SHELL\", \"curl -f http://localhost:8080/health || exit 1\"],",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Container health checks that curl the container's own http://localhost:8080/health endpoint inside the task."
         },
         {
           "type": "shell-execution",
           "line": 130,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks of AWS CLI and Docker commands for creating, deploying, scaling and inspecting the user's own ECS services, plus an ECS Exec `/bin/sh` session for debugging a task."
         },
         {
           "type": "shell-execution",
           "line": 143,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks of AWS CLI and Docker commands for creating, deploying, scaling and inspecting the user's own ECS services, plus an ECS Exec `/bin/sh` session for debugging a task."
         },
         {
           "type": "shell-execution",
           "line": 182,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks of AWS CLI and Docker commands for creating, deploying, scaling and inspecting the user's own ECS services, plus an ECS Exec `/bin/sh` session for debugging a task."
         },
         {
           "type": "shell-execution",
           "line": 206,
           "evidence": "sh",
           "context": "  --command \"/bin/sh\"",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks of AWS CLI and Docker commands for creating, deploying, scaling and inspecting the user's own ECS services, plus an ECS Exec `/bin/sh` session for debugging a task."
         },
         {
           "type": "shell-execution",
           "line": 211,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks of AWS CLI and Docker commands for creating, deploying, scaling and inspecting the user's own ECS services, plus an ECS Exec `/bin/sh` session for debugging a task."
         },
         {
           "type": "network-access",
           "line": 295,
           "evidence": "curl",
           "context": "      command     = [\"CMD-SHELL\", \"curl -f http://localhost:8080/health || exit 1\"]",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Container health checks that curl the container's own http://localhost:8080/health endpoint inside the task."
         },
         {
           "type": "network-access",
           "line": 295,
           "evidence": "http://",
           "context": "      command     = [\"CMD-SHELL\", \"curl -f http://localhost:8080/health || exit 1\"]",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Container health checks that curl the container's own http://localhost:8080/health endpoint inside the task."
         },
         {
           "type": "shell-execution",
           "line": 335,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks of AWS CLI and Docker commands for creating, deploying, scaling and inspecting the user's own ECS services, plus an ECS Exec `/bin/sh` session for debugging a task."
         }
       ]
     }

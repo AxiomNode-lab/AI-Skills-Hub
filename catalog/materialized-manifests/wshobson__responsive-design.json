@@ -1,0 +1,161 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "wshobson/responsive-design",
+  "source": {
+    "repo": "wshobson/agents",
+    "path": "plugins/ui-design/skills/responsive-design",
+    "revision": "156b7a5e7a8b93642628a339ee4039c925b34c7f"
+  },
+  "review": {
+    "path": "catalog/reviews/wshobson__responsive-design.json",
+    "sha256": "51274bc920b97b62da636de12e51316b0549286c9735ffc9f66f3973953a4038"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "low",
+    "capabilities": {
+      "shell": false,
+      "network": true,
+      "credentials": false,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "filesystem-write",
+        "line": 459,
+        "evidence": "Remove",
+        "context": "  /* Remove non-essential elements */",
+        "file": "references/breakpoint-strategies.md"
+      },
+      {
+        "type": "network-access",
+        "line": 588,
+        "evidence": "https://",
+        "context": "- [Tailwind CSS Breakpoints](https://tailwindcss.com/docs/responsive-design)",
+        "file": "references/breakpoint-strategies.md"
+      },
+      {
+        "type": "network-access",
+        "line": 589,
+        "evidence": "https://",
+        "context": "- [The 100% Correct Way to Do CSS Breakpoints](https://www.freecodecamp.org/news/the-100-correct-way-to-do-css-breakpoints-88d6a5ba1862/)",
+        "file": "references/breakpoint-strategies.md"
+      },
+      {
+        "type": "network-access",
+        "line": 590,
+        "evidence": "https://",
+        "context": "- [Modern CSS Solutions](https://moderncss.dev/)",
+        "file": "references/breakpoint-strategies.md"
+      },
+      {
+        "type": "network-access",
+        "line": 591,
+        "evidence": "https://",
+        "context": "- [Defensive CSS](https://defensivecss.dev/)",
+        "file": "references/breakpoint-strategies.md"
+      },
+      {
+        "type": "network-access",
+        "line": 561,
+        "evidence": "https://",
+        "context": "- [MDN Container Queries](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_container_queries)",
+        "file": "references/container-queries.md"
+      },
+      {
+        "type": "network-access",
+        "line": 562,
+        "evidence": "https://",
+        "context": "- [CSS Container Queries Spec](https://www.w3.org/TR/css-contain-3/)",
+        "file": "references/container-queries.md"
+      },
+      {
+        "type": "network-access",
+        "line": 563,
+        "evidence": "https://",
+        "context": "- [Una Kravets: Container Queries](https://web.dev/cq-stable/)",
+        "file": "references/container-queries.md"
+      },
+      {
+        "type": "network-access",
+        "line": 564,
+        "evidence": "https://",
+        "context": "- [Ahmad Shadeed: Container Queries Guide](https://ishadeed.com/article/container-queries-are-finally-here/)",
+        "file": "references/container-queries.md"
+      },
+      {
+        "type": "network-access",
+        "line": 535,
+        "evidence": "https://",
+        "context": "- [Utopia Fluid Type Calculator](https://utopia.fyi/)",
+        "file": "references/fluid-layouts.md"
+      },
+      {
+        "type": "network-access",
+        "line": 536,
+        "evidence": "https://",
+        "context": "- [Modern Fluid Typography](https://www.smashingmagazine.com/2022/01/modern-fluid-typography-css-clamp/)",
+        "file": "references/fluid-layouts.md"
+      },
+      {
+        "type": "network-access",
+        "line": 537,
+        "evidence": "https://",
+        "context": "- [Every Layout](https://every-layout.dev/)",
+        "file": "references/fluid-layouts.md"
+      },
+      {
+        "type": "network-access",
+        "line": 538,
+        "evidence": "https://",
+        "context": "- [CSS min(), max(), and clamp()](https://web.dev/min-max-clamp/)",
+        "file": "references/fluid-layouts.md"
+      }
+    ],
+    "total_bytes": 45026
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "f89abb55d9f073f38f1703e4518f0613c788c6174be7f13b8dfe48a1c076c746",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/breakpoint-strategies.md",
+      "sha256": "d086c14641856aacdd38fd8aebf2988fb0055b7ed1b8773feb3104e69c7d1506",
+      "bytes": 10658,
+      "mode": "100644"
+    },
+    {
+      "path": "references/container-queries.md",
+      "sha256": "67b1697186a531751ec2aa364506919b9ae44680744603613c511d5132eb5a24",
+      "bytes": 9913,
+      "mode": "100644"
+    },
+    {
+      "path": "references/details.md",
+      "sha256": "6b8d84250249319719fc5d4a545628267edd16b8763c107536cf7341d37740b4",
+      "bytes": 10667,
+      "mode": "100644"
+    },
+    {
+      "path": "references/fluid-layouts.md",
+      "sha256": "d67ad19e57b015101da5d4c4a9208015909f60b89db5b7922d0bf9ca17673860",
+      "bytes": 10731,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "c8bd56f8fc0f122c4ff392b02617f0e6bb4a353b2d0189235c6ee77cdcfe8690",
+      "bytes": 1989,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 45026
+}

@@ -1,9 +1,9 @@
 {
   "schema_version": "0.1",
   "skill_id": "bagelhole/docker-management",
-  "status": "draft",
-  "reviewed_on": null,
-  "reviewer": null,
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
   "source": {
     "repo": "BagelHole/DevOps-Security-Agent-Skills",
     "path": "devops/containers/docker-management",
@@ -13,7 +13,7 @@
     "complete": true,
     "scope": "devops/containers/docker-management",
     "url": "https://api.github.com/repos/BagelHole/DevOps-Security-Agent-Skills/git/trees/0365f57a079b1332f95cf26e31dd2d5332a8399f?recursive=1",
-    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
   },
   "license": {
     "spdx": "MIT",
@@ -31,18 +31,32 @@
       ]
     },
     "redistributable": true,
-    "scope_reason": "",
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found; frontmatter declares license: MIT. Command snippets are short and generic. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
     "obligations": [
       "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
-      "Preserve all upstream text and notices byte-for-byte."
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
     ]
   },
   "content_review": {
-    "status": "pending",
-    "risk": "unknown",
+    "status": "approved",
+    "risk": "medium",
     "blocking_findings": [],
-    "capabilities": {},
-    "notes": []
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md and references/docker-commands.md in full. The skill covers Dockerfile best practices (multi-stage, layer caching, non-root users), building and multi-platform builds, running containers with volumes/networks/limits, lifecycle, debugging, health checks, image tagging/pushing/cleanup, a Compose example and runtime hardening flags.",
+      "Medium: following it has the agent run Docker on the user's machine: build/run/exec containers, pull and push images to registries (SKILL.md:113-119, 263-271), force-remove containers (SKILL.md:191) and prune resources, including `docker system prune -a --volumes` (SKILL.md:281, 381; references/docker-commands.md:93), which deletes all unused images and named volumes and their data. Acceptable because this is the user's own local Docker environment and the prune commands are given without `-f`, so Docker itself asks for confirmation; the agent should still get explicit user approval before pruning volumes.",
+      "The Compose example uses a placeholder `POSTGRES_PASSWORD: secret` (SKILL.md:327); the skill itself advises runtime secret injection (SKILL.md:390). Related Skills (SKILL.md:400-402) link to sibling skills ../docker-compose/ and ../../../security/{scanning/container-scanning,hardening/container-hardening}/ as optional reading only."
+    ]
   },
   "files": [
     {
@@ -55,7 +69,7 @@
       "git_blob": "67c5c5cbb12cafb1515e449748866bd40da7dec9",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
       "findings": []
     },
     {
@@ -66,119 +80,119 @@
       "git_blob": "ab1a3615bc0c8611207a969be6c3634cd79bccb5",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "shell-execution",
           "line": 5,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks of Docker CLI commands (build, run, exec, logs, inspect, push, prune) against the user's local Docker daemon, including interactive /bin/sh debugging shells inside containers."
         },
         {
           "type": "shell-execution",
           "line": 8,
           "evidence": "bash",
           "context": "docker run -it --rm ubuntu bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks of Docker CLI commands (build, run, exec, logs, inspect, push, prune) against the user's local Docker daemon, including interactive /bin/sh debugging shells inside containers."
         },
         {
           "type": "filesystem-write",
           "line": 15,
           "evidence": "Remove",
           "context": "# Remove",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Docker cleanup commands (rm, rmi, container/image/system prune) and an `apk del` Dockerfile step; the volume-deleting `system prune -a --volumes` is the notable one and relies on Docker's interactive confirmation."
         },
         {
           "type": "shell-execution",
           "line": 27,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks of Docker CLI commands (build, run, exec, logs, inspect, push, prune) against the user's local Docker daemon, including interactive /bin/sh debugging shells inside containers."
         },
         {
           "type": "filesystem-write",
           "line": 38,
           "evidence": "Remove",
           "context": "# Remove",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Docker cleanup commands (rm, rmi, container/image/system prune) and an `apk del` Dockerfile step; the volume-deleting `system prune -a --volumes` is the notable one and relies on Docker's interactive confirmation."
         },
         {
           "type": "filesystem-write",
           "line": 40,
           "evidence": "Remove",
           "context": "docker image prune -a  # Remove unused",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Docker cleanup commands (rm, rmi, container/image/system prune) and an `apk del` Dockerfile step; the volume-deleting `system prune -a --volumes` is the notable one and relies on Docker's interactive confirmation."
         },
         {
           "type": "shell-execution",
           "line": 45,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks of Docker CLI commands (build, run, exec, logs, inspect, push, prune) against the user's local Docker daemon, including interactive /bin/sh debugging shells inside containers."
         },
         {
           "type": "shell-execution",
           "line": 54,
           "evidence": "bash",
           "context": "docker exec -it myapp bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks of Docker CLI commands (build, run, exec, logs, inspect, push, prune) against the user's local Docker daemon, including interactive /bin/sh debugging shells inside containers."
         },
         {
           "type": "shell-execution",
           "line": 60,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks of Docker CLI commands (build, run, exec, logs, inspect, push, prune) against the user's local Docker daemon, including interactive /bin/sh debugging shells inside containers."
         },
         {
           "type": "shell-execution",
           "line": 72,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks of Docker CLI commands (build, run, exec, logs, inspect, push, prune) against the user's local Docker daemon, including interactive /bin/sh debugging shells inside containers."
         },
         {
           "type": "shell-execution",
           "line": 85,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks of Docker CLI commands (build, run, exec, logs, inspect, push, prune) against the user's local Docker daemon, including interactive /bin/sh debugging shells inside containers."
         },
         {
           "type": "filesystem-write",
           "line": 86,
           "evidence": "Remove",
           "context": "# Remove stopped containers",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Docker cleanup commands (rm, rmi, container/image/system prune) and an `apk del` Dockerfile step; the volume-deleting `system prune -a --volumes` is the notable one and relies on Docker's interactive confirmation."
         },
         {
           "type": "filesystem-write",
           "line": 89,
           "evidence": "Remove",
           "context": "# Remove unused images",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Docker cleanup commands (rm, rmi, container/image/system prune) and an `apk del` Dockerfile step; the volume-deleting `system prune -a --volumes` is the notable one and relies on Docker's interactive confirmation."
         },
         {
           "type": "filesystem-write",
           "line": 92,
           "evidence": "Remove",
           "context": "# Remove everything unused",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Docker cleanup commands (rm, rmi, container/image/system prune) and an `apk del` Dockerfile step; the volume-deleting `system prune -a --volumes` is the notable one and relies on Docker's interactive confirmation."
         }
       ]
     },
@@ -190,223 +204,223 @@
       "git_blob": "b47227a030a441279ae3412e843b6c8a8280b525",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "package-install",
           "line": 62,
           "evidence": "pip install",
           "context": "RUN pip install --no-cache-dir -r requirements.txt",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "A `pip install -r requirements.txt` RUN step inside an example Dockerfile, executed only when the user builds their own image."
         },
         {
           "type": "shell-execution",
           "line": 95,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks of Docker CLI commands (build, run, exec, logs, inspect, push, prune) against the user's local Docker daemon, including interactive /bin/sh debugging shells inside containers."
         },
         {
           "type": "shell-execution",
           "line": 111,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks of Docker CLI commands (build, run, exec, logs, inspect, push, prune) against the user's local Docker daemon, including interactive /bin/sh debugging shells inside containers."
         },
         {
           "type": "shell-execution",
           "line": 126,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks of Docker CLI commands (build, run, exec, logs, inspect, push, prune) against the user's local Docker daemon, including interactive /bin/sh debugging shells inside containers."
         },
         {
           "type": "shell-execution",
           "line": 148,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks of Docker CLI commands (build, run, exec, logs, inspect, push, prune) against the user's local Docker daemon, including interactive /bin/sh debugging shells inside containers."
         },
         {
           "type": "shell-execution",
           "line": 162,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks of Docker CLI commands (build, run, exec, logs, inspect, push, prune) against the user's local Docker daemon, including interactive /bin/sh debugging shells inside containers."
         },
         {
           "type": "shell-execution",
           "line": 180,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks of Docker CLI commands (build, run, exec, logs, inspect, push, prune) against the user's local Docker daemon, including interactive /bin/sh debugging shells inside containers."
         },
         {
           "type": "filesystem-write",
           "line": 187,
           "evidence": "Remove",
           "context": "# Remove container",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Docker cleanup commands (rm, rmi, container/image/system prune) and an `apk del` Dockerfile step; the volume-deleting `system prune -a --volumes` is the notable one and relies on Docker's interactive confirmation."
         },
         {
           "type": "filesystem-write",
           "line": 190,
           "evidence": "remove",
           "context": "# Force remove running container",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Docker cleanup commands (rm, rmi, container/image/system prune) and an `apk del` Dockerfile step; the volume-deleting `system prune -a --volumes` is the notable one and relies on Docker's interactive confirmation."
         },
         {
           "type": "shell-execution",
           "line": 199,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks of Docker CLI commands (build, run, exec, logs, inspect, push, prune) against the user's local Docker daemon, including interactive /bin/sh debugging shells inside containers."
         },
         {
           "type": "shell-execution",
           "line": 217,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks of Docker CLI commands (build, run, exec, logs, inspect, push, prune) against the user's local Docker daemon, including interactive /bin/sh debugging shells inside containers."
         },
         {
           "type": "shell-execution",
           "line": 219,
           "evidence": "sh",
           "context": "docker exec -it myapp /bin/sh",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks of Docker CLI commands (build, run, exec, logs, inspect, push, prune) against the user's local Docker daemon, including interactive /bin/sh debugging shells inside containers."
         },
         {
           "type": "shell-execution",
           "line": 222,
           "evidence": "sh",
           "context": "docker run -it --rm myapp:latest /bin/sh",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks of Docker CLI commands (build, run, exec, logs, inspect, push, prune) against the user's local Docker daemon, including interactive /bin/sh debugging shells inside containers."
         },
         {
           "type": "shell-execution",
           "line": 225,
           "evidence": "sh",
           "context": "docker run -it --entrypoint /bin/sh myapp:latest",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks of Docker CLI commands (build, run, exec, logs, inspect, push, prune) against the user's local Docker daemon, including interactive /bin/sh debugging shells inside containers."
         },
         {
           "type": "shell-execution",
           "line": 230,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks of Docker CLI commands (build, run, exec, logs, inspect, push, prune) against the user's local Docker daemon, including interactive /bin/sh debugging shells inside containers."
         },
         {
           "type": "network-access",
           "line": 251,
           "evidence": "curl",
           "context": "  CMD curl -f http://localhost:3000/health || exit 1",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "A Dockerfile HEALTHCHECK that curls the container's own http://localhost:3000/health endpoint."
         },
         {
           "type": "network-access",
           "line": 251,
           "evidence": "http://",
           "context": "  CMD curl -f http://localhost:3000/health || exit 1",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "A Dockerfile HEALTHCHECK that curls the container's own http://localhost:3000/health endpoint."
         },
         {
           "type": "shell-execution",
           "line": 254,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks of Docker CLI commands (build, run, exec, logs, inspect, push, prune) against the user's local Docker daemon, including interactive /bin/sh debugging shells inside containers."
         },
         {
           "type": "shell-execution",
           "line": 263,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks of Docker CLI commands (build, run, exec, logs, inspect, push, prune) against the user's local Docker daemon, including interactive /bin/sh debugging shells inside containers."
         },
         {
           "type": "shell-execution",
           "line": 276,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks of Docker CLI commands (build, run, exec, logs, inspect, push, prune) against the user's local Docker daemon, including interactive /bin/sh debugging shells inside containers."
         },
         {
           "type": "filesystem-write",
           "line": 277,
           "evidence": "Remove",
           "context": "# Remove unused images",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Docker cleanup commands (rm, rmi, container/image/system prune) and an `apk del` Dockerfile step; the volume-deleting `system prune -a --volumes` is the notable one and relies on Docker's interactive confirmation."
         },
         {
           "type": "filesystem-write",
           "line": 280,
           "evidence": "Remove",
           "context": "# Remove all unused resources",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Docker cleanup commands (rm, rmi, container/image/system prune) and an `apk del` Dockerfile step; the volume-deleting `system prune -a --volumes` is the notable one and relies on Docker's interactive confirmation."
         },
         {
           "type": "filesystem-write",
           "line": 283,
           "evidence": "Remove",
           "context": "# Remove specific image",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Docker cleanup commands (rm, rmi, container/image/system prune) and an `apk del` Dockerfile step; the volume-deleting `system prune -a --volumes` is the notable one and relies on Docker's interactive confirmation."
         },
         {
           "type": "shell-execution",
           "line": 292,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks of Docker CLI commands (build, run, exec, logs, inspect, push, prune) against the user's local Docker daemon, including interactive /bin/sh debugging shells inside containers."
         },
         {
           "type": "credential-access",
           "line": 327,
           "evidence": "secret",
           "context": "      POSTGRES_PASSWORD: secret",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "A placeholder `POSTGRES_PASSWORD: secret` in an example docker-compose file, not a real credential."
         },
         {
           "type": "filesystem-write",
           "line": 347,
           "evidence": "Remove",
           "context": "# Remove unnecessary packages",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "A Dockerfile comment for `apk del --purge build-dependencies` that removes build packages inside the image, not files on the host."
         },
         {
           "type": "shell-execution",
           "line": 356,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks of Docker CLI commands (build, run, exec, logs, inspect, push, prune) against the user's local Docker daemon, including interactive /bin/sh debugging shells inside containers."
         }
       ]
     }

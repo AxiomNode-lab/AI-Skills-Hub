@@ -1,9 +1,9 @@
 {
   "schema_version": "0.1",
   "skill_id": "bagelhole/ebpf-observability",
-  "status": "draft",
-  "reviewed_on": null,
-  "reviewer": null,
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
   "source": {
     "repo": "BagelHole/DevOps-Security-Agent-Skills",
     "path": "devops/observability/ebpf-observability",
@@ -13,7 +13,7 @@
     "complete": true,
     "scope": "devops/observability/ebpf-observability",
     "url": "https://api.github.com/repos/BagelHole/DevOps-Security-Agent-Skills/git/trees/0365f57a079b1332f95cf26e31dd2d5332a8399f?recursive=1",
-    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
   },
   "license": {
     "spdx": "MIT",
@@ -31,18 +31,32 @@
       ]
     },
     "redistributable": true,
-    "scope_reason": "",
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found; frontmatter declares license: MIT, consistent with the repository root. Grafana dashboard IDs and the FlameGraph/btfhub projects are only referenced by ID or URL. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
     "obligations": [
       "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
-      "Preserve all upstream text and notices byte-for-byte."
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
     ]
   },
   "content_review": {
-    "status": "pending",
-    "risk": "unknown",
+    "status": "approved",
+    "risk": "medium",
     "blocking_findings": [],
-    "capabilities": {},
-    "notes": []
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md in full (single-file skill, 935 lines). The skill covers eBPF observability: kernel prerequisites, bpftrace/bcc install, Cilium with Hubble, Tetragon TracingPolicies (process, file, egress, privilege-escalation, container-escape, file-integrity), bpftrace one-liners, Prometheus/ebpf_exporter/Grafana integration, Parca/Pyroscope profiling and troubleshooting with bpftool.",
+      "Medium: following it has the agent run sudo apt/dnf installs, mount bpffs and set sysctl, helm-install Cilium (with kubeProxyReplacement=true, which replaces cluster networking), Tetragon, ebpf_exporter, Parca and Pyroscope, kubectl-apply TracingPolicies that include Sigkill enforcement (restrict-egress kills processes connecting to 169.254.169.254, SKILL.md:243-273; init_module Sigkill, SKILL.md:683-687), and download CLI tarballs into /usr/local/bin with sudo. Acceptable because these are the documented setup steps for the user's own cluster and hosts, the bpftrace one-liners are read-only tracing, and nothing is sent to third parties (the SIEM forwarder at SKILL.md:736 targets a placeholder siem.internal).",
+      "Review before running: the Cilium and Hubble CLIs are fetched at an unpinned version resolved from stable.txt and the tetra CLI from releases/latest (SKILL.md:111-120, 175-177) without checksum verification; FlameGraph is git-cloned unpinned and its Perl scripts executed (SKILL.md:788-790); the btfhub archive is wget'd (SKILL.md:855). These are official vendor release artifacts, not scripts piped to a shell, but pin versions and verify checksums. Installing Cilium with kube-proxy replacement and applying Sigkill policies changes cluster behavior — confirm with the user and test outside production first. Parca is configured with store.insecure=true and debuginfo upload (SKILL.md:757-759), suitable only for an in-cluster store. Some kprobe names (__x64_sys_*, dns_resolve) are kernel- and arch-specific."
+    ]
   },
   "files": [
     {
@@ -55,7 +69,7 @@
       "git_blob": "67c5c5cbb12cafb1515e449748866bd40da7dec9",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
       "findings": []
     },
     {
@@ -66,823 +80,823 @@
       "git_blob": "0c4f8abf15fd9f11ecbe7d935d95d80448c8d07a",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "shell-execution",
           "line": 45,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 55,
           "evidence": "\nsudo",
           "context": "# If not mounted, mount it",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 60,
           "evidence": "\nsudo",
           "context": "# Should return 1; if not:",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 66,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 67,
           "evidence": "\nsudo",
           "context": "# Ubuntu/Debian -- install bpftrace, bcc tools, and libbpf",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 68,
           "evidence": "\nsudo",
           "context": "sudo apt-get update",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 71,
           "evidence": "\nsudo",
           "context": "# Fedora/RHEL",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 74,
           "evidence": "\nsudo",
           "context": "# Verify bpftrace works",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 86,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "network-access",
           "line": 88,
           "evidence": "https://",
           "context": "helm repo add cilium https://helm.cilium.io/",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Helm repo URLs (helm.cilium.io, cloudflare, parca, grafana), CLI and BTF downloads from GitHub releases, a FlameGraph git clone, local metrics/port-forward URLs, and a placeholder internal SIEM endpoint."
         },
         {
           "type": "shell-execution",
           "line": 109,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "network-access",
           "line": 111,
           "evidence": "curl",
           "context": "CILIUM_CLI_VERSION=$(curl -s https://raw.githubusercontent.com/cilium/cilium-cli/main/stable.txt)",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Resolves an unpinned Cilium CLI version from the cilium-cli main branch stable.txt; the tarball is then installed with sudo without checksum verification."
         },
         {
           "type": "network-access",
           "line": 111,
           "evidence": "https://",
           "context": "CILIUM_CLI_VERSION=$(curl -s https://raw.githubusercontent.com/cilium/cilium-cli/main/stable.txt)",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Resolves an unpinned Cilium CLI version from the cilium-cli main branch stable.txt; the tarball is then installed with sudo without checksum verification."
         },
         {
           "type": "network-access",
           "line": 112,
           "evidence": "curl",
           "context": "curl -L --remote-name \"https://github.com/cilium/cilium-cli/releases/download/${CILIUM_CLI_VERSION}/cilium-linux-amd64.tar.gz\"",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Helm repo URLs (helm.cilium.io, cloudflare, parca, grafana), CLI and BTF downloads from GitHub releases, a FlameGraph git clone, local metrics/port-forward URLs, and a placeholder internal SIEM endpoint."
         },
         {
           "type": "network-access",
           "line": 112,
           "evidence": "https://",
           "context": "curl -L --remote-name \"https://github.com/cilium/cilium-cli/releases/download/${CILIUM_CLI_VERSION}/cilium-linux-amd64.tar.gz\"",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Helm repo URLs (helm.cilium.io, cloudflare, parca, grafana), CLI and BTF downloads from GitHub releases, a FlameGraph git clone, local metrics/port-forward URLs, and a placeholder internal SIEM endpoint."
         },
         {
           "type": "shell-execution",
           "line": 112,
           "evidence": "\nsudo",
           "context": "curl -L --remote-name \"https://github.com/cilium/cilium-cli/releases/download/${CILIUM_CLI_VERSION}/cilium-linux-amd64.tar.gz\"",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "network-access",
           "line": 117,
           "evidence": "curl",
           "context": "HUBBLE_VERSION=$(curl -s https://raw.githubusercontent.com/cilium/hubble/master/stable.txt)",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Helm repo URLs (helm.cilium.io, cloudflare, parca, grafana), CLI and BTF downloads from GitHub releases, a FlameGraph git clone, local metrics/port-forward URLs, and a placeholder internal SIEM endpoint."
         },
         {
           "type": "network-access",
           "line": 117,
           "evidence": "https://",
           "context": "HUBBLE_VERSION=$(curl -s https://raw.githubusercontent.com/cilium/hubble/master/stable.txt)",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Helm repo URLs (helm.cilium.io, cloudflare, parca, grafana), CLI and BTF downloads from GitHub releases, a FlameGraph git clone, local metrics/port-forward URLs, and a placeholder internal SIEM endpoint."
         },
         {
           "type": "network-access",
           "line": 118,
           "evidence": "curl",
           "context": "curl -L --remote-name \"https://github.com/cilium/hubble/releases/download/${HUBBLE_VERSION}/hubble-linux-amd64.tar.gz\"",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Helm repo URLs (helm.cilium.io, cloudflare, parca, grafana), CLI and BTF downloads from GitHub releases, a FlameGraph git clone, local metrics/port-forward URLs, and a placeholder internal SIEM endpoint."
         },
         {
           "type": "network-access",
           "line": 118,
           "evidence": "https://",
           "context": "curl -L --remote-name \"https://github.com/cilium/hubble/releases/download/${HUBBLE_VERSION}/hubble-linux-amd64.tar.gz\"",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Helm repo URLs (helm.cilium.io, cloudflare, parca, grafana), CLI and BTF downloads from GitHub releases, a FlameGraph git clone, local metrics/port-forward URLs, and a placeholder internal SIEM endpoint."
         },
         {
           "type": "shell-execution",
           "line": 118,
           "evidence": "\nsudo",
           "context": "curl -L --remote-name \"https://github.com/cilium/hubble/releases/download/${HUBBLE_VERSION}/hubble-linux-amd64.tar.gz\"",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 125,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 150,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "network-access",
           "line": 154,
           "evidence": "http://",
           "context": "# Access at http://localhost:12000 -- provides a real-time service dependency map",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Helm repo URLs (helm.cilium.io, cloudflare, parca, grafana), CLI and BTF downloads from GitHub releases, a FlameGraph git clone, local metrics/port-forward URLs, and a placeholder internal SIEM endpoint."
         },
         {
           "type": "shell-execution",
           "line": 165,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "network-access",
           "line": 166,
           "evidence": "https://",
           "context": "helm repo add cilium https://helm.cilium.io/",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Helm repo URLs (helm.cilium.io, cloudflare, parca, grafana), CLI and BTF downloads from GitHub releases, a FlameGraph git clone, local metrics/port-forward URLs, and a placeholder internal SIEM endpoint."
         },
         {
           "type": "network-access",
           "line": 175,
           "evidence": "curl",
           "context": "curl -LO \"https://github.com/cilium/tetragon/releases/latest/download/tetra-linux-amd64.tar.gz\"",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Downloads the tetra CLI from releases/latest (unpinned) and installs it into /usr/local/bin with sudo."
         },
         {
           "type": "network-access",
           "line": 175,
           "evidence": "https://",
           "context": "curl -LO \"https://github.com/cilium/tetragon/releases/latest/download/tetra-linux-amd64.tar.gz\"",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Downloads the tetra CLI from releases/latest (unpinned) and installs it into /usr/local/bin with sudo."
         },
         {
           "type": "shell-execution",
           "line": 175,
           "evidence": "\nsudo",
           "context": "curl -LO \"https://github.com/cilium/tetragon/releases/latest/download/tetra-linux-amd64.tar.gz\"",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 197,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 233,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 271,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 309,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 321,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 322,
           "evidence": "\nsudo",
           "context": "# Trace read() syscall latency distribution (microseconds)",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "filesystem-write",
           "line": 326,
           "evidence": "delete",
           "context": "    delete(@start[tid]);",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Matches are bpftrace `delete(@start[tid])` map operations inside BPF programs, not file deletions."
         },
         {
           "type": "shell-execution",
           "line": 329,
           "evidence": "\nsudo",
           "context": "# Top 10 slowest syscalls by total time",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "filesystem-write",
           "line": 333,
           "evidence": "delete",
           "context": "    delete(@start[tid]);",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Matches are bpftrace `delete(@start[tid])` map operations inside BPF programs, not file deletions."
         },
         {
           "type": "shell-execution",
           "line": 339,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 340,
           "evidence": "\nsudo",
           "context": "# Trace DNS queries via UDP port 53 sends",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 350,
           "evidence": "\nsudo",
           "context": "# Count DNS queries by source process",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 360,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 361,
           "evidence": "\nsudo",
           "context": "# Trace TCP retransmits with source/destination",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 374,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 375,
           "evidence": "\nsudo",
           "context": "# Block I/O latency histogram by device",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "filesystem-write",
           "line": 379,
           "evidence": "delete",
           "context": "    delete(@start[args->dev, args->sector]);",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Matches are bpftrace `delete(@start[tid])` map operations inside BPF programs, not file deletions."
         },
         {
           "type": "shell-execution",
           "line": 382,
           "evidence": "\nsudo",
           "context": "# Top processes by disk I/O bytes",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 390,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 391,
           "evidence": "\nsudo",
           "context": "# Trace process exec inside containers (cgroup-filtered)",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 396,
           "evidence": "\nsudo",
           "context": "# Memory allocation hotspots per container",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 409,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "network-access",
           "line": 411,
           "evidence": "curl",
           "context": "kubectl exec -n kube-system ds/cilium -- curl -s http://localhost:9965/metrics | head -50",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Helm repo URLs (helm.cilium.io, cloudflare, parca, grafana), CLI and BTF downloads from GitHub releases, a FlameGraph git clone, local metrics/port-forward URLs, and a placeholder internal SIEM endpoint."
         },
         {
           "type": "network-access",
           "line": 411,
           "evidence": "http://",
           "context": "kubectl exec -n kube-system ds/cilium -- curl -s http://localhost:9965/metrics | head -50",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Helm repo URLs (helm.cilium.io, cloudflare, parca, grafana), CLI and BTF downloads from GitHub releases, a FlameGraph git clone, local metrics/port-forward URLs, and a placeholder internal SIEM endpoint."
         },
         {
           "type": "shell-execution",
           "line": 437,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "network-access",
           "line": 439,
           "evidence": "https://",
           "context": "helm repo add ebpf-exporter https://cloudflare.github.io/ebpf_exporter",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Helm repo URLs (helm.cilium.io, cloudflare, parca, grafana), CLI and BTF downloads from GitHub releases, a FlameGraph git clone, local metrics/port-forward URLs, and a placeholder internal SIEM endpoint."
         },
         {
           "type": "shell-execution",
           "line": 482,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 521,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 551,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 564,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 571,
           "evidence": "\nsudo",
           "context": "# DNS latency analysis with bpftrace",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "filesystem-write",
           "line": 575,
           "evidence": "delete",
           "context": "    delete(@start[tid]);",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Matches are bpftrace `delete(@start[tid])` map operations inside BPF programs, not file deletions."
         },
         {
           "type": "shell-execution",
           "line": 583,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 646,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 729,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "network-access",
           "line": 736,
           "evidence": "curl",
           "context": "  curl -X POST -H \"Content-Type: application/json\" -d @- https://siem.internal/api/events",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Pipes Tetragon file-integrity events to a placeholder internal SIEM (https://siem.internal) that the user owns."
         },
         {
           "type": "network-access",
           "line": 736,
           "evidence": "https://",
           "context": "  curl -X POST -H \"Content-Type: application/json\" -d @- https://siem.internal/api/events",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Pipes Tetragon file-integrity events to a placeholder internal SIEM (https://siem.internal) that the user owns."
         },
         {
           "type": "shell-execution",
           "line": 747,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "network-access",
           "line": 749,
           "evidence": "https://",
           "context": "helm repo add parca https://parca-dev.github.io/helm-charts",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Helm repo URLs (helm.cilium.io, cloudflare, parca, grafana), CLI and BTF downloads from GitHub releases, a FlameGraph git clone, local metrics/port-forward URLs, and a placeholder internal SIEM endpoint."
         },
         {
           "type": "shell-execution",
           "line": 764,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "network-access",
           "line": 766,
           "evidence": "https://",
           "context": "helm repo add grafana https://grafana.github.io/helm-charts",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Helm repo URLs (helm.cilium.io, cloudflare, parca, grafana), CLI and BTF downloads from GitHub releases, a FlameGraph git clone, local metrics/port-forward URLs, and a placeholder internal SIEM endpoint."
         },
         {
           "type": "shell-execution",
           "line": 778,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 779,
           "evidence": "\nsudo",
           "context": "# Sample kernel and user stacks at 99Hz for 30 seconds",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 783,
           "evidence": "\nsudo",
           "context": "# Using perf with BPF for flame graphs",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 784,
           "evidence": "\nsudo",
           "context": "sudo perf record -F 99 -a -g -- sleep 30",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "network-access",
           "line": 788,
           "evidence": "https://",
           "context": "git clone https://github.com/brendangregg/FlameGraph.git",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Helm repo URLs (helm.cilium.io, cloudflare, parca, grafana), CLI and BTF downloads from GitHub releases, a FlameGraph git clone, local metrics/port-forward URLs, and a placeholder internal SIEM endpoint."
         },
         {
           "type": "shell-execution",
           "line": 795,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 796,
           "evidence": "\nsudo",
           "context": "# Trace off-CPU time to find where threads are blocked",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "filesystem-write",
           "line": 805,
           "evidence": "delete",
           "context": "      delete(@block_start[tid]);",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Matches are bpftrace `delete(@start[tid])` map operations inside BPF programs, not file deletions."
         },
         {
           "type": "shell-execution",
           "line": 813,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 814,
           "evidence": "\nsudo",
           "context": "# Track memory allocations not freed",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 821,
           "evidence": "\nsudo",
           "context": "# Per-process heap growth tracking",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 836,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 837,
           "evidence": "\nsudo",
           "context": "# Get verbose verifier output",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 849,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "network-access",
           "line": 854,
           "evidence": "https://",
           "context": "# https://github.com/aquasecurity/btfhub",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Helm repo URLs (helm.cilium.io, cloudflare, parca, grafana), CLI and BTF downloads from GitHub releases, a FlameGraph git clone, local metrics/port-forward URLs, and a placeholder internal SIEM endpoint."
         },
         {
           "type": "network-access",
           "line": 855,
           "evidence": "wget",
           "context": "wget \"https://github.com/aquasecurity/btfhub-archive/raw/main/ubuntu/22.04/x86_64/$(uname -r).btf.tar.xz\"",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "wget of a BTF archive from aquasecurity/btfhub-archive as a troubleshooting step when the kernel lacks BTF."
         },
         {
           "type": "network-access",
           "line": 855,
           "evidence": "https://",
           "context": "wget \"https://github.com/aquasecurity/btfhub-archive/raw/main/ubuntu/22.04/x86_64/$(uname -r).btf.tar.xz\"",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "wget of a BTF archive from aquasecurity/btfhub-archive as a troubleshooting step when the kernel lacks BTF."
         },
         {
           "type": "shell-execution",
           "line": 861,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 875,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 891,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 905,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 906,
           "evidence": "\nsudo",
           "context": "# List all loaded BPF programs and their run time",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 907,
           "evidence": "\nsudo",
           "context": "sudo bpftool prog show",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 910,
           "evidence": "\nsudo",
           "context": "# Check map memory usage",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 911,
           "evidence": "\nsudo",
           "context": "sudo bpftool map show",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 914,
           "evidence": "\nsudo",
           "context": "# If a program is consuming too much CPU, check its run count and time",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 917,
           "evidence": "\nsudo",
           "context": "# Detach a misbehaving program",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 923,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 924,
           "evidence": "\nsudo",
           "context": "# Quick check: which eBPF features your kernel supports",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 927,
           "evidence": "\nsudo",
           "context": "# Check specific program types",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 930,
           "evidence": "\nsudo",
           "context": "# Check available map types",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 933,
           "evidence": "\nsudo",
           "context": "# Check available helper functions",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with sudo package installs, bpftrace/bpftool/perf, helm installs, kubectl apply/exec/logs and hubble/cilium CLI commands against the user's own hosts and cluster, which is the skill's purpose."
         }
       ]
     }

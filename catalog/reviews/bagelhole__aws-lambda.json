@@ -1,9 +1,9 @@
 {
   "schema_version": "0.1",
   "skill_id": "bagelhole/aws-lambda",
-  "status": "draft",
-  "reviewed_on": null,
-  "reviewer": null,
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
   "source": {
     "repo": "BagelHole/DevOps-Security-Agent-Skills",
     "path": "infrastructure/cloud-aws/aws-lambda",
@@ -13,7 +13,7 @@
     "complete": true,
     "scope": "infrastructure/cloud-aws/aws-lambda",
     "url": "https://api.github.com/repos/BagelHole/DevOps-Security-Agent-Skills/git/trees/0365f57a079b1332f95cf26e31dd2d5332a8399f?recursive=1",
-    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
   },
   "license": {
     "spdx": "MIT",
@@ -31,18 +31,32 @@
       ]
     },
     "redistributable": true,
-    "scope_reason": "",
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in the file; CLI, Python and SAM snippets are short configuration examples, and the frontmatter declares license: MIT. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
     "obligations": [
       "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
-      "Preserve all upstream text and notices byte-for-byte."
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
     ]
   },
   "content_review": {
-    "status": "pending",
-    "risk": "unknown",
+    "status": "approved",
+    "risk": "medium",
     "blocking_findings": [],
-    "capabilities": {},
-    "notes": []
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "package_install": true,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md in full (single-file skill). The skill covers creating, updating, versioning and aliasing Lambda functions with the AWS CLI, Python handler samples, layers, event source mappings (SQS, DynamoDB Streams, S3, EventBridge), function URLs, concurrency/SnapStart tuning, a SAM template and SAM CLI commands.",
+      "Medium: following it has the agent deploy and reconfigure Lambda functions, add resource-based invoke permissions, change S3 bucket notifications, pip-install dependencies into a layer directory and run `sam deploy`, all with the user's configured AWS credentials. Acceptable because these are standard deployment steps for the user's own serverless app and the skill contains no delete/destroy commands.",
+      "Review before applying: the function URL example (SKILL.md:239-256) creates a public endpoint with `--auth-type NONE` and `--principal \"*\"`, so only use it for intentionally public handlers; `put-bucket-notification-configuration` replaces any existing notification config on the bucket. Account IDs and ARNs (123456789012) are placeholders. Related Skills (SKILL.md:408-412) link to sibling skills ../aws-iam/, ../terraform-aws/, ../aws-s3/, ../aws-vpc/, ../aws-cost-optimization/ as optional reading only."
+    ]
   },
   "files": [
     {
@@ -55,7 +69,7 @@
       "git_blob": "67c5c5cbb12cafb1515e449748866bd40da7dec9",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
       "findings": []
     },
     {
@@ -66,95 +80,95 @@
       "git_blob": "db9c72f35afd64b7735dfe82fb7a07e912cb8329",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "shell-execution",
           "line": 32,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks of aws lambda/events/s3api and SAM CLI commands that build, deploy and configure the user's Lambda functions."
         },
         {
           "type": "shell-execution",
           "line": 154,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks of aws lambda/events/s3api and SAM CLI commands that build, deploy and configure the user's Lambda functions."
         },
         {
           "type": "filesystem-write",
           "line": 156,
           "evidence": "mkdir",
           "context": "mkdir -p layer/python",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Creates a local layer/python build directory; the other match is the word 'remove' in a troubleshooting tip."
         },
         {
           "type": "package-install",
           "line": 157,
           "evidence": "pip install",
           "context": "pip install requests boto3-stubs -t layer/python/",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "pip installs requests and boto3-stubs into a local layer directory to package a Lambda layer."
         },
         {
           "type": "shell-execution",
           "line": 180,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks of aws lambda/events/s3api and SAM CLI commands that build, deploy and configure the user's Lambda functions."
         },
         {
           "type": "shell-execution",
           "line": 238,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Creates an unauthenticated public function URL and grants invoke to principal \"*\"; appropriate only for intentionally public endpoints."
         },
         {
           "type": "network-access",
           "line": 244,
           "evidence": "https://",
           "context": "    \"AllowOrigins\": [\"https://myapp.com\"],",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "A CORS origin placeholder (https://myapp.com) and a SAM output URL template; no instruction to fetch them."
         },
         {
           "type": "shell-execution",
           "line": 261,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks of aws lambda/events/s3api and SAM CLI commands that build, deploy and configure the user's Lambda functions."
         },
         {
           "type": "network-access",
           "line": 380,
           "evidence": "https://",
           "context": "    Value: !Sub \"https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod\"",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "A CORS origin placeholder (https://myapp.com) and a SAM output URL template; no instruction to fetch them."
         },
         {
           "type": "shell-execution",
           "line": 383,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks of aws lambda/events/s3api and SAM CLI commands that build, deploy and configure the user's Lambda functions."
         },
         {
           "type": "filesystem-write",
           "line": 399,
           "evidence": "remove",
           "context": "| Cold starts > 5s | Large package or VPC overhead | Use layers, arm64, provisioned concurrency; remove VPC if not needed |",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Troubleshooting advice to remove VPC attachment, not a file operation."
         }
       ]
     }

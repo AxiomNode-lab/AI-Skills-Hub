@@ -1,9 +1,9 @@
 {
   "schema_version": "0.1",
   "skill_id": "bagelhole/systemd-services",
-  "status": "draft",
-  "reviewed_on": null,
-  "reviewer": null,
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
   "source": {
     "repo": "BagelHole/DevOps-Security-Agent-Skills",
     "path": "infrastructure/servers/systemd-services",
@@ -13,7 +13,7 @@
     "complete": true,
     "scope": "infrastructure/servers/systemd-services",
     "url": "https://api.github.com/repos/BagelHole/DevOps-Security-Agent-Skills/git/trees/0365f57a079b1332f95cf26e31dd2d5332a8399f?recursive=1",
-    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
   },
   "license": {
     "spdx": "MIT",
@@ -31,18 +31,32 @@
       ]
     },
     "redistributable": true,
-    "scope_reason": "",
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found; unit files and commands are short original examples. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
     "obligations": [
       "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
-      "Preserve all upstream text and notices byte-for-byte."
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
     ]
   },
   "content_review": {
-    "status": "pending",
-    "risk": "unknown",
+    "status": "approved",
+    "risk": "medium",
     "blocking_findings": [],
-    "capabilities": {},
-    "notes": []
+    "capabilities": {
+      "shell": true,
+      "network": false,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md in full; it is the only file. systemd guide: a hardened service unit, systemctl management, timers as a cron replacement, socket activation, dependency directives, cgroup v2 resource limits via drop-ins, journalctl analysis, and troubleshooting.",
+      "Following it can make the agent write unit files and drop-ins under /etc/systemd/system (SKILL.md:297-303), reload systemd, start/stop/restart/mask services, and vacuum journal logs (SKILL.md:340-342), all requiring root. Medium because these change system services and delete old logs; acceptable because they are standard, user-directed service administration on the user's own host and the sample unit enables sandboxing (NoNewPrivileges, ProtectSystem=strict) rather than weakening security.",
+      "The resource-limit example sets OOMPolicy=continue (SKILL.md:292), and troubleshooting suggests relaxing ProtectSystem/PrivateTmp only when namespacing fails (SKILL.md:352); neither disables SELinux or other host controls. Related Skills (SKILL.md:360-363) are named only and do not ship with this skill. Frontmatter declares license: MIT."
+    ]
   },
   "files": [
     {
@@ -55,7 +69,7 @@
       "git_blob": "67c5c5cbb12cafb1515e449748866bd40da7dec9",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
       "findings": []
     },
     {
@@ -66,103 +80,103 @@
       "git_blob": "2eb7afd6c2343d5bf4aacd83a74015ad68ef85f1",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "shell-execution",
           "line": 26,
           "evidence": " sudo",
           "context": "- Root or sudo access for creating system-level unit files",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with systemctl, systemd-analyze, and journalctl commands, a sudo prerequisite, and ExecStart script paths in example unit files."
         },
         {
           "type": "network-access",
           "line": 36,
           "evidence": "https://",
           "context": "Documentation=https://docs.example.com/myapp",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "A placeholder Documentation= URL in an example unit file; nothing is fetched."
         },
         {
           "type": "shell-execution",
           "line": 55,
           "evidence": "sh",
           "context": "ExecStartPost=/opt/myapp/bin/healthcheck.sh",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with systemctl, systemd-analyze, and journalctl commands, a sudo prerequisite, and ExecStart script paths in example unit files."
         },
         {
           "type": "shell-execution",
           "line": 57,
           "evidence": "sh",
           "context": "ExecStop=/opt/myapp/bin/graceful-stop.sh",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with systemctl, systemd-analyze, and journalctl commands, a sudo prerequisite, and ExecStart script paths in example unit files."
         },
         {
           "type": "shell-execution",
           "line": 90,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with systemctl, systemd-analyze, and journalctl commands, a sudo prerequisite, and ExecStart script paths in example unit files."
         },
         {
           "type": "shell-execution",
           "line": 176,
           "evidence": "sh",
           "context": "ExecStart=/usr/local/bin/run-backup.sh",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with systemctl, systemd-analyze, and journalctl commands, a sudo prerequisite, and ExecStart script paths in example unit files."
         },
         {
           "type": "shell-execution",
           "line": 183,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with systemctl, systemd-analyze, and journalctl commands, a sudo prerequisite, and ExecStart script paths in example unit files."
         },
         {
           "type": "shell-execution",
           "line": 236,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with systemctl, systemd-analyze, and journalctl commands, a sudo prerequisite, and ExecStart script paths in example unit files."
         },
         {
           "type": "shell-execution",
           "line": 249,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with systemctl, systemd-analyze, and journalctl commands, a sudo prerequisite, and ExecStart script paths in example unit files."
         },
         {
           "type": "shell-execution",
           "line": 295,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with systemctl, systemd-analyze, and journalctl commands, a sudo prerequisite, and ExecStart script paths in example unit files."
         },
         {
           "type": "filesystem-write",
           "line": 297,
           "evidence": "mkdir",
           "context": "mkdir -p /etc/systemd/system/myapp.service.d/",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "mkdir -p and a heredoc creating a systemd drop-in limits.conf under /etc/systemd/system for the user's service."
         },
         {
           "type": "shell-execution",
           "line": 319,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with systemctl, systemd-analyze, and journalctl commands, a sudo prerequisite, and ExecStart script paths in example unit files."
         }
       ]
     }

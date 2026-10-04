@@ -1,9 +1,9 @@
 {
   "schema_version": "0.1",
   "skill_id": "wshobson/react-native-architecture",
-  "status": "draft",
-  "reviewed_on": null,
-  "reviewer": null,
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
   "source": {
     "repo": "wshobson/agents",
     "path": "plugins/frontend-mobile-development/skills/react-native-architecture",
@@ -13,7 +13,7 @@
     "complete": true,
     "scope": "plugins/frontend-mobile-development/skills/react-native-architecture",
     "url": "https://api.github.com/repos/wshobson/agents/git/trees/156b7a5e7a8b93642628a339ee4039c925b34c7f?recursive=1",
-    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
   },
   "license": {
     "spdx": "MIT",
@@ -32,18 +32,32 @@
       ]
     },
     "redistributable": true,
-    "scope_reason": "",
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file; code is original sample TypeScript using public Expo/TanStack APIs. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
     "obligations": [
       "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
-      "Preserve all upstream text and notices byte-for-byte."
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
     ]
   },
   "content_review": {
-    "status": "pending",
-    "risk": "unknown",
+    "status": "approved",
+    "risk": "medium",
     "blocking_findings": [],
-    "capabilities": {},
-    "notes": []
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "package_install": true,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md and references/details.md in full. The skill gives React Native/Expo architecture guidance: project layout, Expo Router navigation, an auth provider using expo-secure-store, offline-first React Query persistence, native modules (haptics, biometrics, push notifications), platform-specific styling, FlashList performance, and EAS build/submit/update.",
+      "Medium: the Quick Start has the agent scaffold a project with `npx create-expo-app@latest` and install npm packages with `npx expo install` (SKILL.md:51-59), and the EAS section lists `eas build`, `eas submit` to the App Store/Play Store and `eas update --branch production` OTA releases (details.md:557-569), which act on the user's Expo account. Acceptable because these are the standard Expo workflow for the user's own app; store submission and production OTA updates should only be run when the user explicitly asks.",
+      "eas.json uses placeholder Apple ID and ASC app ID and references a local google-services.json service-account key path (details.md:548-552); keep that file out of version control. Auth tokens are stored in SecureStore, which is the recommended pattern."
+    ]
   },
   "files": [
     {
@@ -56,7 +70,7 @@
       "git_blob": "326f0a55c96e672fedf9d807ca043c00df05ba0e",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
       "findings": []
     },
     {
@@ -67,15 +81,15 @@
       "git_blob": "89cbcb30591f58d621967c354a4ac6cf31998627",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "shell-execution",
           "line": 557,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "EAS build, store submission and production OTA update commands that act on the user's Expo/App Store/Play accounts; run only on explicit user request."
         }
       ]
     },
@@ -87,15 +101,15 @@
       "git_blob": "e31619d62742b781fccf6064806664e8b2889cbe",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "shell-execution",
           "line": 51,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks scaffold an Expo app, install Expo packages, and run EAS build/submit/update commands for the user's own project."
         }
       ]
     }

@@ -1,9 +1,9 @@
 {
   "schema_version": "0.1",
   "skill_id": "bagelhole/kustomize",
-  "status": "draft",
-  "reviewed_on": null,
-  "reviewer": null,
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
   "source": {
     "repo": "BagelHole/DevOps-Security-Agent-Skills",
     "path": "devops/orchestration/kustomize",
@@ -13,7 +13,7 @@
     "complete": true,
     "scope": "devops/orchestration/kustomize",
     "url": "https://api.github.com/repos/BagelHole/DevOps-Security-Agent-Skills/git/trees/0365f57a079b1332f95cf26e31dd2d5332a8399f?recursive=1",
-    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
   },
   "license": {
     "spdx": "MIT",
@@ -31,18 +31,32 @@
       ]
     },
     "redistributable": true,
-    "scope_reason": "",
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found; kustomization examples are short original samples. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
     "obligations": [
       "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
-      "Preserve all upstream text and notices byte-for-byte."
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
     ]
   },
   "content_review": {
-    "status": "pending",
-    "risk": "unknown",
+    "status": "approved",
+    "risk": "medium",
     "blocking_findings": [],
-    "capabilities": {},
-    "notes": []
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md in full; it is the only file. Kustomize guide: base/overlay layout, strategic-merge, JSON and inline patches, ConfigMap/Secret generators, image and name transformations, components, remote resources, helmCharts integration, replacements, and common issues.",
+      "Most content is YAML the agent may write into the user's repo. The Commands section (SKILL.md:354-372) shows kubectl apply -k, kubectl delete -k overlays/production, and kustomize build | kubectl apply against the current cluster. Medium because these apply or delete cluster resources; acceptable because they are a standard command reference, with kubectl kustomize/diff shown for preview and best practices advising to test builds before applying. Users should confirm before any delete -k, especially on a production overlay.",
+      "Remote resources (SKILL.md:346-349) pull manifests from GitHub URLs, one pinned to ?ref=v1.0.0 and one to a main branch; the skill advises pinning. The secretGenerator literal 'api-key=secret123' is a placeholder. Related Skills (SKILL.md:452-454) link to sibling skills (../kubernetes-ops/, ../helm-charts/, ../argocd-gitops/) that do not ship with this skill; optional. Frontmatter declares license: MIT."
+    ]
   },
   "files": [
     {
@@ -55,7 +69,7 @@
       "git_blob": "67c5c5cbb12cafb1515e449748866bd40da7dec9",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
       "findings": []
     },
     {
@@ -66,79 +80,79 @@
       "git_blob": "e77ea62d1245eef0531fb897b91a5494adf76900",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "credential-access",
           "line": 237,
           "evidence": "Secret",
           "context": "### Secret Generator",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "A Kubernetes secretGenerator example with a placeholder literal (api-key=secret123) and a best-practice note about Secret hash suffixes; no real secrets are read."
         },
         {
           "type": "credential-access",
           "line": 244,
           "evidence": "api-key",
           "context": "      - api-key=secret123",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "A Kubernetes secretGenerator example with a placeholder literal (api-key=secret123) and a best-practice note about Secret hash suffixes; no real secrets are read."
         },
         {
           "type": "network-access",
           "line": 346,
           "evidence": "https://",
           "context": "  - https://github.com/org/manifests//base?ref=v1.0.0",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Example remote resource URLs (GitHub repo and raw file) and a Helm chart repo URL inside kustomization.yaml samples that kustomize would fetch when the user builds."
         },
         {
           "type": "network-access",
           "line": 349,
           "evidence": "https://",
           "context": "  - https://raw.githubusercontent.com/org/repo/main/deployment.yaml",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Example remote resource URLs (GitHub repo and raw file) and a Helm chart repo URL inside kustomization.yaml samples that kustomize would fetch when the user builds."
         },
         {
           "type": "shell-execution",
           "line": 354,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "A bash fence with kubectl kustomize/apply/delete/diff and kustomize build commands."
         },
         {
           "type": "filesystem-write",
           "line": 361,
           "evidence": "Delete",
           "context": "# Delete resources",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Scanner matched 'delete' in kubectl delete -k, which deletes cluster resources rather than local files."
         },
         {
           "type": "filesystem-write",
           "line": 362,
           "evidence": "delete",
           "context": "kubectl delete -k overlays/production",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Scanner matched 'delete' in kubectl delete -k, which deletes cluster resources rather than local files."
         },
         {
           "type": "network-access",
           "line": 380,
           "evidence": "https://",
           "context": "    repo: https://prometheus-community.github.io/helm-charts",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Example remote resource URLs (GitHub repo and raw file) and a Helm chart repo URL inside kustomization.yaml samples that kustomize would fetch when the user builds."
         },
         {
           "type": "credential-access",
           "line": 446,
           "evidence": "Secret",
           "context": "- Enable ConfigMap/Secret hash suffixes",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "A Kubernetes secretGenerator example with a placeholder literal (api-key=secret123) and a best-practice note about Secret hash suffixes; no real secrets are read."
         }
       ]
     }

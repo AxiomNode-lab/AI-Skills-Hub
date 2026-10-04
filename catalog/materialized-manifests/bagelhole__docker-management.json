@@ -1,0 +1,339 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "bagelhole/docker-management",
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "devops/containers/docker-management",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "review": {
+    "path": "catalog/reviews/bagelhole__docker-management.json",
+    "sha256": "3262f1d4eddeb5c4a3a0cd8716fa11a7c3c442dea372021ebe20c109489a9e06"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "shell-execution",
+        "line": 5,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/docker-commands.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 8,
+        "evidence": "bash",
+        "context": "docker run -it --rm ubuntu bash",
+        "file": "references/docker-commands.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 15,
+        "evidence": "Remove",
+        "context": "# Remove",
+        "file": "references/docker-commands.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 27,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/docker-commands.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 38,
+        "evidence": "Remove",
+        "context": "# Remove",
+        "file": "references/docker-commands.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 40,
+        "evidence": "Remove",
+        "context": "docker image prune -a  # Remove unused",
+        "file": "references/docker-commands.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 45,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/docker-commands.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 54,
+        "evidence": "bash",
+        "context": "docker exec -it myapp bash",
+        "file": "references/docker-commands.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 60,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/docker-commands.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 72,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/docker-commands.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 85,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/docker-commands.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 86,
+        "evidence": "Remove",
+        "context": "# Remove stopped containers",
+        "file": "references/docker-commands.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 89,
+        "evidence": "Remove",
+        "context": "# Remove unused images",
+        "file": "references/docker-commands.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 92,
+        "evidence": "Remove",
+        "context": "# Remove everything unused",
+        "file": "references/docker-commands.md"
+      },
+      {
+        "type": "package-install",
+        "line": 62,
+        "evidence": "pip install",
+        "context": "RUN pip install --no-cache-dir -r requirements.txt",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 95,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 111,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 126,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 148,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 162,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 180,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 187,
+        "evidence": "Remove",
+        "context": "# Remove container",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 190,
+        "evidence": "remove",
+        "context": "# Force remove running container",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 199,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 217,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 219,
+        "evidence": "sh",
+        "context": "docker exec -it myapp /bin/sh",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 222,
+        "evidence": "sh",
+        "context": "docker run -it --rm myapp:latest /bin/sh",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 225,
+        "evidence": "sh",
+        "context": "docker run -it --entrypoint /bin/sh myapp:latest",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 230,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 251,
+        "evidence": "curl",
+        "context": "  CMD curl -f http://localhost:3000/health || exit 1",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 251,
+        "evidence": "http://",
+        "context": "  CMD curl -f http://localhost:3000/health || exit 1",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 254,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 263,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 276,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 277,
+        "evidence": "Remove",
+        "context": "# Remove unused images",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 280,
+        "evidence": "Remove",
+        "context": "# Remove all unused resources",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 283,
+        "evidence": "Remove",
+        "context": "# Remove specific image",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 292,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 327,
+        "evidence": "secret",
+        "context": "      POSTGRES_PASSWORD: secret",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 347,
+        "evidence": "Remove",
+        "context": "# Remove unnecessary packages",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 356,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 10903
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/docker-commands.md",
+      "sha256": "c924a066b8de789d4c774d00e566b30fd4d8a19e6721c43d19e41fb792161e0f",
+      "bytes": 1723,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "b9b779cecb24ce973d09bf99a524beecdff795429e18b8c1feb43c46a09916d1",
+      "bytes": 8112,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 10903
+}

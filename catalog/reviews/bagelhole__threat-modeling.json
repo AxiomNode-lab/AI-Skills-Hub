@@ -1,9 +1,9 @@
 {
   "schema_version": "0.1",
   "skill_id": "bagelhole/threat-modeling",
-  "status": "draft",
-  "reviewed_on": null,
-  "reviewer": null,
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
   "source": {
     "repo": "BagelHole/DevOps-Security-Agent-Skills",
     "path": "security/operations/threat-modeling",
@@ -13,7 +13,7 @@
     "complete": true,
     "scope": "security/operations/threat-modeling",
     "url": "https://api.github.com/repos/BagelHole/DevOps-Security-Agent-Skills/git/trees/0365f57a079b1332f95cf26e31dd2d5332a8399f?recursive=1",
-    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
   },
   "license": {
     "spdx": "MIT",
@@ -31,18 +31,32 @@
       ]
     },
     "redistributable": true,
-    "scope_reason": "",
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found; frontmatter declares `license: MIT`, consistent with the repository root. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
     "obligations": [
       "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
-      "Preserve all upstream text and notices byte-for-byte."
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
     ]
   },
   "content_review": {
-    "status": "pending",
-    "risk": "unknown",
+    "status": "approved",
+    "risk": "medium",
     "blocking_findings": [],
-    "capabilities": {},
-    "notes": []
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md and references/threat-model-template.md in full. STRIDE threat-modeling guidance: STRIDE table, YAML worksheet and threat library, text DFD notation, a Threat Dragon JSON example, likelihood/impact scoring matrix, risk-treatment SLAs, and a fill-in threat model template.",
+      "Medium only because the optional 'OWASP Threat Dragon Setup' (SKILL.md:372-379) runs a downloaded container, `docker run -d ... owasp/threat-dragon:v2.2.0`, exposing port 3000. Acceptable: the image tag is pinned, the tool is listed as optional (SKILL.md:29), it runs locally, and the rest of the skill is documentation, YAML/Markdown templates, and a sample GitHub Actions validation workflow for the user's repo.",
+      "The docker example uses the placeholder `ENCRYPTION_KEYS='[\"threat-dragon-encryption-key-change-me\"]'` (SKILL.md:377), which users must replace. Related Skills links `../../scanning/sast-scanning/`, `../penetration-testing/`, `../incident-response/` (SKILL.md:459-461) point to sibling skills that will not ship with this one; they are optional pointers, not needed for the workflow. STRIDE categories and generic threat names are paraphrased common knowledge, not copied OWASP/Microsoft text."
+    ]
   },
   "files": [
     {
@@ -55,7 +69,7 @@
       "git_blob": "67c5c5cbb12cafb1515e449748866bd40da7dec9",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
       "findings": []
     },
     {
@@ -66,7 +80,7 @@
       "git_blob": "593b004e7e7540e81102f5b315649ec4401673d4",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": []
     },
     {
@@ -77,71 +91,71 @@
       "git_blob": "95c2283913f556e24466ea4727dc91b0e696488f",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "credential-access",
           "line": 36,
           "evidence": "API key",
           "context": "| **S**poofing | Pretending to be another user or system | Authentication | MFA, mTLS, API key validation, certificate pinning |",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "'API key', 'secret' and 'credential' appear as threat descriptions and mitigations in the STRIDE table and threat library (e.g. credential stuffing); no instruction to read or use real secrets."
         },
         {
           "type": "credential-access",
           "line": 57,
           "evidence": "secret",
           "context": "    attack_vector: \"Stolen signing key or weak algorithm (HS256 with guessable secret)\"",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "'API key', 'secret' and 'credential' appear as threat descriptions and mitigations in the STRIDE table and threat library (e.g. credential stuffing); no instruction to read or use real secrets."
         },
         {
           "type": "credential-access",
           "line": 247,
           "evidence": "Credential",
           "context": "      name: \"Credential stuffing\"",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "'API key', 'secret' and 'credential' appear as threat descriptions and mitigations in the STRIDE table and threat library (e.g. credential stuffing); no instruction to read or use real secrets."
         },
         {
           "type": "credential-access",
           "line": 248,
           "evidence": "credential",
           "context": "      description: \"Attacker uses leaked credential databases to attempt logins\"",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "'API key', 'secret' and 'credential' appear as threat descriptions and mitigations in the STRIDE table and threat library (e.g. credential stuffing); no instruction to read or use real secrets."
         },
         {
           "type": "credential-access",
           "line": 250,
           "evidence": "credential",
           "context": "      mitigations: [\"MFA\", \"rate limiting\", \"credential breach monitoring\", \"CAPTCHA\"]",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "'API key', 'secret' and 'credential' appear as threat descriptions and mitigations in the STRIDE table and threat library (e.g. credential stuffing); no instruction to read or use real secrets."
         },
         {
           "type": "shell-execution",
           "line": 372,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "```bash fence around the optional, version-pinned `docker run owasp/threat-dragon:v2.2.0` setup at SKILL.md:372."
         },
         {
           "type": "network-access",
           "line": 381,
           "evidence": "http://",
           "context": "# Access at http://localhost:3000",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "`http://localhost:3000` is where the local Threat Dragon container is reached and the GitHub releases URL is a download pointer for the desktop app; the skill does not fetch it."
         },
         {
           "type": "network-access",
           "line": 384,
           "evidence": "https://",
           "context": "# Download from: https://github.com/OWASP/threat-dragon/releases",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "`http://localhost:3000` is where the local Threat Dragon container is reached and the GitHub releases URL is a download pointer for the desktop app; the skill does not fetch it."
         }
       ]
     }

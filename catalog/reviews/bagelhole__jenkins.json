@@ -1,9 +1,9 @@
 {
   "schema_version": "0.1",
   "skill_id": "bagelhole/jenkins",
-  "status": "draft",
-  "reviewed_on": null,
-  "reviewer": null,
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
   "source": {
     "repo": "BagelHole/DevOps-Security-Agent-Skills",
     "path": "devops/ci-cd/jenkins",
@@ -13,7 +13,7 @@
     "complete": true,
     "scope": "devops/ci-cd/jenkins",
     "url": "https://api.github.com/repos/BagelHole/DevOps-Security-Agent-Skills/git/trees/0365f57a079b1332f95cf26e31dd2d5332a8399f?recursive=1",
-    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
   },
   "license": {
     "spdx": "MIT",
@@ -31,18 +31,32 @@
       ]
     },
     "redistributable": true,
-    "scope_reason": "",
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found; frontmatter declares license: MIT, consistent with the repository root. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
     "obligations": [
       "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
-      "Preserve all upstream text and notices byte-for-byte."
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
     ]
   },
   "content_review": {
-    "status": "pending",
-    "risk": "unknown",
+    "status": "approved",
+    "risk": "low",
     "blocking_findings": [],
-    "capabilities": {},
-    "notes": []
+    "capabilities": {
+      "shell": false,
+      "network": false,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md and references/pipeline-syntax.md in full. The skill shows how to write Jenkins declarative and scripted pipelines: Docker, Kubernetes and labeled agents, parameters, credentials binding, parallel stages, shared libraries, plugin lists, JCasC configuration and multibranch pipelines.",
+      "The output is Jenkinsfile/JCasC content the agent writes into the user's repository; `sh` steps (npm, make, ./deploy.sh, docker login, git push) run inside the user's Jenkins, not on the agent's machine. Credentials come from Jenkins credential IDs or ${ADMIN_PASSWORD}/${DOCKER_PASSWORD} variables; nothing is hardcoded.",
+      "Review before adopting: the Kubernetes agent runs docker:24-dind with privileged: true (SKILL.md:121-124); the git push example embeds ${GH_TOKEN} in the remote URL (SKILL.md:203) and `docker login -p` (pipeline-syntax.md:126) can expose secrets in logs — prefer credential helpers or --password-stdin. Related Skills (SKILL.md:435-437) link to sibling skills ../github-actions/, ../../orchestration/kubernetes-ops/ and ../../containers/docker-management/ as optional reading only."
+    ]
   },
   "files": [
     {
@@ -55,7 +69,7 @@
       "git_blob": "67c5c5cbb12cafb1515e449748866bd40da7dec9",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
       "findings": []
     },
     {
@@ -66,71 +80,71 @@
       "git_blob": "694f34e62b2c014e00f7f0cd863fa97bdd2855be",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "shell-execution",
           "line": 23,
           "evidence": "sh",
           "context": "                sh 'make build'",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "`sh` steps inside sample Jenkinsfiles (build, test, deploy, docker login, git push) that run in the user's own Jenkins pipeline."
         },
         {
           "type": "shell-execution",
           "line": 31,
           "evidence": "sh",
           "context": "                        sh 'make test-unit'",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "`sh` steps inside sample Jenkinsfiles (build, test, deploy, docker login, git push) that run in the user's own Jenkins pipeline."
         },
         {
           "type": "shell-execution",
           "line": 36,
           "evidence": "sh",
           "context": "                        sh 'make test-integration'",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "`sh` steps inside sample Jenkinsfiles (build, test, deploy, docker login, git push) that run in the user's own Jenkins pipeline."
         },
         {
           "type": "shell-execution",
           "line": 47,
           "evidence": "sh",
           "context": "                sh 'make deploy'",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "`sh` steps inside sample Jenkinsfiles (build, test, deploy, docker login, git push) that run in the user's own Jenkins pipeline."
         },
         {
           "type": "shell-execution",
           "line": 77,
           "evidence": "sh",
           "context": "            sh 'make build'",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "`sh` steps inside sample Jenkinsfiles (build, test, deploy, docker login, git push) that run in the user's own Jenkins pipeline."
         },
         {
           "type": "shell-execution",
           "line": 82,
           "evidence": "sh",
           "context": "                sh 'make deploy'",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "`sh` steps inside sample Jenkinsfiles (build, test, deploy, docker login, git push) that run in the user's own Jenkins pipeline."
         },
         {
           "type": "shell-execution",
           "line": 104,
           "evidence": "sh",
           "context": "                    sh config.buildCommand ?: 'make build'",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "`sh` steps inside sample Jenkinsfiles (build, test, deploy, docker login, git push) that run in the user's own Jenkins pipeline."
         },
         {
           "type": "shell-execution",
           "line": 126,
           "evidence": "sh",
           "context": "    sh 'docker login -u $DOCKER_USER -p $DOCKER_PASS'",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "`sh` steps inside sample Jenkinsfiles (build, test, deploy, docker login, git push) that run in the user's own Jenkins pipeline."
         }
       ]
     },
@@ -142,199 +156,199 @@
       "git_blob": "e36d16978d93a417ed426f97c4ff708944ab7ea3",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "shell-execution",
           "line": 46,
           "evidence": "sh",
           "context": "                sh 'npm ci'",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "`sh` steps inside sample Jenkinsfiles (build, test, deploy, docker login, git push) that run in the user's own Jenkins pipeline."
         },
         {
           "type": "shell-execution",
           "line": 47,
           "evidence": "sh",
           "context": "                sh 'npm run build'",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "`sh` steps inside sample Jenkinsfiles (build, test, deploy, docker login, git push) that run in the user's own Jenkins pipeline."
         },
         {
           "type": "shell-execution",
           "line": 53,
           "evidence": "sh",
           "context": "                sh 'npm test'",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "`sh` steps inside sample Jenkinsfiles (build, test, deploy, docker login, git push) that run in the user's own Jenkins pipeline."
         },
         {
           "type": "shell-execution",
           "line": 67,
           "evidence": "sh",
           "context": "                sh './deploy.sh'",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "`sh` steps inside sample Jenkinsfiles (build, test, deploy, docker login, git push) that run in the user's own Jenkins pipeline."
         },
         {
           "type": "shell-execution",
           "line": 67,
           "evidence": "sh",
           "context": "                sh './deploy.sh'",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "`sh` steps inside sample Jenkinsfiles (build, test, deploy, docker login, git push) that run in the user's own Jenkins pipeline."
         },
         {
           "type": "shell-execution",
           "line": 97,
           "evidence": "sh",
           "context": "                sh 'npm ci && npm run build'",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "`sh` steps inside sample Jenkinsfiles (build, test, deploy, docker login, git push) that run in the user's own Jenkins pipeline."
         },
         {
           "type": "shell-execution",
           "line": 132,
           "evidence": "sh",
           "context": "                    sh 'npm ci && npm run build'",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "`sh` steps inside sample Jenkinsfiles (build, test, deploy, docker login, git push) that run in the user's own Jenkins pipeline."
         },
         {
           "type": "shell-execution",
           "line": 148,
           "evidence": "sh",
           "context": "                sh 'make build'",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "`sh` steps inside sample Jenkinsfiles (build, test, deploy, docker login, git push) that run in the user's own Jenkins pipeline."
         },
         {
           "type": "shell-execution",
           "line": 173,
           "evidence": "sh",
           "context": "                sh \"deploy.sh ${params.ENVIRONMENT}\"",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "`sh` steps inside sample Jenkinsfiles (build, test, deploy, docker login, git push) that run in the user's own Jenkins pipeline."
         },
         {
           "type": "shell-execution",
           "line": 173,
           "evidence": "sh",
           "context": "                sh \"deploy.sh ${params.ENVIRONMENT}\"",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "`sh` steps inside sample Jenkinsfiles (build, test, deploy, docker login, git push) that run in the user's own Jenkins pipeline."
         },
         {
           "type": "network-access",
           "line": 203,
           "evidence": "https://",
           "context": "                    sh 'git push https://${GH_USER}:${GH_TOKEN}@github.com/repo.git'",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "A git push to a placeholder github.com/repo.git URL inside a credentials-binding example pipeline step."
         },
         {
           "type": "shell-execution",
           "line": 203,
           "evidence": "sh",
           "context": "                    sh 'git push https://${GH_USER}:${GH_TOKEN}@github.com/repo.git'",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "`sh` steps inside sample Jenkinsfiles (build, test, deploy, docker login, git push) that run in the user's own Jenkins pipeline."
         },
         {
           "type": "shell-execution",
           "line": 222,
           "evidence": "sh",
           "context": "                        sh 'npm run test:unit'",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "`sh` steps inside sample Jenkinsfiles (build, test, deploy, docker login, git push) that run in the user's own Jenkins pipeline."
         },
         {
           "type": "shell-execution",
           "line": 227,
           "evidence": "sh",
           "context": "                        sh 'npm run test:integration'",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "`sh` steps inside sample Jenkinsfiles (build, test, deploy, docker login, git push) that run in the user's own Jenkins pipeline."
         },
         {
           "type": "shell-execution",
           "line": 232,
           "evidence": "sh",
           "context": "                        sh 'npm run test:e2e'",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "`sh` steps inside sample Jenkinsfiles (build, test, deploy, docker login, git push) that run in the user's own Jenkins pipeline."
         },
         {
           "type": "shell-execution",
           "line": 266,
           "evidence": "sh",
           "context": "        sh 'npm ci'",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "`sh` steps inside sample Jenkinsfiles (build, test, deploy, docker login, git push) that run in the user's own Jenkins pipeline."
         },
         {
           "type": "shell-execution",
           "line": 267,
           "evidence": "sh",
           "context": "        sh 'npm run build'",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "`sh` steps inside sample Jenkinsfiles (build, test, deploy, docker login, git push) that run in the user's own Jenkins pipeline."
         },
         {
           "type": "shell-execution",
           "line": 312,
           "evidence": "sh",
           "context": "                sh 'npm ci'",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "`sh` steps inside sample Jenkinsfiles (build, test, deploy, docker login, git push) that run in the user's own Jenkins pipeline."
         },
         {
           "type": "shell-execution",
           "line": 313,
           "evidence": "sh",
           "context": "                sh 'npm run build'",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "`sh` steps inside sample Jenkinsfiles (build, test, deploy, docker login, git push) that run in the user's own Jenkins pipeline."
         },
         {
           "type": "shell-execution",
           "line": 318,
           "evidence": "sh",
           "context": "            sh 'npm test'",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "`sh` steps inside sample Jenkinsfiles (build, test, deploy, docker login, git push) that run in the user's own Jenkins pipeline."
         },
         {
           "type": "shell-execution",
           "line": 323,
           "evidence": "sh",
           "context": "                sh './deploy.sh'",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "`sh` steps inside sample Jenkinsfiles (build, test, deploy, docker login, git push) that run in the user's own Jenkins pipeline."
         },
         {
           "type": "shell-execution",
           "line": 323,
           "evidence": "sh",
           "context": "                sh './deploy.sh'",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "`sh` steps inside sample Jenkinsfiles (build, test, deploy, docker login, git push) that run in the user's own Jenkins pipeline."
         },
         {
           "type": "shell-execution",
           "line": 402,
           "evidence": "sh",
           "context": "                sh './deploy.sh'",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "`sh` steps inside sample Jenkinsfiles (build, test, deploy, docker login, git push) that run in the user's own Jenkins pipeline."
         },
         {
           "type": "shell-execution",
           "line": 402,
           "evidence": "sh",
           "context": "                sh './deploy.sh'",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "`sh` steps inside sample Jenkinsfiles (build, test, deploy, docker login, git push) that run in the user's own Jenkins pipeline."
         }
       ]
     }

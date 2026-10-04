@@ -1,9 +1,9 @@
 {
   "schema_version": "0.1",
   "skill_id": "wshobson/mobile-ios-design",
-  "status": "draft",
-  "reviewed_on": null,
-  "reviewer": null,
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
   "source": {
     "repo": "wshobson/agents",
     "path": "plugins/ui-design/skills/mobile-ios-design",
@@ -13,7 +13,7 @@
     "complete": true,
     "scope": "plugins/ui-design/skills/mobile-ios-design",
     "url": "https://api.github.com/repos/wshobson/agents/git/trees/156b7a5e7a8b93642628a339ee4039c925b34c7f?recursive=1",
-    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
   },
   "license": {
     "spdx": "MIT",
@@ -32,18 +32,32 @@
       ]
     },
     "redistributable": true,
-    "scope_reason": "",
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file; Apple HIG concepts are paraphrased in short phrases and the code is original sample SwiftUI. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
     "obligations": [
       "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
-      "Preserve all upstream text and notices byte-for-byte."
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
     ]
   },
   "content_review": {
-    "status": "pending",
-    "risk": "unknown",
+    "status": "approved",
+    "risk": "none",
     "blocking_findings": [],
-    "capabilities": {},
-    "notes": []
+    "capabilities": {
+      "shell": false,
+      "network": false,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md, references/hig-patterns.md, references/ios-navigation.md and references/swiftui-components.md in full. The skill gives iOS Human Interface Guidelines-oriented design guidance and SwiftUI code samples (layouts, navigation, sheets, tabs, deep links, forms, lists, animations, gestures, accessibility, empty/error states).",
+      "No commands, installs, credentials, or network access; it only shapes the SwiftUI code the agent writes for the user's app.",
+      "The HIG principles (Clarity, Deference, Depth) at SKILL.md:25-27 are one-line paraphrases, not copied Apple text. Some samples reference undeclared helpers (items, selectedDetent, hasUnsavedChanges) and are illustrative rather than compile-ready."
+    ]
   },
   "files": [
     {
@@ -56,7 +70,7 @@
       "git_blob": "326f0a55c96e672fedf9d807ca043c00df05ba0e",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
       "findings": []
     },
     {
@@ -67,7 +81,7 @@
       "git_blob": "978ec4155991737433e6b3be299db7e58d98e881",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": []
     },
     {
@@ -78,7 +92,7 @@
       "git_blob": "658f84db00852888cb31953561094b12ecf68f29",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": []
     },
     {
@@ -89,63 +103,63 @@
       "git_blob": "43553a388d480864aa980ec5ab26958838e8c2df",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "filesystem-write",
           "line": 26,
           "evidence": "remove",
           "context": "        items.remove(atOffsets: offsets)",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Matches are in-memory Swift array removal (items.remove(atOffsets:)) and 'Delete' button labels in UI sample code, not file operations."
         },
         {
           "type": "network-access",
           "line": 121,
           "evidence": "https://",
           "context": "                Link(destination: URL(string: \"https://example.com/privacy\")!) {",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "A single placeholder https://example.com/privacy URL in a SwiftUI Link sample; the skill does not instruct fetching anything."
         },
         {
           "type": "filesystem-write",
           "line": 195,
           "evidence": "Delete",
           "context": "Button(\"Delete\", role: .destructive) {",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Matches are in-memory Swift array removal (items.remove(atOffsets:)) and 'Delete' button labels in UI sample code, not file operations."
         },
         {
           "type": "filesystem-write",
           "line": 218,
           "evidence": "Delete",
           "context": "    Button(\"Delete\", systemImage: \"trash\", role: .destructive) { }",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Matches are in-memory Swift array removal (items.remove(atOffsets:)) and 'Delete' button labels in UI sample code, not file operations."
         },
         {
           "type": "filesystem-write",
           "line": 286,
           "evidence": "Delete",
           "context": "        Button(\"Delete Account\", role: .destructive) {",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Matches are in-memory Swift array removal (items.remove(atOffsets:)) and 'Delete' button labels in UI sample code, not file operations."
         },
         {
           "type": "filesystem-write",
           "line": 290,
           "evidence": "Delete",
           "context": "            \"Delete Account\",",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Matches are in-memory Swift array removal (items.remove(atOffsets:)) and 'Delete' button labels in UI sample code, not file operations."
         },
         {
           "type": "filesystem-write",
           "line": 294,
           "evidence": "Delete",
           "context": "            Button(\"Delete\", role: .destructive) {",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Matches are in-memory Swift array removal (items.remove(atOffsets:)) and 'Delete' button labels in UI sample code, not file operations."
         }
       ]
     },
@@ -157,7 +171,7 @@
       "git_blob": "931c50668b5ebba95d5eced9e2d28463c94c64e5",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": []
     }
   ]

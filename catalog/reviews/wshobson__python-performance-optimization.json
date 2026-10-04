@@ -1,9 +1,9 @@
 {
   "schema_version": "0.1",
   "skill_id": "wshobson/python-performance-optimization",
-  "status": "draft",
-  "reviewed_on": null,
-  "reviewer": null,
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
   "source": {
     "repo": "wshobson/agents",
     "path": "plugins/python-development/skills/python-performance-optimization",
@@ -13,7 +13,7 @@
     "complete": true,
     "scope": "plugins/python-development/skills/python-performance-optimization",
     "url": "https://api.github.com/repos/wshobson/agents/git/trees/156b7a5e7a8b93642628a339ee4039c925b34c7f?recursive=1",
-    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
   },
   "license": {
     "spdx": "MIT",
@@ -32,18 +32,32 @@
       ]
     },
     "redistributable": true,
-    "scope_reason": "",
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file; code is original illustrative Python. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
     "obligations": [
       "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
-      "Preserve all upstream text and notices byte-for-byte."
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
     ]
   },
   "content_review": {
-    "status": "pending",
-    "risk": "unknown",
+    "status": "approved",
+    "risk": "low",
     "blocking_findings": [],
-    "capabilities": {},
-    "notes": []
+    "capabilities": {
+      "shell": true,
+      "network": false,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md, references/details.md and references/advanced-patterns.md in full. The skill teaches Python profiling (cProfile, line_profiler, memory_profiler, py-spy, tracemalloc) and optimization patterns (comprehensions, generators, join, dict lookups, NumPy, lru_cache, __slots__, multiprocessing, asyncio/aiohttp, batched DB writes, weakref caches, pytest-benchmark).",
+      "Commands are local profiling runs (python -m cProfile, kernprof, py-spy against a PID or script); `pip install` appears only as '# Install:' comments naming well-known PyPI profilers. No credentials or state-changing operations.",
+      "The async I/O benchmark (advanced-patterns.md:161-198) makes live requests to the public httpbin.org test service if run as-is. py-spy attaching to a running process may need elevated privileges on the user's machine."
+    ]
   },
   "files": [
     {
@@ -56,7 +70,7 @@
       "git_blob": "326f0a55c96e672fedf9d807ca043c00df05ba0e",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
       "findings": []
     },
     {
@@ -67,47 +81,47 @@
       "git_blob": "10f45b1ac3b5b7003bc522bb77c6d1e239b73e6c",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "network-access",
           "line": 162,
           "evidence": "https://",
           "context": "    \"https://httpbin.org/delay/1\",",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "httpbin.org/delay URLs used as sample endpoints in an async-vs-sync benchmark; the skill does not tell the agent to fetch external content otherwise."
         },
         {
           "type": "network-access",
           "line": 163,
           "evidence": "https://",
           "context": "    \"https://httpbin.org/delay/1\",",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "httpbin.org/delay URLs used as sample endpoints in an async-vs-sync benchmark; the skill does not tell the agent to fetch external content otherwise."
         },
         {
           "type": "network-access",
           "line": 164,
           "evidence": "https://",
           "context": "    \"https://httpbin.org/delay/1\",",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "httpbin.org/delay URLs used as sample endpoints in an async-vs-sync benchmark; the skill does not tell the agent to fetch external content otherwise."
         },
         {
           "type": "network-access",
           "line": 165,
           "evidence": "https://",
           "context": "    \"https://httpbin.org/delay/1\",",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "httpbin.org/delay URLs used as sample endpoints in an async-vs-sync benchmark; the skill does not tell the agent to fetch external content otherwise."
         },
         {
           "type": "package-install",
           "line": 406,
           "evidence": "pip install",
           "context": "# Install: pip install pytest-benchmark",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "'# Install: pip install line-profiler / memory-profiler / py-spy / pytest-benchmark' comments naming standard PyPI profiling tools, installed only if the user adopts them."
         }
       ]
     },
@@ -119,47 +133,47 @@
       "git_blob": "255ebff62e8b3c85aef29668b153aecda532337b",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "shell-execution",
           "line": 49,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks run local profilers (python -m cProfile/pstats, py-spy top/record/dump) on the user's own scripts or processes."
         },
         {
           "type": "package-install",
           "line": 63,
           "evidence": "pip install",
           "context": "# Install: pip install line-profiler",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "'# Install: pip install line-profiler / memory-profiler / py-spy / pytest-benchmark' comments naming standard PyPI profiling tools, installed only if the user adopts them."
         },
         {
           "type": "package-install",
           "line": 107,
           "evidence": "pip install",
           "context": "# Install: pip install memory-profiler",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "'# Install: pip install line-profiler / memory-profiler / py-spy / pytest-benchmark' comments naming standard PyPI profiling tools, installed only if the user adopts them."
         },
         {
           "type": "shell-execution",
           "line": 134,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks run local profilers (python -m cProfile/pstats, py-spy top/record/dump) on the user's own scripts or processes."
         },
         {
           "type": "package-install",
           "line": 135,
           "evidence": "pip install",
           "context": "# Install: pip install py-spy",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "'# Install: pip install line-profiler / memory-profiler / py-spy / pytest-benchmark' comments naming standard PyPI profiling tools, installed only if the user adopts them."
         }
       ]
     },
@@ -171,7 +185,7 @@
       "git_blob": "32d8363f3d69f19f77368724690269e79b604f88",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": []
     }
   ]

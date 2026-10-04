@@ -1,9 +1,9 @@
 {
   "schema_version": "0.1",
   "skill_id": "wshobson/mobile-android-design",
-  "status": "draft",
-  "reviewed_on": null,
-  "reviewer": null,
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
   "source": {
     "repo": "wshobson/agents",
     "path": "plugins/ui-design/skills/mobile-android-design",
@@ -13,7 +13,7 @@
     "complete": true,
     "scope": "plugins/ui-design/skills/mobile-android-design",
     "url": "https://api.github.com/repos/wshobson/agents/git/trees/156b7a5e7a8b93642628a339ee4039c925b34c7f?recursive=1",
-    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
   },
   "license": {
     "spdx": "MIT",
@@ -32,18 +32,32 @@
       ]
     },
     "redistributable": true,
-    "scope_reason": "",
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file; the Material color values and type scale are standard public design tokens. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
     "obligations": [
       "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
-      "Preserve all upstream text and notices byte-for-byte."
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
     ]
   },
   "content_review": {
-    "status": "pending",
-    "risk": "unknown",
+    "status": "approved",
+    "risk": "none",
     "blocking_findings": [],
-    "capabilities": {},
-    "notes": []
+    "capabilities": {
+      "shell": false,
+      "network": false,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md and references/details.md, references/compose-components.md, references/material3-theming.md, references/android-navigation.md in full. The skill gives Material Design 3 and Jetpack Compose guidance with Kotlin UI samples (layouts, navigation, theming, components, animations).",
+      "No commands, installs, credentials, or network access; it only shapes Kotlin code the user writes. The Gradle dependency block in android-navigation.md:7-13 is sample build configuration, not an instruction to install.",
+      "SKILL.md:21-23 says the Core Concepts section was moved to references/details.md, which ships with the skill."
+    ]
   },
   "files": [
     {
@@ -56,7 +70,7 @@
       "git_blob": "326f0a55c96e672fedf9d807ca043c00df05ba0e",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
       "findings": []
     },
     {
@@ -67,23 +81,23 @@
       "git_blob": "2d77dec09c2969a9c7965c9d13cdd6b19bec48b6",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "network-access",
           "line": 451,
           "evidence": "https://",
           "context": "                    basePath = \"https://myapp.com/product\"",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "https:// URLs at android-navigation.md:451,465 are placeholder deep-link base paths (myapp.com) in sample Kotlin code, not fetch instructions."
         },
         {
           "type": "network-access",
           "line": 465,
           "evidence": "https://",
           "context": "                    basePath = \"https://myapp.com/user\"",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "https:// URLs at android-navigation.md:451,465 are placeholder deep-link base paths (myapp.com) in sample Kotlin code, not fetch instructions."
         }
       ]
     },
@@ -95,79 +109,79 @@
       "git_blob": "3d6ace0636b83a158ef224b2fe0eabfe2e866455",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "filesystem-write",
           "line": 91,
           "evidence": "Delete",
           "context": "                    Icons.Default.Delete,",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "All hits are the word 'Delete' in UI labels, icons, and a confirmation dialog in Compose samples; nothing writes or deletes files."
         },
         {
           "type": "filesystem-write",
           "line": 92,
           "evidence": "Delete",
           "context": "                    contentDescription = \"Delete\",",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "All hits are the word 'Delete' in UI labels, icons, and a confirmation dialog in Compose samples; nothing writes or deletes files."
         },
         {
           "type": "filesystem-write",
           "line": 377,
           "evidence": "Delete",
           "context": "            Text(\"Delete Item?\")",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "All hits are the word 'Delete' in UI labels, icons, and a confirmation dialog in Compose samples; nothing writes or deletes files."
         },
         {
           "type": "filesystem-write",
           "line": 380,
           "evidence": "delete",
           "context": "            Text(\"Are you sure you want to delete \\\"$itemName\\\"? This action cannot be undone.\")",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "All hits are the word 'Delete' in UI labels, icons, and a confirmation dialog in Compose samples; nothing writes or deletes files."
         },
         {
           "type": "filesystem-write",
           "line": 389,
           "evidence": "Delete",
           "context": "                Text(\"Delete\")",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "All hits are the word 'Delete' in UI labels, icons, and a confirmation dialog in Compose samples; nothing writes or deletes files."
         },
         {
           "type": "filesystem-write",
           "line": 432,
           "evidence": "Delete",
           "context": "                Triple(Icons.Default.Delete, \"Delete\", \"delete\")",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "All hits are the word 'Delete' in UI labels, icons, and a confirmation dialog in Compose samples; nothing writes or deletes files."
         },
         {
           "type": "filesystem-write",
           "line": 432,
           "evidence": "Delete",
           "context": "                Triple(Icons.Default.Delete, \"Delete\", \"delete\")",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "All hits are the word 'Delete' in UI labels, icons, and a confirmation dialog in Compose samples; nothing writes or deletes files."
         },
         {
           "type": "filesystem-write",
           "line": 432,
           "evidence": "delete",
           "context": "                Triple(Icons.Default.Delete, \"Delete\", \"delete\")",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "All hits are the word 'Delete' in UI labels, icons, and a confirmation dialog in Compose samples; nothing writes or deletes files."
         },
         {
           "type": "filesystem-write",
           "line": 440,
           "evidence": "delete",
           "context": "                            tint = if (action == \"delete\")",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "All hits are the word 'Delete' in UI labels, icons, and a confirmation dialog in Compose samples; nothing writes or deletes files."
         }
       ]
     },
@@ -179,7 +193,7 @@
       "git_blob": "75b178d2ebd6b15d0f82fe6e4b37fe4f84a96e0c",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": []
     },
     {
@@ -190,15 +204,15 @@
       "git_blob": "bc8b130f3549b535ff5f910675ca4a319da558d4",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "filesystem-write",
           "line": 142,
           "evidence": "Delete",
           "context": "            Text(\"Delete\")",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "All hits are the word 'Delete' in UI labels, icons, and a confirmation dialog in Compose samples; nothing writes or deletes files."
         }
       ]
     },
@@ -210,7 +224,7 @@
       "git_blob": "daf78dddb4716cecfd80b1046fe8c279c74aa298",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": []
     }
   ]

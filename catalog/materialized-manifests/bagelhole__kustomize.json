@@ -1,0 +1,109 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "bagelhole/kustomize",
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "devops/orchestration/kustomize",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "review": {
+    "path": "catalog/reviews/bagelhole__kustomize.json",
+    "sha256": "7699f0cb8a0c5e9e80b2680d6fccd79d0eea414e1b0f9b43e6636d37f73330b7"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "credential-access",
+        "line": 237,
+        "evidence": "Secret",
+        "context": "### Secret Generator",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 244,
+        "evidence": "api-key",
+        "context": "      - api-key=secret123",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 346,
+        "evidence": "https://",
+        "context": "  - https://github.com/org/manifests//base?ref=v1.0.0",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 349,
+        "evidence": "https://",
+        "context": "  - https://raw.githubusercontent.com/org/repo/main/deployment.yaml",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 354,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 361,
+        "evidence": "Delete",
+        "context": "# Delete resources",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 362,
+        "evidence": "delete",
+        "context": "kubectl delete -k overlays/production",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 380,
+        "evidence": "https://",
+        "context": "    repo: https://prometheus-community.github.io/helm-charts",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 446,
+        "evidence": "Secret",
+        "context": "- Enable ConfigMap/Secret hash suffixes",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 9439
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "47b7a56e0f50ae7be2ee3bd7ebce8cf046d784e2c16f86d9bbed346ff7243399",
+      "bytes": 8371,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 9439
+}

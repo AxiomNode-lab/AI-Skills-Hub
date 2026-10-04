@@ -1,9 +1,9 @@
 {
   "schema_version": "0.1",
   "skill_id": "wshobson/python-configuration",
-  "status": "draft",
-  "reviewed_on": null,
-  "reviewer": null,
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
   "source": {
     "repo": "wshobson/agents",
     "path": "plugins/python-development/skills/python-configuration",
@@ -13,7 +13,7 @@
     "complete": true,
     "scope": "plugins/python-development/skills/python-configuration",
     "url": "https://api.github.com/repos/wshobson/agents/git/trees/156b7a5e7a8b93642628a339ee4039c925b34c7f?recursive=1",
-    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
   },
   "license": {
     "spdx": "MIT",
@@ -32,18 +32,32 @@
       ]
     },
     "redistributable": true,
-    "scope_reason": "",
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
     "obligations": [
       "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
-      "Preserve all upstream text and notices byte-for-byte."
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
     ]
   },
   "content_review": {
-    "status": "pending",
-    "risk": "unknown",
+    "status": "approved",
+    "risk": "low",
     "blocking_findings": [],
-    "capabilities": {},
-    "notes": []
+    "capabilities": {
+      "shell": false,
+      "network": false,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md and references/details.md in full. The skill teaches externalized configuration with pydantic-settings: typed settings, fail-fast validation, dev defaults, namespaced and nested env vars, secrets_dir, and custom validators.",
+      "No commands, installs, credentials, or network access by the agent; the bash blocks are .env / environment-variable examples with placeholder values (local_dev_password, secret, your-secret-key).",
+      "The skill explicitly advises never committing .env files or hardcoding secrets (SKILL.md:159, 206)."
+    ]
   },
   "files": [
     {
@@ -56,7 +70,7 @@
       "git_blob": "326f0a55c96e672fedf9d807ca043c00df05ba0e",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
       "findings": []
     },
     {
@@ -67,31 +81,31 @@
       "git_blob": "9c1da34816b0204da85da36e9a7dc365b309685e",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "shell-execution",
           "line": 33,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash-fenced blocks are sample .env and environment-variable listings, not commands for the agent to run."
         },
         {
           "type": "shell-execution",
           "line": 111,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash-fenced blocks are sample .env and environment-variable listings, not commands for the agent to run."
         },
         {
           "type": "credential-access",
           "line": 116,
           "evidence": "secret",
           "context": "DATABASE__PASSWORD=secret",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Settings fields and env var names such as DB_PASSWORD, API_SECRET_KEY, and AUTH_SECRET_KEY with placeholder values in sample config; no instruction to read, print, or send real secrets."
         }
       ]
     },
@@ -103,87 +117,87 @@
       "git_blob": "32ef264e86f591d870337abc32add4212a92a3af",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "credential-access",
           "line": 45,
           "evidence": "api_key",
           "context": "    api_key: str = Field(alias=\"API_KEY\")",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Settings fields and env var names such as DB_PASSWORD, API_SECRET_KEY, and AUTH_SECRET_KEY with placeholder values in sample config; no instruction to read, print, or send real secrets."
         },
         {
           "type": "credential-access",
           "line": 45,
           "evidence": "API_KEY",
           "context": "    api_key: str = Field(alias=\"API_KEY\")",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Settings fields and env var names such as DB_PASSWORD, API_SECRET_KEY, and AUTH_SECRET_KEY with placeholder values in sample config; no instruction to read, print, or send real secrets."
         },
         {
           "type": "credential-access",
           "line": 118,
           "evidence": "api_key",
           "context": "    api_key: str = Field(alias=\"API_KEY\")",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Settings fields and env var names such as DB_PASSWORD, API_SECRET_KEY, and AUTH_SECRET_KEY with placeholder values in sample config; no instruction to read, print, or send real secrets."
         },
         {
           "type": "credential-access",
           "line": 118,
           "evidence": "API_KEY",
           "context": "    api_key: str = Field(alias=\"API_KEY\")",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Settings fields and env var names such as DB_PASSWORD, API_SECRET_KEY, and AUTH_SECRET_KEY with placeholder values in sample config; no instruction to read, print, or send real secrets."
         },
         {
           "type": "shell-execution",
           "line": 161,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash-fenced blocks are sample .env and environment-variable listings, not commands for the agent to run."
         },
         {
           "type": "credential-access",
           "line": 164,
           "evidence": "secret",
           "context": "API_SECRET_KEY=dev-secret-key",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Settings fields and env var names such as DB_PASSWORD, API_SECRET_KEY, and AUTH_SECRET_KEY with placeholder values in sample config; no instruction to read, print, or send real secrets."
         },
         {
           "type": "shell-execution",
           "line": 172,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash-fenced blocks are sample .env and environment-variable listings, not commands for the agent to run."
         },
         {
           "type": "credential-access",
           "line": 178,
           "evidence": "secret",
           "context": "DB_PASSWORD=secret",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Settings fields and env var names such as DB_PASSWORD, API_SECRET_KEY, and AUTH_SECRET_KEY with placeholder values in sample config; no instruction to read, print, or send real secrets."
         },
         {
           "type": "credential-access",
           "line": 185,
           "evidence": "secret",
           "context": "AUTH_SECRET_KEY=your-secret-key",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Settings fields and env var names such as DB_PASSWORD, API_SECRET_KEY, and AUTH_SECRET_KEY with placeholder values in sample config; no instruction to read, print, or send real secrets."
         },
         {
           "type": "credential-access",
           "line": 206,
           "evidence": "secret",
           "context": "5. **Never commit secrets** - Use `.env` files (gitignored) or secret managers",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Settings fields and env var names such as DB_PASSWORD, API_SECRET_KEY, and AUTH_SECRET_KEY with placeholder values in sample config; no instruction to read, print, or send real secrets."
         }
       ]
     }

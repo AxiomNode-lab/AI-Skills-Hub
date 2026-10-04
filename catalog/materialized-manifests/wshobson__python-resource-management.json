@@ -1,0 +1,59 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "wshobson/python-resource-management",
+  "source": {
+    "repo": "wshobson/agents",
+    "path": "plugins/python-development/skills/python-resource-management",
+    "revision": "156b7a5e7a8b93642628a339ee4039c925b34c7f"
+  },
+  "review": {
+    "path": "catalog/reviews/wshobson__python-resource-management.json",
+    "sha256": "9b2a35b4298f3238c59c4066bc4dd5ed4779ff1f512656d18f5da35e22f27d72"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "low",
+    "capabilities": {
+      "shell": false,
+      "network": false,
+      "credentials": false,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "filesystem-write",
+        "line": 221,
+        "evidence": "unlink",
+        "context": "                temp_file.unlink()",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 12801
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "f89abb55d9f073f38f1703e4518f0613c788c6174be7f13b8dfe48a1c076c746",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/details.md",
+      "sha256": "b9cf1a36f6172812c3509e8a88e2d19de76d9e1fe2c4598df10558b372e88022",
+      "bytes": 4721,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "1d60cbc5ce7a9e86fa7f64e147f04f21d5d174b56bf96f5f628c905892068aa5",
+      "bytes": 7012,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 12801
+}

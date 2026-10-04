@@ -1,9 +1,9 @@
 {
   "schema_version": "0.1",
   "skill_id": "wshobson/git-advanced-workflows",
-  "status": "draft",
-  "reviewed_on": null,
-  "reviewer": null,
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
   "source": {
     "repo": "wshobson/agents",
     "path": "plugins/developer-essentials/skills/git-advanced-workflows",
@@ -13,7 +13,7 @@
     "complete": true,
     "scope": "plugins/developer-essentials/skills/git-advanced-workflows",
     "url": "https://api.github.com/repos/wshobson/agents/git/trees/156b7a5e7a8b93642628a339ee4039c925b34c7f?recursive=1",
-    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
   },
   "license": {
     "spdx": "MIT",
@@ -32,18 +32,32 @@
       ]
     },
     "redistributable": true,
-    "scope_reason": "",
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found. Content is generic git usage. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
     "obligations": [
       "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
-      "Preserve all upstream text and notices byte-for-byte."
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
     ]
   },
   "content_review": {
-    "status": "pending",
-    "risk": "unknown",
+    "status": "approved",
+    "risk": "medium",
     "blocking_findings": [],
-    "capabilities": {},
-    "notes": []
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md and references/details.md in full. Git reference for interactive rebase, cherry-pick, bisect (manual and automated), worktrees, reflog recovery, rebase-vs-merge, autosquash, splitting commits and recovery commands, with best practices such as backup branches and --force-with-lease.",
+      "Medium: following it has the agent rewrite history and push — `git push --force-with-lease` (SKILL.md:159, details.md:21), `git reset --hard` (SKILL.md:165, 193; details.md:97, 106), `git push origin` of a hotfix branch (details.md:82) — and run the user's tests via `git bisect run`. Acceptable because these are the standard operations for the user's own repository, the skill itself advises backup branches, rebasing only local commits and lease-protected force pushes; the agent should confirm before force-pushing or hard-resetting. Note `git rebase -i` needs an interactive editor.",
+      "No external file dependencies; references/details.md ships with the skill. `../project-feature` paths are example worktree locations, not links."
+    ]
   },
   "files": [
     {
@@ -56,7 +70,7 @@
       "git_blob": "326f0a55c96e672fedf9d807ca043c00df05ba0e",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
       "findings": []
     },
     {
@@ -67,87 +81,87 @@
       "git_blob": "438a2acf90b0c73fdca2ba8e1a14458ef8c7289d",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "shell-execution",
           "line": 7,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with git rebase/cherry-pick/bisect/worktree/reflog/reset/push commands on the user's own repository, and `git bisect run` of the user's test script or npm test."
         },
         {
           "type": "shell-execution",
           "line": 26,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with git rebase/cherry-pick/bisect/worktree/reflog/reset/push commands on the user's own repository, and `git bisect run` of the user's test script or npm test."
         },
         {
           "type": "shell-execution",
           "line": 46,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with git rebase/cherry-pick/bisect/worktree/reflog/reset/push commands on the user's own repository, and `git bisect run` of the user's test script or npm test."
         },
         {
           "type": "shell-execution",
           "line": 71,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with git rebase/cherry-pick/bisect/worktree/reflog/reset/push commands on the user's own repository, and `git bisect run` of the user's test script or npm test."
         },
         {
           "type": "filesystem-write",
           "line": 90,
           "evidence": "remove",
           "context": "git worktree remove ../myapp-hotfix",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Matched words are the rebase `drop` description ('Remove commit entirely') and `git worktree remove` of an example worktree directory, a recoverable git operation on the user's repo."
         },
         {
           "type": "shell-execution",
           "line": 95,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with git rebase/cherry-pick/bisect/worktree/reflog/reset/push commands on the user's own repository, and `git bisect run` of the user's test script or npm test."
         },
         {
           "type": "shell-execution",
           "line": 128,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with git rebase/cherry-pick/bisect/worktree/reflog/reset/push commands on the user's own repository, and `git bisect run` of the user's test script or npm test."
         },
         {
           "type": "shell-execution",
           "line": 148,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with git rebase/cherry-pick/bisect/worktree/reflog/reset/push commands on the user's own repository, and `git bisect run` of the user's test script or npm test."
         },
         {
           "type": "shell-execution",
           "line": 169,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with git rebase/cherry-pick/bisect/worktree/reflog/reset/push commands on the user's own repository, and `git bisect run` of the user's test script or npm test."
         },
         {
           "type": "shell-execution",
           "line": 194,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with git rebase/cherry-pick/bisect/worktree/reflog/reset/push commands on the user's own repository, and `git bisect run` of the user's test script or npm test."
         }
       ]
     },
@@ -159,111 +173,111 @@
       "git_blob": "f0af52b3f798d19c07b4d3f1c383e8283692ce15",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "filesystem-write",
           "line": 34,
           "evidence": "Remove",
           "context": "- `drop`: Remove commit entirely",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Matched words are the rebase `drop` description ('Remove commit entirely') and `git worktree remove` of an example worktree directory, a recoverable git operation on the user's repo."
         },
         {
           "type": "shell-execution",
           "line": 38,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with git rebase/cherry-pick/bisect/worktree/reflog/reset/push commands on the user's own repository, and `git bisect run` of the user's test script or npm test."
         },
         {
           "type": "shell-execution",
           "line": 53,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with git rebase/cherry-pick/bisect/worktree/reflog/reset/push commands on the user's own repository, and `git bisect run` of the user's test script or npm test."
         },
         {
           "type": "shell-execution",
           "line": 71,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with git rebase/cherry-pick/bisect/worktree/reflog/reset/push commands on the user's own repository, and `git bisect run` of the user's test script or npm test."
         },
         {
           "type": "shell-execution",
           "line": 92,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with git rebase/cherry-pick/bisect/worktree/reflog/reset/push commands on the user's own repository, and `git bisect run` of the user's test script or npm test."
         },
         {
           "type": "shell-execution",
           "line": 95,
           "evidence": "sh",
           "context": "git bisect run ./test.sh",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "`git bisect run ./test.sh` executes the user's own test script at each bisect step."
         },
         {
           "type": "shell-execution",
           "line": 97,
           "evidence": "sh",
           "context": "# test.sh should exit 0 for good, 1-127 (except 125) for bad",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with git rebase/cherry-pick/bisect/worktree/reflog/reset/push commands on the user's own repository, and `git bisect run` of the user's test script or npm test."
         },
         {
           "type": "shell-execution",
           "line": 104,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with git rebase/cherry-pick/bisect/worktree/reflog/reset/push commands on the user's own repository, and `git bisect run` of the user's test script or npm test."
         },
         {
           "type": "filesystem-write",
           "line": 114,
           "evidence": "Remove",
           "context": "# Remove worktree",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Matched words are the rebase `drop` description ('Remove commit entirely') and `git worktree remove` of an example worktree directory, a recoverable git operation on the user's repo."
         },
         {
           "type": "filesystem-write",
           "line": 115,
           "evidence": "remove",
           "context": "git worktree remove ../project-feature",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Matched words are the rebase `drop` description ('Remove commit entirely') and `git worktree remove` of an example worktree directory, a recoverable git operation on the user's repo."
         },
         {
           "type": "shell-execution",
           "line": 125,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with git rebase/cherry-pick/bisect/worktree/reflog/reset/push commands on the user's own repository, and `git bisect run` of the user's test script or npm test."
         },
         {
           "type": "shell-execution",
           "line": 157,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with git rebase/cherry-pick/bisect/worktree/reflog/reset/push commands on the user's own repository, and `git bisect run` of the user's test script or npm test."
         },
         {
           "type": "shell-execution",
           "line": 179,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks with git rebase/cherry-pick/bisect/worktree/reflog/reset/push commands on the user's own repository, and `git bisect run` of the user's test script or npm test."
         }
       ]
     }

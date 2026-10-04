@@ -1,9 +1,9 @@
 {
   "schema_version": "0.1",
   "skill_id": "bagelhole/nfs-storage",
-  "status": "draft",
-  "reviewed_on": null,
-  "reviewer": null,
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
   "source": {
     "repo": "BagelHole/DevOps-Security-Agent-Skills",
     "path": "infrastructure/storage/nfs-storage",
@@ -13,7 +13,7 @@
     "complete": true,
     "scope": "infrastructure/storage/nfs-storage",
     "url": "https://api.github.com/repos/BagelHole/DevOps-Security-Agent-Skills/git/trees/0365f57a079b1332f95cf26e31dd2d5332a8399f?recursive=1",
-    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
   },
   "license": {
     "spdx": "MIT",
@@ -31,18 +31,32 @@
       ]
     },
     "redistributable": true,
-    "scope_reason": "",
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file; the frontmatter declares license: MIT, consistent with the repository root. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
     "obligations": [
       "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
-      "Preserve all upstream text and notices byte-for-byte."
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
     ]
   },
   "content_review": {
-    "status": "pending",
-    "risk": "unknown",
+    "status": "approved",
+    "risk": "medium",
     "blocking_findings": [],
-    "capabilities": {},
-    "notes": []
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md in full (single-file skill). The skill covers NFS server install and /etc/exports, exportfs, firewall rules for NFS, client mounts and /etc/fstab, autofs, server/client performance tuning, Kubernetes NFS PV/PVC and the NFS CSI driver.",
+      "Medium: following it has the agent run root-level system changes — apt/dnf package installs, systemctl enable/restart, editing /etc/exports, /etc/fstab and autofs maps, mount/umount, writing /proc/fs/nfsd tunables and sysctl, adding ufw/firewalld allow rules scoped to 10.0.0.0/24, and `helm install` of the NFS CSI driver into kube-system. Acceptable because these are the standard, user-requested steps for setting up NFS on the user's own hosts; firewall changes only add narrowly scoped allow rules, and nothing disables a security control or deletes data beyond the throughput test file it creates (SKILL.md:272-274).",
+      "Review before applying: several sample exports use no_root_squash (SKILL.md:56, 70) and /shared is exported read-only to all hosts (SKILL.md:59); the table itself warns 'use cautiously'. The CSI driver Helm repo URL tracks the master branch (SKILL.md:315) and is unpinned. Related skills (linux-administration, block-storage, performance-tuning, backup-recovery, object-storage) are named as optional reading only."
+    ]
   },
   "files": [
     {
@@ -55,7 +69,7 @@
       "git_blob": "67c5c5cbb12cafb1515e449748866bd40da7dec9",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
       "findings": []
     },
     {
@@ -66,119 +80,119 @@
       "git_blob": "327f3622553b6ee1a17717f5f14ce0809f304d0c",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "shell-execution",
           "line": 34,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks of NFS administration commands (package install, systemctl, exportfs, mount, firewall, sysctl, helm) for the user's own servers, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 51,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks of NFS administration commands (package install, systemctl, exportfs, mount, firewall, sysctl, helm) for the user's own servers, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 93,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks of NFS administration commands (package install, systemctl, exportfs, mount, firewall, sysctl, helm) for the user's own servers, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 109,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks of NFS administration commands (package install, systemctl, exportfs, mount, firewall, sysctl, helm) for the user's own servers, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 129,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks of NFS administration commands (package install, systemctl, exportfs, mount, firewall, sysctl, helm) for the user's own servers, which is the skill's purpose."
         },
         {
           "type": "filesystem-write",
           "line": 138,
           "evidence": "mkdir",
           "context": "mkdir -p /mnt/data",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "SKILL.md:138 creates the /mnt/data mount point with mkdir -p as part of client setup."
         },
         {
           "type": "shell-execution",
           "line": 154,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks of NFS administration commands (package install, systemctl, exportfs, mount, firewall, sysctl, helm) for the user's own servers, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 170,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks of NFS administration commands (package install, systemctl, exportfs, mount, firewall, sysctl, helm) for the user's own servers, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 195,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks of NFS administration commands (package install, systemctl, exportfs, mount, firewall, sysctl, helm) for the user's own servers, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 220,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks of NFS administration commands (package install, systemctl, exportfs, mount, firewall, sysctl, helm) for the user's own servers, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 237,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks of NFS administration commands (package install, systemctl, exportfs, mount, firewall, sysctl, helm) for the user's own servers, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 259,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks of NFS administration commands (package install, systemctl, exportfs, mount, firewall, sysctl, helm) for the user's own servers, which is the skill's purpose."
         },
         {
           "type": "shell-execution",
           "line": 313,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks of NFS administration commands (package install, systemctl, exportfs, mount, firewall, sysctl, helm) for the user's own servers, which is the skill's purpose."
         },
         {
           "type": "network-access",
           "line": 315,
           "evidence": "https://",
           "context": "helm repo add csi-driver-nfs https://raw.githubusercontent.com/kubernetes-csi/csi-driver-nfs/master/charts",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "SKILL.md:315 adds the kubernetes-csi csi-driver-nfs Helm chart repository (raw.githubusercontent.com, master branch) before a helm install; this is an unpinned but well-known upstream chart repo, not a piped shell script."
         }
       ]
     }

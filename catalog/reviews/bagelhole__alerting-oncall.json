@@ -1,9 +1,9 @@
 {
   "schema_version": "0.1",
   "skill_id": "bagelhole/alerting-oncall",
-  "status": "draft",
-  "reviewed_on": null,
-  "reviewer": null,
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
   "source": {
     "repo": "BagelHole/DevOps-Security-Agent-Skills",
     "path": "devops/observability/alerting-oncall",
@@ -13,7 +13,7 @@
     "complete": true,
     "scope": "devops/observability/alerting-oncall",
     "url": "https://api.github.com/repos/BagelHole/DevOps-Security-Agent-Skills/git/trees/0365f57a079b1332f95cf26e31dd2d5332a8399f?recursive=1",
-    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
   },
   "license": {
     "spdx": "MIT",
@@ -31,18 +31,32 @@
       ]
     },
     "redistributable": true,
-    "scope_reason": "",
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found; Alertmanager, Terraform and template snippets are short configuration examples. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
     "obligations": [
       "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
-      "Preserve all upstream text and notices byte-for-byte."
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
     ]
   },
   "content_review": {
-    "status": "pending",
-    "risk": "unknown",
+    "status": "approved",
+    "risk": "medium",
     "blocking_findings": [],
-    "capabilities": {},
-    "notes": []
+    "capabilities": {
+      "shell": true,
+      "network": false,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md in full; it is the only file. Alerting and on-call guidance: severity levels, Prometheus alert rules, Alertmanager routing, PagerDuty Terraform service/escalation/schedule resources, a Grafana OnCall compose snippet, escalation chains, Slack/PagerDuty templates, rotation guidelines, a runbook template and alert-fatigue strategies.",
+      "Mostly configuration samples for the user's monitoring stack. The runbook template (SKILL.md:410-440) contains production remediation commands, `kubectl rollout undo deployment/myapp -n production` and `kubectl delete pod -l app=postgres -n production` (SKILL.md:428, :433); they are example content for a human-run runbook, not steps the skill tells the agent to execute, but an agent following them would change production state. Medium for that reason; acceptable because they are clearly scoped as conditional remediation in a template and users should confirm before running them.",
+      "Webhook URLs, the PagerDuty service_key 'xxx' and SECRET_KEY=your-secret-key (SKILL.md:137, :178, :311) are placeholders; users should source real values from a secret store. Related Skills links (SKILL.md:496-498: ../prometheus-grafana/, ../../../security/operations/incident-response/, ../../../compliance/continuity/runbook-creation/) are optional pointers that do not ship with this skill. Frontmatter declares license: MIT."
+    ]
   },
   "files": [
     {
@@ -55,7 +69,7 @@
       "git_blob": "67c5c5cbb12cafb1515e449748866bd40da7dec9",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
       "findings": []
     },
     {
@@ -66,87 +80,87 @@
       "git_blob": "4febdd189ac679f5322ed5647a4eeb1ecff12a9b",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "network-access",
           "line": 104,
           "evidence": "https://",
           "context": "          runbook_url: \"https://wiki.example.com/runbooks/service-down\"",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Placeholder runbook wiki URL, Slack webhook and PagerDuty events endpoint in Alertmanager config, and internal service URLs in a compose snippet; the agent is not told to call them."
         },
         {
           "type": "network-access",
           "line": 137,
           "evidence": "https://",
           "context": "  slack_api_url: 'https://hooks.slack.com/services/xxx'",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Placeholder runbook wiki URL, Slack webhook and PagerDuty events endpoint in Alertmanager config, and internal service URLs in a compose snippet; the agent is not told to call them."
         },
         {
           "type": "network-access",
           "line": 138,
           "evidence": "https://",
           "context": "  pagerduty_url: 'https://events.pagerduty.com/v2/enqueue'",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Placeholder runbook wiki URL, Slack webhook and PagerDuty events endpoint in Alertmanager config, and internal service URLs in a compose snippet; the agent is not told to call them."
         },
         {
           "type": "credential-access",
           "line": 311,
           "evidence": "secret",
           "context": "      - SECRET_KEY=your-secret-key",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "SECRET_KEY=your-secret-key is a placeholder environment value in a Grafana OnCall compose example; no real secret is read or sent."
         },
         {
           "type": "network-access",
           "line": 312,
           "evidence": "http://",
           "context": "      - BASE_URL=http://oncall:8080",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Placeholder runbook wiki URL, Slack webhook and PagerDuty events endpoint in Alertmanager config, and internal service URLs in a compose snippet; the agent is not told to call them."
         },
         {
           "type": "network-access",
           "line": 313,
           "evidence": "http://",
           "context": "      - GRAFANA_API_URL=http://grafana:3000",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Placeholder runbook wiki URL, Slack webhook and PagerDuty events endpoint in Alertmanager config, and internal service URLs in a compose snippet; the agent is not told to call them."
         },
         {
           "type": "shell-execution",
           "line": 427,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences in the runbook template holding kubectl rollback and pod-restart commands for a human responder."
         },
         {
           "type": "shell-execution",
           "line": 432,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences in the runbook template holding kubectl rollback and pod-restart commands for a human responder."
         },
         {
           "type": "filesystem-write",
           "line": 433,
           "evidence": "delete",
           "context": "kubectl delete pod -l app=postgres -n production",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "`kubectl delete pod -l app=postgres -n production` restarts production database pods; it is runbook template content and should only be run with the user's confirmation."
         },
         {
           "type": "filesystem-write",
           "line": 465,
           "evidence": "Remove",
           "context": "    - Remove unused alerts",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Hits are `kubectl delete pod` (a Kubernetes pod restart, not a file deletion) and the bullet 'Remove unused alerts'."
         }
       ]
     }

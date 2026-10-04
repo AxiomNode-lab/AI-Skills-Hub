@@ -1,9 +1,9 @@
 {
   "schema_version": "0.1",
   "skill_id": "bagelhole/zero-trust",
-  "status": "draft",
-  "reviewed_on": null,
-  "reviewer": null,
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
   "source": {
     "repo": "BagelHole/DevOps-Security-Agent-Skills",
     "path": "security/network/zero-trust",
@@ -13,7 +13,7 @@
     "complete": true,
     "scope": "security/network/zero-trust",
     "url": "https://api.github.com/repos/BagelHole/DevOps-Security-Agent-Skills/git/trees/0365f57a079b1332f95cf26e31dd2d5332a8399f?recursive=1",
-    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
   },
   "license": {
     "spdx": "MIT",
@@ -31,18 +31,32 @@
       ]
     },
     "redistributable": true,
-    "scope_reason": "",
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found; frontmatter declares license: MIT, consistent with the repository root. BeyondCorp and 'never trust, always verify' are referenced as concepts only. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
     "obligations": [
       "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
-      "Preserve all upstream text and notices byte-for-byte."
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
     ]
   },
   "content_review": {
-    "status": "pending",
-    "risk": "unknown",
+    "status": "approved",
+    "risk": "medium",
     "blocking_findings": [],
-    "capabilities": {},
-    "notes": []
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "package_install": false,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md in full (single-file skill). The skill describes zero-trust architecture: core principles, Cloudflare Access apps/policies/device posture via API and Terraform, an oauth2-proxy deployment with nginx ingress auth, Istio strict mTLS and AuthorizationPolicies, default-deny Kubernetes NetworkPolicies, an OPA/Rego access policy, implementation steps and troubleshooting.",
+      "Medium: the curl examples call the Cloudflare API with the user's ${CF_TOKEN} bearer token to create Access applications, policies and device-posture rules (SKILL.md:65-107), and the manifests apply mesh-wide STRICT mTLS and namespace default-deny policies that can block traffic if applied without matching allow rules. Acceptable because these act on the user's own Cloudflare account and cluster, credentials come from environment variables or Kubernetes Secrets (no hardcoded values), and IDs/domains are placeholders; roll out deny policies in a test namespace first and confirm with the user.",
+      "Related Skills (SKILL.md:433-435) link to sibling skills ../../../infrastructure/networking/service-mesh/, ../../hardening/kubernetes-hardening/ and ../vpn-setup/ as optional reading only. The Rego `step_up_required` rule is defined but not wired into `allow`."
+    ]
   },
   "files": [
     {
@@ -55,7 +69,7 @@
       "git_blob": "67c5c5cbb12cafb1515e449748866bd40da7dec9",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
       "findings": []
     },
     {
@@ -66,143 +80,143 @@
       "git_blob": "1cf24b361daa122d3d3fc751c61e544f3cac5af5",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "shell-execution",
           "line": 65,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "A bash block of curl calls to the Cloudflare Access API that create resources in the user's own account."
         },
         {
           "type": "network-access",
           "line": 67,
           "evidence": "curl",
           "context": "curl -X POST \"https://api.cloudflare.com/client/v4/accounts/${ACCOUNT_ID}/access/apps\" \\",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Cloudflare API endpoints called with the user's token, plus placeholder OIDC issuer, upstream and auth URLs inside Kubernetes manifests."
         },
         {
           "type": "network-access",
           "line": 67,
           "evidence": "https://",
           "context": "curl -X POST \"https://api.cloudflare.com/client/v4/accounts/${ACCOUNT_ID}/access/apps\" \\",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Cloudflare API endpoints called with the user's token, plus placeholder OIDC issuer, upstream and auth URLs inside Kubernetes manifests."
         },
         {
           "type": "network-access",
           "line": 80,
           "evidence": "curl",
           "context": "curl -X POST \"https://api.cloudflare.com/client/v4/accounts/${ACCOUNT_ID}/access/apps/${APP_ID}/policies\" \\",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Cloudflare API endpoints called with the user's token, plus placeholder OIDC issuer, upstream and auth URLs inside Kubernetes manifests."
         },
         {
           "type": "network-access",
           "line": 80,
           "evidence": "https://",
           "context": "curl -X POST \"https://api.cloudflare.com/client/v4/accounts/${ACCOUNT_ID}/access/apps/${APP_ID}/policies\" \\",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Cloudflare API endpoints called with the user's token, plus placeholder OIDC issuer, upstream and auth URLs inside Kubernetes manifests."
         },
         {
           "type": "network-access",
           "line": 98,
           "evidence": "curl",
           "context": "curl -X POST \"https://api.cloudflare.com/client/v4/accounts/${ACCOUNT_ID}/devices/posture\" \\",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Cloudflare API endpoints called with the user's token, plus placeholder OIDC issuer, upstream and auth URLs inside Kubernetes manifests."
         },
         {
           "type": "network-access",
           "line": 98,
           "evidence": "https://",
           "context": "curl -X POST \"https://api.cloudflare.com/client/v4/accounts/${ACCOUNT_ID}/devices/posture\" \\",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Cloudflare API endpoints called with the user's token, plus placeholder OIDC issuer, upstream and auth URLs inside Kubernetes manifests."
         },
         {
           "type": "network-access",
           "line": 177,
           "evidence": "https://",
           "context": "            - --oidc-issuer-url=https://accounts.google.com",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Cloudflare API endpoints called with the user's token, plus placeholder OIDC issuer, upstream and auth URLs inside Kubernetes manifests."
         },
         {
           "type": "credential-access",
           "line": 179,
           "evidence": "secret",
           "context": "            - --client-secret=$(CLIENT_SECRET)",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "oauth2-proxy client/cookie secrets loaded from Kubernetes secretKeyRef, a Bearer ${CF_TOKEN} env var, and a troubleshooting reference to `istioctl proxy-config secret`; no secret values are hardcoded, printed or sent elsewhere."
         },
         {
           "type": "network-access",
           "line": 181,
           "evidence": "http://",
           "context": "            - --upstream=http://internal-service.default.svc:8080",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Cloudflare API endpoints called with the user's token, plus placeholder OIDC issuer, upstream and auth URLs inside Kubernetes manifests."
         },
         {
           "type": "credential-access",
           "line": 183,
           "evidence": "secret",
           "context": "            - --cookie-secret=$(COOKIE_SECRET)",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "oauth2-proxy client/cookie secrets loaded from Kubernetes secretKeyRef, a Bearer ${CF_TOKEN} env var, and a troubleshooting reference to `istioctl proxy-config secret`; no secret values are hardcoded, printed or sent elsewhere."
         },
         {
           "type": "credential-access",
           "line": 188,
           "evidence": "access-token",
           "context": "            - --pass-access-token=true",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "oauth2-proxy client/cookie secrets loaded from Kubernetes secretKeyRef, a Bearer ${CF_TOKEN} env var, and a troubleshooting reference to `istioctl proxy-config secret`; no secret values are hardcoded, printed or sent elsewhere."
         },
         {
           "type": "credential-access",
           "line": 202,
           "evidence": "secret",
           "context": "                  key: client-secret",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "oauth2-proxy client/cookie secrets loaded from Kubernetes secretKeyRef, a Bearer ${CF_TOKEN} env var, and a troubleshooting reference to `istioctl proxy-config secret`; no secret values are hardcoded, printed or sent elsewhere."
         },
         {
           "type": "credential-access",
           "line": 207,
           "evidence": "secret",
           "context": "                  key: cookie-secret",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "oauth2-proxy client/cookie secrets loaded from Kubernetes secretKeyRef, a Bearer ${CF_TOKEN} env var, and a troubleshooting reference to `istioctl proxy-config secret`; no secret values are hardcoded, printed or sent elsewhere."
         },
         {
           "type": "network-access",
           "line": 217,
           "evidence": "https://",
           "context": "    nginx.ingress.kubernetes.io/auth-url: \"https://auth.example.com/oauth2/auth\"",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Cloudflare API endpoints called with the user's token, plus placeholder OIDC issuer, upstream and auth URLs inside Kubernetes manifests."
         },
         {
           "type": "network-access",
           "line": 218,
           "evidence": "https://",
           "context": "    nginx.ingress.kubernetes.io/auth-signin: \"https://auth.example.com/oauth2/start?rd=$scheme://$host$request_uri\"",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Cloudflare API endpoints called with the user's token, plus placeholder OIDC issuer, upstream and auth URLs inside Kubernetes manifests."
         },
         {
           "type": "credential-access",
           "line": 426,
           "evidence": "secret",
           "context": "| mTLS connections failing | Certificate expired or wrong CA | Check cert expiry with `istioctl proxy-config secret`; verify CA chain |",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Troubleshooting hint to inspect workload certificate expiry with `istioctl proxy-config secret`; read-only."
         }
       ]
     }

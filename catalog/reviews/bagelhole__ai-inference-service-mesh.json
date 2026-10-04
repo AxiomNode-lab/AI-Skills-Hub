@@ -1,9 +1,9 @@
 {
   "schema_version": "0.1",
   "skill_id": "bagelhole/ai-inference-service-mesh",
-  "status": "draft",
-  "reviewed_on": null,
-  "reviewer": null,
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
   "source": {
     "repo": "BagelHole/DevOps-Security-Agent-Skills",
     "path": "infrastructure/networking/ai-inference-service-mesh",
@@ -13,7 +13,7 @@
     "complete": true,
     "scope": "infrastructure/networking/ai-inference-service-mesh",
     "url": "https://api.github.com/repos/BagelHole/DevOps-Security-Agent-Skills/git/trees/0365f57a079b1332f95cf26e31dd2d5332a8399f?recursive=1",
-    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
   },
   "license": {
     "spdx": "MIT",
@@ -31,18 +31,32 @@
       ]
     },
     "redistributable": true,
-    "scope_reason": "",
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file; the frontmatter declares license: MIT, consistent with the repository root. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
     "obligations": [
       "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
-      "Preserve all upstream text and notices byte-for-byte."
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
     ]
   },
   "content_review": {
-    "status": "pending",
-    "risk": "unknown",
+    "status": "approved",
+    "risk": "medium",
     "blocking_findings": [],
-    "capabilities": {},
-    "notes": []
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": false,
+      "package_install": true,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md in full (single-file skill). The skill applies Istio patterns to AI inference traffic: strict mTLS, per-service-account AuthorizationPolicies, egress allow-listing for model APIs, header/weight-based canary routing, circuit breaking, retry budgets, locality failover, telemetry and Kiali/istioctl diagnostics.",
+      "Medium: SKILL.md:25-37 has the agent install Istio into the user's cluster with istioctl, create and label a namespace; SKILL.md:401-413 port-forwards Kiali in the background and queries its local API with curl. The YAML manifests, once applied, reconfigure cluster traffic and security policy. Acceptable because these are standard setup and read-only diagnostic steps for the user's own cluster and the policies tighten security (STRICT mTLS, deny-by-namespace, egress allow-list).",
+      "Review before applying: the cluster-wide PeerAuthentication in istio-system (SKILL.md:44-52) enforces STRICT mTLS for every namespace and can break non-mesh workloads; the egress allow-list host 'models.anthropic.com' (SKILL.md:158) is not Anthropic's API host (api.anthropic.com) and should be corrected. Related Skills (SKILL.md:427-429) link to sibling skills ../service-mesh/, ../llm-gateway/, ../../../devops/observability/opentelemetry/ as optional reading only."
+    ]
   },
   "files": [
     {
@@ -55,7 +69,7 @@
       "git_blob": "67c5c5cbb12cafb1515e449748866bd40da7dec9",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
       "findings": []
     },
     {
@@ -66,39 +80,39 @@
       "git_blob": "e6da1e1c58c0efdcbefa5b80790bbdd331de084d",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "shell-execution",
           "line": 25,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "SKILL.md:25 (istioctl install, kubectl create/label namespace) and SKILL.md:401 (kubectl port-forward, curl to localhost Kiali, istioctl proxy-status/proxy-config) are cluster setup and diagnostics for the user's own cluster."
         },
         {
           "type": "shell-execution",
           "line": 401,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "SKILL.md:25 (istioctl install, kubectl create/label namespace) and SKILL.md:401 (kubectl port-forward, curl to localhost Kiali, istioctl proxy-status/proxy-config) are cluster setup and diagnostics for the user's own cluster."
         },
         {
           "type": "network-access",
           "line": 406,
           "evidence": "curl",
           "context": "curl -s http://localhost:20001/kiali/api/namespaces/ai-inference/health | jq .",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "curl to the locally port-forwarded Kiali API (http://localhost:20001) and external model API hostnames listed in Istio ServiceEntry/egress policy; no data is sent to third parties."
         },
         {
           "type": "network-access",
           "line": 406,
           "evidence": "http://",
           "context": "curl -s http://localhost:20001/kiali/api/namespaces/ai-inference/health | jq .",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "curl to the locally port-forwarded Kiali API (http://localhost:20001) and external model API hostnames listed in Istio ServiceEntry/egress policy; no data is sent to third parties."
         }
       ]
     }

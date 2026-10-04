@@ -1,9 +1,9 @@
 {
   "schema_version": "0.1",
   "skill_id": "bagelhole/aws-cost-optimization",
-  "status": "draft",
-  "reviewed_on": null,
-  "reviewer": null,
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
   "source": {
     "repo": "BagelHole/DevOps-Security-Agent-Skills",
     "path": "infrastructure/cloud-aws/aws-cost-optimization",
@@ -13,7 +13,7 @@
     "complete": true,
     "scope": "infrastructure/cloud-aws/aws-cost-optimization",
     "url": "https://api.github.com/repos/BagelHole/DevOps-Security-Agent-Skills/git/trees/0365f57a079b1332f95cf26e31dd2d5332a8399f?recursive=1",
-    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
   },
   "license": {
     "spdx": "MIT",
@@ -31,18 +31,32 @@
       ]
     },
     "redistributable": true,
-    "scope_reason": "",
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found; CLI and Terraform samples are short original examples. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
     "obligations": [
       "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
-      "Preserve all upstream text and notices byte-for-byte."
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
     ]
   },
   "content_review": {
-    "status": "pending",
-    "risk": "unknown",
+    "status": "approved",
+    "risk": "medium",
     "blocking_findings": [],
-    "capabilities": {},
-    "notes": []
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "package_install": false,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md in full; it is the only file. FinOps guide for AWS: a cost-review workflow, Cost Explorer queries, budgets and anomaly detection, a billing alarm, discovery of unused resources, S3 lifecycle tiering, Terraform budget/alarm resources, and scheduled non-production shutdowns.",
+      "Most commands are read-only cost and inventory queries, and the unused-resource section only lists candidates without deleting them. State-changing commands use the user's AWS credentials: creating budgets, anomaly monitors and alarms, applying an S3 lifecycle policy that moves data to Glacier/Deep Archive and expires noncurrent versions after 90 days (SKILL.md:206-231), stopping all running instances tagged Environment=dev (SKILL.md:283-286), and scaling a dev ECS service to zero (SKILL.md:289-292). Medium because of those changes; acceptable because they are scoped to cost controls and dev resources the user chooses to target. Users should confirm the lifecycle policy before applying it to a real bucket.",
+      "Account IDs, ARNs, email addresses and dates are placeholders. Related Skills (SKILL.md:310-314) link to sibling skills (../aws-ec2/, ../aws-s3/, ../aws-rds/, ../aws-lambda/, ../terraform-aws/) that do not ship with this skill; optional. Frontmatter declares license: MIT."
+    ]
   },
   "files": [
     {
@@ -55,7 +69,7 @@
       "git_blob": "67c5c5cbb12cafb1515e449748866bd40da7dec9",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
       "findings": []
     },
     {
@@ -66,55 +80,55 @@
       "git_blob": "121c98f50ce2f62c7292e703bfd42b1292b66590",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "shell-execution",
           "line": 43,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with AWS CLI cost-explorer, budgets, CloudWatch, EC2, S3 and ECS commands run against the user's own account."
         },
         {
           "type": "shell-execution",
           "line": 89,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with AWS CLI cost-explorer, budgets, CloudWatch, EC2, S3 and ECS commands run against the user's own account."
         },
         {
           "type": "shell-execution",
           "line": 150,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with AWS CLI cost-explorer, budgets, CloudWatch, EC2, S3 and ECS commands run against the user's own account."
         },
         {
           "type": "shell-execution",
           "line": 169,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with AWS CLI cost-explorer, budgets, CloudWatch, EC2, S3 and ECS commands run against the user's own account."
         },
         {
           "type": "shell-execution",
           "line": 204,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with AWS CLI cost-explorer, budgets, CloudWatch, EC2, S3 and ECS commands run against the user's own account."
         },
         {
           "type": "shell-execution",
           "line": 281,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with AWS CLI cost-explorer, budgets, CloudWatch, EC2, S3 and ECS commands run against the user's own account."
         }
       ]
     }

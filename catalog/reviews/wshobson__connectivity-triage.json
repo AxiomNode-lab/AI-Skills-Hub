@@ -1,9 +1,9 @@
 {
   "schema_version": "0.1",
   "skill_id": "wshobson/connectivity-triage",
-  "status": "draft",
-  "reviewed_on": null,
-  "reviewer": null,
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
   "source": {
     "repo": "wshobson/agents",
     "path": "plugins/incident-response/skills/connectivity-triage",
@@ -13,7 +13,7 @@
     "complete": true,
     "scope": "plugins/incident-response/skills/connectivity-triage",
     "url": "https://api.github.com/repos/wshobson/agents/git/trees/156b7a5e7a8b93642628a339ee4039c925b34c7f?recursive=1",
-    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
   },
   "license": {
     "spdx": "MIT",
@@ -32,18 +32,32 @@
       ]
     },
     "redistributable": true,
-    "scope_reason": "",
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
     "obligations": [
       "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
-      "Preserve all upstream text and notices byte-for-byte."
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
     ]
   },
   "content_review": {
-    "status": "pending",
-    "risk": "unknown",
+    "status": "approved",
+    "risk": "low",
     "blocking_findings": [],
-    "capabilities": {},
-    "notes": []
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md and references/details.md in full. A macOS connectivity diagnostic workflow that isolates the fault domain (local-link/LAN, DNS, upstream-path, remote-service/application, inconclusive) using built-in tools and an evidence-labelled result format.",
+      "It has the agent run bounded, read-only probes: `ping -c 5`, `scutil --dns`, `dig +time=2 +tries=1`, `traceroute -n -q 1 -m 20`, `nettop -n -L 3`, `networkQuality`, and a GET-only `curl -w` timing request with timeouts to the user's affected URL (SKILL.md:52-108). Acceptable as low: the skill explicitly forbids changing interfaces, DNS, firewall/VPN settings, flushing caches, installing packages, or sending state-changing requests (SKILL.md:20, 157-166; details.md:38, 181, 195, 207, 213), and tells the agent to quote the URL as one argument to avoid shell injection.",
+      "The Related Skills list (SKILL.md:174-178) names sibling skills `incident-runbook-templates`, `on-call-handoff-patterns`, `postmortem-writing` by name only; they are optional and not needed for this workflow. Probes do send traffic to the user's target hosts."
+    ]
   },
   "files": [
     {
@@ -56,7 +70,7 @@
       "git_blob": "326f0a55c96e672fedf9d807ca043c00df05ba0e",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
       "findings": []
     },
     {
@@ -67,127 +81,127 @@
       "git_blob": "77989df0e297d15a69eead226031158e7d8a66b1",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "shell-execution",
           "line": 44,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "```bash fences around the bounded read-only diagnostic commands (ping, scutil, dig, traceroute, nettop, curl timing) in SKILL.md and details.md."
         },
         {
           "type": "shell-execution",
           "line": 70,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "```bash fences around the bounded read-only diagnostic commands (ping, scutil, dig, traceroute, nettop, curl timing) in SKILL.md and details.md."
         },
         {
           "type": "shell-execution",
           "line": 95,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "```bash fences around the bounded read-only diagnostic commands (ping, scutil, dig, traceroute, nettop, curl timing) in SKILL.md and details.md."
         },
         {
           "type": "shell-execution",
           "line": 115,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "```bash fences around the bounded read-only diagnostic commands (ping, scutil, dig, traceroute, nettop, curl timing) in SKILL.md and details.md."
         },
         {
           "type": "shell-execution",
           "line": 134,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "```bash fences around the bounded read-only diagnostic commands (ping, scutil, dig, traceroute, nettop, curl timing) in SKILL.md and details.md."
         },
         {
           "type": "network-access",
           "line": 155,
           "evidence": "curl",
           "context": "### `curl -w` timing",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "A bounded read-only `curl` timing request and `http://`/`https://` scheme checks against the user's affected endpoint; other curl hits are prose referring to that timing check."
         },
         {
           "type": "network-access",
           "line": 157,
           "evidence": "http://",
           "context": "For an HTTP(S) endpoint, use a read-only request to the same host and safe path the incident concerns. Confirm the endpoint is a complete `http://` or `https://` URL, preserve the incident's original scheme, and pass it as one quoted argume",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "A bounded read-only `curl` timing request and `http://`/`https://` scheme checks against the user's affected endpoint; other curl hits are prose referring to that timing check."
         },
         {
           "type": "network-access",
           "line": 157,
           "evidence": "https://",
           "context": "For an HTTP(S) endpoint, use a read-only request to the same host and safe path the incident concerns. Confirm the endpoint is a complete `http://` or `https://` URL, preserve the incident's original scheme, and pass it as one quoted argume",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "A bounded read-only `curl` timing request and `http://`/`https://` scheme checks against the user's affected endpoint; other curl hits are prose referring to that timing check."
         },
         {
           "type": "shell-execution",
           "line": 159,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "```bash fences around the bounded read-only diagnostic commands (ping, scutil, dig, traceroute, nettop, curl timing) in SKILL.md and details.md."
         },
         {
           "type": "network-access",
           "line": 160,
           "evidence": "curl",
           "context": "curl -sS -o /dev/null \\",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "A bounded read-only `curl` timing request and `http://`/`https://` scheme checks against the user's affected endpoint; other curl hits are prose referring to that timing check."
         },
         {
           "type": "filesystem-write",
           "line": 181,
           "evidence": "DELETE",
           "context": "Use a safe read-only endpoint. Do not send POST, PUT, DELETE, or other state-changing requests merely to test connectivity.",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "`DELETE` at details.md:181 is an HTTP method the skill says NOT to send; no file operation."
         },
         {
           "type": "network-access",
           "line": 211,
           "evidence": "curl",
           "context": "Proxies, content filters, endpoint security products, and managed network extensions can cause one application's path to differ from direct command-line probes. If curl succeeds while the application fails, inspect application-specific acti",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "A bounded read-only `curl` timing request and `http://`/`https://` scheme checks against the user's affected endpoint; other curl hits are prose referring to that timing check."
         },
         {
           "type": "network-access",
           "line": 234,
           "evidence": "curl",
           "context": "- whether curl timing changes in the same phase each time.",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "A bounded read-only `curl` timing request and `http://`/`https://` scheme checks against the user's affected endpoint; other curl hits are prose referring to that timing check."
         },
         {
           "type": "network-access",
           "line": 252,
           "evidence": "curl",
           "context": "- curl connects and completes TLS quickly but spends most of the total time before first byte.",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "A bounded read-only `curl` timing request and `http://`/`https://` scheme checks against the user's affected endpoint; other curl hits are prose referring to that timing check."
         },
         {
           "type": "network-access",
           "line": 284,
           "evidence": "curl",
           "context": "- bounded curl timing to a safe HTTP(S) endpoint on the same service is normal;",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "A bounded read-only `curl` timing request and `http://`/`https://` scheme checks against the user's affected endpoint; other curl hits are prose referring to that timing check."
         }
       ]
     },
@@ -199,95 +213,95 @@
       "git_blob": "19b3b6d012f6982782a10582ce141951421b5d1d",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "shell-execution",
           "line": 52,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "```bash fences around the bounded read-only diagnostic commands (ping, scutil, dig, traceroute, nettop, curl timing) in SKILL.md and details.md."
         },
         {
           "type": "shell-execution",
           "line": 61,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "```bash fences around the bounded read-only diagnostic commands (ping, scutil, dig, traceroute, nettop, curl timing) in SKILL.md and details.md."
         },
         {
           "type": "shell-execution",
           "line": 67,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "```bash fences around the bounded read-only diagnostic commands (ping, scutil, dig, traceroute, nettop, curl timing) in SKILL.md and details.md."
         },
         {
           "type": "shell-execution",
           "line": 77,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "```bash fences around the bounded read-only diagnostic commands (ping, scutil, dig, traceroute, nettop, curl timing) in SKILL.md and details.md."
         },
         {
           "type": "shell-execution",
           "line": 85,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "```bash fences around the bounded read-only diagnostic commands (ping, scutil, dig, traceroute, nettop, curl timing) in SKILL.md and details.md."
         },
         {
           "type": "shell-execution",
           "line": 95,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "```bash fences around the bounded read-only diagnostic commands (ping, scutil, dig, traceroute, nettop, curl timing) in SKILL.md and details.md."
         },
         {
           "type": "network-access",
           "line": 103,
           "evidence": "curl",
           "context": "For HTTP(S), use curl phase timing against the actual affected endpoint when a safe read-only request is available. Confirm the incident-supplied endpoint is a complete `http://` or `https://` URL, preserve its original scheme, and pass the",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "A bounded read-only `curl` timing request and `http://`/`https://` scheme checks against the user's affected endpoint; other curl hits are prose referring to that timing check."
         },
         {
           "type": "network-access",
           "line": 103,
           "evidence": "http://",
           "context": "For HTTP(S), use curl phase timing against the actual affected endpoint when a safe read-only request is available. Confirm the incident-supplied endpoint is a complete `http://` or `https://` URL, preserve its original scheme, and pass the",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "A bounded read-only `curl` timing request and `http://`/`https://` scheme checks against the user's affected endpoint; other curl hits are prose referring to that timing check."
         },
         {
           "type": "network-access",
           "line": 103,
           "evidence": "https://",
           "context": "For HTTP(S), use curl phase timing against the actual affected endpoint when a safe read-only request is available. Confirm the incident-supplied endpoint is a complete `http://` or `https://` URL, preserve its original scheme, and pass the",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "A bounded read-only `curl` timing request and `http://`/`https://` scheme checks against the user's affected endpoint; other curl hits are prose referring to that timing check."
         },
         {
           "type": "shell-execution",
           "line": 105,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "```bash fences around the bounded read-only diagnostic commands (ping, scutil, dig, traceroute, nettop, curl timing) in SKILL.md and details.md."
         },
         {
           "type": "network-access",
           "line": 106,
           "evidence": "curl",
           "context": "curl -sS -o /dev/null \\",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "A bounded read-only `curl` timing request and `http://`/`https://` scheme checks against the user's affected endpoint; other curl hits are prose referring to that timing check."
         }
       ]
     }

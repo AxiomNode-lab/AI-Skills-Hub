@@ -1,9 +1,9 @@
 {
   "schema_version": "0.1",
   "skill_id": "bagelhole/linux-administration",
-  "status": "draft",
-  "reviewed_on": null,
-  "reviewer": null,
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
   "source": {
     "repo": "BagelHole/DevOps-Security-Agent-Skills",
     "path": "infrastructure/servers/linux-administration",
@@ -13,7 +13,7 @@
     "complete": true,
     "scope": "infrastructure/servers/linux-administration",
     "url": "https://api.github.com/repos/BagelHole/DevOps-Security-Agent-Skills/git/trees/0365f57a079b1332f95cf26e31dd2d5332a8399f?recursive=1",
-    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
   },
   "license": {
     "spdx": "MIT",
@@ -31,18 +31,32 @@
       ]
     },
     "redistributable": true,
-    "scope_reason": "",
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found; commands are short original examples. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
     "obligations": [
       "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
-      "Preserve all upstream text and notices byte-for-byte."
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
     ]
   },
   "content_review": {
-    "status": "pending",
-    "risk": "unknown",
+    "status": "approved",
+    "risk": "medium",
     "blocking_findings": [],
-    "capabilities": {},
-    "notes": []
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md in full; it is the only file. Linux administration reference for Debian/Ubuntu and RHEL: apt/dnf package management and pinning, adding the Docker apt repository with a signed keyring, system information, filesystems and fstab, process management, cron, journald/syslog/logrotate, networking, and UFW/firewalld rules.",
+      "Following it can make the agent run root commands that install/upgrade/remove packages, write apt preferences, sources and logrotate files, append to /etc/fstab and /etc/cron.allow, kill processes, and open firewall ports. The destructive-command signal is mkfs.ext4 /dev/sdb1 and fsck.ext4 -y (SKILL.md:152, :163), which erase or repair a disk partition. Medium because these are privileged, state-changing host operations; acceptable because the file is a command reference for the user's own server administration, with placeholder device names and no instruction to run them unprompted. Users should confirm the target device before any mkfs/fsck and the rules before ufw enable.",
+      "The Docker repository is added with a GPG keyring and signed-by (SKILL.md:70-72), not a piped script. Firewall examples enable rather than disable controls. Related Skills (SKILL.md:347-351) and the ssh-configuration mention (SKILL.md:26) are names only and do not ship with this skill. Frontmatter declares license: MIT."
+    ]
   },
   "files": [
     {
@@ -55,7 +69,7 @@
       "git_blob": "67c5c5cbb12cafb1515e449748866bd40da7dec9",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
       "findings": []
     },
     {
@@ -66,247 +80,247 @@
       "git_blob": "645d771d89a27e54440236382f4217b3828139a8",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "shell-execution",
           "line": 25,
           "evidence": " sudo",
           "context": "- Root or sudo access on the target system",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with apt/dnf, filesystem, process, cron, journal, and firewall commands, plus sudo prerequisites and script paths in crontab examples."
         },
         {
           "type": "shell-execution",
           "line": 34,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with apt/dnf, filesystem, process, cron, journal, and firewall commands, plus sudo prerequisites and script paths in crontab examples."
         },
         {
           "type": "filesystem-write",
           "line": 50,
           "evidence": "Remove",
           "context": "# Remove a package but keep its config files",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Scanner matched remove/Delete in apt/dnf remove and purge commands and troubleshooting advice to clear old logs and temp files; the skill also writes small config files under /etc."
         },
         {
           "type": "filesystem-write",
           "line": 51,
           "evidence": "remove",
           "context": "apt remove nginx",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Scanner matched remove/Delete in apt/dnf remove and purge commands and troubleshooting advice to clear old logs and temp files; the skill also writes small config files under /etc."
         },
         {
           "type": "filesystem-write",
           "line": 53,
           "evidence": "Remove",
           "context": "# Remove a package and purge all config files",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Scanner matched remove/Delete in apt/dnf remove and purge commands and troubleshooting advice to clear old logs and temp files; the skill also writes small config files under /etc."
         },
         {
           "type": "filesystem-write",
           "line": 56,
           "evidence": "Remove",
           "context": "# Remove unused dependency packages",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Scanner matched remove/Delete in apt/dnf remove and purge commands and troubleshooting advice to clear old logs and temp files; the skill also writes small config files under /etc."
         },
         {
           "type": "network-access",
           "line": 70,
           "evidence": "curl",
           "context": "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Downloads Docker's GPG key into a keyring used with signed-by; it is not executed as a script."
         },
         {
           "type": "network-access",
           "line": 70,
           "evidence": "https://",
           "context": "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Downloads Docker's GPG key into a keyring used with signed-by; it is not executed as a script."
         },
         {
           "type": "network-access",
           "line": 71,
           "evidence": "https://",
           "context": "echo \"deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable\" \\",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "curl of Docker's apt GPG key and repository URL for a signed apt source, and a placeholder remote syslog URL in a config comment."
         },
         {
           "type": "shell-execution",
           "line": 78,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with apt/dnf, filesystem, process, cron, journal, and firewall commands, plus sudo prerequisites and script paths in crontab examples."
         },
         {
           "type": "filesystem-write",
           "line": 94,
           "evidence": "Remove",
           "context": "# Remove a package",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Scanner matched remove/Delete in apt/dnf remove and purge commands and troubleshooting advice to clear old logs and temp files; the skill also writes small config files under /etc."
         },
         {
           "type": "filesystem-write",
           "line": 95,
           "evidence": "remove",
           "context": "dnf remove nginx",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Scanner matched remove/Delete in apt/dnf remove and purge commands and troubleshooting advice to clear old logs and temp files; the skill also writes small config files under /etc."
         },
         {
           "type": "shell-execution",
           "line": 116,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with apt/dnf, filesystem, process, cron, journal, and firewall commands, plus sudo prerequisites and script paths in crontab examples."
         },
         {
           "type": "shell-execution",
           "line": 133,
           "evidence": "sh",
           "context": "du -sh /var/log/*          # Summarize directory sizes",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with apt/dnf, filesystem, process, cron, journal, and firewall commands, plus sudo prerequisites and script paths in crontab examples."
         },
         {
           "type": "shell-execution",
           "line": 146,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with apt/dnf, filesystem, process, cron, journal, and firewall commands, plus sudo prerequisites and script paths in crontab examples."
         },
         {
           "type": "shell-execution",
           "line": 177,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with apt/dnf, filesystem, process, cron, journal, and firewall commands, plus sudo prerequisites and script paths in crontab examples."
         },
         {
           "type": "shell-execution",
           "line": 208,
           "evidence": "sh",
           "context": "nohup /opt/myapp/start.sh > /var/log/myapp.log 2>&1 &",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with apt/dnf, filesystem, process, cron, journal, and firewall commands, plus sudo prerequisites and script paths in crontab examples."
         },
         {
           "type": "shell-execution",
           "line": 211,
           "evidence": "sh",
           "context": "systemd-run --scope -p CPUQuota=25% --unit=limit-myapp /opt/myapp/start.sh",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with apt/dnf, filesystem, process, cron, journal, and firewall commands, plus sudo prerequisites and script paths in crontab examples."
         },
         {
           "type": "shell-execution",
           "line": 216,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with apt/dnf, filesystem, process, cron, journal, and firewall commands, plus sudo prerequisites and script paths in crontab examples."
         },
         {
           "type": "shell-execution",
           "line": 232,
           "evidence": "sh",
           "context": "30 2 * * * /usr/local/bin/backup.sh >> /var/log/backup.log 2>&1",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with apt/dnf, filesystem, process, cron, journal, and firewall commands, plus sudo prerequisites and script paths in crontab examples."
         },
         {
           "type": "shell-execution",
           "line": 235,
           "evidence": "sh",
           "context": "0 0 * * 0 /usr/local/bin/cleanup.sh",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with apt/dnf, filesystem, process, cron, journal, and firewall commands, plus sudo prerequisites and script paths in crontab examples."
         },
         {
           "type": "shell-execution",
           "line": 238,
           "evidence": "sh",
           "context": "*/5 * * * * /usr/local/bin/healthcheck.sh",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with apt/dnf, filesystem, process, cron, journal, and firewall commands, plus sudo prerequisites and script paths in crontab examples."
         },
         {
           "type": "shell-execution",
           "line": 250,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with apt/dnf, filesystem, process, cron, journal, and firewall commands, plus sudo prerequisites and script paths in crontab examples."
         },
         {
           "type": "shell-execution",
           "line": 272,
           "evidence": "sh",
           "context": "du -sh /var/log/*",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with apt/dnf, filesystem, process, cron, journal, and firewall commands, plus sudo prerequisites and script paths in crontab examples."
         },
         {
           "type": "network-access",
           "line": 296,
           "evidence": "http://",
           "context": "# URL=http://logserver.example.com:19532",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "curl of Docker's apt GPG key and repository URL for a signed apt source, and a placeholder remote syslog URL in a config comment."
         },
         {
           "type": "shell-execution",
           "line": 301,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with apt/dnf, filesystem, process, cron, journal, and firewall commands, plus sudo prerequisites and script paths in crontab examples."
         },
         {
           "type": "filesystem-write",
           "line": 336,
           "evidence": "remove",
           "context": "| Disk full | `df -h` and `du -sh /var/log/*` | Clear old logs, run `logrotate -f`, remove temp files |",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Scanner matched remove/Delete in apt/dnf remove and purge commands and troubleshooting advice to clear old logs and temp files; the skill also writes small config files under /etc."
         },
         {
           "type": "shell-execution",
           "line": 336,
           "evidence": "sh",
           "context": "| Disk full | `df -h` and `du -sh /var/log/*` | Clear old logs, run `logrotate -f`, remove temp files |",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with apt/dnf, filesystem, process, cron, journal, and firewall commands, plus sudo prerequisites and script paths in crontab examples."
         },
         {
           "type": "filesystem-write",
           "line": 337,
           "evidence": "Delete",
           "context": "| Out of inodes | `df -i` | Delete many small files, check `/tmp` and mail spools |",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Scanner matched remove/Delete in apt/dnf remove and purge commands and troubleshooting advice to clear old logs and temp files; the skill also writes small config files under /etc."
         },
         {
           "type": "shell-execution",
           "line": 348,
           "evidence": " sudo",
           "context": "- `user-management` -- Create and manage users, groups, and sudo",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash fences with apt/dnf, filesystem, process, cron, journal, and firewall commands, plus sudo prerequisites and script paths in crontab examples."
         }
       ]
     }

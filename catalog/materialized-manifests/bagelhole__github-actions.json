@@ -1,0 +1,143 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "bagelhole/github-actions",
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "devops/ci-cd/github-actions",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "review": {
+    "path": "catalog/reviews/bagelhole__github-actions.json",
+    "sha256": "6e4f27011e215165c7114a9fd9a28e9fe7795ab5e22945721582a001a8efdd09"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "shell-execution",
+        "line": 36,
+        "evidence": "sh",
+        "context": "      - run: ./deploy.sh ${{ inputs.environment }}",
+        "file": "references/workflow-patterns.md"
+      },
+      {
+        "type": "network-access",
+        "line": 69,
+        "evidence": "https://",
+        "context": "      url: https://example.com",
+        "file": "references/workflow-patterns.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 71,
+        "evidence": "sh",
+        "context": "      - run: ./deploy.sh",
+        "file": "references/workflow-patterns.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 135,
+        "evidence": "sh",
+        "context": "      - run: ./deploy.sh",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 146,
+        "evidence": "https://",
+        "context": "      url: https://example.com",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 148,
+        "evidence": "sh",
+        "context": "      - run: ./deploy.sh",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 271,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 273,
+        "evidence": "mkdir",
+        "context": "mkdir actions-runner && cd actions-runner",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 274,
+        "evidence": "curl",
+        "context": "curl -o actions-runner-linux-x64.tar.gz -L https://github.com/actions/runner/releases/download/v2.311.0/actions-runner-linux-x64-2.311.0.tar.gz",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 274,
+        "evidence": "https://",
+        "context": "curl -o actions-runner-linux-x64.tar.gz -L https://github.com/actions/runner/releases/download/v2.311.0/actions-runner-linux-x64-2.311.0.tar.gz",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 278,
+        "evidence": "https://",
+        "context": "./config.sh --url https://github.com/OWNER/REPO --token TOKEN",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 278,
+        "evidence": "sh",
+        "context": "./config.sh --url https://github.com/OWNER/REPO --token TOKEN",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 281,
+        "evidence": "sh",
+        "context": "./run.sh",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 9827
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/workflow-patterns.md",
+      "sha256": "175343992f7696f419d33354f1e495616e2c53fe6d61cf92440fe38208f2a1bd",
+      "bytes": 2027,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "856cc627397b38a3e32a39fd1df2ffdb14d00b3534a8331b1d124c969581e623",
+      "bytes": 6732,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 9827
+}
