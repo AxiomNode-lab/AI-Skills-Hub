@@ -5,12 +5,23 @@ import { confirm, select } from "@inquirer/prompts";
 import { hybridSearch, toInstallChoices } from "@ai-skills-hub/discovery";
 import { loadRegistry } from "@ai-skills-hub/core";
 import { installCapability } from "../install-executor.mjs";
+import { UsageError } from "../errors.mjs";
 
+// Looks like a repository reference rather than a search phrase.
 function isGitReference(value) {
-  return /^(?:https?|ssh):\/\//i.test(value)
-    || /^git@[A-Za-z0-9.-]+:/i.test(value)
-    || /^git:\/\//i.test(value)
-    || value.endsWith(".git");
+  return /^[a-z][a-z0-9+.-]*:\/\//i.test(value) || /^git@/i.test(value) || /^[a-z0-9+.-]+::/i.test(value) || /\.git\/?$/i.test(value);
+}
+
+// Only authenticated, remote transports are accepted: https:// and ssh, never
+// http://, git://, file paths, or git's ext:: remote helpers.
+function validGitUrl(value) {
+  if (/^git@[A-Za-z0-9.-]+:[A-Za-z0-9._\/-]+$/.test(value)) return true;
+  try {
+    const url = new URL(value);
+    return (url.protocol === "https:" || url.protocol === "ssh:") && Boolean(url.hostname) && !url.search && !url.hash && /^[A-Za-z0-9._\/~-]+$/.test(url.pathname);
+  } catch {
+    return false;
+  }
 }
 
 function repositoryName(value) {
@@ -25,40 +36,53 @@ function repositoryName(value) {
 
 function assertGitReference(value) {
   const trimmed = String(value).trim();
-  if (trimmed.includes("\0")) throw new Error("Invalid Git reference.");
-  if (!isGitReference(trimmed)) throw new Error("Unsupported Git reference. Use an HTTPS/SSH Git repository URL.");
+  if (/[\0\s]/.test(trimmed) || trimmed.startsWith("-") || !validGitUrl(trimmed)) {
+    throw new UsageError("Unsupported Git reference. Use an https:// or SSH repository URL");
+  }
+}
+
+// Success is reported only when the adapter actually installed the capability;
+// every other outcome (held, blocked, pending adapter, confirmation needed,
+// incompatible, ...) is a failure with its reason.
+export function addOutcome(result, name) {
+  if (result?.installed !== true) {
+    const reason = result?.requires_confirmation ? "confirmation required" : result?.action ?? "not installed";
+    return { ok: false, message: `Not installed: ${name} (${reason}${result?.reason ? ": " + result.reason : ""}).` };
+  }
+  if (result.action === "already-installed") return { ok: true, message: `${name} is already installed.` };
+  return { ok: true, message: `Installed ${name}${result.destination ? " → " + result.destination : ""}.` };
 }
 
 export async function addCommand(query, options = {}) {
-  if (!query) {
-    console.error("Error: You must provide a search query or capability ID.");
-    console.log("Usage: skills-hub add <query> [--agent <agent-id>] [--yes]");
-    return;
-  }
+  if (!query) throw new UsageError("add needs a search phrase or a Git repository URL");
 
-  const agent = options.agent || "generic-agent";
+  const agent = options.agent || "agent-skills";
 
   if (isGitReference(query)) {
+    assertGitReference(query);
     try {
-      assertGitReference(query);
       const repoName = repositoryName(query);
       const libDir = path.resolve(process.cwd(), "capabilities-library");
       const targetDir = path.join(libDir, repoName);
 
       await fs.mkdir(libDir, { recursive: true });
       if (await fs.access(targetDir).then(() => true).catch(() => false)) {
-        console.error(`Error: A capability named '${repoName}' already exists at ${targetDir}`);
-        console.log("Use 'skills-hub sync' to update it instead.");
+        console.error(`A local capability named '${repoName}' already exists at ${targetDir}. Use 'skills-hub sync' to update it.`);
+        process.exitCode = 1;
         return;
       }
 
-      console.log(`Cloning ${query} into ${targetDir}...`);
-      execFileSync("git", ["clone", "--", query, targetDir], { stdio: "inherit" });
-      console.log(`Successfully added ${repoName} to the local capabilities library.`);
-      console.log("Review the source and registry policy before installing it.");
+      console.log(`Cloning ${query} into ${targetDir} for local review...`);
+      // Argument vector, no shell; git may only use https and ssh here.
+      execFileSync("git", ["clone", "--no-recurse-submodules", "--", query, targetDir], {
+        stdio: "inherit",
+        env: { ...process.env, GIT_ALLOW_PROTOCOL: "https:ssh", GIT_TERMINAL_PROMPT: "0" }
+      });
+      console.log(`Added ${repoName} to capabilities-library/ for review. It is not released and nothing was installed.`);
       return;
     } catch (error) {
-      console.error(`Failed to add Git capability: ${error.message}`);
+      console.error(`Failed to add Git repository: ${error.message}`);
+      process.exitCode = 1;
       return;
     }
   }
@@ -73,6 +97,7 @@ export async function addCommand(query, options = {}) {
 
     if (!searchResult.results.length) {
       console.log(`No capabilities found matching "${query}".`);
+      process.exitCode = 1;
       return;
     }
 
@@ -125,13 +150,12 @@ export async function addCommand(query, options = {}) {
       env: {}
     });
 
-    if (result.action === "blocked" || result.action === "hold" || result.action === "unsupported" || result.action === "incompatible") {
-      console.log(`Installation not performed: ${result.reason}`);
-      return;
-    }
-
-    console.log(`Successfully installed ${selected.name}.`);
+    const outcome = addOutcome(result, selected.name);
+    (outcome.ok ? console.log : console.error)(outcome.message);
+    if (!outcome.ok) process.exitCode = 1;
   } catch (error) {
-    console.error(`Failed to search/install: ${error.message}`);
+    if (error instanceof UsageError) throw error;
+    console.error(`Failed to search or install: ${error.message}`);
+    process.exitCode = 1;
   }
 }

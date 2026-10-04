@@ -9,6 +9,21 @@ export function hubHome(env = process.env) {
   return path.resolve(env.SKILLS_HUB_HOME || fileURLToPath(new URL("../../../", import.meta.url)));
 }
 
+// The root of the running code: the repository in development, the npm
+// package when installed. Unlike hubHome(), SKILLS_HUB_HOME does not move it.
+export function packageRoot() {
+  return fileURLToPath(new URL("../../../", import.meta.url));
+}
+
+// The version of the running code, from the package.json at packageRoot().
+export function hubVersion() {
+  try {
+    return JSON.parse(fs.readFileSync(path.join(packageRoot(), "package.json"), "utf8")).version ?? "0.0.0";
+  } catch {
+    return "0.0.0";
+  }
+}
+
 export function catalogPath(name, env = process.env) {
   return path.join(hubHome(env), "catalog", name);
 }

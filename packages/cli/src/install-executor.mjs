@@ -1,7 +1,7 @@
 import { execFileSync } from "node:child_process";
 import { buildAdapterPlan } from "@ai-skills-hub/discovery";
 import { getAdapter } from "../../installer/src/adapters/index.mjs";
-import { writeInstallRecord } from "../../installer/src/state.mjs";
+import { readInstallRecords, verifyInstallRecord, writeInstallRecord } from "../../installer/src/state.mjs";
 import { buildInstallPlan } from "../../installer/src/index.mjs";
 
 const TRUSTED_BINARIES = new Set(["npx", "pnpm", "codex", "claude", "copilot"]);
@@ -130,6 +130,7 @@ export async function installCapability(
     scope = "project",
     cwd = process.cwd(),
     confirmed = false,
+    force = false,
     env = {},
     json = false
   } = {}
@@ -190,13 +191,21 @@ export async function installCapability(
   }
 
   if (plan.action === "configuration" || plan.action === "install") {
+    // Reinstalling the same verified revision is a no-op, not a rewrite.
+    const existing = readInstallRecords(scope, cwd)[capability.id];
+    if (plan.action === "install" && existing && existing.agent === agent
+      && existing.source?.revision === capability.source?.revision && verifyInstallRecord(existing).ok) {
+      return { ...plan, action: "already-installed", installed: true, destination: existing.destination, record: existing };
+    }
     const adapter = getAdapter(capability);
+    // A Hub-managed, unmodified installation may be replaced; anything else
+    // (an unmanaged folder or locally edited files) needs an explicit --force.
     const result = await adapter.install({
       agent,
       scope,
       cwd,
       overwrite: true,
-      force: true,
+      force,
       env
     });
 

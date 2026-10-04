@@ -6,6 +6,7 @@ import {
   catalogAvailability,
   filterForAgent,
   hubHome,
+  hubVersion,
   isInstallable,
   loadRegistry,
   resolveBundle,
@@ -15,7 +16,7 @@ import {
 import { searchRegistry } from "@ai-skills-hub/discovery";
 import { sha256, verifyReviewedDirectory } from "../../materializer/src/reviewed.mjs";
 
-export const SERVER_INFO = { name: "ai-skills-hub", version: "0.2.0" };
+export const SERVER_INFO = { name: "ai-skills-hub", version: hubVersion() };
 const PROTOCOL_VERSIONS = ["2025-06-18", "2025-03-26", "2024-11-05"];
 const RESOURCE_PREFIX = "skillshub://skills/";
 const MAX_BODY_BYTES = 1024 * 1024;

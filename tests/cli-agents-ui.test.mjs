@@ -123,24 +123,34 @@ test("a Microsoft skill installs for Claude Code into .claude/skills via the Age
   assert.ok(fs.existsSync(path.join(cwd, ".claude", "skills", "wiki-qa", "LICENSE.txt")));
 });
 
-test("the update check is cached for a day so commands do not wait on the network each time", async t => {
-  const { checkForUpdates } = await import("../packages/cli/src/utils.mjs");
+test("the update check asks npm for this package, is cached for a day, and skips development checkouts", async t => {
+  const { checkForUpdates, compareVersions } = await import("../packages/cli/src/utils.mjs");
+  const home = temp(t, "hub-update-home-");
+  fs.writeFileSync(path.join(home, "package.json"), JSON.stringify({ name: "@axiomnode-lab/skills-hub", version: "0.3.0-beta.1" }));
   const cacheFile = path.join(temp(t, "hub-update-"), "update-check.json");
-  let calls = 0;
-  const fetchImpl = async () => { calls += 1; return { ok: true, json: async () => ({ version: "999.0.0" }) }; };
+  const localPkgPath = path.join(home, "package.json");
+  const urls = [];
+  const fetchImpl = async (url) => { urls.push(url); return { ok: true, json: async () => ({ version: "0.3.0" }) }; };
   const logs = [];
-  const log = console.log;
-  console.log = (...args) => logs.push(args.join(" "));
-  t.after(() => { console.log = log; });
-  const run = (now) => checkForUpdates({ env: {}, isTTY: true, fetchImpl, now, cacheFile });
+  const error = console.error;
+  console.error = (...args) => logs.push(args.join(" "));
+  t.after(() => { console.error = error; });
+  const run = (now) => checkForUpdates({ env: {}, isTTY: true, fetchImpl, now, cacheFile, localPkgPath });
   await run(1_000);
   await run(1_000 + 60_000);
-  assert.equal(calls, 1, "a fresh cache answers without fetching");
+  assert.deepEqual(urls, ["https://registry.npmjs.org/@axiomnode-lab%2fskills-hub/latest"], "a fresh cache answers without fetching");
   await run(1_000 + 25 * 60 * 60 * 1000);
-  assert.equal(calls, 2, "a stale cache fetches again");
-  assert.ok(logs.some(line => line.includes("999.0.0")));
-  await checkForUpdates({ env: {}, isTTY: false, fetchImpl, now: 0, cacheFile });
-  assert.equal(calls, 2, "non-interactive output never checks");
+  assert.equal(urls.length, 2, "a stale cache fetches again");
+  assert.ok(logs.some(line => line.includes("0.3.0-beta.1 -> 0.3.0") && line.includes("npm install -g @axiomnode-lab/skills-hub@latest")));
+  await checkForUpdates({ env: {}, isTTY: false, fetchImpl, now: 0, cacheFile, localPkgPath });
+  assert.equal(urls.length, 2, "non-interactive output never checks");
+  fs.writeFileSync(path.join(home, "package.json"), JSON.stringify({ name: "ai-skills-hub", version: "0.3.0-beta.1", private: true }));
+  await checkForUpdates({ env: {}, isTTY: true, fetchImpl, now: 10 * 24 * 60 * 60 * 1000, cacheFile, localPkgPath });
+  assert.equal(urls.length, 2, "a development checkout never checks npm");
+  assert.ok(compareVersions("0.3.0", "0.3.0-beta.1") > 0);
+  assert.ok(compareVersions("0.3.0-beta.2", "0.3.0-beta.10") < 0);
+  assert.ok(compareVersions("0.2.9", "0.3.0-beta.1") < 0);
+  assert.equal(compareVersions("1.0.0", "1.0.0"), 0);
 });
 
 test("release notices are listed by info and returned by install", t => {

@@ -101,6 +101,8 @@ for (const skill of released) {
     const cwd = tempProject(t);
     fs.mkdirSync(path.join(cwd, "catalog"));
     fs.writeFileSync(path.join(cwd, "catalog", "skills.json"), JSON.stringify({ skills: [{ ...skill, materialized_root: path.resolve(skill.materialized_root) }] }));
+    fs.mkdirSync(path.join(cwd, "catalog", "materialized-manifests"));
+    fs.copyFileSync(`catalog/materialized-manifests/${skill.id.replaceAll("/", "__")}.json`, path.join(cwd, "catalog", "materialized-manifests", `${skill.id.replaceAll("/", "__")}.json`));
     const run = (...args) => {
       const result = spawnSync(process.execPath, [path.join(repoRoot, "packages/cli/bin/skills-hub.mjs"), ...args, "--json"], { cwd, encoding: "utf8", env: { ...process.env, SKILLS_HUB_HOME: cwd } });
       assert.equal(result.status, 0, result.stdout + result.stderr);

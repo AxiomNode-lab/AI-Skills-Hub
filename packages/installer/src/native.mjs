@@ -1,3 +1,4 @@
+import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import { resolveHubPath } from "@ai-skills-hub/core";
@@ -16,21 +17,58 @@ function safeInside(root, candidate) {
   return c === r || c.startsWith(r + path.sep);
 }
 
-function copyDirectory(src, destination, overwrite = false) {
-  if (!fs.existsSync(path.join(src, "SKILL.md"))) {
-    throw new Error("Materialized skill is missing SKILL.md: " + src);
-  }
-  if (fs.existsSync(destination) && !overwrite) {
-    throw new Error("Destination exists; pass overwrite=true: " + destination);
-  }
+const sha256 = (bytes) => crypto.createHash("sha256").update(bytes).digest("hex");
 
-  fs.mkdirSync(path.dirname(destination), { recursive: true });
-  fs.cpSync(src, destination, {
-    recursive: true,
-    force: overwrite,
-    errorOnExist: !overwrite,
-    dereference: true
-  });
+// Reads a released artifact and checks it against its release manifest: the
+// same skill and pinned source, exactly the listed regular files (no symlinks,
+// no extras), and every file's size and SHA-256. Returns the verified bytes, so
+// what is installed is exactly what was checked.
+export function verifiedArtifact(skill) {
+  const manifestPath = resolveHubPath(`catalog/materialized-manifests/${skill.id.replaceAll("/", "__")}.json`);
+  if (!fs.existsSync(manifestPath)) throw new Error("Release manifest not found for " + skill.id);
+  const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
+  if (manifest.skill_id !== skill.id || manifest.source?.repo !== skill.source?.repo || manifest.source?.revision !== skill.source?.revision || manifest.source?.path !== skill.source?.path) {
+    throw new Error("Release manifest does not match the catalog record for " + skill.id);
+  }
+  const root = resolveHubPath(skill.materialized_root);
+  const found = [];
+  const walk = (dir) => {
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const full = path.join(dir, entry.name);
+      if (entry.isSymbolicLink()) throw new Error("Released artifact contains a symlink: " + full);
+      if (entry.isDirectory()) walk(full);
+      else if (entry.isFile()) found.push(path.relative(root, full).split(path.sep).join("/"));
+      else throw new Error("Released artifact contains an unsupported entry: " + full);
+    }
+  };
+  if (fs.lstatSync(root).isSymbolicLink()) throw new Error("Released artifact root is a symlink: " + root);
+  walk(root);
+  const expected = manifest.materialized_files.map((file) => file.path).sort();
+  if (JSON.stringify(found.sort()) !== JSON.stringify(expected)) throw new Error("Released artifact files do not match the manifest for " + skill.id);
+  const files = new Map();
+  for (const file of manifest.materialized_files) {
+    if (file.path.split("/").some((part) => part === ".." || part === "" || part === ".")) throw new Error("Unsafe manifest path: " + file.path);
+    const bytes = fs.readFileSync(path.join(root, ...file.path.split("/")));
+    if (bytes.length !== file.bytes || sha256(bytes) !== file.sha256) throw new Error("Released file does not match its manifest hash: " + file.path);
+    files.set(file.path, bytes);
+  }
+  if (!files.has("SKILL.md")) throw new Error("Released artifact is missing SKILL.md: " + skill.id);
+  return files;
+}
+
+// Writes verified files into a new directory. An existing destination is
+// replaced as a whole (the caller has checked ownership), so no stale files
+// from an earlier version remain.
+function writeVerifiedFiles(files, destination, overwrite = false) {
+  if (fs.existsSync(destination)) {
+    if (!overwrite) throw new Error("Destination exists; pass overwrite=true: " + destination);
+    fs.rmSync(destination, { recursive: true, force: true });
+  }
+  for (const [relative, bytes] of files) {
+    const target = path.join(destination, ...relative.split("/"));
+    fs.mkdirSync(path.dirname(target), { recursive: true });
+    fs.writeFileSync(target, bytes, { flag: "wx" });
+  }
 }
 
 export function installMaterializedSkill(skill, options = {}) {
@@ -53,6 +91,7 @@ export function installMaterializedSkill(skill, options = {}) {
   if (!fs.existsSync(sourceRoot)) {
     throw new Error("Materialized root not found: " + sourceRoot);
   }
+  const files = verifiedArtifact(skill);
 
   const root = resolveInstallRoot(agent, scope, cwd);
   const destination = normalizeSkillDirectory(root, skill.name);
@@ -76,7 +115,7 @@ export function installMaterializedSkill(skill, options = {}) {
     }
   }
 
-  copyDirectory(sourceRoot, destination, overwrite);
+  writeVerifiedFiles(files, destination, overwrite);
 
   const record = buildInstallRecord(skill, destination, { agent, scope });
   if (persistState) writeInstallRecord(record, cwd);
