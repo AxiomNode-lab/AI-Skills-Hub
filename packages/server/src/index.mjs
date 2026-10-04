@@ -5,6 +5,7 @@ import readline from "node:readline";
 import {
   catalogAvailability,
   filterForAgent,
+  isInstallable,
   loadRegistry,
   resolveBundle,
   resolveHubPath,
@@ -18,10 +19,9 @@ const RESOURCE_PREFIX = "skillshub://skills/";
 const MAX_BODY_BYTES = 1024 * 1024;
 const MAX_LIMIT = 100;
 
-const isEligible = (skill) => catalogAvailability(skill).status === "eligible";
 
 function installCommand(skill, agent = "<agent>") {
-  return isEligible(skill) ? `skills-hub install ${skill.id} --agent ${agent}` : null;
+  return isInstallable(skill) ? `skills-hub install ${skill.id} --agent ${agent}` : null;
 }
 
 // Normalized catalog metadata only: upstream content is served solely for released skills.
@@ -55,7 +55,7 @@ export function skillSummary(skill) {
 // Lists the regular files of a released skill. Symbolic links and paths outside
 // the materialized root are never served.
 export function skillFiles(skill) {
-  if (!isEligible(skill) || !skill.materialized_root) return [];
+  if (!isInstallable(skill) || !skill.materialized_root) return [];
   const root = resolveHubPath(skill.materialized_root);
   const files = [];
   const walk = (dir) => {
@@ -69,8 +69,8 @@ export function skillFiles(skill) {
   return files.sort();
 }
 
-function readSkillFile(skill, relative) {
-  if (!skillFiles(skill).includes(relative)) return null;
+function readSkillFile(skill, relative, files = skillFiles(skill)) {
+  if (!files.includes(relative)) return null;
   return fs.readFileSync(path.join(resolveHubPath(skill.materialized_root), ...relative.split("/")), "utf8");
 }
 
@@ -78,23 +78,30 @@ const mimeType = (file) => (file.endsWith(".md") ? "text/markdown" : "text/plain
 
 export function createCatalog(registry = loadRegistry()) {
   const byId = new Map(registry.skills.map((skill) => [skill.id, skill]));
+  const eligible = registry.skills.filter(isInstallable);
+  // Each released skill's file list is read from disk once per catalog.
+  const fileLists = new Map();
+  const filesOf = (skill) => {
+    if (!fileLists.has(skill.id)) fileLists.set(skill.id, skillFiles(skill));
+    return fileLists.get(skill.id);
+  };
 
   function search({ query = "", agent, limit = 20, installable_only = false } = {}) {
     const max = Math.min(MAX_LIMIT, Math.max(1, Number(limit) || 20));
-    const pool = installable_only ? { ...registry, skills: registry.skills.filter(isEligible) } : registry;
+    const pool = installable_only ? { ...registry, skills: eligible } : registry;
     return searchRegistry(pool, query, { agent: agent || undefined, limit: max }).map(({ item }) => skillSummary(item));
   }
 
   function detail(id, { agent } = {}) {
     const skill = byId.get(id);
     if (!skill) return null;
-    const files = skillFiles(skill);
+    const files = filesOf(skill);
     return {
       ...skillSummary(skill),
       install: installCommand(skill, agent),
       dependencies: skill.dependencies ?? [],
       files: files.map((file) => ({ path: file, uri: RESOURCE_PREFIX + skill.id + "/" + file })),
-      skill_md: files.includes("SKILL.md") ? readSkillFile(skill, "SKILL.md") : null
+      skill_md: readSkillFile(skill, "SKILL.md", files)
     };
   }
 
@@ -117,7 +124,7 @@ export function createCatalog(registry = loadRegistry()) {
   }
 
   function resources() {
-    return registry.skills.filter(isEligible).flatMap((skill) => skillFiles(skill).map((file) => ({
+    return eligible.flatMap((skill) => filesOf(skill).map((file) => ({
       uri: RESOURCE_PREFIX + skill.id + "/" + file,
       name: `${skill.id}/${file}`,
       title: `${skill.name}: ${file}`,
@@ -128,10 +135,10 @@ export function createCatalog(registry = loadRegistry()) {
   function readResource(uri) {
     if (typeof uri !== "string" || !uri.startsWith(RESOURCE_PREFIX)) return null;
     const rest = uri.slice(RESOURCE_PREFIX.length);
-    for (const skill of registry.skills.filter(isEligible)) {
+    for (const skill of eligible) {
       if (!rest.startsWith(skill.id + "/")) continue;
       const file = rest.slice(skill.id.length + 1);
-      const text = readSkillFile(skill, file);
+      const text = readSkillFile(skill, file, filesOf(skill));
       if (text !== null) return { uri, mimeType: mimeType(file), text };
     }
     return null;
@@ -246,10 +253,10 @@ function readBody(req) {
     let size = 0;
     req.on("data", (chunk) => {
       size += chunk.length;
-      if (size > MAX_BODY_BYTES) {
-        reject(Object.assign(new Error("Request body too large"), { status: 413 }));
-        req.destroy();
-      } else chunks.push(chunk);
+      // Over the limit: stop buffering and answer 413; the socket stays open
+      // until the response is written (sent with connection: close).
+      if (size > MAX_BODY_BYTES) reject(Object.assign(new Error("Request body too large"), { status: 413 }));
+      else chunks.push(chunk);
     });
     req.on("end", () => resolve(Buffer.concat(chunks).toString("utf8")));
     req.on("error", reject);
@@ -260,13 +267,13 @@ function handleApi(catalog, url, res) {
   const params = Object.fromEntries(url.searchParams);
   const route = url.pathname.replace(/\/+$/, "") || "/";
   if (route === "/api/health") {
-    return sendJson(res, 200, { status: "ok", skills: catalog.registry.skills.length, eligible: catalog.registry.skills.filter(isEligible).length });
+    return sendJson(res, 200, { status: "ok", skills: catalog.registry.skills.length, eligible: catalog.registry.skills.filter(isInstallable).length });
   }
   if (route === "/api/catalog") {
     return sendJson(res, 200, {
       generated_at: catalog.registry.generated_at ?? null,
       summary: summarize(catalog.registry.skills),
-      eligible: catalog.registry.skills.filter(isEligible).map((skill) => skill.id),
+      eligible: catalog.registry.skills.filter(isInstallable).map((skill) => skill.id),
       bundles: Object.keys(catalog.registry.bundles ?? {})
     });
   }
@@ -286,6 +293,14 @@ function handleApi(catalog, url, res) {
   return sendJson(res, 404, { error: "not_found" });
 }
 
+function isLoopbackOrigin(origin) {
+  try {
+    return ["localhost", "127.0.0.1", "[::1]"].includes(new URL(origin).hostname);
+  } catch {
+    return false;
+  }
+}
+
 export function createHubServer({ registry } = {}) {
   const catalog = createCatalog(registry);
   return http.createServer(async (req, res) => {
@@ -298,12 +313,16 @@ export function createHubServer({ registry } = {}) {
         });
       }
       if (url.pathname === "/mcp") {
+        // MCP Streamable HTTP: reject cross-site browser requests (DNS rebinding).
+        if (req.headers.origin && !isLoopbackOrigin(req.headers.origin)) {
+          return sendJson(res, 403, { error: "origin_not_allowed" });
+        }
         if (req.method !== "POST") return sendJson(res, 405, { error: "method_not_allowed" }, { allow: "POST" });
         let message;
         try {
           message = JSON.parse(await readBody(req));
         } catch (error) {
-          if (error.status) return sendJson(res, error.status, { error: error.message });
+          if (error.status) return sendJson(res, error.status, { error: error.message }, { connection: "close" });
           return sendJson(res, 400, rpcError(null, -32700, "Parse error"));
         }
         if (Array.isArray(message)) return sendJson(res, 400, rpcError(null, -32600, "Batch requests are not supported"));
@@ -315,7 +334,7 @@ export function createHubServer({ registry } = {}) {
       }
       return handleApi(catalog, url, res);
     } catch (error) {
-      return sendJson(res, 500, { error: "internal_error", message: error.message });
+      return sendJson(res, 500, { error: "internal_error" });
     }
   });
 }

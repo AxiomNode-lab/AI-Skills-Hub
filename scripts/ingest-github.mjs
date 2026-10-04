@@ -84,10 +84,16 @@ if (checkout) {
   revision = git("rev-parse", "HEAD").trim();
   const origin = git("remote", "get-url", "origin").trim().replace(/\.git$/, "");
   if (!origin.toLowerCase().endsWith("/" + repo.toLowerCase())) throw new Error(`Checkout origin ${origin} is not ${repo}`);
+  // The recorded ref must name the commit that was actually read.
+  const refRevision = ["refs/heads/", "refs/remotes/origin/", "refs/tags/"].map((prefix) => {
+    try { return git("rev-parse", "--verify", "-q", prefix + ref + "^{commit}").trim(); } catch { return null; }
+  }).find(Boolean);
+  if (refRevision !== revision) throw new Error(`Checkout HEAD ${revision} is not ${ref} (${refRevision ?? "ref not found in the clone"})`);
   tree = {
     sha: git("rev-parse", "HEAD^{tree}").trim(),
     truncated: false,
-    tree: git("ls-tree", "-r", "--full-tree", revision).split("\n").filter(Boolean).map((line) => {
+    // -z keeps paths unquoted (git C-quotes non-ASCII and special characters otherwise).
+    tree: git("ls-tree", "-r", "--full-tree", "-z", revision).split("\0").filter(Boolean).map((line) => {
       const [meta, file] = line.split("\t");
       const [mode, type] = meta.split(" ");
       return { path: file, mode, type };

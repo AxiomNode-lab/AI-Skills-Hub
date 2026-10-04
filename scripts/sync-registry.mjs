@@ -19,6 +19,9 @@ const args=process.argv.slice(2);
 const onlySources=args.flatMap((arg,i)=>arg==="--source"&&args[i+1]?[args[i+1]]:[]);
 const noFetch=args.includes("--no-fetch");
 const sourceEntries=sources.sources.filter((s)=>s.kind==="github" && s.repo && s.ingest_enabled === true && (!onlySources.length || onlySources.includes(s.repo)));
+// include_paths narrows a source to the listed subtrees (for example, only the
+// programming skills of a mixed repository).
+const inScope=(source,itemPath)=>!source.include_paths || source.include_paths.some((p)=>itemPath===p || itemPath.startsWith(p+"/"));
 if(onlySources.length && sourceEntries.length!==onlySources.length) throw new Error("Unknown or disabled --source: "+onlySources.filter((r)=>!sourceEntries.some((s)=>s.repo===r)).join(", "));
 
 const namespaceByRepo={
@@ -87,13 +90,16 @@ for(const source of sourceEntries){
   const file=path.join(ROOT,"catalog/ingestion",source.repo.replaceAll("/","__")+".json");
   if(!fs.existsSync(file)) throw new Error("Missing ingestion output for "+source.repo);
   const payload=JSON.parse(fs.readFileSync(file,"utf8"));
-  // include_paths narrows a source to the listed subtrees (for example, only the
-  // programming skills of a mixed repository).
-  const inScope=(item)=>!source.include_paths || source.include_paths.some((p)=>item.path===p || item.path.startsWith(p+"/"));
-  for(const item of payload.discovered_skills.filter(inScope)) discovered.push({source,item,revision:payload.source.revision});
+  for(const item of payload.discovered_skills.filter((item)=>inScope(source,item.path))) discovered.push({source,item,revision:payload.source.revision});
 }
 
+// Ids already held by a record at the same upstream path are claimed first, so
+// a new path with the same skill name cannot take them over, whatever the order.
 const claimedIds=new Set();
+for(const {source,item} of discovered){
+  const existing=existingBySource.get(source.repo+":"+item.path);
+  if(existing) claimedIds.add(existing.id);
+}
 for(const {source,item,revision} of discovered){
   const sourceKey=source.repo+":"+item.path;
   seenSourceKeys.add(sourceKey);
@@ -196,7 +202,10 @@ for(const {source,item,revision} of discovered){
 
 for (const skill of registry.skills) {
   const sourceRepo = skill.source?.repo;
-  if (!sourceEntries.some((source) => source.repo === sourceRepo)) continue;
+  const source = sourceEntries.find((entry) => entry.repo === sourceRepo);
+  if (!source) continue;
+  // Records outside include_paths were not looked for, so they are not missing.
+  if (!inScope(source, skill.source.path)) continue;
 
   const sourceKey = sourceRepo + ":" + skill.source.path;
   if (seenSourceKeys.has(sourceKey)) continue;

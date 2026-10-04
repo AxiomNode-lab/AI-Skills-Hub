@@ -101,3 +101,12 @@ test("draft-review refuses code, missing licenses, nested notices, and conflicti
   ];
   for (const [files, expected] of cases) assert.match(fixture(t, files).run().stderr, expected);
 });
+
+test("a skill-local license is refused when a NOTICE or second license file also applies", t => {
+  for (const extra of [{ NOTICE: "Example NOTICE\n" }, { "skills/demo/LICENSE-THIRD-PARTY.md": "Other terms\n" }]) {
+    const f = fixture(t, { "skills/demo/SKILL.md": SKILL(), "skills/demo/LICENSE.txt": APACHE, ...extra });
+    const result = f.run();
+    assert.notEqual(result.status, 0, Object.keys(extra)[0]);
+    assert.match(result.stderr, /Notice, copying, or additional license files apply/);
+  }
+});

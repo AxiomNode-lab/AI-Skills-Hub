@@ -113,3 +113,15 @@ test("HTTP MCP endpoint accepts JSON-RPC posts and rejects other methods", async
   assert.equal((await fetch(base + "/mcp")).status, 405);
   assert.equal((await fetch(base + "/api/health", { method: "DELETE" })).status, 405);
 });
+
+test("HTTP MCP endpoint refuses cross-site origins and answers oversized bodies with 413", async t => {
+  const { base } = await withServer(t);
+  const body = JSON.stringify({ jsonrpc: "2.0", id: 1, method: "tools/list" });
+  const post = (headers, payload = body) => fetch(base + "/mcp", { method: "POST", headers: { "content-type": "application/json", ...headers }, body: payload });
+  assert.equal((await post({ origin: "https://attacker.example" })).status, 403);
+  assert.equal((await post({ origin: "http://localhost:3000" })).status, 200);
+  assert.equal((await post({})).status, 200);
+  const big = await post({}, "x".repeat(1024 * 1024 + 1));
+  assert.equal(big.status, 413);
+  assert.equal((await big.json()).error, "Request body too large");
+});

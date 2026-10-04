@@ -24,6 +24,13 @@ All notable changes to AI Skills Hub are documented here.
 - `scripts/ingest-github.mjs --checkout <clone>` ingests from a pinned local clone when the GitHub API is unavailable; `scripts/sync-registry.mjs --source <repo> --no-fetch` syncs only the named sources from existing ingestion files.
 - A repository-root Apache-2.0 license can cover a skill under the same conditions as MIT, with no NOTICE file applying (docs/LICENSE-POLICY.md).
 
+### Fixed
+- `sync-registry`: records outside a source's `include_paths` are left unchanged instead of being blocked as missing; an existing record keeps its id when a new upstream path has the same skill name, regardless of order.
+- `ingest-github --checkout` and `draft-review` read `git ls-tree -z`, so paths with non-ASCII or special characters are found; `--checkout` refuses a ref that does not name the checked-out commit.
+- `draft-review` refuses a skill-local license when a NOTICE, COPYING, or second license file also applies.
+- `parseFrontmatter` reads plain scalars starting on the next line, comments after quoted values, indentation indicators before chomping (`>2-`), and blank lines inside plain scalars.
+- HTTP MCP endpoint rejects non-loopback `Origin` headers, returns 413 instead of resetting the connection, and no longer echoes internal error messages; file lists are read once per server.
+
 ### Changed
 - `microsoft/azure-ai-anomalydetector-java` is held with reason `upstream-service-retired` (Microsoft retired the service on 2026-10-01) and no longer ships; 165 skills are installable. `info` now prints release hold reasons.
 - Independent instruction reviews of 40 microsoft/skills skills are recorded in docs/reviews/independent-batch-01 to -04.

@@ -142,7 +142,10 @@ export function parseFrontmatter(text) {
     const match = body[i].match(/^([A-Za-z0-9_-]+):(?:\s+(.*))?$/);
     if (!match) continue;
     const [, key, rawValue = ""] = match;
-    const value = /^["']/.test(rawValue.trim()) ? rawValue.trim() : rawValue.replace(/\s+#.*$/, "").trim();
+    const trimmed = rawValue.trim();
+    // A comment may follow a closed quoted scalar: "text" # note
+    const closedQuote = trimmed.match(/^("(?:[^"\\]|\\.)*"|'(?:[^']|'')*')\s*(?:#.*)?$/);
+    const value = closedQuote ? closedQuote[1] : /^["']/.test(trimmed) ? trimmed : rawValue.replace(/\s+#.*$/, "").trim();
     const continuation = [];
     while (i + 1 < body.length && (body[i + 1].trim() === "" || indentOf(body[i + 1]) > 0)) {
       continuation.push(body[i + 1]);
@@ -150,7 +153,8 @@ export function parseFrontmatter(text) {
     }
     while (continuation.length && continuation.at(-1).trim() === "") continuation.pop();
 
-    const block = value.match(/^([>|])([+-]?)\d*$/);
+    // Block indicator with optional indentation digit and chomping, in either order.
+    const block = value.match(/^([>|])(?:([+-])[1-9]?|[1-9]([+-])?)?$/);
     if (block) {
       const nonBlank = continuation.filter((line) => line.trim());
       const indent = nonBlank.length ? Math.min(...nonBlank.map(indentOf)) : 0;
@@ -166,13 +170,14 @@ export function parseFrontmatter(text) {
         }
         result = result.replace(/\n$/, "");
       }
-      fields[key] = block[2] === "-" ? result.replace(/\n+$/, "") : result + "\n";
+      fields[key] = (block[2] ?? block[3]) === "-" ? result.replace(/\n+$/, "") : result + "\n";
       continue;
     }
 
-    if (value === "") {
-      // A nested mapping or sequence; only scalar fields are extracted.
-      if (!continuation.some((line) => line.trim())) fields[key] = "";
+    const firstNested = continuation.find((line) => line.trim())?.trim();
+    if (value === "" && (!firstNested || /^-(\s|$)/.test(firstNested) || /^[^\s"'#][^#]*?:(\s|$)/.test(firstNested))) {
+      // Empty, or a nested mapping or sequence; only scalar fields are extracted.
+      if (!firstNested) fields[key] = "";
       continue;
     }
 
@@ -182,8 +187,17 @@ export function parseFrontmatter(text) {
       continue;
     }
 
-    const plain = [value, ...continuation.map((line) => line.trim()).filter(Boolean)].join(" ");
-    fields[key] = continuation.length ? plain : unquote(value);
+    if (!continuation.length) {
+      fields[key] = unquote(value);
+      continue;
+    }
+    // A plain multi-line scalar folds lines with spaces; a blank line is a newline.
+    let plain = value;
+    for (const line of continuation.map((item) => item.trim())) {
+      if (!line) plain += "\n";
+      else plain += plain && !plain.endsWith("\n") ? " " + line : line;
+    }
+    fields[key] = plain;
   }
   return fields;
 }

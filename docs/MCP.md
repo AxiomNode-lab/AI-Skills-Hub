@@ -7,6 +7,8 @@ AI Skills Hub runs a read-only MCP server so an agent can search the catalog and
 | stdio | `skills-hub mcp` |
 | HTTP (JSON responses) | `skills-hub serve`, then `POST http://127.0.0.1:8787/mcp` |
 
+The HTTP endpoint answers 403 to a request whose `Origin` header is not `localhost`, `127.0.0.1`, or `[::1]`, so a web page cannot reach it through DNS rebinding, and 413 to a body over 1 MiB.
+
 ## Tools
 
 - `search_skills` — `query` (required), `agent`, `installable_only`, `limit` (≤ 100). Returns catalog metadata with `availability`, license, security, release, and source revision.

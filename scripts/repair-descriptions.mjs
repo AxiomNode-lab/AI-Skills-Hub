@@ -10,7 +10,7 @@ import { sha256 as hash } from "../packages/materializer/src/reviewed.mjs";
 const check = process.argv.includes("--check");
 const catalogFile = "catalog/skills.json";
 const catalog = JSON.parse(fs.readFileSync(catalogFile, "utf8"));
-const isBroken = (value) => /^[>|][+-]?\d*$/.test(String(value ?? "").trim());
+const isBroken = (value) => /^[>|](?:[+-]?\d*|\d[+-])$/.test(String(value ?? "").trim());
 const broken = catalog.skills.filter((skill) => isBroken(skill.description));
 
 if (check) {

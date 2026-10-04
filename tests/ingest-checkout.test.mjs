@@ -17,7 +17,7 @@ function repository(t, repo) {
   fs.writeFileSync(path.join(clone, "LICENSE"), "MIT License\n\nCopyright (c) 2026 Example\n\nPermission is hereby granted, free of charge\n");
   fs.writeFileSync(path.join(clone, "skills", "demo", "SKILL.md"), "---\nname: demo\ndescription: Demo skill for ingestion.\n---\n\n# Demo\n");
   const git = (...args) => execFileSync("git", ["-C", clone, ...args], { encoding: "utf8" });
-  git("init", "-q");
+  git("init", "-q", "-b", "main");
   git("-c", "user.name=t", "-c", "user.email=t@example.com", "add", ".");
   git("-c", "user.name=t", "-c", "user.email=t@example.com", "commit", "-qm", "init");
   git("remote", "add", "origin", `https://github.com/${repo}.git`);
@@ -42,4 +42,27 @@ test("ingest-github --checkout refuses a clone of a different repository", t => 
   const result = spawnSync(process.execPath, [script, "example/skills", "main", "--checkout", clone], { cwd: dir, encoding: "utf8" });
   assert.notEqual(result.status, 0);
   assert.match(result.stderr, /is not example\/skills/);
+});
+
+test("ingest-github --checkout refuses a ref that does not name the checked-out commit", t => {
+  const { dir, clone } = repository(t, "example/skills");
+  const git = (...args) => execFileSync("git", ["-C", clone, ...args], { encoding: "utf8" });
+  git("checkout", "-q", "-b", "feature");
+  git("-c", "user.name=t", "-c", "user.email=t@example.com", "commit", "-q", "--allow-empty", "-m", "feature");
+  const result = spawnSync(process.execPath, [script, "example/skills", "main", "--checkout", clone], { cwd: dir, encoding: "utf8" });
+  assert.notEqual(result.status, 0);
+  assert.match(result.stderr, /is not main/);
+});
+
+test("ingest-github --checkout finds skills whose paths git would quote", t => {
+  const { dir, clone } = repository(t, "example/skills");
+  const git = (...args) => execFileSync("git", ["-C", clone, ...args], { encoding: "utf8" });
+  fs.mkdirSync(path.join(clone, "skills", "café"), { recursive: true });
+  fs.writeFileSync(path.join(clone, "skills", "café", "SKILL.md"), "---\nname: cafe\ndescription: Non-ASCII path.\n---\n");
+  git("add", ".");
+  git("-c", "user.name=t", "-c", "user.email=t@example.com", "commit", "-qm", "cafe");
+  const result = spawnSync(process.execPath, [script, "example/skills", "main", "--checkout", clone], { cwd: dir, encoding: "utf8" });
+  assert.equal(result.status, 0, result.stderr);
+  const out = JSON.parse(fs.readFileSync(path.join(dir, "catalog", "ingestion", "example__skills.json"), "utf8"));
+  assert.ok(out.discovered_skills.some(skill => skill.path === "skills/café/SKILL.md"), JSON.stringify(out.discovered_skills.map(s => s.path)));
 });

@@ -1,7 +1,6 @@
 import { select, checkbox, confirm, input, Separator } from "@inquirer/prompts";
 import { detectAgents } from "../../../installer/src/detector.mjs";
 import { catalogAvailability, filterForAgent, loadRegistry } from "@ai-skills-hub/core";
-import { searchRegistry } from "@ai-skills-hub/discovery";
 import { installableSkills } from "./available.mjs";
 import { availabilityText, groupByPublisher, paint, truncate } from "../ui.mjs";
 import { installCapability, planCapability } from "../install-executor.mjs";
@@ -39,9 +38,7 @@ export async function interactiveCommand() {
   let candidates = installable;
   if (searchMode === "search") {
     const query = await input({ message: "Search query:" });
-    // Search within the installable list already computed for this agent.
-    const matched = new Set(searchRegistry({ skills: installable }, query, { limit: Infinity }).map(({ item }) => item.id));
-    candidates = installable.filter((skill) => matched.has(skill.id));
+    candidates = installableSkills(registry, { agent: selectedAgentId, query });
   } else if (searchMode === "all") {
     candidates = filterForAgent(registry.skills, selectedAgentId);
   }

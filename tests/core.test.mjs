@@ -52,6 +52,18 @@ test("frontmatter parser handles quotes, comments, continuations, and nested map
 });
 
 test("catalog descriptions are not bare YAML block indicators",()=>{
-  const broken=loadRegistry().skills.filter(skill=>/^[>|][+-]?\d*$/.test(String(skill.description??"").trim()));
+  const broken=loadRegistry().skills.filter(skill=>/^[>|](?:[+-]?\d*|\d[+-])$/.test(String(skill.description??"").trim()));
   assert.deepEqual(broken.map(skill=>skill.id),[]);
+});
+
+test("parseFrontmatter reads next-line plain scalars, trailing comments, and indentation indicators", () => {
+  const fm = (body) => parseFrontmatter(`---\n${body}\n---\n`);
+  assert.equal(fm("description:\n  Use this when\n  needed.").description, "Use this when needed.");
+  assert.equal(fm('description: "abc" # note').description, "abc");
+  assert.equal(fm("description: 'it''s' # note").description, "it's");
+  assert.equal(fm("description: >2-\n  hello\n  world").description, "hello world");
+  assert.equal(fm("description: |-2\n  a\n  b").description, "a\nb");
+  assert.equal(fm("description: foo\n  bar\n\n  baz").description, "foo bar\nbaz");
+  assert.deepEqual(fm("metadata:\n  author: x\nname: y"), { name: "y" });
+  assert.deepEqual(fm("tags:\n  - a"), {});
 });
