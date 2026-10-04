@@ -28,6 +28,8 @@ All notable changes to AI Skills Hub are documented here.
 - `sync-registry` writes `catalog/reports/release-drift.json`: released skills whose upstream moved past the reviewed revision, and whether SKILL.md changed.
 
 ### Changed
+- 15 skills from j4flmao/agent-skills released (409 installable): API versioning, OpenAPI, gRPC, idempotency, webhooks, resilience, structured logging, background jobs, frontend authentication, zero-trust identity, eBPF threat detection, core algorithms for system design, SOC and red-team methodology and reverse engineering (both with an authorized-use notice). 4 excluded (insecure defaults in auth, authorization and GraphQL samples; an incomplete rate-limiting skill) and 19 held by the release gate (12 non-conforming frontmatter names, 2 invalid frontmatter, 5 high-risk scanner matches).
+- New record ids are lowercase slugs; the validator rejects any other id.
 - The scanner's dynamic-execution check no longer matches the JavaScript `function (` keyword: `eval(` and `exec(` stay case-insensitive (so `EXEC(@sql)` and `Eval(x)` still count), and the `Function` constructor is matched case-sensitively. Nine reviewed DevOps and frontend skills held only by that match are released (394 installable).
 - `microsoft/azure-ai-anomalydetector-java` is held with reason `upstream-service-retired` (Microsoft retired the service on 2026-10-01) and no longer ships; 165 skills are installable. `info` now prints release hold reasons.
 - Independent instruction reviews of 40 microsoft/skills skills are recorded in docs/reviews/independent-batch-01 to -04.

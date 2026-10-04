@@ -1,0 +1,88 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "j4flmao/zero-trust-identity",
+  "source": {
+    "repo": "j4flmao/agent-skills",
+    "path": "skills/cybersecurity/zero-trust-identity",
+    "revision": "d9f812988c8926767ee96f66c1a340d65b595799"
+  },
+  "review": {
+    "path": "catalog/reviews/j4flmao__zero-trust-identity.json",
+    "sha256": "ffcc902b784f0aff3610a3b7d5d0deb0539381a3e2cf8af1fa92893b423bd6b2"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": false,
+      "network": false,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": false,
+      "encoded_content": true
+    },
+    "findings": [
+      {
+        "type": "credential-access",
+        "line": 17,
+        "evidence": "Access Token",
+        "context": "4. **Token Request**: The client authenticates to the token endpoint (`/token`), exchanging the `code` and `code_verifier` (PKCE) for an ID Token (JWT) and an Access Token.",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 23,
+        "evidence": "secret",
+        "context": "*   **HS256 (HMAC with SHA-256)**: Symmetric signing. The Identity Provider (IdP) and the Resource Server (RS) share the same secret key. **Risk**: If the RS is compromised, the shared secret is exposed, allowing the attacker to forge JWTs.",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 23,
+        "evidence": "secret",
+        "context": "*   **HS256 (HMAC with SHA-256)**: Symmetric signing. The Identity Provider (IdP) and the Resource Server (RS) share the same secret key. **Risk**: If the RS is compromised, the shared secret is exposed, allowing the attacker to forge JWTs.",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 28,
+        "evidence": "secret",
+        "context": "2.  **Header Analysis**: Decode the header to verify the `alg` (algorithm) is expected (e.g., preventing algorithm substitution attacks where `alg` is changed from RS256 to HS256, forcing the RS to use the public key as a symmetric HMAC sec",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "encoded-content",
+        "line": 36,
+        "evidence": "base64",
+        "context": "1.  **SP-Initiated Flow**: The Service Provider (SP) generates an `<AuthnRequest>`, signs it, deflates it, base64 encodes it, and redirects the user to the IdP.",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 51,
+        "evidence": "Access Token",
+        "context": "    IdP -->|6. ID Token + Access Token| RP",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 5418
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "b6b8d73f01a48d1411da29d8196e2d85cd91cc9e8d7ae6ac4863ae7e06e6d314",
+      "bytes": 1064,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "b4121fc542b4cf5eefef54ca5150e9e11432cbb25e95f27a3d3076a8235a0147",
+      "bytes": 4354,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 5418
+}

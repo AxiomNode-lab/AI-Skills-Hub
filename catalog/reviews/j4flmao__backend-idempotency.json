@@ -1,9 +1,9 @@
 {
   "schema_version": "0.1",
   "skill_id": "j4flmao/backend-idempotency",
-  "status": "draft",
-  "reviewed_on": null,
-  "reviewer": null,
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
   "source": {
     "repo": "j4flmao/agent-skills",
     "path": "skills/backend/universal/idempotency",
@@ -13,7 +13,7 @@
     "complete": true,
     "scope": "skills/backend/universal/idempotency",
     "url": "https://api.github.com/repos/j4flmao/agent-skills/git/trees/d9f812988c8926767ee96f66c1a340d65b595799?recursive=1",
-    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
   },
   "license": {
     "spdx": "MIT",
@@ -32,18 +32,32 @@
       ]
     },
     "redistributable": true,
-    "scope_reason": "",
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
     "obligations": [
       "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
-      "Preserve all upstream text and notices byte-for-byte."
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
     ]
   },
   "content_review": {
-    "status": "pending",
-    "risk": "unknown",
+    "status": "approved",
+    "risk": "low",
     "blocking_findings": [],
-    "capabilities": {},
-    "notes": []
+    "capabilities": {
+      "shell": false,
+      "network": false,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md and references/exactly-once-strategies.md, idempotency-distributed.md, idempotency-failure-modes.md, idempotency-keys.md, idempotency-middleware.md, idempotency-patterns.md, idempotency-storage.md, idempotency-testing.md in full. Design guidance for idempotency keys and exactly-once semantics (Idempotency-Key header, Redis SET NX / PostgreSQL ON CONFLICT / DynamoDB conditional puts, outbox, sagas, testing) with Express/NestJS/FastAPI/Spring/GraphQL samples.",
+      "No commands the agent is told to run, no installs, credentials, or network access; output is a design as text unless the user asks for files (SKILL.md:32). SQL DELETE statements are cleanup jobs in the user's own schema.",
+      "Technical caveats a user should know: several samples fail open when the idempotency store errors (idempotency-middleware.md:57-59, idempotency-failure-modes.md:21-23), contradicting the fail-fast advice in idempotency-distributed.md:244, which can allow duplicate charges; keys are not scoped per client/tenant, so cached responses are shared by key; SKILL.md:166-183 caches transient 502 errors, which blocks legitimate retries; idempotency-storage.md:102-123 does select-then-insert (racy without the unique constraint) and :239-254 repeats ExpressionAttributeValues. SKILL.md:421-544 is a duplicated generic boilerplate block. Handoff names an optional 'distributed-locking' skill."
+    ]
   },
   "files": [
     {
@@ -56,7 +70,7 @@
       "git_blob": "0e8b6e6d8678128ebfcc28d7cad91fa9ed7f2354",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
       "findings": []
     },
     {
@@ -67,23 +81,23 @@
       "git_blob": "14453e3b585639f4f6de115a47676df7f9705114",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "filesystem-write",
           "line": 11,
           "evidence": "DELETE",
           "context": "- `DELETE FROM cart WHERE id = 456` (deleting a deleted row succeeds)",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Matches are HTTP DELETE method names, SQL DELETE cleanup of expired idempotency rows in the user's database, and Set.delete in sample code; nothing tells the agent to delete files."
         },
         {
           "type": "filesystem-write",
           "line": 76,
           "evidence": "Delete",
           "context": "-- Step 3: Delete or mark as published (after acknowledgment)",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Matches are HTTP DELETE method names, SQL DELETE cleanup of expired idempotency rows in the user's database, and Set.delete in sample code; nothing tells the agent to delete files."
         }
       ]
     },
@@ -95,7 +109,7 @@
       "git_blob": "86bfcc219fc17f553cb1aaa0074fe839a1be5e7c",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": []
     },
     {
@@ -106,23 +120,23 @@
       "git_blob": "886c0f7def38a8edebea18a2dc5ce6f96f6af1ce",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "filesystem-write",
           "line": 77,
           "evidence": "delete",
           "context": "      this.locks.delete(key);",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Matches are HTTP DELETE method names, SQL DELETE cleanup of expired idempotency rows in the user's database, and Set.delete in sample code; nothing tells the agent to delete files."
         },
         {
           "type": "filesystem-write",
           "line": 84,
           "evidence": "delete",
           "context": "      this.locks.delete(key);",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Matches are HTTP DELETE method names, SQL DELETE cleanup of expired idempotency rows in the user's database, and Set.delete in sample code; nothing tells the agent to delete files."
         }
       ]
     },
@@ -134,7 +148,7 @@
       "git_blob": "9fa21683be3066a3874d445033465dd4505a38b7",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": []
     },
     {
@@ -145,15 +159,15 @@
       "git_blob": "25e93c064aa08db79782e4fdd5b9e0b5d6964b21",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "filesystem-write",
           "line": 308,
           "evidence": "DELETE",
           "context": "- Idempotency middleware intercepts all mutating HTTP methods (POST, PUT, PATCH, DELETE)",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Matches are HTTP DELETE method names, SQL DELETE cleanup of expired idempotency rows in the user's database, and Set.delete in sample code; nothing tells the agent to delete files."
         }
       ]
     },
@@ -165,7 +179,7 @@
       "git_blob": "bb139c6d9a7aa417657d71f5ec1af2d82e15ed69",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": []
     },
     {
@@ -176,15 +190,15 @@
       "git_blob": "32256396743ea98233b1e50ca737b85cf2cc95e3",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "filesystem-write",
           "line": 148,
           "evidence": "DELETE",
           "context": "      `DELETE FROM idempotency_keys",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Matches are HTTP DELETE method names, SQL DELETE cleanup of expired idempotency rows in the user's database, and Set.delete in sample code; nothing tells the agent to delete files."
         }
       ]
     },
@@ -196,7 +210,7 @@
       "git_blob": "7941d4bdd20bcba82f8f0bd2a8e71c31b771d519",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": []
     },
     {
@@ -207,39 +221,39 @@
       "git_blob": "7bcb32b5df74210a13befa972e1a8ec4067cfe61",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "filesystem-write",
           "line": 57,
           "evidence": "DELETE",
           "context": "Is the operation naturally idempotent? (PUT, DELETE, same result every time)",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Matches are HTTP DELETE method names, SQL DELETE cleanup of expired idempotency rows in the user's database, and Set.delete in sample code; nothing tells the agent to delete files."
         },
         {
           "type": "filesystem-write",
           "line": 188,
           "evidence": "delete",
           "context": "Use a TTL index (Redis) or a background job (PostgreSQL) to delete keys after the TTL window:",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Matches are HTTP DELETE method names, SQL DELETE cleanup of expired idempotency rows in the user's database, and Set.delete in sample code; nothing tells the agent to delete files."
         },
         {
           "type": "filesystem-write",
           "line": 192,
           "evidence": "DELETE",
           "context": "DELETE FROM idempotency_keys WHERE created_at < NOW() - INTERVAL '24 hours';",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Matches are HTTP DELETE method names, SQL DELETE cleanup of expired idempotency rows in the user's database, and Set.delete in sample code; nothing tells the agent to delete files."
         },
         {
           "type": "filesystem-write",
           "line": 435,
           "evidence": "delete",
           "context": "    this.observers.delete(observer);",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Matches are HTTP DELETE method names, SQL DELETE cleanup of expired idempotency rows in the user's database, and Set.delete in sample code; nothing tells the agent to delete files."
         }
       ]
     }

@@ -1,0 +1,453 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "j4flmao/backend-openapi-documentation",
+  "source": {
+    "repo": "j4flmao/agent-skills",
+    "path": "skills/backend/universal/openapi-documentation",
+    "revision": "d9f812988c8926767ee96f66c1a340d65b595799"
+  },
+  "review": {
+    "path": "catalog/reviews/j4flmao__backend-openapi-documentation.json",
+    "sha256": "4bf904eaeb8e87acf5b1f428b77675fa83999ccafd897ccfbdc595a53f247a12"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "shell-execution",
+        "line": 8,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/openapi-codegen.md"
+      },
+      {
+        "type": "package-install",
+        "line": 9,
+        "evidence": "npm install",
+        "context": "npm install @openapitools/openapi-generator-cli -g",
+        "file": "references/openapi-codegen.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 33,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/openapi-codegen.md"
+      },
+      {
+        "type": "network-access",
+        "line": 45,
+        "evidence": "https://",
+        "context": "const api = new UsersApi(new Configuration({ basePath: 'https://api.example.com/v1' }));",
+        "file": "references/openapi-codegen.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 52,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/openapi-codegen.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 63,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/openapi-codegen.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 74,
+        "evidence": "bash",
+        "context": "   ```bash",
+        "file": "references/openapi-codegen.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 79,
+        "evidence": "bash",
+        "context": "   ```bash",
+        "file": "references/openapi-codegen.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 24,
+        "evidence": "apiKey",
+        "context": "    apiKey:",
+        "file": "references/openapi-security.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 25,
+        "evidence": "apiKey",
+        "context": "      type: apiKey",
+        "file": "references/openapi-security.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 27,
+        "evidence": "API-Key",
+        "context": "      name: X-API-Key",
+        "file": "references/openapi-security.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 29,
+        "evidence": "API key",
+        "context": "        API key for third-party integrations.",
+        "file": "references/openapi-security.md"
+      },
+      {
+        "type": "network-access",
+        "line": 36,
+        "evidence": "https://",
+        "context": "          authorizationUrl: https://auth.example.com/authorize",
+        "file": "references/openapi-security.md"
+      },
+      {
+        "type": "network-access",
+        "line": 37,
+        "evidence": "https://",
+        "context": "          tokenUrl: https://auth.example.com/token",
+        "file": "references/openapi-security.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 53,
+        "evidence": "apiKey",
+        "context": "        - apiKey: []",
+        "file": "references/openapi-security.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 226,
+        "evidence": "DELETE",
+        "context": "              description: GET, POST, PUT, DELETE, PATCH",
+        "file": "references/openapi-security.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 247,
+        "evidence": "delete",
+        "context": "        if (['get', 'post', 'put', 'patch', 'delete'].includes(method)) {",
+        "file": "references/openapi-security.md"
+      },
+      {
+        "type": "network-access",
+        "line": 262,
+        "evidence": "https://",
+        "context": "        if (!server.url.startsWith('https://')) {",
+        "file": "references/openapi-security.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 289,
+        "evidence": "API key",
+        "context": "- Define security schemes explicitly: bearer JWT, API key, OAuth2 flows",
+        "file": "references/openapi-security.md"
+      },
+      {
+        "type": "network-access",
+        "line": 38,
+        "evidence": "https://",
+        "context": "    See https://docs.example.com/api for full documentation.",
+        "file": "references/openapi-setup.md"
+      },
+      {
+        "type": "network-access",
+        "line": 44,
+        "evidence": "https://",
+        "context": "    url: https://opensource.org/licenses/MIT",
+        "file": "references/openapi-setup.md"
+      },
+      {
+        "type": "network-access",
+        "line": 46,
+        "evidence": "https://",
+        "context": "  - url: https://api.example.com/v1",
+        "file": "references/openapi-setup.md"
+      },
+      {
+        "type": "network-access",
+        "line": 48,
+        "evidence": "https://",
+        "context": "  - url: https://staging-api.example.com/v1",
+        "file": "references/openapi-setup.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 123,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/openapi-setup.md"
+      },
+      {
+        "type": "package-install",
+        "line": 124,
+        "evidence": "npm install",
+        "context": "npm install -g @stoplight/spectral-cli",
+        "file": "references/openapi-setup.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 137,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/openapi-setup.md"
+      },
+      {
+        "type": "package-install",
+        "line": 138,
+        "evidence": "npm install",
+        "context": "npm install -g @apidevtools/swagger-cli",
+        "file": "references/openapi-setup.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 143,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/openapi-setup.md"
+      },
+      {
+        "type": "package-install",
+        "line": 144,
+        "evidence": "npm install",
+        "context": "npm install -g @redocly/cli",
+        "file": "references/openapi-setup.md"
+      },
+      {
+        "type": "network-access",
+        "line": 13,
+        "evidence": "http://",
+        "context": "    server: 'http://localhost:3000',",
+        "file": "references/openapi-testing.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 18,
+        "evidence": "DELETE",
+        "context": "      method: ['GET', 'POST', 'PUT', 'DELETE'],",
+        "file": "references/openapi-testing.md"
+      },
+      {
+        "type": "network-access",
+        "line": 161,
+        "evidence": "http://",
+        "context": "    mockUrl = 'http://localhost:4010';",
+        "file": "references/openapi-testing.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 38,
+        "evidence": "delete",
+        "context": "    supportedSubmitMethods: ['get', 'put', 'post', 'delete', 'patch'],",
+        "file": "references/openapi-tools.md"
+      },
+      {
+        "type": "package-install",
+        "line": 88,
+        "evidence": "npm install",
+        "context": "        run: npm install -g @stoplight/spectral-cli",
+        "file": "references/openapi-tools.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 110,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/openapi-tools.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 151,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/openapi-tools.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 179,
+        "evidence": "API key",
+        "context": "    auth: \"OAuth2 implicit flow, API key\"",
+        "file": "references/openapi-tools.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 199,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/openapi-tools.md"
+      },
+      {
+        "type": "network-access",
+        "line": 22,
+        "evidence": "https://",
+        "context": "    See https://docs.example.com/api/v2/migration for v1→v2 changes.",
+        "file": "references/openapi-versioning-strategies.md"
+      },
+      {
+        "type": "network-access",
+        "line": 25,
+        "evidence": "https://",
+        "context": "  - url: https://api.example.com/v2",
+        "file": "references/openapi-versioning-strategies.md"
+      },
+      {
+        "type": "network-access",
+        "line": 27,
+        "evidence": "https://",
+        "context": "  - url: https://api.example.com/v1",
+        "file": "references/openapi-versioning-strategies.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 91,
+        "evidence": "DELETE",
+        "context": "  │   DELETE /resources/{id} → Delete resource",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 91,
+        "evidence": "Delete",
+        "context": "  │   DELETE /resources/{id} → Delete resource",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 111,
+        "evidence": "https://",
+        "context": "  - url: https://api.example.com/v1",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 113,
+        "evidence": "https://",
+        "context": "  - url: https://staging-api.example.com/v1",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 260,
+        "evidence": "apiKey",
+        "context": "    apiKey:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 261,
+        "evidence": "apiKey",
+        "context": "      type: apiKey",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 263,
+        "evidence": "API-Key",
+        "context": "      name: X-API-Key",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 264,
+        "evidence": "API key",
+        "context": "      description: API key for service-to-service auth",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 271,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 283,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 441,
+        "evidence": "API key",
+        "context": "- [ ] Security schemes defined (bearer, API key, OAuth2)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 483,
+        "evidence": "delete",
+        "context": "    this.observers.delete(observer);",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 55590
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "b6b8d73f01a48d1411da29d8196e2d85cd91cc9e8d7ae6ac4863ae7e06e6d314",
+      "bytes": 1064,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/openapi-codegen.md",
+      "sha256": "d25512227897dfcf5033987e83d3fabb5712177c46fa33f8c4fec4dbc7f0143e",
+      "bytes": 4867,
+      "mode": "100644"
+    },
+    {
+      "path": "references/openapi-security.md",
+      "sha256": "548e2a2941c274022c02cfddf90891809ae0dfba49d6db4126be5f50aa9c9002",
+      "bytes": 7840,
+      "mode": "100644"
+    },
+    {
+      "path": "references/openapi-setup.md",
+      "sha256": "2c602025b16838c90f064595160c1f33e22b2cc7e28985072fdf97ae31d19f7b",
+      "bytes": 3975,
+      "mode": "100644"
+    },
+    {
+      "path": "references/openapi-testing.md",
+      "sha256": "930def5c0ee8fe61a1a2cb7c158d7617ea5d36cfa90a4d18a534a30ce9b1cc2b",
+      "bytes": 6851,
+      "mode": "100644"
+    },
+    {
+      "path": "references/openapi-tools.md",
+      "sha256": "75dcb06bbae7e51a4c850f79c5e82dfb390a54ca76b89331fdbfb830b190375d",
+      "bytes": 5424,
+      "mode": "100644"
+    },
+    {
+      "path": "references/openapi-versioning-strategies.md",
+      "sha256": "2b5696697e9a3d696bb03d309f37ba6f9fb3055973cc9dcad34286750e1b96d0",
+      "bytes": 6387,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "3f4286021a3a30c457b296718518b7884f19333dd736d347b6fda465d0cfe741",
+      "bytes": 19182,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 55590
+}

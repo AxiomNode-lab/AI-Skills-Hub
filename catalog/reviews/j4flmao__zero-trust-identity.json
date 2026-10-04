@@ -1,9 +1,9 @@
 {
   "schema_version": "0.1",
   "skill_id": "j4flmao/zero-trust-identity",
-  "status": "draft",
-  "reviewed_on": null,
-  "reviewer": null,
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
   "source": {
     "repo": "j4flmao/agent-skills",
     "path": "skills/cybersecurity/zero-trust-identity",
@@ -13,7 +13,7 @@
     "complete": true,
     "scope": "skills/cybersecurity/zero-trust-identity",
     "url": "https://api.github.com/repos/j4flmao/agent-skills/git/trees/d9f812988c8926767ee96f66c1a340d65b595799?recursive=1",
-    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
   },
   "license": {
     "spdx": "MIT",
@@ -31,18 +31,32 @@
       ]
     },
     "redistributable": true,
-    "scope_reason": "",
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
     "obligations": [
       "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
-      "Preserve all upstream text and notices byte-for-byte."
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
     ]
   },
   "content_review": {
-    "status": "pending",
-    "risk": "unknown",
+    "status": "approved",
+    "risk": "none",
     "blocking_findings": [],
-    "capabilities": {},
-    "notes": []
+    "capabilities": {
+      "shell": false,
+      "network": false,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md in full (61 lines). Explains OIDC authorization-code flow with PKCE, JWT signature validation (RS256 vs HS256, alg-substitution defence, exp/iss/aud checks), and SAML SP-initiated flow.",
+      "No commands, installs, credentials, or network access; guidance is defensive and correct in substance (requires signature verification and alg pinning).",
+      "Minor nuance: SKILL.md:29 says to 'strictly compare' signatures without mentioning constant-time comparison or using a vetted JWT library; not unsafe as written."
+    ]
   },
   "files": [
     {
@@ -55,7 +69,7 @@
       "git_blob": "0e8b6e6d8678128ebfcc28d7cad91fa9ed7f2354",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
       "findings": []
     },
     {
@@ -66,55 +80,55 @@
       "git_blob": "1df74c120525e86251c7bc6652a46fb8516297d8",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "credential-access",
           "line": 17,
           "evidence": "Access Token",
           "context": "4. **Token Request**: The client authenticates to the token endpoint (`/token`), exchanging the `code` and `code_verifier` (PKCE) for an ID Token (JWT) and an Access Token.",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Mentions of access tokens and the HS256 shared secret key in protocol descriptions (SKILL.md:17-51); no instruction to read, print, or send real secrets."
         },
         {
           "type": "credential-access",
           "line": 23,
           "evidence": "secret",
           "context": "*   **HS256 (HMAC with SHA-256)**: Symmetric signing. The Identity Provider (IdP) and the Resource Server (RS) share the same secret key. **Risk**: If the RS is compromised, the shared secret is exposed, allowing the attacker to forge JWTs.",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Mentions of access tokens and the HS256 shared secret key in protocol descriptions (SKILL.md:17-51); no instruction to read, print, or send real secrets."
         },
         {
           "type": "credential-access",
           "line": 23,
           "evidence": "secret",
           "context": "*   **HS256 (HMAC with SHA-256)**: Symmetric signing. The Identity Provider (IdP) and the Resource Server (RS) share the same secret key. **Risk**: If the RS is compromised, the shared secret is exposed, allowing the attacker to forge JWTs.",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Mentions of access tokens and the HS256 shared secret key in protocol descriptions (SKILL.md:17-51); no instruction to read, print, or send real secrets."
         },
         {
           "type": "credential-access",
           "line": 28,
           "evidence": "secret",
           "context": "2.  **Header Analysis**: Decode the header to verify the `alg` (algorithm) is expected (e.g., preventing algorithm substitution attacks where `alg` is changed from RS256 to HS256, forcing the RS to use the public key as a symmetric HMAC sec",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Mentions of access tokens and the HS256 shared secret key in protocol descriptions (SKILL.md:17-51); no instruction to read, print, or send real secrets."
         },
         {
           "type": "encoded-content",
           "line": 36,
           "evidence": "base64",
           "context": "1.  **SP-Initiated Flow**: The Service Provider (SP) generates an `<AuthnRequest>`, signs it, deflates it, base64 encodes it, and redirects the user to the IdP.",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "SKILL.md:36 describes SAML AuthnRequests being base64-encoded; no encoded payload is present."
         },
         {
           "type": "credential-access",
           "line": 51,
           "evidence": "Access Token",
           "context": "    IdP -->|6. ID Token + Access Token| RP",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Mentions of access tokens and the HS256 shared secret key in protocol descriptions (SKILL.md:17-51); no instruction to read, print, or send real secrets."
         }
       ]
     }

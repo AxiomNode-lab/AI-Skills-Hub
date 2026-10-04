@@ -1,9 +1,9 @@
 {
   "schema_version": "0.1",
   "skill_id": "j4flmao/backend-openapi-documentation",
-  "status": "draft",
-  "reviewed_on": null,
-  "reviewer": null,
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
   "source": {
     "repo": "j4flmao/agent-skills",
     "path": "skills/backend/universal/openapi-documentation",
@@ -13,7 +13,7 @@
     "complete": true,
     "scope": "skills/backend/universal/openapi-documentation",
     "url": "https://api.github.com/repos/j4flmao/agent-skills/git/trees/d9f812988c8926767ee96f66c1a340d65b595799?recursive=1",
-    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
   },
   "license": {
     "spdx": "MIT",
@@ -32,18 +32,32 @@
       ]
     },
     "redistributable": true,
-    "scope_reason": "",
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
     "obligations": [
       "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
-      "Preserve all upstream text and notices byte-for-byte."
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
     ]
   },
   "content_review": {
-    "status": "pending",
-    "risk": "unknown",
+    "status": "approved",
+    "risk": "medium",
     "blocking_findings": [],
-    "capabilities": {},
-    "notes": []
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md (591 lines) and references/openapi-codegen.md, openapi-security.md, openapi-setup.md, openapi-testing.md, openapi-tools.md, openapi-versioning-strategies.md in full. Spec-first OpenAPI 3.x workflow: info/servers, paths, $ref components, error schemas, security schemes, Spectral/swagger-cli validation, openapi-generator codegen, versioning and breaking-change detection, plus example tests and CI steps.",
+      "Medium because the workflow tells the agent to run npm tooling: SKILL.md:271-297 runs npx @stoplight/spectral-cli, swagger-cli, openapi-diff and @openapitools/openapi-generator-cli (which writes generated code to ./generated/), and openapi-setup.md:124/138/144 and openapi-codegen.md:9 use 'npm install -g'. These are well-known packages from the official npm registry (not curl|sh), but versions are unpinned except openapitools.json's generator version 7.10.0; the agent should confirm global installs and codegen output paths with the user. No credentials are used and no live services are contacted beyond localhost dev servers.",
+      "Security guidance is sound: global bearer auth, HTTPS-only servers, CORS echoing an allowlisted origin, input constraints. Minor inaccuracies: openapi-versioning-strategies.md lists 'Adding new enum value' as non-breaking (can break strict clients); openapi-security.md defines a header parameter named 'RateLimit-*' (not valid OpenAPI); the .spectral.yaml custom rule in openapi-tools.md repeats keys under one rule (invalid YAML); swagger-cli is deprecated upstream. SKILL.md:469-592 is generic boilerplate (observer pattern, deployment checklist, STRIDE) unrelated to OpenAPI. The handoff names a 'contract-testing' skill that is optional and not bundled."
+    ]
   },
   "files": [
     {
@@ -56,7 +70,7 @@
       "git_blob": "0e8b6e6d8678128ebfcc28d7cad91fa9ed7f2354",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
       "findings": []
     },
     {
@@ -67,71 +81,71 @@
       "git_blob": "3148e3909a54360bbf70307b9ee52c6c1f43a1f0",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "shell-execution",
           "line": 8,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks run npx Spectral/swagger-cli/openapi-diff/openapi-generator-cli for linting, diffing and code generation of the user's own spec, plus a Prism mock server on localhost."
         },
         {
           "type": "package-install",
           "line": 9,
           "evidence": "npm install",
           "context": "npm install @openapitools/openapi-generator-cli -g",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "'npm install -g' of @openapitools/openapi-generator-cli, @stoplight/spectral-cli, @apidevtools/swagger-cli and @redocly/cli from the npm registry, unpinned; also inside an example GitHub Actions workflow."
         },
         {
           "type": "shell-execution",
           "line": 33,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks run npx Spectral/swagger-cli/openapi-diff/openapi-generator-cli for linting, diffing and code generation of the user's own spec, plus a Prism mock server on localhost."
         },
         {
           "type": "network-access",
           "line": 45,
           "evidence": "https://",
           "context": "const api = new UsersApi(new Configuration({ basePath: 'https://api.example.com/v1' }));",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Placeholder example.com server/auth URLs in spec examples, the opensource.org MIT license URL, and localhost URLs in test code; nothing instructs the agent to fetch a remote resource."
         },
         {
           "type": "shell-execution",
           "line": 52,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks run npx Spectral/swagger-cli/openapi-diff/openapi-generator-cli for linting, diffing and code generation of the user's own spec, plus a Prism mock server on localhost."
         },
         {
           "type": "shell-execution",
           "line": 63,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks run npx Spectral/swagger-cli/openapi-diff/openapi-generator-cli for linting, diffing and code generation of the user's own spec, plus a Prism mock server on localhost."
         },
         {
           "type": "shell-execution",
           "line": 74,
           "evidence": "bash",
           "context": "   ```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks run npx Spectral/swagger-cli/openapi-diff/openapi-generator-cli for linting, diffing and code generation of the user's own spec, plus a Prism mock server on localhost."
         },
         {
           "type": "shell-execution",
           "line": 79,
           "evidence": "bash",
           "context": "   ```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks run npx Spectral/swagger-cli/openapi-diff/openapi-generator-cli for linting, diffing and code generation of the user's own spec, plus a Prism mock server on localhost."
         }
       ]
     },
@@ -143,95 +157,95 @@
       "git_blob": "8316b82105f8812f311b5362cce22bb8deea025f",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "credential-access",
           "line": 24,
           "evidence": "apiKey",
           "context": "    apiKey:",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "OpenAPI securitySchemes declarations (bearer JWT, X-API-Key header, OAuth2 scopes) and checklist text; no real secret is read, printed, or sent."
         },
         {
           "type": "credential-access",
           "line": 25,
           "evidence": "apiKey",
           "context": "      type: apiKey",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "OpenAPI securitySchemes declarations (bearer JWT, X-API-Key header, OAuth2 scopes) and checklist text; no real secret is read, printed, or sent."
         },
         {
           "type": "credential-access",
           "line": 27,
           "evidence": "API-Key",
           "context": "      name: X-API-Key",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "OpenAPI securitySchemes declarations (bearer JWT, X-API-Key header, OAuth2 scopes) and checklist text; no real secret is read, printed, or sent."
         },
         {
           "type": "credential-access",
           "line": 29,
           "evidence": "API key",
           "context": "        API key for third-party integrations.",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "OpenAPI securitySchemes declarations (bearer JWT, X-API-Key header, OAuth2 scopes) and checklist text; no real secret is read, printed, or sent."
         },
         {
           "type": "network-access",
           "line": 36,
           "evidence": "https://",
           "context": "          authorizationUrl: https://auth.example.com/authorize",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Placeholder example.com server/auth URLs in spec examples, the opensource.org MIT license URL, and localhost URLs in test code; nothing instructs the agent to fetch a remote resource."
         },
         {
           "type": "network-access",
           "line": 37,
           "evidence": "https://",
           "context": "          tokenUrl: https://auth.example.com/token",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Placeholder example.com server/auth URLs in spec examples, the opensource.org MIT license URL, and localhost URLs in test code; nothing instructs the agent to fetch a remote resource."
         },
         {
           "type": "credential-access",
           "line": 53,
           "evidence": "apiKey",
           "context": "        - apiKey: []",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "OpenAPI securitySchemes declarations (bearer JWT, X-API-Key header, OAuth2 scopes) and checklist text; no real secret is read, printed, or sent."
         },
         {
           "type": "filesystem-write",
           "line": 226,
           "evidence": "DELETE",
           "context": "              description: GET, POST, PUT, DELETE, PATCH",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Matches on HTTP DELETE method names and JS Set.delete() in examples, not file deletion; the only real file output is codegen into ./generated/ when the user runs it."
         },
         {
           "type": "filesystem-write",
           "line": 247,
           "evidence": "delete",
           "context": "        if (['get', 'post', 'put', 'patch', 'delete'].includes(method)) {",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Matches on HTTP DELETE method names and JS Set.delete() in examples, not file deletion; the only real file output is codegen into ./generated/ when the user runs it."
         },
         {
           "type": "network-access",
           "line": 262,
           "evidence": "https://",
           "context": "        if (!server.url.startsWith('https://')) {",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Placeholder example.com server/auth URLs in spec examples, the opensource.org MIT license URL, and localhost URLs in test code; nothing instructs the agent to fetch a remote resource."
         },
         {
           "type": "credential-access",
           "line": 289,
           "evidence": "API key",
           "context": "- Define security schemes explicitly: bearer JWT, API key, OAuth2 flows",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "OpenAPI securitySchemes declarations (bearer JWT, X-API-Key header, OAuth2 scopes) and checklist text; no real secret is read, printed, or sent."
         }
       ]
     },
@@ -243,87 +257,87 @@
       "git_blob": "56340669b4d8eb715c223ae86af2aee8ee757bc8",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "network-access",
           "line": 38,
           "evidence": "https://",
           "context": "    See https://docs.example.com/api for full documentation.",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Placeholder example.com server/auth URLs in spec examples, the opensource.org MIT license URL, and localhost URLs in test code; nothing instructs the agent to fetch a remote resource."
         },
         {
           "type": "network-access",
           "line": 44,
           "evidence": "https://",
           "context": "    url: https://opensource.org/licenses/MIT",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Placeholder example.com server/auth URLs in spec examples, the opensource.org MIT license URL, and localhost URLs in test code; nothing instructs the agent to fetch a remote resource."
         },
         {
           "type": "network-access",
           "line": 46,
           "evidence": "https://",
           "context": "  - url: https://api.example.com/v1",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Placeholder example.com server/auth URLs in spec examples, the opensource.org MIT license URL, and localhost URLs in test code; nothing instructs the agent to fetch a remote resource."
         },
         {
           "type": "network-access",
           "line": 48,
           "evidence": "https://",
           "context": "  - url: https://staging-api.example.com/v1",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Placeholder example.com server/auth URLs in spec examples, the opensource.org MIT license URL, and localhost URLs in test code; nothing instructs the agent to fetch a remote resource."
         },
         {
           "type": "shell-execution",
           "line": 123,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks run npx Spectral/swagger-cli/openapi-diff/openapi-generator-cli for linting, diffing and code generation of the user's own spec, plus a Prism mock server on localhost."
         },
         {
           "type": "package-install",
           "line": 124,
           "evidence": "npm install",
           "context": "npm install -g @stoplight/spectral-cli",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "'npm install -g' of @openapitools/openapi-generator-cli, @stoplight/spectral-cli, @apidevtools/swagger-cli and @redocly/cli from the npm registry, unpinned; also inside an example GitHub Actions workflow."
         },
         {
           "type": "shell-execution",
           "line": 137,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks run npx Spectral/swagger-cli/openapi-diff/openapi-generator-cli for linting, diffing and code generation of the user's own spec, plus a Prism mock server on localhost."
         },
         {
           "type": "package-install",
           "line": 138,
           "evidence": "npm install",
           "context": "npm install -g @apidevtools/swagger-cli",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "'npm install -g' of @openapitools/openapi-generator-cli, @stoplight/spectral-cli, @apidevtools/swagger-cli and @redocly/cli from the npm registry, unpinned; also inside an example GitHub Actions workflow."
         },
         {
           "type": "shell-execution",
           "line": 143,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks run npx Spectral/swagger-cli/openapi-diff/openapi-generator-cli for linting, diffing and code generation of the user's own spec, plus a Prism mock server on localhost."
         },
         {
           "type": "package-install",
           "line": 144,
           "evidence": "npm install",
           "context": "npm install -g @redocly/cli",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "'npm install -g' of @openapitools/openapi-generator-cli, @stoplight/spectral-cli, @apidevtools/swagger-cli and @redocly/cli from the npm registry, unpinned; also inside an example GitHub Actions workflow."
         }
       ]
     },
@@ -335,31 +349,31 @@
       "git_blob": "fd87c9e274cad60a46002da79941b49bbafab609",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "network-access",
           "line": 13,
           "evidence": "http://",
           "context": "    server: 'http://localhost:3000',",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Placeholder example.com server/auth URLs in spec examples, the opensource.org MIT license URL, and localhost URLs in test code; nothing instructs the agent to fetch a remote resource."
         },
         {
           "type": "filesystem-write",
           "line": 18,
           "evidence": "DELETE",
           "context": "      method: ['GET', 'POST', 'PUT', 'DELETE'],",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Matches on HTTP DELETE method names and JS Set.delete() in examples, not file deletion; the only real file output is codegen into ./generated/ when the user runs it."
         },
         {
           "type": "network-access",
           "line": 161,
           "evidence": "http://",
           "context": "    mockUrl = 'http://localhost:4010';",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Placeholder example.com server/auth URLs in spec examples, the opensource.org MIT license URL, and localhost URLs in test code; nothing instructs the agent to fetch a remote resource."
         }
       ]
     },
@@ -371,55 +385,55 @@
       "git_blob": "ad0d1818594b776e73e54aacb9e5052cfb7e4be1",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "filesystem-write",
           "line": 38,
           "evidence": "delete",
           "context": "    supportedSubmitMethods: ['get', 'put', 'post', 'delete', 'patch'],",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Matches on HTTP DELETE method names and JS Set.delete() in examples, not file deletion; the only real file output is codegen into ./generated/ when the user runs it."
         },
         {
           "type": "package-install",
           "line": 88,
           "evidence": "npm install",
           "context": "        run: npm install -g @stoplight/spectral-cli",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "npm install -g of Spectral inside an example GitHub Actions workflow for the user's CI, not run by the agent directly."
         },
         {
           "type": "shell-execution",
           "line": 110,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks run npx Spectral/swagger-cli/openapi-diff/openapi-generator-cli for linting, diffing and code generation of the user's own spec, plus a Prism mock server on localhost."
         },
         {
           "type": "shell-execution",
           "line": 151,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks run npx Spectral/swagger-cli/openapi-diff/openapi-generator-cli for linting, diffing and code generation of the user's own spec, plus a Prism mock server on localhost."
         },
         {
           "type": "credential-access",
           "line": 179,
           "evidence": "API key",
           "context": "    auth: \"OAuth2 implicit flow, API key\"",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "OpenAPI securitySchemes declarations (bearer JWT, X-API-Key header, OAuth2 scopes) and checklist text; no real secret is read, printed, or sent."
         },
         {
           "type": "shell-execution",
           "line": 199,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks run npx Spectral/swagger-cli/openapi-diff/openapi-generator-cli for linting, diffing and code generation of the user's own spec, plus a Prism mock server on localhost."
         }
       ]
     },
@@ -431,31 +445,31 @@
       "git_blob": "b44988dbc5eea33eec8e16bf4b8c284c5dd3c0e8",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "network-access",
           "line": 22,
           "evidence": "https://",
           "context": "    See https://docs.example.com/api/v2/migration for v1→v2 changes.",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Placeholder example.com server/auth URLs in spec examples, the opensource.org MIT license URL, and localhost URLs in test code; nothing instructs the agent to fetch a remote resource."
         },
         {
           "type": "network-access",
           "line": 25,
           "evidence": "https://",
           "context": "  - url: https://api.example.com/v2",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Placeholder example.com server/auth URLs in spec examples, the opensource.org MIT license URL, and localhost URLs in test code; nothing instructs the agent to fetch a remote resource."
         },
         {
           "type": "network-access",
           "line": 27,
           "evidence": "https://",
           "context": "  - url: https://api.example.com/v1",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Placeholder example.com server/auth URLs in spec examples, the opensource.org MIT license URL, and localhost URLs in test code; nothing instructs the agent to fetch a remote resource."
         }
       ]
     },
@@ -467,103 +481,103 @@
       "git_blob": "7c036360554ac67d060799e3c296b83a4bcae8e2",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "filesystem-write",
           "line": 91,
           "evidence": "DELETE",
           "context": "  │   DELETE /resources/{id} → Delete resource",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Matches on HTTP DELETE method names and JS Set.delete() in examples, not file deletion; the only real file output is codegen into ./generated/ when the user runs it."
         },
         {
           "type": "filesystem-write",
           "line": 91,
           "evidence": "Delete",
           "context": "  │   DELETE /resources/{id} → Delete resource",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Matches on HTTP DELETE method names and JS Set.delete() in examples, not file deletion; the only real file output is codegen into ./generated/ when the user runs it."
         },
         {
           "type": "network-access",
           "line": 111,
           "evidence": "https://",
           "context": "  - url: https://api.example.com/v1",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Placeholder example.com server/auth URLs in spec examples, the opensource.org MIT license URL, and localhost URLs in test code; nothing instructs the agent to fetch a remote resource."
         },
         {
           "type": "network-access",
           "line": 113,
           "evidence": "https://",
           "context": "  - url: https://staging-api.example.com/v1",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Placeholder example.com server/auth URLs in spec examples, the opensource.org MIT license URL, and localhost URLs in test code; nothing instructs the agent to fetch a remote resource."
         },
         {
           "type": "credential-access",
           "line": 260,
           "evidence": "apiKey",
           "context": "    apiKey:",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "OpenAPI securitySchemes declarations (bearer JWT, X-API-Key header, OAuth2 scopes) and checklist text; no real secret is read, printed, or sent."
         },
         {
           "type": "credential-access",
           "line": 261,
           "evidence": "apiKey",
           "context": "      type: apiKey",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "OpenAPI securitySchemes declarations (bearer JWT, X-API-Key header, OAuth2 scopes) and checklist text; no real secret is read, printed, or sent."
         },
         {
           "type": "credential-access",
           "line": 263,
           "evidence": "API-Key",
           "context": "      name: X-API-Key",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "OpenAPI securitySchemes declarations (bearer JWT, X-API-Key header, OAuth2 scopes) and checklist text; no real secret is read, printed, or sent."
         },
         {
           "type": "credential-access",
           "line": 264,
           "evidence": "API key",
           "context": "      description: API key for service-to-service auth",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "OpenAPI securitySchemes declarations (bearer JWT, X-API-Key header, OAuth2 scopes) and checklist text; no real secret is read, printed, or sent."
         },
         {
           "type": "shell-execution",
           "line": 271,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks run npx Spectral/swagger-cli/openapi-diff/openapi-generator-cli for linting, diffing and code generation of the user's own spec, plus a Prism mock server on localhost."
         },
         {
           "type": "shell-execution",
           "line": 283,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks run npx Spectral/swagger-cli/openapi-diff/openapi-generator-cli for linting, diffing and code generation of the user's own spec, plus a Prism mock server on localhost."
         },
         {
           "type": "credential-access",
           "line": 441,
           "evidence": "API key",
           "context": "- [ ] Security schemes defined (bearer, API key, OAuth2)",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "OpenAPI securitySchemes declarations (bearer JWT, X-API-Key header, OAuth2 scopes) and checklist text; no real secret is read, printed, or sent."
         },
         {
           "type": "filesystem-write",
           "line": 483,
           "evidence": "delete",
           "context": "    this.observers.delete(observer);",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Matches on HTTP DELETE method names and JS Set.delete() in examples, not file deletion; the only real file output is codegen into ./generated/ when the user runs it."
         }
       ]
     }

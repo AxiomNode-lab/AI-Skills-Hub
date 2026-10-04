@@ -24257,11 +24257,11 @@
       "publisher": "j4flmao",
       "source": {
         "repo": "j4flmao/agent-skills",
-        "path": "skills/backend/universal/api-versioning/SKILL.md",
+        "path": "skills/backend/universal/api-versioning",
         "revision": "d9f812988c8926767ee96f66c1a340d65b595799",
+        "state": "present",
         "revision_type": "git-commit",
-        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/backend/universal/api-versioning/SKILL.md",
-        "state": "present"
+        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/backend/universal/api-versioning"
       },
       "category": [
         "agents",
@@ -24271,31 +24271,299 @@
         "spdx": "MIT",
         "redistributable": true,
         "status": "verified",
-        "evidence": "skills/backend/universal/api-versioning/SKILL.md"
+        "scope": "repository",
+        "evidence": "catalog/reviews/j4flmao__backend-api-versioning.json"
       },
-      "distribution": "review-required",
+      "distribution": "bundled",
       "compatibility": [
         "agent-skills"
       ],
       "security": {
-        "scan_status": "review-required",
-        "risk": "low",
-        "network": true,
+        "scan_status": "verified",
+        "risk": "medium",
         "shell": false,
-        "credentials": false
+        "network": true,
+        "credentials": true,
+        "dynamic_execution": false,
+        "package_install": false,
+        "filesystem_write": true,
+        "encoded_content": false,
+        "findings": [
+          {
+            "type": "filesystem-write",
+            "line": 120,
+            "evidence": "remove",
+            "context": "    remove:",
+            "file": "references/api-migration-deprecation.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 236,
+            "evidence": "Remove",
+            "context": "- Remove deprecated code and tests.",
+            "file": "references/api-migration-deprecation.md"
+          },
+          {
+            "type": "network-access",
+            "line": 380,
+            "evidence": "https://",
+            "context": "          documentation: 'https://docs.example.com/migration'",
+            "file": "references/api-migration-deprecation.md"
+          },
+          {
+            "type": "network-access",
+            "line": 396,
+            "evidence": "https://",
+            "context": "    successor_url: \"https://api.example.com/v2\"",
+            "file": "references/api-migration-deprecation.md"
+          },
+          {
+            "type": "network-access",
+            "line": 472,
+            "evidence": "http://",
+            "context": "const proxy = new MigrationProxy('http://api-v2.internal:8080');",
+            "file": "references/api-migration-deprecation.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 520,
+            "evidence": "api-key",
+            "context": "    headerName = 'x-api-key',   // or 'x-consumer-id'",
+            "file": "references/api-migration-deprecation.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 692,
+            "evidence": "api_key",
+            "context": "  count(DISTINCT api_key) AS unique_consumers",
+            "file": "references/api-migration-deprecation.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 700,
+            "evidence": "api_key",
+            "context": "  api_key,",
+            "file": "references/api-migration-deprecation.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 708,
+            "evidence": "api_key",
+            "context": "GROUP BY api_key, consumer_name",
+            "file": "references/api-migration-deprecation.md"
+          },
+          {
+            "type": "network-access",
+            "line": 89,
+            "evidence": "http://",
+            "context": "    proxy_pass http://backend-${api_version};",
+            "file": "references/api-versioning-advanced.md"
+          },
+          {
+            "type": "network-access",
+            "line": 87,
+            "evidence": "https://",
+            "context": "      \"docs\": \"https://docs.example.com/api/v2\"",
+            "file": "references/api-versioning-multi-protocol.md"
+          },
+          {
+            "type": "network-access",
+            "line": 554,
+            "evidence": "http://",
+            "context": "  url: http://user-service-v1:8080",
+            "file": "references/api-versioning-strategies.md"
+          },
+          {
+            "type": "network-access",
+            "line": 560,
+            "evidence": "http://",
+            "context": "  url: http://user-service-v2:8080",
+            "file": "references/api-versioning-strategies.md"
+          },
+          {
+            "type": "network-access",
+            "line": 640,
+            "evidence": "https://",
+            "context": "  - url: https://api.example.com/v2",
+            "file": "references/api-versioning-strategies.md"
+          },
+          {
+            "type": "network-access",
+            "line": 642,
+            "evidence": "https://",
+            "context": "  - url: https://api.example.com/v1",
+            "file": "references/api-versioning-strategies.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 783,
+            "evidence": "remove",
+            "context": "Avro schema evolution rules: can add fields with defaults, can remove fields with defaults, can change field types only within compatibility rules. Use Confluent Schema Registry with compatibility modes (BACKWARD, FORWARD, FULL, NONE).",
+            "file": "references/api-versioning-strategies.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 805,
+            "evidence": "remove",
+            "context": "Keeping versions in \"beta\" or \"preview\" indefinitely. Either commit to a version or remove it. Beta versions should have clear lifespan.",
+            "file": "references/api-versioning-strategies.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 33,
+            "evidence": "Remove",
+            "context": "5. **Remove**: After sunset date, return `410 Gone`.",
+            "file": "references/breaking-change-mgmt.md"
+          },
+          {
+            "type": "network-access",
+            "line": 73,
+            "evidence": "http://",
+            "context": "        providerBaseUrl: `http://localhost:3000/v2`,",
+            "file": "references/version-compatibility-testing.md"
+          },
+          {
+            "type": "network-access",
+            "line": 74,
+            "evidence": "http://",
+            "context": "        providerStatesSetupUrl: `http://localhost:3000/test/setup`,",
+            "file": "references/version-compatibility-testing.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 114,
+            "evidence": "apiKey",
+            "context": "    const client = new ApiClient({ baseUrl: '/v1', apiKey: 'test' });",
+            "file": "references/version-compatibility-testing.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 120,
+            "evidence": "apiKey",
+            "context": "    const clientV2 = new ApiClient({ baseUrl: '/v2', apiKey: 'test' });",
+            "file": "references/version-compatibility-testing.md"
+          },
+          {
+            "type": "network-access",
+            "line": 49,
+            "evidence": "curl",
+            "context": "| Tooling support | curl, Postman need config | Direct | curl, Postman need header |",
+            "file": "references/version-discovery.md"
+          },
+          {
+            "type": "network-access",
+            "line": 49,
+            "evidence": "curl",
+            "context": "| Tooling support | curl, Postman need config | Direct | curl, Postman need header |",
+            "file": "references/version-discovery.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 88,
+            "evidence": "apiKey",
+            "context": "    const apiKey = req.headers['x-api-key'] as string;",
+            "file": "references/version-discovery.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 88,
+            "evidence": "api-key",
+            "context": "    const apiKey = req.headers['x-api-key'] as string;",
+            "file": "references/version-discovery.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 89,
+            "evidence": "apiKey",
+            "context": "    if (apiKey) {",
+            "file": "references/version-discovery.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 90,
+            "evidence": "apiKey",
+            "context": "      const client = clientRegistry.get(apiKey);",
+            "file": "references/version-discovery.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 91,
+            "evidence": "API key",
+            "context": "      - \"Email all API key holders\"",
+            "file": "references/version-lifecycle.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 125,
+            "evidence": "Remove",
+            "context": "      - \"Remove v1 from CI/CD\"",
+            "file": "references/version-lifecycle.md"
+          },
+          {
+            "type": "network-access",
+            "line": 141,
+            "evidence": "https://",
+            "context": "1. Review the migration guide: https://docs.example.com/migration-v1-to-v2",
+            "file": "references/version-lifecycle.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 198,
+            "evidence": "Remove",
+            "context": "    - \"Remove old behavior after coexistence\"",
+            "file": "references/version-lifecycle.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 147,
+            "evidence": "Remove",
+            "context": "  // 2. Remove from gateway",
+            "file": "references/version-migration-automation.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 150,
+            "evidence": "Delete",
+            "context": "  // 3. Delete route handlers",
+            "file": "references/version-migration-automation.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 77,
+            "evidence": "remove",
+            "context": "├── No → Does it remove a field from response?",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 310,
+            "evidence": "https://",
+            "context": "    \"migrationUrl\": \"https://docs.example.com/migration-v1-to-v2\",",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 485,
+            "evidence": "remove",
+            "context": "- Never remove or change behavior in a non-backward-compatible way without a version bump",
+            "file": "SKILL.md"
+          }
+        ],
+        "review": "catalog/reviews/j4flmao__backend-api-versioning.json"
       },
-      "materialized": false,
+      "materialized": true,
       "release": {
-        "status": "hold",
-        "reasons": [
-          "manual-review-required"
-        ]
+        "status": "eligible",
+        "reasons": []
       },
       "integrity": {
         "upstream_skill_sha256": "bd92f89931ebb7966ff747fdd4eb170a6fa96fda81dafa3f07b5974d6550b9e9",
         "last_ingested_revision": "d9f812988c8926767ee96f66c1a340d65b595799"
       },
-      "description": "Use this skill when the user says 'API versioning', 'version strategy', 'URI versioning', 'header versioning', 'content negotiation', 'accept header', 'breaking change', 'API migration', 'deprecate endpoint', 'sunset endpoint'. This skill manages API version transitions using URI, header, or content-negotiation strategies. Applies to any backend stack. Do NOT use for: database schema versioning, client SDK versioning, or infrastructure versioning."
+      "description": "Use this skill when the user says 'API versioning', 'version strategy', 'URI versioning', 'header versioning', 'content negotiation', 'accept header', 'breaking change', 'API migration', 'deprecate endpoint', 'sunset endpoint'. This skill manages API version transitions using URI, header, or content-negotiation strategies. Applies to any backend stack. Do NOT use for: database schema versioning, client SDK versioning, or infrastructure versioning.",
+      "artifact_type": "skill",
+      "materialized_root": "skills/j4flmao/backend-api-versioning",
+      "materialized_files": 13
     },
     {
       "id": "j4flmao/backend-auth-patterns",
@@ -24395,11 +24663,11 @@
       "publisher": "j4flmao",
       "source": {
         "repo": "j4flmao/agent-skills",
-        "path": "skills/backend/universal/background-jobs/SKILL.md",
+        "path": "skills/backend/universal/background-jobs",
         "revision": "d9f812988c8926767ee96f66c1a340d65b595799",
+        "state": "present",
         "revision_type": "git-commit",
-        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/backend/universal/background-jobs/SKILL.md",
-        "state": "present"
+        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/backend/universal/background-jobs"
       },
       "category": [
         "agents",
@@ -24409,31 +24677,103 @@
         "spdx": "MIT",
         "redistributable": true,
         "status": "verified",
-        "evidence": "skills/backend/universal/background-jobs/SKILL.md"
+        "scope": "repository",
+        "evidence": "catalog/reviews/j4flmao__backend-background-jobs.json"
       },
-      "distribution": "review-required",
+      "distribution": "bundled",
       "compatibility": [
         "agent-skills"
       ],
       "security": {
         "scan_status": "verified",
-        "risk": "none",
-        "network": false,
+        "risk": "medium",
         "shell": false,
-        "credentials": false
+        "network": false,
+        "credentials": true,
+        "dynamic_execution": false,
+        "package_install": false,
+        "filesystem_write": true,
+        "encoded_content": false,
+        "findings": [
+          {
+            "type": "filesystem-write",
+            "line": 64,
+            "evidence": "delete",
+            "context": "    pending.delete(jobId);",
+            "file": "references/background-jobs-chaining.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 68,
+            "evidence": "delete",
+            "context": "      this.pending.delete(groupId);",
+            "file": "references/background-jobs-chaining.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 34,
+            "evidence": "delete",
+            "context": "      this.jobs.delete(name);",
+            "file": "references/job-scheduling.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 142,
+            "evidence": "process.env",
+            "context": "      const lock = await this.redis.set(lockKey, process.env.HOSTNAME, 'NX', 'PX', this.LOCK_TTL);",
+            "file": "references/job-scheduling.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 152,
+            "evidence": "process.env",
+            "context": "            if (currentValue === process.env.HOSTNAME) {",
+            "file": "references/job-scheduling.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 10,
+            "evidence": "process.env",
+            "context": "  host: process.env.REDIS_HOST || 'localhost',",
+            "file": "references/queue-setup.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 11,
+            "evidence": "process.env",
+            "context": "  port: parseInt(process.env.REDIS_PORT || '6379'),",
+            "file": "references/queue-setup.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 12,
+            "evidence": "process.env",
+            "context": "  password: process.env.REDIS_PASSWORD,",
+            "file": "references/queue-setup.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 162,
+            "evidence": "process.env",
+            "context": "const lockClient = createClient({ url: process.env.REDIS_URL });",
+            "file": "references/queue-setup.md"
+          }
+        ],
+        "review": "catalog/reviews/j4flmao__backend-background-jobs.json"
       },
-      "materialized": false,
+      "materialized": true,
       "release": {
-        "status": "hold",
-        "reasons": [
-          "manual-review-required"
-        ]
+        "status": "eligible",
+        "reasons": []
       },
       "integrity": {
         "upstream_skill_sha256": "b49c73bdf0f4d6794a3dc6b9c79998bb38398cb3f970117e5b250e61b4f0113d",
         "last_ingested_revision": "d9f812988c8926767ee96f66c1a340d65b595799"
       },
-      "description": "Use this skill when designing background job processing, task queues, or worker systems. This skill enforces: job idempotency, retry with exponential backoff, queue topology with dead letter, and worker concurrency controls. Applies to any backend stack with Redis/SQS/DB-backed queues. Do NOT use for: event streaming (Kafka), real-time pub/sub, or synchronous request processing."
+      "description": "Use this skill when designing background job processing, task queues, or worker systems. This skill enforces: job idempotency, retry with exponential backoff, queue topology with dead letter, and worker concurrency controls. Applies to any backend stack with Redis/SQS/DB-backed queues. Do NOT use for: event streaming (Kafka), real-time pub/sub, or synchronous request processing.",
+      "artifact_type": "skill",
+      "materialized_root": "skills/j4flmao/backend-background-jobs",
+      "materialized_files": 11
     },
     {
       "id": "j4flmao/backend-caching",
@@ -24579,11 +24919,11 @@
       "publisher": "j4flmao",
       "source": {
         "repo": "j4flmao/agent-skills",
-        "path": "skills/backend/universal/grpc-patterns/SKILL.md",
+        "path": "skills/backend/universal/grpc-patterns",
         "revision": "d9f812988c8926767ee96f66c1a340d65b595799",
+        "state": "present",
         "revision_type": "git-commit",
-        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/backend/universal/grpc-patterns/SKILL.md",
-        "state": "present"
+        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/backend/universal/grpc-patterns"
       },
       "category": [
         "agents",
@@ -24593,31 +24933,75 @@
         "spdx": "MIT",
         "redistributable": true,
         "status": "verified",
-        "evidence": "skills/backend/universal/grpc-patterns/SKILL.md"
+        "scope": "repository",
+        "evidence": "catalog/reviews/j4flmao__backend-grpc-patterns.json"
       },
-      "distribution": "review-required",
+      "distribution": "bundled",
       "compatibility": [
         "agent-skills"
       ],
       "security": {
-        "scan_status": "review-required",
+        "scan_status": "verified",
         "risk": "low",
-        "network": false,
-        "shell": false,
-        "credentials": false
+        "shell": true,
+        "network": true,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false,
+        "filesystem_write": true,
+        "encoded_content": false,
+        "findings": [
+          {
+            "type": "filesystem-write",
+            "line": 23,
+            "evidence": "delete",
+            "context": "        this.channels.delete(oldest);",
+            "file": "references/grpc-performance.md"
+          },
+          {
+            "type": "network-access",
+            "line": 16,
+            "evidence": "curl",
+            "context": "| Tooling | Limited debugging | Rich (curl, Postman, browsers) |",
+            "file": "references/grpc-vs-rest.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 96,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "references/protobuf-basics.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 402,
+            "evidence": "remove",
+            "context": "- Deprecate fields with `[deprecated = true]`, do not remove them until the next major package version.",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 437,
+            "evidence": "delete",
+            "context": "    this.observers.delete(observer);",
+            "file": "SKILL.md"
+          }
+        ],
+        "review": "catalog/reviews/j4flmao__backend-grpc-patterns.json"
       },
-      "materialized": false,
+      "materialized": true,
       "release": {
-        "status": "hold",
-        "reasons": [
-          "manual-review-required"
-        ]
+        "status": "eligible",
+        "reasons": []
       },
       "integrity": {
         "upstream_skill_sha256": "4693318c6f7383c7702f916c6ee6b8c5e2f089114e14bb027c99b674c6e52beb",
         "last_ingested_revision": "d9f812988c8926767ee96f66c1a340d65b595799"
       },
-      "description": "Use this skill when the user says 'gRPC', 'protobuf', 'protocol buffers', 'streaming RPC', 'unary call', 'server streaming', 'client streaming', 'bidirectional streaming', 'gRPC interceptor', 'gRPC error handling', 'protobuf schema', 'service definition', 'RPC design', or when designing gRPC APIs. This skill enforces consistent protobuf schema conventions, streaming patterns, interceptor chains, and structured error handling for gRPC services. Applies to any backend stack using gRPC. Do NOT use for: REST API design, GraphQL schema, message queue design, or frontend data fetching."
+      "description": "Use this skill when the user says 'gRPC', 'protobuf', 'protocol buffers', 'streaming RPC', 'unary call', 'server streaming', 'client streaming', 'bidirectional streaming', 'gRPC interceptor', 'gRPC error handling', 'protobuf schema', 'service definition', 'RPC design', or when designing gRPC APIs. This skill enforces consistent protobuf schema conventions, streaming patterns, interceptor chains, and structured error handling for gRPC services. Applies to any backend stack using gRPC. Do NOT use for: REST API design, GraphQL schema, message queue design, or frontend data fetching.",
+      "artifact_type": "skill",
+      "materialized_root": "skills/j4flmao/backend-grpc-patterns",
+      "materialized_files": 12
     },
     {
       "id": "j4flmao/backend-idempotency",
@@ -24625,11 +25009,11 @@
       "publisher": "j4flmao",
       "source": {
         "repo": "j4flmao/agent-skills",
-        "path": "skills/backend/universal/idempotency/SKILL.md",
+        "path": "skills/backend/universal/idempotency",
         "revision": "d9f812988c8926767ee96f66c1a340d65b595799",
+        "state": "present",
         "revision_type": "git-commit",
-        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/backend/universal/idempotency/SKILL.md",
-        "state": "present"
+        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/backend/universal/idempotency"
       },
       "category": [
         "agents",
@@ -24639,31 +25023,110 @@
         "spdx": "MIT",
         "redistributable": true,
         "status": "verified",
-        "evidence": "skills/backend/universal/idempotency/SKILL.md"
+        "scope": "repository",
+        "evidence": "catalog/reviews/j4flmao__backend-idempotency.json"
       },
-      "distribution": "review-required",
+      "distribution": "bundled",
       "compatibility": [
         "agent-skills"
       ],
       "security": {
-        "scan_status": "review-required",
+        "scan_status": "verified",
         "risk": "low",
-        "network": false,
         "shell": false,
-        "credentials": false
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false,
+        "filesystem_write": true,
+        "encoded_content": false,
+        "findings": [
+          {
+            "type": "filesystem-write",
+            "line": 11,
+            "evidence": "DELETE",
+            "context": "- `DELETE FROM cart WHERE id = 456` (deleting a deleted row succeeds)",
+            "file": "references/exactly-once-strategies.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 76,
+            "evidence": "Delete",
+            "context": "-- Step 3: Delete or mark as published (after acknowledgment)",
+            "file": "references/exactly-once-strategies.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 77,
+            "evidence": "delete",
+            "context": "      this.locks.delete(key);",
+            "file": "references/idempotency-failure-modes.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 84,
+            "evidence": "delete",
+            "context": "      this.locks.delete(key);",
+            "file": "references/idempotency-failure-modes.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 308,
+            "evidence": "DELETE",
+            "context": "- Idempotency middleware intercepts all mutating HTTP methods (POST, PUT, PATCH, DELETE)",
+            "file": "references/idempotency-middleware.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 148,
+            "evidence": "DELETE",
+            "context": "      `DELETE FROM idempotency_keys",
+            "file": "references/idempotency-storage.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 57,
+            "evidence": "DELETE",
+            "context": "Is the operation naturally idempotent? (PUT, DELETE, same result every time)",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 188,
+            "evidence": "delete",
+            "context": "Use a TTL index (Redis) or a background job (PostgreSQL) to delete keys after the TTL window:",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 192,
+            "evidence": "DELETE",
+            "context": "DELETE FROM idempotency_keys WHERE created_at < NOW() - INTERVAL '24 hours';",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 435,
+            "evidence": "delete",
+            "context": "    this.observers.delete(observer);",
+            "file": "SKILL.md"
+          }
+        ],
+        "review": "catalog/reviews/j4flmao__backend-idempotency.json"
       },
-      "materialized": false,
+      "materialized": true,
       "release": {
-        "status": "hold",
-        "reasons": [
-          "manual-review-required"
-        ]
+        "status": "eligible",
+        "reasons": []
       },
       "integrity": {
         "upstream_skill_sha256": "0043500efe5bdb64a67c4e2f0a6fe5da0768df9f34a48776c6666417f9982798",
         "last_ingested_revision": "d9f812988c8926767ee96f66c1a340d65b595799"
       },
-      "description": "Use this skill when the user says 'idempotency', 'idempotent', 'idempotency key', 'exactly-once', 'retry safety', 'deduplication', 'duplicate detection', 'idempotent endpoint', 'safe retry'. This skill implements idempotency keys and exactly-once semantics so retries never result in duplicate side effects. Applies to any backend stack. Do NOT use for: read-only endpoints (they are naturally idempotent), optimistic concurrency, or database-level unique constraints alone."
+      "description": "Use this skill when the user says 'idempotency', 'idempotent', 'idempotency key', 'exactly-once', 'retry safety', 'deduplication', 'duplicate detection', 'idempotent endpoint', 'safe retry'. This skill implements idempotency keys and exactly-once semantics so retries never result in duplicate side effects. Applies to any backend stack. Do NOT use for: read-only endpoints (they are naturally idempotent), optimistic concurrency, or database-level unique constraints alone.",
+      "artifact_type": "skill",
+      "materialized_root": "skills/j4flmao/backend-idempotency",
+      "materialized_files": 10
     },
     {
       "id": "j4flmao/backend-openapi-documentation",
@@ -24671,11 +25134,11 @@
       "publisher": "j4flmao",
       "source": {
         "repo": "j4flmao/agent-skills",
-        "path": "skills/backend/universal/openapi-documentation/SKILL.md",
+        "path": "skills/backend/universal/openapi-documentation",
         "revision": "d9f812988c8926767ee96f66c1a340d65b595799",
+        "state": "present",
         "revision_type": "git-commit",
-        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/backend/universal/openapi-documentation/SKILL.md",
-        "state": "present"
+        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/backend/universal/openapi-documentation"
       },
       "category": [
         "agents",
@@ -24685,31 +25148,411 @@
         "spdx": "MIT",
         "redistributable": true,
         "status": "verified",
-        "evidence": "skills/backend/universal/openapi-documentation/SKILL.md"
+        "scope": "repository",
+        "evidence": "catalog/reviews/j4flmao__backend-openapi-documentation.json"
       },
-      "distribution": "review-required",
+      "distribution": "bundled",
       "compatibility": [
         "agent-skills"
       ],
       "security": {
-        "scan_status": "review-required",
+        "scan_status": "verified",
         "risk": "medium",
-        "network": true,
         "shell": true,
-        "credentials": true
+        "network": true,
+        "credentials": true,
+        "dynamic_execution": false,
+        "package_install": true,
+        "filesystem_write": true,
+        "encoded_content": false,
+        "findings": [
+          {
+            "type": "shell-execution",
+            "line": 8,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "references/openapi-codegen.md"
+          },
+          {
+            "type": "package-install",
+            "line": 9,
+            "evidence": "npm install",
+            "context": "npm install @openapitools/openapi-generator-cli -g",
+            "file": "references/openapi-codegen.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 33,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "references/openapi-codegen.md"
+          },
+          {
+            "type": "network-access",
+            "line": 45,
+            "evidence": "https://",
+            "context": "const api = new UsersApi(new Configuration({ basePath: 'https://api.example.com/v1' }));",
+            "file": "references/openapi-codegen.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 52,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "references/openapi-codegen.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 63,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "references/openapi-codegen.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 74,
+            "evidence": "bash",
+            "context": "   ```bash",
+            "file": "references/openapi-codegen.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 79,
+            "evidence": "bash",
+            "context": "   ```bash",
+            "file": "references/openapi-codegen.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 24,
+            "evidence": "apiKey",
+            "context": "    apiKey:",
+            "file": "references/openapi-security.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 25,
+            "evidence": "apiKey",
+            "context": "      type: apiKey",
+            "file": "references/openapi-security.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 27,
+            "evidence": "API-Key",
+            "context": "      name: X-API-Key",
+            "file": "references/openapi-security.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 29,
+            "evidence": "API key",
+            "context": "        API key for third-party integrations.",
+            "file": "references/openapi-security.md"
+          },
+          {
+            "type": "network-access",
+            "line": 36,
+            "evidence": "https://",
+            "context": "          authorizationUrl: https://auth.example.com/authorize",
+            "file": "references/openapi-security.md"
+          },
+          {
+            "type": "network-access",
+            "line": 37,
+            "evidence": "https://",
+            "context": "          tokenUrl: https://auth.example.com/token",
+            "file": "references/openapi-security.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 53,
+            "evidence": "apiKey",
+            "context": "        - apiKey: []",
+            "file": "references/openapi-security.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 226,
+            "evidence": "DELETE",
+            "context": "              description: GET, POST, PUT, DELETE, PATCH",
+            "file": "references/openapi-security.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 247,
+            "evidence": "delete",
+            "context": "        if (['get', 'post', 'put', 'patch', 'delete'].includes(method)) {",
+            "file": "references/openapi-security.md"
+          },
+          {
+            "type": "network-access",
+            "line": 262,
+            "evidence": "https://",
+            "context": "        if (!server.url.startsWith('https://')) {",
+            "file": "references/openapi-security.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 289,
+            "evidence": "API key",
+            "context": "- Define security schemes explicitly: bearer JWT, API key, OAuth2 flows",
+            "file": "references/openapi-security.md"
+          },
+          {
+            "type": "network-access",
+            "line": 38,
+            "evidence": "https://",
+            "context": "    See https://docs.example.com/api for full documentation.",
+            "file": "references/openapi-setup.md"
+          },
+          {
+            "type": "network-access",
+            "line": 44,
+            "evidence": "https://",
+            "context": "    url: https://opensource.org/licenses/MIT",
+            "file": "references/openapi-setup.md"
+          },
+          {
+            "type": "network-access",
+            "line": 46,
+            "evidence": "https://",
+            "context": "  - url: https://api.example.com/v1",
+            "file": "references/openapi-setup.md"
+          },
+          {
+            "type": "network-access",
+            "line": 48,
+            "evidence": "https://",
+            "context": "  - url: https://staging-api.example.com/v1",
+            "file": "references/openapi-setup.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 123,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "references/openapi-setup.md"
+          },
+          {
+            "type": "package-install",
+            "line": 124,
+            "evidence": "npm install",
+            "context": "npm install -g @stoplight/spectral-cli",
+            "file": "references/openapi-setup.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 137,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "references/openapi-setup.md"
+          },
+          {
+            "type": "package-install",
+            "line": 138,
+            "evidence": "npm install",
+            "context": "npm install -g @apidevtools/swagger-cli",
+            "file": "references/openapi-setup.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 143,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "references/openapi-setup.md"
+          },
+          {
+            "type": "package-install",
+            "line": 144,
+            "evidence": "npm install",
+            "context": "npm install -g @redocly/cli",
+            "file": "references/openapi-setup.md"
+          },
+          {
+            "type": "network-access",
+            "line": 13,
+            "evidence": "http://",
+            "context": "    server: 'http://localhost:3000',",
+            "file": "references/openapi-testing.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 18,
+            "evidence": "DELETE",
+            "context": "      method: ['GET', 'POST', 'PUT', 'DELETE'],",
+            "file": "references/openapi-testing.md"
+          },
+          {
+            "type": "network-access",
+            "line": 161,
+            "evidence": "http://",
+            "context": "    mockUrl = 'http://localhost:4010';",
+            "file": "references/openapi-testing.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 38,
+            "evidence": "delete",
+            "context": "    supportedSubmitMethods: ['get', 'put', 'post', 'delete', 'patch'],",
+            "file": "references/openapi-tools.md"
+          },
+          {
+            "type": "package-install",
+            "line": 88,
+            "evidence": "npm install",
+            "context": "        run: npm install -g @stoplight/spectral-cli",
+            "file": "references/openapi-tools.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 110,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "references/openapi-tools.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 151,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "references/openapi-tools.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 179,
+            "evidence": "API key",
+            "context": "    auth: \"OAuth2 implicit flow, API key\"",
+            "file": "references/openapi-tools.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 199,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "references/openapi-tools.md"
+          },
+          {
+            "type": "network-access",
+            "line": 22,
+            "evidence": "https://",
+            "context": "    See https://docs.example.com/api/v2/migration for v1→v2 changes.",
+            "file": "references/openapi-versioning-strategies.md"
+          },
+          {
+            "type": "network-access",
+            "line": 25,
+            "evidence": "https://",
+            "context": "  - url: https://api.example.com/v2",
+            "file": "references/openapi-versioning-strategies.md"
+          },
+          {
+            "type": "network-access",
+            "line": 27,
+            "evidence": "https://",
+            "context": "  - url: https://api.example.com/v1",
+            "file": "references/openapi-versioning-strategies.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 91,
+            "evidence": "DELETE",
+            "context": "  │   DELETE /resources/{id} → Delete resource",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 91,
+            "evidence": "Delete",
+            "context": "  │   DELETE /resources/{id} → Delete resource",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 111,
+            "evidence": "https://",
+            "context": "  - url: https://api.example.com/v1",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 113,
+            "evidence": "https://",
+            "context": "  - url: https://staging-api.example.com/v1",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 260,
+            "evidence": "apiKey",
+            "context": "    apiKey:",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 261,
+            "evidence": "apiKey",
+            "context": "      type: apiKey",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 263,
+            "evidence": "API-Key",
+            "context": "      name: X-API-Key",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 264,
+            "evidence": "API key",
+            "context": "      description: API key for service-to-service auth",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 271,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "shell-execution",
+            "line": 283,
+            "evidence": "bash",
+            "context": "```bash",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 441,
+            "evidence": "API key",
+            "context": "- [ ] Security schemes defined (bearer, API key, OAuth2)",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 483,
+            "evidence": "delete",
+            "context": "    this.observers.delete(observer);",
+            "file": "SKILL.md"
+          }
+        ],
+        "review": "catalog/reviews/j4flmao__backend-openapi-documentation.json"
       },
-      "materialized": false,
+      "materialized": true,
       "release": {
-        "status": "hold",
-        "reasons": [
-          "manual-review-required"
-        ]
+        "status": "eligible",
+        "reasons": []
       },
       "integrity": {
         "upstream_skill_sha256": "3f4286021a3a30c457b296718518b7884f19333dd736d347b6fda465d0cfe741",
         "last_ingested_revision": "d9f812988c8926767ee96f66c1a340d65b595799"
       },
-      "description": "Use this skill when the user says 'OpenAPI', 'Swagger', 'API documentation', 'spec-first', 'API spec', 'openapi.yaml', 'swagger.json', 'codegen', 'openapi-generator', 'API contract first'. This skill enforces spec-first API documentation with OpenAPI 3.x, code generation, and versioned specs. Applies to any backend stack. Do NOT use for: proto/gRPC specs, GraphQL schemas, or internal-only endpoints."
+      "description": "Use this skill when the user says 'OpenAPI', 'Swagger', 'API documentation', 'spec-first', 'API spec', 'openapi.yaml', 'swagger.json', 'codegen', 'openapi-generator', 'API contract first'. This skill enforces spec-first API documentation with OpenAPI 3.x, code generation, and versioned specs. Applies to any backend stack. Do NOT use for: proto/gRPC specs, GraphQL schemas, or internal-only endpoints.",
+      "artifact_type": "skill",
+      "materialized_root": "skills/j4flmao/backend-openapi-documentation",
+      "materialized_files": 8
     },
     {
       "id": "j4flmao/backend-resilience-patterns",
@@ -24717,11 +25560,11 @@
       "publisher": "j4flmao",
       "source": {
         "repo": "j4flmao/agent-skills",
-        "path": "skills/backend/universal/resilience-patterns/SKILL.md",
+        "path": "skills/backend/universal/resilience-patterns",
         "revision": "d9f812988c8926767ee96f66c1a340d65b595799",
+        "state": "present",
         "revision_type": "git-commit",
-        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/backend/universal/resilience-patterns/SKILL.md",
-        "state": "present"
+        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/backend/universal/resilience-patterns"
       },
       "category": [
         "agents",
@@ -24731,31 +25574,54 @@
         "spdx": "MIT",
         "redistributable": true,
         "status": "verified",
-        "evidence": "skills/backend/universal/resilience-patterns/SKILL.md"
+        "scope": "repository",
+        "evidence": "catalog/reviews/j4flmao__backend-resilience-patterns.json"
       },
-      "distribution": "review-required",
+      "distribution": "bundled",
       "compatibility": [
         "agent-skills"
       ],
       "security": {
-        "scan_status": "review-required",
+        "scan_status": "verified",
         "risk": "low",
-        "network": false,
         "shell": false,
-        "credentials": false
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false,
+        "filesystem_write": true,
+        "encoded_content": false,
+        "findings": [
+          {
+            "type": "filesystem-write",
+            "line": 148,
+            "evidence": "delete",
+            "context": "        this.degradedKeys.delete(key);",
+            "file": "references/resilience-cache.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 560,
+            "evidence": "delete",
+            "context": "    this.observers.delete(observer);",
+            "file": "SKILL.md"
+          }
+        ],
+        "review": "catalog/reviews/j4flmao__backend-resilience-patterns.json"
       },
-      "materialized": false,
+      "materialized": true,
       "release": {
-        "status": "hold",
-        "reasons": [
-          "manual-review-required"
-        ]
+        "status": "eligible",
+        "reasons": []
       },
       "integrity": {
         "upstream_skill_sha256": "b786dccf6b5a6bfbafb9bfc1728cdeabc47c29a4b0be479de55cd913d3c11c8c",
         "last_ingested_revision": "d9f812988c8926767ee96f66c1a340d65b595799"
       },
-      "description": "Use this skill when the user says 'resilience', 'circuit breaker', 'retry', 'bulkhead', 'timeout', 'fallback', 'resilience4j', 'fault tolerance', 'rate limiter', 'backoff', 'retry strategy', 'bulkhead pattern'. This skill applies production fault-tolerance patterns: circuit breaker, retry with backoff, bulkhead isolation, timeouts, and fallback handlers. Applies to any backend stack. Do NOT use for: infrastructure-level resiliency (K8s liveness probes), database replication, or frontend error handling."
+      "description": "Use this skill when the user says 'resilience', 'circuit breaker', 'retry', 'bulkhead', 'timeout', 'fallback', 'resilience4j', 'fault tolerance', 'rate limiter', 'backoff', 'retry strategy', 'bulkhead pattern'. This skill applies production fault-tolerance patterns: circuit breaker, retry with backoff, bulkhead isolation, timeouts, and fallback handlers. Applies to any backend stack. Do NOT use for: infrastructure-level resiliency (K8s liveness probes), database replication, or frontend error handling.",
+      "artifact_type": "skill",
+      "materialized_root": "skills/j4flmao/backend-resilience-patterns",
+      "materialized_files": 10
     },
     {
       "id": "j4flmao/backend-structured-logging",
@@ -24763,11 +25629,11 @@
       "publisher": "j4flmao",
       "source": {
         "repo": "j4flmao/agent-skills",
-        "path": "skills/backend/universal/structured-logging/SKILL.md",
+        "path": "skills/backend/universal/structured-logging",
         "revision": "d9f812988c8926767ee96f66c1a340d65b595799",
+        "state": "present",
         "revision_type": "git-commit",
-        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/backend/universal/structured-logging/SKILL.md",
-        "state": "present"
+        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/backend/universal/structured-logging"
       },
       "category": [
         "agents",
@@ -24777,31 +25643,243 @@
         "spdx": "MIT",
         "redistributable": true,
         "status": "verified",
-        "evidence": "skills/backend/universal/structured-logging/SKILL.md"
+        "scope": "repository",
+        "evidence": "catalog/reviews/j4flmao__backend-structured-logging.json"
       },
-      "distribution": "review-required",
+      "distribution": "bundled",
       "compatibility": [
         "agent-skills"
       ],
       "security": {
-        "scan_status": "review-required",
+        "scan_status": "verified",
         "risk": "medium",
-        "network": false,
         "shell": false,
-        "credentials": true
+        "network": true,
+        "credentials": true,
+        "dynamic_execution": false,
+        "package_install": false,
+        "filesystem_write": true,
+        "encoded_content": false,
+        "findings": [
+          {
+            "type": "credential-access",
+            "line": 75,
+            "evidence": "process.env",
+            "context": "  level: process.env.LOG_LEVEL || 'info',",
+            "file": "references/log-format.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 81,
+            "evidence": "process.env",
+            "context": "      obj['service.name'] = process.env.SERVICE_NAME;",
+            "file": "references/log-format.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 82,
+            "evidence": "process.env",
+            "context": "      obj['service.environment'] = process.env.NODE_ENV;",
+            "file": "references/log-format.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 87,
+            "evidence": "secret",
+            "context": "    paths: ['password', 'secret', 'token', 'ssn', 'email', 'creditCard', 'authorization'],",
+            "file": "references/log-format.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 162,
+            "evidence": "process.env",
+            "context": "    environment: process.env.NODE_ENV,",
+            "file": "references/log-format.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 196,
+            "evidence": "secret",
+            "context": "  { pattern: /\\b(?:password|secret|token|api[_-]?key|authorization)\\s*[:=]\\s*\\S+/gi, replacement: '$1: [REDACTED]' },",
+            "file": "references/log-format.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 55,
+            "evidence": "delete",
+            "context": "      this.buffer.delete(oldest);",
+            "file": "references/log-sampling-strategies.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 73,
+            "evidence": "delete",
+            "context": "    this.buffer.delete(traceId);",
+            "file": "references/log-sampling-strategies.md"
+          },
+          {
+            "type": "network-access",
+            "line": 112,
+            "evidence": "http://",
+            "context": "endpoint = \"http://elasticsearch:9200\"",
+            "file": "references/log-shipping.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 114,
+            "evidence": "secret",
+            "context": "encoding.except_fields = [\"password\", \"secret\", \"token\"]",
+            "file": "references/log-shipping.md"
+          },
+          {
+            "type": "network-access",
+            "line": 121,
+            "evidence": "http://",
+            "context": "endpoint = \"http://elasticsearch:9200\"",
+            "file": "references/log-shipping.md"
+          },
+          {
+            "type": "network-access",
+            "line": 56,
+            "evidence": "http://",
+            "context": "endpoints = [\"http://elasticsearch:9200\"]",
+            "file": "references/logging-aggregation.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 157,
+            "evidence": "delete",
+            "context": "      \"delete\": {",
+            "file": "references/logging-aggregation.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 160,
+            "evidence": "delete",
+            "context": "          \"delete\": {}",
+            "file": "references/logging-aggregation.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 49,
+            "evidence": "process.env",
+            "context": "  level: process.env.LOG_LEVEL || 'info',",
+            "file": "references/logging-architecture.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 55,
+            "evidence": "process.env",
+            "context": "      obj['service.name'] = process.env.SERVICE_NAME;",
+            "file": "references/logging-architecture.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 56,
+            "evidence": "process.env",
+            "context": "      obj['service.environment'] = process.env.NODE_ENV;",
+            "file": "references/logging-architecture.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 61,
+            "evidence": "secret",
+            "context": "    paths: ['password', 'secret', 'token', 'authorization', 'cookie'],",
+            "file": "references/logging-architecture.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 205,
+            "evidence": "process.env",
+            "context": "    if (level === 'debug') return process.env.LOG_LEVEL === 'debug';",
+            "file": "references/logging-architecture.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 104,
+            "evidence": "process.env",
+            "context": "    if (process.env.NODE_ENV === 'production') {",
+            "file": "references/structured-logging-implementation.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 138,
+            "evidence": "process.env",
+            "context": "  level: process.env.LOG_LEVEL || 'info',",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 144,
+            "evidence": "process.env",
+            "context": "      obj['service.name'] = process.env.SERVICE_NAME || 'unknown';",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 145,
+            "evidence": "process.env",
+            "context": "      obj['service.environment'] = process.env.NODE_ENV || 'development';",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 150,
+            "evidence": "secret",
+            "context": "    paths: ['password', 'secret', 'token', 'ssn', 'email', 'creditCard', 'authorization'],",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 259,
+            "evidence": "secret",
+            "context": "  { pattern: /\\b(?:password|secret|token|api[_-]?key|authorization)\\s*[:=]\\s*\\S+/gi, replacement: '$1: [REDACTED]' },",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 334,
+            "evidence": "secret",
+            "context": "    patterns: [password, secret, token, ssn, email, creditCard, authorization]",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 372,
+            "evidence": "secret",
+            "context": "| Secrets in logs | Blocklist-sensitive keys: `password`, `secret`, `token`, `key` |",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 380,
+            "evidence": "remove",
+            "context": "| Logging in hot loops | 100K logs/sec kills performance | Sample or remove |",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 428,
+            "evidence": "delete",
+            "context": "    this.observers.delete(observer);",
+            "file": "SKILL.md"
+          }
+        ],
+        "review": "catalog/reviews/j4flmao__backend-structured-logging.json"
       },
-      "materialized": false,
+      "materialized": true,
       "release": {
-        "status": "hold",
-        "reasons": [
-          "manual-review-required"
-        ]
+        "status": "eligible",
+        "reasons": []
       },
       "integrity": {
         "upstream_skill_sha256": "9cc850046d64632824c2b57779b2196a479966bb1bb600a7608b00754c6a55c1",
         "last_ingested_revision": "d9f812988c8926767ee96f66c1a340d65b595799"
       },
-      "description": "Use this skill when implementing logging frameworks, log formats, or distributed tracing correlation. This skill enforces: JSON lines format, strict log schema with correlation IDs, PII redaction, log level discipline, and stdout-only output. Applies to any backend stack with Winston/Pino/Serilog/Log4j/logrus/zerolog. Do NOT use for: metrics collection, audit trail systems, or application performance monitoring."
+      "description": "Use this skill when implementing logging frameworks, log formats, or distributed tracing correlation. This skill enforces: JSON lines format, strict log schema with correlation IDs, PII redaction, log level discipline, and stdout-only output. Applies to any backend stack with Winston/Pino/Serilog/Log4j/logrus/zerolog. Do NOT use for: metrics collection, audit trail systems, or application performance monitoring.",
+      "artifact_type": "skill",
+      "materialized_root": "skills/j4flmao/backend-structured-logging",
+      "materialized_files": 10
     },
     {
       "id": "j4flmao/backend-webhooks",
@@ -24809,11 +25887,11 @@
       "publisher": "j4flmao",
       "source": {
         "repo": "j4flmao/agent-skills",
-        "path": "skills/backend/universal/webhooks/SKILL.md",
+        "path": "skills/backend/universal/webhooks",
         "revision": "d9f812988c8926767ee96f66c1a340d65b595799",
+        "state": "present",
         "revision_type": "git-commit",
-        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/backend/universal/webhooks/SKILL.md",
-        "state": "present"
+        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/backend/universal/webhooks"
       },
       "category": [
         "agents",
@@ -24823,31 +25901,537 @@
         "spdx": "MIT",
         "redistributable": true,
         "status": "verified",
-        "evidence": "skills/backend/universal/webhooks/SKILL.md"
+        "scope": "repository",
+        "evidence": "catalog/reviews/j4flmao__backend-webhooks.json"
       },
-      "distribution": "review-required",
+      "distribution": "bundled",
       "compatibility": [
         "agent-skills"
       ],
       "security": {
-        "scan_status": "review-required",
+        "scan_status": "verified",
         "risk": "medium",
-        "network": false,
         "shell": false,
-        "credentials": true
+        "network": true,
+        "credentials": true,
+        "dynamic_execution": false,
+        "package_install": false,
+        "filesystem_write": true,
+        "encoded_content": false,
+        "findings": [
+          {
+            "type": "credential-access",
+            "line": 10,
+            "evidence": "secret",
+            "context": "  secret: string;",
+            "file": "references/webhook-delivery.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 39,
+            "evidence": "secret",
+            "context": "      secret: generateSecret(),",
+            "file": "references/webhook-delivery.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 108,
+            "evidence": "secret",
+            "context": "    const signature = this.signPayload(payload, webhook.secret);",
+            "file": "references/webhook-delivery.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 131,
+            "evidence": "process.env",
+            "context": "      environment: process.env.NODE_ENV,",
+            "file": "references/webhook-delivery.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 135,
+            "evidence": "secret",
+            "context": "  private signPayload(payload: any, secret: string): string {",
+            "file": "references/webhook-delivery.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 136,
+            "evidence": "secret",
+            "context": "    const hmac = crypto.createHmac('sha256', secret);",
+            "file": "references/webhook-delivery.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 155,
+            "evidence": "secret",
+            "context": "    const signature = this.signPayload(challenge, webhook.secret);",
+            "file": "references/webhook-delivery.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 177,
+            "evidence": "secret",
+            "context": "  verifySignature(payload: any, signature: string, secret: string): boolean {",
+            "file": "references/webhook-delivery.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 178,
+            "evidence": "secret",
+            "context": "    const expected = this.signPayload(payload, secret);",
+            "file": "references/webhook-delivery.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 104,
+            "evidence": "Remove",
+            "context": "    // Remove delivered events from queue",
+            "file": "references/webhook-rate-limiting.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 134,
+            "evidence": "DELETE",
+            "context": "    await db.query('DELETE FROM webhook_delivery_queue WHERE id = $1', [id]);",
+            "file": "references/webhook-scaling.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 5,
+            "evidence": "secret",
+            "context": "Providers sign the payload with a shared secret using HMAC-SHA256. Always verify before processing.",
+            "file": "references/webhook-security.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 10,
+            "evidence": "secret",
+            "context": "def verify_signature(payload: bytes, signature: str, secret: str) -> bool:",
+            "file": "references/webhook-security.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 12,
+            "evidence": "secret",
+            "context": "        secret.encode(), payload, hashlib.sha256",
+            "file": "references/webhook-security.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 43,
+            "evidence": "Secret",
+            "context": "- **Secret rotation**: Rotate secrets regularly. Support multiple active secrets during rotation windows.",
+            "file": "references/webhook-security.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 39,
+            "evidence": "secret",
+            "context": "  secret: string;             // HMAC signing secret",
+            "file": "references/webhooks-architecture.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 39,
+            "evidence": "secret",
+            "context": "  secret: string;             // HMAC signing secret",
+            "file": "references/webhooks-architecture.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 57,
+            "evidence": "secret",
+            "context": "    const secret = crypto.randomBytes(32).toString('hex');",
+            "file": "references/webhooks-architecture.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 64,
+            "evidence": "secret",
+            "context": "      secret: await this.encryptSecret(secret),",
+            "file": "references/webhooks-architecture.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 64,
+            "evidence": "secret",
+            "context": "      secret: await this.encryptSecret(secret),",
+            "file": "references/webhooks-architecture.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 77,
+            "evidence": "secret",
+            "context": "      secret: await this.encryptSecret(newSecret),",
+            "file": "references/webhooks-architecture.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 143,
+            "evidence": "secret",
+            "context": "      'X-Webhook-Signature': this.signatureService.sign(subscription.secret, payload),",
+            "file": "references/webhooks-architecture.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 220,
+            "evidence": "secret",
+            "context": "    const secret = await this.getPartnerSecret(req.params.partnerId);",
+            "file": "references/webhooks-architecture.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 221,
+            "evidence": "secret",
+            "context": "    if (!this.signatureService.verify(secret, req.body, signature)) {",
+            "file": "references/webhooks-architecture.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 7,
+            "evidence": "secret",
+            "context": "| HMAC-SHA256 | `sha256(payload + secret)` | Most use cases | Standard, fast, supported everywhere |",
+            "file": "references/webhooks-delivery.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 8,
+            "evidence": "secret",
+            "context": "| HMAC-SHA512 | `sha512(payload + secret)` | High-security | Stronger but same approach |",
+            "file": "references/webhooks-delivery.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 9,
+            "evidence": "secret",
+            "context": "| RSA-SHA256 | `RSA.sign(payload, privateKey)` | Public webhook providers | Asymmetric, no shared secret needed |",
+            "file": "references/webhooks-delivery.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 17,
+            "evidence": "secret",
+            "context": "function signPayload(payload: object, secret: string): string {",
+            "file": "references/webhooks-delivery.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 19,
+            "evidence": "secret",
+            "context": "  const hmac = crypto.createHmac('sha256', secret);",
+            "file": "references/webhooks-delivery.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 31,
+            "evidence": "secret",
+            "context": "  secret: string,",
+            "file": "references/webhooks-delivery.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 33,
+            "evidence": "secret",
+            "context": "  const expected = signPayload(payload, secret);",
+            "file": "references/webhooks-delivery.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 52,
+            "evidence": "secret",
+            "context": "  secret: string,",
+            "file": "references/webhooks-delivery.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 72,
+            "evidence": "secret",
+            "context": "  const hmac = crypto.createHmac('sha256', secret);",
+            "file": "references/webhooks-delivery.md"
+          },
+          {
+            "type": "network-access",
+            "line": 99,
+            "evidence": "https://",
+            "context": "      const response = await fetch('https://webhook-provider.com/ips.json');",
+            "file": "references/webhooks-delivery.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 114,
+            "evidence": "Secret",
+            "context": "## Secret Rotation",
+            "file": "references/webhooks-delivery.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 123,
+            "evidence": "secret",
+            "context": "    // Stage 1: Add new secret alongside old (dual acceptance window)",
+            "file": "references/webhooks-delivery.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 127,
+            "evidence": "secret",
+            "context": "    // Stage 2: After grace period, remove old secret",
+            "file": "references/webhooks-delivery.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 127,
+            "evidence": "remove",
+            "context": "    // Stage 2: After grace period, remove old secret",
+            "file": "references/webhooks-delivery.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 131,
+            "evidence": "secret",
+            "context": "      // Send alert if consumer is still using old secret",
+            "file": "references/webhooks-delivery.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 136,
+            "evidence": "secret",
+            "context": "          message: `Consumer ${subscriptionId} still using old secret after rotation`,",
+            "file": "references/webhooks-delivery.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 146,
+            "evidence": "secret",
+            "context": "      subject: 'Webhook secret rotated',",
+            "file": "references/webhooks-delivery.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 147,
+            "evidence": "secret",
+            "context": "      body: `New secret: ${newSecret}\\nUpdate your webhook verification within 7 days.`,",
+            "file": "references/webhooks-delivery.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 213,
+            "evidence": "secret",
+            "context": "    - \"Grace period for dual secret acceptance\"",
+            "file": "references/webhooks-delivery.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 215,
+            "evidence": "secret",
+            "context": "    - \"Compromised secret: immediate rotation + alert\"",
+            "file": "references/webhooks-delivery.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 221,
+            "evidence": "secret",
+            "context": "    - \"Track secret age and rotation compliance\"",
+            "file": "references/webhooks-delivery.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 230,
+            "evidence": "Secret",
+            "context": "| Secret leak | Regular rotation | Rotate every 90 days, separate per consumer |",
+            "file": "references/webhooks-delivery.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 92,
+            "evidence": "secret",
+            "context": "  │   ├── Shared secret known to both parties",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 96,
+            "evidence": "access token",
+            "context": "  │   ├── Provider issues access token",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 125,
+            "evidence": "secret",
+            "context": "function signPayload(payload, secret) {",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 129,
+            "evidence": "secret",
+            "context": "    .createHmac('sha256', secret)",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 136,
+            "evidence": "secret",
+            "context": "  const { signature, timestamp } = signPayload(event, subscription.secret);",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 154,
+            "evidence": "secret",
+            "context": "function verifyWebhook(payload, headers, secret, toleranceMs = 300000) {",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 168,
+            "evidence": "secret",
+            "context": "    .createHmac('sha256', secret)",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 265,
+            "evidence": "secret",
+            "context": "  secret: string;",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 283,
+            "evidence": "DELETE",
+            "context": "// DELETE /api/webhooks/subscriptions/:id — Delete subscription",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 283,
+            "evidence": "Delete",
+            "context": "// DELETE /api/webhooks/subscriptions/:id — Delete subscription",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 284,
+            "evidence": "secret",
+            "context": "// POST   /api/webhooks/subscriptions/:id/rotate — Rotate secret",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 291,
+            "evidence": "secret",
+            "context": "    // Generate unique secret",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 292,
+            "evidence": "secret",
+            "context": "    const secret = crypto.randomBytes(32).toString('hex');",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 295,
+            "evidence": "secret",
+            "context": "    await this.sendTestWebhook(input.url, secret);",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 300,
+            "evidence": "secret",
+            "context": "      secret,",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 312,
+            "evidence": "secret",
+            "context": "  private async sendTestWebhook(url: string, secret: string): Promise<void> {",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 314,
+            "evidence": "secret",
+            "context": "    const { signature, timestamp } = signPayload(testPayload, secret);",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 351,
+            "evidence": "secret",
+            "context": "  const secret = getProviderSecret(provider);",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 354,
+            "evidence": "secret",
+            "context": "    verifyWebhook(JSON.parse(req.rawBody), req.headers, secret);",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 449,
+            "evidence": "secret",
+            "context": "4. **Non-atomic secret rotation**: Updating the secret while a webhook is in flight causes verification failures. Support dual secrets during rotation.",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 449,
+            "evidence": "secret",
+            "context": "4. **Non-atomic secret rotation**: Updating the secret while a webhook is in flight causes verification failures. Support dual secrets during rotation.",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 468,
+            "evidence": "Secret",
+            "context": "### Secret Rotation",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 479,
+            "evidence": "secret",
+            "context": "  // After overlap period, remove old secret",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 479,
+            "evidence": "remove",
+            "context": "  // After overlap period, remove old secret",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 483,
+            "evidence": "secret",
+            "context": "      updated.secret = newSecret;",
+            "file": "SKILL.md"
+          }
+        ],
+        "review": "catalog/reviews/j4flmao__backend-webhooks.json"
       },
-      "materialized": false,
+      "materialized": true,
       "release": {
-        "status": "hold",
-        "reasons": [
-          "manual-review-required"
-        ]
+        "status": "eligible",
+        "reasons": []
       },
       "integrity": {
         "upstream_skill_sha256": "ca9b977e421a2bb15f4aaae0355cc209826b40183de746a71bf518348f8848c5",
         "last_ingested_revision": "d9f812988c8926767ee96f66c1a340d65b595799"
       },
-      "description": "Use this skill when the user says 'webhook', 'webhook receiver', 'webhook delivery', 'signature verification', 'HMAC', 'event delivery', 'outgoing webhook', 'incoming webhook', 'retry webhook', 'webhook endpoint'. This skill implements receiving, verifying, retrying, and delivering webhooks securely. Applies to any backend stack. Do NOT use for: server-sent events (SSE), WebSockets, or long-polling fallbacks."
+      "description": "Use this skill when the user says 'webhook', 'webhook receiver', 'webhook delivery', 'signature verification', 'HMAC', 'event delivery', 'outgoing webhook', 'incoming webhook', 'retry webhook', 'webhook endpoint'. This skill implements receiving, verifying, retrying, and delivering webhooks securely. Applies to any backend stack. Do NOT use for: server-sent events (SSE), WebSockets, or long-polling fallbacks.",
+      "artifact_type": "skill",
+      "materialized_root": "skills/j4flmao/backend-webhooks",
+      "materialized_files": 10
     },
     {
       "id": "j4flmao/blue-team-soc-operations",
@@ -24855,11 +26439,11 @@
       "publisher": "j4flmao",
       "source": {
         "repo": "j4flmao/agent-skills",
-        "path": "skills/cybersecurity/blue-team-soc/SKILL.md",
+        "path": "skills/cybersecurity/blue-team-soc",
         "revision": "d9f812988c8926767ee96f66c1a340d65b595799",
+        "state": "present",
         "revision_type": "git-commit",
-        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/cybersecurity/blue-team-soc/SKILL.md",
-        "state": "present"
+        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/cybersecurity/blue-team-soc"
       },
       "category": [
         "security"
@@ -24868,31 +26452,39 @@
         "spdx": "MIT",
         "redistributable": true,
         "status": "verified",
-        "evidence": "LICENSE"
+        "scope": "repository",
+        "evidence": "catalog/reviews/j4flmao__blue-team-soc-operations.json"
       },
-      "distribution": "review-required",
+      "distribution": "bundled",
       "compatibility": [
         "agent-skills"
       ],
       "security": {
         "scan_status": "verified",
         "risk": "none",
-        "network": false,
         "shell": false,
-        "credentials": false
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false,
+        "filesystem_write": false,
+        "encoded_content": false,
+        "findings": [],
+        "review": "catalog/reviews/j4flmao__blue-team-soc-operations.json"
       },
-      "materialized": false,
+      "materialized": true,
       "release": {
-        "status": "hold",
-        "reasons": [
-          "manual-review-required"
-        ]
+        "status": "eligible",
+        "reasons": []
       },
       "integrity": {
         "upstream_skill_sha256": "068de8cda021875929879be3cd63b9f5fd53c6cc4c900559cebcf771fe9ffa3c",
         "last_ingested_revision": "d9f812988c8926767ee96f66c1a340d65b595799"
       },
-      "description": "Master methodologies for SIEM architecture, incident response, and threat hunting."
+      "description": "Master methodologies for SIEM architecture, incident response, and threat hunting.",
+      "artifact_type": "skill",
+      "materialized_root": "skills/j4flmao/blue-team-soc-operations",
+      "materialized_files": 2
     },
     {
       "id": "j4flmao/chaos-engineering",
@@ -24946,11 +26538,11 @@
       "publisher": "j4flmao",
       "source": {
         "repo": "j4flmao/agent-skills",
-        "path": "skills/system-design/core-algorithms/SKILL.md",
+        "path": "skills/system-design/core-algorithms",
         "revision": "d9f812988c8926767ee96f66c1a340d65b595799",
+        "state": "present",
         "revision_type": "git-commit",
-        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/system-design/core-algorithms/SKILL.md",
-        "state": "present"
+        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/system-design/core-algorithms"
       },
       "category": [
         "agents",
@@ -24960,31 +26552,39 @@
         "spdx": "MIT",
         "redistributable": true,
         "status": "verified",
-        "evidence": "LICENSE"
+        "scope": "repository",
+        "evidence": "catalog/reviews/j4flmao__core-algorithms-system-design.json"
       },
-      "distribution": "review-required",
+      "distribution": "bundled",
       "compatibility": [
         "agent-skills"
       ],
       "security": {
         "scan_status": "verified",
         "risk": "none",
-        "network": false,
         "shell": false,
-        "credentials": false
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false,
+        "filesystem_write": false,
+        "encoded_content": false,
+        "findings": [],
+        "review": "catalog/reviews/j4flmao__core-algorithms-system-design.json"
       },
-      "materialized": false,
+      "materialized": true,
       "release": {
-        "status": "hold",
-        "reasons": [
-          "manual-review-required"
-        ]
+        "status": "eligible",
+        "reasons": []
       },
       "integrity": {
         "upstream_skill_sha256": "60c63e0201747f94da00797048794ebbb59fb46291c6cd174acf085689854b73",
         "last_ingested_revision": "d9f812988c8926767ee96f66c1a340d65b595799"
       },
-      "description": "Mathematical and architectural analysis of Consistent Hashing, Rate Limiting, and Bloom Filters."
+      "description": "Mathematical and architectural analysis of Consistent Hashing, Rate Limiting, and Bloom Filters.",
+      "artifact_type": "skill",
+      "materialized_root": "skills/j4flmao/core-algorithms-system-design",
+      "materialized_files": 2
     },
     {
       "id": "j4flmao/database-sharding",
@@ -25083,11 +26683,11 @@
       "publisher": "j4flmao",
       "source": {
         "repo": "j4flmao/agent-skills",
-        "path": "skills/cybersecurity/ebpf-threat-detection/SKILL.md",
+        "path": "skills/cybersecurity/ebpf-threat-detection",
         "revision": "d9f812988c8926767ee96f66c1a340d65b595799",
+        "state": "present",
         "revision_type": "git-commit",
-        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/cybersecurity/ebpf-threat-detection/SKILL.md",
-        "state": "present"
+        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/cybersecurity/ebpf-threat-detection"
       },
       "category": [
         "security"
@@ -25096,31 +26696,39 @@
         "spdx": "MIT",
         "redistributable": true,
         "status": "verified",
-        "evidence": "LICENSE"
+        "scope": "repository",
+        "evidence": "catalog/reviews/j4flmao__ebpf-threat-detection.json"
       },
-      "distribution": "review-required",
+      "distribution": "bundled",
       "compatibility": [
         "agent-skills"
       ],
       "security": {
         "scan_status": "verified",
         "risk": "none",
-        "network": false,
         "shell": false,
-        "credentials": false
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false,
+        "filesystem_write": false,
+        "encoded_content": false,
+        "findings": [],
+        "review": "catalog/reviews/j4flmao__ebpf-threat-detection.json"
       },
-      "materialized": false,
+      "materialized": true,
       "release": {
-        "status": "hold",
-        "reasons": [
-          "manual-review-required"
-        ]
+        "status": "eligible",
+        "reasons": []
       },
       "integrity": {
         "upstream_skill_sha256": "ba6b8703c32fcf84ee9248acd1b69a1bebf9037318b1157af1fcb5a6760742ba",
         "last_ingested_revision": "d9f812988c8926767ee96f66c1a340d65b595799"
       },
-      "description": "eBPF Threat Detection, Tetragon, Falco, and Kernel Syscall Interception"
+      "description": "eBPF Threat Detection, Tetragon, Falco, and Kernel Syscall Interception",
+      "artifact_type": "skill",
+      "materialized_root": "skills/j4flmao/ebpf-threat-detection",
+      "materialized_files": 2
     },
     {
       "id": "j4flmao/frontend-authentication",
@@ -25128,11 +26736,11 @@
       "publisher": "j4flmao",
       "source": {
         "repo": "j4flmao/agent-skills",
-        "path": "skills/frontend/universal/authentication/SKILL.md",
+        "path": "skills/frontend/universal/authentication",
         "revision": "d9f812988c8926767ee96f66c1a340d65b595799",
+        "state": "present",
         "revision_type": "git-commit",
-        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/frontend/universal/authentication/SKILL.md",
-        "state": "present"
+        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/frontend/universal/authentication"
       },
       "category": [
         "frontend"
@@ -25141,31 +26749,355 @@
         "spdx": "MIT",
         "redistributable": true,
         "status": "verified",
-        "evidence": "skills/frontend/universal/authentication/SKILL.md"
+        "scope": "repository",
+        "evidence": "catalog/reviews/j4flmao__frontend-authentication.json"
       },
-      "distribution": "review-required",
+      "distribution": "bundled",
       "compatibility": [
         "agent-skills"
       ],
       "security": {
-        "scan_status": "review-required",
+        "scan_status": "verified",
         "risk": "medium",
-        "network": true,
         "shell": false,
-        "credentials": true
+        "network": true,
+        "credentials": true,
+        "dynamic_execution": false,
+        "package_install": false,
+        "filesystem_write": true,
+        "encoded_content": true,
+        "findings": [
+          {
+            "type": "credential-access",
+            "line": 12,
+            "evidence": "access_token",
+            "context": "5. Server verifies `sha256(code_verifier) === stored code_challenge`, returns `access_token` + `refresh_token`",
+            "file": "references/auth-flows.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 32,
+            "evidence": "access token",
+            "context": "Do not use. The implicit flow returns the access token as a URL fragment. It is vulnerable to access token interception via referrer headers, browser history, and compromised service workers. Use Authorization Code + PKCE instead.",
+            "file": "references/auth-flows.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 32,
+            "evidence": "access token",
+            "context": "Do not use. The implicit flow returns the access token as a URL fragment. It is vulnerable to access token interception via referrer headers, browser history, and compromised service workers. Use Authorization Code + PKCE instead.",
+            "file": "references/auth-flows.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 64,
+            "evidence": "remove",
+            "context": "        router.replace('/dashboard') // remove token from URL",
+            "file": "references/auth-flows.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 101,
+            "evidence": "access_token",
+            "context": "  access_token: string",
+            "file": "references/oauth-pkce-flow.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 184,
+            "evidence": "access_token",
+            "context": "    return this.memoryStore.get('tokens')?.access_token ?? null",
+            "file": "references/oauth-pkce-flow.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 188,
+            "evidence": "delete",
+            "context": "    this.memoryStore.delete('tokens')",
+            "file": "references/oauth-pkce-flow.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 18,
+            "evidence": "access_token",
+            "context": "Set-Cookie: access_token=<jwt>; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=900",
+            "file": "references/token-management.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 29,
+            "evidence": "accessToken",
+            "context": "let inMemoryToken: { accessToken: string; refreshToken: string } | null = null",
+            "file": "references/token-management.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 48,
+            "evidence": "accessToken",
+            "context": "    accessToken: localStorage.getItem(`${PREFIX}access_token`),",
+            "file": "references/token-management.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 48,
+            "evidence": "access_token",
+            "context": "    accessToken: localStorage.getItem(`${PREFIX}access_token`),",
+            "file": "references/token-management.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 51,
+            "evidence": "accessToken",
+            "context": "  set: ({ accessToken, refreshToken }: { accessToken: string; refreshToken: string }) => {",
+            "file": "references/token-management.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 51,
+            "evidence": "accessToken",
+            "context": "  set: ({ accessToken, refreshToken }: { accessToken: string; refreshToken: string }) => {",
+            "file": "references/token-management.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 52,
+            "evidence": "access_token",
+            "context": "    localStorage.setItem(`${PREFIX}access_token`, accessToken)",
+            "file": "references/token-management.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 52,
+            "evidence": "accessToken",
+            "context": "    localStorage.setItem(`${PREFIX}access_token`, accessToken)",
+            "file": "references/token-management.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 56,
+            "evidence": "access_token",
+            "context": "    localStorage.removeItem(`${PREFIX}access_token`)",
+            "file": "references/token-management.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 78,
+            "evidence": "accessToken",
+            "context": "    tokenStore.set({ accessToken: res.accessToken, refreshToken: res.refreshToken })",
+            "file": "references/token-management.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 78,
+            "evidence": "accessToken",
+            "context": "    tokenStore.set({ accessToken: res.accessToken, refreshToken: res.refreshToken })",
+            "file": "references/token-management.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 79,
+            "evidence": "accessToken",
+            "context": "    return res.accessToken",
+            "file": "references/token-management.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 97,
+            "evidence": "accessToken",
+            "context": "  tokenStore.set({ accessToken: res.accessToken, refreshToken: res.refreshToken })",
+            "file": "references/token-management.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 97,
+            "evidence": "accessToken",
+            "context": "  tokenStore.set({ accessToken: res.accessToken, refreshToken: res.refreshToken })",
+            "file": "references/token-management.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 98,
+            "evidence": "accessToken",
+            "context": "  return res.accessToken",
+            "file": "references/token-management.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 135,
+            "evidence": "accessToken",
+            "context": "  if (!storedTokens?.accessToken) {",
+            "file": "references/token-management.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 139,
+            "evidence": "access token",
+            "context": "  // Check if access token is expired",
+            "file": "references/token-management.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 140,
+            "evidence": "accessToken",
+            "context": "  const payload = parseJWT(storedTokens.accessToken)",
+            "file": "references/token-management.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 154,
+            "evidence": "accessToken",
+            "context": "    const user = await fetchUser(storedTokens.accessToken)",
+            "file": "references/token-management.md"
+          },
+          {
+            "type": "encoded-content",
+            "line": 168,
+            "evidence": "base64",
+            "context": "    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/')",
+            "file": "references/token-management.md"
+          },
+          {
+            "type": "encoded-content",
+            "line": 170,
+            "evidence": "base64",
+            "context": "      atob(base64)",
+            "file": "references/token-management.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 4,
+            "evidence": "access token",
+            "context": "  Use this skill when the user says 'auth', 'authentication', 'login', 'signup', 'JWT', 'OAuth', 'OAuth2', 'OpenID Connect', 'route guard', 'protected route', 'auth middleware', 'token storage', 'refresh token', 'session management', 'acces",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 24,
+            "evidence": "access token",
+            "context": "Exact phrases: \"auth\", \"authentication\", \"login\", \"signup\", \"JWT\", \"OAuth\", \"route guard\", \"protected route\", \"token storage\", \"refresh token\", \"session\", \"access token\", \"logout\", \"SSO\", \"magic link\", \"MFA\".",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 127,
+            "evidence": "accessToken",
+            "context": "  const { accessToken, refreshToken } = await api.post('/auth/login', { email, password })",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 128,
+            "evidence": "accessToken",
+            "context": "  tokenStorage.set({ accessToken, refreshToken })",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 144,
+            "evidence": "accessToken",
+            "context": "  accessToken: string | null",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 163,
+            "evidence": "accessToken",
+            "context": "    accessToken: null,",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 175,
+            "evidence": "accessToken",
+            "context": "        accessToken: storedToken,",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 195,
+            "evidence": "accessToken",
+            "context": "    const { accessToken, refreshToken, user } = await api.post('/auth/login', credentials)",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 197,
+            "evidence": "accessToken",
+            "context": "    setState({ user, accessToken, isAuthenticated: true, isLoading: false })",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 203,
+            "evidence": "accessToken",
+            "context": "    setState({ user: null, accessToken: null, isAuthenticated: false, isLoading: false })",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 287,
+            "evidence": "accessToken",
+            "context": "      const { accessToken } = await refreshAccessToken()",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 288,
+            "evidence": "accessToken",
+            "context": "      processQueue(null, accessToken)",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 289,
+            "evidence": "accessToken",
+            "context": "      originalRequest.headers.Authorization = `Bearer ${accessToken}`",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "network-access",
+            "line": 320,
+            "evidence": "https://",
+            "context": "window.location.href = `https://auth.example.com/authorize?response_type=code&client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&code_challenge=${challenge}&code_challenge_method=S256&state=${state}`",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 390,
+            "evidence": "secret",
+            "context": "    const { secret, qrCode } = await api.post('/auth/mfa/enroll', { method: 'totp' })",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 391,
+            "evidence": "secret",
+            "context": "    return { secret, qrCode }",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 419,
+            "evidence": "access token",
+            "context": "  // Server sets httpOnly cookie for access token",
+            "file": "SKILL.md"
+          }
+        ],
+        "review": "catalog/reviews/j4flmao__frontend-authentication.json"
       },
-      "materialized": false,
+      "materialized": true,
       "release": {
-        "status": "hold",
-        "reasons": [
-          "manual-review-required"
-        ]
+        "status": "eligible",
+        "reasons": []
       },
       "integrity": {
         "upstream_skill_sha256": "061d09a79a5cd730c62131675ef6aa5cb87ef17aa2de064d569b2a8f306d9b55",
         "last_ingested_revision": "d9f812988c8926767ee96f66c1a340d65b595799"
       },
-      "description": "Use this skill when the user says 'auth', 'authentication', 'login', 'signup', 'JWT', 'OAuth', 'OAuth2', 'OpenID Connect', 'route guard', 'protected route', 'auth middleware', 'token storage', 'refresh token', 'session management', 'access token', 'logout', 'SSO', 'magic link', 'passwordless', 'MFA', '2FA'. This skill enforces secure token storage, proper route guard patterns, OAuth flow handling (PKCE, Implicit, Auth Code), refresh token rotation, and session persistence. Works with any frontend framework (React, Vue, Angular, Svelte) and any auth provider (Auth0, Clerk, Supabase, Firebase, Cognito, custom). Do NOT use for: backend auth logic, API token validation, or database-level auth."
+      "description": "Use this skill when the user says 'auth', 'authentication', 'login', 'signup', 'JWT', 'OAuth', 'OAuth2', 'OpenID Connect', 'route guard', 'protected route', 'auth middleware', 'token storage', 'refresh token', 'session management', 'access token', 'logout', 'SSO', 'magic link', 'passwordless', 'MFA', '2FA'. This skill enforces secure token storage, proper route guard patterns, OAuth flow handling (PKCE, Implicit, Auth Code), refresh token rotation, and session persistence. Works with any frontend framework (React, Vue, Angular, Svelte) and any auth provider (Auth0, Clerk, Supabase, Firebase, Cognito, custom). Do NOT use for: backend auth logic, API token validation, or database-level auth.",
+      "artifact_type": "skill",
+      "materialized_root": "skills/j4flmao/frontend-authentication",
+      "materialized_files": 8
     },
     {
       "id": "j4flmao/incident-response",
@@ -25584,11 +27516,11 @@
       "publisher": "j4flmao",
       "source": {
         "repo": "j4flmao/agent-skills",
-        "path": "skills/cybersecurity/red-team-pentest/SKILL.md",
+        "path": "skills/cybersecurity/red-team-pentest",
         "revision": "d9f812988c8926767ee96f66c1a340d65b595799",
+        "state": "present",
         "revision_type": "git-commit",
-        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/cybersecurity/red-team-pentest/SKILL.md",
-        "state": "present"
+        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/cybersecurity/red-team-pentest"
       },
       "category": [
         "security"
@@ -25597,31 +27529,46 @@
         "spdx": "MIT",
         "redistributable": true,
         "status": "verified",
-        "evidence": "LICENSE"
+        "scope": "repository",
+        "evidence": "catalog/reviews/j4flmao__red-team-pentest-methodology.json"
       },
-      "distribution": "review-required",
+      "distribution": "bundled",
       "compatibility": [
         "agent-skills"
       ],
       "security": {
         "scan_status": "verified",
-        "risk": "none",
-        "network": false,
+        "risk": "low",
         "shell": false,
-        "credentials": false
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false,
+        "filesystem_write": false,
+        "encoded_content": false,
+        "findings": [],
+        "review": "catalog/reviews/j4flmao__red-team-pentest-methodology.json"
       },
-      "materialized": false,
+      "materialized": true,
       "release": {
-        "status": "hold",
-        "reasons": [
-          "manual-review-required"
+        "status": "eligible",
+        "reasons": [],
+        "notices": [
+          {
+            "kind": "behavior",
+            "text": "Conceptual offensive-security methodology. Use it only for systems you own or are explicitly authorized to test; the skill itself does not state this.",
+            "evidence": "docs/VERIFIED-LOCAL-SKILLS.md (j4flmao section)"
+          }
         ]
       },
       "integrity": {
         "upstream_skill_sha256": "d5907d5ccc120f94e4ef7b46181dd82c0f652a131b55e2f1bd076973bea0271e",
         "last_ingested_revision": "d9f812988c8926767ee96f66c1a340d65b595799"
       },
-      "description": "Understand the theoretical frameworks of offensive security, OSINT, and attack lifecycles."
+      "description": "Understand the theoretical frameworks of offensive security, OSINT, and attack lifecycles.",
+      "artifact_type": "skill",
+      "materialized_root": "skills/j4flmao/red-team-pentest-methodology",
+      "materialized_files": 2
     },
     {
       "id": "j4flmao/reverse-engineering",
@@ -25629,11 +27576,11 @@
       "publisher": "j4flmao",
       "source": {
         "repo": "j4flmao/agent-skills",
-        "path": "skills/cybersecurity/reverse-engineering/SKILL.md",
+        "path": "skills/cybersecurity/reverse-engineering",
         "revision": "d9f812988c8926767ee96f66c1a340d65b595799",
+        "state": "present",
         "revision_type": "git-commit",
-        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/cybersecurity/reverse-engineering/SKILL.md",
-        "state": "present"
+        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/cybersecurity/reverse-engineering"
       },
       "category": [
         "security"
@@ -25642,31 +27589,46 @@
         "spdx": "MIT",
         "redistributable": true,
         "status": "verified",
-        "evidence": "LICENSE"
+        "scope": "repository",
+        "evidence": "catalog/reviews/j4flmao__reverse-engineering.json"
       },
-      "distribution": "review-required",
+      "distribution": "bundled",
       "compatibility": [
         "agent-skills"
       ],
       "security": {
         "scan_status": "verified",
-        "risk": "none",
-        "network": false,
+        "risk": "low",
         "shell": false,
-        "credentials": false
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false,
+        "filesystem_write": false,
+        "encoded_content": false,
+        "findings": [],
+        "review": "catalog/reviews/j4flmao__reverse-engineering.json"
       },
-      "materialized": false,
+      "materialized": true,
       "release": {
-        "status": "hold",
-        "reasons": [
-          "manual-review-required"
+        "status": "eligible",
+        "reasons": [],
+        "notices": [
+          {
+            "kind": "behavior",
+            "text": "Discusses exploitation techniques conceptually. Use it only on software you own or are authorized to analyze; the skill itself does not state this.",
+            "evidence": "docs/VERIFIED-LOCAL-SKILLS.md (j4flmao section)"
+          }
         ]
       },
       "integrity": {
         "upstream_skill_sha256": "75bf5ea69cca384a95e15602846463f7db9fbc23bec3a1bf49bece3547cdec4c",
         "last_ingested_revision": "d9f812988c8926767ee96f66c1a340d65b595799"
       },
-      "description": "Low-level binary analysis, decompilation theory, memory corruption mechanics, and OS defensive mitigations."
+      "description": "Low-level binary analysis, decompilation theory, memory corruption mechanics, and OS defensive mitigations.",
+      "artifact_type": "skill",
+      "materialized_root": "skills/j4flmao/reverse-engineering",
+      "materialized_files": 2
     },
     {
       "id": "j4flmao/seo",
@@ -25857,11 +27819,11 @@
       "publisher": "j4flmao",
       "source": {
         "repo": "j4flmao/agent-skills",
-        "path": "skills/cybersecurity/zero-trust-identity/SKILL.md",
+        "path": "skills/cybersecurity/zero-trust-identity",
         "revision": "d9f812988c8926767ee96f66c1a340d65b595799",
+        "state": "present",
         "revision_type": "git-commit",
-        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/cybersecurity/zero-trust-identity/SKILL.md",
-        "state": "present"
+        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/cybersecurity/zero-trust-identity"
       },
       "category": [
         "security"
@@ -25870,31 +27832,82 @@
         "spdx": "MIT",
         "redistributable": true,
         "status": "verified",
-        "evidence": "LICENSE"
+        "scope": "repository",
+        "evidence": "catalog/reviews/j4flmao__zero-trust-identity.json"
       },
-      "distribution": "review-required",
+      "distribution": "bundled",
       "compatibility": [
         "agent-skills"
       ],
       "security": {
-        "scan_status": "review-required",
+        "scan_status": "verified",
         "risk": "medium",
-        "network": false,
         "shell": false,
-        "credentials": true
+        "network": false,
+        "credentials": true,
+        "dynamic_execution": false,
+        "package_install": false,
+        "filesystem_write": false,
+        "encoded_content": true,
+        "findings": [
+          {
+            "type": "credential-access",
+            "line": 17,
+            "evidence": "Access Token",
+            "context": "4. **Token Request**: The client authenticates to the token endpoint (`/token`), exchanging the `code` and `code_verifier` (PKCE) for an ID Token (JWT) and an Access Token.",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 23,
+            "evidence": "secret",
+            "context": "*   **HS256 (HMAC with SHA-256)**: Symmetric signing. The Identity Provider (IdP) and the Resource Server (RS) share the same secret key. **Risk**: If the RS is compromised, the shared secret is exposed, allowing the attacker to forge JWTs.",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 23,
+            "evidence": "secret",
+            "context": "*   **HS256 (HMAC with SHA-256)**: Symmetric signing. The Identity Provider (IdP) and the Resource Server (RS) share the same secret key. **Risk**: If the RS is compromised, the shared secret is exposed, allowing the attacker to forge JWTs.",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 28,
+            "evidence": "secret",
+            "context": "2.  **Header Analysis**: Decode the header to verify the `alg` (algorithm) is expected (e.g., preventing algorithm substitution attacks where `alg` is changed from RS256 to HS256, forcing the RS to use the public key as a symmetric HMAC sec",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "encoded-content",
+            "line": 36,
+            "evidence": "base64",
+            "context": "1.  **SP-Initiated Flow**: The Service Provider (SP) generates an `<AuthnRequest>`, signs it, deflates it, base64 encodes it, and redirects the user to the IdP.",
+            "file": "SKILL.md"
+          },
+          {
+            "type": "credential-access",
+            "line": 51,
+            "evidence": "Access Token",
+            "context": "    IdP -->|6. ID Token + Access Token| RP",
+            "file": "SKILL.md"
+          }
+        ],
+        "review": "catalog/reviews/j4flmao__zero-trust-identity.json"
       },
-      "materialized": false,
+      "materialized": true,
       "release": {
-        "status": "hold",
-        "reasons": [
-          "manual-review-required"
-        ]
+        "status": "eligible",
+        "reasons": []
       },
       "integrity": {
         "upstream_skill_sha256": "b4121fc542b4cf5eefef54ca5150e9e11432cbb25e95f27a3d3076a8235a0147",
         "last_ingested_revision": "d9f812988c8926767ee96f66c1a340d65b595799"
       },
-      "description": "Advanced Zero Trust Identity, OIDC/SAML Mechanics, and JWT Validation"
+      "description": "Advanced Zero Trust Identity, OIDC/SAML Mechanics, and JWT Validation",
+      "artifact_type": "skill",
+      "materialized_root": "skills/j4flmao/zero-trust-identity",
+      "materialized_files": 2
     },
     {
       "id": "kdense/13c-metabolic-flux",

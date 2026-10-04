@@ -1,9 +1,9 @@
 {
   "schema_version": "0.1",
   "skill_id": "j4flmao/backend-background-jobs",
-  "status": "draft",
-  "reviewed_on": null,
-  "reviewer": null,
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
   "source": {
     "repo": "j4flmao/agent-skills",
     "path": "skills/backend/universal/background-jobs",
@@ -13,7 +13,7 @@
     "complete": true,
     "scope": "skills/backend/universal/background-jobs",
     "url": "https://api.github.com/repos/j4flmao/agent-skills/git/trees/d9f812988c8926767ee96f66c1a340d65b595799?recursive=1",
-    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
   },
   "license": {
     "spdx": "MIT",
@@ -32,18 +32,32 @@
       ]
     },
     "redistributable": true,
-    "scope_reason": "",
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
     "obligations": [
       "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
-      "Preserve all upstream text and notices byte-for-byte."
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
     ]
   },
   "content_review": {
-    "status": "pending",
-    "risk": "unknown",
+    "status": "approved",
+    "risk": "low",
     "blocking_findings": [],
-    "capabilities": {},
-    "notes": []
+    "capabilities": {
+      "shell": false,
+      "network": false,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md and references/job-testing.md, background-jobs-chaining.md, job-patterns.md, job-monitoring.md, queue-setup.md, background-jobs-fundamentals.md, job-types.md, job-scheduling.md, background-jobs-advanced.md in full. Designs background job systems: queue backend selection, queue topology with DLQs, job contracts with idempotency keys, retry with backoff and jitter, worker concurrency, graceful shutdown, cron scheduling, sagas, and monitoring (BullMQ, Celery, asynq, Hangfire, SQS).",
+      "No commands, installs, credentials, or network access by the agent; the output is design text and sample code. Sample code reads Redis connection settings from environment variables and the guidance says never to put secrets in job payloads (SKILL.md:563, 631).",
+      "Code-quality caveats a user should know: the Bull Board snippets (SKILL.md:502, job-types.md:188) mount /admin/queues with no auth middleware, although SKILL.md:569 says the admin UI requires authentication; the lock release at queue-setup.md:172-174 deletes without an owner check and job-scheduling.md:146-162 has an odd cron check and uses Redis KEYS; SKILL.md:367 and queue-setup.md:7 use BullMQ QueueScheduler, which is deprecated in BullMQ 2+; the idempotency check at SKILL.md:345-358 is check-then-act (job-patterns.md:174-199 shows the locked version). SKILL.md:646 hands off to an optional `backend-event-driven` skill that is not bundled."
+    ]
   },
   "files": [
     {
@@ -56,7 +70,7 @@
       "git_blob": "0e8b6e6d8678128ebfcc28d7cad91fa9ed7f2354",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
       "findings": []
     },
     {
@@ -67,7 +81,7 @@
       "git_blob": "4ba9a43d1edb2ecf65ad1719f03ecec53f88a765",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": []
     },
     {
@@ -78,23 +92,23 @@
       "git_blob": "45396050ee72c5021c2af2b09e187eb56c1257f3",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "filesystem-write",
           "line": 64,
           "evidence": "delete",
           "context": "    pending.delete(jobId);",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Matches are in-memory Map/Set .delete() calls in sample scheduler/coordinator code (background-jobs-chaining.md:64-68, job-scheduling.md:34); no files are written."
         },
         {
           "type": "filesystem-write",
           "line": 68,
           "evidence": "delete",
           "context": "      this.pending.delete(groupId);",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Matches are in-memory Map/Set .delete() calls in sample scheduler/coordinator code (background-jobs-chaining.md:64-68, job-scheduling.md:34); no files are written."
         }
       ]
     },
@@ -106,7 +120,7 @@
       "git_blob": "5a62f7630e3c4b0abadcbf5376b79a6b0522de8e",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": []
     },
     {
@@ -117,7 +131,7 @@
       "git_blob": "e516063868d5c0387f422d09ecac3b909d6d0eca",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": []
     },
     {
@@ -128,7 +142,7 @@
       "git_blob": "4ca5496d12a5be0c8bfcb939dfe675948eee872a",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": []
     },
     {
@@ -139,31 +153,31 @@
       "git_blob": "d0f80d16f0b518afd970b820610e2bf6b2c19b7a",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "filesystem-write",
           "line": 34,
           "evidence": "delete",
           "context": "      this.jobs.delete(name);",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Matches are in-memory Map/Set .delete() calls in sample scheduler/coordinator code (background-jobs-chaining.md:64-68, job-scheduling.md:34); no files are written."
         },
         {
           "type": "credential-access",
           "line": 142,
           "evidence": "process.env",
           "context": "      const lock = await this.redis.set(lockKey, process.env.HOSTNAME, 'NX', 'PX', this.LOCK_TTL);",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Sample code reads REDIS_HOST/REDIS_PORT/REDIS_PASSWORD/REDIS_URL/HOSTNAME from process.env for the user's own queue connection (queue-setup.md:10-12,162; job-scheduling.md:142,152); the agent is not told to read or reveal real secrets."
         },
         {
           "type": "credential-access",
           "line": 152,
           "evidence": "process.env",
           "context": "            if (currentValue === process.env.HOSTNAME) {",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Sample code reads REDIS_HOST/REDIS_PORT/REDIS_PASSWORD/REDIS_URL/HOSTNAME from process.env for the user's own queue connection (queue-setup.md:10-12,162; job-scheduling.md:142,152); the agent is not told to read or reveal real secrets."
         }
       ]
     },
@@ -175,7 +189,7 @@
       "git_blob": "a46e86510a6d87ec763d96f0a1ff0186a7413614",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": []
     },
     {
@@ -186,7 +200,7 @@
       "git_blob": "95a1213ece35edf2478ebc3b3f28677a7af4b050",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": []
     },
     {
@@ -197,39 +211,39 @@
       "git_blob": "c80be630456402b308aa1b97f2b9fb0f5c0970f4",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "credential-access",
           "line": 10,
           "evidence": "process.env",
           "context": "  host: process.env.REDIS_HOST || 'localhost',",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Sample code reads REDIS_HOST/REDIS_PORT/REDIS_PASSWORD/REDIS_URL/HOSTNAME from process.env for the user's own queue connection (queue-setup.md:10-12,162; job-scheduling.md:142,152); the agent is not told to read or reveal real secrets."
         },
         {
           "type": "credential-access",
           "line": 11,
           "evidence": "process.env",
           "context": "  port: parseInt(process.env.REDIS_PORT || '6379'),",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Sample code reads REDIS_HOST/REDIS_PORT/REDIS_PASSWORD/REDIS_URL/HOSTNAME from process.env for the user's own queue connection (queue-setup.md:10-12,162; job-scheduling.md:142,152); the agent is not told to read or reveal real secrets."
         },
         {
           "type": "credential-access",
           "line": 12,
           "evidence": "process.env",
           "context": "  password: process.env.REDIS_PASSWORD,",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Sample code reads REDIS_HOST/REDIS_PORT/REDIS_PASSWORD/REDIS_URL/HOSTNAME from process.env for the user's own queue connection (queue-setup.md:10-12,162; job-scheduling.md:142,152); the agent is not told to read or reveal real secrets."
         },
         {
           "type": "credential-access",
           "line": 162,
           "evidence": "process.env",
           "context": "const lockClient = createClient({ url: process.env.REDIS_URL });",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Sample code reads REDIS_HOST/REDIS_PORT/REDIS_PASSWORD/REDIS_URL/HOSTNAME from process.env for the user's own queue connection (queue-setup.md:10-12,162; job-scheduling.md:142,152); the agent is not told to read or reveal real secrets."
         }
       ]
     },
@@ -241,7 +255,7 @@
       "git_blob": "ca686ba8551fa777c3841ea4fbb5f7fff92c5a7d",
       "license": "MIT",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
       "findings": []
     }
   ]
