@@ -1,0 +1,256 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "bagelhole/platform-engineering",
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "devops/platforms/platform-engineering",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "review": {
+    "path": "catalog/reviews/bagelhole__platform-engineering.json",
+    "sha256": "804a2477534eda790ad58f79a6ce5a9249fc35b1ddd5022a362ea034172718da"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "network-access",
+        "line": 33,
+        "evidence": "https://",
+        "context": "[Backstage](https://backstage.io) is the leading open-source developer portal framework, originally created at Spotify.",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 37,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 59,
+        "evidence": "yarn install",
+        "context": "RUN yarn install --frozen-lockfile",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 80,
+        "evidence": "http://",
+        "context": "  baseUrl: http://localhost:3000",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 86,
+        "evidence": "http://",
+        "context": "  baseUrl: http://localhost:7007",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 110,
+        "evidence": "https://",
+        "context": "      target: https://github.com/myorg/software-catalog/blob/main/catalog-info.yaml",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 112,
+        "evidence": "https://",
+        "context": "      target: https://github.com/myorg/backstage-templates/blob/main/all-templates.yaml",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 123,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 125,
+        "evidence": "https://",
+        "context": "helm repo add crossplane-stable https://charts.crossplane.io/stable",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 145,
+        "evidence": "secret",
+        "context": "kubectl create secret generic aws-creds \\",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 156,
+        "evidence": "Secret",
+        "context": "    source: Secret",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 276,
+        "evidence": "secret",
+        "context": "    - name: db-secret",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 279,
+        "evidence": "Secret",
+        "context": "        kind: Secret",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 409,
+        "evidence": "https://",
+        "context": "        repoUrl: https://github.com/myorg/${{ parameters.name }}",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 487,
+        "evidence": "https://",
+        "context": "    - url: https://grafana.internal/d/orders-service",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 490,
+        "evidence": "https://",
+        "context": "    - url: https://runbooks.internal/orders-service",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 578,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 593,
+        "evidence": "https://",
+        "context": "        - url: https://k8s-dev.internal:6443",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 599,
+        "evidence": "https://",
+        "context": "        - url: https://k8s-prod.internal:6443",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 614,
+        "evidence": "https://",
+        "context": "      target: https://api.github.com",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 625,
+        "evidence": "https://",
+        "context": "  domain: https://grafana.internal",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 630,
+        "evidence": "https://",
+        "context": "      target: https://grafana.internal",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 639,
+        "evidence": "https://",
+        "context": "[Score](https://score.dev) provides a platform-agnostic workload specification so developers describe what they need, and the platform decides how to provision it.",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 718,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 1040,
+        "evidence": "https://",
+        "context": "                  value: \"https://forms.internal/devex-q1\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 1042,
+        "evidence": "sh",
+        "context": "                - /bin/sh",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 1045,
+        "evidence": "curl",
+        "context": "                  curl -X POST \"$SLACK_WEBHOOK\" \\",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 1061,
+        "evidence": "sh",
+        "context": "apiVersion: templates.gatekeeper.sh/v1",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 1079,
+        "evidence": "sh",
+        "context": "    - target: admission.k8s.gatekeeper.sh",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 1097,
+        "evidence": "sh",
+        "context": "apiVersion: constraints.gatekeeper.sh/v1beta1",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 32798
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "91b2abfbbccd761889aeb982d7cf1094e5be96905ce800dec21c84c2418aa39a",
+      "bytes": 31730,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 32798
+}

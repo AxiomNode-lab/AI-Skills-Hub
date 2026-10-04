@@ -1,0 +1,192 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "microsoft/azure-monitor-opentelemetry-exporter-java",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/azure-sdk-java/skills/azure-monitor-opentelemetry-exporter-java",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "review": {
+    "path": "catalog/reviews/microsoft__azure-monitor-opentelemetry-exporter-java.json",
+    "sha256": "04ee853efff0ef3b1c414efb617e117a6d6a5a9b46155584b035d38fe0650e08"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "low",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": false,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "filesystem-write",
+        "line": 15,
+        "evidence": "Remove",
+        "context": "### Remove (Deprecated)",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 18,
+        "evidence": "REMOVE",
+        "context": "<!-- REMOVE THIS -->",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 39,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "network-access",
+        "line": 40,
+        "evidence": "https://",
+        "context": "APPLICATIONINSIGHTS_CONNECTION_STRING=InstrumentationKey=xxx;IngestionEndpoint=https://xxx.in.applicationinsights.azure.com/",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 168,
+        "evidence": "Remove",
+        "context": "4. Remove manual span processor registration (unless custom processors needed)",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "network-access",
+        "line": 175,
+        "evidence": "https://",
+        "context": "| Migration Guide | https://github.com/Azure/azure-sdk-for-java/blob/main/sdk/monitor/azure-monitor-opentelemetry-exporter/MIGRATION.md |",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "network-access",
+        "line": 176,
+        "evidence": "https://",
+        "context": "| Autoconfigure Package | https://central.sonatype.com/artifact/com.azure/azure-monitor-opentelemetry-autoconfigure |",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "network-access",
+        "line": 177,
+        "evidence": "https://",
+        "context": "| OpenTelemetry Java | https://opentelemetry.io/docs/languages/java/ |",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "network-access",
+        "line": 178,
+        "evidence": "https://",
+        "context": "| Application Insights | https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview |",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "network-access",
+        "line": 18,
+        "evidence": "https://",
+        "context": "> See [Migration Guide](https://github.com/Azure/azure-sdk-for-java/blob/main/sdk/monitor/azure-monitor-opentelemetry-exporter/MIGRATION.md) for detailed instructions.",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 44,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 45,
+        "evidence": "https://",
+        "context": "APPLICATIONINSIGHTS_CONNECTION_STRING=InstrumentationKey=xxx;IngestionEndpoint=https://xxx.in.applicationinsights.azure.com/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 254,
+        "evidence": "Remove",
+        "context": "   <!-- Remove -->",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 267,
+        "evidence": "https://",
+        "context": "2. Update initialization code per [Migration Guide](https://github.com/Azure/azure-sdk-for-java/blob/main/sdk/monitor/azure-monitor-opentelemetry-exporter/MIGRATION.md)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 283,
+        "evidence": "https://",
+        "context": "| Maven Package | https://central.sonatype.com/artifact/com.azure/azure-monitor-opentelemetry-exporter |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 284,
+        "evidence": "https://",
+        "context": "| GitHub | https://github.com/Azure/azure-sdk-for-java/tree/main/sdk/monitor/azure-monitor-opentelemetry-exporter |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 285,
+        "evidence": "https://",
+        "context": "| Migration Guide | https://github.com/Azure/azure-sdk-for-java/blob/main/sdk/monitor/azure-monitor-opentelemetry-exporter/MIGRATION.md |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 286,
+        "evidence": "https://",
+        "context": "| Autoconfigure Package | https://central.sonatype.com/artifact/com.azure/azure-monitor-opentelemetry-autoconfigure |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 287,
+        "evidence": "https://",
+        "context": "| OpenTelemetry Java | https://opentelemetry.io/docs/languages/java/ |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 288,
+        "evidence": "https://",
+        "context": "| Application Insights | https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview |",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 15425
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/examples.md",
+      "sha256": "85bdfc7be556eefb310fe51886e3bacaca759187dea377270fa4022d771d5d06",
+      "bytes": 5513,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "2ecdd3db79950efc38de599e90887a41f34e9a670949b9be8e6708578dbad6df",
+      "bytes": 8772,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 15425
+}

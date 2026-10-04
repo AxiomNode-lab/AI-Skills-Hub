@@ -1,0 +1,397 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "j4flmao/frontend-authentication",
+  "source": {
+    "repo": "j4flmao/agent-skills",
+    "path": "skills/frontend/universal/authentication",
+    "revision": "d9f812988c8926767ee96f66c1a340d65b595799"
+  },
+  "review": {
+    "path": "catalog/reviews/j4flmao__frontend-authentication.json",
+    "sha256": "41967faa07c4fb45676afb433567f29c68332e21d4e90e0b7ed8c060a6803b1d"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": false,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": true
+    },
+    "findings": [
+      {
+        "type": "credential-access",
+        "line": 12,
+        "evidence": "access_token",
+        "context": "5. Server verifies `sha256(code_verifier) === stored code_challenge`, returns `access_token` + `refresh_token`",
+        "file": "references/auth-flows.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 32,
+        "evidence": "access token",
+        "context": "Do not use. The implicit flow returns the access token as a URL fragment. It is vulnerable to access token interception via referrer headers, browser history, and compromised service workers. Use Authorization Code + PKCE instead.",
+        "file": "references/auth-flows.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 32,
+        "evidence": "access token",
+        "context": "Do not use. The implicit flow returns the access token as a URL fragment. It is vulnerable to access token interception via referrer headers, browser history, and compromised service workers. Use Authorization Code + PKCE instead.",
+        "file": "references/auth-flows.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 64,
+        "evidence": "remove",
+        "context": "        router.replace('/dashboard') // remove token from URL",
+        "file": "references/auth-flows.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 101,
+        "evidence": "access_token",
+        "context": "  access_token: string",
+        "file": "references/oauth-pkce-flow.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 184,
+        "evidence": "access_token",
+        "context": "    return this.memoryStore.get('tokens')?.access_token ?? null",
+        "file": "references/oauth-pkce-flow.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 188,
+        "evidence": "delete",
+        "context": "    this.memoryStore.delete('tokens')",
+        "file": "references/oauth-pkce-flow.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 18,
+        "evidence": "access_token",
+        "context": "Set-Cookie: access_token=<jwt>; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=900",
+        "file": "references/token-management.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 29,
+        "evidence": "accessToken",
+        "context": "let inMemoryToken: { accessToken: string; refreshToken: string } | null = null",
+        "file": "references/token-management.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 48,
+        "evidence": "accessToken",
+        "context": "    accessToken: localStorage.getItem(`${PREFIX}access_token`),",
+        "file": "references/token-management.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 48,
+        "evidence": "access_token",
+        "context": "    accessToken: localStorage.getItem(`${PREFIX}access_token`),",
+        "file": "references/token-management.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 51,
+        "evidence": "accessToken",
+        "context": "  set: ({ accessToken, refreshToken }: { accessToken: string; refreshToken: string }) => {",
+        "file": "references/token-management.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 51,
+        "evidence": "accessToken",
+        "context": "  set: ({ accessToken, refreshToken }: { accessToken: string; refreshToken: string }) => {",
+        "file": "references/token-management.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 52,
+        "evidence": "access_token",
+        "context": "    localStorage.setItem(`${PREFIX}access_token`, accessToken)",
+        "file": "references/token-management.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 52,
+        "evidence": "accessToken",
+        "context": "    localStorage.setItem(`${PREFIX}access_token`, accessToken)",
+        "file": "references/token-management.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 56,
+        "evidence": "access_token",
+        "context": "    localStorage.removeItem(`${PREFIX}access_token`)",
+        "file": "references/token-management.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 78,
+        "evidence": "accessToken",
+        "context": "    tokenStore.set({ accessToken: res.accessToken, refreshToken: res.refreshToken })",
+        "file": "references/token-management.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 78,
+        "evidence": "accessToken",
+        "context": "    tokenStore.set({ accessToken: res.accessToken, refreshToken: res.refreshToken })",
+        "file": "references/token-management.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 79,
+        "evidence": "accessToken",
+        "context": "    return res.accessToken",
+        "file": "references/token-management.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 97,
+        "evidence": "accessToken",
+        "context": "  tokenStore.set({ accessToken: res.accessToken, refreshToken: res.refreshToken })",
+        "file": "references/token-management.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 97,
+        "evidence": "accessToken",
+        "context": "  tokenStore.set({ accessToken: res.accessToken, refreshToken: res.refreshToken })",
+        "file": "references/token-management.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 98,
+        "evidence": "accessToken",
+        "context": "  return res.accessToken",
+        "file": "references/token-management.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 135,
+        "evidence": "accessToken",
+        "context": "  if (!storedTokens?.accessToken) {",
+        "file": "references/token-management.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 139,
+        "evidence": "access token",
+        "context": "  // Check if access token is expired",
+        "file": "references/token-management.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 140,
+        "evidence": "accessToken",
+        "context": "  const payload = parseJWT(storedTokens.accessToken)",
+        "file": "references/token-management.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 154,
+        "evidence": "accessToken",
+        "context": "    const user = await fetchUser(storedTokens.accessToken)",
+        "file": "references/token-management.md"
+      },
+      {
+        "type": "encoded-content",
+        "line": 168,
+        "evidence": "base64",
+        "context": "    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/')",
+        "file": "references/token-management.md"
+      },
+      {
+        "type": "encoded-content",
+        "line": 170,
+        "evidence": "base64",
+        "context": "      atob(base64)",
+        "file": "references/token-management.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 4,
+        "evidence": "access token",
+        "context": "  Use this skill when the user says 'auth', 'authentication', 'login', 'signup', 'JWT', 'OAuth', 'OAuth2', 'OpenID Connect', 'route guard', 'protected route', 'auth middleware', 'token storage', 'refresh token', 'session management', 'acces",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 24,
+        "evidence": "access token",
+        "context": "Exact phrases: \"auth\", \"authentication\", \"login\", \"signup\", \"JWT\", \"OAuth\", \"route guard\", \"protected route\", \"token storage\", \"refresh token\", \"session\", \"access token\", \"logout\", \"SSO\", \"magic link\", \"MFA\".",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 127,
+        "evidence": "accessToken",
+        "context": "  const { accessToken, refreshToken } = await api.post('/auth/login', { email, password })",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 128,
+        "evidence": "accessToken",
+        "context": "  tokenStorage.set({ accessToken, refreshToken })",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 144,
+        "evidence": "accessToken",
+        "context": "  accessToken: string | null",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 163,
+        "evidence": "accessToken",
+        "context": "    accessToken: null,",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 175,
+        "evidence": "accessToken",
+        "context": "        accessToken: storedToken,",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 195,
+        "evidence": "accessToken",
+        "context": "    const { accessToken, refreshToken, user } = await api.post('/auth/login', credentials)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 197,
+        "evidence": "accessToken",
+        "context": "    setState({ user, accessToken, isAuthenticated: true, isLoading: false })",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 203,
+        "evidence": "accessToken",
+        "context": "    setState({ user: null, accessToken: null, isAuthenticated: false, isLoading: false })",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 287,
+        "evidence": "accessToken",
+        "context": "      const { accessToken } = await refreshAccessToken()",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 288,
+        "evidence": "accessToken",
+        "context": "      processQueue(null, accessToken)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 289,
+        "evidence": "accessToken",
+        "context": "      originalRequest.headers.Authorization = `Bearer ${accessToken}`",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 320,
+        "evidence": "https://",
+        "context": "window.location.href = `https://auth.example.com/authorize?response_type=code&client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&code_challenge=${challenge}&code_challenge_method=S256&state=${state}`",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 390,
+        "evidence": "secret",
+        "context": "    const { secret, qrCode } = await api.post('/auth/mfa/enroll', { method: 'totp' })",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 391,
+        "evidence": "secret",
+        "context": "    return { secret, qrCode }",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 419,
+        "evidence": "access token",
+        "context": "  // Server sets httpOnly cookie for access token",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 50992
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "b6b8d73f01a48d1411da29d8196e2d85cd91cc9e8d7ae6ac4863ae7e06e6d314",
+      "bytes": 1064,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/auth-flows.md",
+      "sha256": "0d3155f5701abf36405379ae9e1f5140f5d9e6a85f8b475bcec40f4bdec32554",
+      "bytes": 6249,
+      "mode": "100644"
+    },
+    {
+      "path": "references/auth-providers.md",
+      "sha256": "8d6a2507cd955c959bb43e203c9a2089735ab32be9467bf4fffa52737587474f",
+      "bytes": 4064,
+      "mode": "100644"
+    },
+    {
+      "path": "references/auth-security.md",
+      "sha256": "e902b2a2430e6ab5280884e04a5e732cf3fe65f8d1c597215a335ac54ef3a349",
+      "bytes": 4730,
+      "mode": "100644"
+    },
+    {
+      "path": "references/auth-ui-patterns.md",
+      "sha256": "d22e78d7437660c09087a9cb5a26f67f3782379d0035b91e624c419abb39c299",
+      "bytes": 4228,
+      "mode": "100644"
+    },
+    {
+      "path": "references/oauth-pkce-flow.md",
+      "sha256": "f618c649c63995fa8d6f2d51442a2550791933bdc39a30ea71bc792ef066a543",
+      "bytes": 5016,
+      "mode": "100644"
+    },
+    {
+      "path": "references/token-management.md",
+      "sha256": "3e23f96da1d27ea9298e8223eadc41397ae0663e514cabcbdc73f6296b35b6d3",
+      "bytes": 6730,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "061d09a79a5cd730c62131675ef6aa5cb87ef17aa2de064d569b2a8f306d9b55",
+      "bytes": 18911,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 50992
+}

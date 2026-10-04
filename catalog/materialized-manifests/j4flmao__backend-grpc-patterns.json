@@ -1,0 +1,141 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "j4flmao/backend-grpc-patterns",
+  "source": {
+    "repo": "j4flmao/agent-skills",
+    "path": "skills/backend/universal/grpc-patterns",
+    "revision": "d9f812988c8926767ee96f66c1a340d65b595799"
+  },
+  "review": {
+    "path": "catalog/reviews/j4flmao__backend-grpc-patterns.json",
+    "sha256": "3d2d2dc23d7e8d86d48208b2266db62d873e25fc64aaec3cc943beed78dafe8e"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "low",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": false,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "filesystem-write",
+        "line": 23,
+        "evidence": "delete",
+        "context": "        this.channels.delete(oldest);",
+        "file": "references/grpc-performance.md"
+      },
+      {
+        "type": "network-access",
+        "line": 16,
+        "evidence": "curl",
+        "context": "| Tooling | Limited debugging | Rich (curl, Postman, browsers) |",
+        "file": "references/grpc-vs-rest.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 96,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/protobuf-basics.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 402,
+        "evidence": "remove",
+        "context": "- Deprecate fields with `[deprecated = true]`, do not remove them until the next major package version.",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 437,
+        "evidence": "delete",
+        "context": "    this.observers.delete(observer);",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 105957
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "b6b8d73f01a48d1411da29d8196e2d85cd91cc9e8d7ae6ac4863ae7e06e6d314",
+      "bytes": 1064,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/advanced_protobuf_schemas.md",
+      "sha256": "13226f919e28d9535b621ff331d1c693cc926bcee6023a5f6843963e985d168b",
+      "bytes": 13683,
+      "mode": "100644"
+    },
+    {
+      "path": "references/grpc_interceptors.md",
+      "sha256": "ec58c0df3de45859731f0dc1a3aee3a440aad653fd25215a428c3b35cfe891e5",
+      "bytes": 23135,
+      "mode": "100644"
+    },
+    {
+      "path": "references/grpc-error-handling.md",
+      "sha256": "85a02c9312684e878e8eea92e03758664810c89b3f9135eac522e3689c482e2d",
+      "bytes": 9159,
+      "mode": "100644"
+    },
+    {
+      "path": "references/grpc-interceptors.md",
+      "sha256": "ca4227e2c32e33db98d16d2b64c2ee74e4299c7d7a7df3861c5e4cabedbc84db",
+      "bytes": 4389,
+      "mode": "100644"
+    },
+    {
+      "path": "references/grpc-performance.md",
+      "sha256": "c308572a31e3108d08e657d4cb3441220c07c4ca330ec7a8c5b1e09be23afb4a",
+      "bytes": 7802,
+      "mode": "100644"
+    },
+    {
+      "path": "references/grpc-security.md",
+      "sha256": "98b02c6472b15f1d6b6471566b7fc80783bdb29cd3498c7b019ca35c565fb871",
+      "bytes": 8177,
+      "mode": "100644"
+    },
+    {
+      "path": "references/grpc-streaming.md",
+      "sha256": "eb6f62658b97bdf7f547ac72efe4a46b7fe4dc36faca886a51798daaa4e6861e",
+      "bytes": 3959,
+      "mode": "100644"
+    },
+    {
+      "path": "references/grpc-testing.md",
+      "sha256": "99d1b4a5228e3c391da70de5120fe0a49136b30b59f624a55577070ac0325530",
+      "bytes": 8123,
+      "mode": "100644"
+    },
+    {
+      "path": "references/grpc-vs-rest.md",
+      "sha256": "6bda28d0679898ab1c4c9e5144d280261c27c8829d84fa5656f64a84a6f65c7c",
+      "bytes": 2166,
+      "mode": "100644"
+    },
+    {
+      "path": "references/protobuf-basics.md",
+      "sha256": "cb29587900f0baafb75f4da2bb18f4ee17f29d51ff2ea757e84fb106c20bd9ff",
+      "bytes": 3540,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "4693318c6f7383c7702f916c6ee6b8c5e2f089114e14bb027c99b674c6e52beb",
+      "bytes": 20760,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 105957
+}

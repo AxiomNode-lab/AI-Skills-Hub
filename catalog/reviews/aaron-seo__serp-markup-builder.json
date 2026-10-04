@@ -1,0 +1,397 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "aaron-seo/serp-markup-builder",
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "aaron-he-zhu/aaron-marketing-skills",
+    "path": "seo-geo/implement/serp-markup-builder",
+    "revision": "cc897fa9e1e3136eb6a301130e49d8d9d1c519b2"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "seo-geo/implement/serp-markup-builder",
+    "url": "https://api.github.com/repos/aaron-he-zhu/aaron-marketing-skills/git/trees/cc897fa9e1e3136eb6a301130e49d8d9d1c519b2?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "Apache-2.0",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/aaron-he-zhu/aaron-marketing-skills/blob/cc897fa9e1e3136eb6a301130e49d8d9d1c519b2/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "seo-geo",
+        "seo-geo/implement",
+        "seo-geo/implement/serp-markup-builder"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the Apache-2.0 license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares Apache-2.0 (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the Apache-2.0 notice condition; no NOTICE file exists, so section 4(d) adds no attribution text, and no file is modified.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "low",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": false,
+      "network": true,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md and references/ctr-and-social-reference.md, meta-instructions-detail.md, meta-tag-code-templates.md, meta-tag-formulas.md, schema-decision-tree.md, schema-instructions-detail.md, schema-templates.md, validation-guide.md in full. Two modes producing paste-ready document-head assets: `meta` (title/description options, Open Graph/Twitter/canonical/robots tags) and `schema` (Schema.org JSON-LD with placement and validation steps).",
+      "Declares `allowed-tools: WebFetch` (SKILL.md:13) to read existing tags/JSON-LD from a user-specified page, treating fetched content as untrusted (SKILL.md:63). Saves to memory/content/ on user confirmation (SKILL.md:110). SKILL.md:63,92 call `python3 \"${CLAUDE_PLUGIN_ROOT}/scripts/connectors/schema_lint.py\" <url>` a 'bundled' pre-flight, but it is not in this skill's directory and will not ship; it is described as a pre-check only, and WebFetch plus the Rich Results Test / Schema.org Validator remain the validation path. No installs or credentials.",
+      "Markup guidance is policy-compliant: schema values only from visible content or user facts with labelled placeholders (SKILL.md:86), aggregateRating/review only for genuine visible reviews (schema-templates.md:11,70,92,191; validation-guide.md:40), and no keyword stuffing or misleading clickbait (meta-tag-formulas.md:100). The HTML comments flagged in meta-tag-code-templates.md:64,69,77,83 are section labels (`<!-- Primary -->`, `<!-- Open Graph -->`, ...) inside a code template, not hidden instructions. Note SKILL.md:89 states a dated claim about FAQ rich results being retired on 2026-05-07 that users should re-verify. Non-shipping optional pointers: ../../../references/skill-contract.md, llms-txt-okf.md, ../../../CONNECTORS.md, ../../../SECURITY.md, and sibling skills."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "664cd12e1c315650bf14cb1385359d13d4724ac03940ac10918390ef78e4f5e7",
+      "bytes": 11347,
+      "mode": "100644",
+      "git_blob": "41889521f7dedb506da3ce1c9998b78965e45e6e",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root Apache-2.0 license, attached to carry its terms and notices.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 3,
+          "evidence": "http://",
+          "context": "                        http://www.apache.org/licenses/",
+          "disposition": "accepted",
+          "reason": "License text."
+        },
+        {
+          "type": "network-access",
+          "line": 195,
+          "evidence": "http://",
+          "context": "       http://www.apache.org/licenses/LICENSE-2.0",
+          "disposition": "accepted",
+          "reason": "License text."
+        }
+      ]
+    },
+    {
+      "path": "references/ctr-and-social-reference.md",
+      "sha256": "065bb79bad6cdeed00c9c9b1dcfd66e3de9276356f457bc0c5662eeabf264f84",
+      "bytes": 1939,
+      "mode": "100644",
+      "git_blob": "0519b1328f596505ab9f447627c83d1f7d5a1270",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "references/meta-instructions-detail.md",
+      "sha256": "4f05297e43dd032124cc829479632bdad7fad8efb39caf8f98c178f45f86b337",
+      "bytes": 3210,
+      "mode": "100644",
+      "git_blob": "43facf3c2ccb4bc03f33ca441ec4b678e5880790",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "references/meta-tag-code-templates.md",
+      "sha256": "98605bd84d85e75e9c6519c8d8d319417f9f2e5ae09e6d55ec4ae057dffea1a1",
+      "bytes": 2703,
+      "mode": "100644",
+      "git_blob": "ed2336562b3330a57be867a1f00744792e5878d0",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "references/meta-tag-formulas.md",
+      "sha256": "00e9e11c81cf63d6798a17854a8a36a220683c4bf2b74ff038896569c759ee79",
+      "bytes": 5047,
+      "mode": "100644",
+      "git_blob": "c6322e8deac9a69fca9befafc7fcdcf7fcb10430",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 42,
+          "evidence": "remove",
+          "context": "| 1 | Add/remove number | +15-25% CTR |",
+          "disposition": "accepted",
+          "reason": "'remove'/'Remove' refers to removing unused JSON fields, placeholders, trailing commas, or numbers/years in title A/B tests (schema-templates.md:3,10,193; validation-guide.md:17; meta-tag-formulas.md:42-43), not file deletion."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 43,
+          "evidence": "remove",
+          "context": "| 2 | Add/remove year | +10-15% CTR |",
+          "disposition": "accepted",
+          "reason": "'remove'/'Remove' refers to removing unused JSON fields, placeholders, trailing commas, or numbers/years in title A/B tests (schema-templates.md:3,10,193; validation-guide.md:17; meta-tag-formulas.md:42-43), not file deletion."
+        }
+      ]
+    },
+    {
+      "path": "references/schema-decision-tree.md",
+      "sha256": "14d5d4ddfb4e21a79830c60a45bf694a57168667cad06ff2b2800c6f586c21c3",
+      "bytes": 3333,
+      "mode": "100644",
+      "git_blob": "6ba8a175ea76039bdeb3ff864ac44cb07e142ddf",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "references/schema-instructions-detail.md",
+      "sha256": "472c544d0b33ae8ec1e9be7766eb0e31008eb76e3b0e2754029fa0143a9525f2",
+      "bytes": 3687,
+      "mode": "100644",
+      "git_blob": "b9b1b67c15b76aa5c0d80cd2f6f447dd799ec397",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 71,
+          "evidence": "https://",
+          "context": "  \"@context\": \"https://schema.org\",",
+          "disposition": "accepted",
+          "reason": "Front-matter homepage URL (SKILL.md:10,14), `https://schema.org` @context and enumeration values inside JSON-LD templates, and links to Schema.org / Google validator documentation (validation-guide.md:84-88); none instruct automated fetching beyond WebFetch of the user's page."
+        }
+      ]
+    },
+    {
+      "path": "references/schema-templates.md",
+      "sha256": "fb4e52696c26d3cbdfff92c34ec0fe1336e383374646a485fe07b2a75aabdcdd",
+      "bytes": 6389,
+      "mode": "100644",
+      "git_blob": "582f75a351c7b1bcac2dadccc949c198a8a0c018",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 3,
+          "evidence": "remove",
+          "context": "Compact starter blocks. Replace placeholders, remove unused fields, and validate before ship.",
+          "disposition": "accepted",
+          "reason": "'remove'/'Remove' refers to removing unused JSON fields, placeholders, trailing commas, or numbers/years in title A/B tests (schema-templates.md:3,10,193; validation-guide.md:17; meta-tag-formulas.md:42-43), not file deletion."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 10,
+          "evidence": "Remove",
+          "context": "- Remove placeholders before publishing.",
+          "disposition": "accepted",
+          "reason": "'remove'/'Remove' refers to removing unused JSON fields, placeholders, trailing commas, or numbers/years in title A/B tests (schema-templates.md:3,10,193; validation-guide.md:17; meta-tag-formulas.md:42-43), not file deletion."
+        },
+        {
+          "type": "network-access",
+          "line": 17,
+          "evidence": "https://",
+          "context": "  \"@context\": \"https://schema.org\",",
+          "disposition": "accepted",
+          "reason": "Front-matter homepage URL (SKILL.md:10,14), `https://schema.org` @context and enumeration values inside JSON-LD templates, and links to Schema.org / Google validator documentation (validation-guide.md:84-88); none instruct automated fetching beyond WebFetch of the user's page."
+        },
+        {
+          "type": "network-access",
+          "line": 38,
+          "evidence": "https://",
+          "context": "  \"@context\": \"https://schema.org\",",
+          "disposition": "accepted",
+          "reason": "Front-matter homepage URL (SKILL.md:10,14), `https://schema.org` @context and enumeration values inside JSON-LD templates, and links to Schema.org / Google validator documentation (validation-guide.md:84-88); none instruct automated fetching beyond WebFetch of the user's page."
+        },
+        {
+          "type": "network-access",
+          "line": 55,
+          "evidence": "https://",
+          "context": "  \"@context\": \"https://schema.org\",",
+          "disposition": "accepted",
+          "reason": "Front-matter homepage URL (SKILL.md:10,14), `https://schema.org` @context and enumeration values inside JSON-LD templates, and links to Schema.org / Google validator documentation (validation-guide.md:84-88); none instruct automated fetching beyond WebFetch of the user's page."
+        },
+        {
+          "type": "network-access",
+          "line": 75,
+          "evidence": "https://",
+          "context": "  \"@context\": \"https://schema.org\",",
+          "disposition": "accepted",
+          "reason": "Front-matter homepage URL (SKILL.md:10,14), `https://schema.org` @context and enumeration values inside JSON-LD templates, and links to Schema.org / Google validator documentation (validation-guide.md:84-88); none instruct automated fetching beyond WebFetch of the user's page."
+        },
+        {
+          "type": "network-access",
+          "line": 87,
+          "evidence": "https://",
+          "context": "    \"availability\": \"https://schema.org/[InStock/OutOfStock/PreOrder]\"",
+          "disposition": "accepted",
+          "reason": "Front-matter homepage URL (SKILL.md:10,14), `https://schema.org` @context and enumeration values inside JSON-LD templates, and links to Schema.org / Google validator documentation (validation-guide.md:84-88); none instruct automated fetching beyond WebFetch of the user's page."
+        },
+        {
+          "type": "network-access",
+          "line": 117,
+          "evidence": "https://",
+          "context": "  \"@context\": \"https://schema.org\",",
+          "disposition": "accepted",
+          "reason": "Front-matter homepage URL (SKILL.md:10,14), `https://schema.org` @context and enumeration values inside JSON-LD templates, and links to Schema.org / Google validator documentation (validation-guide.md:84-88); none instruct automated fetching beyond WebFetch of the user's page."
+        },
+        {
+          "type": "network-access",
+          "line": 148,
+          "evidence": "https://",
+          "context": "  \"@context\": \"https://schema.org\",",
+          "disposition": "accepted",
+          "reason": "Front-matter homepage URL (SKILL.md:10,14), `https://schema.org` @context and enumeration values inside JSON-LD templates, and links to Schema.org / Google validator documentation (validation-guide.md:84-88); none instruct automated fetching beyond WebFetch of the user's page."
+        },
+        {
+          "type": "network-access",
+          "line": 163,
+          "evidence": "https://",
+          "context": "  \"@context\": \"https://schema.org\",",
+          "disposition": "accepted",
+          "reason": "Front-matter homepage URL (SKILL.md:10,14), `https://schema.org` @context and enumeration values inside JSON-LD templates, and links to Schema.org / Google validator documentation (validation-guide.md:84-88); none instruct automated fetching beyond WebFetch of the user's page."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 193,
+          "evidence": "Remove",
+          "context": "- Remove trailing commas and placeholder text before publishing.",
+          "disposition": "accepted",
+          "reason": "'remove'/'Remove' refers to removing unused JSON fields, placeholders, trailing commas, or numbers/years in title A/B tests (schema-templates.md:3,10,193; validation-guide.md:17; meta-tag-formulas.md:42-43), not file deletion."
+        }
+      ]
+    },
+    {
+      "path": "references/validation-guide.md",
+      "sha256": "6492ded7abc083c996a5af19b40e231cbb247099007595003a7aa960d861dd63",
+      "bytes": 4892,
+      "mode": "100644",
+      "git_blob": "78268f0203acb4a0db9c21a5e63ab727a9b9705f",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 17,
+          "evidence": "Remove",
+          "context": "| Trailing comma | Last property ends with `,` | Remove comma after final property. |",
+          "disposition": "accepted",
+          "reason": "'remove'/'Remove' refers to removing unused JSON fields, placeholders, trailing commas, or numbers/years in title A/B tests (schema-templates.md:3,10,193; validation-guide.md:17; meta-tag-formulas.md:42-43), not file deletion."
+        },
+        {
+          "type": "network-access",
+          "line": 20,
+          "evidence": "https://",
+          "context": "| Relative URL | `\"/images/photo.jpg\"` | Use absolute `https://...` URL. |",
+          "disposition": "accepted",
+          "reason": "Front-matter homepage URL (SKILL.md:10,14), `https://schema.org` @context and enumeration values inside JSON-LD templates, and links to Schema.org / Google validator documentation (validation-guide.md:84-88); none instruct automated fetching beyond WebFetch of the user's page."
+        },
+        {
+          "type": "network-access",
+          "line": 67,
+          "evidence": "https://",
+          "context": "| URL is not absolute | Use full `https://` URLs. |",
+          "disposition": "accepted",
+          "reason": "Front-matter homepage URL (SKILL.md:10,14), `https://schema.org` @context and enumeration values inside JSON-LD templates, and links to Schema.org / Google validator documentation (validation-guide.md:84-88); none instruct automated fetching beyond WebFetch of the user's page."
+        },
+        {
+          "type": "network-access",
+          "line": 84,
+          "evidence": "https://",
+          "context": "- Schema.org: `https://schema.org/`",
+          "disposition": "accepted",
+          "reason": "Front-matter homepage URL (SKILL.md:10,14), `https://schema.org` @context and enumeration values inside JSON-LD templates, and links to Schema.org / Google validator documentation (validation-guide.md:84-88); none instruct automated fetching beyond WebFetch of the user's page."
+        },
+        {
+          "type": "network-access",
+          "line": 85,
+          "evidence": "https://",
+          "context": "- Google structured data docs: `https://developers.google.com/search/docs/appearance/structured-data`",
+          "disposition": "accepted",
+          "reason": "Front-matter homepage URL (SKILL.md:10,14), `https://schema.org` @context and enumeration values inside JSON-LD templates, and links to Schema.org / Google validator documentation (validation-guide.md:84-88); none instruct automated fetching beyond WebFetch of the user's page."
+        },
+        {
+          "type": "network-access",
+          "line": 86,
+          "evidence": "https://",
+          "context": "- Rich Results Test: `https://search.google.com/test/rich-results`",
+          "disposition": "accepted",
+          "reason": "Front-matter homepage URL (SKILL.md:10,14), `https://schema.org` @context and enumeration values inside JSON-LD templates, and links to Schema.org / Google validator documentation (validation-guide.md:84-88); none instruct automated fetching beyond WebFetch of the user's page."
+        },
+        {
+          "type": "network-access",
+          "line": 87,
+          "evidence": "https://",
+          "context": "- Schema Validator: `https://validator.schema.org/`",
+          "disposition": "accepted",
+          "reason": "Front-matter homepage URL (SKILL.md:10,14), `https://schema.org` @context and enumeration values inside JSON-LD templates, and links to Schema.org / Google validator documentation (validation-guide.md:84-88); none instruct automated fetching beyond WebFetch of the user's page."
+        },
+        {
+          "type": "network-access",
+          "line": 88,
+          "evidence": "https://",
+          "context": "- JSON-LD Playground: `https://json-ld.org/playground/`",
+          "disposition": "accepted",
+          "reason": "Front-matter homepage URL (SKILL.md:10,14), `https://schema.org` @context and enumeration values inside JSON-LD templates, and links to Schema.org / Google validator documentation (validation-guide.md:84-88); none instruct automated fetching beyond WebFetch of the user's page."
+        }
+      ]
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "0e71984c513b6a530af10d49cbd23babcd00ef6c05d097bba38ee8e7391dcbc9",
+      "bytes": 12731,
+      "mode": "100644",
+      "git_blob": "5bb987243839bc443dff5dfef28eee9ddbbe0fad",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 10,
+          "evidence": "https://",
+          "context": "homepage: \"https://github.com/aaron-he-zhu/aaron-marketing-skills\"",
+          "disposition": "accepted",
+          "reason": "Front-matter homepage URL (SKILL.md:10,14), `https://schema.org` @context and enumeration values inside JSON-LD templates, and links to Schema.org / Google validator documentation (validation-guide.md:84-88); none instruct automated fetching beyond WebFetch of the user's page."
+        },
+        {
+          "type": "network-access",
+          "line": 14,
+          "evidence": "https://",
+          "context": "metadata: {\"author\": \"aaron-he-zhu\", \"version\": \"20.1.0\", \"discipline\": \"seo-geo\", \"phase\": \"implement\", \"geo-relevance\": \"high\", \"hermes\": {\"tags\": [\"marketing\", \"seo-geo\", \"implement\"], \"category\": \"seo-geo\"}, \"openclaw\": {\"emoji\": \"🔍\", ",
+          "disposition": "accepted",
+          "reason": "Front-matter homepage URL (SKILL.md:10,14), `https://schema.org` @context and enumeration values inside JSON-LD templates, and links to Schema.org / Google validator documentation (validation-guide.md:84-88); none instruct automated fetching beyond WebFetch of the user's page."
+        },
+        {
+          "type": "network-access",
+          "line": 94,
+          "evidence": "curl",
+          "context": "> ⚠ **JS-injected JSON-LD caveat**: `schema_lint.py` and any raw fetch (`WebFetch`/`curl`) read server HTML and will **not** see JSON-LD injected client-side by SEO plugins (Yoast/RankMath/AIOSEO). When the pre-check reports no/partial sche",
+          "disposition": "accepted",
+          "reason": "`curl` is named only in a caveat that raw fetches miss client-side JSON-LD; no curl command is instructed."
+        }
+      ]
+    }
+  ]
+}

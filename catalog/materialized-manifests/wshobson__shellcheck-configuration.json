@@ -1,0 +1,507 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "wshobson/shellcheck-configuration",
+  "source": {
+    "repo": "wshobson/agents",
+    "path": "plugins/shell-scripting/skills/shellcheck-configuration",
+    "revision": "156b7a5e7a8b93642628a339ee4039c925b34c7f"
+  },
+  "review": {
+    "path": "catalog/reviews/wshobson__shellcheck-configuration.json",
+    "sha256": "6eee5f39dd22e40cb15154840373812d88c0be64ca5ab74b43b5fc1a87d30e5d"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": false,
+      "dynamic_execution": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "shell-execution",
+        "line": 9,
+        "evidence": "Bash",
+        "context": "- Bash, sh, dash, ksh, and other POSIX shells",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 9,
+        "evidence": "sh",
+        "context": "- Bash, sh, dash, ksh, and other POSIX shells",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 16,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/details.md"
+      },
+      {
+        "type": "network-access",
+        "line": 24,
+        "evidence": "https://",
+        "context": "git clone https://github.com/koalaman/shellcheck.git",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 41,
+        "evidence": "bash",
+        "context": "shell=bash",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 54,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 56,
+        "evidence": "bash",
+        "context": "export SHELLCHECK_SHELL=bash",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 69,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 82,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 101,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 120,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 121,
+        "evidence": "sh",
+        "context": "# SC3010: In POSIX sh, use 'case' instead of 'cond && foo'",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 124,
+        "evidence": "sh",
+        "context": "# SC3043: In POSIX sh, use 'local' is undefined",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 134,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 135,
+        "evidence": "bash",
+        "context": "#!/bin/bash",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 139,
+        "evidence": "sh",
+        "context": "  --shell=sh \\",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 142,
+        "evidence": "sh",
+        "context": "  script.sh",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 145,
+        "evidence": "Bash",
+        "context": "### Development Configuration (Bash with Relaxed Rules)",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 147,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 148,
+        "evidence": "bash",
+        "context": "#!/bin/bash",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 149,
+        "evidence": "Bash",
+        "context": "# Configure for Bash development",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 152,
+        "evidence": "bash",
+        "context": "  --shell=bash \\",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 155,
+        "evidence": "sh",
+        "context": "  script.sh",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 160,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 161,
+        "evidence": "bash",
+        "context": "#!/bin/bash",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 165,
+        "evidence": "sh",
+        "context": "find . -type f -name \"*.sh\" | while read -r script; do",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 168,
+        "evidence": "bash",
+        "context": "        --shell=bash \\",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 179,
+        "evidence": "bash",
+        "context": "shell=bash",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 199,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 200,
+        "evidence": "bash",
+        "context": "#!/bin/bash",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 203,
+        "evidence": "bash",
+        "context": "#!/bin/bash",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 207,
+        "evidence": "sh",
+        "context": "git diff --cached --name-only | grep '\\.sh$' | while read -r script; do",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 233,
+        "evidence": " sudo",
+        "context": "          sudo apt-get install shellcheck",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 234,
+        "evidence": "sh",
+        "context": "          find . -type f -name \"*.sh\" -exec shellcheck {} \\;",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 244,
+        "evidence": "sh",
+        "context": "    - find . -type f -name \"*.sh\" -exec shellcheck {} \\;",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 252,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 253,
+        "evidence": "bash",
+        "context": "#!/bin/bash",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 271,
+        "evidence": "sh",
+        "context": "# shellcheck source=./helper.sh",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 272,
+        "evidence": "sh",
+        "context": "source helper.sh",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 279,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 290,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 305,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 319,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 329,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 341,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 342,
+        "evidence": "bash",
+        "context": "#!/bin/bash",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 345,
+        "evidence": "sh",
+        "context": "for script in *.sh; do",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 350,
+        "evidence": "sh",
+        "context": "find . -name \"*.sh\" -print0 | \\",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 356,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 357,
+        "evidence": "bash",
+        "context": "#!/bin/bash",
+        "file": "references/details.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 360,
+        "evidence": "mkdir",
+        "context": "mkdir -p \"$CACHE_DIR\"",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 381,
+        "evidence": "sh",
+        "context": "find . -name \"*.sh\" | while read -r script; do",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 390,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 391,
+        "evidence": "sh",
+        "context": "shellcheck script.sh",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 394,
+        "evidence": "sh",
+        "context": "# script.sh:1:3: warning: foo is referenced but not assigned. [SC2154]",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 399,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 400,
+        "evidence": "sh",
+        "context": "shellcheck --format=gcc script.sh",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 403,
+        "evidence": "sh",
+        "context": "# script.sh:1:3: warning: foo is referenced but not assigned.",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 408,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 409,
+        "evidence": "sh",
+        "context": "shellcheck --format=json script.sh",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 412,
+        "evidence": "sh",
+        "context": "# [{\"file\": \"script.sh\", \"line\": 1, \"column\": 3, \"level\": \"warning\", \"code\": 2154, \"message\": \"...\"}]",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 417,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 418,
+        "evidence": "sh",
+        "context": "shellcheck --format=quiet script.sh",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 28,
+        "evidence": "bash",
+        "context": "2. **Configure for your target shell** - Don't analyze bash as sh",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 28,
+        "evidence": "sh",
+        "context": "2. **Configure for your target shell** - Don't analyze bash as sh",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 10629
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "f89abb55d9f073f38f1703e4518f0613c788c6174be7f13b8dfe48a1c076c746",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/details.md",
+      "sha256": "65ba7c3e5ac0132e1fa4f75fe9776a68cb3c14b60d2b504f63e3ffad781e5723",
+      "bytes": 7951,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "0442d7cb63b35ac5eccb60450822b66bf036381d476f5aed7a148aa635c5c598",
+      "bytes": 1610,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 10629
+}

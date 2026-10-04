@@ -1,0 +1,259 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "bagelhole/waf-setup",
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "security/network/waf-setup",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "security/network/waf-setup",
+    "url": "https://api.github.com/repos/BagelHole/DevOps-Security-Agent-Skills/git/trees/0365f57a079b1332f95cf26e31dd2d5332a8399f?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/BagelHole/DevOps-Security-Agent-Skills/blob/0365f57a079b1332f95cf26e31dd2d5332a8399f/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "security",
+        "security/network",
+        "security/network/waf-setup"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file; OWASP CRS and AWS managed rule groups are referenced by name and cloned from upstream rather than reproduced, and the frontmatter declares license: MIT. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "medium",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "package_install": true,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md and references/waf-rules.md in full. The skill covers AWS WAF (CLI, managed rule groups, Terraform, ALB/API Gateway association), Cloudflare WAF rulesets via API and Terraform, ModSecurity with Nginx plus the OWASP Core Rule Set, custom rules, and a read-only log-analysis tuning script.",
+      "Medium: following it has the agent create and associate AWS WAF Web ACLs, POST rulesets to the Cloudflare API with a bearer token from ${CF_TOKEN}, apt-install ModSecurity or build it from source, git-clone the CRS and write config files under /etc/nginx/modsec. Acceptable because adding a WAF is the user's stated goal, it strengthens rather than disables security controls, credentials come from user-supplied environment variables, and the guidance repeatedly says to start in detection mode and tune before blocking (SKILL.md:367, 498, 508).",
+      "Review before applying: the sample main.conf sets `SecRuleEngine On` immediately despite the DetectionOnly comment (SKILL.md:367-368); the optional source build clones ModSecurity and the CRS without a pinned tag (SKILL.md:331-334, 396); geo-block country lists (SKILL.md:119, references/waf-rules.md:79) are examples to adapt. Related Skills (SKILL.md:521-523) link to sibling skills ../../scanning/dast-scanning/, ../ssl-tls-management/, ../firewall-config/ as optional reading only."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "67c5c5cbb12cafb1515e449748866bd40da7dec9",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
+      "findings": []
+    },
+    {
+      "path": "references/waf-rules.md",
+      "sha256": "16bedcc5a5e5b161a590da770a47fe39000582d41be47ce00ced564fa3eef1ce",
+      "bytes": 2316,
+      "mode": "100644",
+      "git_blob": "1d9606e583351ebc16d642733c59981eb648503c",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "6cbf22f76184323c7ee15a3535c957ab0e317c1c43375d0a9455df343e2a4334",
+      "bytes": 15204,
+      "mode": "100644",
+      "git_blob": "06c9de186d9aee8efefa4491babd64f3d211a118",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 35,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks with aws wafv2 commands, ModSecurity install/build steps, CRS setup and a log-analysis script, all aimed at the user's own WAF deployment."
+        },
+        {
+          "type": "shell-execution",
+          "line": 152,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks with aws wafv2 commands, ModSecurity install/build steps, CRS setup and a log-analysis script, all aimed at the user's own WAF deployment."
+        },
+        {
+          "type": "shell-execution",
+          "line": 238,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks with aws wafv2 commands, ModSecurity install/build steps, CRS setup and a log-analysis script, all aimed at the user's own WAF deployment."
+        },
+        {
+          "type": "network-access",
+          "line": 240,
+          "evidence": "curl",
+          "context": "curl -s \"https://api.cloudflare.com/client/v4/zones/${ZONE_ID}/rulesets\" \\",
+          "disposition": "accepted",
+          "reason": "Read-only GET listing the zone's existing rulesets."
+        },
+        {
+          "type": "network-access",
+          "line": 240,
+          "evidence": "https://",
+          "context": "curl -s \"https://api.cloudflare.com/client/v4/zones/${ZONE_ID}/rulesets\" \\",
+          "disposition": "accepted",
+          "reason": "Read-only GET listing the zone's existing rulesets."
+        },
+        {
+          "type": "network-access",
+          "line": 244,
+          "evidence": "curl",
+          "context": "curl -X POST \"https://api.cloudflare.com/client/v4/zones/${ZONE_ID}/rulesets\" \\",
+          "disposition": "accepted",
+          "reason": "curl calls to the Cloudflare rulesets API, git clones of ModSecurity and the OWASP CRS, and an nginx proxy_pass example to the user's backend."
+        },
+        {
+          "type": "network-access",
+          "line": 244,
+          "evidence": "https://",
+          "context": "curl -X POST \"https://api.cloudflare.com/client/v4/zones/${ZONE_ID}/rulesets\" \\",
+          "disposition": "accepted",
+          "reason": "curl calls to the Cloudflare rulesets API, git clones of ModSecurity and the OWASP CRS, and an nginx proxy_pass example to the user's backend."
+        },
+        {
+          "type": "network-access",
+          "line": 276,
+          "evidence": "curl",
+          "context": "curl -X POST \"https://api.cloudflare.com/client/v4/zones/${ZONE_ID}/rulesets\" \\",
+          "disposition": "accepted",
+          "reason": "curl calls to the Cloudflare rulesets API, git clones of ModSecurity and the OWASP CRS, and an nginx proxy_pass example to the user's backend."
+        },
+        {
+          "type": "network-access",
+          "line": 276,
+          "evidence": "https://",
+          "context": "curl -X POST \"https://api.cloudflare.com/client/v4/zones/${ZONE_ID}/rulesets\" \\",
+          "disposition": "accepted",
+          "reason": "curl calls to the Cloudflare rulesets API, git clones of ModSecurity and the OWASP CRS, and an nginx proxy_pass example to the user's backend."
+        },
+        {
+          "type": "shell-execution",
+          "line": 326,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks with aws wafv2 commands, ModSecurity install/build steps, CRS setup and a log-analysis script, all aimed at the user's own WAF deployment."
+        },
+        {
+          "type": "network-access",
+          "line": 331,
+          "evidence": "https://",
+          "context": "git clone https://github.com/SpiderLabs/ModSecurity /opt/modsecurity",
+          "disposition": "accepted",
+          "reason": "curl calls to the Cloudflare rulesets API, git clones of ModSecurity and the OWASP CRS, and an nginx proxy_pass example to the user's backend."
+        },
+        {
+          "type": "shell-execution",
+          "line": 334,
+          "evidence": "sh",
+          "context": "./build.sh && ./configure && make && make install",
+          "disposition": "accepted",
+          "reason": "Bash blocks with aws wafv2 commands, ModSecurity install/build steps, CRS setup and a log-analysis script, all aimed at the user's own WAF deployment."
+        },
+        {
+          "type": "network-access",
+          "line": 355,
+          "evidence": "http://",
+          "context": "            proxy_pass http://backend;",
+          "disposition": "accepted",
+          "reason": "nginx proxy_pass to a placeholder upstream, configuration only."
+        },
+        {
+          "type": "shell-execution",
+          "line": 363,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks with aws wafv2 commands, ModSecurity install/build steps, CRS setup and a log-analysis script, all aimed at the user's own WAF deployment."
+        },
+        {
+          "type": "shell-execution",
+          "line": 393,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks with aws wafv2 commands, ModSecurity install/build steps, CRS setup and a log-analysis script, all aimed at the user's own WAF deployment."
+        },
+        {
+          "type": "network-access",
+          "line": 396,
+          "evidence": "https://",
+          "context": "git clone https://github.com/coreruleset/coreruleset crs",
+          "disposition": "accepted",
+          "reason": "curl calls to the Cloudflare rulesets API, git clones of ModSecurity and the OWASP CRS, and an nginx proxy_pass example to the user's backend."
+        },
+        {
+          "type": "shell-execution",
+          "line": 429,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks with aws wafv2 commands, ModSecurity install/build steps, CRS setup and a log-analysis script, all aimed at the user's own WAF deployment."
+        },
+        {
+          "type": "shell-execution",
+          "line": 461,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Read-only tuning script that greps the ModSecurity audit log."
+        },
+        {
+          "type": "shell-execution",
+          "line": 462,
+          "evidence": "bash",
+          "context": "#!/bin/bash",
+          "disposition": "accepted",
+          "reason": "Shebang of the read-only log-analysis tuning script."
+        },
+        {
+          "type": "shell-execution",
+          "line": 463,
+          "evidence": "sh",
+          "context": "# waf-tune.sh - Analyze WAF logs for false positives",
+          "disposition": "accepted",
+          "reason": "Comment naming the read-only waf-tune.sh script."
+        }
+      ]
+    }
+  ]
+}

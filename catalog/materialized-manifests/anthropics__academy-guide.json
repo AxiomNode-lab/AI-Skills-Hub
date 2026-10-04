@@ -1,0 +1,135 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "anthropics/academy-guide",
+  "source": {
+    "repo": "anthropics/skills",
+    "path": "skills/academy-guide",
+    "revision": "8a1541c4a3ffa5a20a5a91de0dcf3f0bab1d1ef4"
+  },
+  "review": {
+    "path": "catalog/reviews/anthropics__academy-guide.json",
+    "sha256": "2465ed7d244e4b6bb34a28ad4e25a7b3f291d278138fb4101295f72f09b7ded7"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "low",
+    "capabilities": {
+      "shell": false,
+      "network": true,
+      "credentials": false,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": false,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "network-access",
+        "line": 4,
+        "evidence": "http://",
+        "context": "                        http://www.apache.org/licenses/",
+        "file": "LICENSE.txt"
+      },
+      {
+        "type": "network-access",
+        "line": 196,
+        "evidence": "http://",
+        "context": "       http://www.apache.org/licenses/LICENSE-2.0",
+        "file": "LICENSE.txt"
+      },
+      {
+        "type": "network-access",
+        "line": 30,
+        "evidence": "https://",
+        "context": "All content lives on [Claude Academy](https://academy.claude.com),",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 40,
+        "evidence": "https://",
+        "context": "surface: [Claude](https://academy.claude.com/claude),",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 41,
+        "evidence": "https://",
+        "context": "[Claude Code](https://academy.claude.com/code),",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 42,
+        "evidence": "https://",
+        "context": "[Claude Cowork](https://academy.claude.com/cowork),",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 43,
+        "evidence": "https://",
+        "context": "[AI Fluency](https://academy.claude.com/fluency), and the",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 44,
+        "evidence": "https://",
+        "context": "[developer platform](https://academy.claude.com/platform). When a user",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 90,
+        "evidence": "https://",
+        "context": "   to the [resources library](https://academy.claude.com/resources) for",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 101,
+        "evidence": "https://",
+        "context": "   `https://academy.claude.com/` plus its path: `/courses/{slug}` for",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 115,
+        "evidence": "https://",
+        "context": "   [academy.claude.com/resources](https://academy.claude.com/resources)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 124,
+        "evidence": "https://",
+        "context": "[academy.claude.com/assets/data/catalog.json](https://academy.claude.com/assets/data/catalog.json),",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 145,
+        "evidence": "https://",
+        "context": "copied verbatim and only ever under `https://academy.claude.com/`.",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 19100
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "bc6b3af2f331cbc7fb0da1344efb2cbe5877a31498b4d70dbc7000f3405a1362",
+      "bytes": 11345,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "f27992510c051355dfe68c92394d509af730da5298094ec86834ee40bbd31376",
+      "bytes": 7755,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 19100
+}

@@ -1,0 +1,160 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "unitone/iam-review",
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "UnitOneAI/SecuritySkills",
+    "path": "skills/identity/iam-review",
+    "revision": "70bc259bb01abb3015ad2ad859ad5253cbf0bcab"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "skills/identity/iam-review",
+    "url": "https://api.github.com/repos/UnitOneAI/SecuritySkills/git/trees/70bc259bb01abb3015ad2ad859ad5253cbf0bcab?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/UnitOneAI/SecuritySkills/blob/70bc259bb01abb3015ad2ad859ad5253cbf0bcab/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "skills",
+        "skills/identity",
+        "skills/identity/iam-review"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT License with its copyright notice, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: Frontmatter declares license: MIT; no third-party copyright notice or other license grant. CIS Controls v8 content is limited to safeguard IDs and short titles (SKILL.md:476-498) and NIST SP 800-63B/800-207 (public domain) items are paraphrased; no full benchmark or control text reproduced. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "low",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": false,
+      "network": false,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md (521 lines) in full; it is the only file. The skill guides a read-only (allowed-tools: Read, Grep, Glob) IAM posture review across AWS, Azure/Entra ID and GCP: identity inventory, authentication/MFA, least privilege, service accounts, stale accounts, JIT access and zero-trust alignment, with checklist IDs, severity tables and a report template.",
+      "Platform tables name read-only cloud CLI queries (e.g. `aws iam list-users`, `aws iam get-credential-report`, `gcloud iam service-accounts keys list`, SKILL.md:102, :104, :151, :185, :231) as places to look; with the declared tool set the agent cannot run them, and if a user runs them the credential report contains sensitive account metadata. SKILL.md:52, :54, :468, :470 forbid policy changes and require redacting any secrets found.",
+      "Cross-references to sibling skills by path (SKILL.md:44 and :441-448, e.g. identity/privileged-access.md, cloud/azure-review.md, compliance/soc2-gap.md) are optional chaining pointers and do not ship. SKILL.md:457 links ../../../schemas/finding.schema.json, used only when JSON output is requested. The injection-like phrase flagged by signals (SKILL.md:55, :467) is an example of text to flag, not an instruction to the agent."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "66eb5ec637cc578833ddcbc870dbf46c6718fd83e985fad5f0f5cf30d60cf47d",
+      "bytes": 1067,
+      "mode": "100644",
+      "git_blob": "5a98cb233448adff07bef15917961275c76572dc",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry the copyright and permission notice.",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "43a8a2df06aaf37f0afed03a2bde45c57ba7e80cb43456f977940f4840d7ad13",
+      "bytes": 26375,
+      "mode": "100644",
+      "git_blob": "d71ed2556da8d4c2205256415cbd20fba8ae65be",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "credential-access",
+          "line": 42,
+          "evidence": "credential",
+          "context": "- Responding to incidents involving credential compromise or privilege escalation",
+          "disposition": "accepted",
+          "reason": "Words like credential and API key appear in review criteria and read-only AWS credential-report queries for assessing MFA and key age; no instruction to read, print, or send real secrets (output must redact them per SKILL.md:468)."
+        },
+        {
+          "type": "credential-access",
+          "line": 66,
+          "evidence": "credential",
+          "context": "| **NIST SP 800-63B** | AAL1, AAL2, AAL3 | Authenticator assurance levels, MFA requirements, credential lifecycle |",
+          "disposition": "accepted",
+          "reason": "Words like credential and API key appear in review criteria and read-only AWS credential-report queries for assessing MFA and key age; no instruction to read, print, or send real secrets (output must redact them per SKILL.md:468)."
+        },
+        {
+          "type": "credential-access",
+          "line": 102,
+          "evidence": "credential",
+          "context": "| **AWS** | `aws iam list-users`, `aws iam list-roles`, `aws iam get-credential-report` | IAM users, roles, access keys, instance profiles |",
+          "disposition": "accepted",
+          "reason": "Words like credential and API key appear in review criteria and read-only AWS credential-report queries for assessing MFA and key age; no instruction to read, print, or send real secrets (output must redact them per SKILL.md:468)."
+        },
+        {
+          "type": "credential-access",
+          "line": 106,
+          "evidence": "API key",
+          "context": "**Output:** Complete identity inventory table with columns: Identity Name, Type (human/service/machine/API key), Provider, Owner, Last Activity Date, Classification.",
+          "disposition": "accepted",
+          "reason": "Words like credential and API key appear in review criteria and read-only AWS credential-report queries for assessing MFA and key age; no instruction to read, print, or send real secrets (output must redact them per SKILL.md:468)."
+        },
+        {
+          "type": "credential-access",
+          "line": 151,
+          "evidence": "Credential",
+          "context": "| **AWS** | IAM Credential Report (`aws iam generate-credential-report`) | Users without MFA, unused credentials, access key age |",
+          "disposition": "accepted",
+          "reason": "Words like credential and API key appear in review criteria and read-only AWS credential-report queries for assessing MFA and key age; no instruction to read, print, or send real secrets (output must redact them per SKILL.md:468)."
+        },
+        {
+          "type": "credential-access",
+          "line": 151,
+          "evidence": "credential",
+          "context": "| **AWS** | IAM Credential Report (`aws iam generate-credential-report`) | Users without MFA, unused credentials, access key age |",
+          "disposition": "accepted",
+          "reason": "Words like credential and API key appear in review criteria and read-only AWS credential-report queries for assessing MFA and key age; no instruction to read, print, or send real secrets (output must redact them per SKILL.md:468)."
+        },
+        {
+          "type": "credential-access",
+          "line": 204,
+          "evidence": "credential",
+          "context": "**Objective:** Assess service account security posture and credential management.",
+          "disposition": "accepted",
+          "reason": "Words like credential and API key appear in review criteria and read-only AWS credential-report queries for assessing MFA and key age; no instruction to read, print, or send real secrets (output must redact them per SKILL.md:468)."
+        },
+        {
+          "type": "credential-access",
+          "line": 265,
+          "evidence": "Credential",
+          "context": "| **AWS** | IAM Credential Report: `password_last_used`, `access_key_last_used` | Inactive users, unused access keys |",
+          "disposition": "accepted",
+          "reason": "Words like credential and API key appear in review criteria and read-only AWS credential-report queries for assessing MFA and key age; no instruction to read, print, or send real secrets (output must redact them per SKILL.md:468)."
+        },
+        {
+          "type": "credential-access",
+          "line": 276,
+          "evidence": "Credential",
+          "context": "| Inactive human account > 90 days | **Medium** | Credential stuffing / takeover target |",
+          "disposition": "accepted",
+          "reason": "Words like credential and API key appear in review criteria and read-only AWS credential-report queries for assessing MFA and key age; no instruction to read, print, or send real secrets (output must redact them per SKILL.md:468)."
+        }
+      ]
+    }
+  ]
+}

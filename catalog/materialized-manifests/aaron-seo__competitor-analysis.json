@@ -1,0 +1,98 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "aaron-seo/competitor-analysis",
+  "source": {
+    "repo": "aaron-he-zhu/aaron-marketing-skills",
+    "path": "seo-geo/survey/competitor-analysis",
+    "revision": "cc897fa9e1e3136eb6a301130e49d8d9d1c519b2"
+  },
+  "review": {
+    "path": "catalog/reviews/aaron-seo__competitor-analysis.json",
+    "sha256": "65b110c664623b19d36a47647b0d68bf056e0dfb47c470d5c2138549880cbcb1"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "low",
+    "capabilities": {
+      "shell": false,
+      "network": true,
+      "credentials": false,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "network-access",
+        "line": 3,
+        "evidence": "http://",
+        "context": "                        http://www.apache.org/licenses/",
+        "file": "LICENSE.txt"
+      },
+      {
+        "type": "network-access",
+        "line": 195,
+        "evidence": "http://",
+        "context": "       http://www.apache.org/licenses/LICENSE-2.0",
+        "file": "LICENSE.txt"
+      },
+      {
+        "type": "network-access",
+        "line": 10,
+        "evidence": "https://",
+        "context": "homepage: \"https://github.com/aaron-he-zhu/aaron-marketing-skills\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 13,
+        "evidence": "https://",
+        "context": "metadata: {\"author\": \"aaron-he-zhu\", \"version\": \"20.1.0\", \"discipline\": \"seo-geo\", \"phase\": \"survey\", \"geo-relevance\": \"medium\", \"hermes\": {\"tags\": [\"marketing\", \"seo-geo\", \"survey\"], \"category\": \"seo-geo\"}, \"openclaw\": {\"emoji\": \"🔍\", \"hom",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 34391
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "664cd12e1c315650bf14cb1385359d13d4724ac03940ac10918390ef78e4f5e7",
+      "bytes": 11347,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/analysis-templates.md",
+      "sha256": "a04b96352a32e76aacb79462411f13e736f483f6ac89a4acf0bdd6d8b8380a08",
+      "bytes": 3790,
+      "mode": "100644"
+    },
+    {
+      "path": "references/battlecard-template.md",
+      "sha256": "89a2d9e941bf25652a403ae34d7292b4eb2be30dddd9ccd36bd63a04c5a11a3b",
+      "bytes": 4198,
+      "mode": "100644"
+    },
+    {
+      "path": "references/example-report.md",
+      "sha256": "002c32f1b514ef064c8ba37c9e2c16d6df0f5addfd890ee55a7584058ed95f3f",
+      "bytes": 2259,
+      "mode": "100644"
+    },
+    {
+      "path": "references/positioning-frameworks.md",
+      "sha256": "fcafeaddf6137096235201bbf3b4cc080839a75748abd82965bcc4dcba11b7b9",
+      "bytes": 4799,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "905922fb722baf1fb3d2046a4d13031cf1ab8d7e8e4dde8b89dcc7f67eea2245",
+      "bytes": 7998,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 34391
+}

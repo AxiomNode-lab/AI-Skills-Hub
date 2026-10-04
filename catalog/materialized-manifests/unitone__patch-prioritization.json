@@ -1,0 +1,221 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "unitone/patch-prioritization",
+  "source": {
+    "repo": "UnitOneAI/SecuritySkills",
+    "path": "skills/vuln-management/patch-prioritization",
+    "revision": "70bc259bb01abb3015ad2ad859ad5253cbf0bcab"
+  },
+  "review": {
+    "path": "catalog/reviews/unitone__patch-prioritization.json",
+    "sha256": "1ad60afaec3a543dd205a76d239367cfc43d566261666b7b4a8ee87f3bb20476"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "low",
+    "capabilities": {
+      "shell": false,
+      "network": true,
+      "credentials": false,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": false,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "network-access",
+        "line": 54,
+        "evidence": "https://",
+        "context": "- [ ] **Historical EPSS data:** EPSS score trends over 7/30/90 days if available (API: https://api.first.org/data/v1/epss)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 120,
+        "evidence": "https://",
+        "context": "2. Compare against 7-day, 30-day, and 90-day historical scores (EPSS API: `https://api.first.org/data/v1/epss?cve=[CVE-ID]`)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 336,
+        "evidence": "https://",
+        "context": "- SSVC 2.1: https://certcc.github.io/SSVC/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 337,
+        "evidence": "https://",
+        "context": "- EPSS API: https://api.first.org/data/v1/epss",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 338,
+        "evidence": "https://",
+        "context": "- CISA KEV: https://www.cisa.gov/known-exploited-vulnerabilities-catalog",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 348,
+        "evidence": "https://",
+        "context": "- Specification: https://certcc.github.io/SSVC/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 349,
+        "evidence": "https://",
+        "context": "- Repository: https://github.com/CERTCC/SSVC",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 353,
+        "evidence": "https://",
+        "context": "- Specification: https://www.first.org/epss/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 354,
+        "evidence": "https://",
+        "context": "- API: https://api.first.org/data/v1/epss",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 355,
+        "evidence": "https://",
+        "context": "- Data: https://epss.cyentia.com/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 359,
+        "evidence": "https://",
+        "context": "- Catalog: https://www.cisa.gov/known-exploited-vulnerabilities-catalog",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 360,
+        "evidence": "https://",
+        "context": "- BOD 22-01: https://www.cisa.gov/binding-operational-directive-22-01",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 361,
+        "evidence": "https://",
+        "context": "- Machine-readable feed: https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 401,
+        "evidence": "https://",
+        "context": "- SSVC 2.1 (CERT/CC): https://certcc.github.io/SSVC/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 402,
+        "evidence": "https://",
+        "context": "- SSVC GitHub Repository: https://github.com/CERTCC/SSVC",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 403,
+        "evidence": "https://",
+        "context": "- EPSS v3 (FIRST.org): https://www.first.org/epss/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 404,
+        "evidence": "https://",
+        "context": "- EPSS API Documentation: https://api.first.org/data/v1/epss",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 405,
+        "evidence": "https://",
+        "context": "- EPSS Data Portal: https://epss.cyentia.com/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 406,
+        "evidence": "https://",
+        "context": "- CISA KEV Catalog: https://www.cisa.gov/known-exploited-vulnerabilities-catalog",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 407,
+        "evidence": "https://",
+        "context": "- CISA BOD 22-01: https://www.cisa.gov/binding-operational-directive-22-01",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 408,
+        "evidence": "https://",
+        "context": "- NIST SP 800-39 (Risk Management): https://csrc.nist.gov/publications/detail/sp/800-39/final",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 409,
+        "evidence": "https://",
+        "context": "- NIST SP 800-53 Rev. 5 (SI-2 Flaw Remediation): https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 410,
+        "evidence": "https://",
+        "context": "- ISO 27005:2022 (Risk Treatment): https://www.iso.org/standard/80585.html",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 411,
+        "evidence": "https://",
+        "context": "- PCI DSS 4.0 Requirement 6.3.3: https://www.pcisecuritystandards.org/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 412,
+        "evidence": "https://",
+        "context": "- ITIL 4 Change Enablement: https://www.axelos.com/certifications/itil-service-management",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 23483
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "66eb5ec637cc578833ddcbc870dbf46c6718fd83e985fad5f0f5cf30d60cf47d",
+      "bytes": 1067,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "bde59ea6425818d20a1855558045a14f3fc0f2e102db0d3c3b08298edbe39943",
+      "bytes": 22416,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 23483
+}

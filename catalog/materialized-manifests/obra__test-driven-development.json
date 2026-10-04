@@ -1,0 +1,150 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "obra/test-driven-development",
+  "source": {
+    "repo": "obra/superpowers",
+    "path": "skills/test-driven-development",
+    "revision": "8ca22dba9a94f28898bbce59f2537ff4d87c747d"
+  },
+  "review": {
+    "path": "catalog/reviews/obra__test-driven-development.json",
+    "sha256": "9ca907715cf6b06477cb72276fc8de7e9d24d9c7d29b7d89f8daf735927cd5cf"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "low",
+    "capabilities": {
+      "shell": true,
+      "network": false,
+      "credentials": false,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "filesystem-write",
+        "line": 37,
+        "evidence": "Delete",
+        "context": "Write code before the test? Delete it. Start over.",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 43,
+        "evidence": "Delete",
+        "context": "- Delete means delete",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 43,
+        "evidence": "delete",
+        "context": "- Delete means delete",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 117,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 172,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 198,
+        "evidence": "Remove",
+        "context": "- Remove duplication",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 231,
+        "evidence": "Delete",
+        "context": "| \"Keep as reference, write tests first\" | You'll adapt it. That's testing after. Delete means delete. |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 231,
+        "evidence": "delete",
+        "context": "| \"Keep as reference, write tests first\" | You'll adapt it. That's testing after. Delete means delete. |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 254,
+        "evidence": "Delete",
+        "context": "**All of these mean: Delete code. Start over with TDD.**",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 269,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 285,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 86,
+        "evidence": "delete",
+        "context": "are checking, unmock it or delete the assertion.",
+        "file": "writing-good-tests.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 147,
+        "evidence": "delete",
+        "context": "    Unmock it or delete the assertion.",
+        "file": "writing-good-tests.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 195,
+        "evidence": "remove",
+        "context": "- An assertion checks a `*-mock` test ID, or fails if you remove the mock",
+        "file": "writing-good-tests.md"
+      }
+    ],
+    "total_bytes": 18916
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "a37e0e9697144819e1d965176ac4ae5bc3fa02d11e7812036bbcadf6dafe2400",
+      "bytes": 1070,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "64b03fce4aee5a97a93160cea8111f3ba13a17b7c001db4bd5836d67fd10705d",
+      "bytes": 9578,
+      "mode": "100644"
+    },
+    {
+      "path": "writing-good-tests.md",
+      "sha256": "51471c853306ff92ca8bb41dcaea05f31c0e46b03651f8f3c99754b7172f4ae1",
+      "bytes": 8268,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 18916
+}

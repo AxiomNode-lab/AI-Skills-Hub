@@ -1,0 +1,113 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "aaron-seo/offsite-signal-analyzer",
+  "source": {
+    "repo": "aaron-he-zhu/aaron-marketing-skills",
+    "path": "seo-geo/evaluate/offsite-signal-analyzer",
+    "revision": "cc897fa9e1e3136eb6a301130e49d8d9d1c519b2"
+  },
+  "review": {
+    "path": "catalog/reviews/aaron-seo__offsite-signal-analyzer.json",
+    "sha256": "94dd1fdc34d9e72390ab30bf3b2fd04c334387abfe6eeeff0b41615009fa3a4d"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "low",
+    "capabilities": {
+      "shell": false,
+      "network": true,
+      "credentials": false,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "network-access",
+        "line": 3,
+        "evidence": "http://",
+        "context": "                        http://www.apache.org/licenses/",
+        "file": "LICENSE.txt"
+      },
+      {
+        "type": "network-access",
+        "line": 195,
+        "evidence": "http://",
+        "context": "       http://www.apache.org/licenses/LICENSE-2.0",
+        "file": "LICENSE.txt"
+      },
+      {
+        "type": "network-access",
+        "line": 103,
+        "evidence": "https://",
+        "context": "https://spam-site.example/toxic-page",
+        "file": "references/link-quality-rubric.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 119,
+        "evidence": "Remove",
+        "context": "| Review quarterly | Remove entries if domains are cleaned up |",
+        "file": "references/link-quality-rubric.md"
+      },
+      {
+        "type": "network-access",
+        "line": 10,
+        "evidence": "https://",
+        "context": "homepage: \"https://github.com/aaron-he-zhu/aaron-marketing-skills\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 14,
+        "evidence": "https://",
+        "context": "metadata: {\"author\": \"aaron-he-zhu\", \"version\": \"20.1.0\", \"discipline\": \"seo-geo\", \"phase\": \"evaluate\", \"geo-relevance\": \"medium\", \"hermes\": {\"tags\": [\"marketing\", \"seo-geo\", \"evaluate\"], \"category\": \"seo-geo\"}, \"openclaw\": {\"emoji\": \"🔍\", ",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 75,
+        "evidence": "https://",
+        "context": "**Industry baseline for AI-crawler traffic (keyless)**: [Cloudflare Radar AI Insights](https://radar.cloudflare.com/ai-insights) publishes network-wide AI-crawler traffic shares and crawl-to-refer ratios with no account — the benchmark to s",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 45122
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "664cd12e1c315650bf14cb1385359d13d4724ac03940ac10918390ef78e4f5e7",
+      "bytes": 11347,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/backlinks-analysis-templates.md",
+      "sha256": "1f483d87c8090ad3371111f6423641195395f11a05fee3505515c854f500094e",
+      "bytes": 3952,
+      "mode": "100644"
+    },
+    {
+      "path": "references/link-quality-rubric.md",
+      "sha256": "4d8f7c0eb93211f2dcdca00af77f0ff28c101618c37e0f787372d5257c21c1c2",
+      "bytes": 7731,
+      "mode": "100644"
+    },
+    {
+      "path": "references/outreach-templates.md",
+      "sha256": "ae46464d7557c281009429641f937c8d5ebca3adc4b881097eaaecbd4fc13eb3",
+      "bytes": 4363,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "31683928d60c0cb4c453001f35216da749b239317cc508a79a48f1586f657e98",
+      "bytes": 17729,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 45122
+}

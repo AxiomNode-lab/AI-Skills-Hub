@@ -1,0 +1,520 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "unitone/detection-engineering",
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "UnitOneAI/SecuritySkills",
+    "path": "skills/secops/detection-engineering",
+    "revision": "70bc259bb01abb3015ad2ad859ad5253cbf0bcab"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "skills/secops/detection-engineering",
+    "url": "https://api.github.com/repos/UnitOneAI/SecuritySkills/git/trees/70bc259bb01abb3015ad2ad859ad5253cbf0bcab?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/UnitOneAI/SecuritySkills/blob/70bc259bb01abb3015ad2ad859ad5253cbf0bcab/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "skills",
+        "skills/secops",
+        "skills/secops/detection-engineering"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT License with its copyright notice, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found; Sigma/ADS/ATT&CK are described in the author's own words with links, and the example rule is not a SigmaHQ rule. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "low",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": false,
+      "network": false,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md in full. Guides authoring Sigma detection rules with Palantir ADS documentation mapped to MITRE ATT&CK, plus coverage-heatmap and detection-as-code practices.",
+      "Authoring and analysis only (allowed-tools Read, Grep, Glob); SKILL.md:513-517 state rules are authored, never executed, and that the skill does not deploy to SIEMs or run test commands. Validation steps (SKILL.md:257-260) describe tests for the user to run in their own environment; the single Base64 string decodes to the harmless UTF-16LE 'echo \"test\"'.",
+      "Defensive content; it cross-references other UnitOne skills (alert-triage, siem-rules, ir-playbook) only as 'do not use when' pointers. SKILL.md:504 links ../../../schemas/finding.schema.json for optional JSON output only; that file does not ship with the skill. The example Sigma rule appears original (placeholder UUID and author), not copied from SigmaHQ."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "66eb5ec637cc578833ddcbc870dbf46c6718fd83e985fad5f0f5cf30d60cf47d",
+      "bytes": 1067,
+      "mode": "100644",
+      "git_blob": "5a98cb233448adff07bef15917961275c76572dc",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry the copyright and permission notice.",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "1af9442bef64f5097ff9b7988e1486040aaa55e543bed21c1ab918b5e3e2978e",
+      "bytes": 30374,
+      "mode": "100644",
+      "git_blob": "72916f6aee6d80ca763a3ad51a34bf0fbe649671",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 54,
+          "evidence": "PowerShell",
+          "context": "- [ ] **Target ATT&CK technique(s):** The specific technique or sub-technique IDs to detect (e.g., T1059.001 -- PowerShell).",
+          "disposition": "accepted",
+          "reason": "'PowerShell'/'pwsh' occur as the ATT&CK technique being detected, Sigma field values and user-side validation examples; the skill does not have the agent run any shell command."
+        },
+        {
+          "type": "shell-execution",
+          "line": 81,
+          "evidence": "PowerShell",
+          "context": "- Technique Name:     [Command and Scripting Interpreter: PowerShell]",
+          "disposition": "accepted",
+          "reason": "'PowerShell'/'pwsh' occur as the ATT&CK technique being detected, Sigma field values and user-side validation examples; the skill does not have the agent run any shell command."
+        },
+        {
+          "type": "shell-execution",
+          "line": 84,
+          "evidence": "PowerShell",
+          "context": "- Required Log Sources: [Sysmon EventID 1, Windows Security 4688, PowerShell 4104/4103]",
+          "disposition": "accepted",
+          "reason": "'PowerShell'/'pwsh' occur as the ATT&CK technique being detected, Sigma field values and user-side validation examples; the skill does not have the agent run any shell command."
+        },
+        {
+          "type": "shell-execution",
+          "line": 85,
+          "evidence": "PowerShell",
+          "context": "- Sub-techniques:     [.001 PowerShell, .002 AppleScript, .003 Windows Command Shell, ...]",
+          "disposition": "accepted",
+          "reason": "'PowerShell'/'pwsh' occur as the ATT&CK technique being detected, Sigma field values and user-side validation examples; the skill does not have the agent run any shell command."
+        },
+        {
+          "type": "shell-execution",
+          "line": 98,
+          "evidence": "PowerShell",
+          "context": "| **Behavioral pattern** | Sequence of actions characteristic of the technique | PowerShell spawning net.exe followed by nltest.exe |",
+          "disposition": "accepted",
+          "reason": "'PowerShell'/'pwsh' occur as the ATT&CK technique being detected, Sigma field values and user-side validation examples; the skill does not have the agent run any shell command."
+        },
+        {
+          "type": "shell-execution",
+          "line": 99,
+          "evidence": "PowerShell",
+          "context": "| **Anomaly from baseline** | Deviation from established normal behavior | PowerShell execution from a user who has never run PowerShell |",
+          "disposition": "accepted",
+          "reason": "'PowerShell'/'pwsh' occur as the ATT&CK technique being detected, Sigma field values and user-side validation examples; the skill does not have the agent run any shell command."
+        },
+        {
+          "type": "shell-execution",
+          "line": 99,
+          "evidence": "PowerShell",
+          "context": "| **Anomaly from baseline** | Deviation from established normal behavior | PowerShell execution from a user who has never run PowerShell |",
+          "disposition": "accepted",
+          "reason": "'PowerShell'/'pwsh' occur as the ATT&CK technique being detected, Sigma field values and user-side validation examples; the skill does not have the agent run any shell command."
+        },
+        {
+          "type": "shell-execution",
+          "line": 117,
+          "evidence": "PowerShell",
+          "context": "title: Suspicious PowerShell Encoded Command Execution",
+          "disposition": "accepted",
+          "reason": "'PowerShell'/'pwsh' occur as the ATT&CK technique being detected, Sigma field values and user-side validation examples; the skill does not have the agent run any shell command."
+        },
+        {
+          "type": "shell-execution",
+          "line": 121,
+          "evidence": "PowerShell",
+          "context": "    Detects execution of PowerShell with encoded command-line arguments,",
+          "disposition": "accepted",
+          "reason": "'PowerShell'/'pwsh' occur as the ATT&CK technique being detected, Sigma field values and user-side validation examples; the skill does not have the agent run any shell command."
+        },
+        {
+          "type": "network-access",
+          "line": 125,
+          "evidence": "https://",
+          "context": "    - https://attack.mitre.org/techniques/T1059/001/",
+          "disposition": "accepted",
+          "reason": "Reference links to MITRE ATT&CK, SigmaHQ, Palantir, Atomic Red Team and Microsoft docs; nothing instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 126,
+          "evidence": "https://",
+          "context": "    - https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_powershell_exe",
+          "disposition": "accepted",
+          "reason": "Reference links to MITRE ATT&CK, SigmaHQ, Palantir, Atomic Red Team and Microsoft docs; nothing instructs fetching them."
+        },
+        {
+          "type": "shell-execution",
+          "line": 126,
+          "evidence": "powershell",
+          "context": "    - https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_powershell_exe",
+          "disposition": "accepted",
+          "reason": "'PowerShell'/'pwsh' occur as the ATT&CK technique being detected, Sigma field values and user-side validation examples; the skill does not have the agent run any shell command."
+        },
+        {
+          "type": "shell-execution",
+          "line": 126,
+          "evidence": "powershell",
+          "context": "    - https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_powershell_exe",
+          "disposition": "accepted",
+          "reason": "'PowerShell'/'pwsh' occur as the ATT&CK technique being detected, Sigma field values and user-side validation examples; the skill does not have the agent run any shell command."
+        },
+        {
+          "type": "shell-execution",
+          "line": 139,
+          "evidence": "powershell",
+          "context": "            - '\\powershell.exe'",
+          "disposition": "accepted",
+          "reason": "'PowerShell'/'pwsh' occur as the ATT&CK technique being detected, Sigma field values and user-side validation examples; the skill does not have the agent run any shell command."
+        },
+        {
+          "type": "shell-execution",
+          "line": 140,
+          "evidence": "pwsh",
+          "context": "            - '\\pwsh.exe'",
+          "disposition": "accepted",
+          "reason": "'PowerShell'/'pwsh' occur as the ATT&CK technique being detected, Sigma field values and user-side validation examples; the skill does not have the agent run any shell command."
+        },
+        {
+          "type": "shell-execution",
+          "line": 190,
+          "evidence": "powershell",
+          "context": "| `|endswith` | Suffix match | `Image|endswith: '\\powershell.exe'` |",
+          "disposition": "accepted",
+          "reason": "'PowerShell'/'pwsh' occur as the ATT&CK technique being detected, Sigma field values and user-side validation examples; the skill does not have the agent run any shell command."
+        },
+        {
+          "type": "encoded-content",
+          "line": 195,
+          "evidence": "Base64",
+          "context": "| `|base64offset` | Base64 encoded value match | `CommandLine|base64offset|contains: 'IEX'` |",
+          "disposition": "accepted",
+          "reason": "Mentions of Base64 describe PowerShell -EncodedCommand detection and the Sigma base64offset modifier; the one encoded test string decodes to 'echo \"test\"'."
+        },
+        {
+          "type": "shell-execution",
+          "line": 207,
+          "evidence": "PowerShell",
+          "context": "> Example: Detect the use of encoded PowerShell commands, which adversaries use to obfuscate malicious payloads and evade command-line logging inspection.",
+          "disposition": "accepted",
+          "reason": "'PowerShell'/'pwsh' occur as the ATT&CK technique being detected, Sigma field values and user-side validation examples; the skill does not have the agent run any shell command."
+        },
+        {
+          "type": "shell-execution",
+          "line": 215,
+          "evidence": "PowerShell",
+          "context": "| MITRE ATT&CK Technique | T1059.001 -- Command and Scripting Interpreter: PowerShell |",
+          "disposition": "accepted",
+          "reason": "'PowerShell'/'pwsh' occur as the ATT&CK technique being detected, Sigma field values and user-side validation examples; the skill does not have the agent run any shell command."
+        },
+        {
+          "type": "shell-execution",
+          "line": 222,
+          "evidence": "powershell",
+          "context": "> Example: This detection monitors process creation events for instances of powershell.exe or pwsh.exe where the command line contains encoded command parameters (-enc, -EncodedCommand). Filters exclude known legitimate automation tools (SC",
+          "disposition": "accepted",
+          "reason": "'PowerShell'/'pwsh' occur as the ATT&CK technique being detected, Sigma field values and user-side validation examples; the skill does not have the agent run any shell command."
+        },
+        {
+          "type": "shell-execution",
+          "line": 222,
+          "evidence": "pwsh",
+          "context": "> Example: This detection monitors process creation events for instances of powershell.exe or pwsh.exe where the command line contains encoded command parameters (-enc, -EncodedCommand). Filters exclude known legitimate automation tools (SC",
+          "disposition": "accepted",
+          "reason": "'PowerShell'/'pwsh' occur as the ATT&CK technique being detected, Sigma field values and user-side validation examples; the skill does not have the agent run any shell command."
+        },
+        {
+          "type": "encoded-content",
+          "line": 227,
+          "evidence": "Base64",
+          "context": "> Example: PowerShell's -EncodedCommand parameter accepts a Base64-encoded string and executes it as a command. Adversaries use this to bypass command-line logging that looks for plaintext strings like \"Invoke-Mimikatz\" or \"Net.WebClient\". ",
+          "disposition": "accepted",
+          "reason": "Mentions of Base64 describe PowerShell -EncodedCommand detection and the Sigma base64offset modifier; the one encoded test string decodes to 'echo \"test\"'."
+        },
+        {
+          "type": "shell-execution",
+          "line": 227,
+          "evidence": "PowerShell",
+          "context": "> Example: PowerShell's -EncodedCommand parameter accepts a Base64-encoded string and executes it as a command. Adversaries use this to bypass command-line logging that looks for plaintext strings like \"Invoke-Mimikatz\" or \"Net.WebClient\". ",
+          "disposition": "accepted",
+          "reason": "'PowerShell'/'pwsh' occur as the ATT&CK technique being detected, Sigma field values and user-side validation examples; the skill does not have the agent run any shell command."
+        },
+        {
+          "type": "shell-execution",
+          "line": 232,
+          "evidence": "PowerShell",
+          "context": "- **Assumption:** PowerShell process creation events are being logged (Sysmon installed or advanced audit policy enabled for process creation with command-line logging).",
+          "disposition": "accepted",
+          "reason": "'PowerShell'/'pwsh' occur as the ATT&CK technique being detected, Sigma field values and user-side validation examples; the skill does not have the agent run any shell command."
+        },
+        {
+          "type": "shell-execution",
+          "line": 234,
+          "evidence": "PowerShell",
+          "context": "- **Blind spot:** PowerShell execution via the .NET System.Management.Automation namespace directly (no powershell.exe process).",
+          "disposition": "accepted",
+          "reason": "'PowerShell'/'pwsh' occur as the ATT&CK technique being detected, Sigma field values and user-side validation examples; the skill does not have the agent run any shell command."
+        },
+        {
+          "type": "shell-execution",
+          "line": 234,
+          "evidence": "powershell",
+          "context": "- **Blind spot:** PowerShell execution via the .NET System.Management.Automation namespace directly (no powershell.exe process).",
+          "disposition": "accepted",
+          "reason": "'PowerShell'/'pwsh' occur as the ATT&CK technique being detected, Sigma field values and user-side validation examples; the skill does not have the agent run any shell command."
+        },
+        {
+          "type": "shell-execution",
+          "line": 252,
+          "evidence": "PowerShell",
+          "context": "| Medium | Encoded PowerShell is a common adversary technique but also has legitimate uses. Priority should escalate to High if combined with other indicators (unusual parent process, network connection to rare domain, execution from temp d",
+          "disposition": "accepted",
+          "reason": "'PowerShell'/'pwsh' occur as the ATT&CK technique being detected, Sigma field values and user-side validation examples; the skill does not have the agent run any shell command."
+        },
+        {
+          "type": "encoded-content",
+          "line": 257,
+          "evidence": "Base64",
+          "context": "1. **True positive test:** Open a command prompt and execute `powershell.exe -EncodedCommand ZQBjAGgAbwAgACIAdABlAHMAdAAiAA==` (Base64 of `echo \"test\"`). Verify the alert fires.",
+          "disposition": "accepted",
+          "reason": "ZQBjAGgAbwAgACIAdABlAHMAdAAiAA== is a benign true-positive test value (UTF-16LE Base64 of echo \"test\") for the user to run, not hidden instructions."
+        },
+        {
+          "type": "shell-execution",
+          "line": 257,
+          "evidence": "powershell",
+          "context": "1. **True positive test:** Open a command prompt and execute `powershell.exe -EncodedCommand ZQBjAGgAbwAgACIAdABlAHMAdAAiAA==` (Base64 of `echo \"test\"`). Verify the alert fires.",
+          "disposition": "accepted",
+          "reason": "'PowerShell'/'pwsh' occur as the ATT&CK technique being detected, Sigma field values and user-side validation examples; the skill does not have the agent run any shell command."
+        },
+        {
+          "type": "shell-execution",
+          "line": 258,
+          "evidence": "powershell",
+          "context": "2. **True negative test:** Execute `powershell.exe -Command \"Get-Process\"` (no encoding). Verify no alert fires.",
+          "disposition": "accepted",
+          "reason": "'PowerShell'/'pwsh' occur as the ATT&CK technique being detected, Sigma field values and user-side validation examples; the skill does not have the agent run any shell command."
+        },
+        {
+          "type": "network-access",
+          "line": 260,
+          "evidence": "https://",
+          "context": "4. **ATT&CK technique coverage:** Validate with atomic red team test `T1059.001` (https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1059.001/T1059.001.md).",
+          "disposition": "accepted",
+          "reason": "Reference links to MITRE ATT&CK, SigmaHQ, Palantir, Atomic Red Team and Microsoft docs; nothing instructs fetching them."
+        },
+        {
+          "type": "encoded-content",
+          "line": 266,
+          "evidence": "Decode the encoded command:** Base64-decode the command-line argument to reveal the actual payload",
+          "context": "2. **Decode the encoded command:** Base64-decode the command-line argument to reveal the actual payload.",
+          "disposition": "accepted",
+          "reason": "Mentions of Base64 describe PowerShell -EncodedCommand detection and the Sigma base64offset modifier; the one encoded test string decodes to 'echo \"test\"'."
+        },
+        {
+          "type": "network-access",
+          "line": 288,
+          "evidence": "https://",
+          "context": "1. Export the current ATT&CK matrix for the relevant platform (Enterprise, Cloud, ICS) from the ATT&CK Navigator (https://mitre-attack.github.io/attack-navigator/)",
+          "disposition": "accepted",
+          "reason": "Reference links to MITRE ATT&CK, SigmaHQ, Palantir, Atomic Red Team and Microsoft docs; nothing instructs fetching them."
+        },
+        {
+          "type": "credential-access",
+          "line": 420,
+          "evidence": "Credential",
+          "context": "| Credential Access | TA0006 | High -- credential dumping tools produce known signatures |",
+          "disposition": "accepted",
+          "reason": "'Credential Access' is the ATT&CK tactic name TA0006 in a table; no handling of real credentials."
+        },
+        {
+          "type": "credential-access",
+          "line": 420,
+          "evidence": "credential",
+          "context": "| Credential Access | TA0006 | High -- credential dumping tools produce known signatures |",
+          "disposition": "accepted",
+          "reason": "'Credential Access' is the ATT&CK tactic name TA0006 in a table; no handling of real credentials."
+        },
+        {
+          "type": "network-access",
+          "line": 432,
+          "evidence": "https://",
+          "context": "- **Specification:** https://sigmahq.io/docs/guide/getting-started.html",
+          "disposition": "accepted",
+          "reason": "Reference links to MITRE ATT&CK, SigmaHQ, Palantir, Atomic Red Team and Microsoft docs; nothing instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 433,
+          "evidence": "https://",
+          "context": "- **Rule repository:** https://github.com/SigmaHQ/sigma (4000+ community rules)",
+          "disposition": "accepted",
+          "reason": "Reference links to MITRE ATT&CK, SigmaHQ, Palantir, Atomic Red Team and Microsoft docs; nothing instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 434,
+          "evidence": "https://",
+          "context": "- **Conversion tool:** `sigma-cli` (https://github.com/SigmaHQ/sigma-cli) converts Sigma to KQL, SPL, EQL, Lucene, and other query languages",
+          "disposition": "accepted",
+          "reason": "Reference links to MITRE ATT&CK, SigmaHQ, Palantir, Atomic Red Team and Microsoft docs; nothing instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 471,
+          "evidence": "https://",
+          "context": "**Reference:** https://blog.palantir.com/alerting-and-detection-strategy-framework-52dc33722f68",
+          "disposition": "accepted",
+          "reason": "Reference links to MITRE ATT&CK, SigmaHQ, Palantir, Atomic Red Team and Microsoft docs; nothing instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 487,
+          "evidence": "https://",
+          "context": "A detection rule that has never been tested against a known-true-positive event provides only theoretical coverage. Use Atomic Red Team (https://github.com/redcanaryco/atomic-red-team), Caldera, or manual technique execution in a test envir",
+          "disposition": "accepted",
+          "reason": "Reference links to MITRE ATT&CK, SigmaHQ, Palantir, Atomic Red Team and Microsoft docs; nothing instructs fetching them."
+        },
+        {
+          "type": "shell-execution",
+          "line": 495,
+          "evidence": "PowerShell",
+          "context": "Overly broad or incorrect ATT&CK mappings undermine coverage analysis. A rule that detects a specific PowerShell obfuscation technique should map to T1059.001 (PowerShell) and potentially T1027 (Obfuscated Files or Information), not to the ",
+          "disposition": "accepted",
+          "reason": "'PowerShell'/'pwsh' occur as the ATT&CK technique being detected, Sigma field values and user-side validation examples; the skill does not have the agent run any shell command."
+        },
+        {
+          "type": "shell-execution",
+          "line": 495,
+          "evidence": "PowerShell",
+          "context": "Overly broad or incorrect ATT&CK mappings undermine coverage analysis. A rule that detects a specific PowerShell obfuscation technique should map to T1059.001 (PowerShell) and potentially T1027 (Obfuscated Files or Information), not to the ",
+          "disposition": "accepted",
+          "reason": "'PowerShell'/'pwsh' occur as the ATT&CK technique being detected, Sigma field values and user-side validation examples; the skill does not have the agent run any shell command."
+        },
+        {
+          "type": "network-access",
+          "line": 523,
+          "evidence": "https://",
+          "context": "1. **MITRE ATT&CK Enterprise Matrix v16** -- https://attack.mitre.org/matrices/enterprise/",
+          "disposition": "accepted",
+          "reason": "Reference links to MITRE ATT&CK, SigmaHQ, Palantir, Atomic Red Team and Microsoft docs; nothing instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 524,
+          "evidence": "https://",
+          "context": "2. **MITRE ATT&CK Techniques** -- https://attack.mitre.org/techniques/enterprise/",
+          "disposition": "accepted",
+          "reason": "Reference links to MITRE ATT&CK, SigmaHQ, Palantir, Atomic Red Team and Microsoft docs; nothing instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 525,
+          "evidence": "https://",
+          "context": "3. **MITRE ATT&CK Navigator** -- https://mitre-attack.github.io/attack-navigator/",
+          "disposition": "accepted",
+          "reason": "Reference links to MITRE ATT&CK, SigmaHQ, Palantir, Atomic Red Team and Microsoft docs; nothing instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 526,
+          "evidence": "https://",
+          "context": "4. **Sigma Rule Specification** -- https://sigmahq.io/docs/guide/getting-started.html",
+          "disposition": "accepted",
+          "reason": "Reference links to MITRE ATT&CK, SigmaHQ, Palantir, Atomic Red Team and Microsoft docs; nothing instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 527,
+          "evidence": "https://",
+          "context": "5. **SigmaHQ Rule Repository** -- https://github.com/SigmaHQ/sigma",
+          "disposition": "accepted",
+          "reason": "Reference links to MITRE ATT&CK, SigmaHQ, Palantir, Atomic Red Team and Microsoft docs; nothing instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 528,
+          "evidence": "https://",
+          "context": "6. **sigma-cli Conversion Tool** -- https://github.com/SigmaHQ/sigma-cli",
+          "disposition": "accepted",
+          "reason": "Reference links to MITRE ATT&CK, SigmaHQ, Palantir, Atomic Red Team and Microsoft docs; nothing instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 529,
+          "evidence": "https://",
+          "context": "7. **pySigma Documentation** -- https://sigmahq-pysigma.readthedocs.io/",
+          "disposition": "accepted",
+          "reason": "Reference links to MITRE ATT&CK, SigmaHQ, Palantir, Atomic Red Team and Microsoft docs; nothing instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 530,
+          "evidence": "https://",
+          "context": "8. **Palantir Alerting and Detection Strategy Framework** -- https://blog.palantir.com/alerting-and-detection-strategy-framework-52dc33722f68",
+          "disposition": "accepted",
+          "reason": "Reference links to MITRE ATT&CK, SigmaHQ, Palantir, Atomic Red Team and Microsoft docs; nothing instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 531,
+          "evidence": "https://",
+          "context": "9. **Atomic Red Team** -- https://github.com/redcanaryco/atomic-red-team",
+          "disposition": "accepted",
+          "reason": "Reference links to MITRE ATT&CK, SigmaHQ, Palantir, Atomic Red Team and Microsoft docs; nothing instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 532,
+          "evidence": "https://",
+          "context": "10. **MITRE Cyber Analytics Repository (CAR)** -- https://car.mitre.org/",
+          "disposition": "accepted",
+          "reason": "Reference links to MITRE ATT&CK, SigmaHQ, Palantir, Atomic Red Team and Microsoft docs; nothing instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 533,
+          "evidence": "https://",
+          "context": "11. **Detection Engineering Maturity Model** -- Kyle Bailey, https://kyle-bailey.medium.com/detection-engineering-maturity-matrix-f4f3181a5cc7",
+          "disposition": "accepted",
+          "reason": "Reference links to MITRE ATT&CK, SigmaHQ, Palantir, Atomic Red Team and Microsoft docs; nothing instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 534,
+          "evidence": "https://",
+          "context": "12. **Sigma Rule Creation Guide (SigmaHQ)** -- https://sigmahq.io/docs/guide/rules.html",
+          "disposition": "accepted",
+          "reason": "Reference links to MITRE ATT&CK, SigmaHQ, Palantir, Atomic Red Team and Microsoft docs; nothing instructs fetching them."
+        }
+      ]
+    }
+  ]
+}

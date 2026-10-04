@@ -1,0 +1,602 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "microsoft/azure-identity-dotnet",
+  "status": "approved",
+  "reviewed_on": "2026-10-02",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/azure-sdk-dotnet/skills/azure-identity-dotnet",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": ".github/plugins/azure-sdk-dotnet/skills/azure-identity-dotnet",
+    "url": "https://api.github.com/repos/microsoft/skills/git/trees/84d8eaa8ae95930f55cdceb3e27196c795dab038?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/microsoft/skills/blob/84d8eaa8ae95930f55cdceb3e27196c795dab038/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        ".github",
+        ".github/plugins",
+        ".github/plugins/azure-sdk-dotnet",
+        ".github/plugins/azure-sdk-dotnet/skills",
+        ".github/plugins/azure-sdk-dotnet/skills/azure-identity-dotnet"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT License with its copyright notice, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found; front matter declares license: MIT with Microsoft as author. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "medium",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": true,
+      "network": false,
+      "credentials": false,
+      "package_install": true,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md (the only file) in full. .NET guide to Azure.Identity: DefaultAzureCredential (basic, ASP.NET Core DI, customization), managed identity, client secret/certificate, chained and developer credentials, environment-based selection, sovereign clouds, retry and logging configuration, error handling and a credential reference table.",
+      "Medium only because SKILL.md:19-25 (and the table at SKILL.md:324-326) give `dotnet add package Azure.Identity`, `Microsoft.Extensions.Azure` and `Azure.Identity.Broker` (official NuGet packages, unpinned; not flagged as package-install by the scanner). All credential use is C# sample code for the user's application with placeholders; the agent is not told to read, print, or transmit real secrets.",
+      "The Key Vault GetSecretAsync sample (SKILL.md:285) reads a secret in user code only. No referenced files outside the skill."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "git_blob": "79656060de00aa4659ad2c276d5be8830664d544",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry the copyright and permission notice.",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "34946fe159707d9ba75e040b654d89a2bede4b408945e476f4f88432dbc0cbfb",
+      "bytes": 9854,
+      "mode": "100644",
+      "git_blob": "a851ddfc4dc0fc76cdb9fb45f0604c16d4d59f82",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "credential-access",
+          "line": 4,
+          "evidence": "credential",
+          "context": "  Azure Identity library for .NET. Authentication library for Azure SDK clients using Microsoft Entra ID. Use for DefaultAzureCredential, managed identity, service principals, and developer credentials. Triggers: \"Azure Identity\", \"DefaultA",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder client secrets/certificate paths and environment-variable names in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "shell-execution",
+          "line": 18,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks run `dotnet add package` for official NuGet packages and list placeholder environment variables; PowerShell hits are a comment and a table row naming AzurePowerShellCredential."
+        },
+        {
+          "type": "credential-access",
+          "line": 24,
+          "evidence": "credential",
+          "context": "# For brokered authentication and Visual Studio Code credential support",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder client secrets/certificate paths and environment-variable names in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 30,
+          "evidence": "Secret",
+          "context": "### Service Principal with Secret",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder client secrets/certificate paths and environment-variable names in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "shell-execution",
+          "line": 32,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks run `dotnet add package` for official NuGet packages and list placeholder environment variables; PowerShell hits are a comment and a table row naming AzurePowerShellCredential."
+        },
+        {
+          "type": "credential-access",
+          "line": 35,
+          "evidence": "secret",
+          "context": "AZURE_CLIENT_SECRET=<client-secret-value>",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder client secrets/certificate paths and environment-variable names in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "shell-execution",
+          "line": 40,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks run `dotnet add package` for official NuGet packages and list placeholder environment variables; PowerShell hits are a comment and a table row naming AzurePowerShellCredential."
+        },
+        {
+          "type": "shell-execution",
+          "line": 49,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks run `dotnet add package` for official NuGet packages and list placeholder environment variables; PowerShell hits are a comment and a table row naming AzurePowerShellCredential."
+        },
+        {
+          "type": "credential-access",
+          "line": 55,
+          "evidence": "credential",
+          "context": "The recommended credential for most scenarios. Tries multiple authentication methods in order. See [DefaultAzureCredential overview](https://aka.ms/azsdk/net/identity/credential-chains#defaultazurecredential-overview) for the current creden",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder client secrets/certificate paths and environment-variable names in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 55,
+          "evidence": "credential",
+          "context": "The recommended credential for most scenarios. Tries multiple authentication methods in order. See [DefaultAzureCredential overview](https://aka.ms/azsdk/net/identity/credential-chains#defaultazurecredential-overview) for the current creden",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder client secrets/certificate paths and environment-variable names in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 55,
+          "evidence": "credential",
+          "context": "The recommended credential for most scenarios. Tries multiple authentication methods in order. See [DefaultAzureCredential overview](https://aka.ms/azsdk/net/identity/credential-chains#defaultazurecredential-overview) for the current creden",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder client secrets/certificate paths and environment-variable names in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 55,
+          "evidence": "https://",
+          "context": "The recommended credential for most scenarios. Tries multiple authentication methods in order. See [DefaultAzureCredential overview](https://aka.ms/azsdk/net/identity/credential-chains#defaultazurecredential-overview) for the current creden",
+          "disposition": "accepted",
+          "reason": "Placeholder storage/Key Vault URIs and NuGet, Microsoft Learn, aka.ms and GitHub reference links; the agent is not told to fetch them."
+        },
+        {
+          "type": "credential-access",
+          "line": 63,
+          "evidence": "credential",
+          "context": "var credential = new DefaultAzureCredential();",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder client secrets/certificate paths and environment-variable names in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 65,
+          "evidence": "https://",
+          "context": "    new Uri(\"https://myaccount.blob.core.windows.net\"),",
+          "disposition": "accepted",
+          "reason": "Placeholder storage/Key Vault URIs and NuGet, Microsoft Learn, aka.ms and GitHub reference links; the agent is not told to fetch them."
+        },
+        {
+          "type": "credential-access",
+          "line": 66,
+          "evidence": "credential",
+          "context": "    credential);",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder client secrets/certificate paths and environment-variable names in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 78,
+          "evidence": "https://",
+          "context": "        new Uri(\"https://myaccount.blob.core.windows.net\"));",
+          "disposition": "accepted",
+          "reason": "Placeholder storage/Key Vault URIs and NuGet, Microsoft Learn, aka.ms and GitHub reference links; the agent is not told to fetch them."
+        },
+        {
+          "type": "network-access",
+          "line": 80,
+          "evidence": "https://",
+          "context": "        new Uri(\"https://myvault.vault.azure.net\"));",
+          "disposition": "accepted",
+          "reason": "Placeholder storage/Key Vault URIs and NuGet, Microsoft Learn, aka.ms and GitHub reference links; the agent is not told to fetch them."
+        },
+        {
+          "type": "credential-access",
+          "line": 90,
+          "evidence": "credential",
+          "context": "var credential = new DefaultAzureCredential(",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder client secrets/certificate paths and environment-variable names in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 103,
+          "evidence": "Credential",
+          "context": "## Credential Types",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder client secrets/certificate paths and environment-variable names in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 109,
+          "evidence": "credential",
+          "context": "var credential = new ManagedIdentityCredential(ManagedIdentityId.SystemAssigned);",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder client secrets/certificate paths and environment-variable names in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 112,
+          "evidence": "credential",
+          "context": "var credential = new ManagedIdentityCredential(",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder client secrets/certificate paths and environment-variable names in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 116,
+          "evidence": "credential",
+          "context": "var credential = new ManagedIdentityCredential(",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder client secrets/certificate paths and environment-variable names in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 120,
+          "evidence": "credential",
+          "context": "var credential = new ManagedIdentityCredential(",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder client secrets/certificate paths and environment-variable names in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 127,
+          "evidence": "credential",
+          "context": "var credential = new ClientSecretCredential(",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder client secrets/certificate paths and environment-variable names in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 130,
+          "evidence": "secret",
+          "context": "    clientSecret: \"<client-secret>\");",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder client secrets/certificate paths and environment-variable names in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 133,
+          "evidence": "https://",
+          "context": "    new Uri(\"https://myvault.vault.azure.net\"),",
+          "disposition": "accepted",
+          "reason": "Placeholder storage/Key Vault URIs and NuGet, Microsoft Learn, aka.ms and GitHub reference links; the agent is not told to fetch them."
+        },
+        {
+          "type": "credential-access",
+          "line": 134,
+          "evidence": "credential",
+          "context": "    credential);",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder client secrets/certificate paths and environment-variable names in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 141,
+          "evidence": "credential",
+          "context": "var credential = new ClientCertificateCredential(",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder client secrets/certificate paths and environment-variable names in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 150,
+          "evidence": "credential",
+          "context": "var credential = new ChainedTokenCredential(",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder client secrets/certificate paths and environment-variable names in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 155,
+          "evidence": "https://",
+          "context": "    new Uri(\"https://myvault.vault.azure.net\"),",
+          "disposition": "accepted",
+          "reason": "Placeholder storage/Key Vault URIs and NuGet, Microsoft Learn, aka.ms and GitHub reference links; the agent is not told to fetch them."
+        },
+        {
+          "type": "credential-access",
+          "line": 156,
+          "evidence": "credential",
+          "context": "    credential);",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder client secrets/certificate paths and environment-variable names in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 163,
+          "evidence": "credential",
+          "context": "var credential = new AzureCliCredential();",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder client secrets/certificate paths and environment-variable names in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "shell-execution",
+          "line": 165,
+          "evidence": "PowerShell",
+          "context": "// Azure PowerShell",
+          "disposition": "accepted",
+          "reason": "Code comment '// Azure PowerShell' above AzurePowerShellCredential; no command."
+        },
+        {
+          "type": "credential-access",
+          "line": 166,
+          "evidence": "credential",
+          "context": "var credential = new AzurePowerShellCredential();",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder client secrets/certificate paths and environment-variable names in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 169,
+          "evidence": "credential",
+          "context": "var credential = new AzureDeveloperCliCredential();",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder client secrets/certificate paths and environment-variable names in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 172,
+          "evidence": "credential",
+          "context": "var credential = new VisualStudioCredential();",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder client secrets/certificate paths and environment-variable names in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 175,
+          "evidence": "credential",
+          "context": "var credential = new InteractiveBrowserCredential();",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder client secrets/certificate paths and environment-variable names in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 182,
+          "evidence": "credential",
+          "context": "TokenCredential credential = builder.Environment.IsProduction()",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder client secrets/certificate paths and environment-variable names in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 190,
+          "evidence": "credential",
+          "context": "var credential = new DefaultAzureCredential(",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder client secrets/certificate paths and environment-variable names in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 202,
+          "evidence": "Credential",
+          "context": "## Credential Types Reference",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder client secrets/certificate paths and environment-variable names in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 204,
+          "evidence": "Credential",
+          "context": "| Category | Credential | Purpose |",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder client secrets/certificate paths and environment-variable names in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 207,
+          "evidence": "credential",
+          "context": "| | `ChainedTokenCredential` | Custom credential chain |",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder client secrets/certificate paths and environment-variable names in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 211,
+          "evidence": "secret",
+          "context": "| **Service Principal** | `ClientSecretCredential` | Client ID + secret |",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder client secrets/certificate paths and environment-variable names in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "shell-execution",
+          "line": 218,
+          "evidence": "PowerShell",
+          "context": "| | `AzurePowerShellCredential` | Azure PowerShell |",
+          "disposition": "accepted",
+          "reason": "Table row naming AzurePowerShellCredential; no command."
+        },
+        {
+          "type": "credential-access",
+          "line": 230,
+          "evidence": "credential",
+          "context": "// Production - use specific credential",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder client secrets/certificate paths and environment-variable names in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 235,
+          "evidence": "Credential",
+          "context": "### 2. Reuse Credential Instances",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder client secrets/certificate paths and environment-variable names in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 238,
+          "evidence": "credential",
+          "context": "// Good: Single credential instance shared across clients",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder client secrets/certificate paths and environment-variable names in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 239,
+          "evidence": "credential",
+          "context": "var credential = new DefaultAzureCredential();",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder client secrets/certificate paths and environment-variable names in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 240,
+          "evidence": "credential",
+          "context": "var blobClient = new BlobServiceClient(blobUri, credential);",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder client secrets/certificate paths and environment-variable names in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 241,
+          "evidence": "credential",
+          "context": "var secretClient = new SecretClient(vaultUri, credential);",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder client secrets/certificate paths and environment-variable names in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 256,
+          "evidence": "credential",
+          "context": "var credential = new ManagedIdentityCredential(options);",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder client secrets/certificate paths and environment-variable names in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 280,
+          "evidence": "https://",
+          "context": "    new Uri(\"https://myvault.vault.azure.net\"),",
+          "disposition": "accepted",
+          "reason": "Placeholder storage/Key Vault URIs and NuGet, Microsoft Learn, aka.ms and GitHub reference links; the agent is not told to fetch them."
+        },
+        {
+          "type": "credential-access",
+          "line": 285,
+          "evidence": "secret",
+          "context": "    KeyVaultSecret secret = await client.GetSecretAsync(\"secret1\");",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder client secrets/certificate paths and environment-variable names in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 293,
+          "evidence": "Credential",
+          "context": "    Console.WriteLine($\"Credential Unavailable: {e.Message}\");",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder client secrets/certificate paths and environment-variable names in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 302,
+          "evidence": "Credential",
+          "context": "| `CredentialUnavailableException` | Credential cannot authenticate in current environment |",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder client secrets/certificate paths and environment-variable names in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 318,
+          "evidence": "credential",
+          "context": "All credential implementations are thread-safe. A single credential instance can be safely shared across multiple clients and threads.",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder client secrets/certificate paths and environment-variable names in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 318,
+          "evidence": "credential",
+          "context": "All credential implementations are thread-safe. A single credential instance can be safely shared across multiple clients and threads.",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder client secrets/certificate paths and environment-variable names in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 332,
+          "evidence": "https://",
+          "context": "| NuGet Package | https://www.nuget.org/packages/Azure.Identity |",
+          "disposition": "accepted",
+          "reason": "Placeholder storage/Key Vault URIs and NuGet, Microsoft Learn, aka.ms and GitHub reference links; the agent is not told to fetch them."
+        },
+        {
+          "type": "network-access",
+          "line": 333,
+          "evidence": "https://",
+          "context": "| API Reference | https://learn.microsoft.com/dotnet/api/azure.identity |",
+          "disposition": "accepted",
+          "reason": "Placeholder storage/Key Vault URIs and NuGet, Microsoft Learn, aka.ms and GitHub reference links; the agent is not told to fetch them."
+        },
+        {
+          "type": "credential-access",
+          "line": 334,
+          "evidence": "Credential",
+          "context": "| Credential Chains | https://aka.ms/azsdk/net/identity/credential-chains |",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder client secrets/certificate paths and environment-variable names in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 334,
+          "evidence": "credential",
+          "context": "| Credential Chains | https://aka.ms/azsdk/net/identity/credential-chains |",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder client secrets/certificate paths and environment-variable names in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 334,
+          "evidence": "https://",
+          "context": "| Credential Chains | https://aka.ms/azsdk/net/identity/credential-chains |",
+          "disposition": "accepted",
+          "reason": "Placeholder storage/Key Vault URIs and NuGet, Microsoft Learn, aka.ms and GitHub reference links; the agent is not told to fetch them."
+        },
+        {
+          "type": "network-access",
+          "line": 335,
+          "evidence": "https://",
+          "context": "| Best Practices | https://learn.microsoft.com/dotnet/azure/sdk/authentication/best-practices |",
+          "disposition": "accepted",
+          "reason": "Placeholder storage/Key Vault URIs and NuGet, Microsoft Learn, aka.ms and GitHub reference links; the agent is not told to fetch them."
+        },
+        {
+          "type": "network-access",
+          "line": 336,
+          "evidence": "https://",
+          "context": "| GitHub Source | https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/identity/Azure.Identity |",
+          "disposition": "accepted",
+          "reason": "Placeholder storage/Key Vault URIs and NuGet, Microsoft Learn, aka.ms and GitHub reference links; the agent is not told to fetch them."
+        }
+      ]
+    }
+  ]
+}

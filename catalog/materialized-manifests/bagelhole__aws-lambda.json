@@ -1,0 +1,123 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "bagelhole/aws-lambda",
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "infrastructure/cloud-aws/aws-lambda",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "review": {
+    "path": "catalog/reviews/bagelhole__aws-lambda.json",
+    "sha256": "e7cf3a60fb8f41e8a2a471e695f19865e127e2bfdf1b5918261030d9742b33b5"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "shell-execution",
+        "line": 32,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 154,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 156,
+        "evidence": "mkdir",
+        "context": "mkdir -p layer/python",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 157,
+        "evidence": "pip install",
+        "context": "pip install requests boto3-stubs -t layer/python/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 180,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 238,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 244,
+        "evidence": "https://",
+        "context": "    \"AllowOrigins\": [\"https://myapp.com\"],",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 261,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 380,
+        "evidence": "https://",
+        "context": "    Value: !Sub \"https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 383,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 399,
+        "evidence": "remove",
+        "context": "| Cold starts > 5s | Large package or VPC overhead | Use layers, arm64, provisioned concurrency; remove VPC if not needed |",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 13543
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "72f2b5004a7f50a6c02e42be63be2f319acf08cac87d089accbde0b747e7a137",
+      "bytes": 12475,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 13543
+}

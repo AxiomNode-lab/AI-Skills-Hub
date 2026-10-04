@@ -1,0 +1,128 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "unitone/prompt-injection",
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "UnitOneAI/SecuritySkills",
+    "path": "skills/ai-security/prompt-injection",
+    "revision": "70bc259bb01abb3015ad2ad859ad5253cbf0bcab"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "skills/ai-security/prompt-injection",
+    "url": "https://api.github.com/repos/UnitOneAI/SecuritySkills/git/trees/70bc259bb01abb3015ad2ad859ad5253cbf0bcab?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/UnitOneAI/SecuritySkills/blob/70bc259bb01abb3015ad2ad859ad5253cbf0bcab/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "skills",
+        "skills/ai-security",
+        "skills/ai-security/prompt-injection"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT License with its copyright notice, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found; OWASP LLM01 and ATLAS are referenced by identifier, and papers are cited by title with arXiv IDs. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "low",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": false,
+      "network": false,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md (298 lines) in full. The skill guides a defensive prompt-injection assessment of an LLM application (OWASP LLM01:2025, MITRE ATLAS AML.T0051): map the interaction surface, find direct/indirect injection vectors in code, assess categories (goal hijacking, prompt leaking, privilege escalation, exfiltration, jailbreaking), evaluate defenses and write a report.",
+      "It is a code/architecture review with Read/Grep/Glob only; it contains no attack payloads beyond the generic phrase 'ignore previous instructions' as an example to detect, and stresses authorized testing of the user's own systems (SKILL.md:42-48). No commands, installs, credentials, network access, or file writes.",
+      "SKILL.md:33 links ../../../schemas/finding.schema.json, used only for optional JSON output (not shipped). SKILL.md:213 and 298 point users to an external exploit-PoC library (github.com/fabraix/playground) as an optional test harness; the agent is not told to fetch or run it. The 2026 PISmith citation (SKILL.md:207, 297) could not be verified."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "66eb5ec637cc578833ddcbc870dbf46c6718fd83e985fad5f0f5cf30d60cf47d",
+      "bytes": 1067,
+      "mode": "100644",
+      "git_blob": "5a98cb233448adff07bef15917961275c76572dc",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry the copyright and permission notice.",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "3ca345d141d2b31c583902a7ab7e851aa23bfddf65e9bba552cf786918de1f1e",
+      "bytes": 20926,
+      "mode": "100644",
+      "git_blob": "0db5c9698585a3216db8e435aedb027a46b8f1d6",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 213,
+          "evidence": "https://",
+          "context": "  - **fabraix/playground** (https://github.com/fabraix/playground) -- Open-source library of AI agent exploit PoCs that can serve as a test harness for validating direct and indirect injection defenses against published attack patterns.",
+          "disposition": "accepted",
+          "reason": "Five reference URLs (genai.owasp.org, atlas.mitre.org, simonwillison.net, github.com/fabraix/playground); the skill does not instruct fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 292,
+          "evidence": "https://",
+          "context": "- OWASP Top 10 for Large Language Model Applications (2025), LLM01: Prompt Injection — https://genai.owasp.org",
+          "disposition": "accepted",
+          "reason": "Five reference URLs (genai.owasp.org, atlas.mitre.org, simonwillison.net, github.com/fabraix/playground); the skill does not instruct fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 293,
+          "evidence": "https://",
+          "context": "- MITRE ATLAS, AML.T0051: LLM Prompt Injection — https://atlas.mitre.org",
+          "disposition": "accepted",
+          "reason": "Five reference URLs (genai.owasp.org, atlas.mitre.org, simonwillison.net, github.com/fabraix/playground); the skill does not instruct fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 296,
+          "evidence": "https://",
+          "context": "- Willison, S. Prompt Injection taxonomy and ongoing research — https://simonwillison.net",
+          "disposition": "accepted",
+          "reason": "Five reference URLs (genai.owasp.org, atlas.mitre.org, simonwillison.net, github.com/fabraix/playground); the skill does not instruct fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 298,
+          "evidence": "https://",
+          "context": "- fabraix/playground — Open-source AI agent exploit library for testing injection defenses — https://github.com/fabraix/playground",
+          "disposition": "accepted",
+          "reason": "Five reference URLs (genai.owasp.org, atlas.mitre.org, simonwillison.net, github.com/fabraix/playground); the skill does not instruct fetching them."
+        }
+      ]
+    }
+  ]
+}

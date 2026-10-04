@@ -1,73 +1,81 @@
 # Installation
 
-Run commands from the repository root after `pnpm install --frozen-lockfile`, using Node.js 22 or later. The repository pins pnpm 10.4.1; on Windows PowerShell, use `pnpm.cmd` if `pnpm.ps1` is blocked by execution policy. The direct Node commands below avoid package-manager banners when consuming JSON.
+Use the npm package from any project directory. Node.js 22 or later is required.
+
+```bash
+npx @axiomnode-lab/skills-hub --help
+# or
+npm install -g @axiomnode-lab/skills-hub && skills-hub --help
+```
+
+The package contains the catalog and every released skill, so commands run without the repository and without network access (except `add` discovery, external installers and the daily npm update check, which is skipped in CI and off a terminal; disable it with `SKILLS_HUB_NO_UPDATE_CHECK=1`). Until the first release is published, build it from a checkout with `pnpm build:package` and run `node dist/npm/packages/cli/bin/skills-hub.mjs`.
 
 ## Inspect before installing
 
 ```bash
-node packages/cli/bin/skills-hub.mjs help
-node packages/cli/bin/skills-hub.mjs search brainstorming --agent codex --json
-node packages/cli/bin/skills-hub.mjs info obra/superpowers/brainstorming --agent codex --json
-node packages/cli/bin/skills-hub.mjs list --agent codex --scope project --json
+skills-hub available --agent codex
+skills-hub search "frontend design" --agent codex
+skills-hub info anthropics/frontend-design --agent codex --json
+skills-hub list --agent codex --scope project --json
 ```
 
-`search` and `info` describe indexed capabilities. Their `hub_status.availability` reports catalog-only, review-required, eligible, source-direct, or blocked. `hub_status.installation` separately reports verified `installed`, `unverified`, or `not-recorded`. `list` returns Hub installation records in the selected scope, filtered by agent when requested. Catalog metadata alone never establishes installation.
+`search` and `info` report catalog availability (`hub_status.availability`: eligible, source-direct, review-required, blocked or catalog-only) separately from installation state (`hub_status.installation`: installed, unverified or not-recorded). Catalog metadata never establishes installation.
 
-## Current catalog outcomes
-
-As of 2026-10-02 the catalog contains 534 skills: 499 review-required, 12 source-direct, 20 blocked, and 3 bundled skills. The bundled skills are materialized and release-eligible; the other 531 releases remain on hold. See [current status](STATUS.md) for a reproducible count command.
-
-This real blocked entry demonstrates a refused installation without changing files:
+## Install
 
 ```bash
-node packages/cli/bin/skills-hub.mjs install obra/superpowers/brainstorming --agent codex --scope project --json
+skills-hub install anthropics/frontend-design,anthropics/brand-guidelines,anthropics/internal-comms --agent codex --json
 ```
 
-Expected: exit code **1**, `success: false`, item `status: blocked`, `installed: false`, and `reason: registry_blocked`. The catalog release reason is `upstream-skill-missing`; adding `--yes` does not override the block.
+Expected: exit code 0, `success: true`, three items with `status: success`. Each skill has `SKILL.md` and `LICENSE.txt` under `.agents/skills/<name>/` (internal-comms also has four `examples/*.md`). `.ai-skills-hub/installed.json` records the source revision and the SHA-256 of every installed file.
 
-This source-direct entry demonstrates the external confirmation gate without executing an installer:
+Install rules:
+
+- Only released skills install locally: `distribution: bundled`, `materialized: true`, `release.status: eligible`, and compatible with `--agent`. A held release returns `bundle_not_released`, a review-required skill `manual_review_required`, a blocked one `registry_blocked`; `--yes` overrides none of these.
+- Before writing, the released files are checked against their release manifest (exact file set, size and SHA-256); a mismatch installs nothing.
+- Dependencies install first. If one fails, the skills that need it are reported as `dependency-failed` and not installed. Other items in the same command keep their outcome; nothing is rolled back.
+- Reinstalling the same revision reports `already-installed` and changes nothing. A folder the Hub did not create, or a Hub installation whose files you edited, is replaced only with `--force`.
+- An install path that goes through a symlink or junction is refused.
+- `install @name` is refused with `bundle_aliases_not_supported`: bundles are catalog groupings, not install targets.
+
+## Examples of refused installs
 
 ```bash
-node packages/cli/bin/skills-hub.mjs install anthropics/mcp-builder --agent codex --scope project --json
+skills-hub install obra/superpowers/brainstorming --agent codex --json
 ```
 
-Expected: exit code **1**, `success: false`, item `status: confirmation-required`, `requires_confirmation: true`, and `reason: explicit_confirmation_required`. Explicitly adding `--yes` authorizes the external installer. Its destination and scope behavior depend on that adapter; do not assume every external tool honors the Hub's scope option.
-
-## Supported install interface
-
-Use `install` followed by one existing capability ID, or comma-separated IDs, and `--agent`. The CLI does not expand bundle aliases such as `@core`. There is no `plan` command and no `--remote`, `--overwrite`, or `--force` CLI option; preview policy using `info`.
-
-Supported options are `--agent`, `--scope project|user`, `--yes` (or `-y`), and `--json` where supported. Noninteractive JSON is supported by `search`, `info`, `list`, and `install`. `add`, `create`, and `uninstall` include interactive flows rather than equivalent JSON automation interfaces.
-
-Local installation requires a compatible, bundled, materialized skill with `release.status: eligible`. An unreleased bundle is held with `bundle_not_released`; review-required skills are held with `manual_review_required`. The three reviewed local releases now qualify. Their actual packaged files, resources, and installation records are tested in temporary projects inside the workspace.
-
-~~~bash
-node packages/cli/bin/skills-hub.mjs install anthropics/frontend-design,anthropics/brand-guidelines,anthropics/internal-comms --agent codex --scope project --json
-node packages/cli/bin/skills-hub.mjs info anthropics/frontend-design --agent codex --json
-node packages/cli/bin/skills-hub.mjs list --agent codex --scope project --json
-~~~
-
-Expected: install returns `success: true`; each skill has `SKILL.md` and `LICENSE.txt` under `.agents/skills/<name>/`, with four additional `examples/*.md` files for internal-comms. The project `.ai-skills-hub/installed.json` records each source revision and file hash. `info`/`list` show `installed` after verification. See [review evidence and limitations](VERIFIED-LOCAL-SKILLS.md); no actual task-quality claim is made.
-
-`install --json` returns `success: true` only when every requested item and resolved dependency installs. Otherwise it returns false, individual outcomes and reasons, and exit code 1. Successful items in a mixed request are retained, not rolled back. Marketplace registration alone is not a completed plugin installation.
-
-## Native destinations and state
-
-| Agent | Default project skill directory |
-| --- | --- |
-| Codex, Cursor, generic Agent Skills | `.agents/skills` |
-| Claude Code | `.claude/skills` |
-| GitHub Copilot | `.github/skills` |
-
-The native installer uses the configured primary directory; it does not dynamically try every fallback directory. `--scope user` uses adapter-defined home-directory paths. The default is project scope.
-
-Hub-managed skill records live in `.ai-skills-hub/installed.json` under the project root, or under the home directory for user scope. File hashes are checked before displaying `installed`. Missing or modified files and records without verifiable file evidence display `unverified`. External installations may not have Hub records and therefore may not appear in `list`.
-
-## Verification
+Expected: exit code 1, item `status: blocked`, `reason: registry_blocked` (this record is a legacy duplicate; see [status](STATUS.md)).
 
 ```bash
-pnpm test
-pnpm validate-all
+skills-hub install anthropics/mcp-builder --agent codex --json
 ```
 
-Tests install local fixtures only in temporary project directories. The cross-platform runner prints discovered file counts and TAP results, and fails if no test files or no passing tests execute. On Windows without symlink privileges, the single MCP symlink protection test records an explicit skip; other errors remain failures.
+Expected: exit code 1, item `status: confirmation-required`, `reason: explicit_confirmation_required`, and `command` showing what `--yes` would run: `npx --yes skills add https://github.com/anthropics/skills/tree/<commit>/skills/mcp-builder/SKILL.md --skill mcp-builder --agent codex -y`. Consenting runs that third-party installer (the `skills` package from npm). Its result is reported, but it does not create a verified Hub record, so `list` may not show it.
+
+## Update and uninstall
+
+```bash
+skills-hub update --dry-run
+skills-hub update anthropics/frontend-design
+skills-hub uninstall anthropics/frontend-design --agent codex --scope project
+```
+
+`update` compares each installed revision with the catalog's current release. Statuses: `up-to-date`, `update-available` (dry run), `updated`, `modified` (installed files were edited; use `--force`), `not-releasable` (the newer revision is held or blocked; the installed version is kept), `not-in-catalog`.
+
+`uninstall <id>` removes a Hub-managed skill folder that sits directly in the agent's skills root. It refuses a different agent (`installed_for_agent_<agent>`), the wrong scope (`not_installed_in_scope`), edited files (unless `--force`), and paths through symlinks, and leaves everything else in the folder untouched. Without an ID it runs interactively in a terminal.
+
+## Destinations and state
+
+| Agent | Project | User (`--scope user`) |
+| --- | --- | --- |
+| Codex, generic Agent Skills | `.agents/skills` | `~/.agents/skills` |
+| Cursor | `.agents/skills` | `~/.cursor/skills` |
+| Claude Code | `.claude/skills` | `~/.claude/skills` |
+| GitHub Copilot | `.github/skills` | `~/.copilot/skills` |
+| OpenCode | `.opencode/skills` | `~/.config/opencode/skills` |
+
+State is in `.ai-skills-hub/installed.json` in the project, or in `~/.ai-skills-hub/` for user scope, written through a temporary file and rename. `installed` is shown only after the recorded hashes are verified; missing or changed files show `unverified`.
+
+## Exit codes and JSON
+
+`0` success, `1` the operation did not complete (any item not installed, an uninstall refused, an update blocked), `2` invalid usage (unknown command or option, invalid `--agent`/`--scope`/`--limit`, missing argument). With `--json`, output is a single JSON document on stdout, including usage errors (`usage_error: true`).

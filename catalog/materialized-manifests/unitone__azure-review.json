@@ -1,0 +1,199 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "unitone/azure-review",
+  "source": {
+    "repo": "UnitOneAI/SecuritySkills",
+    "path": "skills/cloud/azure-review",
+    "revision": "70bc259bb01abb3015ad2ad859ad5253cbf0bcab"
+  },
+  "review": {
+    "path": "catalog/reviews/unitone__azure-review.json",
+    "sha256": "0db65e09fe76ed116d5155f93e1c1e32c81f4547092d7fa4b8248acbdb8a32e5"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": false,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "filesystem-write",
+        "line": 254,
+        "evidence": "Delete",
+        "context": "### CIS 3.11 -- Ensure Soft Delete is Enabled for Azure Containers and Blob Storage",
+        "file": "benchmark-checklist.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 449,
+        "evidence": "Delete",
+        "context": "| 5.2.2 | Delete Policy Assignment | Microsoft.Authorization/policyAssignments/delete |",
+        "file": "benchmark-checklist.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 449,
+        "evidence": "delete",
+        "context": "| 5.2.2 | Delete Policy Assignment | Microsoft.Authorization/policyAssignments/delete |",
+        "file": "benchmark-checklist.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 451,
+        "evidence": "Delete",
+        "context": "| 5.2.4 | Delete Network Security Group | Microsoft.Network/networkSecurityGroups/delete |",
+        "file": "benchmark-checklist.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 451,
+        "evidence": "delete",
+        "context": "| 5.2.4 | Delete Network Security Group | Microsoft.Network/networkSecurityGroups/delete |",
+        "file": "benchmark-checklist.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 453,
+        "evidence": "Delete",
+        "context": "| 5.2.6 | Delete Security Solution | Microsoft.Security/securitySolutions/delete |",
+        "file": "benchmark-checklist.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 453,
+        "evidence": "delete",
+        "context": "| 5.2.6 | Delete Security Solution | Microsoft.Security/securitySolutions/delete |",
+        "file": "benchmark-checklist.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 455,
+        "evidence": "Delete",
+        "context": "| 5.2.8 | Delete SQL Server Firewall Rule | Microsoft.Sql/servers/firewallRules/delete |",
+        "file": "benchmark-checklist.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 455,
+        "evidence": "delete",
+        "context": "| 5.2.8 | Delete SQL Server Firewall Rule | Microsoft.Sql/servers/firewallRules/delete |",
+        "file": "benchmark-checklist.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 603,
+        "evidence": "delete",
+        "context": "**Critical check -- enable soft delete and purge protection:**",
+        "file": "benchmark-checklist.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 106,
+        "evidence": "delete",
+        "context": "| **Medium** | Control gap that should be addressed in normal cycle | Missing activity log alerts, soft delete not enabled, TLS below 1.2 |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 180,
+        "evidence": "delete",
+        "context": "| 3 | Storage Accounts | HTTPS enforcement, infrastructure encryption, public access, network rules, soft delete, CMK encryption, TLS version |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 185,
+        "evidence": "secret",
+        "context": "| 8 | Key Vault | Key/secret expiration, soft delete, purge protection, RBAC authorization, private endpoints |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 185,
+        "evidence": "delete",
+        "context": "| 8 | Key Vault | Key/secret expiration, soft delete, purge protection, RBAC authorization, private endpoints |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 232,
+        "evidence": "https://",
+        "context": "- CIS Microsoft Azure Foundations Benchmark v2.1.0: https://www.cisecurity.org/benchmark/azure",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 233,
+        "evidence": "https://",
+        "context": "- Microsoft Defender for Cloud Documentation: https://learn.microsoft.com/en-us/azure/defender-for-cloud/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 234,
+        "evidence": "https://",
+        "context": "- Microsoft Entra ID Security: https://learn.microsoft.com/en-us/entra/identity/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 235,
+        "evidence": "https://",
+        "context": "- Azure Storage Security: https://learn.microsoft.com/en-us/azure/storage/common/storage-security-guide",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 236,
+        "evidence": "https://",
+        "context": "- Azure Key Vault Best Practices: https://learn.microsoft.com/en-us/azure/key-vault/general/best-practices",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 237,
+        "evidence": "https://",
+        "context": "- Azure App Service Security: https://learn.microsoft.com/en-us/azure/app-service/overview-security",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 238,
+        "evidence": "https://",
+        "context": "- Terraform AzureRM Provider Documentation: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 32402
+  },
+  "materialized_files": [
+    {
+      "path": "benchmark-checklist.md",
+      "sha256": "83867d6b82096d308a6a4ae552e534a184796b968eed4e651d73e14d13cfd078",
+      "bytes": 19193,
+      "mode": "100644"
+    },
+    {
+      "path": "LICENSE.txt",
+      "sha256": "66eb5ec637cc578833ddcbc870dbf46c6718fd83e985fad5f0f5cf30d60cf47d",
+      "bytes": 1067,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "e4f781056d64d14ffd950860c712ffc48198b23b428476e5a550f8eb627040f6",
+      "bytes": 12142,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 32402
+}

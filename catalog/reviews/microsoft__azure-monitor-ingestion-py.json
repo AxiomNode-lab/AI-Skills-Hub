@@ -1,0 +1,370 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "microsoft/azure-monitor-ingestion-py",
+  "status": "approved",
+  "reviewed_on": "2026-10-02",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/azure-sdk-python/skills/azure-monitor-ingestion-py",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": ".github/plugins/azure-sdk-python/skills/azure-monitor-ingestion-py",
+    "url": "https://api.github.com/repos/microsoft/skills/git/trees/84d8eaa8ae95930f55cdceb3e27196c795dab038?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/microsoft/skills/blob/84d8eaa8ae95930f55cdceb3e27196c795dab038/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        ".github",
+        ".github/plugins",
+        ".github/plugins/azure-sdk-python",
+        ".github/plugins/azure-sdk-python/skills",
+        ".github/plugins/azure-sdk-python/skills/azure-monitor-ingestion-py"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT License with its copyright notice, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file; SKILL.md frontmatter declares MIT. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "medium",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": true,
+      "network": false,
+      "credentials": false,
+      "package_install": true,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md, references/capabilities.md and references/non-hero-scenarios.md in full. Python guide for azure-monitor-ingestion: LogsIngestionClient with DefaultAzureCredential, uploading custom logs to a DCR stream, error callbacks and retry, async client and sovereign-cloud configuration.",
+      "Medium only because SKILL.md:20-21 has `pip install azure-monitor-ingestion` and `pip install azure-identity` (official Azure SDK packages). Log uploads are sample code for the user's application against the user's own DCE/DCR; reading logs.json (SKILL.md:107) is a user-supplied input. No instruction to read, print, or send real secrets.",
+      "The 'Ignore Errors' sample (SKILL.md:139-148) silently discards upload failures; users should prefer the error-callback pattern for production."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "git_blob": "79656060de00aa4659ad2c276d5be8830664d544",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry the copyright and permission notice.",
+      "findings": []
+    },
+    {
+      "path": "references/capabilities.md",
+      "sha256": "d8638365a194e41c18c9ebadb5c035da72e2a34288b0ba5d9474967b59f97434",
+      "bytes": 1835,
+      "mode": "100644",
+      "git_blob": "be938859751512053769be76e78e4896b2d1f6d0",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 38,
+          "evidence": "delete",
+          "context": "- Include cleanup/delete paths for created resources in examples.",
+          "disposition": "accepted",
+          "reason": "A checklist item about including cleanup/delete paths for created Azure resources in examples; no local file writes or deletions."
+        }
+      ]
+    },
+    {
+      "path": "references/non-hero-scenarios.md",
+      "sha256": "6787e17dc0f14a370104bd588dc9158c55d1021070587c2c44ffd0d7eeaee55e",
+      "bytes": 2114,
+      "mode": "100644",
+      "git_blob": "a0e11ba342a03cf8eefc8fefd635fad9ef8f9bd4",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "credential-access",
+          "line": 14,
+          "evidence": "credential",
+          "context": "    async with DefaultAzureCredential() as credential:",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage and lifecycle guidance in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 17,
+          "evidence": "credential",
+          "context": "            credential=credential",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage and lifecycle guidance in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 17,
+          "evidence": "credential",
+          "context": "            credential=credential",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage and lifecycle guidance in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 35,
+          "evidence": "credential",
+          "context": "credential = DefaultAzureCredential(authority=AzureAuthorityHosts.AZURE_GOVERNMENT)",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage and lifecycle guidance in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 37,
+          "evidence": "https://",
+          "context": "    endpoint=\"https://example.ingest.monitor.azure.us\",",
+          "disposition": "accepted",
+          "reason": "Placeholder DCE endpoints, Azure Government example endpoint/scope, and a Microsoft Learn link; the agent is not told to fetch anything."
+        },
+        {
+          "type": "credential-access",
+          "line": 38,
+          "evidence": "credential",
+          "context": "    credential=credential,",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage and lifecycle guidance in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 38,
+          "evidence": "credential",
+          "context": "    credential=credential,",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage and lifecycle guidance in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 39,
+          "evidence": "https://",
+          "context": "    credential_scopes=[\"https://monitor.azure.us/.default\"]",
+          "disposition": "accepted",
+          "reason": "Placeholder DCE endpoints, Azure Government example endpoint/scope, and a Microsoft Learn link; the agent is not told to fetch anything."
+        }
+      ]
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "e9686a6ef133b735704d1f677fb926857a056b8b1bb80e085d495d9136c52eae",
+      "bytes": 8043,
+      "mode": "100644",
+      "git_blob": "56f0f86d36e50a701f103f2e20742ad459894804",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 19,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks showing the pip install lines and placeholder environment variables; no other shell commands."
+        },
+        {
+          "type": "package-install",
+          "line": 20,
+          "evidence": "pip install",
+          "context": "pip install azure-monitor-ingestion",
+          "disposition": "accepted",
+          "reason": "`pip install azure-monitor-ingestion` and `pip install azure-identity` for official Azure SDK packages."
+        },
+        {
+          "type": "package-install",
+          "line": 21,
+          "evidence": "pip install",
+          "context": "pip install azure-identity",
+          "disposition": "accepted",
+          "reason": "`pip install azure-monitor-ingestion` and `pip install azure-identity` for official Azure SDK packages."
+        },
+        {
+          "type": "shell-execution",
+          "line": 26,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks showing the pip install lines and placeholder environment variables; no other shell commands."
+        },
+        {
+          "type": "network-access",
+          "line": 28,
+          "evidence": "https://",
+          "context": "AZURE_DCE_ENDPOINT=https://<dce-name>.<region>.ingest.monitor.azure.com  # Required for all auth methods",
+          "disposition": "accepted",
+          "reason": "Placeholder DCE endpoints, Azure Government example endpoint/scope, and a Microsoft Learn link; the agent is not told to fetch anything."
+        },
+        {
+          "type": "credential-access",
+          "line": 53,
+          "evidence": "credential",
+          "context": ">    - Production: set `AZURE_TOKEN_CREDENTIALS=prod` (or `AZURE_TOKEN_CREDENTIALS=<specific_credential>`) to constrain the credential chain to production-safe credentials.",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage and lifecycle guidance in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 56,
+          "evidence": "credential",
+          "context": ">    - Async: `async with <Client>(...) as client:` **and** `async with DefaultAzureCredential() as credential:` (from `azure.identity.aio`)",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage and lifecycle guidance in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 66,
+          "evidence": "credential",
+          "context": "credential = DefaultAzureCredential(require_envvar=True)",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage and lifecycle guidance in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 67,
+          "evidence": "credential",
+          "context": "# Or use a specific credential directly in production:",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage and lifecycle guidance in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 68,
+          "evidence": "credential",
+          "context": "# See https://learn.microsoft.com/python/api/overview/azure/identity-readme?view=azure-python#credential-classes",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage and lifecycle guidance in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 68,
+          "evidence": "https://",
+          "context": "# See https://learn.microsoft.com/python/api/overview/azure/identity-readme?view=azure-python#credential-classes",
+          "disposition": "accepted",
+          "reason": "Placeholder DCE endpoints, Azure Government example endpoint/scope, and a Microsoft Learn link; the agent is not told to fetch anything."
+        },
+        {
+          "type": "credential-access",
+          "line": 69,
+          "evidence": "credential",
+          "context": "# credential = ManagedIdentityCredential()",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage and lifecycle guidance in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 73,
+          "evidence": "credential",
+          "context": "    credential=credential",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage and lifecycle guidance in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 73,
+          "evidence": "credential",
+          "context": "    credential=credential",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage and lifecycle guidance in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 97,
+          "evidence": "credential",
+          "context": "    credential=DefaultAzureCredential()",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage and lifecycle guidance in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 161,
+          "evidence": "credential",
+          "context": "        credential=DefaultAzureCredential()",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage and lifecycle guidance in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 179,
+          "evidence": "credential",
+          "context": "credential = DefaultAzureCredential(authority=AzureAuthorityHosts.AZURE_GOVERNMENT)",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage and lifecycle guidance in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 181,
+          "evidence": "https://",
+          "context": "    endpoint=\"https://example.ingest.monitor.azure.us\",",
+          "disposition": "accepted",
+          "reason": "Placeholder DCE endpoints, Azure Government example endpoint/scope, and a Microsoft Learn link; the agent is not told to fetch anything."
+        },
+        {
+          "type": "credential-access",
+          "line": 182,
+          "evidence": "credential",
+          "context": "    credential=credential,",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage and lifecycle guidance in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 182,
+          "evidence": "credential",
+          "context": "    credential=credential,",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage and lifecycle guidance in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 183,
+          "evidence": "https://",
+          "context": "    credential_scopes=[\"https://monitor.azure.us/.default\"]",
+          "disposition": "accepted",
+          "reason": "Placeholder DCE endpoints, Azure Government example endpoint/scope, and a Microsoft Learn link; the agent is not told to fetch anything."
+        },
+        {
+          "type": "credential-access",
+          "line": 223,
+          "evidence": "credential",
+          "context": "2. **Always use context managers for clients and async credentials.** Wrap every client in `with Client(...) as client:` (sync) or `async with Client(...) as client:` (async) to ensure proper cleanup. For async `DefaultAzureCredential` from",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage and lifecycle guidance in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 224,
+          "evidence": "credential",
+          "context": "3. **Use `DefaultAzureCredential`** for code that runs locally. Use a specific token credential for code that runs in Azure.",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage and lifecycle guidance in sample code; no instruction to read, print, or send real secrets."
+        }
+      ]
+    }
+  ]
+}

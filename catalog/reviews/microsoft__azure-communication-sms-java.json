@@ -1,0 +1,302 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "microsoft/azure-communication-sms-java",
+  "status": "approved",
+  "reviewed_on": "2026-10-02",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/azure-sdk-java/skills/azure-communication-sms-java",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": ".github/plugins/azure-sdk-java/skills/azure-communication-sms-java",
+    "url": "https://api.github.com/repos/microsoft/skills/git/trees/84d8eaa8ae95930f55cdceb3e27196c795dab038?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/microsoft/skills/blob/84d8eaa8ae95930f55cdceb3e27196c795dab038/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        ".github",
+        ".github/plugins",
+        ".github/plugins/azure-sdk-java",
+        ".github/plugins/azure-sdk-java/skills",
+        ".github/plugins/azure-sdk-java/skills/azure-communication-sms-java"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT License with its copyright notice, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file; frontmatter declares MIT with Microsoft as author. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "low",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": false,
+      "network": true,
+      "credentials": true,
+      "package_install": false,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md and references/examples.md in full. Java SDK reference for Azure Communication Services SMS: client creation (DefaultAzureCredential, connection string, AzureKeyCredential), single and bulk sends, send options, delivery reports via Event Grid, async usage, error handling, and an OTP service example.",
+      "Guidance shapes the user's own Java code, which sends SMS through the user's ACS resource with credentials from environment variables or placeholders. No shell commands, installs (Maven snippets only), or instructions for the agent to read or send secrets.",
+      "Sending SMS incurs charges and contacts real phone numbers; samples use 555 placeholder numbers. The OTP example stores codes in memory and tags messages with the phone number, which is a sample-quality pattern rather than production guidance."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "git_blob": "79656060de00aa4659ad2c276d5be8830664d544",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry the copyright and permission notice.",
+      "findings": []
+    },
+    {
+      "path": "references/examples.md",
+      "sha256": "d9220c4787229b1a53d016991f3326eed2575949980fc01e5056de87025e0318",
+      "bytes": 15212,
+      "mode": "100644",
+      "git_blob": "570d0545d6ac0994909e1c1c107f37b425985d0a",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 35,
+          "evidence": "https://",
+          "context": "    .endpoint(\"https://<resource>.communication.azure.com\")",
+          "disposition": "accepted",
+          "reason": "Microsoft Learn link and placeholder `<resource>.communication.azure.com` endpoints in sample code; the skill does not instruct fetching them."
+        },
+        {
+          "type": "credential-access",
+          "line": 36,
+          "evidence": "credential",
+          "context": "    .credential(new DefaultAzureCredentialBuilder().build())",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential, `<connection-string>` / `<access-key>` placeholders and System.getenv reads of AZURE_COMMUNICATION_CONNECTION_STRING in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 51,
+          "evidence": "credential",
+          "context": "import com.azure.core.credential.AzureKeyCredential;",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential, `<connection-string>` / `<access-key>` placeholders and System.getenv reads of AZURE_COMMUNICATION_CONNECTION_STRING in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 54,
+          "evidence": "https://",
+          "context": "    .endpoint(\"https://<resource>.communication.azure.com\")",
+          "disposition": "accepted",
+          "reason": "Microsoft Learn link and placeholder `<resource>.communication.azure.com` endpoints in sample code; the skill does not instruct fetching them."
+        },
+        {
+          "type": "credential-access",
+          "line": 55,
+          "evidence": "credential",
+          "context": "    .credential(new AzureKeyCredential(\"<access-key>\"))",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential, `<connection-string>` / `<access-key>` placeholders and System.getenv reads of AZURE_COMMUNICATION_CONNECTION_STRING in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 431,
+          "evidence": "remove",
+          "context": "            otpStore.remove(phoneNumber);",
+          "disposition": "accepted",
+          "reason": "'remove' at examples.md:431 and 436 is `otpStore.remove(...)` on an in-memory map, not file deletion."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 436,
+          "evidence": "remove",
+          "context": "            otpStore.remove(phoneNumber);",
+          "disposition": "accepted",
+          "reason": "'remove' at examples.md:431 and 436 is `otpStore.remove(...)` on an in-memory map, not file deletion."
+        },
+        {
+          "type": "shell-execution",
+          "line": 478,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "The `bash` fences at SKILL.md:270 and examples.md:478 only list environment variable placeholders; nothing is executed."
+        },
+        {
+          "type": "network-access",
+          "line": 479,
+          "evidence": "https://",
+          "context": "AZURE_COMMUNICATION_ENDPOINT=https://<resource>.communication.azure.com",
+          "disposition": "accepted",
+          "reason": "Microsoft Learn link and placeholder `<resource>.communication.azure.com` endpoints in sample code; the skill does not instruct fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 480,
+          "evidence": "https://",
+          "context": "AZURE_COMMUNICATION_CONNECTION_STRING=endpoint=https://...;accesskey=...",
+          "disposition": "accepted",
+          "reason": "Microsoft Learn link and placeholder `<resource>.communication.azure.com` endpoints in sample code; the skill does not instruct fetching them."
+        }
+      ]
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "78116489577296fe710c3dbd1f50e55536f612b71b26db2d5f56ddb8bc9b95ae",
+      "bytes": 8993,
+      "mode": "100644",
+      "git_blob": "d2dfd5056562193e7cbda6be6c7fd6c6faecdfe8",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "credential-access",
+          "line": 30,
+          "evidence": "credential",
+          "context": "import com.azure.core.credential.TokenCredential;",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential, `<connection-string>` / `<access-key>` placeholders and System.getenv reads of AZURE_COMMUNICATION_CONNECTION_STRING in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 36,
+          "evidence": "credential",
+          "context": "TokenCredential credential = new DefaultAzureCredentialBuilder()",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential, `<connection-string>` / `<access-key>` placeholders and System.getenv reads of AZURE_COMMUNICATION_CONNECTION_STRING in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 39,
+          "evidence": "credential",
+          "context": "// Or use a specific credential directly in production:",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential, `<connection-string>` / `<access-key>` placeholders and System.getenv reads of AZURE_COMMUNICATION_CONNECTION_STRING in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 40,
+          "evidence": "credential",
+          "context": "// See https://learn.microsoft.com/java/api/overview/azure/identity-readme?view=azure-java-stable#credential-classes",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential, `<connection-string>` / `<access-key>` placeholders and System.getenv reads of AZURE_COMMUNICATION_CONNECTION_STRING in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 40,
+          "evidence": "https://",
+          "context": "// See https://learn.microsoft.com/java/api/overview/azure/identity-readme?view=azure-java-stable#credential-classes",
+          "disposition": "accepted",
+          "reason": "Microsoft Learn link and placeholder `<resource>.communication.azure.com` endpoints in sample code; the skill does not instruct fetching them."
+        },
+        {
+          "type": "credential-access",
+          "line": 41,
+          "evidence": "credential",
+          "context": "// TokenCredential credential = new ManagedIdentityCredentialBuilder().build();",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential, `<connection-string>` / `<access-key>` placeholders and System.getenv reads of AZURE_COMMUNICATION_CONNECTION_STRING in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 45,
+          "evidence": "https://",
+          "context": "    .endpoint(\"https://<resource>.communication.azure.com\")",
+          "disposition": "accepted",
+          "reason": "Microsoft Learn link and placeholder `<resource>.communication.azure.com` endpoints in sample code; the skill does not instruct fetching them."
+        },
+        {
+          "type": "credential-access",
+          "line": 46,
+          "evidence": "credential",
+          "context": "    .credential(credential)",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential, `<connection-string>` / `<access-key>` placeholders and System.getenv reads of AZURE_COMMUNICATION_CONNECTION_STRING in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 46,
+          "evidence": "credential",
+          "context": "    .credential(credential)",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential, `<connection-string>` / `<access-key>` placeholders and System.getenv reads of AZURE_COMMUNICATION_CONNECTION_STRING in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 55,
+          "evidence": "credential",
+          "context": "import com.azure.core.credential.AzureKeyCredential;",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential, `<connection-string>` / `<access-key>` placeholders and System.getenv reads of AZURE_COMMUNICATION_CONNECTION_STRING in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 58,
+          "evidence": "https://",
+          "context": "    .endpoint(\"https://<resource>.communication.azure.com\")",
+          "disposition": "accepted",
+          "reason": "Microsoft Learn link and placeholder `<resource>.communication.azure.com` endpoints in sample code; the skill does not instruct fetching them."
+        },
+        {
+          "type": "credential-access",
+          "line": 59,
+          "evidence": "credential",
+          "context": "    .credential(new AzureKeyCredential(\"<access-key>\"))",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential, `<connection-string>` / `<access-key>` placeholders and System.getenv reads of AZURE_COMMUNICATION_CONNECTION_STRING in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "shell-execution",
+          "line": 270,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "The `bash` fences at SKILL.md:270 and examples.md:478 only list environment variable placeholders; nothing is executed."
+        },
+        {
+          "type": "network-access",
+          "line": 271,
+          "evidence": "https://",
+          "context": "AZURE_COMMUNICATION_ENDPOINT=https://<resource>.communication.azure.com  # Required for all auth methods",
+          "disposition": "accepted",
+          "reason": "Microsoft Learn link and placeholder `<resource>.communication.azure.com` endpoints in sample code; the skill does not instruct fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 272,
+          "evidence": "https://",
+          "context": "AZURE_COMMUNICATION_CONNECTION_STRING=endpoint=https://...;accesskey=...  # Alternative to Entra ID auth",
+          "disposition": "accepted",
+          "reason": "Microsoft Learn link and placeholder `<resource>.communication.azure.com` endpoints in sample code; the skill does not instruct fetching them."
+        }
+      ]
+    }
+  ]
+}

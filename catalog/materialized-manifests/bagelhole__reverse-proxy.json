@@ -1,0 +1,186 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "bagelhole/reverse-proxy",
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "infrastructure/networking/reverse-proxy",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "review": {
+    "path": "catalog/reviews/bagelhole__reverse-proxy.json",
+    "sha256": "87d7bdaed7a168ff8a0da82f2471c54df71d4c1e3b5cb92dff76f595dbd0c5be"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": false,
+      "dynamic_execution": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "network-access",
+        "line": 38,
+        "evidence": "https://",
+        "context": "    return 301 https://$host$request_uri;",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 62,
+        "evidence": "http://",
+        "context": "        proxy_pass http://127.0.0.1:3000;",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 94,
+        "evidence": "http://",
+        "context": "        proxy_pass http://127.0.0.1:3000;",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 100,
+        "evidence": "http://",
+        "context": "        proxy_pass http://127.0.0.1:8080/;",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 108,
+        "evidence": "http://",
+        "context": "        proxy_pass http://127.0.0.1:8080;",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 148,
+        "evidence": "http://",
+        "context": "        proxy_pass http://127.0.0.1:8080;",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 155,
+        "evidence": "http://",
+        "context": "        proxy_pass http://127.0.0.1:8080;",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 161,
+        "evidence": "http://",
+        "context": "        proxy_pass http://127.0.0.1:3000;",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 186,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 187,
+        "evidence": "\nsudo",
+        "context": "# Install certbot with nginx plugin",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 190,
+        "evidence": "\nsudo",
+        "context": "# Obtain and install certificate",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 193,
+        "evidence": "\nsudo",
+        "context": "# Auto-renewal is configured via systemd timer",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 196,
+        "evidence": "\nsudo",
+        "context": "# Manual renewal test",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 271,
+        "evidence": "http://",
+        "context": "          - url: \"http://127.0.0.1:3000\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 280,
+        "evidence": "http://",
+        "context": "          - url: \"http://127.0.0.1:8080\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 345,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 346,
+        "evidence": "\nsudo",
+        "context": "# Test configuration syntax",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 349,
+        "evidence": "\nsudo",
+        "context": "# Reload without downtime",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 352,
+        "evidence": "\nsudo",
+        "context": "# View active connections",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 373,
+        "evidence": "http://",
+        "context": "    proxy_pass http://127.0.0.1:3000;",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 11675
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "30157eddaca577bd57328c79893511b28cd93a69be6084d5329e6b9fe2268141",
+      "bytes": 10607,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 11675
+}

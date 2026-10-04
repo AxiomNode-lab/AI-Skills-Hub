@@ -1,0 +1,283 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "aaron-seo/serp-markup-builder",
+  "source": {
+    "repo": "aaron-he-zhu/aaron-marketing-skills",
+    "path": "seo-geo/implement/serp-markup-builder",
+    "revision": "cc897fa9e1e3136eb6a301130e49d8d9d1c519b2"
+  },
+  "review": {
+    "path": "catalog/reviews/aaron-seo__serp-markup-builder.json",
+    "sha256": "eaa2ae955cb47614ec07fd1c09c3702537d6360213b3de8adf98ef1eed0c8f1f"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "low",
+    "capabilities": {
+      "shell": false,
+      "network": true,
+      "credentials": false,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "network-access",
+        "line": 3,
+        "evidence": "http://",
+        "context": "                        http://www.apache.org/licenses/",
+        "file": "LICENSE.txt"
+      },
+      {
+        "type": "network-access",
+        "line": 195,
+        "evidence": "http://",
+        "context": "       http://www.apache.org/licenses/LICENSE-2.0",
+        "file": "LICENSE.txt"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 42,
+        "evidence": "remove",
+        "context": "| 1 | Add/remove number | +15-25% CTR |",
+        "file": "references/meta-tag-formulas.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 43,
+        "evidence": "remove",
+        "context": "| 2 | Add/remove year | +10-15% CTR |",
+        "file": "references/meta-tag-formulas.md"
+      },
+      {
+        "type": "network-access",
+        "line": 71,
+        "evidence": "https://",
+        "context": "  \"@context\": \"https://schema.org\",",
+        "file": "references/schema-instructions-detail.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 3,
+        "evidence": "remove",
+        "context": "Compact starter blocks. Replace placeholders, remove unused fields, and validate before ship.",
+        "file": "references/schema-templates.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 10,
+        "evidence": "Remove",
+        "context": "- Remove placeholders before publishing.",
+        "file": "references/schema-templates.md"
+      },
+      {
+        "type": "network-access",
+        "line": 17,
+        "evidence": "https://",
+        "context": "  \"@context\": \"https://schema.org\",",
+        "file": "references/schema-templates.md"
+      },
+      {
+        "type": "network-access",
+        "line": 38,
+        "evidence": "https://",
+        "context": "  \"@context\": \"https://schema.org\",",
+        "file": "references/schema-templates.md"
+      },
+      {
+        "type": "network-access",
+        "line": 55,
+        "evidence": "https://",
+        "context": "  \"@context\": \"https://schema.org\",",
+        "file": "references/schema-templates.md"
+      },
+      {
+        "type": "network-access",
+        "line": 75,
+        "evidence": "https://",
+        "context": "  \"@context\": \"https://schema.org\",",
+        "file": "references/schema-templates.md"
+      },
+      {
+        "type": "network-access",
+        "line": 87,
+        "evidence": "https://",
+        "context": "    \"availability\": \"https://schema.org/[InStock/OutOfStock/PreOrder]\"",
+        "file": "references/schema-templates.md"
+      },
+      {
+        "type": "network-access",
+        "line": 117,
+        "evidence": "https://",
+        "context": "  \"@context\": \"https://schema.org\",",
+        "file": "references/schema-templates.md"
+      },
+      {
+        "type": "network-access",
+        "line": 148,
+        "evidence": "https://",
+        "context": "  \"@context\": \"https://schema.org\",",
+        "file": "references/schema-templates.md"
+      },
+      {
+        "type": "network-access",
+        "line": 163,
+        "evidence": "https://",
+        "context": "  \"@context\": \"https://schema.org\",",
+        "file": "references/schema-templates.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 193,
+        "evidence": "Remove",
+        "context": "- Remove trailing commas and placeholder text before publishing.",
+        "file": "references/schema-templates.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 17,
+        "evidence": "Remove",
+        "context": "| Trailing comma | Last property ends with `,` | Remove comma after final property. |",
+        "file": "references/validation-guide.md"
+      },
+      {
+        "type": "network-access",
+        "line": 20,
+        "evidence": "https://",
+        "context": "| Relative URL | `\"/images/photo.jpg\"` | Use absolute `https://...` URL. |",
+        "file": "references/validation-guide.md"
+      },
+      {
+        "type": "network-access",
+        "line": 67,
+        "evidence": "https://",
+        "context": "| URL is not absolute | Use full `https://` URLs. |",
+        "file": "references/validation-guide.md"
+      },
+      {
+        "type": "network-access",
+        "line": 84,
+        "evidence": "https://",
+        "context": "- Schema.org: `https://schema.org/`",
+        "file": "references/validation-guide.md"
+      },
+      {
+        "type": "network-access",
+        "line": 85,
+        "evidence": "https://",
+        "context": "- Google structured data docs: `https://developers.google.com/search/docs/appearance/structured-data`",
+        "file": "references/validation-guide.md"
+      },
+      {
+        "type": "network-access",
+        "line": 86,
+        "evidence": "https://",
+        "context": "- Rich Results Test: `https://search.google.com/test/rich-results`",
+        "file": "references/validation-guide.md"
+      },
+      {
+        "type": "network-access",
+        "line": 87,
+        "evidence": "https://",
+        "context": "- Schema Validator: `https://validator.schema.org/`",
+        "file": "references/validation-guide.md"
+      },
+      {
+        "type": "network-access",
+        "line": 88,
+        "evidence": "https://",
+        "context": "- JSON-LD Playground: `https://json-ld.org/playground/`",
+        "file": "references/validation-guide.md"
+      },
+      {
+        "type": "network-access",
+        "line": 10,
+        "evidence": "https://",
+        "context": "homepage: \"https://github.com/aaron-he-zhu/aaron-marketing-skills\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 14,
+        "evidence": "https://",
+        "context": "metadata: {\"author\": \"aaron-he-zhu\", \"version\": \"20.1.0\", \"discipline\": \"seo-geo\", \"phase\": \"implement\", \"geo-relevance\": \"high\", \"hermes\": {\"tags\": [\"marketing\", \"seo-geo\", \"implement\"], \"category\": \"seo-geo\"}, \"openclaw\": {\"emoji\": \"🔍\", ",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 94,
+        "evidence": "curl",
+        "context": "> ⚠ **JS-injected JSON-LD caveat**: `schema_lint.py` and any raw fetch (`WebFetch`/`curl`) read server HTML and will **not** see JSON-LD injected client-side by SEO plugins (Yoast/RankMath/AIOSEO). When the pre-check reports no/partial sche",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 55278
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "664cd12e1c315650bf14cb1385359d13d4724ac03940ac10918390ef78e4f5e7",
+      "bytes": 11347,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/ctr-and-social-reference.md",
+      "sha256": "065bb79bad6cdeed00c9c9b1dcfd66e3de9276356f457bc0c5662eeabf264f84",
+      "bytes": 1939,
+      "mode": "100644"
+    },
+    {
+      "path": "references/meta-instructions-detail.md",
+      "sha256": "4f05297e43dd032124cc829479632bdad7fad8efb39caf8f98c178f45f86b337",
+      "bytes": 3210,
+      "mode": "100644"
+    },
+    {
+      "path": "references/meta-tag-code-templates.md",
+      "sha256": "98605bd84d85e75e9c6519c8d8d319417f9f2e5ae09e6d55ec4ae057dffea1a1",
+      "bytes": 2703,
+      "mode": "100644"
+    },
+    {
+      "path": "references/meta-tag-formulas.md",
+      "sha256": "00e9e11c81cf63d6798a17854a8a36a220683c4bf2b74ff038896569c759ee79",
+      "bytes": 5047,
+      "mode": "100644"
+    },
+    {
+      "path": "references/schema-decision-tree.md",
+      "sha256": "14d5d4ddfb4e21a79830c60a45bf694a57168667cad06ff2b2800c6f586c21c3",
+      "bytes": 3333,
+      "mode": "100644"
+    },
+    {
+      "path": "references/schema-instructions-detail.md",
+      "sha256": "472c544d0b33ae8ec1e9be7766eb0e31008eb76e3b0e2754029fa0143a9525f2",
+      "bytes": 3687,
+      "mode": "100644"
+    },
+    {
+      "path": "references/schema-templates.md",
+      "sha256": "fb4e52696c26d3cbdfff92c34ec0fe1336e383374646a485fe07b2a75aabdcdd",
+      "bytes": 6389,
+      "mode": "100644"
+    },
+    {
+      "path": "references/validation-guide.md",
+      "sha256": "6492ded7abc083c996a5af19b40e231cbb247099007595003a7aa960d861dd63",
+      "bytes": 4892,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "0e71984c513b6a530af10d49cbd23babcd00ef6c05d097bba38ee8e7391dcbc9",
+      "bytes": 12731,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 55278
+}

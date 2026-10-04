@@ -1,0 +1,371 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "j4flmao/backend-api-versioning",
+  "source": {
+    "repo": "j4flmao/agent-skills",
+    "path": "skills/backend/universal/api-versioning",
+    "revision": "d9f812988c8926767ee96f66c1a340d65b595799"
+  },
+  "review": {
+    "path": "catalog/reviews/j4flmao__backend-api-versioning.json",
+    "sha256": "7a8e22fa2ad75ed6b1cacb565e1835b7961f236de2ac282b5526091f72729e3f"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": false,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "filesystem-write",
+        "line": 120,
+        "evidence": "remove",
+        "context": "    remove:",
+        "file": "references/api-migration-deprecation.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 236,
+        "evidence": "Remove",
+        "context": "- Remove deprecated code and tests.",
+        "file": "references/api-migration-deprecation.md"
+      },
+      {
+        "type": "network-access",
+        "line": 380,
+        "evidence": "https://",
+        "context": "          documentation: 'https://docs.example.com/migration'",
+        "file": "references/api-migration-deprecation.md"
+      },
+      {
+        "type": "network-access",
+        "line": 396,
+        "evidence": "https://",
+        "context": "    successor_url: \"https://api.example.com/v2\"",
+        "file": "references/api-migration-deprecation.md"
+      },
+      {
+        "type": "network-access",
+        "line": 472,
+        "evidence": "http://",
+        "context": "const proxy = new MigrationProxy('http://api-v2.internal:8080');",
+        "file": "references/api-migration-deprecation.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 520,
+        "evidence": "api-key",
+        "context": "    headerName = 'x-api-key',   // or 'x-consumer-id'",
+        "file": "references/api-migration-deprecation.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 692,
+        "evidence": "api_key",
+        "context": "  count(DISTINCT api_key) AS unique_consumers",
+        "file": "references/api-migration-deprecation.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 700,
+        "evidence": "api_key",
+        "context": "  api_key,",
+        "file": "references/api-migration-deprecation.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 708,
+        "evidence": "api_key",
+        "context": "GROUP BY api_key, consumer_name",
+        "file": "references/api-migration-deprecation.md"
+      },
+      {
+        "type": "network-access",
+        "line": 89,
+        "evidence": "http://",
+        "context": "    proxy_pass http://backend-${api_version};",
+        "file": "references/api-versioning-advanced.md"
+      },
+      {
+        "type": "network-access",
+        "line": 87,
+        "evidence": "https://",
+        "context": "      \"docs\": \"https://docs.example.com/api/v2\"",
+        "file": "references/api-versioning-multi-protocol.md"
+      },
+      {
+        "type": "network-access",
+        "line": 554,
+        "evidence": "http://",
+        "context": "  url: http://user-service-v1:8080",
+        "file": "references/api-versioning-strategies.md"
+      },
+      {
+        "type": "network-access",
+        "line": 560,
+        "evidence": "http://",
+        "context": "  url: http://user-service-v2:8080",
+        "file": "references/api-versioning-strategies.md"
+      },
+      {
+        "type": "network-access",
+        "line": 640,
+        "evidence": "https://",
+        "context": "  - url: https://api.example.com/v2",
+        "file": "references/api-versioning-strategies.md"
+      },
+      {
+        "type": "network-access",
+        "line": 642,
+        "evidence": "https://",
+        "context": "  - url: https://api.example.com/v1",
+        "file": "references/api-versioning-strategies.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 783,
+        "evidence": "remove",
+        "context": "Avro schema evolution rules: can add fields with defaults, can remove fields with defaults, can change field types only within compatibility rules. Use Confluent Schema Registry with compatibility modes (BACKWARD, FORWARD, FULL, NONE).",
+        "file": "references/api-versioning-strategies.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 805,
+        "evidence": "remove",
+        "context": "Keeping versions in \"beta\" or \"preview\" indefinitely. Either commit to a version or remove it. Beta versions should have clear lifespan.",
+        "file": "references/api-versioning-strategies.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 33,
+        "evidence": "Remove",
+        "context": "5. **Remove**: After sunset date, return `410 Gone`.",
+        "file": "references/breaking-change-mgmt.md"
+      },
+      {
+        "type": "network-access",
+        "line": 73,
+        "evidence": "http://",
+        "context": "        providerBaseUrl: `http://localhost:3000/v2`,",
+        "file": "references/version-compatibility-testing.md"
+      },
+      {
+        "type": "network-access",
+        "line": 74,
+        "evidence": "http://",
+        "context": "        providerStatesSetupUrl: `http://localhost:3000/test/setup`,",
+        "file": "references/version-compatibility-testing.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 114,
+        "evidence": "apiKey",
+        "context": "    const client = new ApiClient({ baseUrl: '/v1', apiKey: 'test' });",
+        "file": "references/version-compatibility-testing.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 120,
+        "evidence": "apiKey",
+        "context": "    const clientV2 = new ApiClient({ baseUrl: '/v2', apiKey: 'test' });",
+        "file": "references/version-compatibility-testing.md"
+      },
+      {
+        "type": "network-access",
+        "line": 49,
+        "evidence": "curl",
+        "context": "| Tooling support | curl, Postman need config | Direct | curl, Postman need header |",
+        "file": "references/version-discovery.md"
+      },
+      {
+        "type": "network-access",
+        "line": 49,
+        "evidence": "curl",
+        "context": "| Tooling support | curl, Postman need config | Direct | curl, Postman need header |",
+        "file": "references/version-discovery.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 88,
+        "evidence": "apiKey",
+        "context": "    const apiKey = req.headers['x-api-key'] as string;",
+        "file": "references/version-discovery.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 88,
+        "evidence": "api-key",
+        "context": "    const apiKey = req.headers['x-api-key'] as string;",
+        "file": "references/version-discovery.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 89,
+        "evidence": "apiKey",
+        "context": "    if (apiKey) {",
+        "file": "references/version-discovery.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 90,
+        "evidence": "apiKey",
+        "context": "      const client = clientRegistry.get(apiKey);",
+        "file": "references/version-discovery.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 91,
+        "evidence": "API key",
+        "context": "      - \"Email all API key holders\"",
+        "file": "references/version-lifecycle.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 125,
+        "evidence": "Remove",
+        "context": "      - \"Remove v1 from CI/CD\"",
+        "file": "references/version-lifecycle.md"
+      },
+      {
+        "type": "network-access",
+        "line": 141,
+        "evidence": "https://",
+        "context": "1. Review the migration guide: https://docs.example.com/migration-v1-to-v2",
+        "file": "references/version-lifecycle.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 198,
+        "evidence": "Remove",
+        "context": "    - \"Remove old behavior after coexistence\"",
+        "file": "references/version-lifecycle.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 147,
+        "evidence": "Remove",
+        "context": "  // 2. Remove from gateway",
+        "file": "references/version-migration-automation.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 150,
+        "evidence": "Delete",
+        "context": "  // 3. Delete route handlers",
+        "file": "references/version-migration-automation.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 77,
+        "evidence": "remove",
+        "context": "├── No → Does it remove a field from response?",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 310,
+        "evidence": "https://",
+        "context": "    \"migrationUrl\": \"https://docs.example.com/migration-v1-to-v2\",",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 485,
+        "evidence": "remove",
+        "context": "- Never remove or change behavior in a non-backward-compatible way without a version bump",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 98167
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "b6b8d73f01a48d1411da29d8196e2d85cd91cc9e8d7ae6ac4863ae7e06e6d314",
+      "bytes": 1064,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/api-migration-deprecation.md",
+      "sha256": "45193e3549901f2f9582a09ff42f408a781b8d79aca8adaec5e66e939f29943d",
+      "bytes": 23017,
+      "mode": "100644"
+    },
+    {
+      "path": "references/api-versioning-advanced.md",
+      "sha256": "349388bc6f47a9d22bcded48682fdbc8cc074bc41adc429d5bd79f48b24212b6",
+      "bytes": 4267,
+      "mode": "100644"
+    },
+    {
+      "path": "references/api-versioning-fundamentals.md",
+      "sha256": "7c461f2c3152a65a272c17e0944c86bb0dbf6bb1cb356d9ce68323823a7657d2",
+      "bytes": 2382,
+      "mode": "100644"
+    },
+    {
+      "path": "references/api-versioning-multi-protocol.md",
+      "sha256": "556d155dccd9480509272cc55e1017d8374e2b1f5df5f6f1e09103cbd5d2ea31",
+      "bytes": 2532,
+      "mode": "100644"
+    },
+    {
+      "path": "references/api-versioning-strategies.md",
+      "sha256": "b7ba5cef310325e92fa10e539b53df2e6f942b4134ff9336952ac97e5591ca59",
+      "bytes": 20000,
+      "mode": "100644"
+    },
+    {
+      "path": "references/breaking-change-mgmt.md",
+      "sha256": "15563fce4b96f17e7bc69ca692ab5b577c89ff9f46e2b4c51dbfb55e4e3edd58",
+      "bytes": 1541,
+      "mode": "100644"
+    },
+    {
+      "path": "references/version-compatibility-testing.md",
+      "sha256": "ac625f3b17191def7918cd8828a33e7835d0826d831974da427d7e473a7f73e2",
+      "bytes": 4429,
+      "mode": "100644"
+    },
+    {
+      "path": "references/version-discovery.md",
+      "sha256": "079ecae866da8ba5124fe98b6058db062481972c7aa1ad9af156aa7439fb9a41",
+      "bytes": 6761,
+      "mode": "100644"
+    },
+    {
+      "path": "references/version-lifecycle.md",
+      "sha256": "f26ea5573d4808bce24fd1e0d40299d800dcd5ec70bdd4c398bb442395f5138a",
+      "bytes": 6598,
+      "mode": "100644"
+    },
+    {
+      "path": "references/version-migration-automation.md",
+      "sha256": "4e50816b14b35b6e3368c87b75284e0979b3990a5b3a2b02c5a1ba4faee4e428",
+      "bytes": 5508,
+      "mode": "100644"
+    },
+    {
+      "path": "references/versioning-strategies.md",
+      "sha256": "06d921d7be1971f533e282c4416980deacce61934ca564866597c29f3add5920",
+      "bytes": 1497,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "bd92f89931ebb7966ff747fdd4eb170a6fa96fda81dafa3f07b5974d6550b9e9",
+      "bytes": 18571,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 98167
+}

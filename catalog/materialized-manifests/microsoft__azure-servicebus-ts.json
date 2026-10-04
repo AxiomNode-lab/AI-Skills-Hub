@@ -1,0 +1,212 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "microsoft/azure-servicebus-ts",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/azure-sdk-typescript/skills/azure-servicebus-ts",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "review": {
+    "path": "catalog/reviews/microsoft__azure-servicebus-ts.json",
+    "sha256": "19ae5a7c97f7eb15f25a7e9a30dfa3b633f2221dca024c3e7ee750fcda744b8b"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "filesystem-write",
+        "line": 36,
+        "evidence": "Delete",
+        "context": "| `QuotaExceeded` | Namespace quota exceeded | No | Delete messages, upgrade tier |",
+        "file": "references/error-handling.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 169,
+        "evidence": "Remove",
+        "context": "  // Remove from DLQ",
+        "file": "references/error-handling.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 199,
+        "evidence": "credential",
+        "context": "const client = new ServiceBusClient(namespace, credential);",
+        "file": "references/error-handling.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 316,
+        "evidence": "credential",
+        "context": "const client = new ServiceBusClient(namespace, credential, {",
+        "file": "references/error-handling.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 16,
+        "evidence": "process.env",
+        "context": "  process.env.SERVICEBUS_NAMESPACE!,",
+        "file": "references/queues-topics.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 87,
+        "evidence": "remove",
+        "context": "    // Process successfully - remove from queue",
+        "file": "references/queues-topics.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 272,
+        "evidence": "remove",
+        "context": "await receiver.completeMessage(message);   // Success - remove from queue",
+        "file": "references/queues-topics.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 278,
+        "evidence": "Delete",
+        "context": "### Receive-and-Delete (At-Most-Once)",
+        "file": "references/queues-topics.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 298,
+        "evidence": "remove",
+        "context": "// COMPLETE: Processing succeeded, remove message",
+        "file": "references/queues-topics.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 17,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 18,
+        "evidence": "npm install",
+        "context": "npm install @azure/service-bus @azure/identity",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 23,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 38,
+        "evidence": "credential",
+        "context": "const credential = new DefaultAzureCredential({requiredEnvVars: [\"AZURE_TOKEN_CREDENTIALS\"]});",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 39,
+        "evidence": "credential",
+        "context": "// Or use a specific credential directly in production:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 40,
+        "evidence": "credential",
+        "context": "// See https://learn.microsoft.com/javascript/api/overview/azure/identity-readme?view=azure-node-latest#credential-classes",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 40,
+        "evidence": "https://",
+        "context": "// See https://learn.microsoft.com/javascript/api/overview/azure/identity-readme?view=azure-node-latest#credential-classes",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 41,
+        "evidence": "credential",
+        "context": "// const credential = new ManagedIdentityCredential();",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 43,
+        "evidence": "process.env",
+        "context": "const fullyQualifiedNamespace = process.env.SERVICEBUS_NAMESPACE!;",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 44,
+        "evidence": "credential",
+        "context": "const client = new ServiceBusClient(fullyQualifiedNamespace, credential);",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 220,
+        "evidence": "Remove",
+        "context": "await receiver.completeMessage(message);   // Remove from queue",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 225,
+        "evidence": "Delete",
+        "context": "// Receive-and-Delete - message removed immediately",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 231,
+        "evidence": "Credential",
+        "context": "1. **Use Microsoft Entra Token Credential** - Use `DefaultAzureCredential` for local development; use `ManagedIdentityCredential` or `WorkloadIdentityCredential` for production",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 29722
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/error-handling.md",
+      "sha256": "e5b822a4c7656875b62b685d98d4f7760b2d724f691c33f205afd669248f1490",
+      "bytes": 11590,
+      "mode": "100644"
+    },
+    {
+      "path": "references/queues-topics.md",
+      "sha256": "76a5c385da9487da00233e919307fe0cc38d7e9167ec72e40a4c9081ab71ffe0",
+      "bytes": 9746,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "7abee3d8459e716a5e0b3d46fccf2f1e0db7c128e843b2981f2dbe97eef1a60e",
+      "bytes": 7246,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 29722
+}

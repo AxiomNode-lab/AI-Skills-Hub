@@ -1,0 +1,339 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "sentry/prompt-optimizer",
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "getsentry/skills",
+    "path": "skills/prompt-optimizer",
+    "revision": "d18b7aa8ba878354e5c348310230e652f7690f9c"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "skills/prompt-optimizer",
+    "url": "https://api.github.com/repos/getsentry/skills/git/trees/d18b7aa8ba878354e5c348310230e652f7690f9c?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "Apache-2.0",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/getsentry/skills/blob/d18b7aa8ba878354e5c348310230e652f7690f9c/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "skills",
+        "skills/prompt-optimizer"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the Apache-2.0 license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares Apache-2.0 (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the Apache-2.0 notice condition; no NOTICE file exists, so section 4(d) adds no attribution text, and no file is modified.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "low",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": false,
+      "network": false,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md, SPEC.md, SOURCES.md, references/core-patterns.md, references/meta-optimization-loop.md, references/model-family-notes.md and references/transformed-examples.md in full. A workflow for writing and refining agent/system prompts: capture a contract, inventory external context by path, pick a model-family strategy, generate candidates, and compare them on an eval set, returning a prompt package.",
+      "Guidance only shapes the reply (prompt text, eval cases, optimization log); no commands, installs, credentials, or network access. Example prompts in transformed-examples.md explicitly include 'Ask before destructive actions'.",
+      "SOURCES.md lists provenance including sibling files in the upstream repo (skills/skill-writer/*, README.md, AGENTS.md) and provider docs/papers by URL; these are citations, not runtime dependencies. The 'copyright' signal is SPEC.md:60, which forbids storing long copyrighted excerpts; provider guidance is paraphrased, not quoted."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "96e78a9ce85795b117c8929887bdb78f88bf23f7b85a31f0872cde4dff7e92cd",
+      "bytes": 10785,
+      "mode": "100644",
+      "git_blob": "753a6c03c60a9232405d05170bd3ad3cab49a1ef",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root Apache-2.0 license, attached to carry its terms and notices.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 3,
+          "evidence": "http://",
+          "context": "                        http://www.apache.org/licenses/",
+          "disposition": "accepted",
+          "reason": "License text."
+        },
+        {
+          "type": "network-access",
+          "line": 184,
+          "evidence": "http://",
+          "context": "       http://www.apache.org/licenses/LICENSE-2.0",
+          "disposition": "accepted",
+          "reason": "License text."
+        }
+      ]
+    },
+    {
+      "path": "references/core-patterns.md",
+      "sha256": "508199c575439e3d021848df67cb8a8be7675f0e1f2e8c77438e0e4734ca415c",
+      "bytes": 5514,
+      "mode": "100644",
+      "git_blob": "8c24cf346d1d479bf6bf78d2bea4dc8bd09762a6",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 96,
+          "evidence": "delete",
+          "context": "- Do not delete platform rules because a deployer layer \"probably covers it\".",
+          "disposition": "accepted",
+          "reason": "Matches are 'delete'/'Remove' in prompt-editing advice (do not delete platform rules, remove persona or duplicate rules); the skill does not delete or write files."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 136,
+          "evidence": "Remove",
+          "context": "- Remove persona, motivation, or reminder text that does not change measured behavior.",
+          "disposition": "accepted",
+          "reason": "Matches are 'delete'/'Remove' in prompt-editing advice (do not delete platform rules, remove persona or duplicate rules); the skill does not delete or write files."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 148,
+          "evidence": "Remove",
+          "context": "| The prompt is long but still unstable | Remove duplicate rules and choose one owner per behavior |",
+          "disposition": "accepted",
+          "reason": "Matches are 'delete'/'Remove' in prompt-editing advice (do not delete platform rules, remove persona or duplicate rules); the skill does not delete or write files."
+        }
+      ]
+    },
+    {
+      "path": "references/meta-optimization-loop.md",
+      "sha256": "9489e6ee08a184319a3ac3e88de54ea9f91bc2da74e4ee2dd8ada662291a9e71",
+      "bytes": 3710,
+      "mode": "100644",
+      "git_blob": "6aa685c61207d333b39eab6528c783ddbe01a9a7",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "references/model-family-notes.md",
+      "sha256": "57a5292ec6e68c846136599c8a424e95330aecc3d2443831fa0a4283fa0f2f04",
+      "bytes": 3397,
+      "mode": "100644",
+      "git_blob": "2e3c260601b53eb3e61e55e94c3245c6bab7bbe4",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "references/transformed-examples.md",
+      "sha256": "3cfb92aadc7b30ca4ad4e9bb02204a92c2366b0483b8023115ad2a1e614d235e",
+      "bytes": 3603,
+      "mode": "100644",
+      "git_blob": "c198b56dd34dff81dc4f098f1d223e3265bd182a",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "b5ba1525d7964004d8664fea9d5028972cca599f346ff4662152479b94e25cb3",
+      "bytes": 4613,
+      "mode": "100644",
+      "git_blob": "b8132d287dbb6b3eac120514e9b5728dd431f7fc",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "SOURCES.md",
+      "sha256": "2effb8172cb365ca7c6e0312c9ecb2aa6761ba00b3269637ada10daa284566a4",
+      "bytes": 11614,
+      "mode": "100644",
+      "git_blob": "afd5e6fdab10b27a67d146a52e24c324c90817ea",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 20,
+          "evidence": "https://",
+          "context": "| `https://agents.md/` | official format guide | canonical | 2026-05-04 | high | AGENTS.md purpose, common sections, nested files, closest-file precedence | public format guidance | Supports exact external file references in repo agent prom",
+          "disposition": "accepted",
+          "reason": "SOURCES.md lists provenance URLs (agents.md, OpenAI, Anthropic, Gemini docs, arXiv, dspy.ai) as citations; the skill does not instruct fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 21,
+          "evidence": "https://",
+          "context": "| `https://developers.openai.com/codex/guides/agents-md` | official product docs | canonical | 2026-05-04 | high | Codex AGENTS.md discovery, scope, merge order, size cap, verification | OpenAI-specific behavior | Used for agent prompt and ",
+          "disposition": "accepted",
+          "reason": "SOURCES.md lists provenance URLs (agents.md, OpenAI, Anthropic, Gemini docs, arXiv, dspy.ai) as citations; the skill does not instruct fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 22,
+          "evidence": "https://",
+          "context": "| `https://platform.openai.com/docs/guides/prompt-optimizer/` | official docs | canonical | 2026-05-04 | high | Dataset-backed prompt optimization, annotations, graders, manual review | verify product surface before dashboard-specific instr",
+          "disposition": "accepted",
+          "reason": "SOURCES.md lists provenance URLs (agents.md, OpenAI, Anthropic, Gemini docs, arXiv, dspy.ai) as citations; the skill does not instruct fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 23,
+          "evidence": "https://",
+          "context": "| `https://platform.openai.com/docs/guides/prompting` | official docs | canonical | 2026-05-04 | high | Prompt objects, versioning, variables, linked evals, prompt roles | product-specific features may evolve | Supports reusable prompt pack",
+          "disposition": "accepted",
+          "reason": "SOURCES.md lists provenance URLs (agents.md, OpenAI, Anthropic, Gemini docs, arXiv, dspy.ai) as citations; the skill does not instruct fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 24,
+          "evidence": "https://",
+          "context": "| `https://developers.openai.com/api/docs/guides/reasoning-best-practices` | official docs | canonical | 2026-04-18 | high | Reasoning-model prompting differences, simplicity, delimiters, no explicit CoT | verify product syntax if exact API",
+          "disposition": "accepted",
+          "reason": "SOURCES.md lists provenance URLs (agents.md, OpenAI, Anthropic, Gemini docs, arXiv, dspy.ai) as citations; the skill does not instruct fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 25,
+          "evidence": "https://",
+          "context": "| `https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/overview` | official docs | canonical | 2026-04-18 | high | Success-criteria-first prompting and reminder that not every failure is a prompt problem | product synta",
+          "disposition": "accepted",
+          "reason": "SOURCES.md lists provenance URLs (agents.md, OpenAI, Anthropic, Gemini docs, arXiv, dspy.ai) as citations; the skill does not instruct fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 26,
+          "evidence": "https://",
+          "context": "| `https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices` | official docs | canonical | 2026-04-18 | high | XML tags, role prompting, examples, long-context ordering, output control | provi",
+          "disposition": "accepted",
+          "reason": "SOURCES.md lists provenance URLs (agents.md, OpenAI, Anthropic, Gemini docs, arXiv, dspy.ai) as citations; the skill does not instruct fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 27,
+          "evidence": "https://",
+          "context": "| `https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-tools` | official docs | canonical | 2026-04-18 | medium | Prompt improver inputs: prompt, failure feedback, ideal examples | console workflow may change ",
+          "disposition": "accepted",
+          "reason": "SOURCES.md lists provenance URLs (agents.md, OpenAI, Anthropic, Gemini docs, arXiv, dspy.ai) as citations; the skill does not instruct fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 28,
+          "evidence": "https://",
+          "context": "| `https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices` | official docs | canonical | 2026-04-18 | high | Concision as a context-budget discipline; \"context window is a public good\" framing | skill-oriented sour",
+          "disposition": "accepted",
+          "reason": "SOURCES.md lists provenance URLs (agents.md, OpenAI, Anthropic, Gemini docs, arXiv, dspy.ai) as citations; the skill does not instruct fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 29,
+          "evidence": "https://",
+          "context": "| `https://ai.google.dev/gemini-api/docs/prompting-strategies` | official docs | canonical | 2026-04-18 | high | Clear instructions, example consistency, positive patterns, prompt iteration | provider-specific behavior | Used for Gemini fam",
+          "disposition": "accepted",
+          "reason": "SOURCES.md lists provenance URLs (agents.md, OpenAI, Anthropic, Gemini docs, arXiv, dspy.ai) as citations; the skill does not instruct fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 30,
+          "evidence": "https://",
+          "context": "| `https://ai.google.dev/gemini-api/docs/text-generation` | official docs | canonical | 2026-04-18 | high | System instruction surface for Gemini | product syntax may evolve | Confirms system-instruction layer |",
+          "disposition": "accepted",
+          "reason": "SOURCES.md lists provenance URLs (agents.md, OpenAI, Anthropic, Gemini docs, arXiv, dspy.ai) as citations; the skill does not instruct fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 31,
+          "evidence": "https://",
+          "context": "| `https://ai.google.dev/gemini-api/docs/thinking` | official docs | canonical | 2026-04-18 | high | Dynamic thinking defaults and controllable reasoning settings | product syntax may evolve | Used for Gemini adapter notes |",
+          "disposition": "accepted",
+          "reason": "SOURCES.md lists provenance URLs (agents.md, OpenAI, Anthropic, Gemini docs, arXiv, dspy.ai) as citations; the skill does not instruct fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 32,
+          "evidence": "https://",
+          "context": "| `https://ai.google.dev/gemini-api/docs/long-context` | official docs | canonical | 2026-04-18 | high | Many-shot in-context learning and long-context prompt placement notes | provider-specific behavior | Supports many-shot adapter note |",
+          "disposition": "accepted",
+          "reason": "SOURCES.md lists provenance URLs (agents.md, OpenAI, Anthropic, Gemini docs, arXiv, dspy.ai) as citations; the skill does not instruct fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 33,
+          "evidence": "https://",
+          "context": "| `https://arxiv.org/abs/2309.03409` | research paper | canonical | 2026-04-18 | high | OPRO candidate search loop and score-driven prompt optimization | research result, not product guarantee | Supports candidate beam design |",
+          "disposition": "accepted",
+          "reason": "SOURCES.md lists provenance URLs (agents.md, OpenAI, Anthropic, Gemini docs, arXiv, dspy.ai) as citations; the skill does not instruct fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 34,
+          "evidence": "https://",
+          "context": "| `https://arxiv.org/abs/2305.03495` | research paper | canonical | 2026-04-18 | high | Textual gradients, minibatch critiques, beam search | research result, not product guarantee | Supports critique-driven edits |",
+          "disposition": "accepted",
+          "reason": "SOURCES.md lists provenance URLs (agents.md, OpenAI, Anthropic, Gemini docs, arXiv, dspy.ai) as citations; the skill does not instruct fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 35,
+          "evidence": "https://",
+          "context": "| `https://arxiv.org/abs/2303.17651` | research paper | canonical | 2026-04-18 | high | FEEDBACK -> REFINE loop and test-time improvement | research result, not product guarantee | Supports iterative refinement loop |",
+          "disposition": "accepted",
+          "reason": "SOURCES.md lists provenance URLs (agents.md, OpenAI, Anthropic, Gemini docs, arXiv, dspy.ai) as citations; the skill does not instruct fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 36,
+          "evidence": "https://",
+          "context": "| `https://arxiv.org/abs/2303.11366` | research paper | canonical | 2026-04-18 | high | Reflection memory across trials for agents | research result, not product guarantee | Supports optimization log and reflection memory |",
+          "disposition": "accepted",
+          "reason": "SOURCES.md lists provenance URLs (agents.md, OpenAI, Anthropic, Gemini docs, arXiv, dspy.ai) as citations; the skill does not instruct fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 37,
+          "evidence": "https://",
+          "context": "| `https://dspy.ai/` | official project docs | canonical | 2026-04-18 | high | Current prompt optimizers such as GEPA and MIPROv2; score-driven instruction search; composable optimization | framework-specific guidance | Supports modern opti",
+          "disposition": "accepted",
+          "reason": "SOURCES.md lists provenance URLs (agents.md, OpenAI, Anthropic, Gemini docs, arXiv, dspy.ai) as citations; the skill does not instruct fetching them."
+        }
+      ]
+    },
+    {
+      "path": "SPEC.md",
+      "sha256": "b56cdc168549dc916a29dc2c360fff95ecc0db8618eb43839c1eef9a11f1d499",
+      "bytes": 5219,
+      "mode": "100644",
+      "git_blob": "f2562e7a57a34261007f429dd49cce7bbe5a0e02",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": []
+    }
+  ]
+}

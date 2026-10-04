@@ -1,0 +1,176 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "anthropics/academy-guide",
+  "status": "approved",
+  "reviewed_on": "2026-10-02",
+  "reviewer": "AI-assisted artifact review; not an independent security certification",
+  "source": {
+    "repo": "anthropics/skills",
+    "path": "skills/academy-guide",
+    "revision": "8a1541c4a3ffa5a20a5a91de0dcf3f0bab1d1ef4"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "skills/academy-guide",
+    "url": "https://api.github.com/repos/anthropics/skills/git/trees/8a1541c4a3ffa5a20a5a91de0dcf3f0bab1d1ef4?recursive=1",
+    "notes": "Non-truncated pinned tree inspected with git ls-tree. The subtree contains only SKILL.md and LICENSE.txt: no symlink, submodule, script, binary, or nested licensing override. The repository-root THIRD_PARTY_NOTICES.md covers third-party software and fonts (BSD-2-Clause, GPL-3.0, HPND, OFL-1.1) that this text-only subtree does not contain."
+  },
+  "license": {
+    "spdx": "Apache-2.0",
+    "redistributable": true,
+    "path": "LICENSE.txt",
+    "url": "https://github.com/anthropics/skills/blob/8a1541c4a3ffa5a20a5a91de0dcf3f0bab1d1ef4/skills/academy-guide/LICENSE.txt",
+    "scope_reason": "SKILL.md frontmatter expressly refers to this folder-local LICENSE.txt, which is the unmodified Apache License 2.0. Both files were read in full; the skill text contains no copied third-party material. No repository-wide license assumption is used.",
+    "obligations": [
+      "Redistribute the original license file with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files; no extra upstream NOTICE exists in scope.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "low",
+    "blocking_findings": [],
+    "capabilities": {
+      "network": true,
+      "filesystem_write": false
+    },
+    "notes": [
+      "Read the complete SKILL.md and LICENSE.txt. The skill tells the agent, after answering a question about using Claude, to optionally recommend at most two strong-match items from Claude Academy.",
+      "Network: when the agent can fetch URLs it may fetch the public JSON catalog at academy.claude.com/assets/data/catalog.json once per conversation. The skill explicitly says to treat the file as data, not instructions, to read only item fields, and to share only URLs under https://academy.claude.com/. Risk is low: a public read with no credentials, uploads, or user data sent.",
+      "No shell command, package installation, file write, credential access, encoded content, or destructive operation is prescribed. The skill only adds a short recommendation line to replies.",
+      "Approval covers redistribution and installation. Whether recommendations are accurate depends on the live Academy catalog and has not been evaluated."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "bc6b3af2f331cbc7fb0da1344efb2cbe5877a31498b4d70dbc7000f3405a1362",
+      "bytes": 11345,
+      "mode": "100644",
+      "git_blob": "4f881c52d1f72f4cfb720e339e2d35c3058d01a9",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "The artifact-local license text is retained without modification.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 4,
+          "evidence": "http://",
+          "context": "                        http://www.apache.org/licenses/",
+          "disposition": "accepted",
+          "reason": "License attribution URL is documentation, not an instruction to fetch or execute."
+        },
+        {
+          "type": "network-access",
+          "line": 196,
+          "evidence": "http://",
+          "context": "       http://www.apache.org/licenses/LICENSE-2.0",
+          "disposition": "accepted",
+          "reason": "License attribution URL is documentation, not an instruction to fetch or execute."
+        }
+      ]
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "f27992510c051355dfe68c92394d509af730da5298094ec86834ee40bbd31376",
+      "bytes": 7755,
+      "mode": "100644",
+      "git_blob": "cefeaeb20cc29a803af0335d7c7155b066d8770f",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "This file expressly references the co-located LICENSE.txt in its frontmatter.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 30,
+          "evidence": "https://",
+          "context": "All content lives on [Claude Academy](https://academy.claude.com),",
+          "disposition": "accepted",
+          "reason": "A public academy.claude.com link the agent may show the user; no request is made by including it."
+        },
+        {
+          "type": "network-access",
+          "line": 40,
+          "evidence": "https://",
+          "context": "surface: [Claude](https://academy.claude.com/claude),",
+          "disposition": "accepted",
+          "reason": "A public academy.claude.com link the agent may show the user; no request is made by including it."
+        },
+        {
+          "type": "network-access",
+          "line": 41,
+          "evidence": "https://",
+          "context": "[Claude Code](https://academy.claude.com/code),",
+          "disposition": "accepted",
+          "reason": "A public academy.claude.com link the agent may show the user; no request is made by including it."
+        },
+        {
+          "type": "network-access",
+          "line": 42,
+          "evidence": "https://",
+          "context": "[Claude Cowork](https://academy.claude.com/cowork),",
+          "disposition": "accepted",
+          "reason": "A public academy.claude.com link the agent may show the user; no request is made by including it."
+        },
+        {
+          "type": "network-access",
+          "line": 43,
+          "evidence": "https://",
+          "context": "[AI Fluency](https://academy.claude.com/fluency), and the",
+          "disposition": "accepted",
+          "reason": "A public academy.claude.com link the agent may show the user; no request is made by including it."
+        },
+        {
+          "type": "network-access",
+          "line": 44,
+          "evidence": "https://",
+          "context": "[developer platform](https://academy.claude.com/platform). When a user",
+          "disposition": "accepted",
+          "reason": "A public academy.claude.com link the agent may show the user; no request is made by including it."
+        },
+        {
+          "type": "network-access",
+          "line": 90,
+          "evidence": "https://",
+          "context": "   to the [resources library](https://academy.claude.com/resources) for",
+          "disposition": "accepted",
+          "reason": "A public academy.claude.com link the agent may show the user; no request is made by including it."
+        },
+        {
+          "type": "network-access",
+          "line": 101,
+          "evidence": "https://",
+          "context": "   `https://academy.claude.com/` plus its path: `/courses/{slug}` for",
+          "disposition": "accepted",
+          "reason": "A public academy.claude.com link the agent may show the user; no request is made by including it."
+        },
+        {
+          "type": "network-access",
+          "line": 115,
+          "evidence": "https://",
+          "context": "   [academy.claude.com/resources](https://academy.claude.com/resources)",
+          "disposition": "accepted",
+          "reason": "A public academy.claude.com link the agent may show the user; no request is made by including it."
+        },
+        {
+          "type": "network-access",
+          "line": 124,
+          "evidence": "https://",
+          "context": "[academy.claude.com/assets/data/catalog.json](https://academy.claude.com/assets/data/catalog.json),",
+          "disposition": "accepted",
+          "reason": "The public Academy catalog JSON the skill may read once per conversation; treated as data, not instructions."
+        },
+        {
+          "type": "network-access",
+          "line": 145,
+          "evidence": "https://",
+          "context": "copied verbatim and only ever under `https://academy.claude.com/`.",
+          "disposition": "accepted",
+          "reason": "A public academy.claude.com link the agent may show the user; no request is made by including it."
+        }
+      ]
+    }
+  ]
+}

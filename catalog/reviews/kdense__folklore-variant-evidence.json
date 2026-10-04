@@ -1,0 +1,299 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "kdense/folklore-variant-evidence",
+  "status": "approved",
+  "reviewed_on": "2026-10-02",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "K-Dense-AI/scientific-agent-skills",
+    "path": "skills/folklore-variant-evidence",
+    "revision": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "skills/folklore-variant-evidence",
+    "url": "https://api.github.com/repos/K-Dense-AI/scientific-agent-skills/git/trees/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE.md",
+    "url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/154988403bb5a18e9d3c0ce4e6d5e2e4b184a298/LICENSE.md",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "skills",
+        "skills/folklore-variant-evidence"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE.md is the MIT License with its copyright notice, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice or other license grant applies to the skill text; frontmatter declares MIT with the service vendor as author. SKILL.md:28 states that the vendor's separate public adapter repository is Apache-2.0 and links to it; that describes the external project, which is cited and linked (mcp-contract.md:182-187), not copied. A byte-exact copy of LICENSE.md ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "medium",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md and references/mcp-contract.md in full. Vendor-authored (Helena Bioinformatics) workflow for the hosted Folklore Clinical Variant Interpretation MCP: resolve one public GRCh38 germline SNV/indel, branch strictly on resolved/ambiguous/not_found/invalid_request/unsupported/resolution_unavailable, chain into variant literature, publication details, corpus search, and ClinGen gene-disease assertions, with provenance and a professional-review boundary statement.",
+      "The agent connects to the MCP endpoint or runs curl JSON-RPC POSTs (SKILL.md:35-44, references/mcp-contract.md:27-35) against https://api.helena.bio/folklore/v1/mcp; no account, API key, package install or file write is involved, and all calls are read-only lookups. Medium because the agent sends queries to a live third-party service in a clinical-adjacent domain; acceptable because the skill enforces strict data minimization (SKILL.md:72-86, 222-223: remove or refuse patient, phenotype, family and private case data) and forbids presenting results as diagnosis or treatment advice.",
+      "Optional pointers to other skills (`database-lookup`, `genomic-coordinates`, SKILL.md:61-64) are not bundled and are not required. The missing-path signals for `tools/list`/`tools/call` are MCP JSON-RPC method names, not files. The `support_helena` tool (SKILL.md:104) is to be used only when explicitly requested. Content is dated to adapter 1.5.0 / protocol 2026-07-28."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE.md",
+      "sha256": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "eb246475fd5a66b9bb56176f3a718984632dd98d",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry the copyright and permission notice.",
+      "findings": []
+    },
+    {
+      "path": "references/mcp-contract.md",
+      "sha256": "ccc2a4ccd7ea57887575ee8c10fa8ae26e676791cdddf6ebd848872a81229a8f",
+      "bytes": 11040,
+      "mode": "100644",
+      "git_blob": "97d87f71a4a5bbf359037d1c9fd7b23355436c06",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 11,
+          "evidence": "https://",
+          "context": "- Endpoint: `https://api.helena.bio/folklore/v1/mcp`",
+          "disposition": "accepted",
+          "reason": "The hosted MCP endpoint the agent queries via MCP or curl, plus links to the vendor's docs and pinned-commit GitHub source files that are cited, not fetched by instruction."
+        },
+        {
+          "type": "network-access",
+          "line": 25,
+          "evidence": "curl",
+          "context": "`params._meta`, as in the skill's curl example. The discovery request is:",
+          "disposition": "accepted",
+          "reason": "The hosted MCP endpoint the agent queries via MCP or curl, plus links to the vendor's docs and pinned-commit GitHub source files that are cited, not fetched by instruction."
+        },
+        {
+          "type": "shell-execution",
+          "line": 27,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks with curl POST requests to the public, unauthenticated MCP endpoint for tools/call and tools/list."
+        },
+        {
+          "type": "network-access",
+          "line": 28,
+          "evidence": "curl",
+          "context": "curl --silent --show-error --fail-with-body --max-time 60 \\",
+          "disposition": "accepted",
+          "reason": "The hosted MCP endpoint the agent queries via MCP or curl, plus links to the vendor's docs and pinned-commit GitHub source files that are cited, not fetched by instruction."
+        },
+        {
+          "type": "network-access",
+          "line": 29,
+          "evidence": "https://",
+          "context": "  -X POST https://api.helena.bio/folklore/v1/mcp \\",
+          "disposition": "accepted",
+          "reason": "The hosted MCP endpoint the agent queries via MCP or curl, plus links to the vendor's docs and pinned-commit GitHub source files that are cited, not fetched by instruction."
+        },
+        {
+          "type": "network-access",
+          "line": 182,
+          "evidence": "https://",
+          "context": "- [Hosted technical guide](https://folklore.helena.bio/docs/folklore-connector)",
+          "disposition": "accepted",
+          "reason": "The hosted MCP endpoint the agent queries via MCP or curl, plus links to the vendor's docs and pinned-commit GitHub source files that are cited, not fetched by instruction."
+        },
+        {
+          "type": "network-access",
+          "line": 183,
+          "evidence": "https://",
+          "context": "- [Protocol compatibility](https://github.com/helena-bioinformatics/folklore-mcp/blob/fef7220d66f99c3c021f8eee1cdd6b8ea4b0a64b/docs/COMPATIBILITY.md)",
+          "disposition": "accepted",
+          "reason": "The hosted MCP endpoint the agent queries via MCP or curl, plus links to the vendor's docs and pinned-commit GitHub source files that are cited, not fetched by instruction."
+        },
+        {
+          "type": "network-access",
+          "line": 184,
+          "evidence": "https://",
+          "context": "- [Tool response construction](https://github.com/helena-bioinformatics/folklore-mcp/blob/fef7220d66f99c3c021f8eee1cdd6b8ea4b0a64b/src/folklore_mcp_service/presentation/mcp.py)",
+          "disposition": "accepted",
+          "reason": "The hosted MCP endpoint the agent queries via MCP or curl, plus links to the vendor's docs and pinned-commit GitHub source files that are cited, not fetched by instruction."
+        },
+        {
+          "type": "network-access",
+          "line": 185,
+          "evidence": "https://",
+          "context": "- [Variant contracts](https://github.com/helena-bioinformatics/folklore-mcp/blob/fef7220d66f99c3c021f8eee1cdd6b8ea4b0a64b/src/folklore_mcp_service/domain/contracts.py)",
+          "disposition": "accepted",
+          "reason": "The hosted MCP endpoint the agent queries via MCP or curl, plus links to the vendor's docs and pinned-commit GitHub source files that are cited, not fetched by instruction."
+        },
+        {
+          "type": "network-access",
+          "line": 186,
+          "evidence": "https://",
+          "context": "- [Literature contracts](https://github.com/helena-bioinformatics/folklore-mcp/blob/fef7220d66f99c3c021f8eee1cdd6b8ea4b0a64b/src/folklore_mcp_service/domain/literature_contracts.py)",
+          "disposition": "accepted",
+          "reason": "The hosted MCP endpoint the agent queries via MCP or curl, plus links to the vendor's docs and pinned-commit GitHub source files that are cited, not fetched by instruction."
+        },
+        {
+          "type": "network-access",
+          "line": 187,
+          "evidence": "https://",
+          "context": "- [Gene-disease contracts](https://github.com/helena-bioinformatics/folklore-mcp/blob/fef7220d66f99c3c021f8eee1cdd6b8ea4b0a64b/src/folklore_mcp_service/domain/gene_disease_contracts.py)",
+          "disposition": "accepted",
+          "reason": "The hosted MCP endpoint the agent queries via MCP or curl, plus links to the vendor's docs and pinned-commit GitHub source files that are cited, not fetched by instruction."
+        }
+      ]
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "134b5ea684815b99c56fadf92a1cb42d37eaca4245515278e404b8876b7acfe0",
+      "bytes": 13542,
+      "mode": "100644",
+      "git_blob": "84f3fd02fab81f0aea248b7f8fce4b74e606c609",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 5,
+          "evidence": "curl",
+          "context": "compatibility: Requires network access to api.helena.bio (stateless Streamable HTTP MCP, no credentials) and a host supporting its advertised protocol, or curl for direct JSON-RPC POST requests.",
+          "disposition": "accepted",
+          "reason": "Frontmatter compatibility note naming curl as a transport option; not itself a command."
+        },
+        {
+          "type": "network-access",
+          "line": 10,
+          "evidence": "https://",
+          "context": "  website: \"https://folklore.helena.bio\"",
+          "disposition": "accepted",
+          "reason": "The hosted MCP endpoint the agent queries via MCP or curl, plus links to the vendor's docs and pinned-commit GitHub source files that are cited, not fetched by instruction."
+        },
+        {
+          "type": "network-access",
+          "line": 11,
+          "evidence": "https://",
+          "context": "  github: \"https://github.com/helena-bioinformatics/folklore-mcp\"",
+          "disposition": "accepted",
+          "reason": "The hosted MCP endpoint the agent queries via MCP or curl, plus links to the vendor's docs and pinned-commit GitHub source files that are cited, not fetched by instruction."
+        },
+        {
+          "type": "network-access",
+          "line": 25,
+          "evidence": "https://",
+          "context": "https://api.helena.bio/folklore/v1/mcp",
+          "disposition": "accepted",
+          "reason": "The hosted MCP endpoint the agent queries via MCP or curl, plus links to the vendor's docs and pinned-commit GitHub source files that are cited, not fetched by instruction."
+        },
+        {
+          "type": "credential-access",
+          "line": 28,
+          "evidence": "API key",
+          "context": "No account or API key is required. The public Apache-2.0 adapter and contract are",
+          "disposition": "accepted",
+          "reason": "SKILL.md:28 states that no account or API key is required; no credential is read or used."
+        },
+        {
+          "type": "network-access",
+          "line": 29,
+          "evidence": "https://",
+          "context": "available at <https://github.com/helena-bioinformatics/folklore-mcp>.",
+          "disposition": "accepted",
+          "reason": "The hosted MCP endpoint the agent queries via MCP or curl, plus links to the vendor's docs and pinned-commit GitHub source files that are cited, not fetched by instruction."
+        },
+        {
+          "type": "shell-execution",
+          "line": 35,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks with curl POST requests to the public, unauthenticated MCP endpoint for tools/call and tools/list."
+        },
+        {
+          "type": "network-access",
+          "line": 36,
+          "evidence": "curl",
+          "context": "curl --silent --show-error --fail-with-body --max-time 60 \\",
+          "disposition": "accepted",
+          "reason": "The hosted MCP endpoint the agent queries via MCP or curl, plus links to the vendor's docs and pinned-commit GitHub source files that are cited, not fetched by instruction."
+        },
+        {
+          "type": "network-access",
+          "line": 37,
+          "evidence": "https://",
+          "context": "  -X POST https://api.helena.bio/folklore/v1/mcp \\",
+          "disposition": "accepted",
+          "reason": "The hosted MCP endpoint the agent queries via MCP or curl, plus links to the vendor's docs and pinned-commit GitHub source files that are cited, not fetched by instruction."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 80,
+          "evidence": "Remove",
+          "context": "3. Remove or refuse patient names, case identifiers, phenotypes, family history,",
+          "disposition": "accepted",
+          "reason": "False positive: SKILL.md:80 tells the agent to remove patient-identifying context from the query, not to delete files."
+        },
+        {
+          "type": "network-access",
+          "line": 175,
+          "evidence": "https://",
+          "context": "  as required by the [upstream interpretation guidance](https://github.com/helena-bioinformatics/folklore-mcp).",
+          "disposition": "accepted",
+          "reason": "The hosted MCP endpoint the agent queries via MCP or curl, plus links to the vendor's docs and pinned-commit GitHub source files that are cited, not fetched by instruction."
+        },
+        {
+          "type": "network-access",
+          "line": 264,
+          "evidence": "https://",
+          "context": "- Integration setup: <https://folklore.helena.bio/integrations>",
+          "disposition": "accepted",
+          "reason": "The hosted MCP endpoint the agent queries via MCP or curl, plus links to the vendor's docs and pinned-commit GitHub source files that are cited, not fetched by instruction."
+        },
+        {
+          "type": "network-access",
+          "line": 265,
+          "evidence": "https://",
+          "context": "- Technical guide: <https://folklore.helena.bio/docs/folklore-connector>",
+          "disposition": "accepted",
+          "reason": "The hosted MCP endpoint the agent queries via MCP or curl, plus links to the vendor's docs and pinned-commit GitHub source files that are cited, not fetched by instruction."
+        },
+        {
+          "type": "network-access",
+          "line": 266,
+          "evidence": "https://",
+          "context": "- Public adapter and contract: <https://github.com/helena-bioinformatics/folklore-mcp>",
+          "disposition": "accepted",
+          "reason": "The hosted MCP endpoint the agent queries via MCP or curl, plus links to the vendor's docs and pinned-commit GitHub source files that are cited, not fetched by instruction."
+        }
+      ]
+    }
+  ]
+}

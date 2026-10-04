@@ -1,0 +1,269 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "bagelhole/aws-ec2",
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "infrastructure/cloud-aws/aws-ec2",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "review": {
+    "path": "catalog/reviews/bagelhole__aws-ec2.json",
+    "sha256": "446a3e22ee885c79d5e69742ea89ed7f27fa6e2423fd823d6529700bbda4aef1"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "encoded_content": true
+    },
+    "findings": [
+      {
+        "type": "shell-execution",
+        "line": 5,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/ec2-operations.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 26,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/ec2-operations.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 52,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/ec2-operations.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 53,
+        "evidence": "bash",
+        "context": "#!/bin/bash",
+        "file": "references/ec2-operations.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 63,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/ec2-operations.md"
+      },
+      {
+        "type": "network-access",
+        "line": 65,
+        "evidence": "curl",
+        "context": "TOKEN=$(curl -X PUT \"http://169.254.169.254/latest/api/token\" -H \"X-aws-ec2-metadata-token-ttl-seconds: 21600\")",
+        "file": "references/ec2-operations.md"
+      },
+      {
+        "type": "network-access",
+        "line": 65,
+        "evidence": "http://",
+        "context": "TOKEN=$(curl -X PUT \"http://169.254.169.254/latest/api/token\" -H \"X-aws-ec2-metadata-token-ttl-seconds: 21600\")",
+        "file": "references/ec2-operations.md"
+      },
+      {
+        "type": "network-access",
+        "line": 66,
+        "evidence": "curl",
+        "context": "curl -H \"X-aws-ec2-metadata-token: $TOKEN\" http://169.254.169.254/latest/meta-data/",
+        "file": "references/ec2-operations.md"
+      },
+      {
+        "type": "network-access",
+        "line": 66,
+        "evidence": "http://",
+        "context": "curl -H \"X-aws-ec2-metadata-token: $TOKEN\" http://169.254.169.254/latest/meta-data/",
+        "file": "references/ec2-operations.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 87,
+        "evidence": "sh",
+        "context": "  user_data = base64encode(file(\"userdata.sh\"))",
+        "file": "references/ec2-operations.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 43,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 68,
+        "evidence": "sh",
+        "context": "  --user-data file://userdata.sh",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 80,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 81,
+        "evidence": "bash",
+        "context": "#!/bin/bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 82,
+        "evidence": "sh",
+        "context": "# userdata.sh - Bootstrap a web server on Amazon Linux 2023",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 100,
+        "evidence": "wget",
+        "context": "dnf install -y ruby wget",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 102,
+        "evidence": "wget",
+        "context": "wget https://aws-codedeploy-us-east-1.s3.us-east-1.amazonaws.com/latest/install",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 102,
+        "evidence": "https://",
+        "context": "wget https://aws-codedeploy-us-east-1.s3.us-east-1.amazonaws.com/latest/install",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 102,
+        "evidence": "\nchmod",
+        "context": "wget https://aws-codedeploy-us-east-1.s3.us-east-1.amazonaws.com/latest/install",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 112,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "encoded-content",
+        "line": 143,
+        "evidence": "base64",
+        "context": "    \"UserData\": \"'\"$(base64 -w0 userdata.sh)\"'\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 143,
+        "evidence": "sh",
+        "context": "    \"UserData\": \"'\"$(base64 -w0 userdata.sh)\"'\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 161,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 223,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 262,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 281,
+        "evidence": "delete",
+        "context": "# Deregister old AMIs and delete associated snapshots",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 283,
+        "evidence": "delete",
+        "context": "aws ec2 delete-snapshot --snapshot-id snap-old123",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 293,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 345,
+        "evidence": "sh",
+        "context": "  user_data = base64encode(file(\"userdata.sh\"))",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "encoded-content",
+        "line": 399,
+        "evidence": "base64",
+        "context": "| User data not running | Script missing shebang or not base64 | Verify `#!/bin/bash` header; check `/var/log/cloud-init-output.log` |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 399,
+        "evidence": "bash",
+        "context": "| User data not running | Script missing shebang or not base64 | Verify `#!/bin/bash` header; check `/var/log/cloud-init-output.log` |",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 16135
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/ec2-operations.md",
+      "sha256": "c74ab8a36bf4962291eca3c7fa7518a4bc5fab7e214f24e59af350ac5efa2bc1",
+      "bytes": 2135,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "afab3066e83a65685de21bbe856c9f329d2a4d3781a0c3ec36712fee5cd5b101",
+      "bytes": 12932,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 16135
+}

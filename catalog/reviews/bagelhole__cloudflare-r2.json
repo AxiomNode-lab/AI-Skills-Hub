@@ -1,0 +1,336 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "bagelhole/cloudflare-r2",
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "infrastructure/cloudflare/cloudflare-r2",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "infrastructure/cloudflare/cloudflare-r2",
+    "url": "https://api.github.com/repos/BagelHole/DevOps-Security-Agent-Skills/git/trees/0365f57a079b1332f95cf26e31dd2d5332a8399f?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/BagelHole/DevOps-Security-Agent-Skills/blob/0365f57a079b1332f95cf26e31dd2d5332a8399f/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "infrastructure",
+        "infrastructure/cloudflare",
+        "infrastructure/cloudflare/cloudflare-r2"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in the file; CLI, API and code snippets are short examples, and the frontmatter declares license: MIT. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "medium",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "package_install": true,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md in full (single-file skill). The skill covers Cloudflare R2 bucket and object management with Wrangler, S3-compatible access via the AWS CLI and boto3, Worker bindings and a sample Worker, presigned URLs (boto3 and aws4fetch), public bucket access, and lifecycle and CORS rules via the Cloudflare API.",
+      "Medium: following it has the agent install Wrangler globally with npm, authenticate with the user's Cloudflare/R2 credentials (wrangler login, CLOUDFLARE_API_TOKEN, an aws CLI profile), create and delete buckets and objects, `aws s3 rm --recursive` a prefix, and PUT lifecycle/CORS configs to api.cloudflare.com with $CF_API_TOKEN. Acceptable because these are standard operations on the user's own Cloudflare account; the deletions (SKILL.md:44, 62, 111) are reference commands with example names and should be run only on user request.",
+      "Users should know: the sample Worker (SKILL.md:169-222) accepts unauthenticated PUT and DELETE requests, so add authentication before deploying it; the lifecycle example auto-deletes tmp/ and logs/ objects. Credentials are placeholders (<R2_ACCESS_KEY>, <ACCOUNT_ID>). Related Skills (SKILL.md:335-337) link to sibling skills ../cloudflare-workers/, ../cloudflare-pages/, ../../networking/cdn-setup/ as optional reading only."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "67c5c5cbb12cafb1515e449748866bd40da7dec9",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "e591a9307ef7799ff1862aaacd36d73121c48e4b429ba322414f28b60b02aaa1",
+      "bytes": 9517,
+      "mode": "100644",
+      "git_blob": "143ee3889c17836178fb9df0fa766626103e18d2",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "package-install",
+          "line": 25,
+          "evidence": "npm install",
+          "context": "- Wrangler CLI v3+ installed: `npm install -g wrangler`.",
+          "disposition": "accepted",
+          "reason": "Prerequisite installs the Wrangler CLI globally with npm."
+        },
+        {
+          "type": "shell-execution",
+          "line": 33,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks run wrangler, aws s3 and curl commands that create, upload to, configure and delete objects in the user's R2 buckets."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 43,
+          "evidence": "Delete",
+          "context": "# Delete an empty bucket",
+          "disposition": "accepted",
+          "reason": "Matches are R2 bucket/object delete commands, `aws s3 rm --recursive` on a bucket prefix and a Worker DELETE handler; these remove cloud objects, not local files."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 44,
+          "evidence": "delete",
+          "context": "npx wrangler r2 bucket delete old-bucket",
+          "disposition": "accepted",
+          "reason": "Matches are R2 bucket/object delete commands, `aws s3 rm --recursive` on a bucket prefix and a Worker DELETE handler; these remove cloud objects, not local files."
+        },
+        {
+          "type": "shell-execution",
+          "line": 49,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks run wrangler, aws s3 and curl commands that create, upload to, configure and delete objects in the user's R2 buckets."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 61,
+          "evidence": "Delete",
+          "context": "# Delete an object",
+          "disposition": "accepted",
+          "reason": "Matches are R2 bucket/object delete commands, `aws s3 rm --recursive` on a bucket prefix and a Worker DELETE handler; these remove cloud objects, not local files."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 62,
+          "evidence": "delete",
+          "context": "npx wrangler r2 object delete app-assets/images/old-logo.png",
+          "disposition": "accepted",
+          "reason": "Matches are R2 bucket/object delete commands, `aws s3 rm --recursive` on a bucket prefix and a Worker DELETE handler; these remove cloud objects, not local files."
+        },
+        {
+          "type": "credential-access",
+          "line": 77,
+          "evidence": "Secret",
+          "context": "4. Save the Access Key ID and Secret Access Key.",
+          "disposition": "accepted",
+          "reason": "Uses the user's own R2 access key/secret (placeholders in aws configure and boto3) and CF_API_TOKEN from the environment to call Cloudflare; no instruction to print or send secrets elsewhere."
+        },
+        {
+          "type": "shell-execution",
+          "line": 81,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks run wrangler, aws s3 and curl commands that create, upload to, configure and delete objects in the user's R2 buckets."
+        },
+        {
+          "type": "credential-access",
+          "line": 85,
+          "evidence": "Secret",
+          "context": "# Secret Access Key: <your-r2-secret-key>",
+          "disposition": "accepted",
+          "reason": "Uses the user's own R2 access key/secret (placeholders in aws configure and boto3) and CF_API_TOKEN from the environment to call Cloudflare; no instruction to print or send secrets elsewhere."
+        },
+        {
+          "type": "credential-access",
+          "line": 85,
+          "evidence": "secret",
+          "context": "# Secret Access Key: <your-r2-secret-key>",
+          "disposition": "accepted",
+          "reason": "Uses the user's own R2 access key/secret (placeholders in aws configure and boto3) and CF_API_TOKEN from the environment to call Cloudflare; no instruction to print or send secrets elsewhere."
+        },
+        {
+          "type": "network-access",
+          "line": 90,
+          "evidence": "https://",
+          "context": "export R2_ENDPOINT=\"https://<ACCOUNT_ID>.r2.cloudflarestorage.com\"",
+          "disposition": "accepted",
+          "reason": "Calls the Cloudflare API and R2 S3 endpoint for the user's account; other URLs are example.com/r2.dev placeholders."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 110,
+          "evidence": "Remove",
+          "context": "# Remove objects by prefix",
+          "disposition": "accepted",
+          "reason": "`aws s3 rm --recursive` deletes every object under the prefix; confirm the bucket and prefix with the user first."
+        },
+        {
+          "type": "network-access",
+          "line": 123,
+          "evidence": "https://",
+          "context": "    endpoint_url=\"https://<ACCOUNT_ID>.r2.cloudflarestorage.com\",",
+          "disposition": "accepted",
+          "reason": "Calls the Cloudflare API and R2 S3 endpoint for the user's account; other URLs are example.com/r2.dev placeholders."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 212,
+          "evidence": "DELETE",
+          "context": "    // DELETE — remove file",
+          "disposition": "accepted",
+          "reason": "Sample Worker exposes an unauthenticated DELETE route; add auth before deploying."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 212,
+          "evidence": "remove",
+          "context": "    // DELETE — remove file",
+          "disposition": "accepted",
+          "reason": "Sample Worker exposes an unauthenticated DELETE route; add auth before deploying."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 213,
+          "evidence": "DELETE",
+          "context": "    if (request.method === \"DELETE\") {",
+          "disposition": "accepted",
+          "reason": "Matches are R2 bucket/object delete commands, `aws s3 rm --recursive` on a bucket prefix and a Worker DELETE handler; these remove cloud objects, not local files."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 215,
+          "evidence": "delete",
+          "context": "      await env.UPLOADS.delete(key);",
+          "disposition": "accepted",
+          "reason": "Matches are R2 bucket/object delete commands, `aws s3 rm --recursive` on a bucket prefix and a Worker DELETE handler; these remove cloud objects, not local files."
+        },
+        {
+          "type": "network-access",
+          "line": 247,
+          "evidence": "https://",
+          "context": "    const r2Url = `https://${env.R2_ACCOUNT_ID}.r2.cloudflarestorage.com/app-assets/${key}`;",
+          "disposition": "accepted",
+          "reason": "Calls the Cloudflare API and R2 S3 endpoint for the user's account; other URLs are example.com/r2.dev placeholders."
+        },
+        {
+          "type": "network-access",
+          "line": 264,
+          "evidence": "https://",
+          "context": "3. Objects are accessible at `https://assets.example.com/<key>`.",
+          "disposition": "accepted",
+          "reason": "Calls the Cloudflare API and R2 S3 endpoint for the user's account; other URLs are example.com/r2.dev placeholders."
+        },
+        {
+          "type": "shell-execution",
+          "line": 266,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks run wrangler, aws s3 and curl commands that create, upload to, configure and delete objects in the user's R2 buckets."
+        },
+        {
+          "type": "network-access",
+          "line": 269,
+          "evidence": "https://",
+          "context": "# URL: https://pub-<hash>.r2.dev/<key>",
+          "disposition": "accepted",
+          "reason": "Calls the Cloudflare API and R2 S3 endpoint for the user's account; other URLs are example.com/r2.dev placeholders."
+        },
+        {
+          "type": "shell-execution",
+          "line": 276,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks run wrangler, aws s3 and curl commands that create, upload to, configure and delete objects in the user's R2 buckets."
+        },
+        {
+          "type": "network-access",
+          "line": 281,
+          "evidence": "curl",
+          "context": "curl -X PUT \"https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/r2/buckets/app-assets/lifecycle\" \\",
+          "disposition": "accepted",
+          "reason": "Calls the Cloudflare API and R2 S3 endpoint for the user's account; other URLs are example.com/r2.dev placeholders."
+        },
+        {
+          "type": "network-access",
+          "line": 281,
+          "evidence": "https://",
+          "context": "curl -X PUT \"https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/r2/buckets/app-assets/lifecycle\" \\",
+          "disposition": "accepted",
+          "reason": "Calls the Cloudflare API and R2 S3 endpoint for the user's account; other URLs are example.com/r2.dev placeholders."
+        },
+        {
+          "type": "shell-execution",
+          "line": 304,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks run wrangler, aws s3 and curl commands that create, upload to, configure and delete objects in the user's R2 buckets."
+        },
+        {
+          "type": "network-access",
+          "line": 306,
+          "evidence": "curl",
+          "context": "curl -X PUT \"https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/r2/buckets/app-assets/cors\" \\",
+          "disposition": "accepted",
+          "reason": "Calls the Cloudflare API and R2 S3 endpoint for the user's account; other URLs are example.com/r2.dev placeholders."
+        },
+        {
+          "type": "network-access",
+          "line": 306,
+          "evidence": "https://",
+          "context": "curl -X PUT \"https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/r2/buckets/app-assets/cors\" \\",
+          "disposition": "accepted",
+          "reason": "Calls the Cloudflare API and R2 S3 endpoint for the user's account; other URLs are example.com/r2.dev placeholders."
+        },
+        {
+          "type": "network-access",
+          "line": 312,
+          "evidence": "https://",
+          "context": "        \"allowedOrigins\": [\"https://example.com\"],",
+          "disposition": "accepted",
+          "reason": "Calls the Cloudflare API and R2 S3 endpoint for the user's account; other URLs are example.com/r2.dev placeholders."
+        },
+        {
+          "type": "network-access",
+          "line": 325,
+          "evidence": "https://",
+          "context": "| `NoSuchBucket` error via S3 API | Wrong endpoint or bucket name | Verify endpoint is `https://<ACCOUNT_ID>.r2.cloudflarestorage.com` |",
+          "disposition": "accepted",
+          "reason": "Calls the Cloudflare API and R2 S3 endpoint for the user's account; other URLs are example.com/r2.dev placeholders."
+        },
+        {
+          "type": "credential-access",
+          "line": 326,
+          "evidence": "secret",
+          "context": "| `SignatureDoesNotMatch` | Incorrect secret key or endpoint mismatch | Regenerate R2 API token; ensure region is `auto` |",
+          "disposition": "accepted",
+          "reason": "Uses the user's own R2 access key/secret (placeholders in aws configure and boto3) and CF_API_TOKEN from the environment to call Cloudflare; no instruction to print or send secrets elsewhere."
+        }
+      ]
+    }
+  ]
+}

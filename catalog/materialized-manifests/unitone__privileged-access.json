@@ -1,0 +1,242 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "unitone/privileged-access",
+  "source": {
+    "repo": "UnitOneAI/SecuritySkills",
+    "path": "skills/identity/privileged-access",
+    "revision": "70bc259bb01abb3015ad2ad859ad5253cbf0bcab"
+  },
+  "review": {
+    "path": "catalog/reviews/unitone__privileged-access.json",
+    "sha256": "2c2c5b0247172a8abdc78212e6ed24a4db1f2a0169fbeb975138ac008a4ec815"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": false,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "credential-access",
+        "line": 7,
+        "evidence": "credential",
+        "context": "  recording, and credential vaulting. Produces findings with severity, framework",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 39,
+        "evidence": "credential",
+        "context": "- Assessing credential vaulting and secrets management practices",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 40,
+        "evidence": "credential",
+        "context": "- Investigating incidents involving privileged credential compromise",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 52,
+        "evidence": "credential",
+        "context": "- Do NOT execute privilege changes or credential rotations. This skill is read-only assessment.",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 64,
+        "evidence": "credential",
+        "context": "Privileged accounts are the primary target in 74% of breaches involving credential misuse (Verizon DBIR). NIST SP 800-53 AC-6 mandates employing the principle of least privilege, authorizing only the access necessary for users to accomplish",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 64,
+        "evidence": "credential",
+        "context": "Privileged accounts are the primary target in 74% of breaches involving credential misuse (Verizon DBIR). NIST SP 800-53 AC-6 mandates employing the principle of least privilege, authorizing only the access necessary for users to accomplish",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 149,
+        "evidence": "Credential",
+        "context": "| **Credential Vaulting** | Credentials in plaintext/spreadsheets | Vault deployed, partial onboarding | All privileged credentials vaulted | Auto-discovered, auto-onboarded, auto-rotated |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 201,
+        "evidence": "credential",
+        "context": "PAM-JIT-09: Ephemeral credential patterns not used where available (static secrets in pipelines)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 276,
+        "evidence": "delete",
+        "context": "PAM-REC-03: Recordings stored on same system as PAM (admin can delete evidence)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 300,
+        "evidence": "Credential",
+        "context": "### Step 6: Credential Vaulting and Secrets Management",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 313,
+        "evidence": "credential",
+        "context": "PAM-VAULT-04: No automatic credential rotation after use or on schedule",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 318,
+        "evidence": "credential",
+        "context": "PAM-VAULT-09: Vault HA/DR not configured — credential lockout during outage",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 321,
+        "evidence": "credential",
+        "context": "PAM-VAULT-12: No secrets scanning in code repositories to detect credential leaks",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 324,
+        "evidence": "Credential",
+        "context": "**Credential management hierarchy (prefer top):**",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 340,
+        "evidence": "Secret",
+        "context": "| **GCP** | Workload Identity Federation, Secret Manager with rotation | No user-managed service account keys, automatic rotation |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 350,
+        "evidence": "credential",
+        "context": "| **Critical** | Immediate privileged credential exposure or uncontrolled access | Plaintext credentials in code repos; no PAM for production admin; root account with no MFA |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 389,
+        "evidence": "Credential",
+        "context": "| Credential Vaulting | [Not Present/Basic/Mature/Advanced] | [Target] |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 407,
+        "evidence": "Credential",
+        "context": "- Credential Vaulting (Step 6): [count]",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 413,
+        "evidence": "credential",
+        "context": "- Immediate (0-7 days): [critical findings — credential exposure, uncontrolled root access]",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 445,
+        "evidence": "credential",
+        "context": "| **5.2** | Use Unique Passwords | No credential sharing between accounts or individuals |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 490,
+        "evidence": "https://",
+        "context": "- NIST SP 800-53 Rev. 5, Security and Privacy Controls — AC-6 Least Privilege: https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 491,
+        "evidence": "https://",
+        "context": "- CIS Controls v8, Control 5 (Account Management), Control 6 (Access Control Management): https://www.cisecurity.org/controls/v8",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 492,
+        "evidence": "https://",
+        "context": "- NIST SP 800-207, Zero Trust Architecture (JIT access principles): https://csrc.nist.gov/publications/detail/sp/800-207/final",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 493,
+        "evidence": "https://",
+        "context": "- CISA Privileged Access Management Guidance: https://www.cisa.gov",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 494,
+        "evidence": "credential",
+        "context": "- Verizon Data Breach Investigations Report (DBIR) — credential misuse statistics: https://www.verizon.com/business/resources/reports/dbir/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 494,
+        "evidence": "https://",
+        "context": "- Verizon Data Breach Investigations Report (DBIR) — credential misuse statistics: https://www.verizon.com/business/resources/reports/dbir/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 495,
+        "evidence": "Credential",
+        "context": "- MITRE ATT&CK — Credential Access (TA0006), Privilege Escalation (TA0004): https://attack.mitre.org",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 495,
+        "evidence": "https://",
+        "context": "- MITRE ATT&CK — Credential Access (TA0006), Privilege Escalation (TA0004): https://attack.mitre.org",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 30741
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "66eb5ec637cc578833ddcbc870dbf46c6718fd83e985fad5f0f5cf30d60cf47d",
+      "bytes": 1067,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "a84add29b90c88c98b2df8694978806bbe8d8b0b7c25bcf04bef8a9405b8bb9d",
+      "bytes": 29674,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 30741
+}

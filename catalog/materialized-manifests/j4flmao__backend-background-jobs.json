@@ -1,0 +1,163 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "j4flmao/backend-background-jobs",
+  "source": {
+    "repo": "j4flmao/agent-skills",
+    "path": "skills/backend/universal/background-jobs",
+    "revision": "d9f812988c8926767ee96f66c1a340d65b595799"
+  },
+  "review": {
+    "path": "catalog/reviews/j4flmao__backend-background-jobs.json",
+    "sha256": "b6c4404063aac7eac0a953c088b93b4bb30ef009dd85d54c1834573b12180963"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": false,
+      "network": false,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "filesystem-write",
+        "line": 64,
+        "evidence": "delete",
+        "context": "    pending.delete(jobId);",
+        "file": "references/background-jobs-chaining.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 68,
+        "evidence": "delete",
+        "context": "      this.pending.delete(groupId);",
+        "file": "references/background-jobs-chaining.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 34,
+        "evidence": "delete",
+        "context": "      this.jobs.delete(name);",
+        "file": "references/job-scheduling.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 142,
+        "evidence": "process.env",
+        "context": "      const lock = await this.redis.set(lockKey, process.env.HOSTNAME, 'NX', 'PX', this.LOCK_TTL);",
+        "file": "references/job-scheduling.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 152,
+        "evidence": "process.env",
+        "context": "            if (currentValue === process.env.HOSTNAME) {",
+        "file": "references/job-scheduling.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 10,
+        "evidence": "process.env",
+        "context": "  host: process.env.REDIS_HOST || 'localhost',",
+        "file": "references/queue-setup.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 11,
+        "evidence": "process.env",
+        "context": "  port: parseInt(process.env.REDIS_PORT || '6379'),",
+        "file": "references/queue-setup.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 12,
+        "evidence": "process.env",
+        "context": "  password: process.env.REDIS_PASSWORD,",
+        "file": "references/queue-setup.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 162,
+        "evidence": "process.env",
+        "context": "const lockClient = createClient({ url: process.env.REDIS_URL });",
+        "file": "references/queue-setup.md"
+      }
+    ],
+    "total_bytes": 75912
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "b6b8d73f01a48d1411da29d8196e2d85cd91cc9e8d7ae6ac4863ae7e06e6d314",
+      "bytes": 1064,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/background-jobs-advanced.md",
+      "sha256": "bd95ccefa3066f0193d79d4119cd613d5423fe90fe0d6f86cc98fdd2315450ff",
+      "bytes": 5251,
+      "mode": "100644"
+    },
+    {
+      "path": "references/background-jobs-chaining.md",
+      "sha256": "83e5f0f0d0fb2a7ed89f985b00cced6691c959ad85b82940b451abe280339ecc",
+      "bytes": 3893,
+      "mode": "100644"
+    },
+    {
+      "path": "references/background-jobs-fundamentals.md",
+      "sha256": "7e339ab079f8654112b3d9ec250a1500d57113df6b717ef9312f4f6693daa3ab",
+      "bytes": 3450,
+      "mode": "100644"
+    },
+    {
+      "path": "references/job-monitoring.md",
+      "sha256": "9d8cc696f61d4565a67cebac05c0a3f51b6fedf4262f5878abffc89596dec67a",
+      "bytes": 3431,
+      "mode": "100644"
+    },
+    {
+      "path": "references/job-patterns.md",
+      "sha256": "bb4651b1e8ddde5ad61f05f0628e037415e05f502c9081b49678289c2d56469b",
+      "bytes": 5064,
+      "mode": "100644"
+    },
+    {
+      "path": "references/job-scheduling.md",
+      "sha256": "cb46e4079b252182cb319f72149d7690ee40b6a26fb3c5ee10352fcd0f3cf724",
+      "bytes": 7550,
+      "mode": "100644"
+    },
+    {
+      "path": "references/job-testing.md",
+      "sha256": "67d1c6b6585c4f2e11dde68b9519ac22322c27a6b5dc0131a17bb9a98e36bb95",
+      "bytes": 6974,
+      "mode": "100644"
+    },
+    {
+      "path": "references/job-types.md",
+      "sha256": "adaf9020d3a2aca5539b7481dd98bc8e2a17e80d429dc606d4d6e2f035d121f9",
+      "bytes": 7121,
+      "mode": "100644"
+    },
+    {
+      "path": "references/queue-setup.md",
+      "sha256": "803dcdbf83a618958599b0b355c4d4a403fd706ead051128def1ace96ac77269",
+      "bytes": 7962,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "b49c73bdf0f4d6794a3dc6b9c79998bb38398cb3f970117e5b250e61b4f0113d",
+      "bytes": 24152,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 75912
+}

@@ -1,0 +1,762 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "microsoft/azure-storage-blob-ts",
+  "status": "approved",
+  "reviewed_on": "2026-10-02",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/azure-sdk-typescript/skills/azure-storage-blob-ts",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": ".github/plugins/azure-sdk-typescript/skills/azure-storage-blob-ts",
+    "url": "https://api.github.com/repos/microsoft/skills/git/trees/84d8eaa8ae95930f55cdceb3e27196c795dab038?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/microsoft/skills/blob/84d8eaa8ae95930f55cdceb3e27196c795dab038/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        ".github",
+        ".github/plugins",
+        ".github/plugins/azure-sdk-typescript",
+        ".github/plugins/azure-sdk-typescript/skills",
+        ".github/plugins/azure-sdk-typescript/skills/azure-storage-blob-ts"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT License with its copyright notice, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice or other license grant found in any file; the '**Source**' lines link to Microsoft's own Azure SDK for JS repository as a citation and the code consists of short SDK usage samples. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "low",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": true,
+      "network": false,
+      "credentials": false,
+      "package_install": true,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md and references/sas-tokens.md, references/streaming.md in full. The skill is an SDK reference for @azure/storage-blob in TypeScript/JavaScript: client authentication, container/blob CRUD, SAS generation, streaming and block uploads.",
+      "The only command is the Installation block `npm install @azure/storage-blob @azure/identity` (official Microsoft packages) for the user's project; everything else is sample code the user's application would run against their own storage account with placeholder names and credentials from environment variables. No instruction for the agent itself to read, print or transmit secrets, call services, or delete data.",
+      "Samples include delete operations (containerClient.delete, blobClient.delete, a cleanup delete at streaming.md:401) and broad SAS permissions (account SAS 'rwdlacupi' at SKILL.md:359 and sas-tokens.md:159); these are user-code patterns, and sas-tokens.md:465-487 recommends least privilege, short expiry and user-delegation SAS. Some samples print full SAS URLs to the console (sas-tokens.md:405-457), which users should avoid in production logs."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "git_blob": "79656060de00aa4659ad2c276d5be8830664d544",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry the copyright and permission notice.",
+      "findings": []
+    },
+    {
+      "path": "references/sas-tokens.md",
+      "sha256": "3cf8e1419061494c9d97f827df7de0da55a2e19c58d3bb01d8683f26b621ee68",
+      "bytes": 12987,
+      "mode": "100644",
+      "git_blob": "d45d1a2130d0d8db4944cc2fa28e069a1e335951",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 5,
+          "evidence": "https://",
+          "context": "**Source**: [Azure SDK for JS - storage-blob](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/storage/storage-blob)",
+          "disposition": "accepted",
+          "reason": "Storage endpoint templates (https://${accountName}.blob.core.windows.net) in sample code and links to Microsoft Learn and the Azure SDK GitHub repo; the skill does not instruct the agent to fetch anything."
+        },
+        {
+          "type": "shell-execution",
+          "line": 11,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks contain only the npm install line and placeholder environment-variable assignments."
+        },
+        {
+          "type": "package-install",
+          "line": 12,
+          "evidence": "npm install",
+          "context": "npm install @azure/storage-blob @azure/identity",
+          "disposition": "accepted",
+          "reason": "`npm install @azure/storage-blob @azure/identity` installs the official Microsoft SDK packages the samples need in the user's project."
+        },
+        {
+          "type": "credential-access",
+          "line": 42,
+          "evidence": "credential",
+          "context": "const credential = new DefaultAzureCredential();",
+          "disposition": "accepted",
+          "reason": "SDK credential classes (DefaultAzureCredential, StorageSharedKeyCredential) and AZURE_STORAGE_* / STORAGE_ACCOUNT_* environment-variable names in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 44,
+          "evidence": "https://",
+          "context": "  `https://${accountName}.blob.core.windows.net`,",
+          "disposition": "accepted",
+          "reason": "Storage endpoint templates (https://${accountName}.blob.core.windows.net) in sample code and links to Microsoft Learn and the Azure SDK GitHub repo; the skill does not instruct the agent to fetch anything."
+        },
+        {
+          "type": "credential-access",
+          "line": 45,
+          "evidence": "credential",
+          "context": "  credential",
+          "disposition": "accepted",
+          "reason": "SDK credential classes (DefaultAzureCredential, StorageSharedKeyCredential) and AZURE_STORAGE_* / STORAGE_ACCOUNT_* environment-variable names in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 77,
+          "evidence": "https://",
+          "context": "const sasUrl = `https://${accountName}.blob.core.windows.net/${containerName}/${blobName}?${sasToken}`;",
+          "disposition": "accepted",
+          "reason": "Storage endpoint templates (https://${accountName}.blob.core.windows.net) in sample code and links to Microsoft Learn and the Azure SDK GitHub repo; the skill does not instruct the agent to fetch anything."
+        },
+        {
+          "type": "credential-access",
+          "line": 97,
+          "evidence": "process.env",
+          "context": "const accountName = process.env[\"STORAGE_ACCOUNT_NAME\"]!;",
+          "disposition": "accepted",
+          "reason": "SDK credential classes (DefaultAzureCredential, StorageSharedKeyCredential) and AZURE_STORAGE_* / STORAGE_ACCOUNT_* environment-variable names in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 98,
+          "evidence": "process.env",
+          "context": "const accountKey = process.env[\"STORAGE_ACCOUNT_KEY\"]!;",
+          "disposition": "accepted",
+          "reason": "SDK credential classes (DefaultAzureCredential, StorageSharedKeyCredential) and AZURE_STORAGE_* / STORAGE_ACCOUNT_* environment-variable names in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 109,
+          "evidence": "delete",
+          "context": "    permissions: BlobSASPermissions.parse(\"racwd\"), // read, add, create, write, delete",
+          "disposition": "accepted",
+          "reason": "Matches are Azure Blob delete APIs and SAS permission names (delete, delete version, permanent delete) in sample code and permission tables, not local file deletion by the agent."
+        },
+        {
+          "type": "network-access",
+          "line": 116,
+          "evidence": "https://",
+          "context": "const sasUrl = `https://${accountName}.blob.core.windows.net/my-container/my-blob.txt?${sasToken}`;",
+          "disposition": "accepted",
+          "reason": "Storage endpoint templates (https://${accountName}.blob.core.windows.net) in sample code and links to Microsoft Learn and the Azure SDK GitHub repo; the skill does not instruct the agent to fetch anything."
+        },
+        {
+          "type": "network-access",
+          "line": 137,
+          "evidence": "https://",
+          "context": "const containerSasUrl = `https://${accountName}.blob.core.windows.net/my-container?${containerSasToken}`;",
+          "disposition": "accepted",
+          "reason": "Storage endpoint templates (https://${accountName}.blob.core.windows.net) in sample code and links to Microsoft Learn and the Azure SDK GitHub repo; the skill does not instruct the agent to fetch anything."
+        },
+        {
+          "type": "network-access",
+          "line": 167,
+          "evidence": "https://",
+          "context": "const accountSasUrl = `https://${accountName}.blob.core.windows.net?${accountSasToken}`;",
+          "disposition": "accepted",
+          "reason": "Storage endpoint templates (https://${accountName}.blob.core.windows.net) in sample code and links to Microsoft Learn and the Azure SDK GitHub repo; the skill does not instruct the agent to fetch anything."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 182,
+          "evidence": "Delete",
+          "context": "| Delete | `d` | Delete blob |",
+          "disposition": "accepted",
+          "reason": "Matches are Azure Blob delete APIs and SAS permission names (delete, delete version, permanent delete) in sample code and permission tables, not local file deletion by the agent."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 182,
+          "evidence": "Delete",
+          "context": "| Delete | `d` | Delete blob |",
+          "disposition": "accepted",
+          "reason": "Matches are Azure Blob delete APIs and SAS permission names (delete, delete version, permanent delete) in sample code and permission tables, not local file deletion by the agent."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 183,
+          "evidence": "Delete",
+          "context": "| Delete Version | `x` | Delete blob version |",
+          "disposition": "accepted",
+          "reason": "Matches are Azure Blob delete APIs and SAS permission names (delete, delete version, permanent delete) in sample code and permission tables, not local file deletion by the agent."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 183,
+          "evidence": "Delete",
+          "context": "| Delete Version | `x` | Delete blob version |",
+          "disposition": "accepted",
+          "reason": "Matches are Azure Blob delete APIs and SAS permission names (delete, delete version, permanent delete) in sample code and permission tables, not local file deletion by the agent."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 188,
+          "evidence": "Delete",
+          "context": "| Permanent Delete | `y` | Permanently delete (soft-deleted) |",
+          "disposition": "accepted",
+          "reason": "Matches are Azure Blob delete APIs and SAS permission names (delete, delete version, permanent delete) in sample code and permission tables, not local file deletion by the agent."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 188,
+          "evidence": "delete",
+          "context": "| Permanent Delete | `y` | Permanently delete (soft-deleted) |",
+          "disposition": "accepted",
+          "reason": "Matches are Azure Blob delete APIs and SAS permission names (delete, delete version, permanent delete) in sample code and permission tables, not local file deletion by the agent."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 198,
+          "evidence": "delete",
+          "context": "permissions.delete = true;",
+          "disposition": "accepted",
+          "reason": "Matches are Azure Blob delete APIs and SAS permission names (delete, delete version, permanent delete) in sample code and permission tables, not local file deletion by the agent."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 219,
+          "evidence": "Delete",
+          "context": "| Delete | `d` | Delete |",
+          "disposition": "accepted",
+          "reason": "Matches are Azure Blob delete APIs and SAS permission names (delete, delete version, permanent delete) in sample code and permission tables, not local file deletion by the agent."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 219,
+          "evidence": "Delete",
+          "context": "| Delete | `d` | Delete |",
+          "disposition": "accepted",
+          "reason": "Matches are Azure Blob delete APIs and SAS permission names (delete, delete version, permanent delete) in sample code and permission tables, not local file deletion by the agent."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 220,
+          "evidence": "Delete",
+          "context": "| Delete Version | `x` | Delete version |",
+          "disposition": "accepted",
+          "reason": "Matches are Azure Blob delete APIs and SAS permission names (delete, delete version, permanent delete) in sample code and permission tables, not local file deletion by the agent."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 220,
+          "evidence": "Delete",
+          "context": "| Delete Version | `x` | Delete version |",
+          "disposition": "accepted",
+          "reason": "Matches are Azure Blob delete APIs and SAS permission names (delete, delete version, permanent delete) in sample code and permission tables, not local file deletion by the agent."
+        },
+        {
+          "type": "network-access",
+          "line": 336,
+          "evidence": "https://",
+          "context": "const sasUrlWithWrite = `https://${accountName}.blob.core.windows.net/container/blob.txt?${writeSasToken}`;",
+          "disposition": "accepted",
+          "reason": "Storage endpoint templates (https://${accountName}.blob.core.windows.net) in sample code and links to Microsoft Learn and the Azure SDK GitHub repo; the skill does not instruct the agent to fetch anything."
+        },
+        {
+          "type": "credential-access",
+          "line": 353,
+          "evidence": "credential",
+          "context": "// No credential needed - SAS in URL",
+          "disposition": "accepted",
+          "reason": "SDK credential classes (DefaultAzureCredential, StorageSharedKeyCredential) and AZURE_STORAGE_* / STORAGE_ACCOUNT_* environment-variable names in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 374,
+          "evidence": "process.env",
+          "context": "  const accountName = process.env[\"STORAGE_ACCOUNT_NAME\"]!;",
+          "disposition": "accepted",
+          "reason": "SDK credential classes (DefaultAzureCredential, StorageSharedKeyCredential) and AZURE_STORAGE_* / STORAGE_ACCOUNT_* environment-variable names in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 375,
+          "evidence": "process.env",
+          "context": "  const accountKey = process.env[\"STORAGE_ACCOUNT_KEY\"]!;",
+          "disposition": "accepted",
+          "reason": "SDK credential classes (DefaultAzureCredential, StorageSharedKeyCredential) and AZURE_STORAGE_* / STORAGE_ACCOUNT_* environment-variable names in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 378,
+          "evidence": "credential",
+          "context": "  const credential = new DefaultAzureCredential();",
+          "disposition": "accepted",
+          "reason": "SDK credential classes (DefaultAzureCredential, StorageSharedKeyCredential) and AZURE_STORAGE_* / STORAGE_ACCOUNT_* environment-variable names in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 380,
+          "evidence": "https://",
+          "context": "    `https://${accountName}.blob.core.windows.net`,",
+          "disposition": "accepted",
+          "reason": "Storage endpoint templates (https://${accountName}.blob.core.windows.net) in sample code and links to Microsoft Learn and the Azure SDK GitHub repo; the skill does not instruct the agent to fetch anything."
+        },
+        {
+          "type": "credential-access",
+          "line": 381,
+          "evidence": "credential",
+          "context": "    credential",
+          "disposition": "accepted",
+          "reason": "SDK credential classes (DefaultAzureCredential, StorageSharedKeyCredential) and AZURE_STORAGE_* / STORAGE_ACCOUNT_* environment-variable names in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 406,
+          "evidence": "https://",
+          "context": "  console.log(`https://${accountName}.blob.core.windows.net/uploads/user-file.txt?${userDelegationSas}`);",
+          "disposition": "accepted",
+          "reason": "Storage endpoint templates (https://${accountName}.blob.core.windows.net) in sample code and links to Microsoft Learn and the Azure SDK GitHub repo; the skill does not instruct the agent to fetch anything."
+        },
+        {
+          "type": "network-access",
+          "line": 428,
+          "evidence": "https://",
+          "context": "  console.log(`https://${accountName}.blob.core.windows.net/public-files/document.pdf?${readSas}`);",
+          "disposition": "accepted",
+          "reason": "Storage endpoint templates (https://${accountName}.blob.core.windows.net) in sample code and links to Microsoft Learn and the Azure SDK GitHub repo; the skill does not instruct the agent to fetch anything."
+        },
+        {
+          "type": "network-access",
+          "line": 443,
+          "evidence": "https://",
+          "context": "  console.log(`https://${accountName}.blob.core.windows.net/uploads/new-upload.txt?${writeSas}`);",
+          "disposition": "accepted",
+          "reason": "Storage endpoint templates (https://${accountName}.blob.core.windows.net) in sample code and links to Microsoft Learn and the Azure SDK GitHub repo; the skill does not instruct the agent to fetch anything."
+        },
+        {
+          "type": "network-access",
+          "line": 457,
+          "evidence": "https://",
+          "context": "  console.log(`https://${accountName}.blob.core.windows.net/public-files?${listSas}`);",
+          "disposition": "accepted",
+          "reason": "Storage endpoint templates (https://${accountName}.blob.core.windows.net) in sample code and links to Microsoft Learn and the Azure SDK GitHub repo; the skill does not instruct the agent to fetch anything."
+        },
+        {
+          "type": "network-access",
+          "line": 494,
+          "evidence": "https://",
+          "context": "- [Official Documentation](https://learn.microsoft.com/azure/storage/common/storage-sas-overview)",
+          "disposition": "accepted",
+          "reason": "Storage endpoint templates (https://${accountName}.blob.core.windows.net) in sample code and links to Microsoft Learn and the Azure SDK GitHub repo; the skill does not instruct the agent to fetch anything."
+        }
+      ]
+    },
+    {
+      "path": "references/streaming.md",
+      "sha256": "6313cd1edaa8189ae974439d65cb95b5b8785699bcc3b7b0ff3e89def13d9653",
+      "bytes": 10493,
+      "mode": "100644",
+      "git_blob": "856b8f69a3a1296556cc78a72230d6b4eb5ca2c0",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 5,
+          "evidence": "https://",
+          "context": "**Source**: [Azure SDK for JS - storage-blob](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/storage/storage-blob)",
+          "disposition": "accepted",
+          "reason": "Storage endpoint templates (https://${accountName}.blob.core.windows.net) in sample code and links to Microsoft Learn and the Azure SDK GitHub repo; the skill does not instruct the agent to fetch anything."
+        },
+        {
+          "type": "shell-execution",
+          "line": 11,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks contain only the npm install line and placeholder environment-variable assignments."
+        },
+        {
+          "type": "package-install",
+          "line": 12,
+          "evidence": "npm install",
+          "context": "npm install @azure/storage-blob @azure/identity",
+          "disposition": "accepted",
+          "reason": "`npm install @azure/storage-blob @azure/identity` installs the official Microsoft SDK packages the samples need in the user's project."
+        },
+        {
+          "type": "credential-access",
+          "line": 27,
+          "evidence": "credential",
+          "context": "const credential = new DefaultAzureCredential();",
+          "disposition": "accepted",
+          "reason": "SDK credential classes (DefaultAzureCredential, StorageSharedKeyCredential) and AZURE_STORAGE_* / STORAGE_ACCOUNT_* environment-variable names in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 28,
+          "evidence": "process.env",
+          "context": "const accountUrl = `https://${process.env[\"STORAGE_ACCOUNT_NAME\"]}.blob.core.windows.net`;",
+          "disposition": "accepted",
+          "reason": "SDK credential classes (DefaultAzureCredential, StorageSharedKeyCredential) and AZURE_STORAGE_* / STORAGE_ACCOUNT_* environment-variable names in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 28,
+          "evidence": "https://",
+          "context": "const accountUrl = `https://${process.env[\"STORAGE_ACCOUNT_NAME\"]}.blob.core.windows.net`;",
+          "disposition": "accepted",
+          "reason": "Storage endpoint templates (https://${accountName}.blob.core.windows.net) in sample code and links to Microsoft Learn and the Azure SDK GitHub repo; the skill does not instruct the agent to fetch anything."
+        },
+        {
+          "type": "credential-access",
+          "line": 30,
+          "evidence": "credential",
+          "context": "const blobServiceClient = new BlobServiceClient(accountUrl, credential);",
+          "disposition": "accepted",
+          "reason": "SDK credential classes (DefaultAzureCredential, StorageSharedKeyCredential) and AZURE_STORAGE_* / STORAGE_ACCOUNT_* environment-variable names in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "encoded-content",
+          "line": 174,
+          "evidence": "base64",
+          "context": "      // Generate block ID (must be base64 encoded, same length)",
+          "disposition": "accepted",
+          "reason": "Base64 is used only to build block IDs for stageBlock in a sample, as the Blob API requires; no encoded payloads are present."
+        },
+        {
+          "type": "encoded-content",
+          "line": 177,
+          "evidence": "base64",
+          "context": "      ).toString(\"base64\");",
+          "disposition": "accepted",
+          "reason": "Base64 is used only to build block IDs for stageBlock in a sample, as the Blob API requires; no encoded payloads are present."
+        },
+        {
+          "type": "network-access",
+          "line": 317,
+          "evidence": "https://",
+          "context": "const sourceUrl = \"https://source-account.blob.core.windows.net/container/blob\";",
+          "disposition": "accepted",
+          "reason": "Storage endpoint templates (https://${accountName}.blob.core.windows.net) in sample code and links to Microsoft Learn and the Azure SDK GitHub repo; the skill does not instruct the agent to fetch anything."
+        },
+        {
+          "type": "credential-access",
+          "line": 358,
+          "evidence": "credential",
+          "context": "  const credential = new DefaultAzureCredential();",
+          "disposition": "accepted",
+          "reason": "SDK credential classes (DefaultAzureCredential, StorageSharedKeyCredential) and AZURE_STORAGE_* / STORAGE_ACCOUNT_* environment-variable names in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 360,
+          "evidence": "process.env",
+          "context": "    `https://${process.env[\"STORAGE_ACCOUNT_NAME\"]}.blob.core.windows.net`,",
+          "disposition": "accepted",
+          "reason": "SDK credential classes (DefaultAzureCredential, StorageSharedKeyCredential) and AZURE_STORAGE_* / STORAGE_ACCOUNT_* environment-variable names in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 360,
+          "evidence": "https://",
+          "context": "    `https://${process.env[\"STORAGE_ACCOUNT_NAME\"]}.blob.core.windows.net`,",
+          "disposition": "accepted",
+          "reason": "Storage endpoint templates (https://${accountName}.blob.core.windows.net) in sample code and links to Microsoft Learn and the Azure SDK GitHub repo; the skill does not instruct the agent to fetch anything."
+        },
+        {
+          "type": "credential-access",
+          "line": 361,
+          "evidence": "credential",
+          "context": "    credential",
+          "disposition": "accepted",
+          "reason": "SDK credential classes (DefaultAzureCredential, StorageSharedKeyCredential) and AZURE_STORAGE_* / STORAGE_ACCOUNT_* environment-variable names in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 401,
+          "evidence": "delete",
+          "context": "  await blobClient.delete();",
+          "disposition": "accepted",
+          "reason": "Cleanup `blobClient.delete()` at the end of a demo that deletes only the test blob the same sample just uploaded."
+        },
+        {
+          "type": "network-access",
+          "line": 425,
+          "evidence": "https://",
+          "context": "- [Official Samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/storage/storage-blob/samples)",
+          "disposition": "accepted",
+          "reason": "Storage endpoint templates (https://${accountName}.blob.core.windows.net) in sample code and links to Microsoft Learn and the Azure SDK GitHub repo; the skill does not instruct the agent to fetch anything."
+        }
+      ]
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "180a75a03963329bd2671651ab1b90ab7e21c1307e7f822a3f649d5bebf367d1",
+      "bytes": 13154,
+      "mode": "100644",
+      "git_blob": "5f9b967cebe6e1821e5a43749ff6f7f7d626c591",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 18,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks contain only the npm install line and placeholder environment-variable assignments."
+        },
+        {
+          "type": "package-install",
+          "line": 19,
+          "evidence": "npm install",
+          "context": "npm install @azure/storage-blob @azure/identity",
+          "disposition": "accepted",
+          "reason": "`npm install @azure/storage-blob @azure/identity` installs the official Microsoft SDK packages the samples need in the user's project."
+        },
+        {
+          "type": "shell-execution",
+          "line": 27,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks contain only the npm install line and placeholder environment-variable assignments."
+        },
+        {
+          "type": "credential-access",
+          "line": 37,
+          "evidence": "Credential",
+          "context": "### Microsoft Entra Token Credential (Recommended)",
+          "disposition": "accepted",
+          "reason": "SDK credential classes (DefaultAzureCredential, StorageSharedKeyCredential) and AZURE_STORAGE_* / STORAGE_ACCOUNT_* environment-variable names in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 44,
+          "evidence": "credential",
+          "context": "const credential = new DefaultAzureCredential({requiredEnvVars: [\"AZURE_TOKEN_CREDENTIALS\"]});",
+          "disposition": "accepted",
+          "reason": "SDK credential classes (DefaultAzureCredential, StorageSharedKeyCredential) and AZURE_STORAGE_* / STORAGE_ACCOUNT_* environment-variable names in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 45,
+          "evidence": "credential",
+          "context": "// Or use a specific credential directly in production:",
+          "disposition": "accepted",
+          "reason": "SDK credential classes (DefaultAzureCredential, StorageSharedKeyCredential) and AZURE_STORAGE_* / STORAGE_ACCOUNT_* environment-variable names in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 46,
+          "evidence": "credential",
+          "context": "// See https://learn.microsoft.com/javascript/api/overview/azure/identity-readme?view=azure-node-latest#credential-classes",
+          "disposition": "accepted",
+          "reason": "SDK credential classes (DefaultAzureCredential, StorageSharedKeyCredential) and AZURE_STORAGE_* / STORAGE_ACCOUNT_* environment-variable names in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 46,
+          "evidence": "https://",
+          "context": "// See https://learn.microsoft.com/javascript/api/overview/azure/identity-readme?view=azure-node-latest#credential-classes",
+          "disposition": "accepted",
+          "reason": "Storage endpoint templates (https://${accountName}.blob.core.windows.net) in sample code and links to Microsoft Learn and the Azure SDK GitHub repo; the skill does not instruct the agent to fetch anything."
+        },
+        {
+          "type": "credential-access",
+          "line": 47,
+          "evidence": "credential",
+          "context": "// const credential = new ManagedIdentityCredential();",
+          "disposition": "accepted",
+          "reason": "SDK credential classes (DefaultAzureCredential, StorageSharedKeyCredential) and AZURE_STORAGE_* / STORAGE_ACCOUNT_* environment-variable names in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 49,
+          "evidence": "process.env",
+          "context": "const accountName = process.env.AZURE_STORAGE_ACCOUNT_NAME!;",
+          "disposition": "accepted",
+          "reason": "SDK credential classes (DefaultAzureCredential, StorageSharedKeyCredential) and AZURE_STORAGE_* / STORAGE_ACCOUNT_* environment-variable names in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 51,
+          "evidence": "https://",
+          "context": "  `https://${accountName}.blob.core.windows.net`,",
+          "disposition": "accepted",
+          "reason": "Storage endpoint templates (https://${accountName}.blob.core.windows.net) in sample code and links to Microsoft Learn and the Azure SDK GitHub repo; the skill does not instruct the agent to fetch anything."
+        },
+        {
+          "type": "credential-access",
+          "line": 52,
+          "evidence": "credential",
+          "context": "  credential",
+          "disposition": "accepted",
+          "reason": "SDK credential classes (DefaultAzureCredential, StorageSharedKeyCredential) and AZURE_STORAGE_* / STORAGE_ACCOUNT_* environment-variable names in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 62,
+          "evidence": "process.env",
+          "context": "  process.env.AZURE_STORAGE_CONNECTION_STRING!",
+          "disposition": "accepted",
+          "reason": "SDK credential classes (DefaultAzureCredential, StorageSharedKeyCredential) and AZURE_STORAGE_* / STORAGE_ACCOUNT_* environment-variable names in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 71,
+          "evidence": "process.env",
+          "context": "const accountName = process.env.AZURE_STORAGE_ACCOUNT_NAME!;",
+          "disposition": "accepted",
+          "reason": "SDK credential classes (DefaultAzureCredential, StorageSharedKeyCredential) and AZURE_STORAGE_* / STORAGE_ACCOUNT_* environment-variable names in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 72,
+          "evidence": "process.env",
+          "context": "const accountKey = process.env.AZURE_STORAGE_ACCOUNT_KEY!;",
+          "disposition": "accepted",
+          "reason": "SDK credential classes (DefaultAzureCredential, StorageSharedKeyCredential) and AZURE_STORAGE_* / STORAGE_ACCOUNT_* environment-variable names in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 76,
+          "evidence": "https://",
+          "context": "  `https://${accountName}.blob.core.windows.net`,",
+          "disposition": "accepted",
+          "reason": "Storage endpoint templates (https://${accountName}.blob.core.windows.net) in sample code and links to Microsoft Learn and the Azure SDK GitHub repo; the skill does not instruct the agent to fetch anything."
+        },
+        {
+          "type": "credential-access",
+          "line": 86,
+          "evidence": "process.env",
+          "context": "const accountName = process.env.AZURE_STORAGE_ACCOUNT_NAME!;",
+          "disposition": "accepted",
+          "reason": "SDK credential classes (DefaultAzureCredential, StorageSharedKeyCredential) and AZURE_STORAGE_* / STORAGE_ACCOUNT_* environment-variable names in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 87,
+          "evidence": "process.env",
+          "context": "const sasToken = process.env.AZURE_STORAGE_SAS_TOKEN!; // starts with \"?\"",
+          "disposition": "accepted",
+          "reason": "SDK credential classes (DefaultAzureCredential, StorageSharedKeyCredential) and AZURE_STORAGE_* / STORAGE_ACCOUNT_* environment-variable names in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 90,
+          "evidence": "https://",
+          "context": "  `https://${accountName}.blob.core.windows.net${sasToken}`",
+          "disposition": "accepted",
+          "reason": "Storage endpoint templates (https://${accountName}.blob.core.windows.net) in sample code and links to Microsoft Learn and the Azure SDK GitHub repo; the skill does not instruct the agent to fetch anything."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 130,
+          "evidence": "Delete",
+          "context": "### Delete Container",
+          "disposition": "accepted",
+          "reason": "Matches are Azure Blob delete APIs and SAS permission names (delete, delete version, permanent delete) in sample code and permission tables, not local file deletion by the agent."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 133,
+          "evidence": "delete",
+          "context": "await containerClient.delete();",
+          "disposition": "accepted",
+          "reason": "Matches are Azure Blob delete APIs and SAS permission names (delete, delete version, permanent delete) in sample code and permission tables, not local file deletion by the agent."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 134,
+          "evidence": "delete",
+          "context": "// Or delete if exists",
+          "disposition": "accepted",
+          "reason": "Matches are Azure Blob delete APIs and SAS permission names (delete, delete version, permanent delete) in sample code and permission tables, not local file deletion by the agent."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 246,
+          "evidence": "Delete",
+          "context": "### Delete Blob",
+          "disposition": "accepted",
+          "reason": "Matches are Azure Blob delete APIs and SAS permission names (delete, delete version, permanent delete) in sample code and permission tables, not local file deletion by the agent."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 250,
+          "evidence": "delete",
+          "context": "await blobClient.delete();",
+          "disposition": "accepted",
+          "reason": "Matches are Azure Blob delete APIs and SAS permission names (delete, delete version, permanent delete) in sample code and permission tables, not local file deletion by the agent."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 252,
+          "evidence": "Delete",
+          "context": "// Delete if exists",
+          "disposition": "accepted",
+          "reason": "Matches are Azure Blob delete APIs and SAS permission names (delete, delete version, permanent delete) in sample code and permission tables, not local file deletion by the agent."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 255,
+          "evidence": "Delete",
+          "context": "// Delete with snapshots",
+          "disposition": "accepted",
+          "reason": "Matches are Azure Blob delete APIs and SAS permission names (delete, delete version, permanent delete) in sample code and permission tables, not local file deletion by the agent."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 256,
+          "evidence": "delete",
+          "context": "await blobClient.delete({ deleteSnapshots: \"include\" });",
+          "disposition": "accepted",
+          "reason": "Matches are Azure Blob delete APIs and SAS permission names (delete, delete version, permanent delete) in sample code and permission tables, not local file deletion by the agent."
+        },
+        {
+          "type": "network-access",
+          "line": 327,
+          "evidence": "https://",
+          "context": "const sasUrl = `https://${accountName}.blob.core.windows.net/my-container/my-file.txt?${sasToken}`;",
+          "disposition": "accepted",
+          "reason": "Storage endpoint templates (https://${accountName}.blob.core.windows.net) in sample code and links to Microsoft Learn and the Azure SDK GitHub repo; the skill does not instruct the agent to fetch anything."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 338,
+          "evidence": "delete",
+          "context": "    permissions: ContainerSASPermissions.parse(\"racwdl\"), // read, add, create, write, delete, list",
+          "disposition": "accepted",
+          "reason": "Matches are Azure Blob delete APIs and SAS permission names (delete, delete version, permanent delete) in sample code and permission tables, not local file deletion by the agent."
+        }
+      ]
+    }
+  ]
+}

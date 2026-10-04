@@ -1,0 +1,165 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "aaron-seo/competitor-analysis",
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "aaron-he-zhu/aaron-marketing-skills",
+    "path": "seo-geo/survey/competitor-analysis",
+    "revision": "cc897fa9e1e3136eb6a301130e49d8d9d1c519b2"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "seo-geo/survey/competitor-analysis",
+    "url": "https://api.github.com/repos/aaron-he-zhu/aaron-marketing-skills/git/trees/cc897fa9e1e3136eb6a301130e49d8d9d1c519b2?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "Apache-2.0",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/aaron-he-zhu/aaron-marketing-skills/blob/cc897fa9e1e3136eb6a301130e49d8d9d1c519b2/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "seo-geo",
+        "seo-geo/survey",
+        "seo-geo/survey/competitor-analysis"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the Apache-2.0 license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares Apache-2.0 (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the Apache-2.0 notice condition; no NOTICE file exists, so section 4(d) adds no attribution text, and no file is modified.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "low",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": false,
+      "network": false,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md and references/analysis-templates.md, battlecard-template.md, example-report.md, positioning-frameworks.md in full. Analytical workflow that benchmarks competitors' keywords, content, backlinks, technical SEO, and AI citations into a comparison table, strengths/weaknesses, and an action plan; requires labelling every metric Measured/User-provided/Estimated and never inventing numbers.",
+      "Writes markdown summaries under the user's project memory/ directory (memory/research/competitor-analysis/, memory/hot-cache.md, memory/open-loops.md) per SKILL.md:32-36,111. SKILL.md:48 suggests an optional keyless helper `python3 \"${CLAUDE_PLUGIN_ROOT}/scripts/connectors/firecrawl.py\"` for scraping competitor pages; that script is not part of this skill and will not ship, so the step is unavailable and the skill falls back to user-provided data (SKILL.md:46). No installs or credentials.",
+      "Paid SEO tools (~~SEO tool, ~~analytics, ~~AI monitor) are optional integrations; without them the skill asks the user for data (SKILL.md:46). Non-shipping optional pointers outside the skill directory that will not ship: ../../../references/skill-contract.md (handoff-summary/save-results shape), ../../../CONNECTORS.md, ../../../SECURITY.md, ../../../scripts/connectors/README.md, ../../../references/platforms/youtube.md (SKILL.md:89,119), and sibling skills content-gap-analysis, serp-analysis, offsite-signal-analyzer, page-play-builder. The handoff-summary shape at SKILL.md:42 lives in skill-contract.md and will be unavailable; the main analysis is fully specified in this skill."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "664cd12e1c315650bf14cb1385359d13d4724ac03940ac10918390ef78e4f5e7",
+      "bytes": 11347,
+      "mode": "100644",
+      "git_blob": "41889521f7dedb506da3ce1c9998b78965e45e6e",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root Apache-2.0 license, attached to carry its terms and notices.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 3,
+          "evidence": "http://",
+          "context": "                        http://www.apache.org/licenses/",
+          "disposition": "accepted",
+          "reason": "License text."
+        },
+        {
+          "type": "network-access",
+          "line": 195,
+          "evidence": "http://",
+          "context": "       http://www.apache.org/licenses/LICENSE-2.0",
+          "disposition": "accepted",
+          "reason": "License text."
+        }
+      ]
+    },
+    {
+      "path": "references/analysis-templates.md",
+      "sha256": "a04b96352a32e76aacb79462411f13e736f483f6ac89a4acf0bdd6d8b8380a08",
+      "bytes": 3790,
+      "mode": "100644",
+      "git_blob": "3780f75a62a1eef2fdbcb965bdb41fcbb556c979",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "references/battlecard-template.md",
+      "sha256": "89a2d9e941bf25652a403ae34d7292b4eb2be30dddd9ccd36bd63a04c5a11a3b",
+      "bytes": 4198,
+      "mode": "100644",
+      "git_blob": "24d7ff9c88358097e7c21b4ed4e94ca718b89313",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "references/example-report.md",
+      "sha256": "002c32f1b514ef064c8ba37c9e2c16d6df0f5addfd890ee55a7584058ed95f3f",
+      "bytes": 2259,
+      "mode": "100644",
+      "git_blob": "4ef522d40a215c1c652933ebf81f741ffaa39da5",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "references/positioning-frameworks.md",
+      "sha256": "fcafeaddf6137096235201bbf3b4cc080839a75748abd82965bcc4dcba11b7b9",
+      "bytes": 4799,
+      "mode": "100644",
+      "git_blob": "40e503befbdb9079706c3de0ddbd00b2f8fca8ef",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "905922fb722baf1fb3d2046a4d13031cf1ab8d7e8e4dde8b89dcc7f67eea2245",
+      "bytes": 7998,
+      "mode": "100644",
+      "git_blob": "46415f10d013f81d40d5e6203c5d433c87cb4c1e",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 10,
+          "evidence": "https://",
+          "context": "homepage: \"https://github.com/aaron-he-zhu/aaron-marketing-skills\"",
+          "disposition": "accepted",
+          "reason": "Only the upstream homepage URL in front-matter metadata (SKILL.md:10,13); no instruction to fetch it."
+        },
+        {
+          "type": "network-access",
+          "line": 13,
+          "evidence": "https://",
+          "context": "metadata: {\"author\": \"aaron-he-zhu\", \"version\": \"20.1.0\", \"discipline\": \"seo-geo\", \"phase\": \"survey\", \"geo-relevance\": \"medium\", \"hermes\": {\"tags\": [\"marketing\", \"seo-geo\", \"survey\"], \"category\": \"seo-geo\"}, \"openclaw\": {\"emoji\": \"🔍\", \"hom",
+          "disposition": "accepted",
+          "reason": "Only the upstream homepage URL in front-matter metadata (SKILL.md:10,13); no instruction to fetch it."
+        }
+      ]
+    }
+  ]
+}

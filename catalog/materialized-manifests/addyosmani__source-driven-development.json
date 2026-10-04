@@ -1,0 +1,60 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "addyosmani/source-driven-development",
+  "source": {
+    "repo": "addyosmani/agent-skills",
+    "path": "skills/source-driven-development",
+    "revision": "1401c8b8030e023baeebb31781a6653fe8e93026"
+  },
+  "review": {
+    "path": "catalog/reviews/addyosmani__source-driven-development.json",
+    "sha256": "07211f93181fcc2dad8261dbb472dc47da7d0364177a4d68e3f347a2b45e1461"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "low",
+    "capabilities": {
+      "shell": false,
+      "network": true,
+      "credentials": false,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": false,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "network-access",
+        "line": 149,
+        "evidence": "https://",
+        "context": "// Source: https://react.dev/reference/react/useActionState#usage",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 160,
+        "evidence": "https://",
+        "context": "Source: https://react.dev/blog/2024/12/05/react-19#actions",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 11106
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "6f202f8bd568cd730dbb2b0d1f8e243bc74c2fa1f64dbce9b2c7ea08bd5c9fd7",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "c59faf851377f0eeda45306398d16eb96d77ab1c2fd3e1a7fb58e9a0af33c1e9",
+      "bytes": 10038,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 11106
+}

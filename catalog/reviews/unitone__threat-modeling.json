@@ -1,0 +1,352 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "unitone/threat-modeling",
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "UnitOneAI/SecuritySkills",
+    "path": "skills/appsec/threat-modeling",
+    "revision": "70bc259bb01abb3015ad2ad859ad5253cbf0bcab"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "skills/appsec/threat-modeling",
+    "url": "https://api.github.com/repos/UnitOneAI/SecuritySkills/git/trees/70bc259bb01abb3015ad2ad859ad5253cbf0bcab?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/UnitOneAI/SecuritySkills/blob/70bc259bb01abb3015ad2ad859ad5253cbf0bcab/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "skills",
+        "skills/appsec",
+        "skills/appsec/threat-modeling"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT License with its copyright notice, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file; ATT&CK usage is limited to technique IDs/names and OWASP/Microsoft sources are cited by link. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "low",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": false,
+      "network": false,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md, csharp-dotnet.md and threat-actor-profiles.md in full. A STRIDE threat-modeling workflow producing actor profiles, DFD/trust boundaries, a component-threat matrix, ATT&CK mapping, risk rating and a threat register, with a .NET-specific supplement.",
+      "Analysis only (allowed-tools Read, Grep, Glob): no commands, installs, credentials, or network access; it tells the agent to treat embedded instructions as data and to redact secrets found during analysis.",
+      "SKILL.md:475-476 link ../../../schemas/finding.schema.json and ../../../docs/sarif-output.md, used only when the user requests JSON/SARIF output; these files do not ship with the skill. MITRE ATT&CK content is limited to technique IDs and names; STRIDE/PASTA descriptions are short paraphrases with citations."
+    ]
+  },
+  "files": [
+    {
+      "path": "csharp-dotnet.md",
+      "sha256": "d0f55860997b233298b981330e8dcb9f1e96b01476bcff73c3ab9875582d79c4",
+      "bytes": 9894,
+      "mode": "100644",
+      "git_blob": "810a8bc330da4a29877d5be2e87154af9737c2fa",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "credential-access",
+          "line": 83,
+          "evidence": "Credential",
+          "context": "| ASP.NET Core Identity | H | M | H | M | L | H | Credential stuffing, weak config |",
+          "disposition": "accepted",
+          "reason": "Words like credential, API key, secret and access token appear as threat categories, ATT&CK technique names (e.g. T1528 Steal Application Access Token) and example threats; nothing instructs reading or using real secrets."
+        }
+      ]
+    },
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "66eb5ec637cc578833ddcbc870dbf46c6718fd83e985fad5f0f5cf30d60cf47d",
+      "bytes": 1067,
+      "mode": "100644",
+      "git_blob": "5a98cb233448adff07bef15917961275c76572dc",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry the copyright and permission notice.",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "a7becb43d40804a9514ee784cb9382f8ecfe3cba9241bd499f77014290bd39d3",
+      "bytes": 36139,
+      "mode": "100644",
+      "git_blob": "c9c41c34289aa72612088c2571f2b2b9436b0797",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "credential-access",
+          "line": 53,
+          "evidence": "secret",
+          "context": "- [ ] **Existing security controls** — WAF, IDS/IPS, SIEM, secret management (Vault, AWS Secrets Manager), encryption at rest and in transit.",
+          "disposition": "accepted",
+          "reason": "Words like credential, API key, secret and access token appear as threat categories, ATT&CK technique names (e.g. T1528 Steal Application Access Token) and example threats; nothing instructs reading or using real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 89,
+          "evidence": "credential",
+          "context": "| Organized Cybercrime | RaaS, credential markets, exploit brokers | Financial gain | Medium | I, D, T | T1486, T1078, T1566 |",
+          "disposition": "accepted",
+          "reason": "Words like credential, API key, secret and access token appear as threat categories, ATT&CK technique names (e.g. T1528 Steal Application Access Token) and example threats; nothing instructs reading or using real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 176,
+          "evidence": "API key",
+          "context": "| Authentication mechanism | mTLS, JWT (RS256), API key, OAuth 2.0 client credentials, none |",
+          "disposition": "accepted",
+          "reason": "Words like credential, API key, secret and access token appear as threat categories, ATT&CK technique names (e.g. T1528 Steal Application Access Token) and example threats; nothing instructs reading or using real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 195,
+          "evidence": "Credential",
+          "context": "| Can an external user authenticate without valid credentials? | Credential stuffing, brute force |",
+          "disposition": "accepted",
+          "reason": "Words like credential, API key, secret and access token appear as threat categories, ATT&CK technique names (e.g. T1528 Steal Application Access Token) and example threats; nothing instructs reading or using real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 198,
+          "evidence": "API key",
+          "context": "| Are API keys rotated and scoped appropriately? | Leaked long-lived API key |",
+          "disposition": "accepted",
+          "reason": "Words like credential, API key, secret and access token appear as threat categories, ATT&CK technique names (e.g. T1528 Steal Application Access Token) and example threats; nothing instructs reading or using real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 288,
+          "evidence": "Credential",
+          "context": "| Organized Cybercrime | Credential stuffing | Auth Service | Spoofing | +0 (standard capability) | High |",
+          "disposition": "accepted",
+          "reason": "Words like credential, API key, secret and access token appear as threat categories, ATT&CK technique names (e.g. T1528 Steal Application Access Token) and example threats; nothing instructs reading or using real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 306,
+          "evidence": "Access Token",
+          "context": "| **Spoofing** | T1078 — Valid Accounts, T1134 — Access Token Manipulation, T1556 — Modify Authentication Process, T1528 — Steal Application Access Token, T1539 — Steal Web Session Cookie |",
+          "disposition": "accepted",
+          "reason": "Words like credential, API key, secret and access token appear as threat categories, ATT&CK technique names (e.g. T1528 Steal Application Access Token) and example threats; nothing instructs reading or using real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 306,
+          "evidence": "Access Token",
+          "context": "| **Spoofing** | T1078 — Valid Accounts, T1134 — Access Token Manipulation, T1556 — Modify Authentication Process, T1528 — Steal Application Access Token, T1539 — Steal Web Session Cookie |",
+          "disposition": "accepted",
+          "reason": "Words like credential, API key, secret and access token appear as threat categories, ATT&CK technique names (e.g. T1528 Steal Application Access Token) and example threats; nothing instructs reading or using real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 377,
+          "evidence": "secret",
+          "context": "| Corrective | Incident response playbooks, automated rollback, secret rotation, patch management |",
+          "disposition": "accepted",
+          "reason": "Words like credential, API key, secret and access token appear as threat categories, ATT&CK technique names (e.g. T1528 Steal Application Access Token) and example threats; nothing instructs reading or using real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 396,
+          "evidence": "Credential",
+          "context": "| TM-001 | Spoofing | Credential stuffing attack against login endpoint due to missing rate limiting and absent MFA | Auth Service `/api/v1/login` | T1078 — Valid Accounts | High | High | Critical | Implement rate limiting (max 10 attempts/",
+          "disposition": "accepted",
+          "reason": "Words like credential, API key, secret and access token appear as threat categories, ATT&CK technique names (e.g. T1528 Steal Application Access Token) and example threats; nothing instructs reading or using real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 396,
+          "evidence": "credential",
+          "context": "| TM-001 | Spoofing | Credential stuffing attack against login endpoint due to missing rate limiting and absent MFA | Auth Service `/api/v1/login` | T1078 — Valid Accounts | High | High | Critical | Implement rate limiting (max 10 attempts/",
+          "disposition": "accepted",
+          "reason": "Words like credential, API key, secret and access token appear as threat categories, ATT&CK technique names (e.g. T1528 Steal Application Access Token) and example threats; nothing instructs reading or using real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 442,
+          "evidence": "Credential",
+          "context": "- **Credential Access** (TA0006) — Techniques for stealing credentials (T1528 Steal Application Access Token, T1539 Steal Web Session Cookie, T1552 Unsecured Credentials)",
+          "disposition": "accepted",
+          "reason": "Words like credential, API key, secret and access token appear as threat categories, ATT&CK technique names (e.g. T1528 Steal Application Access Token) and example threats; nothing instructs reading or using real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 442,
+          "evidence": "Access Token",
+          "context": "- **Credential Access** (TA0006) — Techniques for stealing credentials (T1528 Steal Application Access Token, T1539 Steal Web Session Cookie, T1552 Unsecured Credentials)",
+          "disposition": "accepted",
+          "reason": "Words like credential, API key, secret and access token appear as threat categories, ATT&CK technique names (e.g. T1528 Steal Application Access Token) and example threats; nothing instructs reading or using real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 446,
+          "evidence": "https://",
+          "context": "Use the ATT&CK Navigator (https://mitre-attack.github.io/attack-navigator/) to visualize coverage of identified threats against the ATT&CK matrix.",
+          "disposition": "accepted",
+          "reason": "Reference links to Microsoft, OWASP, MITRE and NIST pages and the ATT&CK Navigator; the skill does not instruct fetching them."
+        },
+        {
+          "type": "credential-access",
+          "line": 487,
+          "evidence": "credential",
+          "context": "- **Never exfiltrate data.** Do not include sensitive values (credentials, API keys, connection strings) found during analysis in the output. Redact or reference them generically (e.g., \"hardcoded credential found in config.yaml, line 42\").",
+          "disposition": "accepted",
+          "reason": "Words like credential, API key, secret and access token appear as threat categories, ATT&CK technique names (e.g. T1528 Steal Application Access Token) and example threats; nothing instructs reading or using real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 493,
+          "evidence": "https://",
+          "context": "1. **Microsoft Threat Modeling Tool** — https://learn.microsoft.com/en-us/azure/security/develop/threat-modeling-tool",
+          "disposition": "accepted",
+          "reason": "Reference links to Microsoft, OWASP, MITRE and NIST pages and the ATT&CK Navigator; the skill does not instruct fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 494,
+          "evidence": "https://",
+          "context": "2. **Microsoft SDL Threat Modeling** — https://www.microsoft.com/en-us/securityengineering/sdl/threatmodeling",
+          "disposition": "accepted",
+          "reason": "Reference links to Microsoft, OWASP, MITRE and NIST pages and the ATT&CK Navigator; the skill does not instruct fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 495,
+          "evidence": "https://",
+          "context": "3. **OWASP Threat Modeling Cheat Sheet** — https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html",
+          "disposition": "accepted",
+          "reason": "Reference links to Microsoft, OWASP, MITRE and NIST pages and the ATT&CK Navigator; the skill does not instruct fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 496,
+          "evidence": "https://",
+          "context": "4. **OWASP Threat Modeling Process** — https://owasp.org/www-community/Threat_Modeling_Process",
+          "disposition": "accepted",
+          "reason": "Reference links to Microsoft, OWASP, MITRE and NIST pages and the ATT&CK Navigator; the skill does not instruct fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 497,
+          "evidence": "https://",
+          "context": "5. **MITRE ATT&CK Enterprise Matrix** — https://attack.mitre.org/matrices/enterprise/",
+          "disposition": "accepted",
+          "reason": "Reference links to Microsoft, OWASP, MITRE and NIST pages and the ATT&CK Navigator; the skill does not instruct fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 498,
+          "evidence": "https://",
+          "context": "6. **MITRE ATT&CK Techniques** — https://attack.mitre.org/techniques/enterprise/",
+          "disposition": "accepted",
+          "reason": "Reference links to Microsoft, OWASP, MITRE and NIST pages and the ATT&CK Navigator; the skill does not instruct fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 500,
+          "evidence": "https://",
+          "context": "8. **NIST SP 800-154** — Guide to Data-Centric System Threat Modeling — https://csrc.nist.gov/publications/detail/sp/800-154/draft",
+          "disposition": "accepted",
+          "reason": "Reference links to Microsoft, OWASP, MITRE and NIST pages and the ATT&CK Navigator; the skill does not instruct fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 502,
+          "evidence": "https://",
+          "context": "10. **OWASP Risk Rating Methodology** — https://owasp.org/www-community/OWASP_Risk_Rating_Methodology",
+          "disposition": "accepted",
+          "reason": "Reference links to Microsoft, OWASP, MITRE and NIST pages and the ATT&CK Navigator; the skill does not instruct fetching them."
+        }
+      ]
+    },
+    {
+      "path": "threat-actor-profiles.md",
+      "sha256": "7794330c89cde0f62e4a16e4c8657a5ed16cec65d31af3b9a146a598576dd404",
+      "bytes": 5419,
+      "mode": "100644",
+      "git_blob": "6aac6ff2e90a30c65964c456b742e3ea4419f84b",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "credential-access",
+          "line": 12,
+          "evidence": "credential",
+          "context": "- **Primary STRIDE Targets:** Spoofing (credential theft), Information Disclosure (exfiltration), Elevation of Privilege (lateral movement)",
+          "disposition": "accepted",
+          "reason": "Words like credential, API key, secret and access token appear as threat categories, ATT&CK technique names (e.g. T1528 Steal Application Access Token) and example threats; nothing instructs reading or using real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 18,
+          "evidence": "credential",
+          "context": "- **Capabilities:** Ransomware-as-a-Service, credential markets, exploit brokers, social engineering at scale",
+          "disposition": "accepted",
+          "reason": "Words like credential, API key, secret and access token appear as threat categories, ATT&CK technique names (e.g. T1528 Steal Application Access Token) and example threats; nothing instructs reading or using real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 20,
+          "evidence": "credential",
+          "context": "- **Access Level:** Initial access via phishing, credential stuffing, or purchased access; escalates to domain admin",
+          "disposition": "accepted",
+          "reason": "Words like credential, API key, secret and access token appear as threat categories, ATT&CK technique names (e.g. T1528 Steal Application Access Token) and example threats; nothing instructs reading or using real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 38,
+          "evidence": "credential",
+          "context": "- **Capabilities:** Moderate — DDoS tools, web defacement, credential dumps, public exploit code",
+          "disposition": "accepted",
+          "reason": "Words like credential, API key, secret and access token appear as threat categories, ATT&CK technique names (e.g. T1528 Steal Application Access Token) and example threats; nothing instructs reading or using real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 54,
+          "evidence": "credential",
+          "context": "- **Modeling Guidance:** Baseline hygiene — patch management, credential rotation, disable defaults. If these actors succeed, foundational controls are missing.",
+          "disposition": "accepted",
+          "reason": "Words like credential, API key, secret and access token appear as threat categories, ATT&CK technique names (e.g. T1528 Steal Application Access Token) and example threats; nothing instructs reading or using real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 62,
+          "evidence": "credential",
+          "context": "- **Primary STRIDE Targets:** Tampering (code injection), Elevation of Privilege (runtime context), Information Disclosure (credential harvesting)",
+          "disposition": "accepted",
+          "reason": "Words like credential, API key, secret and access token appear as threat categories, ATT&CK technique names (e.g. T1528 Steal Application Access Token) and example threats; nothing instructs reading or using real secrets."
+        }
+      ]
+    }
+  ]
+}

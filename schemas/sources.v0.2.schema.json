@@ -45,6 +45,11 @@
           "ingest_enabled": {
             "type": "boolean"
           },
+          "include_paths": {
+            "type": "array",
+            "items": { "type": "string", "minLength": 1 },
+            "description": "Only skills under these repository subtrees are ingested."
+          },
           "official": {
             "type": "boolean"
           },

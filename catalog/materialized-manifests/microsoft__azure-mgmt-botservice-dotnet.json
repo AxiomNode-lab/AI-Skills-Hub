@@ -1,0 +1,151 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "microsoft/azure-mgmt-botservice-dotnet",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/azure-sdk-dotnet/skills/azure-mgmt-botservice-dotnet",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "review": {
+    "path": "catalog/reviews/microsoft__azure-mgmt-botservice-dotnet.json",
+    "sha256": "83a7d7e349ab7c2a814c8181656a627008df817be790400fbad20d5f31118d49"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "shell-execution",
+        "line": 18,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 27,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 32,
+        "evidence": "secret",
+        "context": "AZURE_CLIENT_SECRET=<client-secret> # For service principal auth (optional)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 43,
+        "evidence": "credential",
+        "context": "var credential = new DefaultAzureCredential(",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 46,
+        "evidence": "credential",
+        "context": "// Or use a specific credential directly in production:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 47,
+        "evidence": "credential",
+        "context": "// See https://learn.microsoft.com/dotnet/api/overview/azure/identity-readme?view=azure-dotnet#credential-classes",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 47,
+        "evidence": "https://",
+        "context": "// See https://learn.microsoft.com/dotnet/api/overview/azure/identity-readme?view=azure-dotnet#credential-classes",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 48,
+        "evidence": "credential",
+        "context": "// var credential = new ManagedIdentityCredential();",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 49,
+        "evidence": "credential",
+        "context": "ArmClient armClient = new ArmClient(credential);",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 86,
+        "evidence": "https://",
+        "context": "        endpoint: new Uri(\"https://mybot.azurewebsites.net/api/messages\"),",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 236,
+        "evidence": "Delete",
+        "context": "### 8. Delete Bot",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 340,
+        "evidence": "https://",
+        "context": "| NuGet Package | https://www.nuget.org/packages/Azure.ResourceManager.BotService |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 341,
+        "evidence": "https://",
+        "context": "| API Reference | https://learn.microsoft.com/dotnet/api/azure.resourcemanager.botservice |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 342,
+        "evidence": "https://",
+        "context": "| GitHub Source | https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/botservice/Azure.ResourceManager.BotService |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 343,
+        "evidence": "https://",
+        "context": "| Azure Bot Service Docs | https://learn.microsoft.com/azure/bot-service/ |",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 11472
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "63b889425dca9f3584ba88f509374ede0364ee48d71616c52902c44bc1882691",
+      "bytes": 10332,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 11472
+}

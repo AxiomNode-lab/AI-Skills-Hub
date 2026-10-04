@@ -1,0 +1,116 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "bagelhole/alerting-oncall",
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "devops/observability/alerting-oncall",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "review": {
+    "path": "catalog/reviews/bagelhole__alerting-oncall.json",
+    "sha256": "7d1f5c24e5042d3e0d73163492d84780a24199b50edfcdbd152e3379e9528608"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "network-access",
+        "line": 104,
+        "evidence": "https://",
+        "context": "          runbook_url: \"https://wiki.example.com/runbooks/service-down\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 137,
+        "evidence": "https://",
+        "context": "  slack_api_url: 'https://hooks.slack.com/services/xxx'",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 138,
+        "evidence": "https://",
+        "context": "  pagerduty_url: 'https://events.pagerduty.com/v2/enqueue'",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 311,
+        "evidence": "secret",
+        "context": "      - SECRET_KEY=your-secret-key",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 312,
+        "evidence": "http://",
+        "context": "      - BASE_URL=http://oncall:8080",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 313,
+        "evidence": "http://",
+        "context": "      - GRAFANA_API_URL=http://grafana:3000",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 427,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 432,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 433,
+        "evidence": "delete",
+        "context": "kubectl delete pod -l app=postgres -n production",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 465,
+        "evidence": "Remove",
+        "context": "    - Remove unused alerts",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 13136
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "79528e413e1163d01f981177aab013e143cda4ffc20fe1bfb7c1413e3d641144",
+      "bytes": 12068,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 13136
+}

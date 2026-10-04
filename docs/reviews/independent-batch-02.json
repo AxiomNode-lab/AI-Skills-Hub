@@ -1,0 +1,422 @@
+{
+  "schema_version": "0.1",
+  "review": "independent-batch-02",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted independent instruction review by the PR #10 author session, reading every file in full; not a security certification and not a performance evaluation",
+  "scope": "10 microsoft/skills SDK skills (9 Java, 1 Python) held by PR #11 with reason independent-instruction-review-incomplete",
+  "method": [
+    "Read every upstream file of each skill in full at microsoft/skills@84d8eaa8ae95930f55cdceb3e27196c795dab038.",
+    "Checked each file's SHA-256 against the review record and the local upstream clone, and re-downloaded every file from GitHub at the pinned commit (scripts/verify-upstream.mjs).",
+    "Classified every instruction the agent itself would follow (commands, installs, credentials, network, tools, file changes) separately from sample code written for the user's application.",
+    "Checked every relative link and path for references outside the skill directory.",
+    "Checked service lifecycle where the content depends on it (Anomaly Detector retirement, against Microsoft's documentation source)."
+  ],
+  "skills": [
+    {
+      "id": "microsoft/azure-ai-language-conversations-py",
+      "decision": "release",
+      "risk": "low",
+      "agent_capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "package_install": false,
+        "filesystem_write": false,
+        "dynamic_execution": false,
+        "encoded_content": false
+      },
+      "agent_instructions": "None. The skill is reference documentation: Maven or pip snippets, samples with placeholder or environment-variable credentials, and links to Microsoft documentation. It gives the agent no command to run, nothing to install, and no credential to read.",
+      "out_of_package_references": [],
+      "license": "Repository-root MIT (microsoft/skills LICENSE), no nested notice; SKILL.md declares MIT; no third-party notice in any file.",
+      "sample_accuracy_notes": [
+        "SKILL.md opens with a '## System Prompt' section ('You are an expert Python developer...'). It only sets coding preferences (latest SDK, DefaultAzureCredential, exception handling); it does not widen tool use or override user or safety instructions.",
+        "The orchestration sample treats prediction['intents'] as a dict while the conversation samples treat it as a list; the routing snippet uses `client` and `os` without defining or importing them.",
+        "'Always use the latest version' leaves the version unpinned."
+      ],
+      "files": [
+        {
+          "path": "LICENSE.txt",
+          "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+          "attached": true
+        },
+        {
+          "path": "references/capabilities.md",
+          "sha256": "8fe8ae6c05235fa6d6a705715231910e50729188f6d41eb5d4185043db695383",
+          "attached": false
+        },
+        {
+          "path": "references/non-hero-scenarios.md",
+          "sha256": "71db8bac4317c7335b39358cc638d8387103771bccd0adbab6cba51db8dedc62",
+          "attached": false
+        },
+        {
+          "path": "SKILL.md",
+          "sha256": "4b51c68f15f6155f4621be975bdbb9f41ce79097c9a7cd1784669d8f87cae665",
+          "attached": false
+        }
+      ]
+    },
+    {
+      "id": "microsoft/azure-ai-projects-java",
+      "decision": "release",
+      "risk": "low",
+      "agent_capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "package_install": false,
+        "filesystem_write": false,
+        "dynamic_execution": false,
+        "encoded_content": false
+      },
+      "agent_instructions": "None. The skill is reference documentation: Maven or pip snippets, samples with placeholder or environment-variable credentials, and links to Microsoft documentation. It gives the agent no command to run, nothing to install, and no credential to read.",
+      "out_of_package_references": [],
+      "license": "Repository-root MIT (microsoft/skills LICENSE), no nested notice; SKILL.md declares MIT; no third-party notice in any file.",
+      "sample_accuracy_notes": [
+        "Pins the beta 1.0.0-beta.1. SKILL.md reads PROJECT_ENDPOINT while examples.md reads AZURE_AI_PROJECTS_ENDPOINT.",
+        "getConnectionWithCredentials samples fetch connection secrets into the user's application; they print only the credential type, not the secret.",
+        "The dataset createOrUpdate sample points at https://example.com/data.txt (placeholder); deleteVersion deletes data in the user's project."
+      ],
+      "files": [
+        {
+          "path": "LICENSE.txt",
+          "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+          "attached": true
+        },
+        {
+          "path": "references/examples.md",
+          "sha256": "3829b2d244652f7a4b4a2b4381a5cf9c30e95889662c5f6ee0be45513e7c4102",
+          "attached": false
+        },
+        {
+          "path": "SKILL.md",
+          "sha256": "43679ee1835646c49366ded8024246d57478a1591f75e08933ef7702c5e2a16d",
+          "attached": false
+        }
+      ]
+    },
+    {
+      "id": "microsoft/azure-security-keyvault-secrets-java",
+      "decision": "release",
+      "risk": "low",
+      "agent_capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "package_install": false,
+        "filesystem_write": false,
+        "dynamic_execution": false,
+        "encoded_content": false
+      },
+      "agent_instructions": "None. The skill is reference documentation: Maven or pip snippets, samples with placeholder or environment-variable credentials, and links to Microsoft documentation. It gives the agent no command to run, nothing to install, and no credential to read.",
+      "out_of_package_references": [],
+      "license": "Repository-root MIT (microsoft/skills LICENSE), no nested notice; SKILL.md declares MIT; no third-party notice in any file.",
+      "sample_accuracy_notes": [
+        "Many samples print secret values to stdout (getValue() in Get Secret, Error Handling, Async, and every examples.md listing loop; one prints the first 5 characters). Fine for a demo against a test vault, wrong for production logging; reviewers should know an agent may copy this pattern.",
+        "Sample literals look like real secrets but are placeholders: 'P@ssw0rd123!', 'sk_live_abc123xyz', 'CertP@ss!'.",
+        "The Purge sample calls purgeDeletedSecret and then getDeletedSecret on the same name, which fails after a purge. Purge is irreversible in the user's vault.",
+        "Version mismatch: 4.9.0 in SKILL.md vs 4.11.0-beta.1 (beta) in examples.md."
+      ],
+      "files": [
+        {
+          "path": "LICENSE.txt",
+          "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+          "attached": true
+        },
+        {
+          "path": "references/examples.md",
+          "sha256": "8ff99554d7d79477be2711659aa142d1a1ae9f66dea8175799174063b3633f64",
+          "attached": false
+        },
+        {
+          "path": "SKILL.md",
+          "sha256": "2684f5cb2ee3ee30f225451c6d0d99245b82d95ca10bb8897d3902a0819ebf17",
+          "attached": false
+        }
+      ]
+    },
+    {
+      "id": "microsoft/azure-ai-contentsafety-java",
+      "decision": "release",
+      "risk": "low",
+      "agent_capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "package_install": false,
+        "filesystem_write": false,
+        "dynamic_execution": false,
+        "encoded_content": false
+      },
+      "agent_instructions": "None. The skill is reference documentation: Maven or pip snippets, samples with placeholder or environment-variable credentials, and links to Microsoft documentation. It gives the agent no command to run, nothing to install, and no credential to read.",
+      "out_of_package_references": [],
+      "license": "Repository-root MIT (microsoft/skills LICENSE), no nested notice; SKILL.md declares MIT; no third-party notice in any file.",
+      "sample_accuracy_notes": [
+        "Version mismatch: 1.1.0-beta.1 (beta) in SKILL.md vs 1.0.16 in examples.md.",
+        "The environment-variable comment names AzureKeyCredential while the code uses KeyCredential.",
+        "Moderation sample text uses masked offensive words ('k*ll', 'h*te') as blocklist demo content; thresholds are presented as typical, not as policy."
+      ],
+      "files": [
+        {
+          "path": "LICENSE.txt",
+          "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+          "attached": true
+        },
+        {
+          "path": "references/examples.md",
+          "sha256": "98828606485185a9bbf7f103743f7515d979af8d1d51ac74d217c486b5235bd8",
+          "attached": false
+        },
+        {
+          "path": "SKILL.md",
+          "sha256": "43822acf1e76afe9daaa6ecdba222cfe8dee0cce0c4ffc3405cad38991e1a0a5",
+          "attached": false
+        }
+      ]
+    },
+    {
+      "id": "microsoft/azure-security-keyvault-keys-java",
+      "decision": "release",
+      "risk": "low",
+      "agent_capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "package_install": false,
+        "filesystem_write": false,
+        "dynamic_execution": false,
+        "encoded_content": false
+      },
+      "agent_instructions": "None. The skill is reference documentation: Maven or pip snippets, samples with placeholder or environment-variable credentials, and links to Microsoft documentation. It gives the agent no command to run, nothing to install, and no credential to read.",
+      "out_of_package_references": [],
+      "license": "Repository-root MIT (microsoft/skills LICENSE), no nested notice; SKILL.md declares MIT; no third-party notice in any file.",
+      "sample_accuracy_notes": [
+        "The 'Delete Key' block purges the key and then calls beginRecoverDeletedKey on it, which cannot succeed after a purge; purge is irreversible.",
+        "The algorithm table lists RSA1_5 without noting it is legacy; RSA_OAEP is marked recommended.",
+        "The ImportKey sample uses undefined modulus/exponent variables (placeholder)."
+      ],
+      "files": [
+        {
+          "path": "LICENSE.txt",
+          "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+          "attached": true
+        },
+        {
+          "path": "references/examples.md",
+          "sha256": "67b854b920a436f18813391844bc50099a27988235f332d066925cab63331b22",
+          "attached": false
+        },
+        {
+          "path": "SKILL.md",
+          "sha256": "ad00eabdfbfbf51ee4b58d53a5444e44be2725a6d4c2603d88de1c04816ea5b4",
+          "attached": false
+        }
+      ]
+    },
+    {
+      "id": "microsoft/azure-ai-agents-persistent-java",
+      "decision": "release",
+      "risk": "low",
+      "agent_capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "package_install": false,
+        "filesystem_write": false,
+        "dynamic_execution": false,
+        "encoded_content": false
+      },
+      "agent_instructions": "None. The skill is reference documentation: Maven or pip snippets, samples with placeholder or environment-variable credentials, and links to Microsoft documentation. It gives the agent no command to run, nothing to install, and no credential to read.",
+      "out_of_package_references": [],
+      "license": "Repository-root MIT (microsoft/skills LICENSE), no nested notice; SKILL.md declares MIT; no third-party notice in any file.",
+      "sample_accuracy_notes": [
+        "Strings such as 'You are a personal math tutor' are instructions for the Azure agent the user's code creates, not for the coding agent reading the skill.",
+        "Run polling loops have no timeout; after REQUIRES_ACTION the sample submits tool outputs once and stops polling, and handleRequiredActions uses an undefined threadId.",
+        "Samples enable the hosted Code Interpreter and upload local files (data.csv, document.pdf) to the user's Azure project.",
+        "examples.md lists AZURE_CLIENT_SECRET for a service principal, while the best-practice list prefers managed identity."
+      ],
+      "files": [
+        {
+          "path": "LICENSE.txt",
+          "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+          "attached": true
+        },
+        {
+          "path": "references/examples.md",
+          "sha256": "93e4bdca6f4c48825d123b643ad351e05dacf8a2ff2faf25e700fa925456f317",
+          "attached": false
+        },
+        {
+          "path": "SKILL.md",
+          "sha256": "02ddb9920cf6432b1bac4ff90564365878a1b7341cda4afa989e795458e6978c",
+          "attached": false
+        }
+      ]
+    },
+    {
+      "id": "microsoft/azure-ai-voicelive-java",
+      "decision": "release",
+      "risk": "low",
+      "agent_capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "package_install": false,
+        "filesystem_write": false,
+        "dynamic_execution": false,
+        "encoded_content": false
+      },
+      "agent_instructions": "None. The skill is reference documentation: Maven or pip snippets, samples with placeholder or environment-variable credentials, and links to Microsoft documentation. It gives the agent no command to run, nothing to install, and no credential to read.",
+      "out_of_package_references": [],
+      "license": "Repository-root MIT (microsoft/skills LICENSE), no nested notice; SKILL.md declares MIT; no third-party notice in any file.",
+      "sample_accuracy_notes": [
+        "Event class names differ between SKILL.md (SessionUpdateResponseAudioDelta, SessionUpdateError) and examples.md (ResponseAudioDeltaEvent, ErrorEvent); at least one set will not compile.",
+        "Samples open the microphone and stream audio to the service; the application should tell its users. Personal Voice samples need a consented speaker profile.",
+        "The complete example never closes the session; beta 1.0.0-beta.2."
+      ],
+      "files": [
+        {
+          "path": "LICENSE.txt",
+          "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+          "attached": true
+        },
+        {
+          "path": "references/examples.md",
+          "sha256": "2cadbc41aa84c23c0f75002eeb0916cc52a2ac132185339e4f449b563e3ed23d",
+          "attached": false
+        },
+        {
+          "path": "SKILL.md",
+          "sha256": "78ae78efd24e6742b80d83f2578f1b50560c017a51a00fa21a401d9310db9538",
+          "attached": false
+        }
+      ]
+    },
+    {
+      "id": "microsoft/azure-ai-anomalydetector-java",
+      "decision": "hold",
+      "hold_reason": "upstream-service-retired",
+      "risk": "low",
+      "agent_capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "package_install": false,
+        "filesystem_write": false,
+        "dynamic_execution": false,
+        "encoded_content": false
+      },
+      "agent_instructions": "None. The skill is reference documentation: Maven or pip snippets, samples with placeholder or environment-variable credentials, and links to Microsoft documentation. It gives the agent no command to run, nothing to install, and no credential to read.",
+      "out_of_package_references": [],
+      "license": "Repository-root MIT (microsoft/skills LICENSE), no nested notice; SKILL.md declares MIT; no third-party notice in any file.",
+      "sample_accuracy_notes": [
+        "Content itself is safe reference documentation, but it teaches a service Microsoft has retired. Microsoft's own documentation states: 'The Anomaly Detector service is being retired on the 1st of October, 2026' and new resources could not be created since 20 September 2023 (MicrosoftDocs/azure-ai-docs@e8d0ac6f7ebd7fd000e287657ab9beda5bccc1fa, articles/ai-services/anomaly-detector/faq.yml:22 and includes/deprecation.md:13). This review is dated 2026-10-03.",
+        "The skill does not mention the retirement, so an agent would scaffold code against a service users can no longer use. The earlier artifact review (catalog/reviews/microsoft__azure-ai-anomalydetector-java.json) already flagged the deprecation.",
+        "Also: beta 3.0.0-beta.6; a 'streaming' sample appends OffsetDateTime.now() to a DAILY series."
+      ],
+      "files": [
+        {
+          "path": "LICENSE.txt",
+          "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+          "attached": true
+        },
+        {
+          "path": "references/examples.md",
+          "sha256": "17e01a855536f6112f5daa91a4bf5a9aa7167435853019daf1d1523292ce4df8",
+          "attached": false
+        },
+        {
+          "path": "SKILL.md",
+          "sha256": "e39cb5855a4e4240e037110b74abcc1b850e28761d95c668ac0568b64ca40d6e",
+          "attached": false
+        }
+      ]
+    },
+    {
+      "id": "microsoft/azure-ai-formrecognizer-java",
+      "decision": "release",
+      "risk": "low",
+      "agent_capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "package_install": false,
+        "filesystem_write": false,
+        "dynamic_execution": false,
+        "encoded_content": false
+      },
+      "agent_instructions": "One optional agent instruction: SKILL.md 'Before Implementation' asks the agent to search a `microsoft-docs` MCP server for current API patterns. That is a lookup through a tool the user may or may not have configured; the skill works without it. No command, install, or credential access for the agent.",
+      "out_of_package_references": [
+        {
+          "type": "optional",
+          "target": "microsoft-docs MCP server",
+          "note": "Optional documentation lookup; not shipped and not required."
+        }
+      ],
+      "license": "Repository-root MIT (microsoft/skills LICENSE), no nested notice; SKILL.md declares no license, so the root MIT applies; no third-party notice in any file.",
+      "sample_accuracy_notes": [
+        "Under the proposed reference policy this is an optional external reference (a tool, not a file), allowed with this note.",
+        "The skill name says formrecognizer but the content targets the newer azure-ai-documentintelligence package; this is stated in a banner and a migration table.",
+        "The Maven snippet pins 1.0.0 while the same file says latest GA is 1.0.7.",
+        "The ID-document sample prints personal data (name, date of birth, document number)."
+      ],
+      "files": [
+        {
+          "path": "LICENSE.txt",
+          "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+          "attached": true
+        },
+        {
+          "path": "references/examples.md",
+          "sha256": "d9c623293d850194146e7d40b79502da7f80c2b2180ea701681fbf60267c9780",
+          "attached": false
+        },
+        {
+          "path": "SKILL.md",
+          "sha256": "7fbec12baeb4ccefe06786137317afb1bc7cf310362f0a38085d1ff9858b129b",
+          "attached": false
+        }
+      ]
+    },
+    {
+      "id": "microsoft/azure-compute-batch-java",
+      "decision": "release",
+      "risk": "low",
+      "agent_capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "package_install": false,
+        "filesystem_write": false,
+        "dynamic_execution": false,
+        "encoded_content": false
+      },
+      "agent_instructions": "None. The skill is reference documentation: Maven or pip snippets, samples with placeholder or environment-variable credentials, and links to Microsoft documentation. It gives the agent no command to run, nothing to install, and no credential to read.",
+      "out_of_package_references": [],
+      "license": "Repository-root MIT (microsoft/skills LICENSE), no nested notice; SKILL.md declares MIT; no third-party notice in any file.",
+      "sample_accuracy_notes": [
+        "Samples create billable infrastructure in the user's subscription (pools of 2 to 10 dedicated VMs, autoscale formulas, recurring job schedules) and do not mention cost. A reviewer should know an agent may scaffold this.",
+        "Samples run remote commands with elevated rights on the user's pool nodes ('apt-get install' as ADMIN start task, a 'sudo apt-get update' task). That is the purpose of Azure Batch and runs on the user's VMs, not the agent's machine.",
+        "The pool image pairs offer 'UbuntuServer' with SKU '22_04-lts', which does not exist; other samples correctly use '0001-com-ubuntu-server-jammy'. Exit-code samples use 'cmd /c' on a Linux pool.",
+        "waitForPoolReady loops forever if allocation fails."
+      ],
+      "files": [
+        {
+          "path": "LICENSE.txt",
+          "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+          "attached": true
+        },
+        {
+          "path": "references/examples.md",
+          "sha256": "a7b10e8de3b432232a85689ae1119eae452513209afb5ef787400b8463c6361b",
+          "attached": false
+        },
+        {
+          "path": "SKILL.md",
+          "sha256": "a64ad3c273875782b51595a54968d108eaa7081dd7007bf3c3cb05040aaf7456",
+          "attached": false
+        }
+      ]
+    }
+  ]
+}

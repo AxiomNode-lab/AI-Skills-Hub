@@ -1,0 +1,137 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "microsoft/azure-eventhub-rust",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/azure-sdk-rust/skills/azure-eventhub-rust",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "review": {
+    "path": "catalog/reviews/microsoft__azure-eventhub-rust.json",
+    "sha256": "7e0d3d0da46484812d459f4dfd2f6c88814dd579427b57465989feb102aaa2f8"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "network-access",
+        "line": 23,
+        "evidence": "https://",
+        "context": "> **IMPORTANT:** Only use the official `azure_messaging_eventhubs` crate published by the [azure-sdk](https://crates.io/users/azure-sdk) crates.io user. Do NOT use unofficial or community crates. Official crates use underscores in names and",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 27,
+        "evidence": "sh",
+        "context": "```sh",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 28,
+        "evidence": "cargo add",
+        "context": "cargo add azure_messaging_eventhubs azure_identity tokio futures",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 35,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 61,
+        "evidence": "credential",
+        "context": "    let credential = DeveloperToolsCredential::new(None)?;",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 67,
+        "evidence": "credential",
+        "context": "            credential.clone(),",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 101,
+        "evidence": "credential",
+        "context": "let credential = DeveloperToolsCredential::new(None)?;",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 106,
+        "evidence": "credential",
+        "context": "        credential.clone(),",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 157,
+        "evidence": "remove",
+        "context": "1. **Use `cargo add` to manage dependencies, never edit `Cargo.toml` directly.** Add and remove Rust SDK dependencies with cargo commands instead of manual manifest edits.",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 157,
+        "evidence": "cargo add",
+        "context": "1. **Use `cargo add` to manage dependencies, never edit `Cargo.toml` directly.** Add and remove Rust SDK dependencies with cargo commands instead of manual manifest edits.",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 172,
+        "evidence": "https://",
+        "context": "| API Reference | https://docs.rs/azure_messaging_eventhubs/latest/azure_messaging_eventhubs                    |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 173,
+        "evidence": "https://",
+        "context": "| crates.io     | https://crates.io/crates/azure_messaging_eventhubs                                            |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 174,
+        "evidence": "https://",
+        "context": "| Source Code   | https://github.com/Azure/azure-sdk-for-rust/tree/main/sdk/eventhubs/azure_messaging_eventhubs |",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 7999
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "ebfc903a96b4aa25c2ef83021ef90e02306ce56cf01943244f4bc3f4f3980278",
+      "bytes": 6859,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 7999
+}

@@ -1,0 +1,274 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "harperaa/security-prompts-threat-modeling",
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "harperaa/secure-claude-skills",
+    "path": "security-prompts/threat-modeling",
+    "revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "security-prompts/threat-modeling",
+    "url": "https://api.github.com/repos/harperaa/secure-claude-skills/git/trees/c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/harperaa/secure-claude-skills/blob/c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "security-prompts",
+        "security-prompts/threat-modeling"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file; OWASP Top 10 2021 is referenced by category IDs/names with original checklist questions, and PCI DSS only as concepts. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "low",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md and 01_stride_analysis.md, 02_feature_threats.md, 03_architecture_impact.md, 04_code_review.md, 05_security_tests.md, 06_owasp_check.md, 07_payment_security.md, 08_update_model.md in full. The skill is a set of prompt templates for STRIDE threat modeling, feature/architecture threat analysis, security code review, security test generation, an OWASP Top 10 2021 checklist, and a Clerk Billing + Stripe payment security assessment.",
+      "Following it makes the agent write reports and tests into the user's project (docs/security/THREAT_MODEL.md, docs/security/reviews/*.md, __tests__/...security.test.ts) and optionally run `npm test`, a curl against localhost to check webhook signature rejection, and the Stripe CLI (`stripe listen` / `stripe trigger`) in the user's own test setup (05_security_tests.md:161-173, 07_payment_security.md:164-176); no installs, secrets handling, or remote calls beyond the user's local app and their own Stripe CLI session.",
+      "Template dependence: the prompts are written for the author's Secure Vibe Coding OS starter (Next.js, Clerk, Convex, Stripe) and reference project docs such as @docs/security/SECURITY_ARCHITECTURE.md and helpers withCsrf/withRateLimit/handleApiError (04_code_review.md:44-50) that the user's project may not have; the threat-modeling methodology still works in any project. SKILL.md:207 and :320 assume an install path `.claude/skills/security/security-prompts/threat-modeling/`; the template files themselves ship in this directory. Pointers to the sibling prompt-engineering skill (SKILL.md:301-304, 04_code_review.md:124, 05_security_tests.md:198) and to threat-modeler/security-scanner/security-reporter agents are optional and not shipped.",
+      "Minor inaccuracy: 04_code_review.md:67 maps XML external entities to A04:2021 (in OWASP 2021 XXE falls under A05 Security Misconfiguration). The OWASP section uses only category names and paraphrased questions."
+    ]
+  },
+  "files": [
+    {
+      "path": "01_stride_analysis.md",
+      "sha256": "62c6a297674d429e9d4931af3c87582293910703a309c3c7fd27794647b3761f",
+      "bytes": 3838,
+      "mode": "100644",
+      "git_blob": "596be69d0c741e05d3941b7dfdf51ecbb2d89c5d",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "02_feature_threats.md",
+      "sha256": "d7600313a4bd9a7b730ce7f2866af3774fe54a8b9499024f4965b6176b206005",
+      "bytes": 3393,
+      "mode": "100644",
+      "git_blob": "cb9518c2bd2cb2051fa775f4efadf79dc3188191",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "03_architecture_impact.md",
+      "sha256": "50ba020df62636ce8dc4a9b98bbae1f36415349b6c675107847425fdd6e145a8",
+      "bytes": 4103,
+      "mode": "100644",
+      "git_blob": "ad4183231c1825d5b6075a3aaf580f736fdc831e",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "credential-access",
+          "line": 64,
+          "evidence": "Credential",
+          "context": "- Credential management?",
+          "disposition": "accepted",
+          "reason": "Checklist items about keeping Stripe secret/publishable keys and Redis credentials out of client code and in environment variables; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 99,
+          "evidence": "credential",
+          "context": "- Risks: Redis vulnerabilities, credential theft, network exposure",
+          "disposition": "accepted",
+          "reason": "Checklist items about keeping Stripe secret/publishable keys and Redis credentials out of client code and in environment variables; no instruction to read, print, or send real secrets."
+        }
+      ]
+    },
+    {
+      "path": "04_code_review.md",
+      "sha256": "4c9efeec4303a9df16ca96f5d9f338f81836c81135aaa24caea6bfb0c313e0b2",
+      "bytes": 4009,
+      "mode": "100644",
+      "git_blob": "73b096b5f30d97ec08216135c86efbc1f40c01cc",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "05_security_tests.md",
+      "sha256": "34ad5f88239ff89815a3eaf88fa448713f1cc6d8ce4dd2b78227f1b85370963c",
+      "bytes": 4988,
+      "mode": "100644",
+      "git_blob": "372d585bdf8f9f6b22845a995050647531347c55",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 161,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks showing `npm test` variants and a local webhook-signature test with curl and the Stripe CLI, run against the user's own app."
+        }
+      ]
+    },
+    {
+      "path": "06_owasp_check.md",
+      "sha256": "eb4a9a96337cd3eef44dfcb8526c10f722988262493fca09a91d052b19782036",
+      "bytes": 4539,
+      "mode": "100644",
+      "git_blob": "166fdfa37bf14f20aead4c4b85606750d8fb5eea",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "07_payment_security.md",
+      "sha256": "bb1febde85846e7c346a8a2b8a66a7feff9f94d14c1234ff7da70e88fa3c9163",
+      "bytes": 5637,
+      "mode": "100644",
+      "git_blob": "b52ead804e9c0e63ba4596fc05b9dc8ed1ed0ad2",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "credential-access",
+          "line": 59,
+          "evidence": "API Key",
+          "context": "**5. API Key Security**:",
+          "disposition": "accepted",
+          "reason": "Checklist items about keeping Stripe secret/publishable keys and Redis credentials out of client code and in environment variables; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 61,
+          "evidence": "secret",
+          "context": "- Are publishable and secret keys used correctly?",
+          "disposition": "accepted",
+          "reason": "Checklist items about keeping Stripe secret/publishable keys and Redis credentials out of client code and in environment variables; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 83,
+          "evidence": "secret",
+          "context": "- ❌ Exposing secret API keys client-side",
+          "disposition": "accepted",
+          "reason": "Checklist items about keeping Stripe secret/publishable keys and Redis credentials out of client code and in environment variables; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 100,
+          "evidence": "Secret",
+          "context": "- [ ] Secret key used server-side only",
+          "disposition": "accepted",
+          "reason": "Checklist items about keeping Stripe secret/publishable keys and Redis credentials out of client code and in environment variables; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 132,
+          "evidence": "Secret",
+          "context": "- 🚨 Secret keys exposed",
+          "disposition": "accepted",
+          "reason": "Checklist items about keeping Stripe secret/publishable keys and Redis credentials out of client code and in environment variables; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 159,
+          "evidence": "secret",
+          "context": "- ❌ Expose secret keys client-side",
+          "disposition": "accepted",
+          "reason": "Checklist items about keeping Stripe secret/publishable keys and Redis credentials out of client code and in environment variables; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "shell-execution",
+          "line": 164,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks showing `npm test` variants and a local webhook-signature test with curl and the Stripe CLI, run against the user's own app."
+        },
+        {
+          "type": "network-access",
+          "line": 166,
+          "evidence": "curl",
+          "context": "curl -X POST http://localhost:3000/api/webhooks/stripe \\",
+          "disposition": "accepted",
+          "reason": "curl POST to http://localhost:3000/api/webhooks/stripe with a fake signature to confirm the user's own endpoint rejects it."
+        },
+        {
+          "type": "network-access",
+          "line": 166,
+          "evidence": "http://",
+          "context": "curl -X POST http://localhost:3000/api/webhooks/stripe \\",
+          "disposition": "accepted",
+          "reason": "curl POST to http://localhost:3000/api/webhooks/stripe with a fake signature to confirm the user's own endpoint rejects it."
+        }
+      ]
+    },
+    {
+      "path": "08_update_model.md",
+      "sha256": "824403b3d30857dfb6fb5be103137e649101e353fd631c86a3db22368ca26ed1",
+      "bytes": 2408,
+      "mode": "100644",
+      "git_blob": "d4d8024f0df1d723821daf16bcf7de847a1495bf",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "e8f0d88e88dafeb5ba3503df8babaf5ef1c49323d6c1751c09989d29740fa919",
+      "bytes": 1069,
+      "mode": "100644",
+      "git_blob": "346d6fb05afd34a37fb0b156a612166534ffc7d9",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "1affbca2989abc173ea403746df43733c573510d06405fec7bad7b5d191f65db",
+      "bytes": 11721,
+      "mode": "100644",
+      "git_blob": "b3e6f85c7985ad99a80393cdaf5edd99b086ff12",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": []
+    }
+  ]
+}

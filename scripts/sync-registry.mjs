@@ -13,7 +13,16 @@ const previousSnapshot = JSON.stringify({
   policy_version: registry.policy_version,
   skills: registry.skills
 });
-const sourceEntries=sources.sources.filter((s)=>s.kind==="github" && s.repo && s.ingest_enabled === true);
+// --source <owner/repo> (repeatable) limits the sync to those sources, so other
+// sources' records are not touched. --no-fetch uses catalog/ingestion as is.
+const args=process.argv.slice(2);
+const onlySources=args.flatMap((arg,i)=>arg==="--source"&&args[i+1]?[args[i+1]]:[]);
+const noFetch=args.includes("--no-fetch");
+const sourceEntries=sources.sources.filter((s)=>s.kind==="github" && s.repo && s.ingest_enabled === true && (!onlySources.length || onlySources.includes(s.repo)));
+// include_paths narrows a source to the listed subtrees (for example, only the
+// programming skills of a mixed repository).
+const inScope=(source,itemPath)=>!source.include_paths || source.include_paths.some((p)=>itemPath===p || itemPath.startsWith(p+"/"));
+if(onlySources.length && sourceEntries.length!==onlySources.length) throw new Error("Unknown or disabled --source: "+onlySources.filter((r)=>!sourceEntries.some((s)=>s.repo===r)).join(", "));
 
 const namespaceByRepo={
   "anthropics/skills":"anthropics",
@@ -23,7 +32,17 @@ const namespaceByRepo={
   "K-Dense-AI/scientific-agent-skills":"kdense",
   "microsoft/skills":"microsoft",
   "github/awesome-copilot":"github",
-  "openai/plugins":"openai"
+  "openai/plugins":"openai",
+  "addyosmani/agent-skills":"addyosmani",
+  "UnitOneAI/SecuritySkills":"unitone",
+  "getsentry/skills":"sentry",
+  "aaron-he-zhu/seo-geo-claude-skills":"seo-geo",
+  "aaron-he-zhu/aaron-marketing-skills":"aaron-seo",
+  "wshobson/agents":"wshobson",
+  "BagelHole/DevOps-Security-Agent-Skills":"bagelhole",
+  "supabase/agent-skills":"supabase",
+  "j4flmao/agent-skills":"j4flmao",
+  "harperaa/secure-claude-skills":"harperaa"
 };
 
 function deriveCategory(sourceId,sourcePath){
@@ -60,32 +79,73 @@ function releaseFor(skill){
   return reasons.length?{status:"pending",reasons}:{status:"eligible",reasons:[]};
 }
 
-const existingBySource=new Map(registry.skills.map((s)=>[s.source.repo+":"+s.source.path,s]));
+// Released records name the skill directory, ingestion names its SKILL.md.
+const sourceKeyOf=(repo,skillPath)=>repo+":"+skillPath.replace(/\/SKILL\.md$/i,"");
+// When a blocked legacy record shares a path with a live one, the live one wins.
+const existingBySource=new Map([...registry.skills].sort((a,b)=>(b.distribution==="blocked")-(a.distribution==="blocked")).map((s)=>[sourceKeyOf(s.source.repo,s.source.path),s]));
 const existingById=new Map(registry.skills.map((s)=>[s.id,s]));
 const seenSourceKeys=new Set();
 const discovered=[];
 for(const source of sourceEntries){
   const ref=source.default_branch??"main";
-  execFileSync(process.execPath,[path.join(ROOT,"scripts/ingest-github.mjs"),source.repo,ref],{
+  if(!noFetch) execFileSync(process.execPath,[path.join(ROOT,"scripts/ingest-github.mjs"),source.repo,ref],{
     stdio:"inherit",
     env:process.env
   });
   const file=path.join(ROOT,"catalog/ingestion",source.repo.replaceAll("/","__")+".json");
   if(!fs.existsSync(file)) throw new Error("Missing ingestion output for "+source.repo);
   const payload=JSON.parse(fs.readFileSync(file,"utf8"));
-  for(const item of payload.discovered_skills) discovered.push({source,item,revision:payload.source.revision});
+  for(const item of payload.discovered_skills.filter((item)=>inScope(source,item.path))) discovered.push({source,item,revision:payload.source.revision});
 }
 
+// Ids already held by a record at the same upstream path are claimed first, so
+// a new path with the same skill name cannot take them over, whatever the order.
+// Ids are lowercase slugs: a frontmatter name like "SLI/SLO Management" falls
+// back to the skill's directory name.
+const SLUG=/^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+const idSlug=(item)=>SLUG.test(item.name??"") ? item.name : path.posix.basename(path.posix.dirname(item.path)).toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"");
+const drift=[];
+// Curated release notices survive a recomputed release state.
+const withNotices=(skill)=>skill.release?.notices?{notices:skill.release.notices}:{};
+const claimedIds=new Set();
+for(const {source,item} of discovered){
+  const existing=existingBySource.get(sourceKeyOf(source.repo,item.path));
+  if(existing) claimedIds.add(existing.id);
+}
 for(const {source,item,revision} of discovered){
-  const sourceKey=source.repo+":"+item.path;
+  const sourceKey=sourceKeyOf(source.repo,item.path);
   seenSourceKeys.add(sourceKey);
   let skill=existingBySource.get(sourceKey);
   const namespace=namespaceByRepo[source.repo]??source.repo.split("/")[0].toLowerCase().replace(/[^a-z0-9-]/g,"-");
-  const stableId=skill?.id ?? namespace+"/"+item.name;
+  const stableId=skill?.id ?? namespace+"/"+idSlug(item);
   if(!skill) {
-    skill = existingById.get(stableId);
+    // A record whose upstream path moved keeps its id, unless another path in
+    // this sync already claimed it: then two upstream skills share a name.
+    const byId = existingById.get(stableId);
+    if (byId && claimedIds.has(stableId)) {
+      console.warn("Skipping duplicate skill id "+stableId+" at "+sourceKey);
+      continue;
+    }
+    skill = byId;
   }
-  
+  claimedIds.add(stableId);
+  // A reviewed record stays pinned to the revision its review covers; a newer
+  // upstream commit needs a new review, not a metadata overwrite.
+  if(skill?.license?.evidence?.startsWith("catalog/reviews/")){
+    // Its pinned path counts as seen even if upstream moved it, so it is not
+    // blocked as missing; the move is reported for the new review instead.
+    const pinnedKey=sourceKeyOf(skill.source.repo,skill.source.path);
+    seenSourceKeys.add(pinnedKey);
+    const moved=pinnedKey!==sourceKey;
+    if(skill.source.revision!==revision || moved) drift.push({
+      id:skill.id,
+      pinned_revision:skill.source.revision,
+      upstream_revision:revision,
+      skill_md_changed:item.skill_sha256!==skill.integrity?.upstream_skill_sha256,
+      ...(moved ? { upstream_path:item.path } : {})
+    });
+    continue;
+  }
   if(!skill){
     skill={
       id:stableId,
@@ -155,7 +215,7 @@ for(const {source,item,revision} of discovered){
   const revisionChanged=previousRevision && previousRevision!==revision;
   if(revisionChanged){
     skill.materialized=false;
-    if(skill.distribution==="bundled") skill.release={status:"pending",reasons:["upstream-revision-changed","security-scan-pending","rematerialization-required"]};
+    if(skill.distribution==="bundled") skill.release={...withNotices(skill),status:"pending",reasons:["upstream-revision-changed","security-scan-pending","rematerialization-required"]};
   }
 
   if(!skill.license.redistributable && skill.distribution==="bundled"){
@@ -166,14 +226,17 @@ for(const {source,item,revision} of discovered){
     skill.materialized=false;
   }
 
-  skill.release=releaseFor(skill);
+  skill.release={...withNotices(skill),...releaseFor(skill)};
 }
 
 for (const skill of registry.skills) {
   const sourceRepo = skill.source?.repo;
-  if (!sourceEntries.some((source) => source.repo === sourceRepo)) continue;
+  const source = sourceEntries.find((entry) => entry.repo === sourceRepo);
+  if (!source) continue;
+  // Records outside include_paths were not looked for, so they are not missing.
+  if (!inScope(source, skill.source.path)) continue;
 
-  const sourceKey = sourceRepo + ":" + skill.source.path;
+  const sourceKey = sourceKeyOf(sourceRepo, skill.source.path);
   if (seenSourceKeys.has(sourceKey)) continue;
 
   skill.source = {
@@ -187,6 +250,14 @@ for (const skill of registry.skills) {
     reasons: ["upstream-skill-missing"]
   };
 }
+
+// Reviewed releases whose upstream moved on: candidates for a new review.
+const driftFile=path.join(ROOT,"catalog/reports/release-drift.json");
+const driftById=new Map((fs.existsSync(driftFile)?JSON.parse(fs.readFileSync(driftFile,"utf8")).skills:[]).map((d)=>[d.id,d]));
+for(const skill of registry.skills) if(sourceEntries.some((s)=>s.repo===skill.source?.repo)) driftById.delete(skill.id);
+for(const d of drift) driftById.set(d.id,d);
+fs.mkdirSync(path.dirname(driftFile),{recursive:true});
+fs.writeFileSync(driftFile,JSON.stringify({skills:[...driftById.values()].sort((a,b)=>a.id.localeCompare(b.id))},null,2)+"\n");
 
 registry.skills.sort((a,b)=>a.id.localeCompare(b.id));
 const nextSnapshot = JSON.stringify({

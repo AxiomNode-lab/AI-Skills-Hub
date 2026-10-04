@@ -3,6 +3,7 @@ import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import { verifyReviewedDirectory, sha256 } from "../packages/materializer/src/reviewed.mjs";
+import { parseFrontmatter as parseFields } from "../packages/core/src/index.mjs";
 
 const root=process.cwd();
 const registry=JSON.parse(fs.readFileSync(path.join(root,"catalog/skills.json"),"utf8"));
@@ -11,14 +12,9 @@ const failures=[];
 function parseFrontmatter(body){
   const lines=body.split(/\r?\n/);
   if(lines[0]?.trim()!=="---") throw new Error("SKILL.md must start with YAML frontmatter");
-  const result={};
-  let closed=false;
-  for(const line of lines.slice(1)){
-    if(line.trim()==="---"){closed=true;break;}
-    const match=line.match(/^([A-Za-z0-9_-]+):\s*(.*)$/);
-    if(match) result[match[1]]=match[2].trim().replace(/^['"]|['"]$/g,"");
-  }
-  if(!closed) throw new Error("Unclosed YAML frontmatter");
+  if(!lines.slice(1).some(line=>line.trim()==="---")) throw new Error("Unclosed YAML frontmatter");
+  const result=parseFields(body);
+  if(typeof result.description==="string") result.description=result.description.trim();
   return result;
 }
 

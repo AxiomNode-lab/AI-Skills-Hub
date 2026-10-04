@@ -1,0 +1,226 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "microsoft/m365-agents-ts",
+  "status": "approved",
+  "reviewed_on": "2026-10-02",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/azure-sdk-typescript/skills/m365-agents-ts",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": ".github/plugins/azure-sdk-typescript/skills/m365-agents-ts",
+    "url": "https://api.github.com/repos/microsoft/skills/git/trees/84d8eaa8ae95930f55cdceb3e27196c795dab038?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/microsoft/skills/blob/84d8eaa8ae95930f55cdceb3e27196c795dab038/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        ".github",
+        ".github/plugins",
+        ".github/plugins/azure-sdk-typescript",
+        ".github/plugins/azure-sdk-typescript/skills",
+        ".github/plugins/azure-sdk-typescript/skills/m365-agents-ts"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT License with its copyright notice, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found; front matter declares license: MIT with Microsoft as author. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "medium",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": true,
+      "network": false,
+      "credentials": false,
+      "package_install": true,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md (the only file) in full. TypeScript guide to the Microsoft 365 Agents SDK: Express-hosted AgentApplication routing, streaming Azure OpenAI responses with feedback/AI/sensitivity labels, invoke-activity handling, and the Copilot Studio direct-to-engine client and WebChat integration.",
+      "Medium only because SKILL.md:24-25 have `npm install @microsoft/agents-hosting @microsoft/agents-hosting-express @microsoft/agents-activity @microsoft/agents-copilotstudio-client` (official Microsoft packages, unpinned). Secrets (AZURE_API_KEY, CLIENT_SECRET, COPILOT_BEARER_TOKEN) are placeholder environment variables read via process.env in the user's code; the skill advises keeping secrets out of source and does not tell the agent to read, print, or transmit them.",
+      "SKILL.md:18 suggests checking the microsoft-docs MCP for current signatures (optional). The streaming sample imports `@ai-sdk/azure` and `ai` (Vercel AI SDK), which the install line does not include; users must add them. startServer launches a local HTTP server on PORT in user code."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "git_blob": "79656060de00aa4659ad2c276d5be8830664d544",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry the copyright and permission notice.",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "6e4d92ab2e19baa8136419195394789218c2a9157ddd87100cf352870b379bdc",
+      "bytes": 6879,
+      "mode": "100644",
+      "git_blob": "00169cce10c70508375fc9300513a7600c7f75f8",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 23,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks for `npm install` and placeholder environment-variable listings."
+        },
+        {
+          "type": "package-install",
+          "line": 24,
+          "evidence": "npm install",
+          "context": "npm install @microsoft/agents-hosting @microsoft/agents-hosting-express @microsoft/agents-activity",
+          "disposition": "accepted",
+          "reason": "Unpinned `npm install` of official @microsoft/agents-* packages."
+        },
+        {
+          "type": "package-install",
+          "line": 25,
+          "evidence": "npm install",
+          "context": "npm install @microsoft/agents-copilotstudio-client",
+          "disposition": "accepted",
+          "reason": "Unpinned `npm install` of official @microsoft/agents-* packages."
+        },
+        {
+          "type": "shell-execution",
+          "line": 30,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks for `npm install` and placeholder environment-variable listings."
+        },
+        {
+          "type": "credential-access",
+          "line": 38,
+          "evidence": "secret",
+          "context": "CLIENT_SECRET=<client-secret>",
+          "disposition": "accepted",
+          "reason": "Placeholder CLIENT_SECRET/COPILOT_BEARER_TOKEN env vars and process.env lookups in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 87,
+          "evidence": "https://",
+          "context": "    type: \"https://schema.org/Message\",",
+          "disposition": "accepted",
+          "reason": "schema.org URI used as a sensitivity-label type identifier, not a fetched URL."
+        },
+        {
+          "type": "credential-access",
+          "line": 95,
+          "evidence": "process.env",
+          "context": "    model: azure(process.env.AZURE_OPENAI_DEPLOYMENT_NAME || \"gpt-4o-mini\"),",
+          "disposition": "accepted",
+          "reason": "Placeholder CLIENT_SECRET/COPILOT_BEARER_TOKEN env vars and process.env lookups in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 146,
+          "evidence": "process.env",
+          "context": "  environmentId: process.env.COPILOT_ENVIRONMENT_ID!,",
+          "disposition": "accepted",
+          "reason": "Placeholder CLIENT_SECRET/COPILOT_BEARER_TOKEN env vars and process.env lookups in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 147,
+          "evidence": "process.env",
+          "context": "  schemaName: process.env.COPILOT_SCHEMA_NAME!,",
+          "disposition": "accepted",
+          "reason": "Placeholder CLIENT_SECRET/COPILOT_BEARER_TOKEN env vars and process.env lookups in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 148,
+          "evidence": "process.env",
+          "context": "  clientId: process.env.COPILOT_CLIENT_ID!,",
+          "disposition": "accepted",
+          "reason": "Placeholder CLIENT_SECRET/COPILOT_BEARER_TOKEN env vars and process.env lookups in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 152,
+          "evidence": "process.env",
+          "context": "  return process.env.COPILOT_BEARER_TOKEN!;",
+          "disposition": "accepted",
+          "reason": "Placeholder CLIENT_SECRET/COPILOT_BEARER_TOKEN env vars and process.env lookups in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 191,
+          "evidence": "https://",
+          "context": "| Microsoft 365 Agents SDK               | https://learn.microsoft.com/en-us/microsoft-365/agents-sdk/                                                         |",
+          "disposition": "accepted",
+          "reason": "A schema.org type URI in a sensitivity-label object and Microsoft Learn/GitHub reference links; the agent is not told to fetch them."
+        },
+        {
+          "type": "network-access",
+          "line": 192,
+          "evidence": "https://",
+          "context": "| JavaScript SDK overview                | https://learn.microsoft.com/en-us/javascript/api/overview/agents-overview?view=agents-sdk-js-latest                 |",
+          "disposition": "accepted",
+          "reason": "A schema.org type URI in a sensitivity-label object and Microsoft Learn/GitHub reference links; the agent is not told to fetch them."
+        },
+        {
+          "type": "network-access",
+          "line": 193,
+          "evidence": "https://",
+          "context": "| @microsoft/agents-hosting-express      | https://learn.microsoft.com/en-us/javascript/api/%40microsoft/agents-hosting-express?view=agents-sdk-js-latest      |",
+          "disposition": "accepted",
+          "reason": "A schema.org type URI in a sensitivity-label object and Microsoft Learn/GitHub reference links; the agent is not told to fetch them."
+        },
+        {
+          "type": "network-access",
+          "line": 194,
+          "evidence": "https://",
+          "context": "| @microsoft/agents-copilotstudio-client | https://learn.microsoft.com/en-us/javascript/api/%40microsoft/agents-copilotstudio-client?view=agents-sdk-js-latest |",
+          "disposition": "accepted",
+          "reason": "A schema.org type URI in a sensitivity-label object and Microsoft Learn/GitHub reference links; the agent is not told to fetch them."
+        },
+        {
+          "type": "network-access",
+          "line": 195,
+          "evidence": "https://",
+          "context": "| Integrate with Copilot Studio          | https://learn.microsoft.com/en-us/microsoft-365/agents-sdk/integrate-with-mcs                                       |",
+          "disposition": "accepted",
+          "reason": "A schema.org type URI in a sensitivity-label object and Microsoft Learn/GitHub reference links; the agent is not told to fetch them."
+        },
+        {
+          "type": "network-access",
+          "line": 196,
+          "evidence": "https://",
+          "context": "| GitHub samples                         | https://github.com/microsoft/Agents/tree/main/samples/nodejs                                                        |",
+          "disposition": "accepted",
+          "reason": "A schema.org type URI in a sensitivity-label object and Microsoft Learn/GitHub reference links; the agent is not told to fetch them."
+        }
+      ]
+    }
+  ]
+}

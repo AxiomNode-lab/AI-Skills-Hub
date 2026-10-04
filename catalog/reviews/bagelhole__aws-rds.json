@@ -1,0 +1,208 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "bagelhole/aws-rds",
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "infrastructure/cloud-aws/aws-rds",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "infrastructure/cloud-aws/aws-rds",
+    "url": "https://api.github.com/repos/BagelHole/DevOps-Security-Agent-Skills/git/trees/0365f57a079b1332f95cf26e31dd2d5332a8399f?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/BagelHole/DevOps-Security-Agent-Skills/blob/0365f57a079b1332f95cf26e31dd2d5332a8399f/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "infrastructure",
+        "infrastructure/cloud-aws",
+        "infrastructure/cloud-aws/aws-rds"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found; the frontmatter declares license: MIT, consistent with the repository root. AWS CLI flags and parameter names are factual identifiers. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "medium",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "package_install": false,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md in full (single-file skill). Reference for Amazon RDS: subnet groups, creating a Multi-AZ encrypted PostgreSQL instance, parameter groups, read replicas, snapshots and point-in-time recovery, CloudWatch alarms, a Terraform example and troubleshooting.",
+      "Medium: following it has the agent run `aws rds`/`aws cloudwatch` commands that create, modify (`--apply-immediately`), promote and restore database instances, copy and delete snapshots, and read the RDS-managed master password via `aws secretsmanager get-secret-value` (SKILL.md:103-105). Acceptable because these are the standard operations for the user's own RDS task under their configured AWS identity, and defaults are security-positive (storage encryption, deletion protection, managed master password, final snapshot). Users should confirm before `aws rds delete-db-snapshot` (SKILL.md:212), `promote-read-replica` (SKILL.md:161) and `modify-db-instance --apply-immediately` (SKILL.md:132-135) against production, and avoid printing the master password in shared logs.",
+      "Account ID 123456789012, ARNs, subnet and security-group IDs are placeholders. Related Skills (SKILL.md:360-364) link to sibling skills ../terraform-aws/, ../aws-vpc/, ../aws-iam/, ../aws-cost-optimization/, ../aws-s3/ that do not ship with this skill; they are optional pointers. Frontmatter declares license: MIT."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "67c5c5cbb12cafb1515e449748866bd40da7dec9",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "6d090fe2fdc7a6c73a8e9f2ffbf75e57ed1bac2dc3960c39b874af51ce78e3a4",
+      "bytes": 12679,
+      "mode": "100644",
+      "git_blob": "00af826e56f190711b6d112bee5f80df7ab9a3ca",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 33,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks with aws rds and aws cloudwatch CLI commands that provision, configure, replicate, snapshot and monitor RDS instances in the user's account, which is the skill's purpose."
+        },
+        {
+          "type": "shell-execution",
+          "line": 48,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks with aws rds and aws cloudwatch CLI commands that provision, configure, replicate, snapshot and monitor RDS instances in the user's account, which is the skill's purpose."
+        },
+        {
+          "type": "shell-execution",
+          "line": 95,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks with aws rds and aws cloudwatch CLI commands that provision, configure, replicate, snapshot and monitor RDS instances in the user's account, which is the skill's purpose."
+        },
+        {
+          "type": "credential-access",
+          "line": 102,
+          "evidence": "secret",
+          "context": "# Retrieve the secret value",
+          "disposition": "accepted",
+          "reason": "Retrieving the RDS-managed master password from Secrets Manager (SKILL.md:96-105) and a troubleshooting row pointing to it; the ARN is a placeholder and the read is for the user's own database."
+        },
+        {
+          "type": "credential-access",
+          "line": 103,
+          "evidence": "secret",
+          "context": "aws secretsmanager get-secret-value \\",
+          "disposition": "accepted",
+          "reason": "Retrieving the RDS-managed master password from Secrets Manager (SKILL.md:96-105) and a troubleshooting row pointing to it; the ARN is a placeholder and the read is for the user's own database."
+        },
+        {
+          "type": "credential-access",
+          "line": 104,
+          "evidence": "secret",
+          "context": "  --secret-id arn:aws:secretsmanager:us-east-1:123456789012:secret:rds-db-secret-abc123 \\",
+          "disposition": "accepted",
+          "reason": "Retrieving the RDS-managed master password from Secrets Manager (SKILL.md:96-105) and a troubleshooting row pointing to it; the ARN is a placeholder and the read is for the user's own database."
+        },
+        {
+          "type": "credential-access",
+          "line": 104,
+          "evidence": "secret",
+          "context": "  --secret-id arn:aws:secretsmanager:us-east-1:123456789012:secret:rds-db-secret-abc123 \\",
+          "disposition": "accepted",
+          "reason": "Retrieving the RDS-managed master password from Secrets Manager (SKILL.md:96-105) and a troubleshooting row pointing to it; the ARN is a placeholder and the read is for the user's own database."
+        },
+        {
+          "type": "credential-access",
+          "line": 104,
+          "evidence": "secret",
+          "context": "  --secret-id arn:aws:secretsmanager:us-east-1:123456789012:secret:rds-db-secret-abc123 \\",
+          "disposition": "accepted",
+          "reason": "Retrieving the RDS-managed master password from Secrets Manager (SKILL.md:96-105) and a troubleshooting row pointing to it; the ARN is a placeholder and the read is for the user's own database."
+        },
+        {
+          "type": "shell-execution",
+          "line": 110,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks with aws rds and aws cloudwatch CLI commands that provision, configure, replicate, snapshot and monitor RDS instances in the user's account, which is the skill's purpose."
+        },
+        {
+          "type": "shell-execution",
+          "line": 140,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks with aws rds and aws cloudwatch CLI commands that provision, configure, replicate, snapshot and monitor RDS instances in the user's account, which is the skill's purpose."
+        },
+        {
+          "type": "shell-execution",
+          "line": 178,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks with aws rds and aws cloudwatch CLI commands that provision, configure, replicate, snapshot and monitor RDS instances in the user's account, which is the skill's purpose."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 211,
+          "evidence": "Delete",
+          "context": "# Delete old snapshots",
+          "disposition": "accepted",
+          "reason": "Matched words are a comment and an `aws rds delete-db-snapshot` command for a placeholder old snapshot; it deletes a cloud snapshot, not local files, and should be confirmed by the user."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 212,
+          "evidence": "delete",
+          "context": "aws rds delete-db-snapshot --db-snapshot-identifier old-snapshot-name",
+          "disposition": "accepted",
+          "reason": "Matched words are a comment and an `aws rds delete-db-snapshot` command for a placeholder old snapshot; it deletes a cloud snapshot, not local files, and should be confirmed by the user."
+        },
+        {
+          "type": "shell-execution",
+          "line": 217,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks with aws rds and aws cloudwatch CLI commands that provision, configure, replicate, snapshot and monitor RDS instances in the user's account, which is the skill's purpose."
+        },
+        {
+          "type": "credential-access",
+          "line": 356,
+          "evidence": "secret",
+          "context": "| Master password unknown | Using managed secret | Retrieve from Secrets Manager ARN in instance details |",
+          "disposition": "accepted",
+          "reason": "Retrieving the RDS-managed master password from Secrets Manager (SKILL.md:96-105) and a troubleshooting row pointing to it; the ARN is a placeholder and the read is for the user's own database."
+        }
+      ]
+    }
+  ]
+}

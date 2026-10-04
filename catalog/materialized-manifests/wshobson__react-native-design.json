@@ -1,0 +1,126 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "wshobson/react-native-design",
+  "source": {
+    "repo": "wshobson/agents",
+    "path": "plugins/ui-design/skills/react-native-design",
+    "revision": "156b7a5e7a8b93642628a339ee4039c925b34c7f"
+  },
+  "review": {
+    "path": "catalog/reviews/wshobson__react-native-design.json",
+    "sha256": "f1e80abb46eca1de175fcb99c808a4c885cdc14cc7bcb5f500c28bb456f961bc"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": false,
+      "dynamic_execution": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "shell-execution",
+        "line": 7,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/navigation-patterns.md"
+      },
+      {
+        "type": "package-install",
+        "line": 9,
+        "evidence": "npm install",
+        "context": "npm install @react-navigation/native",
+        "file": "references/navigation-patterns.md"
+      },
+      {
+        "type": "package-install",
+        "line": 10,
+        "evidence": "npm install",
+        "context": "npm install @react-navigation/native-stack",
+        "file": "references/navigation-patterns.md"
+      },
+      {
+        "type": "package-install",
+        "line": 11,
+        "evidence": "npm install",
+        "context": "npm install @react-navigation/bottom-tabs",
+        "file": "references/navigation-patterns.md"
+      },
+      {
+        "type": "package-install",
+        "line": 14,
+        "evidence": "npm install",
+        "context": "npm install react-native-screens react-native-safe-area-context",
+        "file": "references/navigation-patterns.md"
+      },
+      {
+        "type": "network-access",
+        "line": 430,
+        "evidence": "https://",
+        "context": "  prefixes: ['myapp://', 'https://myapp.com'],",
+        "file": "references/navigation-patterns.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 493,
+        "evidence": "remove",
+        "context": "    return () => subscription.remove();",
+        "file": "references/navigation-patterns.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 559,
+        "evidence": "Remove",
+        "context": "            <Text>Remove</Text>",
+        "file": "references/reanimated-patterns.md"
+      }
+    ],
+    "total_bytes": 68015
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "f89abb55d9f073f38f1703e4518f0613c788c6174be7f13b8dfe48a1c076c746",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/details.md",
+      "sha256": "46c4f302d86c5493d6b7ebc9d72750124b925851c3b48f3d2d9717fe0567a171",
+      "bytes": 6515,
+      "mode": "100644"
+    },
+    {
+      "path": "references/navigation-patterns.md",
+      "sha256": "fef43e6a8f768b34f6c7e54989872c6fcc03e0883b4ace27258ec480440f3e45",
+      "bytes": 20184,
+      "mode": "100644"
+    },
+    {
+      "path": "references/reanimated-patterns.md",
+      "sha256": "861706a5ea0fd6d908eaf7159f156d1bbb6600d406b8e0d892624f059b341a35",
+      "bytes": 17423,
+      "mode": "100644"
+    },
+    {
+      "path": "references/styling-patterns.md",
+      "sha256": "3fddb0ebf1c12b5b077906a72a388d447797c1e1cdf9f51a4d71fc24e3b88c32",
+      "bytes": 18876,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "71eacfb8d4a62142e135e8b1934ffb540b0d2703d6b6b273d4c0f255bb1aa68d",
+      "bytes": 3949,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 68015
+}

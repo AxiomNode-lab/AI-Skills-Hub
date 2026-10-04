@@ -1,0 +1,268 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "microsoft/azure-ai-translation-text-py",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/azure-sdk-python/skills/azure-ai-translation-text-py",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "review": {
+    "path": "catalog/reviews/microsoft__azure-ai-translation-text-py.json",
+    "sha256": "a64613e05271281337b8a923eba6ad0fc93ca8e359dee947a96d97270ebcdaef"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "filesystem-write",
+        "line": 42,
+        "evidence": "delete",
+        "context": "- Include cleanup/delete paths for created resources in examples.",
+        "file": "references/capabilities.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 137,
+        "evidence": "credential",
+        "context": "    async with DefaultAzureCredential() as credential:",
+        "file": "references/non-hero-scenarios.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 139,
+        "evidence": "credential",
+        "context": "            credential=credential,",
+        "file": "references/non-hero-scenarios.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 139,
+        "evidence": "credential",
+        "context": "            credential=credential,",
+        "file": "references/non-hero-scenarios.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 19,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 20,
+        "evidence": "pip install",
+        "context": "pip install azure-ai-translation-text",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 25,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 26,
+        "evidence": "https://",
+        "context": "AZURE_TRANSLATOR_ENDPOINT=https://<resource>.cognitiveservices.azure.com  # Required for Entra ID auth (must be a custom subdomain endpoint)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 28,
+        "evidence": "API-key",
+        "context": "# Only required for the legacy API-key auth path below:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 29,
+        "evidence": "api-key",
+        "context": "AZURE_TRANSLATOR_KEY=<your-api-key>",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 39,
+        "evidence": "credential",
+        "context": ">    - Production: set `AZURE_TOKEN_CREDENTIALS=prod` (or `AZURE_TOKEN_CREDENTIALS=<specific_credential>`) to constrain the credential chain to production-safe credentials.",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 42,
+        "evidence": "credential",
+        "context": ">    - Async: `async with <Client>(...) as client:` **and** `async with DefaultAzureCredential() as credential:` (from `azure.identity.aio`)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 52,
+        "evidence": "credential",
+        "context": "credential = DefaultAzureCredential(require_envvar=True)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 53,
+        "evidence": "credential",
+        "context": "# Or use a specific credential directly in production:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 54,
+        "evidence": "credential",
+        "context": "# See https://learn.microsoft.com/python/api/overview/azure/identity-readme?view=azure-python#credential-classes",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 54,
+        "evidence": "https://",
+        "context": "# See https://learn.microsoft.com/python/api/overview/azure/identity-readme?view=azure-python#credential-classes",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 55,
+        "evidence": "credential",
+        "context": "# credential = ManagedIdentityCredential()",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 59,
+        "evidence": "credential",
+        "context": "    credential=credential,",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 59,
+        "evidence": "credential",
+        "context": "    credential=credential,",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 64,
+        "evidence": "API Key",
+        "context": "### Legacy: API Key (existing keyed deployments)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 66,
+        "evidence": "API-key",
+        "context": "New code should use `DefaultAzureCredential` above. The Translator service has two specifics that make API-key auth still common in existing deployments:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 68,
+        "evidence": "credential",
+        "context": "- **Token-credential auth requires a custom subdomain endpoint** (`https://<resource>.cognitiveservices.azure.com`). If you only have the global endpoint (`https://api.cognitive.microsofttranslator.com`), you must either provision a custom ",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 68,
+        "evidence": "https://",
+        "context": "- **Token-credential auth requires a custom subdomain endpoint** (`https://<resource>.cognitiveservices.azure.com`). If you only have the global endpoint (`https://api.cognitive.microsofttranslator.com`), you must either provision a custom ",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 68,
+        "evidence": "https://",
+        "context": "- **Token-credential auth requires a custom subdomain endpoint** (`https://<resource>.cognitiveservices.azure.com`). If you only have the global endpoint (`https://api.cognitive.microsofttranslator.com`), you must either provision a custom ",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 78,
+        "evidence": "credential",
+        "context": "    credential=AzureKeyCredential(os.environ[\"AZURE_TRANSLATOR_KEY\"]),",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 86,
+        "evidence": "credential",
+        "context": "    credential=AzureKeyCredential(os.environ[\"AZURE_TRANSLATOR_KEY\"]),",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 266,
+        "evidence": "credential",
+        "context": "    async with DefaultAzureCredential() as credential:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 268,
+        "evidence": "credential",
+        "context": "            credential=credential,",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 268,
+        "evidence": "credential",
+        "context": "            credential=credential,",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 293,
+        "evidence": "credential",
+        "context": "2. **Always use context managers for clients and async credentials.** Wrap every client in `with Client(...) as client:` (sync) or `async with Client(...) as client:` (async). For async `DefaultAzureCredential` from `azure.identity.aio`, al",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 18938
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/capabilities.md",
+      "sha256": "507a19ec049eec3321ea5f07e467988b39fb3d555c65cf8c7575d439483d1cc4",
+      "bytes": 2235,
+      "mode": "100644"
+    },
+    {
+      "path": "references/non-hero-scenarios.md",
+      "sha256": "9ae62feb1b3c16101714b74b7402baa53af9e839c2d3fd37bf35878cb3ce8326",
+      "bytes": 4683,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "d0560012981e8e97f68c2eb69a1ad0875ec87a4d9e1f5c59fc6366b1d78dae06",
+      "bytes": 10880,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 18938
+}

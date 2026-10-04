@@ -1,0 +1,104 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "aaron-seo/keyword-research",
+  "source": {
+    "repo": "aaron-he-zhu/aaron-marketing-skills",
+    "path": "seo-geo/survey/keyword-research",
+    "revision": "cc897fa9e1e3136eb6a301130e49d8d9d1c519b2"
+  },
+  "review": {
+    "path": "catalog/reviews/aaron-seo__keyword-research.json",
+    "sha256": "602e90397ed269589c16e934fc599c53225afd117a54d0c9570a8742f27eb68d"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "low",
+    "capabilities": {
+      "shell": false,
+      "network": true,
+      "credentials": false,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "network-access",
+        "line": 3,
+        "evidence": "http://",
+        "context": "                        http://www.apache.org/licenses/",
+        "file": "LICENSE.txt"
+      },
+      {
+        "type": "network-access",
+        "line": 195,
+        "evidence": "http://",
+        "context": "       http://www.apache.org/licenses/LICENSE-2.0",
+        "file": "LICENSE.txt"
+      },
+      {
+        "type": "network-access",
+        "line": 10,
+        "evidence": "https://",
+        "context": "homepage: \"https://github.com/aaron-he-zhu/aaron-marketing-skills\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 13,
+        "evidence": "https://",
+        "context": "metadata: {\"author\": \"aaron-he-zhu\", \"version\": \"20.1.0\", \"discipline\": \"seo-geo\", \"phase\": \"survey\", \"geo-relevance\": \"medium\", \"hermes\": {\"tags\": [\"marketing\", \"seo-geo\", \"survey\"], \"category\": \"seo-geo\"}, \"openclaw\": {\"emoji\": \"🔍\", \"hom",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 39224
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "664cd12e1c315650bf14cb1385359d13d4724ac03940ac10918390ef78e4f5e7",
+      "bytes": 11347,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/example-report.md",
+      "sha256": "40214f13ab403309a65c07b510f0335c808f9ece427587d327c106b13c65e7de",
+      "bytes": 3710,
+      "mode": "100644"
+    },
+    {
+      "path": "references/instructions-detail.md",
+      "sha256": "fcbf70ef164650fec1d914408f0b6f62e9a66ffd565891a8857b88a0fcd7826f",
+      "bytes": 4658,
+      "mode": "100644"
+    },
+    {
+      "path": "references/keyword-intent-taxonomy.md",
+      "sha256": "762f9919aba2e2837c4b860e931c14389486f19bedd539f4165a600e462549df",
+      "bytes": 4582,
+      "mode": "100644"
+    },
+    {
+      "path": "references/keyword-prioritization-framework.md",
+      "sha256": "e1cc7c3b8c1f8c32a0c8adc0a2870e20c622c8a8997f1b61fec8d66ac8a28d0e",
+      "bytes": 1930,
+      "mode": "100644"
+    },
+    {
+      "path": "references/topic-cluster-templates.md",
+      "sha256": "0da2b2baa789f0fd02e29299b16af3fa87a6160c12086944654883e3c1e836aa",
+      "bytes": 4304,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "2b47555b8ce9f6a05499bc065e1cf41b9c558f039dc237efe07cee53a8c976b9",
+      "bytes": 8693,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 39224
+}

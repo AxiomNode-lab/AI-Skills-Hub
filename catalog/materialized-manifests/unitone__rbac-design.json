@@ -1,0 +1,109 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "unitone/rbac-design",
+  "source": {
+    "repo": "UnitOneAI/SecuritySkills",
+    "path": "skills/identity/rbac-design",
+    "revision": "70bc259bb01abb3015ad2ad859ad5253cbf0bcab"
+  },
+  "review": {
+    "path": "catalog/reviews/unitone__rbac-design.json",
+    "sha256": "b558b75d9b07de0c7708e78342ffe996b0d23566eb70efdb5dc5d94cdbfc32df"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": false,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "filesystem-write",
+        "line": 85,
+        "evidence": "delete",
+        "context": "| **Action Attributes** | Properties of the requested operation | Read, write, delete, approve, execute |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 215,
+        "evidence": "Credential",
+        "context": "| `key-management` | `app-deployment` | Credential exfiltration | SSoD |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 334,
+        "evidence": "Delete",
+        "context": "| Unassigned roles | Baseline count | 0 | Delete or archive |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 468,
+        "evidence": "https://",
+        "context": "- Sandhu, R., Ferraiolo, D., Kuhn, R. — \"The NIST Model for Role-Based Access Control: Towards a Unified Standard\" (ACM RBAC 2000): https://csrc.nist.gov/projects/role-based-access-control",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 470,
+        "evidence": "https://",
+        "context": "- NIST SP 800-162, Guide to Attribute Based Access Control (ABAC) Definition and Considerations: https://csrc.nist.gov/publications/detail/sp/800-162/final",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 471,
+        "evidence": "https://",
+        "context": "- NIST SP 800-53 Rev. 5, AC-6 (Least Privilege), AC-5 (Separation of Duties): https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 472,
+        "evidence": "https://",
+        "context": "- Cedar Policy Language (AWS): https://www.cedarpolicy.com",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 473,
+        "evidence": "https://",
+        "context": "- Open Policy Agent (OPA) / Rego: https://www.openpolicyagent.org",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 474,
+        "evidence": "https://",
+        "context": "- XACML 3.0 (OASIS Standard): https://docs.oasis-open.org/xacml/3.0/xacml-3.0-core-spec-os-en.html",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 26007
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "66eb5ec637cc578833ddcbc870dbf46c6718fd83e985fad5f0f5cf30d60cf47d",
+      "bytes": 1067,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "b55be1bd780543435081954f6d4dc901cf3db3af1e7c1f371151186659e33c62",
+      "bytes": 24940,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 26007
+}

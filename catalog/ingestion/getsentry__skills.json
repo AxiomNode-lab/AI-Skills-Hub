@@ -1,0 +1,2136 @@
+{
+  "schema_version": "0.2",
+  "source": {
+    "repo": "getsentry/skills",
+    "ref": "main",
+    "revision": "d18b7aa8ba878354e5c348310230e652f7690f9c",
+    "revision_type": "git-commit",
+    "tree_sha": "e6b1e54ab5796fcf95cf9c2a394ea815f0a47832"
+  },
+  "discovered_skills": [
+    {
+      "path": "skills/agents-md/SKILL.md",
+      "name": "agents-md",
+      "description": "Creates and maintains concise AGENTS.md and CLAUDE.md project instruction files. Use when asked to create AGENTS.md, update AGENTS.md, maintain agent docs, set up CLAUDE.md, document repository agent conventions, or keep coding-agent instructions minimal and reference-backed.",
+      "skill_sha256": "8a91ada35068f43ef7ee03e38937863bac4f407878b06f0a4f1ddb4af24bec7e",
+      "license": {
+        "spdx": "NOASSERTION",
+        "redistributable": false,
+        "status": "review-required",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "medium",
+        "capabilities": {
+          "shell": false,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": true,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "package-install",
+            "line": 38,
+            "evidence": "pnpm install",
+            "context": "- Use **pnpm**: `pnpm install`"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": true
+      }
+    },
+    {
+      "path": "skills/blog-writing-guide/SKILL.md",
+      "name": "blog-writing-guide",
+      "description": "Write, review, and improve blog posts for the Sentry engineering blog following Sentry's specific writing standards, voice, and quality bar. Use this skill whenever someone asks to write a blog post, draft a technical article, review blog content, improve a draft, write a product announcement, create an engineering deep-dive, or produce any written content destined for the Sentry blog or developer audience. Also trigger when the user mentions \"blog post,\" \"blog draft,\" \"write-up,\" \"announcement post,\" \"engineering post,\" \"deep dive,\" \"postmortem,\" or asks for help with technical writing for Sentry. Even if the user just says \"help me write about [feature/topic]\" — if it sounds like it could become a Sentry blog post, use this skill.",
+      "skill_sha256": "8aba654d1af0820ee83370ddcbe51c24fb1c624c169931bd87f36247d181caa4",
+      "license": {
+        "spdx": "NOASSERTION",
+        "redistributable": false,
+        "status": "review-required",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "verified",
+        "risk": "none",
+        "capabilities": {
+          "shell": false,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": []
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/brand-guidelines/SKILL.md",
+      "name": "brand-guidelines",
+      "description": "Write copy following Sentry brand guidelines. Use when writing UI text, error messages, empty states, onboarding flows, 404 pages, documentation, marketing copy, or any user-facing content. Covers both Plain Speech (default) and Sentry Voice tones.",
+      "skill_sha256": "59c75b089fc355f34862172222344801d267ea8158d1bcddb9d1338ba8e9bc39",
+      "license": {
+        "spdx": "NOASSERTION",
+        "redistributable": false,
+        "status": "review-required",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "capabilities": {
+          "shell": false,
+          "network": true,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": true,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "filesystem-write",
+            "line": 45,
+            "evidence": "delete",
+            "context": "| \"Are you sure you want to delete?\" | \"Delete this item?\" |"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 45,
+            "evidence": "Delete",
+            "context": "| \"Are you sure you want to delete?\" | \"Delete this item?\" |"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 120,
+            "evidence": "Delete",
+            "context": "- Use action verbs: \"Save\", \"Delete\", \"Create\""
+          },
+          {
+            "type": "filesystem-write",
+            "line": 146,
+            "evidence": "Delete",
+            "context": "- Use specific button labels (\"Delete Project\", not \"OK\")"
+          },
+          {
+            "type": "network-access",
+            "line": 167,
+            "evidence": "https://",
+            "context": "- [Sentry Voice Guidelines](https://develop.sentry.dev/frontend/sentry-voice/)"
+          },
+          {
+            "type": "network-access",
+            "line": 168,
+            "evidence": "https://",
+            "context": "- [Sentry Frontend Handbook](https://develop.sentry.dev/frontend/)"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": true,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/claude-settings-audit/SKILL.md",
+      "name": "claude-settings-audit",
+      "description": "Analyze a repository to generate recommended Claude Code settings.json permissions. Use when setting up a new project, auditing existing settings, or determining which read-only bash commands to allow. Detects tech stack, build tools, and monorepo structure.",
+      "skill_sha256": "53e0964b7a98c351e6d3dda055abb33ec5e2c287eebd4c74485b60312be9dfa9",
+      "license": {
+        "spdx": "NOASSERTION",
+        "redistributable": false,
+        "status": "review-required",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "medium",
+        "capabilities": {
+          "shell": true,
+          "network": true,
+          "credentials": true,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": true,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "shell-execution",
+            "line": 3,
+            "evidence": "bash",
+            "context": "description: Analyze a repository to generate recommended Claude Code settings.json permissions. Use when setting up a new project, auditing existing settings, or determining which read-only bash commands to allow. Detects tech stack, build"
+          },
+          {
+            "type": "shell-execution",
+            "line": 14,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 51,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 63,
+            "evidence": "Bash",
+            "context": "  \"Bash(ls:*)\","
+          },
+          {
+            "type": "shell-execution",
+            "line": 64,
+            "evidence": "Bash",
+            "context": "  \"Bash(pwd:*)\","
+          },
+          {
+            "type": "shell-execution",
+            "line": 65,
+            "evidence": "Bash",
+            "context": "  \"Bash(find:*)\","
+          },
+          {
+            "type": "shell-execution",
+            "line": 66,
+            "evidence": "Bash",
+            "context": "  \"Bash(file:*)\","
+          },
+          {
+            "type": "shell-execution",
+            "line": 67,
+            "evidence": "Bash",
+            "context": "  \"Bash(stat:*)\","
+          },
+          {
+            "type": "shell-execution",
+            "line": 68,
+            "evidence": "Bash",
+            "context": "  \"Bash(wc:*)\","
+          },
+          {
+            "type": "shell-execution",
+            "line": 69,
+            "evidence": "Bash",
+            "context": "  \"Bash(head:*)\","
+          },
+          {
+            "type": "shell-execution",
+            "line": 70,
+            "evidence": "Bash",
+            "context": "  \"Bash(tail:*)\","
+          },
+          {
+            "type": "shell-execution",
+            "line": 71,
+            "evidence": "Bash",
+            "context": "  \"Bash(cat:*)\","
+          },
+          {
+            "type": "shell-execution",
+            "line": 72,
+            "evidence": "Bash",
+            "context": "  \"Bash(tree:*)\","
+          },
+          {
+            "type": "shell-execution",
+            "line": 73,
+            "evidence": "Bash",
+            "context": "  \"Bash(git status:*)\","
+          },
+          {
+            "type": "shell-execution",
+            "line": 74,
+            "evidence": "Bash",
+            "context": "  \"Bash(git log:*)\","
+          },
+          {
+            "type": "shell-execution",
+            "line": 75,
+            "evidence": "Bash",
+            "context": "  \"Bash(git diff:*)\","
+          },
+          {
+            "type": "shell-execution",
+            "line": 76,
+            "evidence": "Bash",
+            "context": "  \"Bash(git show:*)\","
+          },
+          {
+            "type": "shell-execution",
+            "line": 77,
+            "evidence": "Bash",
+            "context": "  \"Bash(git branch:*)\","
+          },
+          {
+            "type": "shell-execution",
+            "line": 78,
+            "evidence": "Bash",
+            "context": "  \"Bash(git remote:*)\","
+          },
+          {
+            "type": "shell-execution",
+            "line": 79,
+            "evidence": "Bash",
+            "context": "  \"Bash(git tag:*)\","
+          },
+          {
+            "type": "shell-execution",
+            "line": 80,
+            "evidence": "Bash",
+            "context": "  \"Bash(git stash list:*)\","
+          },
+          {
+            "type": "shell-execution",
+            "line": 81,
+            "evidence": "Bash",
+            "context": "  \"Bash(git rev-parse:*)\","
+          },
+          {
+            "type": "shell-execution",
+            "line": 82,
+            "evidence": "Bash",
+            "context": "  \"Bash(gh pr view:*)\","
+          },
+          {
+            "type": "shell-execution",
+            "line": 83,
+            "evidence": "Bash",
+            "context": "  \"Bash(gh pr list:*)\","
+          },
+          {
+            "type": "shell-execution",
+            "line": 84,
+            "evidence": "Bash",
+            "context": "  \"Bash(gh pr checks:*)\","
+          },
+          {
+            "type": "shell-execution",
+            "line": 85,
+            "evidence": "Bash",
+            "context": "  \"Bash(gh pr diff:*)\","
+          },
+          {
+            "type": "shell-execution",
+            "line": 86,
+            "evidence": "Bash",
+            "context": "  \"Bash(gh issue view:*)\","
+          },
+          {
+            "type": "shell-execution",
+            "line": 87,
+            "evidence": "Bash",
+            "context": "  \"Bash(gh issue list:*)\","
+          },
+          {
+            "type": "shell-execution",
+            "line": 88,
+            "evidence": "Bash",
+            "context": "  \"Bash(gh run view:*)\","
+          },
+          {
+            "type": "shell-execution",
+            "line": 89,
+            "evidence": "Bash",
+            "context": "  \"Bash(gh run list:*)\","
+          },
+          {
+            "type": "shell-execution",
+            "line": 90,
+            "evidence": "Bash",
+            "context": "  \"Bash(gh run logs:*)\","
+          },
+          {
+            "type": "shell-execution",
+            "line": 91,
+            "evidence": "Bash",
+            "context": "  \"Bash(gh repo view:*)\","
+          },
+          {
+            "type": "shell-execution",
+            "line": 92,
+            "evidence": "Bash",
+            "context": "  \"Bash(gh api:*)\""
+          },
+          {
+            "type": "credential-access",
+            "line": 165,
+            "evidence": "secret",
+            "context": "  \"Skill(sentry-skills:secret-serialization)\","
+          },
+          {
+            "type": "shell-execution",
+            "line": 211,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "network-access",
+            "line": 224,
+            "evidence": "https://",
+            "context": "      \"url\": \"https://mcp.sentry.dev/mcp/{org-slug}/{project-slug}\""
+          },
+          {
+            "type": "shell-execution",
+            "line": 302,
+            "evidence": "sh",
+            "context": "- **Custom scripts** - Never include project scripts that may have side effects (e.g., `./scripts/deploy.sh`)"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 304,
+            "evidence": "delete",
+            "context": "- **Commands that modify state** - No install, build, run, write, or delete commands"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": true,
+        "network": true,
+        "credentials": true,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/code-review/SKILL.md",
+      "name": "code-review",
+      "description": "Perform code reviews following Sentry engineering practices. Use when reviewing pull requests, examining code changes, or providing feedback on code quality. Covers security, performance, testing, and design review.",
+      "skill_sha256": "ec5fc8855cb4648b4f2c79b608f8c8824a2da6a683330524c4d6283e4a3954c4",
+      "license": {
+        "spdx": "NOASSERTION",
+        "redistributable": false,
+        "status": "review-required",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "capabilities": {
+          "shell": false,
+          "network": true,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "network-access",
+            "line": 102,
+            "evidence": "https://",
+            "context": "- [Sentry Code Review Guidelines](https://develop.sentry.dev/engineering-practices/code-review/)"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": true,
+        "credentials": true,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/code-simplifier/SKILL.md",
+      "name": "code-simplifier",
+      "description": "Simplifies and refines code for clarity, consistency, and maintainability while preserving all functionality. Use when asked to \"simplify code\", \"clean up code\", \"refactor for clarity\", \"improve readability\", or review recently modified code for elegance. Focuses on project-specific best practices.",
+      "skill_sha256": "ad4ce00d2759e0773bee88f267f4ae0f52684979d7fbceb14dffd5efefbce141",
+      "license": {
+        "spdx": "NOASSERTION",
+        "redistributable": false,
+        "status": "review-required",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "capabilities": {
+          "shell": false,
+          "network": true,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": true,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "network-access",
+            "line": 8,
+            "evidence": "https://",
+            "context": "https://github.com/anthropics/claude-plugins-official/blob/main/plugins/code-simplifier/agents/code-simplifier.md"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 51,
+            "evidence": "Remove",
+            "context": "- Remove helpful abstractions that improve code organization"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": true,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/commit/SKILL.md",
+      "name": "commit",
+      "description": "Use for every request to commit changes or draft a commit message. Creates Sentry-style conventional commits with issue references.",
+      "skill_sha256": "0307d3ecfe3b3e70246cbd88b19dc5853340b624b6ee3cd935c7bffc45b64279",
+      "license": {
+        "spdx": "NOASSERTION",
+        "redistributable": false,
+        "status": "review-required",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "capabilities": {
+          "shell": true,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "shell-execution",
+            "line": 10,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 58,
+            "evidence": "bash",
+            "context": "```bash"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": true,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/create-branch/SKILL.md",
+      "name": "create-branch",
+      "description": "Create a git branch following Sentry naming conventions. Use when asked to \"create a branch\", \"new branch\", \"start a branch\", \"make a branch\", \"switch to a new branch\", or when starting new work on the default branch.",
+      "skill_sha256": "0e017d30c6031477fe147a39e7f40603acb6588ed2a00145c5cd46980a43c6cf",
+      "license": {
+        "spdx": "NOASSERTION",
+        "redistributable": false,
+        "status": "review-required",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "capabilities": {
+          "shell": true,
+          "network": true,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "shell-execution",
+            "line": 17,
+            "evidence": "bash",
+            "context": "     ```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 48,
+            "evidence": "bash",
+            "context": "   ```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 61,
+            "evidence": "bash",
+            "context": "   ```bash"
+          },
+          {
+            "type": "network-access",
+            "line": 68,
+            "evidence": "https://",
+            "context": "- [Sentry Branch Naming](https://develop.sentry.dev/sdk/getting-started/standards/code-submission/#branch-naming)"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": true,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/django-access-review/SKILL.md",
+      "name": "django-access-review",
+      "description": "Django access control and IDOR security review. Use when reviewing Django views, DRF viewsets, ORM queries, or any Python/Django code handling user authorization. Trigger keywords: \"IDOR\", \"access control\", \"authorization\", \"Django permissions\", \"object permissions\", \"tenant isolation\", \"broken access\".",
+      "skill_sha256": "0b0891f6335b84bd557e92022db197ed7d948406e2389ed6d09fd2f45b695a03",
+      "license": {
+        "spdx": "LICENSE",
+        "redistributable": false,
+        "status": "review-required",
+        "evidence_type": "skill-frontmatter",
+        "evidence_path": "skills/django-access-review/SKILL.md"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "capabilities": {
+          "shell": true,
+          "network": true,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": true,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "shell-execution",
+            "line": 4,
+            "evidence": "Bash",
+            "context": "allowed-tools: Read Grep Glob Bash Task"
+          },
+          {
+            "type": "network-access",
+            "line": 10,
+            "evidence": "https://",
+            "context": "https://cheatsheetseries.owasp.org/"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 17,
+            "evidence": "delete",
+            "context": "**Can User A access, modify, or delete User B's data?**"
+          },
+          {
+            "type": "shell-execution",
+            "line": 62,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 99,
+            "evidence": "Delete",
+            "context": "- Delete endpoints - can users delete others' data?"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 99,
+            "evidence": "delete",
+            "context": "- Delete endpoints - can users delete others' data?"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": true,
+        "network": true,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/django-perf-review/SKILL.md",
+      "name": "django-perf-review",
+      "description": "Django performance code review. Use when asked to \"review Django performance\", \"find N+1 queries\", \"optimize Django\", \"check queryset performance\", \"database performance\", \"Django ORM issues\", or audit Django code for performance problems.",
+      "skill_sha256": "52283bff7b23f06f94bbb413d174fd1cbcf497f8e8a63d4f0d569ba6bfd949d4",
+      "license": {
+        "spdx": "LICENSE",
+        "redistributable": false,
+        "status": "review-required",
+        "evidence_type": "skill-frontmatter",
+        "evidence_path": "skills/django-perf-review/SKILL.md"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "capabilities": {
+          "shell": true,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": true,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "shell-execution",
+            "line": 4,
+            "evidence": "Bash",
+            "context": "allowed-tools: Read Grep Glob Bash Task"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 236,
+            "evidence": "delete",
+            "context": "### Rule: Use delete() on queryset, not in loops"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 241,
+            "evidence": "delete",
+            "context": "    obj.delete()"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 243,
+            "evidence": "DELETE",
+            "context": "# SOLUTION: Single DELETE"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 244,
+            "evidence": "delete",
+            "context": "queryset.delete()"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 249,
+            "evidence": "delete",
+            "context": "- [ ] Each iteration calls create(), save(), or delete()"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 351,
+            "evidence": "remove",
+            "context": "If the answer to any is \"no\" - remove the finding."
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": true,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/doc-coauthoring/SKILL.md",
+      "name": "doc-coauthoring",
+      "description": "Guide users through a structured workflow for co-authoring documentation. Use when user wants to write documentation, proposals, technical specs, decision docs, or similar structured content. This workflow helps users efficiently transfer context, refine content through iteration, and verify the doc works for readers. Trigger when user mentions writing docs, creating proposals, drafting specs, or similar documentation tasks.",
+      "skill_sha256": "819ad219b7e3f3fd8bc4b0a224dce9cf3b177df6f311b640831b87fb3b5d7730",
+      "license": {
+        "spdx": "NOASSERTION",
+        "redistributable": false,
+        "status": "review-required",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "capabilities": {
+          "shell": false,
+          "network": true,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": true,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "filesystem-write",
+            "line": 112,
+            "evidence": "remove",
+            "context": "3. User will indicate what to keep/remove/combine"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 176,
+            "evidence": "Remove",
+            "context": "- \"Remove 3 (duplicates 1)\""
+          },
+          {
+            "type": "filesystem-write",
+            "line": 177,
+            "evidence": "Remove",
+            "context": "- \"Remove 6 (audience already knows this)\""
+          },
+          {
+            "type": "filesystem-write",
+            "line": 203,
+            "evidence": "Remove",
+            "context": "Provide a note: Instead of editing the doc directly, ask them to indicate what to change. This helps learning of their style for future sections. For example: \"Remove the X bullet - already covered by Y\" or \"Make the third paragraph more co"
+          },
+          {
+            "type": "network-access",
+            "line": 303,
+            "evidence": "https://",
+            "context": "1. Open a fresh Claude conversation: https://claude.ai"
+          },
+          {
+            "type": "network-access",
+            "line": 379,
+            "evidence": "https://",
+            "context": "This skill was adapted from [anthropics/skills](https://github.com/anthropics/courses/tree/master/claude-code/skills/doc-coauthoring)."
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": true,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/document-api-endpoint/SKILL.md",
+      "name": "document-api-endpoint",
+      "description": "Document and type a Sentry API endpoint. Write or fix @extend_schema decorators, specify response TypedDicts, type request parameters, correct type drift between the declared schema and the runtime response, and validate the generated spec. Use when asked to \"document an endpoint\", \"add OpenAPI docs\", \"add/fix @extend_schema\", \"type an endpoint response\", \"fix the response type\", \"fix type drift\", \"reuse a response type\", \"split an overloaded endpoint\", \"specify the response schema\", \"add a TypedDict response\", \"migrate a legacy api-docs path\", \"fix a parameter type\", or \"make an endpoint public\" / \"promote an endpoint\" (promotion is one section here).",
+      "skill_sha256": "40c7592cdfbef2e02bf004133446d7a9c85e98f9fd653d3cee689f3bba4bf7a9",
+      "license": {
+        "spdx": "NOASSERTION",
+        "redistributable": false,
+        "status": "review-required",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "capabilities": {
+          "shell": true,
+          "network": true,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": true,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "network-access",
+            "line": 8,
+            "evidence": "https://",
+            "context": "Add or fix OpenAPI docs for a Sentry endpoint with drf-spectacular. Full reference is at https://develop.sentry.dev/backend/api/public/, the most useful section to you will be https://develop.sentry.dev/backend/api/public/#5-method-decorato"
+          },
+          {
+            "type": "network-access",
+            "line": 8,
+            "evidence": "https://",
+            "context": "Add or fix OpenAPI docs for a Sentry endpoint with drf-spectacular. Full reference is at https://develop.sentry.dev/backend/api/public/, the most useful section to you will be https://develop.sentry.dev/backend/api/public/#5-method-decorato"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 15,
+            "evidence": "remove",
+            "context": "4. If a legacy `api-docs/paths/**/*.json` covers the path, remove it (see lesson 4)."
+          },
+          {
+            "type": "shell-execution",
+            "line": 22,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "network-access",
+            "line": 23,
+            "evidence": "curl",
+            "context": "curl -s -H \"Authorization: Bearer $TOKEN\" \"https://us.sentry.io/api/0/<endpoint>\" | jq 'keys'"
+          },
+          {
+            "type": "network-access",
+            "line": 23,
+            "evidence": "https://",
+            "context": "curl -s -H \"Authorization: Bearer $TOKEN\" \"https://us.sentry.io/api/0/<endpoint>\" | jq 'keys'"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 33,
+            "evidence": "Delete",
+            "context": "Delete the `api-docs/paths/**/*.json` file AND its `$ref` in `api-docs/openapi.json`. drf-spectacular's `APPEND_PATHS` does not merge HTTP methods, so once any method on a path uses `@extend_schema`, all *legacy* methods on that path vanish"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 40,
+            "evidence": "Remove",
+            "context": "- Remove the method from `API_OWNERSHIP_ALLOWLIST_DONT_MODIFY` in the same change as the flip."
+          },
+          {
+            "type": "filesystem-write",
+            "line": 41,
+            "evidence": "delete",
+            "context": "- If the endpoint is redundant or being renamed, delete or deprecate the old version in its own change first, then stack the publish on top."
+          },
+          {
+            "type": "shell-execution",
+            "line": 48,
+            "evidence": "bash",
+            "context": "```bash"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": true,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/find-bugs/SKILL.md",
+      "name": "find-bugs",
+      "description": "Find bugs, security vulnerabilities, and code quality issues in local branch changes. Use when asked to review changes, find bugs, security review, or audit code on the current branch.",
+      "skill_sha256": "08664c3698f89116a4b04d12f699f95cff1aadb725da353b7f24f8ad73b02003",
+      "license": {
+        "spdx": "NOASSERTION",
+        "redistributable": false,
+        "status": "review-required",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "verified",
+        "risk": "none",
+        "capabilities": {
+          "shell": false,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": []
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": true,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/gh-review-requests/SKILL.md",
+      "name": "gh-review-requests",
+      "description": "Fetch unread GitHub notifications for open PRs where review is requested from a specified team or opened by a team member. Use when asked to \"find PRs I need to review\", \"show my review requests\", \"what needs my review\", \"fetch GitHub review requests\", or \"check team review queue\".",
+      "skill_sha256": "c03fa31242d4dfa9002c1610376954cd6455a500931b054e13ba6fa6cde235bb",
+      "license": {
+        "spdx": "NOASSERTION",
+        "redistributable": false,
+        "status": "review-required",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "capabilities": {
+          "shell": true,
+          "network": true,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "shell-execution",
+            "line": 4,
+            "evidence": "Bash",
+            "context": "allowed-tools: Bash"
+          },
+          {
+            "type": "network-access",
+            "line": 13,
+            "evidence": "https://",
+            "context": "**Requires**: The `uv` CLI for python package management, install guide at https://docs.astral.sh/uv/getting-started/installation/"
+          },
+          {
+            "type": "shell-execution",
+            "line": 13,
+            "evidence": "sh",
+            "context": "**Requires**: The `uv` CLI for python package management, install guide at https://docs.astral.sh/uv/getting-started/installation/"
+          },
+          {
+            "type": "shell-execution",
+            "line": 25,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 31,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "network-access",
+            "line": 44,
+            "evidence": "https://",
+            "context": "      \"url\": \"https://github.com/getsentry/ops/pull/19144\","
+          },
+          {
+            "type": "network-access",
+            "line": 64,
+            "evidence": "https://",
+            "context": "| 1 | feat(kafka): add workflow to restart a broker | https://github.com/getsentry/ops/pull/19144 | opened by: evanh |"
+          },
+          {
+            "type": "shell-execution",
+            "line": 72,
+            "evidence": "bash",
+            "context": "```bash"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": true,
+        "network": true,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/gha-security-review/SKILL.md",
+      "name": "gha-security-review",
+      "description": "GitHub Actions security review for workflow exploitation vulnerabilities. Use when asked to \"review GitHub Actions\", \"audit workflows\", \"check CI security\", \"GHA security\", \"workflow security review\", or review .github/workflows/ for pwn requests, expression injection, credential theft, and supply chain attacks. Exploitation-focused with concrete PoC scenarios.",
+      "skill_sha256": "b75c6c43ff99c82b3cf44519bd30723917de97064f225e392ecfd6fdcd7455bd",
+      "license": {
+        "spdx": "NOASSERTION",
+        "redistributable": false,
+        "status": "review-required",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "medium",
+        "capabilities": {
+          "shell": true,
+          "network": true,
+          "credentials": true,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "credential-access",
+            "line": 3,
+            "evidence": "credential",
+            "context": "description: 'GitHub Actions security review for workflow exploitation vulnerabilities. Use when asked to \"review GitHub Actions\", \"audit workflows\", \"check CI security\", \"GHA security\", \"workflow security review\", or review .github/workflo"
+          },
+          {
+            "type": "shell-execution",
+            "line": 4,
+            "evidence": "Bash",
+            "context": "allowed-tools: Read Grep Glob Bash Task"
+          },
+          {
+            "type": "network-access",
+            "line": 9,
+            "evidence": "https://",
+            "context": "by StepSecurity (2025): https://www.stepsecurity.io/blog/hackerbot-claw-github-actions-exploitation"
+          },
+          {
+            "type": "credential-access",
+            "line": 75,
+            "evidence": "credential",
+            "context": "| PATs / deploy keys / elevated credentials | `references/credential-escalation.md` |"
+          },
+          {
+            "type": "credential-access",
+            "line": 107,
+            "evidence": "Credential",
+            "context": "### Check 4: Credential Escalation"
+          },
+          {
+            "type": "credential-access",
+            "line": 110,
+            "evidence": "secret",
+            "context": "- What's the blast radius of each secret?"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": true,
+        "network": true,
+        "credentials": true,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/iterate-pr/SKILL.md",
+      "name": "iterate-pr",
+      "description": "Iterate on a PR until actionable CI passes and high/medium review feedback is addressed. Use for PR CI failures, review feedback, or green-check loops; do not wait for human approval, draft status, or merge gates.",
+      "skill_sha256": "d57ecb10e3f0619796a2b71045fbe6725b4ba6cf60aaf63d4c8860a83a83279e",
+      "license": {
+        "spdx": "NOASSERTION",
+        "redistributable": false,
+        "status": "review-required",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "capabilities": {
+          "shell": true,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "shell-execution",
+            "line": 40,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 111,
+            "evidence": "bash",
+            "context": "```bash"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/pr-link-issue/SKILL.md",
+      "name": "pr-link-issue",
+      "description": "Append a GitHub issue link and its Linear ticket to the current PR's description. Use when asked to \"link issue to pr\", \"fill in issue and linear in pr\", \"add issue refs to pr\", or when given a GitHub issue URL and asked to attach it to the current PR. Resolves the Linear ticket automatically from the issue's linear-linkback comment.",
+      "skill_sha256": "ae3fff3e5bec03c993ca8059669c785f675982e6bd71c8f09bcc095230f6535b",
+      "license": {
+        "spdx": "NOASSERTION",
+        "redistributable": false,
+        "status": "review-required",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "capabilities": {
+          "shell": true,
+          "network": true,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "network-access",
+            "line": 12,
+            "evidence": "https://",
+            "context": "- `<issue-url>` — GitHub issue URL like `https://github.com/<owner>/<repo>/issues/<n>`. Issue number alone is fine if the PR is in the same repo."
+          },
+          {
+            "type": "shell-execution",
+            "line": 19,
+            "evidence": "bash",
+            "context": "   ```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 29,
+            "evidence": "bash",
+            "context": "   ```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 39,
+            "evidence": "bash",
+            "context": "   ```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 56,
+            "evidence": "bash",
+            "context": "   ```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 65,
+            "evidence": "bash",
+            "context": "   ```bash"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": true,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/pr-writer/SKILL.md",
+      "name": "pr-writer",
+      "description": "Create or refresh reviewer-facing PR titles and descriptions. Use when opening a PR, updating its title or body, or preparing branch changes for review.",
+      "skill_sha256": "785a2b1f084407e42f61661f83c7b0c621889865a483774f44c893c0cbcf57bc",
+      "license": {
+        "spdx": "NOASSERTION",
+        "redistributable": false,
+        "status": "review-required",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "capabilities": {
+          "shell": true,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "shell-execution",
+            "line": 16,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 27,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 116,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 122,
+            "evidence": "bash",
+            "context": "```bash"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": true,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/presentation-creator/SKILL.md",
+      "name": "presentation-creator",
+      "description": "Create data-driven presentation slides using React, Vite, and Recharts with Sentry branding. Use when asked to \"create a presentation\", \"build slides\", \"make a deck\", \"create a data presentation\", \"build a Sentry presentation\". Scaffolds a complete slide-based app with charts, animations, and single-file HTML output.",
+      "skill_sha256": "28c0cef62578ec5423da646049e336069cde5ca9c5a92b4161455f8d45262cc8",
+      "license": {
+        "spdx": "NOASSERTION",
+        "redistributable": false,
+        "status": "review-required",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "medium",
+        "capabilities": {
+          "shell": false,
+          "network": true,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": true,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "network-access",
+            "line": 51,
+            "evidence": "https://",
+            "context": "    <link rel=\"preconnect\" href=\"https://fonts.googleapis.com\" />"
+          },
+          {
+            "type": "network-access",
+            "line": 52,
+            "evidence": "https://",
+            "context": "    <link href=\"https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap\" rel=\"stylesheet\" />"
+          },
+          {
+            "type": "network-access",
+            "line": 53,
+            "evidence": "https://",
+            "context": "    <link href=\"https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap\" rel=\"stylesheet\" />"
+          },
+          {
+            "type": "package-install",
+            "line": 206,
+            "evidence": "npm install",
+            "context": "1. Run `npm install && npm run dev` to start the dev server"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": true,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": true
+      }
+    },
+    {
+      "path": "skills/prompt-optimizer/SKILL.md",
+      "name": "prompt-optimizer",
+      "description": "Creates, optimizes, and iteratively refines agent prompts, system prompts, developer prompts, and reusable prompt templates. Use when asked to improve a prompt, optimize a system prompt, rewrite an agent prompt, tune prompt wording, make a prompt more reliable, port prompts between OpenAI, Claude, or Gemini, or build prompt evals.",
+      "skill_sha256": "b5ba1525d7964004d8664fea9d5028972cca599f346ff4662152479b94e25cb3",
+      "license": {
+        "spdx": "NOASSERTION",
+        "redistributable": false,
+        "status": "review-required",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "verified",
+        "risk": "none",
+        "capabilities": {
+          "shell": false,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": []
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/secret-serialization/SKILL.md",
+      "name": "secret-serialization",
+      "description": "Finds secrets, tokens, passwords, and API keys that can leak through generated serialization: Python dataclass repr and asdict, attrs, pydantic model_dump, NamedTuple, JavaScript JSON.stringify and util.inspect, structured logs, tracing spans, and error reports. Use when asked to \"check for secret serialization\", \"credential in repr\", \"repr=False audit\", \"secret in spans\", \"token in logs\", or when a change adds a credential field to a dataclass, model, or config object, or adds code that stringifies whole objects or every kwarg into telemetry.",
+      "skill_sha256": "fcff1bc1e5f38bdbe9dccccd21a39846bd45e2423307fda971c9cc1e53a39d3b",
+      "license": {
+        "spdx": "NOASSERTION",
+        "redistributable": false,
+        "status": "review-required",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "medium",
+        "capabilities": {
+          "shell": false,
+          "network": false,
+          "credentials": true,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "credential-access",
+            "line": 2,
+            "evidence": "secret",
+            "context": "name: secret-serialization"
+          },
+          {
+            "type": "credential-access",
+            "line": 3,
+            "evidence": "secret",
+            "context": "description: 'Finds secrets, tokens, passwords, and API keys that can leak through generated serialization: Python dataclass repr and asdict, attrs, pydantic model_dump, NamedTuple, JavaScript JSON.stringify and util.inspect, structured log"
+          },
+          {
+            "type": "credential-access",
+            "line": 3,
+            "evidence": "credential",
+            "context": "description: 'Finds secrets, tokens, passwords, and API keys that can leak through generated serialization: Python dataclass repr and asdict, attrs, pydantic model_dump, NamedTuple, JavaScript JSON.stringify and util.inspect, structured log"
+          },
+          {
+            "type": "credential-access",
+            "line": 3,
+            "evidence": "secret",
+            "context": "description: 'Finds secrets, tokens, passwords, and API keys that can leak through generated serialization: Python dataclass repr and asdict, attrs, pydantic model_dump, NamedTuple, JavaScript JSON.stringify and util.inspect, structured log"
+          },
+          {
+            "type": "credential-access",
+            "line": 3,
+            "evidence": "credential",
+            "context": "description: 'Finds secrets, tokens, passwords, and API keys that can leak through generated serialization: Python dataclass repr and asdict, attrs, pydantic model_dump, NamedTuple, JavaScript JSON.stringify and util.inspect, structured log"
+          },
+          {
+            "type": "credential-access",
+            "line": 7,
+            "evidence": "Secret",
+            "context": "# Secret Serialization Review"
+          },
+          {
+            "type": "credential-access",
+            "line": 13,
+            "evidence": "credential",
+            "context": "1. **Holder**: a credential is stored as a field on a type with generated `repr`, `str`, `asdict`, `model_dump`, `toJSON`, or property enumeration."
+          },
+          {
+            "type": "credential-access",
+            "line": 22,
+            "evidence": "secret",
+            "context": "- Hardcoded secret literals and committed `.env` files are out of scope."
+          },
+          {
+            "type": "credential-access",
+            "line": 31,
+            "evidence": "Credential",
+            "context": "## Credential Fields"
+          },
+          {
+            "type": "credential-access",
+            "line": 33,
+            "evidence": "credential",
+            "context": "Treat a field as credential-bearing when its name, type, or source says so:"
+          },
+          {
+            "type": "credential-access",
+            "line": 35,
+            "evidence": "secret",
+            "context": "- Names containing `secret`, `token`, `password`, `passwd`, `pwd`, `api_key`, `apikey`, `access_key`, `private_key`, `signing_key`, `client_secret`, `bearer`, `credential`, `authorization`, `auth_header`, `cookie`, `session_key`, `dsn`, `co"
+          },
+          {
+            "type": "credential-access",
+            "line": 35,
+            "evidence": "api_key",
+            "context": "- Names containing `secret`, `token`, `password`, `passwd`, `pwd`, `api_key`, `apikey`, `access_key`, `private_key`, `signing_key`, `client_secret`, `bearer`, `credential`, `authorization`, `auth_header`, `cookie`, `session_key`, `dsn`, `co"
+          },
+          {
+            "type": "credential-access",
+            "line": 35,
+            "evidence": "apikey",
+            "context": "- Names containing `secret`, `token`, `password`, `passwd`, `pwd`, `api_key`, `apikey`, `access_key`, `private_key`, `signing_key`, `client_secret`, `bearer`, `credential`, `authorization`, `auth_header`, `cookie`, `session_key`, `dsn`, `co"
+          },
+          {
+            "type": "credential-access",
+            "line": 35,
+            "evidence": "credential",
+            "context": "- Names containing `secret`, `token`, `password`, `passwd`, `pwd`, `api_key`, `apikey`, `access_key`, `private_key`, `signing_key`, `client_secret`, `bearer`, `credential`, `authorization`, `auth_header`, `cookie`, `session_key`, `dsn`, `co"
+          },
+          {
+            "type": "credential-access",
+            "line": 44,
+            "evidence": "credential",
+            "context": "- **Raw attribute access** reads the stored value directly: `vars(obj)`, `obj.__dict__`, `pickle`, `json.dumps(obj, default=vars)`. Every stored attribute is exposed this way, whatever flags the field has. Treat these only as sinks: report "
+          },
+          {
+            "type": "credential-access",
+            "line": 64,
+            "evidence": "credential",
+            "context": "1. Read the changed hunk. Find new or modified credential fields on auto-serializing types, and new or modified code that serializes objects or kwargs into logs, spans, error context, caches, queues, or responses."
+          },
+          {
+            "type": "credential-access",
+            "line": 65,
+            "evidence": "credential",
+            "context": "2. For each credential field, read the full class, decorators, base classes, and model config. List every generated path and check which ones the field's mechanisms block, using the table above."
+          },
+          {
+            "type": "credential-access",
+            "line": 68,
+            "evidence": "credential",
+            "context": "5. For each changed sink, check for a key allowlist, redaction keyed on credential names, or a filter that replaces objects with their type name. Then grep for callers that pass credential-bearing objects into it."
+          },
+          {
+            "type": "credential-access",
+            "line": 68,
+            "evidence": "credential",
+            "context": "5. For each changed sink, check for a key allowlist, redaction keyed on credential names, or a filter that replaces objects with their type name. Then grep for callers that pass credential-bearing objects into it."
+          },
+          {
+            "type": "credential-access",
+            "line": 69,
+            "evidence": "credential",
+            "context": "6. Look at tests only to see whether one asserts the credential is absent from the serialized form. A missing test is fix guidance, not a finding."
+          },
+          {
+            "type": "credential-access",
+            "line": 76,
+            "evidence": "credential",
+            "context": "| Unexcluded credential field | A credential field is added or moved onto a type with generated serialization, and no mechanism blocks any of its generated paths. |"
+          },
+          {
+            "type": "credential-access",
+            "line": 76,
+            "evidence": "credential",
+            "context": "| Unexcluded credential field | A credential field is added or moved onto a type with generated serialization, and no mechanism blocks any of its generated paths. |"
+          },
+          {
+            "type": "credential-access",
+            "line": 78,
+            "evidence": "credential",
+            "context": "| Raw attribute sink | A sink applies `vars`, `__dict__`, `pickle`, or `default=vars` to an instance that stores a credential, even if the field is fully excluded or wrapped. |"
+          },
+          {
+            "type": "credential-access",
+            "line": 79,
+            "evidence": "Credential",
+            "context": "| Credential moved onto a holder | A refactor moves a credential from a lazy read or closure onto an object field. |"
+          },
+          {
+            "type": "credential-access",
+            "line": 79,
+            "evidence": "credential",
+            "context": "| Credential moved onto a holder | A refactor moves a credential from a lazy read or closure onto an object field. |"
+          },
+          {
+            "type": "credential-access",
+            "line": 88,
+            "evidence": "credential",
+            "context": "| high | The credential reaches a sink anywhere in the repository: log line, span attribute, error event, cache entry, persisted row, queue payload, or API response. The other side may predate the diff. Also a new wholesale sink whose exist"
+          },
+          {
+            "type": "credential-access",
+            "line": 88,
+            "evidence": "credential",
+            "context": "| high | The credential reaches a sink anywhere in the repository: log line, span attribute, error event, cache entry, persisted row, queue payload, or API response. The other side may predate the diff. Also a new wholesale sink whose exist"
+          },
+          {
+            "type": "credential-access",
+            "line": 89,
+            "evidence": "credential",
+            "context": "| medium | An unexcluded credential field whose instances leave the constructing module, after a repository search found no sink. Also a wholesale sink with no allowlist and no traced credential-bearing caller. |"
+          },
+          {
+            "type": "credential-access",
+            "line": 89,
+            "evidence": "credential",
+            "context": "| medium | An unexcluded credential field whose instances leave the constructing module, after a repository search found no sink. Also a wholesale sink with no allowlist and no traced credential-bearing caller. |"
+          },
+          {
+            "type": "credential-access",
+            "line": 90,
+            "evidence": "credential",
+            "context": "| low | An unexcluded credential field whose instances never leave the constructing scope. |"
+          },
+          {
+            "type": "credential-access",
+            "line": 102,
+            "evidence": "credential",
+            "context": "- Sinks that already allowlist scalar keys, redact by credential name, or replace objects with a type name."
+          },
+          {
+            "type": "credential-access",
+            "line": 111,
+            "evidence": "credential",
+            "context": "- Raw attribute sink: serialize an explicit allowlisted dict instead of the instance, or stop storing the credential on it. A field flag or wrapper does not fix it."
+          },
+          {
+            "type": "credential-access",
+            "line": 112,
+            "evidence": "credential",
+            "context": "- Sink: allowlist scalar keys, redact keys matching credential names, and record `type(value).__name__` instead of `str(value)` for non-scalar values."
+          },
+          {
+            "type": "credential-access",
+            "line": 113,
+            "evidence": "credential",
+            "context": "- Regression test: serialize an instance with the same serializer the sink uses (for example `sentry_sdk.serializer.serialize`, `json.dumps(asdict(obj))`, `JSON.stringify(obj)`, `util.inspect(obj)`) and assert the credential string is absen"
+          },
+          {
+            "type": "credential-access",
+            "line": 118,
+            "evidence": "credential",
+            "context": "- Description: one or two sentences naming the generated path that exposes the credential, where instances travel, and the fix."
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": true,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/security-review/SKILL.md",
+      "name": "security-review",
+      "description": "Security code review for vulnerabilities. Use when asked to \"security review\", \"find vulnerabilities\", \"check for security issues\", \"audit security\", \"OWASP review\", or review code for injection, XSS, authentication, authorization, cryptography issues. Provides systematic review with confidence-based reporting.",
+      "skill_sha256": "56a0f507ac82d7003f06103b7443472a0c4e6a5007a84f7b4d29b240359d0f9e",
+      "license": {
+        "spdx": "LICENSE",
+        "redistributable": false,
+        "status": "review-required",
+        "evidence_type": "skill-frontmatter",
+        "evidence_path": "skills/security-review/SKILL.md"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "high",
+        "capabilities": {
+          "shell": true,
+          "network": true,
+          "credentials": true,
+          "dynamic_execution": true,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "shell-execution",
+            "line": 4,
+            "evidence": "Bash",
+            "context": "allowed-tools: Read Grep Glob Bash Task"
+          },
+          {
+            "type": "network-access",
+            "line": 10,
+            "evidence": "https://",
+            "context": "https://cheatsheetseries.owasp.org/"
+          },
+          {
+            "type": "network-access",
+            "line": 58,
+            "evidence": "https://",
+            "context": "| Hardcoded values | `BASE_URL = \"https://api.internal\"` | Compile-time constants |"
+          },
+          {
+            "type": "dynamic-execution",
+            "line": 190,
+            "evidence": "eval(",
+            "context": "eval(user_input)           # Any language"
+          },
+          {
+            "type": "dynamic-execution",
+            "line": 191,
+            "evidence": "exec(",
+            "context": "exec(user_input)           # Any language"
+          },
+          {
+            "type": "dynamic-execution",
+            "line": 197,
+            "evidence": "exec(",
+            "context": "child_process.exec(user)   # Node.js"
+          },
+          {
+            "type": "credential-access",
+            "line": 213,
+            "evidence": "api_key",
+            "context": "api_key = \"sk-...\""
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": true,
+        "network": true,
+        "credentials": true,
+        "dynamic_execution": true,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/skill-scanner/SKILL.md",
+      "name": "skill-scanner",
+      "description": "Scan agent skills for security issues. Use when asked to \"scan a skill\", \"audit a skill\", \"review skill security\", \"check skill for injection\", \"validate SKILL.md\", or assess whether an agent skill is safe to install. Checks for prompt injection, malicious scripts, excessive permissions, secret exposure, and supply chain risks.",
+      "skill_sha256": "b0fdcbb9cd0d11e0425815fa37bb5483b13e6dce5fe5f3aeb4529dc8f80708bd",
+      "license": {
+        "spdx": "NOASSERTION",
+        "redistributable": false,
+        "status": "review-required",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "medium",
+        "capabilities": {
+          "shell": true,
+          "network": true,
+          "credentials": true,
+          "dynamic_execution": false,
+          "package_install": true,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "credential-access",
+            "line": 6,
+            "evidence": "secret",
+            "context": "  malicious scripts, excessive permissions, secret exposure, and supply chain risks."
+          },
+          {
+            "type": "shell-execution",
+            "line": 7,
+            "evidence": "Bash",
+            "context": "allowed-tools: Read Grep Glob Bash"
+          },
+          {
+            "type": "credential-access",
+            "line": 12,
+            "evidence": "secret",
+            "context": "Scan agent skills for security issues before adoption. Detects prompt injection, malicious code, excessive permissions, secret exposure, and supply chain risks."
+          },
+          {
+            "type": "network-access",
+            "line": 14,
+            "evidence": "https://",
+            "context": "**Requires**: The `uv` CLI for python package management, install guide at https://docs.astral.sh/uv/getting-started/installation/"
+          },
+          {
+            "type": "shell-execution",
+            "line": 14,
+            "evidence": "sh",
+            "context": "**Requires**: The `uv` CLI for python package management, install guide at https://docs.astral.sh/uv/getting-started/installation/"
+          },
+          {
+            "type": "shell-execution",
+            "line": 24,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 42,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 52,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 66,
+            "evidence": "Bash",
+            "context": "- **Tool assessment**: Review `allowed-tools` — is Bash justified? Are tools unrestricted (`*`)?"
+          },
+          {
+            "type": "package-install",
+            "line": 111,
+            "evidence": "npm install",
+            "context": "- **npm lifecycle hooks**: `postinstall` scripts in bundled `package.json` — run automatically on `npm install`"
+          },
+          {
+            "type": "credential-access",
+            "line": 124,
+            "evidence": "Credential",
+            "context": "   - **Credential theft**: Reading SSH keys, .env files, tokens from environment"
+          },
+          {
+            "type": "shell-execution",
+            "line": 154,
+            "evidence": "Bash",
+            "context": "- `Read Grep Glob Bash` — Medium risk, needs Bash justification (e.g., running bundled scripts)"
+          },
+          {
+            "type": "shell-execution",
+            "line": 154,
+            "evidence": "Bash",
+            "context": "- `Read Grep Glob Bash` — Medium risk, needs Bash justification (e.g., running bundled scripts)"
+          },
+          {
+            "type": "shell-execution",
+            "line": 155,
+            "evidence": "Bash",
+            "context": "- `Read Grep Glob Bash Write Edit WebFetch Task` — High risk, near-full access"
+          },
+          {
+            "type": "credential-access",
+            "line": 182,
+            "evidence": "Secret",
+            "context": "- **Category**: Prompt Injection / Malicious Code / Excessive Permissions / Secret Exposure / Supply Chain / Validation"
+          },
+          {
+            "type": "credential-access",
+            "line": 197,
+            "evidence": "credential",
+            "context": "- **Critical**: Any high-confidence critical finding (prompt injection, credential theft, data exfiltration)"
+          },
+          {
+            "type": "credential-access",
+            "line": 208,
+            "evidence": "credential",
+            "context": "| `references/dangerous-code-patterns.md` | Script security patterns: exfiltration, shells, credential theft, eval/exec |"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": true,
+        "network": true,
+        "credentials": true,
+        "dynamic_execution": false,
+        "package_install": true
+      }
+    },
+    {
+      "path": "skills/skill-writer/SKILL.md",
+      "name": "skill-writer",
+      "description": "Create, synthesize, and iteratively improve agent skills following the Agent Skills specification. Use when asked to \"create a skill\", \"write a skill\", \"synthesize sources into a skill\", \"improve a skill from positive/negative examples\", \"update a skill\", or \"maintain skill docs and registration\". Handles source capture, precision passes, authoring, registration, and validation.",
+      "skill_sha256": "d8597ec2e5f00cc8d87a73741369c7cc433a3bbb95801169c35e84a10d514d26",
+      "license": {
+        "spdx": "NOASSERTION",
+        "redistributable": false,
+        "status": "review-required",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "verified",
+        "risk": "none",
+        "capabilities": {
+          "shell": false,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": []
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/sred-project-organizer/SKILL.md",
+      "name": "sred-project-organizer",
+      "description": "Take a list of projects and their related documentation, and organize them into the SRED format for submission.",
+      "skill_sha256": "2174432848a32e1ca8bb7085dfcb429b37b36cb46a874af6248cbcd90d827862",
+      "license": {
+        "spdx": "NOASSERTION",
+        "redistributable": false,
+        "status": "review-required",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "capabilities": {
+          "shell": false,
+          "network": true,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "network-access",
+            "line": 119,
+            "evidence": "https://",
+            "context": "Example work summary: https://www.notion.so/sentry/SRED-Work-Summary-2026-30a8b10e4b5d81f5bc8df3553da55220"
+          },
+          {
+            "type": "network-access",
+            "line": 129,
+            "evidence": "https://",
+            "context": "Full documentation on the SRED program: https://www.canada.ca/en/revenue-agency/services/scientific-research-experimental-development-tax-incentive-program.html"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": true,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/sred-work-summary/SKILL.md",
+      "name": "sred-work-summary",
+      "description": "Go back through the previous year of work and create a Notion doc that groups relevant links into projects that can then be documented as SRED projects.",
+      "skill_sha256": "2ccbcb74155d8b53e00584aa3eedfb18615e2e21b58d11280a5659f652039534",
+      "license": {
+        "spdx": "NOASSERTION",
+        "redistributable": false,
+        "status": "review-required",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "capabilities": {
+          "shell": true,
+          "network": true,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "shell-execution",
+            "line": 20,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 38,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "network-access",
+            "line": 140,
+            "evidence": "https://",
+            "context": "This is an example Working Summary document for the year 2025: https://www.notion.so/sentry/Work-Summary-Feb-2025-Jan-2026-3068b10e4b5d81d3a40cfa6ad3fe1078?source=copy_link"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": true,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/triage-frontend-issues/SKILL.md",
+      "name": "triage-frontend-issues",
+      "description": "Triage new issues in the Sentry `javascript` project by archiving non-actionable noise. Use when asked to \"triage issues\", \"triage the javascript project\", \"archive non-actionable issues\", \"triage new frontend issues\", or \"clean up the sentry/javascript queue\". Operates only on the sentry/javascript project, only archives (never resolves), and always archives with `untilEscalating`.",
+      "skill_sha256": "45c3d3f2562f5e3840ea2bbf3ecd35a49a848456af065701ae45682e7b49dabd",
+      "license": {
+        "spdx": "NOASSERTION",
+        "redistributable": false,
+        "status": "review-required",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "capabilities": {
+          "shell": false,
+          "network": true,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": true,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "filesystem-write",
+            "line": 16,
+            "evidence": "delete",
+            "context": "2. **Archive only.** The only status mutation permitted is `status=ignored`. Never resolve, never unresolve, never assign, never delete, never bulk-update fields other than status."
+          },
+          {
+            "type": "network-access",
+            "line": 34,
+            "evidence": "https://",
+            "context": "| Sentry issue URL (`https://sentry.sentry.io/issues/JAVASCRIPT-…`) | Triage that single issue. |"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": true,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/typing-exclusion-worker/SKILL.md",
+      "name": "typing-exclusion-worker",
+      "description": "Python typing exclusion worker: remove assigned mypy exclusion modules in small scoped batches, fix typing issues, run validation, and produce a structured completion summary. Use when running parallel typing-debt workers or when asked to remove modules from pyproject mypy exclusion overrides.",
+      "skill_sha256": "0ec48152ced06a0322978d2f677cfcff2f37fd3ce4a0801e852fb6ec219ae861",
+      "license": {
+        "spdx": "NOASSERTION",
+        "redistributable": false,
+        "status": "review-required",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "capabilities": {
+          "shell": false,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": true,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "filesystem-write",
+            "line": 3,
+            "evidence": "remove",
+            "context": "description: \"Python typing exclusion worker: remove assigned mypy exclusion modules in small scoped batches, fix typing issues, run validation, and produce a structured completion summary. Use when running parallel typing-debt workers or w"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 3,
+            "evidence": "remove",
+            "context": "description: \"Python typing exclusion worker: remove assigned mypy exclusion modules in small scoped batches, fix typing issues, run validation, and produce a structured completion summary. Use when running parallel typing-debt workers or w"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 12,
+            "evidence": "remove",
+            "context": "- remove only assigned modules from mypy exclusions,"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 22,
+            "evidence": "remove",
+            "context": "- exact module list to remove from exclusion,"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 30,
+            "evidence": "remove",
+            "context": "1. Only remove assigned module entries from the mypy exclusion list in `pyproject.toml`."
+          },
+          {
+            "type": "filesystem-write",
+            "line": 39,
+            "evidence": "Remove",
+            "context": "   - Remove assigned modules from the exclusion override in `pyproject.toml`."
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    }
+  ],
+  "license_files": [
+    {
+      "path": "LICENSE",
+      "sha256": "96e78a9ce85795b117c8929887bdb78f88bf23f7b85a31f0872cde4dff7e92cd",
+      "preview": "Apache License Version 2.0, January 2004 http://www.apache.org/licenses/ TERMS AND CONDITIONS FOR USE, REPRODUCT"
+    },
+    {
+      "path": "skills/django-perf-review/LICENSE",
+      "sha256": "6498709ced00a7f52d527da0af674d5c83ac4f6364e2197ecdc0057834f6151a",
+      "preview": "Apache License 2.0 This skill contains original content. See repository root LICENSE for full terms."
+    },
+    {
+      "path": "skills/security-review/LICENSE",
+      "sha256": "0fc858d87f467971ee612fc183896257a1c160a1610a443896b33ae4d2a44ef7",
+      "preview": "The reference material in this skill is derived from the OWASP Cheat Sheet Series. Source: https://cheatsheetseries.owasp.org/ OWASP Foundation: https://owasp.org/ Original content is licensed under"
+    }
+  ],
+  "warnings": [
+    {
+      "path": "skills/agents-md/SKILL.md",
+      "type": "review-signal",
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": true
+      }
+    },
+    {
+      "path": "skills/presentation-creator/SKILL.md",
+      "type": "review-signal",
+      "capabilities": {
+        "shell": false,
+        "network": true,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": true
+      }
+    },
+    {
+      "path": "skills/security-review/SKILL.md",
+      "type": "review-signal",
+      "capabilities": {
+        "shell": true,
+        "network": true,
+        "credentials": true,
+        "dynamic_execution": true,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/skill-scanner/SKILL.md",
+      "type": "review-signal",
+      "capabilities": {
+        "shell": true,
+        "network": true,
+        "credentials": true,
+        "dynamic_execution": false,
+        "package_install": true
+      }
+    }
+  ]
+}

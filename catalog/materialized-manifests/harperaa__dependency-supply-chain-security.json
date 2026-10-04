@@ -1,0 +1,326 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "harperaa/dependency-supply-chain-security",
+  "source": {
+    "repo": "harperaa/secure-claude-skills",
+    "path": "dependency-security",
+    "revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223"
+  },
+  "review": {
+    "path": "catalog/reviews/harperaa__dependency-supply-chain-security.json",
+    "sha256": "248c7d93c68ba04253183fd64332dcfbc6e3ae0ef1bcf31f2dfa8500ea0a60a8"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "shell-execution",
+        "line": 52,
+        "evidence": "sh",
+        "context": "- `scripts/security-check.sh` - Runs npm audit + shows outdated packages",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 59,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 72,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 81,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 83,
+        "evidence": "bash",
+        "context": "bash scripts/security-check.sh",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 83,
+        "evidence": "sh",
+        "context": "bash scripts/security-check.sh",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 107,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 119,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 139,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 144,
+        "evidence": "npm install",
+        "context": "npm install package-name@1.2.3",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 154,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 181,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 196,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 198,
+        "evidence": "https://",
+        "context": "# https://nextjs.org/docs/upgrading",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 204,
+        "evidence": "npm install",
+        "context": "npm install next@latest react@latest react-dom@latest",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 229,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 242,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 259,
+        "evidence": "https://",
+        "context": "1. **Check npm page:** https://www.npmjs.com/package/PACKAGE_NAME",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 282,
+        "evidence": "bash",
+        "context": "   ```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 283,
+        "evidence": "npm install",
+        "context": "   npm install new-package",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 289,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 294,
+        "evidence": "npm install",
+        "context": "npm install",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 325,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 345,
+        "evidence": "bash",
+        "context": "   ```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 347,
+        "evidence": "https://",
+        "context": "   @mycompany:registry=https://npm.mycompany.com",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 352,
+        "evidence": "sh",
+        "context": "## Scripts/security-check.sh",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 354,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 355,
+        "evidence": "bash",
+        "context": "#!/bin/bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 385,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 386,
+        "evidence": "npm install",
+        "context": "npm install -g snyk",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 394,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 465,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 502,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 522,
+        "evidence": "bash",
+        "context": "bash scripts/security-check.sh",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 522,
+        "evidence": "sh",
+        "context": "bash scripts/security-check.sh",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 530,
+        "evidence": "https://",
+        "context": "- npm Audit Documentation: https://docs.npmjs.com/cli/v8/commands/npm-audit",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 531,
+        "evidence": "https://",
+        "context": "- OWASP Dependency Check: https://owasp.org/www-project-dependency-check/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 532,
+        "evidence": "https://",
+        "context": "- Sonatype Supply Chain Report: https://www.sonatype.com/state-of-the-software-supply-chain",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 533,
+        "evidence": "https://",
+        "context": "- Snyk: https://snyk.io/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 534,
+        "evidence": "https://",
+        "context": "- GitHub Dependabot: https://docs.github.com/en/code-security/dependabot",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 14131
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "e8f0d88e88dafeb5ba3503df8babaf5ef1c49323d6c1751c09989d29740fa919",
+      "bytes": 1069,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "5a5a4af825fead404c479411c923c35a1ea5b8aaac484b343a4c65f75a0f860f",
+      "bytes": 13062,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 14131
+}

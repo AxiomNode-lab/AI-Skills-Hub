@@ -1,0 +1,129 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "wshobson/mtls-configuration",
+  "source": {
+    "repo": "wshobson/agents",
+    "path": "plugins/cloud-infrastructure/skills/mtls-configuration",
+    "revision": "156b7a5e7a8b93642628a339ee4039c925b34c7f"
+  },
+  "review": {
+    "path": "catalog/reviews/wshobson__mtls-configuration.json",
+    "sha256": "4edcb970c3c23c879343231d32f3e202b5edb4025fcc8121108ab95a7c78a68a"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": false,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": false,
+      "encoded_content": true
+    },
+    "findings": [
+      {
+        "type": "credential-access",
+        "line": 98,
+        "evidence": "secret",
+        "context": "    secretName: istio-ca-secret",
+        "file": "references/details.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 100,
+        "evidence": "secret",
+        "context": "# Create Istio CA secret",
+        "file": "references/details.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 102,
+        "evidence": "Secret",
+        "context": "kind: Secret",
+        "file": "references/details.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 104,
+        "evidence": "secret",
+        "context": "  name: istio-ca-secret",
+        "file": "references/details.md"
+      },
+      {
+        "type": "encoded-content",
+        "line": 108,
+        "evidence": "base64",
+        "context": "  tls.crt: <base64-encoded-ca-cert>",
+        "file": "references/details.md"
+      },
+      {
+        "type": "encoded-content",
+        "line": 109,
+        "evidence": "base64",
+        "context": "  tls.key: <base64-encoded-ca-key>",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 242,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/details.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 244,
+        "evidence": "secret",
+        "context": "istioctl proxy-config secret deploy/my-app -o json | \\",
+        "file": "references/details.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 245,
+        "evidence": "secret",
+        "context": "  jq '.dynamicActiveSecrets[0].secret.tlsCertificate.certificateChain.inlineBytes' | \\",
+        "file": "references/details.md"
+      },
+      {
+        "type": "encoded-content",
+        "line": 246,
+        "evidence": "base64",
+        "context": "  tr -d '\"' | base64 -d | openssl x509 -text -noout",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 257,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/details.md"
+      }
+    ],
+    "total_bytes": 9573
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "f89abb55d9f073f38f1703e4518f0613c788c6174be7f13b8dfe48a1c076c746",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/details.md",
+      "sha256": "f5c1f3d385dafcf02a1c4a55c7ec66758eac7e773f996073bcd6d62fce56a942",
+      "bytes": 5807,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "1527e7f31e5e160dd7ff5c194fe0ce0705fbbf6b7912307666b8508ffd3ac04d",
+      "bytes": 2698,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 9573
+}

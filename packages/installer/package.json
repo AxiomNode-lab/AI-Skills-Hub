@@ -1,7 +1,7 @@
 {
   "name": "@ai-skills-hub/installer",
-  "version": "0.2.0",
-  "private": false,
+  "version": "0.3.0-beta.1",
+  "private": true,
   "type": "module",
   "license": "MIT",
   "exports": {
@@ -9,5 +9,8 @@
     "./targets": "./src/targets.mjs",
     "./native": "./src/native.mjs",
     "./state": "./src/state.mjs"
+  },
+  "dependencies": {
+    "@ai-skills-hub/core": "workspace:*"
   }
 }

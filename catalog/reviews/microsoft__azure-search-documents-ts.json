@@ -1,0 +1,386 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "microsoft/azure-search-documents-ts",
+  "status": "approved",
+  "reviewed_on": "2026-10-02",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/azure-sdk-typescript/skills/azure-search-documents-ts",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": ".github/plugins/azure-sdk-typescript/skills/azure-search-documents-ts",
+    "url": "https://api.github.com/repos/microsoft/skills/git/trees/84d8eaa8ae95930f55cdceb3e27196c795dab038?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/microsoft/skills/blob/84d8eaa8ae95930f55cdceb3e27196c795dab038/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        ".github",
+        ".github/plugins",
+        ".github/plugins/azure-sdk-typescript",
+        ".github/plugins/azure-sdk-typescript/skills",
+        ".github/plugins/azure-sdk-typescript/skills/azure-search-documents-ts"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT License with its copyright notice, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file; references cite Microsoft's own MIT-licensed azure-sdk-for-js repository as source. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "medium",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "package_install": true,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md, references/semantic-ranking.md and references/vector-search.md in full. TypeScript reference for @azure/search-documents: authentication with DefaultAzureCredential, index creation, document upload, full-text, vector, hybrid and semantic search, facets, autocomplete and batch operations.",
+      "Medium only because SKILL.md:18 (repeated at semantic-ranking.md:12 and vector-search.md:12) tells the agent to run `npm install @azure/search-documents @azure/identity`; these are Microsoft's official npm packages, so this is acceptable. Otherwise the content shapes the user's own code, which calls the user's Azure AI Search service with credentials from environment variables.",
+      "Sample code mutates search indexes (createOrUpdateIndex, uploadDocuments, batch delete actions) only when the user runs it. vector-search.md:383 builds an OData filter by string interpolation; users should sanitize input in production. The description mentions agentic retrieval/knowledge bases, which the files do not actually cover."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "git_blob": "79656060de00aa4659ad2c276d5be8830664d544",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry the copyright and permission notice.",
+      "findings": []
+    },
+    {
+      "path": "references/semantic-ranking.md",
+      "sha256": "f66727d9092c553595e5c91792731fed21ee466c9c787bfb547e20abba05cdb3",
+      "bytes": 11400,
+      "mode": "100644",
+      "git_blob": "b89ec78c4f02b3f92335e1017eaba47b4216567c",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 5,
+          "evidence": "https://",
+          "context": "**Source**: [Azure SDK for JS - search-documents](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/search/search-documents)",
+          "disposition": "accepted",
+          "reason": "Links to the azure-sdk-for-js GitHub repository and Microsoft Learn plus placeholder search endpoints; the skill does not instruct fetching them."
+        },
+        {
+          "type": "shell-execution",
+          "line": 11,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash fences contain only the npm install line and environment-variable placeholders (SKILL.md:17-28, references at line 11)."
+        },
+        {
+          "type": "package-install",
+          "line": 12,
+          "evidence": "npm install",
+          "context": "npm install @azure/search-documents @azure/identity",
+          "disposition": "accepted",
+          "reason": "`npm install @azure/search-documents @azure/identity` installs Microsoft's official SDK packages from npm (SKILL.md:18, semantic-ranking.md:12, vector-search.md:12)."
+        },
+        {
+          "type": "credential-access",
+          "line": 68,
+          "evidence": "process.env",
+          "context": "  process.env[\"AZURE_SEARCH_ENDPOINT\"]!,",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential and process.env reads of AZURE_SEARCH_ENDPOINT / placeholder AZURE_SEARCH_ADMIN_KEY in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 315,
+          "evidence": "credential",
+          "context": "const indexClient = new SearchIndexClient(endpoint, credential);",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential and process.env reads of AZURE_SEARCH_ENDPOINT / placeholder AZURE_SEARCH_ADMIN_KEY in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 372,
+          "evidence": "process.env",
+          "context": "    process.env[\"AZURE_SEARCH_ENDPOINT\"]!,",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential and process.env reads of AZURE_SEARCH_ENDPOINT / placeholder AZURE_SEARCH_ADMIN_KEY in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 468,
+          "evidence": "https://",
+          "context": "- [Official Documentation](https://learn.microsoft.com/azure/search/semantic-search-overview)",
+          "disposition": "accepted",
+          "reason": "Links to the azure-sdk-for-js GitHub repository and Microsoft Learn plus placeholder search endpoints; the skill does not instruct fetching them."
+        }
+      ]
+    },
+    {
+      "path": "references/vector-search.md",
+      "sha256": "573a6bd823708a2267e1adb8e8555591d4210748235e4a93401eaf35819e3d58",
+      "bytes": 9993,
+      "mode": "100644",
+      "git_blob": "c573322019dbe06307753ab31f214869389a3e5c",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 5,
+          "evidence": "https://",
+          "context": "**Source**: [Azure SDK for JS - search-documents](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/search/search-documents)",
+          "disposition": "accepted",
+          "reason": "Links to the azure-sdk-for-js GitHub repository and Microsoft Learn plus placeholder search endpoints; the skill does not instruct fetching them."
+        },
+        {
+          "type": "shell-execution",
+          "line": 11,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash fences contain only the npm install line and environment-variable placeholders (SKILL.md:17-28, references at line 11)."
+        },
+        {
+          "type": "package-install",
+          "line": 12,
+          "evidence": "npm install",
+          "context": "npm install @azure/search-documents @azure/identity",
+          "disposition": "accepted",
+          "reason": "`npm install @azure/search-documents @azure/identity` installs Microsoft's official SDK packages from npm (SKILL.md:18, semantic-ranking.md:12, vector-search.md:12)."
+        },
+        {
+          "type": "credential-access",
+          "line": 23,
+          "evidence": "credential",
+          "context": "const credential = new DefaultAzureCredential();",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential and process.env reads of AZURE_SEARCH_ENDPOINT / placeholder AZURE_SEARCH_ADMIN_KEY in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 24,
+          "evidence": "process.env",
+          "context": "const endpoint = process.env[\"AZURE_SEARCH_ENDPOINT\"]!;",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential and process.env reads of AZURE_SEARCH_ENDPOINT / placeholder AZURE_SEARCH_ADMIN_KEY in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 30,
+          "evidence": "credential",
+          "context": "  credential",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential and process.env reads of AZURE_SEARCH_ENDPOINT / placeholder AZURE_SEARCH_ADMIN_KEY in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 34,
+          "evidence": "credential",
+          "context": "const indexClient = new SearchIndexClient(endpoint, credential);",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential and process.env reads of AZURE_SEARCH_ENDPOINT / placeholder AZURE_SEARCH_ADMIN_KEY in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 73,
+          "evidence": "credential",
+          "context": "const searchClient = new SearchClient<Product>(endpoint, \"products\", credential);",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential and process.env reads of AZURE_SEARCH_ENDPOINT / placeholder AZURE_SEARCH_ADMIN_KEY in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 305,
+          "evidence": "credential",
+          "context": "const indexClient = new SearchIndexClient(endpoint, credential);",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential and process.env reads of AZURE_SEARCH_ENDPOINT / placeholder AZURE_SEARCH_ADMIN_KEY in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 348,
+          "evidence": "process.env",
+          "context": "          resourceUri: process.env[\"AZURE_OPENAI_ENDPOINT\"]!,",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential and process.env reads of AZURE_SEARCH_ENDPOINT / placeholder AZURE_SEARCH_ADMIN_KEY in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 378,
+          "evidence": "process.env",
+          "context": "    process.env[\"AZURE_SEARCH_ENDPOINT\"]!,",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential and process.env reads of AZURE_SEARCH_ENDPOINT / placeholder AZURE_SEARCH_ADMIN_KEY in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 438,
+          "evidence": "https://",
+          "context": "- [Official Samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/search/search-documents/samples)",
+          "disposition": "accepted",
+          "reason": "Links to the azure-sdk-for-js GitHub repository and Microsoft Learn plus placeholder search endpoints; the skill does not instruct fetching them."
+        }
+      ]
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "b6a0a3f657d9b31b7eb59363f9bc10b688f99b1de035f581bfd765d3edc8d654",
+      "bytes": 7236,
+      "mode": "100644",
+      "git_blob": "b31e05d49593682d54727deec69b10e5394c1f6f",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 17,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash fences contain only the npm install line and environment-variable placeholders (SKILL.md:17-28, references at line 11)."
+        },
+        {
+          "type": "package-install",
+          "line": 18,
+          "evidence": "npm install",
+          "context": "npm install @azure/search-documents @azure/identity",
+          "disposition": "accepted",
+          "reason": "`npm install @azure/search-documents @azure/identity` installs Microsoft's official SDK packages from npm (SKILL.md:18, semantic-ranking.md:12, vector-search.md:12)."
+        },
+        {
+          "type": "shell-execution",
+          "line": 23,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash fences contain only the npm install line and environment-variable placeholders (SKILL.md:17-28, references at line 11)."
+        },
+        {
+          "type": "network-access",
+          "line": 24,
+          "evidence": "https://",
+          "context": "AZURE_SEARCH_ENDPOINT=https://<service-name>.search.windows.net",
+          "disposition": "accepted",
+          "reason": "Links to the azure-sdk-for-js GitHub repository and Microsoft Learn plus placeholder search endpoints; the skill does not instruct fetching them."
+        },
+        {
+          "type": "credential-access",
+          "line": 36,
+          "evidence": "process.env",
+          "context": "const endpoint = process.env.AZURE_SEARCH_ENDPOINT!;",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential and process.env reads of AZURE_SEARCH_ENDPOINT / placeholder AZURE_SEARCH_ADMIN_KEY in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 37,
+          "evidence": "process.env",
+          "context": "const indexName = process.env.AZURE_SEARCH_INDEX_NAME!;",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential and process.env reads of AZURE_SEARCH_ENDPOINT / placeholder AZURE_SEARCH_ADMIN_KEY in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 39,
+          "evidence": "credential",
+          "context": "const credential = new DefaultAzureCredential({requiredEnvVars: [\"AZURE_TOKEN_CREDENTIALS\"]});",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential and process.env reads of AZURE_SEARCH_ENDPOINT / placeholder AZURE_SEARCH_ADMIN_KEY in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 40,
+          "evidence": "credential",
+          "context": "// Or use a specific credential directly in production:",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential and process.env reads of AZURE_SEARCH_ENDPOINT / placeholder AZURE_SEARCH_ADMIN_KEY in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 41,
+          "evidence": "credential",
+          "context": "// See https://learn.microsoft.com/javascript/api/overview/azure/identity-readme?view=azure-node-latest#credential-classes",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential and process.env reads of AZURE_SEARCH_ENDPOINT / placeholder AZURE_SEARCH_ADMIN_KEY in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 41,
+          "evidence": "https://",
+          "context": "// See https://learn.microsoft.com/javascript/api/overview/azure/identity-readme?view=azure-node-latest#credential-classes",
+          "disposition": "accepted",
+          "reason": "Links to the azure-sdk-for-js GitHub repository and Microsoft Learn plus placeholder search endpoints; the skill does not instruct fetching them."
+        },
+        {
+          "type": "credential-access",
+          "line": 42,
+          "evidence": "credential",
+          "context": "// const credential = new ManagedIdentityCredential();",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential and process.env reads of AZURE_SEARCH_ENDPOINT / placeholder AZURE_SEARCH_ADMIN_KEY in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 45,
+          "evidence": "credential",
+          "context": "const searchClient = new SearchClient(endpoint, indexName, credential);",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential and process.env reads of AZURE_SEARCH_ENDPOINT / placeholder AZURE_SEARCH_ADMIN_KEY in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 48,
+          "evidence": "credential",
+          "context": "const indexClient = new SearchIndexClient(endpoint, credential);",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential and process.env reads of AZURE_SEARCH_ENDPOINT / placeholder AZURE_SEARCH_ADMIN_KEY in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 242,
+          "evidence": "delete",
+          "context": "// Batch upload, merge, delete",
+          "disposition": "accepted",
+          "reason": "'delete' at SKILL.md:242-246 is a search-index batch delete action in sample code, not a local file operation."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 246,
+          "evidence": "delete",
+          "context": "  { delete: { id: \"3\" } },",
+          "disposition": "accepted",
+          "reason": "'delete' at SKILL.md:242-246 is a search-index batch delete action in sample code, not a local file operation."
+        }
+      ]
+    }
+  ]
+}

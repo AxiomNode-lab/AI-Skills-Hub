@@ -1,0 +1,80 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "wshobson/service-mesh-observability",
+  "source": {
+    "repo": "wshobson/agents",
+    "path": "plugins/cloud-infrastructure/skills/service-mesh-observability",
+    "revision": "156b7a5e7a8b93642628a339ee4039c925b34c7f"
+  },
+  "review": {
+    "path": "catalog/reviews/wshobson__service-mesh-observability.json",
+    "sha256": "e0084b6fcf8a35db018107efbe896407a3f82cb64c1a55fa4c750316210ca976"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": false,
+      "dynamic_execution": false,
+      "package_install": true,
+      "filesystem_write": false,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "shell-execution",
+        "line": 118,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/details.md"
+      },
+      {
+        "type": "network-access",
+        "line": 217,
+        "evidence": "http://",
+        "context": "      url: http://prometheus.istio-system:9090",
+        "file": "references/details.md"
+      },
+      {
+        "type": "network-access",
+        "line": 219,
+        "evidence": "http://",
+        "context": "      url: http://jaeger-query.istio-system:16686",
+        "file": "references/details.md"
+      },
+      {
+        "type": "network-access",
+        "line": 221,
+        "evidence": "http://",
+        "context": "      url: http://grafana.istio-system:3000",
+        "file": "references/details.md"
+      }
+    ],
+    "total_bytes": 11616
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "f89abb55d9f073f38f1703e4518f0613c788c6174be7f13b8dfe48a1c076c746",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/details.md",
+      "sha256": "71c404bbfbc491e3e23124fbf4416f327f61d3a7495c6e09bb6871c5feaebd54",
+      "bytes": 7715,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "0aaa93e88b7f9fbdedbd6f881eb662e63b5a82ee942c02eb3ae0b7f7c806b042",
+      "bytes": 2833,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 11616
+}

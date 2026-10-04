@@ -1,0 +1,402 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "microsoft/azure-ai-translation-document-py",
+  "status": "approved",
+  "reviewed_on": "2026-10-02",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/azure-sdk-python/skills/azure-ai-translation-document-py",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": ".github/plugins/azure-sdk-python/skills/azure-ai-translation-document-py",
+    "url": "https://api.github.com/repos/microsoft/skills/git/trees/84d8eaa8ae95930f55cdceb3e27196c795dab038?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/microsoft/skills/blob/84d8eaa8ae95930f55cdceb3e27196c795dab038/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        ".github",
+        ".github/plugins",
+        ".github/plugins/azure-sdk-python",
+        ".github/plugins/azure-sdk-python/skills",
+        ".github/plugins/azure-sdk-python/skills/azure-ai-translation-document-py"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT License with its copyright notice, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file; frontmatter declares MIT with Microsoft as author. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "medium",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": true,
+      "network": false,
+      "credentials": false,
+      "package_install": true,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md and references/capabilities.md, references/non-hero-scenarios.md in full. Python reference for Azure AI Document Translation (azure-ai-translation-document): batch translation between Blob containers, multiple targets, single-document translation, job/document status, cancel, glossaries, supported formats, async client and SAS storage requirements.",
+      "Medium only because SKILL.md:20 tells the agent to `pip install azure-ai-translation-document` (official PyPI package, unpinned). All service calls use DefaultAzureCredential (or legacy AzureKeyCredential from an environment variable) in Python sample code for the user's application; the single-document sample reads document.docx and writes document_es.docx in the user's code. The agent is not told to call the service, read secrets, or run anything else.",
+      "Inconsistency: SKILL.md:240-248 calls client.get_supported_languages() on DocumentTranslationClient, while references/non-hero-scenarios.md:66-82 says that method does not exist and uses TextTranslationClient (azure-ai-translation-text, not in the install line) instead. Container URLs embed SAS tokens; users should treat them as secrets."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "git_blob": "79656060de00aa4659ad2c276d5be8830664d544",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry the copyright and permission notice.",
+      "findings": []
+    },
+    {
+      "path": "references/capabilities.md",
+      "sha256": "97f6b6c08edfa43b336d10e897b65c1c4e21b45adb40c40b1988d1e63073f5b2",
+      "bytes": 2334,
+      "mode": "100644",
+      "git_blob": "d0ead4f44fb47932672a1ac538e618a0900158c4",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 42,
+          "evidence": "delete",
+          "context": "- Include cleanup/delete paths for created resources in examples.",
+          "disposition": "accepted",
+          "reason": "False positive: references/capabilities.md:42 is an authoring checklist item about including cleanup/delete paths for created resources in examples."
+        }
+      ]
+    },
+    {
+      "path": "references/non-hero-scenarios.md",
+      "sha256": "72f8fd3bc91b42aafec125c3d0e17964368de338d0b98d09f015de2f8e15de59",
+      "bytes": 3275,
+      "mode": "100644",
+      "git_blob": "15eb6947c060176985d407d2424c93bc9faae6e2",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 43,
+          "evidence": "https://",
+          "context": "                            glossary_url=\"https://<storage>.blob.core.windows.net/glossary/terms.csv?<sas>\",",
+          "disposition": "accepted",
+          "reason": "Placeholder Translator endpoint and Blob/SAS container URLs, the public Translator languages endpoint in a comment, and a Microsoft Learn link; nothing is fetched by instruction."
+        },
+        {
+          "type": "credential-access",
+          "line": 75,
+          "evidence": "credential",
+          "context": "# Languages endpoint requires no credential; default endpoint is https://api.cognitive.microsofttranslator.com",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential/AzureKeyCredential construction and environment-variable names in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 75,
+          "evidence": "https://",
+          "context": "# Languages endpoint requires no credential; default endpoint is https://api.cognitive.microsofttranslator.com",
+          "disposition": "accepted",
+          "reason": "Placeholder Translator endpoint and Blob/SAS container URLs, the public Translator languages endpoint in a comment, and a Microsoft Learn link; nothing is fetched by instruction."
+        },
+        {
+          "type": "credential-access",
+          "line": 76,
+          "evidence": "credential",
+          "context": "text_client = TextTranslationClient()  # no credential needed for this call",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential/AzureKeyCredential construction and environment-variable names in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 91,
+          "evidence": "credential",
+          "context": "    async with DefaultAzureCredential() as credential:",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential/AzureKeyCredential construction and environment-variable names in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 94,
+          "evidence": "credential",
+          "context": "            credential=credential,",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential/AzureKeyCredential construction and environment-variable names in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 94,
+          "evidence": "credential",
+          "context": "            credential=credential,",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential/AzureKeyCredential construction and environment-variable names in sample code for the user's app; no instruction to read, print, or send real secrets."
+        }
+      ]
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "6dd015ac34065253ff022f579a3c5af02aed4e495a587895acbe7a33f1c8205d",
+      "bytes": 10514,
+      "mode": "100644",
+      "git_blob": "64da88e8a88f1ff64c38261c0ca0df09544f3b70",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 19,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks with the pip install command and an environment-variable listing with placeholder values."
+        },
+        {
+          "type": "package-install",
+          "line": 20,
+          "evidence": "pip install",
+          "context": "pip install azure-ai-translation-document",
+          "disposition": "accepted",
+          "reason": "`pip install azure-ai-translation-document` installs the official Microsoft SDK from PyPI (unpinned)."
+        },
+        {
+          "type": "shell-execution",
+          "line": 25,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash-fenced block listing environment variable names with placeholder values; no command is executed."
+        },
+        {
+          "type": "network-access",
+          "line": 26,
+          "evidence": "https://",
+          "context": "AZURE_DOCUMENT_TRANSLATION_ENDPOINT=https://<resource>.cognitiveservices.azure.com  # Required for all auth methods",
+          "disposition": "accepted",
+          "reason": "Placeholder Translator endpoint and Blob/SAS container URLs, the public Translator languages endpoint in a comment, and a Microsoft Learn link; nothing is fetched by instruction."
+        },
+        {
+          "type": "network-access",
+          "line": 28,
+          "evidence": "https://",
+          "context": "AZURE_SOURCE_CONTAINER_URL=https://<storage>.blob.core.windows.net/<container>?<sas>  # Required for all auth methods",
+          "disposition": "accepted",
+          "reason": "Placeholder Translator endpoint and Blob/SAS container URLs, the public Translator languages endpoint in a comment, and a Microsoft Learn link; nothing is fetched by instruction."
+        },
+        {
+          "type": "network-access",
+          "line": 29,
+          "evidence": "https://",
+          "context": "AZURE_TARGET_CONTAINER_URL=https://<storage>.blob.core.windows.net/<container>?<sas>  # Required for all auth methods",
+          "disposition": "accepted",
+          "reason": "Placeholder Translator endpoint and Blob/SAS container URLs, the public Translator languages endpoint in a comment, and a Microsoft Learn link; nothing is fetched by instruction."
+        },
+        {
+          "type": "credential-access",
+          "line": 31,
+          "evidence": "api-key",
+          "context": "AZURE_DOCUMENT_TRANSLATION_KEY=<your-api-key>  # Only required for the legacy API-key auth path below",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential/AzureKeyCredential construction and environment-variable names in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 31,
+          "evidence": "API-key",
+          "context": "AZURE_DOCUMENT_TRANSLATION_KEY=<your-api-key>  # Only required for the legacy API-key auth path below",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential/AzureKeyCredential construction and environment-variable names in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 40,
+          "evidence": "credential",
+          "context": ">    - Production: set `AZURE_TOKEN_CREDENTIALS=prod` (or `AZURE_TOKEN_CREDENTIALS=<specific_credential>`) to constrain the credential chain to production-safe credentials.",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential/AzureKeyCredential construction and environment-variable names in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 43,
+          "evidence": "credential",
+          "context": ">    - Async: `async with <Client>(...) as client:` **and** `async with DefaultAzureCredential() as credential:` (from `azure.identity.aio`)",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential/AzureKeyCredential construction and environment-variable names in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 53,
+          "evidence": "credential",
+          "context": "credential = DefaultAzureCredential()",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential/AzureKeyCredential construction and environment-variable names in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 54,
+          "evidence": "credential",
+          "context": "# Or use a specific credential directly in production:",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential/AzureKeyCredential construction and environment-variable names in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 55,
+          "evidence": "credential",
+          "context": "# See https://learn.microsoft.com/python/api/overview/azure/identity-readme?view=azure-python#credential-classes",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential/AzureKeyCredential construction and environment-variable names in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 55,
+          "evidence": "https://",
+          "context": "# See https://learn.microsoft.com/python/api/overview/azure/identity-readme?view=azure-python#credential-classes",
+          "disposition": "accepted",
+          "reason": "Placeholder Translator endpoint and Blob/SAS container URLs, the public Translator languages endpoint in a comment, and a Microsoft Learn link; nothing is fetched by instruction."
+        },
+        {
+          "type": "credential-access",
+          "line": 56,
+          "evidence": "credential",
+          "context": "# credential = ManagedIdentityCredential()",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential/AzureKeyCredential construction and environment-variable names in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 60,
+          "evidence": "credential",
+          "context": "    credential=credential,",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential/AzureKeyCredential construction and environment-variable names in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 60,
+          "evidence": "credential",
+          "context": "    credential=credential,",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential/AzureKeyCredential construction and environment-variable names in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 65,
+          "evidence": "API Key",
+          "context": "### Legacy: API Key (existing keyed deployments)",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential/AzureKeyCredential construction and environment-variable names in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 76,
+          "evidence": "credential",
+          "context": "    credential=AzureKeyCredential(os.environ[\"AZURE_DOCUMENT_TRANSLATION_KEY\"]),",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential/AzureKeyCredential construction and environment-variable names in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 80,
+          "evidence": "credential",
+          "context": "# SingleDocumentTranslationClient accepts the same key-based credential.",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential/AzureKeyCredential construction and environment-variable names in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 91,
+          "evidence": "credential",
+          "context": "credential = DefaultAzureCredential()",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential/AzureKeyCredential construction and environment-variable names in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 95,
+          "evidence": "credential",
+          "context": "    credential=credential,",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential/AzureKeyCredential construction and environment-variable names in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 95,
+          "evidence": "credential",
+          "context": "    credential=credential,",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential/AzureKeyCredential construction and environment-variable names in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 217,
+          "evidence": "https://",
+          "context": "                            glossary_url=\"https://<storage>.blob.core.windows.net/glossary/terms.csv?<sas>\",",
+          "disposition": "accepted",
+          "reason": "Placeholder Translator endpoint and Blob/SAS container URLs, the public Translator languages endpoint in a comment, and a Microsoft Learn link; nothing is fetched by instruction."
+        },
+        {
+          "type": "credential-access",
+          "line": 257,
+          "evidence": "credential",
+          "context": "    async with DefaultAzureCredential() as credential:",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential/AzureKeyCredential construction and environment-variable names in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 260,
+          "evidence": "credential",
+          "context": "            credential=credential,",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential/AzureKeyCredential construction and environment-variable names in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 260,
+          "evidence": "credential",
+          "context": "            credential=credential,",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential/AzureKeyCredential construction and environment-variable names in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 284,
+          "evidence": "credential",
+          "context": "2. **Always use context managers for clients and async credentials.** Wrap every client in `with Client(...) as client:` (sync) or `async with Client(...) as client:` (async). For async `DefaultAzureCredential` from `azure.identity.aio`, al",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential/AzureKeyCredential construction and environment-variable names in sample code for the user's app; no instruction to read, print, or send real secrets."
+        }
+      ]
+    }
+  ]
+}

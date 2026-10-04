@@ -1,0 +1,254 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "microsoft/azure-ai-vision-imageanalysis-py",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/azure-sdk-python/skills/azure-ai-vision-imageanalysis-py",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "review": {
+    "path": "catalog/reviews/microsoft__azure-ai-vision-imageanalysis-py.json",
+    "sha256": "262f13a077a8166e8a2dc2fe42c7da52e136b3d6df3a5cccc891af2bd4497aaa"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "filesystem-write",
+        "line": 44,
+        "evidence": "delete",
+        "context": "- Include cleanup/delete paths for created resources in examples.",
+        "file": "references/capabilities.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 93,
+        "evidence": "credential",
+        "context": "    async with DefaultAzureCredential() as credential:",
+        "file": "references/non-hero-scenarios.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 96,
+        "evidence": "credential",
+        "context": "            credential=credential",
+        "file": "references/non-hero-scenarios.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 96,
+        "evidence": "credential",
+        "context": "            credential=credential",
+        "file": "references/non-hero-scenarios.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 19,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 20,
+        "evidence": "pip install",
+        "context": "pip install azure-ai-vision-imageanalysis",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 25,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 26,
+        "evidence": "https://",
+        "context": "VISION_ENDPOINT=https://<resource>.cognitiveservices.azure.com  # Required for all auth methods",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 28,
+        "evidence": "api-key",
+        "context": "VISION_KEY=<your-api-key>  # Only required for the legacy API-key auth path below",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 28,
+        "evidence": "API-key",
+        "context": "VISION_KEY=<your-api-key>  # Only required for the legacy API-key auth path below",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 37,
+        "evidence": "credential",
+        "context": ">    - Production: set `AZURE_TOKEN_CREDENTIALS=prod` (or `AZURE_TOKEN_CREDENTIALS=<specific_credential>`) to constrain the credential chain to production-safe credentials.",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 40,
+        "evidence": "credential",
+        "context": ">    - Async: `async with <Client>(...) as client:` **and** `async with DefaultAzureCredential() as credential:` (from `azure.identity.aio`)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 51,
+        "evidence": "credential",
+        "context": "credential = DefaultAzureCredential(require_envvar=True)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 52,
+        "evidence": "credential",
+        "context": "# Or use a specific credential directly in production:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 53,
+        "evidence": "credential",
+        "context": "# See https://learn.microsoft.com/python/api/overview/azure/identity-readme?view=azure-python#credential-classes",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 53,
+        "evidence": "https://",
+        "context": "# See https://learn.microsoft.com/python/api/overview/azure/identity-readme?view=azure-python#credential-classes",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 54,
+        "evidence": "credential",
+        "context": "# credential = ManagedIdentityCredential()",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 58,
+        "evidence": "credential",
+        "context": "    credential=credential,",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 58,
+        "evidence": "credential",
+        "context": "    credential=credential,",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 61,
+        "evidence": "https://",
+        "context": "        image_url=\"https://aka.ms/azsdk/image-analysis/sample.jpg\",",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 66,
+        "evidence": "API Key",
+        "context": "### Legacy: API Key (existing keyed deployments)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 78,
+        "evidence": "credential",
+        "context": "    credential=AzureKeyCredential(os.environ[\"VISION_KEY\"]),",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 81,
+        "evidence": "https://",
+        "context": "        image_url=\"https://aka.ms/azsdk/image-analysis/sample.jpg\",",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 91,
+        "evidence": "https://",
+        "context": "image_url = \"https://example.com/image.jpg\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 237,
+        "evidence": "credential",
+        "context": "    async with DefaultAzureCredential() as credential:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 240,
+        "evidence": "credential",
+        "context": "            credential=credential",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 240,
+        "evidence": "credential",
+        "context": "            credential=credential",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 286,
+        "evidence": "credential",
+        "context": "2. **Always use context managers for clients and async credentials.** Wrap every client in `with ImageAnalysisClient(...) as client:` (sync) or `async with ImageAnalysisClient(...) as client:` (async). For async `DefaultAzureCredential` fro",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 17224
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/capabilities.md",
+      "sha256": "960a7fbd228256952991c2a27c904b992d100b7810567186e7c17e287e190771",
+      "bytes": 2375,
+      "mode": "100644"
+    },
+    {
+      "path": "references/non-hero-scenarios.md",
+      "sha256": "9a173f9a41c90c274fb1d09b1175ceebdea69cf5a5c0be7964a93d45800d4458",
+      "bytes": 3743,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "b6bcdb76e29ccc125741a75a07f0f65ee971086749a72a87d0b83c20bf9f6ea5",
+      "bytes": 9966,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 17224
+}

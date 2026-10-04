@@ -1,0 +1,164 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "j4flmao/backend-idempotency",
+  "source": {
+    "repo": "j4flmao/agent-skills",
+    "path": "skills/backend/universal/idempotency",
+    "revision": "d9f812988c8926767ee96f66c1a340d65b595799"
+  },
+  "review": {
+    "path": "catalog/reviews/j4flmao__backend-idempotency.json",
+    "sha256": "dec42f168cc95e50c5276f327d11672b9c5b52af379f3051023eb46d975a18bc"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "low",
+    "capabilities": {
+      "shell": false,
+      "network": false,
+      "credentials": false,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "filesystem-write",
+        "line": 11,
+        "evidence": "DELETE",
+        "context": "- `DELETE FROM cart WHERE id = 456` (deleting a deleted row succeeds)",
+        "file": "references/exactly-once-strategies.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 76,
+        "evidence": "Delete",
+        "context": "-- Step 3: Delete or mark as published (after acknowledgment)",
+        "file": "references/exactly-once-strategies.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 77,
+        "evidence": "delete",
+        "context": "      this.locks.delete(key);",
+        "file": "references/idempotency-failure-modes.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 84,
+        "evidence": "delete",
+        "context": "      this.locks.delete(key);",
+        "file": "references/idempotency-failure-modes.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 308,
+        "evidence": "DELETE",
+        "context": "- Idempotency middleware intercepts all mutating HTTP methods (POST, PUT, PATCH, DELETE)",
+        "file": "references/idempotency-middleware.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 148,
+        "evidence": "DELETE",
+        "context": "      `DELETE FROM idempotency_keys",
+        "file": "references/idempotency-storage.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 57,
+        "evidence": "DELETE",
+        "context": "Is the operation naturally idempotent? (PUT, DELETE, same result every time)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 188,
+        "evidence": "delete",
+        "context": "Use a TTL index (Redis) or a background job (PostgreSQL) to delete keys after the TTL window:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 192,
+        "evidence": "DELETE",
+        "context": "DELETE FROM idempotency_keys WHERE created_at < NOW() - INTERVAL '24 hours';",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 435,
+        "evidence": "delete",
+        "context": "    this.observers.delete(observer);",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 82642
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "b6b8d73f01a48d1411da29d8196e2d85cd91cc9e8d7ae6ac4863ae7e06e6d314",
+      "bytes": 1064,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/exactly-once-strategies.md",
+      "sha256": "b40717c9b244aa02194830e325a579f365bb74ece48aed666403a9d9b7e97a23",
+      "bytes": 6074,
+      "mode": "100644"
+    },
+    {
+      "path": "references/idempotency-distributed.md",
+      "sha256": "d6a935ab7dd0b01e1d8485ead4087985db1b55d59cff6a7b75751597c15645ff",
+      "bytes": 8198,
+      "mode": "100644"
+    },
+    {
+      "path": "references/idempotency-failure-modes.md",
+      "sha256": "0f36b88f140a70e0d0fcdef541c05469b39f1420bea8d5b625157d5a9caeaecd",
+      "bytes": 7141,
+      "mode": "100644"
+    },
+    {
+      "path": "references/idempotency-keys.md",
+      "sha256": "c42dc8ea0e0d1ec96d33b3643a0322ac7b56e764331a2058fb4b9443818807ff",
+      "bytes": 7819,
+      "mode": "100644"
+    },
+    {
+      "path": "references/idempotency-middleware.md",
+      "sha256": "c9756092bc75181bf5742f3cc4ed8f5100408df13e56bca1aa22b9ab1582be5f",
+      "bytes": 9802,
+      "mode": "100644"
+    },
+    {
+      "path": "references/idempotency-patterns.md",
+      "sha256": "9821bcc07f112ab83b5fe46ba0f385414594b0785d5295ad786dbbaa193c26ce",
+      "bytes": 5302,
+      "mode": "100644"
+    },
+    {
+      "path": "references/idempotency-storage.md",
+      "sha256": "af168e82ee8392f0a4a20bef37fd050ce37ddd2f59f3225512f3a279e52e9f79",
+      "bytes": 7421,
+      "mode": "100644"
+    },
+    {
+      "path": "references/idempotency-testing.md",
+      "sha256": "c20f8c8414e52ed5a39485fa26099a21f4ed7a3374a63a04faee7e64038cb80b",
+      "bytes": 7666,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "0043500efe5bdb64a67c4e2f0a6fe5da0768df9f34a48776c6666417f9982798",
+      "bytes": 22155,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 82642
+}
