@@ -3,9 +3,10 @@ import { searchRegistry } from "@ai-skills-hub/discovery";
 import { groupByPublisher, paint, riskLabel, truncate } from "../ui.mjs";
 
 // Released skills that `install` accepts, optionally for one agent and matching a query.
-export function installableSkills(registry, { agent, query } = {}) {
-  let skills = registry.skills.filter(isInstallable);
-  if (agent) skills = skills.filter((skill) => compatibilityBasis(skill, agent) !== null);
+// `pool` is an installable list already computed for the agent, to search within.
+export function installableSkills(registry, { agent, query, pool } = {}) {
+  let skills = pool ? [...pool] : registry.skills.filter(isInstallable);
+  if (agent && !pool) skills = skills.filter((skill) => compatibilityBasis(skill, agent) !== null);
   if (query) {
     // The pool is already agent-filtered.
     const matched = new Set(searchRegistry({ skills }, query, { limit: Infinity }).map(({ item }) => item.id));

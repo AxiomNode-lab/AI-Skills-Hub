@@ -21,7 +21,7 @@ const skill = registry.skills.find((item) => item.id === id);
 if (!skill) throw new Error("Unknown skill: " + id);
 if (skill.distribution === "blocked") throw new Error("Blocked skills are not reviewed for release");
 
-const git = (...args) => execFileSync("git", ["-C", checkout, ...args], { encoding: "utf8" }).trim();
+const git = (...args) => execFileSync("git", ["-C", checkout, ...args], { encoding: "utf8", maxBuffer: 256 * 1024 * 1024 }).trim();
 const revision = git("rev-parse", "HEAD");
 if (revision !== skill.source?.revision) {
   throw new Error(`Checkout is at ${revision}; the catalog pins ${skill.source?.revision}`);

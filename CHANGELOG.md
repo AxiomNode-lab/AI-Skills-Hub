@@ -28,7 +28,7 @@ All notable changes to AI Skills Hub are documented here.
 - `sync-registry` writes `catalog/reports/release-drift.json`: released skills whose upstream moved past the reviewed revision, and whether SKILL.md changed.
 
 ### Changed
-- The scanner's dynamic-execution pattern is case-sensitive: it still matches `eval(`, `exec(` and the `Function` constructor, but no longer every JavaScript `function (`. Nine reviewed DevOps and frontend skills held only by that match are released (394 installable).
+- The scanner's dynamic-execution check no longer matches the JavaScript `function (` keyword: `eval(` and `exec(` stay case-insensitive (so `EXEC(@sql)` and `Eval(x)` still count), and the `Function` constructor is matched case-sensitively. Nine reviewed DevOps and frontend skills held only by that match are released (394 installable).
 - `microsoft/azure-ai-anomalydetector-java` is held with reason `upstream-service-retired` (Microsoft retired the service on 2026-10-01) and no longer ships; 165 skills are installable. `info` now prints release hold reasons.
 - Independent instruction reviews of 40 microsoft/skills skills are recorded in docs/reviews/independent-batch-01 to -04.
 - `microsoft/azure-monitor-query-py` is held with reason `upstream-api-removed`: its unpinned package dropped the metrics clients it documents; 162 skills are installable.
@@ -36,6 +36,11 @@ All notable changes to AI Skills Hub are documented here.
 - Agent Skills format skills now install for every agent that loads the format (Claude Code, Codex, Cursor, GitHub Copilot, OpenCode); previously most were limited by a per-source guess, so Claude Code saw 19 of 166 released skills.
 
 ### Fixed
+- A reviewed release whose upstream path moved stays released and is listed in the drift report with its new path, instead of being blocked as missing; curated `release.notices` survive a recomputed release state.
+- Release notices are shown before the user confirms: with the confirmation-required message and in the interactive flow.
+- `ingest-github --checkout` accepts a full commit SHA, or any branch, remote branch, or tag of that name that points at HEAD.
+- The server re-checks that a listed file is still a regular file before reading it, closes an oversized request after the 413, and reuses its installable list; `draft-review` allows large repository trees.
+- `parseFrontmatter` skips leading blank lines and comment lines in plain scalars, and ignores lines after a closed quoted value.
 - `sync-registry` no longer rewrites reviewed, released records: they stay pinned to the reviewed revision until a new review. Before this, the nightly Source Sync reset 330 of 385 released skills (directory vs `SKILL.md` path forms) and failed validation.
 - `sync-registry`: records outside a source's `include_paths` are left unchanged instead of being blocked as missing; an existing record keeps its id when a new upstream path has the same skill name, regardless of order.
 - `ingest-github --checkout` and `draft-review` read `git ls-tree -z`, so paths with non-ASCII or special characters are found; `--checkout` refuses a ref that does not name the checked-out commit.

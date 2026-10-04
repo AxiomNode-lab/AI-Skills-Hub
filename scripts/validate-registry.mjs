@@ -34,7 +34,7 @@ for (const skill of data.skills) {
   if (typeof skill.materialized !== "boolean") throw new Error(skill.id + " invalid materialized flag");
   if (!["pending","eligible","hold"].includes(skill.release?.status)) throw new Error(skill.id + " invalid release status");
   if (!Array.isArray(skill.release?.reasons)) throw new Error(skill.id + " invalid release reasons");
-  // Notices are shown before install; each needs a kind, text, and evidence.
+  // Notices are shown by info, install, and the server; each needs a kind, text, and evidence.
   if (skill.release.notices !== undefined && !(Array.isArray(skill.release.notices) && skill.release.notices.every((n) =>
     ["behavior", "lifecycle"].includes(n?.kind) && typeof n.text === "string" && n.text.trim() && typeof n.evidence === "string" && n.evidence.trim()))) {
     throw new Error(skill.id + " invalid release notices");

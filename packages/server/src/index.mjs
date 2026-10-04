@@ -71,7 +71,14 @@ export function skillFiles(skill) {
 
 function readSkillFile(skill, relative, files = skillFiles(skill)) {
   if (!files.includes(relative)) return null;
-  return fs.readFileSync(path.join(resolveHubPath(skill.materialized_root), ...relative.split("/")), "utf8");
+  // The list may be cached: re-check that the path is still a regular file.
+  const full = path.join(resolveHubPath(skill.materialized_root), ...relative.split("/"));
+  try {
+    if (!fs.lstatSync(full).isFile()) return null;
+  } catch {
+    return null;
+  }
+  return fs.readFileSync(full, "utf8");
 }
 
 const mimeType = (file) => (file.endsWith(".md") ? "text/markdown" : "text/plain");
@@ -144,7 +151,7 @@ export function createCatalog(registry = loadRegistry()) {
     return null;
   }
 
-  return { registry, byId, search, detail, list, resources, readResource };
+  return { registry, byId, eligible, search, detail, list, resources, readResource };
 }
 
 const TOOLS = [
@@ -267,13 +274,13 @@ function handleApi(catalog, url, res) {
   const params = Object.fromEntries(url.searchParams);
   const route = url.pathname.replace(/\/+$/, "") || "/";
   if (route === "/api/health") {
-    return sendJson(res, 200, { status: "ok", skills: catalog.registry.skills.length, eligible: catalog.registry.skills.filter(isInstallable).length });
+    return sendJson(res, 200, { status: "ok", skills: catalog.registry.skills.length, eligible: catalog.eligible.length });
   }
   if (route === "/api/catalog") {
     return sendJson(res, 200, {
       generated_at: catalog.registry.generated_at ?? null,
       summary: summarize(catalog.registry.skills),
-      eligible: catalog.registry.skills.filter(isInstallable).map((skill) => skill.id),
+      eligible: catalog.eligible.map((skill) => skill.id),
       bundles: Object.keys(catalog.registry.bundles ?? {})
     });
   }
@@ -322,7 +329,11 @@ export function createHubServer({ registry } = {}) {
         try {
           message = JSON.parse(await readBody(req));
         } catch (error) {
-          if (error.status) return sendJson(res, error.status, { error: error.message }, { connection: "close" });
+          if (error.status) {
+            // Stop reading an oversized body once the 413 has been sent.
+            res.on("finish", () => req.destroy());
+            return sendJson(res, error.status, { error: error.message }, { connection: "close" });
+          }
           return sendJson(res, 400, rpcError(null, -32700, "Parse error"));
         }
         if (Array.isArray(message)) return sendJson(res, 400, rpcError(null, -32600, "Batch requests are not supported"));

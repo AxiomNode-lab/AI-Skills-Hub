@@ -14,7 +14,11 @@ export async function installCommand(ids, options = {}) {
         if (result.installed) {
           console.log(`${paint("green", "✔")} Installed ${result.id}${result.destination ? paint("dim", ` → ${result.destination}`) : ""}`);
           for (const notice of result.notices ?? []) console.log(`  ${paint("yellow", "⚠ Notice:")} ${notice.text}`);
-        } else console.error(`${paint("red", "✖", process.stderr)} ${result.status}: ${result.id}: ${result.reason}${result.requires_confirmation ? ". Re-run with --yes to confirm." : ""}`);
+        } else {
+          console.error(`${paint("red", "✖", process.stderr)} ${result.status}: ${result.id}: ${result.reason}${result.requires_confirmation ? ". Re-run with --yes to confirm." : ""}`);
+          // Shown before the user confirms with --yes.
+          if (result.requires_confirmation) for (const notice of result.notices ?? []) console.error(`  ${paint("yellow", "⚠ Notice:", process.stderr)} ${notice.text}`);
+        }
       }
       console.log(success ? paint("green", "Installation complete.") : paint("yellow", "Installation incomplete; not all requested capabilities were installed."));
     }

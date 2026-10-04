@@ -85,10 +85,11 @@ if (checkout) {
   const origin = git("remote", "get-url", "origin").trim().replace(/\.git$/, "");
   if (!origin.toLowerCase().endsWith("/" + repo.toLowerCase())) throw new Error(`Checkout origin ${origin} is not ${repo}`);
   // The recorded ref must name the commit that was actually read.
-  const refRevision = ["refs/heads/", "refs/remotes/origin/", "refs/tags/"].map((prefix) => {
+  // A full commit SHA, or any branch, remote branch, or tag of that name, may match.
+  const refRevisions = /^[0-9a-f]{40}$/i.test(ref) ? [ref.toLowerCase()] : ["refs/heads/", "refs/remotes/origin/", "refs/tags/"].map((prefix) => {
     try { return git("rev-parse", "--verify", "-q", prefix + ref + "^{commit}").trim(); } catch { return null; }
-  }).find(Boolean);
-  if (refRevision !== revision) throw new Error(`Checkout HEAD ${revision} is not ${ref} (${refRevision ?? "ref not found in the clone"})`);
+  }).filter(Boolean);
+  if (!refRevisions.includes(revision)) throw new Error(`Checkout HEAD ${revision} is not ${ref} (${refRevisions.join(", ") || "ref not found in the clone"})`);
   tree = {
     sha: git("rev-parse", "HEAD^{tree}").trim(),
     truncated: false,

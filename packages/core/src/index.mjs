@@ -187,14 +187,15 @@ export function parseFrontmatter(text) {
       continue;
     }
 
-    if (!continuation.length) {
+    if (!continuation.length || closedQuote) {
       fields[key] = unquote(value);
       continue;
     }
     // A plain multi-line scalar folds lines with spaces; a blank line is a newline.
     let plain = value;
     for (const line of continuation.map((item) => item.trim())) {
-      if (!line) plain += "\n";
+      if (line.startsWith("#")) continue;
+      if (!line) plain += plain ? "\n" : "";
       else plain += plain && !plain.endsWith("\n") ? " " + line : line;
     }
     fields[key] = plain;

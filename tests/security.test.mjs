@@ -23,7 +23,7 @@ test("clean text has no findings",()=>{
 
 test("dynamic execution is detected without matching the JavaScript function keyword", () => {
   const dynamic = (text) => scanText(text).findings.some(f => f.type === "dynamic-execution");
-  for (const text of ["eval(userInput)", "exec(code)", "child_process.exec(cmd)", "new Function(body)", "Function (\"return this\")()", "re.exec(line)"]) {
+  for (const text of ["eval(userInput)", "exec(code)", "EXEC(@sql)", "Eval(x)", "child_process.exec(cmd)", "new Function(body)", "Function (\"return this\")()", "re.exec(line)"]) {
     assert.equal(dynamic(text), true, text);
   }
   for (const text of ["function (a, b) { return a + b; }", "setTimeout(function () {})", "// HTTP function (API endpoint)"]) {

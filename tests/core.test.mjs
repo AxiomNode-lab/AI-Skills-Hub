@@ -67,3 +67,10 @@ test("parseFrontmatter reads next-line plain scalars, trailing comments, and ind
   assert.deepEqual(fm("metadata:\n  author: x\nname: y"), { name: "y" });
   assert.deepEqual(fm("tags:\n  - a"), {});
 });
+
+test("parseFrontmatter skips leading blank lines and comments in plain scalars", () => {
+  const fm = (body) => parseFrontmatter(`---\n${body}\n---\n`);
+  assert.equal(fm("description:\n\n  text here").description, "text here");
+  assert.equal(fm("description:\n  # comment\n  text").description, "text");
+  assert.equal(fm('description: "abc"\n  more').description, "abc");
+});

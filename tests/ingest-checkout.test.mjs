@@ -66,3 +66,18 @@ test("ingest-github --checkout finds skills whose paths git would quote", t => {
   const out = JSON.parse(fs.readFileSync(path.join(dir, "catalog", "ingestion", "example__skills.json"), "utf8"));
   assert.ok(out.discovered_skills.some(skill => skill.path === "skills/café/SKILL.md"), JSON.stringify(out.discovered_skills.map(s => s.path)));
 });
+
+test("ingest-github --checkout accepts a commit SHA or a remote branch that names HEAD", t => {
+  const { dir, clone, head } = repository(t, "example/skills");
+  const git = (...args) => execFileSync("git", ["-C", clone, ...args], { encoding: "utf8" });
+  // A stale local main, with HEAD detached at the newer origin/main.
+  git("-c", "user.name=t", "-c", "user.email=t@example.com", "commit", "-q", "--allow-empty", "-m", "newer");
+  const newer = git("rev-parse", "HEAD").trim();
+  git("update-ref", "refs/remotes/origin/main", newer);
+  git("checkout", "-q", "--detach", newer);
+  git("branch", "-f", "main", head);
+  for (const ref of ["main", newer]) {
+    const result = spawnSync(process.execPath, [script, "example/skills", ref, "--checkout", clone], { cwd: dir, encoding: "utf8" });
+    assert.equal(result.status, 0, ref + ": " + result.stderr);
+  }
+});

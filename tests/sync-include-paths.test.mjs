@@ -82,3 +82,22 @@ test("a reviewed, released record stays pinned when upstream moves to a new revi
   // The newer upstream revision is reported for a new review.
   assert.deepEqual(drift, [{ id: "example/foo", pinned_revision: "a".repeat(40), upstream_revision: "b".repeat(40), skill_md_changed: true }]);
 });
+
+test("a reviewed record whose upstream path moved stays released and is reported", t => {
+  const released = {
+    ...record("example/foo", "skills/foo"),
+    license: { spdx: "MIT", redistributable: true, status: "verified", scope: "repository", evidence: "catalog/reviews/example__foo.json" },
+    distribution: "bundled", materialized: true, materialized_root: "skills/example/foo",
+    release: { status: "eligible", reasons: [] }
+  };
+  const { skills, drift } = syncFixture(t, { source: { repo: "example/mixed-skills" }, skills: [released], discovered: [entry("foo", "new/foo/SKILL.md")] });
+  assert.deepEqual(skills, [released]);
+  assert.equal(drift[0].upstream_path, "new/foo/SKILL.md");
+});
+
+test("sync keeps curated release notices when it recomputes a release state", t => {
+  const notice = { kind: "lifecycle", text: "Service retires soon.", evidence: "docs/example.md" };
+  const held = { ...record("example/foo", "skills/foo/SKILL.md"), release: { status: "hold", reasons: ["manual_review_required"], notices: [notice] } };
+  const { skills } = syncFixture(t, { source: { repo: "example/mixed-skills" }, skills: [held], discovered: [entry("foo", "skills/foo/SKILL.md")] });
+  assert.deepEqual(skills[0].release.notices, [notice]);
+});

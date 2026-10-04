@@ -38,7 +38,7 @@ export async function interactiveCommand() {
   let candidates = installable;
   if (searchMode === "search") {
     const query = await input({ message: "Search query:" });
-    candidates = installableSkills(registry, { agent: selectedAgentId, query });
+    candidates = installableSkills(registry, { query, pool: installable });
   } else if (searchMode === "all") {
     candidates = filterForAgent(registry.skills, selectedAgentId);
   }
@@ -107,6 +107,11 @@ export async function interactiveCommand() {
 
   if (requiresConsent) {
     console.log("\nExternal installers and agent configuration changes require explicit confirmation.");
+  }
+
+  // Release notices are part of what the user agrees to, so show them first.
+  for (const { cap } of actionable) {
+    for (const notice of cap.release?.notices ?? []) console.log(`${paint("yellow", "⚠ Notice")} ${cap.id}: ${notice.text}`);
   }
 
   const proceed = await confirm({

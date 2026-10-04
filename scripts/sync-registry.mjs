@@ -99,6 +99,8 @@ for(const source of sourceEntries){
 // Ids already held by a record at the same upstream path are claimed first, so
 // a new path with the same skill name cannot take them over, whatever the order.
 const drift=[];
+// Curated release notices survive a recomputed release state.
+const withNotices=(skill)=>skill.release?.notices?{notices:skill.release.notices}:{};
 const claimedIds=new Set();
 for(const {source,item} of discovered){
   const existing=existingBySource.get(sourceKeyOf(source.repo,item.path));
@@ -124,11 +126,17 @@ for(const {source,item,revision} of discovered){
   // A reviewed record stays pinned to the revision its review covers; a newer
   // upstream commit needs a new review, not a metadata overwrite.
   if(skill?.license?.evidence?.startsWith("catalog/reviews/")){
-    if(skill.source.revision!==revision) drift.push({
+    // Its pinned path counts as seen even if upstream moved it, so it is not
+    // blocked as missing; the move is reported for the new review instead.
+    const pinnedKey=sourceKeyOf(skill.source.repo,skill.source.path);
+    seenSourceKeys.add(pinnedKey);
+    const moved=pinnedKey!==sourceKey;
+    if(skill.source.revision!==revision || moved) drift.push({
       id:skill.id,
       pinned_revision:skill.source.revision,
       upstream_revision:revision,
-      skill_md_changed:item.skill_sha256!==skill.integrity?.upstream_skill_sha256
+      skill_md_changed:item.skill_sha256!==skill.integrity?.upstream_skill_sha256,
+      ...(moved ? { upstream_path:item.path } : {})
     });
     continue;
   }
@@ -201,7 +209,7 @@ for(const {source,item,revision} of discovered){
   const revisionChanged=previousRevision && previousRevision!==revision;
   if(revisionChanged){
     skill.materialized=false;
-    if(skill.distribution==="bundled") skill.release={status:"pending",reasons:["upstream-revision-changed","security-scan-pending","rematerialization-required"]};
+    if(skill.distribution==="bundled") skill.release={...withNotices(skill),status:"pending",reasons:["upstream-revision-changed","security-scan-pending","rematerialization-required"]};
   }
 
   if(!skill.license.redistributable && skill.distribution==="bundled"){
@@ -212,7 +220,7 @@ for(const {source,item,revision} of discovered){
     skill.materialized=false;
   }
 
-  skill.release=releaseFor(skill);
+  skill.release={...withNotices(skill),...releaseFor(skill)};
 }
 
 for (const skill of registry.skills) {
