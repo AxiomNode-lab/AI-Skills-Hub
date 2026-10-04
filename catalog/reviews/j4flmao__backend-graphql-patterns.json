@@ -1,0 +1,409 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "j4flmao/backend-graphql-patterns",
+  "status": "draft",
+  "reviewed_on": null,
+  "reviewer": null,
+  "source": {
+    "repo": "j4flmao/agent-skills",
+    "path": "skills/backend/universal/graphql-patterns",
+    "revision": "d9f812988c8926767ee96f66c1a340d65b595799"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "skills/backend/universal/graphql-patterns",
+    "url": "https://api.github.com/repos/j4flmao/agent-skills/git/trees/d9f812988c8926767ee96f66c1a340d65b595799?recursive=1",
+    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/j4flmao/agent-skills/blob/d9f812988c8926767ee96f66c1a340d65b595799/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "skills",
+        "skills/backend",
+        "skills/backend/universal",
+        "skills/backend/universal/graphql-patterns"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte."
+    ]
+  },
+  "content_review": {
+    "status": "pending",
+    "risk": "unknown",
+    "blocking_findings": [],
+    "capabilities": {},
+    "notes": []
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "b6b8d73f01a48d1411da29d8196e2d85cd91cc9e8d7ae6ac4863ae7e06e6d314",
+      "bytes": 1064,
+      "mode": "100644",
+      "git_blob": "0e8b6e6d8678128ebfcc28d7cad91fa9ed7f2354",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "references/federation-subscriptions.md",
+      "sha256": "934eaec77559bcc3a4c0618bd0d7d4088e7148217f9e0681fef0a6471571efc1",
+      "bytes": 8112,
+      "mode": "100644",
+      "git_blob": "07f36e0ea2df8271709edfab6f8e7eb991ed9bc3",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 45,
+          "evidence": "http://",
+          "context": "      url: http://accounts/graphql",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 47,
+          "evidence": "http://",
+          "context": "      url: http://products/graphql",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 49,
+          "evidence": "http://",
+          "context": "      url: http://reviews/graphql",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 57,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 118,
+          "evidence": "process.env",
+          "context": "  publisher: new Redis(process.env.REDIS_URL),",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 119,
+          "evidence": "process.env",
+          "context": "  subscriber: new Redis(process.env.REDIS_URL),",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "references/graphql-federation.md",
+      "sha256": "cd295b58377ceb2392900d7c503f65c5b632d1d787732d6ccf8e77fe2735f105",
+      "bytes": 7708,
+      "mode": "100644",
+      "git_blob": "7c19612253ab7091bf0b35086916f519996db2b2",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 106,
+          "evidence": "http://",
+          "context": "    routing_url: http://users-service:4001/graphql",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 110,
+          "evidence": "http://",
+          "context": "    routing_url: http://orders-service:4002/graphql",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 114,
+          "evidence": "http://",
+          "context": "    routing_url: http://payments-service:4003/graphql",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 119,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 138,
+          "evidence": "https://",
+          "context": "      - https://app.example.com",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "references/graphql-migration.md",
+      "sha256": "ba94134057ccaaf4a5635c319382ef40f9c85aff78c3fc9a7f6e57b9e3d47ed9",
+      "bytes": 6371,
+      "mode": "100644",
+      "git_blob": "ad794643067fbcd150a2f6c2c2d74548b73ef465",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 29,
+          "evidence": "https://",
+          "context": "      const response = await fetch(`https://api.example.com/users/${id}`, {",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 36,
+          "evidence": "https://",
+          "context": "      const url = new URL('https://api.example.com/users');",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 118,
+          "evidence": "https://",
+          "context": "        @link(url: \"https://specs.apollo.dev/federation/v2.0\",",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 229,
+          "evidence": "remove",
+          "context": "- Never remove fields without deprecation notice (minimum 6 months)",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "references/graphql-monitoring.md",
+      "sha256": "fe882f8e9cbdcb57d1fa94bc2ca55fec952cb8b4ffafe3059845efad0c079829",
+      "bytes": 7447,
+      "mode": "100644",
+      "git_blob": "ffaaceec04f9dac4a74752c05181e0cdac85a8ee",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "references/graphql-performance.md",
+      "sha256": "74b0113537f902267cd3bee9c469b9ae17e44103160375667e9c8822bdc04ecd",
+      "bytes": 6775,
+      "mode": "100644",
+      "git_blob": "223c967d9db27896e69c884f0ba8f06c3969b78e",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "references/graphql-security.md",
+      "sha256": "1a6b458be5c8ebb70e3060b53c9f7fb7f8a67121e08d1af071430769e062cc13",
+      "bytes": 6819,
+      "mode": "100644",
+      "git_blob": "627947f86b5778b9d24621b438df30fef3f5f15f",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "credential-access",
+          "line": 84,
+          "evidence": "process.env",
+          "context": "      const user = jwt.verify(token, process.env.JWT_SECRET);",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 205,
+          "evidence": "process.env",
+          "context": "  introspection: process.env.NODE_ENV !== 'production',",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 246,
+          "evidence": "process.env",
+          "context": "    if (process.env.NODE_ENV === 'production') {",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 272,
+          "evidence": "process.env",
+          "context": "      ctx.user = jwt.verify(token, process.env.JWT_SECRET);",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "references/graphql-tooling.md",
+      "sha256": "2b08668ad4ca31a658007f01787b7da69d66cfc901806ba972f57610eca3051e",
+      "bytes": 8017,
+      "mode": "100644",
+      "git_blob": "a295838aa6bff84599a1b68e904738187bf2a335",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 6,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "package-install",
+          "line": 7,
+          "evidence": "npm install",
+          "context": "npm install -D @graphql-codegen/cli @graphql-codegen/typescript @graphql-codegen/typescript-resolvers @graphql-codegen/typescript-operations",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 58,
+          "evidence": "process.env",
+          "context": "const httpLink = createHttpLink({ uri: process.env.GRAPHQL_URL });",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "references/schema-resolvers.md",
+      "sha256": "e08d0340a2fab054af23d5260353c4b987c7b94e9d1f73d4eb14d660eb0138db",
+      "bytes": 7361,
+      "mode": "100644",
+      "git_blob": "ad3ee8990f4b6ca4198660815bf1c93cf268a41b",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "encoded-content",
+          "line": 45,
+          "evidence": "Base64",
+          "context": "// Base64-encoded ID",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "encoded-content",
+          "line": 46,
+          "evidence": "base64",
+          "context": "const cursor = Buffer.from(id.toString()).toString('base64');",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "encoded-content",
+          "line": 48,
+          "evidence": "Base64",
+          "context": "// Base64-encoded timestamp + ID (for stable sort)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "encoded-content",
+          "line": 49,
+          "evidence": "base64",
+          "context": "const cursor = Buffer.from(`${createdAt.toISOString()}_${id}`).toString('base64');",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "encoded-content",
+          "line": 52,
+          "evidence": "base64",
+          "context": "const decoded = Buffer.from(cursor, 'base64').toString('utf8');",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 263,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "830457b631c4aeca69074797c1f6099c176922a06d069fd98e92f74300245314",
+      "bytes": 27710,
+      "mode": "100644",
+      "git_blob": "ead4a22e831aba5167ce9fe60dfa3d365ef543e4",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "encoded-content",
+          "line": 185,
+          "evidence": "base64",
+          "context": "Use the Relay connection pattern for all list fields. Arguments: `first`, `after`, `last`, `before`. Return type: `Connection` type with `edges` (array of `Edge` types) and `pageInfo` (hasNextPage, hasPreviousPage, startCursor, endCursor). ",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 510,
+          "evidence": "delete",
+          "context": "    this.observers.delete(observer);",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    }
+  ]
+}

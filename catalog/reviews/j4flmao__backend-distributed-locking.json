@@ -1,0 +1,429 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "j4flmao/backend-distributed-locking",
+  "status": "draft",
+  "reviewed_on": null,
+  "reviewer": null,
+  "source": {
+    "repo": "j4flmao/agent-skills",
+    "path": "skills/backend/universal/distributed-locking",
+    "revision": "d9f812988c8926767ee96f66c1a340d65b595799"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "skills/backend/universal/distributed-locking",
+    "url": "https://api.github.com/repos/j4flmao/agent-skills/git/trees/d9f812988c8926767ee96f66c1a340d65b595799?recursive=1",
+    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/j4flmao/agent-skills/blob/d9f812988c8926767ee96f66c1a340d65b595799/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "skills",
+        "skills/backend",
+        "skills/backend/universal",
+        "skills/backend/universal/distributed-locking"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte."
+    ]
+  },
+  "content_review": {
+    "status": "pending",
+    "risk": "unknown",
+    "blocking_findings": [],
+    "capabilities": {},
+    "notes": []
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "b6b8d73f01a48d1411da29d8196e2d85cd91cc9e8d7ae6ac4863ae7e06e6d314",
+      "bytes": 1064,
+      "mode": "100644",
+      "git_blob": "0e8b6e6d8678128ebfcc28d7cad91fa9ed7f2354",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "references/distributed-locking-advanced.md",
+      "sha256": "06b702b30b8fbbfee7fb230c6b19976ca4bee13535046d6e14db2014a22265ad",
+      "bytes": 6736,
+      "mode": "100644",
+      "git_blob": "faae9b262512485ef683179088d17e5dda729d98",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 61,
+          "evidence": "delete",
+          "context": "    // Lua script: atomic check-and-delete",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "dynamic-execution",
+          "line": 71,
+          "evidence": "eval(",
+          "context": "        await server.eval(script, 1, resource, value);",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 149,
+          "evidence": "process.env",
+          "context": "      await this.etcd.put('cluster/leader').value(process.env.HOSTNAME).lease(this.lease);",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 152,
+          "evidence": "process.env",
+          "context": "      logger.info('Became leader', { hostname: process.env.HOSTNAME });",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "dynamic-execution",
+          "line": 181,
+          "evidence": "eval(",
+          "context": "    const result = await this.redis.eval(`",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "references/distributed-locking-fundamentals.md",
+      "sha256": "f7ef53ec352897578268b7fbf5a4971fa9523a51db5dfa8770e36d48496ecc2e",
+      "bytes": 6109,
+      "mode": "100644",
+      "git_blob": "04a7f3e1e8ec79f9394e5d4f9a04052ff2f1aafb",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 31,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 37,
+          "evidence": "delete",
+          "context": "# Release using Lua script (atomic check-and-delete)",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "references/fencing-tokens-deep.md",
+      "sha256": "1111af7ff5cf9d3a6547fd55a3b701e104e4a8180cf98919d66adf9a10acde0b",
+      "bytes": 5922,
+      "mode": "100644",
+      "git_blob": "26646b48c85dfd167f33eceed083297c8d104cc3",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "credential-access",
+          "line": 95,
+          "evidence": "process.env",
+          "context": "      Buffer.from(process.env.HOSTNAME),",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "references/lock-contention-analysis.md",
+      "sha256": "1a07f0c0249b8f25ed0a97c635067197da8d2e10fd323826d8992d9020086948",
+      "bytes": 9150,
+      "mode": "100644",
+      "git_blob": "e44458570cf9ac9742a69172c7f7728a8476db8f",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 20,
+          "evidence": "delete",
+          "context": "    this.pending.delete(lockName);",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "references/lock-deep-dive.md",
+      "sha256": "944981ab0c5925a423ae5e8ef6dce94f504fbfc4e97e46cc5baccdec14fea2b5",
+      "bytes": 3639,
+      "mode": "100644",
+      "git_blob": "f905b590b412d52aa77a79966d93a40241672a2c",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 66,
+          "evidence": "delete",
+          "context": "        await self.redis.delete(self.key)",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "references/lock-implementations.md",
+      "sha256": "c5242e2e3e9296e8e352ff3542ae0bdce71dd442a2405a9b19a56b45d2430985",
+      "bytes": 3491,
+      "mode": "100644",
+      "git_blob": "4d24ec3725dea2cc4efc3e3b13de50b3df3e89dc",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 56,
+          "evidence": "delete",
+          "context": "        r.delete(lock_key)",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "references/lock-providers.md",
+      "sha256": "a6ad2fdd49bf07f1ef62607d0bb09c706464ce4ed424132c95d4555372725987",
+      "bytes": 7553,
+      "mode": "100644",
+      "git_blob": "ab7d9f61a752e7df64b586e3b86c080ccfffd78a",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 7,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "package-install",
+          "line": 8,
+          "evidence": "npm install",
+          "context": "npm install ioredis",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "package-install",
+          "line": 10,
+          "evidence": "npm install",
+          "context": "npm install redis",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 18,
+          "evidence": "process.env",
+          "context": "const client = createClient({ url: process.env.REDIS_URL })",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "dynamic-execution",
+          "line": 37,
+          "evidence": "eval(",
+          "context": "  await client.eval(script, { keys: [`lock:${name}`], arguments: ['locked'] })",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 48,
+          "evidence": "process.env",
+          "context": "    new Redis(process.env.REDIS_URL_1),",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 49,
+          "evidence": "process.env",
+          "context": "    new Redis(process.env.REDIS_URL_2),",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 50,
+          "evidence": "process.env",
+          "context": "    new Redis(process.env.REDIS_URL_3),",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 126,
+          "evidence": "process.env",
+          "context": "const pool = new Pool({ connectionString: process.env.DATABASE_URL })",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 227,
+          "evidence": "delete",
+          "context": "    finally { await client.delete(created) }",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 243,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "package-install",
+          "line": 244,
+          "evidence": "npm install",
+          "context": "npm install @etcd/client",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "references/lock-strategies.md",
+      "sha256": "4b4daaac03481af6e53352ee52ae538ce5e197851d777ef34e74ad96da803f66",
+      "bytes": 4272,
+      "mode": "100644",
+      "git_blob": "47b945e143815d901f92f61a36c4a86a95f36620",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "references/lock-testing.md",
+      "sha256": "c755da8f86a8d9df59342f1ec17e79489e64f565e21c863c7aedb51d436da6ea",
+      "bytes": 8315,
+      "mode": "100644",
+      "git_blob": "4edca5fb4183871c02e8e607c962eba0aee467b4",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "d9407f4ec21b2f497a142a27d485862f501f24c9546cbc3056c075212ec83905",
+      "bytes": 17686,
+      "mode": "100644",
+      "git_blob": "cc05a61d8e93b3681a51e9ba71b70efb3d912450",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "credential-access",
+          "line": 269,
+          "evidence": "process.env",
+          "context": "      await lease.put(key).value(process.env.HOSTNAME);",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 290,
+          "evidence": "process.env",
+          "context": "    const result = await this.redis.set(key, process.env.HOSTNAME, 'PX', ttlMs, 'NX');",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 295,
+          "evidence": "delete",
+          "context": "    // Lua script ensures we only delete if we own the lock",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 303,
+          "evidence": "process.env",
+          "context": "    await this.redis.eval(script, 1, key, process.env.HOSTNAME);",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "dynamic-execution",
+          "line": 303,
+          "evidence": "eval(",
+          "context": "    await this.redis.eval(script, 1, key, process.env.HOSTNAME);",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "dynamic-execution",
+          "line": 319,
+          "evidence": "eval(",
+          "context": "    const result = await this.redis.eval(script, 1, key, permits, maxPermits);",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 352,
+          "evidence": "delete",
+          "context": "- ZooKeeper ephemeral nodes auto-delete on session loss",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "dynamic-execution",
+          "line": 447,
+          "evidence": "eval(",
+          "context": "        self.redis.eval(lua_script, 1, self.lock_key, self.lock_value)",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    }
+  ]
+}

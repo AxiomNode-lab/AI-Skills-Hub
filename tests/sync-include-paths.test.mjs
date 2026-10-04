@@ -101,3 +101,8 @@ test("sync keeps curated release notices when it recomputes a release state", t 
   const { skills } = syncFixture(t, { source: { repo: "example/mixed-skills" }, skills: [held], discovered: [entry("foo", "skills/foo/SKILL.md")] });
   assert.deepEqual(skills[0].release.notices, [notice]);
 });
+
+test("new records get a lowercase slug id even when the frontmatter name is not one", t => {
+  const { skills } = syncFixture(t, { source: { repo: "example/mixed-skills" }, skills: [], discovered: [entry("SLI/SLO Management", "skills/sre/sli-slo-management/SKILL.md")] });
+  assert.equal(skills[0].id, "example/sli-slo-management");
+});

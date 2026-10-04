@@ -1,6 +1,6 @@
 {
   "schema_version": "0.2",
-  "generated_at": "2026-10-04T02:16:46.254Z",
+  "generated_at": "2026-10-04T14:48:16.083Z",
   "skills": [
     {
       "id": "aaron-seo/competitor-analysis",
@@ -24158,6 +24158,1743 @@
       "artifact_type": "skill",
       "materialized_root": "skills/bagelhole/zero-trust",
       "materialized_files": 2
+    },
+    {
+      "id": "j4flmao/ai-content-optimization",
+      "name": "AI Content Optimization",
+      "publisher": "j4flmao",
+      "source": {
+        "repo": "j4flmao/agent-skills",
+        "path": "skills/seo/ai-content-optimization/SKILL.md",
+        "revision": "d9f812988c8926767ee96f66c1a340d65b595799",
+        "revision_type": "git-commit",
+        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/seo/ai-content-optimization/SKILL.md",
+        "state": "present"
+      },
+      "category": [
+        "agents",
+        "engineering"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "LICENSE"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills"
+      ],
+      "security": {
+        "scan_status": "verified",
+        "risk": "none",
+        "network": false,
+        "shell": false,
+        "credentials": false
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": "231e9c65b73c96d1b353bc8a17c410b735e9ca9245c82ca6aec0c3da875684ba",
+        "last_ingested_revision": "d9f812988c8926767ee96f66c1a340d65b595799"
+      },
+      "description": "Strategies to maintain high quality and avoid search engine penalties when using AI generation."
+    },
+    {
+      "id": "j4flmao/backend-api-design",
+      "name": "backend-api-design",
+      "publisher": "j4flmao",
+      "source": {
+        "repo": "j4flmao/agent-skills",
+        "path": "skills/backend/universal/api-design/SKILL.md",
+        "revision": "d9f812988c8926767ee96f66c1a340d65b595799",
+        "revision_type": "git-commit",
+        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/backend/universal/api-design/SKILL.md",
+        "state": "present"
+      },
+      "category": [
+        "agents",
+        "engineering"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "skills/backend/universal/api-design/SKILL.md"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills"
+      ],
+      "security": {
+        "scan_status": "review-required",
+        "risk": "medium",
+        "network": true,
+        "shell": false,
+        "credentials": true
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": "bb21d2c76a5b7db3a6ff3ff2a3273c5844c2c9a8e8d2aff19c96e23054380ad8",
+        "last_ingested_revision": "d9f812988c8926767ee96f66c1a340d65b595799"
+      },
+      "description": "Use this skill when the user says 'API design', 'REST API', 'GraphQL schema', 'endpoint design', 'API conventions', 'URL structure', 'HTTP methods', 'response format', 'API versioning', 'pagination', or when designing new API endpoints. This skill enforces consistent REST or GraphQL conventions: plural nouns, kebab-case URLs, consistent response envelopes, versioned endpoints, paginated lists, and structured error responses. Applies to any backend stack. Do NOT use for: database schema design, frontend data fetching, or authentication implementation."
+    },
+    {
+      "id": "j4flmao/backend-api-versioning",
+      "name": "backend-api-versioning",
+      "publisher": "j4flmao",
+      "source": {
+        "repo": "j4flmao/agent-skills",
+        "path": "skills/backend/universal/api-versioning/SKILL.md",
+        "revision": "d9f812988c8926767ee96f66c1a340d65b595799",
+        "revision_type": "git-commit",
+        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/backend/universal/api-versioning/SKILL.md",
+        "state": "present"
+      },
+      "category": [
+        "agents",
+        "engineering"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "skills/backend/universal/api-versioning/SKILL.md"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills"
+      ],
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "network": true,
+        "shell": false,
+        "credentials": false
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": "bd92f89931ebb7966ff747fdd4eb170a6fa96fda81dafa3f07b5974d6550b9e9",
+        "last_ingested_revision": "d9f812988c8926767ee96f66c1a340d65b595799"
+      },
+      "description": "Use this skill when the user says 'API versioning', 'version strategy', 'URI versioning', 'header versioning', 'content negotiation', 'accept header', 'breaking change', 'API migration', 'deprecate endpoint', 'sunset endpoint'. This skill manages API version transitions using URI, header, or content-negotiation strategies. Applies to any backend stack. Do NOT use for: database schema versioning, client SDK versioning, or infrastructure versioning."
+    },
+    {
+      "id": "j4flmao/backend-auth-patterns",
+      "name": "backend-auth-patterns",
+      "publisher": "j4flmao",
+      "source": {
+        "repo": "j4flmao/agent-skills",
+        "path": "skills/backend/universal/auth-patterns/SKILL.md",
+        "revision": "d9f812988c8926767ee96f66c1a340d65b595799",
+        "revision_type": "git-commit",
+        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/backend/universal/auth-patterns/SKILL.md",
+        "state": "present"
+      },
+      "category": [
+        "agents",
+        "engineering"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "skills/backend/universal/auth-patterns/SKILL.md"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills"
+      ],
+      "security": {
+        "scan_status": "review-required",
+        "risk": "medium",
+        "network": true,
+        "shell": false,
+        "credentials": true
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": "20a1e6d5a2e35076b28492df7e0ec7e27994df3a0266625546b3029217589c71",
+        "last_ingested_revision": "d9f812988c8926767ee96f66c1a340d65b595799"
+      },
+      "description": "Use this skill when the user says 'auth', 'authentication', 'authorization', 'JWT', 'OAuth', 'RBAC', 'permissions', 'login', 'session', 'refresh token', 'guard', 'middleware auth', or when implementing or reviewing authentication and authorization. This skill enforces: JWT structure and validation, refresh token rotation, OAuth2/OIDC flows, RBAC vs ABAC decision, middleware placement, and password security. Applies to any backend stack. Do NOT use for: specific OAuth provider implementation details, frontend auth UI, or passwordless login flows."
+    },
+    {
+      "id": "j4flmao/backend-authorization",
+      "name": "backend-authorization",
+      "publisher": "j4flmao",
+      "source": {
+        "repo": "j4flmao/agent-skills",
+        "path": "skills/backend/universal/authorization/SKILL.md",
+        "revision": "d9f812988c8926767ee96f66c1a340d65b595799",
+        "revision_type": "git-commit",
+        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/backend/universal/authorization/SKILL.md",
+        "state": "present"
+      },
+      "category": [
+        "agents",
+        "engineering"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "skills/backend/universal/authorization/SKILL.md"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills"
+      ],
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "network": false,
+        "shell": false,
+        "credentials": false
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": "cc231c991c2015311f543b1f843b7df19752971e71dfa749e17753da55fa7715",
+        "last_ingested_revision": "d9f812988c8926767ee96f66c1a340d65b595799"
+      },
+      "description": "Use this skill when the user says 'authorization', 'access control', 'RBAC', 'ABAC', 'ReBAC', 'permissions', 'role', 'policy', 'Casbin', 'Cerbos', 'permission delegation', 'temporary access', 'break glass', 'super admin', 'JIT elevation', 'role hierarchy', or when designing or implementing authorization for any backend application. This skill covers: authorization model selection (RBAC/ABAC/ReBAC), permission architecture design, role hierarchy and inheritance, admin/master admin patterns, temporary JIT elevation, permission delegation, fine-grained ABAC policies, policy engine integration (Casbin, OPA, Cerbos, Permit.io), and authorization testing. Do NOT use for: authentication flows, JWT implementation, OAuth2/OIDC configuration, session management, or frontend route guards."
+    },
+    {
+      "id": "j4flmao/backend-background-jobs",
+      "name": "backend-background-jobs",
+      "publisher": "j4flmao",
+      "source": {
+        "repo": "j4flmao/agent-skills",
+        "path": "skills/backend/universal/background-jobs/SKILL.md",
+        "revision": "d9f812988c8926767ee96f66c1a340d65b595799",
+        "revision_type": "git-commit",
+        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/backend/universal/background-jobs/SKILL.md",
+        "state": "present"
+      },
+      "category": [
+        "agents",
+        "engineering"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "skills/backend/universal/background-jobs/SKILL.md"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills"
+      ],
+      "security": {
+        "scan_status": "verified",
+        "risk": "none",
+        "network": false,
+        "shell": false,
+        "credentials": false
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": "b49c73bdf0f4d6794a3dc6b9c79998bb38398cb3f970117e5b250e61b4f0113d",
+        "last_ingested_revision": "d9f812988c8926767ee96f66c1a340d65b595799"
+      },
+      "description": "Use this skill when designing background job processing, task queues, or worker systems. This skill enforces: job idempotency, retry with exponential backoff, queue topology with dead letter, and worker concurrency controls. Applies to any backend stack with Redis/SQS/DB-backed queues. Do NOT use for: event streaming (Kafka), real-time pub/sub, or synchronous request processing."
+    },
+    {
+      "id": "j4flmao/backend-caching",
+      "name": "backend-caching",
+      "publisher": "j4flmao",
+      "source": {
+        "repo": "j4flmao/agent-skills",
+        "path": "skills/backend/universal/caching/SKILL.md",
+        "revision": "d9f812988c8926767ee96f66c1a340d65b595799",
+        "revision_type": "git-commit",
+        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/backend/universal/caching/SKILL.md",
+        "state": "present"
+      },
+      "category": [
+        "agents",
+        "engineering"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "skills/backend/universal/caching/SKILL.md"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills"
+      ],
+      "security": {
+        "scan_status": "review-required",
+        "risk": "high",
+        "network": false,
+        "shell": false,
+        "credentials": false
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": "06bd9d98ba37661c1d6209c683b2d5b2a5b4734b9901ed7d33a1940ef5f8b89a",
+        "last_ingested_revision": "d9f812988c8926767ee96f66c1a340d65b595799"
+      },
+      "description": "Use this skill when the user says 'cache', 'Redis', 'Memcached', 'CDN', 'cache-aside', 'read-through', 'write-through', 'write-behind', 'cache invalidation', 'TTL', 'cache stampede', 'thundering herd', 'cache warming', 'LRU', 'LFU', 'cache hit ratio', 'cache strategy', or when designing a caching layer. This skill enforces consistent caching strategies: layer selection, read/write patterns, invalidation, stampede prevention, and monitoring. Applies to any backend stack. Do NOT use for: message queue design, database schema design, or frontend state caching."
+    },
+    {
+      "id": "j4flmao/backend-distributed-locking",
+      "name": "backend-distributed-locking",
+      "publisher": "j4flmao",
+      "source": {
+        "repo": "j4flmao/agent-skills",
+        "path": "skills/backend/universal/distributed-locking/SKILL.md",
+        "revision": "d9f812988c8926767ee96f66c1a340d65b595799",
+        "revision_type": "git-commit",
+        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/backend/universal/distributed-locking/SKILL.md",
+        "state": "present"
+      },
+      "category": [
+        "agents",
+        "engineering"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "skills/backend/universal/distributed-locking/SKILL.md"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills"
+      ],
+      "security": {
+        "scan_status": "review-required",
+        "risk": "high",
+        "network": false,
+        "shell": false,
+        "credentials": true
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": "d9407f4ec21b2f497a142a27d485862f501f24c9546cbc3056c075212ec83905",
+        "last_ingested_revision": "d9f812988c8926767ee96f66c1a340d65b595799"
+      },
+      "description": "Use this skill when the user says 'distributed lock', 'Redis lock', 'Redlock', 'ZooKeeper lock', 'advisory lock', 'PostgreSQL lock', 'pg_advisory_lock', 'lease', 'distributed mutex', 'lock timeouts', 'fencing token'. This skill implements distributed locking using Redis Redlock, ZooKeeper, PostgreSQL advisory locks, or lease-based mechanisms. Applies to any backend stack. Do NOT use for: single-process mutexes, database transaction serialization, or optimistic concurrency."
+    },
+    {
+      "id": "j4flmao/backend-graphql-patterns",
+      "name": "backend-graphql-patterns",
+      "publisher": "j4flmao",
+      "source": {
+        "repo": "j4flmao/agent-skills",
+        "path": "skills/backend/universal/graphql-patterns/SKILL.md",
+        "revision": "d9f812988c8926767ee96f66c1a340d65b595799",
+        "revision_type": "git-commit",
+        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/backend/universal/graphql-patterns/SKILL.md",
+        "state": "present"
+      },
+      "category": [
+        "agents",
+        "engineering"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "skills/backend/universal/graphql-patterns/SKILL.md"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills"
+      ],
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "network": false,
+        "shell": false,
+        "credentials": false
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": "830457b631c4aeca69074797c1f6099c176922a06d069fd98e92f74300245314",
+        "last_ingested_revision": "d9f812988c8926767ee96f66c1a340d65b595799"
+      },
+      "description": "Use this skill when designing GraphQL schemas, resolvers, or data loading strategies. This skill enforces: schema-first design, N+1 prevention via DataLoader, directive-based auth, cursor-based pagination, and structured error handling. Applies to any backend stack with GraphQL. Do NOT use for: REST API design, gRPC service definition, or internal-only RPC endpoints."
+    },
+    {
+      "id": "j4flmao/backend-grpc-patterns",
+      "name": "backend-grpc-patterns",
+      "publisher": "j4flmao",
+      "source": {
+        "repo": "j4flmao/agent-skills",
+        "path": "skills/backend/universal/grpc-patterns/SKILL.md",
+        "revision": "d9f812988c8926767ee96f66c1a340d65b595799",
+        "revision_type": "git-commit",
+        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/backend/universal/grpc-patterns/SKILL.md",
+        "state": "present"
+      },
+      "category": [
+        "agents",
+        "engineering"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "skills/backend/universal/grpc-patterns/SKILL.md"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills"
+      ],
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "network": false,
+        "shell": false,
+        "credentials": false
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": "4693318c6f7383c7702f916c6ee6b8c5e2f089114e14bb027c99b674c6e52beb",
+        "last_ingested_revision": "d9f812988c8926767ee96f66c1a340d65b595799"
+      },
+      "description": "Use this skill when the user says 'gRPC', 'protobuf', 'protocol buffers', 'streaming RPC', 'unary call', 'server streaming', 'client streaming', 'bidirectional streaming', 'gRPC interceptor', 'gRPC error handling', 'protobuf schema', 'service definition', 'RPC design', or when designing gRPC APIs. This skill enforces consistent protobuf schema conventions, streaming patterns, interceptor chains, and structured error handling for gRPC services. Applies to any backend stack using gRPC. Do NOT use for: REST API design, GraphQL schema, message queue design, or frontend data fetching."
+    },
+    {
+      "id": "j4flmao/backend-idempotency",
+      "name": "backend-idempotency",
+      "publisher": "j4flmao",
+      "source": {
+        "repo": "j4flmao/agent-skills",
+        "path": "skills/backend/universal/idempotency/SKILL.md",
+        "revision": "d9f812988c8926767ee96f66c1a340d65b595799",
+        "revision_type": "git-commit",
+        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/backend/universal/idempotency/SKILL.md",
+        "state": "present"
+      },
+      "category": [
+        "agents",
+        "engineering"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "skills/backend/universal/idempotency/SKILL.md"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills"
+      ],
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "network": false,
+        "shell": false,
+        "credentials": false
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": "0043500efe5bdb64a67c4e2f0a6fe5da0768df9f34a48776c6666417f9982798",
+        "last_ingested_revision": "d9f812988c8926767ee96f66c1a340d65b595799"
+      },
+      "description": "Use this skill when the user says 'idempotency', 'idempotent', 'idempotency key', 'exactly-once', 'retry safety', 'deduplication', 'duplicate detection', 'idempotent endpoint', 'safe retry'. This skill implements idempotency keys and exactly-once semantics so retries never result in duplicate side effects. Applies to any backend stack. Do NOT use for: read-only endpoints (they are naturally idempotent), optimistic concurrency, or database-level unique constraints alone."
+    },
+    {
+      "id": "j4flmao/backend-openapi-documentation",
+      "name": "backend-openapi-documentation",
+      "publisher": "j4flmao",
+      "source": {
+        "repo": "j4flmao/agent-skills",
+        "path": "skills/backend/universal/openapi-documentation/SKILL.md",
+        "revision": "d9f812988c8926767ee96f66c1a340d65b595799",
+        "revision_type": "git-commit",
+        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/backend/universal/openapi-documentation/SKILL.md",
+        "state": "present"
+      },
+      "category": [
+        "agents",
+        "engineering"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "skills/backend/universal/openapi-documentation/SKILL.md"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills"
+      ],
+      "security": {
+        "scan_status": "review-required",
+        "risk": "medium",
+        "network": true,
+        "shell": true,
+        "credentials": true
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": "3f4286021a3a30c457b296718518b7884f19333dd736d347b6fda465d0cfe741",
+        "last_ingested_revision": "d9f812988c8926767ee96f66c1a340d65b595799"
+      },
+      "description": "Use this skill when the user says 'OpenAPI', 'Swagger', 'API documentation', 'spec-first', 'API spec', 'openapi.yaml', 'swagger.json', 'codegen', 'openapi-generator', 'API contract first'. This skill enforces spec-first API documentation with OpenAPI 3.x, code generation, and versioned specs. Applies to any backend stack. Do NOT use for: proto/gRPC specs, GraphQL schemas, or internal-only endpoints."
+    },
+    {
+      "id": "j4flmao/backend-resilience-patterns",
+      "name": "backend-resilience-patterns",
+      "publisher": "j4flmao",
+      "source": {
+        "repo": "j4flmao/agent-skills",
+        "path": "skills/backend/universal/resilience-patterns/SKILL.md",
+        "revision": "d9f812988c8926767ee96f66c1a340d65b595799",
+        "revision_type": "git-commit",
+        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/backend/universal/resilience-patterns/SKILL.md",
+        "state": "present"
+      },
+      "category": [
+        "agents",
+        "engineering"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "skills/backend/universal/resilience-patterns/SKILL.md"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills"
+      ],
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "network": false,
+        "shell": false,
+        "credentials": false
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": "b786dccf6b5a6bfbafb9bfc1728cdeabc47c29a4b0be479de55cd913d3c11c8c",
+        "last_ingested_revision": "d9f812988c8926767ee96f66c1a340d65b595799"
+      },
+      "description": "Use this skill when the user says 'resilience', 'circuit breaker', 'retry', 'bulkhead', 'timeout', 'fallback', 'resilience4j', 'fault tolerance', 'rate limiter', 'backoff', 'retry strategy', 'bulkhead pattern'. This skill applies production fault-tolerance patterns: circuit breaker, retry with backoff, bulkhead isolation, timeouts, and fallback handlers. Applies to any backend stack. Do NOT use for: infrastructure-level resiliency (K8s liveness probes), database replication, or frontend error handling."
+    },
+    {
+      "id": "j4flmao/backend-structured-logging",
+      "name": "backend-structured-logging",
+      "publisher": "j4flmao",
+      "source": {
+        "repo": "j4flmao/agent-skills",
+        "path": "skills/backend/universal/structured-logging/SKILL.md",
+        "revision": "d9f812988c8926767ee96f66c1a340d65b595799",
+        "revision_type": "git-commit",
+        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/backend/universal/structured-logging/SKILL.md",
+        "state": "present"
+      },
+      "category": [
+        "agents",
+        "engineering"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "skills/backend/universal/structured-logging/SKILL.md"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills"
+      ],
+      "security": {
+        "scan_status": "review-required",
+        "risk": "medium",
+        "network": false,
+        "shell": false,
+        "credentials": true
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": "9cc850046d64632824c2b57779b2196a479966bb1bb600a7608b00754c6a55c1",
+        "last_ingested_revision": "d9f812988c8926767ee96f66c1a340d65b595799"
+      },
+      "description": "Use this skill when implementing logging frameworks, log formats, or distributed tracing correlation. This skill enforces: JSON lines format, strict log schema with correlation IDs, PII redaction, log level discipline, and stdout-only output. Applies to any backend stack with Winston/Pino/Serilog/Log4j/logrus/zerolog. Do NOT use for: metrics collection, audit trail systems, or application performance monitoring."
+    },
+    {
+      "id": "j4flmao/backend-webhooks",
+      "name": "backend-webhooks",
+      "publisher": "j4flmao",
+      "source": {
+        "repo": "j4flmao/agent-skills",
+        "path": "skills/backend/universal/webhooks/SKILL.md",
+        "revision": "d9f812988c8926767ee96f66c1a340d65b595799",
+        "revision_type": "git-commit",
+        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/backend/universal/webhooks/SKILL.md",
+        "state": "present"
+      },
+      "category": [
+        "agents",
+        "engineering"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "skills/backend/universal/webhooks/SKILL.md"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills"
+      ],
+      "security": {
+        "scan_status": "review-required",
+        "risk": "medium",
+        "network": false,
+        "shell": false,
+        "credentials": true
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": "ca9b977e421a2bb15f4aaae0355cc209826b40183de746a71bf518348f8848c5",
+        "last_ingested_revision": "d9f812988c8926767ee96f66c1a340d65b595799"
+      },
+      "description": "Use this skill when the user says 'webhook', 'webhook receiver', 'webhook delivery', 'signature verification', 'HMAC', 'event delivery', 'outgoing webhook', 'incoming webhook', 'retry webhook', 'webhook endpoint'. This skill implements receiving, verifying, retrying, and delivering webhooks securely. Applies to any backend stack. Do NOT use for: server-sent events (SSE), WebSockets, or long-polling fallbacks."
+    },
+    {
+      "id": "j4flmao/blue-team-soc-operations",
+      "name": "blue-team-soc-operations",
+      "publisher": "j4flmao",
+      "source": {
+        "repo": "j4flmao/agent-skills",
+        "path": "skills/cybersecurity/blue-team-soc/SKILL.md",
+        "revision": "d9f812988c8926767ee96f66c1a340d65b595799",
+        "revision_type": "git-commit",
+        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/cybersecurity/blue-team-soc/SKILL.md",
+        "state": "present"
+      },
+      "category": [
+        "security"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "LICENSE"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills"
+      ],
+      "security": {
+        "scan_status": "verified",
+        "risk": "none",
+        "network": false,
+        "shell": false,
+        "credentials": false
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": "068de8cda021875929879be3cd63b9f5fd53c6cc4c900559cebcf771fe9ffa3c",
+        "last_ingested_revision": "d9f812988c8926767ee96f66c1a340d65b595799"
+      },
+      "description": "Master methodologies for SIEM architecture, incident response, and threat hunting."
+    },
+    {
+      "id": "j4flmao/chaos-engineering",
+      "name": "Chaos Engineering",
+      "publisher": "j4flmao",
+      "source": {
+        "repo": "j4flmao/agent-skills",
+        "path": "skills/site-reliability-engineering/chaos-engineering/SKILL.md",
+        "revision": "d9f812988c8926767ee96f66c1a340d65b595799",
+        "revision_type": "git-commit",
+        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/site-reliability-engineering/chaos-engineering/SKILL.md",
+        "state": "present"
+      },
+      "category": [
+        "agents",
+        "engineering"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "LICENSE"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills"
+      ],
+      "security": {
+        "scan_status": "verified",
+        "risk": "none",
+        "network": false,
+        "shell": false,
+        "credentials": false
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": "06a0e20e9e235edb9e56d07c7c96dff7cce4b05df55a43e87f260d9e9c04a8a0",
+        "last_ingested_revision": "d9f812988c8926767ee96f66c1a340d65b595799"
+      },
+      "description": "Fault injection mechanics at network/kernel layer and blast radius containment."
+    },
+    {
+      "id": "j4flmao/core-algorithms-system-design",
+      "name": "core-algorithms-system-design",
+      "publisher": "j4flmao",
+      "source": {
+        "repo": "j4flmao/agent-skills",
+        "path": "skills/system-design/core-algorithms/SKILL.md",
+        "revision": "d9f812988c8926767ee96f66c1a340d65b595799",
+        "revision_type": "git-commit",
+        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/system-design/core-algorithms/SKILL.md",
+        "state": "present"
+      },
+      "category": [
+        "agents",
+        "engineering"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "LICENSE"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills"
+      ],
+      "security": {
+        "scan_status": "verified",
+        "risk": "none",
+        "network": false,
+        "shell": false,
+        "credentials": false
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": "60c63e0201747f94da00797048794ebbb59fb46291c6cd174acf085689854b73",
+        "last_ingested_revision": "d9f812988c8926767ee96f66c1a340d65b595799"
+      },
+      "description": "Mathematical and architectural analysis of Consistent Hashing, Rate Limiting, and Bloom Filters."
+    },
+    {
+      "id": "j4flmao/database-sharding",
+      "name": "Database Sharding and Scaling",
+      "publisher": "j4flmao",
+      "source": {
+        "repo": "j4flmao/agent-skills",
+        "path": "skills/system-design/database-sharding/SKILL.md",
+        "revision": "d9f812988c8926767ee96f66c1a340d65b595799",
+        "revision_type": "git-commit",
+        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/system-design/database-sharding/SKILL.md",
+        "state": "present"
+      },
+      "category": [
+        "agents",
+        "engineering"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "LICENSE"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills"
+      ],
+      "security": {
+        "scan_status": "verified",
+        "risk": "none",
+        "network": false,
+        "shell": false,
+        "credentials": false
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": "3e089f365c50b42869e46680e86fa3806784bbfaa7138e8d615a6e879cdb08c0",
+        "last_ingested_revision": "d9f812988c8926767ee96f66c1a340d65b595799"
+      },
+      "description": "Best practices for sharding algorithms (Consistent Hashing) and scaling SQL databases."
+    },
+    {
+      "id": "j4flmao/distributed-consensus",
+      "name": "distributed-consensus",
+      "publisher": "j4flmao",
+      "source": {
+        "repo": "j4flmao/agent-skills",
+        "path": "skills/system-design/distributed-consensus/SKILL.md",
+        "revision": "d9f812988c8926767ee96f66c1a340d65b595799",
+        "revision_type": "git-commit",
+        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/system-design/distributed-consensus/SKILL.md",
+        "state": "present"
+      },
+      "category": [
+        "agents",
+        "engineering"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "LICENSE"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills"
+      ],
+      "security": {
+        "scan_status": "verified",
+        "risk": "none",
+        "network": false,
+        "shell": false,
+        "credentials": false
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": "e64597c12b1102b64239da9a77cdb49fd86bf30cb37659e4c4e9dddc4dc09e9d",
+        "last_ingested_revision": "d9f812988c8926767ee96f66c1a340d65b595799"
+      }
+    },
+    {
+      "id": "j4flmao/ebpf-threat-detection",
+      "name": "ebpf-threat-detection",
+      "publisher": "j4flmao",
+      "source": {
+        "repo": "j4flmao/agent-skills",
+        "path": "skills/cybersecurity/ebpf-threat-detection/SKILL.md",
+        "revision": "d9f812988c8926767ee96f66c1a340d65b595799",
+        "revision_type": "git-commit",
+        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/cybersecurity/ebpf-threat-detection/SKILL.md",
+        "state": "present"
+      },
+      "category": [
+        "security"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "LICENSE"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills"
+      ],
+      "security": {
+        "scan_status": "verified",
+        "risk": "none",
+        "network": false,
+        "shell": false,
+        "credentials": false
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": "ba6b8703c32fcf84ee9248acd1b69a1bebf9037318b1157af1fcb5a6760742ba",
+        "last_ingested_revision": "d9f812988c8926767ee96f66c1a340d65b595799"
+      },
+      "description": "eBPF Threat Detection, Tetragon, Falco, and Kernel Syscall Interception"
+    },
+    {
+      "id": "j4flmao/frontend-authentication",
+      "name": "frontend-authentication",
+      "publisher": "j4flmao",
+      "source": {
+        "repo": "j4flmao/agent-skills",
+        "path": "skills/frontend/universal/authentication/SKILL.md",
+        "revision": "d9f812988c8926767ee96f66c1a340d65b595799",
+        "revision_type": "git-commit",
+        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/frontend/universal/authentication/SKILL.md",
+        "state": "present"
+      },
+      "category": [
+        "frontend"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "skills/frontend/universal/authentication/SKILL.md"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills"
+      ],
+      "security": {
+        "scan_status": "review-required",
+        "risk": "medium",
+        "network": true,
+        "shell": false,
+        "credentials": true
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": "061d09a79a5cd730c62131675ef6aa5cb87ef17aa2de064d569b2a8f306d9b55",
+        "last_ingested_revision": "d9f812988c8926767ee96f66c1a340d65b595799"
+      },
+      "description": "Use this skill when the user says 'auth', 'authentication', 'login', 'signup', 'JWT', 'OAuth', 'OAuth2', 'OpenID Connect', 'route guard', 'protected route', 'auth middleware', 'token storage', 'refresh token', 'session management', 'access token', 'logout', 'SSO', 'magic link', 'passwordless', 'MFA', '2FA'. This skill enforces secure token storage, proper route guard patterns, OAuth flow handling (PKCE, Implicit, Auth Code), refresh token rotation, and session persistence. Works with any frontend framework (React, Vue, Angular, Svelte) and any auth provider (Auth0, Clerk, Supabase, Firebase, Cognito, custom). Do NOT use for: backend auth logic, API token validation, or database-level auth."
+    },
+    {
+      "id": "j4flmao/incident-response",
+      "name": "Incident Response",
+      "publisher": "j4flmao",
+      "source": {
+        "repo": "j4flmao/agent-skills",
+        "path": "skills/site-reliability-engineering/incident-response/SKILL.md",
+        "revision": "d9f812988c8926767ee96f66c1a340d65b595799",
+        "revision_type": "git-commit",
+        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/site-reliability-engineering/incident-response/SKILL.md",
+        "state": "present"
+      },
+      "category": [
+        "agents",
+        "engineering"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "LICENSE"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills"
+      ],
+      "security": {
+        "scan_status": "verified",
+        "risk": "none",
+        "network": false,
+        "shell": false,
+        "credentials": false
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": "39f9c1694bbac035bd6b5a627d98f8f94e4190a57ae1f99fbed7cd71772e3e2d",
+        "last_ingested_revision": "d9f812988c8926767ee96f66c1a340d65b595799"
+      },
+      "description": "Automating triage pipelines and blameless post-mortem frameworks."
+    },
+    {
+      "id": "j4flmao/micro-frontends",
+      "name": "Micro-Frontends",
+      "publisher": "j4flmao",
+      "source": {
+        "repo": "j4flmao/agent-skills",
+        "path": "skills/web/micro-frontends/SKILL.md",
+        "revision": "d9f812988c8926767ee96f66c1a340d65b595799",
+        "revision_type": "git-commit",
+        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/web/micro-frontends/SKILL.md",
+        "state": "present"
+      },
+      "category": [
+        "frontend"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "LICENSE"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills"
+      ],
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "network": true,
+        "shell": false,
+        "credentials": false
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": "df882c52341f8a1d1637f08272acabb2d448c735846ca217527738f0a4588e27",
+        "last_ingested_revision": "d9f812988c8926767ee96f66c1a340d65b595799"
+      },
+      "description": "Implementing Module Federation for scaling frontend teams."
+    },
+    {
+      "id": "j4flmao/modern-cryptography",
+      "name": "modern-cryptography",
+      "publisher": "j4flmao",
+      "source": {
+        "repo": "j4flmao/agent-skills",
+        "path": "skills/cybersecurity/modern-cryptography/SKILL.md",
+        "revision": "d9f812988c8926767ee96f66c1a340d65b595799",
+        "revision_type": "git-commit",
+        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/cybersecurity/modern-cryptography/SKILL.md",
+        "state": "present"
+      },
+      "category": [
+        "security"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "LICENSE"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills"
+      ],
+      "security": {
+        "scan_status": "review-required",
+        "risk": "high",
+        "network": false,
+        "shell": false,
+        "credentials": true
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": "ebee47fca7da09813ec4a53cf3fe094893ee2c2d4f9c33c0dc42ba5355fb80d1",
+        "last_ingested_revision": "d9f812988c8926767ee96f66c1a340d65b595799"
+      },
+      "description": "Modern Cryptography, ECC, ECDHE, and Post-Quantum Algorithms"
+    },
+    {
+      "id": "j4flmao/nextjs-server-components",
+      "name": "Next.js Server Components",
+      "publisher": "j4flmao",
+      "source": {
+        "repo": "j4flmao/agent-skills",
+        "path": "skills/web/nextjs-server-components/SKILL.md",
+        "revision": "d9f812988c8926767ee96f66c1a340d65b595799",
+        "revision_type": "git-commit",
+        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/web/nextjs-server-components/SKILL.md",
+        "state": "present"
+      },
+      "category": [
+        "agents",
+        "engineering"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "LICENSE"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills"
+      ],
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "network": true,
+        "shell": false,
+        "credentials": false
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": "1b7e4b65874ce630f03fde741c175477939f4cb1537f0d2c07803df250d6d0a2",
+        "last_ingested_revision": "d9f812988c8926767ee96f66c1a340d65b595799"
+      },
+      "description": "Best practices for SSR, Streaming, and hydration optimization in Next.js."
+    },
+    {
+      "id": "j4flmao/observability-scaling",
+      "name": "Observability and Scaling",
+      "publisher": "j4flmao",
+      "source": {
+        "repo": "j4flmao/agent-skills",
+        "path": "skills/site-reliability-engineering/observability-scaling/SKILL.md",
+        "revision": "d9f812988c8926767ee96f66c1a340d65b595799",
+        "revision_type": "git-commit",
+        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/site-reliability-engineering/observability-scaling/SKILL.md",
+        "state": "present"
+      },
+      "category": [
+        "agents",
+        "engineering"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "LICENSE"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills"
+      ],
+      "security": {
+        "scan_status": "verified",
+        "risk": "none",
+        "network": false,
+        "shell": false,
+        "credentials": false
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": "8fb4749516b9f1d65d0b63f0a00091b0bccee64d1f462f1a29e48d25d9c4ca8e",
+        "last_ingested_revision": "d9f812988c8926767ee96f66c1a340d65b595799"
+      },
+      "description": "Prometheus TSDB compaction and OpenTelemetry trace context propagation."
+    },
+    {
+      "id": "j4flmao/owasp-web-security",
+      "name": "owasp-web-security",
+      "publisher": "j4flmao",
+      "source": {
+        "repo": "j4flmao/agent-skills",
+        "path": "skills/cybersecurity/owasp-web-security/SKILL.md",
+        "revision": "d9f812988c8926767ee96f66c1a340d65b595799",
+        "revision_type": "git-commit",
+        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/cybersecurity/owasp-web-security/SKILL.md",
+        "state": "present"
+      },
+      "category": [
+        "security"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "LICENSE"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills"
+      ],
+      "security": {
+        "scan_status": "review-required",
+        "risk": "high",
+        "network": true,
+        "shell": false,
+        "credentials": false
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": "f1b77369a932f28a36055f822ab2625c0c9f70024fe0953d2f7e9acd27018c2f",
+        "last_ingested_revision": "d9f812988c8926767ee96f66c1a340d65b595799"
+      },
+      "description": "Theoretical mechanics of critical web vulnerabilities, static analysis, and secure architecture remediation."
+    },
+    {
+      "id": "j4flmao/performance",
+      "name": "Web Performance",
+      "publisher": "j4flmao",
+      "source": {
+        "repo": "j4flmao/agent-skills",
+        "path": "skills/web/performance/SKILL.md",
+        "revision": "d9f812988c8926767ee96f66c1a340d65b595799",
+        "revision_type": "git-commit",
+        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/web/performance/SKILL.md",
+        "state": "present"
+      },
+      "category": [
+        "agents",
+        "engineering"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "LICENSE"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills"
+      ],
+      "security": {
+        "scan_status": "verified",
+        "risk": "none",
+        "network": false,
+        "shell": false,
+        "credentials": false
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": "7be5f3d5b743b65699dd6644c065c9afe64ac5a252a76a95cffada8bdb33bbea",
+        "last_ingested_revision": "d9f812988c8926767ee96f66c1a340d65b595799"
+      },
+      "description": "Optimization strategies for Core Web Vitals (LCP, FID/INP, CLS)."
+    },
+    {
+      "id": "j4flmao/programmatic-seo",
+      "name": "Programmatic SEO",
+      "publisher": "j4flmao",
+      "source": {
+        "repo": "j4flmao/agent-skills",
+        "path": "skills/seo/programmatic-seo/SKILL.md",
+        "revision": "d9f812988c8926767ee96f66c1a340d65b595799",
+        "revision_type": "git-commit",
+        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/seo/programmatic-seo/SKILL.md",
+        "state": "present"
+      },
+      "category": [
+        "agents",
+        "engineering"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "LICENSE"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills"
+      ],
+      "security": {
+        "scan_status": "verified",
+        "risk": "none",
+        "network": false,
+        "shell": false,
+        "credentials": false
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": "17254f8b3c2457bcffd04d0656ee8addbe6101939fe7108ac777420ddcbccd69",
+        "last_ingested_revision": "d9f812988c8926767ee96f66c1a340d65b595799"
+      },
+      "description": "Automated generation of high-quality landing pages at scale."
+    },
+    {
+      "id": "j4flmao/rate-limiting",
+      "name": "rate-limiting",
+      "publisher": "j4flmao",
+      "source": {
+        "repo": "j4flmao/agent-skills",
+        "path": "skills/backend/universal/rate-limiting/SKILL.md",
+        "revision": "d9f812988c8926767ee96f66c1a340d65b595799",
+        "revision_type": "git-commit",
+        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/backend/universal/rate-limiting/SKILL.md",
+        "state": "present"
+      },
+      "category": [
+        "agents",
+        "engineering"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "skills/backend/universal/rate-limiting/SKILL.md"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills"
+      ],
+      "security": {
+        "scan_status": "verified",
+        "risk": "none",
+        "network": false,
+        "shell": false,
+        "credentials": false
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": "563026c2c961c17355250de3405ae00459bb3b5bf945c93a1ba5aa7b5adbe42b",
+        "last_ingested_revision": "d9f812988c8926767ee96f66c1a340d65b595799"
+      },
+      "description": "Comprehensive skill definitions for rate-limiting. Includes multiple references and diagrams."
+    },
+    {
+      "id": "j4flmao/red-team-pentest-methodology",
+      "name": "red-team-pentest-methodology",
+      "publisher": "j4flmao",
+      "source": {
+        "repo": "j4flmao/agent-skills",
+        "path": "skills/cybersecurity/red-team-pentest/SKILL.md",
+        "revision": "d9f812988c8926767ee96f66c1a340d65b595799",
+        "revision_type": "git-commit",
+        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/cybersecurity/red-team-pentest/SKILL.md",
+        "state": "present"
+      },
+      "category": [
+        "security"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "LICENSE"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills"
+      ],
+      "security": {
+        "scan_status": "verified",
+        "risk": "none",
+        "network": false,
+        "shell": false,
+        "credentials": false
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": "d5907d5ccc120f94e4ef7b46181dd82c0f652a131b55e2f1bd076973bea0271e",
+        "last_ingested_revision": "d9f812988c8926767ee96f66c1a340d65b595799"
+      },
+      "description": "Understand the theoretical frameworks of offensive security, OSINT, and attack lifecycles."
+    },
+    {
+      "id": "j4flmao/reverse-engineering",
+      "name": "reverse-engineering",
+      "publisher": "j4flmao",
+      "source": {
+        "repo": "j4flmao/agent-skills",
+        "path": "skills/cybersecurity/reverse-engineering/SKILL.md",
+        "revision": "d9f812988c8926767ee96f66c1a340d65b595799",
+        "revision_type": "git-commit",
+        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/cybersecurity/reverse-engineering/SKILL.md",
+        "state": "present"
+      },
+      "category": [
+        "security"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "LICENSE"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills"
+      ],
+      "security": {
+        "scan_status": "verified",
+        "risk": "none",
+        "network": false,
+        "shell": false,
+        "credentials": false
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": "75bf5ea69cca384a95e15602846463f7db9fbc23bec3a1bf49bece3547cdec4c",
+        "last_ingested_revision": "d9f812988c8926767ee96f66c1a340d65b595799"
+      },
+      "description": "Low-level binary analysis, decompilation theory, memory corruption mechanics, and OS defensive mitigations."
+    },
+    {
+      "id": "j4flmao/seo",
+      "name": "seo",
+      "publisher": "j4flmao",
+      "source": {
+        "repo": "j4flmao/agent-skills",
+        "path": "skills/seo/SKILL.md",
+        "revision": "d9f812988c8926767ee96f66c1a340d65b595799",
+        "revision_type": "git-commit",
+        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/seo/SKILL.md",
+        "state": "present"
+      },
+      "category": [
+        "agents",
+        "engineering"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "LICENSE"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills"
+      ],
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "network": true,
+        "shell": false,
+        "credentials": false
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": "6a7832042c7245d9ddd8a33d416bb826ef49ab558b32ddaf09900d8e938406ef",
+        "last_ingested_revision": "d9f812988c8926767ee96f66c1a340d65b595799"
+      }
+    },
+    {
+      "id": "j4flmao/sli-slo-management",
+      "name": "SLI/SLO Management",
+      "publisher": "j4flmao",
+      "source": {
+        "repo": "j4flmao/agent-skills",
+        "path": "skills/site-reliability-engineering/sli-slo-management/SKILL.md",
+        "revision": "d9f812988c8926767ee96f66c1a340d65b595799",
+        "revision_type": "git-commit",
+        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/site-reliability-engineering/sli-slo-management/SKILL.md",
+        "state": "present"
+      },
+      "category": [
+        "agents",
+        "engineering"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "LICENSE"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills"
+      ],
+      "security": {
+        "scan_status": "verified",
+        "risk": "none",
+        "network": false,
+        "shell": false,
+        "credentials": false
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": "3214774237603ed1d6acb98f753343a99075fb4f9787dc5ba917b40f1eb5aa35",
+        "last_ingested_revision": "d9f812988c8926767ee96f66c1a340d65b595799"
+      },
+      "description": "Error budget policies and mathematical modeling of SLIs."
+    },
+    {
+      "id": "j4flmao/structured-data",
+      "name": "Structured Data",
+      "publisher": "j4flmao",
+      "source": {
+        "repo": "j4flmao/agent-skills",
+        "path": "skills/seo/structured-data/SKILL.md",
+        "revision": "d9f812988c8926767ee96f66c1a340d65b595799",
+        "revision_type": "git-commit",
+        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/seo/structured-data/SKILL.md",
+        "state": "present"
+      },
+      "category": [
+        "agents",
+        "engineering"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "LICENSE"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills"
+      ],
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "network": true,
+        "shell": false,
+        "credentials": false
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": "a2770fbb3b6f5670a6f27ffeebf63b0ca3b8fd4bf532402d601b8f424aaa5124",
+        "last_ingested_revision": "d9f812988c8926767ee96f66c1a340d65b595799"
+      },
+      "description": "JSON-LD Schema markup for Products, Articles, and FAQs."
+    },
+    {
+      "id": "j4flmao/web3d",
+      "name": "Web3D & WebGL",
+      "publisher": "j4flmao",
+      "source": {
+        "repo": "j4flmao/agent-skills",
+        "path": "skills/web/web3d/SKILL.md",
+        "revision": "d9f812988c8926767ee96f66c1a340d65b595799",
+        "revision_type": "git-commit",
+        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/web/web3d/SKILL.md",
+        "state": "present"
+      },
+      "category": [
+        "agents",
+        "engineering"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "LICENSE"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills"
+      ],
+      "security": {
+        "scan_status": "verified",
+        "risk": "none",
+        "network": false,
+        "shell": false,
+        "credentials": false
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": "12c50d4e9891eea1485d49711eaf0522ec12e71b1add40478b6c9b961cd5037c",
+        "last_ingested_revision": "d9f812988c8926767ee96f66c1a340d65b595799"
+      },
+      "description": "Integration patterns for WebGL and Three.js in web applications."
+    },
+    {
+      "id": "j4flmao/zero-trust-identity",
+      "name": "zero-trust-identity",
+      "publisher": "j4flmao",
+      "source": {
+        "repo": "j4flmao/agent-skills",
+        "path": "skills/cybersecurity/zero-trust-identity/SKILL.md",
+        "revision": "d9f812988c8926767ee96f66c1a340d65b595799",
+        "revision_type": "git-commit",
+        "url": "https://github.com/j4flmao/agent-skills/tree/d9f812988c8926767ee96f66c1a340d65b595799/skills/cybersecurity/zero-trust-identity/SKILL.md",
+        "state": "present"
+      },
+      "category": [
+        "security"
+      ],
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence": "LICENSE"
+      },
+      "distribution": "review-required",
+      "compatibility": [
+        "agent-skills"
+      ],
+      "security": {
+        "scan_status": "review-required",
+        "risk": "medium",
+        "network": false,
+        "shell": false,
+        "credentials": true
+      },
+      "materialized": false,
+      "release": {
+        "status": "hold",
+        "reasons": [
+          "manual-review-required"
+        ]
+      },
+      "integrity": {
+        "upstream_skill_sha256": "b4121fc542b4cf5eefef54ca5150e9e11432cbb25e95f27a3d3076a8235a0147",
+        "last_ingested_revision": "d9f812988c8926767ee96f66c1a340d65b595799"
+      },
+      "description": "Advanced Zero Trust Identity, OIDC/SAML Mechanics, and JWT Validation"
     },
     {
       "id": "kdense/13c-metabolic-flux",

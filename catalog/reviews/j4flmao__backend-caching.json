@@ -1,0 +1,454 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "j4flmao/backend-caching",
+  "status": "draft",
+  "reviewed_on": null,
+  "reviewer": null,
+  "source": {
+    "repo": "j4flmao/agent-skills",
+    "path": "skills/backend/universal/caching",
+    "revision": "d9f812988c8926767ee96f66c1a340d65b595799"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "skills/backend/universal/caching",
+    "url": "https://api.github.com/repos/j4flmao/agent-skills/git/trees/d9f812988c8926767ee96f66c1a340d65b595799?recursive=1",
+    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/j4flmao/agent-skills/blob/d9f812988c8926767ee96f66c1a340d65b595799/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "skills",
+        "skills/backend",
+        "skills/backend/universal",
+        "skills/backend/universal/caching"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte."
+    ]
+  },
+  "content_review": {
+    "status": "pending",
+    "risk": "unknown",
+    "blocking_findings": [],
+    "capabilities": {},
+    "notes": []
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "b6b8d73f01a48d1411da29d8196e2d85cd91cc9e8d7ae6ac4863ae7e06e6d314",
+      "bytes": 1064,
+      "mode": "100644",
+      "git_blob": "0e8b6e6d8678128ebfcc28d7cad91fa9ed7f2354",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "references/cache-invalidation.md",
+      "sha256": "c7f1137944eec8b3aae4e73b7f9ae4e2ac612414b07139311f82e80832966c3e",
+      "bytes": 4114,
+      "mode": "100644",
+      "git_blob": "00df0d9c3d31fc33bcf4ba99bd16223cd61871bc",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 33,
+          "evidence": "delete",
+          "context": "  2. Update or delete cache key",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 40,
+          "evidence": "Delete",
+          "context": "  2. Delete cache (don't update — delete forces fresh read)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 40,
+          "evidence": "delete",
+          "context": "  2. Delete cache (don't update — delete forces fresh read)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 47,
+          "evidence": "DELETE",
+          "context": "  DELETE /cache/purge?pattern=users:*",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 75,
+          "evidence": "delete",
+          "context": "Thread B: delete cache",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 78,
+          "evidence": "Delete",
+          "context": "Solution: Delete cache BEFORE writing DB, or use compare-and-delete.",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 78,
+          "evidence": "delete",
+          "context": "Solution: Delete cache BEFORE writing DB, or use compare-and-delete.",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 79,
+          "evidence": "Delete",
+          "context": "Better: Write DB → Delete cache (lock key during DB write).",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 129,
+          "evidence": "delete",
+          "context": "        redis.delete(key)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 134,
+          "evidence": "DELETE",
+          "context": "Purge by URL: DELETE /cache/www.example.com/users/abc123",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 135,
+          "evidence": "DELETE",
+          "context": "Purge by tag: DELETE /cache?tags=user_abc123",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "references/cache-monitoring.md",
+      "sha256": "fcba35fb18f435b160ac5ae6d366a9946038050f629bc0435e3c1f0c4e51ead4",
+      "bytes": 8386,
+      "mode": "100644",
+      "git_blob": "e20de7dfc3c5fd49d6b382e02fe49b24b9decfa1",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "dynamic-execution",
+          "line": 86,
+          "evidence": "exec(",
+          "context": "    while ((match = dbRegex.exec(info)) !== null) {",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 175,
+          "evidence": "delete",
+          "context": "          // Check TTL and delete if expired",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "dynamic-execution",
+          "line": 181,
+          "evidence": "exec(",
+          "context": "        const results = await pipeline.exec();",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "dynamic-execution",
+          "line": 205,
+          "evidence": "exec(",
+          "context": "        const results = await pipeline.exec();",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "references/cache-strategies.md",
+      "sha256": "903eb99a02afdb58b2ee64b01577f49830ffb42044731ca97e2130f5657f3288",
+      "bytes": 3601,
+      "mode": "100644",
+      "git_blob": "3349a2606c492b1482876da44dc9584cb96fc732",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 16,
+          "evidence": "Delete",
+          "context": "  2. Delete cache entry for that key (or update)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 24,
+          "evidence": "delete",
+          "context": "  - Write-then-read race: stale data possible if delete delayed",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 37,
+          "evidence": "Delete",
+          "context": "  2. Delete or update cache behind the scenes",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "references/cache-testing.md",
+      "sha256": "df83da213e034c24ed9da7c47581f36ea0264c5edbee67501a47b490f9bd22f5",
+      "bytes": 7051,
+      "mode": "100644",
+      "git_blob": "96e62656b3c7eb0ed2886d4faa6ba1ecb03c92f4",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "references/caching-advanced.md",
+      "sha256": "71fb1d70b7b7fea600b50ce94d02bda701bbb5168d56749eeeae27fc46a06847",
+      "bytes": 4673,
+      "mode": "100644",
+      "git_blob": "00268425fab698f53f5da7826637ccbe061026e6",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 40,
+          "evidence": "delete",
+          "context": "    this.local.delete(key);",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "references/caching-fundamentals.md",
+      "sha256": "ef8a148b32b4c5d03c3acd6324f89e22bda5b1b03e1904c38c85e47de3b76564",
+      "bytes": 2753,
+      "mode": "100644",
+      "git_blob": "d6ec32bce17b39c641ee79ea29996850a10f8deb",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 60,
+          "evidence": "delete",
+          "context": "| Write-invalidate | Update → delete cache key | Medium | Zero |",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "references/caching-stampede-prevention.md",
+      "sha256": "a13404b87f0e61f6c0b464d86b0e09b14af737b015a998dfe056e9d8315c95bc",
+      "bytes": 7442,
+      "mode": "100644",
+      "git_blob": "fd9ff0db9a9a9836c08af221f2508577dc275736",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 198,
+          "evidence": "delete",
+          "context": "      this.timers.delete(key);",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 214,
+          "evidence": "sh",
+          "context": "        - /bin/sh",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 216,
+          "evidence": "curl",
+          "context": "        - \"curl -XPOST http://localhost:3000/__warmup && sleep 5\"",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 216,
+          "evidence": "http://",
+          "context": "        - \"curl -XPOST http://localhost:3000/__warmup && sleep 5\"",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "references/cdn-caching.md",
+      "sha256": "cc3d13562c0b657e775fbf7f17b9f6485883029dc3b448cd5b9e71c1230796d4",
+      "bytes": 4302,
+      "mode": "100644",
+      "git_blob": "18d187fa2f121c39e5123c9f8b778fccb5ee3a26",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 129,
+          "evidence": "Remove",
+          "context": "  - Remove session tokens from cache key",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "references/redis-patterns.md",
+      "sha256": "321a8e61cc5f420424c7b6f2e31e1e18d3e0b108d5674c8d0c469ed01fba1c1a",
+      "bytes": 4643,
+      "mode": "100644",
+      "git_blob": "8887b9a4ce6b1b9062de4f38c701ae1363b744c3",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 26,
+          "evidence": "remove",
+          "context": "LPOP notifications:abc123       → remove and get from head",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 64,
+          "evidence": "Remove",
+          "context": "-- Remove entries outside window",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 95,
+          "evidence": "delete",
+          "context": "    # Lua script ensures atomic compare-and-delete",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "dynamic-execution",
+          "line": 103,
+          "evidence": "eval(",
+          "context": "    r.eval(script, 1, f\"lock:{lock_name}\", lock_value)",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "06bd9d98ba37661c1d6209c683b2d5b2a5b4734b9901ed7d33a1940ef5f8b89a",
+      "bytes": 22472,
+      "mode": "100644",
+      "git_blob": "3329559d5d620017acd41873999919619c13a569",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 143,
+          "evidence": "Delete",
+          "context": "  2. Delete cache entry for that key",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 171,
+          "evidence": "delete",
+          "context": "- Recommended: Write DB first, then delete cache (cache will be populated on next read)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 336,
+          "evidence": "delete",
+          "context": "      this.timers.delete(key);",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 355,
+          "evidence": "Delete",
+          "context": "2. Delete cache entry",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "dynamic-execution",
+          "line": 550,
+          "evidence": "exec(",
+          "context": "- Enable pipelining in ioredis: `redis.pipeline().set('a', '1').get('a').exec()`",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    }
+  ]
+}

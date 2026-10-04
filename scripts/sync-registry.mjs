@@ -40,7 +40,8 @@ const namespaceByRepo={
   "aaron-he-zhu/aaron-marketing-skills":"aaron-seo",
   "wshobson/agents":"wshobson",
   "BagelHole/DevOps-Security-Agent-Skills":"bagelhole",
-  "supabase/agent-skills":"supabase"
+  "supabase/agent-skills":"supabase",
+  "j4flmao/agent-skills":"j4flmao"
 };
 
 function deriveCategory(sourceId,sourcePath){
@@ -98,6 +99,10 @@ for(const source of sourceEntries){
 
 // Ids already held by a record at the same upstream path are claimed first, so
 // a new path with the same skill name cannot take them over, whatever the order.
+// Ids are lowercase slugs: a frontmatter name like "SLI/SLO Management" falls
+// back to the skill's directory name.
+const SLUG=/^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+const idSlug=(item)=>SLUG.test(item.name??"") ? item.name : path.posix.basename(path.posix.dirname(item.path)).toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"");
 const drift=[];
 // Curated release notices survive a recomputed release state.
 const withNotices=(skill)=>skill.release?.notices?{notices:skill.release.notices}:{};
@@ -111,7 +116,7 @@ for(const {source,item,revision} of discovered){
   seenSourceKeys.add(sourceKey);
   let skill=existingBySource.get(sourceKey);
   const namespace=namespaceByRepo[source.repo]??source.repo.split("/")[0].toLowerCase().replace(/[^a-z0-9-]/g,"-");
-  const stableId=skill?.id ?? namespace+"/"+item.name;
+  const stableId=skill?.id ?? namespace+"/"+idSlug(item);
   if(!skill) {
     // A record whose upstream path moved keeps its id, unless another path in
     // this sync already claimed it: then two upstream skills share a name.

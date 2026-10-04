@@ -1,0 +1,98 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "j4flmao/owasp-web-security",
+  "status": "draft",
+  "reviewed_on": null,
+  "reviewer": null,
+  "source": {
+    "repo": "j4flmao/agent-skills",
+    "path": "skills/cybersecurity/owasp-web-security",
+    "revision": "d9f812988c8926767ee96f66c1a340d65b595799"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "skills/cybersecurity/owasp-web-security",
+    "url": "https://api.github.com/repos/j4flmao/agent-skills/git/trees/d9f812988c8926767ee96f66c1a340d65b595799?recursive=1",
+    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/j4flmao/agent-skills/blob/d9f812988c8926767ee96f66c1a340d65b595799/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "skills",
+        "skills/cybersecurity",
+        "skills/cybersecurity/owasp-web-security"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte."
+    ]
+  },
+  "content_review": {
+    "status": "pending",
+    "risk": "unknown",
+    "blocking_findings": [],
+    "capabilities": {},
+    "notes": []
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "b6b8d73f01a48d1411da29d8196e2d85cd91cc9e8d7ae6ac4863ae7e06e6d314",
+      "bytes": 1064,
+      "mode": "100644",
+      "git_blob": "0e8b6e6d8678128ebfcc28d7cad91fa9ed7f2354",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "f1b77369a932f28a36055f822ab2625c0c9f70024fe0953d2f7e9acd27018c2f",
+      "bytes": 3126,
+      "mode": "100644",
+      "git_blob": "436b3f5d739043260f8c34f13cd2eebbb11cc036",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "dynamic-execution",
+          "line": 14,
+          "evidence": "exec(",
+          "context": "- **Identification via SAST**: Look for sinks (e.g., `execute()`, `exec()`, `eval()`) where the data flow graph shows input from an untrusted source without intervening sanitization or parameterization nodes.",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "dynamic-execution",
+          "line": 14,
+          "evidence": "eval(",
+          "context": "- **Identification via SAST**: Look for sinks (e.g., `execute()`, `exec()`, `eval()`) where the data flow graph shows input from an untrusted source without intervening sanitization or parameterization nodes.",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 21,
+          "evidence": "cURL",
+          "context": "- **Identification via SAST**: Trace tainted input to HTTP client sinks (e.g., `requests.get()`, `cURL`). ",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    }
+  ]
+}

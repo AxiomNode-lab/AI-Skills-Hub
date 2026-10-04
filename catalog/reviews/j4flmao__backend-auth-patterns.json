@@ -1,0 +1,854 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "j4flmao/backend-auth-patterns",
+  "status": "draft",
+  "reviewed_on": null,
+  "reviewer": null,
+  "source": {
+    "repo": "j4flmao/agent-skills",
+    "path": "skills/backend/universal/auth-patterns",
+    "revision": "d9f812988c8926767ee96f66c1a340d65b595799"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "skills/backend/universal/auth-patterns",
+    "url": "https://api.github.com/repos/j4flmao/agent-skills/git/trees/d9f812988c8926767ee96f66c1a340d65b595799?recursive=1",
+    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/j4flmao/agent-skills/blob/d9f812988c8926767ee96f66c1a340d65b595799/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "skills",
+        "skills/backend",
+        "skills/backend/universal",
+        "skills/backend/universal/auth-patterns"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte."
+    ]
+  },
+  "content_review": {
+    "status": "pending",
+    "risk": "unknown",
+    "blocking_findings": [],
+    "capabilities": {},
+    "notes": []
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "b6b8d73f01a48d1411da29d8196e2d85cd91cc9e8d7ae6ac4863ae7e06e6d314",
+      "bytes": 1064,
+      "mode": "100644",
+      "git_blob": "0e8b6e6d8678128ebfcc28d7cad91fa9ed7f2354",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "references/auth-oauth2.md",
+      "sha256": "d34602febbcd44e51226f4883c325f98fe8817d4a848b0fb166312999e913216",
+      "bytes": 9275,
+      "mode": "100644",
+      "git_blob": "0cd7af17ed65ac2e15ed947e52ebee4a523e904c",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "credential-access",
+          "line": 8,
+          "evidence": "secret",
+          "context": "| Authorization Code + PKCE | Native mobile, SPA | Yes | High (no client secret needed) |",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 9,
+          "evidence": "secret",
+          "context": "| Client Credentials | M2M, server-to-server | No | Medium (requires client secret) |",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 33,
+          "evidence": "Access Token",
+          "context": "     │                     │  5. Access Token    │",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 35,
+          "evidence": "Access Token",
+          "context": "     │  6. Access Token    │                     │",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 68,
+          "evidence": "https://",
+          "context": "    redirect_uri: 'https://app.example.com/callback',",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 75,
+          "evidence": "https://",
+          "context": "  window.location.href = `https://auth.example.com/authorize?${params}`;",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 83,
+          "evidence": "https://",
+          "context": "  const response = await fetch('https://auth.example.com/token', {",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 89,
+          "evidence": "https://",
+          "context": "      redirect_uri: 'https://app.example.com/callback',",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 104,
+          "evidence": "accessToken",
+          "context": "  private accessToken: string | null = null;",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 115,
+          "evidence": "accessToken",
+          "context": "    if (this.accessToken && Date.now() < this.tokenExpiry - 60000) {",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 116,
+          "evidence": "accessToken",
+          "context": "      return this.accessToken; // Return cached token",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "encoded-content",
+          "line": 123,
+          "evidence": "base64",
+          "context": "        'Authorization': `Basic ${Buffer.from(`${this.clientId}:${this.clientSecret}`).toString('base64')}`,",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 132,
+          "evidence": "accessToken",
+          "context": "    this.accessToken = data.access_token;",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 132,
+          "evidence": "access_token",
+          "context": "    this.accessToken = data.access_token;",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 134,
+          "evidence": "accessToken",
+          "context": "    return this.accessToken!;",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 152,
+          "evidence": "access token",
+          "context": "      return res.status(401).json({ error: 'Missing access token' });",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 247,
+          "evidence": "https://",
+          "context": "  \"iss\": \"https://auth.example.com/\",",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 270,
+          "evidence": "secret",
+          "context": "- Store client secrets securely (environment variables, secret manager)",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "references/auth-passwordless.md",
+      "sha256": "fd3dae6f1cef7222ddccc7860da40e7b3d4694661c8787eded059204a65ae79d",
+      "bytes": 7820,
+      "mode": "100644",
+      "git_blob": "ab6b936c059d69020ff5ebbb7bac0df7178e6e0b",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "credential-access",
+          "line": 28,
+          "evidence": "process.env",
+          "context": "        link: `${process.env.APP_URL}/auth/magic-link?token=${token}&email=${encodeURIComponent(email)}`,",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 176,
+          "evidence": "credential",
+          "context": "  async verifyRegistration(userId: string, credential: any): Promise<boolean> {",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 187,
+          "evidence": "credential",
+          "context": "    // Store credential for future authentication",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 190,
+          "evidence": "credential",
+          "context": "      credentialId: credential.id,",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 191,
+          "evidence": "credential",
+          "context": "      publicKey: credential.response.publicKey,",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 192,
+          "evidence": "credential",
+          "context": "      counter: credential.response.counter,",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 193,
+          "evidence": "credential",
+          "context": "      transports: credential.response.transports,",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 233,
+          "evidence": "accessToken",
+          "context": "    const profile = await this.getProfile(provider, tokens.accessToken);",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 254,
+          "evidence": "accessToken",
+          "context": "        accessToken: tokens.accessToken,",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 254,
+          "evidence": "accessToken",
+          "context": "        accessToken: tokens.accessToken,",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "references/auth-patterns-advanced.md",
+      "sha256": "9b0009162fa271f43bd1d32e166c849446c7da2679665ee893f7abbd80c5339e",
+      "bytes": 4481,
+      "mode": "100644",
+      "git_blob": "c142cf3ce4c9d72ea203cb933199d6d3e6c597f4",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "credential-access",
+          "line": 35,
+          "evidence": "accessToken",
+          "context": "    return { accessToken: newAccess, refreshToken: newRefresh };",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 42,
+          "evidence": "Secret",
+          "context": "| Flow | Client Secret | Redirect URI | Best For |",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 57,
+          "evidence": "https://",
+          "context": "window.location = `https://auth.example.com/authorize?",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 60,
+          "evidence": "https://",
+          "context": "  redirect_uri=https://app.example.com/callback&",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 70,
+          "evidence": "https://",
+          "context": "  redirect_uri: 'https://app.example.com/callback',",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 154,
+          "evidence": "https://",
+          "context": "    body: `Click to sign in: https://app.example.com/auth/magic?token=${token}`,",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "references/auth-patterns-fundamentals.md",
+      "sha256": "8da8170b2b066e201d4c176c1b1e0bfc63f34b6368228ff1abd4d0abc16875b9",
+      "bytes": 2548,
+      "mode": "100644",
+      "git_blob": "636a72cb6dc6593b7d8c05fcdc4b4e434215f20a",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "credential-access",
+          "line": 16,
+          "evidence": "Access Token",
+          "context": "| Access Token (JWT) | Memory (JS), httpOnly cookie | 15 min | API authorization |",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 17,
+          "evidence": "access token",
+          "context": "| Refresh Token | httpOnly cookie, secure storage | 7 days | Get new access token |",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 20,
+          "evidence": "API Key",
+          "context": "| API Key | Server env / secrets manager | Months/years | M2M communication |",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 35,
+          "evidence": "secret",
+          "context": "| OAuth2 + PKCE | SPA, Mobile | High (no client secret) | High |",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 37,
+          "evidence": "API Key",
+          "context": "| API Key | M2M, 3rd party | Low (static) | Low |",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "references/auth-patterns-provider-comparison.md",
+      "sha256": "6e0e02bd71fea3441dd34030f5156cf0d1ab249630842fdf53bceffc7733c5a9",
+      "bytes": 2515,
+      "mode": "100644",
+      "git_blob": "c5cdbd3113d2cbcf8eea184575ce52879aaa441e",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "references/auth-testing.md",
+      "sha256": "710b95c8e06d3c134afc6c872c1c50432c0666587292f41c1905951fbab99a8c",
+      "bytes": 7299,
+      "mode": "100644",
+      "git_blob": "10be39cd5871235a0abbf219df62c6d6da119482",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "credential-access",
+          "line": 16,
+          "evidence": "accessToken",
+          "context": "    expect(res.body).toHaveProperty('accessToken');",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 94,
+          "evidence": "secret",
+          "context": "      { secret: 'different-secret' }",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 94,
+          "evidence": "secret",
+          "context": "      { secret: 'different-secret' }",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 116,
+          "evidence": "access token",
+          "context": "  it('issues new access token with valid refresh token', async () => {",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 126,
+          "evidence": "accessToken",
+          "context": "    expect(refreshRes.body.accessToken).toBeDefined();",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 212,
+          "evidence": "secret",
+          "context": "  options?: { expiresIn?: string; secret?: string }",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 214,
+          "evidence": "secret",
+          "context": "  const secret = options?.secret || process.env.JWT_SECRET || 'test-secret';",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 214,
+          "evidence": "secret",
+          "context": "  const secret = options?.secret || process.env.JWT_SECRET || 'test-secret';",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 214,
+          "evidence": "process.env",
+          "context": "  const secret = options?.secret || process.env.JWT_SECRET || 'test-secret';",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 214,
+          "evidence": "secret",
+          "context": "  const secret = options?.secret || process.env.JWT_SECRET || 'test-secret';",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 217,
+          "evidence": "secret",
+          "context": "  return jwt.sign(payload, secret, {",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "references/jwt-oauth-guide.md",
+      "sha256": "d82f6862d2b2e854a7259add42f8a013360b38b1d0e71c85110614ec3f9b25cd",
+      "bytes": 1721,
+      "mode": "100644",
+      "git_blob": "1caecd83919c1f2321ae6cc604cd0cd347be240a",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "credential-access",
+          "line": 25,
+          "evidence": "Access Token",
+          "context": "### Access Token",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 48,
+          "evidence": "accessToken",
+          "context": "  return { accessToken: signAccessToken(stored.userId), refreshToken: newToken }",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "references/oidc-flows.md",
+      "sha256": "a318a1342af8e2566bedee0ad8008c7010347192cee58c8ba3eed71689d34e6b",
+      "bytes": 1711,
+      "mode": "100644",
+      "git_blob": "02bfb3de8e6ccdb8a724fa4d162f5e782e12e804",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "credential-access",
+          "line": 22,
+          "evidence": "access_token",
+          "context": "7. Authorization Server → Client: access_token + id_token + refresh_token",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 35,
+          "evidence": "Access Token",
+          "context": "Access Token validation:",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 41,
+          "evidence": "https://",
+          "context": "- **Auth0**: `https://{tenant}.auth0.com`",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 42,
+          "evidence": "https://",
+          "context": "- **Keycloak**: `https://{host}/realms/{realm}`",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 43,
+          "evidence": "https://",
+          "context": "- **Azure AD**: `https://login.microsoftonline.com/{tenant}/v2.0`",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 44,
+          "evidence": "https://",
+          "context": "- **Google**: `https://accounts.google.com`",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 45,
+          "evidence": "https://",
+          "context": "- **AWS Cognito**: `https://cognito-idp.{region}.amazonaws.com/{pool}`",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 46,
+          "evidence": "https://",
+          "context": "- **Okta**: `https://{org}.okta.com`",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "references/rbac-abac.md",
+      "sha256": "416a20c58f5a82259e372fe7382689652f2206e002dd01f70360f3682f9b0461",
+      "bytes": 2658,
+      "mode": "100644",
+      "git_blob": "d7fe8221697d8770791a3c78c8d29fd7ed1d0151",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 23,
+          "evidence": "delete",
+          "context": "  admin: ['order:create', 'order:read', 'order:update', 'order:delete', 'user:manage'],",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "20a1e6d5a2e35076b28492df7e0ec7e27994df3a0266625546b3029217589c71",
+      "bytes": 22306,
+      "mode": "100644",
+      "git_blob": "f94033ac131ed7d5789969972e7ebbaea44546c8",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "credential-access",
+          "line": 28,
+          "evidence": "API-key",
+          "context": "- Security requirements level (basic auth, enterprise SSO, API-key M2M).",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 66,
+          "evidence": "API Key",
+          "context": "            ├── Yes → API Key (simple) or OAuth2 Client Credentials (standard)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 74,
+          "evidence": "secret",
+          "context": "├── Yes → HMAC with HS256 (simpler, faster, one secret to manage)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 76,
+          "evidence": "secret",
+          "context": "    ├── Yes → RSA with RS256 or EC with ES256 (public key distribution, no shared secret)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 102,
+          "evidence": "API Key",
+          "context": "| M2M service | API Key or Client Credentials | Static key or short-lived JWT | Env/Secrets |",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 123,
+          "evidence": "https://",
+          "context": "  \"iss\": \"https://api.example.com\",",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 136,
+          "evidence": "Access token",
+          "context": "- Access token expiry: 15 minutes. Refresh token expiry: 7 days.",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 142,
+          "evidence": "access_token",
+          "context": "1. Client sends access_token + refresh_token",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 144,
+          "evidence": "access_token",
+          "context": "3. If access_token expired but refresh_token valid:",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 145,
+          "evidence": "access_token",
+          "context": "   a. Issue new access_token (15 min)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 157,
+          "evidence": "accessToken",
+          "context": "  accessToken: string;",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 178,
+          "evidence": "accessToken",
+          "context": "  const accessToken = generateAccessToken(user);",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 187,
+          "evidence": "accessToken",
+          "context": "  return { accessToken, refreshToken: newRefreshToken };",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 225,
+          "evidence": "delete",
+          "context": "        \"action\": \"order:delete\",",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 254,
+          "evidence": "process.env",
+          "context": "    const payload = jwt.verify(token, process.env.JWT_PUBLIC_KEY, {",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 256,
+          "evidence": "process.env",
+          "context": "      issuer: process.env.JWT_ISSUER,",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 284,
+          "evidence": "https://",
+          "context": "            issuer=\"https://api.example.com\",",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 354,
+          "evidence": "secret",
+          "context": "  secret: process.env.SESSION_SECRET,",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 354,
+          "evidence": "process.env",
+          "context": "  secret: process.env.SESSION_SECRET,",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 358,
+          "evidence": "process.env",
+          "context": "    secure: process.env.NODE_ENV === 'production',",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 408,
+          "evidence": "Secret",
+          "context": "8. **Secret hardcoded in source**: Always use environment variables or secrets manager.",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 453,
+          "evidence": "API key",
+          "context": "- API key lookup: Hash keys before storing. Constant-time comparison.",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 511,
+          "evidence": "delete",
+          "context": "    this.observers.delete(observer);",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,228 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "j4flmao/backend-grpc-patterns",
+  "status": "draft",
+  "reviewed_on": null,
+  "reviewer": null,
+  "source": {
+    "repo": "j4flmao/agent-skills",
+    "path": "skills/backend/universal/grpc-patterns",
+    "revision": "d9f812988c8926767ee96f66c1a340d65b595799"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "skills/backend/universal/grpc-patterns",
+    "url": "https://api.github.com/repos/j4flmao/agent-skills/git/trees/d9f812988c8926767ee96f66c1a340d65b595799?recursive=1",
+    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/j4flmao/agent-skills/blob/d9f812988c8926767ee96f66c1a340d65b595799/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "skills",
+        "skills/backend",
+        "skills/backend/universal",
+        "skills/backend/universal/grpc-patterns"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte."
+    ]
+  },
+  "content_review": {
+    "status": "pending",
+    "risk": "unknown",
+    "blocking_findings": [],
+    "capabilities": {},
+    "notes": []
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "b6b8d73f01a48d1411da29d8196e2d85cd91cc9e8d7ae6ac4863ae7e06e6d314",
+      "bytes": 1064,
+      "mode": "100644",
+      "git_blob": "0e8b6e6d8678128ebfcc28d7cad91fa9ed7f2354",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "references/advanced_protobuf_schemas.md",
+      "sha256": "13226f919e28d9535b621ff331d1c693cc926bcee6023a5f6843963e985d168b",
+      "bytes": 13683,
+      "mode": "100644",
+      "git_blob": "11001552dde07004b2a49f64193aba25c7025746",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "references/grpc_interceptors.md",
+      "sha256": "ec58c0df3de45859731f0dc1a3aee3a440aad653fd25215a428c3b35cfe891e5",
+      "bytes": 23135,
+      "mode": "100644",
+      "git_blob": "c7f30219af7036edf66f769d289f512c37d75ddb",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "references/grpc-error-handling.md",
+      "sha256": "85a02c9312684e878e8eea92e03758664810c89b3f9135eac522e3689c482e2d",
+      "bytes": 9159,
+      "mode": "100644",
+      "git_blob": "c50691810e6cca666c6af3427be6ef91b02f5b75",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "references/grpc-interceptors.md",
+      "sha256": "ca4227e2c32e33db98d16d2b64c2ee74e4299c7d7a7df3861c5e4cabedbc84db",
+      "bytes": 4389,
+      "mode": "100644",
+      "git_blob": "67a1beb118d7ee3eefac78ed3cbc73dbfc45895f",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "references/grpc-performance.md",
+      "sha256": "c308572a31e3108d08e657d4cb3441220c07c4ca330ec7a8c5b1e09be23afb4a",
+      "bytes": 7802,
+      "mode": "100644",
+      "git_blob": "a100ae4d72350431a1ff13dc704db1fb58e26a62",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 23,
+          "evidence": "delete",
+          "context": "        this.channels.delete(oldest);",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "references/grpc-security.md",
+      "sha256": "98b02c6472b15f1d6b6471566b7fc80783bdb29cd3498c7b019ca35c565fb871",
+      "bytes": 8177,
+      "mode": "100644",
+      "git_blob": "2a50e0ca802e2f5ecb0b5b73009ed059b91c92d4",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "references/grpc-streaming.md",
+      "sha256": "eb6f62658b97bdf7f547ac72efe4a46b7fe4dc36faca886a51798daaa4e6861e",
+      "bytes": 3959,
+      "mode": "100644",
+      "git_blob": "25d5a90300d8ef3463c1f0c88f089a927c05f78e",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "references/grpc-testing.md",
+      "sha256": "99d1b4a5228e3c391da70de5120fe0a49136b30b59f624a55577070ac0325530",
+      "bytes": 8123,
+      "mode": "100644",
+      "git_blob": "075f707ec712b881a63fe4e05409ad0aa939db1d",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "references/grpc-vs-rest.md",
+      "sha256": "6bda28d0679898ab1c4c9e5144d280261c27c8829d84fa5656f64a84a6f65c7c",
+      "bytes": 2166,
+      "mode": "100644",
+      "git_blob": "d4c664da71269a97cbf91b104a207e09e903ac76",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 16,
+          "evidence": "curl",
+          "context": "| Tooling | Limited debugging | Rich (curl, Postman, browsers) |",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "references/protobuf-basics.md",
+      "sha256": "cb29587900f0baafb75f4da2bb18f4ee17f29d51ff2ea757e84fb106c20bd9ff",
+      "bytes": 3540,
+      "mode": "100644",
+      "git_blob": "ea3a2c6b55fc799a16ada3789a50ae40274685c7",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 96,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "4693318c6f7383c7702f916c6ee6b8c5e2f089114e14bb027c99b674c6e52beb",
+      "bytes": 20760,
+      "mode": "100644",
+      "git_blob": "05b8fa5455afed35067759b0c7c8985b654c86da",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 402,
+          "evidence": "remove",
+          "context": "- Deprecate fields with `[deprecated = true]`, do not remove them until the next major package version.",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 437,
+          "evidence": "delete",
+          "context": "    this.observers.delete(observer);",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    }
+  ]
+}

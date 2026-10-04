@@ -1,0 +1,705 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "j4flmao/backend-authorization",
+  "status": "draft",
+  "reviewed_on": null,
+  "reviewer": null,
+  "source": {
+    "repo": "j4flmao/agent-skills",
+    "path": "skills/backend/universal/authorization",
+    "revision": "d9f812988c8926767ee96f66c1a340d65b595799"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "skills/backend/universal/authorization",
+    "url": "https://api.github.com/repos/j4flmao/agent-skills/git/trees/d9f812988c8926767ee96f66c1a340d65b595799?recursive=1",
+    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/j4flmao/agent-skills/blob/d9f812988c8926767ee96f66c1a340d65b595799/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "skills",
+        "skills/backend",
+        "skills/backend/universal",
+        "skills/backend/universal/authorization"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte."
+    ]
+  },
+  "content_review": {
+    "status": "pending",
+    "risk": "unknown",
+    "blocking_findings": [],
+    "capabilities": {},
+    "notes": []
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "b6b8d73f01a48d1411da29d8196e2d85cd91cc9e8d7ae6ac4863ae7e06e6d314",
+      "bytes": 1064,
+      "mode": "100644",
+      "git_blob": "0e8b6e6d8678128ebfcc28d7cad91fa9ed7f2354",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "references/authorization-advanced.md",
+      "sha256": "42874939b36b78f858e6cd8e48692042ee6bb38db37b38a32864e71a6216afdc",
+      "bytes": 5744,
+      "mode": "100644",
+      "git_blob": "2807d911ecd21e6ec6d7cf2ac732e397a5f85bf2",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 27,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "references/authorization-audit.md",
+      "sha256": "7a56f3358468413248687a0fb39d006af1429bebbc96da218b9c76a7e4e6fd33",
+      "bytes": 6346,
+      "mode": "100644",
+      "git_blob": "e413baa181f98692a673317a197049b8e89ac2d9",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "references/authorization-delegation.md",
+      "sha256": "a402c24d6658c5538772b46aafb541a12cf5abe1952c439d0c72d9e55e7d8c7c",
+      "bytes": 9105,
+      "mode": "100644",
+      "git_blob": "87c20c5583a435a93735947ba71e833188f389d8",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "credential-access",
+          "line": 262,
+          "evidence": "apiKey",
+          "context": "    const apiKey = `sa_${crypto.randomBytes(32).toString('hex')}`;",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 263,
+          "evidence": "apiKey",
+          "context": "    const hashedKey = crypto.createHash('sha256').update(apiKey).digest('hex');",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 274,
+          "evidence": "apiKey",
+          "context": "    return { ...account.toObject(), apiKey }; // Return API key once",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 274,
+          "evidence": "API key",
+          "context": "    return { ...account.toObject(), apiKey }; // Return API key once",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 277,
+          "evidence": "apiKey",
+          "context": "  async verifyServiceAccountAccess(apiKey: string, requiredPermission: string): Promise<boolean> {",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 278,
+          "evidence": "apiKey",
+          "context": "    const hash = crypto.createHash('sha256').update(apiKey).digest('hex');",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "references/authorization-fundamentals.md",
+      "sha256": "0f43e82ff8c02f7f35fe079a4ff7635aab8f62624127e5acfc560e4430770cf5",
+      "bytes": 3733,
+      "mode": "100644",
+      "git_blob": "ad0cc17ec83489e05fedc1200e51c24d5ceeb1ef",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 11,
+          "evidence": "delete",
+          "context": "| **Action** | read, write, delete, approve, export | Request method + path |",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "references/authorization-middleware.md",
+      "sha256": "8f1d37d8895510071c42cfede2ffb894ccc6866aee8d609dbc6b3e8373b8de91",
+      "bytes": 11227,
+      "mode": "100644",
+      "git_blob": "ce194d45e4be953c07c7ec23ca16761e3caad26b",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 209,
+          "evidence": "http://",
+          "context": "                \"http://opa:8181/v1/data/authz/allow\",",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "references/authorization-models.md",
+      "sha256": "6c019fc9ef6c484eb6a33a95927fd3b75defe398d14401131e8653d72a28ea32",
+      "bytes": 4276,
+      "mode": "100644",
+      "git_blob": "9bf67eafc22925746798a615f8ec7565cf210a7d",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 57,
+          "evidence": "delete",
+          "context": "  group:admin → read, write, delete",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "references/authorization-policy-distribution.md",
+      "sha256": "89ae0127e6133c96de05c91298addb815542c894cdf5fcbed1c48d43cf1be8f9",
+      "bytes": 5834,
+      "mode": "100644",
+      "git_blob": "ca00d569304cbcace6736176840967c57d82f27e",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 35,
+          "evidence": "https://",
+          "context": "    url: https://policies.internal.example.com",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 140,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "references/authorization-testing.md",
+      "sha256": "e1f9581079c8829232ed541a7231ecaaede387ebce60a76362ceffa23fb5c5d2",
+      "bytes": 13143,
+      "mode": "100644",
+      "git_blob": "862ecb4563c3d4512bdaa6860058298a5e2adf39",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 23,
+          "evidence": "delete",
+          "context": "    'document': { create: true, read: true, update: true, delete: true, approve: true },",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 24,
+          "evidence": "delete",
+          "context": "    'workspace': { create: true, read: true, update: true, delete: true, invite: true },",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 25,
+          "evidence": "delete",
+          "context": "    'user':      { create: true, read: true, update: true, delete: true, deactivate: true },",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 30,
+          "evidence": "delete",
+          "context": "    'document': { create: true, read: true, update: true, delete: true, approve: true },",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 31,
+          "evidence": "delete",
+          "context": "    'workspace': { create: true, read: true, update: true, delete: false, invite: true },",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 32,
+          "evidence": "delete",
+          "context": "    'user':      { create: true, read: true, update: true, delete: false, deactivate: true },",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 37,
+          "evidence": "delete",
+          "context": "    'document': { create: true, read: true, update: true, delete: false, approve: true },",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 38,
+          "evidence": "delete",
+          "context": "    'workspace': { create: true, read: true, update: true, delete: false, invite: true },",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 39,
+          "evidence": "delete",
+          "context": "    'user':      { create: false, read: true, update: false, delete: false, deactivate: false },",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 44,
+          "evidence": "delete",
+          "context": "    'document': { create: true, read: true, update: true, delete: false, approve: false },",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 45,
+          "evidence": "delete",
+          "context": "    'workspace': { create: false, read: true, update: false, delete: false, invite: false },",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 46,
+          "evidence": "delete",
+          "context": "    'user':      { create: false, read: false, update: false, delete: false, deactivate: false },",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 51,
+          "evidence": "delete",
+          "context": "    'document': { create: false, read: true, update: false, delete: false, approve: false },",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 52,
+          "evidence": "delete",
+          "context": "    'workspace': { create: false, read: true, update: false, delete: false, invite: false },",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 53,
+          "evidence": "delete",
+          "context": "    'user':      { create: false, read: false, update: false, delete: false, deactivate: false },",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 107,
+          "evidence": "delete",
+          "context": "    const adminActions = ['user.deactivate', 'billing.export', 'workspace.delete'];",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 161,
+          "evidence": "delete",
+          "context": "    expect(() => createDelegation('user-a', 'user-b', ['document.delete']))",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 173,
+          "evidence": "delete",
+          "context": "    'document.read', 'document.write', 'document.delete',",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 311,
+          "evidence": "delete",
+          "context": "    authorize({ role: 'viewer' }, 'document.delete');",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "references/data-level-authorization.md",
+      "sha256": "ab79b31265cd474754ab92ae1bab13fedf91f534562aba2085c058dd74a41f32",
+      "bytes": 10181,
+      "mode": "100644",
+      "git_blob": "66b0857d007267ab1116bb20affbfc4441158a03",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 95,
+          "evidence": "delete",
+          "context": "    -- Can only set status to 'approved', not delete",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 357,
+          "evidence": "DELETE",
+          "context": "  AFTER INSERT OR UPDATE OR DELETE ON documents",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "references/fine-grained-policies.md",
+      "sha256": "fcb382a90193f5615fe3a25e55e125c55868ea575c71ff3c518bf37ad5c9b2fd",
+      "bytes": 9223,
+      "mode": "100644",
+      "git_blob": "09dd93405a9edb7b19760cdb9ac650269bac145f",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 139,
+          "evidence": "delete",
+          "context": "  action: [document.delete, document.export, user.deactivate]",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "references/permission-architecture.md",
+      "sha256": "80e0ea4b29bb37dadc24734657053b06d5e7f8124964563a2cdafd94752627fd",
+      "bytes": 5972,
+      "mode": "100644",
+      "git_blob": "63762f008b796f3eb7c69ed86d01ee7f0b736c53",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 20,
+          "evidence": "delete",
+          "context": "| Resource | `document.delete` | `WHERE doc_id = :target` |",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 45,
+          "evidence": "delete",
+          "context": "permissions: ['workspace.read', 'workspace.write', 'workspace.delete']",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 66,
+          "evidence": "delete",
+          "context": "  document.delete",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 78,
+          "evidence": "delete",
+          "context": "| `action` | Yes | The operation: create, read, update, delete, execute, approve, export, share, manage |",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 133,
+          "evidence": "delete",
+          "context": "    delete: {",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 134,
+          "evidence": "delete",
+          "context": "      description: 'Permanently delete document',",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 152,
+          "evidence": "delete",
+          "context": "    delete: { description: 'Delete workspace',        defaultRoles: ['admin'] },",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 152,
+          "evidence": "Delete",
+          "context": "    delete: { description: 'Delete workspace',        defaultRoles: ['admin'] },",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "references/policy-engines-comparison.md",
+      "sha256": "e89397481faf7e0d693cf7a538dbf11c185ae828b87e2af676c16ca7914bf316",
+      "bytes": 7700,
+      "mode": "100644",
+      "git_blob": "3151fc475cd1837f946f9bed257bbfd40be33434",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 135,
+          "evidence": "http://",
+          "context": "  const response = await fetch('http://opa:8181/v1/data/httpapi/authz/allow', {",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 188,
+          "evidence": "delete",
+          "context": "    - actions: ['delete']",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 216,
+          "evidence": "http://",
+          "context": "const cerbos = new HTTP('http://localhost:3593');",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 249,
+          "evidence": "http://",
+          "context": "  pdp: 'http://localhost:7766',",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "references/rbac-hierarchy.md",
+      "sha256": "0696ef65d39e37217a40b5795d120f85378f77ae38e9187c4116f246c2ab029f",
+      "bytes": 7236,
+      "mode": "100644",
+      "git_blob": "6b42c66ab42cff9bfabf8088ecda164f4486e2eb",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 110,
+          "evidence": "Delete",
+          "context": "  - Delete org",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 151,
+          "evidence": "delete",
+          "context": "  - Cannot delete invoices",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 167,
+          "evidence": "delete",
+          "context": "  - Cannot delete users",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 187,
+          "evidence": "delete",
+          "context": "  - Cannot create/modify/delete any resource",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 247,
+          "evidence": "Remove",
+          "context": "| Deactivation | Remove assignments, archive definition | IAM team |",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "references/temporary-delegated-access.md",
+      "sha256": "9d4325870d77b6618c56d44d39d2ac321b40f42694db7804f2111ad9953b45eb",
+      "bytes": 10008,
+      "mode": "100644",
+      "git_blob": "03816389615d543a4cd475646ba90887d85f306a",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "cc231c991c2015311f543b1f843b7df19752971e71dfa749e17753da55fa7715",
+      "bytes": 28550,
+      "mode": "100644",
+      "git_blob": "f9edd6741cd5ab880eca667d0adfed14ef4e4172",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 121,
+          "evidence": "delete",
+          "context": "| Invoice | create, read, update, delete, approve | own dept only, business hours |",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 123,
+          "evidence": "delete",
+          "context": "| Workspace | create, read, update, delete, invite | quota limits |",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 128,
+          "evidence": "Delete",
+          "context": "- **Action catalog** — Create, Read, Update, Delete, Execute, Approve, Delegate.",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 164,
+          "evidence": "delete",
+          "context": "- `workspace.read`, `workspace.write`, `workspace.delete`",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 320,
+          "evidence": "delete",
+          "context": "| Action | read, write, approve, delete | Request path + method |",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 476,
+          "evidence": "delete",
+          "context": "  { role: 'manager',   actions: ['workspace.delete'],            expected: 'deny' },",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 478,
+          "evidence": "delete",
+          "context": "  { role: 'editor',    actions: ['workspace.delete'],            expected: 'deny' },",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    }
+  ]
+}

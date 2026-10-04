@@ -1,0 +1,401 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "j4flmao/backend-structured-logging",
+  "status": "draft",
+  "reviewed_on": null,
+  "reviewer": null,
+  "source": {
+    "repo": "j4flmao/agent-skills",
+    "path": "skills/backend/universal/structured-logging",
+    "revision": "d9f812988c8926767ee96f66c1a340d65b595799"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "skills/backend/universal/structured-logging",
+    "url": "https://api.github.com/repos/j4flmao/agent-skills/git/trees/d9f812988c8926767ee96f66c1a340d65b595799?recursive=1",
+    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/j4flmao/agent-skills/blob/d9f812988c8926767ee96f66c1a340d65b595799/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "skills",
+        "skills/backend",
+        "skills/backend/universal",
+        "skills/backend/universal/structured-logging"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte."
+    ]
+  },
+  "content_review": {
+    "status": "pending",
+    "risk": "unknown",
+    "blocking_findings": [],
+    "capabilities": {},
+    "notes": []
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "b6b8d73f01a48d1411da29d8196e2d85cd91cc9e8d7ae6ac4863ae7e06e6d314",
+      "bytes": 1064,
+      "mode": "100644",
+      "git_blob": "0e8b6e6d8678128ebfcc28d7cad91fa9ed7f2354",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "references/log-aggregation.md",
+      "sha256": "b83d56a2d4a4c00dd52bc2bc307a79a0b20702efba5a22e1571d526de2026c71",
+      "bytes": 2772,
+      "mode": "100644",
+      "git_blob": "215b22fe7f4f1c65f9699aa9e72a238938c58841",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "references/log-correlation-tracing.md",
+      "sha256": "9f2645762614c6bf1ef3c7267d9a71379925d66386349d429bcd17b0784748cd",
+      "bytes": 5143,
+      "mode": "100644",
+      "git_blob": "c43f764767ae4016298667d4671339beaf4a03d6",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "references/log-format.md",
+      "sha256": "1b0ae8c19ba7bc9a4793ef26a0a9c687432808eef73d6b6adae430df4325df0f",
+      "bytes": 8575,
+      "mode": "100644",
+      "git_blob": "d4093f550110d9c205be1b716bb9e7f53002e607",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "credential-access",
+          "line": 75,
+          "evidence": "process.env",
+          "context": "  level: process.env.LOG_LEVEL || 'info',",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 81,
+          "evidence": "process.env",
+          "context": "      obj['service.name'] = process.env.SERVICE_NAME;",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 82,
+          "evidence": "process.env",
+          "context": "      obj['service.environment'] = process.env.NODE_ENV;",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 87,
+          "evidence": "secret",
+          "context": "    paths: ['password', 'secret', 'token', 'ssn', 'email', 'creditCard', 'authorization'],",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 162,
+          "evidence": "process.env",
+          "context": "    environment: process.env.NODE_ENV,",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 196,
+          "evidence": "secret",
+          "context": "  { pattern: /\\b(?:password|secret|token|api[_-]?key|authorization)\\s*[:=]\\s*\\S+/gi, replacement: '$1: [REDACTED]' },",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "references/log-sampling-strategies.md",
+      "sha256": "aa0916bc0d40b88d772ef0a65e0fcf5255d3395892c53c32d0aba9fa7f1a47f2",
+      "bytes": 4697,
+      "mode": "100644",
+      "git_blob": "19462955529f90372c0161e6eca727bfaf089d3f",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 55,
+          "evidence": "delete",
+          "context": "      this.buffer.delete(oldest);",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 73,
+          "evidence": "delete",
+          "context": "    this.buffer.delete(traceId);",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "references/log-shipping.md",
+      "sha256": "65262cd8f5b2e796dfe0371c00347d1cf64dd6036dbb442678a8b116c29963ef",
+      "bytes": 7377,
+      "mode": "100644",
+      "git_blob": "38a7494de9a31b0dc162e9e3f75274734dd79a0a",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 112,
+          "evidence": "http://",
+          "context": "endpoint = \"http://elasticsearch:9200\"",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 114,
+          "evidence": "secret",
+          "context": "encoding.except_fields = [\"password\", \"secret\", \"token\"]",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 121,
+          "evidence": "http://",
+          "context": "endpoint = \"http://elasticsearch:9200\"",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "references/logging-aggregation.md",
+      "sha256": "5909ce616dfe9b1a97d19e932b143f09a83a7e3b2ff2ad67d60978e99c070304",
+      "bytes": 6248,
+      "mode": "100644",
+      "git_blob": "98b537f830c7739baea8eb8f519d3a41d14d8f81",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 56,
+          "evidence": "http://",
+          "context": "endpoints = [\"http://elasticsearch:9200\"]",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 157,
+          "evidence": "delete",
+          "context": "      \"delete\": {",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 160,
+          "evidence": "delete",
+          "context": "          \"delete\": {}",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "references/logging-architecture.md",
+      "sha256": "b77b3683e920e851f0f5358baa9f955aab7d138386158412b2b896d2c3e7ad5d",
+      "bytes": 7052,
+      "mode": "100644",
+      "git_blob": "5afcda36bd9d443291557a8ae19946e35ed66699",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "credential-access",
+          "line": 49,
+          "evidence": "process.env",
+          "context": "  level: process.env.LOG_LEVEL || 'info',",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 55,
+          "evidence": "process.env",
+          "context": "      obj['service.name'] = process.env.SERVICE_NAME;",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 56,
+          "evidence": "process.env",
+          "context": "      obj['service.environment'] = process.env.NODE_ENV;",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 61,
+          "evidence": "secret",
+          "context": "    paths: ['password', 'secret', 'token', 'authorization', 'cookie'],",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 205,
+          "evidence": "process.env",
+          "context": "    if (level === 'debug') return process.env.LOG_LEVEL === 'debug';",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "references/structured-logging-implementation.md",
+      "sha256": "ffd906b0beca0310685dcc8518118982630f694ce701d858dfb549f9e118c39f",
+      "bytes": 5508,
+      "mode": "100644",
+      "git_blob": "da15491f9113adb09b64609098600ffad959a94d",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "credential-access",
+          "line": 104,
+          "evidence": "process.env",
+          "context": "    if (process.env.NODE_ENV === 'production') {",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "9cc850046d64632824c2b57779b2196a479966bb1bb600a7608b00754c6a55c1",
+      "bytes": 21240,
+      "mode": "100644",
+      "git_blob": "5cbab589640b34e6a4316241f0e1dcc9008691df",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "credential-access",
+          "line": 138,
+          "evidence": "process.env",
+          "context": "  level: process.env.LOG_LEVEL || 'info',",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 144,
+          "evidence": "process.env",
+          "context": "      obj['service.name'] = process.env.SERVICE_NAME || 'unknown';",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 145,
+          "evidence": "process.env",
+          "context": "      obj['service.environment'] = process.env.NODE_ENV || 'development';",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 150,
+          "evidence": "secret",
+          "context": "    paths: ['password', 'secret', 'token', 'ssn', 'email', 'creditCard', 'authorization'],",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 259,
+          "evidence": "secret",
+          "context": "  { pattern: /\\b(?:password|secret|token|api[_-]?key|authorization)\\s*[:=]\\s*\\S+/gi, replacement: '$1: [REDACTED]' },",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 334,
+          "evidence": "secret",
+          "context": "    patterns: [password, secret, token, ssn, email, creditCard, authorization]",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 372,
+          "evidence": "secret",
+          "context": "| Secrets in logs | Blocklist-sensitive keys: `password`, `secret`, `token`, `key` |",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 380,
+          "evidence": "remove",
+          "context": "| Logging in hot loops | 100K logs/sec kills performance | Sample or remove |",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 428,
+          "evidence": "delete",
+          "context": "    this.observers.delete(observer);",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    }
+  ]
+}

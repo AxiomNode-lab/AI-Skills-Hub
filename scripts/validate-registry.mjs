@@ -32,6 +32,7 @@ for (const skill of data.skills) {
   }
 
   if (typeof skill.materialized !== "boolean") throw new Error(skill.id + " invalid materialized flag");
+  if (!/^[a-z0-9][a-z0-9._-]*(\/[a-z0-9][a-z0-9._-]*)+$/.test(skill.id)) throw new Error(skill.id + " invalid id: use lowercase namespace/slug");
   if (!["pending","eligible","hold"].includes(skill.release?.status)) throw new Error(skill.id + " invalid release status");
   if (!Array.isArray(skill.release?.reasons)) throw new Error(skill.id + " invalid release reasons");
   // Notices are shown by info, install, and the server; each needs a kind, text, and evidence.

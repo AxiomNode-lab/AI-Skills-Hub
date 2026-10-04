@@ -1,0 +1,571 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "j4flmao/backend-openapi-documentation",
+  "status": "draft",
+  "reviewed_on": null,
+  "reviewer": null,
+  "source": {
+    "repo": "j4flmao/agent-skills",
+    "path": "skills/backend/universal/openapi-documentation",
+    "revision": "d9f812988c8926767ee96f66c1a340d65b595799"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "skills/backend/universal/openapi-documentation",
+    "url": "https://api.github.com/repos/j4flmao/agent-skills/git/trees/d9f812988c8926767ee96f66c1a340d65b595799?recursive=1",
+    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/j4flmao/agent-skills/blob/d9f812988c8926767ee96f66c1a340d65b595799/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "skills",
+        "skills/backend",
+        "skills/backend/universal",
+        "skills/backend/universal/openapi-documentation"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte."
+    ]
+  },
+  "content_review": {
+    "status": "pending",
+    "risk": "unknown",
+    "blocking_findings": [],
+    "capabilities": {},
+    "notes": []
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "b6b8d73f01a48d1411da29d8196e2d85cd91cc9e8d7ae6ac4863ae7e06e6d314",
+      "bytes": 1064,
+      "mode": "100644",
+      "git_blob": "0e8b6e6d8678128ebfcc28d7cad91fa9ed7f2354",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": []
+    },
+    {
+      "path": "references/openapi-codegen.md",
+      "sha256": "d25512227897dfcf5033987e83d3fabb5712177c46fa33f8c4fec4dbc7f0143e",
+      "bytes": 4867,
+      "mode": "100644",
+      "git_blob": "3148e3909a54360bbf70307b9ee52c6c1f43a1f0",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 8,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "package-install",
+          "line": 9,
+          "evidence": "npm install",
+          "context": "npm install @openapitools/openapi-generator-cli -g",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 33,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 45,
+          "evidence": "https://",
+          "context": "const api = new UsersApi(new Configuration({ basePath: 'https://api.example.com/v1' }));",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 52,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 63,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 74,
+          "evidence": "bash",
+          "context": "   ```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 79,
+          "evidence": "bash",
+          "context": "   ```bash",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "references/openapi-security.md",
+      "sha256": "548e2a2941c274022c02cfddf90891809ae0dfba49d6db4126be5f50aa9c9002",
+      "bytes": 7840,
+      "mode": "100644",
+      "git_blob": "8316b82105f8812f311b5362cce22bb8deea025f",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "credential-access",
+          "line": 24,
+          "evidence": "apiKey",
+          "context": "    apiKey:",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 25,
+          "evidence": "apiKey",
+          "context": "      type: apiKey",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 27,
+          "evidence": "API-Key",
+          "context": "      name: X-API-Key",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 29,
+          "evidence": "API key",
+          "context": "        API key for third-party integrations.",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 36,
+          "evidence": "https://",
+          "context": "          authorizationUrl: https://auth.example.com/authorize",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 37,
+          "evidence": "https://",
+          "context": "          tokenUrl: https://auth.example.com/token",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 53,
+          "evidence": "apiKey",
+          "context": "        - apiKey: []",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 226,
+          "evidence": "DELETE",
+          "context": "              description: GET, POST, PUT, DELETE, PATCH",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 247,
+          "evidence": "delete",
+          "context": "        if (['get', 'post', 'put', 'patch', 'delete'].includes(method)) {",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 262,
+          "evidence": "https://",
+          "context": "        if (!server.url.startsWith('https://')) {",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 289,
+          "evidence": "API key",
+          "context": "- Define security schemes explicitly: bearer JWT, API key, OAuth2 flows",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "references/openapi-setup.md",
+      "sha256": "2c602025b16838c90f064595160c1f33e22b2cc7e28985072fdf97ae31d19f7b",
+      "bytes": 3975,
+      "mode": "100644",
+      "git_blob": "56340669b4d8eb715c223ae86af2aee8ee757bc8",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 38,
+          "evidence": "https://",
+          "context": "    See https://docs.example.com/api for full documentation.",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 44,
+          "evidence": "https://",
+          "context": "    url: https://opensource.org/licenses/MIT",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 46,
+          "evidence": "https://",
+          "context": "  - url: https://api.example.com/v1",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 48,
+          "evidence": "https://",
+          "context": "  - url: https://staging-api.example.com/v1",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 123,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "package-install",
+          "line": 124,
+          "evidence": "npm install",
+          "context": "npm install -g @stoplight/spectral-cli",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 137,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "package-install",
+          "line": 138,
+          "evidence": "npm install",
+          "context": "npm install -g @apidevtools/swagger-cli",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 143,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "package-install",
+          "line": 144,
+          "evidence": "npm install",
+          "context": "npm install -g @redocly/cli",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "references/openapi-testing.md",
+      "sha256": "930def5c0ee8fe61a1a2cb7c158d7617ea5d36cfa90a4d18a534a30ce9b1cc2b",
+      "bytes": 6851,
+      "mode": "100644",
+      "git_blob": "fd87c9e274cad60a46002da79941b49bbafab609",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 13,
+          "evidence": "http://",
+          "context": "    server: 'http://localhost:3000',",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 18,
+          "evidence": "DELETE",
+          "context": "      method: ['GET', 'POST', 'PUT', 'DELETE'],",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 161,
+          "evidence": "http://",
+          "context": "    mockUrl = 'http://localhost:4010';",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "references/openapi-tools.md",
+      "sha256": "75dcb06bbae7e51a4c850f79c5e82dfb390a54ca76b89331fdbfb830b190375d",
+      "bytes": 5424,
+      "mode": "100644",
+      "git_blob": "ad0d1818594b776e73e54aacb9e5052cfb7e4be1",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 38,
+          "evidence": "delete",
+          "context": "    supportedSubmitMethods: ['get', 'put', 'post', 'delete', 'patch'],",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "package-install",
+          "line": 88,
+          "evidence": "npm install",
+          "context": "        run: npm install -g @stoplight/spectral-cli",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 110,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 151,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 179,
+          "evidence": "API key",
+          "context": "    auth: \"OAuth2 implicit flow, API key\"",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 199,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "references/openapi-versioning-strategies.md",
+      "sha256": "2b5696697e9a3d696bb03d309f37ba6f9fb3055973cc9dcad34286750e1b96d0",
+      "bytes": 6387,
+      "mode": "100644",
+      "git_blob": "b44988dbc5eea33eec8e16bf4b8c284c5dd3c0e8",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 22,
+          "evidence": "https://",
+          "context": "    See https://docs.example.com/api/v2/migration for v1→v2 changes.",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 25,
+          "evidence": "https://",
+          "context": "  - url: https://api.example.com/v2",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 27,
+          "evidence": "https://",
+          "context": "  - url: https://api.example.com/v1",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "3f4286021a3a30c457b296718518b7884f19333dd736d347b6fda465d0cfe741",
+      "bytes": 19182,
+      "mode": "100644",
+      "git_blob": "7c036360554ac67d060799e3c296b83a4bcae8e2",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 91,
+          "evidence": "DELETE",
+          "context": "  │   DELETE /resources/{id} → Delete resource",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 91,
+          "evidence": "Delete",
+          "context": "  │   DELETE /resources/{id} → Delete resource",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 111,
+          "evidence": "https://",
+          "context": "  - url: https://api.example.com/v1",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "network-access",
+          "line": 113,
+          "evidence": "https://",
+          "context": "  - url: https://staging-api.example.com/v1",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 260,
+          "evidence": "apiKey",
+          "context": "    apiKey:",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 261,
+          "evidence": "apiKey",
+          "context": "      type: apiKey",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 263,
+          "evidence": "API-Key",
+          "context": "      name: X-API-Key",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 264,
+          "evidence": "API key",
+          "context": "      description: API key for service-to-service auth",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 271,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "shell-execution",
+          "line": 283,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "credential-access",
+          "line": 441,
+          "evidence": "API key",
+          "context": "- [ ] Security schemes defined (bearer, API key, OAuth2)",
+          "disposition": "pending",
+          "reason": ""
+        },
+        {
+          "type": "filesystem-write",
+          "line": 483,
+          "evidence": "delete",
+          "context": "    this.observers.delete(observer);",
+          "disposition": "pending",
+          "reason": ""
+        }
+      ]
+    }
+  ]
+}
