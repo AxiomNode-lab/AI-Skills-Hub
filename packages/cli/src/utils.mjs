@@ -99,7 +99,7 @@ export async function checkForUpdates({
       else throw new Error("stale");
     } catch {
       const response = await fetchImpl(
-        `https://registry.npmjs.org/${local.name.replace("/", "%2f")}/latest`,
+        `https://registry.npmjs.org/${local.name.replaceAll("/", "%2f")}/latest`,
         { signal: AbortSignal.timeout(1500) }
       );
       if (response.ok) latest = (await response.json()).version ?? null;
