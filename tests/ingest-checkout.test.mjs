@@ -81,3 +81,18 @@ test("ingest-github --checkout accepts a commit SHA or a remote branch that name
     assert.equal(result.status, 0, ref + ": " + result.stderr);
   }
 });
+
+test("ingest-github records malformed frontmatter on the skill instead of failing the source", t => {
+  const { dir, clone } = repository(t, "example/skills");
+  const git = (...args) => execFileSync("git", ["-C", clone, ...args], { encoding: "utf8" });
+  fs.mkdirSync(path.join(clone, "skills", "broken"), { recursive: true });
+  fs.writeFileSync(path.join(clone, "skills", "broken", "SKILL.md"), "---\nname: broken\nname: twice\n---\n");
+  git("add", ".");
+  git("-c", "user.name=t", "-c", "user.email=t@example.com", "commit", "-qm", "broken");
+  const result = spawnSync(process.execPath, [script, "example/skills", "main", "--checkout", clone], { cwd: dir, encoding: "utf8" });
+  assert.equal(result.status, 0, result.stderr);
+  const out = JSON.parse(fs.readFileSync(path.join(dir, "catalog", "ingestion", "example__skills.json"), "utf8"));
+  const broken = out.discovered_skills.find(skill => skill.path === "skills/broken/SKILL.md");
+  assert.match(broken.frontmatter_error, /Invalid YAML/);
+  assert.equal(broken.description, null);
+});

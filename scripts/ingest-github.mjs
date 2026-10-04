@@ -178,14 +178,21 @@ for (const item of skillPaths) {
 
   const skillSha = crypto.createHash("sha256").update(body).digest("hex");
   const scan = scanText(body);
-  const frontmatter = parseFrontmatter(body);
+  // Malformed frontmatter is recorded on the item, never guessed around.
+  let frontmatter = {};
+  let frontmatterError = null;
+  try {
+    frontmatter = parseFrontmatter(body);
+  } catch (error) {
+    frontmatterError = error.message;
+  }
 
   const license = await licenseEvidenceFor(item, frontmatter.license ?? null, item);
   const capabilityScan = {
     shell: /(^|\s)(bash|sh|zsh|pwsh|powershell)\b|(?:^|\s)(sudo|chmod)\b|rm\s+-rf/i.test(body),
     network: /\b(curl|wget)\b|https?:\/\/|fetch\(/i.test(body),
     credentials: /api[_ -]?key|access[_ -]?token|secret|credential|process\.env/i.test(body),
-    dynamic_execution: /\b(eval|exec|Function)\s*\(/i.test(body),
+    dynamic_execution: scan.capabilities.dynamic_execution,
     package_install: /\b(npm|pnpm|yarn|pip|uv|cargo)\s+(install|add)\b/i.test(body)
   };
 
@@ -196,7 +203,8 @@ for (const item of skillPaths) {
     skill_sha256: skillSha,
     license,
     security: { scan_status: scan.findings.length ? "review-required" : "verified", risk: riskLevel(scan), capabilities: scan.capabilities, findings: scan.findings },
-    capabilities: capabilityScan
+    capabilities: capabilityScan,
+    ...(frontmatterError ? { frontmatter_error: frontmatterError } : {})
   });
 
   if (capabilityScan.dynamic_execution || capabilityScan.package_install) {

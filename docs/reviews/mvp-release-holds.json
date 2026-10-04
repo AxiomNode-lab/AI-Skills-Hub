@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "review": "Holds applied while preparing the npm MVP release",
+  "reviewed_on": "2026-10-04",
+  "reviewer": "AI-assisted lead review (Claude Code); not legal advice or a security certification",
+  "scope": "Released skills whose instructions route the agent to skills that are not released",
+  "method": "Read SKILL.md in full and checked every skill it requires against the catalog release state.",
+  "skills": [
+    {
+      "id": "obra/using-superpowers",
+      "decision": "hold",
+      "hold_reason": "required-skill-not-released",
+      "evidence": "SKILL.md:20-31 requires invoking skills before any response and routes new work to superpowers:brainstorming (SKILL.md:22, 30) and bugs to superpowers:systematic-debugging (SKILL.md:31); obra/brainstorming and obra/systematic-debugging are not released, so the routing points to skills the Hub does not install. Same rule that excluded addyosmani/using-agent-skills; PR #11 also held this skill."
+    }
+  ]
+}

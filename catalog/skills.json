@@ -92939,7 +92939,7 @@
         "scope": "repository",
         "evidence": "catalog/reviews/obra__using-superpowers.json"
       },
-      "distribution": "bundled",
+      "distribution": "review-required",
       "compatibility": [
         "agent-skills",
         "claude-code",
@@ -92982,10 +92982,13 @@
         ],
         "review": "catalog/reviews/obra__using-superpowers.json"
       },
-      "materialized": true,
+      "materialized": false,
       "release": {
-        "status": "eligible",
-        "reasons": []
+        "status": "hold",
+        "reasons": [
+          "required-skill-not-released"
+        ],
+        "evidence": "docs/reviews/mvp-release-holds.json"
       },
       "integrity": {
         "upstream_skill_sha256": "82c5c8866ad7f5dd4440ce66bd7806ba48a2f13771beae5cf112e53f08fe36ba",
@@ -92993,7 +92996,6 @@
       },
       "description": "Use when starting any conversation - establishes how to find and use skills, requiring skill invocation before ANY response including clarifying questions",
       "artifact_type": "skill",
-      "materialized_root": "skills/obra/using-superpowers",
       "materialized_files": 9
     },
     {

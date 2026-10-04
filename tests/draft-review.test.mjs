@@ -9,7 +9,7 @@ import { prepareReviewedSkill, validateReleaseReview } from "../packages/materia
 
 const script = fileURLToPath(new URL("../scripts/draft-review.mjs", import.meta.url));
 const APACHE = "Apache License\nVersion 2.0, January 2004\nhttp://www.apache.org/licenses/\n2. Grant of Copyright License.\n4. Redistribution.\n";
-const MIT = "MIT License\n\nCopyright (c) 2025 Example\n\nPermission is hereby granted, free of charge, to any person obtaining a copy.\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n";
+const MIT = "MIT License\n\nCopyright (c) 2025 Example\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n";
 const SKILL = (license) => `---\nname: demo\ndescription: Demo skill\n${license ? `license: ${license}\n` : ""}---\nSee https://example.com\n`;
 
 // files: repository-relative path -> contents
@@ -109,4 +109,12 @@ test("a skill-local license is refused when a NOTICE or second license file also
     assert.notEqual(result.status, 0, Object.keys(extra)[0]);
     assert.match(result.stderr, /Notice, copying, or additional license files apply/);
   }
+});
+
+test("only the complete MIT text with a copyright line is recognized as MIT", async () => {
+  const { detectLicense } = await import("../packages/materializer/src/reviewed.mjs");
+  assert.equal(detectLicense(MIT), "MIT");
+  assert.equal(detectLicense(MIT.replace("Copyright (c) 2025 Example\n", "")), null);
+  assert.equal(detectLicense(MIT.replace("sublicense, and/or sell", "and/or sell")), null);
+  assert.equal(detectLicense(MIT.split("THE SOFTWARE IS PROVIDED")[0]), null);
 });

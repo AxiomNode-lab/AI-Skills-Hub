@@ -72,5 +72,18 @@ test("parseFrontmatter skips leading blank lines and comments in plain scalars",
   const fm = (body) => parseFrontmatter(`---\n${body}\n---\n`);
   assert.equal(fm("description:\n\n  text here").description, "text here");
   assert.equal(fm("description:\n  # comment\n  text").description, "text");
-  assert.equal(fm('description: "abc"\n  more').description, "abc");
+  assert.throws(() => fm('description: "abc"\n  more'), /Invalid YAML frontmatter/);
+});
+
+test("parseFrontmatter fails closed on malformed or unsafe frontmatter", () => {
+  for (const [text, pattern] of [
+    ["---\nname: a\n", /Unclosed/],
+    ["---\nname: a\nname: b\n---\n", /Invalid YAML/],
+    ["---\nbase: &x a\nname: *x\n---\n", /aliases|anchors/],
+    ["---\nlicense: [MIT]\n---\n", /license must be a non-empty string/],
+    ["---\ndescription: \"\"\n---\n", /description must be a non-empty string/],
+    ["---\n- a\n- b\n---\n", /mapping/],
+    ["---\nname: !!js/function x\n---\n", /custom tags|Invalid YAML/]
+  ]) assert.throws(() => parseFrontmatter(text), pattern, text);
+  assert.deepEqual(parseFrontmatter("no frontmatter here"), {});
 });

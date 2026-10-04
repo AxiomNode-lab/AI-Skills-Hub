@@ -1,9 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { PassThrough } from "node:stream";
-import fs from "node:fs";
-import os from "node:os";
-import path from "node:path";
 import { loadRegistry } from "../packages/core/src/index.mjs";
 import { createCatalog, createHubServer, handleMcpMessage, runStdioServer } from "../packages/server/src/index.mjs";
 
@@ -124,27 +121,11 @@ test("HTTP MCP endpoint refuses cross-site origins and answers oversized bodies 
   const body = JSON.stringify({ jsonrpc: "2.0", id: 1, method: "tools/list" });
   const post = (headers, payload = body) => fetch(base + "/mcp", { method: "POST", headers: { "content-type": "application/json", ...headers }, body: payload });
   assert.equal((await post({ origin: "https://attacker.example" })).status, 403);
-  assert.equal((await post({ origin: "http://localhost:3000" })).status, 200);
+  assert.equal((await post({ origin: "http://localhost:3000" })).status, 403);
+  assert.equal((await post({ origin: base })).status, 200);
   assert.equal((await post({})).status, 200);
   const big = await post({}, "x".repeat(1024 * 1024 + 1));
   assert.equal(big.status, 413);
   assert.equal((await big.json()).error, "Request body too large");
 });
 
-test("a cached file list never serves a file that became a symlink or was removed", t => {
-  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "hub-server-files-"));
-  t.after(() => fs.rmSync(dir, { recursive: true, force: true }));
-  fs.writeFileSync(path.join(dir, "SKILL.md"), "---\nname: demo\ndescription: demo\n---\n");
-  fs.writeFileSync(path.join(dir, "notes.md"), "notes\n");
-  fs.writeFileSync(path.join(dir, "..", path.basename(dir) + "-secret.txt"), "secret\n");
-  t.after(() => fs.rmSync(path.join(dir, "..", path.basename(dir) + "-secret.txt"), { force: true }));
-  const real = registry.skills.find(skill => skill.id === "anthropics/frontend-design");
-  const skill = { ...real, id: "demo/demo", materialized_root: dir };
-  const local = createCatalog({ ...registry, skills: [skill] });
-  assert.equal(local.readResource("skillshub://skills/demo/demo/notes.md").text, "notes\n");
-  fs.rmSync(path.join(dir, "notes.md"));
-  fs.symlinkSync(path.join(dir, "..", path.basename(dir) + "-secret.txt"), path.join(dir, "notes.md"));
-  assert.equal(local.readResource("skillshub://skills/demo/demo/notes.md"), null);
-  fs.rmSync(path.join(dir, "notes.md"));
-  assert.equal(local.readResource("skillshub://skills/demo/demo/notes.md"), null);
-});

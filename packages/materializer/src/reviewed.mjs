@@ -7,6 +7,30 @@ import { parseFrontmatter } from "../../core/src/index.mjs";
 export const sha256 = bytes => crypto.createHash("sha256").update(bytes).digest("hex");
 const riskOrder = ["none", "low", "medium", "high"];
 const fail = message => { throw new Error(message); };
+// MIT must be the complete standard text after a copyright line: a partial or
+// edited grant is not accepted as MIT.
+const MIT_TERMS = `Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.`;
+const normalizedTerms = (text) => text.replace(/\s+/g, " ").trim().replace(/\.$/, "");
+
+function isCompleteMit(text) {
+  const body = text.replace(/^\s*MIT License\s*/i, "");
+  const copyright = body.match(/^\s*Copyright\s+(?:\(c\)|©)[^\r\n]+\r?\n/i);
+  return !!copyright && normalizedTerms(body.slice(copyright[0].length)) === normalizedTerms(MIT_TERMS);
+}
 
 // Accepted licenses and how to recognize their full text. MIT or Apache-2.0 may
 // also come from the repository root (scope "repository"): only when the review
@@ -15,9 +39,7 @@ const fail = message => { throw new Error(message); };
 // byte-exact copy of the root license ships with the skill (an "attached" file).
 const LICENSE_TEXT = {
   "Apache-2.0": text => /Apache License\s+Version 2\.0/.test(text) && text.includes("Grant of Copyright License") && text.includes("Redistribution."),
-  MIT: text => /Permission is hereby granted, free of charge/.test(text)
-    && /above copyright notice and this permission notice shall be\s+included/.test(text)
-    && /^\s*Copyright\s+(?:\(c\)|©)/im.test(text)
+  MIT: isCompleteMit
 };
 
 export function detectLicense(text) {
