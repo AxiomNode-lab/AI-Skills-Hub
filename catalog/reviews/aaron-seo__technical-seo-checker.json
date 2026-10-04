@@ -1,0 +1,327 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "aaron-seo/technical-seo-checker",
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "aaron-he-zhu/aaron-marketing-skills",
+    "path": "seo-geo/tune/technical-seo-checker",
+    "revision": "cc897fa9e1e3136eb6a301130e49d8d9d1c519b2"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "seo-geo/tune/technical-seo-checker",
+    "url": "https://api.github.com/repos/aaron-he-zhu/aaron-marketing-skills/git/trees/cc897fa9e1e3136eb6a301130e49d8d9d1c519b2?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "Apache-2.0",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/aaron-he-zhu/aaron-marketing-skills/blob/cc897fa9e1e3136eb6a301130e49d8d9d1c519b2/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "seo-geo",
+        "seo-geo/tune",
+        "seo-geo/tune/technical-seo-checker"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the Apache-2.0 license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares Apache-2.0 (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the Apache-2.0 notice condition; no NOTICE file exists, so section 4(d) adds no attribution text, and no file is modified.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "medium",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md and references/bulk-audit-playbook.md, ecommerce-platform-patterns.md, http-status-codes.md, llm-crawler-handling.md, pre-migration-playbook.md, robots-txt-reference.md, technical-audit-example.md, technical-audit-templates.md in full. Audits crawlability, indexability, Core Web Vitals, mobile, HTTPS/security, URL structure, structured data and hreflang with /10 section scores and a P0/P1/P2 roadmap; includes bulk, e-commerce platform, AI-crawler robots.txt, and pre-migration playbooks.",
+      "Declares `allowed-tools: WebFetch` (SKILL.md:13) and treats fetched content as untrusted (SKILL.md:108). SKILL.md:102 gives a runnable read-only command `curl \"https://crt.sh/?q=%25.<domain>&output=json\"` (certificate-transparency subdomain lookup) and the W3C Nu validator URL — public, keyless, read-only lookups. SKILL.md:98,100,104 reference helpers (`robots.py`, `sitemap.py`, `crawl.py`, `onpage.py`, `psi.py`, `ledger.py`, `firecrawl.py`, and a gated `indexpush.py ... --key $INDEXNOW_KEY` / `--token $BAIDU_PUSH_TOKEN`, dry-run by default) under `${CLAUDE_PLUGIN_ROOT}/scripts/connectors/`; none ship with this skill, so the audit falls back to WebFetch and user-provided reports (SKILL.md:96,139). Rated medium for the shell curl to a third-party service and the described credentialed index push; acceptable because the curl is a pinned read-only public query on the user's own domain, the push is opt-in and unavailable standalone, and no destructive or state-changing command is executed by the agent.",
+      "Writes audit summaries, a pre-migration baseline, a redirect-map CSV and post-migration diffs under memory/ (SKILL.md:149; pre-migration-playbook.md:21,31,76,104-106) — the main save is after asking. Migration cutover steps (robots.txt changes, sitemap submission, removing staging noindex; pre-migration-playbook.md:89-94) are a checklist for the user, not agent actions. Non-shipping optional pointers: ../../../references/skill-contract.md (handoff shape), ../../../CONNECTORS.md, ../../../SECURITY.md, ../../../scripts/connectors/README.md. Paid tools (~~web crawler, ~~page speed tool, ~~CDN) are optional."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "664cd12e1c315650bf14cb1385359d13d4724ac03940ac10918390ef78e4f5e7",
+      "bytes": 11347,
+      "mode": "100644",
+      "git_blob": "41889521f7dedb506da3ce1c9998b78965e45e6e",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root Apache-2.0 license, attached to carry its terms and notices.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 3,
+          "evidence": "http://",
+          "context": "                        http://www.apache.org/licenses/",
+          "disposition": "accepted",
+          "reason": "License text."
+        },
+        {
+          "type": "network-access",
+          "line": 195,
+          "evidence": "http://",
+          "context": "       http://www.apache.org/licenses/LICENSE-2.0",
+          "disposition": "accepted",
+          "reason": "License text."
+        }
+      ]
+    },
+    {
+      "path": "references/bulk-audit-playbook.md",
+      "sha256": "94e1080daf4bb3110a9d8753fe5f3b3dd9117b88dc1123d50c44cd3156b948f5",
+      "bytes": 4280,
+      "mode": "100644",
+      "git_blob": "b808718d8007402240b880eeaa18d4b3b1ff0be0",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 18,
+          "evidence": "https://",
+          "context": "1. **Sitemap URL** — `https://example.com/sitemap.xml` (or `sitemap_index.xml`)",
+          "disposition": "accepted",
+          "reason": "Front-matter homepage URL (SKILL.md:10,14) and example.com sitemap URLs in prompts and robots.txt templates (SKILL.md:75; bulk-audit-playbook.md:18; llm-crawler-handling.md:58; robots-txt-reference.md:12,47); fetching is limited to WebFetch of the user's site and the crt.sh lookup noted in the overrides."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 58,
+          "evidence": "Remove",
+          "context": "1. Remove noindex from low-stock products (32 pages)  — theme.liquid",
+          "disposition": "accepted",
+          "reason": "'Remove'/'remove' refer to recommended fixes on the user's site (removing noindex, removing non-indexable URLs from a sitemap, removing a staging site from Search Console), not agent file deletion."
+        }
+      ]
+    },
+    {
+      "path": "references/ecommerce-platform-patterns.md",
+      "sha256": "e544bd27385af746032f4d4c566326633844e4a20000908eb10a3befcf6265d8",
+      "bytes": 3826,
+      "mode": "100644",
+      "git_blob": "f5db0aae304d49ed78c580cf7e6a2b4dcdcce011",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "references/http-status-codes.md",
+      "sha256": "04c2e9d0b4feba325e48d581cceb7e46093732f9d4c1ce2f8a329ef8b18b1bfb",
+      "bytes": 2529,
+      "mode": "100644",
+      "git_blob": "c682c0e2e0575f30f78e1ce76781d74f2d7d5e8b",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 35,
+          "evidence": "Remove",
+          "context": "| 404 in sitemap | Remove or redirect to equivalent page |",
+          "disposition": "accepted",
+          "reason": "'Remove'/'remove' refer to recommended fixes on the user's site (removing noindex, removing non-indexable URLs from a sitemap, removing a staging site from Search Console), not agent file deletion."
+        }
+      ]
+    },
+    {
+      "path": "references/llm-crawler-handling.md",
+      "sha256": "d831179bfab06d8a1d73cff9e9fc39a28dab1eab8cf3c69e2bcd4fe8be1dd68f",
+      "bytes": 4580,
+      "mode": "100644",
+      "git_blob": "0d815373923e855fd0310f21346c110b707694e1",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 58,
+          "evidence": "https://",
+          "context": "Sitemap: https://example.com/sitemap.xml",
+          "disposition": "accepted",
+          "reason": "Front-matter homepage URL (SKILL.md:10,14) and example.com sitemap URLs in prompts and robots.txt templates (SKILL.md:75; bulk-audit-playbook.md:18; llm-crawler-handling.md:58; robots-txt-reference.md:12,47); fetching is limited to WebFetch of the user's site and the crt.sh lookup noted in the overrides."
+        }
+      ]
+    },
+    {
+      "path": "references/pre-migration-playbook.md",
+      "sha256": "b41a708de38ddf822bf37c24d7f8e60f9788b27715dc69725b75dcf756be1202",
+      "bytes": 6092,
+      "mode": "100644",
+      "git_blob": "03d9a6da062b1e7362f8e926a30131d3140bde99",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 92,
+          "evidence": "remove",
+          "context": "4. Unblock crawling (remove any staging noindex)",
+          "disposition": "accepted",
+          "reason": "'Remove'/'remove' refer to recommended fixes on the user's site (removing noindex, removing non-indexable URLs from a sitemap, removing a staging site from Search Console), not agent file deletion."
+        }
+      ]
+    },
+    {
+      "path": "references/robots-txt-reference.md",
+      "sha256": "cb2eba170826f244c6cf653017b4f69379dbd7486aef37a493b975a409d0695d",
+      "bytes": 3138,
+      "mode": "100644",
+      "git_blob": "25e45e409e22cf0c7c568396c61e81d65c4b866a",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 12,
+          "evidence": "https://",
+          "context": "| `Sitemap: https://example.com/sitemap.xml` | Declare XML sitemap | Absolute URL; multiple lines allowed |",
+          "disposition": "accepted",
+          "reason": "Front-matter homepage URL (SKILL.md:10,14) and example.com sitemap URLs in prompts and robots.txt templates (SKILL.md:75; bulk-audit-playbook.md:18; llm-crawler-handling.md:58; robots-txt-reference.md:12,47); fetching is limited to WebFetch of the user's site and the crt.sh lookup noted in the overrides."
+        },
+        {
+          "type": "network-access",
+          "line": 47,
+          "evidence": "https://",
+          "context": "Sitemap: https://example.com/sitemap.xml",
+          "disposition": "accepted",
+          "reason": "Front-matter homepage URL (SKILL.md:10,14) and example.com sitemap URLs in prompts and robots.txt templates (SKILL.md:75; bulk-audit-playbook.md:18; llm-crawler-handling.md:58; robots-txt-reference.md:12,47); fetching is limited to WebFetch of the user's site and the crt.sh lookup noted in the overrides."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 59,
+          "evidence": "remove",
+          "context": "| Staging | `Disallow: /` plus noindex/auth; remove via Search Console if indexed |",
+          "disposition": "accepted",
+          "reason": "'Remove'/'remove' refer to recommended fixes on the user's site (removing noindex, removing non-indexable URLs from a sitemap, removing a staging site from Search Console), not agent file deletion."
+        }
+      ]
+    },
+    {
+      "path": "references/technical-audit-example.md",
+      "sha256": "f92ca242d80b70c0e4e6c3cfac497964cf40e304fbacd1253f622646ebdb8680",
+      "bytes": 4221,
+      "mode": "100644",
+      "git_blob": "e60b0d89a21b9528f3ac4c8c09d6d25bf6900588",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 29,
+          "evidence": "Remove",
+          "context": "| Only indexable URLs | [pass/warn/fail] | [noindex/canonical/redirect count] | Remove non-indexable URLs |",
+          "disposition": "accepted",
+          "reason": "'Remove'/'remove' refer to recommended fixes on the user's site (removing noindex, removing non-indexable URLs from a sitemap, removing a staging site from Search Console), not agent file deletion."
+        }
+      ]
+    },
+    {
+      "path": "references/technical-audit-templates.md",
+      "sha256": "0db1ed35641046727255d1b22bed57dd7b4feb6e755c9d405b2d494541e37215",
+      "bytes": 6368,
+      "mode": "100644",
+      "git_blob": "1af330ca15dc347b68f76f13a002e0e8faed4d6b",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "644b100eb3f0d0c7858342873c792f4b3f01db5e80bc05e50ed97ac0c9c030ce",
+      "bytes": 12320,
+      "mode": "100644",
+      "git_blob": "26b7352464931419189594f4c95f515ec1b70eb5",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 10,
+          "evidence": "https://",
+          "context": "homepage: \"https://github.com/aaron-he-zhu/aaron-marketing-skills\"",
+          "disposition": "accepted",
+          "reason": "Front-matter homepage URL (SKILL.md:10,14) and example.com sitemap URLs in prompts and robots.txt templates (SKILL.md:75; bulk-audit-playbook.md:18; llm-crawler-handling.md:58; robots-txt-reference.md:12,47); fetching is limited to WebFetch of the user's site and the crt.sh lookup noted in the overrides."
+        },
+        {
+          "type": "network-access",
+          "line": 14,
+          "evidence": "https://",
+          "context": "metadata: {\"author\": \"aaron-he-zhu\", \"version\": \"20.1.0\", \"discipline\": \"seo-geo\", \"phase\": \"tune\", \"geo-relevance\": \"low\", \"hermes\": {\"tags\": [\"marketing\", \"seo-geo\", \"tune\"], \"category\": \"seo-geo\"}, \"openclaw\": {\"emoji\": \"🔍\", \"homepage\":",
+          "disposition": "accepted",
+          "reason": "Front-matter homepage URL (SKILL.md:10,14) and example.com sitemap URLs in prompts and robots.txt templates (SKILL.md:75; bulk-audit-playbook.md:18; llm-crawler-handling.md:58; robots-txt-reference.md:12,47); fetching is limited to WebFetch of the user's site and the crt.sh lookup noted in the overrides."
+        },
+        {
+          "type": "network-access",
+          "line": 75,
+          "evidence": "https://",
+          "context": "Audit all URLs in https://example.com/sitemap.xml",
+          "disposition": "accepted",
+          "reason": "Front-matter homepage URL (SKILL.md:10,14) and example.com sitemap URLs in prompts and robots.txt templates (SKILL.md:75; bulk-audit-playbook.md:18; llm-crawler-handling.md:58; robots-txt-reference.md:12,47); fetching is limited to WebFetch of the user's site and the crt.sh lookup noted in the overrides."
+        },
+        {
+          "type": "network-access",
+          "line": 102,
+          "evidence": "curl",
+          "context": "**Keyless recipe sharpeners**: subdomain inventory from certificate-transparency logs — `curl \"https://crt.sh/?q=%25.<domain>&output=json\"` (dedupe on `name_value`; slow and occasionally times out) — surfaces forgotten or staging subdomains",
+          "disposition": "accepted",
+          "reason": "Runnable `curl` to crt.sh (public certificate-transparency log) for the user's domain; read-only, keyless, output is JSON data not executed."
+        },
+        {
+          "type": "network-access",
+          "line": 102,
+          "evidence": "https://",
+          "context": "**Keyless recipe sharpeners**: subdomain inventory from certificate-transparency logs — `curl \"https://crt.sh/?q=%25.<domain>&output=json\"` (dedupe on `name_value`; slow and occasionally times out) — surfaces forgotten or staging subdomains",
+          "disposition": "accepted",
+          "reason": "Runnable `curl` to crt.sh (public certificate-transparency log) for the user's domain; read-only, keyless, output is JSON data not executed."
+        },
+        {
+          "type": "network-access",
+          "line": 102,
+          "evidence": "https://",
+          "context": "**Keyless recipe sharpeners**: subdomain inventory from certificate-transparency logs — `curl \"https://crt.sh/?q=%25.<domain>&output=json\"` (dedupe on `name_value`; slow and occasionally times out) — surfaces forgotten or staging subdomains",
+          "disposition": "accepted",
+          "reason": "Runnable `curl` to crt.sh (public certificate-transparency log) for the user's domain; read-only, keyless, output is JSON data not executed."
+        },
+        {
+          "type": "shell-execution",
+          "line": 102,
+          "evidence": "sh",
+          "context": "**Keyless recipe sharpeners**: subdomain inventory from certificate-transparency logs — `curl \"https://crt.sh/?q=%25.<domain>&output=json\"` (dedupe on `name_value`; slow and occasionally times out) — surfaces forgotten or staging subdomains",
+          "disposition": "accepted",
+          "reason": "Same crt.sh curl; it is not piped to a shell and performs no state change."
+        }
+      ]
+    }
+  ]
+}

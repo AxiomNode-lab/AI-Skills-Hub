@@ -1,0 +1,290 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "microsoft/azure-storage-queue-rust",
+  "status": "approved",
+  "reviewed_on": "2026-10-02",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/azure-sdk-rust/skills/azure-storage-queue-rust",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": ".github/plugins/azure-sdk-rust/skills/azure-storage-queue-rust",
+    "url": "https://api.github.com/repos/microsoft/skills/git/trees/84d8eaa8ae95930f55cdceb3e27196c795dab038?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/microsoft/skills/blob/84d8eaa8ae95930f55cdceb3e27196c795dab038/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        ".github",
+        ".github/plugins",
+        ".github/plugins/azure-sdk-rust",
+        ".github/plugins/azure-sdk-rust/skills",
+        ".github/plugins/azure-sdk-rust/skills/azure-storage-queue-rust"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT License with its copyright notice, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found; SKILL.md frontmatter declares MIT. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "medium",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": true,
+      "network": false,
+      "credentials": false,
+      "package_install": true,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md in full (the skill's only file). Rust guide for the official azure_storage_queue crate: QueueServiceClient/QueueClient with DeveloperToolsCredential, sending, receiving, deleting and peeking messages, RBAC roles and Rust SDK best practices.",
+      "Medium because SKILL.md:28 has `cargo add azure_storage_queue azure_identity azure_core tokio` and SKILL.md:158 tells the agent to manage dependencies with `cargo add` rather than editing Cargo.toml; SKILL.md:23 explicitly restricts installs to official azure-sdk crates, which limits supply-chain risk. Queue operations are sample code against the user's own storage account.",
+      "SKILL.md:166 suggests running `cargo clippy -- -D warnings` when lint-clean output is expected; a read-only build/lint command. No credentials are hard-coded and the skill says never to hardcode them (SKILL.md:161)."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "git_blob": "79656060de00aa4659ad2c276d5be8830664d544",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry the copyright and permission notice.",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "75f05006d817cfd262462fda75d0e0a4495d90665cbf79e37f83fe7d96a68c3d",
+      "bytes": 7620,
+      "mode": "100644",
+      "git_blob": "394fb2c299773253527edcdf8f6505139edd8f27",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 20,
+          "evidence": "delete",
+          "context": "- You need to peek, receive, or delete queue messages",
+          "disposition": "accepted",
+          "reason": "Matches on deleting/removing queue messages and on 'add and remove' dependencies with cargo; these are remote queue operations or package-manager edits, not arbitrary file deletions."
+        },
+        {
+          "type": "network-access",
+          "line": 23,
+          "evidence": "https://",
+          "context": "> **IMPORTANT:** Only use the official `azure_storage_queue` crate published by the [azure-sdk](https://crates.io/users/azure-sdk) crates.io user. Do NOT use unofficial or community crates. Official crates use underscores in names and none ",
+          "disposition": "accepted",
+          "reason": "Placeholder queue endpoints and crates.io/docs.rs/GitHub reference links; the agent is not told to fetch anything beyond installing crates."
+        },
+        {
+          "type": "shell-execution",
+          "line": 27,
+          "evidence": "sh",
+          "context": "```sh",
+          "disposition": "accepted",
+          "reason": "Shell blocks with the cargo add install line and a placeholder environment variable; no other commands."
+        },
+        {
+          "type": "package-install",
+          "line": 28,
+          "evidence": "cargo add",
+          "context": "cargo add azure_storage_queue azure_identity azure_core tokio",
+          "disposition": "accepted",
+          "reason": "`cargo add` of official Azure SDK crates plus tokio, with guidance to use cargo for dependency changes."
+        },
+        {
+          "type": "shell-execution",
+          "line": 35,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Shell blocks with the cargo add install line and a placeholder environment variable; no other commands."
+        },
+        {
+          "type": "network-access",
+          "line": 36,
+          "evidence": "https://",
+          "context": "AZURE_STORAGE_QUEUE_ENDPOINT=https://<account>.queue.core.windows.net/ # Required for all operations",
+          "disposition": "accepted",
+          "reason": "Placeholder queue endpoints and crates.io/docs.rs/GitHub reference links; the agent is not told to fetch anything beyond installing crates."
+        },
+        {
+          "type": "credential-access",
+          "line": 51,
+          "evidence": "credential",
+          "context": "    let credential = DeveloperToolsCredential::new(None)?;",
+          "disposition": "accepted",
+          "reason": "DeveloperToolsCredential construction in Rust sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 52,
+          "evidence": "https://",
+          "context": "    let service_url = Url::parse(\"https://<storage_account_name>.queue.core.windows.net/\")?;",
+          "disposition": "accepted",
+          "reason": "Placeholder queue endpoints and crates.io/docs.rs/GitHub reference links; the agent is not told to fetch anything beyond installing crates."
+        },
+        {
+          "type": "credential-access",
+          "line": 53,
+          "evidence": "credential",
+          "context": "    let service_client = QueueServiceClient::new(service_url, Some(credential), None)?;",
+          "disposition": "accepted",
+          "reason": "DeveloperToolsCredential construction in Rust sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 68,
+          "evidence": "delete",
+          "context": "| `QueueClient`        | Queue operations, send/receive/delete | `service_client.queue_client(\"<name>\")?` |",
+          "disposition": "accepted",
+          "reason": "Matches on deleting/removing queue messages and on 'add and remove' dependencies with cargo; these are remote queue operations or package-manager edits, not arbitrary file deletions."
+        },
+        {
+          "type": "credential-access",
+          "line": 81,
+          "evidence": "credential",
+          "context": "    let credential = DeveloperToolsCredential::new(None)?;",
+          "disposition": "accepted",
+          "reason": "DeveloperToolsCredential construction in Rust sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 82,
+          "evidence": "https://",
+          "context": "    let service_url = Url::parse(\"https://<storage_account_name>.queue.core.windows.net/\")?;",
+          "disposition": "accepted",
+          "reason": "Placeholder queue endpoints and crates.io/docs.rs/GitHub reference links; the agent is not told to fetch anything beyond installing crates."
+        },
+        {
+          "type": "credential-access",
+          "line": 83,
+          "evidence": "credential",
+          "context": "    let service_client = QueueServiceClient::new(service_url, Some(credential), None)?;",
+          "disposition": "accepted",
+          "reason": "DeveloperToolsCredential construction in Rust sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 105,
+          "evidence": "credential",
+          "context": "    let credential = DeveloperToolsCredential::new(None)?;",
+          "disposition": "accepted",
+          "reason": "DeveloperToolsCredential construction in Rust sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 106,
+          "evidence": "https://",
+          "context": "    let service_url = Url::parse(\"https://<storage_account_name>.queue.core.windows.net/\")?;",
+          "disposition": "accepted",
+          "reason": "Placeholder queue endpoints and crates.io/docs.rs/GitHub reference links; the agent is not told to fetch anything beyond installing crates."
+        },
+        {
+          "type": "credential-access",
+          "line": 107,
+          "evidence": "credential",
+          "context": "    let service_client = QueueServiceClient::new(service_url, Some(credential), None)?;",
+          "disposition": "accepted",
+          "reason": "DeveloperToolsCredential construction in Rust sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 119,
+          "evidence": "Delete",
+          "context": "### Delete a Message",
+          "disposition": "accepted",
+          "reason": "Matches on deleting/removing queue messages and on 'add and remove' dependencies with cargo; these are remote queue operations or package-manager edits, not arbitrary file deletions."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 121,
+          "evidence": "delete",
+          "context": "After receiving a message, delete it using the message ID and pop receipt:",
+          "disposition": "accepted",
+          "reason": "Matches on deleting/removing queue messages and on 'add and remove' dependencies with cargo; these are remote queue operations or package-manager edits, not arbitrary file deletions."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 154,
+          "evidence": "delete",
+          "context": "| `Storage Queue Data Message Processor` | Receive and delete     |",
+          "disposition": "accepted",
+          "reason": "Matches on deleting/removing queue messages and on 'add and remove' dependencies with cargo; these are remote queue operations or package-manager edits, not arbitrary file deletions."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 158,
+          "evidence": "remove",
+          "context": "1. **Use `cargo add` to manage dependencies, never edit `Cargo.toml` directly.** Add and remove Rust SDK dependencies with cargo commands instead of manual manifest edits.",
+          "disposition": "accepted",
+          "reason": "Matches on deleting/removing queue messages and on 'add and remove' dependencies with cargo; these are remote queue operations or package-manager edits, not arbitrary file deletions."
+        },
+        {
+          "type": "package-install",
+          "line": 158,
+          "evidence": "cargo add",
+          "context": "1. **Use `cargo add` to manage dependencies, never edit `Cargo.toml` directly.** Add and remove Rust SDK dependencies with cargo commands instead of manual manifest edits.",
+          "disposition": "accepted",
+          "reason": "`cargo add` of official Azure SDK crates plus tokio, with guidance to use cargo for dependency changes."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 164,
+          "evidence": "Delete",
+          "context": "7. **Delete messages after processing** — use the message ID and pop receipt from `receive_messages`",
+          "disposition": "accepted",
+          "reason": "Matches on deleting/removing queue messages and on 'add and remove' dependencies with cargo; these are remote queue operations or package-manager edits, not arbitrary file deletions."
+        },
+        {
+          "type": "network-access",
+          "line": 173,
+          "evidence": "https://",
+          "context": "| API Reference | https://docs.rs/crate/azure_storage_queue/latest                                      |",
+          "disposition": "accepted",
+          "reason": "Placeholder queue endpoints and crates.io/docs.rs/GitHub reference links; the agent is not told to fetch anything beyond installing crates."
+        },
+        {
+          "type": "network-access",
+          "line": 174,
+          "evidence": "https://",
+          "context": "| crates.io     | https://crates.io/crates/azure_storage_queue                                          |",
+          "disposition": "accepted",
+          "reason": "Placeholder queue endpoints and crates.io/docs.rs/GitHub reference links; the agent is not told to fetch anything beyond installing crates."
+        },
+        {
+          "type": "network-access",
+          "line": 175,
+          "evidence": "https://",
+          "context": "| Source Code   | https://github.com/Azure/azure-sdk-for-rust/tree/main/sdk/storage/azure_storage_queue |",
+          "disposition": "accepted",
+          "reason": "Placeholder queue endpoints and crates.io/docs.rs/GitHub reference links; the agent is not told to fetch anything beyond installing crates."
+        }
+      ]
+    }
+  ]
+}

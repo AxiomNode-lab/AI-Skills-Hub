@@ -24,8 +24,11 @@ test("blocked skill cannot be installed",()=>{
 
 
 test("incompatible agent is rejected before install resolution",()=>{
-  const plan=buildInstallPlan([{...base,distribution:"source-direct",compatibility:["agent-skills","claude-code"]}],"codex");
-  assert.equal(plan[0].action,"incompatible");
+  for(const skill of [
+    {...base,distribution:"source-direct",compatibility:["claude-code"]},
+    {...base,distribution:"source-direct",artifact_type:"mcp-server",compatibility:["agent-skills","claude-code"]}
+  ]) assert.equal(buildInstallPlan([skill],"codex")[0].action,"incompatible");
+  assert.equal(buildInstallPlan([{...base,distribution:"source-direct",compatibility:["agent-skills"]}],"unknown-agent")[0].action,"incompatible");
 });
 
 

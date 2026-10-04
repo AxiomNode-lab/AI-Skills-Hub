@@ -1,0 +1,256 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "microsoft/azure-monitor-opentelemetry-exporter-java",
+  "status": "approved",
+  "reviewed_on": "2026-10-02",
+  "reviewer": "AI-assisted artifact review; not an independent security certification",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/azure-sdk-java/skills/azure-monitor-opentelemetry-exporter-java",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": ".github/plugins/azure-sdk-java/skills/azure-monitor-opentelemetry-exporter-java",
+    "url": "https://api.github.com/repos/microsoft/skills/git/trees/84d8eaa8ae95930f55cdceb3e27196c795dab038?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/microsoft/skills/blob/84d8eaa8ae95930f55cdceb3e27196c795dab038/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        ".github",
+        ".github/plugins",
+        ".github/plugins/azure-sdk-java",
+        ".github/plugins/azure-sdk-java/skills",
+        ".github/plugins/azure-sdk-java/skills/azure-monitor-opentelemetry-exporter-java"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT License with its copyright notice, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares license MIT, consistent with the root license. Every file was read in full; no third-party copyright notice, other license grant, or copied third-party text was found. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "low",
+    "blocking_findings": [],
+    "capabilities": {
+      "network": false,
+      "filesystem_write": false
+    },
+    "notes": [
+      "Read SKILL.md and references/examples.md in full. Java OpenTelemetry samples for the deprecated Azure Monitor exporter and migration to autoconfigure.",
+      "Connection strings appear only as 'xxx' and '{connection-string}' placeholders or are read from an environment variable in sample code. No instruction to read, print, or send real secrets. Links point to Maven Central, GitHub, Microsoft Learn, and opentelemetry.io documentation."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "git_blob": "79656060de00aa4659ad2c276d5be8830664d544",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry the copyright and permission notice.",
+      "findings": []
+    },
+    {
+      "path": "references/examples.md",
+      "sha256": "85bdfc7be556eefb310fe51886e3bacaca759187dea377270fa4022d771d5d06",
+      "bytes": 5513,
+      "mode": "100644",
+      "git_blob": "0c6065ccc15d8b72d9ee077ce2d297768ab08468",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 15,
+          "evidence": "Remove",
+          "context": "### Remove (Deprecated)",
+          "disposition": "accepted",
+          "reason": "Prose or code-comment use of remove/delete (editing advice or a dependency swap), not a file-deletion command."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 18,
+          "evidence": "REMOVE",
+          "context": "<!-- REMOVE THIS -->",
+          "disposition": "accepted",
+          "reason": "Prose or code-comment use of remove/delete (editing advice or a dependency swap), not a file-deletion command."
+        },
+        {
+          "type": "shell-execution",
+          "line": 39,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Shell example setting a placeholder environment variable for the user's application."
+        },
+        {
+          "type": "network-access",
+          "line": 40,
+          "evidence": "https://",
+          "context": "APPLICATIONINSIGHTS_CONNECTION_STRING=InstrumentationKey=xxx;IngestionEndpoint=https://xxx.in.applicationinsights.azure.com/",
+          "disposition": "accepted",
+          "reason": "Placeholder endpoint inside a sample connection string or code example; not a real request target."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 168,
+          "evidence": "Remove",
+          "context": "4. Remove manual span processor registration (unless custom processors needed)",
+          "disposition": "accepted",
+          "reason": "Prose or code-comment use of remove/delete (editing advice or a dependency swap), not a file-deletion command."
+        },
+        {
+          "type": "network-access",
+          "line": 175,
+          "evidence": "https://",
+          "context": "| Migration Guide | https://github.com/Azure/azure-sdk-for-java/blob/main/sdk/monitor/azure-monitor-opentelemetry-exporter/MIGRATION.md |",
+          "disposition": "accepted",
+          "reason": "Reference or citation link in documentation; the skill does not instruct the agent to fetch it."
+        },
+        {
+          "type": "network-access",
+          "line": 176,
+          "evidence": "https://",
+          "context": "| Autoconfigure Package | https://central.sonatype.com/artifact/com.azure/azure-monitor-opentelemetry-autoconfigure |",
+          "disposition": "accepted",
+          "reason": "Reference or citation link in documentation; the skill does not instruct the agent to fetch it."
+        },
+        {
+          "type": "network-access",
+          "line": 177,
+          "evidence": "https://",
+          "context": "| OpenTelemetry Java | https://opentelemetry.io/docs/languages/java/ |",
+          "disposition": "accepted",
+          "reason": "Reference or citation link in documentation; the skill does not instruct the agent to fetch it."
+        },
+        {
+          "type": "network-access",
+          "line": 178,
+          "evidence": "https://",
+          "context": "| Application Insights | https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview |",
+          "disposition": "accepted",
+          "reason": "Reference or citation link in documentation; the skill does not instruct the agent to fetch it."
+        }
+      ]
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "2ecdd3db79950efc38de599e90887a41f34e9a670949b9be8e6708578dbad6df",
+      "bytes": 8772,
+      "mode": "100644",
+      "git_blob": "2be5ec33b16457816e0737dcc99007560fea74d5",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 18,
+          "evidence": "https://",
+          "context": "> See [Migration Guide](https://github.com/Azure/azure-sdk-for-java/blob/main/sdk/monitor/azure-monitor-opentelemetry-exporter/MIGRATION.md) for detailed instructions.",
+          "disposition": "accepted",
+          "reason": "Reference or citation link in documentation; the skill does not instruct the agent to fetch it."
+        },
+        {
+          "type": "shell-execution",
+          "line": 44,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Shell example setting a placeholder environment variable for the user's application."
+        },
+        {
+          "type": "network-access",
+          "line": 45,
+          "evidence": "https://",
+          "context": "APPLICATIONINSIGHTS_CONNECTION_STRING=InstrumentationKey=xxx;IngestionEndpoint=https://xxx.in.applicationinsights.azure.com/",
+          "disposition": "accepted",
+          "reason": "Placeholder endpoint inside a sample connection string or code example; not a real request target."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 254,
+          "evidence": "Remove",
+          "context": "   <!-- Remove -->",
+          "disposition": "accepted",
+          "reason": "Prose or code-comment use of remove/delete (editing advice or a dependency swap), not a file-deletion command."
+        },
+        {
+          "type": "network-access",
+          "line": 267,
+          "evidence": "https://",
+          "context": "2. Update initialization code per [Migration Guide](https://github.com/Azure/azure-sdk-for-java/blob/main/sdk/monitor/azure-monitor-opentelemetry-exporter/MIGRATION.md)",
+          "disposition": "accepted",
+          "reason": "Reference or citation link in documentation; the skill does not instruct the agent to fetch it."
+        },
+        {
+          "type": "network-access",
+          "line": 283,
+          "evidence": "https://",
+          "context": "| Maven Package | https://central.sonatype.com/artifact/com.azure/azure-monitor-opentelemetry-exporter |",
+          "disposition": "accepted",
+          "reason": "Reference or citation link in documentation; the skill does not instruct the agent to fetch it."
+        },
+        {
+          "type": "network-access",
+          "line": 284,
+          "evidence": "https://",
+          "context": "| GitHub | https://github.com/Azure/azure-sdk-for-java/tree/main/sdk/monitor/azure-monitor-opentelemetry-exporter |",
+          "disposition": "accepted",
+          "reason": "Reference or citation link in documentation; the skill does not instruct the agent to fetch it."
+        },
+        {
+          "type": "network-access",
+          "line": 285,
+          "evidence": "https://",
+          "context": "| Migration Guide | https://github.com/Azure/azure-sdk-for-java/blob/main/sdk/monitor/azure-monitor-opentelemetry-exporter/MIGRATION.md |",
+          "disposition": "accepted",
+          "reason": "Reference or citation link in documentation; the skill does not instruct the agent to fetch it."
+        },
+        {
+          "type": "network-access",
+          "line": 286,
+          "evidence": "https://",
+          "context": "| Autoconfigure Package | https://central.sonatype.com/artifact/com.azure/azure-monitor-opentelemetry-autoconfigure |",
+          "disposition": "accepted",
+          "reason": "Reference or citation link in documentation; the skill does not instruct the agent to fetch it."
+        },
+        {
+          "type": "network-access",
+          "line": 287,
+          "evidence": "https://",
+          "context": "| OpenTelemetry Java | https://opentelemetry.io/docs/languages/java/ |",
+          "disposition": "accepted",
+          "reason": "Reference or citation link in documentation; the skill does not instruct the agent to fetch it."
+        },
+        {
+          "type": "network-access",
+          "line": 288,
+          "evidence": "https://",
+          "context": "| Application Insights | https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview |",
+          "disposition": "accepted",
+          "reason": "Reference or citation link in documentation; the skill does not instruct the agent to fetch it."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "bagelhole/convex-backend",
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "infrastructure/platforms/convex-backend",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "review": {
+    "path": "catalog/reviews/bagelhole__convex-backend.json",
+    "sha256": "7a937a1f4b04fedb15ba6927f4a1ec66631a4304c26d15ee77f650074274845c"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": true,
+      "filesystem_write": false,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "shell-execution",
+        "line": 31,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 33,
+        "evidence": "npm install",
+        "context": "npm install convex",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 151,
+        "evidence": "https://",
+        "context": "    const response = await fetch(\"https://api.anthropic.com/v1/messages\", {",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 155,
+        "evidence": "api-key",
+        "context": "        \"x-api-key\": process.env.ANTHROPIC_API_KEY!,",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 155,
+        "evidence": "process.env",
+        "context": "        \"x-api-key\": process.env.ANTHROPIC_API_KEY!,",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 204,
+        "evidence": "process.env",
+        "context": "      domain: process.env.AUTH_DOMAIN,",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 259,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 9279
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "88e496a813f683211b6496a02c5d2941b3609096bd157c76b41ba0c035b0f971",
+      "bytes": 8211,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 9279
+}

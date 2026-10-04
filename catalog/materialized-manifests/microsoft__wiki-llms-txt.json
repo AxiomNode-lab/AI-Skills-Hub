@@ -1,0 +1,60 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "microsoft/wiki-llms-txt",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/deep-wiki/skills/wiki-llms-txt",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "review": {
+    "path": "catalog/reviews/microsoft__wiki-llms-txt.json",
+    "sha256": "996b3d66eb41e53aa1fe6628fa2e21974ae84c3baf4d7faea3b3e2025269807f"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "low",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": false,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "network-access",
+        "line": 12,
+        "evidence": "https://",
+        "context": "Generate `llms.txt` and `llms-full.txt` files that provide LLM-friendly access to wiki documentation, following the [llms.txt specification](https://llmstxt.org/).",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 34,
+        "evidence": "https://",
+        "context": "The file follows the [llms.txt specification](https://llmstxt.org/):",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 6307
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "62f14490deb8e0713eca06ab576f6fe45d081f1cbb9452a45389a9540f39ab69",
+      "bytes": 5167,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 6307
+}

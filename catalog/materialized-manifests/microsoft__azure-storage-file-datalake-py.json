@@ -1,0 +1,247 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "microsoft/azure-storage-file-datalake-py",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/azure-sdk-python/skills/azure-storage-file-datalake-py",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "review": {
+    "path": "catalog/reviews/microsoft__azure-storage-file-datalake-py.json",
+    "sha256": "ca4cdf9ec836f55d5d5ff4569d68a9a0b7a30bdbcdb54ddaf1024cfa9187c4b9"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "filesystem-write",
+        "line": 34,
+        "evidence": "delete",
+        "context": "- Include cleanup/delete paths for created resources in examples.",
+        "file": "references/capabilities.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 62,
+        "evidence": "credential",
+        "context": "    async with DefaultAzureCredential() as credential:",
+        "file": "references/non-hero-scenarios.md"
+      },
+      {
+        "type": "network-access",
+        "line": 64,
+        "evidence": "https://",
+        "context": "            account_url=\"https://<account>.dfs.core.windows.net\",",
+        "file": "references/non-hero-scenarios.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 65,
+        "evidence": "credential",
+        "context": "            credential=credential",
+        "file": "references/non-hero-scenarios.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 65,
+        "evidence": "credential",
+        "context": "            credential=credential",
+        "file": "references/non-hero-scenarios.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 19,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 20,
+        "evidence": "pip install",
+        "context": "pip install azure-storage-file-datalake azure-identity",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 25,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 26,
+        "evidence": "https://",
+        "context": "AZURE_STORAGE_ACCOUNT_URL=https://<account>.dfs.core.windows.net  # Required for all auth methods",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 36,
+        "evidence": "credential",
+        "context": ">    - Production: set `AZURE_TOKEN_CREDENTIALS=prod` (or `AZURE_TOKEN_CREDENTIALS=<specific_credential>`) to constrain the credential chain to production-safe credentials.",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 39,
+        "evidence": "credential",
+        "context": ">    - Async: `async with <Client>(...) as client:` **and** `async with DefaultAzureCredential() as credential:` (from `azure.identity.aio`)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 48,
+        "evidence": "credential",
+        "context": "credential = DefaultAzureCredential(require_envvar=True)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 49,
+        "evidence": "credential",
+        "context": "# Or use a specific credential directly in production:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 50,
+        "evidence": "credential",
+        "context": "# See https://learn.microsoft.com/python/api/overview/azure/identity-readme?view=azure-python#credential-classes",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 50,
+        "evidence": "https://",
+        "context": "# See https://learn.microsoft.com/python/api/overview/azure/identity-readme?view=azure-python#credential-classes",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 51,
+        "evidence": "credential",
+        "context": "# credential = ManagedIdentityCredential()",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 52,
+        "evidence": "https://",
+        "context": "account_url = \"https://<account>.dfs.core.windows.net\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 54,
+        "evidence": "credential",
+        "context": "with DataLakeServiceClient(account_url=account_url, credential=credential) as service_client:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 54,
+        "evidence": "credential",
+        "context": "with DataLakeServiceClient(account_url=account_url, credential=credential) as service_client:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 77,
+        "evidence": "Delete",
+        "context": "# Delete",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 99,
+        "evidence": "Delete",
+        "context": "# Delete directory",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 145,
+        "evidence": "Delete",
+        "context": "### Delete File",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 207,
+        "evidence": "credential",
+        "context": "    async with DefaultAzureCredential() as credential:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 209,
+        "evidence": "https://",
+        "context": "            account_url=\"https://<account>.dfs.core.windows.net\",",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 210,
+        "evidence": "credential",
+        "context": "            credential=credential",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 210,
+        "evidence": "credential",
+        "context": "            credential=credential",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 227,
+        "evidence": "credential",
+        "context": "2. **Always use context managers for clients and async credentials.** Wrap every client in `with DataLakeServiceClient(...) as client:` (sync) or `async with DataLakeServiceClient(...) as client:` (async). For async `DefaultAzureCredential`",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 13103
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/capabilities.md",
+      "sha256": "e4344ff6d4c9ae5008bdd43035bcf827c98ed3d84aa8a67c2ec6eaa8e99b2ead",
+      "bytes": 1630,
+      "mode": "100644"
+    },
+    {
+      "path": "references/non-hero-scenarios.md",
+      "sha256": "e9b1e3ab80d3d532c85bbc29710bca59ac92fe41342ae33b4c937d6ff03ecaed",
+      "bytes": 2158,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "a8a7321f17a1097d0c418cf1e57b3c8758f25e986fb4f35f8de408f6d8c43d95",
+      "bytes": 8175,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 13103
+}

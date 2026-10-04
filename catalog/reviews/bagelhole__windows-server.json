@@ -1,0 +1,288 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "bagelhole/windows-server",
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "infrastructure/servers/windows-server",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "infrastructure/servers/windows-server",
+    "url": "https://api.github.com/repos/BagelHole/DevOps-Security-Agent-Skills/git/trees/0365f57a079b1332f95cf26e31dd2d5332a8399f?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/BagelHole/DevOps-Security-Agent-Skills/blob/0365f57a079b1332f95cf26e31dd2d5332a8399f/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "infrastructure",
+        "infrastructure/servers",
+        "infrastructure/servers/windows-server"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found; PowerShell examples are short original command samples. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "medium",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "package_install": true,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md in full; it is the only file. PowerShell reference for Windows Server: system info, services, firewall and DNS settings, remoting, roles/features, IIS sites and bindings, Active Directory forest/users/groups, Windows Update via PSWindowsUpdate, event logs, scheduled tasks, and troubleshooting.",
+      "Following it can make the agent run privileged PowerShell that changes server state: install/remove Windows features, open firewall ports, promote a domain controller (SKILL.md:157-162), create users and add them to groups, reset passwords, install PSWindowsUpdate from the PowerShell Gallery and apply updates with -AutoReboot (SKILL.md:203-209), clear an event log (SKILL.md:256, marked 'use cautiously'), and register SYSTEM scheduled tasks. Medium because these are administrator-level changes to real servers; acceptable because the file is a command reference for the user's own administration task, not a procedure to run unprompted, and it does not disable security controls. Users should confirm before reboots, forest promotion, or log clearing.",
+      "Passwords in the examples ('P@ssw0rd!', 'TempP@ss1', 'NewP@ss1') are placeholders but are passed as plaintext; the example at SKILL.md:177 adds a new user to Domain Admins, which users should not copy blindly. Related Skills (SKILL.md:298-302) are named, not linked, and do not ship with this skill. Frontmatter declares license: MIT."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "67c5c5cbb12cafb1515e449748866bd40da7dec9",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "df29d44f6a8670e19e2b1dfe5b679cc15a8c0c01c64338795eef7f77a7ab3d73",
+      "bytes": 10933,
+      "mode": "100644",
+      "git_blob": "1e3264d4e2e3c53fd03a38539a2186f75bcfdb9d",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 3,
+          "evidence": "PowerShell",
+          "context": "description: Administer Windows Server systems. Manage IIS, Active Directory, and PowerShell automation. Use when administering Windows infrastructure.",
+          "disposition": "accepted",
+          "reason": "PowerShell code fences and mentions of PowerShell for administering the user's Windows servers."
+        },
+        {
+          "type": "shell-execution",
+          "line": 12,
+          "evidence": "PowerShell",
+          "context": "Windows Server management and PowerShell automation for production workloads including IIS web hosting, Active Directory domain services, and system maintenance.",
+          "disposition": "accepted",
+          "reason": "PowerShell code fences and mentions of PowerShell for administering the user's Windows servers."
+        },
+        {
+          "type": "shell-execution",
+          "line": 19,
+          "evidence": "PowerShell",
+          "context": "- Automating administrative tasks with PowerShell",
+          "disposition": "accepted",
+          "reason": "PowerShell code fences and mentions of PowerShell for administering the user's Windows servers."
+        },
+        {
+          "type": "shell-execution",
+          "line": 26,
+          "evidence": "PowerShell",
+          "context": "- PowerShell 5.1+ (built-in) or PowerShell 7+ installed",
+          "disposition": "accepted",
+          "reason": "PowerShell code fences and mentions of PowerShell for administering the user's Windows servers."
+        },
+        {
+          "type": "shell-execution",
+          "line": 26,
+          "evidence": "PowerShell",
+          "context": "- PowerShell 5.1+ (built-in) or PowerShell 7+ installed",
+          "disposition": "accepted",
+          "reason": "PowerShell code fences and mentions of PowerShell for administering the user's Windows servers."
+        },
+        {
+          "type": "shell-execution",
+          "line": 30,
+          "evidence": "PowerShell",
+          "context": "## PowerShell Administration Essentials",
+          "disposition": "accepted",
+          "reason": "PowerShell code fences and mentions of PowerShell for administering the user's Windows servers."
+        },
+        {
+          "type": "shell-execution",
+          "line": 32,
+          "evidence": "powershell",
+          "context": "```powershell",
+          "disposition": "accepted",
+          "reason": "PowerShell code fences and mentions of PowerShell for administering the user's Windows servers."
+        },
+        {
+          "type": "shell-execution",
+          "line": 33,
+          "evidence": "PowerShell",
+          "context": "# Check PowerShell version",
+          "disposition": "accepted",
+          "reason": "PowerShell code fences and mentions of PowerShell for administering the user's Windows servers."
+        },
+        {
+          "type": "shell-execution",
+          "line": 63,
+          "evidence": "PowerShell",
+          "context": "# PowerShell remoting to another server",
+          "disposition": "accepted",
+          "reason": "PowerShell code fences and mentions of PowerShell for administering the user's Windows servers."
+        },
+        {
+          "type": "credential-access",
+          "line": 64,
+          "evidence": "Credential",
+          "context": "Enter-PSSession -ComputerName server02 -Credential (Get-Credential)",
+          "disposition": "accepted",
+          "reason": "Get-Credential prompts the user for credentials when opening a remote PSSession; nothing is stored or transmitted elsewhere."
+        },
+        {
+          "type": "credential-access",
+          "line": 64,
+          "evidence": "Credential",
+          "context": "Enter-PSSession -ComputerName server02 -Credential (Get-Credential)",
+          "disposition": "accepted",
+          "reason": "Get-Credential prompts the user for credentials when opening a remote PSSession; nothing is stored or transmitted elsewhere."
+        },
+        {
+          "type": "shell-execution",
+          "line": 72,
+          "evidence": "powershell",
+          "context": "```powershell",
+          "disposition": "accepted",
+          "reason": "PowerShell code fences and mentions of PowerShell for administering the user's Windows servers."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 94,
+          "evidence": "Remove",
+          "context": "# Remove a feature",
+          "disposition": "accepted",
+          "reason": "Scanner matched 'Remove'/'remove' in Uninstall-WindowsFeature and Unregister-ScheduledTask comments, which change server configuration rather than delete files."
+        },
+        {
+          "type": "shell-execution",
+          "line": 100,
+          "evidence": "powershell",
+          "context": "```powershell",
+          "disposition": "accepted",
+          "reason": "PowerShell code fences and mentions of PowerShell for administering the user's Windows servers."
+        },
+        {
+          "type": "network-access",
+          "line": 148,
+          "evidence": "https://",
+          "context": "  <action type=\"Redirect\" url=\"https://{HTTP_HOST}/{R:1}\" redirectType=\"Permanent\" />",
+          "disposition": "accepted",
+          "reason": "An https redirect URL inside an IIS URL Rewrite rule and placeholder WSUS server URLs in registry notes; nothing is fetched by the agent."
+        },
+        {
+          "type": "shell-execution",
+          "line": 155,
+          "evidence": "powershell",
+          "context": "```powershell",
+          "disposition": "accepted",
+          "reason": "PowerShell code fences and mentions of PowerShell for administering the user's Windows servers."
+        },
+        {
+          "type": "shell-execution",
+          "line": 201,
+          "evidence": "powershell",
+          "context": "```powershell",
+          "disposition": "accepted",
+          "reason": "PowerShell code fences and mentions of PowerShell for administering the user's Windows servers."
+        },
+        {
+          "type": "shell-execution",
+          "line": 202,
+          "evidence": "PowerShell",
+          "context": "# Install the PSWindowsUpdate module (from PowerShell Gallery)",
+          "disposition": "accepted",
+          "reason": "PowerShell code fences and mentions of PowerShell for administering the user's Windows servers."
+        },
+        {
+          "type": "shell-execution",
+          "line": 218,
+          "evidence": "powershell",
+          "context": "$action  = New-ScheduledTaskAction -Execute \"powershell.exe\" `",
+          "disposition": "accepted",
+          "reason": "PowerShell code fences and mentions of PowerShell for administering the user's Windows servers."
+        },
+        {
+          "type": "network-access",
+          "line": 225,
+          "evidence": "http://",
+          "context": "# WUServer = http://wsus.corp.example.com:8530",
+          "disposition": "accepted",
+          "reason": "An https redirect URL inside an IIS URL Rewrite rule and placeholder WSUS server URLs in registry notes; nothing is fetched by the agent."
+        },
+        {
+          "type": "network-access",
+          "line": 226,
+          "evidence": "http://",
+          "context": "# WUStatusServer = http://wsus.corp.example.com:8530",
+          "disposition": "accepted",
+          "reason": "An https redirect URL inside an IIS URL Rewrite rule and placeholder WSUS server URLs in registry notes; nothing is fetched by the agent."
+        },
+        {
+          "type": "shell-execution",
+          "line": 231,
+          "evidence": "powershell",
+          "context": "```powershell",
+          "disposition": "accepted",
+          "reason": "PowerShell code fences and mentions of PowerShell for administering the user's Windows servers."
+        },
+        {
+          "type": "shell-execution",
+          "line": 264,
+          "evidence": "powershell",
+          "context": "```powershell",
+          "disposition": "accepted",
+          "reason": "PowerShell code fences and mentions of PowerShell for administering the user's Windows servers."
+        },
+        {
+          "type": "shell-execution",
+          "line": 266,
+          "evidence": "powershell",
+          "context": "$action  = New-ScheduledTaskAction -Execute \"powershell.exe\" `",
+          "disposition": "accepted",
+          "reason": "PowerShell code fences and mentions of PowerShell for administering the user's Windows servers."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 278,
+          "evidence": "remove",
+          "context": "# Disable and remove a task",
+          "disposition": "accepted",
+          "reason": "Scanner matched 'Remove'/'remove' in Uninstall-WindowsFeature and Unregister-ScheduledTask comments, which change server configuration rather than delete files."
+        }
+      ]
+    }
+  ]
+}

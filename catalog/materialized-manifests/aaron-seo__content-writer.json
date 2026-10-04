@@ -1,0 +1,165 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "aaron-seo/content-writer",
+  "source": {
+    "repo": "aaron-he-zhu/aaron-marketing-skills",
+    "path": "seo-geo/implement/content-writer",
+    "revision": "cc897fa9e1e3136eb6a301130e49d8d9d1c519b2"
+  },
+  "review": {
+    "path": "catalog/reviews/aaron-seo__content-writer.json",
+    "sha256": "961dfdba5b7ca953b975b2f2b72af871e78677700c1d274c6c705700dc6a7170"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": false,
+      "network": true,
+      "credentials": false,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "network-access",
+        "line": 3,
+        "evidence": "http://",
+        "context": "                        http://www.apache.org/licenses/",
+        "file": "LICENSE.txt"
+      },
+      {
+        "type": "network-access",
+        "line": 195,
+        "evidence": "http://",
+        "context": "       http://www.apache.org/licenses/LICENSE-2.0",
+        "file": "LICENSE.txt"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 93,
+        "evidence": "Delete",
+        "context": "| Delete (410) | No value, no links, no traffic |",
+        "file": "references/content-decay-signals.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 3,
+        "evidence": "remove",
+        "context": "Compact blueprints for common SEO formats. Replace placeholders, keep the primary keyword in the H1 and first 100 words, and remove sections that do not match intent.",
+        "file": "references/content-structure-templates.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 52,
+        "evidence": "remove",
+        "context": "- [ ] Replace placeholders and remove irrelevant sections.",
+        "file": "references/content-structure-templates.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 34,
+        "evidence": "Remove",
+        "context": "| O09 | Information Density | Remove filler |",
+        "file": "references/instructions-detail.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 42,
+        "evidence": "remove",
+        "context": "| Tools/products | \"[old tool]\" | Add/remove current options | H |",
+        "file": "references/refresh-templates.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 43,
+        "evidence": "remove",
+        "context": "| Broken links | [X broken] | Fix, replace, or remove | H |",
+        "file": "references/refresh-templates.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 61,
+        "evidence": "Remove",
+        "context": "| Section / Asset | Keep / Update / Add / Remove | Current | After Refresh | Source / Reason |",
+        "file": "references/refresh-templates.md"
+      },
+      {
+        "type": "network-access",
+        "line": 10,
+        "evidence": "https://",
+        "context": "homepage: \"https://github.com/aaron-he-zhu/aaron-marketing-skills\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 13,
+        "evidence": "https://",
+        "context": "metadata: {\"author\": \"aaron-he-zhu\", \"version\": \"20.1.0\", \"discipline\": \"seo-geo\", \"phase\": \"implement\", \"geo-relevance\": \"high\", \"hermes\": {\"tags\": [\"marketing\", \"seo-geo\", \"implement\"], \"category\": \"seo-geo\"}, \"openclaw\": {\"emoji\": \"🔍\", ",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 55168
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "664cd12e1c315650bf14cb1385359d13d4724ac03940ac10918390ef78e4f5e7",
+      "bytes": 11347,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/content-decay-signals.md",
+      "sha256": "70b8e92f3d65b4030c47488a99f97690d2245ee59492d5010bf607dbf1b0b0cb",
+      "bytes": 4189,
+      "mode": "100644"
+    },
+    {
+      "path": "references/content-structure-templates.md",
+      "sha256": "f37dfd001669a2c35a44fa6be5b34b99c4eb4c38fe71a471a990cf88252f8bd6",
+      "bytes": 3519,
+      "mode": "100644"
+    },
+    {
+      "path": "references/instructions-detail.md",
+      "sha256": "24605115a253effc44386066b559370b680433ddc908f68b3ba8e54da91700e1",
+      "bytes": 4572,
+      "mode": "100644"
+    },
+    {
+      "path": "references/refresh-example.md",
+      "sha256": "f3ade02aca9a770f120508a4f20050ef7ac8d176ca73cce5edad7b1fb4995ca2",
+      "bytes": 3340,
+      "mode": "100644"
+    },
+    {
+      "path": "references/refresh-templates.md",
+      "sha256": "e5add0c5b21c08dd9c72853f34831c4bb40ad8ae2e7b4315dc27650fecf1d42f",
+      "bytes": 5569,
+      "mode": "100644"
+    },
+    {
+      "path": "references/seo-writing-checklist.md",
+      "sha256": "2444caf310b03243501af872e5e087854f79a935d289b185dd1e6fc9a06cb0eb",
+      "bytes": 3728,
+      "mode": "100644"
+    },
+    {
+      "path": "references/title-formulas.md",
+      "sha256": "e9d0d47c2c93dce7e8a04622c7cf7f26dc63116795b4a0feb167e7271fe43f29",
+      "bytes": 4128,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "cf0138f710988b2cb698d3be52ee92119f69222710dc7753a843ecfb9b463f80",
+      "bytes": 14776,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 55168
+}

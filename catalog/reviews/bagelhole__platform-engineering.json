@@ -1,0 +1,328 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "bagelhole/platform-engineering",
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "devops/platforms/platform-engineering",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "devops/platforms/platform-engineering",
+    "url": "https://api.github.com/repos/BagelHole/DevOps-Security-Agent-Skills/git/trees/0365f57a079b1332f95cf26e31dd2d5332a8399f?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/BagelHole/DevOps-Security-Agent-Skills/blob/0365f57a079b1332f95cf26e31dd2d5332a8399f/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "devops",
+        "devops/platforms",
+        "devops/platforms/platform-engineering"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found; Backstage and Score are linked, and the YAML/TypeScript samples are short original configuration examples. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "medium",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "package_install": true,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md (1244 lines) in full; it is the only file. Reference guide for building an internal developer platform: Backstage setup, catalog and templates, Crossplane XRDs/compositions, Score specs, Terraform modules, DORA metrics, and OPA/Kyverno/NetworkPolicy governance.",
+      "Following the skill can make the agent scaffold Backstage with npx @backstage/create-app@latest (SKILL.md:39), add yarn packages (:580-581), brew install score-compose/score-k8s (:720, :727), helm install Crossplane and kubectl apply providers into a cluster (:125-161), and create a Kubernetes secret from a local aws-credentials.txt (:145-147). Medium because these install tools and change cluster state with real cloud credentials; acceptable because they are standard, user-directed setup steps for the user's own platform with nothing destructive, no disabled security controls, and no remote script piped to a shell.",
+      "Config samples use ${ENV_VAR} placeholders for tokens (GITHUB_TOKEN, K8S_*_TOKEN, GRAFANA_API_TOKEN) and example hosts (*.internal, myorg); the Crossplane RDS composition sets deletionProtection: false and skipFinalSnapshot: true (:245-247), which users should tighten for production. Frontmatter declares license: MIT."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "67c5c5cbb12cafb1515e449748866bd40da7dec9",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "91b2abfbbccd761889aeb982d7cf1094e5be96905ce800dec21c84c2418aa39a",
+      "bytes": 31730,
+      "mode": "100644",
+      "git_blob": "357e328da4cb2aee644e05e282eb65947402a72b",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 33,
+          "evidence": "https://",
+          "context": "[Backstage](https://backstage.io) is the leading open-source developer portal framework, originally created at Spotify.",
+          "disposition": "accepted",
+          "reason": "Project links (backstage.io, score.dev, charts.crossplane.io) and placeholder internal/localhost URLs in config samples, plus a curl to a Slack webhook inside an example CronJob for the user's own survey bot."
+        },
+        {
+          "type": "shell-execution",
+          "line": 37,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash fences for npx/yarn/helm/kubectl/brew/score commands and /bin/sh in an example CronJob; scanner also matched 'sh' inside YAML/rego blocks."
+        },
+        {
+          "type": "package-install",
+          "line": 59,
+          "evidence": "yarn install",
+          "context": "RUN yarn install --frozen-lockfile",
+          "disposition": "accepted",
+          "reason": "yarn install inside an example Backstage Dockerfile build stage; other installs (npx, yarn add, brew) are standard setup commands for the user's platform."
+        },
+        {
+          "type": "network-access",
+          "line": 80,
+          "evidence": "http://",
+          "context": "  baseUrl: http://localhost:3000",
+          "disposition": "accepted",
+          "reason": "Project links (backstage.io, score.dev, charts.crossplane.io) and placeholder internal/localhost URLs in config samples, plus a curl to a Slack webhook inside an example CronJob for the user's own survey bot."
+        },
+        {
+          "type": "network-access",
+          "line": 86,
+          "evidence": "http://",
+          "context": "  baseUrl: http://localhost:7007",
+          "disposition": "accepted",
+          "reason": "Project links (backstage.io, score.dev, charts.crossplane.io) and placeholder internal/localhost URLs in config samples, plus a curl to a Slack webhook inside an example CronJob for the user's own survey bot."
+        },
+        {
+          "type": "network-access",
+          "line": 110,
+          "evidence": "https://",
+          "context": "      target: https://github.com/myorg/software-catalog/blob/main/catalog-info.yaml",
+          "disposition": "accepted",
+          "reason": "Project links (backstage.io, score.dev, charts.crossplane.io) and placeholder internal/localhost URLs in config samples, plus a curl to a Slack webhook inside an example CronJob for the user's own survey bot."
+        },
+        {
+          "type": "network-access",
+          "line": 112,
+          "evidence": "https://",
+          "context": "      target: https://github.com/myorg/backstage-templates/blob/main/all-templates.yaml",
+          "disposition": "accepted",
+          "reason": "Project links (backstage.io, score.dev, charts.crossplane.io) and placeholder internal/localhost URLs in config samples, plus a curl to a Slack webhook inside an example CronJob for the user's own survey bot."
+        },
+        {
+          "type": "shell-execution",
+          "line": 123,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash fences for npx/yarn/helm/kubectl/brew/score commands and /bin/sh in an example CronJob; scanner also matched 'sh' inside YAML/rego blocks."
+        },
+        {
+          "type": "network-access",
+          "line": 125,
+          "evidence": "https://",
+          "context": "helm repo add crossplane-stable https://charts.crossplane.io/stable",
+          "disposition": "accepted",
+          "reason": "Project links (backstage.io, score.dev, charts.crossplane.io) and placeholder internal/localhost URLs in config samples, plus a curl to a Slack webhook inside an example CronJob for the user's own survey bot."
+        },
+        {
+          "type": "credential-access",
+          "line": 145,
+          "evidence": "secret",
+          "context": "kubectl create secret generic aws-creds \\",
+          "disposition": "accepted",
+          "reason": "Real credential handling: loads the user's AWS credentials file into a crossplane-system secret, which is the documented Crossplane provider setup."
+        },
+        {
+          "type": "credential-access",
+          "line": 156,
+          "evidence": "Secret",
+          "context": "    source: Secret",
+          "disposition": "accepted",
+          "reason": "Kubernetes Secret objects and a kubectl create secret from the user's own aws-credentials.txt for Crossplane's ProviderConfig; no instruction to print or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 276,
+          "evidence": "secret",
+          "context": "    - name: db-secret",
+          "disposition": "accepted",
+          "reason": "Kubernetes Secret objects and a kubectl create secret from the user's own aws-credentials.txt for Crossplane's ProviderConfig; no instruction to print or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 279,
+          "evidence": "Secret",
+          "context": "        kind: Secret",
+          "disposition": "accepted",
+          "reason": "Kubernetes Secret objects and a kubectl create secret from the user's own aws-credentials.txt for Crossplane's ProviderConfig; no instruction to print or transmit secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 409,
+          "evidence": "https://",
+          "context": "        repoUrl: https://github.com/myorg/${{ parameters.name }}",
+          "disposition": "accepted",
+          "reason": "Project links (backstage.io, score.dev, charts.crossplane.io) and placeholder internal/localhost URLs in config samples, plus a curl to a Slack webhook inside an example CronJob for the user's own survey bot."
+        },
+        {
+          "type": "network-access",
+          "line": 487,
+          "evidence": "https://",
+          "context": "    - url: https://grafana.internal/d/orders-service",
+          "disposition": "accepted",
+          "reason": "Project links (backstage.io, score.dev, charts.crossplane.io) and placeholder internal/localhost URLs in config samples, plus a curl to a Slack webhook inside an example CronJob for the user's own survey bot."
+        },
+        {
+          "type": "network-access",
+          "line": 490,
+          "evidence": "https://",
+          "context": "    - url: https://runbooks.internal/orders-service",
+          "disposition": "accepted",
+          "reason": "Project links (backstage.io, score.dev, charts.crossplane.io) and placeholder internal/localhost URLs in config samples, plus a curl to a Slack webhook inside an example CronJob for the user's own survey bot."
+        },
+        {
+          "type": "shell-execution",
+          "line": 578,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash fences for npx/yarn/helm/kubectl/brew/score commands and /bin/sh in an example CronJob; scanner also matched 'sh' inside YAML/rego blocks."
+        },
+        {
+          "type": "network-access",
+          "line": 593,
+          "evidence": "https://",
+          "context": "        - url: https://k8s-dev.internal:6443",
+          "disposition": "accepted",
+          "reason": "Project links (backstage.io, score.dev, charts.crossplane.io) and placeholder internal/localhost URLs in config samples, plus a curl to a Slack webhook inside an example CronJob for the user's own survey bot."
+        },
+        {
+          "type": "network-access",
+          "line": 599,
+          "evidence": "https://",
+          "context": "        - url: https://k8s-prod.internal:6443",
+          "disposition": "accepted",
+          "reason": "Project links (backstage.io, score.dev, charts.crossplane.io) and placeholder internal/localhost URLs in config samples, plus a curl to a Slack webhook inside an example CronJob for the user's own survey bot."
+        },
+        {
+          "type": "network-access",
+          "line": 614,
+          "evidence": "https://",
+          "context": "      target: https://api.github.com",
+          "disposition": "accepted",
+          "reason": "Project links (backstage.io, score.dev, charts.crossplane.io) and placeholder internal/localhost URLs in config samples, plus a curl to a Slack webhook inside an example CronJob for the user's own survey bot."
+        },
+        {
+          "type": "network-access",
+          "line": 625,
+          "evidence": "https://",
+          "context": "  domain: https://grafana.internal",
+          "disposition": "accepted",
+          "reason": "Project links (backstage.io, score.dev, charts.crossplane.io) and placeholder internal/localhost URLs in config samples, plus a curl to a Slack webhook inside an example CronJob for the user's own survey bot."
+        },
+        {
+          "type": "network-access",
+          "line": 630,
+          "evidence": "https://",
+          "context": "      target: https://grafana.internal",
+          "disposition": "accepted",
+          "reason": "Project links (backstage.io, score.dev, charts.crossplane.io) and placeholder internal/localhost URLs in config samples, plus a curl to a Slack webhook inside an example CronJob for the user's own survey bot."
+        },
+        {
+          "type": "network-access",
+          "line": 639,
+          "evidence": "https://",
+          "context": "[Score](https://score.dev) provides a platform-agnostic workload specification so developers describe what they need, and the platform decides how to provision it.",
+          "disposition": "accepted",
+          "reason": "Project links (backstage.io, score.dev, charts.crossplane.io) and placeholder internal/localhost URLs in config samples, plus a curl to a Slack webhook inside an example CronJob for the user's own survey bot."
+        },
+        {
+          "type": "shell-execution",
+          "line": 718,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash fences for npx/yarn/helm/kubectl/brew/score commands and /bin/sh in an example CronJob; scanner also matched 'sh' inside YAML/rego blocks."
+        },
+        {
+          "type": "network-access",
+          "line": 1040,
+          "evidence": "https://",
+          "context": "                  value: \"https://forms.internal/devex-q1\"",
+          "disposition": "accepted",
+          "reason": "Project links (backstage.io, score.dev, charts.crossplane.io) and placeholder internal/localhost URLs in config samples, plus a curl to a Slack webhook inside an example CronJob for the user's own survey bot."
+        },
+        {
+          "type": "shell-execution",
+          "line": 1042,
+          "evidence": "sh",
+          "context": "                - /bin/sh",
+          "disposition": "accepted",
+          "reason": "Bash fences for npx/yarn/helm/kubectl/brew/score commands and /bin/sh in an example CronJob; scanner also matched 'sh' inside YAML/rego blocks."
+        },
+        {
+          "type": "network-access",
+          "line": 1045,
+          "evidence": "curl",
+          "context": "                  curl -X POST \"$SLACK_WEBHOOK\" \\",
+          "disposition": "accepted",
+          "reason": "Project links (backstage.io, score.dev, charts.crossplane.io) and placeholder internal/localhost URLs in config samples, plus a curl to a Slack webhook inside an example CronJob for the user's own survey bot."
+        },
+        {
+          "type": "shell-execution",
+          "line": 1061,
+          "evidence": "sh",
+          "context": "apiVersion: templates.gatekeeper.sh/v1",
+          "disposition": "accepted",
+          "reason": "Bash fences for npx/yarn/helm/kubectl/brew/score commands and /bin/sh in an example CronJob; scanner also matched 'sh' inside YAML/rego blocks."
+        },
+        {
+          "type": "shell-execution",
+          "line": 1079,
+          "evidence": "sh",
+          "context": "    - target: admission.k8s.gatekeeper.sh",
+          "disposition": "accepted",
+          "reason": "Bash fences for npx/yarn/helm/kubectl/brew/score commands and /bin/sh in an example CronJob; scanner also matched 'sh' inside YAML/rego blocks."
+        },
+        {
+          "type": "shell-execution",
+          "line": 1097,
+          "evidence": "sh",
+          "context": "apiVersion: constraints.gatekeeper.sh/v1beta1",
+          "disposition": "accepted",
+          "reason": "Bash fences for npx/yarn/helm/kubectl/brew/score commands and /bin/sh in an example CronJob; scanner also matched 'sh' inside YAML/rego blocks."
+        }
+      ]
+    }
+  ]
+}

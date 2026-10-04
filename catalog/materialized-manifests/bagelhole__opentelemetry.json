@@ -1,0 +1,130 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "bagelhole/opentelemetry",
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "devops/observability/opentelemetry",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "review": {
+    "path": "catalog/reviews/bagelhole__opentelemetry.json",
+    "sha256": "67d306c4f6e23eab8adf1c689a70b7582c1c27bbeced1fffec8a382aa39eb55f"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": false,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": false,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "network-access",
+        "line": 122,
+        "evidence": "http://",
+        "context": "    endpoint: http://mimir:9009/api/v1/push",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 259,
+        "evidence": "http://",
+        "context": "        endpoint=os.getenv(\"OTEL_EXPORTER_OTLP_ENDPOINT\", \"http://otel-collector:4317\"),",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 268,
+        "evidence": "http://",
+        "context": "        endpoint=os.getenv(\"OTEL_EXPORTER_OTLP_ENDPOINT\", \"http://otel-collector:4317\"),",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 313,
+        "evidence": "process.env",
+        "context": "  [ATTR_SERVICE_NAME]: process.env.SERVICE_NAME || \"node-service\",",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 314,
+        "evidence": "process.env",
+        "context": "  [ATTR_SERVICE_VERSION]: process.env.SERVICE_VERSION || \"1.0.0\",",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 315,
+        "evidence": "process.env",
+        "context": "  \"deployment.environment\": process.env.DEPLOY_ENV || \"development\",",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 321,
+        "evidence": "process.env",
+        "context": "    url: process.env.OTEL_EXPORTER_OTLP_ENDPOINT || \"http://otel-collector:4317\",",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 321,
+        "evidence": "http://",
+        "context": "    url: process.env.OTEL_EXPORTER_OTLP_ENDPOINT || \"http://otel-collector:4317\",",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 325,
+        "evidence": "process.env",
+        "context": "      url: process.env.OTEL_EXPORTER_OTLP_ENDPOINT || \"http://otel-collector:4317\",",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 325,
+        "evidence": "http://",
+        "context": "      url: process.env.OTEL_EXPORTER_OTLP_ENDPOINT || \"http://otel-collector:4317\",",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 361,
+        "evidence": "http://",
+        "context": "    endpoint: http://otel-collector.observability:4317",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 382,
+        "evidence": "http://",
+        "context": "    endpoint: http://otel-collector.observability:4317",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 15560
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "d39bcaa4265333f7cca3d0e48948f6cef5425ad53ccd66a5840a4fb0d8a30e4a",
+      "bytes": 14492,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 15560
+}

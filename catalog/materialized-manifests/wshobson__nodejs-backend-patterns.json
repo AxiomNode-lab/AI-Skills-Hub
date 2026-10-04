@@ -1,0 +1,268 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "wshobson/nodejs-backend-patterns",
+  "source": {
+    "repo": "wshobson/agents",
+    "path": "plugins/javascript-typescript/skills/nodejs-backend-patterns",
+    "revision": "156b7a5e7a8b93642628a339ee4039c925b34c7f"
+  },
+  "review": {
+    "path": "catalog/reviews/wshobson__nodejs-backend-patterns.json",
+    "sha256": "e730375181548df93fd981b6c47f19573aa8e7ef6122d8243e42a967c82d5eae"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": false,
+      "network": false,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "credential-access",
+        "line": 50,
+        "evidence": "process.env",
+        "context": "      host: process.env.DB_HOST,",
+        "file": "references/advanced-patterns.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 51,
+        "evidence": "process.env",
+        "context": "      port: parseInt(process.env.DB_PORT || \"5432\"),",
+        "file": "references/advanced-patterns.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 52,
+        "evidence": "process.env",
+        "context": "      database: process.env.DB_NAME,",
+        "file": "references/advanced-patterns.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 53,
+        "evidence": "process.env",
+        "context": "      user: process.env.DB_USER,",
+        "file": "references/advanced-patterns.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 54,
+        "evidence": "process.env",
+        "context": "      password: process.env.DB_PASSWORD,",
+        "file": "references/advanced-patterns.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 91,
+        "evidence": "process.env",
+        "context": "  host: process.env.DB_HOST,",
+        "file": "references/advanced-patterns.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 92,
+        "evidence": "process.env",
+        "context": "  port: parseInt(process.env.DB_PORT || \"5432\"),",
+        "file": "references/advanced-patterns.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 93,
+        "evidence": "process.env",
+        "context": "  database: process.env.DB_NAME,",
+        "file": "references/advanced-patterns.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 94,
+        "evidence": "process.env",
+        "context": "  user: process.env.DB_USER,",
+        "file": "references/advanced-patterns.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 95,
+        "evidence": "process.env",
+        "context": "  password: process.env.DB_PASSWORD,",
+        "file": "references/advanced-patterns.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 128,
+        "evidence": "process.env",
+        "context": "    await mongoose.connect(process.env.MONGODB_URI!, {",
+        "file": "references/advanced-patterns.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 278,
+        "evidence": "process.env",
+        "context": "        process.env.REFRESH_TOKEN_SECRET!,",
+        "file": "references/advanced-patterns.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 299,
+        "evidence": "process.env",
+        "context": "    return jwt.sign(payload, process.env.JWT_SECRET!, {",
+        "file": "references/advanced-patterns.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 305,
+        "evidence": "process.env",
+        "context": "    return jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET!, {",
+        "file": "references/advanced-patterns.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 319,
+        "evidence": "process.env",
+        "context": "  host: process.env.REDIS_HOST,",
+        "file": "references/advanced-patterns.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 320,
+        "evidence": "process.env",
+        "context": "  port: parseInt(process.env.REDIS_PORT || \"6379\"),",
+        "file": "references/advanced-patterns.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 342,
+        "evidence": "delete",
+        "context": "  async delete(key: string): Promise<void> {",
+        "file": "references/advanced-patterns.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 19,
+        "evidence": "process.env",
+        "context": "app.use(cors({ origin: process.env.ALLOWED_ORIGINS?.split(\",\") }));",
+        "file": "references/details.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 32,
+        "evidence": "process.env",
+        "context": "const PORT = process.env.PORT || 3000;",
+        "file": "references/details.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 50,
+        "evidence": "process.env",
+        "context": "    level: process.env.LOG_LEVEL || \"info\",",
+        "file": "references/details.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 191,
+        "evidence": "Remove",
+        "context": "    // Remove password from response",
+        "file": "references/details.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 215,
+        "evidence": "delete",
+        "context": "    const deleted = await this.userRepository.delete(id);",
+        "file": "references/details.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 280,
+        "evidence": "delete",
+        "context": "  async delete(id: string): Promise<boolean> {",
+        "file": "references/details.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 281,
+        "evidence": "DELETE",
+        "context": "    const query = \"DELETE FROM users WHERE id = $1\";",
+        "file": "references/details.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 327,
+        "evidence": "process.env",
+        "context": "    const payload = jwt.verify(token, process.env.JWT_SECRET!) as JWTPayload;",
+        "file": "references/details.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 408,
+        "evidence": "process.env",
+        "context": "  host: process.env.REDIS_HOST,",
+        "file": "references/details.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 409,
+        "evidence": "process.env",
+        "context": "  port: parseInt(process.env.REDIS_PORT || \"6379\"),",
+        "file": "references/details.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 443,
+        "evidence": "process.env",
+        "context": "  level: process.env.LOG_LEVEL || \"info\",",
+        "file": "references/details.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 560,
+        "evidence": "process.env",
+        "context": "    process.env.NODE_ENV === \"production\"",
+        "file": "references/details.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 595,
+        "evidence": "delete",
+        "context": "Redis-backed `CacheService` with get/set/delete/invalidatePattern, plus a `@Cacheable` decorator for method-level caching. See [references/advanced-patterns.md](./advanced-patterns.md).",
+        "file": "references/details.md"
+      }
+    ],
+    "total_bytes": 27469
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "f89abb55d9f073f38f1703e4518f0613c788c6174be7f13b8dfe48a1c076c746",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/advanced-patterns.md",
+      "sha256": "f5f0036b4990badcd241263298b4f9ef3d358d94e3db5d08307d5b80369ed584",
+      "bytes": 9405,
+      "mode": "100644"
+    },
+    {
+      "path": "references/details.md",
+      "sha256": "d3cf1ec64b36bd3cbaa130430870fe3dcf1b346f5016242719f2f29bb44452b8",
+      "bytes": 15001,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "d52e1150accdc27e916f0962c9ba0872fcbe8a7d849d905dcc795c0f9d05aeae",
+      "bytes": 1995,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 27469
+}

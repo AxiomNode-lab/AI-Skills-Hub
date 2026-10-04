@@ -1,0 +1,108 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "wshobson/fastapi-templates",
+  "source": {
+    "repo": "wshobson/agents",
+    "path": "plugins/api-scaffolding/skills/fastapi-templates",
+    "revision": "156b7a5e7a8b93642628a339ee4039c925b34c7f"
+  },
+  "review": {
+    "path": "catalog/reviews/wshobson__fastapi-templates.json",
+    "sha256": "6851a0f87aad5c92e34d89dcff7db2b5fb2359b87761383d861d540dd1375297"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": false,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "filesystem-write",
+        "line": 158,
+        "evidence": "delete",
+        "context": "    async def delete(self, db: AsyncSession, id: int) -> bool:",
+        "file": "references/details.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 159,
+        "evidence": "Delete",
+        "context": "        \"\"\"Delete record.\"\"\"",
+        "file": "references/details.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 162,
+        "evidence": "delete",
+        "context": "            await db.delete(obj)",
+        "file": "references/details.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 323,
+        "evidence": "delete",
+        "context": "@router.delete(\"/{user_id}\", status_code=status.HTTP_204_NO_CONTENT)",
+        "file": "references/details.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 329,
+        "evidence": "Delete",
+        "context": "    \"\"\"Delete user.\"\"\"",
+        "file": "references/details.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 333,
+        "evidence": "delete",
+        "context": "    deleted = await user_service.repository.delete(db, user_id)",
+        "file": "references/details.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 354,
+        "evidence": "access token",
+        "context": "    \"\"\"Create JWT access token.\"\"\"",
+        "file": "references/details.md"
+      },
+      {
+        "type": "network-access",
+        "line": 116,
+        "evidence": "http://",
+        "context": "    async with AsyncClient(app=app, base_url=\"http://test\") as client:",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 16499
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "f89abb55d9f073f38f1703e4518f0613c788c6174be7f13b8dfe48a1c076c746",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/details.md",
+      "sha256": "23bf5358c43675a10e26cb1f949e183d53f17e54118bca45d10a08bb8b218b31",
+      "bytes": 11627,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "92d4394d030080ded938cf247eb79885ed4b467a6c5b60cd94bb569cf6ea2b17",
+      "bytes": 3804,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 16499
+}

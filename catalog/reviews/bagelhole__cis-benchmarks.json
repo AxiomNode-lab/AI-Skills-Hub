@@ -1,0 +1,120 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "bagelhole/cis-benchmarks",
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "security/hardening/cis-benchmarks",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "security/hardening/cis-benchmarks",
+    "url": "https://api.github.com/repos/BagelHole/DevOps-Security-Agent-Skills/git/trees/0365f57a079b1332f95cf26e31dd2d5332a8399f?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/BagelHole/DevOps-Security-Agent-Skills/blob/0365f57a079b1332f95cf26e31dd2d5332a8399f/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "security",
+        "security/hardening",
+        "security/hardening/cis-benchmarks"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in the file; CIS content is referenced only by profile ID and two short paraphrased control titles in an original InSpec example (SKILL.md:57, 66), not reproduced benchmark recommendations, and the frontmatter declares license: MIT. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "medium",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md in full (single-file skill). The skill covers auditing hosts against CIS benchmarks with OpenSCAP, Lynis, a two-control InSpec profile and kube-bench, plus a scan/analyze/remediate/validate workflow and best practices.",
+      "Medium: following it has the agent apt-install openscap-scanner, scap-security-guide and lynis, run audits that write report files (results.xml, report.html, /tmp/lynis-report.dat), run InSpec over SSH against a target host, and run the kube-bench container (unpinned :latest) with /etc and /var mounted read-only. Acceptable because the commands are read-only assessments of the user's own systems; remediation is described only as a generic workflow step with no automated changes.",
+      "Users should know: the skill does not reproduce CIS benchmark text; it relies on the CIS profile shipped with scap-security-guide and on kube-bench's checks. Related Skills (SKILL.md:125-126) link to sibling skills ../linux-hardening/ and ../../scanning/vulnerability-scanning/ as optional reading only."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "67c5c5cbb12cafb1515e449748866bd40da7dec9",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "2ef507840ff6eeb1bd8c2d15251ce2940969cf8d2e89511170ae16d7550709c3",
+      "bytes": 2471,
+      "mode": "100644",
+      "git_blob": "c542a7cc6a53f6c23e376175f2aa3865d5ee1be8",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 26,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks that install and run OpenSCAP, Lynis, InSpec and kube-bench audits against the user's own hosts and cluster nodes."
+        },
+        {
+          "type": "shell-execution",
+          "line": 40,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks that install and run OpenSCAP, Lynis, InSpec and kube-bench audits against the user's own hosts and cluster nodes."
+        },
+        {
+          "type": "shell-execution",
+          "line": 74,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks that install and run OpenSCAP, Lynis, InSpec and kube-bench audits against the user's own hosts and cluster nodes."
+        },
+        {
+          "type": "shell-execution",
+          "line": 81,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks that install and run OpenSCAP, Lynis, InSpec and kube-bench audits against the user's own hosts and cluster nodes."
+        }
+      ]
+    }
+  ]
+}

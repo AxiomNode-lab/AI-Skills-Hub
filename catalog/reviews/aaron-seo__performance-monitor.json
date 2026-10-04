@@ -1,0 +1,187 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "aaron-seo/performance-monitor",
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "aaron-he-zhu/aaron-marketing-skills",
+    "path": "seo-geo/evaluate/performance-monitor",
+    "revision": "cc897fa9e1e3136eb6a301130e49d8d9d1c519b2"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "seo-geo/evaluate/performance-monitor",
+    "url": "https://api.github.com/repos/aaron-he-zhu/aaron-marketing-skills/git/trees/cc897fa9e1e3136eb6a301130e49d8d9d1c519b2?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "Apache-2.0",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/aaron-he-zhu/aaron-marketing-skills/blob/cc897fa9e1e3136eb6a301130e49d8d9d1c519b2/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "seo-geo",
+        "seo-geo/evaluate",
+        "seo-geo/evaluate/performance-monitor"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the Apache-2.0 license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares Apache-2.0 (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the Apache-2.0 notice condition; no NOTICE file exists, so section 4(d) adds no attribution text, and no file is modified.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "low",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": false,
+      "network": false,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md and references/alert-configuration-templates.md, alert-threshold-guide.md, evidence-and-cycle-control.md, kpi-definitions.md, report-output-templates.md, report-templates.md in full. Two-mode monitor: `report` builds source-tagged multi-metric SEO/GEO performance reports with period-over-period deltas; `alert` designs threshold/anomaly alert configurations (triggers, priorities, response plans, routing) as a document for the user to implement.",
+      "Writes to memory/monitoring/ only after asking (SKILL.md:144). SKILL.md:63 recommends an optional zero-dependency helper `python3 \"${CLAUDE_PLUGIN_ROOT}/scripts/connectors/ledger.py\" record|diff|trend`; it does not ship with this skill, so deltas are computed manually from user-provided exports. Alert mode only produces a configuration summary; it does not send notifications or connect to Slack/email/PagerDuty itself. No installs or credentials.",
+      "Never scores CORE-EEAT or CITE itself and marks those sections 'Not yet evaluated' when no auditor output exists (SKILL.md:22,91-92), so it does not depend on the excluded auditor runtimes. Paid tools (~~analytics, ~~search console, ~~SEO tool, ~~AI monitor, ~~web crawler) are optional. Non-shipping optional pointers: ../../../references/skill-contract.md (handoff shape, termination), ../../../references/measurement-protocol.md, ../../../CONNECTORS.md, ../../../scripts/connectors/README.md; evidence-and-cycle-control.md:3 refers to 'root protocols' that also will not ship, but the profile itself is self-describing."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "664cd12e1c315650bf14cb1385359d13d4724ac03940ac10918390ef78e4f5e7",
+      "bytes": 11347,
+      "mode": "100644",
+      "git_blob": "41889521f7dedb506da3ce1c9998b78965e45e6e",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root Apache-2.0 license, attached to carry its terms and notices.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 3,
+          "evidence": "http://",
+          "context": "                        http://www.apache.org/licenses/",
+          "disposition": "accepted",
+          "reason": "License text."
+        },
+        {
+          "type": "network-access",
+          "line": 195,
+          "evidence": "http://",
+          "context": "       http://www.apache.org/licenses/LICENSE-2.0",
+          "disposition": "accepted",
+          "reason": "License text."
+        }
+      ]
+    },
+    {
+      "path": "references/alert-configuration-templates.md",
+      "sha256": "850131d944128ab040204f5fb5554ac8b8f16f16aa345569c7b48a903ee62bdf",
+      "bytes": 4662,
+      "mode": "100644",
+      "git_blob": "85a81e00920c2b0df36cde68d068bd4cfcfaa4f9",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "references/alert-threshold-guide.md",
+      "sha256": "2f5f240e3f7537111df434fc3142377e6fdc67c2cadfa6e065239a8d99babc44",
+      "bytes": 3453,
+      "mode": "100644",
+      "git_blob": "f11cf37cec079c5bc7c717ceaf764d048e355845",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "references/evidence-and-cycle-control.md",
+      "sha256": "05461e0f16aa0a52f7897f8fc51d3a7907f85f8ae73a21500972a67419fe22f3",
+      "bytes": 2920,
+      "mode": "100644",
+      "git_blob": "7c5c58f8687e1bf1f0832547f7318c715d3f5ebc",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "references/kpi-definitions.md",
+      "sha256": "74d71ac579c3112f211b86d8b831f568eddd6b2d11ffbd81db6442e682fdf1b6",
+      "bytes": 6667,
+      "mode": "100644",
+      "git_blob": "02d09e2b88be12f7ec9cb6cf967eed75d82767d3",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "references/report-output-templates.md",
+      "sha256": "fc1e28a722c99c43f9142541551789234170bf8ccaf1499d2fdea1eb5e731151",
+      "bytes": 2540,
+      "mode": "100644",
+      "git_blob": "d08a6976d174b989b7123d890dd895d6baff0054",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "references/report-templates.md",
+      "sha256": "cb515fc2ed257b62bb5d348f126638abdea754c4b8050e0ce42297c5ae78efad",
+      "bytes": 4975,
+      "mode": "100644",
+      "git_blob": "02b8b89a328da6a3f2d55e828b07b6bfa9a38192",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "64041054d895a965c2a5377486cf6ecdc999d78492eea9f9afbce5829614aa09",
+      "bytes": 16858,
+      "mode": "100644",
+      "git_blob": "598996fc8860759441a8530b5d0f1bf4f1f5c7b1",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 10,
+          "evidence": "https://",
+          "context": "homepage: \"https://github.com/aaron-he-zhu/aaron-marketing-skills\"",
+          "disposition": "accepted",
+          "reason": "Only the upstream homepage URL in front-matter metadata (SKILL.md:10,13); no instruction to fetch it."
+        },
+        {
+          "type": "network-access",
+          "line": 13,
+          "evidence": "https://",
+          "context": "metadata: {\"author\": \"aaron-he-zhu\", \"version\": \"20.1.0\", \"discipline\": \"seo-geo\", \"phase\": \"evaluate\", \"geo-relevance\": \"medium\", \"hermes\": {\"tags\": [\"marketing\", \"seo-geo\", \"evaluate\"], \"category\": \"seo-geo\"}, \"openclaw\": {\"emoji\": \"🔍\", ",
+          "disposition": "accepted",
+          "reason": "Only the upstream homepage URL in front-matter metadata (SKILL.md:10,13); no instruction to fetch it."
+        }
+      ]
+    }
+  ]
+}

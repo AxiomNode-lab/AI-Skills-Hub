@@ -1,0 +1,258 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "aaron-seo/content-writer",
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "aaron-he-zhu/aaron-marketing-skills",
+    "path": "seo-geo/implement/content-writer",
+    "revision": "cc897fa9e1e3136eb6a301130e49d8d9d1c519b2"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "seo-geo/implement/content-writer",
+    "url": "https://api.github.com/repos/aaron-he-zhu/aaron-marketing-skills/git/trees/cc897fa9e1e3136eb6a301130e49d8d9d1c519b2?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "Apache-2.0",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/aaron-he-zhu/aaron-marketing-skills/blob/cc897fa9e1e3136eb6a301130e49d8d9d1c519b2/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "seo-geo",
+        "seo-geo/implement",
+        "seo-geo/implement/content-writer"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the Apache-2.0 license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares Apache-2.0 (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the Apache-2.0 notice condition; no NOTICE file exists, so section 4(d) adds no attribution text, and no file is modified.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "medium",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": false,
+      "network": false,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md and references/content-decay-signals.md, content-structure-templates.md, instructions-detail.md, refresh-example.md, refresh-templates.md, seo-writing-checklist.md, title-formulas.md in full. Two-mode SEO/GEO writer: `new` drafts a page against a keyword (titles, meta, H1/H2 structure, FAQ, links, self-check); `refresh` diagnoses content decay and produces a prioritized update and republish plan.",
+      "Writes a dated summary to memory/content/content-writer/ only after asking (SKILL.md:51,130) and reads the user's own memory/projections/narrative.json and claims.json if present, with a documented fallback when absent (SKILL.md:50,71). SKILL.md:63 describes a gated publish-time index push via `python3 \"${CLAUDE_PLUGIN_ROOT}/scripts/connectors/indexpush.py\" ... --key $INDEXNOW_KEY --live` / `--token $BAIDU_PUSH_TOKEN`; it is dry-run by default and only for live URLs, and the script is not part of this skill, so it cannot run from this artifact. Rated medium because the skill describes using environment secrets to call live indexing services and submitting claims through a non-shipping registry-events.py (SKILL.md:51,130); acceptable because both are optional, gated on user permission or an actually-live URL, and unavailable standalone. SKILL.md:69 tells the agent to treat fetched content as untrusted.",
+      "Content guidance is non-deceptive: no keyword stuffing (SKILL.md:83), never invent figures or attributions (SKILL.md:65), affiliate disclosure (content-structure-templates.md:58), no clickbait (title-formulas.md:36). Non-shipping optional pointers: ../../../references/skill-contract.md (handoff shape, termination rules), ../../../CONNECTORS.md, ../../../SECURITY.md, ../../../references/measurement-protocol.md, ../../../references/humanizer-slop.md, ../../evaluate/performance-monitor/references/evidence-and-cycle-control.md, plus sibling skills content-quality-auditor, geo-content-optimizer, serp-markup-builder. Paid tools (~~SEO tool, ~~search console, ~~analytics) are optional (SKILL.md:61)."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "664cd12e1c315650bf14cb1385359d13d4724ac03940ac10918390ef78e4f5e7",
+      "bytes": 11347,
+      "mode": "100644",
+      "git_blob": "41889521f7dedb506da3ce1c9998b78965e45e6e",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root Apache-2.0 license, attached to carry its terms and notices.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 3,
+          "evidence": "http://",
+          "context": "                        http://www.apache.org/licenses/",
+          "disposition": "accepted",
+          "reason": "License text."
+        },
+        {
+          "type": "network-access",
+          "line": 195,
+          "evidence": "http://",
+          "context": "       http://www.apache.org/licenses/LICENSE-2.0",
+          "disposition": "accepted",
+          "reason": "License text."
+        }
+      ]
+    },
+    {
+      "path": "references/content-decay-signals.md",
+      "sha256": "70b8e92f3d65b4030c47488a99f97690d2245ee59492d5010bf607dbf1b0b0cb",
+      "bytes": 4189,
+      "mode": "100644",
+      "git_blob": "0cd48169b43a4328ab3c4a7436ce8108242c1311",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 93,
+          "evidence": "Delete",
+          "context": "| Delete (410) | No value, no links, no traffic |",
+          "disposition": "accepted",
+          "reason": "Words like 'remove'/'Delete (410)' in editorial tables describe edits to the user's article or retiring a web page as a recommendation, not file deletion by the agent."
+        }
+      ]
+    },
+    {
+      "path": "references/content-structure-templates.md",
+      "sha256": "f37dfd001669a2c35a44fa6be5b34b99c4eb4c38fe71a471a990cf88252f8bd6",
+      "bytes": 3519,
+      "mode": "100644",
+      "git_blob": "50983a8a770853dcc3eb9f02a5ac2ee52db5257a",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 3,
+          "evidence": "remove",
+          "context": "Compact blueprints for common SEO formats. Replace placeholders, keep the primary keyword in the H1 and first 100 words, and remove sections that do not match intent.",
+          "disposition": "accepted",
+          "reason": "Words like 'remove'/'Delete (410)' in editorial tables describe edits to the user's article or retiring a web page as a recommendation, not file deletion by the agent."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 52,
+          "evidence": "remove",
+          "context": "- [ ] Replace placeholders and remove irrelevant sections.",
+          "disposition": "accepted",
+          "reason": "Words like 'remove'/'Delete (410)' in editorial tables describe edits to the user's article or retiring a web page as a recommendation, not file deletion by the agent."
+        }
+      ]
+    },
+    {
+      "path": "references/instructions-detail.md",
+      "sha256": "24605115a253effc44386066b559370b680433ddc908f68b3ba8e54da91700e1",
+      "bytes": 4572,
+      "mode": "100644",
+      "git_blob": "ce8784efd74dbcbf88943cfaaa816695a675e7ff",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 34,
+          "evidence": "Remove",
+          "context": "| O09 | Information Density | Remove filler |",
+          "disposition": "accepted",
+          "reason": "Words like 'remove'/'Delete (410)' in editorial tables describe edits to the user's article or retiring a web page as a recommendation, not file deletion by the agent."
+        }
+      ]
+    },
+    {
+      "path": "references/refresh-example.md",
+      "sha256": "f3ade02aca9a770f120508a4f20050ef7ac8d176ca73cce5edad7b1fb4995ca2",
+      "bytes": 3340,
+      "mode": "100644",
+      "git_blob": "d2ab3514bfc837c7d72b9d7da34201866e9e66bc",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "references/refresh-templates.md",
+      "sha256": "e5add0c5b21c08dd9c72853f34831c4bb40ad8ae2e7b4315dc27650fecf1d42f",
+      "bytes": 5569,
+      "mode": "100644",
+      "git_blob": "2fb5a144c33911aa382e7eeb9d0084a1644a1e22",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 42,
+          "evidence": "remove",
+          "context": "| Tools/products | \"[old tool]\" | Add/remove current options | H |",
+          "disposition": "accepted",
+          "reason": "Words like 'remove'/'Delete (410)' in editorial tables describe edits to the user's article or retiring a web page as a recommendation, not file deletion by the agent."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 43,
+          "evidence": "remove",
+          "context": "| Broken links | [X broken] | Fix, replace, or remove | H |",
+          "disposition": "accepted",
+          "reason": "Words like 'remove'/'Delete (410)' in editorial tables describe edits to the user's article or retiring a web page as a recommendation, not file deletion by the agent."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 61,
+          "evidence": "Remove",
+          "context": "| Section / Asset | Keep / Update / Add / Remove | Current | After Refresh | Source / Reason |",
+          "disposition": "accepted",
+          "reason": "Words like 'remove'/'Delete (410)' in editorial tables describe edits to the user's article or retiring a web page as a recommendation, not file deletion by the agent."
+        }
+      ]
+    },
+    {
+      "path": "references/seo-writing-checklist.md",
+      "sha256": "2444caf310b03243501af872e5e087854f79a935d289b185dd1e6fc9a06cb0eb",
+      "bytes": 3728,
+      "mode": "100644",
+      "git_blob": "e5ace6fd043fad2d4985eaf5032ea341b444078b",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "references/title-formulas.md",
+      "sha256": "e9d0d47c2c93dce7e8a04622c7cf7f26dc63116795b4a0feb167e7271fe43f29",
+      "bytes": 4128,
+      "mode": "100644",
+      "git_blob": "d2ba3741eb392667db82419e9ca591e3b5f9ad05",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "cf0138f710988b2cb698d3be52ee92119f69222710dc7753a843ecfb9b463f80",
+      "bytes": 14776,
+      "mode": "100644",
+      "git_blob": "1dce40f818e333853fb74984af54a6f626a673b9",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 10,
+          "evidence": "https://",
+          "context": "homepage: \"https://github.com/aaron-he-zhu/aaron-marketing-skills\"",
+          "disposition": "accepted",
+          "reason": "Only the upstream homepage URL in front-matter metadata (SKILL.md:10,13); no instruction to fetch it."
+        },
+        {
+          "type": "network-access",
+          "line": 13,
+          "evidence": "https://",
+          "context": "metadata: {\"author\": \"aaron-he-zhu\", \"version\": \"20.1.0\", \"discipline\": \"seo-geo\", \"phase\": \"implement\", \"geo-relevance\": \"high\", \"hermes\": {\"tags\": [\"marketing\", \"seo-geo\", \"implement\"], \"category\": \"seo-geo\"}, \"openclaw\": {\"emoji\": \"🔍\", ",
+          "disposition": "accepted",
+          "reason": "Only the upstream homepage URL in front-matter metadata (SKILL.md:10,13); no instruction to fetch it."
+        }
+      ]
+    }
+  ]
+}

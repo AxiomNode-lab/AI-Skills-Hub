@@ -1,18 +1,20 @@
 # Current Status
 
-Repository snapshot: 2026-10-02. Counts below come from `catalog/skills.json`, `catalog/bundles.json`, and `catalog/sources.json`, not from installed files or remote search results.
+Repository snapshot: 2026-10-04. Counts below come from `catalog/skills.json`, `catalog/bundles.json`, and `catalog/sources.json`, not from installed files or remote search results.
 
 ## Catalog
 
 | Distribution | Records |
 | --- | ---: |
-| bundled | 3 |
+| bundled | 416 |
 | source-direct | 12 |
-| review-required | 499 |
-| blocked | 20 |
-| **Total** | **534** |
+| review-required | 615 |
+| blocked | 40 |
+| **Total** | **1083** |
 
-531 records have `release.status: hold`; 3 are materialized and release-eligible: `anthropics/frontend-design`, `anthropics/brand-guidelines`, and `anthropics/internal-comms`. [Release evidence](VERIFIED-LOCAL-SKILLS.md) records their pinned provenance, file-level license decisions, scans, and hashes. Installation success is not task-performance evaluation. There are 7 bundle definitions and 15 source/provider/standard records. The local contract treats these as Skills: 63 explicitly declare `artifact_type: skill`, and 471 omit it and use the default. The catalog currently contains no explicit MCP server, Agent Plugin, or CLI tool records.
+667 records are not release-eligible; 416 are materialized and release-eligible: five Anthropic skills under skill-local Apache-2.0 licenses, 385 under a repository-root MIT license from microsoft/skills, obra/superpowers, K-Dense, and the programming sources supabase/agent-skills, addyosmani/agent-skills, UnitOneAI/SecuritySkills, wshobson/agents, BagelHole/DevOps-Security-Agent-Skills, j4flmao/agent-skills, and harperaa/secure-claude-skills, and 26 under a repository-root Apache-2.0 license from getsentry/skills and the SEO/GEO skills of aaron-he-zhu/aaron-marketing-skills (see the [license policy](LICENSE-POLICY.md)). [Release evidence](VERIFIED-LOCAL-SKILLS.md) records their pinned provenance, file-level license decisions, scans, and hashes. Installation success is not task-performance evaluation. There are 7 bundle definitions and 25 source/provider/standard records. The local contract treats these as Skills: 475 explicitly declare `artifact_type: skill`, and 608 omit it and use the default. The catalog currently contains no explicit MCP server, Agent Plugin, or CLI tool records.
+
+Released skills stay pinned to the commit their review covers. The nightly source sync lists any whose upstream has moved on in `catalog/reports/release-drift.json`; those need a new review before their files change. Thirteen released skills carry a `release.notices` entry that `info` and `install` print: a disclosed self-citation behavior (11 K-Dense skills) or a dated service retirement (two microsoft/skills skills).
 
 Reproduce the distribution counts from the repository root:
 
@@ -20,16 +22,21 @@ Reproduce the distribution counts from the repository root:
 node -e "const c=require('./catalog/skills.json'); console.log('total',c.skills.length); for(const s of ['bundled','source-direct','review-required','blocked']) console.log(s,c.skills.filter(x=>x.distribution===s).length)"
 ```
 
-`obra/superpowers/brainstorming` is currently blocked with release reason `upstream-skill-missing`. Its presence in search results is not permission to install it.
+`obra/superpowers/brainstorming` and seven other `obra/superpowers/*` records are blocked with release reason `upstream-skill-missing`. Each is a legacy duplicate of an `obra/<name>` record for the same upstream path; the skill files exist at the pinned commit, and the reason was recorded when sync compared directory paths with `SKILL.md` paths. The blocks stay because the `obra/<name>` records are the live entries. Their presence in search results is not permission to install them. The 20 `seo-geo/*` records are blocked with `upstream-moved`: every SKILL.md in aaron-he-zhu/seo-geo-claude-skills only says the skill moved to aaron-he-zhu/aaron-marketing-skills, which is now ingested for its `seo-geo/` subtree only (`include_paths`).
 
 ## Implemented CLI behavior
 
 - `search` searches the local catalog. A phrase or keyword must match before agent/status ranking bonuses apply. `--agent` filters compatibility.
 - `info` and `search` separate catalog availability from verified Hub installation state. `list` reads installation records for the selected scope and agent, not the catalog.
 - `install` accepts explicit IDs, checks skill compatibility and distribution/release gates, and reports every outcome. JSON success requires all requested installations and resolved dependencies to succeed; incomplete requests exit 1.
-- Eligible materialized bundles use the native installer. Three reviewed text-only skills are available in the current catalog. Source-direct skills require explicit external-install consent; review and blocked states are not overridden by `--yes`.
+- Eligible materialized bundles use the native installer. 416 reviewed text-only skills are available in the current catalog. Source-direct skills require explicit external-install consent; review and blocked states are not overridden by `--yes`.
 - `add` accepts a Git URL (cloned into `capabilities-library` for review) or starts interactive hybrid discovery. Remote queries do not require a `--remote` flag; the CLI has no such option. Selection and external execution are separate steps.
 - The no-command flow browses/searches compatible catalog entries interactively. Installs are sequential, not parallel.
+- The CLI resolves the catalog and materialized skills from the Hub root (or `SKILLS_HUB_HOME`) and installs relative to the current directory, so it can be run inside any project.
+- `mcp` (stdio) and `serve` (HTTP, `127.0.0.1:8787` by default) run a read-only catalog server: `search_skills` and `get_skill` MCP tools, released-skill file resources, and the routes in [API](API.md). No browser catalog exists yet.
+- `available [query] --agent <id>` lists exactly the skills `install` accepts. `search --installable` filters search results the same way.
+- Agent detection looks for each agent's command on `PATH` (with `PATHEXT` on Windows) or its configuration folder, and the interactive flow lists every supported agent with detected ones marked. Agent Skills format skills install for every agent that loads the format; see the README's supported-agent table.
+- `pnpm verify-upstream` re-downloads every file of every released skill from GitHub at its pinned commit and compares SHA-256; CI runs it on Linux. On 2026-10-04 all 1369 files of the 394 released skills matched. On 2026-10-03 and all 534 catalog records that existed then resolved to an existing SKILL.md at their pinned commits. The 472 records from the seven sources added on 2026-10-03 were ingested from pinned clones.
 - `create`, `sync`, and interactive `uninstall` are also available. See `node packages/cli/bin/skills-hub.mjs help` and [installation](INSTALLATION.md).
 
 ## Library capabilities and limits

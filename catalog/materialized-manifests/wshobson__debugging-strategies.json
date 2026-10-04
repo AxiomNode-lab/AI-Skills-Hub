@@ -1,0 +1,88 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "wshobson/debugging-strategies",
+  "source": {
+    "repo": "wshobson/agents",
+    "path": "plugins/developer-essentials/skills/debugging-strategies",
+    "revision": "156b7a5e7a8b93642628a339ee4039c925b34c7f"
+  },
+  "review": {
+    "path": "catalog/reviews/wshobson__debugging-strategies.json",
+    "sha256": "955839c51ccbc2256b3dde9c74c804def09aee6d7e62838b6d666d612f3d374e"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "low",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": false,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "filesystem-write",
+        "line": 65,
+        "evidence": "Remove",
+        "context": "   - Remove unrelated code",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 143,
+        "evidence": "Remove",
+        "context": "   - Remove complexity",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 299,
+        "evidence": "http://",
+        "context": "// Visit http://localhost:6060/debug/pprof/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 317,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 492,
+        "evidence": "Remove",
+        "context": "2. **Isolate the Problem**: Remove complexity until minimal case",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 505,
+        "evidence": "Remove",
+        "context": "- **Debug Logging in Prod**: Remove before shipping",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 12947
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "f89abb55d9f073f38f1703e4518f0613c788c6174be7f13b8dfe48a1c076c746",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "f7361b6e479a148fa609aa2b0c377fd09ed254985aa5763f509be38f7e7e9c0d",
+      "bytes": 11879,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 12947
+}

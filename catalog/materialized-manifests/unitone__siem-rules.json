@@ -1,0 +1,151 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "unitone/siem-rules",
+  "source": {
+    "repo": "UnitOneAI/SecuritySkills",
+    "path": "skills/secops/siem-rules",
+    "revision": "70bc259bb01abb3015ad2ad859ad5253cbf0bcab"
+  },
+  "review": {
+    "path": "catalog/reviews/unitone__siem-rules.json",
+    "sha256": "9a52420d26fe1090d5f3435b940b66ca845a878823fcaed43d701cc58149433b"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": false,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "credential-access",
+        "line": 377,
+        "evidence": "credential",
+        "context": "// Successful login preceded by multiple failures (credential guessing success)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 470,
+        "evidence": "Remove",
+        "context": "| **Retired** | Archived | Rule is no longer in use | Remove from active rule set, archive documentation |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 489,
+        "evidence": "remove",
+        "context": "5. Are there new exclusions needed or obsolete exclusions to remove?",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 521,
+        "evidence": "Credential",
+        "context": "| ATT&CK Tactic | [Credential Access (TA0006)] |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 574,
+        "evidence": "Credential",
+        "context": "| T1003 | OS Credential Dumping | Sysmon EID 10 (process access to LSASS) |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 661,
+        "evidence": "https://",
+        "context": "1. **MITRE ATT&CK Enterprise Matrix v16** -- https://attack.mitre.org/matrices/enterprise/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 662,
+        "evidence": "https://",
+        "context": "2. **Microsoft Sentinel KQL Reference** -- https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 663,
+        "evidence": "https://",
+        "context": "3. **Microsoft Sentinel Analytics Rules** -- https://learn.microsoft.com/en-us/azure/sentinel/detect-threats-built-in",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 664,
+        "evidence": "https://",
+        "context": "4. **Splunk SPL Reference** -- https://docs.splunk.com/Documentation/Splunk/latest/SearchReference",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 665,
+        "evidence": "https://",
+        "context": "5. **Splunk Security Essentials** -- https://splunkbase.splunk.com/app/3435/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 666,
+        "evidence": "https://",
+        "context": "6. **Azure AD Sign-in Error Codes** -- https://learn.microsoft.com/en-us/azure/active-directory/develop/reference-error-codes",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 667,
+        "evidence": "https://",
+        "context": "7. **Windows Security Event Log Reference** -- https://learn.microsoft.com/en-us/windows/security/threat-protection/auditing/security-auditing-overview",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 668,
+        "evidence": "https://",
+        "context": "8. **MITRE ATT&CK Data Sources** -- https://attack.mitre.org/datasources/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 669,
+        "evidence": "https://",
+        "context": "9. **Sentinel Entity Mapping** -- https://learn.microsoft.com/en-us/azure/sentinel/map-data-fields-to-entities",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 670,
+        "evidence": "https://",
+        "context": "10. **Splunk CIM (Common Information Model)** -- https://docs.splunk.com/Documentation/CIM/latest/User/Overview",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 31423
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "66eb5ec637cc578833ddcbc870dbf46c6718fd83e985fad5f0f5cf30d60cf47d",
+      "bytes": 1067,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "56b6d68aa4a4d8ed9971d9457c51eb57b29276b568314bf79eefa06876d96850",
+      "bytes": 30356,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 31423
+}

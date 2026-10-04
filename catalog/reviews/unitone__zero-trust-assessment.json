@@ -1,0 +1,152 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "unitone/zero-trust-assessment",
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "UnitOneAI/SecuritySkills",
+    "path": "skills/identity/zero-trust-assessment",
+    "revision": "70bc259bb01abb3015ad2ad859ad5253cbf0bcab"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "skills/identity/zero-trust-assessment",
+    "url": "https://api.github.com/repos/UnitOneAI/SecuritySkills/git/trees/70bc259bb01abb3015ad2ad859ad5253cbf0bcab?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/UnitOneAI/SecuritySkills/blob/70bc259bb01abb3015ad2ad859ad5253cbf0bcab/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "skills",
+        "skills/identity",
+        "skills/identity/zero-trust-assessment"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT License with its copyright notice, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice or other license grant found; the seven tenets closely follow NIST SP 800-207 wording and CISA ZTMM pillar/stage names are used, both US government works (public domain); Forrester ZTX is only named. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "none",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": false,
+      "network": false,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md in full (the only file). Read-only (allowed-tools: Read, Grep, Glob) Zero Trust maturity assessment against NIST SP 800-207 tenets and the CISA Zero Trust Maturity Model v2 pillars, producing a scorecard, findings checklist (ZT-* IDs) and roadmap.",
+      "No commands, installs, credentials, or network access; the skill states it is assessment-only and does not modify configurations.",
+      "The injection-like phrase at SKILL.md:54 ('ignore previous instructions') is quoted as content to flag, not obey. Optional out-of-directory link SKILL.md:453 (../../../schemas/finding.schema.json) applies only to JSON output and will not ship. Cross-references at SKILL.md:43 and 488-492 name sibling skill files (identity/iam-review.md etc.) as optional chaining, not required."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "66eb5ec637cc578833ddcbc870dbf46c6718fd83e985fad5f0f5cf30d60cf47d",
+      "bytes": 1067,
+      "mode": "100644",
+      "git_blob": "5a98cb233448adff07bef15917961275c76572dc",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry the copyright and permission notice.",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "d14dfaba2131e3656e356c7d909f734b5a44d057404f820248d379f228ba87d1",
+      "bytes": 27252,
+      "mode": "100644",
+      "git_blob": "38f4022e3e2f537487a310ef538f594ad8ee2e01",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "credential-access",
+          "line": 94,
+          "evidence": "credential",
+          "context": "| **ID Management** | Enterprise identity provider and credential management |",
+          "disposition": "accepted",
+          "reason": "'credential' appears in an architecture component description and a finding ID about compromised-credential detection; no access to real credentials."
+        },
+        {
+          "type": "credential-access",
+          "line": 153,
+          "evidence": "credential",
+          "context": "ZT-ID-08: No identity threat detection (compromised credential detection)",
+          "disposition": "accepted",
+          "reason": "'credential' appears in an architecture component description and a finding ID about compromised-credential detection; no access to real credentials."
+        },
+        {
+          "type": "network-access",
+          "line": 474,
+          "evidence": "https://",
+          "context": "- NIST SP 800-207, Zero Trust Architecture: https://csrc.nist.gov/publications/detail/sp/800-207/final",
+          "disposition": "accepted",
+          "reason": "Reference links to NIST, CISA, White House and DoD documents; the skill does not instruct fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 475,
+          "evidence": "https://",
+          "context": "- CISA Zero Trust Maturity Model v2.0: https://www.cisa.gov/zero-trust-maturity-model",
+          "disposition": "accepted",
+          "reason": "Reference links to NIST, CISA, White House and DoD documents; the skill does not instruct fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 476,
+          "evidence": "https://",
+          "context": "- OMB Memorandum M-22-09, Moving the U.S. Government Toward Zero Trust Cybersecurity Principles: https://www.whitehouse.gov/wp-content/uploads/2022/01/M-22-09.pdf",
+          "disposition": "accepted",
+          "reason": "Reference links to NIST, CISA, White House and DoD documents; the skill does not instruct fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 477,
+          "evidence": "https://",
+          "context": "- Executive Order 14028, Improving the Nation's Cybersecurity: https://www.whitehouse.gov/briefing-room/presidential-actions/2021/05/12/executive-order-on-improving-the-nations-cybersecurity/",
+          "disposition": "accepted",
+          "reason": "Reference links to NIST, CISA, White House and DoD documents; the skill does not instruct fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 478,
+          "evidence": "https://",
+          "context": "- NIST SP 800-53 Rev. 5, AC family (supporting access control requirements): https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final",
+          "disposition": "accepted",
+          "reason": "Reference links to NIST, CISA, White House and DoD documents; the skill does not instruct fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 479,
+          "evidence": "https://",
+          "context": "- DoD Zero Trust Reference Architecture v2.0: https://dodcio.defense.gov/Library/",
+          "disposition": "accepted",
+          "reason": "Reference links to NIST, CISA, White House and DoD documents; the skill does not instruct fetching them."
+        }
+      ]
+    }
+  ]
+}

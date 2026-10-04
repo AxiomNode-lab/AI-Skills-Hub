@@ -1,0 +1,242 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "bagelhole/object-storage",
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "infrastructure/storage/object-storage",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "review": {
+    "path": "catalog/reviews/bagelhole__object-storage.json",
+    "sha256": "553d85e5ef30f89b243f886ab17b8c6dbe202629b03fb7d8adf2ff54b5911d75"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "shell-execution",
+        "line": 35,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 48,
+        "evidence": "Delete",
+        "context": "# Delete an empty bucket",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 51,
+        "evidence": "Delete",
+        "context": "# Delete a bucket and ALL its contents (destructive)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 57,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 71,
+        "evidence": "delete",
+        "context": "aws s3 sync ./build/ s3://my-app-assets-prod/static/ --delete",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 85,
+        "evidence": "delete",
+        "context": "# Recursive delete of a prefix",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 91,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 109,
+        "evidence": "Delete",
+        "context": "# Delete a specific version permanently",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 110,
+        "evidence": "delete",
+        "context": "aws s3api delete-object \\",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 118,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 167,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 215,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 232,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 240,
+        "evidence": "secret",
+        "context": "  -e MINIO_ROOT_PASSWORD=minio-secret-key-change-me \\",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 256,
+        "evidence": "secret",
+        "context": "      MINIO_ROOT_PASSWORD: minio-secret-key-change-me",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 257,
+        "evidence": "https://",
+        "context": "      MINIO_BROWSER_REDIRECT_URL: https://minio-console.example.com",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 280,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 286,
+        "evidence": "curl",
+        "context": "curl -s http://localhost:9000/minio/health/live",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 286,
+        "evidence": "http://",
+        "context": "curl -s http://localhost:9000/minio/health/live",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 291,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 293,
+        "evidence": "curl",
+        "context": "curl -O https://dl.min.io/client/mc/release/linux-amd64/mc",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 293,
+        "evidence": "https://",
+        "context": "curl -O https://dl.min.io/client/mc/release/linux-amd64/mc",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 293,
+        "evidence": "\nchmod",
+        "context": "curl -O https://dl.min.io/client/mc/release/linux-amd64/mc",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 297,
+        "evidence": "secret",
+        "context": "mc alias set myminio http://localhost:9000 minioadmin minio-secret-key-change-me",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 297,
+        "evidence": "http://",
+        "context": "mc alias set myminio http://localhost:9000 minioadmin minio-secret-key-change-me",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 300,
+        "evidence": "https://",
+        "context": "mc alias set aws https://s3.amazonaws.com AKIAEXAMPLE SECRETKEYEXAMPLE",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 331,
+        "evidence": "secret",
+        "context": "mc admin user svcacct add myminio minioadmin --access-key myapp-key --secret-key myapp-secret",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 331,
+        "evidence": "secret",
+        "context": "mc admin user svcacct add myminio minioadmin --access-key myapp-key --secret-key myapp-secret",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 10987
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "650289d4c1f7e84736cb50a3e1bd5c92e526cdfc3d30badf54201f2346fd229a",
+      "bytes": 9919,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 10987
+}

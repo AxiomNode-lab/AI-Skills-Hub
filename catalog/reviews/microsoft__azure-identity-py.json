@@ -1,0 +1,1138 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "microsoft/azure-identity-py",
+  "status": "approved",
+  "reviewed_on": "2026-10-02",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/azure-sdk-python/skills/azure-identity-py",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": ".github/plugins/azure-sdk-python/skills/azure-identity-py",
+    "url": "https://api.github.com/repos/microsoft/skills/git/trees/84d8eaa8ae95930f55cdceb3e27196c795dab038?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/microsoft/skills/blob/84d8eaa8ae95930f55cdceb3e27196c795dab038/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        ".github",
+        ".github/plugins",
+        ".github/plugins/azure-sdk-python",
+        ".github/plugins/azure-sdk-python/skills",
+        ".github/plugins/azure-sdk-python/skills/azure-identity-py"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT License with its copyright notice, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "medium",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": true,
+      "network": false,
+      "credentials": false,
+      "package_install": true,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md, references/non-hero-scenarios.md and references/capabilities.md in full. Python guide to azure-identity: DefaultAzureCredential and its exclusions, managed identity, service principal (secret/certificate), workload identity, device code, browser, on-behalf-of, pipelines credentials, bearer-token providers, sovereign clouds, token caching and logging.",
+      "Medium only because SKILL.md:28 and :34 have `pip install azure-identity` / `pip install azure-identity-broker` (official Microsoft packages). All credential use is sample code for the user's application with placeholders or os.environ lookups; the skill advises never hardcoding credentials and does not tell the agent to read, print, or transmit real secrets.",
+      "Samples users should apply carefully: `additionally_allowed_tenants=[..., \"*\"]` (SKILL.md:461) allows any tenant, and `allow_unencrypted_storage=True` (SKILL.md:444) is explicitly marked not recommended for production. references/non-hero-scenarios.md largely duplicates SKILL.md sections."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "git_blob": "79656060de00aa4659ad2c276d5be8830664d544",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry the copyright and permission notice.",
+      "findings": []
+    },
+    {
+      "path": "references/capabilities.md",
+      "sha256": "294c3cb8b688c5a435acfd5633ecea51cd07845363fc893fa29efcc418f597b0",
+      "bytes": 2234,
+      "mode": "100644",
+      "git_blob": "bfc31d6efe88cf04ddb3e2519782b859d250fd62",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "credential-access",
+          "line": 10,
+          "evidence": "Credential",
+          "context": "- `Credential Types`",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 11,
+          "evidence": "Credential",
+          "context": "- `Specific Credential Examples`",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 28,
+          "evidence": "Credential",
+          "context": "- `Credential Selection Matrix`: | Environment | Recommended Credential |  ",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 28,
+          "evidence": "Credential",
+          "context": "- `Credential Selection Matrix`: | Environment | Recommended Credential |  ",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 29,
+          "evidence": "credential",
+          "context": "  See: [`non-hero-scenarios.md#credential-selection-matrix`](non-hero-scenarios.md#credential-selection-matrix)",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 29,
+          "evidence": "credential",
+          "context": "  See: [`non-hero-scenarios.md#credential-selection-matrix`](non-hero-scenarios.md#credential-selection-matrix)",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 40,
+          "evidence": "delete",
+          "context": "- Include cleanup/delete paths for created resources in examples.",
+          "disposition": "accepted",
+          "reason": "Matched the word 'delete' in a checklist item about including cleanup paths for created resources; no file writes."
+        }
+      ]
+    },
+    {
+      "path": "references/non-hero-scenarios.md",
+      "sha256": "3c3fdd62c8a3bc43e71b7bd4010a51d8d2809b5458eb898426523e28466bbdd1",
+      "bytes": 4355,
+      "mode": "100644",
+      "git_blob": "06509500188c302cfc61456dd31a9e636dd4de3f",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "credential-access",
+          "line": 15,
+          "evidence": "credential",
+          "context": "    # Preferred: use async context manager for both credential and client",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 16,
+          "evidence": "credential",
+          "context": "    async with DefaultAzureCredential() as credential:",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 18,
+          "evidence": "https://",
+          "context": "            account_url=\"https://<account>.blob.core.windows.net\",",
+          "disposition": "accepted",
+          "reason": "Token scopes, placeholder service endpoints and PyPI/Microsoft Learn/GitHub/aka.ms reference links; the agent is not told to fetch them."
+        },
+        {
+          "type": "credential-access",
+          "line": 19,
+          "evidence": "credential",
+          "context": "            credential=credential,",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 19,
+          "evidence": "credential",
+          "context": "            credential=credential,",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 35,
+          "evidence": "credential",
+          "context": "credential = DefaultAzureCredential(authority=AzureAuthorityHosts.AZURE_GOVERNMENT)",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 38,
+          "evidence": "credential",
+          "context": "credential = DefaultAzureCredential(authority=AzureAuthorityHosts.AZURE_CHINA)",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 54,
+          "evidence": "credential",
+          "context": "credential = DefaultAzureCredential(",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 59,
+          "evidence": "credential",
+          "context": "credential = DefaultAzureCredential(",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 73,
+          "evidence": "credential",
+          "context": "credential = ClientSecretCredential(",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 76,
+          "evidence": "secret",
+          "context": "    client_secret=\"<secret>\",",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 90,
+          "evidence": "credential",
+          "context": "with DefaultAzureCredential() as credential:",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 92,
+          "evidence": "credential",
+          "context": "        token = credential.get_token(\"https://management.azure.com/.default\")",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 92,
+          "evidence": "https://",
+          "context": "        token = credential.get_token(\"https://management.azure.com/.default\")",
+          "disposition": "accepted",
+          "reason": "Token scopes, placeholder service endpoints and PyPI/Microsoft Learn/GitHub/aka.ms reference links; the agent is not told to fetch them."
+        },
+        {
+          "type": "credential-access",
+          "line": 94,
+          "evidence": "credential",
+          "context": "        # No credential in the chain could attempt authentication.",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 96,
+          "evidence": "credential",
+          "context": "        logger.error(\"No credential available — check Azure CLI login or Managed Identity configuration\")",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 100,
+          "evidence": "credential",
+          "context": "        # e.message contains details from each credential in the chain.",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "shell-execution",
+          "line": 118,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks for pip install and environment-variable examples; the PowerShell match is a table row naming AzurePowerShellCredential."
+        },
+        {
+          "type": "credential-access",
+          "line": 123,
+          "evidence": "Credential",
+          "context": "## Credential Selection Matrix",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 125,
+          "evidence": "Credential",
+          "context": "| Environment | Recommended Credential |",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        }
+      ]
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "b10709c8cadc23134bfee415010f9f0292e39f06c216df3f3dd6fc826897414c",
+      "bytes": 17698,
+      "mode": "100644",
+      "git_blob": "f187f844b717be8d522ff19699e3a12974098a09",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "credential-access",
+          "line": 5,
+          "evidence": "credential",
+          "context": "  Triggers: \"azure-identity\", \"DefaultAzureCredential\", \"authentication\", \"managed identity\", \"service principal\", \"credential\".",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 21,
+          "evidence": "secret",
+          "context": "- You need service principal auth with secret or certificate",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 23,
+          "evidence": "credential",
+          "context": "- You need to troubleshoot credential chain failures",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "shell-execution",
+          "line": 27,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks for pip install and environment-variable examples; the PowerShell match is a table row naming AzurePowerShellCredential."
+        },
+        {
+          "type": "package-install",
+          "line": 28,
+          "evidence": "pip install",
+          "context": "pip install azure-identity",
+          "disposition": "accepted",
+          "reason": "`pip install azure-identity` and optional `pip install azure-identity-broker`, both official Azure SDK packages."
+        },
+        {
+          "type": "shell-execution",
+          "line": 33,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks for pip install and environment-variable examples; the PowerShell match is a table row naming AzurePowerShellCredential."
+        },
+        {
+          "type": "package-install",
+          "line": 34,
+          "evidence": "pip install",
+          "context": "pip install azure-identity-broker",
+          "disposition": "accepted",
+          "reason": "`pip install azure-identity` and optional `pip install azure-identity-broker`, both official Azure SDK packages."
+        },
+        {
+          "type": "shell-execution",
+          "line": 43,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks for pip install and environment-variable examples; the PowerShell match is a table row naming AzurePowerShellCredential."
+        },
+        {
+          "type": "credential-access",
+          "line": 44,
+          "evidence": "secret",
+          "context": "# Service principal with client secret",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 47,
+          "evidence": "secret",
+          "context": "AZURE_CLIENT_SECRET=<your-client-secret>",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 61,
+          "evidence": "Credential",
+          "context": "# Credential selection (new)",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 62,
+          "evidence": "credential",
+          "context": "AZURE_TOKEN_CREDENTIALS=dev|prod|<credential-name>  # Optional, restricts DAC chain",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 71,
+          "evidence": "credential",
+          "context": ">    - Production: set `AZURE_TOKEN_CREDENTIALS=prod` (or `AZURE_TOKEN_CREDENTIALS=<specific_credential>`) to constrain the credential chain to production-safe credentials.",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 73,
+          "evidence": "credential",
+          "context": ">    - Sync: `with DefaultAzureCredential() as credential:`",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 74,
+          "evidence": "credential",
+          "context": ">    - Async: `async with DefaultAzureCredential() as credential:` (from `azure.identity.aio`)",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 80,
+          "evidence": "credential",
+          "context": "The recommended credential for most scenarios. Tries multiple authentication methods in order:",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 87,
+          "evidence": "credential",
+          "context": "credential = DefaultAzureCredential()",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 90,
+          "evidence": "https://",
+          "context": "    account_url=\"https://<account>.blob.core.windows.net\",",
+          "disposition": "accepted",
+          "reason": "Token scopes, placeholder service endpoints and PyPI/Microsoft Learn/GitHub/aka.ms reference links; the agent is not told to fetch them."
+        },
+        {
+          "type": "credential-access",
+          "line": 91,
+          "evidence": "credential",
+          "context": "    credential=credential",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 91,
+          "evidence": "credential",
+          "context": "    credential=credential",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 96,
+          "evidence": "Credential",
+          "context": "### Credential Chain Order",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 98,
+          "evidence": "credential",
+          "context": "See [DefaultAzureCredential overview](https://aka.ms/azsdk/python/identity/credential-chains#defaultazurecredential-overview) for the current credential chain order and defaults.",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 98,
+          "evidence": "credential",
+          "context": "See [DefaultAzureCredential overview](https://aka.ms/azsdk/python/identity/credential-chains#defaultazurecredential-overview) for the current credential chain order and defaults.",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 98,
+          "evidence": "https://",
+          "context": "See [DefaultAzureCredential overview](https://aka.ms/azsdk/python/identity/credential-chains#defaultazurecredential-overview) for the current credential chain order and defaults.",
+          "disposition": "accepted",
+          "reason": "Token scopes, placeholder service endpoints and PyPI/Microsoft Learn/GitHub/aka.ms reference links; the agent is not told to fetch them."
+        },
+        {
+          "type": "credential-access",
+          "line": 104,
+          "evidence": "credential",
+          "context": "credential = DefaultAzureCredential(",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 111,
+          "evidence": "credential",
+          "context": "credential = DefaultAzureCredential(",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 116,
+          "evidence": "credential",
+          "context": "credential = DefaultAzureCredential(process_timeout=30)",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 119,
+          "evidence": "credential",
+          "context": "credential = DefaultAzureCredential(require_envvar=True)",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 130,
+          "evidence": "credential",
+          "context": "| `exclude_visual_studio_code_credential` | False | Skip VS Code credential |",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "shell-execution",
+          "line": 132,
+          "evidence": "PowerShell",
+          "context": "| `exclude_powershell_credential` | False | Skip Azure PowerShell |",
+          "disposition": "accepted",
+          "reason": "Table row describing the exclude_powershell_credential option; no command."
+        },
+        {
+          "type": "credential-access",
+          "line": 139,
+          "evidence": "credential",
+          "context": "Helper that wraps a credential into a callable returning a bearer token string. Essential for OpenAI SDK and other non-Azure-SDK clients:",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 144,
+          "evidence": "credential",
+          "context": "credential = DefaultAzureCredential()",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 146,
+          "evidence": "credential",
+          "context": "    credential, \"https://cognitiveservices.azure.com/.default\"",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 146,
+          "evidence": "https://",
+          "context": "    credential, \"https://cognitiveservices.azure.com/.default\"",
+          "disposition": "accepted",
+          "reason": "Token scopes, placeholder service endpoints and PyPI/Microsoft Learn/GitHub/aka.ms reference links; the agent is not told to fetch them."
+        },
+        {
+          "type": "network-access",
+          "line": 153,
+          "evidence": "https://",
+          "context": "    azure_endpoint=\"https://<resource>.openai.azure.com/\",",
+          "disposition": "accepted",
+          "reason": "Token scopes, placeholder service endpoints and PyPI/Microsoft Learn/GitHub/aka.ms reference links; the agent is not told to fetch them."
+        },
+        {
+          "type": "credential-access",
+          "line": 161,
+          "evidence": "Credential",
+          "context": "## Credential Types",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 163,
+          "evidence": "Credential",
+          "context": "### Credential Chains",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 165,
+          "evidence": "Credential",
+          "context": "| Credential | Use Case |",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 168,
+          "evidence": "credential",
+          "context": "| `ChainedTokenCredential` | Custom credential chain with explicit ordering |",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 172,
+          "evidence": "Credential",
+          "context": "| Credential | Use Case |",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 180,
+          "evidence": "Credential",
+          "context": "| Credential | Use Case |",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 182,
+          "evidence": "secret",
+          "context": "| `ClientSecretCredential` | Service principal with client secret |",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 190,
+          "evidence": "Credential",
+          "context": "| Credential | Use Case |",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 198,
+          "evidence": "Credential",
+          "context": "| Credential | Use Case |",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 205,
+          "evidence": "Credential",
+          "context": "## Specific Credential Examples",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 215,
+          "evidence": "credential",
+          "context": "credential = ManagedIdentityCredential()",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 218,
+          "evidence": "credential",
+          "context": "credential = ManagedIdentityCredential(",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 222,
+          "evidence": "credential",
+          "context": "# credential = ManagedIdentityCredential(object_id=\"<object-id>\")",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 223,
+          "evidence": "credential",
+          "context": "# credential = ManagedIdentityCredential(resource_id=\"<resource-id>\")",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 232,
+          "evidence": "credential",
+          "context": "credential = ClientSecretCredential(",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 247,
+          "evidence": "credential",
+          "context": "credential = CertificateCredential(",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 254,
+          "evidence": "credential",
+          "context": "credential = CertificateCredential(",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 268,
+          "evidence": "credential",
+          "context": "credential = AzureCliCredential()",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 270,
+          "evidence": "credential",
+          "context": "credential = AzureCliCredential(tenant_id=\"<tenant-id>\")",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 275,
+          "evidence": "credential",
+          "context": "Custom credential chain:",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 285,
+          "evidence": "credential",
+          "context": "credential = ChainedTokenCredential(",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 299,
+          "evidence": "credential",
+          "context": "credential = WorkloadIdentityCredential()",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 302,
+          "evidence": "credential",
+          "context": "credential = WorkloadIdentityCredential(",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 316,
+          "evidence": "credential",
+          "context": "credential = DeviceCodeCredential()",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 323,
+          "evidence": "credential",
+          "context": "credential = DeviceCodeCredential(",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 336,
+          "evidence": "credential",
+          "context": "credential = InteractiveBrowserCredential()",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 339,
+          "evidence": "credential",
+          "context": "credential = InteractiveBrowserCredential(",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 352,
+          "evidence": "credential",
+          "context": "credential = OnBehalfOfCredential(",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 355,
+          "evidence": "secret",
+          "context": "    client_secret=\"<client-secret>\",",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 356,
+          "evidence": "access-token",
+          "context": "    user_assertion=\"<access-token-from-client>\",",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 368,
+          "evidence": "credential",
+          "context": "credential = AzurePipelinesCredential(",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 381,
+          "evidence": "credential",
+          "context": "with DefaultAzureCredential() as credential:",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 383,
+          "evidence": "credential",
+          "context": "    token = credential.get_token(\"https://management.azure.com/.default\")",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 383,
+          "evidence": "https://",
+          "context": "    token = credential.get_token(\"https://management.azure.com/.default\")",
+          "disposition": "accepted",
+          "reason": "Token scopes, placeholder service endpoints and PyPI/Microsoft Learn/GitHub/aka.ms reference links; the agent is not told to fetch them."
+        },
+        {
+          "type": "credential-access",
+          "line": 387,
+          "evidence": "credential",
+          "context": "    token = credential.get_token(\"https://ossrdbms-aad.database.windows.net/.default\")",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 387,
+          "evidence": "https://",
+          "context": "    token = credential.get_token(\"https://ossrdbms-aad.database.windows.net/.default\")",
+          "disposition": "accepted",
+          "reason": "Token scopes, placeholder service endpoints and PyPI/Microsoft Learn/GitHub/aka.ms reference links; the agent is not told to fetch them."
+        },
+        {
+          "type": "credential-access",
+          "line": 399,
+          "evidence": "credential",
+          "context": "    # Preferred: use async context manager for both credential and client",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 400,
+          "evidence": "credential",
+          "context": "    async with DefaultAzureCredential() as credential:",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 402,
+          "evidence": "https://",
+          "context": "            account_url=\"https://<account>.blob.core.windows.net\",",
+          "disposition": "accepted",
+          "reason": "Token scopes, placeholder service endpoints and PyPI/Microsoft Learn/GitHub/aka.ms reference links; the agent is not told to fetch them."
+        },
+        {
+          "type": "credential-access",
+          "line": 403,
+          "evidence": "credential",
+          "context": "            credential=credential,",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 403,
+          "evidence": "credential",
+          "context": "            credential=credential,",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 419,
+          "evidence": "credential",
+          "context": "credential = DefaultAzureCredential(authority=AzureAuthorityHosts.AZURE_GOVERNMENT)",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 422,
+          "evidence": "credential",
+          "context": "credential = DefaultAzureCredential(authority=AzureAuthorityHosts.AZURE_CHINA)",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 438,
+          "evidence": "credential",
+          "context": "credential = DefaultAzureCredential(",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 443,
+          "evidence": "credential",
+          "context": "credential = DefaultAzureCredential(",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 457,
+          "evidence": "credential",
+          "context": "credential = ClientSecretCredential(",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 460,
+          "evidence": "secret",
+          "context": "    client_secret=\"<secret>\",",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 471,
+          "evidence": "credential",
+          "context": "with DefaultAzureCredential() as credential:",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 473,
+          "evidence": "credential",
+          "context": "        token = credential.get_token(\"https://management.azure.com/.default\")",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 473,
+          "evidence": "https://",
+          "context": "        token = credential.get_token(\"https://management.azure.com/.default\")",
+          "disposition": "accepted",
+          "reason": "Token scopes, placeholder service endpoints and PyPI/Microsoft Learn/GitHub/aka.ms reference links; the agent is not told to fetch them."
+        },
+        {
+          "type": "credential-access",
+          "line": 475,
+          "evidence": "credential",
+          "context": "        # No credential in the chain could attempt authentication",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 479,
+          "evidence": "credential",
+          "context": "        # e.message contains details from each credential in the chain",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "shell-execution",
+          "line": 496,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks for pip install and environment-variable examples; the PowerShell match is a table row naming AzurePowerShellCredential."
+        },
+        {
+          "type": "credential-access",
+          "line": 501,
+          "evidence": "Credential",
+          "context": "## Credential Selection Matrix",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 503,
+          "evidence": "Credential",
+          "context": "| Environment | Recommended Credential |",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 518,
+          "evidence": "credential",
+          "context": "2. **Use credentials as context managers** (`with DefaultAzureCredential() as credential:`) when they own token caches / HTTP transports you want cleaned up; for async, use `async with` on credentials from `azure.identity.aio`.",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 519,
+          "evidence": "credential",
+          "context": "3. **Use `DefaultAzureCredential`** for code that runs locally. Use a specific token credential for code that runs in Azure.",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 523,
+          "evidence": "credential",
+          "context": "7. **Use `ChainedTokenCredential`** when you need a custom credential order",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 528,
+          "evidence": "credential",
+          "context": "12. **Reuse credential instances** — same credential can be shared across multiple clients",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 528,
+          "evidence": "credential",
+          "context": "12. **Reuse credential instances** — same credential can be shared across multiple clients",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 534,
+          "evidence": "https://",
+          "context": "| PyPI Package | https://pypi.org/project/azure-identity/ |",
+          "disposition": "accepted",
+          "reason": "Token scopes, placeholder service endpoints and PyPI/Microsoft Learn/GitHub/aka.ms reference links; the agent is not told to fetch them."
+        },
+        {
+          "type": "network-access",
+          "line": 535,
+          "evidence": "https://",
+          "context": "| API Reference | https://learn.microsoft.com/python/api/azure-identity |",
+          "disposition": "accepted",
+          "reason": "Token scopes, placeholder service endpoints and PyPI/Microsoft Learn/GitHub/aka.ms reference links; the agent is not told to fetch them."
+        },
+        {
+          "type": "network-access",
+          "line": 536,
+          "evidence": "https://",
+          "context": "| GitHub Source | https://github.com/Azure/azure-sdk-for-python/tree/main/sdk/identity/azure-identity |",
+          "disposition": "accepted",
+          "reason": "Token scopes, placeholder service endpoints and PyPI/Microsoft Learn/GitHub/aka.ms reference links; the agent is not told to fetch them."
+        },
+        {
+          "type": "credential-access",
+          "line": 537,
+          "evidence": "Credential",
+          "context": "| Credential Chains | https://aka.ms/azsdk/python/identity/credential-chains |",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 537,
+          "evidence": "credential",
+          "context": "| Credential Chains | https://aka.ms/azsdk/python/identity/credential-chains |",
+          "disposition": "accepted",
+          "reason": "Credential classes, placeholder secrets (<your-client-secret>, <cert-password>) and os.environ['AZURE_CLIENT_SECRET'] lookups in sample code for the user's app; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 537,
+          "evidence": "https://",
+          "context": "| Credential Chains | https://aka.ms/azsdk/python/identity/credential-chains |",
+          "disposition": "accepted",
+          "reason": "Token scopes, placeholder service endpoints and PyPI/Microsoft Learn/GitHub/aka.ms reference links; the agent is not told to fetch them."
+        }
+      ]
+    }
+  ]
+}

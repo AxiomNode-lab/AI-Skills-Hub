@@ -1,0 +1,226 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "microsoft/azure-mgmt-apicenter-dotnet",
+  "status": "approved",
+  "reviewed_on": "2026-10-02",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/azure-sdk-dotnet/skills/azure-mgmt-apicenter-dotnet",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": ".github/plugins/azure-sdk-dotnet/skills/azure-mgmt-apicenter-dotnet",
+    "url": "https://api.github.com/repos/microsoft/skills/git/trees/84d8eaa8ae95930f55cdceb3e27196c795dab038?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/microsoft/skills/blob/84d8eaa8ae95930f55cdceb3e27196c795dab038/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        ".github",
+        ".github/plugins",
+        ".github/plugins/azure-sdk-dotnet",
+        ".github/plugins/azure-sdk-dotnet/skills",
+        ".github/plugins/azure-sdk-dotnet/skills/azure-mgmt-apicenter-dotnet"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT License with its copyright notice, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found; frontmatter declares MIT. The inline JSON Schema is an original illustrative example. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "medium",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": true,
+      "network": false,
+      "credentials": false,
+      "package_install": true,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md (the only file) in full. C# samples for Azure.ResourceManager.ApiCenter: ArmClient auth via DefaultAzureCredential and creating API Center services, workspaces, APIs, versions, definitions (import/export specs), environments, deployments and metadata schemas.",
+      "Medium only because SKILL.md:19-20 (and the table at SKILL.md:413-414) give `dotnet add package` commands for official NuGet packages. ARM create/update calls and the local spec read (File.ReadAllTextAsync, SKILL.md:190) are sample code for the user's application.",
+      "No hidden content and no external file dependencies. Example URLs are example.com placeholders plus portal.azure.com."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "git_blob": "79656060de00aa4659ad2c276d5be8830664d544",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry the copyright and permission notice.",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "e902c513aee8662f55c2d3d36b6e38da6dc174198942858e95980c2173635b06",
+      "bytes": 13524,
+      "mode": "100644",
+      "git_blob": "c67b575cbc92644e4ef78a7cad695a2944f545bc",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 18,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Fenced ```bash blocks contain `dotnet add package` commands and environment-variable placeholders only."
+        },
+        {
+          "type": "shell-execution",
+          "line": 28,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Fenced ```bash blocks contain `dotnet add package` commands and environment-variable placeholders only."
+        },
+        {
+          "type": "credential-access",
+          "line": 43,
+          "evidence": "credential",
+          "context": "var credential = new DefaultAzureCredential(",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential construction passed to ArmClient in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 46,
+          "evidence": "credential",
+          "context": "// Or use a specific credential directly in production:",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential construction passed to ArmClient in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 47,
+          "evidence": "credential",
+          "context": "// See https://learn.microsoft.com/dotnet/api/overview/azure/identity-readme?view=azure-dotnet#credential-classes",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential construction passed to ArmClient in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 47,
+          "evidence": "https://",
+          "context": "// See https://learn.microsoft.com/dotnet/api/overview/azure/identity-readme?view=azure-dotnet#credential-classes",
+          "disposition": "accepted",
+          "reason": "example.com placeholder URIs set as API metadata values, portal.azure.com, and links to NuGet, Microsoft Learn and GitHub; the agent is not told to fetch any of them."
+        },
+        {
+          "type": "credential-access",
+          "line": 48,
+          "evidence": "credential",
+          "context": "// var credential = new ManagedIdentityCredential();",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential construction passed to ArmClient in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 49,
+          "evidence": "credential",
+          "context": "ArmClient client = new ArmClient(credential);",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential construction passed to ArmClient in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 123,
+          "evidence": "https://",
+          "context": "        Uri = new Uri(\"https://example.com/terms\")",
+          "disposition": "accepted",
+          "reason": "example.com placeholder URIs set as API metadata values, portal.azure.com, and links to NuGet, Microsoft Learn and GitHub; the agent is not told to fetch any of them."
+        },
+        {
+          "type": "network-access",
+          "line": 130,
+          "evidence": "https://",
+          "context": "            Uri = new Uri(\"https://docs.example.com/orders\")",
+          "disposition": "accepted",
+          "reason": "example.com placeholder URIs set as API metadata values, portal.azure.com, and links to NuGet, Microsoft Learn and GitHub; the agent is not told to fetch any of them."
+        },
+        {
+          "type": "network-access",
+          "line": 234,
+          "evidence": "https://",
+          "context": "        ManagementPortalUris = { new Uri(\"https://portal.azure.com\") }",
+          "disposition": "accepted",
+          "reason": "example.com placeholder URIs set as API metadata values, portal.azure.com, and links to NuGet, Microsoft Learn and GitHub; the agent is not told to fetch any of them."
+        },
+        {
+          "type": "network-access",
+          "line": 239,
+          "evidence": "https://",
+          "context": "        DeveloperPortalUris = { new Uri(\"https://developer.example.com\") }",
+          "disposition": "accepted",
+          "reason": "example.com placeholder URIs set as API metadata values, portal.azure.com, and links to NuGet, Microsoft Learn and GitHub; the agent is not told to fetch any of them."
+        },
+        {
+          "type": "network-access",
+          "line": 270,
+          "evidence": "https://",
+          "context": "        RuntimeUris = { new Uri(\"https://api.example.com/orders\") }",
+          "disposition": "accepted",
+          "reason": "example.com placeholder URIs set as API metadata values, portal.azure.com, and links to NuGet, Microsoft Learn and GitHub; the agent is not told to fetch any of them."
+        },
+        {
+          "type": "network-access",
+          "line": 420,
+          "evidence": "https://",
+          "context": "| NuGet Package | https://www.nuget.org/packages/Azure.ResourceManager.ApiCenter |",
+          "disposition": "accepted",
+          "reason": "example.com placeholder URIs set as API metadata values, portal.azure.com, and links to NuGet, Microsoft Learn and GitHub; the agent is not told to fetch any of them."
+        },
+        {
+          "type": "network-access",
+          "line": 421,
+          "evidence": "https://",
+          "context": "| API Reference | https://learn.microsoft.com/dotnet/api/azure.resourcemanager.apicenter |",
+          "disposition": "accepted",
+          "reason": "example.com placeholder URIs set as API metadata values, portal.azure.com, and links to NuGet, Microsoft Learn and GitHub; the agent is not told to fetch any of them."
+        },
+        {
+          "type": "network-access",
+          "line": 422,
+          "evidence": "https://",
+          "context": "| Product Documentation | https://learn.microsoft.com/azure/api-center/ |",
+          "disposition": "accepted",
+          "reason": "example.com placeholder URIs set as API metadata values, portal.azure.com, and links to NuGet, Microsoft Learn and GitHub; the agent is not told to fetch any of them."
+        },
+        {
+          "type": "network-access",
+          "line": 423,
+          "evidence": "https://",
+          "context": "| GitHub Source | https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/apicenter/Azure.ResourceManager.ApiCenter |",
+          "disposition": "accepted",
+          "reason": "example.com placeholder URIs set as API metadata values, portal.azure.com, and links to NuGet, Microsoft Learn and GitHub; the agent is not told to fetch any of them."
+        }
+      ]
+    }
+  ]
+}

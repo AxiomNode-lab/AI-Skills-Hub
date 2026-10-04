@@ -1,0 +1,123 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "bagelhole/load-balancing",
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "infrastructure/networking/load-balancing",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "review": {
+    "path": "catalog/reviews/bagelhole__load-balancing.json",
+    "sha256": "c227c9c8a3245297533bb7d2e7d26e2aac7cf4d70da1a428ecf9bcdadaffa606"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "network-access",
+        "line": 44,
+        "evidence": "https://",
+        "context": "    return 301 https://$host$request_uri;",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 57,
+        "evidence": "http://",
+        "context": "        proxy_pass http://app_backend;",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 198,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 202,
+        "evidence": "\nsudo",
+        "context": "# Reload without dropping connections",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 206,
+        "evidence": " sudo",
+        "context": "echo \"show stat\" | sudo socat stdio /var/run/haproxy/admin.sock",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 209,
+        "evidence": " sudo",
+        "context": "echo \"set server web_servers/web1 state drain\" | sudo socat stdio /var/run/haproxy/admin.sock",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 212,
+        "evidence": " sudo",
+        "context": "echo \"set server web_servers/web1 state maint\" | sudo socat stdio /var/run/haproxy/admin.sock",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 215,
+        "evidence": " sudo",
+        "context": "echo \"set server web_servers/web1 state ready\" | sudo socat stdio /var/run/haproxy/admin.sock",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 222,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 267,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 275,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 12199
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "d71115181a13abb31b79527493fc0fab195c6e4727e716ac3e765c10bf1425fb",
+      "bytes": 11131,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 12199
+}

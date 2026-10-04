@@ -1,0 +1,221 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "bagelhole/windows-server",
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "infrastructure/servers/windows-server",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "review": {
+    "path": "catalog/reviews/bagelhole__windows-server.json",
+    "sha256": "fc5e379d996f2bb4d9d223b9a2f08044509c587f693621ea75f47ed4b1929d92"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "shell-execution",
+        "line": 3,
+        "evidence": "PowerShell",
+        "context": "description: Administer Windows Server systems. Manage IIS, Active Directory, and PowerShell automation. Use when administering Windows infrastructure.",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 12,
+        "evidence": "PowerShell",
+        "context": "Windows Server management and PowerShell automation for production workloads including IIS web hosting, Active Directory domain services, and system maintenance.",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 19,
+        "evidence": "PowerShell",
+        "context": "- Automating administrative tasks with PowerShell",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 26,
+        "evidence": "PowerShell",
+        "context": "- PowerShell 5.1+ (built-in) or PowerShell 7+ installed",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 26,
+        "evidence": "PowerShell",
+        "context": "- PowerShell 5.1+ (built-in) or PowerShell 7+ installed",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 30,
+        "evidence": "PowerShell",
+        "context": "## PowerShell Administration Essentials",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 32,
+        "evidence": "powershell",
+        "context": "```powershell",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 33,
+        "evidence": "PowerShell",
+        "context": "# Check PowerShell version",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 63,
+        "evidence": "PowerShell",
+        "context": "# PowerShell remoting to another server",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 64,
+        "evidence": "Credential",
+        "context": "Enter-PSSession -ComputerName server02 -Credential (Get-Credential)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 64,
+        "evidence": "Credential",
+        "context": "Enter-PSSession -ComputerName server02 -Credential (Get-Credential)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 72,
+        "evidence": "powershell",
+        "context": "```powershell",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 94,
+        "evidence": "Remove",
+        "context": "# Remove a feature",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 100,
+        "evidence": "powershell",
+        "context": "```powershell",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 148,
+        "evidence": "https://",
+        "context": "  <action type=\"Redirect\" url=\"https://{HTTP_HOST}/{R:1}\" redirectType=\"Permanent\" />",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 155,
+        "evidence": "powershell",
+        "context": "```powershell",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 201,
+        "evidence": "powershell",
+        "context": "```powershell",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 202,
+        "evidence": "PowerShell",
+        "context": "# Install the PSWindowsUpdate module (from PowerShell Gallery)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 218,
+        "evidence": "powershell",
+        "context": "$action  = New-ScheduledTaskAction -Execute \"powershell.exe\" `",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 225,
+        "evidence": "http://",
+        "context": "# WUServer = http://wsus.corp.example.com:8530",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 226,
+        "evidence": "http://",
+        "context": "# WUStatusServer = http://wsus.corp.example.com:8530",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 231,
+        "evidence": "powershell",
+        "context": "```powershell",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 264,
+        "evidence": "powershell",
+        "context": "```powershell",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 266,
+        "evidence": "powershell",
+        "context": "$action  = New-ScheduledTaskAction -Execute \"powershell.exe\" `",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 278,
+        "evidence": "remove",
+        "context": "# Disable and remove a task",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 12001
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "df29d44f6a8670e19e2b1dfe5b679cc15a8c0c01c64338795eef7f77a7ab3d73",
+      "bytes": 10933,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 12001
+}

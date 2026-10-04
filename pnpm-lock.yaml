@@ -19,6 +19,9 @@ importers:
       '@ai-skills-hub/installer':
         specifier: workspace:*
         version: link:../installer
+      '@ai-skills-hub/server':
+        specifier: workspace:*
+        version: link:../server
       '@inquirer/prompts':
         specifier: ^8.7.2
         version: 8.7.2
@@ -31,7 +34,11 @@ importers:
         specifier: workspace:*
         version: link:../core
 
-  packages/installer: {}
+  packages/installer:
+    dependencies:
+      '@ai-skills-hub/core':
+        specifier: workspace:*
+        version: link:../core
 
   packages/licenses: {}
 
@@ -40,6 +47,15 @@ importers:
   packages/plugin-export: {}
 
   packages/security: {}
+
+  packages/server:
+    dependencies:
+      '@ai-skills-hub/core':
+        specifier: workspace:*
+        version: link:../core
+      '@ai-skills-hub/discovery':
+        specifier: workspace:*
+        version: link:../discovery
 
 packages:
 

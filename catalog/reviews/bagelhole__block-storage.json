@@ -1,0 +1,264 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "bagelhole/block-storage",
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "infrastructure/storage/block-storage",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "infrastructure/storage/block-storage",
+    "url": "https://api.github.com/repos/BagelHole/DevOps-Security-Agent-Skills/git/trees/0365f57a079b1332f95cf26e31dd2d5332a8399f?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/BagelHole/DevOps-Security-Agent-Skills/blob/0365f57a079b1332f95cf26e31dd2d5332a8399f/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "infrastructure",
+        "infrastructure/storage",
+        "infrastructure/storage/block-storage"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found; the frontmatter declares license: MIT. Commands are standard util-linux/LVM/mdadm/AWS CLI usage. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "medium",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md in full (single-file skill). Command reference for Linux block storage: disk discovery and partitioning, ext4/XFS creation and resizing, fstab entries, LVM create/extend/snapshot/reduce/remove, AWS EBS create/attach/modify/snapshot/delete, and mdadm software RAID.",
+      "Medium: following it has the agent run root-level, data-destroying disk operations — `parted mklabel`, `wipefs -a`, `mkfs.*` (SKILL.md:46, 57, 64-73, 251, 316), `lvremove -f`, `lvreduce`, `lvconvert --merge` (SKILL.md:190-215), `mdadm --create` on raw disks (SKILL.md:298-304), appending to /etc/fstab and mdadm.conf, apt/dnf installs, and `aws ec2 delete-volume` (SKILL.md:287). Acceptable because it is a reference for the user's own storage task with placeholder device names and volume IDs, it marks unmount-first and the destructive merge, and nothing instructs running commands unprompted; consistent with other released storage/admin skills. The agent must confirm the exact target device or volume with the user before any format, wipe, remove or delete command.",
+      "Related Skills (SKILL.md:351-355) name sibling skills by backtick name only; optional. Frontmatter declares license: MIT."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "67c5c5cbb12cafb1515e449748866bd40da7dec9",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "55c0a49f9f02909db6154eb99e02f9167d566378727311c53d4ab2379ec28ddd",
+      "bytes": 10270,
+      "mode": "100644",
+      "git_blob": "24c8c59d0d36e939e9d51bf3b0f5954d24146aa5",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 25,
+          "evidence": " sudo",
+          "context": "- Root or sudo access on the target system",
+          "disposition": "accepted",
+          "reason": "Prerequisite text stating root or sudo access is needed; not a command."
+        },
+        {
+          "type": "shell-execution",
+          "line": 33,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks with root-level disk, LVM, mdadm and aws ec2 commands that partition, format, mount and manage the user's storage, which is the skill's purpose."
+        },
+        {
+          "type": "shell-execution",
+          "line": 62,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks with root-level disk, LVM, mdadm and aws ec2 commands that partition, format, mount and manage the user's storage, which is the skill's purpose."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 76,
+          "evidence": "mkdir",
+          "context": "mkdir -p /data",
+          "disposition": "accepted",
+          "reason": "mkdir of mount points, `lvremove`/`pvremove`/`vgreduce`, `mdadm --remove` of a failed disk, `aws ec2 delete-volume`, and appends to /etc/fstab and mdadm.conf; these change or destroy storage and must be confirmed against the intended device."
+        },
+        {
+          "type": "shell-execution",
+          "line": 105,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks with root-level disk, LVM, mdadm and aws ec2 commands that partition, format, mount and manage the user's storage, which is the skill's purpose."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 136,
+          "evidence": "mkdir",
+          "context": "mkdir -p /data/app",
+          "disposition": "accepted",
+          "reason": "mkdir of mount points, `lvremove`/`pvremove`/`vgreduce`, `mdadm --remove` of a failed disk, `aws ec2 delete-volume`, and appends to /etc/fstab and mdadm.conf; these change or destroy storage and must be confirmed against the intended device."
+        },
+        {
+          "type": "shell-execution",
+          "line": 145,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks with root-level disk, LVM, mdadm and aws ec2 commands that partition, format, mount and manage the user's storage, which is the skill's purpose."
+        },
+        {
+          "type": "shell-execution",
+          "line": 164,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks with root-level disk, LVM, mdadm and aws ec2 commands that partition, format, mount and manage the user's storage, which is the skill's purpose."
+        },
+        {
+          "type": "shell-execution",
+          "line": 177,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks with root-level disk, LVM, mdadm and aws ec2 commands that partition, format, mount and manage the user's storage, which is the skill's purpose."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 182,
+          "evidence": "mkdir",
+          "context": "mkdir -p /mnt/snapshot",
+          "disposition": "accepted",
+          "reason": "mkdir of mount points, `lvremove`/`pvremove`/`vgreduce`, `mdadm --remove` of a failed disk, `aws ec2 delete-volume`, and appends to /etc/fstab and mdadm.conf; these change or destroy storage and must be confirmed against the intended device."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 188,
+          "evidence": "remove",
+          "context": "# Unmount and remove the snapshot when done",
+          "disposition": "accepted",
+          "reason": "mkdir of mount points, `lvremove`/`pvremove`/`vgreduce`, `mdadm --remove` of a failed disk, `aws ec2 delete-volume`, and appends to /etc/fstab and mdadm.conf; these change or destroy storage and must be confirmed against the intended device."
+        },
+        {
+          "type": "shell-execution",
+          "line": 199,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks with root-level disk, LVM, mdadm and aws ec2 commands that partition, format, mount and manage the user's storage, which is the skill's purpose."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 208,
+          "evidence": "Remove",
+          "context": "# Remove a logical volume",
+          "disposition": "accepted",
+          "reason": "mkdir of mount points, `lvremove`/`pvremove`/`vgreduce`, `mdadm --remove` of a failed disk, `aws ec2 delete-volume`, and appends to /etc/fstab and mdadm.conf; these change or destroy storage and must be confirmed against the intended device."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 212,
+          "evidence": "Remove",
+          "context": "# Remove a disk from a volume group (migrate data off first)",
+          "disposition": "accepted",
+          "reason": "mkdir of mount points, `lvremove`/`pvremove`/`vgreduce`, `mdadm --remove` of a failed disk, `aws ec2 delete-volume`, and appends to /etc/fstab and mdadm.conf; these change or destroy storage and must be confirmed against the intended device."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 214,
+          "evidence": "Remove",
+          "context": "vgreduce data_vg /dev/sdc  # Remove PV from VG",
+          "disposition": "accepted",
+          "reason": "mkdir of mount points, `lvremove`/`pvremove`/`vgreduce`, `mdadm --remove` of a failed disk, `aws ec2 delete-volume`, and appends to /etc/fstab and mdadm.conf; these change or destroy storage and must be confirmed against the intended device."
+        },
+        {
+          "type": "shell-execution",
+          "line": 220,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks with root-level disk, LVM, mdadm and aws ec2 commands that partition, format, mount and manage the user's storage, which is the skill's purpose."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 252,
+          "evidence": "mkdir",
+          "context": "mkdir -p /data",
+          "disposition": "accepted",
+          "reason": "mkdir of mount points, `lvremove`/`pvremove`/`vgreduce`, `mdadm --remove` of a failed disk, `aws ec2 delete-volume`, and appends to /etc/fstab and mdadm.conf; these change or destroy storage and must be confirmed against the intended device."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 286,
+          "evidence": "Delete",
+          "context": "# Delete a volume (ensure it is detached first)",
+          "disposition": "accepted",
+          "reason": "mkdir of mount points, `lvremove`/`pvremove`/`vgreduce`, `mdadm --remove` of a failed disk, `aws ec2 delete-volume`, and appends to /etc/fstab and mdadm.conf; these change or destroy storage and must be confirmed against the intended device."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 287,
+          "evidence": "delete",
+          "context": "aws ec2 delete-volume --volume-id vol-0abc123def456789",
+          "disposition": "accepted",
+          "reason": "mkdir of mount points, `lvremove`/`pvremove`/`vgreduce`, `mdadm --remove` of a failed disk, `aws ec2 delete-volume`, and appends to /etc/fstab and mdadm.conf; these change or destroy storage and must be confirmed against the intended device."
+        },
+        {
+          "type": "shell-execution",
+          "line": 292,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks with root-level disk, LVM, mdadm and aws ec2 commands that partition, format, mount and manage the user's storage, which is the skill's purpose."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 317,
+          "evidence": "mkdir",
+          "context": "mkdir -p /data",
+          "disposition": "accepted",
+          "reason": "mkdir of mount points, `lvremove`/`pvremove`/`vgreduce`, `mdadm --remove` of a failed disk, `aws ec2 delete-volume`, and appends to /etc/fstab and mdadm.conf; these change or destroy storage and must be confirmed against the intended device."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 322,
+          "evidence": "remove",
+          "context": "mdadm --manage /dev/md0 --remove /dev/sdc",
+          "disposition": "accepted",
+          "reason": "mkdir of mount points, `lvremove`/`pvremove`/`vgreduce`, `mdadm --remove` of a failed disk, `aws ec2 delete-volume`, and appends to /etc/fstab and mdadm.conf; these change or destroy storage and must be confirmed against the intended device."
+        }
+      ]
+    }
+  ]
+}

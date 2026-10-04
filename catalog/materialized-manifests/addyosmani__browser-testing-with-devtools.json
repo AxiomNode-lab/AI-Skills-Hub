@@ -1,0 +1,67 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "addyosmani/browser-testing-with-devtools",
+  "source": {
+    "repo": "addyosmani/agent-skills",
+    "path": "skills/browser-testing-with-devtools",
+    "revision": "1401c8b8030e023baeebb31781a6653fe8e93026"
+  },
+  "review": {
+    "path": "catalog/reviews/addyosmani__browser-testing-with-devtools.json",
+    "sha256": "8301c9a7bee9b2f04348323bafd4d063cbd0263f98147bb3839c8ff475900823"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": true,
+      "package_install": true,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "credential-access",
+        "line": 88,
+        "evidence": "credential",
+        "context": "- **No credential access.** Do not use JavaScript execution to read cookies, localStorage tokens, sessionStorage secrets, or any authentication material.",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 192,
+        "evidence": "http://",
+        "context": "1. Navigate to http://localhost:3000/tasks",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 289,
+        "evidence": "Credential",
+        "context": "| \"I need to read localStorage to debug this\" | Credential material is off-limits. Inspect application state through non-sensitive variables instead. |",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 15607
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "6f202f8bd568cd730dbb2b0d1f8e243bc74c2fa1f64dbce9b2c7ea08bd5c9fd7",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "4e3aacd6a380cd25bc6c2d67fdd1c926a9b22535b8a62109ecd33cefd909e3d9",
+      "bytes": 14539,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 15607
+}

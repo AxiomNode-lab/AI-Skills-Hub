@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { resolveHubPath } from "@ai-skills-hub/core";
 import { normalizeSkillDirectory, resolveInstallRoot } from "./targets.mjs";
 import {
   buildInstallRecord,
@@ -48,7 +49,7 @@ export function installMaterializedSkill(skill, options = {}) {
     throw new Error("Skill is not a release-eligible materialized bundled artifact: " + skill.id);
   }
 
-  const sourceRoot = path.resolve(skill.materialized_root);
+  const sourceRoot = resolveHubPath(skill.materialized_root);
   if (!fs.existsSync(sourceRoot)) {
     throw new Error("Materialized root not found: " + sourceRoot);
   }

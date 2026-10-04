@@ -1,0 +1,450 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "microsoft/azure-monitor-opentelemetry-exporter-py",
+  "status": "approved",
+  "reviewed_on": "2026-10-02",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/azure-sdk-python/skills/azure-monitor-opentelemetry-exporter-py",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": ".github/plugins/azure-sdk-python/skills/azure-monitor-opentelemetry-exporter-py",
+    "url": "https://api.github.com/repos/microsoft/skills/git/trees/84d8eaa8ae95930f55cdceb3e27196c795dab038?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/microsoft/skills/blob/84d8eaa8ae95930f55cdceb3e27196c795dab038/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        ".github",
+        ".github/plugins",
+        ".github/plugins/azure-sdk-python",
+        ".github/plugins/azure-sdk-python/skills",
+        ".github/plugins/azure-sdk-python/skills/azure-monitor-opentelemetry-exporter-py"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT License with its copyright notice, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file; frontmatter declares license: MIT consistent with the repository-root MIT license. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "medium",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": false,
+      "package_install": true,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md, references/capabilities.md and references/non-hero-scenarios.md in full. Reference for azure-monitor-opentelemetry-exporter in Python: trace/metric/log exporters to Application Insights, Entra ID ingestion auth, sampling, offline storage, sovereign clouds.",
+      "The only command is `pip install azure-monitor-opentelemetry-exporter` (line 20) for the user's project, which is why the risk is medium; it is the official package. All other content is sample code; connection strings are placeholders (InstrumentationKey=xxx) and the agent is not told to read, print, or send secrets.",
+      "Following the samples makes the user's application send telemetry (including log records) to Application Insights, so users should review what they log. The sampling snippet in SKILL.md (lines 164-172) imports ParentBasedTraceIdRatio without using it and omits `from opentelemetry import trace`; the reference version is correct. Minor sample issue."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "git_blob": "79656060de00aa4659ad2c276d5be8830664d544",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry the copyright and permission notice.",
+      "findings": []
+    },
+    {
+      "path": "references/capabilities.md",
+      "sha256": "63ab7914b7edfbe1888a52c1aa0167bc26a4fa01f24da057a010a331e273f127",
+      "bytes": 2143,
+      "mode": "100644",
+      "git_blob": "6cddf9224e775e5cae711bc9f38e7f92120f25f0",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 40,
+          "evidence": "delete",
+          "context": "- Include cleanup/delete paths for created resources in examples.",
+          "disposition": "accepted",
+          "reason": "Generic checklist line in references/capabilities.md line 40 about including cleanup/delete paths in examples; no file deletion instructed."
+        }
+      ]
+    },
+    {
+      "path": "references/non-hero-scenarios.md",
+      "sha256": "fc7c9da2853fc25553349b315730b25f0af29bd7f55d66c0e28a7610947a0f27",
+      "bytes": 3022,
+      "mode": "100644",
+      "git_blob": "af09ed2a42b7bd66c6cc9b2adc6abc4d741ddab5",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "credential-access",
+          "line": 12,
+          "evidence": "credential",
+          "context": "# Local dev: DefaultAzureCredential. In production, set AZURE_TOKEN_CREDENTIALS=prod or use a specific credential.",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential passed to exporters and a configuration table entry for `credential`; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 13,
+          "evidence": "credential",
+          "context": "credential = DefaultAzureCredential()",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential passed to exporters and a configuration table entry for `credential`; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 14,
+          "evidence": "credential",
+          "context": "# Or use a specific credential directly in production:",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential passed to exporters and a configuration table entry for `credential`; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 15,
+          "evidence": "credential",
+          "context": "# See https://learn.microsoft.com/python/api/overview/azure/identity-readme?view=azure-python#credential-classes",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential passed to exporters and a configuration table entry for `credential`; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 15,
+          "evidence": "https://",
+          "context": "# See https://learn.microsoft.com/python/api/overview/azure/identity-readme?view=azure-python#credential-classes",
+          "disposition": "accepted",
+          "reason": "Placeholder Application Insights ingestion endpoints in connection strings (xxx.in.applicationinsights.azure.com/.us) and Microsoft Learn links; nothing tells the agent to fetch them."
+        },
+        {
+          "type": "credential-access",
+          "line": 16,
+          "evidence": "credential",
+          "context": "# credential = ManagedIdentityCredential()",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential passed to exporters and a configuration table entry for `credential`; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 19,
+          "evidence": "credential",
+          "context": "    credential=credential",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential passed to exporters and a configuration table entry for `credential`; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 19,
+          "evidence": "credential",
+          "context": "    credential=credential",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential passed to exporters and a configuration table entry for `credential`; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 47,
+          "evidence": "credential",
+          "context": "    credential=DefaultAzureCredential(),",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential passed to exporters and a configuration table entry for `credential`; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 57,
+          "evidence": "credential",
+          "context": "    credential=DefaultAzureCredential(),",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential passed to exporters and a configuration table entry for `credential`; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 69,
+          "evidence": "credential",
+          "context": "credential = DefaultAzureCredential(authority=AzureAuthorityHosts.AZURE_GOVERNMENT)",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential passed to exporters and a configuration table entry for `credential`; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 71,
+          "evidence": "https://",
+          "context": "    connection_string=\"InstrumentationKey=xxx;IngestionEndpoint=https://xxx.in.applicationinsights.azure.us/\",",
+          "disposition": "accepted",
+          "reason": "Placeholder Application Insights ingestion endpoints in connection strings (xxx.in.applicationinsights.azure.com/.us) and Microsoft Learn links; nothing tells the agent to fetch them."
+        },
+        {
+          "type": "credential-access",
+          "line": 72,
+          "evidence": "credential",
+          "context": "    credential=credential",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential passed to exporters and a configuration table entry for `credential`; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 72,
+          "evidence": "credential",
+          "context": "    credential=credential",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential passed to exporters and a configuration table entry for `credential`; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 89,
+          "evidence": "credential",
+          "context": "| `credential` | Azure credential for AAD auth | None |",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential passed to exporters and a configuration table entry for `credential`; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 89,
+          "evidence": "credential",
+          "context": "| `credential` | Azure credential for AAD auth | None |",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential passed to exporters and a configuration table entry for `credential`; no instruction to read, print, or transmit secrets."
+        }
+      ]
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "0442148cb6e845b4c682e1adf7e253fef2dab295a47a48da210d91970205178b",
+      "bytes": 9074,
+      "mode": "100644",
+      "git_blob": "7feaa1cd43cedd1d3b2405776622a89651fa0c38",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 19,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Two bash fences: the pip install line (19) and a placeholder environment-variable listing (25)."
+        },
+        {
+          "type": "package-install",
+          "line": 20,
+          "evidence": "pip install",
+          "context": "pip install azure-monitor-opentelemetry-exporter",
+          "disposition": "accepted",
+          "reason": "`pip install azure-monitor-opentelemetry-exporter` (line 20) installs the official exporter package for the user's project."
+        },
+        {
+          "type": "shell-execution",
+          "line": 25,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Two bash fences: the pip install line (19) and a placeholder environment-variable listing (25)."
+        },
+        {
+          "type": "network-access",
+          "line": 26,
+          "evidence": "https://",
+          "context": "APPLICATIONINSIGHTS_CONNECTION_STRING=InstrumentationKey=xxx;IngestionEndpoint=https://xxx.in.applicationinsights.azure.com/  # Required for all auth methods",
+          "disposition": "accepted",
+          "reason": "Placeholder Application Insights ingestion endpoints in connection strings (xxx.in.applicationinsights.azure.com/.us) and Microsoft Learn links; nothing tells the agent to fetch them."
+        },
+        {
+          "type": "credential-access",
+          "line": 34,
+          "evidence": "credential",
+          "context": "> 1. **Prefer `DefaultAzureCredential` for ingestion auth when supported.** `APPLICATIONINSIGHTS_CONNECTION_STRING` identifies the target Application Insights resource, and `credential=DefaultAzureCredential(...)` provides Microsoft Entra a",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential passed to exporters and a configuration table entry for `credential`; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 36,
+          "evidence": "credential",
+          "context": ">    - Production: set `AZURE_TOKEN_CREDENTIALS=prod` (or `AZURE_TOKEN_CREDENTIALS=<specific_credential>`) to constrain the credential chain to production-safe credentials.",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential passed to exporters and a configuration table entry for `credential`; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 61,
+          "evidence": "credential",
+          "context": "    credential=DefaultAzureCredential(),",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential passed to exporters and a configuration table entry for `credential`; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 87,
+          "evidence": "credential",
+          "context": "    credential=DefaultAzureCredential(),",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential passed to exporters and a configuration table entry for `credential`; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 112,
+          "evidence": "credential",
+          "context": "    credential=DefaultAzureCredential(),",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential passed to exporters and a configuration table entry for `credential`; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 139,
+          "evidence": "credential",
+          "context": "    credential=DefaultAzureCredential(),",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential passed to exporters and a configuration table entry for `credential`; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 150,
+          "evidence": "credential",
+          "context": "credential = DefaultAzureCredential(require_envvar=True)",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential passed to exporters and a configuration table entry for `credential`; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 151,
+          "evidence": "credential",
+          "context": "# Or use a specific credential directly in production:",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential passed to exporters and a configuration table entry for `credential`; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 152,
+          "evidence": "credential",
+          "context": "# See https://learn.microsoft.com/python/api/overview/azure/identity-readme?view=azure-python#credential-classes",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential passed to exporters and a configuration table entry for `credential`; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 152,
+          "evidence": "https://",
+          "context": "# See https://learn.microsoft.com/python/api/overview/azure/identity-readme?view=azure-python#credential-classes",
+          "disposition": "accepted",
+          "reason": "Placeholder Application Insights ingestion endpoints in connection strings (xxx.in.applicationinsights.azure.com/.us) and Microsoft Learn links; nothing tells the agent to fetch them."
+        },
+        {
+          "type": "credential-access",
+          "line": 153,
+          "evidence": "credential",
+          "context": "# credential = ManagedIdentityCredential()",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential passed to exporters and a configuration table entry for `credential`; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 156,
+          "evidence": "credential",
+          "context": "    credential=credential",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential passed to exporters and a configuration table entry for `credential`; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 156,
+          "evidence": "credential",
+          "context": "    credential=credential",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential passed to exporters and a configuration table entry for `credential`; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 184,
+          "evidence": "credential",
+          "context": "    credential=DefaultAzureCredential(),",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential passed to exporters and a configuration table entry for `credential`; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 194,
+          "evidence": "credential",
+          "context": "    credential=DefaultAzureCredential(),",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential passed to exporters and a configuration table entry for `credential`; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 206,
+          "evidence": "credential",
+          "context": "credential = DefaultAzureCredential(authority=AzureAuthorityHosts.AZURE_GOVERNMENT)",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential passed to exporters and a configuration table entry for `credential`; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 208,
+          "evidence": "https://",
+          "context": "    connection_string=\"InstrumentationKey=xxx;IngestionEndpoint=https://xxx.in.applicationinsights.azure.us/\",",
+          "disposition": "accepted",
+          "reason": "Placeholder Application Insights ingestion endpoints in connection strings (xxx.in.applicationinsights.azure.com/.us) and Microsoft Learn links; nothing tells the agent to fetch them."
+        },
+        {
+          "type": "credential-access",
+          "line": 209,
+          "evidence": "credential",
+          "context": "    credential=credential",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential passed to exporters and a configuration table entry for `credential`; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 209,
+          "evidence": "credential",
+          "context": "    credential=credential",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential passed to exporters and a configuration table entry for `credential`; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 226,
+          "evidence": "credential",
+          "context": "| `credential` | Azure credential for AAD auth | None |",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential passed to exporters and a configuration table entry for `credential`; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 226,
+          "evidence": "credential",
+          "context": "| `credential` | Azure credential for AAD auth | None |",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential passed to exporters and a configuration table entry for `credential`; no instruction to read, print, or transmit secrets."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,144 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "obra/finishing-a-development-branch",
+  "source": {
+    "repo": "obra/superpowers",
+    "path": "skills/finishing-a-development-branch",
+    "revision": "8ca22dba9a94f28898bbce59f2537ff4d87c747d"
+  },
+  "review": {
+    "path": "catalog/reviews/obra__finishing-a-development-branch.json",
+    "sha256": "a86b9ae1ba55c8005388d59b84cbddaf329fdc23d4c92193e7f504756e49ba47"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": false,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "shell-execution",
+        "line": 30,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 88,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 107,
+        "evidence": "delete",
+        "context": "delete the branch:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 109,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 115,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 138,
+        "evidence": "delete",
+        "context": "This will permanently delete:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 148,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 153,
+        "evidence": "delete",
+        "context": "Then clean up the worktree (Step 6) and force-delete the branch:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 155,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 172,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 173,
+        "evidence": "remove",
+        "context": "git worktree remove \"$WORKTREE_PATH\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 182,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 193,
+        "evidence": "Delete",
+        "context": "3. Delete them (unrecoverable)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 198,
+        "evidence": "remove",
+        "context": "Carry out the choice, then remove the worktree.",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 8851
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "a37e0e9697144819e1d965176ac4ae5bc3fa02d11e7812036bbcadf6dafe2400",
+      "bytes": 1070,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "8db5a922b242dd4e1bf824cb91c13b3e8d8e8a86d6ceaf7f0774eb9cce909d65",
+      "bytes": 7781,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 8851
+}

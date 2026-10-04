@@ -1,0 +1,571 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "bagelhole/azure-keyvault",
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "security/secrets/azure-keyvault",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "review": {
+    "path": "catalog/reviews/bagelhole__azure-keyvault.json",
+    "sha256": "1101709a79f41ef07437ba6dfa2987b33f254aef3c28418cb0c8477f77e372ec"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": true
+    },
+    "findings": [
+      {
+        "type": "credential-access",
+        "line": 3,
+        "evidence": "secret",
+        "context": "description: Manage secrets and certificates in Azure Key Vault. Configure access policies, integrate with Azure services, and implement secure secret management. Use when managing secrets in Azure environments.",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 18,
+        "evidence": "secret",
+        "context": "- Implementing centralized secret management for Azure services",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 33,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 43,
+        "evidence": "delete",
+        "context": "  --enable-soft-delete true \\",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 53,
+        "evidence": "delete",
+        "context": "  --enable-soft-delete true \\",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 70,
+        "evidence": "Secret",
+        "context": "## Secret Management",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 72,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 73,
+        "evidence": "secret",
+        "context": "# Set a secret",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 74,
+        "evidence": "secret",
+        "context": "az keyvault secret set \\",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 81,
+        "evidence": "secret",
+        "context": "# Set a multi-line secret (JSON credentials)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 82,
+        "evidence": "secret",
+        "context": "az keyvault secret set \\",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 87,
+        "evidence": "secret",
+        "context": "# Get secret value",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 88,
+        "evidence": "secret",
+        "context": "az keyvault secret show \\",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 94,
+        "evidence": "secret",
+        "context": "az keyvault secret show \\",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 100,
+        "evidence": "secret",
+        "context": "az keyvault secret list --vault-name myapp-vault-prod -o table",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 102,
+        "evidence": "secret",
+        "context": "# List secret versions",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 103,
+        "evidence": "secret",
+        "context": "az keyvault secret list-versions \\",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 108,
+        "evidence": "secret",
+        "context": "az keyvault secret set-attributes \\",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 110,
+        "evidence": "api-key",
+        "context": "  --name api-key \\",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 113,
+        "evidence": "secret",
+        "context": "# Disable a secret (without deleting)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 114,
+        "evidence": "secret",
+        "context": "az keyvault secret set-attributes \\",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 116,
+        "evidence": "api-key",
+        "context": "  --name old-api-key \\",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 119,
+        "evidence": "secret",
+        "context": "# Delete a secret (soft-delete)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 119,
+        "evidence": "Delete",
+        "context": "# Delete a secret (soft-delete)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 119,
+        "evidence": "delete",
+        "context": "# Delete a secret (soft-delete)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 120,
+        "evidence": "secret",
+        "context": "az keyvault secret delete \\",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 120,
+        "evidence": "delete",
+        "context": "az keyvault secret delete \\",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 122,
+        "evidence": "api-key",
+        "context": "  --name old-api-key",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 124,
+        "evidence": "secret",
+        "context": "# Recover a deleted secret",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 125,
+        "evidence": "secret",
+        "context": "az keyvault secret recover \\",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 127,
+        "evidence": "api-key",
+        "context": "  --name old-api-key",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 129,
+        "evidence": "secret",
+        "context": "# Purge a deleted secret (permanent, requires purge protection to be off)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 130,
+        "evidence": "secret",
+        "context": "az keyvault secret purge \\",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 132,
+        "evidence": "api-key",
+        "context": "  --name old-api-key",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 135,
+        "evidence": "secret",
+        "context": "az keyvault secret backup \\",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 140,
+        "evidence": "secret",
+        "context": "az keyvault secret restore \\",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 147,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "encoded-content",
+        "line": 175,
+        "evidence": "base64",
+        "context": "  --value \"base64-encoded-plaintext\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 203,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 246,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 247,
+        "evidence": "secret",
+        "context": "# Grant secret reader access to a managed identity",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 271,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 272,
+        "evidence": "secret",
+        "context": "# Grant secret access via access policy",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 276,
+        "evidence": "secret",
+        "context": "  --secret-permissions get list",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 302,
+        "evidence": "credential",
+        "context": "credential = DefaultAzureCredential()",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 304,
+        "evidence": "https://",
+        "context": "vault_url = \"https://myapp-vault-prod.vault.azure.net/\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 307,
+        "evidence": "credential",
+        "context": "secret_client = SecretClient(vault_url=vault_url, credential=credential)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 307,
+        "evidence": "credential",
+        "context": "secret_client = SecretClient(vault_url=vault_url, credential=credential)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 309,
+        "evidence": "Secret",
+        "context": "print(f\"Secret value: {db_password.value}\")",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 316,
+        "evidence": "Secret",
+        "context": "    print(f\"Secret: {secret_properties.name}, Enabled: {secret_properties.enabled}\")",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 319,
+        "evidence": "credential",
+        "context": "key_client = KeyClient(vault_url=vault_url, credential=credential)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 319,
+        "evidence": "credential",
+        "context": "key_client = KeyClient(vault_url=vault_url, credential=credential)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 323,
+        "evidence": "credential",
+        "context": "crypto_client = CryptographyClient(key, credential=credential)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 323,
+        "evidence": "credential",
+        "context": "crypto_client = CryptographyClient(key, credential=credential)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 340,
+        "evidence": "credential",
+        "context": "var credential = new DefaultAzureCredential();",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 341,
+        "evidence": "credential",
+        "context": "var client = new SecretClient(new Uri(\"https://myapp-vault-prod.vault.azure.net/\"), credential);",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 341,
+        "evidence": "https://",
+        "context": "var client = new SecretClient(new Uri(\"https://myapp-vault-prod.vault.azure.net/\"), credential);",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 343,
+        "evidence": "secret",
+        "context": "KeyVaultSecret secret = await client.GetSecretAsync(\"db-password\");",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 344,
+        "evidence": "secret",
+        "context": "string password = secret.Value;",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 370,
+        "evidence": "secret",
+        "context": "          objectType: secret",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 373,
+        "evidence": "api-key",
+        "context": "          objectName: api-key",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 374,
+        "evidence": "secret",
+        "context": "          objectType: secret",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 377,
+        "evidence": "secret",
+        "context": "          objectType: secret",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 385,
+        "evidence": "api-key",
+        "context": "        - objectName: api-key",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 386,
+        "evidence": "api-key",
+        "context": "          key: api-key",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 387,
+        "evidence": "secret",
+        "context": "    - secretName: tls-secret",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 473,
+        "evidence": "secret",
+        "context": "| Soft-deleted secret blocks creation | Name collision with deleted secret | Recover and update, or purge the deleted secret first |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 473,
+        "evidence": "secret",
+        "context": "| Soft-deleted secret blocks creation | Name collision with deleted secret | Recover and update, or purge the deleted secret first |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 473,
+        "evidence": "secret",
+        "context": "| Soft-deleted secret blocks creation | Name collision with deleted secret | Recover and update, or purge the deleted secret first |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 477,
+        "evidence": "secret",
+        "context": "| High latency on secret retrieval | No client-side caching | Implement caching in application; use CSI driver for K8s (syncs on interval) |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 482,
+        "evidence": "delete",
+        "context": "- Enable soft-delete and purge protection (required for compliance)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 496,
+        "evidence": "secret",
+        "context": "- [aws-secrets-manager](../aws-secrets-manager/) - AWS secret management",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 497,
+        "evidence": "secret",
+        "context": "- [gcp-secret-manager](../gcp-secret-manager/) - GCP secret management",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 497,
+        "evidence": "secret",
+        "context": "- [gcp-secret-manager](../gcp-secret-manager/) - GCP secret management",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 497,
+        "evidence": "secret",
+        "context": "- [gcp-secret-manager](../gcp-secret-manager/) - GCP secret management",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 15989
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "e65341fb9f57a9c94bc6b1a93296c9427edf3d95af66223413e4f09e744ce9de",
+      "bytes": 14921,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 15989
+}

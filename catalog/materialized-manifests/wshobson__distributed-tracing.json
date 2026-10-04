@@ -1,0 +1,101 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "wshobson/distributed-tracing",
+  "source": {
+    "repo": "wshobson/agents",
+    "path": "plugins/observability-monitoring/skills/distributed-tracing",
+    "revision": "156b7a5e7a8b93642628a339ee4039c925b34c7f"
+  },
+  "review": {
+    "path": "catalog/reviews/wshobson__distributed-tracing.json",
+    "sha256": "324deab0fecdea0925e9289c19d17469f1261838a9d976c4651e1a478cc906e1"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": false,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": false,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "shell-execution",
+        "line": 30,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/details.md"
+      },
+      {
+        "type": "network-access",
+        "line": 33,
+        "evidence": "https://",
+        "context": "kubectl create -f https://github.com/jaegertracing/jaeger-operator/releases/download/v1.51.0/jaeger-operator.yaml -n observability",
+        "file": "references/details.md"
+      },
+      {
+        "type": "network-access",
+        "line": 48,
+        "evidence": "http://",
+        "context": "        server-urls: http://elasticsearch:9200",
+        "file": "references/details.md"
+      },
+      {
+        "type": "network-access",
+        "line": 141,
+        "evidence": "http://",
+        "context": "  endpoint: \"http://jaeger:14268/api/traces\",",
+        "file": "references/details.md"
+      },
+      {
+        "type": "network-access",
+        "line": 185,
+        "evidence": "http://",
+        "context": "        jaeger.WithEndpoint(\"http://jaeger:14268/api/traces\"),",
+        "file": "references/details.md"
+      },
+      {
+        "type": "network-access",
+        "line": 240,
+        "evidence": "http://",
+        "context": "response = requests.get('http://downstream-service/api', headers=headers)",
+        "file": "references/details.md"
+      },
+      {
+        "type": "network-access",
+        "line": 251,
+        "evidence": "http://",
+        "context": "axios.get(\"http://downstream-service/api\", { headers });",
+        "file": "references/details.md"
+      }
+    ],
+    "total_bytes": 11178
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "f89abb55d9f073f38f1703e4518f0613c788c6174be7f13b8dfe48a1c076c746",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/details.md",
+      "sha256": "2c941c4d4dd5907031d9fc21818f5258fed37864f0234055d9b8775a5b40690d",
+      "bytes": 8005,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "0d1126fba0efea8dba3adfda2ce15b1868b3db29240d8be8388ebc1657ba31a0",
+      "bytes": 2105,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 11178
+}

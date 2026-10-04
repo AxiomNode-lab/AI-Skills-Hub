@@ -1,0 +1,255 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "microsoft/azure-storage-blob-java",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/azure-sdk-java/skills/azure-storage-blob-java",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "review": {
+    "path": "catalog/reviews/microsoft__azure-storage-blob-java.json",
+    "sha256": "2cea7f2939c14bb4423442501edc00b22fbae8a0b1ac485f789915286510ec40"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "credential-access",
+        "line": 55,
+        "evidence": "Credential",
+        "context": "### Using Shared Key Credential",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 62,
+        "evidence": "credential",
+        "context": "StorageSharedKeyCredential credential = new StorageSharedKeyCredential(accountName, accountKey);",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "network-access",
+        "line": 64,
+        "evidence": "https://",
+        "context": "String endpoint = String.format(\"https://%s.blob.core.windows.net\", accountName);",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 67,
+        "evidence": "credential",
+        "context": "    .credential(credential)",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 67,
+        "evidence": "credential",
+        "context": "    .credential(credential)",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 93,
+        "evidence": "credential",
+        "context": "    .credential(new DefaultAzureCredentialBuilder().build())",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 135,
+        "evidence": "Delete",
+        "context": "### List and Delete Containers",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 143,
+        "evidence": "Delete",
+        "context": "// Delete container",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 144,
+        "evidence": "delete",
+        "context": "containerClient.delete();",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 369,
+        "evidence": "credential",
+        "context": "        StorageSharedKeyCredential credential = new StorageSharedKeyCredential(accountName, accountKey);",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "network-access",
+        "line": 370,
+        "evidence": "https://",
+        "context": "        String endpoint = String.format(Locale.ROOT, \"https://%s.blob.core.windows.net\", accountName);",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 374,
+        "evidence": "credential",
+        "context": "            .credential(credential)",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 374,
+        "evidence": "credential",
+        "context": "            .credential(credential)",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 406,
+        "evidence": "delete",
+        "context": "        blobClient.delete();",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 407,
+        "evidence": "delete",
+        "context": "        containerClient.delete();",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 48,
+        "evidence": "credential",
+        "context": "import com.azure.core.credential.TokenCredential;",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 54,
+        "evidence": "credential",
+        "context": "TokenCredential credential = new DefaultAzureCredentialBuilder()",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 57,
+        "evidence": "credential",
+        "context": "// Or use a specific credential directly in production:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 58,
+        "evidence": "credential",
+        "context": "// See https://learn.microsoft.com/java/api/overview/azure/identity-readme?view=azure-java-stable#credential-classes",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 58,
+        "evidence": "https://",
+        "context": "// See https://learn.microsoft.com/java/api/overview/azure/identity-readme?view=azure-java-stable#credential-classes",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 59,
+        "evidence": "credential",
+        "context": "// TokenCredential credential = new ManagedIdentityCredentialBuilder().build();",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 63,
+        "evidence": "credential",
+        "context": "    .credential(credential)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 63,
+        "evidence": "credential",
+        "context": "    .credential(credential)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 265,
+        "evidence": "Delete",
+        "context": "### Delete Blob",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 268,
+        "evidence": "delete",
+        "context": "blobClient.delete();",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 270,
+        "evidence": "Delete",
+        "context": "// Delete if exists",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 273,
+        "evidence": "Delete",
+        "context": "// Delete with snapshots",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 391,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 393,
+        "evidence": "https://",
+        "context": "AZURE_STORAGE_ACCOUNT_URL=https://<account>.blob.core.windows.net  # Required for all auth methods",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 23645
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/examples.md",
+      "sha256": "b48214ea380b105c265f75a26fce6d5034329ea78bfe200e07cd0dd34d55b205",
+      "bytes": 11617,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "677a18b27f976c62c8cc3276637319bbb581dc2860750941f7ba3b688e0f9f8a",
+      "bytes": 10888,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 23645
+}

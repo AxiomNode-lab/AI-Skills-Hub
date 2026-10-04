@@ -1,0 +1,103 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "addyosmani/ci-cd-and-automation",
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "addyosmani/agent-skills",
+    "path": "skills/ci-cd-and-automation",
+    "revision": "1401c8b8030e023baeebb31781a6653fe8e93026"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "skills/ci-cd-and-automation",
+    "url": "https://api.github.com/repos/addyosmani/agent-skills/git/trees/1401c8b8030e023baeebb31781a6653fe8e93026?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/addyosmani/agent-skills/blob/1401c8b8030e023baeebb31781a6653fe8e93026/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "skills",
+        "skills/ci-cd-and-automation"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT License with its copyright notice, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found; workflow YAML is generic sample configuration. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "medium",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md in full (the only file). Guidance for setting up CI/CD quality gates: example GitHub Actions workflows (lint, typecheck, tests, build, npm audit, Postgres integration, Playwright E2E), CI-failure feedback loop, preview/staged deployments, feature flags, rollback, environment/secrets separation, Dependabot and CI optimization.",
+      "Medium because following it has the agent write workflow files into the user's repository that install packages and deploy (npm ci, npx playwright install, npx vercel with a VERCEL_TOKEN secret, prisma migrate deploy) when CI runs, and the feedback loop (SKILL.md:176-187) has the agent fix, commit and push again. Acceptable: these are the user's own pipelines, secrets are referenced only through GitHub Secrets placeholders (never read or printed), the agent's local actions are the project's lint/test commands, and the skill stresses staging verification, rollback and branch protection.",
+      "Optional pointer to the sibling debugging-and-error-recovery skill (SKILL.md:189). Example action versions (actions/checkout@v4 etc.) are tag-pinned rather than SHA-pinned, which users may want to harden."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "6f202f8bd568cd730dbb2b0d1f8e243bc74c2fa1f64dbce9b2c7ea08bd5c9fd7",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "d67778ada6b9cda6227e9130da182c13e73c8b2e",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry the copyright and permission notice.",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "a6ed8ed56456b01ff8314c44eefc69897d9905ae4e06bb2b7036286efb79b5f0",
+      "bytes": 11332,
+      "mode": "100644",
+      "git_blob": "118456fcb10225c030769a4fee7815b9c536b0ce",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 227,
+          "evidence": "Remove",
+          "context": "**Flag lifecycle:** Create → Enable for testing → Canary → Full rollout → Remove the flag and dead code. Flags that live forever become technical debt — set a cleanup date when you create them.",
+          "disposition": "accepted",
+          "reason": "'Remove' appears in feature-flag cleanup and CI-optimization advice; the actual writes are CI workflow files the user asked for."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 324,
+          "evidence": "Remove",
+          "context": "│   └── Remove slow tests from the critical path, run them on a schedule instead",
+          "disposition": "accepted",
+          "reason": "'Remove' appears in feature-flag cleanup and CI-optimization advice; the actual writes are CI workflow files the user asked for."
+        }
+      ]
+    }
+  ]
+}

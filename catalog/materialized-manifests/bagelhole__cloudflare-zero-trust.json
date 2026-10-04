@@ -1,0 +1,347 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "bagelhole/cloudflare-zero-trust",
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "infrastructure/cloudflare/cloudflare-zero-trust",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "review": {
+    "path": "catalog/reviews/bagelhole__cloudflare-zero-trust.json",
+    "sha256": "d6f5730f1f7acedcf398a73d45b331e5b50e320ef3666f2cdae553605b9866b3"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "shell-execution",
+        "line": 29,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 35,
+        "evidence": "curl",
+        "context": "curl -fsSL https://pkg.cloudflare.com/cloudflare-main.gpg | sudo tee /usr/share/keyrings/cloudflare-main.gpg >/dev/null",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 35,
+        "evidence": "https://",
+        "context": "curl -fsSL https://pkg.cloudflare.com/cloudflare-main.gpg | sudo tee /usr/share/keyrings/cloudflare-main.gpg >/dev/null",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 35,
+        "evidence": " sudo",
+        "context": "curl -fsSL https://pkg.cloudflare.com/cloudflare-main.gpg | sudo tee /usr/share/keyrings/cloudflare-main.gpg >/dev/null",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 36,
+        "evidence": "https://",
+        "context": "echo \"deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/cloudflared $(lsb_release -cs) main\" | sudo tee /etc/apt/sources.list.d/cloudflared.list",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 36,
+        "evidence": " sudo",
+        "context": "echo \"deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/cloudflared $(lsb_release -cs) main\" | sudo tee /etc/apt/sources.list.d/cloudflared.list",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 36,
+        "evidence": "\nsudo",
+        "context": "echo \"deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/cloudflared $(lsb_release -cs) main\" | sudo tee /etc/apt/sources.list.d/cloudflared.list",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 37,
+        "evidence": " sudo",
+        "context": "sudo apt update && sudo apt install -y cloudflared",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 49,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 77,
+        "evidence": "http://",
+        "context": "    service: http://localhost:3000",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 81,
+        "evidence": "http://",
+        "context": "    service: http://localhost:8080",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 91,
+        "evidence": "http://",
+        "context": "    service: http://10.0.0.0/24",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 99,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 103,
+        "evidence": "\nsudo",
+        "context": "# Install as a systemd service",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 104,
+        "evidence": "\nsudo",
+        "context": "sudo cloudflared service install",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 105,
+        "evidence": "\nsudo",
+        "context": "sudo systemctl enable cloudflared",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 152,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 154,
+        "evidence": "curl",
+        "context": "curl -X POST \"https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/access/apps\" \\",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 154,
+        "evidence": "https://",
+        "context": "curl -X POST \"https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/access/apps\" \\",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 169,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 171,
+        "evidence": "curl",
+        "context": "curl -X POST \"https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/access/apps/<APP_ID>/policies\" \\",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 171,
+        "evidence": "https://",
+        "context": "curl -X POST \"https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/access/apps/<APP_ID>/policies\" \\",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 198,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 200,
+        "evidence": "curl",
+        "context": "curl -X POST \"https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/access/service_tokens\" \\",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 200,
+        "evidence": "https://",
+        "context": "curl -X POST \"https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/access/service_tokens\" \\",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 205,
+        "evidence": "Secret",
+        "context": "# Response includes Client ID and Client Secret",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 208,
+        "evidence": "Secret",
+        "context": "# CF-Access-Client-Secret: <CLIENT_SECRET>",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 211,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 213,
+        "evidence": "curl",
+        "context": "curl -H \"CF-Access-Client-Id: $CF_CLIENT_ID\" \\",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 214,
+        "evidence": "Secret",
+        "context": "     -H \"CF-Access-Client-Secret: $CF_CLIENT_SECRET\" \\",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 215,
+        "evidence": "https://",
+        "context": "     https://grafana.example.com/api/health",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 238,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 244,
+        "evidence": "https://",
+        "context": "# DoH: https://<UNIQUE_ID>.cloudflare-gateway.com/dns-query",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 249,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 251,
+        "evidence": "curl",
+        "context": "curl -X POST \"https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/gateway/rules\" \\",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 251,
+        "evidence": "https://",
+        "context": "curl -X POST \"https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/gateway/rules\" \\",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 276,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 282,
+        "evidence": "https://",
+        "context": "# 1. Install WARP client from https://1.1.1.1",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 287,
+        "evidence": "curl",
+        "context": "curl https://connectivity.cloudflare.com/cdn-cgi/trace",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 287,
+        "evidence": "https://",
+        "context": "curl https://connectivity.cloudflare.com/cdn-cgi/trace",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 293,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 315,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 335,
+        "evidence": "Secret",
+        "context": "| Service token auth fails | Token expired or wrong headers | Regenerate token; use both `CF-Access-Client-Id` and `CF-Access-Client-Secret` |",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 11685
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "dbe1f763a8bf2226c7a643afe0dad1ca6cd24aa916d38b04938feb50195510c7",
+      "bytes": 10617,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 11685
+}

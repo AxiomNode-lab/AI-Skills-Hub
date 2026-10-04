@@ -1,0 +1,156 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "wshobson/python-testing-patterns",
+  "source": {
+    "repo": "wshobson/agents",
+    "path": "plugins/python-development/skills/python-testing-patterns",
+    "revision": "156b7a5e7a8b93642628a339ee4039c925b34c7f"
+  },
+  "review": {
+    "path": "catalog/reviews/wshobson__python-testing-patterns.json",
+    "sha256": "123a799d9b4c8fd4e7295ebc761bed7646ae5aef7f2811c307332629ca69bff1"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "network-access",
+        "line": 21,
+        "evidence": "https://",
+        "context": "    result = await fetch_data(\"https://api.example.com\")",
+        "file": "references/advanced-patterns.md"
+      },
+      {
+        "type": "network-access",
+        "line": 22,
+        "evidence": "https://",
+        "context": "    assert result[\"url\"] == \"https://api.example.com\"",
+        "file": "references/advanced-patterns.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 86,
+        "evidence": "api_key",
+        "context": "        self.api_key = \"production-key\"",
+        "file": "references/advanced-patterns.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 89,
+        "evidence": "api_key",
+        "context": "        return self.api_key",
+        "file": "references/advanced-patterns.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 95,
+        "evidence": "api_key",
+        "context": "    monkeypatch.setattr(config, \"api_key\", \"test-key\")",
+        "file": "references/advanced-patterns.md"
+      },
+      {
+        "type": "package-install",
+        "line": 354,
+        "evidence": "pip install",
+        "context": "          pip install -e \".[dev]\"",
+        "file": "references/advanced-patterns.md"
+      },
+      {
+        "type": "package-install",
+        "line": 355,
+        "evidence": "pip install",
+        "context": "          pip install pytest pytest-cov",
+        "file": "references/advanced-patterns.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 120,
+        "evidence": "api_key",
+        "context": "        \"api_key\": \"test-key\",",
+        "file": "references/details.md"
+      },
+      {
+        "type": "network-access",
+        "line": 219,
+        "evidence": "https://",
+        "context": "    client = APIClient(\"https://api.example.com\")",
+        "file": "references/details.md"
+      },
+      {
+        "type": "network-access",
+        "line": 230,
+        "evidence": "https://",
+        "context": "        mock_get.assert_called_once_with(\"https://api.example.com/users/1\")",
+        "file": "references/details.md"
+      },
+      {
+        "type": "network-access",
+        "line": 235,
+        "evidence": "https://",
+        "context": "    client = APIClient(\"https://api.example.com\")",
+        "file": "references/details.md"
+      },
+      {
+        "type": "network-access",
+        "line": 248,
+        "evidence": "https://",
+        "context": "    client = APIClient(\"https://api.example.com\")",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 261,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 263,
+        "evidence": "pip install",
+        "context": "pip install pytest-cov",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 27065
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "f89abb55d9f073f38f1703e4518f0613c788c6174be7f13b8dfe48a1c076c746",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/advanced-patterns.md",
+      "sha256": "f560ee8b3cffc0fe971e78269bed21dc74f541c2056eae58d34259d9e537176a",
+      "bytes": 9454,
+      "mode": "100644"
+    },
+    {
+      "path": "references/details.md",
+      "sha256": "baaa88e2997d960c19f981248b9e3e850e36e2cdf4d97b50297f5d9764826349",
+      "bytes": 9261,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "a1020718f31629c2a5b20731cad1804dbb81b18800495c5cebdf16e6cac9c175",
+      "bytes": 7282,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 27065
+}

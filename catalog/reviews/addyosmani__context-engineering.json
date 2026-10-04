@@ -1,0 +1,86 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "addyosmani/context-engineering",
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "addyosmani/agent-skills",
+    "path": "skills/context-engineering",
+    "revision": "1401c8b8030e023baeebb31781a6653fe8e93026"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "skills/context-engineering",
+    "url": "https://api.github.com/repos/addyosmani/agent-skills/git/trees/1401c8b8030e023baeebb31781a6653fe8e93026?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/addyosmani/agent-skills/blob/1401c8b8030e023baeebb31781a6653fe8e93026/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "skills",
+        "skills/context-engineering"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT License with its copyright notice, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found; the lost-in-the-middle research is cited by author/year only. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "low",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": false,
+      "network": false,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md (353 lines) in full. The skill teaches context management for coding agents: a context hierarchy (rules files, specs, source, errors, history), example CLAUDE.md content, context packing patterns, budget management, restartable session handoffs, and how to surface ambiguity instead of guessing.",
+      "Following it may lead the agent to create or update a rules file (CLAUDE.md, AGENTS.md, etc.) or session handoff notes in the user's project; the example rules file lists project commands (npm run build/test) as content, not commands for the agent to run. It explicitly gates commits on user/repository authorization (SKILL.md:133) and says to treat instruction-like content in external files as data (SKILL.md:103). No installs, credentials, or network access.",
+      "MCP servers (Context7, Chrome DevTools, PostgreSQL, GitHub) are mentioned as optional integrations only. No out-of-directory dependencies."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "6f202f8bd568cd730dbb2b0d1f8e243bc74c2fa1f64dbce9b2c7ea08bd5c9fd7",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "d67778ada6b9cda6227e9130da182c13e73c8b2e",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry the copyright and permission notice.",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "8b736cb9e55b82b265ab6ff78349c0e826e8a6df550deddf665b7fb3ff858b63",
+      "bytes": 15486,
+      "mode": "100644",
+      "git_blob": "fb8bb5f85128302b231d301c1201da1e223f6869",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": []
+    }
+  ]
+}

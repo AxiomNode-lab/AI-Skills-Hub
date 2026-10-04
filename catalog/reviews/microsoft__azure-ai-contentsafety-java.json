@@ -1,0 +1,414 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "microsoft/azure-ai-contentsafety-java",
+  "status": "approved",
+  "reviewed_on": "2026-10-02",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/azure-sdk-java/skills/azure-ai-contentsafety-java",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": ".github/plugins/azure-sdk-java/skills/azure-ai-contentsafety-java",
+    "url": "https://api.github.com/repos/microsoft/skills/git/trees/84d8eaa8ae95930f55cdceb3e27196c795dab038?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/microsoft/skills/blob/84d8eaa8ae95930f55cdceb3e27196c795dab038/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        ".github",
+        ".github/plugins",
+        ".github/plugins/azure-sdk-java",
+        ".github/plugins/azure-sdk-java/skills",
+        ".github/plugins/azure-sdk-java/skills/azure-ai-contentsafety-java"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT License with its copyright notice, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file; content is Microsoft-authored SDK usage samples. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "low",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": false,
+      "network": false,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md and references/examples.md in full. The skill is an SDK reference for the Azure AI Content Safety Java client: client creation, text and image harm analysis, severity handling, and blocklist management.",
+      "No commands, installs, credential handling, or network access by the agent: dependencies are given as Maven XML snippets for the user's build, and all API calls are Java sample code using CONTENT_SAFETY_ENDPOINT/CONTENT_SAFETY_KEY environment variables with placeholder values.",
+      "The Maven version differs between SKILL.md:21 (1.1.0-beta.1) and references/examples.md:21 (1.0.16); users should pick the version they intend. Sample text contains mild masked offensive words ('h*te', 'k*ll') as moderation test inputs."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "git_blob": "79656060de00aa4659ad2c276d5be8830664d544",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry the copyright and permission notice.",
+      "findings": []
+    },
+    {
+      "path": "references/examples.md",
+      "sha256": "98828606485185a9bbf7f103743f7515d979af8d1d51ac74d217c486b5235bd8",
+      "bytes": 17451,
+      "mode": "100644",
+      "git_blob": "15b13c26ceb6d68be3845612730d915cacc404ce",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "credential-access",
+          "line": 34,
+          "evidence": "API Key",
+          "context": "### With API Key Credential",
+          "disposition": "accepted",
+          "reason": "KeyCredential/DefaultAzureCredential usage and the CONTENT_SAFETY_KEY environment-variable name in sample client construction; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 34,
+          "evidence": "Credential",
+          "context": "### With API Key Credential",
+          "disposition": "accepted",
+          "reason": "KeyCredential/DefaultAzureCredential usage and the CONTENT_SAFETY_KEY environment-variable name in sample client construction; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 41,
+          "evidence": "credential",
+          "context": "import com.azure.core.credential.KeyCredential;",
+          "disposition": "accepted",
+          "reason": "KeyCredential/DefaultAzureCredential usage and the CONTENT_SAFETY_KEY environment-variable name in sample client construction; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 49,
+          "evidence": "credential",
+          "context": "    .credential(new KeyCredential(key))",
+          "disposition": "accepted",
+          "reason": "KeyCredential/DefaultAzureCredential usage and the CONTENT_SAFETY_KEY environment-variable name in sample client construction; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 55,
+          "evidence": "credential",
+          "context": "    .credential(new KeyCredential(key))",
+          "disposition": "accepted",
+          "reason": "KeyCredential/DefaultAzureCredential usage and the CONTENT_SAFETY_KEY environment-variable name in sample client construction; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 67,
+          "evidence": "credential",
+          "context": "    .credential(new DefaultAzureCredentialBuilder().build())",
+          "disposition": "accepted",
+          "reason": "KeyCredential/DefaultAzureCredential usage and the CONTENT_SAFETY_KEY environment-variable name in sample client construction; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 72,
+          "evidence": "credential",
+          "context": "    .credential(new DefaultAzureCredentialBuilder().build())",
+          "disposition": "accepted",
+          "reason": "KeyCredential/DefaultAzureCredential usage and the CONTENT_SAFETY_KEY environment-variable name in sample client construction; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 85,
+          "evidence": "credential",
+          "context": "import com.azure.core.credential.KeyCredential;",
+          "disposition": "accepted",
+          "reason": "KeyCredential/DefaultAzureCredential usage and the CONTENT_SAFETY_KEY environment-variable name in sample client construction; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 94,
+          "evidence": "credential",
+          "context": "            .credential(new KeyCredential(key))",
+          "disposition": "accepted",
+          "reason": "KeyCredential/DefaultAzureCredential usage and the CONTENT_SAFETY_KEY environment-variable name in sample client construction; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 120,
+          "evidence": "credential",
+          "context": "import com.azure.core.credential.KeyCredential;",
+          "disposition": "accepted",
+          "reason": "KeyCredential/DefaultAzureCredential usage and the CONTENT_SAFETY_KEY environment-variable name in sample client construction; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 134,
+          "evidence": "credential",
+          "context": "            .credential(new KeyCredential(key))",
+          "disposition": "accepted",
+          "reason": "KeyCredential/DefaultAzureCredential usage and the CONTENT_SAFETY_KEY environment-variable name in sample client construction; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 165,
+          "evidence": "credential",
+          "context": "import com.azure.core.credential.KeyCredential;",
+          "disposition": "accepted",
+          "reason": "KeyCredential/DefaultAzureCredential usage and the CONTENT_SAFETY_KEY environment-variable name in sample client construction; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 181,
+          "evidence": "credential",
+          "context": "            .credential(new KeyCredential(key))",
+          "disposition": "accepted",
+          "reason": "KeyCredential/DefaultAzureCredential usage and the CONTENT_SAFETY_KEY environment-variable name in sample client construction; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 244,
+          "evidence": "credential",
+          "context": "import com.azure.core.credential.KeyCredential;",
+          "disposition": "accepted",
+          "reason": "KeyCredential/DefaultAzureCredential usage and the CONTENT_SAFETY_KEY environment-variable name in sample client construction; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 257,
+          "evidence": "credential",
+          "context": "    .credential(new KeyCredential(key))",
+          "disposition": "accepted",
+          "reason": "KeyCredential/DefaultAzureCredential usage and the CONTENT_SAFETY_KEY environment-variable name in sample client construction; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 338,
+          "evidence": "Remove",
+          "context": "### Remove Blocklist Items",
+          "disposition": "accepted",
+          "reason": "Matches are 'Remove Block Items' / 'Delete Blocklist' headings and the corresponding blocklist API calls on the user's Content Safety resource, not local file operations."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 382,
+          "evidence": "Delete",
+          "context": "### Delete Blocklist",
+          "disposition": "accepted",
+          "reason": "Matches are 'Remove Block Items' / 'Delete Blocklist' headings and the corresponding blocklist API calls on the user's Content Safety resource, not local file operations."
+        },
+        {
+          "type": "credential-access",
+          "line": 397,
+          "evidence": "credential",
+          "context": "import com.azure.core.credential.KeyCredential;",
+          "disposition": "accepted",
+          "reason": "KeyCredential/DefaultAzureCredential usage and the CONTENT_SAFETY_KEY environment-variable name in sample client construction; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 400,
+          "evidence": "credential",
+          "context": "    .credential(new KeyCredential(key))",
+          "disposition": "accepted",
+          "reason": "KeyCredential/DefaultAzureCredential usage and the CONTENT_SAFETY_KEY environment-variable name in sample client construction; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 424,
+          "evidence": "credential",
+          "context": "    .credential(new KeyCredential(key))",
+          "disposition": "accepted",
+          "reason": "KeyCredential/DefaultAzureCredential usage and the CONTENT_SAFETY_KEY environment-variable name in sample client construction; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 460,
+          "evidence": "API key",
+          "context": "                    System.err.println(\"Unauthorized - check API key\");",
+          "disposition": "accepted",
+          "reason": "KeyCredential/DefaultAzureCredential usage and the CONTENT_SAFETY_KEY environment-variable name in sample client construction; no instruction to read, print, or send real secrets."
+        }
+      ]
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "43822acf1e76afe9daaa6ecdba222cfe8dee0cce0c4ffc3405cad38991e1a0a5",
+      "bytes": 8510,
+      "mode": "100644",
+      "git_blob": "d9a4e8f157e635c0962744d019f9d3e4d02d58ec",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "credential-access",
+          "line": 27,
+          "evidence": "API Key",
+          "context": "### With API Key",
+          "disposition": "accepted",
+          "reason": "KeyCredential/DefaultAzureCredential usage and the CONTENT_SAFETY_KEY environment-variable name in sample client construction; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 34,
+          "evidence": "credential",
+          "context": "import com.azure.core.credential.KeyCredential;",
+          "disposition": "accepted",
+          "reason": "KeyCredential/DefaultAzureCredential usage and the CONTENT_SAFETY_KEY environment-variable name in sample client construction; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 40,
+          "evidence": "credential",
+          "context": "    .credential(new KeyCredential(key))",
+          "disposition": "accepted",
+          "reason": "KeyCredential/DefaultAzureCredential usage and the CONTENT_SAFETY_KEY environment-variable name in sample client construction; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 45,
+          "evidence": "credential",
+          "context": "    .credential(new KeyCredential(key))",
+          "disposition": "accepted",
+          "reason": "KeyCredential/DefaultAzureCredential usage and the CONTENT_SAFETY_KEY environment-variable name in sample client construction; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 53,
+          "evidence": "credential",
+          "context": "import com.azure.core.credential.TokenCredential;",
+          "disposition": "accepted",
+          "reason": "KeyCredential/DefaultAzureCredential usage and the CONTENT_SAFETY_KEY environment-variable name in sample client construction; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 58,
+          "evidence": "credential",
+          "context": "TokenCredential credential = new DefaultAzureCredentialBuilder()",
+          "disposition": "accepted",
+          "reason": "KeyCredential/DefaultAzureCredential usage and the CONTENT_SAFETY_KEY environment-variable name in sample client construction; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 61,
+          "evidence": "credential",
+          "context": "// Or use a specific credential directly in production:",
+          "disposition": "accepted",
+          "reason": "KeyCredential/DefaultAzureCredential usage and the CONTENT_SAFETY_KEY environment-variable name in sample client construction; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 62,
+          "evidence": "credential",
+          "context": "// See https://learn.microsoft.com/java/api/overview/azure/identity-readme?view=azure-java-stable#credential-classes",
+          "disposition": "accepted",
+          "reason": "KeyCredential/DefaultAzureCredential usage and the CONTENT_SAFETY_KEY environment-variable name in sample client construction; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 62,
+          "evidence": "https://",
+          "context": "// See https://learn.microsoft.com/java/api/overview/azure/identity-readme?view=azure-java-stable#credential-classes",
+          "disposition": "accepted",
+          "reason": "Placeholder endpoint (https://<resource>.cognitiveservices.azure.com/), a placeholder image URL in a sample, and a Microsoft Learn link; nothing is fetched by the agent."
+        },
+        {
+          "type": "credential-access",
+          "line": 63,
+          "evidence": "credential",
+          "context": "// TokenCredential credential = new ManagedIdentityCredentialBuilder().build();",
+          "disposition": "accepted",
+          "reason": "KeyCredential/DefaultAzureCredential usage and the CONTENT_SAFETY_KEY environment-variable name in sample client construction; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 66,
+          "evidence": "credential",
+          "context": "    .credential(credential)",
+          "disposition": "accepted",
+          "reason": "KeyCredential/DefaultAzureCredential usage and the CONTENT_SAFETY_KEY environment-variable name in sample client construction; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 66,
+          "evidence": "credential",
+          "context": "    .credential(credential)",
+          "disposition": "accepted",
+          "reason": "KeyCredential/DefaultAzureCredential usage and the CONTENT_SAFETY_KEY environment-variable name in sample client construction; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 160,
+          "evidence": "https://",
+          "context": "    .setBlobUrl(\"https://example.com/image.jpg\");",
+          "disposition": "accepted",
+          "reason": "Placeholder endpoint (https://<resource>.cognitiveservices.azure.com/), a placeholder image URL in a sample, and a Microsoft Learn link; nothing is fetched by the agent."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 243,
+          "evidence": "Remove",
+          "context": "### Remove Block Items",
+          "disposition": "accepted",
+          "reason": "Matches are 'Remove Block Items' / 'Delete Blocklist' headings and the corresponding blocklist API calls on the user's Content Safety resource, not local file operations."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 253,
+          "evidence": "Delete",
+          "context": "### Delete Blocklist",
+          "disposition": "accepted",
+          "reason": "Matches are 'Remove Block Items' / 'Delete Blocklist' headings and the corresponding blocklist API calls on the user's Content Safety resource, not local file operations."
+        },
+        {
+          "type": "shell-execution",
+          "line": 275,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "The single bash block at SKILL.md:275 only lists placeholder environment-variable assignments."
+        },
+        {
+          "type": "network-access",
+          "line": 276,
+          "evidence": "https://",
+          "context": "CONTENT_SAFETY_ENDPOINT=https://<resource>.cognitiveservices.azure.com/ # Required for all auth methods",
+          "disposition": "accepted",
+          "reason": "Placeholder endpoint (https://<resource>.cognitiveservices.azure.com/), a placeholder image URL in a sample, and a Microsoft Learn link; nothing is fetched by the agent."
+        },
+        {
+          "type": "credential-access",
+          "line": 277,
+          "evidence": "api-key",
+          "context": "CONTENT_SAFETY_KEY=<your-api-key> # Only required for AzureKeyCredential auth",
+          "disposition": "accepted",
+          "reason": "KeyCredential/DefaultAzureCredential usage and the CONTENT_SAFETY_KEY environment-variable name in sample client construction; no instruction to read, print, or send real secrets."
+        }
+      ]
+    }
+  ]
+}

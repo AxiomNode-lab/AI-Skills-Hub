@@ -1,0 +1,192 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "bagelhole/waf-setup",
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "security/network/waf-setup",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "review": {
+    "path": "catalog/reviews/bagelhole__waf-setup.json",
+    "sha256": "ddd48c6b0e325546e18484dabffb892f334936757a81e7a794797ce4b02996cc"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "shell-execution",
+        "line": 35,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 152,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 238,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 240,
+        "evidence": "curl",
+        "context": "curl -s \"https://api.cloudflare.com/client/v4/zones/${ZONE_ID}/rulesets\" \\",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 240,
+        "evidence": "https://",
+        "context": "curl -s \"https://api.cloudflare.com/client/v4/zones/${ZONE_ID}/rulesets\" \\",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 244,
+        "evidence": "curl",
+        "context": "curl -X POST \"https://api.cloudflare.com/client/v4/zones/${ZONE_ID}/rulesets\" \\",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 244,
+        "evidence": "https://",
+        "context": "curl -X POST \"https://api.cloudflare.com/client/v4/zones/${ZONE_ID}/rulesets\" \\",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 276,
+        "evidence": "curl",
+        "context": "curl -X POST \"https://api.cloudflare.com/client/v4/zones/${ZONE_ID}/rulesets\" \\",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 276,
+        "evidence": "https://",
+        "context": "curl -X POST \"https://api.cloudflare.com/client/v4/zones/${ZONE_ID}/rulesets\" \\",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 326,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 331,
+        "evidence": "https://",
+        "context": "git clone https://github.com/SpiderLabs/ModSecurity /opt/modsecurity",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 334,
+        "evidence": "sh",
+        "context": "./build.sh && ./configure && make && make install",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 355,
+        "evidence": "http://",
+        "context": "            proxy_pass http://backend;",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 363,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 393,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 396,
+        "evidence": "https://",
+        "context": "git clone https://github.com/coreruleset/coreruleset crs",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 429,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 461,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 462,
+        "evidence": "bash",
+        "context": "#!/bin/bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 463,
+        "evidence": "sh",
+        "context": "# waf-tune.sh - Analyze WAF logs for false positives",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 18588
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/waf-rules.md",
+      "sha256": "16bedcc5a5e5b161a590da770a47fe39000582d41be47ce00ced564fa3eef1ce",
+      "bytes": 2316,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "6cbf22f76184323c7ee15a3535c957ab0e317c1c43375d0a9455df343e2a4334",
+      "bytes": 15204,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 18588
+}

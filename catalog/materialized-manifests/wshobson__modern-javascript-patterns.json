@@ -1,0 +1,72 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "wshobson/modern-javascript-patterns",
+  "source": {
+    "repo": "wshobson/agents",
+    "path": "plugins/javascript-typescript/skills/modern-javascript-patterns",
+    "revision": "156b7a5e7a8b93642628a339ee4039c925b34c7f"
+  },
+  "review": {
+    "path": "catalog/reviews/wshobson__modern-javascript-patterns.json",
+    "sha256": "2f0d292fc1176c45ef92bacd1ab7640be88817a7e31c382e7a38534f94d65aa9"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "low",
+    "capabilities": {
+      "shell": false,
+      "network": false,
+      "credentials": false,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "filesystem-write",
+        "line": 215,
+        "evidence": "Remove",
+        "context": "// Remove from array",
+        "file": "references/advanced-patterns.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 230,
+        "evidence": "Remove",
+        "context": "// Remove property",
+        "file": "references/advanced-patterns.md"
+      }
+    ],
+    "total_bytes": 23729
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "f89abb55d9f073f38f1703e4518f0613c788c6174be7f13b8dfe48a1c076c746",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/advanced-patterns.md",
+      "sha256": "bd44770188cfa14d453b1c3026289cfaf7beff78f0eedbe47a9c6b9f24dfe3af",
+      "bytes": 10110,
+      "mode": "100644"
+    },
+    {
+      "path": "references/details.md",
+      "sha256": "c9ef5c72ef42ff58b87b5f7a506a8cadae195d2b38fe45e118c7ad05fcf905c5",
+      "bytes": 10362,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "32e203b8d944115102986dcb3cf4c48918edc5dbf6942668875970121809c064",
+      "bytes": 2189,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 23729
+}

@@ -50,14 +50,17 @@ test("local search keeps deterministic alphabetical ordering for equal scores",(
 });
 
 test("agent filtering and compatibility bonuses only apply to textual matches",()=>{
+  // "generic" is an Agent Skills format skill, so every standard agent can use it;
+  // an explicit listing still ranks first.
   const skills=[
     {id:"generic",name:"alpha",tags:["needle"],compatibility:["agent-skills"]},
     {id:"explicit",name:"beta",tags:["needle"],compatibility:["generic-agent","codex"]},
     {id:"unrelated",name:"other",compatibility:["generic-agent","codex"],release:{status:"eligible"},distribution:"bundled"}
   ];
   assert.deepEqual(searchRegistry({skills},"needle",{agent:"generic-agent"}).map(x=>x.item.id),["explicit","generic"]);
-  assert.deepEqual(searchRegistry({skills},"needle",{agent:"codex"}).map(x=>x.item.id),["explicit"]);
-  assert.deepEqual(searchRegistry({skills},"needle",{agent:"claude-code"}),[]);
+  assert.deepEqual(searchRegistry({skills},"needle",{agent:"codex"}).map(x=>x.item.id),["explicit","generic"]);
+  assert.deepEqual(searchRegistry({skills},"needle",{agent:"claude-code"}).map(x=>x.item.id),["generic"]);
+  assert.deepEqual(searchRegistry({skills},"needle",{agent:"unknown-agent"}),[]);
 });
 
 test("released bundle becomes local install choice",()=>{

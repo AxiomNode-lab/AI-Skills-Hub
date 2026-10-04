@@ -1,107 +1,43 @@
 import fs from "node:fs";
+import os from "node:os";
 import path from "node:path";
-import { execFile } from "node:child_process";
-import { promisify } from "node:util";
+import { findExecutable } from "@ai-skills-hub/core";
 
-const execFileAsync = promisify(execFile);
+// Agents with a native skill install target (see targets.mjs and catalog/agents.json).
+// Each is detected by an executable on PATH or a configuration directory; detection
+// is a convenience for choosing an agent, not a requirement for installing.
+function agentSpecs(home, env) {
+  const appData = env.APPDATA || path.join(home, "AppData", "Roaming");
+  return [
+    { id: "claude-code", name: "Claude Code", commands: ["claude"], dirs: [path.join(home, ".claude")] },
+    { id: "codex", name: "Codex", commands: ["codex"], dirs: [path.join(home, ".codex")] },
+    {
+      id: "cursor", name: "Cursor", commands: ["cursor", "cursor-agent"],
+      dirs: [path.join(home, ".cursor"), path.join(appData, "Cursor"), path.join(home, "Library", "Application Support", "Cursor"), path.join(home, ".config", "Cursor")]
+    },
+    { id: "github-copilot", name: "GitHub Copilot", commands: ["copilot"], dirs: [path.join(home, ".copilot")] },
+    { id: "opencode", name: "OpenCode", commands: ["opencode"], dirs: [path.join(home, ".config", "opencode"), path.join(home, ".opencode")] }
+  ];
+}
 
-// Helper to check if a directory or file exists
-function exists(p) {
+function isDirectory(candidate) {
   try {
-    return fs.existsSync(p);
+    return fs.statSync(candidate).isDirectory();
   } catch {
     return false;
   }
 }
 
-// Known local agent installation paths / commands
-const LOCAL_AGENTS = {
-  "claude-code": {
-    name: "Claude Code",
-    type: "local",
-    check: async () => {
-      // Check if `claude` command is in PATH
-      try {
-        await execFileAsync("which", ["claude"]);
-        return true;
-      } catch {
-        return false;
-      }
-    }
-  },
-  "cursor": {
-    name: "Cursor",
-    type: "local",
-    check: async () => {
-      // Common cursor config paths
-      const home = process.env.HOME || process.env.USERPROFILE;
-      const paths = [
-        path.join(home, ".cursor"),
-        path.join(home, "AppData", "Roaming", "Cursor"),
-        path.join(home, "Library", "Application Support", "Cursor")
-      ];
-      return paths.some(exists);
-    }
-  },
-  "opencode": {
-    name: "OpenCode",
-    type: "local",
-    check: async () => {
-      const home = process.env.HOME || process.env.USERPROFILE;
-      return exists(path.join(home, ".opencode"));
-    }
-  },
-  "agent-skills": {
-    name: "Agent Skills (Default)",
-    type: "local",
-    check: async () => {
-      // This is the default project agent, always return true as a fallback
-      return true;
-    }
-  }
-};
-
-// Function to detect docker containers running specific agents
-async function checkDockerAgents() {
-  try {
-    const { stdout } = await execFileAsync("docker", ["ps", "--format", "{{.Names}} {{.Image}}"]);
-    const lines = stdout.trim().split("\n");
-    const found = [];
-    for (const line of lines) {
-      const [name, image] = line.split(" ");
-      if (!name) continue;
-      
-      const lowerName = name.toLowerCase();
-      const lowerImage = image ? image.toLowerCase() : "";
-
-      if (lowerName.includes("gemini") || lowerImage.includes("gemini")) {
-        found.push({ id: `docker-gemini-${name}`, name: `Gemini (Docker: ${name})`, type: "docker" });
-      } else if (lowerName.includes("chatgpt") || lowerImage.includes("chatgpt")) {
-        found.push({ id: `docker-chatgpt-${name}`, name: `ChatGPT (Docker: ${name})`, type: "docker" });
-      } else if (lowerName.includes("codex") || lowerImage.includes("codex")) {
-        found.push({ id: `docker-codex-${name}`, name: `Codex (Docker: ${name})`, type: "docker" });
-      }
-    }
-    return found;
-  } catch (error) {
-    // Docker is probably not installed or not running
-    return [];
-  }
-}
-
-export async function detectAgents() {
-  const agents = [];
-
-  // Check local agents
-  for (const [id, config] of Object.entries(LOCAL_AGENTS)) {
-    if (await config.check()) {
-      agents.push({ id, name: config.name, type: config.type });
-    }
-  }
-
-  // Check docker agents
-  const dockerAgents = await checkDockerAgents();
-  agents.push(...dockerAgents);
-
+// Returns every supported agent with `detected` and the evidence found, detected
+// agents first, followed by the generic Agent Skills target (always available).
+export async function detectAgents({ env = process.env, home = os.homedir() } = {}) {
+  const agents = agentSpecs(home, env).map(({ id, name, commands, dirs }) => {
+    let evidence = null;
+    for (const command of commands) if ((evidence = findExecutable(command, env))) break;
+    evidence ??= dirs.find(isDirectory) ?? null;
+    return { id, name, detected: Boolean(evidence), evidence };
+  });
+  agents.sort((a, b) => Number(b.detected) - Number(a.detected));
+  agents.push({ id: "agent-skills", name: "Agent Skills (generic .agents/skills)", detected: true, evidence: null });
   return agents;
 }

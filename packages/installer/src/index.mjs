@@ -1,12 +1,10 @@
+import { compatibilityBasis } from "@ai-skills-hub/core";
+
 function buildInstallPlan(skills, agent, options = {}) {
   const allowReview = options.allowReview === true;
 
   return skills.map((skill) => {
-    const compatible = new Set(skill.compatibility ?? []);
-    const isCompatible =
-      compatible.has(agent) ||
-      (agent === "generic-agent" && compatible.has("agent-skills")) ||
-      (agent === "agent-skills" && compatible.has("agent-skills"));
+    const isCompatible = compatibilityBasis(skill, agent) !== null;
 
     const base = {
       id: skill.id,

@@ -3,12 +3,21 @@ import crypto from "node:crypto";
 import fs from "node:fs";
 import { scanText, riskLevel } from "../packages/security/src/index.mjs";
 import { classifyLicense, normalizeLicense } from "../packages/licenses/src/index.mjs";
+import { parseFrontmatter } from "../packages/core/src/index.mjs";
 
-const [, , repo, ref = "main"] = process.argv;
-if (!repo) {
-  console.error("Usage: node scripts/ingest-github.mjs <owner/repo> [ref]");
+import { execFileSync } from "node:child_process";
+
+const argv = process.argv.slice(2);
+const checkoutIndex = argv.indexOf("--checkout");
+// --checkout <dir>: read the tree and files from a local clone at its HEAD commit
+// instead of the GitHub API (for environments where the API is unavailable).
+const checkout = checkoutIndex === -1 ? null : argv.splice(checkoutIndex, 2)[1];
+const [repo, ref = "main"] = argv;
+if (!repo || (checkoutIndex !== -1 && !checkout)) {
+  console.error("Usage: node scripts/ingest-github.mjs <owner/repo> [ref] [--checkout <clone-dir>]");
   process.exit(1);
 }
+const git = (...args) => execFileSync("git", ["-C", checkout, ...args], { encoding: "utf8", maxBuffer: 256 * 1024 * 1024 });
 
 const token = process.env.GITHUB_TOKEN;
 const baseHeaders = {
@@ -55,6 +64,13 @@ const api = async (url) => {
 };
 
 const raw = async (filePath) => {
+  if (checkout) {
+    try {
+      return git("show", `${revision}:${filePath}`);
+    } catch {
+      return null;
+    }
+  }
   const encodedPath = filePath.split("/").map(encodeURIComponent).join("/");
   const url = "https://raw.githubusercontent.com/" + repo + "/" + revision + "/" + encodedPath;
   const res = await fetchWithRetry(url, { headers: { "user-agent": baseHeaders["user-agent"], ...(token ? {authorization:"Bearer "+token} : {}) } });
@@ -62,11 +78,34 @@ const raw = async (filePath) => {
   return res.text();
 };
 
-const commitList = await api("https://api.github.com/repos/" + repo + "/commits?sha=" + encodeURIComponent(ref) + "&per_page=1");
-const revision = commitList[0]?.sha;
-if (!revision) throw new Error("Unable to resolve ref to an immutable commit.");
-
-const tree = await api("https://api.github.com/repos/" + repo + "/git/trees/" + revision + "?recursive=1");
+let revision;
+let tree;
+if (checkout) {
+  revision = git("rev-parse", "HEAD").trim();
+  const origin = git("remote", "get-url", "origin").trim().replace(/\.git$/, "");
+  if (!origin.toLowerCase().endsWith("/" + repo.toLowerCase())) throw new Error(`Checkout origin ${origin} is not ${repo}`);
+  // The recorded ref must name the commit that was actually read.
+  // A full commit SHA, or any branch, remote branch, or tag of that name, may match.
+  const refRevisions = /^[0-9a-f]{40}$/i.test(ref) ? [ref.toLowerCase()] : ["refs/heads/", "refs/remotes/origin/", "refs/tags/"].map((prefix) => {
+    try { return git("rev-parse", "--verify", "-q", prefix + ref + "^{commit}").trim(); } catch { return null; }
+  }).filter(Boolean);
+  if (!refRevisions.includes(revision)) throw new Error(`Checkout HEAD ${revision} is not ${ref} (${refRevisions.join(", ") || "ref not found in the clone"})`);
+  tree = {
+    sha: git("rev-parse", "HEAD^{tree}").trim(),
+    truncated: false,
+    // -z keeps paths unquoted (git C-quotes non-ASCII and special characters otherwise).
+    tree: git("ls-tree", "-r", "--full-tree", "-z", revision).split("\0").filter(Boolean).map((line) => {
+      const [meta, file] = line.split("\t");
+      const [mode, type] = meta.split(" ");
+      return { path: file, mode, type };
+    })
+  };
+} else {
+  const commitList = await api("https://api.github.com/repos/" + repo + "/commits?sha=" + encodeURIComponent(ref) + "&per_page=1");
+  revision = commitList[0]?.sha;
+  if (!revision) throw new Error("Unable to resolve ref to an immutable commit.");
+  tree = await api("https://api.github.com/repos/" + repo + "/git/trees/" + revision + "?recursive=1");
+}
 if (tree.truncated) {
   console.error("GitHub returned a truncated tree; refuse unsafe partial ingestion.");
   process.exit(2);
@@ -139,16 +178,7 @@ for (const item of skillPaths) {
 
   const skillSha = crypto.createHash("sha256").update(body).digest("hex");
   const scan = scanText(body);
-  const lines = body.split(/\r?\n/);
-  const frontmatter = {};
-
-  if (lines[0]?.trim() === "---") {
-    for (const line of lines.slice(1, 80)) {
-      if (line.trim() === "---") break;
-      const match = line.match(/^([A-Za-z0-9_-]+):\s*(.+)$/);
-      if (match) frontmatter[match[1]] = match[2].trim().replace(/^['"]|['"]$/g, "");
-    }
-  }
+  const frontmatter = parseFrontmatter(body);
 
   const license = await licenseEvidenceFor(item, frontmatter.license ?? null, item);
   const capabilityScan = {
@@ -162,7 +192,7 @@ for (const item of skillPaths) {
   result.discovered_skills.push({
     path: item,
     name: frontmatter.name ?? item.split("/").slice(-2, -1)[0],
-    description: frontmatter.description ?? null,
+    description: frontmatter.description?.trim() || null,
     skill_sha256: skillSha,
     license,
     security: { scan_status: scan.findings.length ? "review-required" : "verified", risk: riskLevel(scan), capabilities: scan.capabilities, findings: scan.findings },

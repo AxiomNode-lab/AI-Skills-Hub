@@ -1,0 +1,290 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "microsoft/azure-servicebus-ts",
+  "status": "approved",
+  "reviewed_on": "2026-10-02",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/azure-sdk-typescript/skills/azure-servicebus-ts",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": ".github/plugins/azure-sdk-typescript/skills/azure-servicebus-ts",
+    "url": "https://api.github.com/repos/microsoft/skills/git/trees/84d8eaa8ae95930f55cdceb3e27196c795dab038?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/microsoft/skills/blob/84d8eaa8ae95930f55cdceb3e27196c795dab038/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        ".github",
+        ".github/plugins",
+        ".github/plugins/azure-sdk-typescript",
+        ".github/plugins/azure-sdk-typescript/skills",
+        ".github/plugins/azure-sdk-typescript/skills/azure-servicebus-ts"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT License with its copyright notice, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "medium",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "package_install": true,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md and references/queues-topics.md, references/error-handling.md in full. TypeScript reference for Azure Service Bus (@azure/service-bus): sending/receiving on queues and topics, sessions, dead-letter handling, scheduling, deferral, receive modes, error codes, lock renewal, graceful shutdown and idempotent processing.",
+      "Tells the agent to `npm install @azure/service-bus @azure/identity` (SKILL.md:18, unpinned); sample code authenticates with DefaultAzureCredential to the user's own Service Bus namespace (from SERVICEBUS_NAMESPACE) and sends, receives, completes and dead-letters messages. Medium because of the package install and live-service credential use; acceptable because these are official Microsoft SDK packages and the code targets only the user's own namespace with Entra ID auth.",
+      "receiveAndDelete mode and completeMessage permanently remove messages from a real queue; running samples against a production namespace consumes messages. queues-topics.md:52-60 batch-overflow sample discards the new batch (minor bug in sample logic)."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "git_blob": "79656060de00aa4659ad2c276d5be8830664d544",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry the copyright and permission notice.",
+      "findings": []
+    },
+    {
+      "path": "references/error-handling.md",
+      "sha256": "e5b822a4c7656875b62b685d98d4f7760b2d724f691c33f205afd669248f1490",
+      "bytes": 11590,
+      "mode": "100644",
+      "git_blob": "57d993a8094f0af3621e64381791ca3065ca599d",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 36,
+          "evidence": "Delete",
+          "context": "| `QuotaExceeded` | Namespace quota exceeded | No | Delete messages, upgrade tier |",
+          "disposition": "accepted",
+          "reason": "False positive: comments and headings about removing or deleting messages from a Service Bus queue (completeMessage, receive-and-delete, DLQ cleanup), not file-system operations."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 169,
+          "evidence": "Remove",
+          "context": "  // Remove from DLQ",
+          "disposition": "accepted",
+          "reason": "False positive: comments and headings about removing or deleting messages from a Service Bus queue (completeMessage, receive-and-delete, DLQ cleanup), not file-system operations."
+        },
+        {
+          "type": "credential-access",
+          "line": 199,
+          "evidence": "credential",
+          "context": "const client = new ServiceBusClient(namespace, credential);",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential setup and the SERVICEBUS_NAMESPACE environment variable used to build a client for the user's own namespace; no secrets are read, printed or transmitted."
+        },
+        {
+          "type": "credential-access",
+          "line": 316,
+          "evidence": "credential",
+          "context": "const client = new ServiceBusClient(namespace, credential, {",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential setup and the SERVICEBUS_NAMESPACE environment variable used to build a client for the user's own namespace; no secrets are read, printed or transmitted."
+        }
+      ]
+    },
+    {
+      "path": "references/queues-topics.md",
+      "sha256": "76a5c385da9487da00233e919307fe0cc38d7e9167ec72e40a4c9081ab71ffe0",
+      "bytes": 9746,
+      "mode": "100644",
+      "git_blob": "bebaeac42bc9e93f7eba353425ed29b170100223",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "credential-access",
+          "line": 16,
+          "evidence": "process.env",
+          "context": "  process.env.SERVICEBUS_NAMESPACE!,",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential setup and the SERVICEBUS_NAMESPACE environment variable used to build a client for the user's own namespace; no secrets are read, printed or transmitted."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 87,
+          "evidence": "remove",
+          "context": "    // Process successfully - remove from queue",
+          "disposition": "accepted",
+          "reason": "False positive: comments and headings about removing or deleting messages from a Service Bus queue (completeMessage, receive-and-delete, DLQ cleanup), not file-system operations."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 272,
+          "evidence": "remove",
+          "context": "await receiver.completeMessage(message);   // Success - remove from queue",
+          "disposition": "accepted",
+          "reason": "False positive: comments and headings about removing or deleting messages from a Service Bus queue (completeMessage, receive-and-delete, DLQ cleanup), not file-system operations."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 278,
+          "evidence": "Delete",
+          "context": "### Receive-and-Delete (At-Most-Once)",
+          "disposition": "accepted",
+          "reason": "False positive: comments and headings about removing or deleting messages from a Service Bus queue (completeMessage, receive-and-delete, DLQ cleanup), not file-system operations."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 298,
+          "evidence": "remove",
+          "context": "// COMPLETE: Processing succeeded, remove message",
+          "disposition": "accepted",
+          "reason": "False positive: comments and headings about removing or deleting messages from a Service Bus queue (completeMessage, receive-and-delete, DLQ cleanup), not file-system operations."
+        }
+      ]
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "7abee3d8459e716a5e0b3d46fccf2f1e0db7c128e843b2981f2dbe97eef1a60e",
+      "bytes": 7246,
+      "mode": "100644",
+      "git_blob": "43e5acb47b8db2aee786f02a19f6c0db19556713",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 17,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks for the npm install command and an environment-variable listing."
+        },
+        {
+          "type": "package-install",
+          "line": 18,
+          "evidence": "npm install",
+          "context": "npm install @azure/service-bus @azure/identity",
+          "disposition": "accepted",
+          "reason": "`npm install @azure/service-bus @azure/identity` installs the official Azure SDK packages from npm (unpinned)."
+        },
+        {
+          "type": "shell-execution",
+          "line": 23,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash-fenced block listing environment variable names with placeholder values; no command is executed."
+        },
+        {
+          "type": "credential-access",
+          "line": 38,
+          "evidence": "credential",
+          "context": "const credential = new DefaultAzureCredential({requiredEnvVars: [\"AZURE_TOKEN_CREDENTIALS\"]});",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential setup and the SERVICEBUS_NAMESPACE environment variable used to build a client for the user's own namespace; no secrets are read, printed or transmitted."
+        },
+        {
+          "type": "credential-access",
+          "line": 39,
+          "evidence": "credential",
+          "context": "// Or use a specific credential directly in production:",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential setup and the SERVICEBUS_NAMESPACE environment variable used to build a client for the user's own namespace; no secrets are read, printed or transmitted."
+        },
+        {
+          "type": "credential-access",
+          "line": 40,
+          "evidence": "credential",
+          "context": "// See https://learn.microsoft.com/javascript/api/overview/azure/identity-readme?view=azure-node-latest#credential-classes",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential setup and the SERVICEBUS_NAMESPACE environment variable used to build a client for the user's own namespace; no secrets are read, printed or transmitted."
+        },
+        {
+          "type": "network-access",
+          "line": 40,
+          "evidence": "https://",
+          "context": "// See https://learn.microsoft.com/javascript/api/overview/azure/identity-readme?view=azure-node-latest#credential-classes",
+          "disposition": "accepted",
+          "reason": "A Microsoft Learn documentation link in a code comment; nothing is fetched by instruction."
+        },
+        {
+          "type": "credential-access",
+          "line": 41,
+          "evidence": "credential",
+          "context": "// const credential = new ManagedIdentityCredential();",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential setup and the SERVICEBUS_NAMESPACE environment variable used to build a client for the user's own namespace; no secrets are read, printed or transmitted."
+        },
+        {
+          "type": "credential-access",
+          "line": 43,
+          "evidence": "process.env",
+          "context": "const fullyQualifiedNamespace = process.env.SERVICEBUS_NAMESPACE!;",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential setup and the SERVICEBUS_NAMESPACE environment variable used to build a client for the user's own namespace; no secrets are read, printed or transmitted."
+        },
+        {
+          "type": "credential-access",
+          "line": 44,
+          "evidence": "credential",
+          "context": "const client = new ServiceBusClient(fullyQualifiedNamespace, credential);",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential setup and the SERVICEBUS_NAMESPACE environment variable used to build a client for the user's own namespace; no secrets are read, printed or transmitted."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 220,
+          "evidence": "Remove",
+          "context": "await receiver.completeMessage(message);   // Remove from queue",
+          "disposition": "accepted",
+          "reason": "False positive: comments and headings about removing or deleting messages from a Service Bus queue (completeMessage, receive-and-delete, DLQ cleanup), not file-system operations."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 225,
+          "evidence": "Delete",
+          "context": "// Receive-and-Delete - message removed immediately",
+          "disposition": "accepted",
+          "reason": "False positive: comments and headings about removing or deleting messages from a Service Bus queue (completeMessage, receive-and-delete, DLQ cleanup), not file-system operations."
+        },
+        {
+          "type": "credential-access",
+          "line": 231,
+          "evidence": "Credential",
+          "context": "1. **Use Microsoft Entra Token Credential** - Use `DefaultAzureCredential` for local development; use `ManagedIdentityCredential` or `WorkloadIdentityCredential` for production",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential setup and the SERVICEBUS_NAMESPACE environment variable used to build a client for the user's own namespace; no secrets are read, printed or transmitted."
+        }
+      ]
+    }
+  ]
+}

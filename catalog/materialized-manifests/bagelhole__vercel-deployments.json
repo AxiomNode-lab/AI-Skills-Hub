@@ -1,0 +1,109 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "bagelhole/vercel-deployments",
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "infrastructure/platforms/vercel-deployments",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "review": {
+    "path": "catalog/reviews/bagelhole__vercel-deployments.json",
+    "sha256": "fb33011ec8f4968026f2e9306a974cc80cbaac17961a110934dbcfc7869d2730"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "shell-execution",
+        "line": 31,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 79,
+        "evidence": "https://",
+        "context": "    { \"source\": \"/api/v1/:path*\", \"destination\": \"https://api.example.com/:path*\" }",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 86,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 98,
+        "evidence": "Remove",
+        "context": "# Remove an env var",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 104,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 204,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 240,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 242,
+        "evidence": "npm install",
+        "context": "npm install @vercel/speed-insights",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 245,
+        "evidence": "npm install",
+        "context": "npm install @vercel/analytics",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 8267
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "dfce42f6b99abf0d3fcfd8e0ebaf11a8cef17640b001c2a703d279ca2b3b9d72",
+      "bytes": 7199,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 8267
+}

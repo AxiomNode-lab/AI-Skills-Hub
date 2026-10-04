@@ -1,0 +1,94 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "kdense/consciousness-council",
+  "source": {
+    "repo": "K-Dense-AI/scientific-agent-skills",
+    "path": "skills/consciousness-council",
+    "revision": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298"
+  },
+  "review": {
+    "path": "catalog/reviews/kdense__consciousness-council.json",
+    "sha256": "15280dc43190cf50e438939065164e940fa0f1cf9fcc1799871bf85614bc4746"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "low",
+    "capabilities": {
+      "shell": false,
+      "network": true,
+      "credentials": false,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "filesystem-write",
+        "line": 50,
+        "evidence": "remove",
+        "context": "| 11  | **The Minimalist** | Simplification, constraint-seeking     | \"What can we remove?\"                        | Can oversimplify complex problems         |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 172,
+        "evidence": "https://",
+        "context": "This specific prompt workflow and its optional scoring have not been benchmarked for decision accuracy. Multi-agent studies do not directly validate several voices generated in one conversation. [Baltaji et al. (2024)](https://arxiv.org/abs",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 172,
+        "evidence": "https://",
+        "context": "This specific prompt workflow and its optional scoring have not been benchmarked for decision accuracy. Multi-agent studies do not directly validate several voices generated in one conversation. [Baltaji et al. (2024)](https://arxiv.org/abs",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 176,
+        "evidence": "https://",
+        "context": "Originally created by [AHK Strategies](https://www.ahkstrategies.net/), with inspiration from [MindBook](https://themindbook.app/). The [current MindBook FAQ](https://themindbook.app/help), reviewed 2026-09-30, distinguishes its 12-archetyp",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 176,
+        "evidence": "https://",
+        "context": "Originally created by [AHK Strategies](https://www.ahkstrategies.net/), with inspiration from [MindBook](https://themindbook.app/). The [current MindBook FAQ](https://themindbook.app/help), reviewed 2026-09-30, distinguishes its 12-archetyp",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 176,
+        "evidence": "https://",
+        "context": "Originally created by [AHK Strategies](https://www.ahkstrategies.net/), with inspiration from [MindBook](https://themindbook.app/). The [current MindBook FAQ](https://themindbook.app/help), reviewed 2026-09-30, distinguishes its 12-archetyp",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 21611
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE.md"
+    },
+    {
+      "path": "references/advanced-configurations.md",
+      "sha256": "052f4a047b4256f771dd97e04df41c8aca26e70e619573202ad688b98874ffdc",
+      "bytes": 6611,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "84b5eb07e5459cc110d7d6f63be48a7a01d374ec618da8e293a88b1d037c0c8c",
+      "bytes": 13932,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 21611
+}

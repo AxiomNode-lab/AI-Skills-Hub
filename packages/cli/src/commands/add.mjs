@@ -64,10 +64,7 @@ export async function addCommand(query, options = {}) {
   }
 
   try {
-    const registry = loadRegistry(
-      path.resolve(process.cwd(), "catalog", "skills.json"),
-      path.resolve(process.cwd(), "catalog", "bundles.json")
-    );
+    const registry = loadRegistry();
 
     const searchResult = await hybridSearch(registry, query, {
       agent,

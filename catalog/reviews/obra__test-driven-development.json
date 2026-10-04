@@ -1,0 +1,205 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "obra/test-driven-development",
+  "status": "approved",
+  "reviewed_on": "2026-10-02",
+  "reviewer": "AI-assisted artifact review; not an independent security certification",
+  "source": {
+    "repo": "obra/superpowers",
+    "path": "skills/test-driven-development",
+    "revision": "8ca22dba9a94f28898bbce59f2537ff4d87c747d"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "skills/test-driven-development",
+    "url": "https://api.github.com/repos/obra/superpowers/git/trees/8ca22dba9a94f28898bbce59f2537ff4d87c747d?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/obra/superpowers/blob/8ca22dba9a94f28898bbce59f2537ff4d87c747d/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "skills",
+        "skills/test-driven-development"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT License with its copyright notice, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license, so no conflicting declaration exists. Every file was read in full; no third-party copyright notice, other license grant, or copied third-party text was found. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "low",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": true,
+      "network": false
+    },
+    "notes": [
+      "Read SKILL.md and writing-good-tests.md in full. Red-green-refactor guidance with TypeScript examples and rules for honest tests.",
+      "'Delete' refers to discarding code written before a failing test, as development advice. Shell examples run the project's own test command. No package installs, credentials, or network access."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "a37e0e9697144819e1d965176ac4ae5bc3fa02d11e7812036bbcadf6dafe2400",
+      "bytes": 1070,
+      "mode": "100644",
+      "git_blob": "abf0390320aa14406af7a520b9b0739fdda9bf08",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry the copyright and permission notice.",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "64b03fce4aee5a97a93160cea8111f3ba13a17b7c001db4bd5836d67fd10705d",
+      "bytes": 9578,
+      "mode": "100644",
+      "git_blob": "46838cc9e893c06259e3bdad0fc2425b36242f15",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 37,
+          "evidence": "Delete",
+          "context": "Write code before the test? Delete it. Start over.",
+          "disposition": "accepted",
+          "reason": "Prose or code-comment use of remove/delete (editing advice or a dependency swap), not a file-deletion command."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 43,
+          "evidence": "Delete",
+          "context": "- Delete means delete",
+          "disposition": "accepted",
+          "reason": "Prose or code-comment use of remove/delete (editing advice or a dependency swap), not a file-deletion command."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 43,
+          "evidence": "delete",
+          "context": "- Delete means delete",
+          "disposition": "accepted",
+          "reason": "Prose or code-comment use of remove/delete (editing advice or a dependency swap), not a file-deletion command."
+        },
+        {
+          "type": "shell-execution",
+          "line": 117,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Fenced example of running the project's own test command."
+        },
+        {
+          "type": "shell-execution",
+          "line": 172,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Fenced example of running the project's own test command."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 198,
+          "evidence": "Remove",
+          "context": "- Remove duplication",
+          "disposition": "accepted",
+          "reason": "Prose or code-comment use of remove/delete (editing advice or a dependency swap), not a file-deletion command."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 231,
+          "evidence": "Delete",
+          "context": "| \"Keep as reference, write tests first\" | You'll adapt it. That's testing after. Delete means delete. |",
+          "disposition": "accepted",
+          "reason": "Prose or code-comment use of remove/delete (editing advice or a dependency swap), not a file-deletion command."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 231,
+          "evidence": "delete",
+          "context": "| \"Keep as reference, write tests first\" | You'll adapt it. That's testing after. Delete means delete. |",
+          "disposition": "accepted",
+          "reason": "Prose or code-comment use of remove/delete (editing advice or a dependency swap), not a file-deletion command."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 254,
+          "evidence": "Delete",
+          "context": "**All of these mean: Delete code. Start over with TDD.**",
+          "disposition": "accepted",
+          "reason": "Prose or code-comment use of remove/delete (editing advice or a dependency swap), not a file-deletion command."
+        },
+        {
+          "type": "shell-execution",
+          "line": 269,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Fenced example of running the project's own test command."
+        },
+        {
+          "type": "shell-execution",
+          "line": 285,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Fenced example of running the project's own test command."
+        }
+      ]
+    },
+    {
+      "path": "writing-good-tests.md",
+      "sha256": "51471c853306ff92ca8bb41dcaea05f31c0e46b03651f8f3c99754b7172f4ae1",
+      "bytes": 8268,
+      "mode": "100644",
+      "git_blob": "d3c4482fd30b4f9084bb61545fe73939a7502c28",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 86,
+          "evidence": "delete",
+          "context": "are checking, unmock it or delete the assertion.",
+          "disposition": "accepted",
+          "reason": "Prose or code-comment use of remove/delete (editing advice or a dependency swap), not a file-deletion command."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 147,
+          "evidence": "delete",
+          "context": "    Unmock it or delete the assertion.",
+          "disposition": "accepted",
+          "reason": "Prose or code-comment use of remove/delete (editing advice or a dependency swap), not a file-deletion command."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 195,
+          "evidence": "remove",
+          "context": "- An assertion checks a `*-mock` test ID, or fails if you remove the mock",
+          "disposition": "accepted",
+          "reason": "Prose or code-comment use of remove/delete (editing advice or a dependency swap), not a file-deletion command."
+        }
+      ]
+    }
+  ]
+}

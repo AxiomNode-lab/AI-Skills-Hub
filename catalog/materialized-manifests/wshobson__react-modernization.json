@@ -1,0 +1,94 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "wshobson/react-modernization",
+  "source": {
+    "repo": "wshobson/agents",
+    "path": "plugins/framework-migration/skills/react-modernization",
+    "revision": "156b7a5e7a8b93642628a339ee4039c925b34c7f"
+  },
+  "review": {
+    "path": "catalog/reviews/wshobson__react-modernization.json",
+    "sha256": "c9f2cb6651927a17939f9536bcee08cd09660c42c30843f103cb7dc273bf1e8b"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": false,
+      "dynamic_execution": true,
+      "package_install": true,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "shell-execution",
+        "line": 7,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/details.md"
+      },
+      {
+        "type": "network-access",
+        "line": 9,
+        "evidence": "https://",
+        "context": "npx jscodeshift -t https://raw.githubusercontent.com/reactjs/react-codemod/master/transforms/rename-unsafe-lifecycles.js src/",
+        "file": "references/details.md"
+      },
+      {
+        "type": "network-access",
+        "line": 12,
+        "evidence": "https://",
+        "context": "npx jscodeshift -t https://raw.githubusercontent.com/reactjs/react-codemod/master/transforms/update-react-imports.js src/",
+        "file": "references/details.md"
+      },
+      {
+        "type": "network-access",
+        "line": 15,
+        "evidence": "https://",
+        "context": "npx jscodeshift -t https://raw.githubusercontent.com/reactjs/react-codemod/master/transforms/error-boundaries.js src/",
+        "file": "references/details.md"
+      },
+      {
+        "type": "network-access",
+        "line": 18,
+        "evidence": "https://",
+        "context": "npx jscodeshift -t https://raw.githubusercontent.com/reactjs/react-codemod/master/transforms/rename-unsafe-lifecycles.js --parser=tsx src/",
+        "file": "references/details.md"
+      },
+      {
+        "type": "network-access",
+        "line": 21,
+        "evidence": "https://",
+        "context": "npx jscodeshift -t https://raw.githubusercontent.com/reactjs/react-codemod/master/transforms/rename-unsafe-lifecycles.js --dry --print src/",
+        "file": "references/details.md"
+      }
+    ],
+    "total_bytes": 12319
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "f89abb55d9f073f38f1703e4518f0613c788c6174be7f13b8dfe48a1c076c746",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/details.md",
+      "sha256": "29632d9c891ed3f9716fffb7592941337c12d50ec4499479440b371a6f1074fc",
+      "bytes": 4436,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "7787e2435f53744559f1c48a0769f17ffba48cb1e2ca4fe207cbb81b800055f1",
+      "bytes": 6815,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 12319
+}

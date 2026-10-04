@@ -1,0 +1,914 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "supabase/supabase-postgres-best-practices",
+  "source": {
+    "repo": "supabase/agent-skills",
+    "path": "skills/supabase-postgres-best-practices",
+    "revision": "c9be0e931b7930f7d02126d04774d904c381e7d7"
+  },
+  "review": {
+    "path": "catalog/reviews/supabase__supabase-postgres-best-practices.json",
+    "sha256": "7d332a9cd16c86fa099f761c8620ef12f32b408798448df87ebf2972227a8e94"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "low",
+    "capabilities": {
+      "shell": false,
+      "network": true,
+      "credentials": false,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "network-access",
+        "line": 3,
+        "evidence": "https://",
+        "context": "## [1.6.0](https://github.com/supabase/agent-skills/compare/supabase-postgres-best-practices-v1.5.0...supabase-postgres-best-practices-v1.6.0) (2026-07-30)",
+        "file": "CHANGELOG.md"
+      },
+      {
+        "type": "network-access",
+        "line": 8,
+        "evidence": "https://",
+        "context": "* add schema-constraints reference for safe migration patterns ([#30](https://github.com/supabase/agent-skills/issues/30)) ([9b236f3](https://github.com/supabase/agent-skills/commit/9b236f3ebd65d76a2c570f19931353da9c858d5a))",
+        "file": "CHANGELOG.md"
+      },
+      {
+        "type": "network-access",
+        "line": 8,
+        "evidence": "https://",
+        "context": "* add schema-constraints reference for safe migration patterns ([#30](https://github.com/supabase/agent-skills/issues/30)) ([9b236f3](https://github.com/supabase/agent-skills/commit/9b236f3ebd65d76a2c570f19931353da9c858d5a))",
+        "file": "CHANGELOG.md"
+      },
+      {
+        "type": "network-access",
+        "line": 9,
+        "evidence": "https://",
+        "context": "* using Supabase agent skills ([#12](https://github.com/supabase/agent-skills/issues/12)) ([7c2e389](https://github.com/supabase/agent-skills/commit/7c2e3894fddfde8eb6c77d2a8921904543b9be7a))",
+        "file": "CHANGELOG.md"
+      },
+      {
+        "type": "network-access",
+        "line": 9,
+        "evidence": "https://",
+        "context": "* using Supabase agent skills ([#12](https://github.com/supabase/agent-skills/issues/12)) ([7c2e389](https://github.com/supabase/agent-skills/commit/7c2e3894fddfde8eb6c77d2a8921904543b9be7a))",
+        "file": "CHANGELOG.md"
+      },
+      {
+        "type": "network-access",
+        "line": 14,
+        "evidence": "https://",
+        "context": "* correct broken reference link in postgres best practices skill ([#58](https://github.com/supabase/agent-skills/issues/58)) ([f4e2277](https://github.com/supabase/agent-skills/commit/f4e22777fd8573537297b568c16e5a45a25927da))",
+        "file": "CHANGELOG.md"
+      },
+      {
+        "type": "network-access",
+        "line": 14,
+        "evidence": "https://",
+        "context": "* correct broken reference link in postgres best practices skill ([#58](https://github.com/supabase/agent-skills/issues/58)) ([f4e2277](https://github.com/supabase/agent-skills/commit/f4e22777fd8573537297b568c16e5a45a25927da))",
+        "file": "CHANGELOG.md"
+      },
+      {
+        "type": "network-access",
+        "line": 15,
+        "evidence": "https://",
+        "context": "* cover SECURITY DEFINER, auth.role() deprecation, and BOLA in security checklist ([#85](https://github.com/supabase/agent-skills/issues/85)) ([133f43e](https://github.com/supabase/agent-skills/commit/133f43e8c2ffc48823ff0630c692cabecea3e3a",
+        "file": "CHANGELOG.md"
+      },
+      {
+        "type": "network-access",
+        "line": 15,
+        "evidence": "https://",
+        "context": "* cover SECURITY DEFINER, auth.role() deprecation, and BOLA in security checklist ([#85](https://github.com/supabase/agent-skills/issues/85)) ([133f43e](https://github.com/supabase/agent-skills/commit/133f43e8c2ffc48823ff0630c692cabecea3e3a",
+        "file": "CHANGELOG.md"
+      },
+      {
+        "type": "network-access",
+        "line": 16,
+        "evidence": "https://",
+        "context": "* **supabase-postgres-best-practices:** make skill description trigger-rich ([#194](https://github.com/supabase/agent-skills/issues/194)) ([3291216](https://github.com/supabase/agent-skills/commit/32912161e2732c3e5001c6811a76c1f8308ed0da))",
+        "file": "CHANGELOG.md"
+      },
+      {
+        "type": "network-access",
+        "line": 16,
+        "evidence": "https://",
+        "context": "* **supabase-postgres-best-practices:** make skill description trigger-rich ([#194](https://github.com/supabase/agent-skills/issues/194)) ([3291216](https://github.com/supabase/agent-skills/commit/32912161e2732c3e5001c6811a76c1f8308ed0da))",
+        "file": "CHANGELOG.md"
+      },
+      {
+        "type": "network-access",
+        "line": 18,
+        "evidence": "https://",
+        "context": "## [1.5.0](https://github.com/supabase/agent-skills/compare/supabase-postgres-best-practices-v1.4.0...supabase-postgres-best-practices-v1.5.0) (2026-07-30)",
+        "file": "CHANGELOG.md"
+      },
+      {
+        "type": "network-access",
+        "line": 23,
+        "evidence": "https://",
+        "context": "* add schema-constraints reference for safe migration patterns ([#30](https://github.com/supabase/agent-skills/issues/30)) ([9b236f3](https://github.com/supabase/agent-skills/commit/9b236f3ebd65d76a2c570f19931353da9c858d5a))",
+        "file": "CHANGELOG.md"
+      },
+      {
+        "type": "network-access",
+        "line": 23,
+        "evidence": "https://",
+        "context": "* add schema-constraints reference for safe migration patterns ([#30](https://github.com/supabase/agent-skills/issues/30)) ([9b236f3](https://github.com/supabase/agent-skills/commit/9b236f3ebd65d76a2c570f19931353da9c858d5a))",
+        "file": "CHANGELOG.md"
+      },
+      {
+        "type": "network-access",
+        "line": 24,
+        "evidence": "https://",
+        "context": "* using Supabase agent skills ([#12](https://github.com/supabase/agent-skills/issues/12)) ([7c2e389](https://github.com/supabase/agent-skills/commit/7c2e3894fddfde8eb6c77d2a8921904543b9be7a))",
+        "file": "CHANGELOG.md"
+      },
+      {
+        "type": "network-access",
+        "line": 24,
+        "evidence": "https://",
+        "context": "* using Supabase agent skills ([#12](https://github.com/supabase/agent-skills/issues/12)) ([7c2e389](https://github.com/supabase/agent-skills/commit/7c2e3894fddfde8eb6c77d2a8921904543b9be7a))",
+        "file": "CHANGELOG.md"
+      },
+      {
+        "type": "network-access",
+        "line": 29,
+        "evidence": "https://",
+        "context": "* correct broken reference link in postgres best practices skill ([#58](https://github.com/supabase/agent-skills/issues/58)) ([f4e2277](https://github.com/supabase/agent-skills/commit/f4e22777fd8573537297b568c16e5a45a25927da))",
+        "file": "CHANGELOG.md"
+      },
+      {
+        "type": "network-access",
+        "line": 29,
+        "evidence": "https://",
+        "context": "* correct broken reference link in postgres best practices skill ([#58](https://github.com/supabase/agent-skills/issues/58)) ([f4e2277](https://github.com/supabase/agent-skills/commit/f4e22777fd8573537297b568c16e5a45a25927da))",
+        "file": "CHANGELOG.md"
+      },
+      {
+        "type": "network-access",
+        "line": 30,
+        "evidence": "https://",
+        "context": "* cover SECURITY DEFINER, auth.role() deprecation, and BOLA in security checklist ([#85](https://github.com/supabase/agent-skills/issues/85)) ([133f43e](https://github.com/supabase/agent-skills/commit/133f43e8c2ffc48823ff0630c692cabecea3e3a",
+        "file": "CHANGELOG.md"
+      },
+      {
+        "type": "network-access",
+        "line": 30,
+        "evidence": "https://",
+        "context": "* cover SECURITY DEFINER, auth.role() deprecation, and BOLA in security checklist ([#85](https://github.com/supabase/agent-skills/issues/85)) ([133f43e](https://github.com/supabase/agent-skills/commit/133f43e8c2ffc48823ff0630c692cabecea3e3a",
+        "file": "CHANGELOG.md"
+      },
+      {
+        "type": "network-access",
+        "line": 31,
+        "evidence": "https://",
+        "context": "* **supabase-postgres-best-practices:** make skill description trigger-rich ([#194](https://github.com/supabase/agent-skills/issues/194)) ([3291216](https://github.com/supabase/agent-skills/commit/32912161e2732c3e5001c6811a76c1f8308ed0da))",
+        "file": "CHANGELOG.md"
+      },
+      {
+        "type": "network-access",
+        "line": 31,
+        "evidence": "https://",
+        "context": "* **supabase-postgres-best-practices:** make skill description trigger-rich ([#194](https://github.com/supabase/agent-skills/issues/194)) ([3291216](https://github.com/supabase/agent-skills/commit/32912161e2732c3e5001c6811a76c1f8308ed0da))",
+        "file": "CHANGELOG.md"
+      },
+      {
+        "type": "network-access",
+        "line": 33,
+        "evidence": "https://",
+        "context": "## [1.4.0](https://github.com/supabase/agent-skills/compare/v1.3.0...v1.4.0) (2026-07-10)",
+        "file": "CHANGELOG.md"
+      },
+      {
+        "type": "network-access",
+        "line": 38,
+        "evidence": "https://",
+        "context": "* add schema-constraints reference for safe migration patterns ([#30](https://github.com/supabase/agent-skills/issues/30)) ([9b236f3](https://github.com/supabase/agent-skills/commit/9b236f3ebd65d76a2c570f19931353da9c858d5a))",
+        "file": "CHANGELOG.md"
+      },
+      {
+        "type": "network-access",
+        "line": 38,
+        "evidence": "https://",
+        "context": "* add schema-constraints reference for safe migration patterns ([#30](https://github.com/supabase/agent-skills/issues/30)) ([9b236f3](https://github.com/supabase/agent-skills/commit/9b236f3ebd65d76a2c570f19931353da9c858d5a))",
+        "file": "CHANGELOG.md"
+      },
+      {
+        "type": "network-access",
+        "line": 39,
+        "evidence": "https://",
+        "context": "* using Supabase agent skills ([#12](https://github.com/supabase/agent-skills/issues/12)) ([7c2e389](https://github.com/supabase/agent-skills/commit/7c2e3894fddfde8eb6c77d2a8921904543b9be7a))",
+        "file": "CHANGELOG.md"
+      },
+      {
+        "type": "network-access",
+        "line": 39,
+        "evidence": "https://",
+        "context": "* using Supabase agent skills ([#12](https://github.com/supabase/agent-skills/issues/12)) ([7c2e389](https://github.com/supabase/agent-skills/commit/7c2e3894fddfde8eb6c77d2a8921904543b9be7a))",
+        "file": "CHANGELOG.md"
+      },
+      {
+        "type": "network-access",
+        "line": 44,
+        "evidence": "https://",
+        "context": "* correct broken reference link in postgres best practices skill ([#58](https://github.com/supabase/agent-skills/issues/58)) ([f4e2277](https://github.com/supabase/agent-skills/commit/f4e22777fd8573537297b568c16e5a45a25927da))",
+        "file": "CHANGELOG.md"
+      },
+      {
+        "type": "network-access",
+        "line": 44,
+        "evidence": "https://",
+        "context": "* correct broken reference link in postgres best practices skill ([#58](https://github.com/supabase/agent-skills/issues/58)) ([f4e2277](https://github.com/supabase/agent-skills/commit/f4e22777fd8573537297b568c16e5a45a25927da))",
+        "file": "CHANGELOG.md"
+      },
+      {
+        "type": "network-access",
+        "line": 45,
+        "evidence": "https://",
+        "context": "* cover SECURITY DEFINER, auth.role() deprecation, and BOLA in security checklist ([#85](https://github.com/supabase/agent-skills/issues/85)) ([133f43e](https://github.com/supabase/agent-skills/commit/133f43e8c2ffc48823ff0630c692cabecea3e3a",
+        "file": "CHANGELOG.md"
+      },
+      {
+        "type": "network-access",
+        "line": 45,
+        "evidence": "https://",
+        "context": "* cover SECURITY DEFINER, auth.role() deprecation, and BOLA in security checklist ([#85](https://github.com/supabase/agent-skills/issues/85)) ([133f43e](https://github.com/supabase/agent-skills/commit/133f43e8c2ffc48823ff0630c692cabecea3e3a",
+        "file": "CHANGELOG.md"
+      },
+      {
+        "type": "network-access",
+        "line": 47,
+        "evidence": "https://",
+        "context": "## [1.3.0](https://github.com/supabase/agent-skills/compare/v1.2.0...v1.3.0) (2026-06-05)",
+        "file": "CHANGELOG.md"
+      },
+      {
+        "type": "network-access",
+        "line": 52,
+        "evidence": "https://",
+        "context": "* add schema-constraints reference for safe migration patterns ([#30](https://github.com/supabase/agent-skills/issues/30)) ([9b236f3](https://github.com/supabase/agent-skills/commit/9b236f3ebd65d76a2c570f19931353da9c858d5a))",
+        "file": "CHANGELOG.md"
+      },
+      {
+        "type": "network-access",
+        "line": 52,
+        "evidence": "https://",
+        "context": "* add schema-constraints reference for safe migration patterns ([#30](https://github.com/supabase/agent-skills/issues/30)) ([9b236f3](https://github.com/supabase/agent-skills/commit/9b236f3ebd65d76a2c570f19931353da9c858d5a))",
+        "file": "CHANGELOG.md"
+      },
+      {
+        "type": "network-access",
+        "line": 53,
+        "evidence": "https://",
+        "context": "* using Supabase agent skills ([#12](https://github.com/supabase/agent-skills/issues/12)) ([7c2e389](https://github.com/supabase/agent-skills/commit/7c2e3894fddfde8eb6c77d2a8921904543b9be7a))",
+        "file": "CHANGELOG.md"
+      },
+      {
+        "type": "network-access",
+        "line": 53,
+        "evidence": "https://",
+        "context": "* using Supabase agent skills ([#12](https://github.com/supabase/agent-skills/issues/12)) ([7c2e389](https://github.com/supabase/agent-skills/commit/7c2e3894fddfde8eb6c77d2a8921904543b9be7a))",
+        "file": "CHANGELOG.md"
+      },
+      {
+        "type": "network-access",
+        "line": 58,
+        "evidence": "https://",
+        "context": "* correct broken reference link in postgres best practices skill ([#58](https://github.com/supabase/agent-skills/issues/58)) ([f4e2277](https://github.com/supabase/agent-skills/commit/f4e22777fd8573537297b568c16e5a45a25927da))",
+        "file": "CHANGELOG.md"
+      },
+      {
+        "type": "network-access",
+        "line": 58,
+        "evidence": "https://",
+        "context": "* correct broken reference link in postgres best practices skill ([#58](https://github.com/supabase/agent-skills/issues/58)) ([f4e2277](https://github.com/supabase/agent-skills/commit/f4e22777fd8573537297b568c16e5a45a25927da))",
+        "file": "CHANGELOG.md"
+      },
+      {
+        "type": "network-access",
+        "line": 59,
+        "evidence": "https://",
+        "context": "* cover SECURITY DEFINER, auth.role() deprecation, and BOLA in security checklist ([#85](https://github.com/supabase/agent-skills/issues/85)) ([133f43e](https://github.com/supabase/agent-skills/commit/133f43e8c2ffc48823ff0630c692cabecea3e3a",
+        "file": "CHANGELOG.md"
+      },
+      {
+        "type": "network-access",
+        "line": 59,
+        "evidence": "https://",
+        "context": "* cover SECURITY DEFINER, auth.role() deprecation, and BOLA in security checklist ([#85](https://github.com/supabase/agent-skills/issues/85)) ([133f43e](https://github.com/supabase/agent-skills/commit/133f43e8c2ffc48823ff0630c692cabecea3e3a",
+        "file": "CHANGELOG.md"
+      },
+      {
+        "type": "network-access",
+        "line": 61,
+        "evidence": "https://",
+        "context": "## [1.2.0](https://github.com/supabase/agent-skills/compare/v1.1.1...v1.2.0) (2026-06-02)",
+        "file": "CHANGELOG.md"
+      },
+      {
+        "type": "network-access",
+        "line": 66,
+        "evidence": "https://",
+        "context": "* add schema-constraints reference for safe migration patterns ([#30](https://github.com/supabase/agent-skills/issues/30)) ([9b236f3](https://github.com/supabase/agent-skills/commit/9b236f3ebd65d76a2c570f19931353da9c858d5a))",
+        "file": "CHANGELOG.md"
+      },
+      {
+        "type": "network-access",
+        "line": 66,
+        "evidence": "https://",
+        "context": "* add schema-constraints reference for safe migration patterns ([#30](https://github.com/supabase/agent-skills/issues/30)) ([9b236f3](https://github.com/supabase/agent-skills/commit/9b236f3ebd65d76a2c570f19931353da9c858d5a))",
+        "file": "CHANGELOG.md"
+      },
+      {
+        "type": "network-access",
+        "line": 67,
+        "evidence": "https://",
+        "context": "* using Supabase agent skills ([#12](https://github.com/supabase/agent-skills/issues/12)) ([7c2e389](https://github.com/supabase/agent-skills/commit/7c2e3894fddfde8eb6c77d2a8921904543b9be7a))",
+        "file": "CHANGELOG.md"
+      },
+      {
+        "type": "network-access",
+        "line": 67,
+        "evidence": "https://",
+        "context": "* using Supabase agent skills ([#12](https://github.com/supabase/agent-skills/issues/12)) ([7c2e389](https://github.com/supabase/agent-skills/commit/7c2e3894fddfde8eb6c77d2a8921904543b9be7a))",
+        "file": "CHANGELOG.md"
+      },
+      {
+        "type": "network-access",
+        "line": 72,
+        "evidence": "https://",
+        "context": "* correct broken reference link in postgres best practices skill ([#58](https://github.com/supabase/agent-skills/issues/58)) ([f4e2277](https://github.com/supabase/agent-skills/commit/f4e22777fd8573537297b568c16e5a45a25927da))",
+        "file": "CHANGELOG.md"
+      },
+      {
+        "type": "network-access",
+        "line": 72,
+        "evidence": "https://",
+        "context": "* correct broken reference link in postgres best practices skill ([#58](https://github.com/supabase/agent-skills/issues/58)) ([f4e2277](https://github.com/supabase/agent-skills/commit/f4e22777fd8573537297b568c16e5a45a25927da))",
+        "file": "CHANGELOG.md"
+      },
+      {
+        "type": "network-access",
+        "line": 73,
+        "evidence": "https://",
+        "context": "* cover SECURITY DEFINER, auth.role() deprecation, and BOLA in security checklist ([#85](https://github.com/supabase/agent-skills/issues/85)) ([133f43e](https://github.com/supabase/agent-skills/commit/133f43e8c2ffc48823ff0630c692cabecea3e3a",
+        "file": "CHANGELOG.md"
+      },
+      {
+        "type": "network-access",
+        "line": 73,
+        "evidence": "https://",
+        "context": "* cover SECURITY DEFINER, auth.role() deprecation, and BOLA in security checklist ([#85](https://github.com/supabase/agent-skills/issues/85)) ([133f43e](https://github.com/supabase/agent-skills/commit/133f43e8c2ffc48823ff0630c692cabecea3e3a",
+        "file": "CHANGELOG.md"
+      },
+      {
+        "type": "network-access",
+        "line": 151,
+        "evidence": "https://",
+        "context": "[Postgres Indexes](https://www.postgresql.org/docs/current/indexes.html)",
+        "file": "references/_contributing.md"
+      },
+      {
+        "type": "network-access",
+        "line": 34,
+        "evidence": "https://",
+        "context": "Reference: [Postgres Docs](https://www.postgresql.org/docs/current/)",
+        "file": "references/_template.md"
+      },
+      {
+        "type": "network-access",
+        "line": 55,
+        "evidence": "https://",
+        "context": "Reference: [Full Text Search](https://supabase.com/docs/guides/database/full-text-search)",
+        "file": "references/advanced-full-text-search.md"
+      },
+      {
+        "type": "network-access",
+        "line": 49,
+        "evidence": "https://",
+        "context": "Reference: [JSONB Indexes](https://www.postgresql.org/docs/current/datatype-json.html#JSON-INDEXING)",
+        "file": "references/advanced-jsonb-indexing.md"
+      },
+      {
+        "type": "network-access",
+        "line": 46,
+        "evidence": "https://",
+        "context": "Reference: [Connection Timeouts](https://www.postgresql.org/docs/current/runtime-config-client.html#GUC-IDLE-IN-TRANSACTION-SESSION-TIMEOUT)",
+        "file": "references/conn-idle-timeout.md"
+      },
+      {
+        "type": "network-access",
+        "line": 44,
+        "evidence": "https://",
+        "context": "Reference: [Database Connections](https://supabase.com/docs/guides/platform/performance#connection-management)",
+        "file": "references/conn-limits.md"
+      },
+      {
+        "type": "network-access",
+        "line": 41,
+        "evidence": "https://",
+        "context": "Reference: [Connection Pooling](https://supabase.com/docs/guides/database/connecting-to-postgres#connection-pooler)",
+        "file": "references/conn-pooling.md"
+      },
+      {
+        "type": "network-access",
+        "line": 46,
+        "evidence": "https://",
+        "context": "Reference: [Prepared Statements with Pooling](https://supabase.com/docs/guides/database/connecting-to-postgres#connection-pool-modes)",
+        "file": "references/conn-prepared-statements.md"
+      },
+      {
+        "type": "network-access",
+        "line": 54,
+        "evidence": "https://",
+        "context": "Reference: [COPY](https://www.postgresql.org/docs/current/sql-copy.html)",
+        "file": "references/data-batch-inserts.md"
+      },
+      {
+        "type": "network-access",
+        "line": 53,
+        "evidence": "https://",
+        "context": "Reference: [N+1 Query Problem](https://supabase.com/docs/guides/database/query-optimization)",
+        "file": "references/data-n-plus-one.md"
+      },
+      {
+        "type": "network-access",
+        "line": 50,
+        "evidence": "https://",
+        "context": "Reference: [Pagination](https://supabase.com/docs/guides/database/pagination)",
+        "file": "references/data-pagination.md"
+      },
+      {
+        "type": "network-access",
+        "line": 50,
+        "evidence": "https://",
+        "context": "Reference: [INSERT ON CONFLICT](https://www.postgresql.org/docs/current/sql-insert.html#SQL-ON-CONFLICT)",
+        "file": "references/data-upsert.md"
+      },
+      {
+        "type": "network-access",
+        "line": 56,
+        "evidence": "https://",
+        "context": "Reference: [Advisory Locks](https://www.postgresql.org/docs/current/explicit-locking.html#ADVISORY-LOCKS)",
+        "file": "references/lock-advisory.md"
+      },
+      {
+        "type": "network-access",
+        "line": 68,
+        "evidence": "https://",
+        "context": "[Deadlocks](https://www.postgresql.org/docs/current/explicit-locking.html#LOCKING-DEADLOCKS)",
+        "file": "references/lock-deadlock-prevention.md"
+      },
+      {
+        "type": "network-access",
+        "line": 50,
+        "evidence": "https://",
+        "context": "Reference: [Transaction Management](https://www.postgresql.org/docs/current/tutorial-transactions.html)",
+        "file": "references/lock-short-transactions.md"
+      },
+      {
+        "type": "network-access",
+        "line": 54,
+        "evidence": "https://",
+        "context": "Reference: [SELECT FOR UPDATE SKIP LOCKED](https://www.postgresql.org/docs/current/sql-select.html#SQL-FOR-UPDATE-SHARE)",
+        "file": "references/lock-skip-locked.md"
+      },
+      {
+        "type": "network-access",
+        "line": 45,
+        "evidence": "https://",
+        "context": "Reference: [EXPLAIN](https://supabase.com/docs/guides/database/inspect)",
+        "file": "references/monitor-explain-analyze.md"
+      },
+      {
+        "type": "network-access",
+        "line": 55,
+        "evidence": "https://",
+        "context": "Reference: [pg_stat_statements](https://supabase.com/docs/guides/database/extensions/pg_stat_statements)",
+        "file": "references/monitor-pg-stat-statements.md"
+      },
+      {
+        "type": "network-access",
+        "line": 55,
+        "evidence": "https://",
+        "context": "Reference: [VACUUM](https://supabase.com/docs/guides/database/database-size#vacuum-operations)",
+        "file": "references/monitor-vacuum-analyze.md"
+      },
+      {
+        "type": "network-access",
+        "line": 44,
+        "evidence": "https://",
+        "context": "Reference: [Multicolumn Indexes](https://www.postgresql.org/docs/current/indexes-multicolumn.html)",
+        "file": "references/query-composite-indexes.md"
+      },
+      {
+        "type": "network-access",
+        "line": 40,
+        "evidence": "https://",
+        "context": "Reference: [Index-Only Scans](https://www.postgresql.org/docs/current/indexes-index-only-scans.html)",
+        "file": "references/query-covering-indexes.md"
+      },
+      {
+        "type": "network-access",
+        "line": 48,
+        "evidence": "https://",
+        "context": "Reference: [Index Types](https://www.postgresql.org/docs/current/indexes-types.html)",
+        "file": "references/query-index-types.md"
+      },
+      {
+        "type": "network-access",
+        "line": 43,
+        "evidence": "https://",
+        "context": "Reference: [Query Optimization](https://supabase.com/docs/guides/database/query-optimization)",
+        "file": "references/query-missing-indexes.md"
+      },
+      {
+        "type": "network-access",
+        "line": 45,
+        "evidence": "https://",
+        "context": "Reference: [Partial Indexes](https://www.postgresql.org/docs/current/indexes-partial.html)",
+        "file": "references/query-partial-indexes.md"
+      },
+      {
+        "type": "network-access",
+        "line": 80,
+        "evidence": "https://",
+        "context": "Reference: [Constraints](https://www.postgresql.org/docs/current/ddl-constraints.html)",
+        "file": "references/schema-constraints.md"
+      },
+      {
+        "type": "network-access",
+        "line": 46,
+        "evidence": "https://",
+        "context": "Reference: [Data Types](https://www.postgresql.org/docs/current/datatype.html)",
+        "file": "references/schema-data-types.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 17,
+        "evidence": "delete",
+        "context": "  customer_id bigint references customers(id) on delete cascade,",
+        "file": "references/schema-foreign-key-indexes.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 22,
+        "evidence": "DELETE",
+        "context": "-- JOINs and ON DELETE CASCADE both require full table scan",
+        "file": "references/schema-foreign-key-indexes.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 24,
+        "evidence": "delete",
+        "context": "delete from customers where id = 123;          -- Locks table, scans all orders",
+        "file": "references/schema-foreign-key-indexes.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 32,
+        "evidence": "delete",
+        "context": "  customer_id bigint references customers(id) on delete cascade,",
+        "file": "references/schema-foreign-key-indexes.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 41,
+        "evidence": "delete",
+        "context": "delete from customers where id = 123;          -- Uses index, fast cascade",
+        "file": "references/schema-foreign-key-indexes.md"
+      },
+      {
+        "type": "network-access",
+        "line": 59,
+        "evidence": "https://",
+        "context": "Reference: [Foreign Keys](https://www.postgresql.org/docs/current/ddl-constraints.html#DDL-CONSTRAINTS-FK)",
+        "file": "references/schema-foreign-key-indexes.md"
+      },
+      {
+        "type": "network-access",
+        "line": 55,
+        "evidence": "https://",
+        "context": "Reference: [Identifiers and Key Words](https://www.postgresql.org/docs/current/sql-syntax-lexical.html#SQL-SYNTAX-IDENTIFIERS)",
+        "file": "references/schema-lowercase-identifiers.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 46,
+        "evidence": "DELETE",
+        "context": "drop table events_2023_01;  -- Instant vs DELETE taking hours",
+        "file": "references/schema-partitioning.md"
+      },
+      {
+        "type": "network-access",
+        "line": 55,
+        "evidence": "https://",
+        "context": "Reference: [Table Partitioning](https://www.postgresql.org/docs/current/ddl-partitioning.html)",
+        "file": "references/schema-partitioning.md"
+      },
+      {
+        "type": "network-access",
+        "line": 61,
+        "evidence": "https://",
+        "context": "[Identity Columns](https://www.postgresql.org/docs/current/sql-createtable.html#SQL-CREATETABLE-PARMS-GENERATED-IDENTITY)",
+        "file": "references/schema-primary-keys.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 39,
+        "evidence": "DELETE",
+        "context": "-- No DELETE permission",
+        "file": "references/security-privileges.md"
+      },
+      {
+        "type": "network-access",
+        "line": 54,
+        "evidence": "https://",
+        "context": "Reference: [Roles and Privileges](https://supabase.com/blog/postgres-roles-and-privileges)",
+        "file": "references/security-privileges.md"
+      },
+      {
+        "type": "network-access",
+        "line": 50,
+        "evidence": "https://",
+        "context": "Reference: [Row Level Security](https://supabase.com/docs/guides/database/postgres/row-level-security)",
+        "file": "references/security-rls-basics.md"
+      },
+      {
+        "type": "network-access",
+        "line": 63,
+        "evidence": "https://",
+        "context": "Reference: [RLS Performance](https://supabase.com/docs/guides/database/postgres/row-level-security#rls-performance-recommendations)",
+        "file": "references/security-rls-performance.md"
+      },
+      {
+        "type": "network-access",
+        "line": 60,
+        "evidence": "https://",
+        "context": "- https://www.postgresql.org/docs/current/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 61,
+        "evidence": "https://",
+        "context": "- https://supabase.com/docs",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 62,
+        "evidence": "https://",
+        "context": "- https://wiki.postgresql.org/wiki/Performance_Optimization",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 63,
+        "evidence": "https://",
+        "context": "- https://supabase.com/docs/guides/database/overview",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 64,
+        "evidence": "https://",
+        "context": "- https://supabase.com/docs/guides/auth/row-level-security",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 63072
+  },
+  "materialized_files": [
+    {
+      "path": "CHANGELOG.md",
+      "sha256": "751ad110037c85d400018c9894716a04fa46357ff55c22b1169b280752e19e88",
+      "bytes": 5684,
+      "mode": "100644"
+    },
+    {
+      "path": "LICENSE.txt",
+      "sha256": "b65e575eb4f04a13c187d64e958321298e2ab84d67aa8428819f362056ba292c",
+      "bytes": 1065,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/_contributing.md",
+      "sha256": "191e039e7d94764e6073410b513b559f9a594e0fdf0252a30c2a2986df2ab3bc",
+      "bytes": 4113,
+      "mode": "100644"
+    },
+    {
+      "path": "references/_sections.md",
+      "sha256": "c9e992612b422c7122de0b7542ebc2450db283edaab08cfe86c6d657fcccccd5",
+      "bytes": 1682,
+      "mode": "100644"
+    },
+    {
+      "path": "references/_template.md",
+      "sha256": "6299954250f212caabe339d752c3e5313a8e07d1a182a4e4b425baee91df1bd2",
+      "bytes": 1040,
+      "mode": "100644"
+    },
+    {
+      "path": "references/advanced-full-text-search.md",
+      "sha256": "40c2606bbb4c4dce31308f201b24cc7f58c7df05b1d9c6856fe2b888d3b7cf28",
+      "bytes": 1468,
+      "mode": "100644"
+    },
+    {
+      "path": "references/advanced-jsonb-indexing.md",
+      "sha256": "24cacf6a8bc35901dd566d24502ce8e57f810a5c196b897e61d52726e521d106",
+      "bytes": 1444,
+      "mode": "100644"
+    },
+    {
+      "path": "references/conn-idle-timeout.md",
+      "sha256": "630588902c00fcec59a5988cc5d042f76dcf2c923a535abfd8c47dca205eaed5",
+      "bytes": 1282,
+      "mode": "100644"
+    },
+    {
+      "path": "references/conn-limits.md",
+      "sha256": "11b2a67a7c7679cbbc5d807bbb17e69c98484a581d0c8b929c03408f412b81b2",
+      "bytes": 1325,
+      "mode": "100644"
+    },
+    {
+      "path": "references/conn-pooling.md",
+      "sha256": "88cf086bf98ba865d2e9d0579974e1366b14157619d6a93e7da77be91084e4a5",
+      "bytes": 1382,
+      "mode": "100644"
+    },
+    {
+      "path": "references/conn-prepared-statements.md",
+      "sha256": "174e9332fe3dda5c99b2b00159fb1915ae36c00bab3a7882c14e73e4344e946e",
+      "bytes": 1529,
+      "mode": "100644"
+    },
+    {
+      "path": "references/data-batch-inserts.md",
+      "sha256": "531933b82d6a622d0fae29e0ea80be6fe5d78655adf2804c271ea84a1930de37",
+      "bytes": 1287,
+      "mode": "100644"
+    },
+    {
+      "path": "references/data-n-plus-one.md",
+      "sha256": "21a44905e5b16a42741892ec34bb1bfef124d049b140a76934a9acd0f46f5fc2",
+      "bytes": 1361,
+      "mode": "100644"
+    },
+    {
+      "path": "references/data-pagination.md",
+      "sha256": "73c9fa10a3d439bedea0e11b640bd25bf30dd50f0d9006cf85baf7c3151543fa",
+      "bytes": 1358,
+      "mode": "100644"
+    },
+    {
+      "path": "references/data-upsert.md",
+      "sha256": "2612af83b20a2701dde30ef1f8d7efd26b7e9eef84717226b8f038a2d2150ff7",
+      "bytes": 1390,
+      "mode": "100644"
+    },
+    {
+      "path": "references/lock-advisory.md",
+      "sha256": "c88d259dbf81c3771438f59a165f7eab8acd09999dd370bdf807521c73f35aab",
+      "bytes": 1531,
+      "mode": "100644"
+    },
+    {
+      "path": "references/lock-deadlock-prevention.md",
+      "sha256": "09aee46f51d7178c8e55fe056cd5a94a64ba2c122fe418e6900cd99f297b2347",
+      "bytes": 1855,
+      "mode": "100644"
+    },
+    {
+      "path": "references/lock-short-transactions.md",
+      "sha256": "5aa7f61095916986d39644b446cdbcd2bacca7ef698a3bb50b3f82dd60207602",
+      "bytes": 1350,
+      "mode": "100644"
+    },
+    {
+      "path": "references/lock-skip-locked.md",
+      "sha256": "6c45077f430f29cd9cd8f448c94d578e827e7bd023fcdaf717a756acb116fa4b",
+      "bytes": 1353,
+      "mode": "100644"
+    },
+    {
+      "path": "references/monitor-explain-analyze.md",
+      "sha256": "4cb67ffbf8e57f2e5b380b0beb4242528b513723ce314a2c2ffcf083bd4203d7",
+      "bytes": 1441,
+      "mode": "100644"
+    },
+    {
+      "path": "references/monitor-pg-stat-statements.md",
+      "sha256": "89dca99d4e894fcbdcac136be7ad9fbc03d1342904f065c1b198dc9cf495f098",
+      "bytes": 1418,
+      "mode": "100644"
+    },
+    {
+      "path": "references/monitor-vacuum-analyze.md",
+      "sha256": "2892272011710eb49b3f185ec12f15ce9ce4c365792c672f6e2a9c90da426a1a",
+      "bytes": 1506,
+      "mode": "100644"
+    },
+    {
+      "path": "references/query-composite-indexes.md",
+      "sha256": "73e42424e671f0266e74fdb220db3196790f69fb43e2b19c7b9483eb4971b554",
+      "bytes": 1454,
+      "mode": "100644"
+    },
+    {
+      "path": "references/query-covering-indexes.md",
+      "sha256": "daf2a7f0477fb7357b62b5fb5b185b1995a77a186347e45cb780e25e7a7589b6",
+      "bytes": 1287,
+      "mode": "100644"
+    },
+    {
+      "path": "references/query-index-types.md",
+      "sha256": "472a74f22c2df203bd0154999b3a5a0187cca2ab3d9a3978e305bb7c32f1a282",
+      "bytes": 1521,
+      "mode": "100644"
+    },
+    {
+      "path": "references/query-missing-indexes.md",
+      "sha256": "91ad8b0ff4365704b4830a7f077c6f140f7140fd5d3ce5cd0b92b160cf9e25f1",
+      "bytes": 1218,
+      "mode": "100644"
+    },
+    {
+      "path": "references/query-partial-indexes.md",
+      "sha256": "6448982bc8558c6555284958edc331b29239c6a0130e6b4501dd6d4da607a6dd",
+      "bytes": 1347,
+      "mode": "100644"
+    },
+    {
+      "path": "references/schema-constraints.md",
+      "sha256": "90e8efda3e9e81095e642911ad4aae2809d160f29414338fa997253238f510f8",
+      "bytes": 1880,
+      "mode": "100644"
+    },
+    {
+      "path": "references/schema-data-types.md",
+      "sha256": "e01b58c14c7f3f65d8ead580b9a4fcf70b83baaab0f9a5f83c569c9fd113e8c8",
+      "bytes": 1453,
+      "mode": "100644"
+    },
+    {
+      "path": "references/schema-foreign-key-indexes.md",
+      "sha256": "7587713d12a65a212365459b3d39e4717d8a79e4073b10bd62f1054d8192c0dd",
+      "bytes": 1679,
+      "mode": "100644"
+    },
+    {
+      "path": "references/schema-lowercase-identifiers.md",
+      "sha256": "4bc80f70865f2390872591f326c8a6be6456a0aeb5a7e5a2475d7cd9d43059ab",
+      "bytes": 1728,
+      "mode": "100644"
+    },
+    {
+      "path": "references/schema-partitioning.md",
+      "sha256": "541e13fbeaf4bb1485c9059d4c9417dbdb766cf16f4237cd63a04ada7ec45b90",
+      "bytes": 1548,
+      "mode": "100644"
+    },
+    {
+      "path": "references/schema-primary-keys.md",
+      "sha256": "3c8beabef82066f9a0838b926da0885117fd2d9a263aaf84cb5ca9e5f0d400e9",
+      "bytes": 1821,
+      "mode": "100644"
+    },
+    {
+      "path": "references/security-privileges.md",
+      "sha256": "095909274a4fb43df785d7144cf674eeb40284d2d45628f14af4108737b93663",
+      "bytes": 1566,
+      "mode": "100644"
+    },
+    {
+      "path": "references/security-rls-basics.md",
+      "sha256": "e04dd1a3a382aafdaaa73fe9f7976352acdde6e90c2a2470d281b94d4f44b096",
+      "bytes": 1372,
+      "mode": "100644"
+    },
+    {
+      "path": "references/security-rls-performance.md",
+      "sha256": "2e1faeca7d5746e246b1c78f9492fe2a9cfa41c4d7fa1e23c402d58fa18ea014",
+      "bytes": 2103,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "ad65e776f45e761bafc609d3f506c77c1032225aa65e0c4c02f241b8071e5855",
+      "bytes": 3231,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 63072
+}

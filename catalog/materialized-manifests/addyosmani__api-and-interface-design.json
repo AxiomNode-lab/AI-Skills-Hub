@@ -1,0 +1,81 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "addyosmani/api-and-interface-design",
+  "source": {
+    "repo": "addyosmani/agent-skills",
+    "path": "skills/api-and-interface-design",
+    "revision": "1401c8b8030e023baeebb31781a6653fe8e93026"
+  },
+  "review": {
+    "path": "catalog/reviews/addyosmani__api-and-interface-design.json",
+    "sha256": "1d1a0b2fa2309a90fa20603ab869316c0bf2abc3a38807383cd1a7a3e6006bf4"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "low",
+    "capabilities": {
+      "shell": false,
+      "network": false,
+      "credentials": false,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "filesystem-write",
+        "line": 30,
+        "evidence": "remove",
+        "context": "- **Plan for deprecation at design time.** See `deprecation-and-migration` for how to safely remove things users depend on.",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 56,
+        "evidence": "delete",
+        "context": "  // Idempotent delete — succeeds even if already deleted",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 138,
+        "evidence": "remove",
+        "context": "// Bad: Change existing field types or remove fields",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 226,
+        "evidence": "DELETE",
+        "context": "DELETE /api/tasks/:id          → Delete a task",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 226,
+        "evidence": "Delete",
+        "context": "DELETE /api/tasks/:id          → Delete a task",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 15954
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "6f202f8bd568cd730dbb2b0d1f8e243bc74c2fa1f64dbce9b2c7ea08bd5c9fd7",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "e83d34f52ff12dd8a7c5134cd7e8140ea4541ec65e204f8a1e4cd366e30c4192",
+      "bytes": 14886,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 15954
+}

@@ -1,0 +1,286 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "kdense/genomic-intelligence",
+  "source": {
+    "repo": "K-Dense-AI/scientific-agent-skills",
+    "path": "skills/genomic-intelligence",
+    "revision": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298"
+  },
+  "review": {
+    "path": "catalog/reviews/kdense__genomic-intelligence.json",
+    "sha256": "a0f72e6d38464c8c81397e660da6bf5158cef6448fd4bb28e63a605486dc4bea"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": false,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "network-access",
+        "line": 3,
+        "evidence": "https://",
+        "context": "Base URL: `https://api.genomicintelligence.ai` (override with `GI_BASE_URL` for",
+        "file": "references/api-and-auth.md"
+      },
+      {
+        "type": "network-access",
+        "line": 4,
+        "evidence": "https://",
+        "context": "staging). Live contract: <https://api.genomicintelligence.ai/v1/openapi.json>.",
+        "file": "references/api-and-auth.md"
+      },
+      {
+        "type": "network-access",
+        "line": 11,
+        "evidence": "https://",
+        "context": "[official overview](https://docs.genomicintelligence.ai/) documents capability",
+        "file": "references/api-and-auth.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 14,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/api-and-auth.md"
+      },
+      {
+        "type": "network-access",
+        "line": 149,
+        "evidence": "https://",
+        "context": "write was executed in this review. Read the [current workflow contract](https://docs.genomicintelligence.ai/tasks#genomic-variant-interpretation)",
+        "file": "references/api-and-auth.md"
+      },
+      {
+        "type": "network-access",
+        "line": 3,
+        "evidence": "https://",
+        "context": "Connect a Streamable HTTP client to `https://mcp.genomicintelligence.ai/mcp`.",
+        "file": "references/mcp.md"
+      },
+      {
+        "type": "network-access",
+        "line": 10,
+        "evidence": "https://",
+        "context": "- [Live OpenAPI](https://api.genomicintelligence.ai/v1/openapi.json): all 12",
+        "file": "references/review.md"
+      },
+      {
+        "type": "network-access",
+        "line": 13,
+        "evidence": "https://",
+        "context": "- [REST guide](https://docs.genomicintelligence.ai/rest-api): transport,",
+        "file": "references/review.md"
+      },
+      {
+        "type": "network-access",
+        "line": 15,
+        "evidence": "https://",
+        "context": "- [Task guide](https://docs.genomicintelligence.ai/tasks): interpretation,",
+        "file": "references/review.md"
+      },
+      {
+        "type": "network-access",
+        "line": 18,
+        "evidence": "https://",
+        "context": "- [Limits](https://docs.genomicintelligence.ai/reference/limits) and",
+        "file": "references/review.md"
+      },
+      {
+        "type": "network-access",
+        "line": 19,
+        "evidence": "https://",
+        "context": "  [errors](https://docs.genomicintelligence.ai/reference/errors): 20,000-site",
+        "file": "references/review.md"
+      },
+      {
+        "type": "network-access",
+        "line": 23,
+        "evidence": "https://",
+        "context": "- [MCP guide](https://docs.genomicintelligence.ai/mcp), hosted",
+        "file": "references/review.md"
+      },
+      {
+        "type": "network-access",
+        "line": 24,
+        "evidence": "https://",
+        "context": "  `https://mcp.genomicintelligence.ai/mcp` self-description, and",
+        "file": "references/review.md"
+      },
+      {
+        "type": "network-access",
+        "line": 25,
+        "evidence": "https://",
+        "context": "  [gi-mcp 0.1.0a21](https://pypi.org/project/gi-mcp/0.1.0a21/): acquisition",
+        "file": "references/review.md"
+      },
+      {
+        "type": "network-access",
+        "line": 29,
+        "evidence": "https://",
+        "context": "- Ensembl [symbol lookup](https://rest.ensembl.org/documentation/info/symbol_lookup),",
+        "file": "references/review.md"
+      },
+      {
+        "type": "network-access",
+        "line": 30,
+        "evidence": "https://",
+        "context": "  [ID lookup](https://rest.ensembl.org/documentation/info/lookup), and",
+        "file": "references/review.md"
+      },
+      {
+        "type": "network-access",
+        "line": 31,
+        "evidence": "https://",
+        "context": "  [region sequence](https://rest.ensembl.org/documentation/info/sequence_region):",
+        "file": "references/review.md"
+      },
+      {
+        "type": "network-access",
+        "line": 47,
+        "evidence": "https://",
+        "context": "The [symbol lookup](https://rest.ensembl.org/documentation/info/symbol_lookup),",
+        "file": "references/sequence-acquisition.md"
+      },
+      {
+        "type": "network-access",
+        "line": 48,
+        "evidence": "https://",
+        "context": "[ID lookup](https://rest.ensembl.org/documentation/info/lookup), and",
+        "file": "references/sequence-acquisition.md"
+      },
+      {
+        "type": "network-access",
+        "line": 49,
+        "evidence": "https://",
+        "context": "[region sequence](https://rest.ensembl.org/documentation/info/sequence_region)",
+        "file": "references/sequence-acquisition.md"
+      },
+      {
+        "type": "network-access",
+        "line": 21,
+        "evidence": "https://",
+        "context": "<https://api.genomicintelligence.ai/v1/openapi.json>.",
+        "file": "references/tasks.md"
+      },
+      {
+        "type": "network-access",
+        "line": 29,
+        "evidence": "https://",
+        "context": "**Official docs:** [docs.genomicintelligence.ai](https://docs.genomicintelligence.ai) ·",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 30,
+        "evidence": "https://",
+        "context": "REST contract at [api.genomicintelligence.ai/v1/openapi.json](https://api.genomicintelligence.ai/v1/openapi.json) ·",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 31,
+        "evidence": "https://",
+        "context": "hosted MCP server at `https://mcp.genomicintelligence.ai/mcp`",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 54,
+        "evidence": "https://",
+        "context": "GI hosts an MCP server at `https://mcp.genomicintelligence.ai/mcp` (Streamable",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 64,
+        "evidence": "https://",
+        "context": "Plain HTTP with `requests` against `https://api.genomicintelligence.ai/v1`. The",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 74,
+        "evidence": "https://",
+        "context": "   See the [current authentication contract](https://docs.genomicintelligence.ai/).",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 79,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 81,
+        "evidence": "https://",
+        "context": "export GI_BASE_URL=\"https://api.genomicintelligence.ai\"   # override for staging",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 216,
+        "evidence": "https://",
+        "context": "BASE = os.environ.get(\"GI_BASE_URL\", \"https://api.genomicintelligence.ai\").rstrip(\"/\")",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 63683
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE.md"
+    },
+    {
+      "path": "references/api-and-auth.md",
+      "sha256": "4644e9986e698fd0706d02d2e3e41cb7591e3e62bed8c4c9021e625d0496903e",
+      "bytes": 8372,
+      "mode": "100644"
+    },
+    {
+      "path": "references/mcp.md",
+      "sha256": "eaecc14ec4abd21d4b715341c58b9324ad8d2e10df000c43935be78b13be3c6c",
+      "bytes": 6018,
+      "mode": "100644"
+    },
+    {
+      "path": "references/review.md",
+      "sha256": "dfd1e491e566df6057a8fc0b8410223b17d806e30203e5c0127234641114f0a0",
+      "bytes": 4223,
+      "mode": "100644"
+    },
+    {
+      "path": "references/sequence-acquisition.md",
+      "sha256": "200d7f914c2a4b2cb39f0e27f359fbc6b2df46f36a775af6c0aaec66623b87f4",
+      "bytes": 6252,
+      "mode": "100644"
+    },
+    {
+      "path": "references/tasks.md",
+      "sha256": "094dc336002abd1d8396c48ccafb1c11b4ba5a19e5612d4ab14ead4b1d19fe18",
+      "bytes": 12924,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "cdb027004996d313d31b55f6b93306de45306a89b8a4a792e94c36cf2d1dea20",
+      "bytes": 24826,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 63683
+}
