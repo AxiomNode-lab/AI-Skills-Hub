@@ -1,0 +1,71 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "wshobson/web-component-design",
+  "source": {
+    "repo": "wshobson/agents",
+    "path": "plugins/ui-design/skills/web-component-design",
+    "revision": "156b7a5e7a8b93642628a339ee4039c925b34c7f"
+  },
+  "review": {
+    "path": "catalog/reviews/wshobson__web-component-design.json",
+    "sha256": "a3614dee5e395a3dcf38d08bf72ade8242dbd287b976b9166c5545ecfd137079"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "low",
+    "capabilities": {
+      "shell": false,
+      "network": false,
+      "credentials": false,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "filesystem-write",
+        "line": 169,
+        "evidence": "delete",
+        "context": "      next.has(id) ? next.delete(id) : next.add(id);",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 46904
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "f89abb55d9f073f38f1703e4518f0613c788c6174be7f13b8dfe48a1c076c746",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/accessibility-patterns.md",
+      "sha256": "cecf82569bb7cbe89c96bd1d00ac0bee91d121515f19908a26e15634d13d3e3b",
+      "bytes": 15848,
+      "mode": "100644"
+    },
+    {
+      "path": "references/component-patterns.md",
+      "sha256": "a258c10793aae4b2628ff291fc7557d5605c73821d4946b98b923d6ef014c787",
+      "bytes": 9730,
+      "mode": "100644"
+    },
+    {
+      "path": "references/css-styling-approaches.md",
+      "sha256": "fe34ea85c3c3116982783c9148217c5642a15fcb73207458326ed91de05e592e",
+      "bytes": 12783,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "a7978f5e9e3fa7129cf3eb8d607cedece4e207011321893d9a3c5dd92cf32603",
+      "bytes": 7475,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 46904
+}

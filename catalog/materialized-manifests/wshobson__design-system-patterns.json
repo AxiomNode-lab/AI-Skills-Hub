@@ -1,0 +1,189 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "wshobson/design-system-patterns",
+  "source": {
+    "repo": "wshobson/agents",
+    "path": "plugins/ui-design/skills/design-system-patterns",
+    "revision": "156b7a5e7a8b93642628a339ee4039c925b34c7f"
+  },
+  "review": {
+    "path": "catalog/reviews/wshobson__design-system-patterns.json",
+    "sha256": "563cba009a411debebf9dceacde744aeff85e294ce8019aa98bcea9641c4db10"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "low",
+    "capabilities": {
+      "shell": false,
+      "network": true,
+      "credentials": false,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "filesystem-write",
+        "line": 54,
+        "evidence": "delete",
+        "context": "          next.delete(id);",
+        "file": "references/component-architecture.md"
+      },
+      {
+        "type": "network-access",
+        "line": 614,
+        "evidence": "https://",
+        "context": "- [Radix UI Primitives](https://www.radix-ui.com/primitives)",
+        "file": "references/component-architecture.md"
+      },
+      {
+        "type": "network-access",
+        "line": 615,
+        "evidence": "https://",
+        "context": "- [Headless UI](https://headlessui.com/)",
+        "file": "references/component-architecture.md"
+      },
+      {
+        "type": "network-access",
+        "line": 616,
+        "evidence": "https://",
+        "context": "- [Class Variance Authority](https://cva.style/docs)",
+        "file": "references/component-architecture.md"
+      },
+      {
+        "type": "network-access",
+        "line": 617,
+        "evidence": "https://",
+        "context": "- [React Aria](https://react-spectrum.adobe.com/react-aria/)",
+        "file": "references/component-architecture.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 377,
+        "evidence": "Remove",
+        "context": "6. **Remove**: After deprecation period",
+        "file": "references/design-tokens.md"
+      },
+      {
+        "type": "network-access",
+        "line": 417,
+        "evidence": "https://",
+        "context": "- [Design Tokens W3C Community Group](https://design-tokens.github.io/community-group/)",
+        "file": "references/design-tokens.md"
+      },
+      {
+        "type": "network-access",
+        "line": 418,
+        "evidence": "https://",
+        "context": "- [Style Dictionary](https://amzn.github.io/style-dictionary/)",
+        "file": "references/design-tokens.md"
+      },
+      {
+        "type": "network-access",
+        "line": 419,
+        "evidence": "https://",
+        "context": "- [Tokens Studio](https://tokens.studio/)",
+        "file": "references/design-tokens.md"
+      },
+      {
+        "type": "network-access",
+        "line": 420,
+        "evidence": "https://",
+        "context": "- [Open Props](https://open-props.style/)",
+        "file": "references/design-tokens.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 77,
+        "evidence": "remove",
+        "context": "      root.classList.remove(\"light\", \"dark\");",
+        "file": "references/details.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 199,
+        "evidence": "Remove",
+        "context": "        // Remove after a tick",
+        "file": "references/theming-architecture.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 207,
+        "evidence": "remove",
+        "context": "        root.classList.remove(\"light\", \"dark\");",
+        "file": "references/theming-architecture.md"
+      },
+      {
+        "type": "network-access",
+        "line": 518,
+        "evidence": "https://",
+        "context": "- [Web.dev: prefers-color-scheme](https://web.dev/prefers-color-scheme/)",
+        "file": "references/theming-architecture.md"
+      },
+      {
+        "type": "network-access",
+        "line": 519,
+        "evidence": "https://",
+        "context": "- [CSS Color Scheme](https://developer.mozilla.org/en-US/docs/Web/CSS/color-scheme)",
+        "file": "references/theming-architecture.md"
+      },
+      {
+        "type": "network-access",
+        "line": 520,
+        "evidence": "https://",
+        "context": "- [next-themes](https://github.com/pacocoursey/next-themes)",
+        "file": "references/theming-architecture.md"
+      },
+      {
+        "type": "network-access",
+        "line": 521,
+        "evidence": "https://",
+        "context": "- [Radix UI Colors](https://www.radix-ui.com/colors)",
+        "file": "references/theming-architecture.md"
+      }
+    ],
+    "total_bytes": 49564
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "f89abb55d9f073f38f1703e4518f0613c788c6174be7f13b8dfe48a1c076c746",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/component-architecture.md",
+      "sha256": "84dc16ed581c1ad72e34b93ba84bcfa9223d30f9c42eb7e36654bbbe8daefc61",
+      "bytes": 15293,
+      "mode": "100644"
+    },
+    {
+      "path": "references/design-tokens.md",
+      "sha256": "44bd27e26f072a3facd6cd841140d403805106c9c5d5e39fc33bf6ffccf8af64",
+      "bytes": 11269,
+      "mode": "100644"
+    },
+    {
+      "path": "references/details.md",
+      "sha256": "1f1792e8b20c24c2be2acd46e7da85928578d108006594f3ae35d93f9108ff6d",
+      "bytes": 5566,
+      "mode": "100644"
+    },
+    {
+      "path": "references/theming-architecture.md",
+      "sha256": "24c9efec7c809a4d6797e6a11bc66ce08c5d708211caac14266ce5754c83cc75",
+      "bytes": 12365,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "618355f0e6c6ba8ca5d231035c9da18302fe6894aedce565743e9181b6c928ee",
+      "bytes": 4003,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 49564
+}

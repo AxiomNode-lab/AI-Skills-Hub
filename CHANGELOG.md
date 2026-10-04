@@ -28,6 +28,7 @@ All notable changes to AI Skills Hub are documented here.
 - `sync-registry` writes `catalog/reports/release-drift.json`: released skills whose upstream moved past the reviewed revision, and whether SKILL.md changed.
 
 ### Changed
+- The scanner's dynamic-execution pattern is case-sensitive: it still matches `eval(`, `exec(` and the `Function` constructor, but no longer every JavaScript `function (`. Nine reviewed DevOps and frontend skills held only by that match are released (394 installable).
 - `microsoft/azure-ai-anomalydetector-java` is held with reason `upstream-service-retired` (Microsoft retired the service on 2026-10-01) and no longer ships; 165 skills are installable. `info` now prints release hold reasons.
 - Independent instruction reviews of 40 microsoft/skills skills are recorded in docs/reviews/independent-batch-01 to -04.
 - `microsoft/azure-monitor-query-py` is held with reason `upstream-api-removed`: its unpinned package dropped the metrics clients it documents; 162 skills are installable.

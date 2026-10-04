@@ -1,0 +1,168 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "bagelhole/firebase-app-platform",
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "infrastructure/platforms/firebase-app-platform",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "infrastructure/platforms/firebase-app-platform",
+    "url": "https://api.github.com/repos/BagelHole/DevOps-Security-Agent-Skills/git/trees/0365f57a079b1332f95cf26e31dd2d5332a8399f?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/BagelHole/DevOps-Security-Agent-Skills/blob/0365f57a079b1332f95cf26e31dd2d5332a8399f/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "infrastructure",
+        "infrastructure/platforms",
+        "infrastructure/platforms/firebase-app-platform"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: License metadata says MIT; no third-party copyright notice, other license grant, or copied third-party text found; rules and config snippets are short examples. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "medium",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "package_install": true,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md in full. The skill covers Firebase CLI setup, Firestore security rules and data access, Auth, Cloud Functions v2, Hosting config with security headers, emulators, environment config, and multi-project deploys.",
+      "Following it can make the agent install firebase-tools globally (npm install -g), log in with the user's Google account, and run firebase deploy against staging or production projects (SKILL.md:44-50, 314-316). Deploying is the user's own release task and the skill recommends separate staging/production projects and local emulators first, so medium risk is acceptable; production deploys should be confirmed with the user.",
+      "Secrets shown are placeholders (sk_live_xxx). functions:config:set (SKILL.md:290) is a deprecated Firebase API. Related-skill links (../../cloud-gcp/gcp-cloud-functions/, ../vercel-deployments/, ../convex-backend/ at SKILL.md:362-364) are optional pointers."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "67c5c5cbb12cafb1515e449748866bd40da7dec9",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "0b3324833c803e1ce9b724205587008825bbb3132235cd77b930a725d55d3141",
+      "bytes": 9793,
+      "mode": "100644",
+      "git_blob": "fd22669922f6b3eed6f80e47930f809ad43386a6",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "package-install",
+          "line": 26,
+          "evidence": "npm install",
+          "context": "- Firebase CLI (`npm install -g firebase-tools`)",
+          "disposition": "accepted",
+          "reason": "npm install -g firebase-tools, the official Firebase CLI, listed as a prerequisite and in Quick Start."
+        },
+        {
+          "type": "shell-execution",
+          "line": 32,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "firebase CLI commands for login, init, emulators, config, and deploys to the user's own Firebase projects."
+        },
+        {
+          "type": "package-install",
+          "line": 34,
+          "evidence": "npm install",
+          "context": "npm install -g firebase-tools",
+          "disposition": "accepted",
+          "reason": "npm install -g firebase-tools, the official Firebase CLI, listed as a prerequisite and in Quick Start."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 74,
+          "evidence": "delete",
+          "context": "      allow update, delete: if request.auth != null",
+          "disposition": "accepted",
+          "reason": "Hits are Firestore 'delete' permissions in security rules and firebase hosting:channel:delete for a preview channel; nothing deletes local files."
+        },
+        {
+          "type": "shell-execution",
+          "line": 259,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "firebase CLI commands for login, init, emulators, config, and deploys to the user's own Firebase projects."
+        },
+        {
+          "type": "network-access",
+          "line": 270,
+          "evidence": "http://",
+          "context": "# Emulator UI at http://localhost:4000",
+          "disposition": "accepted",
+          "reason": "The emulator UI localhost URL; no instruction to fetch remote content."
+        },
+        {
+          "type": "shell-execution",
+          "line": 288,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "firebase CLI commands for login, init, emulators, config, and deploys to the user's own Firebase projects."
+        },
+        {
+          "type": "shell-execution",
+          "line": 308,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "firebase CLI commands for login, init, emulators, config, and deploys to the user's own Firebase projects."
+        },
+        {
+          "type": "shell-execution",
+          "line": 329,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "firebase CLI commands for login, init, emulators, config, and deploys to the user's own Firebase projects."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 337,
+          "evidence": "delete",
+          "context": "firebase hosting:channel:delete pr-123",
+          "disposition": "accepted",
+          "reason": "Hits are Firestore 'delete' permissions in security rules and firebase hosting:channel:delete for a preview channel; nothing deletes local files."
+        }
+      ]
+    }
+  ]
+}

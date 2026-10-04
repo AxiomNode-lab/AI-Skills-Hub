@@ -1,0 +1,101 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "wshobson/angular-migration",
+  "source": {
+    "repo": "wshobson/agents",
+    "path": "plugins/framework-migration/skills/angular-migration",
+    "revision": "156b7a5e7a8b93642628a339ee4039c925b34c7f"
+  },
+  "review": {
+    "path": "catalog/reviews/wshobson__angular-migration.json",
+    "sha256": "0607878b18b9d15de92e2f176f6edb84edcf1feda0162a238437e1ef64b8a2d7"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "low",
+    "capabilities": {
+      "shell": false,
+      "network": false,
+      "credentials": false,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "filesystem-write",
+        "line": 75,
+        "evidence": "Remove",
+        "context": "- Remove AngularJS code",
+        "file": "references/details.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 76,
+        "evidence": "Remove",
+        "context": "- Remove ngUpgrade",
+        "file": "references/details.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 150,
+        "evidence": "Delete",
+        "context": "        <button ng-click=\"onDelete()\">Delete</button>",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 166,
+        "evidence": "delete",
+        "context": "      <button (click)=\"delete.emit()\">Delete</button>",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 166,
+        "evidence": "Delete",
+        "context": "      <button (click)=\"delete.emit()\">Delete</button>",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 172,
+        "evidence": "delete",
+        "context": "  @Output() delete = new EventEmitter<void>();",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 175,
+        "evidence": "delete",
+        "context": "// Usage: <app-user-card [user]=\"user\" (delete)=\"handleDelete()\"></app-user-card>",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 10017
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "f89abb55d9f073f38f1703e4518f0613c788c6174be7f13b8dfe48a1c076c746",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/details.md",
+      "sha256": "19d2101db58c095d4cf2dfcf8b2686ed7baa08661fce0c8e580b14ba2205662a",
+      "bytes": 1818,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "71aba7584ac885fc1feb9741ad2f62ec20103e60cf14e4733a4ae63509664b1d",
+      "bytes": 7131,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 10017
+}
