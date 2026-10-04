@@ -34,6 +34,7 @@ const namespaceByRepo={
   "UnitOneAI/SecuritySkills":"unitone",
   "getsentry/skills":"sentry",
   "aaron-he-zhu/seo-geo-claude-skills":"seo-geo",
+  "aaron-he-zhu/aaron-marketing-skills":"aaron-seo",
   "wshobson/agents":"wshobson",
   "BagelHole/DevOps-Security-Agent-Skills":"bagelhole",
   "supabase/agent-skills":"supabase"
@@ -86,7 +87,10 @@ for(const source of sourceEntries){
   const file=path.join(ROOT,"catalog/ingestion",source.repo.replaceAll("/","__")+".json");
   if(!fs.existsSync(file)) throw new Error("Missing ingestion output for "+source.repo);
   const payload=JSON.parse(fs.readFileSync(file,"utf8"));
-  for(const item of payload.discovered_skills) discovered.push({source,item,revision:payload.source.revision});
+  // include_paths narrows a source to the listed subtrees (for example, only the
+  // programming skills of a mixed repository).
+  const inScope=(item)=>!source.include_paths || source.include_paths.some((p)=>item.path===p || item.path.startsWith(p+"/"));
+  for(const item of payload.discovered_skills.filter(inScope)) discovered.push({source,item,revision:payload.source.revision});
 }
 
 const claimedIds=new Set();

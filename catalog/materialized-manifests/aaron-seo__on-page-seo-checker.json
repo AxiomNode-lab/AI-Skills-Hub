@@ -1,0 +1,133 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "aaron-seo/on-page-seo-checker",
+  "source": {
+    "repo": "aaron-he-zhu/aaron-marketing-skills",
+    "path": "seo-geo/tune/on-page-seo-checker",
+    "revision": "cc897fa9e1e3136eb6a301130e49d8d9d1c519b2"
+  },
+  "review": {
+    "path": "catalog/reviews/aaron-seo__on-page-seo-checker.json",
+    "sha256": "9dc498c4660e33c67bb7b28028dd302927169bb25257b1fa64427722397e792c"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "low",
+    "capabilities": {
+      "shell": false,
+      "network": true,
+      "credentials": false,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "network-access",
+        "line": 3,
+        "evidence": "http://",
+        "context": "                        http://www.apache.org/licenses/",
+        "file": "LICENSE.txt"
+      },
+      {
+        "type": "network-access",
+        "line": 195,
+        "evidence": "http://",
+        "context": "       http://www.apache.org/licenses/LICENSE-2.0",
+        "file": "LICENSE.txt"
+      },
+      {
+        "type": "network-access",
+        "line": 9,
+        "evidence": "https://",
+        "context": "**User**: \"Audit the on-page SEO of https://example.com/best-noise-cancelling-headphones targeting 'best noise cancelling headphones'\"",
+        "file": "references/audit-example.md"
+      },
+      {
+        "type": "network-access",
+        "line": 16,
+        "evidence": "https://",
+        "context": "**Page**: https://example.com/best-noise-cancelling-headphones",
+        "file": "references/audit-example.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 108,
+        "evidence": "Remove",
+        "context": "| Title >60 chars | Medium | Remove filler, move brand to end, keep keyword early |",
+        "file": "references/scoring-rubric.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 117,
+        "evidence": "remove",
+        "context": "| Broken links | High | Replace, redirect, or remove |",
+        "file": "references/scoring-rubric.md"
+      },
+      {
+        "type": "network-access",
+        "line": 10,
+        "evidence": "https://",
+        "context": "homepage: \"https://github.com/aaron-he-zhu/aaron-marketing-skills\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 14,
+        "evidence": "https://",
+        "context": "metadata: {\"author\": \"aaron-he-zhu\", \"version\": \"20.1.0\", \"discipline\": \"seo-geo\", \"phase\": \"tune\", \"geo-relevance\": \"medium\", \"hermes\": {\"tags\": [\"marketing\", \"seo-geo\", \"tune\"], \"category\": \"seo-geo\"}, \"openclaw\": {\"emoji\": \"🔍\", \"homepag",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 110,
+        "evidence": "curl",
+        "context": "9. **Audit Page-Level Tags** — URL slug, canonical tag, and on-page schema presence. For deep crawl/indexing, Core Web Vitals, mobile rendering, and HTTPS/security, route to [technical-seo-checker](../technical-seo-checker/SKILL.md). ⚠ **JS",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 40355
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "664cd12e1c315650bf14cb1385359d13d4724ac03940ac10918390ef78e4f5e7",
+      "bytes": 11347,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/audit-example.md",
+      "sha256": "a2c0ebff60a5315572a19a57d9c4a2df0f18bfc0c092d48697bc266c62546246",
+      "bytes": 4239,
+      "mode": "100644"
+    },
+    {
+      "path": "references/audit-templates.md",
+      "sha256": "940c4d42657a533a9f1c1aac25addcd3f6d8192cd62df974f787bdfb48ca0e64",
+      "bytes": 4471,
+      "mode": "100644"
+    },
+    {
+      "path": "references/bulk-audit-playbook.md",
+      "sha256": "1b8a4aebf7d5e0ea4b73113e6bb4482b00632a4767a78a9efce2e2e50be60033",
+      "bytes": 3712,
+      "mode": "100644"
+    },
+    {
+      "path": "references/scoring-rubric.md",
+      "sha256": "031fea0ec2306d77d40398026bfc74e8d12ea0fc64434a663c562998fe2dcafd",
+      "bytes": 5914,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "0ec9eb013e2eb8d208d1e4c36fae6fe8e1803bc70cd31e279ed880ddb8562b08",
+      "bytes": 10672,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 40355
+}

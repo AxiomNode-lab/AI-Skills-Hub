@@ -1,9 +1,9 @@
 {
   "schema_version": "0.1",
   "skill_id": "sentry/commit",
-  "status": "draft",
-  "reviewed_on": null,
-  "reviewer": null,
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
   "source": {
     "repo": "getsentry/skills",
     "path": "skills/commit",
@@ -13,7 +13,7 @@
     "complete": true,
     "scope": "skills/commit",
     "url": "https://api.github.com/repos/getsentry/skills/git/trees/d18b7aa8ba878354e5c348310230e652f7690f9c?recursive=1",
-    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
   },
   "license": {
     "spdx": "Apache-2.0",
@@ -30,18 +30,32 @@
       ]
     },
     "redistributable": true,
-    "scope_reason": "",
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the Apache-2.0 license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares Apache-2.0 (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the Apache-2.0 notice condition; no NOTICE file exists, so section 4(d) adds no attribution text, and no file is modified.",
     "obligations": [
       "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
-      "Preserve all upstream text and notices byte-for-byte."
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
     ]
   },
   "content_review": {
-    "status": "pending",
-    "risk": "unknown",
+    "status": "approved",
+    "risk": "medium",
     "blocking_findings": [],
-    "capabilities": {},
-    "notes": []
+    "capabilities": {
+      "shell": true,
+      "network": false,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md in full (62 lines). Sentry-style conventional commit guidance: type/scope/subject rules, footers (Fixes/Refs/BREAKING CHANGE), and a git commit example.",
+      "Medium: creates git commits and may create a feature branch when on main/master (SKILL.md:14-16). Acceptable because it applies only when the user asks to commit, avoids committing directly to main unless the user requested it, and does not push, merge, or delete anything.",
+      "Tells the agent to keep customer names, emails, secrets and PII out of commit messages (SKILL.md:38-39)."
+    ]
   },
   "files": [
     {
@@ -54,23 +68,23 @@
       "git_blob": "753a6c03c60a9232405d05170bd3ad3cab49a1ef",
       "license": "Apache-2.0",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Byte-exact copy of the repository-root Apache-2.0 license, attached to carry its terms and notices.",
       "findings": [
         {
           "type": "network-access",
           "line": 3,
           "evidence": "http://",
           "context": "                        http://www.apache.org/licenses/",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "License text."
         },
         {
           "type": "network-access",
           "line": 184,
           "evidence": "http://",
           "context": "       http://www.apache.org/licenses/LICENSE-2.0",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "License text."
         }
       ]
     },
@@ -82,23 +96,23 @@
       "git_blob": "f50eadfa6611aa5f69708e3959323c9738625636",
       "license": "Apache-2.0",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "shell-execution",
           "line": 10,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks run 'git branch --show-current' and 'git commit -m ...' for the commit the user requested."
         },
         {
           "type": "shell-execution",
           "line": 58,
           "evidence": "bash",
           "context": "```bash",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "Bash blocks run 'git branch --show-current' and 'git commit -m ...' for the commit the user requested."
         }
       ]
     }

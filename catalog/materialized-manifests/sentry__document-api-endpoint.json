@@ -1,0 +1,130 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "sentry/document-api-endpoint",
+  "source": {
+    "repo": "getsentry/skills",
+    "path": "skills/document-api-endpoint",
+    "revision": "d18b7aa8ba878354e5c348310230e652f7690f9c"
+  },
+  "review": {
+    "path": "catalog/reviews/sentry__document-api-endpoint.json",
+    "sha256": "3035db5cdff0c86365e8ef77b2cfaf82706b6f026cd0893fa252967ec2fbe0ca"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "network-access",
+        "line": 3,
+        "evidence": "http://",
+        "context": "                        http://www.apache.org/licenses/",
+        "file": "LICENSE.txt"
+      },
+      {
+        "type": "network-access",
+        "line": 184,
+        "evidence": "http://",
+        "context": "       http://www.apache.org/licenses/LICENSE-2.0",
+        "file": "LICENSE.txt"
+      },
+      {
+        "type": "network-access",
+        "line": 8,
+        "evidence": "https://",
+        "context": "Add or fix OpenAPI docs for a Sentry endpoint with drf-spectacular. Full reference is at https://develop.sentry.dev/backend/api/public/, the most useful section to you will be https://develop.sentry.dev/backend/api/public/#5-method-decorato",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 8,
+        "evidence": "https://",
+        "context": "Add or fix OpenAPI docs for a Sentry endpoint with drf-spectacular. Full reference is at https://develop.sentry.dev/backend/api/public/, the most useful section to you will be https://develop.sentry.dev/backend/api/public/#5-method-decorato",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 15,
+        "evidence": "remove",
+        "context": "4. If a legacy `api-docs/paths/**/*.json` covers the path, remove it (see lesson 4).",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 22,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 23,
+        "evidence": "curl",
+        "context": "curl -s -H \"Authorization: Bearer $TOKEN\" \"https://us.sentry.io/api/0/<endpoint>\" | jq 'keys'",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 23,
+        "evidence": "https://",
+        "context": "curl -s -H \"Authorization: Bearer $TOKEN\" \"https://us.sentry.io/api/0/<endpoint>\" | jq 'keys'",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 33,
+        "evidence": "Delete",
+        "context": "Delete the `api-docs/paths/**/*.json` file AND its `$ref` in `api-docs/openapi.json`. drf-spectacular's `APPEND_PATHS` does not merge HTTP methods, so once any method on a path uses `@extend_schema`, all *legacy* methods on that path vanish",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 40,
+        "evidence": "Remove",
+        "context": "- Remove the method from `API_OWNERSHIP_ALLOWLIST_DONT_MODIFY` in the same change as the flip.",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 41,
+        "evidence": "delete",
+        "context": "- If the endpoint is redundant or being renamed, delete or deprecate the old version in its own change first, then stack the publish on top.",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 48,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 15258
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "96e78a9ce85795b117c8929887bdb78f88bf23f7b85a31f0872cde4dff7e92cd",
+      "bytes": 10785,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "40c7592cdfbef2e02bf004133446d7a9c85e98f9fd653d3cee689f3bba4bf7a9",
+      "bytes": 4473,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 15258
+}

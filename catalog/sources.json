@@ -191,8 +191,8 @@
       "official": false,
       "priority": "community",
       "repository_license": "Apache-2.0",
-      "notes": "SEO and generative engine optimization (GEO) skills. Added 2026-10-03 for programming-focused coverage; every skill still needs review before release.",
-      "ingest_enabled": true
+      "notes": "Signpost repository: every SKILL.md at the pinned commit only says the skill has moved to aaron-he-zhu/aaron-marketing-skills. Not ingested.",
+      "ingest_enabled": false
     },
     {
       "id": "wshobson/agents",
@@ -215,6 +215,20 @@
       "repository_license": "MIT",
       "notes": "DevOps, infrastructure, security and compliance skills. Added 2026-10-03 for programming-focused coverage; every skill still needs review before release.",
       "ingest_enabled": true
+    },
+    {
+      "id": "aaron-he-zhu/aaron-marketing-skills",
+      "kind": "github",
+      "repo": "aaron-he-zhu/aaron-marketing-skills",
+      "default_branch": "main",
+      "official": false,
+      "priority": "community",
+      "repository_license": "Apache-2.0",
+      "notes": "Active home of the SEO and GEO (generative engine optimization) skills formerly in seo-geo-claude-skills. Only the seo-geo/ skills are in scope; ad, email, influencer and other marketing skills are not reviewed. Added 2026-10-04.",
+      "ingest_enabled": true,
+      "include_paths": [
+        "seo-geo"
+      ]
     }
   ]
 }

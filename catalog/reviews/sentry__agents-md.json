@@ -1,9 +1,9 @@
 {
   "schema_version": "0.1",
   "skill_id": "sentry/agents-md",
-  "status": "draft",
-  "reviewed_on": null,
-  "reviewer": null,
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
   "source": {
     "repo": "getsentry/skills",
     "path": "skills/agents-md",
@@ -13,7 +13,7 @@
     "complete": true,
     "scope": "skills/agents-md",
     "url": "https://api.github.com/repos/getsentry/skills/git/trees/d18b7aa8ba878354e5c348310230e652f7690f9c?recursive=1",
-    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
   },
   "license": {
     "spdx": "Apache-2.0",
@@ -30,18 +30,32 @@
       ]
     },
     "redistributable": true,
-    "scope_reason": "",
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the Apache-2.0 license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares Apache-2.0 (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the Apache-2.0 notice condition; no NOTICE file exists, so section 4(d) adds no attribution text, and no file is modified.",
     "obligations": [
       "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
-      "Preserve all upstream text and notices byte-for-byte."
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
     ]
   },
   "content_review": {
-    "status": "pending",
-    "risk": "unknown",
+    "status": "approved",
+    "risk": "low",
     "blocking_findings": [],
-    "capabilities": {},
-    "notes": []
+    "capabilities": {
+      "shell": false,
+      "network": false,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md, SPEC.md and SOURCES.md in full. Guides the agent to inspect a repository and write a concise AGENTS.md (optionally symlinking CLAUDE.md to it) with command tables, conventions and links to existing docs.",
+      "The agent reads repository files and creates/edits AGENTS.md and possibly a CLAUDE.md symlink in the user's repo, which is the requested output. No commands are executed, nothing is installed, no credentials or network access; `pnpm install` and similar appear only inside the template text to be written into AGENTS.md.",
+      "SOURCES.md:187,198 names skills/skill-writer from the upstream repository as provenance only; it is not needed at runtime. The template's commit-attribution section (SKILL.md:56-60) is a placeholder the user should adapt or drop."
+    ]
   },
   "files": [
     {
@@ -54,23 +68,23 @@
       "git_blob": "753a6c03c60a9232405d05170bd3ad3cab49a1ef",
       "license": "Apache-2.0",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Byte-exact copy of the repository-root Apache-2.0 license, attached to carry its terms and notices.",
       "findings": [
         {
           "type": "network-access",
           "line": 3,
           "evidence": "http://",
           "context": "                        http://www.apache.org/licenses/",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "License text."
         },
         {
           "type": "network-access",
           "line": 184,
           "evidence": "http://",
           "context": "       http://www.apache.org/licenses/LICENSE-2.0",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "License text."
         }
       ]
     },
@@ -82,15 +96,15 @@
       "git_blob": "bd92e4a9df47f63bd943bc3d5011da0b3d6e04ff",
       "license": "Apache-2.0",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "package-install",
           "line": 38,
           "evidence": "pnpm install",
           "context": "- Use **pnpm**: `pnpm install`",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "`pnpm install` at SKILL.md:38 is example content inside the AGENTS.md template, not a command the agent is told to run."
         }
       ]
     },
@@ -102,31 +116,31 @@
       "git_blob": "edfafb63491741c75f1291334cd4b92c57eb0b12",
       "license": "Apache-2.0",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "network-access",
           "line": 19,
           "evidence": "https://",
           "context": "| `https://agents.md/` | official format guide | canonical | 2026-05-04 | high | AGENTS.md purpose, common sections, nested files, closest-file precedence | public format guidance | Supports path-backed and scoped instructions |",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "SOURCES.md:199-201 lists agents.md, OpenAI Codex docs and agentskills.io as provenance citations; the skill does not instruct fetching them."
         },
         {
           "type": "network-access",
           "line": 20,
           "evidence": "https://",
           "context": "| `https://developers.openai.com/codex/guides/agents-md` | official product docs | canonical | 2026-05-04 | high | Codex discovery order, global/project scopes, nested precedence, size cap, verification commands | OpenAI-specific behavior |",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "SOURCES.md:199-201 lists agents.md, OpenAI Codex docs and agentskills.io as provenance citations; the skill does not instruct fetching them."
         },
         {
           "type": "network-access",
           "line": 21,
           "evidence": "https://",
           "context": "| `https://agentskills.io/specification` | official spec | canonical | 2026-05-04 | high | Skill frontmatter, progressive disclosure, focused references | skill format guidance | Supports concise runtime file shape |",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "SOURCES.md:199-201 lists agents.md, OpenAI Codex docs and agentskills.io as provenance citations; the skill does not instruct fetching them."
         }
       ]
     },
@@ -138,7 +152,7 @@
       "git_blob": "c699def49233fbb1c6a43ebadf74af8e8993c522",
       "license": "Apache-2.0",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
       "findings": []
     }
   ]

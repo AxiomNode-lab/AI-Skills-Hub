@@ -1,9 +1,9 @@
 {
   "schema_version": "0.1",
   "skill_id": "sentry/triage-frontend-issues",
-  "status": "draft",
-  "reviewed_on": null,
-  "reviewer": null,
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
   "source": {
     "repo": "getsentry/skills",
     "path": "skills/triage-frontend-issues",
@@ -13,7 +13,7 @@
     "complete": true,
     "scope": "skills/triage-frontend-issues",
     "url": "https://api.github.com/repos/getsentry/skills/git/trees/d18b7aa8ba878354e5c348310230e652f7690f9c?recursive=1",
-    "notes": "Generated from git ls-tree at the pinned revision; confirm no ancestor NOTICE or nested licensing override."
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
   },
   "license": {
     "spdx": "Apache-2.0",
@@ -30,18 +30,32 @@
       ]
     },
     "redistributable": true,
-    "scope_reason": "",
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the Apache-2.0 license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares Apache-2.0 (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the Apache-2.0 notice condition; no NOTICE file exists, so section 4(d) adds no attribution text, and no file is modified.",
     "obligations": [
       "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
-      "Preserve all upstream text and notices byte-for-byte."
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
     ]
   },
   "content_review": {
-    "status": "pending",
-    "risk": "unknown",
+    "status": "approved",
+    "risk": "medium",
     "blocking_findings": [],
-    "capabilities": {},
-    "notes": []
+    "capabilities": {
+      "shell": false,
+      "network": true,
+      "credentials": true,
+      "package_install": false,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md, SPEC.md and references/archive-criteria.md in full. Triages unresolved issues in the Sentry `javascript` project via the Sentry MCP server: classifies each issue against a noise taxonomy, shows a plan table, and archives approved issues with status=ignored / ignoreMode=untilEscalating and a stated reason.",
+      "Medium because it changes live state in a Sentry organization through an authenticated MCP server (update_issue). Acceptable: SKILL.md:15-21 hard-limits it to archive-only, untilEscalating, unresolved issues, one project, and requires explicit user approval of a displayed plan before any update_issue call (SKILL.md:20, 97-115); it never resolves, assigns or deletes.",
+      "Practically scoped to Sentry's own organization (organizationSlug='sentry', project 'javascript'; SKILL.md:15, 46, 50) and requires the Sentry MCP at mcp.sentry.dev to be authenticated (SKILL.md:25-26); other users would need to adapt it. SPEC.md is a maintainer document and is not loaded at runtime; it mentions references/evidence/ which does not exist yet (SPEC.md:202) but is not required."
+    ]
   },
   "files": [
     {
@@ -54,23 +68,23 @@
       "git_blob": "753a6c03c60a9232405d05170bd3ad3cab49a1ef",
       "license": "Apache-2.0",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Byte-exact copy of the repository-root Apache-2.0 license, attached to carry its terms and notices.",
       "findings": [
         {
           "type": "network-access",
           "line": 3,
           "evidence": "http://",
           "context": "                        http://www.apache.org/licenses/",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "License text."
         },
         {
           "type": "network-access",
           "line": 184,
           "evidence": "http://",
           "context": "       http://www.apache.org/licenses/LICENSE-2.0",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "License text."
         }
       ]
     },
@@ -82,7 +96,7 @@
       "git_blob": "feb30d2ef9c5fe97cd49e38cc69bcbf27d090ad9",
       "license": "Apache-2.0",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
       "findings": []
     },
     {
@@ -93,23 +107,23 @@
       "git_blob": "b4b8fbe9ecc2422b8aa0ee8521702491d15f7e6a",
       "license": "Apache-2.0",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "filesystem-write",
           "line": 16,
           "evidence": "delete",
           "context": "2. **Archive only.** The only status mutation permitted is `status=ignored`. Never resolve, never unresolve, never assign, never delete, never bulk-update fields other than status.",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "The word 'delete' appears only in prohibitions ('never delete', SKILL.md:16, SPEC.md:12); the skill writes or deletes no files."
         },
         {
           "type": "network-access",
           "line": 34,
           "evidence": "https://",
           "context": "| Sentry issue URL (`https://sentry.sentry.io/issues/JAVASCRIPT-…`) | Triage that single issue. |",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "The https:// URL at SKILL.md:34 is an input-format example for a Sentry issue link; network access happens only through the Sentry MCP tools the skill names."
         }
       ]
     },
@@ -121,15 +135,15 @@
       "git_blob": "0938282268f93388b3ac009eedc15d15fef43daa",
       "license": "Apache-2.0",
       "covered_by": "LICENSE.txt",
-      "license_reason": "",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
       "findings": [
         {
           "type": "filesystem-write",
           "line": 12,
           "evidence": "delete",
           "context": "- **Out of scope:** any other project. Any non-archive status change (resolve, assign, delete, escalate). Any auto-apply mode without confirmation. Any change to issue ownership routing. Anything outside Sentry MCP.",
-          "disposition": "pending",
-          "reason": ""
+          "disposition": "accepted",
+          "reason": "The word 'delete' appears only in prohibitions ('never delete', SKILL.md:16, SPEC.md:12); the skill writes or deletes no files."
         }
       ]
     }
