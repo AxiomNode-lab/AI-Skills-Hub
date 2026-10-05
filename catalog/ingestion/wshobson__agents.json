@@ -3,9 +3,9 @@
   "source": {
     "repo": "wshobson/agents",
     "ref": "main",
-    "revision": "156b7a5e7a8b93642628a339ee4039c925b34c7f",
+    "revision": "46891e7e60da0e52baf1050b7b6391b64e84c6d9",
     "revision_type": "git-commit",
-    "tree_sha": "d9a2388d0fb280c650f18bdbf15cb127539c2494"
+    "tree_sha": "46891e7e60da0e52baf1050b7b6391b64e84c6d9"
   },
   "discovered_skills": [
     {
@@ -981,49 +981,24 @@
         "evidence_path": "LICENSE"
       },
       "security": {
-        "scan_status": "review-required",
-        "risk": "high",
+        "scan_status": "verified",
+        "risk": "none",
         "capabilities": {
           "shell": false,
           "network": false,
           "credentials": false,
-          "dynamic_execution": true,
+          "dynamic_execution": false,
           "package_install": false,
           "filesystem_write": false,
           "encoded_content": false
         },
-        "findings": [
-          {
-            "type": "dynamic-execution",
-            "line": 31,
-            "evidence": "function (",
-            "context": "describe(\"Security Tests\", function () {"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 32,
-            "evidence": "function (",
-            "context": "  it(\"Should prevent reentrancy attack\", async function () {"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 50,
-            "evidence": "function (",
-            "context": "  it(\"Should prevent integer overflow\", async function () {"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 59,
-            "evidence": "function (",
-            "context": "  it(\"Should enforce access control\", async function () {"
-          }
-        ]
+        "findings": []
       },
       "capabilities": {
         "shell": false,
         "network": false,
         "credentials": false,
-        "dynamic_execution": true,
+        "dynamic_execution": false,
         "package_install": false
       }
     },
@@ -1040,12 +1015,12 @@
       },
       "security": {
         "scan_status": "review-required",
-        "risk": "high",
+        "risk": "medium",
         "capabilities": {
           "shell": false,
           "network": true,
           "credentials": true,
-          "dynamic_execution": true,
+          "dynamic_execution": false,
           "package_install": false,
           "filesystem_write": false,
           "encoded_content": false
@@ -1088,142 +1063,16 @@
             "context": "    apiKey: process.env.ETHERSCAN_API_KEY,"
           },
           {
-            "type": "dynamic-execution",
-            "line": 72,
-            "evidence": "function (",
-            "context": "describe(\"Token Contract\", function () {"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 83,
-            "evidence": "function (",
-            "context": "  describe(\"Deployment\", function () {"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 84,
-            "evidence": "function (",
-            "context": "    it(\"Should set the right owner\", async function () {"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 89,
-            "evidence": "function (",
-            "context": "    it(\"Should assign total supply to owner\", async function () {"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 96,
-            "evidence": "function (",
-            "context": "  describe(\"Transactions\", function () {"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 97,
-            "evidence": "function (",
-            "context": "    it(\"Should transfer tokens between accounts\", async function () {"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 107,
-            "evidence": "function (",
-            "context": "    it(\"Should fail if sender doesn't have enough tokens\", async function () {"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 116,
-            "evidence": "function (",
-            "context": "    it(\"Should emit Transfer event\", async function () {"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 125,
-            "evidence": "function (",
-            "context": "  describe(\"Time-based tests\", function () {"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 126,
-            "evidence": "function (",
-            "context": "    it(\"Should handle time-locked operations\", async function () {"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 136,
-            "evidence": "function (",
-            "context": "  describe(\"Gas optimization\", function () {"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 137,
-            "evidence": "function (",
-            "context": "    it(\"Should use gas efficiently\", async function () {"
-          },
-          {
             "type": "network-access",
             "line": 216,
             "evidence": "https://",
             "context": "        vm.createSelectFork(\"https://eth-mainnet.alchemyapi.io/v2/...\");"
           },
           {
-            "type": "dynamic-execution",
-            "line": 230,
-            "evidence": "function (",
-            "context": "describe(\"Complex State Changes\", function () {"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 233,
-            "evidence": "function (",
-            "context": "  beforeEach(async function () {"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 237,
-            "evidence": "function (",
-            "context": "  afterEach(async function () {"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 241,
-            "evidence": "function (",
-            "context": "  it(\"Test 1\", async function () {"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 245,
-            "evidence": "function (",
-            "context": "  it(\"Test 2\", async function () {"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 254,
-            "evidence": "function (",
-            "context": "describe(\"Mainnet Fork Tests\", function () {"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 257,
-            "evidence": "function (",
-            "context": "  before(async function () {"
-          },
-          {
             "type": "credential-access",
             "line": 263,
             "evidence": "process.env",
             "context": "            jsonRpcUrl: process.env.MAINNET_RPC_URL,"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 282,
-            "evidence": "function (",
-            "context": "  it(\"Should swap on Uniswap\", async function () {"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 291,
-            "evidence": "function (",
-            "context": "it(\"Should impersonate whale account\", async function () {"
           }
         ]
       },
@@ -1231,7 +1080,7 @@
         "shell": false,
         "network": true,
         "credentials": true,
-        "dynamic_execution": true,
+        "dynamic_execution": false,
         "package_install": false
       }
     },
@@ -1455,7 +1304,7 @@
       "path": "plugins/cicd-automation/skills/gitlab-ci-patterns/SKILL.md",
       "name": "gitlab-ci-patterns",
       "description": "Build GitLab CI/CD pipelines with multi-stage workflows, caching, and distributed runners for scalable automation. Use when implementing GitLab CI/CD, optimizing pipeline performance, or setting up automated testing and deployment.",
-      "skill_sha256": "0b2d3cf90961e4df928106fc40911cd7a1c4d4703354a86b9d7bacadff7df8fd",
+      "skill_sha256": "152b2b89bbbb14eebe2a78517d80ee7d52b6052345beea631ca9658d34e614ea",
       "license": {
         "spdx": "MIT",
         "redistributable": true,
@@ -1483,13 +1332,13 @@
           },
           {
             "type": "network-access",
-            "line": 115,
+            "line": 120,
             "evidence": "https://",
             "context": "    url: https://staging.example.com"
           },
           {
             "type": "network-access",
-            "line": 127,
+            "line": 132,
             "evidence": "https://",
             "context": "    url: https://app.example.com"
           }
@@ -2051,7 +1900,7 @@
       "path": "plugins/cloud-infrastructure/skills/linkerd-patterns/SKILL.md",
       "name": "linkerd-patterns",
       "description": "Implement Linkerd service mesh patterns for lightweight, security-focused service mesh deployments. Use when setting up Linkerd, configuring traffic policies, or implementing zero-trust networking with minimal overhead.",
-      "skill_sha256": "40a8e48356998ab7b46553d0b0e174fde4d4c4598349ce0722791baadf42bb78",
+      "skill_sha256": "a025d94e1538a54b443103d9e1e68de301d7d36dd2fd81883668bbc8de62a23f",
       "license": {
         "spdx": "MIT",
         "redistributable": true,
@@ -2072,57 +1921,45 @@
         },
         "findings": [
           {
-            "type": "shell-execution",
-            "line": 56,
-            "evidence": "bash",
-            "context": "```bash"
-          },
-          {
             "type": "network-access",
-            "line": 58,
-            "evidence": "curl",
-            "context": "curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install | sh"
-          },
-          {
-            "type": "network-access",
-            "line": 58,
+            "line": 57,
             "evidence": "https://",
-            "context": "curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install | sh"
+            "context": "for other systems, follow the [official installation guide](https://linkerd.io/docs/getting-started/)."
           },
           {
             "type": "shell-execution",
-            "line": 58,
-            "evidence": "sh",
-            "context": "curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install | sh"
+            "line": 59,
+            "evidence": "bash",
+            "context": "```bash"
           },
           {
             "type": "shell-execution",
-            "line": 239,
+            "line": 243,
             "evidence": "bash",
             "context": "```bash"
           },
           {
             "type": "network-access",
-            "line": 245,
+            "line": 249,
             "evidence": "https://",
             "context": "  --api-server-address https://west.example.com:6443 \\"
           },
           {
             "type": "shell-execution",
-            "line": 258,
+            "line": 262,
             "evidence": "bash",
             "context": "```bash"
           },
           {
             "type": "shell-execution",
-            "line": 277,
+            "line": 281,
             "evidence": "bash",
             "context": "```bash"
           }
         ]
       },
       "capabilities": {
-        "shell": true,
+        "shell": false,
         "network": true,
         "credentials": true,
         "dynamic_execution": false,
@@ -2671,12 +2508,12 @@
       },
       "security": {
         "scan_status": "review-required",
-        "risk": "high",
+        "risk": "low",
         "capabilities": {
           "shell": true,
           "network": true,
           "credentials": false,
-          "dynamic_execution": true,
+          "dynamic_execution": false,
           "package_install": false,
           "filesystem_write": true,
           "encoded_content": false
@@ -2707,12 +2544,6 @@
             "context": "```bash"
           },
           {
-            "type": "dynamic-execution",
-            "line": 362,
-            "evidence": "function (",
-            "context": "  descriptor.value = function (...args: any[]) {"
-          },
-          {
             "type": "filesystem-write",
             "line": 492,
             "evidence": "Remove",
@@ -2730,7 +2561,7 @@
         "shell": false,
         "network": true,
         "credentials": false,
-        "dynamic_execution": true,
+        "dynamic_execution": false,
         "package_install": false
       }
     },
@@ -3059,7 +2890,7 @@
       "path": "plugins/developer-essentials/skills/turborepo-caching/SKILL.md",
       "name": "turborepo-caching",
       "description": "Configure Turborepo for efficient monorepo builds with local and remote caching. Use when setting up Turborepo, optimizing build pipelines, or implementing distributed caching.",
-      "skill_sha256": "23a4846bd0097c41abaa92b0ac87364f8b2acee1a2f777902477b33f07672537",
+      "skill_sha256": "07477fcd27f880e0f55fdec25c44e7454aedec81cbe2eba95c3749cc79e53afa",
       "license": {
         "spdx": "MIT",
         "redistributable": true,
@@ -3117,37 +2948,37 @@
           },
           {
             "type": "network-access",
-            "line": 232,
+            "line": 233,
             "evidence": "http://",
-            "context": "turbo build --api=\"http://localhost:3000\" --token=\"my-token\" --team=\"my-team\""
+            "context": "turbo build --api=\"http://127.0.0.1:3000\" --token=\"my-token\" --team=\"my-team\""
           },
           {
             "type": "shell-execution",
-            "line": 237,
+            "line": 238,
             "evidence": "bash",
             "context": "```bash"
           },
           {
             "type": "network-access",
-            "line": 267,
+            "line": 268,
             "evidence": "https://",
             "context": "  \"$schema\": \"https://turbo.build/schema.json\","
           },
           {
             "type": "destructive-operation",
-            "line": 318,
+            "line": 319,
             "evidence": "rm -rf",
             "context": "    \"clean\": \"turbo clean && rm -rf node_modules\","
           },
           {
             "type": "shell-execution",
-            "line": 318,
+            "line": 319,
             "evidence": "rm -rf",
             "context": "    \"clean\": \"turbo clean && rm -rf node_modules\","
           },
           {
             "type": "shell-execution",
-            "line": 335,
+            "line": 336,
             "evidence": "bash",
             "context": "```bash"
           }
@@ -3655,8 +3486,8 @@
     {
       "path": "plugins/file-conversion/skills/file-conversion/SKILL.md",
       "name": "file-conversion",
-      "description": "Convert files between formats — PDF to Word, HEIC to JPG, MP4 to MP3, CSV to JSON, EPUB to MOBI, and 999 total routes across images, video, audio, documents, data, fonts, ebooks, and archives. Free via changethisfile.com, no API key or signup. Use when the user needs a file converted to a different format.",
-      "skill_sha256": "741dc2607393dd39fca53c409c26490bd3269e213cd99c752595ddbf3f1790d5",
+      "description": "Use when the user needs a local file converted between common image, audio, video, document, or data formats. Select installed tools, preserve originals, and verify the output.",
+      "skill_sha256": "7622ea29bc61ac692fcd6c8b13c4a47e11b70a7c8f095e87f17f714c9a2d2602",
       "license": {
         "spdx": "MIT",
         "redistributable": true,
@@ -3665,125 +3496,101 @@
       },
       "security": {
         "scan_status": "review-required",
-        "risk": "medium",
+        "risk": "high",
         "capabilities": {
           "shell": true,
           "network": true,
-          "credentials": true,
+          "credentials": false,
           "dynamic_execution": false,
           "package_install": false,
-          "filesystem_write": false,
-          "encoded_content": true
+          "filesystem_write": true,
+          "encoded_content": false
         },
         "findings": [
           {
-            "type": "credential-access",
-            "line": 3,
-            "evidence": "API key",
-            "context": "description: Convert files between formats — PDF to Word, HEIC to JPG, MP4 to MP3, CSV to JSON, EPUB to MOBI, and 999 total routes across images, video, audio, documents, data, fonts, ebooks, and archives. Free via changethisfile.com, no AP"
-          },
-          {
-            "type": "credential-access",
-            "line": 8,
-            "evidence": "API key",
-            "context": "Convert files between 999 conversion routes using the free ChangeThisFile service. No account or API key required. Conversions run server-side (FFmpeg, LibreOffice, Calibre, 7-Zip, sharp, Ghostscript); files are deleted within 24 hours."
+            "type": "shell-execution",
+            "line": 19,
+            "evidence": "PowerShell",
+            "context": "2. Find installed tools with `command -v` on POSIX shells or `Get-Command` in PowerShell."
           },
           {
             "type": "shell-execution",
-            "line": 15,
+            "line": 51,
             "evidence": "bash",
             "context": "```bash"
           },
           {
             "type": "shell-execution",
-            "line": 16,
-            "evidence": "sh",
-            "context": "scripts/convert.sh <input-file> <target-format> [output-file]"
+            "line": 63,
+            "evidence": "bash",
+            "context": "```bash"
           },
           {
             "type": "shell-execution",
-            "line": 17,
-            "evidence": "sh",
-            "context": "# e.g. scripts/convert.sh report.docx pdf"
+            "line": 74,
+            "evidence": "bash",
+            "context": "```bash"
           },
           {
-            "type": "encoded-content",
-            "line": 21,
-            "evidence": "base64",
-            "context": "The script path is relative to this skill's directory. It base64-encodes the file, calls the hosted MCP endpoint over plain HTTPS, downloads the result, and writes it next to the input (or to `[output-file]`)."
-          },
-          {
-            "type": "network-access",
-            "line": 23,
-            "evidence": "curl",
-            "context": "3. **Remote file (you have a URL, not a local file)** — skip the download/re-upload; one curl does it:"
+            "type": "filesystem-write",
+            "line": 75,
+            "evidence": "remove",
+            "context": "magick \"$conversion_input\" -auto-orient -background white -alpha remove -alpha off \\"
           },
           {
             "type": "shell-execution",
-            "line": 25,
+            "line": 83,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 94,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "destructive-operation",
+            "line": 97,
+            "evidence": "rm -rf",
+            "context": "  trap 'rm -rf -- \"$conversion_profile\"' EXIT"
+          },
+          {
+            "type": "shell-execution",
+            "line": 97,
+            "evidence": "rm -rf",
+            "context": "  trap 'rm -rf -- \"$conversion_profile\"' EXIT"
+          },
+          {
+            "type": "shell-execution",
+            "line": 111,
             "evidence": "bash",
             "context": "```bash"
           },
           {
             "type": "network-access",
-            "line": 26,
-            "evidence": "curl",
-            "context": "curl -sS -X POST https://changethisfile.com/mcp \\"
-          },
-          {
-            "type": "network-access",
-            "line": 26,
+            "line": 155,
             "evidence": "https://",
-            "context": "curl -sS -X POST https://changethisfile.com/mcp \\"
+            "context": "Command references: [FFmpeg](https://ffmpeg.org/ffmpeg.html),"
           },
           {
             "type": "network-access",
-            "line": 31,
-            "evidence": "curl",
-            "context": "The response text contains a download URL — fetch it with `curl -o <output>`."
-          },
-          {
-            "type": "shell-execution",
-            "line": 37,
-            "evidence": "bash",
-            "context": "```bash"
-          },
-          {
-            "type": "network-access",
-            "line": 38,
-            "evidence": "curl",
-            "context": "curl -sS -X POST https://changethisfile.com/mcp \\"
-          },
-          {
-            "type": "network-access",
-            "line": 38,
+            "line": 156,
             "evidence": "https://",
-            "context": "curl -sS -X POST https://changethisfile.com/mcp \\"
-          },
-          {
-            "type": "credential-access",
-            "line": 47,
-            "evidence": "API key",
-            "context": "- Max input: **25 MB** (free path). Larger files: get a free API key (1,000 conversions/month) at https://changethisfile.com/docs/authentication and use `POST /v1/convert`."
+            "context": "[Pandoc](https://pandoc.org/MANUAL.html), and"
           },
           {
             "type": "network-access",
-            "line": 47,
+            "line": 157,
             "evidence": "https://",
-            "context": "- Max input: **25 MB** (free path). Larger files: get a free API key (1,000 conversions/month) at https://changethisfile.com/docs/authentication and use `POST /v1/convert`."
-          },
-          {
-            "type": "network-access",
-            "line": 55,
-            "evidence": "https://",
-            "context": "- Full docs: https://changethisfile.com/docs/mcp"
+            "context": "[LibreOffice parameters](https://help.libreoffice.org/latest/en-US/text/shared/guide/start_parameters.html)."
           }
         ]
       },
       "capabilities": {
-        "shell": false,
+        "shell": true,
         "network": true,
-        "credentials": true,
+        "credentials": false,
         "dynamic_execution": false,
         "package_install": false
       }
@@ -3801,47 +3608,17 @@
       },
       "security": {
         "scan_status": "review-required",
-        "risk": "high",
+        "risk": "low",
         "capabilities": {
           "shell": false,
           "network": false,
           "credentials": false,
-          "dynamic_execution": true,
+          "dynamic_execution": false,
           "package_install": false,
           "filesystem_write": true,
           "encoded_content": false
         },
         "findings": [
-          {
-            "type": "dynamic-execution",
-            "line": 86,
-            "evidence": "function (",
-            "context": "  .controller(\"UserController\", function ($scope, UserService) {"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 89,
-            "evidence": "function (",
-            "context": "    $scope.loadUser = function (id) {"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 90,
-            "evidence": "function (",
-            "context": "      UserService.getUser(id).then(function (user) {"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 95,
-            "evidence": "function (",
-            "context": "    $scope.saveUser = function () {"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 140,
-            "evidence": "function (",
-            "context": "angular.module(\"myApp\").directive(\"userCard\", function () {"
-          },
           {
             "type": "filesystem-write",
             "line": 150,
@@ -3871,48 +3648,6 @@
             "line": 175,
             "evidence": "delete",
             "context": "// Usage: <app-user-card [user]=\"user\" (delete)=\"handleDelete()\"></app-user-card>"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 182,
-            "evidence": "function (",
-            "context": "angular.module(\"myApp\").factory(\"UserService\", function ($http) {"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 184,
-            "evidence": "function (",
-            "context": "    getUser: function (id) {"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 187,
-            "evidence": "function (",
-            "context": "    saveUser: function (user) {"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 237,
-            "evidence": "function (",
-            "context": "angular.module(\"myApp\").controller(\"OldController\", function (newService) {"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 246,
-            "evidence": "function(",
-            "context": "angular.module('myApp').factory('oldService', function() {"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 248,
-            "evidence": "function(",
-            "context": "    getData: function() {"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 282,
-            "evidence": "function (",
-            "context": "angular.module(\"myApp\").config(function ($routeProvider) {"
           }
         ]
       },
@@ -3920,7 +3655,7 @@
         "shell": false,
         "network": false,
         "credentials": false,
-        "dynamic_execution": true,
+        "dynamic_execution": false,
         "package_install": false
       }
     },
@@ -4983,7 +4718,7 @@
       "path": "plugins/kubernetes-operations/skills/gitops-workflow/SKILL.md",
       "name": "gitops-workflow",
       "description": "Implement GitOps workflows with ArgoCD and Flux for automated, declarative Kubernetes deployments with continuous reconciliation. Use when implementing GitOps practices, automating Kubernetes deployments, or setting up declarative infrastructure management.",
-      "skill_sha256": "0a965df87fbf065e9e64fd49b7a4adb4f5d3ead6b70c873675e2b37d370ca065",
+      "skill_sha256": "f9f620a4a4beb07c160794ecc0d471960a1aa98a18910d9096be018ffb34ec28",
       "license": {
         "spdx": "MIT",
         "redistributable": true,
@@ -5064,105 +4799,81 @@
             "context": "    server: https://kubernetes.default.svc"
           },
           {
+            "type": "network-access",
+            "line": 119,
+            "evidence": "https://",
+            "context": "[official Flux installation guide](https://fluxcd.io/flux/installation/)."
+          },
+          {
             "type": "shell-execution",
-            "line": 118,
+            "line": 121,
             "evidence": "bash",
             "context": "```bash"
           },
           {
             "type": "network-access",
-            "line": 120,
-            "evidence": "curl",
-            "context": "curl -s https://fluxcd.io/install.sh | sudo bash"
-          },
-          {
-            "type": "network-access",
-            "line": 120,
-            "evidence": "https://",
-            "context": "curl -s https://fluxcd.io/install.sh | sudo bash"
-          },
-          {
-            "type": "shell-execution",
-            "line": 120,
-            "evidence": "sh",
-            "context": "curl -s https://fluxcd.io/install.sh | sudo bash"
-          },
-          {
-            "type": "shell-execution",
-            "line": 120,
-            "evidence": " sudo",
-            "context": "curl -s https://fluxcd.io/install.sh | sudo bash"
-          },
-          {
-            "type": "shell-execution",
-            "line": 120,
-            "evidence": "bash",
-            "context": "curl -s https://fluxcd.io/install.sh | sudo bash"
-          },
-          {
-            "type": "network-access",
-            "line": 141,
+            "line": 145,
             "evidence": "https://",
             "context": "  url: https://github.com/org/my-app"
           },
           {
             "type": "filesystem-write",
-            "line": 172,
+            "line": 176,
             "evidence": "Delete",
             "context": "    prune: true # Delete resources not in Git"
           },
           {
             "type": "credential-access",
-            "line": 226,
+            "line": 230,
             "evidence": "Secret",
             "context": "## Secret Management"
           },
           {
             "type": "shell-execution",
-            "line": 250,
+            "line": 254,
             "evidence": "bash",
             "context": "```bash"
           },
           {
             "type": "credential-access",
-            "line": 251,
+            "line": 255,
             "evidence": "secret",
             "context": "# Encrypt secret"
           },
           {
             "type": "credential-access",
-            "line": 252,
+            "line": 256,
             "evidence": "secret",
             "context": "kubeseal --format yaml < secret.yaml > sealed-secret.yaml"
           },
           {
             "type": "credential-access",
-            "line": 252,
+            "line": 256,
             "evidence": "secret",
             "context": "kubeseal --format yaml < secret.yaml > sealed-secret.yaml"
           },
           {
             "type": "credential-access",
-            "line": 254,
+            "line": 258,
             "evidence": "secret",
             "context": "# Commit sealed-secret.yaml to Git"
           },
           {
             "type": "shell-execution",
-            "line": 274,
+            "line": 278,
             "evidence": "bash",
             "context": "```bash"
           },
           {
             "type": "shell-execution",
-            "line": 281,
+            "line": 285,
             "evidence": "bash",
             "context": "```bash"
           }
         ]
       },
       "capabilities": {
-        "shell": true,
+        "shell": false,
         "network": true,
         "credentials": true,
         "dynamic_execution": false,
@@ -6283,12 +5994,12 @@
       },
       "security": {
         "scan_status": "review-required",
-        "risk": "high",
+        "risk": "low",
         "capabilities": {
           "shell": false,
           "network": true,
           "credentials": false,
-          "dynamic_execution": true,
+          "dynamic_execution": false,
           "package_install": false,
           "filesystem_write": false,
           "encoded_content": false
@@ -6299,24 +6010,6 @@
             "line": 67,
             "evidence": "https://",
             "context": "<script src=\"https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID&currency=USD\"></script>"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 70,
-            "evidence": "function(",
-            "context": "    createOrder: function(data, actions) {"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 79,
-            "evidence": "function(",
-            "context": "    onApprove: function(data, actions) {"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 80,
-            "evidence": "function(",
-            "context": "      return actions.order.capture().then(function(details) {"
           }
         ]
       },
@@ -6324,7 +6017,7 @@
         "shell": false,
         "network": true,
         "credentials": true,
-        "dynamic_execution": true,
+        "dynamic_execution": false,
         "package_install": false
       }
     },
@@ -7478,7 +7171,7 @@
       "path": "plugins/python-development/skills/uv-package-manager/SKILL.md",
       "name": "uv-package-manager",
       "description": "Master the uv package manager for fast Python dependency management, virtual environments, and modern Python project workflows. Use when setting up Python projects, managing dependencies, or optimizing Python development workflows with uv.",
-      "skill_sha256": "4479df2315c5230e7b6ef4eb7ab2db2e4b514ce4c777c8b7c1eb2e48d85b1bc0",
+      "skill_sha256": "14df843d2d7958257e47933961914ff6598adb8422e4759000586c43ce80ab2c",
       "license": {
         "spdx": "MIT",
         "redistributable": true,
@@ -7505,82 +7198,34 @@
             "context": "```bash"
           },
           {
-            "type": "network-access",
-            "line": 58,
-            "evidence": "curl",
-            "context": "curl -LsSf https://astral.sh/uv/install.sh | sh"
-          },
-          {
-            "type": "network-access",
-            "line": 58,
-            "evidence": "https://",
-            "context": "curl -LsSf https://astral.sh/uv/install.sh | sh"
-          },
-          {
-            "type": "shell-execution",
-            "line": 58,
-            "evidence": "sh",
-            "context": "curl -LsSf https://astral.sh/uv/install.sh | sh"
-          },
-          {
-            "type": "shell-execution",
-            "line": 58,
-            "evidence": "sh",
-            "context": "curl -LsSf https://astral.sh/uv/install.sh | sh"
-          },
-          {
-            "type": "shell-execution",
-            "line": 58,
-            "evidence": "sh",
-            "context": "curl -LsSf https://astral.sh/uv/install.sh | sh"
-          },
-          {
-            "type": "shell-execution",
-            "line": 60,
-            "evidence": "PowerShell",
-            "context": "# Windows (PowerShell)"
-          },
-          {
-            "type": "network-access",
-            "line": 61,
-            "evidence": "https://",
-            "context": "powershell -c \"irm https://astral.sh/uv/install.ps1 | iex\""
-          },
-          {
-            "type": "shell-execution",
-            "line": 61,
-            "evidence": "powershell",
-            "context": "powershell -c \"irm https://astral.sh/uv/install.ps1 | iex\""
-          },
-          {
-            "type": "shell-execution",
-            "line": 61,
-            "evidence": "sh",
-            "context": "powershell -c \"irm https://astral.sh/uv/install.ps1 | iex\""
-          },
-          {
             "type": "package-install",
-            "line": 64,
-            "evidence": "pip install",
-            "context": "pip install uv"
-          },
-          {
-            "type": "network-access",
-            "line": 70,
-            "evidence": "https://",
-            "context": "cargo install --git https://github.com/astral-sh/uv uv"
-          },
-          {
-            "type": "package-install",
-            "line": 70,
+            "line": 61,
             "evidence": "cargo install",
-            "context": "cargo install --git https://github.com/astral-sh/uv uv"
+            "context": "cargo install --locked uv"
+          },
+          {
+            "type": "shell-execution",
+            "line": 66,
+            "evidence": "powershell",
+            "context": "```powershell"
+          },
+          {
+            "type": "shell-execution",
+            "line": 67,
+            "evidence": "sh",
+            "context": "winget install --id=astral-sh.uv -e"
+          },
+          {
+            "type": "network-access",
+            "line": 70,
+            "evidence": "https://",
+            "context": "Use the [official installation guide](https://docs.astral.sh/uv/getting-started/installation/)"
           },
           {
             "type": "shell-execution",
             "line": 70,
             "evidence": "sh",
-            "context": "cargo install --git https://github.com/astral-sh/uv uv"
+            "context": "Use the [official installation guide](https://docs.astral.sh/uv/getting-started/installation/)"
           },
           {
             "type": "shell-execution",
@@ -7813,7 +7458,7 @@
         ]
       },
       "capabilities": {
-        "shell": true,
+        "shell": false,
         "network": true,
         "credentials": false,
         "dynamic_execution": false,
@@ -9876,28 +9521,6 @@
   ],
   "warnings": [
     {
-      "path": "plugins/blockchain-web3/skills/solidity-security/SKILL.md",
-      "type": "review-signal",
-      "capabilities": {
-        "shell": false,
-        "network": false,
-        "credentials": false,
-        "dynamic_execution": true,
-        "package_install": false
-      }
-    },
-    {
-      "path": "plugins/blockchain-web3/skills/web3-testing/SKILL.md",
-      "type": "review-signal",
-      "capabilities": {
-        "shell": false,
-        "network": true,
-        "credentials": true,
-        "dynamic_execution": true,
-        "package_install": false
-      }
-    },
-    {
       "path": "plugins/cicd-automation/skills/github-actions-templates/SKILL.md",
       "type": "review-signal",
       "capabilities": {
@@ -9926,17 +9549,6 @@
         "shell": false,
         "network": true,
         "credentials": true,
-        "dynamic_execution": true,
-        "package_install": false
-      }
-    },
-    {
-      "path": "plugins/developer-essentials/skills/debugging-strategies/SKILL.md",
-      "type": "review-signal",
-      "capabilities": {
-        "shell": false,
-        "network": true,
-        "credentials": false,
         "dynamic_execution": true,
         "package_install": false
       }
@@ -9975,17 +9587,6 @@
       }
     },
     {
-      "path": "plugins/framework-migration/skills/angular-migration/SKILL.md",
-      "type": "review-signal",
-      "capabilities": {
-        "shell": false,
-        "network": false,
-        "credentials": false,
-        "dynamic_execution": true,
-        "package_install": false
-      }
-    },
-    {
       "path": "plugins/framework-migration/skills/dependency-upgrade/SKILL.md",
       "type": "review-signal",
       "capabilities": {
@@ -9994,17 +9595,6 @@
         "credentials": false,
         "dynamic_execution": false,
         "package_install": true
-      }
-    },
-    {
-      "path": "plugins/payment-processing/skills/paypal-integration/SKILL.md",
-      "type": "review-signal",
-      "capabilities": {
-        "shell": false,
-        "network": true,
-        "credentials": true,
-        "dynamic_execution": true,
-        "package_install": false
       }
     },
     {
@@ -10033,7 +9623,7 @@
       "path": "plugins/python-development/skills/uv-package-manager/SKILL.md",
       "type": "review-signal",
       "capabilities": {
-        "shell": true,
+        "shell": false,
         "network": true,
         "credentials": false,
         "dynamic_execution": false,

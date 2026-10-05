@@ -3,9 +3,9 @@
   "source": {
     "repo": "K-Dense-AI/scientific-agent-skills",
     "ref": "main",
-    "revision": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+    "revision": "92ace75ac21efe19a620434e0ca4e356081fe807",
     "revision_type": "git-commit",
-    "tree_sha": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298"
+    "tree_sha": "92ace75ac21efe19a620434e0ca4e356081fe807"
   },
   "discovered_skills": [
     {
@@ -10379,54 +10379,6 @@
             "context": "Check [current pricing](https://modal.com/pricing) and workspace quotas before sizing a run. GPU use requires a payment method even when credits remain."
           },
           {
-            "type": "dynamic-execution",
-            "line": 92,
-            "evidence": "function(",
-            "context": "A Modal `App` groups related functions. Functions decorated with `@app.function()` run remotely in the cloud:"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 99,
-            "evidence": "function(",
-            "context": "@app.function()"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 124,
-            "evidence": "function(",
-            "context": "@app.function(image=image, gpu=\"L40S\")"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 147,
-            "evidence": "function(",
-            "context": "@app.function(gpu=\"H100\")"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 154,
-            "evidence": "function(",
-            "context": "@app.function(gpu=\"H100:4\")"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 159,
-            "evidence": "function(",
-            "context": "@app.function(gpu=[\"H100\", \"A100-80GB\", \"A100-40GB\"])"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 182,
-            "evidence": "function(",
-            "context": "@app.function(volumes={\"/data\": vol})"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 191,
-            "evidence": "function(",
-            "context": "@app.function(volumes={\"/data\": vol})"
-          },
-          {
             "type": "network-access",
             "line": 206,
             "evidence": "https://",
@@ -10436,12 +10388,6 @@
             "type": "credential-access",
             "line": 216,
             "evidence": "Secret",
-            "context": "@app.function(secrets=[modal.Secret.from_name(\"my-api-keys\")])"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 216,
-            "evidence": "function(",
             "context": "@app.function(secrets=[modal.Secret.from_name(\"my-api-keys\")])"
           },
           {
@@ -10476,51 +10422,9 @@
           },
           {
             "type": "dynamic-execution",
-            "line": 236,
-            "evidence": "function(",
-            "context": "@app.function(image=web_image)"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 254,
-            "evidence": "function(",
-            "context": "@app.function(schedule=modal.Cron(\"0 9 * * *\"))  # Daily at 9 AM UTC"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 259,
-            "evidence": "function(",
-            "context": "@app.function(schedule=modal.Period(hours=6))"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 277,
-            "evidence": "function(",
-            "context": "@app.function("
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 298,
-            "evidence": "function(",
-            "context": "@app.function()"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 319,
-            "evidence": "function(",
-            "context": "@app.function("
-          },
-          {
-            "type": "dynamic-execution",
             "line": 373,
             "evidence": "exec(",
             "context": "    proc = sb.exec(\"python\", \"/tmp/job.py\")"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 429,
-            "evidence": "function(",
-            "context": "@app.function("
           },
           {
             "type": "credential-access",

@@ -5,7 +5,7 @@
     "ref": "main",
     "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f",
     "revision_type": "git-commit",
-    "tree_sha": "b35cce916bf6c4a47004f72b6d0dfef56c0550ae"
+    "tree_sha": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
   },
   "discovered_skills": [
     {
@@ -16707,12 +16707,12 @@
       },
       "security": {
         "scan_status": "review-required",
-        "risk": "high",
+        "risk": "medium",
         "capabilities": {
           "shell": true,
           "network": true,
           "credentials": false,
-          "dynamic_execution": true,
+          "dynamic_execution": false,
           "package_install": true,
           "filesystem_write": true,
           "encoded_content": false
@@ -16741,12 +16741,6 @@
             "line": 74,
             "evidence": "delete",
             "context": "      allow update, delete: if request.auth != null"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 197,
-            "evidence": "function (",
-            "context": "// HTTP function (API endpoint)"
           },
           {
             "type": "shell-execution",
@@ -16790,7 +16784,7 @@
         "shell": false,
         "network": true,
         "credentials": false,
-        "dynamic_execution": true,
+        "dynamic_execution": false,
         "package_install": true
       }
     },
@@ -25888,7 +25882,7 @@
         "shell": false,
         "network": true,
         "credentials": false,
-        "dynamic_execution": true,
+        "dynamic_execution": false,
         "package_install": true
       }
     },

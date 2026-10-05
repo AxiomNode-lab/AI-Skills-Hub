@@ -880,29 +880,17 @@
       },
       "security": {
         "scan_status": "review-required",
-        "risk": "high",
+        "risk": "low",
         "capabilities": {
           "shell": true,
           "network": false,
           "credentials": false,
-          "dynamic_execution": true,
+          "dynamic_execution": false,
           "package_install": false,
           "filesystem_write": false,
           "encoded_content": false
         },
         "findings": [
-          {
-            "type": "dynamic-execution",
-            "line": 112,
-            "evidence": "function(",
-            "context": "    result = function(input)"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 121,
-            "evidence": "function(",
-            "context": "- [ ] **Step 3: Implement `function(input: InputType) -> ResultType` in `exact/path/to/file.py`**"
-          },
           {
             "type": "shell-execution",
             "line": 134,
@@ -915,7 +903,7 @@
         "shell": false,
         "network": false,
         "credentials": false,
-        "dynamic_execution": true,
+        "dynamic_execution": false,
         "package_install": false
       }
     },
@@ -1067,17 +1055,6 @@
         "credentials": false,
         "dynamic_execution": false,
         "package_install": true
-      }
-    },
-    {
-      "path": "skills/writing-plans/SKILL.md",
-      "type": "review-signal",
-      "capabilities": {
-        "shell": false,
-        "network": false,
-        "credentials": false,
-        "dynamic_execution": true,
-        "package_install": false
       }
     }
   ]

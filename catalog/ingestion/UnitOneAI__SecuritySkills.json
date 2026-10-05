@@ -5,7 +5,7 @@
     "ref": "main",
     "revision": "70bc259bb01abb3015ad2ad859ad5253cbf0bcab",
     "revision_type": "git-commit",
-    "tree_sha": "4fadf214d3b5efe8dea7d3b09be0593eaa1cb3a4"
+    "tree_sha": "70bc259bb01abb3015ad2ad859ad5253cbf0bcab"
   },
   "discovered_skills": [
     {
@@ -1379,23 +1379,17 @@
       },
       "security": {
         "scan_status": "review-required",
-        "risk": "high",
+        "risk": "low",
         "capabilities": {
           "shell": false,
           "network": true,
           "credentials": false,
-          "dynamic_execution": true,
+          "dynamic_execution": false,
           "package_install": false,
           "filesystem_write": false,
           "encoded_content": false
         },
         "findings": [
-          {
-            "type": "dynamic-execution",
-            "line": 208,
-            "evidence": "function (",
-            "context": "1. **Confusing authentication with authorization.** An API that verifies the user's identity (authentication) but does not verify the user's permission to access the specific resource or function (authorization) is vulnerable to both BOLA ("
-          },
           {
             "type": "network-access",
             "line": 247,
@@ -1450,7 +1444,7 @@
         "shell": false,
         "network": true,
         "credentials": true,
-        "dynamic_execution": true,
+        "dynamic_execution": false,
         "package_install": false
       }
     },
@@ -2690,12 +2684,12 @@
       },
       "security": {
         "scan_status": "review-required",
-        "risk": "high",
+        "risk": "low",
         "capabilities": {
           "shell": false,
           "network": false,
           "credentials": false,
-          "dynamic_execution": true,
+          "dynamic_execution": false,
           "package_install": false,
           "filesystem_write": true,
           "encoded_content": false
@@ -2706,12 +2700,6 @@
             "line": 180,
             "evidence": "delete",
             "context": "- **3.2.1**: Data retention and disposal policies limit storage amount and retention time; quarterly process to identify/delete excess data"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 240,
-            "evidence": "function (",
-            "context": "- **7.2.2**: Access assigned based on job classification and function (role-based access control)"
           }
         ]
       },
@@ -2719,7 +2707,7 @@
         "shell": false,
         "network": false,
         "credentials": true,
-        "dynamic_execution": true,
+        "dynamic_execution": false,
         "package_install": false
       }
     },
@@ -6617,17 +6605,6 @@
       }
     },
     {
-      "path": "skills/appsec/api-security/SKILL.md",
-      "type": "review-signal",
-      "capabilities": {
-        "shell": false,
-        "network": true,
-        "credentials": true,
-        "dynamic_execution": true,
-        "package_install": false
-      }
-    },
-    {
       "path": "skills/appsec/owasp-top-10-web/SKILL.md",
       "type": "review-signal",
       "capabilities": {
@@ -6636,17 +6613,6 @@
         "credentials": true,
         "dynamic_execution": true,
         "package_install": true
-      }
-    },
-    {
-      "path": "skills/compliance/pci-dss-review/SKILL.md",
-      "type": "review-signal",
-      "capabilities": {
-        "shell": false,
-        "network": false,
-        "credentials": true,
-        "dynamic_execution": true,
-        "package_install": false
       }
     },
     {
