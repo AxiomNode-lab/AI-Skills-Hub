@@ -1,18 +1,18 @@
 # Current Status
 
-Snapshot: 2026-10-04, branch `feat/npm-mvp-release`, version `0.3.0-beta.1`. Counts come from `catalog/skills.json`, `catalog/bundles.json` and `catalog/sources.json`, and from running the commands below, not from earlier reports.
+Snapshot: 2026-10-05, version `0.3.0-beta.1`. Counts come from `catalog/skills.json`, `catalog/bundles.json` and `catalog/sources.json`, and from running the commands below, not from earlier reports.
 
 ## Catalog
 
 | Distribution | Records |
 | --- | ---: |
-| bundled (released) | 415 |
+| bundled (released) | 414 |
 | source-direct | 12 |
-| review-required | 616 |
+| review-required | 617 |
 | blocked | 40 |
 | **Total** | **1083** |
 
-415 records are materialized and release-eligible: 31 under Apache-2.0 (five Anthropic skills with skill-local licenses, and getsentry/skills and the aaron-he-zhu SEO/GEO skills under repository-root licenses) and 384 under a repository-root MIT license (microsoft/skills, obra/superpowers, K-Dense, supabase/agent-skills, addyosmani/agent-skills, UnitOneAI/SecuritySkills, wshobson/agents, BagelHole/DevOps-Security-Agent-Skills, j4flmao/agent-skills, harperaa/secure-claude-skills). Each has a review in `catalog/reviews/`, a manifest with per-file SHA-256 in `catalog/materialized-manifests/`, and its files under `skills/` ([evidence](VERIFIED-LOCAL-SKILLS.md), [policy](LICENSE-POLICY.md)). 1490 files are released. Five more reviewed records are held with recorded evidence (service retirement, a removed API, or a required skill that is not released).
+414 records are materialized and release-eligible: 31 under Apache-2.0 (five Anthropic skills with skill-local licenses, and getsentry/skills and the aaron-he-zhu SEO/GEO skills under repository-root licenses) and 383 under a repository-root MIT license (microsoft/skills, obra/superpowers, K-Dense, supabase/agent-skills, addyosmani/agent-skills, UnitOneAI/SecuritySkills, wshobson/agents, BagelHole/DevOps-Security-Agent-Skills, j4flmao/agent-skills, harperaa/secure-claude-skills). Each has a review in `catalog/reviews/`, a manifest with per-file SHA-256 in `catalog/materialized-manifests/`, and its files under `skills/` ([evidence](VERIFIED-LOCAL-SKILLS.md), [policy](LICENSE-POLICY.md)). 1488 files are released. The held `microsoft/azure-keyvault-keys-rust` record has a blocking four-byte DEK example documented in [Batch 06](reviews/independent-batch-06.ar.md); its upstream files are retained in provenance records but are not shipped.
 
 Released means provenance verified, license reviewed, scanner findings reviewed and release approved. It does not mean task performance was evaluated: no skill has a task-performance evaluation.
 
@@ -56,5 +56,5 @@ CI runs `validate-all` on Linux and Windows (Node 22), `verify-upstream` on Linu
 - The model-based reranker in `@ai-skills-hub/discovery` is not reachable from the CLI; search is keyword-based.
 - Bundle aliases (`@frontend`) are catalog groupings only; `install @name` is refused with `bundle_aliases_not_supported`.
 - 49 catalog records have no description; none is released. Descriptions are repaired only from the same upstream file (hash match), which is not available for them.
-- PR #11 asked for an additional independent instruction review of the second MIT batch; 40 of those skills received one (4 held), the rest were reviewed once in full.
+- PR #11 asked for an additional independent instruction review of the 139-skill expansion. The [reconciliation matrix](reviews/2026-10-05-pr10-expansion-reconciliation.json) now records 50 with additional batch evidence, 5 held and 89 eligible without that additional review.
 - No skill has a task-performance evaluation. Reviews are AI-assisted and are not legal advice or a security certification.

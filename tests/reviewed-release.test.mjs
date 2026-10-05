@@ -172,6 +172,7 @@ test("azure-keyvault-keys-rust remains held for the four-byte DEK example", () =
   assert.equal(fs.existsSync("skills/microsoft/azure-keyvault-keys-rust"), false);
   assert.equal(fs.existsSync("catalog/materialized-manifests/microsoft__azure-keyvault-keys-rust.json"), false);
   const boundReview = JSON.parse(fs.readFileSync("catalog/reviews/microsoft__azure-keyvault-keys-rust.json", "utf8"));
+  assert.equal(boundReview.status, "held");
   assert.equal(boundReview.content_review.status, "blocked");
   assert.equal(boundReview.content_review.risk, "high");
   assert.equal(boundReview.content_review.blocking_findings[0]?.line, 159);
