@@ -2,14 +2,14 @@
   "schema_version": 1,
   "snapshot_date": "2026-10-05",
   "main_commit": "998e8124ff37690cc1169cb67c65803257550eba",
-  "pr11_commit": "c8df71bcfd897fd9aee2fbe5323db29d98baf98a",
+  "pr11_commit": "e76646ad22f53be3e03d84a81c77fb913c02ab3a",
   "scope": "The exact 139-skill expansion recorded in PR #11; this matrix records current main state and batch coverage, not a new review or release decision.",
   "summary": {
     "total": 139,
     "eligible": 135,
     "held": 4,
-    "independently_reviewed_in_main": 40,
-    "eligible_without_independent_batch": 99
+    "independently_reviewed_in_main": 45,
+    "eligible_without_independent_batch": 94
   },
   "skills": [
     {
@@ -760,10 +760,13 @@
       "current_release": "eligible",
       "risk": "medium",
       "current_review": "catalog/reviews/microsoft__azure-cosmos-rust.json",
-      "independent_batch": null,
+      "independent_batch": {
+        "file": "docs/reviews/independent-batch-05.json",
+        "decision": "release"
+      },
       "manifest": "catalog/materialized-manifests/microsoft__azure-cosmos-rust.json",
       "skill_root": "skills/microsoft/azure-cosmos-rust",
-      "independent_review_remaining": true
+      "independent_review_remaining": false
     },
     {
       "id": "microsoft/azure-cosmos-ts",
@@ -934,10 +937,13 @@
       "current_release": "eligible",
       "risk": "medium",
       "current_review": "catalog/reviews/microsoft__azure-identity-rust.json",
-      "independent_batch": null,
+      "independent_batch": {
+        "file": "docs/reviews/independent-batch-05.json",
+        "decision": "release"
+      },
       "manifest": "catalog/materialized-manifests/microsoft__azure-identity-rust.json",
       "skill_root": "skills/microsoft/azure-identity-rust",
-      "independent_review_remaining": true
+      "independent_review_remaining": false
     },
     {
       "id": "microsoft/azure-identity-ts",
@@ -1012,10 +1018,13 @@
       "current_release": "eligible",
       "risk": "medium",
       "current_review": "catalog/reviews/microsoft__azure-keyvault-secrets-rust.json",
-      "independent_batch": null,
+      "independent_batch": {
+        "file": "docs/reviews/independent-batch-05.json",
+        "decision": "release"
+      },
       "manifest": "catalog/materialized-manifests/microsoft__azure-keyvault-secrets-rust.json",
       "skill_root": "skills/microsoft/azure-keyvault-secrets-rust",
-      "independent_review_remaining": true
+      "independent_review_remaining": false
     },
     {
       "id": "microsoft/azure-keyvault-secrets-ts",
@@ -1747,10 +1756,13 @@
       "current_release": "eligible",
       "risk": "medium",
       "current_review": "catalog/reviews/microsoft__microsoft-docs.json",
-      "independent_batch": null,
+      "independent_batch": {
+        "file": "docs/reviews/independent-batch-05.json",
+        "decision": "release"
+      },
       "manifest": "catalog/materialized-manifests/microsoft__microsoft-docs.json",
       "skill_root": "skills/microsoft/microsoft-docs",
-      "independent_review_remaining": true
+      "independent_review_remaining": false
     },
     {
       "id": "microsoft/wiki-agents-md",
@@ -1771,10 +1783,13 @@
       "current_release": "eligible",
       "risk": "medium",
       "current_review": "catalog/reviews/microsoft__wiki-vitepress.json",
-      "independent_batch": null,
+      "independent_batch": {
+        "file": "docs/reviews/independent-batch-05.json",
+        "decision": "release"
+      },
       "manifest": "catalog/materialized-manifests/microsoft__wiki-vitepress.json",
       "skill_root": "skills/microsoft/wiki-vitepress",
-      "independent_review_remaining": true
+      "independent_review_remaining": false
     },
     {
       "id": "obra/diagnosing-superpowers",
