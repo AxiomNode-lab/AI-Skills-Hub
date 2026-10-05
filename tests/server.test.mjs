@@ -1,9 +1,11 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { PassThrough } from "node:stream";
+import { loadRegistry } from "../packages/core/src/index.mjs";
 import { createCatalog, createHubServer, handleMcpMessage, runStdioServer } from "../packages/server/src/index.mjs";
 
-const catalog = createCatalog();
+const registry = loadRegistry();
+const catalog = createCatalog(registry);
 const rpc = (method, params, id = 1) => handleMcpMessage(catalog, { jsonrpc: "2.0", id, method, params });
 
 async function withServer(t) {
@@ -71,11 +73,14 @@ test("MCP stdio transport answers line-delimited requests", async () => {
   let text = "";
   output.on("data", chunk => { text += chunk; });
   const done = runStdioServer({ input, output });
-  input.end('{"jsonrpc":"2.0","id":7,"method":"ping"}\nnot json\n');
+  input.end('{"jsonrpc":"2.0","id":7,"method":"ping"}\nnot json\n{"jsonrpc":"2.0","id":8,"method":"initialize","params":null}\n');
   await done;
-  const [ping, parseError] = text.trim().split("\n").map(line => JSON.parse(line));
+  const [ping, parseError, failed] = text.trim().split("\n").map(line => JSON.parse(line));
   assert.deepEqual(ping, { jsonrpc: "2.0", id: 7, result: {} });
   assert.equal(parseError.error.code, -32700);
+  // A request that fails while being handled keeps its id and is not a parse error.
+  assert.equal(failed.id, 8);
+  assert.ok(failed.error && failed.error.code !== -32700, JSON.stringify(failed));
 });
 
 test("HTTP API serves health, filtered skills, details, and bundles", async t => {
@@ -109,4 +114,39 @@ test("HTTP MCP endpoint accepts JSON-RPC posts and rejects other methods", async
   assert.equal((await post("{")).status, 400);
   assert.equal((await fetch(base + "/mcp")).status, 405);
   assert.equal((await fetch(base + "/api/health", { method: "DELETE" })).status, 405);
+});
+
+test("HTTP MCP endpoint refuses cross-site origins and answers oversized bodies with 413", async t => {
+  const { base } = await withServer(t);
+  const body = JSON.stringify({ jsonrpc: "2.0", id: 1, method: "tools/list" });
+  const post = (headers, payload = body) => fetch(base + "/mcp", { method: "POST", headers: { "content-type": "application/json", ...headers }, body: payload });
+  assert.equal((await post({ origin: "https://attacker.example" })).status, 403);
+  assert.equal((await post({ origin: "http://localhost:3000" })).status, 403);
+  assert.equal((await post({ origin: base })).status, 200);
+  assert.equal((await post({})).status, 200);
+  const big = await post({}, "x".repeat(1024 * 1024 + 1));
+  assert.equal(big.status, 413);
+  assert.equal((await big.json()).error, "Request body too large");
+});
+
+
+test("skills-hub mcp writes only JSON-RPC to stdout and negotiates supported protocol versions", async () => {
+  const { spawnSync } = await import("node:child_process");
+  const { fileURLToPath } = await import("node:url");
+  const cliPath = fileURLToPath(new URL("../packages/cli/bin/skills-hub.mjs", import.meta.url));
+  const input = [
+    { jsonrpc: "2.0", id: 1, method: "initialize", params: { protocolVersion: "2025-03-26", capabilities: {}, clientInfo: { name: "t", version: "1" } } },
+    { jsonrpc: "2.0", method: "notifications/initialized" },
+    { jsonrpc: "2.0", id: 2, method: "initialize", params: { protocolVersion: "1999-01-01" } },
+    { jsonrpc: "2.0", id: 3, method: "tools/call", params: { name: "search_skills", arguments: { query: "frontend design", limit: 2 } } }
+  ].map(m => JSON.stringify(m)).join("\n") + "\nnot json\n";
+  // A TTY-like environment would trigger the update check on other commands; mcp must not print it.
+  const result = spawnSync(process.execPath, [cliPath, "mcp"], { input, encoding: "utf8", env: { ...process.env, SKILLS_HUB_NO_UPDATE_CHECK: "" } });
+  const lines = result.stdout.trim().split("\n");
+  const messages = lines.map(line => JSON.parse(line));
+  assert.equal(messages.length, 4, result.stdout);
+  assert.equal(messages[0].result.protocolVersion, "2025-03-26");
+  assert.equal(messages[1].result.protocolVersion, "2025-06-18", "unsupported versions get the latest supported one");
+  assert.ok(messages[2].result.structuredContent.items.length > 0);
+  assert.equal(messages[3].error.code, -32700);
 });

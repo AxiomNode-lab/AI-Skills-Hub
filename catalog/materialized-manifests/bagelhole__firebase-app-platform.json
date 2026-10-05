@@ -1,0 +1,116 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "bagelhole/firebase-app-platform",
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "infrastructure/platforms/firebase-app-platform",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "review": {
+    "path": "catalog/reviews/bagelhole__firebase-app-platform.json",
+    "sha256": "c3a87073c1612b3b069ae96e01d779e16cd920649a6157ba9d964289a97a32b2"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "package-install",
+        "line": 26,
+        "evidence": "npm install",
+        "context": "- Firebase CLI (`npm install -g firebase-tools`)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 32,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 34,
+        "evidence": "npm install",
+        "context": "npm install -g firebase-tools",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 74,
+        "evidence": "delete",
+        "context": "      allow update, delete: if request.auth != null",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 259,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 270,
+        "evidence": "http://",
+        "context": "# Emulator UI at http://localhost:4000",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 288,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 308,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 329,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 337,
+        "evidence": "delete",
+        "context": "firebase hosting:channel:delete pr-123",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 10861
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "0b3324833c803e1ce9b724205587008825bbb3132235cd77b930a725d55d3141",
+      "bytes": 9793,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 10861
+}

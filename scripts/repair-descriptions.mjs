@@ -3,14 +3,14 @@
 // bare YAML block indicators (">", "|-", ...). Each upstream SKILL.md is fetched
 // at the catalog's pinned commit and must match the recorded SHA-256 before its
 // description is used. Usage: node scripts/repair-descriptions.mjs [--check]
-import crypto from "node:crypto";
 import fs from "node:fs";
 import { parseFrontmatter } from "../packages/core/src/index.mjs";
+import { sha256 as hash } from "../packages/materializer/src/reviewed.mjs";
 
 const check = process.argv.includes("--check");
 const catalogFile = "catalog/skills.json";
 const catalog = JSON.parse(fs.readFileSync(catalogFile, "utf8"));
-const isBroken = (value) => /^[>|][+-]?\d*$/.test(String(value ?? "").trim());
+const isBroken = (value) => /^[>|](?:[+-]?\d*|\d[+-])$/.test(String(value ?? "").trim());
 const broken = catalog.skills.filter((skill) => isBroken(skill.description));
 
 if (check) {
@@ -43,7 +43,7 @@ for (const skill of broken) {
     continue;
   }
   const body = await response.text();
-  const sha256 = crypto.createHash("sha256").update(body).digest("hex");
+  const sha256 = hash(body);
   if (skill.integrity?.upstream_skill_sha256 && sha256 !== skill.integrity.upstream_skill_sha256) {
     failures.push(`${skill.id}: upstream SHA-256 does not match the catalog record`);
     continue;

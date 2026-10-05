@@ -1,7 +1,7 @@
 import { catalogAvailability } from "@ai-skills-hub/core";
+import { availabilityLabel, installationLabel } from "./ui.mjs";
 import { readInstallRecords, verifyInstallRecord } from "../../installer/src/state.mjs";
 
-export { catalogAvailability };
 
 export function recordedInstallation(record) {
   const base = { agent: record.agent, scope: record.scope, destination: record.destination ?? null };
@@ -34,7 +34,7 @@ export function statusReader(options = {}) {
 }
 
 export function printCapabilityStatus(status) {
-  console.log(`Availability: ${status.availability.status} (${status.availability.reason})`);
+  console.log(`Availability: ${availabilityLabel(status.availability.status)} (${status.availability.reason})`);
   const installed = status.installation;
-  console.log(`Installation: ${installed.status} (${installed.scope}, ${installed.agent || "all agents"})${installed.reason ? ` / ${installed.reason}` : ""}`);
+  console.log(`Installation: ${installationLabel(installed.status)} (${installed.scope}, ${installed.agent || "all agents"})${installed.reason ? ` / ${installed.reason}` : ""}`);
 }

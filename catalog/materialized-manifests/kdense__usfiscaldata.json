@@ -1,0 +1,493 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "kdense/usfiscaldata",
+  "source": {
+    "repo": "K-Dense-AI/scientific-agent-skills",
+    "path": "skills/usfiscaldata",
+    "revision": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298"
+  },
+  "review": {
+    "path": "catalog/reviews/kdense__usfiscaldata.json",
+    "sha256": "e966fc6bc726ba9f569e71f519d4556f5f430f193da01c65a6838399a0cd0551"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "credential-access",
+        "line": 7,
+        "evidence": "API key",
+        "context": "- No API key, no authentication, no registration required",
+        "file": "references/api-basics.md"
+      },
+      {
+        "type": "network-access",
+        "line": 16,
+        "evidence": "https://",
+        "context": "Base URL:  https://api.fiscaldata.treasury.gov/services/api/fiscal_service",
+        "file": "references/api-basics.md"
+      },
+      {
+        "type": "network-access",
+        "line": 21,
+        "evidence": "https://",
+        "context": "https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v2/accounting/od/debt_to_penny?fields=record_date,tot_pub_debt_out_amt&sort=-record_date&page[size]=5",
+        "file": "references/api-basics.md"
+      },
+      {
+        "type": "network-access",
+        "line": 39,
+        "evidence": "https://",
+        "context": "1. Dataset detail page at `https://fiscaldata.treasury.gov/datasets/{slug}/`",
+        "file": "references/api-basics.md"
+      },
+      {
+        "type": "network-access",
+        "line": 40,
+        "evidence": "https://",
+        "context": "2. Site implementation fallback (not a stable API contract): Gatsby page data: `https://fiscaldata.treasury.gov/page-data/datasets/{slug}/page-data.json` (look for `\"endpoint\"` fields)",
+        "file": "references/api-basics.md"
+      },
+      {
+        "type": "network-access",
+        "line": 41,
+        "evidence": "https://",
+        "context": "3. [API endpoint table](https://fiscaldata.treasury.gov/api-documentation/#list-of-endpoints-table)",
+        "file": "references/api-basics.md"
+      },
+      {
+        "type": "network-access",
+        "line": 88,
+        "evidence": "https://",
+        "context": "The [Fiscal Service Data Registry](https://fiscal.treasury.gov/data-registry/index.html) contains field definitions, authoritative sources, data types, and formats across federal government data.",
+        "file": "references/api-basics.md"
+      },
+      {
+        "type": "network-access",
+        "line": 22,
+        "evidence": "https://",
+        "context": "    \"https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v2/accounting/od/debt_to_penny\",",
+        "file": "references/datasets-debt.md"
+      },
+      {
+        "type": "network-access",
+        "line": 33,
+        "evidence": "https://",
+        "context": "    \"https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v2/accounting/od/debt_to_penny\",",
+        "file": "references/datasets-debt.md"
+      },
+      {
+        "type": "network-access",
+        "line": 63,
+        "evidence": "https://",
+        "context": "    \"https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v2/accounting/od/debt_outstanding\",",
+        "file": "references/datasets-debt.md"
+      },
+      {
+        "type": "network-access",
+        "line": 122,
+        "evidence": "https://",
+        "context": "    \"https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v2/debt/tror\",",
+        "file": "references/datasets-debt.md"
+      },
+      {
+        "type": "network-access",
+        "line": 181,
+        "evidence": "https://",
+        "context": "- [Debt To The Penny](https://fiscaldata.treasury.gov/datasets/debt-to-the-penny/)",
+        "file": "references/datasets-debt.md"
+      },
+      {
+        "type": "network-access",
+        "line": 182,
+        "evidence": "https://",
+        "context": "- [Schedules Federal Debt](https://fiscaldata.treasury.gov/datasets/schedules-federal-debt/)",
+        "file": "references/datasets-debt.md"
+      },
+      {
+        "type": "network-access",
+        "line": 183,
+        "evidence": "https://",
+        "context": "- [Treasury Report On Receivables](https://fiscaldata.treasury.gov/datasets/treasury-report-on-receivables/)",
+        "file": "references/datasets-debt.md"
+      },
+      {
+        "type": "network-access",
+        "line": 184,
+        "evidence": "https://",
+        "context": "- [Interest Expense Debt Outstanding](https://fiscaldata.treasury.gov/datasets/interest-expense-debt-outstanding/)",
+        "file": "references/datasets-debt.md"
+      },
+      {
+        "type": "network-access",
+        "line": 185,
+        "evidence": "https://",
+        "context": "- [Ssa Title Xii Advance Activities](https://fiscaldata.treasury.gov/datasets/ssa-title-xii-advance-activities/)",
+        "file": "references/datasets-debt.md"
+      },
+      {
+        "type": "network-access",
+        "line": 189,
+        "evidence": "https://",
+        "context": "- [Daily Treasury Statement](https://fiscaldata.treasury.gov/datasets/daily-treasury-statement/)",
+        "file": "references/datasets-fiscal.md"
+      },
+      {
+        "type": "network-access",
+        "line": 190,
+        "evidence": "https://",
+        "context": "- [Monthly Treasury Statement](https://fiscaldata.treasury.gov/datasets/monthly-treasury-statement/)",
+        "file": "references/datasets-fiscal.md"
+      },
+      {
+        "type": "network-access",
+        "line": 191,
+        "evidence": "https://",
+        "context": "- [Treasury Bulletin](https://fiscaldata.treasury.gov/datasets/treasury-bulletin/)",
+        "file": "references/datasets-fiscal.md"
+      },
+      {
+        "type": "network-access",
+        "line": 22,
+        "evidence": "https://",
+        "context": "    \"https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v2/accounting/od/avg_interest_rates\",",
+        "file": "references/datasets-interest-rates.md"
+      },
+      {
+        "type": "network-access",
+        "line": 37,
+        "evidence": "https://",
+        "context": "    \"https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v2/accounting/od/avg_interest_rates\",",
+        "file": "references/datasets-interest-rates.md"
+      },
+      {
+        "type": "network-access",
+        "line": 187,
+        "evidence": "https://",
+        "context": "- [Average Interest Rates Treasury Securities](https://fiscaldata.treasury.gov/datasets/average-interest-rates-treasury-securities/)",
+        "file": "references/datasets-interest-rates.md"
+      },
+      {
+        "type": "network-access",
+        "line": 188,
+        "evidence": "https://",
+        "context": "- [Treasury Reporting Rates Exchange](https://fiscaldata.treasury.gov/datasets/treasury-reporting-rates-exchange/)",
+        "file": "references/datasets-interest-rates.md"
+      },
+      {
+        "type": "network-access",
+        "line": 189,
+        "evidence": "https://",
+        "context": "- [Tips Cpi Data](https://fiscaldata.treasury.gov/datasets/tips-cpi-data/)",
+        "file": "references/datasets-interest-rates.md"
+      },
+      {
+        "type": "network-access",
+        "line": 190,
+        "evidence": "https://",
+        "context": "- [Slgs Daily Rate Table](https://fiscaldata.treasury.gov/datasets/slgs-daily-rate-table/)",
+        "file": "references/datasets-interest-rates.md"
+      },
+      {
+        "type": "network-access",
+        "line": 31,
+        "evidence": "https://",
+        "context": "    \"https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v1/accounting/od/auctions_query\",",
+        "file": "references/datasets-securities.md"
+      },
+      {
+        "type": "network-access",
+        "line": 44,
+        "evidence": "https://",
+        "context": "    \"https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v1/accounting/od/auctions_query\",",
+        "file": "references/datasets-securities.md"
+      },
+      {
+        "type": "network-access",
+        "line": 76,
+        "evidence": "https://",
+        "context": "    \"https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v1/accounting/od/upcoming_auctions\",",
+        "file": "references/datasets-securities.md"
+      },
+      {
+        "type": "network-access",
+        "line": 110,
+        "evidence": "https://",
+        "context": "    \"https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v1/accounting/od/buybacks_operations\",",
+        "file": "references/datasets-securities.md"
+      },
+      {
+        "type": "network-access",
+        "line": 259,
+        "evidence": "https://",
+        "context": "- [Treasury Securities Auctions Data](https://fiscaldata.treasury.gov/datasets/treasury-securities-auctions-data/)",
+        "file": "references/datasets-securities.md"
+      },
+      {
+        "type": "network-access",
+        "line": 260,
+        "evidence": "https://",
+        "context": "- [Upcoming Auctions](https://fiscaldata.treasury.gov/datasets/upcoming-auctions/)",
+        "file": "references/datasets-securities.md"
+      },
+      {
+        "type": "network-access",
+        "line": 261,
+        "evidence": "https://",
+        "context": "- [I Bonds Interest Rates](https://fiscaldata.treasury.gov/datasets/i-bonds-interest-rates/)",
+        "file": "references/datasets-securities.md"
+      },
+      {
+        "type": "network-access",
+        "line": 262,
+        "evidence": "https://",
+        "context": "- [Savings Bonds Issues Redemptions Maturities By Series](https://fiscaldata.treasury.gov/datasets/savings-bonds-issues-redemptions-maturities-by-series/)",
+        "file": "references/datasets-securities.md"
+      },
+      {
+        "type": "network-access",
+        "line": 263,
+        "evidence": "https://",
+        "context": "- [Slgs Securities](https://fiscaldata.treasury.gov/datasets/slgs-securities/)",
+        "file": "references/datasets-securities.md"
+      },
+      {
+        "type": "network-access",
+        "line": 264,
+        "evidence": "https://",
+        "context": "- [Slgs Securities Program Stats](https://fiscaldata.treasury.gov/datasets/slgs-securities-program-stats/)",
+        "file": "references/datasets-securities.md"
+      },
+      {
+        "type": "network-access",
+        "line": 15,
+        "evidence": "https://",
+        "context": "BASE_URL = \"https://api.fiscaldata.treasury.gov/services/api/fiscal_service\"",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "network-access",
+        "line": 198,
+        "evidence": "https://",
+        "context": "base <- \"https://api.fiscaldata.treasury.gov/services/api/fiscal_service\"",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "network-access",
+        "line": 217,
+        "evidence": "https://",
+        "context": "Use the [dataset catalog](https://fiscaldata.treasury.gov/datasets/) and each",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "network-access",
+        "line": 219,
+        "evidence": "https://",
+        "context": "limitations. The [API guide](https://fiscaldata.treasury.gov/api-documentation/)",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "network-access",
+        "line": 137,
+        "evidence": "https://",
+        "context": "    base = \"https://api.fiscaldata.treasury.gov/services/api/fiscal_service\"",
+        "file": "references/parameters.md"
+      },
+      {
+        "type": "network-access",
+        "line": 186,
+        "evidence": "https://",
+        "context": "    \"https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v1/accounting/od/rates_of_exchange\",",
+        "file": "references/parameters.md"
+      },
+      {
+        "type": "network-access",
+        "line": 118,
+        "evidence": "https://",
+        "context": "    base = \"https://api.fiscaldata.treasury.gov/services/api/fiscal_service\"",
+        "file": "references/response-format.md"
+      },
+      {
+        "type": "network-access",
+        "line": 162,
+        "evidence": "https://",
+        "context": "    \"https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v2/accounting/od/debt_to_penny\",",
+        "file": "references/response-format.md"
+      },
+      {
+        "type": "network-access",
+        "line": 178,
+        "evidence": "https://",
+        "context": "    \"https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v2/accounting/od/debt_to_penny\",",
+        "file": "references/response-format.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 3,
+        "evidence": "API key",
+        "context": "description: Queries the U.S. Treasury Fiscal Data REST API for federal financial data. No API key required. Use for national debt (Debt to the Penny), Daily Treasury Statements, Monthly Treasury Statements, Treasury securities auctions, in",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 6,
+        "evidence": "Bash",
+        "context": "allowed-tools: Read Write Edit Bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 15,
+        "evidence": "API key",
+        "context": "Free, open REST API from the U.S. Department of the Treasury for federal financial data. No API key or registration required.",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 17,
+        "evidence": "https://",
+        "context": "**Base URL:** `https://api.fiscaldata.treasury.gov/services/api/fiscal_service`",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 19,
+        "evidence": "https://",
+        "context": "Browse [the current dataset catalog](https://fiscaldata.treasury.gov/datasets/) via the dataset search. Verify endpoint paths on each dataset's API Quick Guide — paths change over time.",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 23,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 24,
+        "evidence": "pip install",
+        "context": "uv pip install requests pandas",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 33,
+        "evidence": "https://",
+        "context": "BASE_URL = \"https://api.fiscaldata.treasury.gov/services/api/fiscal_service\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 177,
+        "evidence": "https://",
+        "context": "Reviewed against the [official API guide](https://fiscaldata.treasury.gov/api-documentation/), dataset data dictionaries, and unauthenticated live GET responses on 2026-09-30. See references for table-specific caveats.",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 198,
+        "evidence": "https://",
+        "context": "> https://doi.org/10.48550/arXiv.2609.00065",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 200,
+        "evidence": "https://",
+        "context": "Always cite the current version. The DOI and https://arxiv.org/abs/2609.00065 resolve to the",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 202,
+        "evidence": "https://",
+        "context": "available, fetch https://arxiv.org/abs/2609.00065 (or",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 203,
+        "evidence": "http://",
+        "context": "http://export.arxiv.org/api/query?id_list=2609.00065) before writing the reference and take",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 71035
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE.md"
+    },
+    {
+      "path": "references/api-basics.md",
+      "sha256": "6f3d80a2d49dc28d41908274fb96efcc63242d0dcff6a5b369a4e9ec9a69d256",
+      "bytes": 3953,
+      "mode": "100644"
+    },
+    {
+      "path": "references/datasets-debt.md",
+      "sha256": "4822640d01a464cba36ca344c112fe7ab00786085a86d5bb798c6e7e95f6f858",
+      "bytes": 7109,
+      "mode": "100644"
+    },
+    {
+      "path": "references/datasets-fiscal.md",
+      "sha256": "64b10a2ee66781d6832dfb697a3d4b43d686d3f8ad74ddea46dc4659176bb8ec",
+      "bytes": 9620,
+      "mode": "100644"
+    },
+    {
+      "path": "references/datasets-interest-rates.md",
+      "sha256": "51504b8d7c6fa9d2481ca24446cb45a6216d291e93e4cc9ac6761cff25bec743",
+      "bytes": 7024,
+      "mode": "100644"
+    },
+    {
+      "path": "references/datasets-securities.md",
+      "sha256": "96286113846f6d9cc64f76ba94c8a1fe79be60df63f613812cb0620bfe094bd9",
+      "bytes": 10148,
+      "mode": "100644"
+    },
+    {
+      "path": "references/examples.md",
+      "sha256": "57cce4b3f3bc81431f0a8b6826b495953a4210199a86af09fd7edcf2a39413d6",
+      "bytes": 9702,
+      "mode": "100644"
+    },
+    {
+      "path": "references/parameters.md",
+      "sha256": "93b230c3d944fab0629e12709265d0b52f3b1afebf061928ae6d1b7183dc8a2e",
+      "bytes": 6692,
+      "mode": "100644"
+    },
+    {
+      "path": "references/response-format.md",
+      "sha256": "a8993a9b8d154ddd39801cae05b2e052366ea37bfafce4793a75b67fa1fb0ac1",
+      "bytes": 6093,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "7cdcb756489ae8e94a73df1eebfb9abef554e912af6559ebd28dffa021ab63d5",
+      "bytes": 9626,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 71035
+}

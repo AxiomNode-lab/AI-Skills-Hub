@@ -1,0 +1,171 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "bagelhole/docker-compose",
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "devops/containers/docker-compose",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "review": {
+    "path": "catalog/reviews/bagelhole__docker-compose.json",
+    "sha256": "a14827f2ce474883ff07b036993ee3ebe0801754e6b1643f34c7d8edfa63d398"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "network-access",
+        "line": 51,
+        "evidence": "curl",
+        "context": "      test: [\"CMD\", \"curl\", \"-f\", \"http://localhost/health\"]",
+        "file": "references/compose-patterns.md"
+      },
+      {
+        "type": "network-access",
+        "line": 51,
+        "evidence": "http://",
+        "context": "      test: [\"CMD\", \"curl\", \"-f\", \"http://localhost/health\"]",
+        "file": "references/compose-patterns.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 75,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/compose-patterns.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 44,
+        "evidence": "secret",
+        "context": "      - DATABASE_URL=postgres://postgres:secret@db:5432/myapp",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 53,
+        "evidence": "secret",
+        "context": "      POSTGRES_PASSWORD: secret",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 94,
+        "evidence": "API_KEY",
+        "context": "      - API_KEY=${API_KEY}  # From shell or .env file",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 94,
+        "evidence": "API_KEY",
+        "context": "      - API_KEY=${API_KEY}  # From shell or .env file",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 242,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 274,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 289,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 299,
+        "evidence": "remove",
+        "context": "# Stop and remove containers",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 302,
+        "evidence": "remove",
+        "context": "# Stop and remove everything including volumes",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 311,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 327,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 343,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 348,
+        "evidence": "sh",
+        "context": "docker compose exec web /bin/sh",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 371,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 11013
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/compose-patterns.md",
+      "sha256": "b9f13e6e97c542bebad2d01c2694abf7bb98b99020f6eaa82c5464dddba17e8e",
+      "bytes": 1818,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "0a3ca0d9b2b521e639f408127066977cd14de75ef412bab3d921820f6c60ff0d",
+      "bytes": 8127,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 11013
+}

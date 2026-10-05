@@ -1,63 +1,60 @@
 # Current Status
 
-Repository snapshot: 2026-10-03. Counts below come from `catalog/skills.json`, `catalog/bundles.json`, and `catalog/sources.json`, not from installed files or remote search results.
+Snapshot: 2026-10-04, branch `feat/npm-mvp-release`, version `0.3.0-beta.1`. Counts come from `catalog/skills.json`, `catalog/bundles.json` and `catalog/sources.json`, and from running the commands below, not from earlier reports.
 
 ## Catalog
 
 | Distribution | Records |
 | --- | ---: |
-| bundled | 26 |
+| bundled (released) | 415 |
 | source-direct | 12 |
-| review-required | 476 |
-| blocked | 20 |
-| **Total** | **534** |
+| review-required | 616 |
+| blocked | 40 |
+| **Total** | **1083** |
 
-508 records have `release.status: hold`; 26 are materialized and release-eligible: five Anthropic skills under skill-local Apache-2.0 licenses and 21 from microsoft/skills, obra/superpowers, and K-Dense under a repository-root MIT license (see the [license policy](LICENSE-POLICY.md)). [Release evidence](VERIFIED-LOCAL-SKILLS.md) records their pinned provenance, file-level license decisions, scans, and hashes. Installation success is not task-performance evaluation. There are 7 bundle definitions and 15 source/provider/standard records. The local contract treats these as Skills: 221 explicitly declare `artifact_type: skill`, and 313 omit it and use the default. The catalog currently contains no explicit MCP server, Agent Plugin, or CLI tool records.
+415 records are materialized and release-eligible: 31 under Apache-2.0 (five Anthropic skills with skill-local licenses, and getsentry/skills and the aaron-he-zhu SEO/GEO skills under repository-root licenses) and 384 under a repository-root MIT license (microsoft/skills, obra/superpowers, K-Dense, supabase/agent-skills, addyosmani/agent-skills, UnitOneAI/SecuritySkills, wshobson/agents, BagelHole/DevOps-Security-Agent-Skills, j4flmao/agent-skills, harperaa/secure-claude-skills). Each has a review in `catalog/reviews/`, a manifest with per-file SHA-256 in `catalog/materialized-manifests/`, and its files under `skills/` ([evidence](VERIFIED-LOCAL-SKILLS.md), [policy](LICENSE-POLICY.md)). 1490 files are released. Five more reviewed records are held with recorded evidence (service retirement, a removed API, or a required skill that is not released).
 
-Reproduce the distribution counts from the repository root:
+Released means provenance verified, license reviewed, scanner findings reviewed and release approved. It does not mean task performance was evaluated: no skill has a task-performance evaluation.
+
+`catalog/sources.json` has 25 source, provider and standard records. The 40 blocked records are 20 seo-geo-claude-skills signposts (`upstream-moved`) and 20 records recorded as `upstream-skill-missing` (15 obra/superpowers, 4 vercel-labs, 1 microsoft). Eight of the obra ones are legacy `obra/superpowers/*` duplicates of live `obra/<name>` records whose files do exist upstream; the reason was recorded when sync compared directory paths with `SKILL.md` paths.
+
+Reproduce the counts:
 
 ```bash
 node -e "const c=require('./catalog/skills.json'); console.log('total',c.skills.length); for(const s of ['bundled','source-direct','review-required','blocked']) console.log(s,c.skills.filter(x=>x.distribution===s).length)"
 ```
 
-`obra/superpowers/brainstorming` is currently blocked with release reason `upstream-skill-missing`. Its presence in search results is not permission to install it.
+## Distribution
 
-## Implemented CLI behavior
+Users install one npm package, `@axiomnode-lab/skills-hub` (binary `skills-hub`). `scripts/build-package.mjs` builds it from the workspace: the runtime modules reachable from the CLI with internal imports rewritten to relative paths, the registry, and the files, manifest and review of every released skill. Runtime dependencies are `@inquirer/prompts` and `yaml`. `scripts/e2e-package.mjs` packs it, installs the tarball into a temporary project, and runs the workflow there through the installed binary, `npx`, and a global install. The workspace packages `@ai-skills-hub/*` are private and are not published.
 
-- `search` searches the local catalog. A phrase or keyword must match before agent/status ranking bonuses apply. `--agent` filters compatibility.
-- `info` and `search` separate catalog availability from verified Hub installation state. `list` reads installation records for the selected scope and agent, not the catalog.
-- `install` accepts explicit IDs, checks skill compatibility and distribution/release gates, and reports every outcome. JSON success requires all requested installations and resolved dependencies to succeed; incomplete requests exit 1.
-- Eligible materialized bundles use the native installer. 26 reviewed text-only skills are available in the current catalog. Source-direct skills require explicit external-install consent; review and blocked states are not overridden by `--yes`.
-- `add` accepts a Git URL (cloned into `capabilities-library` for review) or starts interactive hybrid discovery. Remote queries do not require a `--remote` flag; the CLI has no such option. Selection and external execution are separate steps.
-- The no-command flow browses/searches compatible catalog entries interactively. Installs are sequential, not parallel.
-- The CLI resolves the catalog and materialized skills from the Hub root (or `SKILLS_HUB_HOME`) and installs relative to the current directory, so it can be run inside any project.
-- `mcp` (stdio) and `serve` (HTTP, `127.0.0.1:8787` by default) run a read-only catalog server: `search_skills` and `get_skill` MCP tools, released-skill file resources, and the routes in [API](API.md). No browser catalog exists yet.
-- `create`, `sync`, and interactive `uninstall` are also available. See `node packages/cli/bin/skills-hub.mjs help` and [installation](INSTALLATION.md).
+The package is not yet published to npm. Releases are tag-driven ([RELEASING](RELEASING.md)).
 
-## Library capabilities and limits
+## CLI behavior
 
-The discovery package includes skills.sh, MCP Registry, GitHub, npm, and plugin providers, a cache, query hints, and optional model reranking. These are implementation capabilities, not a guarantee that every upstream service is reachable. The CLI does not expose every library option; for example, it has no model-reranking flags, and `add` does not supply configured GitHub sources.
-
-Adapter code supports MCP configuration/external commands, npm project dependencies, and adding a Codex plugin marketplace. Adding a marketplace does not install the plugin. These remote artifact types are not currently persisted as approved records in the local catalog.
-
-Installation state is written atomically. Managed skill file hashes support verification; missing or changed files display `unverified`. External installers do not automatically produce verified Hub skill records, so `not-recorded` is not proof that no external installation exists. Existing state stores one record per skill ID within each scope.
+- `available`, `search` and `info` read the packaged catalog. Search is keyword matching with ranking (exact ID/name, publisher/category/tag, compatibility, release state); release state and installability only rank results that already match the text.
+- `install` installs released skills for one agent, dependencies first. It verifies the artifact against its manifest before writing, writes exactly the verified bytes, records per-file hashes in `.ai-skills-hub/installed.json`, refuses to replace an unmanaged or edited folder without `--force`, and treats reinstalling the same revision as a no-op. Install paths through symlinks are refused. Multi-skill installs are not atomic; nothing is rolled back.
+- `update` moves installed skills to the released revision; it refuses releases that are not eligible and keeps edited files unless `--force`; `--dry-run` reports only.
+- `uninstall <id>` removes only a Hub-managed folder directly inside the agent's skills root, checks the recorded agent, scope and file hashes, and never follows symlinks.
+- External installers (source-direct skills, MCP configuration, plugin marketplaces) run only after `--yes`, through an allowlisted binary and a validated argument vector, which `install` shows before consent. Adding a plugin marketplace is reported as not installed.
+- `add <phrase>` combines the catalog with public directories (skills.sh, MCP Registry, npm, plugin directories); popularity can rank a result higher but never releases it. `add <git-url>` clones an https or SSH repository into `capabilities-library/` for review; it installs and releases nothing.
+- `mcp` and `serve` are read-only. `serve` binds to 127.0.0.1 by default, has no authentication, and warns on other addresses. The server verifies the release manifest, review hash and file hashes on every request, refuses symlinks and paths outside the package, and checks `Host` and `Origin`.
+- Exit codes: 0 success, 1 failed operation, 2 usage error. `--json` is always machine-readable, including usage errors.
 
 ## Verification
 
-`pnpm validate-all` checks workspace exports, JavaScript syntax, schema references, the generated lockfile, registry policy, materialized integrity, the project duplicate report, and tests. `pnpm run dedupe` is the project report command; `pnpm dedupe` is the package-manager command.
-
-`pnpm test` discovers test files explicitly and rejects runs with no files or no passing tests. CI runs the same validation on `ubuntu-latest` and `windows-latest` with Node 22. Path assertions use native path construction. The MCP symlink test skips only if Windows denies creating the fixture link with `EPERM` or `EACCES`; when creation succeeds, the protection assertion must pass.
-
-Source/agent validation and the local capability contract can also be checked directly:
-
 ```bash
-node scripts/validate-sources.mjs
-node scripts/validate-capability-contract.mjs
+pnpm validate-all      # workspace, syntax, schemas, lockfile, registry, materialized integrity, dedupe, tests
+pnpm verify-upstream   # re-download every released file at its pinned commit and compare SHA-256
+pnpm e2e:package       # build, pack, install the tarball in a temp dir, run the user workflow
 ```
 
-## Remaining work
+CI runs `validate-all` on Linux and Windows (Node 22), `verify-upstream` on Linux, and the package E2E on both.
 
-- Review and release eligible artifacts with artifact-level license evidence and immutable source revisions.
-- Persist approved MCP, Plugin, and CLI records in the local catalog.
-- Add stronger dependency planning, evaluation signals, artifact caching, and update/rollback transactions.
-- Extend installation evidence for external adapters and multiple agents without treating catalog inclusion as trust.
+## Known limitations
+
+- The model-based reranker in `@ai-skills-hub/discovery` is not reachable from the CLI; search is keyword-based.
+- Bundle aliases (`@frontend`) are catalog groupings only; `install @name` is refused with `bundle_aliases_not_supported`.
+- 49 catalog records have no description; none is released. Descriptions are repaired only from the same upstream file (hash match), which is not available for them.
+- PR #11 asked for an additional independent instruction review of the second MIT batch; 40 of those skills received one (4 held), the rest were reviewed once in full.
+- No skill has a task-performance evaluation. Reviews are AI-assisted and are not legal advice or a security certification.

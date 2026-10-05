@@ -50,14 +50,17 @@ test("local search keeps deterministic alphabetical ordering for equal scores",(
 });
 
 test("agent filtering and compatibility bonuses only apply to textual matches",()=>{
+  // "generic" is an Agent Skills format skill, so every standard agent can use it;
+  // an explicit listing still ranks first.
   const skills=[
     {id:"generic",name:"alpha",tags:["needle"],compatibility:["agent-skills"]},
     {id:"explicit",name:"beta",tags:["needle"],compatibility:["generic-agent","codex"]},
     {id:"unrelated",name:"other",compatibility:["generic-agent","codex"],release:{status:"eligible"},distribution:"bundled"}
   ];
   assert.deepEqual(searchRegistry({skills},"needle",{agent:"generic-agent"}).map(x=>x.item.id),["explicit","generic"]);
-  assert.deepEqual(searchRegistry({skills},"needle",{agent:"codex"}).map(x=>x.item.id),["explicit"]);
-  assert.deepEqual(searchRegistry({skills},"needle",{agent:"claude-code"}),[]);
+  assert.deepEqual(searchRegistry({skills},"needle",{agent:"codex"}).map(x=>x.item.id),["explicit","generic"]);
+  assert.deepEqual(searchRegistry({skills},"needle",{agent:"claude-code"}).map(x=>x.item.id),["generic"]);
+  assert.deepEqual(searchRegistry({skills},"needle",{agent:"unknown-agent"}),[]);
 });
 
 test("released bundle becomes local install choice",()=>{
@@ -222,4 +225,16 @@ test("review-required skill cannot silently become source-direct",async()=>{
   },"codex");
   assert.equal(plan.action,"adapter-pending");
   assert.equal(plan.reason,"manual_review_required");
+});
+
+test("real-catalog search ranks the obvious capability first and only returns textual matches", async () => {
+  const { loadRegistry } = await import("../packages/core/src/index.mjs");
+  const registry = loadRegistry();
+  const top = (query, options = {}) => searchRegistry(registry, query, { limit: 5, ...options }).map(({ item }) => item);
+  assert.equal(top("pdf")[0].id, "anthropics/pdf");
+  assert.equal(top("frontend design", { agent: "codex" })[0].id, "anthropics/frontend-design");
+  assert.ok(top("docker").slice(0, 2).every(skill => skill.id.includes("docker")));
+  // Release state and installability rank among matches; they never create a match.
+  for (const skill of top("pdf")) assert.match(`${skill.id} ${skill.name} ${skill.description} ${(skill.tags ?? []).join(" ")}`, /pdf/i, skill.id);
+  assert.equal(searchRegistry(registry, "zzqx-no-such-capability", { limit: 5 }).length, 0);
 });

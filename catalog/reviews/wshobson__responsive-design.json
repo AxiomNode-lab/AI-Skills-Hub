@@ -1,0 +1,239 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "wshobson/responsive-design",
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "wshobson/agents",
+    "path": "plugins/ui-design/skills/responsive-design",
+    "revision": "156b7a5e7a8b93642628a339ee4039c925b34c7f"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "plugins/ui-design/skills/responsive-design",
+    "url": "https://api.github.com/repos/wshobson/agents/git/trees/156b7a5e7a8b93642628a339ee4039c925b34c7f?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/wshobson/agents/blob/156b7a5e7a8b93642628a339ee4039c925b34c7f/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "plugins",
+        "plugins/ui-design",
+        "plugins/ui-design/skills",
+        "plugins/ui-design/skills/responsive-design"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file; Bootstrap/Tailwind breakpoint values are factual numbers, not copied documentation. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "none",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": false,
+      "network": false,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md and references/details.md, references/breakpoint-strategies.md, references/container-queries.md, references/fluid-layouts.md in full. The skill is reference guidance on mobile-first breakpoints, container queries, fluid typography/spacing with clamp(), CSS Grid/Flexbox layouts, responsive images, navigation and tables, with CSS and React/Tailwind samples.",
+      "No commands, installs, credentials, or network access; all code is CSS/TSX/JS the user may adopt in their own front-end (a Playwright-style breakpoint test helper takes a page object the user supplies).",
+      "Short layout idioms (sidebar, cluster, switcher in references/fluid-layouts.md:288-362) are widely used CSS techniques of the kind popularised by Every Layout, which is linked as a resource; they are a few lines each and not reproduced prose. SKILL.md:23 points to references/details.md, which is present."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "f89abb55d9f073f38f1703e4518f0613c788c6174be7f13b8dfe48a1c076c746",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "326f0a55c96e672fedf9d807ca043c00df05ba0e",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
+      "findings": []
+    },
+    {
+      "path": "references/breakpoint-strategies.md",
+      "sha256": "d086c14641856aacdd38fd8aebf2988fb0055b7ed1b8773feb3104e69c7d1506",
+      "bytes": 10658,
+      "mode": "100644",
+      "git_blob": "97620dd79bdf3f3cdd7aff8b1635842c713e3f04",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 459,
+          "evidence": "Remove",
+          "context": "  /* Remove non-essential elements */",
+          "disposition": "accepted",
+          "reason": "The matched word 'Remove' is a CSS comment in a print stylesheet (hide non-essential elements), not a file operation."
+        },
+        {
+          "type": "network-access",
+          "line": 588,
+          "evidence": "https://",
+          "context": "- [Tailwind CSS Breakpoints](https://tailwindcss.com/docs/responsive-design)",
+          "disposition": "accepted",
+          "reason": "Resource lists link to Tailwind docs, MDN, W3C, web.dev, Smashing Magazine and similar articles; the skill does not instruct fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 589,
+          "evidence": "https://",
+          "context": "- [The 100% Correct Way to Do CSS Breakpoints](https://www.freecodecamp.org/news/the-100-correct-way-to-do-css-breakpoints-88d6a5ba1862/)",
+          "disposition": "accepted",
+          "reason": "Resource lists link to Tailwind docs, MDN, W3C, web.dev, Smashing Magazine and similar articles; the skill does not instruct fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 590,
+          "evidence": "https://",
+          "context": "- [Modern CSS Solutions](https://moderncss.dev/)",
+          "disposition": "accepted",
+          "reason": "Resource lists link to Tailwind docs, MDN, W3C, web.dev, Smashing Magazine and similar articles; the skill does not instruct fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 591,
+          "evidence": "https://",
+          "context": "- [Defensive CSS](https://defensivecss.dev/)",
+          "disposition": "accepted",
+          "reason": "Resource lists link to Tailwind docs, MDN, W3C, web.dev, Smashing Magazine and similar articles; the skill does not instruct fetching them."
+        }
+      ]
+    },
+    {
+      "path": "references/container-queries.md",
+      "sha256": "67b1697186a531751ec2aa364506919b9ae44680744603613c511d5132eb5a24",
+      "bytes": 9913,
+      "mode": "100644",
+      "git_blob": "98471f8ca44142227d9cc1f23f4aee0b2dfc5394",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 561,
+          "evidence": "https://",
+          "context": "- [MDN Container Queries](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_container_queries)",
+          "disposition": "accepted",
+          "reason": "Resource lists link to Tailwind docs, MDN, W3C, web.dev, Smashing Magazine and similar articles; the skill does not instruct fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 562,
+          "evidence": "https://",
+          "context": "- [CSS Container Queries Spec](https://www.w3.org/TR/css-contain-3/)",
+          "disposition": "accepted",
+          "reason": "Resource lists link to Tailwind docs, MDN, W3C, web.dev, Smashing Magazine and similar articles; the skill does not instruct fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 563,
+          "evidence": "https://",
+          "context": "- [Una Kravets: Container Queries](https://web.dev/cq-stable/)",
+          "disposition": "accepted",
+          "reason": "Resource lists link to Tailwind docs, MDN, W3C, web.dev, Smashing Magazine and similar articles; the skill does not instruct fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 564,
+          "evidence": "https://",
+          "context": "- [Ahmad Shadeed: Container Queries Guide](https://ishadeed.com/article/container-queries-are-finally-here/)",
+          "disposition": "accepted",
+          "reason": "Resource lists link to Tailwind docs, MDN, W3C, web.dev, Smashing Magazine and similar articles; the skill does not instruct fetching them."
+        }
+      ]
+    },
+    {
+      "path": "references/details.md",
+      "sha256": "6b8d84250249319719fc5d4a545628267edd16b8763c107536cf7341d37740b4",
+      "bytes": 10667,
+      "mode": "100644",
+      "git_blob": "6846aa955394c74a1e0816cdd7e8382575fb213d",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "references/fluid-layouts.md",
+      "sha256": "d67ad19e57b015101da5d4c4a9208015909f60b89db5b7922d0bf9ca17673860",
+      "bytes": 10731,
+      "mode": "100644",
+      "git_blob": "29fde9cf9bde75980829cce6e72e126d12e77702",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 535,
+          "evidence": "https://",
+          "context": "- [Utopia Fluid Type Calculator](https://utopia.fyi/)",
+          "disposition": "accepted",
+          "reason": "Resource lists link to Tailwind docs, MDN, W3C, web.dev, Smashing Magazine and similar articles; the skill does not instruct fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 536,
+          "evidence": "https://",
+          "context": "- [Modern Fluid Typography](https://www.smashingmagazine.com/2022/01/modern-fluid-typography-css-clamp/)",
+          "disposition": "accepted",
+          "reason": "Resource lists link to Tailwind docs, MDN, W3C, web.dev, Smashing Magazine and similar articles; the skill does not instruct fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 537,
+          "evidence": "https://",
+          "context": "- [Every Layout](https://every-layout.dev/)",
+          "disposition": "accepted",
+          "reason": "Resource lists link to Tailwind docs, MDN, W3C, web.dev, Smashing Magazine and similar articles; the skill does not instruct fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 538,
+          "evidence": "https://",
+          "context": "- [CSS min(), max(), and clamp()](https://web.dev/min-max-clamp/)",
+          "disposition": "accepted",
+          "reason": "Resource lists link to Tailwind docs, MDN, W3C, web.dev, Smashing Magazine and similar articles; the skill does not instruct fetching them."
+        }
+      ]
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "c8bd56f8fc0f122c4ff392b02617f0e6bb4a353b2d0189235c6ee77cdcfe8690",
+      "bytes": 1989,
+      "mode": "100644",
+      "git_blob": "caec2b194f22e940260a3b697919884c15b346e8",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": []
+    }
+  ]
+}

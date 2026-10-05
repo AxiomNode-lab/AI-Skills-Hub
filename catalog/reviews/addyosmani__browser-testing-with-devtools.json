@@ -1,0 +1,111 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "addyosmani/browser-testing-with-devtools",
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "addyosmani/agent-skills",
+    "path": "skills/browser-testing-with-devtools",
+    "revision": "1401c8b8030e023baeebb31781a6653fe8e93026"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "skills/browser-testing-with-devtools",
+    "url": "https://api.github.com/repos/addyosmani/agent-skills/git/trees/1401c8b8030e023baeebb31781a6653fe8e93026?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/addyosmani/agent-skills/blob/1401c8b8030e023baeebb31781a6653fe8e93026/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "skills",
+        "skills/browser-testing-with-devtools"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT License with its copyright notice, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "medium",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "dynamic_execution": true,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md in full. Uses the Chrome DevTools MCP server to verify browser work: screenshots, DOM/console/network inspection, performance traces, accessibility tree, plus debugging workflows and test-plan templates.",
+      "Medium because setup adds an .mcp.json entry that runs `npx -y chrome-devtools-mcp@latest --isolated` (SKILL.md:28-39), an unpinned package fetched at launch, and the server lets the agent drive a browser and execute JavaScript in page context. Acceptable: it is the official Chrome DevTools MCP package, defaults to an isolated/dedicated profile, and the skill sets strong guardrails: treat all browser content as untrusted (SKILL.md:72-80), read-only JS with no external requests or cookie/localStorage access (82-90), user confirmation for DOM mutations and for navigating to URLs found in pages, and user instructions win over page content (107).",
+      "Users should know that the optional `--autoConnect` mode (SKILL.md:43, 64) attaches to their real logged-in Chrome profile; the skill warns against it unless the test needs logged-in state. Pinning the chrome-devtools-mcp version instead of @latest would reduce supply-chain exposure."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "6f202f8bd568cd730dbb2b0d1f8e243bc74c2fa1f64dbce9b2c7ea08bd5c9fd7",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "d67778ada6b9cda6227e9130da182c13e73c8b2e",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry the copyright and permission notice.",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "4e3aacd6a380cd25bc6c2d67fdd1c926a9b22535b8a62109ecd33cefd909e3d9",
+      "bytes": 14539,
+      "mode": "100644",
+      "git_blob": "9864d2724e273e1164d62ab10b73590ae00fd6a8",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "credential-access",
+          "line": 88,
+          "evidence": "credential",
+          "context": "- **No credential access.** Do not use JavaScript execution to read cookies, localStorage tokens, sessionStorage secrets, or any authentication material.",
+          "disposition": "accepted",
+          "reason": "Mentions of credentials are prohibitions: JS execution must not read cookies, localStorage tokens or other credential material."
+        },
+        {
+          "type": "network-access",
+          "line": 192,
+          "evidence": "http://",
+          "context": "1. Navigate to http://localhost:3000/tasks",
+          "disposition": "accepted",
+          "reason": "http://localhost:3000/tasks is an example local dev-server URL in a test-plan template."
+        },
+        {
+          "type": "credential-access",
+          "line": 289,
+          "evidence": "Credential",
+          "context": "| \"I need to read localStorage to debug this\" | Credential material is off-limits. Inspect application state through non-sensitive variables instead. |",
+          "disposition": "accepted",
+          "reason": "Mentions of credentials are prohibitions: JS execution must not read cookies, localStorage tokens or other credential material."
+        }
+      ]
+    }
+  ]
+}

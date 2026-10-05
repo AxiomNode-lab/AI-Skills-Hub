@@ -1,0 +1,115 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "wshobson/on-call-handoff-patterns",
+  "source": {
+    "repo": "wshobson/agents",
+    "path": "plugins/incident-response/skills/on-call-handoff-patterns",
+    "revision": "156b7a5e7a8b93642628a339ee4039c925b34c7f"
+  },
+  "review": {
+    "path": "catalog/reviews/wshobson__on-call-handoff-patterns.json",
+    "sha256": "6d9c55323b12330dc34f0c270eaf2d2c5cc8b4f2846f52653caca0f6c45e9251"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "low",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": false,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": false,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "network-access",
+        "line": 45,
+        "evidence": "https://",
+        "context": "- Dashboard: [API Latency](https://grafana/d/api-latency)",
+        "file": "references/details.md"
+      },
+      {
+        "type": "network-access",
+        "line": 69,
+        "evidence": "https://",
+        "context": "- Dashboard: [Auth Service Memory](https://grafana/d/auth-memory)",
+        "file": "references/details.md"
+      },
+      {
+        "type": "network-access",
+        "line": 70,
+        "evidence": "https://",
+        "context": "- Analysis doc: [Memory Investigation](https://docs/eng-1235)",
+        "file": "references/details.md"
+      },
+      {
+        "type": "network-access",
+        "line": 81,
+        "evidence": "https://",
+        "context": "- **Postmortem**: [POSTMORTEM-89](https://docs/postmortem-89)",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 149,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/details.md"
+      },
+      {
+        "type": "network-access",
+        "line": 166,
+        "evidence": "https://",
+        "context": "- [Runbooks](https://wiki/runbooks)",
+        "file": "references/details.md"
+      },
+      {
+        "type": "network-access",
+        "line": 167,
+        "evidence": "https://",
+        "context": "- [Service Catalog](https://wiki/services)",
+        "file": "references/details.md"
+      },
+      {
+        "type": "network-access",
+        "line": 168,
+        "evidence": "https://",
+        "context": "- [Incident Slack](https://slack.com/incidents)",
+        "file": "references/details.md"
+      },
+      {
+        "type": "network-access",
+        "line": 169,
+        "evidence": "https://",
+        "context": "- [PagerDuty](https://pagerduty.com/schedules)",
+        "file": "references/details.md"
+      }
+    ],
+    "total_bytes": 11045
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "f89abb55d9f073f38f1703e4518f0613c788c6174be7f13b8dfe48a1c076c746",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/details.md",
+      "sha256": "7270323f269f96af621686db8ac558315b5c5ff42cd719866070d8aabc9827ff",
+      "bytes": 6276,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "46d03bf3a2922e77d0393dc6c0f0342056a25af15bee7c7523b0adc6d1e5d49e",
+      "bytes": 3701,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 11045
+}

@@ -1,0 +1,108 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "wshobson/event-store-design",
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "wshobson/agents",
+    "path": "plugins/backend-development/skills/event-store-design",
+    "revision": "156b7a5e7a8b93642628a339ee4039c925b34c7f"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "plugins/backend-development/skills/event-store-design",
+    "url": "https://api.github.com/repos/wshobson/agents/git/trees/156b7a5e7a8b93642628a339ee4039c925b34c7f?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/wshobson/agents/blob/156b7a5e7a8b93642628a339ee4039c925b34c7f/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "plugins",
+        "plugins/backend-development",
+        "plugins/backend-development/skills",
+        "plugins/backend-development/skills/event-store-design"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "low",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": false,
+      "network": false,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md and references/details.md in full. Event-sourcing store design: architecture, requirements, technology comparison, and templates for a PostgreSQL schema, an asyncpg-based Python event store, EventStoreDB client usage, and a DynamoDB event store.",
+      "No commands, installs, credentials, or network access by the agent; the SQL and Python are templates for the user's own code.",
+      "The EventStoreDB sample connects with `esdb://localhost:2113?tls=false` (details.md:318), a local-dev setting users should not carry to production. The DynamoDB template's 'conditional write for concurrency' docstring does not actually use a condition expression (details.md:392-409), so it does not enforce optimistic concurrency as written."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "f89abb55d9f073f38f1703e4518f0613c788c6174be7f13b8dfe48a1c076c746",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "326f0a55c96e672fedf9d807ca043c00df05ba0e",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
+      "findings": []
+    },
+    {
+      "path": "references/details.md",
+      "sha256": "485be108607252e1a7ba2948c5c81c4ee7573c9b5386e7a62f98a5f0f0c1ec51",
+      "bytes": 11449,
+      "mode": "100644",
+      "git_blob": "17e738f3727a4d278cb6b6a26e05cd2cf4ea0837",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "66bcb9ad668a029829ad5b573457f61ebb987018dc4d60023352fac8cd5d5400",
+      "bytes": 4148,
+      "mode": "100644",
+      "git_blob": "2f09764c1b38ab15dd069d6836a66f580e7884e8",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 77,
+          "evidence": "delete",
+          "context": "- **Don't update or delete events** - They're immutable facts",
+          "disposition": "accepted",
+          "reason": "'Don't update or delete events' at SKILL.md:77 is design advice, not a file operation."
+        }
+      ]
+    }
+  ]
+}

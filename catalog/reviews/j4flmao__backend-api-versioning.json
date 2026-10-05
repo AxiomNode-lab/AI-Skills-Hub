@@ -1,0 +1,515 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "j4flmao/backend-api-versioning",
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "j4flmao/agent-skills",
+    "path": "skills/backend/universal/api-versioning",
+    "revision": "d9f812988c8926767ee96f66c1a340d65b595799"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "skills/backend/universal/api-versioning",
+    "url": "https://api.github.com/repos/j4flmao/agent-skills/git/trees/d9f812988c8926767ee96f66c1a340d65b595799?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/j4flmao/agent-skills/blob/d9f812988c8926767ee96f66c1a340d65b595799/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "skills",
+        "skills/backend",
+        "skills/backend/universal",
+        "skills/backend/universal/api-versioning"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file; frontmatter declares MIT, and RFC/OWASP-style material is only cited or paraphrased (e.g. RFC 8594 by number), not reproduced. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "low",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": false,
+      "network": false,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md and references/api-migration-deprecation.md, api-versioning-advanced.md, api-versioning-fundamentals.md, api-versioning-multi-protocol.md, api-versioning-strategies.md, breaking-change-mgmt.md, version-compatibility-testing.md, version-discovery.md, version-lifecycle.md, version-migration-automation.md and versioning-strategies.md in full. The skill covers API versioning strategy (URI/header/content-negotiation/query), breaking-change classification, Deprecation/Sunset/Link headers, sunset with 410, migration tooling and multi-protocol (REST/GraphQL/gRPC/WebSocket) versioning.",
+      "Guidance only shapes the user's code and process. There are no instructions for the agent to run commands, install packages, use credentials or contact services. version-migration-automation.md:9-40 is a GitHub Actions workflow template (it commits, pushes a branch and deploys when the user triggers it by hand). Its sunsetVersion/cron sample (lines 139-174) deletes route files automatically once consumers reach zero. Both are code for the user's own repository, not agent actions.",
+      "Minor inaccuracies only. api-versioning-strategies.md:282 returns 1 with the comment 'default to latest'. api-migration-deprecation.md:190 uses await in a non-async middleware, and its consumerTracking (lines 518-552) keys on API key/IP/user agent. The AWS SAM sample at api-versioning-strategies.md:619 uses AuthorizationType: NONE as a routing illustration. No unsafe security default is recommended; SKILL.md:446-451 says old versions must keep current auth and rate-limit rules."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "b6b8d73f01a48d1411da29d8196e2d85cd91cc9e8d7ae6ac4863ae7e06e6d314",
+      "bytes": 1064,
+      "mode": "100644",
+      "git_blob": "0e8b6e6d8678128ebfcc28d7cad91fa9ed7f2354",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
+      "findings": []
+    },
+    {
+      "path": "references/api-migration-deprecation.md",
+      "sha256": "45193e3549901f2f9582a09ff42f408a781b8d79aca8adaec5e66e939f29943d",
+      "bytes": 23017,
+      "mode": "100644",
+      "git_blob": "c14aa89300a7a6b4d4459d46fc4d70e04e17e3af",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 120,
+          "evidence": "remove",
+          "context": "    remove:",
+          "disposition": "accepted",
+          "reason": "Hits are words like 'remove'/'Remove'/'Delete' in deprecation prose and in sample code (e.g. 'Remove from gateway', 'Delete route handlers' in a user-run sunset script); the agent is not told to delete files."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 236,
+          "evidence": "Remove",
+          "context": "- Remove deprecated code and tests.",
+          "disposition": "accepted",
+          "reason": "Hits are words like 'remove'/'Remove'/'Delete' in deprecation prose and in sample code (e.g. 'Remove from gateway', 'Delete route handlers' in a user-run sunset script); the agent is not told to delete files."
+        },
+        {
+          "type": "network-access",
+          "line": 380,
+          "evidence": "https://",
+          "context": "          documentation: 'https://docs.example.com/migration'",
+          "disposition": "accepted",
+          "reason": "URLs are example docs/API hosts (docs.example.com, api.example.com, localhost pact URLs) and a 'curl' mention in a comparison table; the skill does not instruct fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 396,
+          "evidence": "https://",
+          "context": "    successor_url: \"https://api.example.com/v2\"",
+          "disposition": "accepted",
+          "reason": "URLs are example docs/API hosts (docs.example.com, api.example.com, localhost pact URLs) and a 'curl' mention in a comparison table; the skill does not instruct fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 472,
+          "evidence": "http://",
+          "context": "const proxy = new MigrationProxy('http://api-v2.internal:8080');",
+          "disposition": "accepted",
+          "reason": "URLs are example docs/API hosts (docs.example.com, api.example.com, localhost pact URLs) and a 'curl' mention in a comparison table; the skill does not instruct fetching them."
+        },
+        {
+          "type": "credential-access",
+          "line": 520,
+          "evidence": "api-key",
+          "context": "    headerName = 'x-api-key',   // or 'x-consumer-id'",
+          "disposition": "accepted",
+          "reason": "API keys appear as header names (x-api-key) in consumer-identification and version-pinning sample code and as placeholder test values (apiKey: 'test'); there's no instruction to read or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 692,
+          "evidence": "api_key",
+          "context": "  count(DISTINCT api_key) AS unique_consumers",
+          "disposition": "accepted",
+          "reason": "API keys appear as header names (x-api-key) in consumer-identification and version-pinning sample code and as placeholder test values (apiKey: 'test'); there's no instruction to read or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 700,
+          "evidence": "api_key",
+          "context": "  api_key,",
+          "disposition": "accepted",
+          "reason": "API keys appear as header names (x-api-key) in consumer-identification and version-pinning sample code and as placeholder test values (apiKey: 'test'); there's no instruction to read or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 708,
+          "evidence": "api_key",
+          "context": "GROUP BY api_key, consumer_name",
+          "disposition": "accepted",
+          "reason": "API keys appear as header names (x-api-key) in consumer-identification and version-pinning sample code and as placeholder test values (apiKey: 'test'); there's no instruction to read or send real secrets."
+        }
+      ]
+    },
+    {
+      "path": "references/api-versioning-advanced.md",
+      "sha256": "349388bc6f47a9d22bcded48682fdbc8cc074bc41adc429d5bd79f48b24212b6",
+      "bytes": 4267,
+      "mode": "100644",
+      "git_blob": "f04a52511204ba9417035d1e36c92dc896e4bb59",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 89,
+          "evidence": "http://",
+          "context": "    proxy_pass http://backend-${api_version};",
+          "disposition": "accepted",
+          "reason": "URLs are example docs/API hosts (docs.example.com, api.example.com, localhost pact URLs) and a 'curl' mention in a comparison table; the skill does not instruct fetching them."
+        }
+      ]
+    },
+    {
+      "path": "references/api-versioning-fundamentals.md",
+      "sha256": "7c461f2c3152a65a272c17e0944c86bb0dbf6bb1cb356d9ce68323823a7657d2",
+      "bytes": 2382,
+      "mode": "100644",
+      "git_blob": "4348444423870733de03c7d231277f232412bca7",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "references/api-versioning-multi-protocol.md",
+      "sha256": "556d155dccd9480509272cc55e1017d8374e2b1f5df5f6f1e09103cbd5d2ea31",
+      "bytes": 2532,
+      "mode": "100644",
+      "git_blob": "ce60bac843de4bc700e6647000b20ffffeb6462b",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 87,
+          "evidence": "https://",
+          "context": "      \"docs\": \"https://docs.example.com/api/v2\"",
+          "disposition": "accepted",
+          "reason": "URLs are example docs/API hosts (docs.example.com, api.example.com, localhost pact URLs) and a 'curl' mention in a comparison table; the skill does not instruct fetching them."
+        }
+      ]
+    },
+    {
+      "path": "references/api-versioning-strategies.md",
+      "sha256": "b7ba5cef310325e92fa10e539b53df2e6f942b4134ff9336952ac97e5591ca59",
+      "bytes": 20000,
+      "mode": "100644",
+      "git_blob": "406b8c43a0f6d900c42b010d7b9cdd2f6403daab",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 554,
+          "evidence": "http://",
+          "context": "  url: http://user-service-v1:8080",
+          "disposition": "accepted",
+          "reason": "URLs are example docs/API hosts (docs.example.com, api.example.com, localhost pact URLs) and a 'curl' mention in a comparison table; the skill does not instruct fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 560,
+          "evidence": "http://",
+          "context": "  url: http://user-service-v2:8080",
+          "disposition": "accepted",
+          "reason": "URLs are example docs/API hosts (docs.example.com, api.example.com, localhost pact URLs) and a 'curl' mention in a comparison table; the skill does not instruct fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 640,
+          "evidence": "https://",
+          "context": "  - url: https://api.example.com/v2",
+          "disposition": "accepted",
+          "reason": "URLs are example docs/API hosts (docs.example.com, api.example.com, localhost pact URLs) and a 'curl' mention in a comparison table; the skill does not instruct fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 642,
+          "evidence": "https://",
+          "context": "  - url: https://api.example.com/v1",
+          "disposition": "accepted",
+          "reason": "URLs are example docs/API hosts (docs.example.com, api.example.com, localhost pact URLs) and a 'curl' mention in a comparison table; the skill does not instruct fetching them."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 783,
+          "evidence": "remove",
+          "context": "Avro schema evolution rules: can add fields with defaults, can remove fields with defaults, can change field types only within compatibility rules. Use Confluent Schema Registry with compatibility modes (BACKWARD, FORWARD, FULL, NONE).",
+          "disposition": "accepted",
+          "reason": "Hits are words like 'remove'/'Remove'/'Delete' in deprecation prose and in sample code (e.g. 'Remove from gateway', 'Delete route handlers' in a user-run sunset script); the agent is not told to delete files."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 805,
+          "evidence": "remove",
+          "context": "Keeping versions in \"beta\" or \"preview\" indefinitely. Either commit to a version or remove it. Beta versions should have clear lifespan.",
+          "disposition": "accepted",
+          "reason": "Hits are words like 'remove'/'Remove'/'Delete' in deprecation prose and in sample code (e.g. 'Remove from gateway', 'Delete route handlers' in a user-run sunset script); the agent is not told to delete files."
+        }
+      ]
+    },
+    {
+      "path": "references/breaking-change-mgmt.md",
+      "sha256": "15563fce4b96f17e7bc69ca692ab5b577c89ff9f46e2b4c51dbfb55e4e3edd58",
+      "bytes": 1541,
+      "mode": "100644",
+      "git_blob": "b6cff39ecd874e74a8ac191c9a28c1ded0f4fa8d",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 33,
+          "evidence": "Remove",
+          "context": "5. **Remove**: After sunset date, return `410 Gone`.",
+          "disposition": "accepted",
+          "reason": "Hits are words like 'remove'/'Remove'/'Delete' in deprecation prose and in sample code (e.g. 'Remove from gateway', 'Delete route handlers' in a user-run sunset script); the agent is not told to delete files."
+        }
+      ]
+    },
+    {
+      "path": "references/version-compatibility-testing.md",
+      "sha256": "ac625f3b17191def7918cd8828a33e7835d0826d831974da427d7e473a7f73e2",
+      "bytes": 4429,
+      "mode": "100644",
+      "git_blob": "1125bc18148e5eafe86b5affc9489f068752170f",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 73,
+          "evidence": "http://",
+          "context": "        providerBaseUrl: `http://localhost:3000/v2`,",
+          "disposition": "accepted",
+          "reason": "URLs are example docs/API hosts (docs.example.com, api.example.com, localhost pact URLs) and a 'curl' mention in a comparison table; the skill does not instruct fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 74,
+          "evidence": "http://",
+          "context": "        providerStatesSetupUrl: `http://localhost:3000/test/setup`,",
+          "disposition": "accepted",
+          "reason": "URLs are example docs/API hosts (docs.example.com, api.example.com, localhost pact URLs) and a 'curl' mention in a comparison table; the skill does not instruct fetching them."
+        },
+        {
+          "type": "credential-access",
+          "line": 114,
+          "evidence": "apiKey",
+          "context": "    const client = new ApiClient({ baseUrl: '/v1', apiKey: 'test' });",
+          "disposition": "accepted",
+          "reason": "API keys appear as header names (x-api-key) in consumer-identification and version-pinning sample code and as placeholder test values (apiKey: 'test'); there's no instruction to read or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 120,
+          "evidence": "apiKey",
+          "context": "    const clientV2 = new ApiClient({ baseUrl: '/v2', apiKey: 'test' });",
+          "disposition": "accepted",
+          "reason": "API keys appear as header names (x-api-key) in consumer-identification and version-pinning sample code and as placeholder test values (apiKey: 'test'); there's no instruction to read or send real secrets."
+        }
+      ]
+    },
+    {
+      "path": "references/version-discovery.md",
+      "sha256": "079ecae866da8ba5124fe98b6058db062481972c7aa1ad9af156aa7439fb9a41",
+      "bytes": 6761,
+      "mode": "100644",
+      "git_blob": "9782d04c5b25a651151066ef692ae722063c484d",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 49,
+          "evidence": "curl",
+          "context": "| Tooling support | curl, Postman need config | Direct | curl, Postman need header |",
+          "disposition": "accepted",
+          "reason": "URLs are example docs/API hosts (docs.example.com, api.example.com, localhost pact URLs) and a 'curl' mention in a comparison table; the skill does not instruct fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 49,
+          "evidence": "curl",
+          "context": "| Tooling support | curl, Postman need config | Direct | curl, Postman need header |",
+          "disposition": "accepted",
+          "reason": "URLs are example docs/API hosts (docs.example.com, api.example.com, localhost pact URLs) and a 'curl' mention in a comparison table; the skill does not instruct fetching them."
+        },
+        {
+          "type": "credential-access",
+          "line": 88,
+          "evidence": "apiKey",
+          "context": "    const apiKey = req.headers['x-api-key'] as string;",
+          "disposition": "accepted",
+          "reason": "API keys appear as header names (x-api-key) in consumer-identification and version-pinning sample code and as placeholder test values (apiKey: 'test'); there's no instruction to read or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 88,
+          "evidence": "api-key",
+          "context": "    const apiKey = req.headers['x-api-key'] as string;",
+          "disposition": "accepted",
+          "reason": "API keys appear as header names (x-api-key) in consumer-identification and version-pinning sample code and as placeholder test values (apiKey: 'test'); there's no instruction to read or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 89,
+          "evidence": "apiKey",
+          "context": "    if (apiKey) {",
+          "disposition": "accepted",
+          "reason": "API keys appear as header names (x-api-key) in consumer-identification and version-pinning sample code and as placeholder test values (apiKey: 'test'); there's no instruction to read or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 90,
+          "evidence": "apiKey",
+          "context": "      const client = clientRegistry.get(apiKey);",
+          "disposition": "accepted",
+          "reason": "API keys appear as header names (x-api-key) in consumer-identification and version-pinning sample code and as placeholder test values (apiKey: 'test'); there's no instruction to read or send real secrets."
+        }
+      ]
+    },
+    {
+      "path": "references/version-lifecycle.md",
+      "sha256": "f26ea5573d4808bce24fd1e0d40299d800dcd5ec70bdd4c398bb442395f5138a",
+      "bytes": 6598,
+      "mode": "100644",
+      "git_blob": "8e5483be135c6c6b5f2ddd13d170f6c1e2ebf49a",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "credential-access",
+          "line": 91,
+          "evidence": "API key",
+          "context": "      - \"Email all API key holders\"",
+          "disposition": "accepted",
+          "reason": "API keys appear as header names (x-api-key) in consumer-identification and version-pinning sample code and as placeholder test values (apiKey: 'test'); there's no instruction to read or send real secrets."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 125,
+          "evidence": "Remove",
+          "context": "      - \"Remove v1 from CI/CD\"",
+          "disposition": "accepted",
+          "reason": "Hits are words like 'remove'/'Remove'/'Delete' in deprecation prose and in sample code (e.g. 'Remove from gateway', 'Delete route handlers' in a user-run sunset script); the agent is not told to delete files."
+        },
+        {
+          "type": "network-access",
+          "line": 141,
+          "evidence": "https://",
+          "context": "1. Review the migration guide: https://docs.example.com/migration-v1-to-v2",
+          "disposition": "accepted",
+          "reason": "URLs are example docs/API hosts (docs.example.com, api.example.com, localhost pact URLs) and a 'curl' mention in a comparison table; the skill does not instruct fetching them."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 198,
+          "evidence": "Remove",
+          "context": "    - \"Remove old behavior after coexistence\"",
+          "disposition": "accepted",
+          "reason": "Hits are words like 'remove'/'Remove'/'Delete' in deprecation prose and in sample code (e.g. 'Remove from gateway', 'Delete route handlers' in a user-run sunset script); the agent is not told to delete files."
+        }
+      ]
+    },
+    {
+      "path": "references/version-migration-automation.md",
+      "sha256": "4e50816b14b35b6e3368c87b75284e0979b3990a5b3a2b02c5a1ba4faee4e428",
+      "bytes": 5508,
+      "mode": "100644",
+      "git_blob": "73ef9530e6d2a6db4e0bfacf02fa9aa6f1703051",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 147,
+          "evidence": "Remove",
+          "context": "  // 2. Remove from gateway",
+          "disposition": "accepted",
+          "reason": "Hits are words like 'remove'/'Remove'/'Delete' in deprecation prose and in sample code (e.g. 'Remove from gateway', 'Delete route handlers' in a user-run sunset script); the agent is not told to delete files."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 150,
+          "evidence": "Delete",
+          "context": "  // 3. Delete route handlers",
+          "disposition": "accepted",
+          "reason": "Hits are words like 'remove'/'Remove'/'Delete' in deprecation prose and in sample code (e.g. 'Remove from gateway', 'Delete route handlers' in a user-run sunset script); the agent is not told to delete files."
+        }
+      ]
+    },
+    {
+      "path": "references/versioning-strategies.md",
+      "sha256": "06d921d7be1971f533e282c4416980deacce61934ca564866597c29f3add5920",
+      "bytes": 1497,
+      "mode": "100644",
+      "git_blob": "2f64fa0c64964ac241bc5e266959160b22369b9f",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "bd92f89931ebb7966ff747fdd4eb170a6fa96fda81dafa3f07b5974d6550b9e9",
+      "bytes": 18571,
+      "mode": "100644",
+      "git_blob": "2984ad27318b49d7d74b846b2565c430c44636ba",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 77,
+          "evidence": "remove",
+          "context": "├── No → Does it remove a field from response?",
+          "disposition": "accepted",
+          "reason": "Hits are words like 'remove'/'Remove'/'Delete' in deprecation prose and in sample code (e.g. 'Remove from gateway', 'Delete route handlers' in a user-run sunset script); the agent is not told to delete files."
+        },
+        {
+          "type": "network-access",
+          "line": 310,
+          "evidence": "https://",
+          "context": "    \"migrationUrl\": \"https://docs.example.com/migration-v1-to-v2\",",
+          "disposition": "accepted",
+          "reason": "URLs are example docs/API hosts (docs.example.com, api.example.com, localhost pact URLs) and a 'curl' mention in a comparison table; the skill does not instruct fetching them."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 485,
+          "evidence": "remove",
+          "context": "- Never remove or change behavior in a non-backward-compatible way without a version bump",
+          "disposition": "accepted",
+          "reason": "Hits are words like 'remove'/'Remove'/'Delete' in deprecation prose and in sample code (e.g. 'Remove from gateway', 'Delete route handlers' in a user-run sunset script); the agent is not told to delete files."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "wshobson/python-design-patterns",
+  "source": {
+    "repo": "wshobson/agents",
+    "path": "plugins/python-development/skills/python-design-patterns",
+    "revision": "156b7a5e7a8b93642628a339ee4039c925b34c7f"
+  },
+  "review": {
+    "path": "catalog/reviews/wshobson__python-design-patterns.json",
+    "sha256": "31b3a3eab37a11cb54a42095b056fc45e03897ebd88f02f61c8c0fedaa4fe590"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "low",
+    "capabilities": {
+      "shell": false,
+      "network": false,
+      "credentials": false,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "filesystem-write",
+        "line": 61,
+        "evidence": "Delete",
+        "context": "8. **Delete before abstracting** - Remove dead code, then consider patterns",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 61,
+        "evidence": "Remove",
+        "context": "8. **Delete before abstracting** - Remove dead code, then consider patterns",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 16793
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "f89abb55d9f073f38f1703e4518f0613c788c6174be7f13b8dfe48a1c076c746",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/details.md",
+      "sha256": "5d85b7a1745446432060bb31ee1fa686d5a41d86cfaf3687dd2710b47b72e5ea",
+      "bytes": 10996,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "42c99b3bc55a56a65cd3f16aa24ea50672ce0fa4893eb0f34bba0cdb8a0e3319",
+      "bytes": 4729,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 16793
+}

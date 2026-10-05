@@ -1,0 +1,115 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "wshobson/async-python-patterns",
+  "source": {
+    "repo": "wshobson/agents",
+    "path": "plugins/python-development/skills/async-python-patterns",
+    "revision": "156b7a5e7a8b93642628a339ee4039c925b34c7f"
+  },
+  "review": {
+    "path": "catalog/reviews/wshobson__async-python-patterns.json",
+    "sha256": "384f1a2dbff4ec56fca7fa74f859983a4e96391b83cc62c7e1f6cd43c6b38b8e"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "low",
+    "capabilities": {
+      "shell": false,
+      "network": true,
+      "credentials": false,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "network-access",
+        "line": 67,
+        "evidence": "https://",
+        "context": "    async for page_data in fetch_pages(\"https://api.example.com/items\", 3):",
+        "file": "references/details.md"
+      },
+      {
+        "type": "network-access",
+        "line": 150,
+        "evidence": "https://",
+        "context": "    urls = [f\"https://api.example.com/item/{i}\" for i in range(20)]",
+        "file": "references/details.md"
+      },
+      {
+        "type": "network-access",
+        "line": 231,
+        "evidence": "https://",
+        "context": "        \"https://httpbin.org/delay/1\",",
+        "file": "references/details.md"
+      },
+      {
+        "type": "network-access",
+        "line": 232,
+        "evidence": "https://",
+        "context": "        \"https://httpbin.org/delay/2\",",
+        "file": "references/details.md"
+      },
+      {
+        "type": "network-access",
+        "line": 233,
+        "evidence": "https://",
+        "context": "        \"https://httpbin.org/status/404\",",
+        "file": "references/details.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 321,
+        "evidence": "remove",
+        "context": "        self.clients.remove(websocket)",
+        "file": "references/details.md"
+      },
+      {
+        "type": "network-access",
+        "line": 358,
+        "evidence": "https://",
+        "context": "        tasks = [session.get(f\"https://api.example.com/item/{i}\") for i in range(50)]",
+        "file": "references/details.md"
+      },
+      {
+        "type": "network-access",
+        "line": 103,
+        "evidence": "https://",
+        "context": "    result = await fetch_data(\"https://api.example.com\")",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 287,
+        "evidence": "https://",
+        "context": "    result = await fetch_data(\"https://api.example.com\")",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 21113
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "f89abb55d9f073f38f1703e4518f0613c788c6174be7f13b8dfe48a1c076c746",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/details.md",
+      "sha256": "94df4840e91f1d237ba9d3d9bbcb7073be90c42e17ea94ebcb364370920081fa",
+      "bytes": 12523,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "beeac92f802f21a968088e5d12fc587833b772ad69806eddf6812f1a2e9c7a57",
+      "bytes": 7522,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 21113
+}

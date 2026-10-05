@@ -1,0 +1,402 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "microsoft/azure-communication-common-java",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/azure-sdk-java/skills/azure-communication-common-java",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "review": {
+    "path": "catalog/reviews/microsoft__azure-communication-common-java.json",
+    "sha256": "5814dd34345b2d3f86b074afe1a3567cbddd5ee6b597286b138ac4e47e17a1bc"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "credential-access",
+        "line": 7,
+        "evidence": "Credential",
+        "context": "- [Communication Token Credential](#communication-token-credential)",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 7,
+        "evidence": "credential",
+        "context": "- [Communication Token Credential](#communication-token-credential)",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 23,
+        "evidence": "Credential",
+        "context": "## Communication Token Credential",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 30,
+        "evidence": "access-token",
+        "context": "String userToken = \"<user-access-token>\";",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 31,
+        "evidence": "credential",
+        "context": "CommunicationTokenCredential credential = new CommunicationTokenCredential(userToken);",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 49,
+        "evidence": "credential",
+        "context": "CommunicationTokenCredential credential = new CommunicationTokenCredential(refreshOptions);",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "network-access",
+        "line": 280,
+        "evidence": "https://",
+        "context": "String resourceEndpoint = \"https://<resource>.communication.azure.com\";",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "network-access",
+        "line": 282,
+        "evidence": "https://",
+        "context": "    \"https://auth.msft.communication.azure.com/TeamsExtension.ManageCalls\"",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 289,
+        "evidence": "credential",
+        "context": "CommunicationTokenCredential credential = new CommunicationTokenCredential(entraOptions);",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 315,
+        "evidence": "credential",
+        "context": "        CommunicationTokenCredential credential = getOrCreateCredential(userId, initialToken);",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 319,
+        "evidence": "credential",
+        "context": "            .credential(credential)",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 319,
+        "evidence": "credential",
+        "context": "            .credential(credential)",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 336,
+        "evidence": "credential",
+        "context": "        CommunicationTokenCredential credential = credentialCache.remove(userId);",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 336,
+        "evidence": "remove",
+        "context": "        CommunicationTokenCredential credential = credentialCache.remove(userId);",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 337,
+        "evidence": "credential",
+        "context": "        if (credential != null) {",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 338,
+        "evidence": "credential",
+        "context": "            credential.close();",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "network-access",
+        "line": 410,
+        "evidence": "https://",
+        "context": "            return endpoint.replace(\"https://\", \"\").replace(\".communication.azure.com\", \"\");",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 418,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "network-access",
+        "line": 419,
+        "evidence": "https://",
+        "context": "AZURE_COMMUNICATION_ENDPOINT=https://<resource>.communication.azure.com",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 420,
+        "evidence": "access-token",
+        "context": "AZURE_COMMUNICATION_USER_TOKEN=<user-access-token>",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 44,
+        "evidence": "access-token",
+        "context": "String userToken = \"<user-access-token>\";",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 45,
+        "evidence": "credential",
+        "context": "CommunicationTokenCredential credential = new CommunicationTokenCredential(userToken);",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 49,
+        "evidence": "https://",
+        "context": "    .endpoint(\"https://<resource>.communication.azure.com\")",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 50,
+        "evidence": "credential",
+        "context": "    .credential(credential)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 50,
+        "evidence": "credential",
+        "context": "    .credential(credential)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 71,
+        "evidence": "credential",
+        "context": "CommunicationTokenCredential credential = new CommunicationTokenCredential(refreshOptions);",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 88,
+        "evidence": "credential",
+        "context": "CommunicationTokenCredential credential = new CommunicationTokenCredential(options);",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 106,
+        "evidence": "https://",
+        "context": "String resourceEndpoint = \"https://<resource>.communication.azure.com\";",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 108,
+        "evidence": "https://",
+        "context": "    \"https://auth.msft.communication.azure.com/TeamsExtension.ManageCalls\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 115,
+        "evidence": "credential",
+        "context": "CommunicationTokenCredential credential = new CommunicationTokenCredential(entraOptions);",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 218,
+        "evidence": "credential",
+        "context": "import com.azure.core.credential.AccessToken;",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 218,
+        "evidence": "AccessToken",
+        "context": "import com.azure.core.credential.AccessToken;",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 221,
+        "evidence": "credential",
+        "context": "CommunicationTokenCredential credential = new CommunicationTokenCredential(token);",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 224,
+        "evidence": "AccessToken",
+        "context": "AccessToken accessToken = credential.getToken();",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 224,
+        "evidence": "accessToken",
+        "context": "AccessToken accessToken = credential.getToken();",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 224,
+        "evidence": "credential",
+        "context": "AccessToken accessToken = credential.getToken();",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 225,
+        "evidence": "accessToken",
+        "context": "System.out.println(\"Token expires: \" + accessToken.getExpiresAt());",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 228,
+        "evidence": "credential",
+        "context": "credential.getTokenAsync()",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 235,
+        "evidence": "Credential",
+        "context": "## Dispose Credential",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 239,
+        "evidence": "credential",
+        "context": "credential.close();",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 243,
+        "evidence": "credential",
+        "context": "    // Use credential",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 265,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 266,
+        "evidence": "https://",
+        "context": "AZURE_COMMUNICATION_ENDPOINT=https://<resource>.communication.azure.com",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 267,
+        "evidence": "access-token",
+        "context": "AZURE_COMMUNICATION_USER_TOKEN=<user-access-token>",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 281,
+        "evidence": "credential",
+        "context": "// Pattern: Create credential for Chat/Calling client",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 288,
+        "evidence": "credential",
+        "context": "    CommunicationTokenCredential credential = ",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 293,
+        "evidence": "credential",
+        "context": "        .credential(credential)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 293,
+        "evidence": "credential",
+        "context": "        .credential(credential)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 305,
+        "evidence": "credential",
+        "context": "- \"ACS authentication\", \"communication token credential\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 306,
+        "evidence": "access token",
+        "context": "- \"user access token\", \"token refresh\"",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 25482
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/examples.md",
+      "sha256": "7b2a3df4df01f9cc409dd3bf2ddcc8a8f3e261022d656eaa6eb998681c03096f",
+      "bytes": 14662,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "aa84ee9ea16a5663b2971f4f3c66b6fcaa901d067d9d3ffdabe24dc4b22593db",
+      "bytes": 9680,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 25482
+}

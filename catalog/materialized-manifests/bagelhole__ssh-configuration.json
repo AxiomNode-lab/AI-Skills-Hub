@@ -1,0 +1,165 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "bagelhole/ssh-configuration",
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "infrastructure/servers/ssh-configuration",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "review": {
+    "path": "catalog/reviews/bagelhole__ssh-configuration.json",
+    "sha256": "529bab8d418109af8ba617288db7aceae512cdf317bd4f11af18aaf91e7bf5c2"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "shell-execution",
+        "line": 27,
+        "evidence": " sudo",
+        "context": "- Root or sudo access on the server for sshd_config changes",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 32,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 46,
+        "evidence": "mkdir",
+        "context": "cat ~/.ssh/id_ed25519.pub | ssh user@server \"mkdir -p ~/.ssh && chmod 700 ~/.ssh && cat >> ~/.ssh/authorized_keys && chmod 600 ~/.ssh/authorized_keys\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 46,
+        "evidence": " chmod",
+        "context": "cat ~/.ssh/id_ed25519.pub | ssh user@server \"mkdir -p ~/.ssh && chmod 700 ~/.ssh && cat >> ~/.ssh/authorized_keys && chmod 600 ~/.ssh/authorized_keys\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 46,
+        "evidence": " chmod",
+        "context": "cat ~/.ssh/id_ed25519.pub | ssh user@server \"mkdir -p ~/.ssh && chmod 700 ~/.ssh && cat >> ~/.ssh/authorized_keys && chmod 600 ~/.ssh/authorized_keys\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 58,
+        "evidence": "Remove",
+        "context": "# Remove all keys from the agent",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 70,
+        "evidence": "remove",
+        "context": "# After verifying the new key works, remove the old public key from authorized_keys on the server",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 131,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 133,
+        "evidence": "mkdir",
+        "context": "mkdir -p ~/.ssh/sockets",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 133,
+        "evidence": "\nchmod",
+        "context": "mkdir -p ~/.ssh/sockets",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 139,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 200,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 213,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 237,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 263,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 281,
+        "evidence": "sh",
+        "context": "command=\"/usr/local/bin/run-backup.sh\",no-port-forwarding,no-X11-forwarding,no-agent-forwarding ssh-ed25519 AAAA... backup@example.com",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 296,
+        "evidence": "Remove",
+        "context": "| Host key verification failed | `ssh-keygen -R server` | Remove stale host key; verify server identity |",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 10360
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "8b5e112803741a8993a8d51eb5bff74450c452ca1d80c555100824fdf9614c20",
+      "bytes": 9292,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 10360
+}

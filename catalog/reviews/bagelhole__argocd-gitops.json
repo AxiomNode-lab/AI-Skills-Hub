@@ -1,0 +1,436 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "bagelhole/argocd-gitops",
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "devops/orchestration/argocd-gitops",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "devops/orchestration/argocd-gitops",
+    "url": "https://api.github.com/repos/BagelHole/DevOps-Security-Agent-Skills/git/trees/0365f57a079b1332f95cf26e31dd2d5332a8399f?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/BagelHole/DevOps-Security-Agent-Skills/blob/0365f57a079b1332f95cf26e31dd2d5332a8399f/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "devops",
+        "devops/orchestration",
+        "devops/orchestration/argocd-gitops"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file; manifests and CLI lines are short configuration examples, and the frontmatter declares license: MIT. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "medium",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "package_install": true,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md and references/argocd-patterns.md in full. The skill covers installing ArgoCD, Application/AppProject/ApplicationSet manifests (Git, list, matrix generators), sync policies, waves and hooks, repository and cluster secrets, notifications, and the argocd CLI.",
+      "Medium: following it has the agent install ArgoCD into the user's cluster via `kubectl apply` of the upstream install manifest, read the initial admin password from a Kubernetes secret, and run state-changing argocd commands (sync, sync --force, rollback, delete). Acceptable because these are standard GitOps operations on the user's own cluster and the delete/force commands are presented as a CLI reference, not as steps to run automatically; confirm with the user before syncing, rolling back or deleting production apps.",
+      "Users should know: the install manifest at SKILL.md:37 tracks the moving `stable` branch rather than a pinned version, and the example sync policies enable `prune: true` (SKILL.md:71, 269), which deletes cluster resources missing from Git. Repository/cluster secrets (SKILL.md:356-383, references/argocd-patterns.md:73-91) use placeholders (ghp_xxxx, '...'). Related Skills (SKILL.md:443-445) link to sibling skills ../kubernetes-ops/, ../helm-charts/, ../kustomize/ as optional reading only."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "67c5c5cbb12cafb1515e449748866bd40da7dec9",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
+      "findings": []
+    },
+    {
+      "path": "references/argocd-patterns.md",
+      "sha256": "6157972dc4bc8f46291e33a1e89a241b7e7cdf7e86ac375fcc1ca84e0e9d6258",
+      "bytes": 2075,
+      "mode": "100644",
+      "git_blob": "3135d0cc8ac1c147abbd1b9abbe8ca08837437a9",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 14,
+          "evidence": "https://",
+          "context": "    repoURL: https://github.com/org/repo",
+          "disposition": "accepted",
+          "reason": "Example repoURLs, cluster API server URLs and placeholder example.com hosts in manifests, plus one kubectl apply of the upstream ArgoCD install manifest."
+        },
+        {
+          "type": "network-access",
+          "line": 18,
+          "evidence": "https://",
+          "context": "    server: https://kubernetes.default.svc",
+          "disposition": "accepted",
+          "reason": "Example repoURLs, cluster API server URLs and placeholder example.com hosts in manifests, plus one kubectl apply of the upstream ArgoCD install manifest."
+        },
+        {
+          "type": "network-access",
+          "line": 64,
+          "evidence": "https://",
+          "context": "        repoURL: https://github.com/org/repo",
+          "disposition": "accepted",
+          "reason": "Example repoURLs, cluster API server URLs and placeholder example.com hosts in manifests, plus one kubectl apply of the upstream ArgoCD install manifest."
+        },
+        {
+          "type": "credential-access",
+          "line": 75,
+          "evidence": "Secret",
+          "context": "kind: Secret",
+          "disposition": "accepted",
+          "reason": "Retrieves the ArgoCD initial admin password from the user's own cluster for login, and shows repository/cluster Secret manifests with placeholder tokens and keys."
+        },
+        {
+          "type": "credential-access",
+          "line": 79,
+          "evidence": "secret",
+          "context": "    argocd.argoproj.io/secret-type: cluster",
+          "disposition": "accepted",
+          "reason": "Retrieves the ArgoCD initial admin password from the user's own cluster for login, and shows repository/cluster Secret manifests with placeholder tokens and keys."
+        },
+        {
+          "type": "network-access",
+          "line": 82,
+          "evidence": "https://",
+          "context": "  server: https://prod-cluster.example.com",
+          "disposition": "accepted",
+          "reason": "Example repoURLs, cluster API server URLs and placeholder example.com hosts in manifests, plus one kubectl apply of the upstream ArgoCD install manifest."
+        },
+        {
+          "type": "shell-execution",
+          "line": 110,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks of kubectl and argocd CLI commands to install ArgoCD and sync, diff, roll back or delete the user's applications; the `sh` hit at SKILL.md:319 is a container command in a sample Job."
+        }
+      ]
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "d0310ea76e7cc5df2368084f19e802b82094d0de45751048b036caabe2434fc5",
+      "bytes": 9662,
+      "mode": "100644",
+      "git_blob": "6351b04e9ee5d48ae3f658120a165b9f81378487",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 32,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks of kubectl and argocd CLI commands to install ArgoCD and sync, diff, roll back or delete the user's applications; the `sh` hit at SKILL.md:319 is a container command in a sample Job."
+        },
+        {
+          "type": "network-access",
+          "line": 37,
+          "evidence": "https://",
+          "context": "kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml",
+          "disposition": "accepted",
+          "reason": "Applies the upstream ArgoCD install manifest from the unpinned `stable` branch to the user's cluster; pin a release tag for reproducible installs."
+        },
+        {
+          "type": "credential-access",
+          "line": 40,
+          "evidence": "secret",
+          "context": "kubectl -n argocd get secret argocd-initial-admin-secret \\",
+          "disposition": "accepted",
+          "reason": "Retrieves the ArgoCD initial admin password from the user's own cluster for login, and shows repository/cluster Secret manifests with placeholder tokens and keys."
+        },
+        {
+          "type": "credential-access",
+          "line": 40,
+          "evidence": "secret",
+          "context": "kubectl -n argocd get secret argocd-initial-admin-secret \\",
+          "disposition": "accepted",
+          "reason": "Retrieves the ArgoCD initial admin password from the user's own cluster for login, and shows repository/cluster Secret manifests with placeholder tokens and keys."
+        },
+        {
+          "type": "encoded-content",
+          "line": 41,
+          "evidence": "base64",
+          "context": "  -o jsonpath=\"{.data.password}\" | base64 -d",
+          "disposition": "accepted",
+          "reason": "`base64 -d` decodes the Kubernetes secret value for the admin password; no encoded payload is embedded."
+        },
+        {
+          "type": "network-access",
+          "line": 63,
+          "evidence": "https://",
+          "context": "    repoURL: https://github.com/org/myapp-manifests.git",
+          "disposition": "accepted",
+          "reason": "Example repoURLs, cluster API server URLs and placeholder example.com hosts in manifests, plus one kubectl apply of the upstream ArgoCD install manifest."
+        },
+        {
+          "type": "network-access",
+          "line": 67,
+          "evidence": "https://",
+          "context": "    server: https://kubernetes.default.svc",
+          "disposition": "accepted",
+          "reason": "Example repoURLs, cluster API server URLs and placeholder example.com hosts in manifests, plus one kubectl apply of the upstream ArgoCD install manifest."
+        },
+        {
+          "type": "network-access",
+          "line": 88,
+          "evidence": "https://",
+          "context": "    repoURL: https://github.com/org/myapp-chart.git",
+          "disposition": "accepted",
+          "reason": "Example repoURLs, cluster API server URLs and placeholder example.com hosts in manifests, plus one kubectl apply of the upstream ArgoCD install manifest."
+        },
+        {
+          "type": "network-access",
+          "line": 101,
+          "evidence": "https://",
+          "context": "    server: https://kubernetes.default.svc",
+          "disposition": "accepted",
+          "reason": "Example repoURLs, cluster API server URLs and placeholder example.com hosts in manifests, plus one kubectl apply of the upstream ArgoCD install manifest."
+        },
+        {
+          "type": "network-access",
+          "line": 120,
+          "evidence": "https://",
+          "context": "    repoURL: https://github.com/org/myapp-manifests.git",
+          "disposition": "accepted",
+          "reason": "Example repoURLs, cluster API server URLs and placeholder example.com hosts in manifests, plus one kubectl apply of the upstream ArgoCD install manifest."
+        },
+        {
+          "type": "network-access",
+          "line": 127,
+          "evidence": "https://",
+          "context": "    server: https://kubernetes.default.svc",
+          "disposition": "accepted",
+          "reason": "Example repoURLs, cluster API server URLs and placeholder example.com hosts in manifests, plus one kubectl apply of the upstream ArgoCD install manifest."
+        },
+        {
+          "type": "network-access",
+          "line": 142,
+          "evidence": "https://",
+          "context": "    - https://github.com/org/*",
+          "disposition": "accepted",
+          "reason": "Example repoURLs, cluster API server URLs and placeholder example.com hosts in manifests, plus one kubectl apply of the upstream ArgoCD install manifest."
+        },
+        {
+          "type": "network-access",
+          "line": 145,
+          "evidence": "https://",
+          "context": "      server: https://kubernetes.default.svc",
+          "disposition": "accepted",
+          "reason": "Example repoURLs, cluster API server URLs and placeholder example.com hosts in manifests, plus one kubectl apply of the upstream ArgoCD install manifest."
+        },
+        {
+          "type": "network-access",
+          "line": 175,
+          "evidence": "https://",
+          "context": "        repoURL: https://github.com/org/myapp-manifests.git",
+          "disposition": "accepted",
+          "reason": "Example repoURLs, cluster API server URLs and placeholder example.com hosts in manifests, plus one kubectl apply of the upstream ArgoCD install manifest."
+        },
+        {
+          "type": "network-access",
+          "line": 185,
+          "evidence": "https://",
+          "context": "        repoURL: https://github.com/org/myapp-manifests.git",
+          "disposition": "accepted",
+          "reason": "Example repoURLs, cluster API server URLs and placeholder example.com hosts in manifests, plus one kubectl apply of the upstream ArgoCD install manifest."
+        },
+        {
+          "type": "network-access",
+          "line": 189,
+          "evidence": "https://",
+          "context": "        server: https://kubernetes.default.svc",
+          "disposition": "accepted",
+          "reason": "Example repoURLs, cluster API server URLs and placeholder example.com hosts in manifests, plus one kubectl apply of the upstream ArgoCD install manifest."
+        },
+        {
+          "type": "network-access",
+          "line": 210,
+          "evidence": "https://",
+          "context": "            url: https://prod-cluster.example.com",
+          "disposition": "accepted",
+          "reason": "Example repoURLs, cluster API server URLs and placeholder example.com hosts in manifests, plus one kubectl apply of the upstream ArgoCD install manifest."
+        },
+        {
+          "type": "network-access",
+          "line": 212,
+          "evidence": "https://",
+          "context": "            url: https://staging-cluster.example.com",
+          "disposition": "accepted",
+          "reason": "Example repoURLs, cluster API server URLs and placeholder example.com hosts in manifests, plus one kubectl apply of the upstream ArgoCD install manifest."
+        },
+        {
+          "type": "network-access",
+          "line": 219,
+          "evidence": "https://",
+          "context": "        repoURL: https://github.com/org/myapp-manifests.git",
+          "disposition": "accepted",
+          "reason": "Example repoURLs, cluster API server URLs and placeholder example.com hosts in manifests, plus one kubectl apply of the upstream ArgoCD install manifest."
+        },
+        {
+          "type": "network-access",
+          "line": 240,
+          "evidence": "https://",
+          "context": "              repoURL: https://github.com/org/myapp-manifests.git",
+          "disposition": "accepted",
+          "reason": "Example repoURLs, cluster API server URLs and placeholder example.com hosts in manifests, plus one kubectl apply of the upstream ArgoCD install manifest."
+        },
+        {
+          "type": "network-access",
+          "line": 254,
+          "evidence": "https://",
+          "context": "        repoURL: https://github.com/org/myapp-manifests.git",
+          "disposition": "accepted",
+          "reason": "Example repoURLs, cluster API server URLs and placeholder example.com hosts in manifests, plus one kubectl apply of the upstream ArgoCD install manifest."
+        },
+        {
+          "type": "network-access",
+          "line": 258,
+          "evidence": "https://",
+          "context": "        server: https://kubernetes.default.svc",
+          "disposition": "accepted",
+          "reason": "Example repoURLs, cluster API server URLs and placeholder example.com hosts in manifests, plus one kubectl apply of the upstream ArgoCD install manifest."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 269,
+          "evidence": "Delete",
+          "context": "    prune: true          # Delete resources not in Git",
+          "disposition": "accepted",
+          "reason": "Matches are 'delete' in prune comments, the hook-delete-policy annotation and the `argocd app delete` CLI reference; no local file deletion."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 312,
+          "evidence": "delete",
+          "context": "    argocd.argoproj.io/hook-delete-policy: HookSucceeded",
+          "disposition": "accepted",
+          "reason": "Matches are 'delete' in prune comments, the hook-delete-policy annotation and the `argocd app delete` CLI reference; no local file deletion."
+        },
+        {
+          "type": "shell-execution",
+          "line": 319,
+          "evidence": "sh",
+          "context": "          command: [\"./migrate.sh\"]",
+          "disposition": "accepted",
+          "reason": "Bash blocks of kubectl and argocd CLI commands to install ArgoCD and sync, diff, roll back or delete the user's applications; the `sh` hit at SKILL.md:319 is a container command in a sample Job."
+        },
+        {
+          "type": "shell-execution",
+          "line": 325,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks of kubectl and argocd CLI commands to install ArgoCD and sync, diff, roll back or delete the user's applications; the `sh` hit at SKILL.md:319 is a container command in a sample Job."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 344,
+          "evidence": "Delete",
+          "context": "# Delete application",
+          "disposition": "accepted",
+          "reason": "Matches are 'delete' in prune comments, the hook-delete-policy annotation and the `argocd app delete` CLI reference; no local file deletion."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 345,
+          "evidence": "delete",
+          "context": "argocd app delete myapp",
+          "disposition": "accepted",
+          "reason": "`argocd app delete myapp` removes an ArgoCD application (and possibly its resources); listed as a CLI reference and should only be run on user request."
+        },
+        {
+          "type": "credential-access",
+          "line": 358,
+          "evidence": "Secret",
+          "context": "kind: Secret",
+          "disposition": "accepted",
+          "reason": "Retrieves the ArgoCD initial admin password from the user's own cluster for login, and shows repository/cluster Secret manifests with placeholder tokens and keys."
+        },
+        {
+          "type": "credential-access",
+          "line": 363,
+          "evidence": "secret",
+          "context": "    argocd.argoproj.io/secret-type: repository",
+          "disposition": "accepted",
+          "reason": "Retrieves the ArgoCD initial admin password from the user's own cluster for login, and shows repository/cluster Secret manifests with placeholder tokens and keys."
+        },
+        {
+          "type": "network-access",
+          "line": 365,
+          "evidence": "https://",
+          "context": "  url: https://github.com/org/private-repo.git",
+          "disposition": "accepted",
+          "reason": "Example repoURLs, cluster API server URLs and placeholder example.com hosts in manifests, plus one kubectl apply of the upstream ArgoCD install manifest."
+        },
+        {
+          "type": "credential-access",
+          "line": 371,
+          "evidence": "Secret",
+          "context": "kind: Secret",
+          "disposition": "accepted",
+          "reason": "Retrieves the ArgoCD initial admin password from the user's own cluster for login, and shows repository/cluster Secret manifests with placeholder tokens and keys."
+        },
+        {
+          "type": "credential-access",
+          "line": 376,
+          "evidence": "secret",
+          "context": "    argocd.argoproj.io/secret-type: repository",
+          "disposition": "accepted",
+          "reason": "Retrieves the ArgoCD initial admin password from the user's own cluster for login, and shows repository/cluster Secret manifests with placeholder tokens and keys."
+        },
+        {
+          "type": "credential-access",
+          "line": 420,
+          "evidence": "secret",
+          "context": "**Solution**: Check repository secret, verify URL and credentials",
+          "disposition": "accepted",
+          "reason": "Retrieves the ArgoCD initial admin password from the user's own cluster for login, and shows repository/cluster Secret manifests with placeholder tokens and keys."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 438,
+          "evidence": "remove",
+          "context": "- Enable auto-pruning to remove deleted resources",
+          "disposition": "accepted",
+          "reason": "Matches are 'delete' in prune comments, the hook-delete-policy annotation and the `argocd app delete` CLI reference; no local file deletion."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,158 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "bagelhole/azure-devops",
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "devops/ci-cd/azure-devops",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "review": {
+    "path": "catalog/reviews/bagelhole__azure-devops.json",
+    "sha256": "7119ae7d8d0146ef92a73dcc6ab9873bdd134c0d89b103dda9eab744e0e62069"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "credential-access",
+        "line": 211,
+        "evidence": "Secret",
+        "context": "### Secret Variables",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 220,
+        "evidence": "secret",
+        "context": "      echo \"Using secret\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 221,
+        "evidence": "sh",
+        "context": "      ./deploy.sh",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 223,
+        "evidence": "API_KEY",
+        "context": "      API_KEY: $(mySecret)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 298,
+        "evidence": "sh",
+        "context": "                - script: ./deploy.sh staging",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 320,
+        "evidence": "sh",
+        "context": "            - script: ./deploy.sh",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 380,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 382,
+        "evidence": "mkdir",
+        "context": "mkdir myagent && cd myagent",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 383,
+        "evidence": "curl",
+        "context": "curl -o vsts-agent.tar.gz https://vstsagentpackage.azureedge.net/agent/3.227.2/vsts-agent-linux-x64-3.227.2.tar.gz",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 383,
+        "evidence": "https://",
+        "context": "curl -o vsts-agent.tar.gz https://vstsagentpackage.azureedge.net/agent/3.227.2/vsts-agent-linux-x64-3.227.2.tar.gz",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 387,
+        "evidence": "https://",
+        "context": "./config.sh --url https://dev.azure.com/myorg --auth pat --token PAT_TOKEN --pool default",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 387,
+        "evidence": "sh",
+        "context": "./config.sh --url https://dev.azure.com/myorg --auth pat --token PAT_TOKEN --pool default",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 389,
+        "evidence": "\nsudo",
+        "context": "# Run as service",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 390,
+        "evidence": "sh",
+        "context": "sudo ./svc.sh install",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 390,
+        "evidence": "\nsudo",
+        "context": "sudo ./svc.sh install",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 391,
+        "evidence": "sh",
+        "context": "sudo ./svc.sh start",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 9512
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "847957d6a32ac782e6dea7f2f71d0531b74be4a0468d287967c10cba7852ad99",
+      "bytes": 8444,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 9512
+}

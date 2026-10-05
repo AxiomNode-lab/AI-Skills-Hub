@@ -5,11 +5,11 @@ import os from "node:os";
 import path from "node:path";
 import { execFileSync, spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
-import { detectLicense, prepareReviewedSkill, validateReleaseReview } from "../packages/materializer/src/reviewed.mjs";
+import { prepareReviewedSkill, validateReleaseReview } from "../packages/materializer/src/reviewed.mjs";
 
 const script = fileURLToPath(new URL("../scripts/draft-review.mjs", import.meta.url));
 const APACHE = "Apache License\nVersion 2.0, January 2004\nhttp://www.apache.org/licenses/\n2. Grant of Copyright License.\n4. Redistribution.\n";
-const MIT = fs.readFileSync(new URL("../LICENSE", import.meta.url), "utf8").replace(/\r\n/g, "\n");
+const MIT = "MIT License\n\nCopyright (c) 2025 Example\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n";
 const SKILL = (license) => `---\nname: demo\ndescription: Demo skill\n${license ? `license: ${license}\n` : ""}---\nSee https://example.com\n`;
 
 // files: repository-relative path -> contents
@@ -75,26 +75,46 @@ test("a repository-root MIT license is attached and released byte-for-byte", t =
   const extra = structuredClone(review);
   extra.license.ancestor_check.overrides = ["skills/NOTICE"];
   assert.throws(() => validateReleaseReview(f.skill, extra), /nested license/);
-  const apache = structuredClone(review);
-  apache.license.spdx = "Apache-2.0";
-  assert.throws(() => validateReleaseReview(f.skill, apache), /Only MIT/);
+  const other = structuredClone(review);
+  other.license.spdx = "GPL-3.0";
+  assert.throws(() => validateReleaseReview(f.skill, other), /license review required/);
+});
+
+test("a repository-root Apache-2.0 license is attached when no NOTICE applies", t => {
+  const f = fixture(t, { "LICENSE": APACHE, "skills/demo/SKILL.md": SKILL("Apache-2.0"), "skills/demo/notes.md": "Notes\n" });
+  assert.equal(f.run().status, 0);
+  const review = approve(f.review());
+  assert.deepEqual([review.license.spdx, review.license.scope, review.license.source_path], ["Apache-2.0", "repository", "LICENSE"]);
+  const staged = prepareReviewedSkill(f.skill, review, path.join(f.upstream, "skills", "demo"), path.join(f.root, "staging"));
+  assert.equal(fs.readFileSync(path.join(staged.target, "LICENSE.txt"), "utf8"), APACHE);
 });
 
 test("draft-review refuses code, missing licenses, nested notices, and conflicting declarations", t => {
   const cases = [
     [{ "skills/demo/SKILL.md": SKILL("Complete terms in LICENSE.txt"), "skills/demo/LICENSE.txt": APACHE, "skills/demo/helper.py": "print('x')\n" }, /Only non-executable text packages/],
     [{ "skills/demo/SKILL.md": SKILL(null) }, /No skill-local or repository-root license/],
-    [{ "LICENSE": APACHE, "skills/demo/SKILL.md": SKILL(null) }, /not MIT/],
+    [{ "LICENSE": "GNU GENERAL PUBLIC LICENSE\nVersion 3\n", "skills/demo/SKILL.md": SKILL(null) }, /neither MIT nor Apache-2.0/],
+    [{ "LICENSE": APACHE, "NOTICE": "Example notice\n", "skills/demo/SKILL.md": SKILL(null) }, /Nested license/],
+    [{ "LICENSE": APACHE, "skills/demo/SKILL.md": SKILL("MIT") }, /declares a different license/],
     [{ "LICENSE": MIT, "skills/NOTICE": "Other terms\n", "skills/demo/SKILL.md": SKILL(null) }, /Nested license/],
-    [{ "LICENSE": MIT, "skills/demo/SKILL.md": SKILL("Apache-2.0") }, /declares a different license/],
-    [{ "LICENSE": MIT, "skills/demo/SKILL.md": SKILL("\n  spdx: Proprietary") }, /license must be a non-empty string/],
-    [{ "LICENSE": MIT, "skills/demo/SKILL.md": SKILL(null).replace("---\nSee", '"license": Proprietary\n---\nSee') }, /declares a different license/]
+    [{ "LICENSE": MIT, "skills/demo/SKILL.md": SKILL("Apache-2.0") }, /declares a different license/]
   ];
   for (const [files, expected] of cases) assert.match(fixture(t, files).run().stderr, expected);
 });
 
-test("MIT detection rejects incomplete grants and added restrictions", () => {
+test("a skill-local license is refused when a NOTICE or second license file also applies", t => {
+  for (const extra of [{ NOTICE: "Example NOTICE\n" }, { "skills/demo/LICENSE-THIRD-PARTY.md": "Other terms\n" }]) {
+    const f = fixture(t, { "skills/demo/SKILL.md": SKILL(), "skills/demo/LICENSE.txt": APACHE, ...extra });
+    const result = f.run();
+    assert.notEqual(result.status, 0, Object.keys(extra)[0]);
+    assert.match(result.stderr, /Notice, copying, or additional license files apply/);
+  }
+});
+
+test("only the complete MIT text with a copyright line is recognized as MIT", async () => {
+  const { detectLicense } = await import("../packages/materializer/src/reviewed.mjs");
   assert.equal(detectLicense(MIT), "MIT");
-  assert.equal(detectLicense(MIT.slice(0, MIT.indexOf('THE SOFTWARE IS PROVIDED'))), null);
-  assert.equal(detectLicense(MIT + '\nNon-commercial use only.\n'), null);
+  assert.equal(detectLicense(MIT.replace("Copyright (c) 2025 Example\n", "")), null);
+  assert.equal(detectLicense(MIT.replace("sublicense, and/or sell", "and/or sell")), null);
+  assert.equal(detectLicense(MIT.split("THE SOFTWARE IS PROVIDED")[0]), null);
 });

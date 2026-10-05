@@ -1,0 +1,466 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "kdense/zarr-python",
+  "source": {
+    "repo": "K-Dense-AI/scientific-agent-skills",
+    "path": "skills/zarr-python",
+    "revision": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298"
+  },
+  "review": {
+    "path": "catalog/reviews/kdense__zarr-python.json",
+    "sha256": "29a497e37ff80a000fcbbdc96aebc10958718537fef1124212e9c9903fc0d450"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "network-access",
+        "line": 66,
+        "evidence": "https://",
+        "context": "Sources: [API](https://zarr.readthedocs.io/en/stable/api/zarr/),",
+        "file": "references/api_reference.md"
+      },
+      {
+        "type": "network-access",
+        "line": 67,
+        "evidence": "https://",
+        "context": "[released sync API](https://github.com/zarr-developers/zarr-python/blob/v3.4.0/src/zarr/api/synchronous.py),",
+        "file": "references/api_reference.md"
+      },
+      {
+        "type": "network-access",
+        "line": 68,
+        "evidence": "https://",
+        "context": "[released errors](https://github.com/zarr-developers/zarr-python/blob/v3.4.0/src/zarr/errors.py).",
+        "file": "references/api_reference.md"
+      },
+      {
+        "type": "network-access",
+        "line": 106,
+        "evidence": "https://",
+        "context": "Sources: [performance](https://zarr.readthedocs.io/en/stable/user-guide/performance/),",
+        "file": "references/chunking_and_compression.md"
+      },
+      {
+        "type": "network-access",
+        "line": 107,
+        "evidence": "https://",
+        "context": "[rectilinear example](https://zarr.readthedocs.io/en/stable/user-guide/examples/rectilinear_chunks/),",
+        "file": "references/chunking_and_compression.md"
+      },
+      {
+        "type": "network-access",
+        "line": 108,
+        "evidence": "https://",
+        "context": "[released array implementation](https://github.com/zarr-developers/zarr-python/blob/v3.4.0/src/zarr/core/array.py).",
+        "file": "references/chunking_and_compression.md"
+      },
+      {
+        "type": "network-access",
+        "line": 130,
+        "evidence": "https://",
+        "context": "Sources: [Dask writer](https://docs.dask.org/en/stable/generated/dask.array.to_zarr.html),",
+        "file": "references/integration.md"
+      },
+      {
+        "type": "network-access",
+        "line": 131,
+        "evidence": "https://",
+        "context": "[Xarray writer](https://docs.xarray.dev/en/stable/generated/xarray.Dataset.to_zarr.html),",
+        "file": "references/integration.md"
+      },
+      {
+        "type": "network-access",
+        "line": 132,
+        "evidence": "https://",
+        "context": "[Xarray reader](https://docs.xarray.dev/en/stable/generated/xarray.open_zarr.html),",
+        "file": "references/integration.md"
+      },
+      {
+        "type": "network-access",
+        "line": 133,
+        "evidence": "https://",
+        "context": "[consolidated metadata](https://zarr.readthedocs.io/en/stable/user-guide/consolidated_metadata/).",
+        "file": "references/integration.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 21,
+        "evidence": "Remove",
+        "context": "benchmarking. Remove unsupported claims of universal codec or layout superiority.",
+        "file": "references/performance_and_patterns.md"
+      },
+      {
+        "type": "network-access",
+        "line": 144,
+        "evidence": "https://",
+        "context": "Source: [released Array API](https://github.com/zarr-developers/zarr-python/blob/v3.4.0/src/zarr/core/array.py),",
+        "file": "references/performance_and_patterns.md"
+      },
+      {
+        "type": "network-access",
+        "line": 145,
+        "evidence": "https://",
+        "context": "[h5py datasets](https://docs.h5py.org/en/stable/high/dataset.html).",
+        "file": "references/performance_and_patterns.md"
+      },
+      {
+        "type": "network-access",
+        "line": 24,
+        "evidence": "https://",
+        "context": "- [Zarr 3.4.0 PyPI metadata](https://pypi.org/pypi/zarr/3.4.0/json)",
+        "file": "references/review.md"
+      },
+      {
+        "type": "network-access",
+        "line": 25,
+        "evidence": "https://",
+        "context": "- [Zarr release notes](https://zarr.readthedocs.io/en/stable/release-notes/)",
+        "file": "references/review.md"
+      },
+      {
+        "type": "network-access",
+        "line": 26,
+        "evidence": "https://",
+        "context": "- [Zarr v3.4.0 source](https://github.com/zarr-developers/zarr-python/tree/v3.4.0/src/zarr)",
+        "file": "references/review.md"
+      },
+      {
+        "type": "network-access",
+        "line": 27,
+        "evidence": "https://",
+        "context": "- [Storage guide](https://zarr.readthedocs.io/en/stable/user-guide/storage/)",
+        "file": "references/review.md"
+      },
+      {
+        "type": "network-access",
+        "line": 28,
+        "evidence": "https://",
+        "context": "- [Performance guide](https://zarr.readthedocs.io/en/stable/user-guide/performance/)",
+        "file": "references/review.md"
+      },
+      {
+        "type": "network-access",
+        "line": 29,
+        "evidence": "https://",
+        "context": "- [CLI guide](https://zarr.readthedocs.io/en/stable/user-guide/cli/)",
+        "file": "references/review.md"
+      },
+      {
+        "type": "network-access",
+        "line": 30,
+        "evidence": "https://",
+        "context": "- [Migration guide](https://zarr.readthedocs.io/en/stable/user-guide/v3_migration/)",
+        "file": "references/review.md"
+      },
+      {
+        "type": "network-access",
+        "line": 31,
+        "evidence": "https://",
+        "context": "- [Consolidation guide](https://zarr.readthedocs.io/en/stable/user-guide/consolidated_metadata/)",
+        "file": "references/review.md"
+      },
+      {
+        "type": "network-access",
+        "line": 32,
+        "evidence": "https://",
+        "context": "- [s3fs 2026.9.0 source](https://github.com/fsspec/s3fs/blob/2026.9.0/s3fs/core.py)",
+        "file": "references/review.md"
+      },
+      {
+        "type": "network-access",
+        "line": 33,
+        "evidence": "https://",
+        "context": "- [gcsfs 2026.8.1 source](https://github.com/fsspec/gcsfs/blob/2026.8.1/gcsfs/core.py)",
+        "file": "references/review.md"
+      },
+      {
+        "type": "network-access",
+        "line": 34,
+        "evidence": "https://",
+        "context": "- [fsspec HTTP source](https://github.com/fsspec/filesystem_spec/blob/2026.9.0/fsspec/implementations/http.py)",
+        "file": "references/review.md"
+      },
+      {
+        "type": "network-access",
+        "line": 35,
+        "evidence": "https://",
+        "context": "- [Xarray 2026.9.0 Zarr backend](https://github.com/pydata/xarray/blob/v2026.09.0/xarray/backends/zarr.py)",
+        "file": "references/review.md"
+      },
+      {
+        "type": "network-access",
+        "line": 36,
+        "evidence": "https://",
+        "context": "- [Dask 2026.8.0 array I/O](https://github.com/dask/dask/blob/2026.8.0/dask/array/core.py)",
+        "file": "references/review.md"
+      },
+      {
+        "type": "network-access",
+        "line": 37,
+        "evidence": "https://",
+        "context": "- [h5py datasets](https://docs.h5py.org/en/stable/high/dataset.html)",
+        "file": "references/review.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 57,
+        "evidence": "credential",
+        "context": "locally; its provider credential configuration differs from fsspec.",
+        "file": "references/storage_backends.md"
+      },
+      {
+        "type": "network-access",
+        "line": 90,
+        "evidence": "https://",
+        "context": "http_array = zarr.open_array(\"https://example.org/array.zarr\", mode=\"r\")",
+        "file": "references/storage_backends.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 96,
+        "evidence": "credential",
+        "context": "| S3 / s3fs 2026.9.0 | `s3://bucket/key`; `anon=False` uses SDK credentials (roles/profiles preferred), `anon=True` for public buckets. Optional `endpoint_url` is an explicitly supplied S3-compatible endpoint, not a bucket path. | SDK GetOb",
+        "file": "references/storage_backends.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 100,
+        "evidence": "API key",
+        "context": "Zarr has no universal hosted REST service, API key, pagination parameter or JSON query",
+        "file": "references/storage_backends.md"
+      },
+      {
+        "type": "network-access",
+        "line": 111,
+        "evidence": "https://",
+        "context": "Sources: [Zarr stores](https://zarr.readthedocs.io/en/stable/user-guide/storage/),",
+        "file": "references/storage_backends.md"
+      },
+      {
+        "type": "network-access",
+        "line": 112,
+        "evidence": "https://",
+        "context": "[s3fs](https://s3fs.readthedocs.io/en/latest/), [gcsfs](https://gcsfs.readthedocs.io/en/latest/),",
+        "file": "references/storage_backends.md"
+      },
+      {
+        "type": "network-access",
+        "line": 112,
+        "evidence": "https://",
+        "context": "[s3fs](https://s3fs.readthedocs.io/en/latest/), [gcsfs](https://gcsfs.readthedocs.io/en/latest/),",
+        "file": "references/storage_backends.md"
+      },
+      {
+        "type": "network-access",
+        "line": 113,
+        "evidence": "https://",
+        "context": "[fsspec HTTP](https://filesystem-spec.readthedocs.io/en/latest/api.html#fsspec.implementations.http.HTTPFileSystem).",
+        "file": "references/storage_backends.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 55,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/v3_migration.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 75,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/v3_migration.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 76,
+        "evidence": "remove",
+        "context": "zarr remove-metadata v2 migration-copy.zarr --dry-run",
+        "file": "references/v3_migration.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 77,
+        "evidence": "remove",
+        "context": "zarr remove-metadata v2 migration-copy.zarr",
+        "file": "references/v3_migration.md"
+      },
+      {
+        "type": "network-access",
+        "line": 89,
+        "evidence": "https://",
+        "context": "Sources: [migration guide](https://zarr.readthedocs.io/en/stable/user-guide/v3_migration/),",
+        "file": "references/v3_migration.md"
+      },
+      {
+        "type": "network-access",
+        "line": 90,
+        "evidence": "https://",
+        "context": "[CLI](https://zarr.readthedocs.io/en/stable/user-guide/cli/),",
+        "file": "references/v3_migration.md"
+      },
+      {
+        "type": "network-access",
+        "line": 91,
+        "evidence": "https://",
+        "context": "[released migration code](https://github.com/zarr-developers/zarr-python/blob/v3.4.0/src/zarr/metadata/migrate_v3.py).",
+        "file": "references/v3_migration.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 4,
+        "evidence": "Bash",
+        "context": "allowed-tools: Read Write Edit Bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 26,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 27,
+        "evidence": "pip install",
+        "context": "uv pip install \"zarr==3.4.0\" \"numpy==2.5.3\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 29,
+        "evidence": "pip install",
+        "context": "uv pip install \"zarr[remote,cli]==3.4.0\" \"fsspec==2026.9.0\" \"s3fs==2026.9.0\" \"gcsfs==2026.8.1\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 168,
+        "evidence": "https://",
+        "context": "Official sources: [release notes](https://zarr.readthedocs.io/en/stable/release-notes/),",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 169,
+        "evidence": "https://",
+        "context": "[documentation](https://zarr.readthedocs.io/en/stable/),",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 170,
+        "evidence": "https://",
+        "context": "[format specification](https://zarr-specs.readthedocs.io/),",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 171,
+        "evidence": "https://",
+        "context": "[released source](https://github.com/zarr-developers/zarr-python/tree/v3.4.0).",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 181,
+        "evidence": "https://",
+        "context": "> https://doi.org/10.48550/arXiv.2609.00065",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 183,
+        "evidence": "https://",
+        "context": "Always cite the current version. The DOI and https://arxiv.org/abs/2609.00065 resolve to the",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 185,
+        "evidence": "https://",
+        "context": "available, fetch https://arxiv.org/abs/2609.00065 (or",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 186,
+        "evidence": "http://",
+        "context": "http://export.arxiv.org/api/query?id_list=2609.00065) before writing the reference and take",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 44748
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE.md"
+    },
+    {
+      "path": "references/api_reference.md",
+      "sha256": "cae3f3d04560d7443694c2ddc6d8ec845932f66bdf8a4288cd1da6559eaf6b23",
+      "bytes": 4931,
+      "mode": "100644"
+    },
+    {
+      "path": "references/chunking_and_compression.md",
+      "sha256": "f35187bf6584171b800e5bdeae474e7c3680969c717fa77fbe8d76852d440843",
+      "bytes": 4732,
+      "mode": "100644"
+    },
+    {
+      "path": "references/integration.md",
+      "sha256": "7eb3df9e64673cb8cc8cd991980e20138add108541d5fe3224710f01777ee62c",
+      "bytes": 6382,
+      "mode": "100644"
+    },
+    {
+      "path": "references/performance_and_patterns.md",
+      "sha256": "39e1887400b3f5f7d912293ded8d78fa33ab2a6de9bc765cb5da15d4223f72fd",
+      "bytes": 6580,
+      "mode": "100644"
+    },
+    {
+      "path": "references/review.md",
+      "sha256": "2760cdb7cc1d5b621655f92ffb090fc40c08320cfcf8454ec867696d43218a92",
+      "bytes": 2528,
+      "mode": "100644"
+    },
+    {
+      "path": "references/storage_backends.md",
+      "sha256": "7bdb667451cef86a94a996b6331cec3cd7e4b421da833805cd6bdb4362750272",
+      "bytes": 5580,
+      "mode": "100644"
+    },
+    {
+      "path": "references/v3_migration.md",
+      "sha256": "b1016328d4a83b414fa12381201aa4fde7f2c4147b8774aafb2405b7fbbafc3c",
+      "bytes": 3993,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "1edaabfc3fc618d4c3a16bd70c589c039a3cb3a26683f02bca0ccc140d3c9c4d",
+      "bytes": 8954,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 44748
+}

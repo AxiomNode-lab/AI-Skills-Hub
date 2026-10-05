@@ -1,0 +1,66 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "wshobson/react-native-architecture",
+  "source": {
+    "repo": "wshobson/agents",
+    "path": "plugins/frontend-mobile-development/skills/react-native-architecture",
+    "revision": "156b7a5e7a8b93642628a339ee4039c925b34c7f"
+  },
+  "review": {
+    "path": "catalog/reviews/wshobson__react-native-architecture.json",
+    "sha256": "1015fbee8e8900c740882013589d4bd9aa75684919f846c972d6f5311efac5fe"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "shell-execution",
+        "line": 557,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 51,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 18398
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "f89abb55d9f073f38f1703e4518f0613c788c6174be7f13b8dfe48a1c076c746",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/details.md",
+      "sha256": "72b69297e14daa2f3d16be629e986ebd07d6146b646a4449cf96516d2e291de5",
+      "bytes": 13728,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "84895e8207c68928f30896a0b4da38c6e0d3abd2d9ac39227bf279bb08c2a79e",
+      "bytes": 3602,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 18398
+}

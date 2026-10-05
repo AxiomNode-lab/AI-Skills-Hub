@@ -1,0 +1,317 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "microsoft/azure-containerregistry-py",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/azure-sdk-python/skills/azure-containerregistry-py",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "review": {
+    "path": "catalog/reviews/microsoft__azure-containerregistry-py.json",
+    "sha256": "fe184b4bd3512bb072ec796ba84cd1a5b73507b94d9b484298f30b3dfa1d1420"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "filesystem-write",
+        "line": 36,
+        "evidence": "delete",
+        "context": "- Include cleanup/delete paths for created resources in examples.",
+        "file": "references/capabilities.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 16,
+        "evidence": "Delete",
+        "context": "### Delete Tag",
+        "file": "references/non-hero-scenarios.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 28,
+        "evidence": "credential",
+        "context": "with DefaultAzureCredential() as credential:",
+        "file": "references/non-hero-scenarios.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 29,
+        "evidence": "credential",
+        "context": "    with ContainerRegistryClient(endpoint, credential) as client:",
+        "file": "references/non-hero-scenarios.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 49,
+        "evidence": "credential",
+        "context": "    async with DefaultAzureCredential() as credential:",
+        "file": "references/non-hero-scenarios.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 50,
+        "evidence": "credential",
+        "context": "        async with ContainerRegistryClient(endpoint, credential) as client:",
+        "file": "references/non-hero-scenarios.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 74,
+        "evidence": "Delete",
+        "context": "| `delete_repository` | Delete repository and all images |",
+        "file": "references/non-hero-scenarios.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 77,
+        "evidence": "Delete",
+        "context": "| `delete_tag` | Delete specific tag |",
+        "file": "references/non-hero-scenarios.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 80,
+        "evidence": "Delete",
+        "context": "| `delete_manifest` | Delete manifest by digest |",
+        "file": "references/non-hero-scenarios.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 19,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 20,
+        "evidence": "pip install",
+        "context": "pip install azure-containerregistry",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 25,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 26,
+        "evidence": "https://",
+        "context": "AZURE_CONTAINERREGISTRY_ENDPOINT=https://<registry-name>.azurecr.io  # Required for all auth methods",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 36,
+        "evidence": "credential",
+        "context": ">    - Production: set `AZURE_TOKEN_CREDENTIALS=prod` (or `AZURE_TOKEN_CREDENTIALS=<specific_credential>`) to constrain the credential chain to production-safe credentials.",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 39,
+        "evidence": "credential",
+        "context": ">    - Async: `async with <Client>(...) as client:` **and** `async with DefaultAzureCredential() as credential:` (from `azure.identity.aio`)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 51,
+        "evidence": "credential",
+        "context": "credential = DefaultAzureCredential(require_envvar=True)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 52,
+        "evidence": "credential",
+        "context": "# Or use a specific credential directly in production:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 53,
+        "evidence": "credential",
+        "context": "# See https://learn.microsoft.com/python/api/overview/azure/identity-readme?view=azure-python#credential-classes",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 53,
+        "evidence": "https://",
+        "context": "# See https://learn.microsoft.com/python/api/overview/azure/identity-readme?view=azure-python#credential-classes",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 54,
+        "evidence": "credential",
+        "context": "# credential = ManagedIdentityCredential()",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 58,
+        "evidence": "credential",
+        "context": "    credential=credential",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 58,
+        "evidence": "credential",
+        "context": "    credential=credential",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 70,
+        "evidence": "https://",
+        "context": "    endpoint=\"https://mcr.microsoft.com\",",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 71,
+        "evidence": "credential",
+        "context": "    credential=None,",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 72,
+        "evidence": "https://",
+        "context": "    audience=\"https://mcr.microsoft.com\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 112,
+        "evidence": "Delete",
+        "context": "### Delete Repository",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 178,
+        "evidence": "Delete",
+        "context": "### Delete Manifest",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 181,
+        "evidence": "Delete",
+        "context": "# Delete by digest",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 184,
+        "evidence": "Delete",
+        "context": "# Delete by tag",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 199,
+        "evidence": "Delete",
+        "context": "### Delete Tag",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 230,
+        "evidence": "credential",
+        "context": "    async with DefaultAzureCredential() as credential:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 231,
+        "evidence": "credential",
+        "context": "        async with ContainerRegistryClient(endpoint, credential) as client:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 255,
+        "evidence": "Delete",
+        "context": "| `delete_repository` | Delete repository and all images |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 258,
+        "evidence": "Delete",
+        "context": "| `delete_tag` | Delete specific tag |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 261,
+        "evidence": "Delete",
+        "context": "| `delete_manifest` | Delete manifest by digest |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 268,
+        "evidence": "credential",
+        "context": "2. **Always use context managers for clients and async credentials.** Wrap every client in `with Client(...) as client:` (sync) or `async with Client(...) as client:` (async). For async `DefaultAzureCredential` from `azure.identity.aio`, al",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 270,
+        "evidence": "Delete",
+        "context": "4. **Delete by digest** not tag to avoid orphaned images",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 14185
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/capabilities.md",
+      "sha256": "979d61d84dd9bdd8c33faba7a2ce3af1a6e3c824081b3e3d0ad8cd60f75f0249",
+      "bytes": 1778,
+      "mode": "100644"
+    },
+    {
+      "path": "references/non-hero-scenarios.md",
+      "sha256": "b919f1e7e42e49b33815c7cbb7737be105b89539364f93b102f50bdf15e645bd",
+      "bytes": 2554,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "15bb9f18c67f30940b36edd5a2c050c05153ce2b3626d8ebf55604a9fbe946b2",
+      "bytes": 8713,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 14185
+}

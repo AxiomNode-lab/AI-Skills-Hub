@@ -1,0 +1,242 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "unitone/agent-security",
+  "source": {
+    "repo": "UnitOneAI/SecuritySkills",
+    "path": "skills/ai-security/agent-security",
+    "revision": "70bc259bb01abb3015ad2ad859ad5253cbf0bcab"
+  },
+  "review": {
+    "path": "catalog/reviews/unitone__agent-security.json",
+    "sha256": "081056ef70c22833fb50ab7bfb3c7c6d4ee0540f57f76d485098c9e3672b74f6"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": false,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "credential-access",
+        "line": 93,
+        "evidence": "credential",
+        "context": "| Agent identity and credential management | Auth middleware, secret managers, token configs | Exposes credential scope and rotation practices |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 93,
+        "evidence": "secret",
+        "context": "| Agent identity and credential management | Auth middleware, secret managers, token configs | Exposes credential scope and rotation practices |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 93,
+        "evidence": "credential",
+        "context": "| Agent identity and credential management | Auth middleware, secret managers, token configs | Exposes credential scope and rotation practices |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 112,
+        "evidence": "credential",
+        "context": "| **Information System** | Risks to the broader IT environment the agent operates within | Lateral movement, data exfiltration, credential theft, persistent access |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 127,
+        "evidence": "https://",
+        "context": "For hands-on validation of agent permission boundaries and tool-use attack surface, use the **fabraix/playground** open-source exploit library (https://github.com/fabraix/playground). This provides consolidated AI agent exploit PoCs mapped ",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 145,
+        "evidence": "delete",
+        "context": "- **Permission granularity:** Are tools granted with broad capabilities (e.g., \"database access\" meaning read, write, delete, schema alter) or scoped to specific operations (e.g., \"read-only access to the orders table\")?",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 146,
+        "evidence": "Credential",
+        "context": "- **Credential scope:** Does the agent's service identity have cloud IAM permissions beyond what its tools require? Are wildcards present in IAM policies (`*` actions, `*` resources)?",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 170,
+        "evidence": "delete",
+        "context": "| Agent has write/delete access to production databases without task justification | Critical |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 193,
+        "evidence": "process.env",
+        "context": "**Detection methods:** Search for network restrictions (`network_policy`, `egress`, `allowed_hosts`), file system restrictions (`chroot`, `sandbox`, `allowed_paths`), environment access (`os.environ`, `process.env`), resource limits (`max_t",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 203,
+        "evidence": "secret",
+        "context": "| Secrets | No direct access; tools broker secret access | Agent can read all env vars including secrets |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 283,
+        "evidence": "delete",
+        "context": "| Data destruction | What data can it delete or corrupt? | Production data loss |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 295,
+        "evidence": "credential",
+        "context": "| Compromised agent can access cloud metadata endpoint (credential theft) | Critical |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 313,
+        "evidence": "delete",
+        "context": "- **Log integrity:** Are logs tamper-evident? Can the agent or an attacker who compromises the agent modify or delete its own audit trail?",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 341,
+        "evidence": "delete",
+        "context": "| Agent can modify or delete its own audit trail | Critical |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 388,
+        "evidence": "DELETE",
+        "context": "| Database writes | INSERT, UPDATE, DELETE | Transaction rollback, soft delete | Point-in-time recovery; logged |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 388,
+        "evidence": "delete",
+        "context": "| Database writes | INSERT, UPDATE, DELETE | Transaction rollback, soft delete | Point-in-time recovery; logged |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 389,
+        "evidence": "delete",
+        "context": "| File modifications | Create, overwrite, delete | Version history, backup before modify | Previous version retained |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 503,
+        "evidence": "credential",
+        "context": "| [name] | [purpose] | [tool list] | [credential type] | [Yes/No, which actions] | [trust level] |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 564,
+        "evidence": "https://",
+        "context": "**OWASP Agentic AI Threats:** These threat categories are maintained by the OWASP GenAI Security Project working group. The AG01-AG10 numbering and scope used here reflect the documented threat areas. Verify current numbering and content ag",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 566,
+        "evidence": "https://",
+        "context": "**NIST AI RMF 1.0:** Published January 2023. Organized around four functions: GOVERN (policies, culture), MAP (context, risk identification), MEASURE (risk analysis), MANAGE (risk response, monitoring). Reference: [nist.gov/aiframework](htt",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 586,
+        "evidence": "https://",
+        "context": "1. OWASP GenAI Security Project -- Agentic AI Threat Categories -- https://genai.owasp.org",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 587,
+        "evidence": "https://",
+        "context": "2. OWASP Top 10 for LLM Applications 2025 -- https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 588,
+        "evidence": "https://",
+        "context": "3. NIST AI Risk Management Framework 1.0 (January 2023) -- https://www.nist.gov/aiframework",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 589,
+        "evidence": "https://",
+        "context": "4. NIST SP 800-53 Rev. 5 -- Security and Privacy Controls (AC-6: Least Privilege, AU-2: Event Logging, AU-10: Non-repudiation) -- https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 590,
+        "evidence": "https://",
+        "context": "5. MITRE ATLAS -- Adversarial Threat Landscape for AI Systems -- https://atlas.mitre.org",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 591,
+        "evidence": "https://",
+        "context": "6. Rehberger, J. \"Prompt Injection: Exfiltrating Data via Tool Calls\" (2023) -- https://embracethered.com",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 594,
+        "evidence": "https://",
+        "context": "9. OWASP Application Security Verification Standard (ASVS), V14: Configuration -- https://owasp.org/www-project-application-security-verification-standard/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 599,
+        "evidence": "https://",
+        "context": "14. fabraix/playground -- Open-source AI agent red-team exploit library for validating agent permission boundaries and tool-use attack surface -- https://github.com/fabraix/playground",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 45211
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "66eb5ec637cc578833ddcbc870dbf46c6718fd83e985fad5f0f5cf30d60cf47d",
+      "bytes": 1067,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "3a83761e8787d708f0d1c25f243e0f7dbaf695bb522fb55750ae0c5061d87a3a",
+      "bytes": 44144,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 45211
+}

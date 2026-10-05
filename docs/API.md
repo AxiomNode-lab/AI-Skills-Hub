@@ -1,9 +1,9 @@
 # Registry API
 
-`skills-hub serve` starts a read-only HTTP server over the local catalog. It binds to `127.0.0.1:8787` by default; use `--host` and `--port` to change that. The API never executes installation actions, and responses contain normalized catalog metadata. Upstream file content is returned only for materialized, release-eligible skills.
+`skills-hub serve` starts a read-only HTTP server over the packaged catalog. It binds to `127.0.0.1:8787` by default; use `--host` and `--port` to change that. **It has no authentication**: binding to a non-loopback address prints a warning, and anyone who can reach it can read the catalog and released skill files. The API never executes installation actions, and responses contain normalized catalog metadata. Upstream file content is returned only for materialized, release-eligible skills.
 
 ```bash
-node packages/cli/bin/skills-hub.mjs serve --port 8787
+skills-hub serve --port 8787
 curl "http://127.0.0.1:8787/api/skills?q=frontend%20design&agent=codex"
 ```
 
@@ -23,8 +23,4 @@ curl "http://127.0.0.1:8787/api/skills?q=frontend%20design&agent=codex"
 
 Each item has `availability` (`eligible`, `source-direct`, `review-required`, `blocked`, or `catalog-only`) and `install`, which is a CLI command only for eligible skills. Catalog inclusion is not approval.
 
-Requests must use the listening IP (or a loopback alias when listening locally) and port in `Host`. Browser requests must have the matching HTTP origin; other origins, including `null`, receive 403. Cross-origin CORS access is not enabled. Non-browser clients may omit `Origin`. This local server has no authentication and should not be exposed as a public service.
-
-Other methods return 405. MCP posts require `Content-Type: application/json`; unsupported protocol versions, malformed parameters, invalid pagination and malformed URL escapes are rejected. Request bodies on `/mcp` are limited to 1 MiB (413 when exceeded).
-
-Before serving content, the server verifies the bound release review, complete inventory and file hashes. Extra, missing or modified files, unresolved review evidence, paths outside the Hub, and symlinks/junctions anywhere below the Hub root suppress all content for that artifact. Its normalized catalog metadata remains available. The bytes returned are the bytes whose hashes were checked for the request.
+Responses are `application/json` with `x-content-type-options: nosniff` and no CORS headers. Requests whose `Host` is not this server, or whose `Origin` is another site, get 403. Invalid `limit`, `offset` or `agent` values and malformed path encoding get 400; other methods 405. Request bodies on `/mcp` are limited to 1 MiB. Error responses carry an error code, not internal messages.

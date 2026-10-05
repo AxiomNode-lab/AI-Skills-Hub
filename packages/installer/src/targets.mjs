@@ -8,7 +8,8 @@ const targets = {
   "claude-code": { project: [".claude/skills", ".agents/skills"], user: [".claude/skills", ".agents/skills"] },
   "cursor": { project: [".agents/skills", ".cursor/skills"], user: [".cursor/skills", ".agents/skills"] },
   "github-copilot": { project: [".github/skills", ".agents/skills"], user: ["~/.copilot/skills", "~/.agents/skills"] },
-  "copilot": { project: [".github/skills", ".agents/skills"], user: ["~/.copilot/skills", "~/.agents/skills"] }
+  "copilot": { project: [".github/skills", ".agents/skills"], user: ["~/.copilot/skills", "~/.agents/skills"] },
+  "opencode": { project: [".opencode/skills"], user: ["~/.config/opencode/skills"] }
 };
 
 function expandHome(value) {

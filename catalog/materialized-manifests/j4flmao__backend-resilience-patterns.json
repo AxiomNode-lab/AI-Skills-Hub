@@ -1,0 +1,108 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "j4flmao/backend-resilience-patterns",
+  "source": {
+    "repo": "j4flmao/agent-skills",
+    "path": "skills/backend/universal/resilience-patterns",
+    "revision": "d9f812988c8926767ee96f66c1a340d65b595799"
+  },
+  "review": {
+    "path": "catalog/reviews/j4flmao__backend-resilience-patterns.json",
+    "sha256": "e1b34659d0bba313d34dd21efce5d6695c3ecab279988afe185d7208502e1a2f"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "low",
+    "capabilities": {
+      "shell": false,
+      "network": false,
+      "credentials": false,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "filesystem-write",
+        "line": 148,
+        "evidence": "delete",
+        "context": "        this.degradedKeys.delete(key);",
+        "file": "references/resilience-cache.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 560,
+        "evidence": "delete",
+        "context": "    this.observers.delete(observer);",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 64403
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "b6b8d73f01a48d1411da29d8196e2d85cd91cc9e8d7ae6ac4863ae7e06e6d314",
+      "bytes": 1064,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/bulkhead-patterns.md",
+      "sha256": "f9b0d80948b5d46c5940c31588ed9bc89e34d70298373cb3ee0bbfdbbf96e4dd",
+      "bytes": 2943,
+      "mode": "100644"
+    },
+    {
+      "path": "references/circuit-breaker-patterns.md",
+      "sha256": "e050d8e389f6e9e1c9741136f4369c534e11f4ae4f67d5846a094a52cb509f9f",
+      "bytes": 5965,
+      "mode": "100644"
+    },
+    {
+      "path": "references/fallback-strategies.md",
+      "sha256": "300728a74efe79fb9614d29599c5579fb0eb12be457c5040ef43fff91a1f9f9d",
+      "bytes": 3822,
+      "mode": "100644"
+    },
+    {
+      "path": "references/resilience-cache.md",
+      "sha256": "67cd3fc0e41a18b077e8b4fae85e2f56b82c968fb5f47ac2d13c2ed6a857efdc",
+      "bytes": 4617,
+      "mode": "100644"
+    },
+    {
+      "path": "references/resilience-testing.md",
+      "sha256": "d00e4cadb7523f0ef3d863e37103cc682f1ffd5acf8efc7ba0931b2a59c8e64c",
+      "bytes": 5130,
+      "mode": "100644"
+    },
+    {
+      "path": "references/resilience4j-guide.md",
+      "sha256": "575bb9c184ec57337ff14e05a6b59959085fb1328e86eaffa98bee4b8831ca90",
+      "bytes": 4057,
+      "mode": "100644"
+    },
+    {
+      "path": "references/retry-backoff-strategies.md",
+      "sha256": "43e86f72e27a5050d3e775113b2ef35c44d7d121f901b6b0fdfa04459ecd22ec",
+      "bytes": 4122,
+      "mode": "100644"
+    },
+    {
+      "path": "references/timeout-retry-patterns.md",
+      "sha256": "b46444171fa43340e59ee1519d48246cd48022d7f71ddd6c7a84ac882beb968f",
+      "bytes": 6856,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "b786dccf6b5a6bfbafb9bfc1728cdeabc47c29a4b0be479de55cd913d3c11c8c",
+      "bytes": 25827,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 64403
+}

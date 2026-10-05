@@ -1,0 +1,243 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "sentry/prompt-optimizer",
+  "source": {
+    "repo": "getsentry/skills",
+    "path": "skills/prompt-optimizer",
+    "revision": "d18b7aa8ba878354e5c348310230e652f7690f9c"
+  },
+  "review": {
+    "path": "catalog/reviews/sentry__prompt-optimizer.json",
+    "sha256": "0a5dd467e893ac6e9e6ee96add4e056a26eac9cd3ddde2f7284df89197fac021"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "low",
+    "capabilities": {
+      "shell": false,
+      "network": true,
+      "credentials": false,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "network-access",
+        "line": 3,
+        "evidence": "http://",
+        "context": "                        http://www.apache.org/licenses/",
+        "file": "LICENSE.txt"
+      },
+      {
+        "type": "network-access",
+        "line": 184,
+        "evidence": "http://",
+        "context": "       http://www.apache.org/licenses/LICENSE-2.0",
+        "file": "LICENSE.txt"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 96,
+        "evidence": "delete",
+        "context": "- Do not delete platform rules because a deployer layer \"probably covers it\".",
+        "file": "references/core-patterns.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 136,
+        "evidence": "Remove",
+        "context": "- Remove persona, motivation, or reminder text that does not change measured behavior.",
+        "file": "references/core-patterns.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 148,
+        "evidence": "Remove",
+        "context": "| The prompt is long but still unstable | Remove duplicate rules and choose one owner per behavior |",
+        "file": "references/core-patterns.md"
+      },
+      {
+        "type": "network-access",
+        "line": 20,
+        "evidence": "https://",
+        "context": "| `https://agents.md/` | official format guide | canonical | 2026-05-04 | high | AGENTS.md purpose, common sections, nested files, closest-file precedence | public format guidance | Supports exact external file references in repo agent prom",
+        "file": "SOURCES.md"
+      },
+      {
+        "type": "network-access",
+        "line": 21,
+        "evidence": "https://",
+        "context": "| `https://developers.openai.com/codex/guides/agents-md` | official product docs | canonical | 2026-05-04 | high | Codex AGENTS.md discovery, scope, merge order, size cap, verification | OpenAI-specific behavior | Used for agent prompt and ",
+        "file": "SOURCES.md"
+      },
+      {
+        "type": "network-access",
+        "line": 22,
+        "evidence": "https://",
+        "context": "| `https://platform.openai.com/docs/guides/prompt-optimizer/` | official docs | canonical | 2026-05-04 | high | Dataset-backed prompt optimization, annotations, graders, manual review | verify product surface before dashboard-specific instr",
+        "file": "SOURCES.md"
+      },
+      {
+        "type": "network-access",
+        "line": 23,
+        "evidence": "https://",
+        "context": "| `https://platform.openai.com/docs/guides/prompting` | official docs | canonical | 2026-05-04 | high | Prompt objects, versioning, variables, linked evals, prompt roles | product-specific features may evolve | Supports reusable prompt pack",
+        "file": "SOURCES.md"
+      },
+      {
+        "type": "network-access",
+        "line": 24,
+        "evidence": "https://",
+        "context": "| `https://developers.openai.com/api/docs/guides/reasoning-best-practices` | official docs | canonical | 2026-04-18 | high | Reasoning-model prompting differences, simplicity, delimiters, no explicit CoT | verify product syntax if exact API",
+        "file": "SOURCES.md"
+      },
+      {
+        "type": "network-access",
+        "line": 25,
+        "evidence": "https://",
+        "context": "| `https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/overview` | official docs | canonical | 2026-04-18 | high | Success-criteria-first prompting and reminder that not every failure is a prompt problem | product synta",
+        "file": "SOURCES.md"
+      },
+      {
+        "type": "network-access",
+        "line": 26,
+        "evidence": "https://",
+        "context": "| `https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices` | official docs | canonical | 2026-04-18 | high | XML tags, role prompting, examples, long-context ordering, output control | provi",
+        "file": "SOURCES.md"
+      },
+      {
+        "type": "network-access",
+        "line": 27,
+        "evidence": "https://",
+        "context": "| `https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-tools` | official docs | canonical | 2026-04-18 | medium | Prompt improver inputs: prompt, failure feedback, ideal examples | console workflow may change ",
+        "file": "SOURCES.md"
+      },
+      {
+        "type": "network-access",
+        "line": 28,
+        "evidence": "https://",
+        "context": "| `https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices` | official docs | canonical | 2026-04-18 | high | Concision as a context-budget discipline; \"context window is a public good\" framing | skill-oriented sour",
+        "file": "SOURCES.md"
+      },
+      {
+        "type": "network-access",
+        "line": 29,
+        "evidence": "https://",
+        "context": "| `https://ai.google.dev/gemini-api/docs/prompting-strategies` | official docs | canonical | 2026-04-18 | high | Clear instructions, example consistency, positive patterns, prompt iteration | provider-specific behavior | Used for Gemini fam",
+        "file": "SOURCES.md"
+      },
+      {
+        "type": "network-access",
+        "line": 30,
+        "evidence": "https://",
+        "context": "| `https://ai.google.dev/gemini-api/docs/text-generation` | official docs | canonical | 2026-04-18 | high | System instruction surface for Gemini | product syntax may evolve | Confirms system-instruction layer |",
+        "file": "SOURCES.md"
+      },
+      {
+        "type": "network-access",
+        "line": 31,
+        "evidence": "https://",
+        "context": "| `https://ai.google.dev/gemini-api/docs/thinking` | official docs | canonical | 2026-04-18 | high | Dynamic thinking defaults and controllable reasoning settings | product syntax may evolve | Used for Gemini adapter notes |",
+        "file": "SOURCES.md"
+      },
+      {
+        "type": "network-access",
+        "line": 32,
+        "evidence": "https://",
+        "context": "| `https://ai.google.dev/gemini-api/docs/long-context` | official docs | canonical | 2026-04-18 | high | Many-shot in-context learning and long-context prompt placement notes | provider-specific behavior | Supports many-shot adapter note |",
+        "file": "SOURCES.md"
+      },
+      {
+        "type": "network-access",
+        "line": 33,
+        "evidence": "https://",
+        "context": "| `https://arxiv.org/abs/2309.03409` | research paper | canonical | 2026-04-18 | high | OPRO candidate search loop and score-driven prompt optimization | research result, not product guarantee | Supports candidate beam design |",
+        "file": "SOURCES.md"
+      },
+      {
+        "type": "network-access",
+        "line": 34,
+        "evidence": "https://",
+        "context": "| `https://arxiv.org/abs/2305.03495` | research paper | canonical | 2026-04-18 | high | Textual gradients, minibatch critiques, beam search | research result, not product guarantee | Supports critique-driven edits |",
+        "file": "SOURCES.md"
+      },
+      {
+        "type": "network-access",
+        "line": 35,
+        "evidence": "https://",
+        "context": "| `https://arxiv.org/abs/2303.17651` | research paper | canonical | 2026-04-18 | high | FEEDBACK -> REFINE loop and test-time improvement | research result, not product guarantee | Supports iterative refinement loop |",
+        "file": "SOURCES.md"
+      },
+      {
+        "type": "network-access",
+        "line": 36,
+        "evidence": "https://",
+        "context": "| `https://arxiv.org/abs/2303.11366` | research paper | canonical | 2026-04-18 | high | Reflection memory across trials for agents | research result, not product guarantee | Supports optimization log and reflection memory |",
+        "file": "SOURCES.md"
+      },
+      {
+        "type": "network-access",
+        "line": 37,
+        "evidence": "https://",
+        "context": "| `https://dspy.ai/` | official project docs | canonical | 2026-04-18 | high | Current prompt optimizers such as GEPA and MIPROv2; score-driven instruction search; composable optimization | framework-specific guidance | Supports modern opti",
+        "file": "SOURCES.md"
+      }
+    ],
+    "total_bytes": 48455
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "96e78a9ce85795b117c8929887bdb78f88bf23f7b85a31f0872cde4dff7e92cd",
+      "bytes": 10785,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/core-patterns.md",
+      "sha256": "508199c575439e3d021848df67cb8a8be7675f0e1f2e8c77438e0e4734ca415c",
+      "bytes": 5514,
+      "mode": "100644"
+    },
+    {
+      "path": "references/meta-optimization-loop.md",
+      "sha256": "9489e6ee08a184319a3ac3e88de54ea9f91bc2da74e4ee2dd8ada662291a9e71",
+      "bytes": 3710,
+      "mode": "100644"
+    },
+    {
+      "path": "references/model-family-notes.md",
+      "sha256": "57a5292ec6e68c846136599c8a424e95330aecc3d2443831fa0a4283fa0f2f04",
+      "bytes": 3397,
+      "mode": "100644"
+    },
+    {
+      "path": "references/transformed-examples.md",
+      "sha256": "3cfb92aadc7b30ca4ad4e9bb02204a92c2366b0483b8023115ad2a1e614d235e",
+      "bytes": 3603,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "b5ba1525d7964004d8664fea9d5028972cca599f346ff4662152479b94e25cb3",
+      "bytes": 4613,
+      "mode": "100644"
+    },
+    {
+      "path": "SOURCES.md",
+      "sha256": "2effb8172cb365ca7c6e0312c9ecb2aa6761ba00b3269637ada10daa284566a4",
+      "bytes": 11614,
+      "mode": "100644"
+    },
+    {
+      "path": "SPEC.md",
+      "sha256": "b56cdc168549dc916a29dc2c360fff95ecc0db8618eb43839c1eef9a11f1d499",
+      "bytes": 5219,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 48455
+}

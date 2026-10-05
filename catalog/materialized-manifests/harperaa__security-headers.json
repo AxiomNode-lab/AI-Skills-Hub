@@ -1,0 +1,410 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "harperaa/security-headers",
+  "source": {
+    "repo": "harperaa/secure-claude-skills",
+    "path": "security-headers",
+    "revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223"
+  },
+  "review": {
+    "path": "catalog/reviews/harperaa__security-headers.json",
+    "sha256": "6460f9c94b83eb1247b17afde64ec4c7bc7896be24d36bf662886058541f0f4f"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": true
+    },
+    "findings": [
+      {
+        "type": "credential-access",
+        "line": 50,
+        "evidence": "process.env",
+        "context": "const clerkDomain = process.env.NEXT_PUBLIC_CLERK_FRONTEND_API_URL",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 51,
+        "evidence": "process.env",
+        "context": "  ? new URL(process.env.NEXT_PUBLIC_CLERK_FRONTEND_API_URL).origin",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 54,
+        "evidence": "process.env",
+        "context": "const convexDomain = process.env.NEXT_PUBLIC_CONVEX_URL",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 55,
+        "evidence": "process.env",
+        "context": "  ? new URL(process.env.NEXT_PUBLIC_CONVEX_URL).origin",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 60,
+        "evidence": "https://",
+        "context": "  `script-src 'self' 'unsafe-inline' 'unsafe-eval' ${clerkDomain} https://js.stripe.com`,",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 62,
+        "evidence": "https://",
+        "context": "  `connect-src 'self' ${clerkDomain} ${convexDomain} https://api.stripe.com`,",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 63,
+        "evidence": "https://",
+        "context": "  `frame-src 'self' ${clerkDomain} https://js.stripe.com https://hooks.stripe.com`,",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 63,
+        "evidence": "https://",
+        "context": "  `frame-src 'self' ${clerkDomain} https://js.stripe.com https://hooks.stripe.com`,",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 84,
+        "evidence": "process.env",
+        "context": "const clerkDomain = process.env.NEXT_PUBLIC_CLERK_FRONTEND_API_URL",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 85,
+        "evidence": "process.env",
+        "context": "  ? new URL(process.env.NEXT_PUBLIC_CLERK_FRONTEND_API_URL).origin",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 104,
+        "evidence": "Delete",
+        "context": "Attacker embeds your \"Delete Account\" button in an invisible iframe overlay on a game site. Users think they're clicking \"Play Game\" but actually click \"Delete Account.\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 104,
+        "evidence": "Delete",
+        "context": "Attacker embeds your \"Delete Account\" button in an invisible iframe overlay on a game site. Users think they're clicking \"Play Game\" but actually click \"Delete Account.\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 146,
+        "evidence": "https://",
+        "context": "User types \"yourapp.com\" (no https://). Browser initially requests HTTP. Attacker intercepts, serves fake HTTP version, steals credentials.",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 150,
+        "evidence": "process.env",
+        "context": "if (process.env.NODE_ENV === 'production') {",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 166,
+        "evidence": "remove",
+        "context": "**Important:** Once HSTS is set for a domain, browsers remember it. If you need to remove it, you must:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 203,
+        "evidence": "process.env",
+        "context": "  const clerkDomain = process.env.NEXT_PUBLIC_CLERK_FRONTEND_API_URL",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 204,
+        "evidence": "process.env",
+        "context": "    ? new URL(process.env.NEXT_PUBLIC_CLERK_FRONTEND_API_URL).origin",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 207,
+        "evidence": "process.env",
+        "context": "  const convexDomain = process.env.NEXT_PUBLIC_CONVEX_URL",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 208,
+        "evidence": "process.env",
+        "context": "    ? new URL(process.env.NEXT_PUBLIC_CONVEX_URL).origin",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 214,
+        "evidence": "https://",
+        "context": "    `script-src 'self' 'unsafe-inline' 'unsafe-eval' ${clerkDomain} https://js.stripe.com`,",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 216,
+        "evidence": "https://",
+        "context": "    `connect-src 'self' ${clerkDomain} ${convexDomain} https://api.stripe.com`,",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 217,
+        "evidence": "https://",
+        "context": "    `frame-src 'self' ${clerkDomain} https://js.stripe.com https://hooks.stripe.com`,",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 217,
+        "evidence": "https://",
+        "context": "    `frame-src 'self' ${clerkDomain} https://js.stripe.com https://hooks.stripe.com`,",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 232,
+        "evidence": "process.env",
+        "context": "  if (process.env.NODE_ENV === 'production') {",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 256,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 257,
+        "evidence": "curl",
+        "context": "curl -I http://localhost:3000",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 257,
+        "evidence": "http://",
+        "context": "curl -I http://localhost:3000",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 267,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 269,
+        "evidence": "curl",
+        "context": "curl -I https://yourapp.com",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 269,
+        "evidence": "https://",
+        "context": "curl -I https://yourapp.com",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 277,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 278,
+        "evidence": "curl",
+        "context": "curl -I http://localhost:3000/dashboard",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 278,
+        "evidence": "http://",
+        "context": "curl -I http://localhost:3000/dashboard",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 287,
+        "evidence": "https://",
+        "context": "- **Security Headers:** https://securityheaders.com/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 288,
+        "evidence": "https://",
+        "context": "- **Mozilla Observatory:** https://observatory.mozilla.org/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 289,
+        "evidence": "https://",
+        "context": "- **SSL Labs:** https://www.ssllabs.com/ssltest/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 303,
+        "evidence": "https://",
+        "context": "  `script-src 'self' 'unsafe-inline' 'unsafe-eval' ${clerkDomain} https://js.stripe.com https://www.googletagmanager.com https://www.google-analytics.com`,",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 303,
+        "evidence": "https://",
+        "context": "  `script-src 'self' 'unsafe-inline' 'unsafe-eval' ${clerkDomain} https://js.stripe.com https://www.googletagmanager.com https://www.google-analytics.com`,",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 303,
+        "evidence": "https://",
+        "context": "  `script-src 'self' 'unsafe-inline' 'unsafe-eval' ${clerkDomain} https://js.stripe.com https://www.googletagmanager.com https://www.google-analytics.com`,",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 305,
+        "evidence": "https://",
+        "context": "  `connect-src 'self' ${clerkDomain} ${convexDomain} https://api.stripe.com https://www.google-analytics.com https://analytics.google.com`,",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 305,
+        "evidence": "https://",
+        "context": "  `connect-src 'self' ${clerkDomain} ${convexDomain} https://api.stripe.com https://www.google-analytics.com https://analytics.google.com`,",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 305,
+        "evidence": "https://",
+        "context": "  `connect-src 'self' ${clerkDomain} ${convexDomain} https://api.stripe.com https://www.google-analytics.com https://analytics.google.com`,",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 313,
+        "evidence": "process.env",
+        "context": "const cdnDomain = process.env.NEXT_PUBLIC_CDN_URL",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 314,
+        "evidence": "process.env",
+        "context": "  ? new URL(process.env.NEXT_PUBLIC_CDN_URL).origin",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "encoded-content",
+        "line": 336,
+        "evidence": "base64",
+        "context": "const nonce = crypto.randomBytes(16).toString('base64');",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 348,
+        "evidence": "https://",
+        "context": "`img-src 'self' data: https://gravatar.com https://images.yourapp.com`",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 348,
+        "evidence": "https://",
+        "context": "`img-src 'self' data: https://gravatar.com https://images.yourapp.com`",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 386,
+        "evidence": "https://",
+        "context": "- Mozilla Security Headers Guide: https://infosec.mozilla.org/guidelines/web_security",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 387,
+        "evidence": "https://",
+        "context": "- OWASP Secure Headers Project: https://owasp.org/www-project-secure-headers/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 388,
+        "evidence": "https://",
+        "context": "- Content Security Policy: https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 389,
+        "evidence": "https://",
+        "context": "- HSTS Specification: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 390,
+        "evidence": "https://",
+        "context": "- Security Headers Checker: https://securityheaders.com/",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 14845
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "e8f0d88e88dafeb5ba3503df8babaf5ef1c49323d6c1751c09989d29740fa919",
+      "bytes": 1069,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "9074c79143952e06dfcedcb03d570357d24aa7133d6cea9dca83ae43dcf5e0fa",
+      "bytes": 13776,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 14845
+}

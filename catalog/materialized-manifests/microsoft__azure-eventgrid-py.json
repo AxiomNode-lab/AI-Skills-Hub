@@ -1,0 +1,247 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "microsoft/azure-eventgrid-py",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/azure-sdk-python/skills/azure-eventgrid-py",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "review": {
+    "path": "catalog/reviews/microsoft__azure-eventgrid-py.json",
+    "sha256": "4e4c6e234b9623a0256fa57bce6f291b084dc7bf30f229ac479c5c3915d8d232"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "filesystem-write",
+        "line": 30,
+        "evidence": "delete",
+        "context": "- Include cleanup/delete paths for created resources in examples.",
+        "file": "references/capabilities.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 14,
+        "evidence": "credential",
+        "context": "    async with DefaultAzureCredential() as credential:",
+        "file": "references/non-hero-scenarios.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 15,
+        "evidence": "credential",
+        "context": "        async with EventGridPublisherClient(endpoint, credential) as client:",
+        "file": "references/non-hero-scenarios.md"
+      },
+      {
+        "type": "network-access",
+        "line": 37,
+        "evidence": "https://",
+        "context": "namespace_endpoint = \"https://<namespace>.<region>.eventgrid.azure.net\"",
+        "file": "references/non-hero-scenarios.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 40,
+        "evidence": "credential",
+        "context": "with DefaultAzureCredential() as credential:",
+        "file": "references/non-hero-scenarios.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 43,
+        "evidence": "credential",
+        "context": "        credential=credential,",
+        "file": "references/non-hero-scenarios.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 43,
+        "evidence": "credential",
+        "context": "        credential=credential,",
+        "file": "references/non-hero-scenarios.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 19,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 20,
+        "evidence": "pip install",
+        "context": "pip install azure-eventgrid azure-identity",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 25,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 26,
+        "evidence": "https://",
+        "context": "EVENTGRID_TOPIC_ENDPOINT=https://<topic-name>.<region>.eventgrid.azure.net/api/events  # Required for Event Grid topic publishing",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 27,
+        "evidence": "https://",
+        "context": "EVENTGRID_NAMESPACE_ENDPOINT=https://<namespace>.<region>.eventgrid.azure.net  # Required for namespace operations",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 37,
+        "evidence": "credential",
+        "context": ">    - Production: set `AZURE_TOKEN_CREDENTIALS=prod` (or `AZURE_TOKEN_CREDENTIALS=<specific_credential>`) to constrain the credential chain to production-safe credentials.",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 40,
+        "evidence": "credential",
+        "context": ">    - Async: `async with <Client>(...) as client:` **and** `async with DefaultAzureCredential() as credential:` (from `azure.identity.aio`)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 50,
+        "evidence": "credential",
+        "context": "credential = DefaultAzureCredential(require_envvar=True)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 51,
+        "evidence": "credential",
+        "context": "# Or use a specific credential directly in production:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 52,
+        "evidence": "credential",
+        "context": "# See https://learn.microsoft.com/python/api/overview/azure/identity-readme?view=azure-python#credential-classes",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 52,
+        "evidence": "https://",
+        "context": "# See https://learn.microsoft.com/python/api/overview/azure/identity-readme?view=azure-python#credential-classes",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 53,
+        "evidence": "credential",
+        "context": "# credential = ManagedIdentityCredential()",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 55,
+        "evidence": "https://",
+        "context": "endpoint = \"https://<topic-name>.<region>.eventgrid.azure.net/api/events\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 57,
+        "evidence": "credential",
+        "context": "with EventGridPublisherClient(endpoint, credential) as client:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 123,
+        "evidence": "https://",
+        "context": "    dataschema=\"https://schema.example\",  # Optional: schema URL",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 149,
+        "evidence": "credential",
+        "context": "    credential = DefaultAzureCredential()",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 151,
+        "evidence": "credential",
+        "context": "    async with EventGridPublisherClient(endpoint, credential) as client:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 172,
+        "evidence": "https://",
+        "context": "namespace_endpoint = \"https://<namespace>.<region>.eventgrid.azure.net\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 177,
+        "evidence": "credential",
+        "context": "    credential=DefaultAzureCredential()",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 188,
+        "evidence": "credential",
+        "context": "2. **Always use context managers for clients and async credentials.** Wrap every client in `with Client(...) as client:` (sync) or `async with Client(...) as client:` (async). For async `DefaultAzureCredential` from `azure.identity.aio`, al",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 11417
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/capabilities.md",
+      "sha256": "240a660af1c8a413dc2991a70614356dafb37c26db6284fa0ad766be9b19fd27",
+      "bytes": 1329,
+      "mode": "100644"
+    },
+    {
+      "path": "references/non-hero-scenarios.md",
+      "sha256": "b952ad88139ec27ff4810c0593a2f213740ac7392c4cb9b03be9251c59587e54",
+      "bytes": 1595,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "9c216f29155345129844628e6137de6d3593690e9ce6bae80e543aff84fbb933",
+      "bytes": 7353,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 11417
+}

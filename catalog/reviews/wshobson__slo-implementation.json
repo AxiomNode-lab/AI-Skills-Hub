@@ -1,0 +1,99 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "wshobson/slo-implementation",
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "wshobson/agents",
+    "path": "plugins/observability-monitoring/skills/slo-implementation",
+    "revision": "156b7a5e7a8b93642628a339ee4039c925b34c7f"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "plugins/observability-monitoring/skills/slo-implementation",
+    "url": "https://api.github.com/repos/wshobson/agents/git/trees/156b7a5e7a8b93642628a339ee4039c925b34c7f?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/wshobson/agents/blob/156b7a5e7a8b93642628a339ee4039c925b34c7f/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "plugins",
+        "plugins/observability-monitoring",
+        "plugins/observability-monitoring/skills",
+        "plugins/observability-monitoring/skills/slo-implementation"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "none",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": false,
+      "network": false,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md and references/details.md in full. SLI/SLO/error-budget guidance: availability, latency and durability SLIs in PromQL, SLO target table, error-budget policy, Prometheus recording and multi-window burn-rate alerting rules, dashboard layout, and an SLO review cadence.",
+      "No commands, installs, credentials, or network access; the YAML and PromQL are configuration the user adds to their own Prometheus/Grafana.",
+      "The alert rules reference `burn_rate_1h`, `burn_rate_6h` and `burn_rate_30m` recording rules (SKILL.md:195-211, details.md:11-19) but only `burn_rate_5m` is defined (SKILL.md:175), so users must add the missing recording rules. The 14.4x/6x multi-window thresholds are the widely used SRE convention, stated as numbers rather than copied text. Related Skills (details.md:64-65) are named by plain text only."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "f89abb55d9f073f38f1703e4518f0613c788c6174be7f13b8dfe48a1c076c746",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "326f0a55c96e672fedf9d807ca043c00df05ba0e",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
+      "findings": []
+    },
+    {
+      "path": "references/details.md",
+      "sha256": "5ec829a44c438dd828e910ab7db9986768d79e5b9cb550ca217ed71376cedce9",
+      "bytes": 1378,
+      "mode": "100644",
+      "git_blob": "8a5b02b8e662cbb63e76b531945378347adce12a",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "538e560a1c10be5f643d0a048e4e828605420e9b1867a9d4449f8a3471c14049",
+      "bytes": 7163,
+      "mode": "100644",
+      "git_blob": "f740d0975b0b1004cb52e2e3293118f5fbd02dc0",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": []
+    }
+  ]
+}

@@ -1,0 +1,168 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "harperaa/security-prompts-auth",
+  "source": {
+    "repo": "harperaa/secure-claude-skills",
+    "path": "security-prompts/auth-authorization",
+    "revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223"
+  },
+  "review": {
+    "path": "catalog/reviews/harperaa__security-prompts-auth.json",
+    "sha256": "d09d82f4be6b5e856242865b68252dbf1826a2430caab9f97533aeca490d403e"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "low",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": false,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "network-access",
+        "line": 73,
+        "evidence": "curl",
+        "context": "- How to test via curl or Postman",
+        "file": "04_auth_testing.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 85,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "04_auth_testing.md"
+      },
+      {
+        "type": "network-access",
+        "line": 87,
+        "evidence": "curl",
+        "context": "curl http://localhost:3000/admin \\",
+        "file": "04_auth_testing.md"
+      },
+      {
+        "type": "network-access",
+        "line": 87,
+        "evidence": "http://",
+        "context": "curl http://localhost:3000/admin \\",
+        "file": "04_auth_testing.md"
+      },
+      {
+        "type": "network-access",
+        "line": 92,
+        "evidence": "curl",
+        "context": "curl http://localhost:3000/admin \\",
+        "file": "04_auth_testing.md"
+      },
+      {
+        "type": "network-access",
+        "line": 92,
+        "evidence": "http://",
+        "context": "curl http://localhost:3000/admin \\",
+        "file": "04_auth_testing.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 54,
+        "evidence": "delete",
+        "context": "- `users.read`, `users.write`, `users.delete`",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 197,
+        "evidence": "delete",
+        "context": "- admin: All user access + create/edit/delete posts, moderate comments",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 258,
+        "evidence": "delete",
+        "context": "- Admin: Most permissions, cannot delete workspace",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 343,
+        "evidence": "DELETE",
+        "context": "export async function DELETE(req: Request) {",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 350,
+        "evidence": "Delete",
+        "context": "  // Delete logic",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 382,
+        "evidence": "delete",
+        "context": "test(\"non-admin cannot delete posts\", async () => {",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 383,
+        "evidence": "DELETE",
+        "context": "  const response = await DELETE(\"/api/posts/123\", {",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 453,
+        "evidence": "DELETE",
+        "context": "export async function DELETE(req: Request) {",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 29187
+  },
+  "materialized_files": [
+    {
+      "path": "01_rbac_implementation.md",
+      "sha256": "e6a9129a811126314ba12f33fab00d98c92361da72eee61547c1334be52f2740",
+      "bytes": 4022,
+      "mode": "100644"
+    },
+    {
+      "path": "02_permissions.md",
+      "sha256": "fb5b53b6ffe50b95eb1faaa271e19f735d6b31033b039b8ece86b30be352efa7",
+      "bytes": 3640,
+      "mode": "100644"
+    },
+    {
+      "path": "03_ownership.md",
+      "sha256": "4679d180147640a4f7f4aba944fd992aa2f04c89f07fdaef8855e1a864817225",
+      "bytes": 2695,
+      "mode": "100644"
+    },
+    {
+      "path": "04_auth_testing.md",
+      "sha256": "68c638b4fc2c78f73bfe6424cffe655dd30bd3ad66de5f05ab76833f09f18d0d",
+      "bytes": 3802,
+      "mode": "100644"
+    },
+    {
+      "path": "LICENSE.txt",
+      "sha256": "e8f0d88e88dafeb5ba3503df8babaf5ef1c49323d6c1751c09989d29740fa919",
+      "bytes": 1069,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "47d0b4ad34238226b59266a349f9b23889fd6ccaf13fe94875f699fae7f32ad0",
+      "bytes": 13959,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 29187
+}

@@ -1,0 +1,171 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "bagelhole/sast-scanning",
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "security/scanning/sast-scanning",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "review": {
+    "path": "catalog/reviews/bagelhole__sast-scanning.json",
+    "sha256": "4c880049a5999175f6349ad7eb56f6a8a6b5c8b24a62aa99fa19da6baf86b538"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": false,
+      "dynamic_execution": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "shell-execution",
+        "line": 16,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/sast-tools.md"
+      },
+      {
+        "type": "package-install",
+        "line": 18,
+        "evidence": "pip install",
+        "context": "pip install semgrep",
+        "file": "references/sast-tools.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 40,
+        "evidence": "delete",
+        "context": "          regex: (?i)(select|insert|update|delete)",
+        "file": "references/sast-tools.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 48,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/sast-tools.md"
+      },
+      {
+        "type": "network-access",
+        "line": 53,
+        "evidence": "http://",
+        "context": "  -Dsonar.host.url=http://sonarqube:9000 \\",
+        "file": "references/sast-tools.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 80,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/sast-tools.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 43,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 45,
+        "evidence": "pip install",
+        "context": "pip install semgrep",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 53,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 281,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 283,
+        "evidence": "pip install",
+        "context": "pip install bandit",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 303,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 305,
+        "evidence": "npm install",
+        "context": "npm install eslint eslint-plugin-security --save-dev",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 327,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 367,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 368,
+        "evidence": "bash",
+        "context": "#!/bin/bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 369,
+        "evidence": "sh",
+        "context": "# security-gate.sh",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 11861
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/sast-tools.md",
+      "sha256": "360ab74411cbd06decbb6b0adfb81f1dc0f4291e167a7a26de3067b6a1653fcf",
+      "bytes": 1987,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "623ed8661f7ebe16f6b543f443da76532310ec0a258f6b405ff614f9a9033b69",
+      "bytes": 8806,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 11861
+}

@@ -1,0 +1,94 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "wshobson/pci-compliance",
+  "source": {
+    "repo": "wshobson/agents",
+    "path": "plugins/payment-processing/skills/pci-compliance",
+    "revision": "156b7a5e7a8b93642628a339ee4039c925b34c7f"
+  },
+  "review": {
+    "path": "catalog/reviews/wshobson__pci-compliance.json",
+    "sha256": "69884fb5baf99d9360c9d610d78d3c97d22204f3679a0cbd5b13f2e6d47ac13c"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": false,
+      "network": false,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "filesystem-write",
+        "line": 91,
+        "evidence": "Remove",
+        "context": "    # Remove spaces and dashes",
+        "file": "references/details.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 115,
+        "evidence": "Remove",
+        "context": "    # Remove special characters",
+        "file": "references/details.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 84,
+        "evidence": "Remove",
+        "context": "        \"\"\"Remove sensitive data from logs.\"\"\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 92,
+        "evidence": "Remove",
+        "context": "        # Remove prohibited data",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 142,
+        "evidence": "api_key",
+        "context": "        stripe.api_key = \"sk_...\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 207,
+        "evidence": "Remove",
+        "context": "        \"\"\"Remove token from vault.\"\"\"",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 13412
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "f89abb55d9f073f38f1703e4518f0613c788c6174be7f13b8dfe48a1c076c746",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/details.md",
+      "sha256": "4267e2904bd95e6275cac61f1ba8dc3aee15b0721c9bb35a2140e6585d283aac",
+      "bytes": 4651,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "c9e9f09f66cf8faedfba24c5e611b8ccee4b103ff7dc91e759a06aee23f2ee16",
+      "bytes": 7693,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 13412
+}

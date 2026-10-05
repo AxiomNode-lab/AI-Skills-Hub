@@ -1,0 +1,145 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "wshobson/tailwind-design-system",
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "wshobson/agents",
+    "path": "plugins/frontend-mobile-development/skills/tailwind-design-system",
+    "revision": "156b7a5e7a8b93642628a339ee4039c925b34c7f"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "plugins/frontend-mobile-development/skills/tailwind-design-system",
+    "url": "https://api.github.com/repos/wshobson/agents/git/trees/156b7a5e7a8b93642628a339ee4039c925b34c7f?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/wshobson/agents/blob/156b7a5e7a8b93642628a339ee4039c925b34c7f/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "plugins",
+        "plugins/frontend-mobile-development",
+        "plugins/frontend-mobile-development/skills",
+        "plugins/frontend-mobile-development/skills/tailwind-design-system"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file; the shadcn/ui-style component snippets are short adapted examples (shadcn/ui itself is MIT). A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "none",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": false,
+      "network": false,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md and references/details.md, references/advanced-patterns.md in full. The skill guides building a Tailwind CSS v4 design system: @theme tokens in OKLCH, dark mode via @custom-variant, CVA-based Button/Card/Input/Label/Grid components, native CSS animations, a ThemeProvider, and a v3-to-v4 migration checklist.",
+      "No commands, installs, credentials, or network access; all content is CSS/TSX the user adds to their own project (the ThemeProvider sample stores only the theme name in browser localStorage).",
+      "The component samples (references/details.md:5-349, references/advanced-patterns.md:59-111) follow the widely used shadcn/ui pattern (cn helper, CVA variants, Radix Slot/Dialog) adapted to React 19 ref-as-prop; they are idiomatic snippets rather than a verbatim copy with a notice. Internal links from details.md to ./advanced-patterns.md resolve within the skill."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "f89abb55d9f073f38f1703e4518f0613c788c6174be7f13b8dfe48a1c076c746",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "326f0a55c96e672fedf9d807ca043c00df05ba0e",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
+      "findings": []
+    },
+    {
+      "path": "references/advanced-patterns.md",
+      "sha256": "40a4a9fa931f4bc95213870ea1fe7c32ce50aacf3531af07954b660c4f51e1a2",
+      "bytes": 8108,
+      "mode": "100644",
+      "git_blob": "6b42078427da489c6cc5fce0f7caa3c7a0553e0d",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 150,
+          "evidence": "remove",
+          "context": "    root.classList.remove('light', 'dark')",
+          "disposition": "accepted",
+          "reason": "Matched words are a DOM classList.remove call, a migration checklist item ('Remove forwardRef') and a 'Delete' button label in sample JSX, not file operations."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 297,
+          "evidence": "Remove",
+          "context": "- [ ] Remove `forwardRef` (React 19 passes ref as prop)",
+          "disposition": "accepted",
+          "reason": "Matched words are a DOM classList.remove call, a migration checklist item ('Remove forwardRef') and a 'Delete' button label in sample JSX, not file operations."
+        }
+      ]
+    },
+    {
+      "path": "references/details.md",
+      "sha256": "06db0dc31dabeced9ea5ee27dfe2f98fd1783756a3930e6aeacf09ab4fc6562a",
+      "bytes": 10661,
+      "mode": "100644",
+      "git_blob": "a5dbeed732b46b8e2d1ae1dc6ac32b8ba20c076f",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 66,
+          "evidence": "Delete",
+          "context": "<Button variant=\"destructive\" size=\"lg\">Delete</Button>",
+          "disposition": "accepted",
+          "reason": "Matched words are a DOM classList.remove call, a migration checklist item ('Remove forwardRef') and a 'Delete' button label in sample JSX, not file operations."
+        }
+      ]
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "b6577edb7b7f71a6954f68b80c7eea1748ccdf31862759f864bce558fb2bcf83",
+      "bytes": 5290,
+      "mode": "100644",
+      "git_blob": "17c4fd0ec99c26254e58288b7219dfe44d0a20ba",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 10,
+          "evidence": "https://",
+          "context": "> **Note**: This skill targets Tailwind CSS v4 (2024+). For v3 projects, refer to the [upgrade guide](https://tailwindcss.com/docs/upgrade-guide).",
+          "disposition": "accepted",
+          "reason": "Single documentation link to the Tailwind CSS v3-to-v4 upgrade guide; the skill does not instruct fetching it."
+        }
+      ]
+    }
+  ]
+}

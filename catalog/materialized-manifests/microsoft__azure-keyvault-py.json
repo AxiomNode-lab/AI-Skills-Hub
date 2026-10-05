@@ -1,0 +1,583 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "microsoft/azure-keyvault-py",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/azure-sdk-python/skills/azure-keyvault-py",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "review": {
+    "path": "catalog/reviews/microsoft__azure-keyvault-py.json",
+    "sha256": "bd9cbd3377cf24b217d5354d3e5fb8ae1358dcb5a5c6f9123cbd8613a73df104"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "filesystem-write",
+        "line": 30,
+        "evidence": "delete",
+        "context": "- Include cleanup/delete paths for created resources in examples.",
+        "file": "references/capabilities.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 13,
+        "evidence": "credential",
+        "context": "    async with DefaultAzureCredential() as credential:",
+        "file": "references/non-hero-scenarios.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 14,
+        "evidence": "credential",
+        "context": "        async with SecretClient(vault_url=vault_url, credential=credential) as client:",
+        "file": "references/non-hero-scenarios.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 14,
+        "evidence": "credential",
+        "context": "        async with SecretClient(vault_url=vault_url, credential=credential) as client:",
+        "file": "references/non-hero-scenarios.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 15,
+        "evidence": "secret",
+        "context": "            secret = await client.get_secret(\"my-secret\")",
+        "file": "references/non-hero-scenarios.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 15,
+        "evidence": "secret",
+        "context": "            secret = await client.get_secret(\"my-secret\")",
+        "file": "references/non-hero-scenarios.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 16,
+        "evidence": "secret",
+        "context": "            print(f\"Retrieved secret: {secret.name} (version: {secret.properties.version})\")",
+        "file": "references/non-hero-scenarios.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 16,
+        "evidence": "secret",
+        "context": "            print(f\"Retrieved secret: {secret.name} (version: {secret.properties.version})\")",
+        "file": "references/non-hero-scenarios.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 16,
+        "evidence": "secret",
+        "context": "            print(f\"Retrieved secret: {secret.name} (version: {secret.properties.version})\")",
+        "file": "references/non-hero-scenarios.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 28,
+        "evidence": "secret",
+        "context": "    secret = client.get_secret(\"nonexistent\")",
+        "file": "references/non-hero-scenarios.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 30,
+        "evidence": "Secret",
+        "context": "    print(\"Secret not found\")",
+        "file": "references/non-hero-scenarios.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 19,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 21,
+        "evidence": "pip install",
+        "context": "pip install azure-keyvault-secrets azure-identity",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 24,
+        "evidence": "pip install",
+        "context": "pip install azure-keyvault-keys azure-identity",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 27,
+        "evidence": "pip install",
+        "context": "pip install azure-keyvault-certificates azure-identity",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 30,
+        "evidence": "pip install",
+        "context": "pip install azure-keyvault-secrets azure-keyvault-keys azure-keyvault-certificates azure-identity",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 35,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 36,
+        "evidence": "https://",
+        "context": "AZURE_KEYVAULT_URL=https://<vault-name>.vault.azure.net/  # Required for all auth methods",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 46,
+        "evidence": "credential",
+        "context": ">    - Production: set `AZURE_TOKEN_CREDENTIALS=prod` (or `AZURE_TOKEN_CREDENTIALS=<specific_credential>`) to constrain the credential chain to production-safe credentials.",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 49,
+        "evidence": "credential",
+        "context": ">    - Async: `async with <Client>(...) as client:` **and** `async with DefaultAzureCredential() as credential:` (from `azure.identity.aio`)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 62,
+        "evidence": "credential",
+        "context": "credential = DefaultAzureCredential(require_envvar=True)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 63,
+        "evidence": "credential",
+        "context": "# Or use a specific credential directly in production:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 64,
+        "evidence": "credential",
+        "context": "# See https://learn.microsoft.com/python/api/overview/azure/identity-readme?view=azure-python#credential-classes",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 64,
+        "evidence": "https://",
+        "context": "# See https://learn.microsoft.com/python/api/overview/azure/identity-readme?view=azure-python#credential-classes",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 65,
+        "evidence": "credential",
+        "context": "# credential = ManagedIdentityCredential()",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 66,
+        "evidence": "https://",
+        "context": "vault_url = \"https://<vault-name>.vault.azure.net/\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 68,
+        "evidence": "credential",
+        "context": "with SecretClient(vault_url=vault_url, credential=credential) as client:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 68,
+        "evidence": "credential",
+        "context": "with SecretClient(vault_url=vault_url, credential=credential) as client:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 69,
+        "evidence": "secret",
+        "context": "    # All secret operations go inside this block (see examples below)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 73,
+        "evidence": "Secret",
+        "context": "### Secret Operations",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 76,
+        "evidence": "secret",
+        "context": "# Set secret",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 77,
+        "evidence": "secret",
+        "context": "secret = client.set_secret(\"database-password\", \"super-secret-value\")",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 77,
+        "evidence": "secret",
+        "context": "secret = client.set_secret(\"database-password\", \"super-secret-value\")",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 78,
+        "evidence": "secret",
+        "context": "print(f\"Created: {secret.name}, version: {secret.properties.version}\")",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 78,
+        "evidence": "secret",
+        "context": "print(f\"Created: {secret.name}, version: {secret.properties.version}\")",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 80,
+        "evidence": "secret",
+        "context": "# Get secret",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 81,
+        "evidence": "secret",
+        "context": "secret = client.get_secret(\"database-password\")",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 82,
+        "evidence": "secret",
+        "context": "print(f\"Value: {secret.value}\")",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 85,
+        "evidence": "secret",
+        "context": "secret = client.get_secret(\"database-password\", version=\"abc123\")",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 89,
+        "evidence": "Secret",
+        "context": "    print(f\"Secret: {secret_properties.name}\")",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 95,
+        "evidence": "secret",
+        "context": "# Delete secret (soft delete)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 95,
+        "evidence": "Delete",
+        "context": "# Delete secret (soft delete)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 95,
+        "evidence": "delete",
+        "context": "# Delete secret (soft delete)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 99,
+        "evidence": "delete",
+        "context": "# Purge (permanent delete, if soft-delete enabled)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 99,
+        "evidence": "delete",
+        "context": "# Purge (permanent delete, if soft-delete enabled)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 102,
+        "evidence": "secret",
+        "context": "# Recover deleted secret",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 114,
+        "evidence": "credential",
+        "context": "credential = DefaultAzureCredential()",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 115,
+        "evidence": "https://",
+        "context": "vault_url = \"https://<vault-name>.vault.azure.net/\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 117,
+        "evidence": "credential",
+        "context": "with KeyClient(vault_url=vault_url, credential=credential) as client:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 117,
+        "evidence": "credential",
+        "context": "with KeyClient(vault_url=vault_url, credential=credential) as client:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 141,
+        "evidence": "Delete",
+        "context": "# Delete key",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 152,
+        "evidence": "credential",
+        "context": "# crypto_client = CryptographyClient(key, credential=credential)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 152,
+        "evidence": "credential",
+        "context": "# crypto_client = CryptographyClient(key, credential=credential)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 155,
+        "evidence": "https://",
+        "context": "    \"https://<vault>.vault.azure.net/keys/<key-name>/<version>\",",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 156,
+        "evidence": "credential",
+        "context": "    credential=credential",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 156,
+        "evidence": "credential",
+        "context": "    credential=credential",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 188,
+        "evidence": "credential",
+        "context": "credential = DefaultAzureCredential()",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 189,
+        "evidence": "https://",
+        "context": "vault_url = \"https://<vault-name>.vault.azure.net/\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 191,
+        "evidence": "credential",
+        "context": "with CertificateClient(vault_url=vault_url, credential=credential) as client:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 191,
+        "evidence": "credential",
+        "context": "with CertificateClient(vault_url=vault_url, credential=credential) as client:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 208,
+        "evidence": "secret",
+        "context": "# Get certificate with private key (as secret)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 210,
+        "evidence": "credential",
+        "context": "with SecretClient(vault_url=vault_url, credential=credential) as secret_client:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 210,
+        "evidence": "credential",
+        "context": "with SecretClient(vault_url=vault_url, credential=credential) as secret_client:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 218,
+        "evidence": "Delete",
+        "context": "# Delete certificate",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 239,
+        "evidence": "credential",
+        "context": "    async with DefaultAzureCredential() as credential:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 240,
+        "evidence": "credential",
+        "context": "        async with SecretClient(vault_url=vault_url, credential=credential) as client:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 240,
+        "evidence": "credential",
+        "context": "        async with SecretClient(vault_url=vault_url, credential=credential) as client:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 241,
+        "evidence": "secret",
+        "context": "            secret = await client.get_secret(\"my-secret\")",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 241,
+        "evidence": "secret",
+        "context": "            secret = await client.get_secret(\"my-secret\")",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 242,
+        "evidence": "secret",
+        "context": "            print(secret.value)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 254,
+        "evidence": "secret",
+        "context": "    secret = client.get_secret(\"nonexistent\")",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 256,
+        "evidence": "Secret",
+        "context": "    print(\"Secret not found\")",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 266,
+        "evidence": "credential",
+        "context": "2. **Always use context managers for clients and async credentials.** Wrap every client in `with Client(...) as client:` (sync) or `async with Client(...) as client:` (async). For async `DefaultAzureCredential` from `azure.identity.aio`, al",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 267,
+        "evidence": "credential",
+        "context": "3. **Use `DefaultAzureCredential`** for code that runs locally. Use a specific token credential for code that runs in Azure.",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 269,
+        "evidence": "delete",
+        "context": "5. **Enable soft-delete** for recovery (enabled by default)",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 13086
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/capabilities.md",
+      "sha256": "46d0a786957f19e87e0e1ade56bd94e1e77cfb6db20421ad53438d80bbc58377",
+      "bytes": 1287,
+      "mode": "100644"
+    },
+    {
+      "path": "references/non-hero-scenarios.md",
+      "sha256": "1f2fb0a97eff30cbabe4e5af479e9edba42dc7517480b1a82a147652c3071359",
+      "bytes": 1060,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "5300434b6d8025604bfb4e16514b27d1e380255f0a587c65d000cbdf59248ce1",
+      "bytes": 9599,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 13086
+}

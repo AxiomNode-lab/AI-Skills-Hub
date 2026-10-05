@@ -1,0 +1,249 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "microsoft/azure-identity-rust",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/azure-sdk-rust/skills/azure-identity-rust",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "review": {
+    "path": "catalog/reviews/microsoft__azure-identity-rust.json",
+    "sha256": "1baa066de0f72c6e67036f2dce27d1b4e75a7cef4250dc0282f2632f36e29d24"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "credential-access",
+        "line": 5,
+        "evidence": "credential",
+        "context": "  Triggers: \"azure identity rust\", \"DeveloperToolsCredential\", \"authentication rust\", \"managed identity rust\", \"credential rust\", \"Entra ID rust\".",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 21,
+        "evidence": "secret",
+        "context": "- You need service principal auth with secret or certificate",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 23,
+        "evidence": "https://",
+        "context": "> **IMPORTANT:** Only use official `azure_*` crates published by the [azure-sdk](https://crates.io/users/azure-sdk) crates.io user. Do NOT use the deprecated `azure_sdk_*` crates (MindFlavor/AzureSDKForRust) or community crates. Official cr",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 34,
+        "evidence": "sh",
+        "context": "```sh",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 35,
+        "evidence": "cargo add",
+        "context": "cargo add azure_identity azure_core tokio",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 42,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 45,
+        "evidence": "secret",
+        "context": "AZURE_CLIENT_SECRET=<your-client-secret> # Required for ClientSecretCredential",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 61,
+        "evidence": "credential",
+        "context": "    let credential = DeveloperToolsCredential::new(None)?;",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 63,
+        "evidence": "https://",
+        "context": "        \"https://<vault-name>.vault.azure.net/\",",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 64,
+        "evidence": "credential",
+        "context": "        credential.clone(),",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 68,
+        "evidence": "secret",
+        "context": "    let secret = client.get_secret(\"secret-name\", None).await?.into_model()?;",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 68,
+        "evidence": "secret",
+        "context": "    let secret = client.get_secret(\"secret-name\", None).await?.into_model()?;",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 69,
+        "evidence": "Secret",
+        "context": "    println!(\"Secret: {:?}\", secret.value);",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 69,
+        "evidence": "secret",
+        "context": "    println!(\"Secret: {:?}\", secret.value);",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 76,
+        "evidence": "sh",
+        "context": "```sh",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 81,
+        "evidence": "Credential",
+        "context": "| Order | Credential                  | Login Command    |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 94,
+        "evidence": "credential",
+        "context": "let credential = ManagedIdentityCredential::new(None)?;",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 104,
+        "evidence": "credential",
+        "context": "let credential = ClientSecretCredential::new(",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 107,
+        "evidence": "secret",
+        "context": "    \"<client-secret>\",",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 112,
+        "evidence": "Credential",
+        "context": "## Credential Types",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 114,
+        "evidence": "Credential",
+        "context": "| Credential                    | Use Case                               |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 119,
+        "evidence": "secret",
+        "context": "| `ClientSecretCredential`      | Service principal with secret          |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 128,
+        "evidence": "remove",
+        "context": "1. **Use `cargo add` to manage dependencies, never edit `Cargo.toml` directly.** Add and remove Rust SDK dependencies with cargo commands instead of manual manifest edits.",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 128,
+        "evidence": "cargo add",
+        "context": "1. **Use `cargo add` to manage dependencies, never edit `Cargo.toml` directly.** Add and remove Rust SDK dependencies with cargo commands instead of manual manifest edits.",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 132,
+        "evidence": "credential",
+        "context": "5. **Clone credentials** — pass `credential.clone()` when constructing multiple clients; credentials are `Arc`-wrapped",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 134,
+        "evidence": "secret",
+        "context": "7. **Assign RBAC roles** — ensure the identity has appropriate roles for the target service (e.g., \"Key Vault Secrets User\" for secret reads)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 142,
+        "evidence": "https://",
+        "context": "| API Reference | https://docs.rs/azure_identity/latest/azure_identity                              |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 143,
+        "evidence": "https://",
+        "context": "| crates.io     | https://crates.io/crates/azure_identity                                           |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 144,
+        "evidence": "https://",
+        "context": "| Source Code   | https://github.com/Azure/azure-sdk-for-rust/tree/main/sdk/identity/azure_identity |",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 7498
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "a8012a1c4324eee8b38daf43ce1f6400ecb3fa8c64763399f4247155627024ac",
+      "bytes": 6358,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 7498
+}

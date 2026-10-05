@@ -1,0 +1,308 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "wshobson/auth-implementation-patterns",
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "wshobson/agents",
+    "path": "plugins/developer-essentials/skills/auth-implementation-patterns",
+    "revision": "156b7a5e7a8b93642628a339ee4039c925b34c7f"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "plugins/developer-essentials/skills/auth-implementation-patterns",
+    "url": "https://api.github.com/repos/wshobson/agents/git/trees/156b7a5e7a8b93642628a339ee4039c925b34c7f?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/wshobson/agents/blob/156b7a5e7a8b93642628a339ee4039c925b34c7f/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "plugins",
+        "plugins/developer-essentials",
+        "plugins/developer-essentials/skills",
+        "plugins/developer-essentials/skills/auth-implementation-patterns"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "low",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": false,
+      "network": false,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md and references/details.md in full. The skill explains authentication vs authorization and gives TypeScript/Express samples for JWT access/refresh tokens, Redis-backed sessions, Passport Google OAuth, RBAC, permission checks, resource ownership, bcrypt password hashing and rate limiting, plus best practices and pitfalls.",
+      "No commands, installs, credentials, or network access for the agent; secrets appear only as process.env references (JWT_SECRET, SESSION_SECRET, GOOGLE_CLIENT_SECRET) in application code the user writes, with no instruction to read, print or send real values.",
+      "Review samples before copying: the OAuth callback passes the access token in a redirect query string (references/details.md:297-299), which leaks into logs/history; refresh tokens are looked up by `await hash(refreshToken)` (references/details.md:90, 111), which only works with a deterministic hash such as SHA-256, not salted bcrypt; and `requireOwnership` is declared async so it returns a Promise rather than middleware (references/details.md:412). These are code-quality caveats, not unsafe agent behavior."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "f89abb55d9f073f38f1703e4518f0613c788c6174be7f13b8dfe48a1c076c746",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "326f0a55c96e672fedf9d807ca043c00df05ba0e",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
+      "findings": []
+    },
+    {
+      "path": "references/details.md",
+      "sha256": "cc556cbe7ac5987f40a332b5f77709aef9983dcc4ef29d10ebf1487f26eb7a64",
+      "bytes": 13674,
+      "mode": "100644",
+      "git_blob": "480914e7f901567ec3115cb180a51da56e531299",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "credential-access",
+          "line": 22,
+          "evidence": "accessToken",
+          "context": "  const accessToken = jwt.sign(",
+          "disposition": "accepted",
+          "reason": "Sample Express code reads JWT, session, Redis and Google OAuth secrets from process.env and handles access/refresh token variables inside the user's application; the agent is not told to access real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 24,
+          "evidence": "process.env",
+          "context": "    process.env.JWT_SECRET!,",
+          "disposition": "accepted",
+          "reason": "Sample Express code reads JWT, session, Redis and Google OAuth secrets from process.env and handles access/refresh token variables inside the user's application; the agent is not told to access real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 30,
+          "evidence": "process.env",
+          "context": "    process.env.JWT_REFRESH_SECRET!,",
+          "disposition": "accepted",
+          "reason": "Sample Express code reads JWT, session, Redis and Google OAuth secrets from process.env and handles access/refresh token variables inside the user's application; the agent is not told to access real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 34,
+          "evidence": "accessToken",
+          "context": "  return { accessToken, refreshToken };",
+          "disposition": "accepted",
+          "reason": "Sample Express code reads JWT, session, Redis and Google OAuth secrets from process.env and handles access/refresh token variables inside the user's application; the agent is not told to access real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 40,
+          "evidence": "process.env",
+          "context": "    return jwt.verify(token, process.env.JWT_SECRET!) as JWTPayload;",
+          "disposition": "accepted",
+          "reason": "Sample Express code reads JWT, session, Redis and Google OAuth secrets from process.env and handles access/refresh token variables inside the user's application; the agent is not told to access real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 96,
+          "evidence": "access token",
+          "context": "  // Refresh access token",
+          "disposition": "accepted",
+          "reason": "Sample Express code reads JWT, session, Redis and Google OAuth secrets from process.env and handles access/refresh token variables inside the user's application; the agent is not told to access real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 101,
+          "evidence": "process.env",
+          "context": "      payload = jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET!) as {",
+          "disposition": "accepted",
+          "reason": "Sample Express code reads JWT, session, Redis and Google OAuth secrets from process.env and handles access/refresh token variables inside the user's application; the agent is not told to access real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 127,
+          "evidence": "access token",
+          "context": "    // Generate new access token",
+          "disposition": "accepted",
+          "reason": "Sample Express code reads JWT, session, Redis and Google OAuth secrets from process.env and handles access/refresh token variables inside the user's application; the agent is not told to access real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 128,
+          "evidence": "accessToken",
+          "context": "    const accessToken = jwt.sign(",
+          "disposition": "accepted",
+          "reason": "Sample Express code reads JWT, session, Redis and Google OAuth secrets from process.env and handles access/refresh token variables inside the user's application; the agent is not told to access real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 130,
+          "evidence": "process.env",
+          "context": "      process.env.JWT_SECRET!,",
+          "disposition": "accepted",
+          "reason": "Sample Express code reads JWT, session, Redis and Google OAuth secrets from process.env and handles access/refresh token variables inside the user's application; the agent is not told to access real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 134,
+          "evidence": "accessToken",
+          "context": "    return { accessToken };",
+          "disposition": "accepted",
+          "reason": "Sample Express code reads JWT, session, Redis and Google OAuth secrets from process.env and handles access/refresh token variables inside the user's application; the agent is not told to access real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 154,
+          "evidence": "accessToken",
+          "context": "    const { accessToken } =",
+          "disposition": "accepted",
+          "reason": "Sample Express code reads JWT, session, Redis and Google OAuth secrets from process.env and handles access/refresh token variables inside the user's application; the agent is not told to access real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 156,
+          "evidence": "accessToken",
+          "context": "    res.json({ accessToken });",
+          "disposition": "accepted",
+          "reason": "Sample Express code reads JWT, session, Redis and Google OAuth secrets from process.env and handles access/refresh token variables inside the user's application; the agent is not told to access real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 180,
+          "evidence": "process.env",
+          "context": "  url: process.env.REDIS_URL,",
+          "disposition": "accepted",
+          "reason": "Sample Express code reads JWT, session, Redis and Google OAuth secrets from process.env and handles access/refresh token variables inside the user's application; the agent is not told to access real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 187,
+          "evidence": "secret",
+          "context": "    secret: process.env.SESSION_SECRET!,",
+          "disposition": "accepted",
+          "reason": "Sample Express code reads JWT, session, Redis and Google OAuth secrets from process.env and handles access/refresh token variables inside the user's application; the agent is not told to access real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 187,
+          "evidence": "process.env",
+          "context": "    secret: process.env.SESSION_SECRET!,",
+          "disposition": "accepted",
+          "reason": "Sample Express code reads JWT, session, Redis and Google OAuth secrets from process.env and handles access/refresh token variables inside the user's application; the agent is not told to access real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 191,
+          "evidence": "process.env",
+          "context": "      secure: process.env.NODE_ENV === \"production\", // HTTPS only",
+          "disposition": "accepted",
+          "reason": "Sample Express code reads JWT, session, Redis and Google OAuth secrets from process.env and handles access/refresh token variables inside the user's application; the agent is not told to access real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 254,
+          "evidence": "process.env",
+          "context": "      clientID: process.env.GOOGLE_CLIENT_ID!,",
+          "disposition": "accepted",
+          "reason": "Sample Express code reads JWT, session, Redis and Google OAuth secrets from process.env and handles access/refresh token variables inside the user's application; the agent is not told to access real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 255,
+          "evidence": "process.env",
+          "context": "      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,",
+          "disposition": "accepted",
+          "reason": "Sample Express code reads JWT, session, Redis and Google OAuth secrets from process.env and handles access/refresh token variables inside the user's application; the agent is not told to access real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 258,
+          "evidence": "accessToken",
+          "context": "    async (accessToken, refreshToken, profile, done) => {",
+          "disposition": "accepted",
+          "reason": "Sample Express code reads JWT, session, Redis and Google OAuth secrets from process.env and handles access/refresh token variables inside the user's application; the agent is not told to access real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 298,
+          "evidence": "process.env",
+          "context": "      `${process.env.FRONTEND_URL}/auth/callback?token=${tokens.accessToken}`,",
+          "disposition": "accepted",
+          "reason": "Sample Express code reads JWT, session, Redis and Google OAuth secrets from process.env and handles access/refresh token variables inside the user's application; the agent is not told to access real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 298,
+          "evidence": "accessToken",
+          "context": "      `${process.env.FRONTEND_URL}/auth/callback?token=${tokens.accessToken}`,",
+          "disposition": "accepted",
+          "reason": "Sample Express code reads JWT, session, Redis and Google OAuth secrets from process.env and handles access/refresh token variables inside the user's application; the agent is not told to access real secrets."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 341,
+          "evidence": "delete",
+          "context": "app.delete(",
+          "disposition": "accepted",
+          "reason": "Matched 'delete' words are an Express DELETE route, a database user deletion inside an admin-only sample handler, and a permission enum value, not agent file operations."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 346,
+          "evidence": "delete",
+          "context": "    // Only admins can delete users",
+          "disposition": "accepted",
+          "reason": "Matched 'delete' words are an Express DELETE route, a database user deletion inside an admin-only sample handler, and a permission enum value, not agent file operations."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 347,
+          "evidence": "delete",
+          "context": "    await db.users.delete(req.params.id);",
+          "disposition": "accepted",
+          "reason": "Matched 'delete' words are an Express DELETE route, a database user deletion inside an admin-only sample handler, and a permission enum value, not agent file operations."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 359,
+          "evidence": "delete",
+          "context": "  DELETE_USERS = \"delete:users\",",
+          "disposition": "accepted",
+          "reason": "Matched 'delete' words are an Express DELETE route, a database user deletion inside an admin-only sample handler, and a permission enum value, not agent file operations."
+        }
+      ]
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "1fc61d6074ace3d3db9d527ef92a7188118ff305b6ea98e0f9356545c6e15996",
+      "bytes": 2677,
+      "mode": "100644",
+      "git_blob": "e002769ebf44a7b3f135a57f72231666760ecf81",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": []
+    }
+  ]
+}

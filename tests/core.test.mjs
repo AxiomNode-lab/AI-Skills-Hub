@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { loadRegistry, resolveBundle, filterForAgent, findSkill, parseFrontmatter } from "../packages/core/src/index.mjs";
+import { loadRegistry, resolveBundle, filterForAgent, findSkill, parseFrontmatter, compatibilityBasis } from "../packages/core/src/index.mjs";
 
 test("registry contains no broken bundle references",()=>{
   const registry=loadRegistry();
@@ -14,11 +14,20 @@ test("skill identity resolves by id and name",()=>{
   assert.equal(findSkill(registry,skill.name)?.id,skill.id);
 });
 
-test("generic Agent Skills compatibility does not leak into named agents",()=>{
-  const registry=loadRegistry();
-  const docs=resolveBundle(registry,"@documents");
-  assert.equal(filterForAgent(docs,"codex").length,0);
-  assert.ok(filterForAgent(docs,"claude-code").length>=1);
+test("Agent Skills format skills are compatible with standard agents only",()=>{
+  const skill={id:"a/b",name:"b",compatibility:["agent-skills"]};
+  for(const agent of ["claude-code","codex","cursor","github-copilot","copilot","opencode"]) assert.equal(compatibilityBasis(skill,agent),"standard",agent);
+  // A generic agent accepts anything listed for agent-skills, of any artifact type.
+  assert.equal(compatibilityBasis(skill,"generic-agent"),"listed");
+  assert.equal(compatibilityBasis({...skill,artifact_type:"cli-tool"},"generic-agent"),"listed");
+  // External installers need an explicit listing; only bundled files rely on the format.
+  for(const distribution of ["source-direct","review-required","blocked"]) assert.equal(compatibilityBasis({...skill,distribution},"codex"),null,distribution);
+  assert.equal(compatibilityBasis({...skill,distribution:"source-direct",compatibility:["agent-skills","codex"]},"codex"),"listed");
+  assert.equal(compatibilityBasis({...skill,compatibility:["agent-skills","codex"]},"codex"),"listed");
+  assert.equal(compatibilityBasis(skill,"some-other-agent"),null);
+  assert.equal(compatibilityBasis({...skill,artifact_type:"mcp-server"},"codex"),null);
+  assert.equal(compatibilityBasis({...skill,compatibility:["claude-code"]},"codex"),null);
+  assert.equal(filterForAgent([skill],"claude-code").length,1);
 });
 
 test("@all bundle is a catalog snapshot with no unknown ids",()=>{
@@ -43,24 +52,38 @@ test("frontmatter parser handles quotes, comments, continuations, and nested map
 });
 
 test("catalog descriptions are not bare YAML block indicators",()=>{
-  const broken=loadRegistry().skills.filter(skill=>/^[>|][+-]?\d*$/.test(String(skill.description??"").trim()));
+  const broken=loadRegistry().skills.filter(skill=>/^[>|](?:[+-]?\d*|\d[+-])$/.test(String(skill.description??"").trim()));
   assert.deepEqual(broken.map(skill=>skill.id),[]);
 });
 
-test("frontmatter preserves YAML scalar semantics and quoted license keys", () => {
-  assert.equal(parseFrontmatter('---\n"license": Proprietary\n---').license, "Proprietary");
-  assert.equal(parseFrontmatter('---\ndescription: "a  b" # comment\n---').description, "a  b");
-  assert.equal(parseFrontmatter('---\ndescription: |+\n  text\n\n---').description, "text\n\n");
-  assert.equal(parseFrontmatter('---\ndescription: >2-\n  first\n  second\n---').description, "first second");
+test("parseFrontmatter reads next-line plain scalars, trailing comments, and indentation indicators", () => {
+  const fm = (body) => parseFrontmatter(`---\n${body}\n---\n`);
+  assert.equal(fm("description:\n  Use this when\n  needed.").description, "Use this when needed.");
+  assert.equal(fm('description: "abc" # note').description, "abc");
+  assert.equal(fm("description: 'it''s' # note").description, "it's");
+  assert.equal(fm("description: >2-\n  hello\n  world").description, "hello world");
+  assert.equal(fm("description: |-2\n  a\n  b").description, "a\nb");
+  assert.equal(fm("description: foo\n  bar\n\n  baz").description, "foo bar\nbaz");
+  assert.deepEqual(fm("metadata:\n  author: x\nname: y"), { name: "y" });
+  assert.deepEqual(fm("tags:\n  - a"), {});
 });
 
-test("frontmatter rejects ambiguous licensing and unsafe or malformed YAML", () => {
-  for (const body of [
-    'license:\n  spdx: Proprietary', 'license: [MIT, Proprietary]', 'license:',
-    'license: false', 'license: MIT\nlicense: Proprietary',
-    'license: !custom MIT', 'license: &grant MIT', 'license: *grant',
-    '<<: {license: Proprietary}', 'description: "unterminated',
-    '__proto__: value', 'description: x\n\tbad: indentation'
-  ]) assert.throws(() => parseFrontmatter(`---\n${body}\n---`), undefined, body);
-  assert.throws(() => parseFrontmatter('---\nlicense: MIT'), /Unclosed/);
+test("parseFrontmatter skips leading blank lines and comments in plain scalars", () => {
+  const fm = (body) => parseFrontmatter(`---\n${body}\n---\n`);
+  assert.equal(fm("description:\n\n  text here").description, "text here");
+  assert.equal(fm("description:\n  # comment\n  text").description, "text");
+  assert.throws(() => fm('description: "abc"\n  more'), /Invalid YAML frontmatter/);
+});
+
+test("parseFrontmatter fails closed on malformed or unsafe frontmatter", () => {
+  for (const [text, pattern] of [
+    ["---\nname: a\n", /Unclosed/],
+    ["---\nname: a\nname: b\n---\n", /Invalid YAML/],
+    ["---\nbase: &x a\nname: *x\n---\n", /aliases|anchors/],
+    ["---\nlicense: [MIT]\n---\n", /license must be a non-empty string/],
+    ["---\ndescription: \"\"\n---\n", /description must be a non-empty string/],
+    ["---\n- a\n- b\n---\n", /mapping/],
+    ["---\nname: !!js/function x\n---\n", /custom tags|Invalid YAML/]
+  ]) assert.throws(() => parseFrontmatter(text), pattern, text);
+  assert.deepEqual(parseFrontmatter("no frontmatter here"), {});
 });

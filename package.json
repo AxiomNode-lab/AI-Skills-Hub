@@ -1,6 +1,6 @@
 {
   "name": "ai-skills-hub",
-  "version": "0.2.0",
+  "version": "0.3.0-beta.1",
   "private": true,
   "description": "License-aware registry and distribution layer for AI Agent capabilities.",
   "license": "MIT",
@@ -25,7 +25,10 @@
     "static-check": "node scripts/static-check.mjs",
     "validate-discovery": "node tests/discovery.test.mjs",
     "capability-schema-check": "node scripts/validate-capability-contract.mjs",
-    "repair-descriptions": "node scripts/repair-descriptions.mjs"
+    "repair-descriptions": "node scripts/repair-descriptions.mjs",
+    "verify-upstream": "node scripts/verify-upstream.mjs",
+    "build:package": "node scripts/build-package.mjs",
+    "e2e:package": "node scripts/e2e-package.mjs"
   },
   "engines": {
     "node": ">=22"

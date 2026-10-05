@@ -1,0 +1,108 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "wshobson/python-resilience",
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "wshobson/agents",
+    "path": "plugins/python-development/skills/python-resilience",
+    "revision": "156b7a5e7a8b93642628a339ee4039c925b34c7f"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "plugins/python-development/skills/python-resilience",
+    "url": "https://api.github.com/repos/wshobson/agents/git/trees/156b7a5e7a8b93642628a339ee4039c925b34c7f?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/wshobson/agents/blob/156b7a5e7a8b93642628a339ee4039c925b34c7f/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "plugins",
+        "plugins/python-development",
+        "plugins/python-development/skills",
+        "plugins/python-development/skills/python-resilience"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "none",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": false,
+      "network": false,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md and references/details.md in full. The skill teaches retry/backoff/jitter with tenacity, retrying only transient errors and status codes, timeout and tracing decorators, dependency injection and fail-safe defaults in Python.",
+      "No commands, installs, credentials, or network access by the agent; HTTP calls appear only inside sample code the user would run in their own application.",
+      "Nothing further to flag."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "f89abb55d9f073f38f1703e4518f0613c788c6174be7f13b8dfe48a1c076c746",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "326f0a55c96e672fedf9d807ca043c00df05ba0e",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
+      "findings": []
+    },
+    {
+      "path": "references/details.md",
+      "sha256": "bacdee07c89f21324069904107b99224afd9b65415f56da8974b20aa03e4aff4",
+      "bytes": 5376,
+      "mode": "100644",
+      "git_blob": "491f93480fed2f54856da04b581e5c6fdae87cbc",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "ddf3a7dc5bd59dd228a65a3ee7ae60fe740e9dc6e98bfac0ce0be5330fcc5332",
+      "bytes": 6031,
+      "mode": "100644",
+      "git_blob": "89c1e9d9ba0134709f9b1ac876d0b401362afd4d",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 47,
+          "evidence": "https://",
+          "context": "    return httpx.post(\"https://api.example.com\", json=request).json()",
+          "disposition": "accepted",
+          "reason": "SKILL.md:47 posts to the placeholder https://api.example.com inside a sample retry-decorated function; the agent is not told to contact any service."
+        }
+      ]
+    }
+  ]
+}

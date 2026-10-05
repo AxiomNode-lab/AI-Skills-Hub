@@ -34,11 +34,17 @@ for (const skill of data.skills) {
   }
 
   if (typeof skill.materialized !== "boolean") throw new Error(skill.id + " invalid materialized flag");
+  if (!/^[a-z0-9][a-z0-9._-]*(\/[a-z0-9][a-z0-9._-]*)+$/.test(skill.id)) throw new Error(skill.id + " invalid id: use lowercase namespace/slug");
   if (skill.dependencies !== undefined && (!Array.isArray(skill.dependencies) || new Set(skill.dependencies).size !== skill.dependencies.length)) {
     throw new Error(skill.id + " invalid dependencies");
   }
   if (!["pending","eligible","hold"].includes(skill.release?.status)) throw new Error(skill.id + " invalid release status");
   if (!Array.isArray(skill.release?.reasons)) throw new Error(skill.id + " invalid release reasons");
+  // Notices are shown by info, install, and the server; each needs a kind, text, and evidence.
+  if (skill.release.notices !== undefined && !(Array.isArray(skill.release.notices) && skill.release.notices.every((n) =>
+    ["behavior", "lifecycle"].includes(n?.kind) && typeof n.text === "string" && n.text.trim() && typeof n.evidence === "string" && n.evidence.trim()))) {
+    throw new Error(skill.id + " invalid release notices");
+  }
   if (!skill.integrity || typeof skill.integrity !== "object") throw new Error(skill.id + " missing integrity metadata");
   if (skill.distribution !== "bundled" && skill.release.status === "eligible") {
     throw new Error(skill.id + " non-bundled skill cannot be release-eligible");
@@ -58,6 +64,7 @@ for (const skill of data.skills) {
   }
 }
 
+// A released skill may only depend on skills that are themselves released.
 for (const skill of data.skills) {
   for (const dependencyId of skill.dependencies ?? []) {
     const dependency = skillsById.get(dependencyId);

@@ -35,7 +35,8 @@ export async function createCommand() {
   
   try {
     await fs.access(targetDir);
-    console.error(`❌ Error: Capability with ID '${id}' already exists at ${targetDir}`);
+    console.error(`Error: capability '${id}' already exists at ${targetDir}`);
+    process.exitCode = 1;
     return;
   } catch {
     // Directory doesn't exist, which is good

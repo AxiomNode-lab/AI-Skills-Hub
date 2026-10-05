@@ -775,37 +775,24 @@
         "evidence_path": "LICENSE"
       },
       "security": {
-        "scan_status": "review-required",
-        "risk": "high",
+        "scan_status": "verified",
+        "risk": "none",
         "capabilities": {
           "shell": false,
           "network": false,
           "credentials": false,
-          "dynamic_execution": true,
+          "dynamic_execution": false,
           "package_install": false,
           "filesystem_write": false,
           "encoded_content": false
         },
-        "findings": [
-          {
-            "type": "dynamic-execution",
-            "line": 93,
-            "evidence": "function (",
-            "context": "   - Unusual permit function (DAI, RAI, GLM)"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 217,
-            "evidence": "function (",
-            "context": "**Mitigation:** Use multi-sig for pause function (already implemented ✓)"
-          }
-        ]
+        "findings": []
       },
       "capabilities": {
         "shell": false,
         "network": false,
         "credentials": false,
-        "dynamic_execution": true,
+        "dynamic_execution": false,
         "package_install": false
       }
     },
@@ -5974,12 +5961,12 @@
       },
       "security": {
         "scan_status": "review-required",
-        "risk": "high",
+        "risk": "medium",
         "capabilities": {
           "shell": true,
           "network": true,
           "credentials": false,
-          "dynamic_execution": true,
+          "dynamic_execution": false,
           "package_install": true,
           "filesystem_write": true,
           "encoded_content": false
@@ -6124,12 +6111,6 @@
             "context": "```bash"
           },
           {
-            "type": "dynamic-execution",
-            "line": 447,
-            "evidence": "function (",
-            "context": "- Reuse the same harness function (`LLVMFuzzerTestOneInput`) with a different main function"
-          },
-          {
             "type": "shell-execution",
             "line": 456,
             "evidence": "bash",
@@ -6237,7 +6218,7 @@
         "shell": true,
         "network": true,
         "credentials": false,
-        "dynamic_execution": true,
+        "dynamic_execution": false,
         "package_install": true
       }
     },
@@ -8146,12 +8127,12 @@
       },
       "security": {
         "scan_status": "review-required",
-        "risk": "high",
+        "risk": "low",
         "capabilities": {
           "shell": true,
           "network": true,
           "credentials": false,
-          "dynamic_execution": true,
+          "dynamic_execution": false,
           "package_install": false,
           "filesystem_write": true,
           "encoded_content": false
@@ -8200,12 +8181,6 @@
             "context": "    curl -o \"${TMP_WYCHEPROOF_FOLDER}${i}\" \"${BASE_URL}${i}\""
           },
           {
-            "type": "dynamic-execution",
-            "line": 307,
-            "evidence": "function (",
-            "context": "  it(`[${tcId + 1}] ${tests[tcId].comment}`, function () {"
-          },
-          {
             "type": "network-access",
             "line": 383,
             "evidence": "https://",
@@ -8235,7 +8210,7 @@
         "shell": false,
         "network": true,
         "credentials": false,
-        "dynamic_execution": true,
+        "dynamic_execution": false,
         "package_install": false
       }
     },
@@ -8426,12 +8401,12 @@
       },
       "security": {
         "scan_status": "review-required",
-        "risk": "high",
+        "risk": "medium",
         "capabilities": {
           "shell": true,
           "network": false,
           "credentials": false,
-          "dynamic_execution": true,
+          "dynamic_execution": false,
           "package_install": true,
           "filesystem_write": true,
           "encoded_content": false
@@ -8472,12 +8447,6 @@
             "line": 180,
             "evidence": "bash",
             "context": "```bash"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 204,
-            "evidence": "function (",
-            "context": "to a production function (see"
           }
         ]
       },
@@ -8485,7 +8454,7 @@
         "shell": false,
         "network": false,
         "credentials": false,
-        "dynamic_execution": true,
+        "dynamic_execution": false,
         "package_install": true
       }
     },
@@ -9474,17 +9443,6 @@
       }
     },
     {
-      "path": "plugins/building-secure-contracts/skills/token-integration-analyzer/SKILL.md",
-      "type": "review-signal",
-      "capabilities": {
-        "shell": false,
-        "network": false,
-        "credentials": false,
-        "dynamic_execution": true,
-        "package_install": false
-      }
-    },
-    {
       "path": "plugins/devcontainer-setup/skills/devcontainer-setup/SKILL.md",
       "type": "review-signal",
       "capabilities": {
@@ -9557,7 +9515,7 @@
         "shell": true,
         "network": true,
         "credentials": false,
-        "dynamic_execution": true,
+        "dynamic_execution": false,
         "package_install": true
       }
     },
@@ -9573,24 +9531,13 @@
       }
     },
     {
-      "path": "plugins/testing-handbook-skills/skills/wycheproof/SKILL.md",
-      "type": "review-signal",
-      "capabilities": {
-        "shell": false,
-        "network": true,
-        "credentials": false,
-        "dynamic_execution": true,
-        "package_install": false
-      }
-    },
-    {
       "path": "plugins/trailmark/skills/genotoxic/SKILL.md",
       "type": "review-signal",
       "capabilities": {
         "shell": false,
         "network": false,
         "credentials": false,
-        "dynamic_execution": true,
+        "dynamic_execution": false,
         "package_install": true
       }
     },

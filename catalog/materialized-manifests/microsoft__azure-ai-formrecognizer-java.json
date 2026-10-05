@@ -1,0 +1,360 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "microsoft/azure-ai-formrecognizer-java",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/azure-sdk-java/skills/azure-ai-formrecognizer-java",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "review": {
+    "path": "catalog/reviews/microsoft__azure-ai-formrecognizer-java.json",
+    "sha256": "808c68a32d25761f68f1a93a9846f4e8334a5d233990af1c7d1ba568c8305485"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "credential-access",
+        "line": 14,
+        "evidence": "credential",
+        "context": "    .credential(new DefaultAzureCredentialBuilder().build())",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 25,
+        "evidence": "credential",
+        "context": "    .credential(new DefaultAzureCredentialBuilder().build())",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 37,
+        "evidence": "credential",
+        "context": "    .credential(new DefaultAzureCredentialBuilder().build())",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "network-access",
+        "line": 102,
+        "evidence": "https://",
+        "context": "String documentUrl = \"https://raw.githubusercontent.com/Azure/azure-sdk-for-java/main/\"",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "network-access",
+        "line": 122,
+        "evidence": "https://",
+        "context": "String receiptUrl = \"https://raw.githubusercontent.com/Azure/azure-sdk-for-java/main/\"",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "network-access",
+        "line": 190,
+        "evidence": "https://",
+        "context": "String invoiceUrl = \"https://raw.githubusercontent.com/Azure/azure-sdk-for-java/main/\"",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "network-access",
+        "line": 251,
+        "evidence": "https://",
+        "context": "String idDocUrl = \"https://raw.githubusercontent.com/Azure/azure-sdk-for-java/main/\"",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "network-access",
+        "line": 404,
+        "evidence": "https://",
+        "context": "String documentUrl = \"https://example.com/document.pdf\";",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 453,
+        "evidence": "Delete",
+        "context": "// Delete model",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 467,
+        "evidence": "credential",
+        "context": "    .credential(new DefaultAzureCredentialBuilder().build())",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 523,
+        "evidence": "credential",
+        "context": "            .credential(new DefaultAzureCredentialBuilder().build())",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "network-access",
+        "line": 526,
+        "evidence": "https://",
+        "context": "        String receiptUrl = \"https://raw.githubusercontent.com/Azure/azure-sdk-for-java/main/\"",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "network-access",
+        "line": 14,
+        "evidence": "https://",
+        "context": "> See [Migration Guide](https://github.com/Azure/azure-sdk-for-java/blob/main/sdk/documentintelligence/azure-ai-documentintelligence/MIGRATION_GUIDE.md).",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 41,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 42,
+        "evidence": "https://",
+        "context": "DOCUMENT_INTELLIGENCE_ENDPOINT=https://<resource>.cognitiveservices.azure.com/ # Required for all auth methods",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 53,
+        "evidence": "credential",
+        "context": "import com.azure.core.credential.TokenCredential;",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 58,
+        "evidence": "credential",
+        "context": "TokenCredential credential = new DefaultAzureCredentialBuilder()",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 61,
+        "evidence": "credential",
+        "context": "// Or use a specific credential directly in production:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 62,
+        "evidence": "credential",
+        "context": "// See https://learn.microsoft.com/java/api/overview/azure/identity-readme?view=azure-java-stable#credential-classes",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 62,
+        "evidence": "https://",
+        "context": "// See https://learn.microsoft.com/java/api/overview/azure/identity-readme?view=azure-java-stable#credential-classes",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 63,
+        "evidence": "credential",
+        "context": "// TokenCredential credential = new ManagedIdentityCredentialBuilder().build();",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 67,
+        "evidence": "credential",
+        "context": "    .credential(credential)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 67,
+        "evidence": "credential",
+        "context": "    .credential(credential)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 71,
+        "evidence": "API Key",
+        "context": "### API Key",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 74,
+        "evidence": "credential",
+        "context": "import com.azure.core.credential.AzureKeyCredential;",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 78,
+        "evidence": "credential",
+        "context": "    .credential(new AzureKeyCredential(System.getenv(\"DOCUMENT_INTELLIGENCE_KEY\")))",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 87,
+        "evidence": "credential",
+        "context": "import com.azure.core.credential.TokenCredential;",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 92,
+        "evidence": "credential",
+        "context": "TokenCredential credential = new DefaultAzureCredentialBuilder()",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 95,
+        "evidence": "credential",
+        "context": "// Or use a specific credential directly in production:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 96,
+        "evidence": "credential",
+        "context": "// See https://learn.microsoft.com/java/api/overview/azure/identity-readme?view=azure-java-stable#credential-classes",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 96,
+        "evidence": "https://",
+        "context": "// See https://learn.microsoft.com/java/api/overview/azure/identity-readme?view=azure-java-stable#credential-classes",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 97,
+        "evidence": "credential",
+        "context": "// TokenCredential credential = new ManagedIdentityCredentialBuilder().build();",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 101,
+        "evidence": "credential",
+        "context": "    .credential(credential)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 101,
+        "evidence": "credential",
+        "context": "    .credential(credential)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 109,
+        "evidence": "credential",
+        "context": "import com.azure.core.credential.TokenCredential;",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 114,
+        "evidence": "credential",
+        "context": "TokenCredential credential = new DefaultAzureCredentialBuilder()",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 117,
+        "evidence": "credential",
+        "context": "// Or use a specific credential directly in production:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 118,
+        "evidence": "credential",
+        "context": "// See https://learn.microsoft.com/java/api/overview/azure/identity-readme?view=azure-java-stable#credential-classes",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 118,
+        "evidence": "https://",
+        "context": "// See https://learn.microsoft.com/java/api/overview/azure/identity-readme?view=azure-java-stable#credential-classes",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 119,
+        "evidence": "credential",
+        "context": "// TokenCredential credential = new ManagedIdentityCredentialBuilder().build();",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 123,
+        "evidence": "credential",
+        "context": "    .credential(credential)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 123,
+        "evidence": "credential",
+        "context": "    .credential(credential)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 165,
+        "evidence": "https://",
+        "context": "String documentUrl = \"https://example.com/invoice.pdf\";",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 286,
+        "evidence": "Delete",
+        "context": "// Delete model",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 35385
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/examples.md",
+      "sha256": "d9c623293d850194146e7d40b79502da7f80c2b2180ea701681fbf60267c9780",
+      "bytes": 20841,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "7fbec12baeb4ccefe06786137317afb1bc7cf310362f0a38085d1ff9858b129b",
+      "bytes": 13404,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 35385
+}

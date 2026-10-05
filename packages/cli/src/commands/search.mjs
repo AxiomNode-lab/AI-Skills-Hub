@@ -1,12 +1,17 @@
 import { searchRegistry } from "@ai-skills-hub/discovery";
-import { loadRegistry } from "@ai-skills-hub/core";
+import { isInstallable, loadRegistry } from "@ai-skills-hub/core";
 import { statusReader, printCapabilityStatus } from "../capability-status.mjs";
+import { paint } from "../ui.mjs";
 
 export function searchCommand(query, options = {}) {
   const registry = loadRegistry();
 
   const readStatus = statusReader(options);
-  const results = searchRegistry(registry, query || "", {
+  // Narrow the pool before ranking so the limit applies to installable matches.
+  const pool = options.installable
+    ? { ...registry, skills: registry.skills.filter(isInstallable) }
+    : registry;
+  const results = searchRegistry(pool, query || "", {
     agent: options.agent || undefined,
     limit: options.limit || 50
   }).map(({ item, score }) => ({ ...item, _score: score, hub_status: readStatus(item) }));
@@ -23,7 +28,7 @@ export function searchCommand(query, options = {}) {
 
   console.log(`Found ${results.length} capabilities:\n`);
   for (const cap of results) {
-    console.log(`ID: ${cap.id}`);
+    console.log(`ID: ${paint("bold", cap.id)}`);
     console.log(`Name: ${cap.name}`);
     printCapabilityStatus(cap.hub_status);
     console.log(`Type: ${cap.artifact_type || cap.type || "skill"}`);

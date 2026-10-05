@@ -1,0 +1,376 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "bagelhole/windows-hardening",
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "security/hardening/windows-hardening",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "security/hardening/windows-hardening",
+    "url": "https://api.github.com/repos/BagelHole/DevOps-Security-Agent-Skills/git/trees/0365f57a079b1332f95cf26e31dd2d5332a8399f?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/BagelHole/DevOps-Security-Agent-Skills/blob/0365f57a079b1332f95cf26e31dd2d5332a8399f/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "security",
+        "security/hardening",
+        "security/hardening/windows-hardening"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found; CIS benchmarks and Microsoft baselines are referenced by name only, with no benchmark recommendation text reproduced, and ASR rule GUIDs are short factual identifiers. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "medium",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md in full; it is the only file. PowerShell reference for hardening Windows Server: security baselines via Security Compliance Toolkit/LGPO, password and lockout policy, default account handling, LAPS, LSA/SMB/LLMNR/WDigest/UAC registry hardening, Windows Firewall default-deny with management allow rules, advanced audit and PowerShell logging, Defender and ASR rules, BitLocker, Credential Guard, AppLocker (audit mode first), and a read-only audit script.",
+      "Following it can make the agent run privileged state-changing commands: Install-Module -Force from the PowerShell Gallery (SKILL.md:39-41), registry and policy edits, renaming/disabling local accounts (SKILL.md:91-93), firewall profile changes to block inbound (SKILL.md:187-192), disabling NetBIOS on all adapters, enabling BitLocker, and Credential Guard with UEFI lock. Medium because these reconfigure real servers and could lock out remote access if the management subnet is wrong; acceptable because the file is a reference for the user's own hardening task, every change strengthens rather than disables a security control, BitLocker passwords are prompted with Read-Host -AsSecureString, and AppLocker is staged in audit mode. Users should confirm and test changes (especially firewall defaults and Credential Guard UEFI lock) before applying to production.",
+      "Privacy note: SKILL.md:352 sets Defender SubmitSamplesConsent SendAllSamples, which uploads files to Microsoft; users with data-residency constraints should choose a narrower setting. SKILL.md:45 'Import-Module ...LGPO.exe' is an incorrect command (LGPO is an executable, not a module). Related Skills links (SKILL.md:609-611: ../cis-benchmarks/, ../../../infrastructure/servers/windows-server/, ../linux-hardening/) are optional pointers that do not ship with this skill. Frontmatter declares license: MIT."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "67c5c5cbb12cafb1515e449748866bd40da7dec9",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "46d283f368da2e25067a7662770b6fdf9c682343ca340c9308c6dcde1d572400",
+      "bytes": 24552,
+      "mode": "100644",
+      "git_blob": "7b615a94f38d4035fceda13e4d3dd0043cfd61b5",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 28,
+          "evidence": "PowerShell",
+          "context": "- PowerShell 5.1+ (built into Windows Server)",
+          "disposition": "accepted",
+          "reason": "PowerShell code fences and prerequisites for configuring the user's Windows servers (policy, registry, firewall, Defender, BitLocker, audit commands)."
+        },
+        {
+          "type": "shell-execution",
+          "line": 34,
+          "evidence": "powershell",
+          "context": "```powershell",
+          "disposition": "accepted",
+          "reason": "PowerShell code fences and prerequisites for configuring the user's Windows servers (policy, registry, firewall, Defender, BitLocker, audit commands)."
+        },
+        {
+          "type": "network-access",
+          "line": 36,
+          "evidence": "https://",
+          "context": "# Download from: https://www.microsoft.com/en-us/download/details.aspx?id=55319",
+          "disposition": "accepted",
+          "reason": "A Microsoft Download Center URL for the Security Baseline given as a manual download pointer; the agent is not told to fetch it."
+        },
+        {
+          "type": "shell-execution",
+          "line": 56,
+          "evidence": "powershell",
+          "context": "```powershell",
+          "disposition": "accepted",
+          "reason": "PowerShell code fences and prerequisites for configuring the user's Windows servers (policy, registry, firewall, Defender, BitLocker, audit commands)."
+        },
+        {
+          "type": "shell-execution",
+          "line": 64,
+          "evidence": "PowerShell",
+          "context": "# Or configure via PowerShell DSC",
+          "disposition": "accepted",
+          "reason": "PowerShell code fences and prerequisites for configuring the user's Windows servers (policy, registry, firewall, Defender, BitLocker, audit commands)."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 95,
+          "evidence": "Remove",
+          "context": "# Remove unnecessary local accounts",
+          "disposition": "accepted",
+          "reason": "The hit is the comment 'Remove unnecessary local accounts' above a loop that only prints accounts for review with Write-Host; no deletion occurs."
+        },
+        {
+          "type": "shell-execution",
+          "line": 106,
+          "evidence": "PowerShell",
+          "context": "Install-WindowsFeature -Name RSAT-AD-PowerShell",
+          "disposition": "accepted",
+          "reason": "PowerShell code fences and prerequisites for configuring the user's Windows servers (policy, registry, firewall, Defender, BitLocker, audit commands)."
+        },
+        {
+          "type": "shell-execution",
+          "line": 116,
+          "evidence": "powershell",
+          "context": "```powershell",
+          "disposition": "accepted",
+          "reason": "PowerShell code fences and prerequisites for configuring the user's Windows servers (policy, registry, firewall, Defender, BitLocker, audit commands)."
+        },
+        {
+          "type": "credential-access",
+          "line": 153,
+          "evidence": "credential",
+          "context": "# Disable LLMNR (prevent credential theft)",
+          "disposition": "accepted",
+          "reason": "Hits are security-feature names (Credential Guard, 'Credential Validation' audit subcategory, LSASS credential-theft ASR rule, LLMNR credential theft comment); no secret is read, printed, or sent."
+        },
+        {
+          "type": "shell-execution",
+          "line": 183,
+          "evidence": "powershell",
+          "context": "```powershell",
+          "disposition": "accepted",
+          "reason": "PowerShell code fences and prerequisites for configuring the user's Windows servers (policy, registry, firewall, Defender, BitLocker, audit commands)."
+        },
+        {
+          "type": "shell-execution",
+          "line": 262,
+          "evidence": "powershell",
+          "context": "```powershell",
+          "disposition": "accepted",
+          "reason": "PowerShell code fences and prerequisites for configuring the user's Windows servers (policy, registry, firewall, Defender, BitLocker, audit commands)."
+        },
+        {
+          "type": "credential-access",
+          "line": 268,
+          "evidence": "Credential",
+          "context": "auditpol /set /subcategory:\"Credential Validation\" /success:enable /failure:enable",
+          "disposition": "accepted",
+          "reason": "Hits are security-feature names (Credential Guard, 'Credential Validation' audit subcategory, LSASS credential-theft ASR rule, LLMNR credential theft comment); no secret is read, printed, or sent."
+        },
+        {
+          "type": "shell-execution",
+          "line": 308,
+          "evidence": "PowerShell",
+          "context": "# PowerShell Logging (Critical for forensics)",
+          "disposition": "accepted",
+          "reason": "PowerShell code fences and prerequisites for configuring the user's Windows servers (policy, registry, firewall, Defender, BitLocker, audit commands)."
+        },
+        {
+          "type": "shell-execution",
+          "line": 312,
+          "evidence": "PowerShell",
+          "context": "New-Item -Path \"HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\PowerShell\\ScriptBlockLogging\" -Force",
+          "disposition": "accepted",
+          "reason": "PowerShell code fences and prerequisites for configuring the user's Windows servers (policy, registry, firewall, Defender, BitLocker, audit commands)."
+        },
+        {
+          "type": "shell-execution",
+          "line": 313,
+          "evidence": "PowerShell",
+          "context": "Set-ItemProperty -Path \"HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\PowerShell\\ScriptBlockLogging\" `",
+          "disposition": "accepted",
+          "reason": "PowerShell code fences and prerequisites for configuring the user's Windows servers (policy, registry, firewall, Defender, BitLocker, audit commands)."
+        },
+        {
+          "type": "shell-execution",
+          "line": 317,
+          "evidence": "PowerShell",
+          "context": "New-Item -Path \"HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\PowerShell\\ModuleLogging\" -Force",
+          "disposition": "accepted",
+          "reason": "PowerShell code fences and prerequisites for configuring the user's Windows servers (policy, registry, firewall, Defender, BitLocker, audit commands)."
+        },
+        {
+          "type": "shell-execution",
+          "line": 318,
+          "evidence": "PowerShell",
+          "context": "Set-ItemProperty -Path \"HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\PowerShell\\ModuleLogging\" `",
+          "disposition": "accepted",
+          "reason": "PowerShell code fences and prerequisites for configuring the user's Windows servers (policy, registry, firewall, Defender, BitLocker, audit commands)."
+        },
+        {
+          "type": "shell-execution",
+          "line": 320,
+          "evidence": "PowerShell",
+          "context": "New-Item -Path \"HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\PowerShell\\ModuleLogging\\ModuleNames\" -Force",
+          "disposition": "accepted",
+          "reason": "PowerShell code fences and prerequisites for configuring the user's Windows servers (policy, registry, firewall, Defender, BitLocker, audit commands)."
+        },
+        {
+          "type": "shell-execution",
+          "line": 321,
+          "evidence": "PowerShell",
+          "context": "Set-ItemProperty -Path \"HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\PowerShell\\ModuleLogging\\ModuleNames\" `",
+          "disposition": "accepted",
+          "reason": "PowerShell code fences and prerequisites for configuring the user's Windows servers (policy, registry, firewall, Defender, BitLocker, audit commands)."
+        },
+        {
+          "type": "shell-execution",
+          "line": 325,
+          "evidence": "PowerShell",
+          "context": "New-Item -Path \"HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\PowerShell\\Transcription\" -Force",
+          "disposition": "accepted",
+          "reason": "PowerShell code fences and prerequisites for configuring the user's Windows servers (policy, registry, firewall, Defender, BitLocker, audit commands)."
+        },
+        {
+          "type": "shell-execution",
+          "line": 326,
+          "evidence": "PowerShell",
+          "context": "Set-ItemProperty -Path \"HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\PowerShell\\Transcription\" `",
+          "disposition": "accepted",
+          "reason": "PowerShell code fences and prerequisites for configuring the user's Windows servers (policy, registry, firewall, Defender, BitLocker, audit commands)."
+        },
+        {
+          "type": "shell-execution",
+          "line": 328,
+          "evidence": "PowerShell",
+          "context": "Set-ItemProperty -Path \"HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\PowerShell\\Transcription\" `",
+          "disposition": "accepted",
+          "reason": "PowerShell code fences and prerequisites for configuring the user's Windows servers (policy, registry, firewall, Defender, BitLocker, audit commands)."
+        },
+        {
+          "type": "shell-execution",
+          "line": 330,
+          "evidence": "PowerShell",
+          "context": "Set-ItemProperty -Path \"HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\PowerShell\\Transcription\" `",
+          "disposition": "accepted",
+          "reason": "PowerShell code fences and prerequisites for configuring the user's Windows servers (policy, registry, firewall, Defender, BitLocker, audit commands)."
+        },
+        {
+          "type": "shell-execution",
+          "line": 339,
+          "evidence": "powershell",
+          "context": "```powershell",
+          "disposition": "accepted",
+          "reason": "PowerShell code fences and prerequisites for configuring the user's Windows servers (policy, registry, firewall, Defender, BitLocker, audit commands)."
+        },
+        {
+          "type": "credential-access",
+          "line": 384,
+          "evidence": "credential",
+          "context": "# Block credential stealing from LSASS",
+          "disposition": "accepted",
+          "reason": "Hits are security-feature names (Credential Guard, 'Credential Validation' audit subcategory, LSASS credential-theft ASR rule, LLMNR credential theft comment); no secret is read, printed, or sent."
+        },
+        {
+          "type": "shell-execution",
+          "line": 421,
+          "evidence": "powershell",
+          "context": "```powershell",
+          "disposition": "accepted",
+          "reason": "PowerShell code fences and prerequisites for configuring the user's Windows servers (policy, registry, firewall, Defender, BitLocker, audit commands)."
+        },
+        {
+          "type": "credential-access",
+          "line": 455,
+          "evidence": "Credential",
+          "context": "## Credential Guard",
+          "disposition": "accepted",
+          "reason": "Hits are security-feature names (Credential Guard, 'Credential Validation' audit subcategory, LSASS credential-theft ASR rule, LLMNR credential theft comment); no secret is read, printed, or sent."
+        },
+        {
+          "type": "shell-execution",
+          "line": 457,
+          "evidence": "powershell",
+          "context": "```powershell",
+          "disposition": "accepted",
+          "reason": "PowerShell code fences and prerequisites for configuring the user's Windows servers (policy, registry, firewall, Defender, BitLocker, audit commands)."
+        },
+        {
+          "type": "credential-access",
+          "line": 459,
+          "evidence": "Credential",
+          "context": "# Enable Windows Credential Guard",
+          "disposition": "accepted",
+          "reason": "Hits are security-feature names (Credential Guard, 'Credential Validation' audit subcategory, LSASS credential-theft ASR rule, LLMNR credential theft comment); no secret is read, printed, or sent."
+        },
+        {
+          "type": "credential-access",
+          "line": 474,
+          "evidence": "Credential",
+          "context": "# Verify Credential Guard status",
+          "disposition": "accepted",
+          "reason": "Hits are security-feature names (Credential Guard, 'Credential Validation' audit subcategory, LSASS credential-theft ASR rule, LLMNR credential theft comment); no secret is read, printed, or sent."
+        },
+        {
+          "type": "shell-execution",
+          "line": 481,
+          "evidence": "powershell",
+          "context": "```powershell",
+          "disposition": "accepted",
+          "reason": "PowerShell code fences and prerequisites for configuring the user's Windows servers (policy, registry, firewall, Defender, BitLocker, audit commands)."
+        },
+        {
+          "type": "shell-execution",
+          "line": 489,
+          "evidence": "PowerShell",
+          "context": "# Create default executable rules via PowerShell",
+          "disposition": "accepted",
+          "reason": "PowerShell code fences and prerequisites for configuring the user's Windows servers (policy, registry, firewall, Defender, BitLocker, audit commands)."
+        },
+        {
+          "type": "shell-execution",
+          "line": 524,
+          "evidence": "powershell",
+          "context": "```powershell",
+          "disposition": "accepted",
+          "reason": "PowerShell code fences and prerequisites for configuring the user's Windows servers (policy, registry, firewall, Defender, BitLocker, audit commands)."
+        },
+        {
+          "type": "credential-access",
+          "line": 585,
+          "evidence": "Credential",
+          "context": "| Credential Guard breaks apps | Legacy auth protocols blocked | Identify apps using NTLM/CredSSP; migrate to Kerberos/modern auth |",
+          "disposition": "accepted",
+          "reason": "Hits are security-feature names (Credential Guard, 'Credential Validation' audit subcategory, LSASS credential-theft ASR rule, LLMNR credential theft comment); no secret is read, printed, or sent."
+        },
+        {
+          "type": "credential-access",
+          "line": 595,
+          "evidence": "Credential",
+          "context": "- Enable Credential Guard on all compatible hardware",
+          "disposition": "accepted",
+          "reason": "Hits are security-feature names (Credential Guard, 'Credential Validation' audit subcategory, LSASS credential-theft ASR rule, LLMNR credential theft comment); no secret is read, printed, or sent."
+        },
+        {
+          "type": "shell-execution",
+          "line": 598,
+          "evidence": "PowerShell",
+          "context": "- Enable PowerShell script block and module logging on all servers",
+          "disposition": "accepted",
+          "reason": "PowerShell code fences and prerequisites for configuring the user's Windows servers (policy, registry, firewall, Defender, BitLocker, audit commands)."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,296 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "microsoft/azure-storage-blob-py",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/azure-sdk-python/skills/azure-storage-blob-py",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "review": {
+    "path": "catalog/reviews/microsoft__azure-storage-blob-py.json",
+    "sha256": "18d548b4cb9ceb1b06c182e5fbf1a2d13553751717e6ee0544cd4b3d85c6698b"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "filesystem-write",
+        "line": 30,
+        "evidence": "delete",
+        "context": "- Include cleanup/delete paths for created resources in examples.",
+        "file": "references/capabilities.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 32,
+        "evidence": "credential",
+        "context": "    async with DefaultAzureCredential() as credential:",
+        "file": "references/non-hero-scenarios.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 33,
+        "evidence": "credential",
+        "context": "        async with BlobServiceClient(account_url, credential=credential) as client:",
+        "file": "references/non-hero-scenarios.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 33,
+        "evidence": "credential",
+        "context": "        async with BlobServiceClient(account_url, credential=credential) as client:",
+        "file": "references/non-hero-scenarios.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 41,
+        "evidence": "credential",
+        "context": "    async with DefaultAzureCredential() as credential:",
+        "file": "references/non-hero-scenarios.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 42,
+        "evidence": "credential",
+        "context": "        async with BlobServiceClient(account_url, credential=credential) as client:",
+        "file": "references/non-hero-scenarios.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 42,
+        "evidence": "credential",
+        "context": "        async with BlobServiceClient(account_url, credential=credential) as client:",
+        "file": "references/non-hero-scenarios.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 19,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 20,
+        "evidence": "pip install",
+        "context": "pip install azure-storage-blob azure-identity",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 25,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 28,
+        "evidence": "https://",
+        "context": "AZURE_STORAGE_ACCOUNT_URL=https://<account>.blob.core.windows.net  # Alternative to account name",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 38,
+        "evidence": "credential",
+        "context": ">    - Production: set `AZURE_TOKEN_CREDENTIALS=prod` (or `AZURE_TOKEN_CREDENTIALS=<specific_credential>`) to constrain the credential chain to production-safe credentials.",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 41,
+        "evidence": "credential",
+        "context": ">    - Async: `async with <Client>(...) as client:` **and** `async with DefaultAzureCredential() as credential:` (from `azure.identity.aio`)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 50,
+        "evidence": "credential",
+        "context": "credential = DefaultAzureCredential(require_envvar=True)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 51,
+        "evidence": "credential",
+        "context": "# Or use a specific credential directly in production:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 52,
+        "evidence": "credential",
+        "context": "# See https://learn.microsoft.com/python/api/overview/azure/identity-readme?view=azure-python#credential-classes",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 52,
+        "evidence": "https://",
+        "context": "# See https://learn.microsoft.com/python/api/overview/azure/identity-readme?view=azure-python#credential-classes",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 53,
+        "evidence": "credential",
+        "context": "# credential = ManagedIdentityCredential()",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 54,
+        "evidence": "https://",
+        "context": "account_url = \"https://<account>.blob.core.windows.net\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 56,
+        "evidence": "credential",
+        "context": "with BlobServiceClient(account_url, credential=credential) as blob_service_client:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 56,
+        "evidence": "credential",
+        "context": "with BlobServiceClient(account_url, credential=credential) as blob_service_client:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 142,
+        "evidence": "Delete",
+        "context": "### Delete Blob",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 147,
+        "evidence": "Delete",
+        "context": "# Delete with snapshots",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 159,
+        "evidence": "credential",
+        "context": "    credential=credential,",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 159,
+        "evidence": "credential",
+        "context": "    credential=credential,",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 184,
+        "evidence": "https://",
+        "context": "account_url = \"https://<account>.blob.core.windows.net\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 186,
+        "evidence": "credential",
+        "context": "with BlobServiceClient(account_url, credential=DefaultAzureCredential()) as service:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 232,
+        "evidence": "credential",
+        "context": "    async with DefaultAzureCredential() as credential:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 233,
+        "evidence": "credential",
+        "context": "        async with BlobServiceClient(account_url, credential=credential) as client:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 233,
+        "evidence": "credential",
+        "context": "        async with BlobServiceClient(account_url, credential=credential) as client:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 241,
+        "evidence": "credential",
+        "context": "    async with BlobServiceClient(account_url, credential=credential) as client:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 241,
+        "evidence": "credential",
+        "context": "    async with BlobServiceClient(account_url, credential=credential) as client:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 251,
+        "evidence": "credential",
+        "context": "2. **Always use context managers for clients and async credentials.** Wrap every client in `with BlobServiceClient(...) as client:` (sync) or `async with BlobServiceClient(...) as client:` (async). For async `DefaultAzureCredential` from `a",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 252,
+        "evidence": "credential",
+        "context": "3. **Use `DefaultAzureCredential`** for code that runs locally (instead of connection strings). Use a specific token credential for code that runs in Azure.",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 13225
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/capabilities.md",
+      "sha256": "5f07b3f4925a40b16c7f5aaa4ad7e61524142a72a7d88de4031773297d67b942",
+      "bytes": 1310,
+      "mode": "100644"
+    },
+    {
+      "path": "references/non-hero-scenarios.md",
+      "sha256": "b0ad5f98350ef38460ebda48b5ae2299b24a7b93dec149610ee5b10911533db6",
+      "bytes": 1621,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "036cde228f87b9e6aacbd3ec317bd504cb5639e04aec81f1b3ef631a9b240622",
+      "bytes": 9154,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 13225
+}

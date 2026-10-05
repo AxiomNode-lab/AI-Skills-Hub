@@ -1,0 +1,206 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "bagelhole/cloudformation",
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "infrastructure/cloud-aws/cloudformation",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "review": {
+    "path": "catalog/reviews/bagelhole__cloudformation.json",
+    "sha256": "5acc802a4556395246bf82eee766f53e680f1e1d4162a6933b61cd03f738810e"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "network-access",
+        "line": 91,
+        "evidence": "https://",
+        "context": "      TemplateURL: https://s3.amazonaws.com/bucket/vpc.yaml",
+        "file": "references/cfn-syntax.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 106,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/cfn-syntax.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 118,
+        "evidence": "Delete",
+        "context": "# Delete stack",
+        "file": "references/cfn-syntax.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 119,
+        "evidence": "delete",
+        "context": "aws cloudformation delete-stack --stack-name mystack",
+        "file": "references/cfn-syntax.md"
+      },
+      {
+        "type": "package-install",
+        "line": 28,
+        "evidence": "pip install",
+        "context": "- (Optional) `cfn-lint` installed for template validation (`pip install cfn-lint`)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 163,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 197,
+        "evidence": "Delete",
+        "context": "# Delete a stack",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 198,
+        "evidence": "delete",
+        "context": "aws cloudformation delete-stack --stack-name dev-web",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 199,
+        "evidence": "delete",
+        "context": "aws cloudformation wait stack-delete-complete --stack-name dev-web",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 204,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 232,
+        "evidence": "Delete",
+        "context": "# Delete a change set without applying",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 233,
+        "evidence": "delete",
+        "context": "aws cloudformation delete-change-set \\",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 240,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 280,
+        "evidence": "https://",
+        "context": "      TemplateURL: https://s3.amazonaws.com/my-cfn-templates/network.yaml",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 292,
+        "evidence": "https://",
+        "context": "      TemplateURL: https://s3.amazonaws.com/my-cfn-templates/database.yaml",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 302,
+        "evidence": "https://",
+        "context": "      TemplateURL: https://s3.amazonaws.com/my-cfn-templates/app.yaml",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 316,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 372,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 392,
+        "evidence": "Delete",
+        "context": "        \"Action\": \"Update:Delete\",",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 402,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 437,
+        "evidence": "Delete",
+        "context": "| Delete fails - resource in use | Dependent resource outside the stack | Remove the dependency first; check for SG references |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 437,
+        "evidence": "Remove",
+        "context": "| Delete fails - resource in use | Dependent resource outside the stack | Remove the dependency first; check for SG references |",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 16923
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/cfn-syntax.md",
+      "sha256": "b78f607be7085f2c356dc4a9ba4f0386eefa4321d240561b231665b9dd4de1fc",
+      "bytes": 2064,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "6059381f806f35df387ab3e8bbdaa00b9248e8113aa57aaeefe9ca13eee0657a",
+      "bytes": 13791,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 16923
+}

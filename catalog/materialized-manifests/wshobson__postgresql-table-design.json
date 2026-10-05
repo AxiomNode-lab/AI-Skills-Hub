@@ -1,0 +1,59 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "wshobson/postgresql-table-design",
+  "source": {
+    "repo": "wshobson/agents",
+    "path": "plugins/database-design/skills/postgresql-table-design",
+    "revision": "156b7a5e7a8b93642628a339ee4039c925b34c7f"
+  },
+  "review": {
+    "path": "catalog/reviews/wshobson__postgresql-table-design.json",
+    "sha256": "1ba4a105c7bb9fc04d9854fa7ba4f0d785b5d57b609ef7aa1c73104a8ce0e7ca"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "low",
+    "capabilities": {
+      "shell": false,
+      "network": false,
+      "credentials": false,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "filesystem-write",
+        "line": 62,
+        "evidence": "DELETE",
+        "context": "- **FK**: specify `ON DELETE/UPDATE` (`CASCADE`, `RESTRICT`, `SET NULL`, `SET DEFAULT`). Index the referencing column. Use `DEFERRABLE INITIALLY DEFERRED` for circular dependencies checked at commit.",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 21074
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "f89abb55d9f073f38f1703e4518f0613c788c6174be7f13b8dfe48a1c076c746",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/details.md",
+      "sha256": "fac8b43c75ed30d95f2ab12886021f26bb8b03f8fed0cea2929b8de18953023a",
+      "bytes": 12094,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "1e27b0fac6d88a710cd925b831608ca202c40ade4f4e285a8e027dcf2f9a44ea",
+      "bytes": 7912,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 21074
+}

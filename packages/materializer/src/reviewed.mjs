@@ -7,6 +7,8 @@ import { parseFrontmatter } from "../../core/src/index.mjs";
 export const sha256 = bytes => crypto.createHash("sha256").update(bytes).digest("hex");
 const riskOrder = ["none", "low", "medium", "high"];
 const fail = message => { throw new Error(message); };
+// MIT must be the complete standard text after a copyright line: a partial or
+// edited grant is not accepted as MIT.
 const MIT_TERMS = `Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
 in the Software without restriction, including without limitation the rights
@@ -22,7 +24,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.`;
-const normalizedTerms = text => text.replace(/\s+/g, " ").trim().replace(/\.$/, "");
+const normalizedTerms = (text) => text.replace(/\s+/g, " ").trim().replace(/\.$/, "");
 
 function isCompleteMit(text) {
   const body = text.replace(/^\s*MIT License\s*/i, "");
@@ -30,10 +32,11 @@ function isCompleteMit(text) {
   return !!copyright && normalizedTerms(body.slice(copyright[0].length)) === normalizedTerms(MIT_TERMS);
 }
 
-// Accepted licenses and how to recognize their full text. MIT may also come from
-// the repository root (scope "repository"): only when the review records that no
-// nested license, copying, or notice file applies to the skill, and a byte-exact
-// copy of the root license ships with the skill (an "attached" file).
+// Accepted licenses and how to recognize their full text. MIT or Apache-2.0 may
+// also come from the repository root (scope "repository"): only when the review
+// records that no nested license, copying, or notice file applies to the skill
+// (for Apache-2.0 this also means no NOTICE file must be carried), and a
+// byte-exact copy of the root license ships with the skill (an "attached" file).
 const LICENSE_TEXT = {
   "Apache-2.0": text => /Apache License\s+Version 2\.0/.test(text) && text.includes("Grant of Copyright License") && text.includes("Redistribution."),
   MIT: isCompleteMit
@@ -51,7 +54,7 @@ function validateLicenseReview(review) {
     if (review.files.some(file => file.attached)) fail("Skill-local licenses do not attach files");
     return;
   }
-  if (scope !== "repository" || license.spdx !== "MIT") fail("Only MIT may be accepted from the repository root");
+  if (scope !== "repository" || !["MIT", "Apache-2.0"].includes(license.spdx)) fail("Only MIT or Apache-2.0 may be accepted from the repository root");
   if (typeof license.source_path !== "string" || license.source_path.includes("/")) fail("Repository license must be a root file");
   relativeFile(license.source_path);
   if (license.ancestor_check?.complete !== true || !Array.isArray(license.ancestor_check.overrides) || license.ancestor_check.overrides.length) {
@@ -126,7 +129,8 @@ export function verifyReviewedDirectory(skill, review, directory) {
   // A declared license must agree with the reviewed one.
   const declared = fields.license?.trim();
   const agrees = declared === `Complete terms in ${review.license.path}`
-    || (review.license.spdx === "MIT" && (declared === undefined || /^MIT(?: License)?$/i.test(declared)));
+    || (review.license.spdx === "MIT" && (declared === undefined || /^MIT(?: License)?$/i.test(declared)))
+    || (review.license.spdx === "Apache-2.0" && review.license.scope === "repository" && (declared === undefined || /^Apache(?:[- ]License)?[- ]2\.0$/i.test(declared)));
   if (!agrees) fail("Skill frontmatter license conflicts with the reviewed license");
   const license = fs.readFileSync(path.join(root, review.license.path), "utf8");
   if (!LICENSE_TEXT[review.license.spdx](license)) fail(`${review.license.spdx} license text missing`);

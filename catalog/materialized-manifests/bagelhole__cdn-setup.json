@@ -1,0 +1,270 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "bagelhole/cdn-setup",
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "infrastructure/networking/cdn-setup",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "review": {
+    "path": "catalog/reviews/bagelhole__cdn-setup.json",
+    "sha256": "9a6fc11099583ae29f921185cc8f371fee28b1bf79b75464800d8ed809bd046e"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "shell-execution",
+        "line": 34,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 87,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 164,
+        "evidence": "DELETE",
+        "context": "    allowed_methods  = [\"GET\", \"HEAD\", \"OPTIONS\", \"PUT\", \"POST\", \"PATCH\", \"DELETE\"]",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 199,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 201,
+        "evidence": "curl",
+        "context": "curl -X POST \"https://api.cloudflare.com/client/v4/zones\" \\",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 201,
+        "evidence": "https://",
+        "context": "curl -X POST \"https://api.cloudflare.com/client/v4/zones\" \\",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 207,
+        "evidence": "curl",
+        "context": "ZONE_ID=$(curl -s \"https://api.cloudflare.com/client/v4/zones?name=example.com\" \\",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 207,
+        "evidence": "https://",
+        "context": "ZONE_ID=$(curl -s \"https://api.cloudflare.com/client/v4/zones?name=example.com\" \\",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 213,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 215,
+        "evidence": "curl",
+        "context": "curl -X POST \"https://api.cloudflare.com/client/v4/zones/$ZONE_ID/rulesets/phases/http_request_cache_settings/entrypoint\" \\",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 215,
+        "evidence": "https://",
+        "context": "curl -X POST \"https://api.cloudflare.com/client/v4/zones/$ZONE_ID/rulesets/phases/http_request_cache_settings/entrypoint\" \\",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 236,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 238,
+        "evidence": "curl",
+        "context": "curl -X POST \"https://api.cloudflare.com/client/v4/zones/$ZONE_ID/purge_cache\" \\",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 238,
+        "evidence": "https://",
+        "context": "curl -X POST \"https://api.cloudflare.com/client/v4/zones/$ZONE_ID/purge_cache\" \\",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 244,
+        "evidence": "curl",
+        "context": "curl -X POST \"https://api.cloudflare.com/client/v4/zones/$ZONE_ID/purge_cache\" \\",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 244,
+        "evidence": "https://",
+        "context": "curl -X POST \"https://api.cloudflare.com/client/v4/zones/$ZONE_ID/purge_cache\" \\",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 247,
+        "evidence": "https://",
+        "context": "  -d '{\"files\":[\"https://example.com/style.css\",\"https://example.com/app.js\"]}'",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 247,
+        "evidence": "https://",
+        "context": "  -d '{\"files\":[\"https://example.com/style.css\",\"https://example.com/app.js\"]}'",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 250,
+        "evidence": "curl",
+        "context": "curl -X POST \"https://api.cloudflare.com/client/v4/zones/$ZONE_ID/purge_cache\" \\",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 250,
+        "evidence": "https://",
+        "context": "curl -X POST \"https://api.cloudflare.com/client/v4/zones/$ZONE_ID/purge_cache\" \\",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 253,
+        "evidence": "https://",
+        "context": "  -d '{\"prefixes\":[\"https://example.com/images/\"]}'",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 303,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 305,
+        "evidence": "bash",
+        "context": "#!/bin/bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 307,
+        "evidence": "https://",
+        "context": "  \"https://www.example.com/\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 308,
+        "evidence": "https://",
+        "context": "  \"https://www.example.com/products\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 309,
+        "evidence": "https://",
+        "context": "  \"https://www.example.com/about\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 310,
+        "evidence": "https://",
+        "context": "  \"https://www.example.com/css/main.abc123.css\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 311,
+        "evidence": "https://",
+        "context": "  \"https://www.example.com/js/app.def456.js\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 315,
+        "evidence": "curl",
+        "context": "  curl -s -o /dev/null -w \"%{http_code} %{time_total}s %{url_effective}\\n\" \"$url\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 321,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 323,
+        "evidence": "curl",
+        "context": "curl -sI https://www.example.com/style.css | grep -i -E \"cf-cache|x-cache|age|cache-control\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 323,
+        "evidence": "https://",
+        "context": "curl -sI https://www.example.com/style.css | grep -i -E \"cf-cache|x-cache|age|cache-control\"",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 12021
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "d94b72a47cc2d1ceb19cb1a299153f32e095ca1080fb483beca7ace7e593d093",
+      "bytes": 10953,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 12021
+}

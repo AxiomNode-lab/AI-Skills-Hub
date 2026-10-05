@@ -1,0 +1,236 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "bagelhole/sast-scanning",
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "security/scanning/sast-scanning",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "security/scanning/sast-scanning",
+    "url": "https://api.github.com/repos/BagelHole/DevOps-Security-Agent-Skills/git/trees/0365f57a079b1332f95cf26e31dd2d5332a8399f?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/BagelHole/DevOps-Security-Agent-Skills/blob/0365f57a079b1332f95cf26e31dd2d5332a8399f/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "security",
+        "security/scanning",
+        "security/scanning/sast-scanning"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file; the License columns describe the external tools, the CodeQL query and Semgrep rules are short illustrative examples, and the frontmatter declares license: MIT. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "medium",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md and references/sast-tools.md in full. The skill covers static application security testing of the user's source code with Semgrep (CLI, custom rules, CI), CodeQL (workflow and a sample query), SonarQube (docker-compose, scanner config, quality gates), Bandit, ESLint security plugin and Brakeman, plus a jq-based CI gate script.",
+      "Medium: following it has the agent install scanners with pip, brew, npm (--save-dev, modifying package.json) and gem, and run them over the local codebase writing report files; `semgrep --config auto`/registry rulesets download rules from the Semgrep registry. Acceptable because these are standard, read-only analyses of the user's own code and the installs are well-known security tools the user asked to adopt.",
+      "Users should know: CI examples reference SEMGREP_APP_TOKEN/SONAR_TOKEN only via GitHub secrets; the SonarQube compose file uses default sonar/sonar passwords suitable only for local trials; the SonarSource actions are pinned to @master rather than a version. Related Skills (SKILL.md:417-419) link to sibling skills ../dast-scanning/, ../dependency-scanning/, ../../../devops/ci-cd/github-actions/ as optional reading only."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "67c5c5cbb12cafb1515e449748866bd40da7dec9",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
+      "findings": []
+    },
+    {
+      "path": "references/sast-tools.md",
+      "sha256": "360ab74411cbd06decbb6b0adfb81f1dc0f4291e167a7a26de3067b6a1653fcf",
+      "bytes": 1987,
+      "mode": "100644",
+      "git_blob": "2dc5cfac08519f0278a477ad5cfdd4deb8ac5f36",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 16,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks that install and run Semgrep, Bandit, ESLint, Brakeman and sonar-scanner on the user's code, plus a jq-based security-gate shell script."
+        },
+        {
+          "type": "package-install",
+          "line": 18,
+          "evidence": "pip install",
+          "context": "pip install semgrep",
+          "disposition": "accepted",
+          "reason": "pip install semgrep/bandit and npm install eslint-plugin-security to add the scanners to the user's project or environment."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 40,
+          "evidence": "delete",
+          "context": "          regex: (?i)(select|insert|update|delete)",
+          "disposition": "accepted",
+          "reason": "The match is the word 'delete' inside a Semgrep regex for SQL keywords; no file deletion."
+        },
+        {
+          "type": "shell-execution",
+          "line": 48,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks that install and run Semgrep, Bandit, ESLint, Brakeman and sonar-scanner on the user's code, plus a jq-based security-gate shell script."
+        },
+        {
+          "type": "network-access",
+          "line": 53,
+          "evidence": "http://",
+          "context": "  -Dsonar.host.url=http://sonarqube:9000 \\",
+          "disposition": "accepted",
+          "reason": "A placeholder SonarQube server URL (http://sonarqube:9000) in a scanner CLI example."
+        },
+        {
+          "type": "shell-execution",
+          "line": 80,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks that install and run Semgrep, Bandit, ESLint, Brakeman and sonar-scanner on the user's code, plus a jq-based security-gate shell script."
+        }
+      ]
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "623ed8661f7ebe16f6b543f443da76532310ec0a258f6b405ff614f9a9033b69",
+      "bytes": 8806,
+      "mode": "100644",
+      "git_blob": "0604e5fcaeb313a3d414667254dd5ed9dce6fc76",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 43,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks that install and run Semgrep, Bandit, ESLint, Brakeman and sonar-scanner on the user's code, plus a jq-based security-gate shell script."
+        },
+        {
+          "type": "package-install",
+          "line": 45,
+          "evidence": "pip install",
+          "context": "pip install semgrep",
+          "disposition": "accepted",
+          "reason": "pip install semgrep/bandit and npm install eslint-plugin-security to add the scanners to the user's project or environment."
+        },
+        {
+          "type": "shell-execution",
+          "line": 53,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks that install and run Semgrep, Bandit, ESLint, Brakeman and sonar-scanner on the user's code, plus a jq-based security-gate shell script."
+        },
+        {
+          "type": "shell-execution",
+          "line": 281,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks that install and run Semgrep, Bandit, ESLint, Brakeman and sonar-scanner on the user's code, plus a jq-based security-gate shell script."
+        },
+        {
+          "type": "package-install",
+          "line": 283,
+          "evidence": "pip install",
+          "context": "pip install bandit",
+          "disposition": "accepted",
+          "reason": "pip install semgrep/bandit and npm install eslint-plugin-security to add the scanners to the user's project or environment."
+        },
+        {
+          "type": "shell-execution",
+          "line": 303,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks that install and run Semgrep, Bandit, ESLint, Brakeman and sonar-scanner on the user's code, plus a jq-based security-gate shell script."
+        },
+        {
+          "type": "package-install",
+          "line": 305,
+          "evidence": "npm install",
+          "context": "npm install eslint eslint-plugin-security --save-dev",
+          "disposition": "accepted",
+          "reason": "pip install semgrep/bandit and npm install eslint-plugin-security to add the scanners to the user's project or environment."
+        },
+        {
+          "type": "shell-execution",
+          "line": 327,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks that install and run Semgrep, Bandit, ESLint, Brakeman and sonar-scanner on the user's code, plus a jq-based security-gate shell script."
+        },
+        {
+          "type": "shell-execution",
+          "line": 367,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks that install and run Semgrep, Bandit, ESLint, Brakeman and sonar-scanner on the user's code, plus a jq-based security-gate shell script."
+        },
+        {
+          "type": "shell-execution",
+          "line": 368,
+          "evidence": "bash",
+          "context": "#!/bin/bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks that install and run Semgrep, Bandit, ESLint, Brakeman and sonar-scanner on the user's code, plus a jq-based security-gate shell script."
+        },
+        {
+          "type": "shell-execution",
+          "line": 369,
+          "evidence": "sh",
+          "context": "# security-gate.sh",
+          "disposition": "accepted",
+          "reason": "Bash blocks that install and run Semgrep, Bandit, ESLint, Brakeman and sonar-scanner on the user's code, plus a jq-based security-gate shell script."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,390 @@
+{
+  "schema_version": "0.1",
+  "review": "independent-batch-01",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted independent instruction review by the PR #10 author session, reading every file in full; not a security certification and not a performance evaluation",
+  "scope": "10 microsoft/skills Java SDK skills held by PR #11 with reason independent-instruction-review-incomplete",
+  "method": [
+    "Read every upstream file of each skill in full at microsoft/skills@84d8eaa8ae95930f55cdceb3e27196c795dab038.",
+    "Checked each file's SHA-256 against the review record and re-downloaded every file from GitHub at the pinned commit (scripts/verify-upstream.mjs).",
+    "Classified every instruction the agent itself would follow (commands, installs, credentials, network, file changes) separately from sample code written for the user's application.",
+    "Checked every relative link and path for references outside the skill directory."
+  ],
+  "skills": [
+    {
+      "id": "microsoft/azure-cosmos-java",
+      "decision": "release",
+      "risk": "low",
+      "agent_capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "package_install": false,
+        "filesystem_write": false,
+        "dynamic_execution": false,
+        "encoded_content": false
+      },
+      "agent_instructions": "None. The skill is reference documentation: Maven snippets, Java samples with placeholder or environment-variable credentials, and links to Microsoft documentation. It gives the agent no command to run, nothing to install, and no credential to read.",
+      "out_of_package_references": [],
+      "license": "Repository-root MIT (microsoft/skills LICENSE), no nested notice; SKILL.md declares MIT; no third-party notice in any file.",
+      "sample_accuracy_notes": [
+        "The 'Sync' sample under Create Database calls .map() on a synchronous CosmosDatabaseResponse, which does not compile.",
+        "Maven version is LATEST in SKILL.md; samples delete databases/containers in the user's own account."
+      ],
+      "files": [
+        {
+          "path": "LICENSE.txt",
+          "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+          "attached": true
+        },
+        {
+          "path": "references/examples.md",
+          "sha256": "d885f9aa0ddc03e07ad85d054a933514a2f649ba1ed1fd3f32ffa53086c6d16b",
+          "attached": false
+        },
+        {
+          "path": "SKILL.md",
+          "sha256": "44598c07681d06e88d7a26ad5a11e18170ea5cf65c1457a2bce5742dad9bbbbf",
+          "attached": false
+        }
+      ]
+    },
+    {
+      "id": "microsoft/azure-storage-blob-java",
+      "decision": "release",
+      "risk": "low",
+      "agent_capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "package_install": false,
+        "filesystem_write": false,
+        "dynamic_execution": false,
+        "encoded_content": false
+      },
+      "agent_instructions": "None. The skill is reference documentation: Maven snippets, Java samples with placeholder or environment-variable credentials, and links to Microsoft documentation. It gives the agent no command to run, nothing to install, and no credential to read.",
+      "out_of_package_references": [],
+      "license": "Repository-root MIT (microsoft/skills LICENSE), no nested notice; SKILL.md declares MIT; no third-party notice in any file.",
+      "sample_accuracy_notes": [
+        "Samples generate SAS tokens (read-only by default) and use shared keys only from placeholders or environment variables."
+      ],
+      "files": [
+        {
+          "path": "LICENSE.txt",
+          "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+          "attached": true
+        },
+        {
+          "path": "references/examples.md",
+          "sha256": "b48214ea380b105c265f75a26fce6d5034329ea78bfe200e07cd0dd34d55b205",
+          "attached": false
+        },
+        {
+          "path": "SKILL.md",
+          "sha256": "677a18b27f976c62c8cc3276637319bbb581dc2860750941f7ba3b688e0f9f8a",
+          "attached": false
+        }
+      ]
+    },
+    {
+      "id": "microsoft/azure-eventgrid-java",
+      "decision": "release",
+      "risk": "low",
+      "agent_capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "package_install": false,
+        "filesystem_write": false,
+        "dynamic_execution": false,
+        "encoded_content": false
+      },
+      "agent_instructions": "None. The skill is reference documentation: Maven snippets, Java samples with placeholder or environment-variable credentials, and links to Microsoft documentation. It gives the agent no command to run, nothing to install, and no credential to read.",
+      "out_of_package_references": [],
+      "license": "Repository-root MIT (microsoft/skills LICENSE), no nested notice; SKILL.md declares MIT; no third-party notice in any file.",
+      "sample_accuracy_notes": [
+        "SKILL.md pins 4.27.0 while references/examples.md pins 4.32.0-beta.1 (a prerelease)."
+      ],
+      "files": [
+        {
+          "path": "LICENSE.txt",
+          "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+          "attached": true
+        },
+        {
+          "path": "references/examples.md",
+          "sha256": "9990c43884a9950dd0bbe3db6aa0a91424f0c41ae9a010dcef83cb59c0440b21",
+          "attached": false
+        },
+        {
+          "path": "SKILL.md",
+          "sha256": "55f7bee669c8c15e804990b6a5c8a31a8063db0c22e594cba802f4c0e274e792",
+          "attached": false
+        }
+      ]
+    },
+    {
+      "id": "microsoft/azure-eventhub-java",
+      "decision": "release",
+      "risk": "low",
+      "agent_capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "package_install": false,
+        "filesystem_write": false,
+        "dynamic_execution": false,
+        "encoded_content": false
+      },
+      "agent_instructions": "None. The skill is reference documentation: Maven snippets, Java samples with placeholder or environment-variable credentials, and links to Microsoft documentation. It gives the agent no command to run, nothing to install, and no credential to read.",
+      "out_of_package_references": [],
+      "license": "Repository-root MIT (microsoft/skills LICENSE), no nested notice; SKILL.md declares MIT; no third-party notice in any file.",
+      "sample_accuracy_notes": [
+        "SKILL.md pins 5.19.0 while references/examples.md pins 5.21.0."
+      ],
+      "files": [
+        {
+          "path": "LICENSE.txt",
+          "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+          "attached": true
+        },
+        {
+          "path": "references/examples.md",
+          "sha256": "0d661dcc67e01dbfdc06090e02bf12e3bef80c8c9aae08274a53f5163e649b13",
+          "attached": false
+        },
+        {
+          "path": "SKILL.md",
+          "sha256": "ef3200235c5e38f311fb6af505f0193166b9b2f99326cea3410c8ecc7f743255",
+          "attached": false
+        }
+      ]
+    },
+    {
+      "id": "microsoft/azure-data-tables-java",
+      "decision": "release",
+      "risk": "low",
+      "agent_capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "package_install": false,
+        "filesystem_write": false,
+        "dynamic_execution": false,
+        "encoded_content": false
+      },
+      "agent_instructions": "None. The skill is reference documentation: Maven snippets, Java samples with placeholder or environment-variable credentials, and links to Microsoft documentation. It gives the agent no command to run, nothing to install, and no credential to read.",
+      "out_of_package_references": [],
+      "license": "Repository-root MIT (microsoft/skills LICENSE), no nested notice; SKILL.md declares MIT; no third-party notice in any file.",
+      "sample_accuracy_notes": [
+        "Pins the prerelease 12.6.0-beta.1.",
+        "The 'Typed Entities' sample implements TableEntity as an interface; in the SDK it is a class, so the sample does not compile."
+      ],
+      "files": [
+        {
+          "path": "LICENSE.txt",
+          "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+          "attached": true
+        },
+        {
+          "path": "references/examples.md",
+          "sha256": "f58b252000b23aea4fc8fa6031d81c7931dd91cc1b0c8cbb48ec4e9645dbeee2",
+          "attached": false
+        },
+        {
+          "path": "SKILL.md",
+          "sha256": "257cca211f25374b4cfa2662c667659cbe54e9422656b990aad623aa242d8782",
+          "attached": false
+        }
+      ]
+    },
+    {
+      "id": "microsoft/azure-identity-java",
+      "decision": "release",
+      "risk": "low",
+      "agent_capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "package_install": false,
+        "filesystem_write": false,
+        "dynamic_execution": false,
+        "encoded_content": false
+      },
+      "agent_instructions": "None. The skill is reference documentation: Maven snippets, Java samples with placeholder or environment-variable credentials, and links to Microsoft documentation. It gives the agent no command to run, nothing to install, and no credential to read.",
+      "out_of_package_references": [],
+      "license": "Repository-root MIT (microsoft/skills LICENSE), no nested notice; SKILL.md declares MIT; no third-party notice in any file.",
+      "sample_accuracy_notes": [
+        "The 'Token Caching' section uses enableAccountIdentifierLogging(), which is a logging option, not caching.",
+        "One sample contains a literal placeholder password (P@s$w0rd)."
+      ],
+      "files": [
+        {
+          "path": "LICENSE.txt",
+          "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+          "attached": true
+        },
+        {
+          "path": "references/examples.md",
+          "sha256": "b58509321e58bbb1dac3f6d6d342f3d863b1ecce5ec37f1205418473431dc842",
+          "attached": false
+        },
+        {
+          "path": "SKILL.md",
+          "sha256": "17659e2590c0a2ee45d3d630badbecad24315ac73d5aed6b5aabdf43e1e48dd8",
+          "attached": false
+        }
+      ]
+    },
+    {
+      "id": "microsoft/azure-monitor-query-java",
+      "decision": "release",
+      "risk": "low",
+      "agent_capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "package_install": false,
+        "filesystem_write": false,
+        "dynamic_execution": false,
+        "encoded_content": false
+      },
+      "agent_instructions": "None. The skill is reference documentation: Maven snippets, Java samples with placeholder or environment-variable credentials, and links to Microsoft documentation. It gives the agent no command to run, nothing to install, and no credential to read.",
+      "out_of_package_references": [],
+      "license": "Repository-root MIT (microsoft/skills LICENSE), no nested notice; SKILL.md declares MIT; no third-party notice in any file.",
+      "sample_accuracy_notes": [
+        "The skill states that the package is deprecated in favour of azure-monitor-query-logs and azure-monitor-query-metrics; samples are read-only queries."
+      ],
+      "files": [
+        {
+          "path": "LICENSE.txt",
+          "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+          "attached": true
+        },
+        {
+          "path": "references/examples.md",
+          "sha256": "3e61a7983db87e90b23c6aab3bb7ab5e1dbcdb8a33a4227832e9bd82e51571ab",
+          "attached": false
+        },
+        {
+          "path": "SKILL.md",
+          "sha256": "924066d2c6056b8e528fc8b7654b91646c4c37717dd10a96e7545fe244733a06",
+          "attached": false
+        }
+      ]
+    },
+    {
+      "id": "microsoft/azure-communication-chat-java",
+      "decision": "release",
+      "risk": "low",
+      "agent_capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "package_install": false,
+        "filesystem_write": false,
+        "dynamic_execution": false,
+        "encoded_content": false
+      },
+      "agent_instructions": "None. The skill is reference documentation: Maven snippets, Java samples with placeholder or environment-variable credentials, and links to Microsoft documentation. It gives the agent no command to run, nothing to install, and no credential to read.",
+      "out_of_package_references": [],
+      "license": "Repository-root MIT (microsoft/skills LICENSE), no nested notice; SKILL.md declares MIT; no third-party notice in any file.",
+      "sample_accuracy_notes": [
+        "HTML message samples do not mention escaping content when the user's app renders it."
+      ],
+      "files": [
+        {
+          "path": "LICENSE.txt",
+          "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+          "attached": true
+        },
+        {
+          "path": "references/examples.md",
+          "sha256": "fada42581c630e69ae02ac7e5eba1c679af26c0d750fe268f04c2a5f395e545e",
+          "attached": false
+        },
+        {
+          "path": "SKILL.md",
+          "sha256": "6b4cf495990c027f146f4dab11b17a2d04c21e67fcf96af26ad56260f7a764fd",
+          "attached": false
+        }
+      ]
+    },
+    {
+      "id": "microsoft/azure-communication-common-java",
+      "decision": "release",
+      "risk": "low",
+      "agent_capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "package_install": false,
+        "filesystem_write": false,
+        "dynamic_execution": false,
+        "encoded_content": false
+      },
+      "agent_instructions": "None. The skill is reference documentation: Maven snippets, Java samples with placeholder or environment-variable credentials, and links to Microsoft documentation. It gives the agent no command to run, nothing to install, and no credential to read.",
+      "out_of_package_references": [],
+      "license": "Repository-root MIT (microsoft/skills LICENSE), no nested notice; SKILL.md declares MIT; no third-party notice in any file.",
+      "sample_accuracy_notes": [
+        "A debug sample prints the first 20 characters of a token although the same file says never to log tokens.",
+        "The TokenService sample appends userId to a URL without encoding."
+      ],
+      "files": [
+        {
+          "path": "LICENSE.txt",
+          "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+          "attached": true
+        },
+        {
+          "path": "references/examples.md",
+          "sha256": "7b2a3df4df01f9cc409dd3bf2ddcc8a8f3e261022d656eaa6eb998681c03096f",
+          "attached": false
+        },
+        {
+          "path": "SKILL.md",
+          "sha256": "aa84ee9ea16a5663b2971f4f3c66b6fcaa901d067d9d3ffdabe24dc4b22593db",
+          "attached": false
+        }
+      ]
+    },
+    {
+      "id": "microsoft/azure-messaging-webpubsub-java",
+      "decision": "release",
+      "risk": "low",
+      "agent_capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "package_install": false,
+        "filesystem_write": false,
+        "dynamic_execution": false,
+        "encoded_content": false
+      },
+      "agent_instructions": "None. The skill is reference documentation: Maven snippets, Java samples with placeholder or environment-variable credentials, and links to Microsoft documentation. It gives the agent no command to run, nothing to install, and no credential to read.",
+      "out_of_package_references": [],
+      "license": "Repository-root MIT (microsoft/skills LICENSE), no nested notice; SKILL.md declares MIT; no third-party notice in any file.",
+      "sample_accuracy_notes": [
+        "Samples print the client access URL, which embeds a bearer token.",
+        "The chat example grants broad roles (any group) for 24 hours, contrary to its own least-privilege advice."
+      ],
+      "files": [
+        {
+          "path": "LICENSE.txt",
+          "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+          "attached": true
+        },
+        {
+          "path": "references/examples.md",
+          "sha256": "19ee9954df37cdfeec7a20820de82994fa76f662940695fa29436e42c7fdfce6",
+          "attached": false
+        },
+        {
+          "path": "SKILL.md",
+          "sha256": "9bb62a43834be7a0095dc995fa5f703329114aa47f9ccdebe227a8a8c48bd374",
+          "attached": false
+        }
+      ]
+    }
+  ]
+}

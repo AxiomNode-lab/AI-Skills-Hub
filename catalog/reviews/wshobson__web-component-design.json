@@ -1,0 +1,130 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "wshobson/web-component-design",
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "wshobson/agents",
+    "path": "plugins/ui-design/skills/web-component-design",
+    "revision": "156b7a5e7a8b93642628a339ee4039c925b34c7f"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "plugins/ui-design/skills/web-component-design",
+    "url": "https://api.github.com/repos/wshobson/agents/git/trees/156b7a5e7a8b93642628a339ee4039c925b34c7f?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/wshobson/agents/blob/156b7a5e7a8b93642628a339ee4039c925b34c7f/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "plugins",
+        "plugins/ui-design",
+        "plugins/ui-design/skills",
+        "plugins/ui-design/skills/web-component-design"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file; the CVA button sample resembles common shadcn/ui-style snippets but is a short idiomatic configuration example. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "low",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": false,
+      "network": false,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md and references/accessibility-patterns.md, references/component-patterns.md, references/css-styling-approaches.md in full. Guidance and React/Vue/Svelte/TSX code samples for component composition, CSS-in-JS styling approaches and accessible ARIA widget patterns.",
+      "No commands, installs, credentials, or network access; the content only shapes the reply or the user's own component code.",
+      "Nothing else notable; sample code references unshown helpers (Spinner, XIcon, cn) as illustrative placeholders."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "f89abb55d9f073f38f1703e4518f0613c788c6174be7f13b8dfe48a1c076c746",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "326f0a55c96e672fedf9d807ca043c00df05ba0e",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
+      "findings": []
+    },
+    {
+      "path": "references/accessibility-patterns.md",
+      "sha256": "cecf82569bb7cbe89c96bd1d00ac0bee91d121515f19908a26e15634d13d3e3b",
+      "bytes": 15848,
+      "mode": "100644",
+      "git_blob": "5653a8f07c45fc0739d398ecc2dd35ebb5d4d3f9",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "references/component-patterns.md",
+      "sha256": "a258c10793aae4b2628ff291fc7557d5605c73821d4946b98b923d6ef014c787",
+      "bytes": 9730,
+      "mode": "100644",
+      "git_blob": "ad486cf4c7448cf06bc157e1e7f6682df72bf46b",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "references/css-styling-approaches.md",
+      "sha256": "fe34ea85c3c3116982783c9148217c5642a15fcb73207458326ed91de05e592e",
+      "bytes": 12783,
+      "mode": "100644",
+      "git_blob": "63cb64526cca06cc1be8e16568b4f90b8fa7da2a",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "a7978f5e9e3fa7129cf3eb8d607cedece4e207011321893d9a3c5dd92cf32603",
+      "bytes": 7475,
+      "mode": "100644",
+      "git_blob": "f118d3e536640a9e1caeff14f9cefe0d37d5c3c7",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 169,
+          "evidence": "delete",
+          "context": "      next.has(id) ? next.delete(id) : next.add(id);",
+          "disposition": "accepted",
+          "reason": "The hit is `next.delete(id)` on a JavaScript Set in an accordion sample, not a file deletion."
+        }
+      ]
+    }
+  ]
+}

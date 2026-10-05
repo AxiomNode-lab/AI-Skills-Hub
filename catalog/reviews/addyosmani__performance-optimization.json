@@ -1,0 +1,122 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "addyosmani/performance-optimization",
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "addyosmani/agent-skills",
+    "path": "skills/performance-optimization",
+    "revision": "1401c8b8030e023baeebb31781a6653fe8e93026"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "skills/performance-optimization",
+    "url": "https://api.github.com/repos/addyosmani/agent-skills/git/trees/1401c8b8030e023baeebb31781a6653fe8e93026?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/addyosmani/agent-skills/blob/1401c8b8030e023baeebb31781a6653fe8e93026/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "skills",
+        "skills/performance-optimization"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT License with its copyright notice, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "low",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": true,
+      "network": false,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md and references/optimization-patterns.md in full. A measure-identify-fix-verify-guard workflow for frontend and backend performance, with worked fixes for N+1 queries, pagination, indexes, connection pools, images, re-renders, bundle size and caching.",
+      "It shapes the user's own code and suggests read-only measurement (Lighthouse, DevTools, EXPLAIN ANALYZE) plus optional CI budget commands (`npx bundlesize`, `npx lhci autorun`, SKILL.md:205-209) presented as CI configuration; edits are to the user's project and optional PERF.md ledger. No credentials or remote-script execution.",
+      "SKILL.md:131 and :214 and optimization-patterns.md:5 and :250 point to a shared performance-checklist.md outside the skill directory (`../../references/` / `../../../references/`); it does not ship with the skill but is supplementary 'see also' material, the skill is complete without it. The HTML comment signal in optimization-patterns.md (lines 91-118) is ordinary HTML comments inside an html code sample explaining art direction; no hidden instructions."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "6f202f8bd568cd730dbb2b0d1f8e243bc74c2fa1f64dbce9b2c7ea08bd5c9fd7",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "d67778ada6b9cda6227e9130da182c13e73c8b2e",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry the copyright and permission notice.",
+      "findings": []
+    },
+    {
+      "path": "references/optimization-patterns.md",
+      "sha256": "fbf724076ffb8ac1a28e1a2773c0b550f5361090024b2dd32e5a682c69b7945f",
+      "bytes": 9692,
+      "mode": "100644",
+      "git_blob": "63e27bcc7a051c3dc23c164f146f374e119874cc",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "665a83a7218d6aebd02ca329a7b2422cf28f7c55cb56f870c05e12047770245c",
+      "bytes": 16678,
+      "mode": "100644",
+      "git_blob": "498735724035f468737bd118f9c60676a013d544",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 48,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "The flagged ```bash fences hold measurement snippets (web-vitals, console.time) and CI budget commands for the user's pipeline; nothing destructive or remote-script based."
+        },
+        {
+          "type": "shell-execution",
+          "line": 62,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "The flagged ```bash fences hold measurement snippets (web-vitals, console.time) and CI budget commands for the user's pipeline; nothing destructive or remote-script based."
+        },
+        {
+          "type": "shell-execution",
+          "line": 204,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "The flagged ```bash fences hold measurement snippets (web-vitals, console.time) and CI budget commands for the user's pipeline; nothing destructive or remote-script based."
+        }
+      ]
+    }
+  ]
+}

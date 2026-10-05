@@ -6,6 +6,8 @@ import {
   catalogAvailability,
   filterForAgent,
   hubHome,
+  hubVersion,
+  isInstallable,
   loadRegistry,
   resolveBundle,
   resolveHubPath,
@@ -14,16 +16,15 @@ import {
 import { searchRegistry } from "@ai-skills-hub/discovery";
 import { sha256, verifyReviewedDirectory } from "../../materializer/src/reviewed.mjs";
 
-export const SERVER_INFO = { name: "ai-skills-hub", version: "0.2.0" };
+export const SERVER_INFO = { name: "ai-skills-hub", version: hubVersion() };
 const PROTOCOL_VERSIONS = ["2025-06-18", "2025-03-26", "2024-11-05"];
 const RESOURCE_PREFIX = "skillshub://skills/";
 const MAX_BODY_BYTES = 1024 * 1024;
 const MAX_LIMIT = 100;
 
-const isEligible = (skill) => catalogAvailability(skill).status === "eligible";
 
 function installCommand(skill, agent = "<agent>") {
-  return isEligible(skill) ? `skills-hub install ${skill.id} --agent ${agent}` : null;
+  return isInstallable(skill) ? `skills-hub install ${skill.id} --agent ${agent}` : null;
 }
 
 // Normalized catalog metadata only: upstream content is served solely for released skills.
@@ -44,7 +45,7 @@ export function skillSummary(skill) {
       redistributable: skill.license?.redistributable === true
     },
     security: { risk: skill.security?.risk ?? "unknown", scan_status: skill.security?.scan_status ?? "unknown" },
-    release: { status: skill.release?.status ?? "unknown", reasons: skill.release?.reasons ?? [] },
+    release: { status: skill.release?.status ?? "unknown", reasons: skill.release?.reasons ?? [], notices: skill.release?.notices ?? [] },
     source: {
       repo: skill.source?.repo ?? null,
       revision: skill.source?.revision ?? null,
@@ -67,10 +68,11 @@ function checkedHubPath(value) {
   return full;
 }
 
-// Fail closed and return the exact bytes verified during this request. Catalog
-// eligibility alone is not authorization to expose arbitrary local files.
+// Fail closed and return the exact bytes verified during this request: the
+// release manifest, its review (by hash), and every reviewed file (by hash).
+// Catalog eligibility alone is not authorization to expose local files.
 function verifiedContents(skill) {
-  if (!isEligible(skill) || !skill.materialized_root || !/^[a-z0-9._-]+\/[a-z0-9-]+$/.test(skill.id)) return new Map();
+  if (!isInstallable(skill) || !skill.materialized_root || !/^[a-z0-9._-]+\/[a-z0-9._-]+$/.test(skill.id)) return new Map();
   if (skill.license?.status !== "verified" || skill.license.redistributable !== true || skill.security?.scan_status !== "verified" || skill.security.risk === "high") return new Map();
   try {
     const root = checkedHubPath(skill.materialized_root);
@@ -92,16 +94,17 @@ function verifiedContents(skill) {
   }
 }
 
-export const skillFiles = skill => [...verifiedContents(skill).keys()].sort();
-const readSkillFile = (skill, relative) => verifiedContents(skill).get(relative) ?? null;
+export const skillFiles = (skill) => [...verifiedContents(skill).keys()].sort();
+
 const mimeType = (file) => (file.endsWith(".md") ? "text/markdown" : "text/plain");
 
 export function createCatalog(registry = loadRegistry()) {
   const byId = new Map(registry.skills.map((skill) => [skill.id, skill]));
+  const eligible = registry.skills.filter(isInstallable);
 
   function search({ query = "", agent, limit = 20, installable_only = false } = {}) {
     const max = Math.min(MAX_LIMIT, Math.max(1, Number(limit) || 20));
-    const pool = installable_only ? { ...registry, skills: registry.skills.filter(isEligible) } : registry;
+    const pool = installable_only ? { ...registry, skills: eligible } : registry;
     return searchRegistry(pool, query, { agent: agent || undefined, limit: max }).map(({ item }) => skillSummary(item));
   }
 
@@ -138,7 +141,7 @@ export function createCatalog(registry = loadRegistry()) {
   }
 
   function resources() {
-    return registry.skills.filter(isEligible).flatMap((skill) => skillFiles(skill).map((file) => ({
+    return eligible.flatMap((skill) => skillFiles(skill).map((file) => ({
       uri: RESOURCE_PREFIX + skill.id + "/" + file,
       name: `${skill.id}/${file}`,
       title: `${skill.name}: ${file}`,
@@ -149,16 +152,16 @@ export function createCatalog(registry = loadRegistry()) {
   function readResource(uri) {
     if (typeof uri !== "string" || !uri.startsWith(RESOURCE_PREFIX)) return null;
     const rest = uri.slice(RESOURCE_PREFIX.length);
-    for (const skill of registry.skills.filter(isEligible)) {
+    for (const skill of eligible) {
       if (!rest.startsWith(skill.id + "/")) continue;
       const file = rest.slice(skill.id.length + 1);
-      const text = readSkillFile(skill, file);
-      if (text !== null) return { uri, mimeType: mimeType(file), text };
+      const text = verifiedContents(skill).get(file);
+      if (text !== undefined) return { uri, mimeType: mimeType(file), text };
     }
     return null;
   }
 
-  return { registry, byId, search, detail, list, resources, readResource };
+  return { registry, byId, eligible, search, detail, list, resources, readResource };
 }
 
 const TOOLS = [
@@ -204,12 +207,13 @@ function rpcError(id, code, message) {
 
 // Handles one JSON-RPC message; returns null for notifications.
 export function handleMcpMessage(catalog, message) {
-  if (!message || Array.isArray(message) || message.jsonrpc !== "2.0" || typeof message.method !== "string" || (message.id !== undefined && typeof message.id !== "string" && !(typeof message.id === "number" && Number.isFinite(message.id)))) {
-    return rpcError(message?.id, -32600, "Invalid Request");
+  if (!message || Array.isArray(message) || message.jsonrpc !== "2.0" || typeof message.method !== "string"
+    || (message.id !== undefined && message.id !== null && typeof message.id !== "string" && !(typeof message.id === "number" && Number.isFinite(message.id)))) {
+    return rpcError(typeof message?.id === "string" || typeof message?.id === "number" ? message.id : null, -32600, "Invalid Request");
   }
   const { id, method, params = {} } = message;
-  if (!params || typeof params !== "object" || Array.isArray(params)) return rpcError(id, -32602, "params must be an object");
   if (id === undefined || id === null) return null;
+  if (!params || typeof params !== "object" || Array.isArray(params)) return rpcError(id, -32602, "params must be an object");
   const ok = (result) => ({ jsonrpc: "2.0", id, result });
 
   switch (method) {
@@ -269,15 +273,12 @@ function readBody(req) {
   return new Promise((resolve, reject) => {
     const chunks = [];
     let size = 0;
-    let oversized = false;
     req.on("data", (chunk) => {
-      if (oversized) return;
       size += chunk.length;
-      if (size > MAX_BODY_BYTES) {
-        oversized = true;
-        chunks.length = 0;
-        reject(Object.assign(new Error("Request body too large"), { status: 413 }));
-      } else chunks.push(chunk);
+      // Over the limit: stop buffering and answer 413; the socket stays open
+      // until the response is written (sent with connection: close).
+      if (size > MAX_BODY_BYTES) reject(Object.assign(new Error("Request body too large"), { status: 413 }));
+      else chunks.push(chunk);
     });
     req.on("end", () => resolve(Buffer.concat(chunks).toString("utf8")));
     req.on("error", reject);
@@ -292,13 +293,13 @@ function handleApi(catalog, url, res) {
   if (params.agent !== undefined && !/^[a-z0-9-]+$/.test(params.agent)) return sendJson(res, 400, { error: "invalid_agent" });
   const route = url.pathname.replace(/\/+$/, "") || "/";
   if (route === "/api/health") {
-    return sendJson(res, 200, { status: "ok", skills: catalog.registry.skills.length, eligible: catalog.registry.skills.filter(isEligible).length });
+    return sendJson(res, 200, { status: "ok", skills: catalog.registry.skills.length, eligible: catalog.eligible.length });
   }
   if (route === "/api/catalog") {
     return sendJson(res, 200, {
       generated_at: catalog.registry.generated_at ?? null,
       summary: summarize(catalog.registry.skills),
-      eligible: catalog.registry.skills.filter(isEligible).map((skill) => skill.id),
+      eligible: catalog.eligible.map((skill) => skill.id),
       bundles: Object.keys(catalog.registry.bundles ?? {})
     });
   }
@@ -322,14 +323,16 @@ export function createHubServer({ registry } = {}) {
   const catalog = createCatalog(registry);
   return http.createServer(async (req, res) => {
     try {
+      // DNS rebinding and cross-site requests: the Host header must name this
+      // server, and a browser Origin must be this server's own origin.
       const address = req.socket.localAddress;
-      const host = address?.includes(":") ? `[${address}]` : address;
+      const host = address?.includes(":") && !address.startsWith("::ffff:") ? `[${address}]` : address?.replace(/^::ffff:/, "");
       const authorities = new Set([`${host}:${req.socket.localPort}`]);
       if (["127.0.0.1", "::1", "::ffff:127.0.0.1"].includes(address)) {
         for (const name of ["localhost", "127.0.0.1", "[::1]"]) authorities.add(`${name}:${req.socket.localPort}`);
       }
       if (!authorities.has(req.headers.host)) return sendJson(res, 403, { error: "untrusted_host" });
-      if (req.headers.origin !== undefined && ![...authorities].some(authority => req.headers.origin === `http://${authority}`)) return sendJson(res, 403, { error: "untrusted_origin" });
+      if (req.headers.origin !== undefined && ![...authorities].some((authority) => req.headers.origin === `http://${authority}`)) return sendJson(res, 403, { error: "untrusted_origin" });
       const url = new URL(req.url, "http://localhost");
       if (req.method === "OPTIONS") {
         return sendJson(res, 204, undefined, {
@@ -345,11 +348,15 @@ export function createHubServer({ registry } = {}) {
         try {
           message = JSON.parse(await readBody(req));
         } catch (error) {
-          if (error.status) return sendJson(res, error.status, { error: error.message });
+          if (error.status) {
+            // Stop reading an oversized body once the 413 has been sent.
+            res.on("finish", () => req.destroy());
+            return sendJson(res, error.status, { error: error.message }, { connection: "close" });
+          }
           return sendJson(res, 400, rpcError(null, -32700, "Parse error"));
         }
         if (Array.isArray(message)) return sendJson(res, 400, rpcError(null, -32600, "Batch requests are not supported"));
-        const response = handleMcpMessage(catalog, message);
+        const response = handleSafely(catalog, message);
         return response ? sendJson(res, 200, response) : sendJson(res, 202, undefined);
       }
       if (req.method !== "GET" && req.method !== "HEAD") {
@@ -363,17 +370,30 @@ export function createHubServer({ registry } = {}) {
 }
 
 // MCP stdio transport: one JSON-RPC message per line on stdin and stdout.
+// A failure while handling a valid request is an internal error for that
+// request id, never a parse error the client cannot correlate.
+function handleSafely(catalog, message) {
+  try {
+    return handleMcpMessage(catalog, message);
+  } catch {
+    const id = message?.id;
+    return id === undefined || id === null ? null : rpcError(id, -32603, "Internal error");
+  }
+}
+
 export function runStdioServer({ registry, input = process.stdin, output = process.stdout } = {}) {
   const catalog = createCatalog(registry);
   const lines = readline.createInterface({ input, crlfDelay: Infinity });
   lines.on("line", (line) => {
     if (!line.trim()) return;
-    let response;
+    let message;
     try {
-      response = handleMcpMessage(catalog, JSON.parse(line));
+      message = JSON.parse(line);
     } catch {
-      response = rpcError(null, -32700, "Parse error");
+      output.write(JSON.stringify(rpcError(null, -32700, "Parse error")) + "\n");
+      return;
     }
+    const response = handleSafely(catalog, message);
     if (response) output.write(JSON.stringify(response) + "\n");
   });
   return new Promise((resolve) => lines.on("close", resolve));

@@ -1,0 +1,59 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "wshobson/event-store-design",
+  "source": {
+    "repo": "wshobson/agents",
+    "path": "plugins/backend-development/skills/event-store-design",
+    "revision": "156b7a5e7a8b93642628a339ee4039c925b34c7f"
+  },
+  "review": {
+    "path": "catalog/reviews/wshobson__event-store-design.json",
+    "sha256": "355382042f3362b18cbc7fb7205cc43f6a9aa25f82286fc0bcfc320638ea6b19"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "low",
+    "capabilities": {
+      "shell": false,
+      "network": false,
+      "credentials": false,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "filesystem-write",
+        "line": 77,
+        "evidence": "delete",
+        "context": "- **Don't update or delete events** - They're immutable facts",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 16665
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "f89abb55d9f073f38f1703e4518f0613c788c6174be7f13b8dfe48a1c076c746",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/details.md",
+      "sha256": "485be108607252e1a7ba2948c5c81c4ee7573c9b5386e7a62f98a5f0f0c1ec51",
+      "bytes": 11449,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "66bcb9ad668a029829ad5b573457f61ebb987018dc4d60023352fac8cd5d5400",
+      "bytes": 4148,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 16665
+}

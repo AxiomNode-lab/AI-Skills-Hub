@@ -1,0 +1,310 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "aaron-seo/geo-content-optimizer",
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "aaron-he-zhu/aaron-marketing-skills",
+    "path": "seo-geo/implement/geo-content-optimizer",
+    "revision": "cc897fa9e1e3136eb6a301130e49d8d9d1c519b2"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "seo-geo/implement/geo-content-optimizer",
+    "url": "https://api.github.com/repos/aaron-he-zhu/aaron-marketing-skills/git/trees/cc897fa9e1e3136eb6a301130e49d8d9d1c519b2?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "Apache-2.0",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/aaron-he-zhu/aaron-marketing-skills/blob/cc897fa9e1e3136eb6a301130e49d8d9d1c519b2/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "seo-geo",
+        "seo-geo/implement",
+        "seo-geo/implement/geo-content-optimizer"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the Apache-2.0 license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares Apache-2.0 (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the Apache-2.0 notice condition; no NOTICE file exists, so section 4(d) adds no attribution text, and no file is modified.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "low",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": false,
+      "network": false,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md and references/ai-citation-patterns.md, ai-overview-recovery.md, geo-optimization-techniques.md, instructions-detail.md, medium-github-surfaces.md, quotable-content-examples.md in full. Rewrites or audits content for citation readiness in AI answer engines (definitions, sourced quotable statements, Q&A/tables, FAQ schema matching visible content) and reports a before/after GEO score; includes an AI Overview recovery playbook.",
+      "Reads the user's own memory/entities/<slug>.md when present and otherwise reports DONE_WITH_CONCERNS (SKILL.md:40); saves to memory/content/ only on user confirmation (SKILL.md:84). SKILL.md:56 suggests an optional keyless probe `python3 \"${CLAUDE_PLUGIN_ROOT}/scripts/connectors/tavily.py\" search ...`; the script is not part of this skill and will not ship, so the skill falls back to asking the user for queries and engine observations (SKILL.md:52). No installs or credentials.",
+      "Guidance is evidence-bounded and non-deceptive: schema must match visible content and self-assigned ratings are called spam (ai-overview-recovery.md:76-80), Medium republishing uses canonical tags (medium-github-surfaces.md:14-21). medium-github-surfaces.md:12,48,62-63 attribute patterns to an unnamed 'source skill'; the text reads as paraphrase, not a verbatim copy, so not excluded on that basis. Non-shipping optional pointers: ../../../references/entity-geo-handoff-schema.md, skill-contract.md, measurement-protocol.md, humanizer-slop.md, llms-txt-okf.md, platforms/*.md, ../../../CONNECTORS.md, ../../../scripts/connectors/README.md, ../../../../protocol/entity-registry/SKILL.md, and sibling skills."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "664cd12e1c315650bf14cb1385359d13d4724ac03940ac10918390ef78e4f5e7",
+      "bytes": 11347,
+      "mode": "100644",
+      "git_blob": "41889521f7dedb506da3ce1c9998b78965e45e6e",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root Apache-2.0 license, attached to carry its terms and notices.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 3,
+          "evidence": "http://",
+          "context": "                        http://www.apache.org/licenses/",
+          "disposition": "accepted",
+          "reason": "License text."
+        },
+        {
+          "type": "network-access",
+          "line": 195,
+          "evidence": "http://",
+          "context": "       http://www.apache.org/licenses/LICENSE-2.0",
+          "disposition": "accepted",
+          "reason": "License text."
+        }
+      ]
+    },
+    {
+      "path": "references/ai-citation-patterns.md",
+      "sha256": "647875902b7fa6b42583a5bdf29b31af54d1a233d9594d8e6fa62cec70fb1b45",
+      "bytes": 10799,
+      "mode": "100644",
+      "git_blob": "cac0dc205106ec020a0622286c2f958cd8437cde",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 18,
+          "evidence": "https://",
+          "context": "| **Google AI Overviews / AI Mode** | Supporting links come from Google Search. A page must be indexed and eligible to appear with a snippet; there is no additional technical requirement or special schema for these AI features. `Googlebot` ",
+          "disposition": "accepted",
+          "reason": "Front-matter homepage URL (SKILL.md:10,13), citation links to first-party provider documentation (Google, OpenAI, Perplexity, Anthropic, Microsoft, Brave) in ai-citation-patterns.md:18-45, and a schema.org @context in a JSON-LD template; the skill does not instruct the agent to fetch them."
+        },
+        {
+          "type": "network-access",
+          "line": 18,
+          "evidence": "https://",
+          "context": "| **Google AI Overviews / AI Mode** | Supporting links come from Google Search. A page must be indexed and eligible to appear with a snippet; there is no additional technical requirement or special schema for these AI features. `Googlebot` ",
+          "disposition": "accepted",
+          "reason": "Front-matter homepage URL (SKILL.md:10,13), citation links to first-party provider documentation (Google, OpenAI, Perplexity, Anthropic, Microsoft, Brave) in ai-citation-patterns.md:18-45, and a schema.org @context in a JSON-LD template; the skill does not instruct the agent to fetch them."
+        },
+        {
+          "type": "network-access",
+          "line": 18,
+          "evidence": "https://",
+          "context": "| **Google AI Overviews / AI Mode** | Supporting links come from Google Search. A page must be indexed and eligible to appear with a snippet; there is no additional technical requirement or special schema for these AI features. `Googlebot` ",
+          "disposition": "accepted",
+          "reason": "Front-matter homepage URL (SKILL.md:10,13), citation links to first-party provider documentation (Google, OpenAI, Perplexity, Anthropic, Microsoft, Brave) in ai-citation-patterns.md:18-45, and a schema.org @context in a JSON-LD template; the skill does not instruct the agent to fetch them."
+        },
+        {
+          "type": "network-access",
+          "line": 19,
+          "evidence": "https://",
+          "context": "| **ChatGPT Search** | `OAI-SearchBot` controls eligibility for ChatGPT search results. `GPTBot` is for content that may be used to improve foundation models. `ChatGPT-User` performs certain user-triggered visits and does not control Search",
+          "disposition": "accepted",
+          "reason": "Front-matter homepage URL (SKILL.md:10,13), citation links to first-party provider documentation (Google, OpenAI, Perplexity, Anthropic, Microsoft, Brave) in ai-citation-patterns.md:18-45, and a schema.org @context in a JSON-LD template; the skill does not instruct the agent to fetch them."
+        },
+        {
+          "type": "network-access",
+          "line": 20,
+          "evidence": "https://",
+          "context": "| **Perplexity** | `PerplexityBot` surfaces and links websites in search results. `Perplexity-User` performs user-requested fetches and generally ignores `robots.txt`. Perplexity publishes separate IP ranges and WAF guidance for both. | Con",
+          "disposition": "accepted",
+          "reason": "Front-matter homepage URL (SKILL.md:10,13), citation links to first-party provider documentation (Google, OpenAI, Perplexity, Anthropic, Microsoft, Brave) in ai-citation-patterns.md:18-45, and a schema.org @context in a JSON-LD template; the skill does not instruct the agent to fetch them."
+        },
+        {
+          "type": "network-access",
+          "line": 21,
+          "evidence": "https://",
+          "context": "| **Claude** | `Claude-SearchBot` supports search indexing, `Claude-User` supports user-directed retrieval, and `ClaudeBot` is for potential model-development use. Anthropic documents `robots.txt` controls for all three. | Configure each ag",
+          "disposition": "accepted",
+          "reason": "Front-matter homepage URL (SKILL.md:10,13), citation links to first-party provider documentation (Google, OpenAI, Perplexity, Anthropic, Microsoft, Brave) in ai-citation-patterns.md:18-45, and a schema.org @context in a JSON-LD template; the skill does not instruct the agent to fetch them."
+        },
+        {
+          "type": "network-access",
+          "line": 22,
+          "evidence": "https://",
+          "context": "| **Gemini API with Google Search grounding** | The `google_search` tool handles searching, result processing, and citation. Current API responses expose inline citation `annotations` plus `google_search_call` and `google_search_result` ste",
+          "disposition": "accepted",
+          "reason": "Front-matter homepage URL (SKILL.md:10,13), citation links to first-party provider documentation (Google, OpenAI, Perplexity, Anthropic, Microsoft, Brave) in ai-citation-patterns.md:18-45, and a schema.org @context in a JSON-LD template; the skill does not instruct the agent to fetch them."
+        },
+        {
+          "type": "network-access",
+          "line": 23,
+          "evidence": "https://",
+          "context": "| **Bing-backed Copilot Studio public-web grounding** | Microsoft's documented Copilot Studio flow uses Bing Custom Search for configured public-web knowledge sources, then performs grounding and provenance checks. Microsoft recommends site",
+          "disposition": "accepted",
+          "reason": "Front-matter homepage URL (SKILL.md:10,13), citation links to first-party provider documentation (Google, OpenAI, Perplexity, Anthropic, Microsoft, Brave) in ai-citation-patterns.md:18-45, and a schema.org @context in a JSON-LD template; the skill does not instruct the agent to fetch them."
+        },
+        {
+          "type": "network-access",
+          "line": 24,
+          "evidence": "https://",
+          "context": "| **Brave Search** | Brave documents an independent index and a crawler without a differentiated user-agent string. If a page is not crawlable by Googlebot, Brave says its crawler will not crawl it. Brave uses `noindex`, after a re-fetch, f",
+          "disposition": "accepted",
+          "reason": "Front-matter homepage URL (SKILL.md:10,13), citation links to first-party provider documentation (Google, OpenAI, Perplexity, Anthropic, Microsoft, Brave) in ai-citation-patterns.md:18-45, and a schema.org @context in a JSON-LD template; the skill does not instruct the agent to fetch them."
+        },
+        {
+          "type": "network-access",
+          "line": 36,
+          "evidence": "https://",
+          "context": "  [Google announcement](https://blog.google/products-and-platforms/products/search/original-high-quality-content-search/)",
+          "disposition": "accepted",
+          "reason": "Front-matter homepage URL (SKILL.md:10,13), citation links to first-party provider documentation (Google, OpenAI, Perplexity, Anthropic, Microsoft, Brave) in ai-citation-patterns.md:18-45, and a schema.org @context in a JSON-LD template; the skill does not instruct the agent to fetch them."
+        },
+        {
+          "type": "network-access",
+          "line": 40,
+          "evidence": "https://",
+          "context": "  [Claude web-search documentation](https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-search-tool)",
+          "disposition": "accepted",
+          "reason": "Front-matter homepage URL (SKILL.md:10,13), citation links to first-party provider documentation (Google, OpenAI, Perplexity, Anthropic, Microsoft, Brave) in ai-citation-patterns.md:18-45, and a schema.org @context in a JSON-LD template; the skill does not instruct the agent to fetch them."
+        },
+        {
+          "type": "network-access",
+          "line": 45,
+          "evidence": "https://",
+          "context": "  [Google optimization guidance](https://developers.google.com/search/docs/fundamentals/ai-optimization-guide)",
+          "disposition": "accepted",
+          "reason": "Front-matter homepage URL (SKILL.md:10,13), citation links to first-party provider documentation (Google, OpenAI, Perplexity, Anthropic, Microsoft, Brave) in ai-citation-patterns.md:18-45, and a schema.org @context in a JSON-LD template; the skill does not instruct the agent to fetch them."
+        }
+      ]
+    },
+    {
+      "path": "references/ai-overview-recovery.md",
+      "sha256": "ad778226ad40da9099ee4cedd8cf776b012d3794f0839c335b57f0ab9072cf32",
+      "bytes": 4960,
+      "mode": "100644",
+      "git_blob": "3baf6025e86fba53c57435ced5d665b5434820ba",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "references/geo-optimization-techniques.md",
+      "sha256": "a4e34d667cb801e9327512502a20ca7eebe5a4e25ae8b4d7d3e137f66fcbca93",
+      "bytes": 3456,
+      "mode": "100644",
+      "git_blob": "e3ce11656d53d4cf58d97e80f864cad018dda573",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 80,
+          "evidence": "https://",
+          "context": "  \"@context\": \"https://schema.org\",",
+          "disposition": "accepted",
+          "reason": "Front-matter homepage URL (SKILL.md:10,13), citation links to first-party provider documentation (Google, OpenAI, Perplexity, Anthropic, Microsoft, Brave) in ai-citation-patterns.md:18-45, and a schema.org @context in a JSON-LD template; the skill does not instruct the agent to fetch them."
+        }
+      ]
+    },
+    {
+      "path": "references/instructions-detail.md",
+      "sha256": "721c2e93ca425c177f12c19703e4e973160460f9f939fc4cf103e34a9f8fe32a",
+      "bytes": 4177,
+      "mode": "100644",
+      "git_blob": "ed236d7128c0a035d5fb8f34ff2f7691dfa7b591",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "references/medium-github-surfaces.md",
+      "sha256": "8b3b0e08ba06cb78e4f25feeec0762da02006a407935628ba158bf46fd6ffd18",
+      "bytes": 5888,
+      "mode": "100644",
+      "git_blob": "a81fa0c532cd5a322fa356b982b382513bdabdee",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "references/quotable-content-examples.md",
+      "sha256": "0423bc158bd2b9480315f668c3c5afe40d9a677137122f7e2f31cad44b7aeb0c",
+      "bytes": 3645,
+      "mode": "100644",
+      "git_blob": "4ba42b12aa64438db3f6f5345ebdf3f4d185fc28",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "credential-access",
+          "line": 13,
+          "evidence": "credential",
+          "context": "| Expert | Unsupported opinion | \"[Expert quote],\" says [Name], [credential]. [Research/source] supports this with [metric]. | Credential, quote, supporting evidence |",
+          "disposition": "accepted",
+          "reason": "The word 'credential' in quotable-content-examples.md:13 means an expert's professional qualification in a quote template, not a secret."
+        },
+        {
+          "type": "credential-access",
+          "line": 13,
+          "evidence": "Credential",
+          "context": "| Expert | Unsupported opinion | \"[Expert quote],\" says [Name], [credential]. [Research/source] supports this with [metric]. | Credential, quote, supporting evidence |",
+          "disposition": "accepted",
+          "reason": "The word 'credential' in quotable-content-examples.md:13 means an expert's professional qualification in a quote template, not a secret."
+        }
+      ]
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "3d5e0a6d08593ee601999572e5adcc3e421c501764da3974bbe0e564255f1162",
+      "bytes": 9338,
+      "mode": "100644",
+      "git_blob": "23073ae3ef57daa68e8a943c9ffe72f300bafa49",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 10,
+          "evidence": "https://",
+          "context": "homepage: \"https://github.com/aaron-he-zhu/aaron-marketing-skills\"",
+          "disposition": "accepted",
+          "reason": "Front-matter homepage URL (SKILL.md:10,13), citation links to first-party provider documentation (Google, OpenAI, Perplexity, Anthropic, Microsoft, Brave) in ai-citation-patterns.md:18-45, and a schema.org @context in a JSON-LD template; the skill does not instruct the agent to fetch them."
+        },
+        {
+          "type": "network-access",
+          "line": 13,
+          "evidence": "https://",
+          "context": "metadata: {\"author\": \"aaron-he-zhu\", \"version\": \"20.1.0\", \"discipline\": \"seo-geo\", \"phase\": \"implement\", \"geo-relevance\": \"high\", \"hermes\": {\"tags\": [\"marketing\", \"seo-geo\", \"implement\"], \"category\": \"seo-geo\"}, \"openclaw\": {\"emoji\": \"🔍\", ",
+          "disposition": "accepted",
+          "reason": "Front-matter homepage URL (SKILL.md:10,13), citation links to first-party provider documentation (Google, OpenAI, Perplexity, Anthropic, Microsoft, Brave) in ai-citation-patterns.md:18-45, and a schema.org @context in a JSON-LD template; the skill does not instruct the agent to fetch them."
+        }
+      ]
+    }
+  ]
+}

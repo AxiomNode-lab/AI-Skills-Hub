@@ -1,0 +1,148 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "wshobson/react-modernization",
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "wshobson/agents",
+    "path": "plugins/framework-migration/skills/react-modernization",
+    "revision": "156b7a5e7a8b93642628a339ee4039c925b34c7f"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "plugins/framework-migration/skills/react-modernization",
+    "url": "https://api.github.com/repos/wshobson/agents/git/trees/156b7a5e7a8b93642628a339ee4039c925b34c7f?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/wshobson/agents/blob/156b7a5e7a8b93642628a339ee4039c925b34c7f/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "plugins",
+        "plugins/framework-migration",
+        "plugins/framework-migration/skills",
+        "plugins/framework-migration/skills/react-modernization"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found. Code samples are short generic React patterns; codemod transforms are linked, not included. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "medium",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "dynamic_execution": true,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md and references/details.md in full. Guide for upgrading React (16 to 18), migrating class components to hooks, adopting concurrent features (createRoot, batching, transitions, Suspense), codemods, memoization/code splitting, TypeScript migration and a migration checklist.",
+      "Medium: references/details.md:9-24 has the agent run `npx jscodeshift` with transform scripts fetched from the reactjs/react-codemod `master` branch and `npx codemod`, which download and execute unpinned remote JavaScript that rewrites the user's src/ tree. Acceptable because the transforms come from the official React codemod project, run only on the user's own code for the migration they asked for, and a `--dry --print` preview is shown (details.md:21); users should review the diff or pin a commit.",
+      "No external file dependencies; references/details.md ships with the skill. Code samples are generic React patterns."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "f89abb55d9f073f38f1703e4518f0613c788c6174be7f13b8dfe48a1c076c746",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "326f0a55c96e672fedf9d807ca043c00df05ba0e",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
+      "findings": []
+    },
+    {
+      "path": "references/details.md",
+      "sha256": "29632d9c891ed3f9716fffb7592941337c12d50ec4499479440b371a6f1074fc",
+      "bytes": 4436,
+      "mode": "100644",
+      "git_blob": "7ec464f6702dcba4d0f7ba9d1cf94b075ab7f852",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 7,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "A bash block running npx jscodeshift/codemod commands over the user's src/ directory (references/details.md:7-25)."
+        },
+        {
+          "type": "network-access",
+          "line": 9,
+          "evidence": "https://",
+          "context": "npx jscodeshift -t https://raw.githubusercontent.com/reactjs/react-codemod/master/transforms/rename-unsafe-lifecycles.js src/",
+          "disposition": "accepted",
+          "reason": "jscodeshift `-t` arguments are raw.githubusercontent.com URLs of official react-codemod transforms that jscodeshift downloads and runs (details.md:9-21)."
+        },
+        {
+          "type": "network-access",
+          "line": 12,
+          "evidence": "https://",
+          "context": "npx jscodeshift -t https://raw.githubusercontent.com/reactjs/react-codemod/master/transforms/update-react-imports.js src/",
+          "disposition": "accepted",
+          "reason": "jscodeshift `-t` arguments are raw.githubusercontent.com URLs of official react-codemod transforms that jscodeshift downloads and runs (details.md:9-21)."
+        },
+        {
+          "type": "network-access",
+          "line": 15,
+          "evidence": "https://",
+          "context": "npx jscodeshift -t https://raw.githubusercontent.com/reactjs/react-codemod/master/transforms/error-boundaries.js src/",
+          "disposition": "accepted",
+          "reason": "jscodeshift `-t` arguments are raw.githubusercontent.com URLs of official react-codemod transforms that jscodeshift downloads and runs (details.md:9-21)."
+        },
+        {
+          "type": "network-access",
+          "line": 18,
+          "evidence": "https://",
+          "context": "npx jscodeshift -t https://raw.githubusercontent.com/reactjs/react-codemod/master/transforms/rename-unsafe-lifecycles.js --parser=tsx src/",
+          "disposition": "accepted",
+          "reason": "jscodeshift `-t` arguments are raw.githubusercontent.com URLs of official react-codemod transforms that jscodeshift downloads and runs (details.md:9-21)."
+        },
+        {
+          "type": "network-access",
+          "line": 21,
+          "evidence": "https://",
+          "context": "npx jscodeshift -t https://raw.githubusercontent.com/reactjs/react-codemod/master/transforms/rename-unsafe-lifecycles.js --dry --print src/",
+          "disposition": "accepted",
+          "reason": "jscodeshift `-t` arguments are raw.githubusercontent.com URLs of official react-codemod transforms that jscodeshift downloads and runs (details.md:9-21)."
+        }
+      ]
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "7787e2435f53744559f1c48a0769f17ffba48cb1e2ca4fe207cbb81b800055f1",
+      "bytes": 6815,
+      "mode": "100644",
+      "git_blob": "bf9a545b589b4ad0fb9fb0a4440f965023fe0c88",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": []
+    }
+  ]
+}

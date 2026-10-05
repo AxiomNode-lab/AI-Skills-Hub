@@ -1,0 +1,78 @@
+name: Release
+
+# Publishes @axiomnode-lab/skills-hub to npm when a GitHub release is published
+# for a tag v<version> that matches package.json. Never runs on ordinary pushes.
+# Uses npm Trusted Publishing (OIDC): configure this repository and workflow as
+# a trusted publisher for the package on npmjs.com; no NPM_TOKEN is used.
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ai-skills-hub-release
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment: npm
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+        with:
+          version: 10.4.1
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22.x
+          cache: pnpm
+          registry-url: https://registry.npmjs.org
+      - name: Use an npm version that supports trusted publishing
+        run: npm install -g npm@11
+      - run: pnpm install --frozen-lockfile
+
+      - name: Check the tag matches the package version
+        env:
+          TAG: ${{ github.event.release.tag_name }}
+        run: |
+          version=$(node -p "require('./package.json').version")
+          test "$TAG" = "v$version" || { echo "Tag $TAG does not match version $version"; exit 1; }
+
+      - run: pnpm validate-all
+      - run: pnpm verify-upstream
+      - run: pnpm e2e:package
+
+      - name: Build the package and list its contents
+        run: |
+          pnpm build:package
+          cd dist/npm
+          npm pack --dry-run
+
+      - name: Publish with provenance
+        working-directory: dist/npm
+        run: |
+          version=$(node -p "require('./package.json').version")
+          # Prereleases go to "next" once a stable version owns "latest"; until
+          # then they are "latest", so `npx @axiomnode-lab/skills-hub` resolves.
+          tag=latest
+          case "$version" in
+            *-*) npm view @axiomnode-lab/skills-hub dist-tags.latest >/dev/null 2>&1 && tag=next ;;
+          esac
+          npm publish --provenance --access public --tag "$tag"
+
+      - name: Verify the published package
+        run: |
+          version=$(node -p "require('./package.json').version")
+          for attempt in 1 2 3 4 5 6; do
+            npm view "@axiomnode-lab/skills-hub@$version" version && break
+            sleep 10
+          done
+          dir=$(mktemp -d) && cd "$dir"
+          SKILLS_HUB_NO_UPDATE_CHECK=1 npx --yes "@axiomnode-lab/skills-hub@$version" --version | grep -x "$version"
+          SKILLS_HUB_NO_UPDATE_CHECK=1 npx --yes "@axiomnode-lab/skills-hub@$version" install anthropics/frontend-design --agent codex --json
+          test -f .agents/skills/frontend-design/SKILL.md

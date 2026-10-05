@@ -1,0 +1,424 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "unitone/detection-engineering",
+  "source": {
+    "repo": "UnitOneAI/SecuritySkills",
+    "path": "skills/secops/detection-engineering",
+    "revision": "70bc259bb01abb3015ad2ad859ad5253cbf0bcab"
+  },
+  "review": {
+    "path": "catalog/reviews/unitone__detection-engineering.json",
+    "sha256": "1512eaff85f9c03001a076ce53fe4f3420dbcd9eefcdcef9e767f1fc47b105f9"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": false,
+      "encoded_content": true
+    },
+    "findings": [
+      {
+        "type": "shell-execution",
+        "line": 54,
+        "evidence": "PowerShell",
+        "context": "- [ ] **Target ATT&CK technique(s):** The specific technique or sub-technique IDs to detect (e.g., T1059.001 -- PowerShell).",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 81,
+        "evidence": "PowerShell",
+        "context": "- Technique Name:     [Command and Scripting Interpreter: PowerShell]",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 84,
+        "evidence": "PowerShell",
+        "context": "- Required Log Sources: [Sysmon EventID 1, Windows Security 4688, PowerShell 4104/4103]",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 85,
+        "evidence": "PowerShell",
+        "context": "- Sub-techniques:     [.001 PowerShell, .002 AppleScript, .003 Windows Command Shell, ...]",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 98,
+        "evidence": "PowerShell",
+        "context": "| **Behavioral pattern** | Sequence of actions characteristic of the technique | PowerShell spawning net.exe followed by nltest.exe |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 99,
+        "evidence": "PowerShell",
+        "context": "| **Anomaly from baseline** | Deviation from established normal behavior | PowerShell execution from a user who has never run PowerShell |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 99,
+        "evidence": "PowerShell",
+        "context": "| **Anomaly from baseline** | Deviation from established normal behavior | PowerShell execution from a user who has never run PowerShell |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 117,
+        "evidence": "PowerShell",
+        "context": "title: Suspicious PowerShell Encoded Command Execution",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 121,
+        "evidence": "PowerShell",
+        "context": "    Detects execution of PowerShell with encoded command-line arguments,",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 125,
+        "evidence": "https://",
+        "context": "    - https://attack.mitre.org/techniques/T1059/001/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 126,
+        "evidence": "https://",
+        "context": "    - https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_powershell_exe",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 126,
+        "evidence": "powershell",
+        "context": "    - https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_powershell_exe",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 126,
+        "evidence": "powershell",
+        "context": "    - https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_powershell_exe",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 139,
+        "evidence": "powershell",
+        "context": "            - '\\powershell.exe'",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 140,
+        "evidence": "pwsh",
+        "context": "            - '\\pwsh.exe'",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 190,
+        "evidence": "powershell",
+        "context": "| `|endswith` | Suffix match | `Image|endswith: '\\powershell.exe'` |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "encoded-content",
+        "line": 195,
+        "evidence": "Base64",
+        "context": "| `|base64offset` | Base64 encoded value match | `CommandLine|base64offset|contains: 'IEX'` |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 207,
+        "evidence": "PowerShell",
+        "context": "> Example: Detect the use of encoded PowerShell commands, which adversaries use to obfuscate malicious payloads and evade command-line logging inspection.",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 215,
+        "evidence": "PowerShell",
+        "context": "| MITRE ATT&CK Technique | T1059.001 -- Command and Scripting Interpreter: PowerShell |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 222,
+        "evidence": "powershell",
+        "context": "> Example: This detection monitors process creation events for instances of powershell.exe or pwsh.exe where the command line contains encoded command parameters (-enc, -EncodedCommand). Filters exclude known legitimate automation tools (SC",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 222,
+        "evidence": "pwsh",
+        "context": "> Example: This detection monitors process creation events for instances of powershell.exe or pwsh.exe where the command line contains encoded command parameters (-enc, -EncodedCommand). Filters exclude known legitimate automation tools (SC",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "encoded-content",
+        "line": 227,
+        "evidence": "Base64",
+        "context": "> Example: PowerShell's -EncodedCommand parameter accepts a Base64-encoded string and executes it as a command. Adversaries use this to bypass command-line logging that looks for plaintext strings like \"Invoke-Mimikatz\" or \"Net.WebClient\". ",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 227,
+        "evidence": "PowerShell",
+        "context": "> Example: PowerShell's -EncodedCommand parameter accepts a Base64-encoded string and executes it as a command. Adversaries use this to bypass command-line logging that looks for plaintext strings like \"Invoke-Mimikatz\" or \"Net.WebClient\". ",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 232,
+        "evidence": "PowerShell",
+        "context": "- **Assumption:** PowerShell process creation events are being logged (Sysmon installed or advanced audit policy enabled for process creation with command-line logging).",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 234,
+        "evidence": "PowerShell",
+        "context": "- **Blind spot:** PowerShell execution via the .NET System.Management.Automation namespace directly (no powershell.exe process).",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 234,
+        "evidence": "powershell",
+        "context": "- **Blind spot:** PowerShell execution via the .NET System.Management.Automation namespace directly (no powershell.exe process).",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 252,
+        "evidence": "PowerShell",
+        "context": "| Medium | Encoded PowerShell is a common adversary technique but also has legitimate uses. Priority should escalate to High if combined with other indicators (unusual parent process, network connection to rare domain, execution from temp d",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "encoded-content",
+        "line": 257,
+        "evidence": "Base64",
+        "context": "1. **True positive test:** Open a command prompt and execute `powershell.exe -EncodedCommand ZQBjAGgAbwAgACIAdABlAHMAdAAiAA==` (Base64 of `echo \"test\"`). Verify the alert fires.",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 257,
+        "evidence": "powershell",
+        "context": "1. **True positive test:** Open a command prompt and execute `powershell.exe -EncodedCommand ZQBjAGgAbwAgACIAdABlAHMAdAAiAA==` (Base64 of `echo \"test\"`). Verify the alert fires.",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 258,
+        "evidence": "powershell",
+        "context": "2. **True negative test:** Execute `powershell.exe -Command \"Get-Process\"` (no encoding). Verify no alert fires.",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 260,
+        "evidence": "https://",
+        "context": "4. **ATT&CK technique coverage:** Validate with atomic red team test `T1059.001` (https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1059.001/T1059.001.md).",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "encoded-content",
+        "line": 266,
+        "evidence": "Decode the encoded command:** Base64-decode the command-line argument to reveal the actual payload",
+        "context": "2. **Decode the encoded command:** Base64-decode the command-line argument to reveal the actual payload.",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 288,
+        "evidence": "https://",
+        "context": "1. Export the current ATT&CK matrix for the relevant platform (Enterprise, Cloud, ICS) from the ATT&CK Navigator (https://mitre-attack.github.io/attack-navigator/)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 420,
+        "evidence": "Credential",
+        "context": "| Credential Access | TA0006 | High -- credential dumping tools produce known signatures |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 420,
+        "evidence": "credential",
+        "context": "| Credential Access | TA0006 | High -- credential dumping tools produce known signatures |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 432,
+        "evidence": "https://",
+        "context": "- **Specification:** https://sigmahq.io/docs/guide/getting-started.html",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 433,
+        "evidence": "https://",
+        "context": "- **Rule repository:** https://github.com/SigmaHQ/sigma (4000+ community rules)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 434,
+        "evidence": "https://",
+        "context": "- **Conversion tool:** `sigma-cli` (https://github.com/SigmaHQ/sigma-cli) converts Sigma to KQL, SPL, EQL, Lucene, and other query languages",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 471,
+        "evidence": "https://",
+        "context": "**Reference:** https://blog.palantir.com/alerting-and-detection-strategy-framework-52dc33722f68",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 487,
+        "evidence": "https://",
+        "context": "A detection rule that has never been tested against a known-true-positive event provides only theoretical coverage. Use Atomic Red Team (https://github.com/redcanaryco/atomic-red-team), Caldera, or manual technique execution in a test envir",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 495,
+        "evidence": "PowerShell",
+        "context": "Overly broad or incorrect ATT&CK mappings undermine coverage analysis. A rule that detects a specific PowerShell obfuscation technique should map to T1059.001 (PowerShell) and potentially T1027 (Obfuscated Files or Information), not to the ",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 495,
+        "evidence": "PowerShell",
+        "context": "Overly broad or incorrect ATT&CK mappings undermine coverage analysis. A rule that detects a specific PowerShell obfuscation technique should map to T1059.001 (PowerShell) and potentially T1027 (Obfuscated Files or Information), not to the ",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 523,
+        "evidence": "https://",
+        "context": "1. **MITRE ATT&CK Enterprise Matrix v16** -- https://attack.mitre.org/matrices/enterprise/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 524,
+        "evidence": "https://",
+        "context": "2. **MITRE ATT&CK Techniques** -- https://attack.mitre.org/techniques/enterprise/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 525,
+        "evidence": "https://",
+        "context": "3. **MITRE ATT&CK Navigator** -- https://mitre-attack.github.io/attack-navigator/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 526,
+        "evidence": "https://",
+        "context": "4. **Sigma Rule Specification** -- https://sigmahq.io/docs/guide/getting-started.html",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 527,
+        "evidence": "https://",
+        "context": "5. **SigmaHQ Rule Repository** -- https://github.com/SigmaHQ/sigma",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 528,
+        "evidence": "https://",
+        "context": "6. **sigma-cli Conversion Tool** -- https://github.com/SigmaHQ/sigma-cli",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 529,
+        "evidence": "https://",
+        "context": "7. **pySigma Documentation** -- https://sigmahq-pysigma.readthedocs.io/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 530,
+        "evidence": "https://",
+        "context": "8. **Palantir Alerting and Detection Strategy Framework** -- https://blog.palantir.com/alerting-and-detection-strategy-framework-52dc33722f68",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 531,
+        "evidence": "https://",
+        "context": "9. **Atomic Red Team** -- https://github.com/redcanaryco/atomic-red-team",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 532,
+        "evidence": "https://",
+        "context": "10. **MITRE Cyber Analytics Repository (CAR)** -- https://car.mitre.org/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 533,
+        "evidence": "https://",
+        "context": "11. **Detection Engineering Maturity Model** -- Kyle Bailey, https://kyle-bailey.medium.com/detection-engineering-maturity-matrix-f4f3181a5cc7",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 534,
+        "evidence": "https://",
+        "context": "12. **Sigma Rule Creation Guide (SigmaHQ)** -- https://sigmahq.io/docs/guide/rules.html",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 31441
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "66eb5ec637cc578833ddcbc870dbf46c6718fd83e985fad5f0f5cf30d60cf47d",
+      "bytes": 1067,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "1af9442bef64f5097ff9b7988e1486040aaa55e543bed21c1ab918b5e3e2978e",
+      "bytes": 30374,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 31441
+}
