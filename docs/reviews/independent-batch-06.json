@@ -137,7 +137,7 @@
     {
       "id": "microsoft/azure-keyvault-keys-rust",
       "decision": "release",
-      "decision_reason": "No blocking license, dependency, or security finding was confirmed. Material operational/security caveats are retained as evidence; release state remains unchanged.",
+      "decision_reason": "No blocking license, dependency, or security finding was confirmed. Material operational/security caveats are retained as evidence; release state remains unchanged. SUPERSEDED by the correction below: treating the four-byte DEK as merely illustrative was incorrect.",
       "risk": "medium",
       "source": {
         "repo": "microsoft/skills",
@@ -301,6 +301,44 @@
           "attached": false
         }
       ]
+    }
+  ],
+  "corrections": [
+    {
+      "id": "microsoft/azure-keyvault-keys-rust",
+      "corrected_on": "2026-10-05",
+      "supersedes": "Original Batch 06 release decision for this skill.",
+      "decision": "hold",
+      "hold_reason": "unsafe-four-byte-dek-example",
+      "risk": "high",
+      "evidence": [
+        "SKILL.md:157 labels the value a symmetric data encryption key (DEK).",
+        "SKILL.md:159 uses `let dek = random::<u32>().to_le_bytes().to_vec();`; u32 is 32 bits and to_le_bytes() returns exactly four bytes.",
+        "SKILL.md:161-170 immediately wraps those bytes with the RSA KEK, so the value is presented as the DEK in the claimed envelope-encryption workflow.",
+        "NIST FIPS 197 §6.1 permits AES key lengths of 128, 192, or 256 bits; 32 bits is not a valid AES key.",
+        "Microsoft Learn Azure data-encryption-at-rest guidance describes the DEK in its envelope-encryption hierarchy as a symmetric AES-256 key.",
+        "The example is therefore unusable as an AES DEK as written and can mislead an agent/user into deploying only 32 bits of purported encryption-key material."
+      ],
+      "primary_guidance": [
+        {
+          "source": "NIST FIPS 197, Advanced Encryption Standard (AES), §6.1",
+          "url": "https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.197-upd1.pdf",
+          "finding": "AES uses 128-, 192-, or 256-bit keys."
+        },
+        {
+          "source": "Microsoft Learn, Azure data encryption at rest — envelope encryption with a key hierarchy",
+          "url": "https://learn.microsoft.com/en-us/azure/security/fundamentals/encryption-atrest",
+          "finding": "Azure describes the DEK in this model as a symmetric AES-256 key."
+        }
+      ],
+      "remediation": "Keep this individual skill on hold without modifying vendored upstream bytes. Re-review a corrected immutable upstream artifact before release.",
+      "provenance_preserved": {
+        "repo": "microsoft/skills",
+        "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038",
+        "path": ".github/plugins/azure-sdk-rust/skills/azure-keyvault-keys-rust",
+        "skill_sha256": "24e1f152af7ecb5dbb37a84456b596c1ebc78773b9e1f1e32e4b223931a9a2c0",
+        "git_blob": "46c85d4db9dc67761ca7b143d6c52af524c5f379"
+      }
     }
   ]
 }

@@ -158,3 +158,22 @@ test("held skills keep their review record but ship no files and are refused by 
   assert.notEqual(result.status, 0, result.stdout);
   assert.equal(fs.existsSync(path.join(cwd, ".agents")), false);
 });
+
+
+test("azure-keyvault-keys-rust remains held for the four-byte DEK example", () => {
+  const skill = registry.skills.find(skill => skill.id === "microsoft/azure-keyvault-keys-rust");
+  assert.ok(skill);
+  assert.equal(skill.distribution, "review-required");
+  assert.equal(skill.release?.status, "hold");
+  assert.deepEqual(skill.release?.reasons, ["unsafe-four-byte-dek-example"]);
+  assert.equal(skill.release?.evidence, "docs/reviews/independent-batch-06.json");
+  assert.equal(skill.materialized, false);
+  assert.equal(skill.materialized_root, undefined);
+  assert.equal(fs.existsSync("skills/microsoft/azure-keyvault-keys-rust"), false);
+  assert.equal(fs.existsSync("catalog/materialized-manifests/microsoft__azure-keyvault-keys-rust.json"), false);
+  const boundReview = JSON.parse(fs.readFileSync("catalog/reviews/microsoft__azure-keyvault-keys-rust.json", "utf8"));
+  assert.equal(boundReview.content_review.status, "blocked");
+  assert.equal(boundReview.content_review.risk, "high");
+  assert.equal(boundReview.content_review.blocking_findings[0]?.line, 159);
+  assert.match(boundReview.content_review.blocking_findings[0]?.evidence ?? "", /random::<u32>/);
+});

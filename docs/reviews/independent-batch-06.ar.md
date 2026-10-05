@@ -33,3 +33,12 @@
 ## أثر الدفعة
 
 تم ربط هذه الخمس فقط بـbatch 06 وإعادة حساب summary من بيانات المصفوفة؛ لم تتغير أي release state أو skill bytes أو catalog/manifest/lockfile.
+
+
+## تصحيح قرار `azure-keyvault-keys-rust` — يلغي القرار الأصلي
+
+القرار الأصلي في Batch 06 كان `release` رغم تسجيل مشكلة `SKILL.md:159`. بعد إعادة التقييم، هذا القرار **مُلغى ومُستبدل بـ `hold` لهذه المهارة وحدها**.
+
+الدليل قابل لإعادة الإنتاج: `SKILL.md:157` يسمي القيمة صراحةً symmetric DEK، و`SKILL.md:159` ينشئ `u32` ثم `to_le_bytes()`، أي **4 bytes = 32 bits**، وبعدها `:161-170` يمرر هذه القيمة مباشرة إلى عملية wrap بالـKEK. NIST FIPS 197 §6.1 يحدد مفاتيح AES بـ128/192/256 bits، وMicrosoft Learn تصف DEK في نموذج Azure envelope encryption بأنه symmetric AES-256 key. لذلك القيمة ليست AES DEK صالحًا كما هو موصوف، ونسخ المثال بواسطة agent قد ينتج workflow غير قابل للاستخدام مع AES أو key material بفضاء 32-bit ضعيف جدًا.
+
+السبب المسجل للـhold: `unsafe-four-byte-dek-example`. لم نعدل `SKILL.md` أو revision أو upstream bytes؛ أزيلت النسخة materialized من الإصدار إلى أن يتوفر artifact upstream مصحح عند revision immutable جديد وتتم مراجعته. القرارات الأربع الأخرى في Batch 06 لم تتغير.
