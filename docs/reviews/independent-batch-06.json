@@ -1,0 +1,306 @@
+{
+  "schema_version": "0.1",
+  "review": "independent-batch-06",
+  "reviewed_on": "2026-10-05",
+  "reviewer": "AI-assisted independent instruction review on PR #11, reading every distributed file in full and checking immutable upstream Git identity; not legal advice, a human security certification, or a task-performance evaluation",
+  "scope": "Exactly five currently eligible microsoft/skills artifacts that had no additional independent-batch evidence before batch 06.",
+  "method": [
+    "Read AGENTS.md, docs/LICENSE-POLICY.md, docs/QUALITY-GATES.md, the reconciliation matrix, and independent-batch-05 JSON/Arabic report before reviewing this batch.",
+    "Read every distributed file for each selected skill in full (SKILL.md and attached LICENSE.txt), plus its catalog review and materialized manifest.",
+    "Queried the complete, non-truncated microsoft/skills Git tree at immutable revision 84d8eaa8ae95930f55cdceb3e27196c795dab038. Each selected upstream subtree contains exactly one 100644 SKILL.md; upstream Git blob and byte count match the distributed file. The root MIT LICENSE blob matches the attached LICENSE.txt.",
+    "Cross-checked the recorded SHA-256 values between review and materialized manifest and bound them to matching Git blob/byte identity. Local `git` upstream verification could not run because the execution container cannot resolve github.com; final GitHub `verify-upstream` CI is therefore required before treating upstream verification as complete.",
+    "Checked the pinned tree for LICENSE/COPYING/NOTICE files at the repository root and along each ancestor path, and read the root MIT license. No applicable nested override or third-party notice was found.",
+    "Semantically separated agent-executed commands/tool lookups from sample application code. Recorded package installs, network/authentication, payload/key display, resource/message mutations, permissions, missing dependencies and external references."
+  ],
+  "automatic_checks": [
+    "Pinned upstream recursive-tree completeness and Git blob/mode/byte comparison through the GitHub connector.",
+    "Review/manifest SHA-256 and inventory consistency cross-check.",
+    "Final-head repository CI is expected to run pnpm validate-all, Linux verify-upstream and package E2E, with Windows/Linux CI and CodeQL/Dependency Audit/Secret Scan."
+  ],
+  "not_tested": [
+    "No Azure login, M365/Copilot Studio login, token acquisition or live cloud call was performed.",
+    "No Event Hub event, Queue Storage message, Key Vault key/certificate or M365 conversation was created, sent, received, modified, signed or deleted.",
+    "No Rust/TypeScript sample was compiled or executed; no cargo/npm dependency installation from these skills was performed.",
+    "No behavioral benchmark, task-performance comparison, legal certification or human security certification was performed."
+  ],
+  "skills": [
+    {
+      "id": "microsoft/azure-eventhub-rust",
+      "decision": "release",
+      "decision_reason": "No blocking license, dependency, or security finding was confirmed. Material operational/security caveats are retained as evidence; release state remains unchanged.",
+      "risk": "medium",
+      "source": {
+        "repo": "microsoft/skills",
+        "path": ".github/plugins/azure-sdk-rust/skills/azure-eventhub-rust",
+        "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+      },
+      "agent_capabilities": {
+        "shell": true,
+        "network": true,
+        "credentials": true,
+        "package_install": true,
+        "filesystem_write": true,
+        "dynamic_execution": false,
+        "encoded_content": false
+      },
+      "agent_instructions": "The agent is directly told to add Rust dependencies with cargo and may run clippy. Authentication, Event Hub producer/consumer construction, send/batch-send and receive loops are sample application code; following those samples causes authenticated network traffic to the user's Event Hubs namespace.",
+      "evidence": [
+        "SKILL.md:23 links the official azure-sdk publisher and rejects unofficial crates.",
+        "SKILL.md:28 instructs unpinned `cargo add azure_messaging_eventhubs azure_identity tokio futures`; SKILL.md:157 reinforces cargo-based dependency changes.",
+        "SKILL.md:61-70 application sample obtains DeveloperToolsCredential and opens a ProducerClient against the named Event Hub.",
+        "SKILL.md:80 sends one event; SKILL.md:86-90 builds and sends a batch. If adopted/run, these mutate the user's Event Hub stream by publishing data.",
+        "SKILL.md:101-110 opens an authenticated ConsumerClient; SKILL.md:123-146 receives from a partition and prints received event bodies to stdout. Event payloads can contain sensitive application data, so users should not treat the println as safe for production logs.",
+        "SKILL.md:166 recommends `cargo clippy -- -D warnings` when lint-clean output is expected."
+      ],
+      "out_of_package_references": [],
+      "license": "Repository-root MIT at microsoft/skills@84d8eaa8ae95930f55cdceb3e27196c795dab038. The pinned recursive tree is non-truncated and shows no LICENSE/COPYING/NOTICE on the ancestor path to this skill. Distributed LICENSE.txt is the same 1140-byte 100644 Git blob 79656060de00aa4659ad2c276d5be8830664d544 with recorded SHA-256 d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb. Full SKILL.md review found no third-party copyright/license notice.",
+      "sample_accuracy_notes": [
+        "No credential value is printed or embedded. DeveloperToolsCredential uses the user's existing developer identity; RBAC roles are explicitly documented.",
+        "The received event body is displayed by sample code. This is not a credential leak by itself, but following it can log sensitive message content.",
+        "The shipped file is sufficient as reference guidance for send/receive once dependencies, Azure identity, namespace and hub already exist; it does not provision those Azure resources."
+      ],
+      "files": [
+        {
+          "path": "LICENSE.txt",
+          "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+          "bytes": 1140,
+          "mode": "100644",
+          "git_blob": "79656060de00aa4659ad2c276d5be8830664d544",
+          "attached": true
+        },
+        {
+          "path": "SKILL.md",
+          "sha256": "ebfc903a96b4aa25c2ef83021ef90e02306ce56cf01943244f4bc3f4f3980278",
+          "bytes": 6859,
+          "mode": "100644",
+          "git_blob": "39e8ddaaa38e6c4e94757250eb26ef2e29ef763d",
+          "attached": false
+        }
+      ]
+    },
+    {
+      "id": "microsoft/azure-keyvault-certificates-rust",
+      "decision": "release",
+      "decision_reason": "No blocking license, dependency, or security finding was confirmed. Material operational/security caveats are retained as evidence; release state remains unchanged.",
+      "risk": "medium",
+      "source": {
+        "repo": "microsoft/skills",
+        "path": ".github/plugins/azure-sdk-rust/skills/azure-keyvault-certificates-rust",
+        "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+      },
+      "agent_capabilities": {
+        "shell": true,
+        "network": true,
+        "credentials": true,
+        "package_install": true,
+        "filesystem_write": true,
+        "dynamic_execution": false,
+        "encoded_content": false
+      },
+      "agent_instructions": "The agent is told to install Rust crates. Certificate get/create/update/delete/list and cryptographic signing are application examples that use the user's Azure identity and mutate or use Key Vault resources if the generated code is run.",
+      "evidence": [
+        "SKILL.md:28 instructs unpinned `cargo add azure_security_keyvault_certificates azure_identity tokio futures`.",
+        "SKILL.md:50-61 gets a certificate using DeveloperToolsCredential and prints only the certificate ID, not private-key material.",
+        "SKILL.md:72-108 creates a self-signed certificate via a long-running operation; following the sample creates a persistent Key Vault certificate.",
+        "SKILL.md:119-123 updates certificate properties; SKILL.md:129 deletes the named certificate. Both mutate the user's vault when run.",
+        "SKILL.md:139-142 lists certificate names.",
+        "SKILL.md:154-185 signs a SHA-256 placeholder digest through Key Vault Keys and prints the resulting signature. A signature is not the private key, but it may be sensitive protocol/application output and should be logged only intentionally.",
+        "The signing example imports `azure_security_keyvault_keys`, but the Installation command at SKILL.md:28 does not install that crate; therefore the shipped instructions are incomplete for the claimed signing workflow until the user adds the missing dependency.",
+        "SKILL.md:205 directs cargo-based dependency management; SKILL.md:213 recommends clippy when required."
+      ],
+      "out_of_package_references": [],
+      "license": "Repository-root MIT at microsoft/skills@84d8eaa8ae95930f55cdceb3e27196c795dab038. The pinned recursive tree is non-truncated and shows no LICENSE/COPYING/NOTICE on the ancestor path to this skill. Distributed LICENSE.txt is the same 1140-byte 100644 Git blob 79656060de00aa4659ad2c276d5be8830664d544 with recorded SHA-256 d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb. Full SKILL.md review found no third-party copyright/license notice.",
+      "sample_accuracy_notes": [
+        "No private key, client secret, token, or certificate private material is printed by the examples.",
+        "Create/update/delete are explicit resource mutations and require Key Vault permissions; RBAC roles are stated.",
+        "Dependency omission for the signing subsection is concrete but localized and discoverable from the import; treated as a completeness defect, not a redistribution/security blocker."
+      ],
+      "files": [
+        {
+          "path": "LICENSE.txt",
+          "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+          "bytes": 1140,
+          "mode": "100644",
+          "git_blob": "79656060de00aa4659ad2c276d5be8830664d544",
+          "attached": true
+        },
+        {
+          "path": "SKILL.md",
+          "sha256": "f98f25489aec42b2fd43856ad9766982a35d9ec39d28a7d51f4bc3b29ffd1f1e",
+          "bytes": 7869,
+          "mode": "100644",
+          "git_blob": "5f12b3391b353becfa8a42a142097f63290ce3ea",
+          "attached": false
+        }
+      ]
+    },
+    {
+      "id": "microsoft/azure-keyvault-keys-rust",
+      "decision": "release",
+      "decision_reason": "No blocking license, dependency, or security finding was confirmed. Material operational/security caveats are retained as evidence; release state remains unchanged.",
+      "risk": "medium",
+      "source": {
+        "repo": "microsoft/skills",
+        "path": ".github/plugins/azure-sdk-rust/skills/azure-keyvault-keys-rust",
+        "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+      },
+      "agent_capabilities": {
+        "shell": true,
+        "network": true,
+        "credentials": true,
+        "package_install": true,
+        "filesystem_write": true,
+        "dynamic_execution": false,
+        "encoded_content": false
+      },
+      "agent_instructions": "The agent is told to install Rust crates. Key retrieval, create/update/delete/list and wrap/unwrap are application examples; running them uses the user's Azure identity and can create, mutate, delete or perform cryptographic operations with Key Vault keys.",
+      "evidence": [
+        "SKILL.md:28 instructs unpinned `cargo add azure_security_keyvault_keys azure_identity tokio futures`.",
+        "SKILL.md:50-59 gets a key and prints `key.key`. That structure represents key material returned by the service (normally public key parameters for asymmetric keys, not the HSM private key), so following the example can still disclose key metadata/public material into logs.",
+        "SKILL.md:71-91 creates an EC key; SKILL.md:102-106 updates key properties; SKILL.md:112 deletes a key. These are persistent Key Vault mutations if run.",
+        "SKILL.md:122-125 lists key names.",
+        "SKILL.md:136-184 creates an RSA KEK, generates a DEK, wraps it, then unwraps it. The example's `random::<u32>()` produces only 32 bits before converting to bytes; that is illustrative and is not adequate production-strength DEK generation.",
+        "SKILL.md:207 directs cargo-based dependency changes; SKILL.md:214 recommends clippy when required."
+      ],
+      "out_of_package_references": [],
+      "license": "Repository-root MIT at microsoft/skills@84d8eaa8ae95930f55cdceb3e27196c795dab038. The pinned recursive tree is non-truncated and shows no LICENSE/COPYING/NOTICE on the ancestor path to this skill. Distributed LICENSE.txt is the same 1140-byte 100644 Git blob 79656060de00aa4659ad2c276d5be8830664d544 with recorded SHA-256 d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb. Full SKILL.md review found no third-party copyright/license notice.",
+      "sample_accuracy_notes": [
+        "The skill correctly states that Key Vault crypto operations are server-side and the private key does not leave the HSM; the get-key print should nevertheless be treated as intentional key-material/metadata logging.",
+        "The 32-bit DEK sample is a meaningful security-quality caveat: a user who copied it as a real data-encryption key would get inadequate key strength. Because the text presents it as a sample inside a wrap/unwrap demonstration rather than a production key-generation prescription, it is recorded prominently but not treated as a release blocker.",
+        "No real credentials are shipped."
+      ],
+      "files": [
+        {
+          "path": "LICENSE.txt",
+          "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+          "bytes": 1140,
+          "mode": "100644",
+          "git_blob": "79656060de00aa4659ad2c276d5be8830664d544",
+          "attached": true
+        },
+        {
+          "path": "SKILL.md",
+          "sha256": "24e1f152af7ecb5dbb37a84456b596c1ebc78773b9e1f1e32e4b223931a9a2c0",
+          "bytes": 7549,
+          "mode": "100644",
+          "git_blob": "46c85d4db9dc67761ca7b143d6c52af524c5f379",
+          "attached": false
+        }
+      ]
+    },
+    {
+      "id": "microsoft/azure-storage-queue-rust",
+      "decision": "release",
+      "decision_reason": "No blocking license, dependency, or security finding was confirmed. Material operational/security caveats are retained as evidence; release state remains unchanged.",
+      "risk": "medium",
+      "source": {
+        "repo": "microsoft/skills",
+        "path": ".github/plugins/azure-sdk-rust/skills/azure-storage-queue-rust",
+        "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+      },
+      "agent_capabilities": {
+        "shell": true,
+        "network": true,
+        "credentials": true,
+        "package_install": true,
+        "filesystem_write": true,
+        "dynamic_execution": false,
+        "encoded_content": false
+      },
+      "agent_instructions": "The agent is told to install Rust crates. Queue send/receive/delete/peek are application examples using DeveloperToolsCredential; running them makes authenticated network calls and can publish, receive, display and delete messages.",
+      "evidence": [
+        "SKILL.md:28 instructs unpinned `cargo add azure_storage_queue azure_identity azure_core tokio`; SKILL.md:158 reinforces cargo-based dependency changes.",
+        "SKILL.md:51-55 creates QueueServiceClient/QueueClient with DeveloperToolsCredential.",
+        "SKILL.md:75-90 sends `hello world`; following the sample publishes a queue message.",
+        "SKILL.md:101-107 receives messages and prints `message_text` to stdout. Real queue messages may contain sensitive application data, so copying this logging into production can disclose payloads.",
+        "SKILL.md:115-120 receives then deletes messages using ID/pop receipt; deletion is destructive and removes processed messages.",
+        "SKILL.md:127-131 peeks and prints message text without removing it.",
+        "SKILL.md:166 recommends clippy when required."
+      ],
+      "out_of_package_references": [],
+      "license": "Repository-root MIT at microsoft/skills@84d8eaa8ae95930f55cdceb3e27196c795dab038. The pinned recursive tree is non-truncated and shows no LICENSE/COPYING/NOTICE on the ancestor path to this skill. Distributed LICENSE.txt is the same 1140-byte 100644 Git blob 79656060de00aa4659ad2c276d5be8830664d544 with recorded SHA-256 d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb. Full SKILL.md review found no third-party copyright/license notice.",
+      "sample_accuracy_notes": [
+        "No credential or token is printed. Message payload logging can still expose sensitive business/application data.",
+        "The skill says it can create/manage queues, but its shipped examples do not demonstrate queue creation/deletion; they assume an existing queue. Therefore the shipped file fully demonstrates message operations but not the broader queue-resource creation claim.",
+        "RBAC roles distinguish sender, reader/contributor and message processor permissions."
+      ],
+      "files": [
+        {
+          "path": "LICENSE.txt",
+          "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+          "bytes": 1140,
+          "mode": "100644",
+          "git_blob": "79656060de00aa4659ad2c276d5be8830664d544",
+          "attached": true
+        },
+        {
+          "path": "SKILL.md",
+          "sha256": "75f05006d817cfd262462fda75d0e0a4495d90665cbf79e37f83fe7d96a68c3d",
+          "bytes": 7620,
+          "mode": "100644",
+          "git_blob": "394fb2c299773253527edcdf8f6505139edd8f27",
+          "attached": false
+        }
+      ]
+    },
+    {
+      "id": "microsoft/m365-agents-ts",
+      "decision": "release",
+      "decision_reason": "No blocking license, dependency, or security finding was confirmed. Material operational/security caveats are retained as evidence; release state remains unchanged.",
+      "risk": "medium",
+      "source": {
+        "repo": "microsoft/skills",
+        "path": ".github/plugins/azure-sdk-typescript/skills/m365-agents-ts",
+        "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+      },
+      "agent_capabilities": {
+        "shell": true,
+        "network": true,
+        "credentials": true,
+        "package_install": true,
+        "filesystem_write": false,
+        "dynamic_execution": false,
+        "encoded_content": false
+      },
+      "agent_instructions": "The agent is directly told to consult microsoft-docs MCP, confirm package versions on npm and install unpinned Microsoft packages. The TypeScript samples start an HTTP server, call Azure OpenAI, and use Copilot Studio with environment-sourced identifiers/tokens.",
+      "evidence": [
+        "SKILL.md:17-18 directs the agent to use microsoft-docs MCP for current API signatures and confirm package versions on npm; these are external network lookups.",
+        "SKILL.md:24-25 runs unpinned `npm install` for four official @microsoft/agents-* packages.",
+        "SKILL.md:31-42 declares placeholders for AZURE_API_KEY, CLIENT_SECRET and COPILOT_BEARER_TOKEN. They are not literal secrets.",
+        "SKILL.md:55-67 calls `startServer(agent)`, which starts a local HTTP server when the application is run.",
+        "SKILL.md:73-113 streams an Azure OpenAI completion. It reads AZURE_OPENAI_DEPLOYMENT_NAME; the Azure provider will also require its configured Azure credentials. The sample imports `@ai-sdk/azure` and `ai`, but neither dependency is included in SKILL.md:24-25, so the shipped installation instructions are incomplete for this workflow.",
+        "SKILL.md:145-158 reads Copilot environment/client identifiers and returns `process.env.COPILOT_BEARER_TOKEN` from the token provider to CopilotStudioClient. Following this code transmits the bearer token as authentication to the configured Copilot Studio service; it does not print the token.",
+        "SKILL.md:158-160 starts a Copilot Studio conversation, sends `Hello!`, and `console.log(reply)` displays the service reply. Replies can contain business/user content and should be logged deliberately.",
+        "SKILL.md:181-185 explicitly says to keep secrets out of source, use environment/secure stores, cache tokens, and validate invoke payloads before logging/persisting."
+      ],
+      "out_of_package_references": [
+        "`microsoft-docs` is an external skill/tool dependency requested by the 'Before implementation' step; the core samples remain readable without its files, but current-signature verification depends on that tool being available.",
+        "Reference links point to Microsoft Learn and microsoft/Agents GitHub samples; no sibling file is required."
+      ],
+      "license": "Repository-root MIT at microsoft/skills@84d8eaa8ae95930f55cdceb3e27196c795dab038. The pinned recursive tree is non-truncated and shows no LICENSE/COPYING/NOTICE on the ancestor path to this skill. Distributed LICENSE.txt is the same 1140-byte 100644 Git blob 79656060de00aa4659ad2c276d5be8830664d544 with recorded SHA-256 d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb. Full SKILL.md review found no third-party copyright/license notice.",
+      "sample_accuracy_notes": [
+        "CLIENT_SECRET is declared in the environment block but the shown samples do not consume it; COPILOT_BEARER_TOKEN is consumed by the token provider.",
+        "The missing `@ai-sdk/azure` and `ai` installs are a concrete completeness defect for the Azure OpenAI streaming sample, not a license/security blocker.",
+        "No sample logs a client secret, API key or bearer token."
+      ],
+      "files": [
+        {
+          "path": "LICENSE.txt",
+          "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+          "bytes": 1140,
+          "mode": "100644",
+          "git_blob": "79656060de00aa4659ad2c276d5be8830664d544",
+          "attached": true
+        },
+        {
+          "path": "SKILL.md",
+          "sha256": "6e4d92ab2e19baa8136419195394789218c2a9157ddd87100cf352870b379bdc",
+          "bytes": 6879,
+          "mode": "100644",
+          "git_blob": "00169cce10c70508375fc9300513a7600c7f75f8",
+          "attached": false
+        }
+      ]
+    }
+  ]
+}
