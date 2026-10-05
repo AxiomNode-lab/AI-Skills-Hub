@@ -136,7 +136,7 @@
     },
     {
       "id": "microsoft/azure-keyvault-keys-rust",
-      "decision": "release",
+      "decision": "hold",
       "decision_reason": "No blocking license, dependency, or security finding was confirmed. Material operational/security caveats are retained as evidence; release state remains unchanged. SUPERSEDED by the correction below: treating the four-byte DEK as merely illustrative was incorrect.",
       "risk": "medium",
       "source": {
@@ -186,7 +186,10 @@
           "git_blob": "46c85d4db9dc67761ca7b143d6c52af524c5f379",
           "attached": false
         }
-      ]
+      ],
+      "original_decision": "release",
+      "hold_reason": "unsafe-four-byte-dek-example",
+      "correction_note": "The original Batch 06 assessment recorded the four-byte DEK but incorrectly treated it as illustrative/non-blocking. The correction below supersedes that release conclusion while preserving the original decision in `original_decision` and the original evidence fields."
     },
     {
       "id": "microsoft/azure-storage-queue-rust",
