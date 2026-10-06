@@ -1,0 +1,202 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "microsoft/azure-ai-agents-persistent-dotnet",
+  "status": "approved",
+  "reviewed_on": "2026-10-02",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/azure-sdk-dotnet/skills/azure-ai-agents-persistent-dotnet",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": ".github/plugins/azure-sdk-dotnet/skills/azure-ai-agents-persistent-dotnet",
+    "url": "https://api.github.com/repos/microsoft/skills/git/trees/84d8eaa8ae95930f55cdceb3e27196c795dab038?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/microsoft/skills/blob/84d8eaa8ae95930f55cdceb3e27196c795dab038/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        ".github",
+        ".github/plugins",
+        ".github/plugins/azure-sdk-dotnet",
+        ".github/plugins/azure-sdk-dotnet/skills",
+        ".github/plugins/azure-sdk-dotnet/skills/azure-ai-agents-persistent-dotnet"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT License with its copyright notice, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found; frontmatter declares MIT with Microsoft as author. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "medium",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": true,
+      "network": false,
+      "credentials": false,
+      "package_install": true,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md in full (the only file). .NET reference for Azure.AI.Agents.Persistent: PersistentAgentsClient agent CRUD, threads, messages, polling and streaming runs, function calling, file search with vector stores, Bing grounding, Azure AI Search, cleanup, tool catalogue and error handling.",
+      "Medium only because SKILL.md:19-20 (and the table at SKILL.md:351-352) give `dotnet add package Azure.AI.Agents.Persistent --prerelease` and `Azure.Identity` (official NuGet packages; pre-release, unpinned). All service calls, including file upload and Delete* cleanup, are C# sample code for the user's application using DefaultAzureCredential and PROJECT_ENDPOINT; the agent is not told to call the service, read secrets, or run anything else.",
+      "Created agents, threads, vector stores and uploaded files persist server-side until the cleanup section is run. ExecuteFunction and searchConnectionId in samples are user-supplied placeholders, not bundled code."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "git_blob": "79656060de00aa4659ad2c276d5be8830664d544",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry the copyright and permission notice.",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "108f198e45b9cd7029768e149f0cd58b0ef5b58efd66ce61c0b2698f69860c26",
+      "bytes": 11875,
+      "mode": "100644",
+      "git_blob": "9c9bd87a4bf852157158e2c658218762cfd2130c",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 18,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks with the `dotnet add package` commands and an environment-variable listing with placeholder values."
+        },
+        {
+          "type": "shell-execution",
+          "line": 27,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash-fenced block listing environment variable names with placeholder values; no command is executed."
+        },
+        {
+          "type": "network-access",
+          "line": 28,
+          "evidence": "https://",
+          "context": "PROJECT_ENDPOINT=https://<resource>.services.ai.azure.com/api/projects/<project>  # Required: Azure AI project endpoint",
+          "disposition": "accepted",
+          "reason": "Placeholder Foundry project endpoint, a Microsoft Learn link in a code comment, and NuGet/Learn/GitHub reference links; nothing is fetched by instruction."
+        },
+        {
+          "type": "credential-access",
+          "line": 43,
+          "evidence": "credential",
+          "context": "var credential = new DefaultAzureCredential(",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential construction in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 46,
+          "evidence": "credential",
+          "context": "// Or use a specific credential directly in production:",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential construction in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 47,
+          "evidence": "credential",
+          "context": "// See https://learn.microsoft.com/dotnet/api/overview/azure/identity-readme?view=azure-dotnet#credential-classes",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential construction in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 47,
+          "evidence": "https://",
+          "context": "// See https://learn.microsoft.com/dotnet/api/overview/azure/identity-readme?view=azure-dotnet#credential-classes",
+          "disposition": "accepted",
+          "reason": "Placeholder Foundry project endpoint, a Microsoft Learn link in a code comment, and NuGet/Learn/GitHub reference links; nothing is fetched by instruction."
+        },
+        {
+          "type": "credential-access",
+          "line": 48,
+          "evidence": "credential",
+          "context": "// var credential = new ManagedIdentityCredential();",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential construction in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 49,
+          "evidence": "credential",
+          "context": "PersistentAgentsClient client = new(projectEndpoint, credential);",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential construction in sample code for the user's app; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 322,
+          "evidence": "Delete",
+          "context": "3. **Clean up resources** — Delete threads and agents when done",
+          "disposition": "accepted",
+          "reason": "False positive: SKILL.md:322 best-practice item about deleting threads and agents on the service when done, not local file operations."
+        },
+        {
+          "type": "network-access",
+          "line": 358,
+          "evidence": "https://",
+          "context": "| NuGet Package | https://www.nuget.org/packages/Azure.AI.Agents.Persistent |",
+          "disposition": "accepted",
+          "reason": "Placeholder Foundry project endpoint, a Microsoft Learn link in a code comment, and NuGet/Learn/GitHub reference links; nothing is fetched by instruction."
+        },
+        {
+          "type": "network-access",
+          "line": 359,
+          "evidence": "https://",
+          "context": "| API Reference | https://learn.microsoft.com/dotnet/api/azure.ai.agents.persistent |",
+          "disposition": "accepted",
+          "reason": "Placeholder Foundry project endpoint, a Microsoft Learn link in a code comment, and NuGet/Learn/GitHub reference links; nothing is fetched by instruction."
+        },
+        {
+          "type": "network-access",
+          "line": 360,
+          "evidence": "https://",
+          "context": "| GitHub Source | https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/ai/Azure.AI.Agents.Persistent |",
+          "disposition": "accepted",
+          "reason": "Placeholder Foundry project endpoint, a Microsoft Learn link in a code comment, and NuGet/Learn/GitHub reference links; nothing is fetched by instruction."
+        },
+        {
+          "type": "network-access",
+          "line": 361,
+          "evidence": "https://",
+          "context": "| Samples | https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/ai/Azure.AI.Agents.Persistent/samples |",
+          "disposition": "accepted",
+          "reason": "Placeholder Foundry project endpoint, a Microsoft Learn link in a code comment, and NuGet/Learn/GitHub reference links; nothing is fetched by instruction."
+        }
+      ]
+    }
+  ]
+}

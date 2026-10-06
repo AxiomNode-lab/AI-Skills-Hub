@@ -1,0 +1,109 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "unitone/post-incident-review",
+  "source": {
+    "repo": "UnitOneAI/SecuritySkills",
+    "path": "skills/incident-response/post-incident-review",
+    "revision": "70bc259bb01abb3015ad2ad859ad5253cbf0bcab"
+  },
+  "review": {
+    "path": "catalog/reviews/unitone__post-incident-review.json",
+    "sha256": "27311a56a10ea47c483c6548bf7558a8b9fcdd795224b601fd306b5948f6beab"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "low",
+    "capabilities": {
+      "shell": false,
+      "network": true,
+      "credentials": false,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": false,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "network-access",
+        "line": 449,
+        "evidence": "https://",
+        "context": "1. **NIST SP 800-61 Rev 2** -- Computer Security Incident Handling Guide (Section 3.4: Post-Incident Activity) -- https://csrc.nist.gov/publications/detail/sp/800-61/rev-2/final",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 450,
+        "evidence": "https://",
+        "context": "2. **NIST Cybersecurity Framework (CSF) -- Recover Function** -- https://www.nist.gov/cyberframework",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 451,
+        "evidence": "https://",
+        "context": "3. **Etsy Blameless Post-Mortem Culture** -- Allspaw, J. \"Blameless PostMortems and a Just Culture\" -- https://codeascraft.com/2012/05/22/blameless-postmortems/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 452,
+        "evidence": "https://",
+        "context": "4. **Google SRE Book -- Chapter 15: Postmortem Culture** -- https://sre.google/sre-book/postmortem-culture/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 453,
+        "evidence": "https://",
+        "context": "5. **IBM Cost of a Data Breach Report** -- https://www.ibm.com/security/data-breach",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 454,
+        "evidence": "https://",
+        "context": "6. **Mandiant M-Trends Annual Report** -- https://www.mandiant.com/m-trends",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 455,
+        "evidence": "https://",
+        "context": "7. **SANS Incident Handler's Handbook -- Lessons Learned Phase** -- https://www.sans.org/white-papers/33901/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 456,
+        "evidence": "https://",
+        "context": "8. **ISO/IEC 27035-2:2023** -- Information Security Incident Management -- Part 2: Guidelines to Plan and Prepare for Incident Response -- https://www.iso.org/standard/78974.html",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 457,
+        "evidence": "http://",
+        "context": "9. **VERIS (Vocabulary for Event Recording and Incident Sharing)** -- http://veriscommunity.net/",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 30067
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "66eb5ec637cc578833ddcbc870dbf46c6718fd83e985fad5f0f5cf30d60cf47d",
+      "bytes": 1067,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "404a6bfdd2659772c467b25f59a48ae6847c5665541a384ae90fcf2049c14b8c",
+      "bytes": 29000,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 30067
+}

@@ -1,0 +1,268 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "microsoft/azure-data-tables-py",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/azure-sdk-python/skills/azure-data-tables-py",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "review": {
+    "path": "catalog/reviews/microsoft__azure-data-tables-py.json",
+    "sha256": "4628075ab9508eed7377242b43c5ec9267c33b21d8a4597295bb07371c120fe8"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "filesystem-write",
+        "line": 32,
+        "evidence": "delete",
+        "context": "- Include cleanup/delete paths for created resources in examples.",
+        "file": "references/capabilities.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 31,
+        "evidence": "credential",
+        "context": "    async with DefaultAzureCredential() as credential:",
+        "file": "references/non-hero-scenarios.md"
+      },
+      {
+        "type": "network-access",
+        "line": 33,
+        "evidence": "https://",
+        "context": "            endpoint=\"https://<account>.table.core.windows.net\",",
+        "file": "references/non-hero-scenarios.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 35,
+        "evidence": "credential",
+        "context": "            credential=credential",
+        "file": "references/non-hero-scenarios.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 35,
+        "evidence": "credential",
+        "context": "            credential=credential",
+        "file": "references/non-hero-scenarios.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 19,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 20,
+        "evidence": "pip install",
+        "context": "pip install azure-data-tables azure-identity",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 25,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 27,
+        "evidence": "https://",
+        "context": "AZURE_STORAGE_ACCOUNT_URL=https://<account>.table.core.windows.net  # Required for Azure Storage Tables",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 30,
+        "evidence": "https://",
+        "context": "COSMOS_TABLE_ENDPOINT=https://<account>.table.cosmos.azure.com  # Required for Cosmos DB Table API",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 40,
+        "evidence": "credential",
+        "context": ">    - Production: set `AZURE_TOKEN_CREDENTIALS=prod` (or `AZURE_TOKEN_CREDENTIALS=<specific_credential>`) to constrain the credential chain to production-safe credentials.",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 43,
+        "evidence": "credential",
+        "context": ">    - Async: `async with <Client>(...) as client:` **and** `async with DefaultAzureCredential() as credential:` (from `azure.identity.aio`)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 53,
+        "evidence": "credential",
+        "context": "credential = DefaultAzureCredential(require_envvar=True)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 54,
+        "evidence": "credential",
+        "context": "# Or use a specific credential directly in production:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 55,
+        "evidence": "credential",
+        "context": "# See https://learn.microsoft.com/python/api/overview/azure/identity-readme?view=azure-python#credential-classes",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 55,
+        "evidence": "https://",
+        "context": "# See https://learn.microsoft.com/python/api/overview/azure/identity-readme?view=azure-python#credential-classes",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 56,
+        "evidence": "credential",
+        "context": "# credential = ManagedIdentityCredential()",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 58,
+        "evidence": "https://",
+        "context": "endpoint = \"https://<account>.table.core.windows.net\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 61,
+        "evidence": "credential",
+        "context": "with TableServiceClient(endpoint=endpoint, credential=credential) as service_client:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 61,
+        "evidence": "credential",
+        "context": "with TableServiceClient(endpoint=endpoint, credential=credential) as service_client:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 66,
+        "evidence": "credential",
+        "context": "with TableClient(endpoint=endpoint, table_name=\"mytable\", credential=credential) as table_client:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 66,
+        "evidence": "credential",
+        "context": "with TableClient(endpoint=endpoint, table_name=\"mytable\", credential=credential) as table_client:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 75,
+        "evidence": "delete",
+        "context": "| `TableServiceClient` | Create/delete tables, list tables |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 87,
+        "evidence": "Delete",
+        "context": "# Delete table",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 148,
+        "evidence": "Delete",
+        "context": "### Delete Entity",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 227,
+        "evidence": "credential",
+        "context": "    async with DefaultAzureCredential() as credential:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 229,
+        "evidence": "https://",
+        "context": "            endpoint=\"https://<account>.table.core.windows.net\",",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 231,
+        "evidence": "credential",
+        "context": "            credential=credential",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 231,
+        "evidence": "credential",
+        "context": "            credential=credential",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 263,
+        "evidence": "credential",
+        "context": "2. **Always use context managers for clients and async credentials.** Wrap every client in `with TableClient(...) as client:` (sync) or `async with TableClient(...) as client:` (async). For async `DefaultAzureCredential` from `azure.identit",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 12702
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/capabilities.md",
+      "sha256": "85f71185bb124f051c6c2213c12512155670d516a3270be35db032677d73e7c4",
+      "bytes": 1389,
+      "mode": "100644"
+    },
+    {
+      "path": "references/non-hero-scenarios.md",
+      "sha256": "33485310a13b17feab2f2d5e5be4cd48f6c287680a431334170dcbebb9b0682c",
+      "bytes": 1755,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "e28e8908e2a19511abab4ede57bfb967e75dba99b92b242c97c0eb23d729cc7a",
+      "bytes": 8418,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 12702
+}

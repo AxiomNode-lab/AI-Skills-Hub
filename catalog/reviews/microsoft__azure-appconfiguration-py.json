@@ -1,0 +1,314 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "microsoft/azure-appconfiguration-py",
+  "status": "approved",
+  "reviewed_on": "2026-10-02",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/azure-sdk-python/skills/azure-appconfiguration-py",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": ".github/plugins/azure-sdk-python/skills/azure-appconfiguration-py",
+    "url": "https://api.github.com/repos/microsoft/skills/git/trees/84d8eaa8ae95930f55cdceb3e27196c795dab038?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/microsoft/skills/blob/84d8eaa8ae95930f55cdceb3e27196c795dab038/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        ".github",
+        ".github/plugins",
+        ".github/plugins/azure-sdk-python",
+        ".github/plugins/azure-sdk-python/skills",
+        ".github/plugins/azure-sdk-python/skills/azure-appconfiguration-py"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT License with its copyright notice, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file; frontmatter declares license: MIT consistent with the repository-root MIT license. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "medium",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": false,
+      "package_install": true,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md, references/capabilities.md and references/non-hero-scenarios.md in full. Reference for the azure-appconfiguration Python SDK: Entra ID auth with context managers, get/set/delete/list settings, feature flags, read-only locks, snapshots, async client.",
+      "The only command is `pip install azure-appconfiguration` (line 20) for the user's project, which is why the risk is medium; it names the official Azure SDK package. All other content is sample code that runs in the user's application; the agent is not told to read, print, or transmit real secrets; samples use DefaultAzureCredential/ManagedIdentityCredential and placeholder endpoints.",
+      "Samples include state-changing service calls (set/delete settings, set_read_only, snapshots) that only run when the user's code runs. SKILL.md line 197 imports `ConfigurationSettingFilter` while references/non-hero-scenarios.md line 11 uses `ConfigurationSettingsFilter`; a minor sample inconsistency for the user to verify, not a missing file. Both reference files are inside the skill directory."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "git_blob": "79656060de00aa4659ad2c276d5be8830664d544",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry the copyright and permission notice.",
+      "findings": []
+    },
+    {
+      "path": "references/capabilities.md",
+      "sha256": "a9250ecce4162dfea5a4afa20bba138b69e8e9ebbfee88ded452cffae80bd98b",
+      "bytes": 1397,
+      "mode": "100644",
+      "git_blob": "9b454b1c449b8e497ec42bf1db4d6c4eaef0693c",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 32,
+          "evidence": "delete",
+          "context": "- Include cleanup/delete paths for created resources in examples.",
+          "disposition": "accepted",
+          "reason": "Hits are App Configuration service operations (delete_configuration_setting, removing a read-only lock) and a checklist line about cleanup paths in examples; no local file deletion."
+        }
+      ]
+    },
+    {
+      "path": "references/non-hero-scenarios.md",
+      "sha256": "b3f8c49acab1f099f06da52684490aec1eef6921bcfded032c443c83ee277343",
+      "bytes": 1621,
+      "mode": "100644",
+      "git_blob": "fe197704f325515f5de546d85084f1543aa67eee",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "credential-access",
+          "line": 40,
+          "evidence": "credential",
+          "context": "    async with DefaultAzureCredential() as credential:",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage and AZURE_TOKEN_CREDENTIALS guidance in sample code; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 43,
+          "evidence": "credential",
+          "context": "            credential=credential",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage and AZURE_TOKEN_CREDENTIALS guidance in sample code; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 43,
+          "evidence": "credential",
+          "context": "            credential=credential",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage and AZURE_TOKEN_CREDENTIALS guidance in sample code; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 55,
+          "evidence": "Delete",
+          "context": "| `delete_configuration_setting` | Delete setting |",
+          "disposition": "accepted",
+          "reason": "Hits are App Configuration service operations (delete_configuration_setting, removing a read-only lock) and a checklist line about cleanup paths in examples; no local file deletion."
+        }
+      ]
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "4ac56c42ed0d45adf51f98f4b4150290ab98c22c2f5b7fe367f8746d48e670f3",
+      "bytes": 7716,
+      "mode": "100644",
+      "git_blob": "bd07f0434d51ab1efa899c1b234e7f08a05bcab2",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 19,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Two bash fences: the pip install line (19) and a placeholder environment-variable listing (25)."
+        },
+        {
+          "type": "package-install",
+          "line": 20,
+          "evidence": "pip install",
+          "context": "pip install azure-appconfiguration",
+          "disposition": "accepted",
+          "reason": "`pip install azure-appconfiguration` (line 20) installs the official SDK package for the user's project."
+        },
+        {
+          "type": "shell-execution",
+          "line": 25,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Two bash fences: the pip install line (19) and a placeholder environment-variable listing (25)."
+        },
+        {
+          "type": "network-access",
+          "line": 26,
+          "evidence": "https://",
+          "context": "AZURE_APPCONFIGURATION_ENDPOINT=https://<name>.azconfig.io  # Required for Entra ID auth",
+          "disposition": "accepted",
+          "reason": "Placeholder endpoint https://<name>.azconfig.io and a Microsoft Learn link in a code comment; nothing tells the agent to fetch them."
+        },
+        {
+          "type": "credential-access",
+          "line": 36,
+          "evidence": "credential",
+          "context": ">    - Production: set `AZURE_TOKEN_CREDENTIALS=prod` (or `AZURE_TOKEN_CREDENTIALS=<specific_credential>`) to constrain the credential chain to production-safe credentials.",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage and AZURE_TOKEN_CREDENTIALS guidance in sample code; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 39,
+          "evidence": "credential",
+          "context": ">    - Async: `async with <Client>(...) as client:` **and** `async with DefaultAzureCredential() as credential:` (from `azure.identity.aio`)",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage and AZURE_TOKEN_CREDENTIALS guidance in sample code; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 49,
+          "evidence": "credential",
+          "context": "credential = DefaultAzureCredential(require_envvar=True)",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage and AZURE_TOKEN_CREDENTIALS guidance in sample code; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 50,
+          "evidence": "credential",
+          "context": "# Or use a specific credential directly in production:",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage and AZURE_TOKEN_CREDENTIALS guidance in sample code; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 51,
+          "evidence": "credential",
+          "context": "# See https://learn.microsoft.com/python/api/overview/azure/identity-readme?view=azure-python#credential-classes",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage and AZURE_TOKEN_CREDENTIALS guidance in sample code; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 51,
+          "evidence": "https://",
+          "context": "# See https://learn.microsoft.com/python/api/overview/azure/identity-readme?view=azure-python#credential-classes",
+          "disposition": "accepted",
+          "reason": "Placeholder endpoint https://<name>.azconfig.io and a Microsoft Learn link in a code comment; nothing tells the agent to fetch them."
+        },
+        {
+          "type": "credential-access",
+          "line": 52,
+          "evidence": "credential",
+          "context": "# credential = ManagedIdentityCredential()",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage and AZURE_TOKEN_CREDENTIALS guidance in sample code; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 56,
+          "evidence": "credential",
+          "context": "    credential=credential",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage and AZURE_TOKEN_CREDENTIALS guidance in sample code; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 56,
+          "evidence": "credential",
+          "context": "    credential=credential",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage and AZURE_TOKEN_CREDENTIALS guidance in sample code; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 97,
+          "evidence": "Delete",
+          "context": "### Delete Setting",
+          "disposition": "accepted",
+          "reason": "Hits are App Configuration service operations (delete_configuration_setting, removing a read-only lock) and a checklist line about cleanup paths in examples; no local file deletion."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 185,
+          "evidence": "Remove",
+          "context": "# Remove read-only",
+          "disposition": "accepted",
+          "reason": "Hits are App Configuration service operations (delete_configuration_setting, removing a read-only lock) and a checklist line about cleanup paths in examples; no local file deletion."
+        },
+        {
+          "type": "credential-access",
+          "line": 227,
+          "evidence": "credential",
+          "context": "    async with DefaultAzureCredential() as credential:",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage and AZURE_TOKEN_CREDENTIALS guidance in sample code; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 230,
+          "evidence": "credential",
+          "context": "            credential=credential",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage and AZURE_TOKEN_CREDENTIALS guidance in sample code; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 230,
+          "evidence": "credential",
+          "context": "            credential=credential",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage and AZURE_TOKEN_CREDENTIALS guidance in sample code; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 242,
+          "evidence": "Delete",
+          "context": "| `delete_configuration_setting` | Delete setting |",
+          "disposition": "accepted",
+          "reason": "Hits are App Configuration service operations (delete_configuration_setting, removing a read-only lock) and a checklist line about cleanup paths in examples; no local file deletion."
+        },
+        {
+          "type": "credential-access",
+          "line": 251,
+          "evidence": "credential",
+          "context": "2. **Always use context managers for clients and async credentials.** Wrap every client in `with Client(...) as client:` (sync) or `async with Client(...) as client:` (async). For async `DefaultAzureCredential` from `azure.identity.aio`, al",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage and AZURE_TOKEN_CREDENTIALS guidance in sample code; no instruction to read, print, or transmit secrets."
+        }
+      ]
+    }
+  ]
+}

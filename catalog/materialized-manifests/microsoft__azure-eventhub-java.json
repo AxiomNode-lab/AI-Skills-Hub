@@ -1,0 +1,164 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "microsoft/azure-eventhub-java",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/azure-sdk-java/skills/azure-eventhub-java",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "review": {
+    "path": "catalog/reviews/microsoft__azure-eventhub-java.json",
+    "sha256": "38b6f91db59a5bfd4632e2282fec0627cd8560f8bbd4cbe0d296328d3351f4d2"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": false,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "credential-access",
+        "line": 65,
+        "evidence": "credential",
+        "context": "            .credential(",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 154,
+        "evidence": "credential",
+        "context": "    .credential(\"<<fully-qualified-namespace>>\", \"<<event-hub-name>>\",",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 192,
+        "evidence": "credential",
+        "context": "    .credential(\"<<fully-qualified-namespace>>\", \"<<event-hub-name>>\",",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 259,
+        "evidence": "credential",
+        "context": "            .credential(new DefaultAzureCredentialBuilder().build())",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 266,
+        "evidence": "credential",
+        "context": "            .credential(\"<<fully-qualified-namespace>>\", \"<<event-hub-name>>\",",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 316,
+        "evidence": "credential",
+        "context": "    .credential(\"<<fully-qualified-namespace>>\", \"<<event-hub-name>>\",",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 363,
+        "evidence": "credential",
+        "context": "    .credential(\"<<namespace>>\", \"<<event-hub>>\",",
+        "file": "references/examples.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 54,
+        "evidence": "credential",
+        "context": "import com.azure.core.credential.TokenCredential;",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 60,
+        "evidence": "credential",
+        "context": "TokenCredential credential = new DefaultAzureCredentialBuilder()",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 63,
+        "evidence": "credential",
+        "context": "// Or use a specific credential directly in production:",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 64,
+        "evidence": "credential",
+        "context": "// See https://learn.microsoft.com/java/api/overview/azure/identity-readme?view=azure-java-stable#credential-classes",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 64,
+        "evidence": "https://",
+        "context": "// See https://learn.microsoft.com/java/api/overview/azure/identity-readme?view=azure-java-stable#credential-classes",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 65,
+        "evidence": "credential",
+        "context": "// TokenCredential credential = new ManagedIdentityCredentialBuilder().build();",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 70,
+        "evidence": "credential",
+        "context": "    .credential(credential)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 70,
+        "evidence": "credential",
+        "context": "    .credential(credential)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 349,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 25715
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/examples.md",
+      "sha256": "0d661dcc67e01dbfdc06090e02bf12e3bef80c8c9aae08274a53f5163e649b13",
+      "bytes": 13281,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "ef3200235c5e38f311fb6af505f0193166b9b2f99326cea3410c8ecc7f743255",
+      "bytes": 11294,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 25715
+}

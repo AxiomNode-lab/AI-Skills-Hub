@@ -1,0 +1,210 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "microsoft/azure-mgmt-fabric-dotnet",
+  "status": "approved",
+  "reviewed_on": "2026-10-02",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/azure-sdk-dotnet/skills/azure-mgmt-fabric-dotnet",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": ".github/plugins/azure-sdk-dotnet/skills/azure-mgmt-fabric-dotnet",
+    "url": "https://api.github.com/repos/microsoft/skills/git/trees/84d8eaa8ae95930f55cdceb3e27196c795dab038?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/microsoft/skills/blob/84d8eaa8ae95930f55cdceb3e27196c795dab038/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        ".github",
+        ".github/plugins",
+        ".github/plugins/azure-sdk-dotnet",
+        ".github/plugins/azure-sdk-dotnet/skills",
+        ".github/plugins/azure-sdk-dotnet/skills/azure-mgmt-fabric-dotnet"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT License with its copyright notice, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found; frontmatter declares MIT and NuGet/GitHub/Microsoft Learn sources are linked. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "medium",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": true,
+      "network": false,
+      "credentials": false,
+      "package_install": true,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md (the only file) in full. Guidance and C# samples for the Azure.ResourceManager.Fabric management-plane SDK: authenticating an ArmClient, creating, reading, scaling, suspending/resuming, deleting and listing Microsoft Fabric capacities, name availability, SKU listing and error handling.",
+      "Medium because SKILL.md:21-24 (and the table at SKILL.md:337-340) give `dotnet add package` commands for official NuGet packages, including a `--prerelease` Microsoft.Fabric.Api option. The ARM create/update/suspend/delete calls are sample code for the user's application, not commands the agent runs; credentials come from DefaultAzureCredential and placeholder env vars, and the skill says never to hardcode them.",
+      "Running the samples provisions billable Fabric capacity (e.g. F64/F128) and can delete it; users should confirm SKU, region and resource names. No hidden content or external file dependencies."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "git_blob": "79656060de00aa4659ad2c276d5be8830664d544",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry the copyright and permission notice.",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "88fcd541f96a973d546da7f0d06db97df5cc9b8e1a99a4790458a6ef2abbf74d",
+      "bytes": 11625,
+      "mode": "100644",
+      "git_blob": "19e5a3918fdf9d5c978a5181025a2f6a2c342645",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 21,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash fences hold `dotnet add package Azure.ResourceManager.Fabric` / `Azure.Identity` and placeholder environment variables."
+        },
+        {
+          "type": "shell-execution",
+          "line": 32,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash fences hold `dotnet add package Azure.ResourceManager.Fabric` / `Azure.Identity` and placeholder environment variables."
+        },
+        {
+          "type": "credential-access",
+          "line": 37,
+          "evidence": "secret",
+          "context": "AZURE_CLIENT_SECRET=<client-secret> # For service principal auth (optional)",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential passed to ArmClient and placeholder AZURE_CLIENT_SECRET in the env-var list; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 48,
+          "evidence": "credential",
+          "context": "var credential = new DefaultAzureCredential(",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential passed to ArmClient and placeholder AZURE_CLIENT_SECRET in the env-var list; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 51,
+          "evidence": "credential",
+          "context": "// Or use a specific credential directly in production:",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential passed to ArmClient and placeholder AZURE_CLIENT_SECRET in the env-var list; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 52,
+          "evidence": "credential",
+          "context": "// See https://learn.microsoft.com/dotnet/api/overview/azure/identity-readme?view=azure-dotnet#credential-classes",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential passed to ArmClient and placeholder AZURE_CLIENT_SECRET in the env-var list; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 52,
+          "evidence": "https://",
+          "context": "// See https://learn.microsoft.com/dotnet/api/overview/azure/identity-readme?view=azure-dotnet#credential-classes",
+          "disposition": "accepted",
+          "reason": "A Microsoft Learn link in a code comment and NuGet/GitHub/Microsoft Learn reference links; the agent is not told to fetch them."
+        },
+        {
+          "type": "credential-access",
+          "line": 53,
+          "evidence": "credential",
+          "context": "// var credential = new ManagedIdentityCredential();",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential passed to ArmClient and placeholder AZURE_CLIENT_SECRET in the env-var list; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 54,
+          "evidence": "credential",
+          "context": "var armClient = new ArmClient(credential);",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential passed to ArmClient and placeholder AZURE_CLIENT_SECRET in the env-var list; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 160,
+          "evidence": "Delete",
+          "context": "### 5. Delete Capacity",
+          "disposition": "accepted",
+          "reason": "Matches are the 'Delete Capacity' ARM sample (deletes a Fabric capacity in the user's subscription) and the pitfall 'Suspend doesn't delete'; no local file deletion."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 327,
+          "evidence": "delete",
+          "context": "2. **Suspend doesn't delete** — Suspended capacities still exist but don't bill for compute",
+          "disposition": "accepted",
+          "reason": "Matches are the 'Delete Capacity' ARM sample (deletes a Fabric capacity in the user's subscription) and the pitfall 'Suspend doesn't delete'; no local file deletion."
+        },
+        {
+          "type": "network-access",
+          "line": 344,
+          "evidence": "https://",
+          "context": "- [Azure.ResourceManager.Fabric NuGet](https://www.nuget.org/packages/Azure.ResourceManager.Fabric)",
+          "disposition": "accepted",
+          "reason": "A Microsoft Learn link in a code comment and NuGet/GitHub/Microsoft Learn reference links; the agent is not told to fetch them."
+        },
+        {
+          "type": "network-access",
+          "line": 345,
+          "evidence": "https://",
+          "context": "- [GitHub Source](https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/fabric/Azure.ResourceManager.Fabric)",
+          "disposition": "accepted",
+          "reason": "A Microsoft Learn link in a code comment and NuGet/GitHub/Microsoft Learn reference links; the agent is not told to fetch them."
+        },
+        {
+          "type": "network-access",
+          "line": 346,
+          "evidence": "https://",
+          "context": "- [Microsoft Fabric Documentation](https://learn.microsoft.com/fabric/)",
+          "disposition": "accepted",
+          "reason": "A Microsoft Learn link in a code comment and NuGet/GitHub/Microsoft Learn reference links; the agent is not told to fetch them."
+        },
+        {
+          "type": "network-access",
+          "line": 347,
+          "evidence": "https://",
+          "context": "- [Fabric Capacity Management](https://learn.microsoft.com/fabric/admin/service-admin-portal-capacity-settings)",
+          "disposition": "accepted",
+          "reason": "A Microsoft Learn link in a code comment and NuGet/GitHub/Microsoft Learn reference links; the agent is not told to fetch them."
+        }
+      ]
+    }
+  ]
+}

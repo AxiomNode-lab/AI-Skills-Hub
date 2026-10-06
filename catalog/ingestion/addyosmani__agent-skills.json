@@ -1,0 +1,1428 @@
+{
+  "schema_version": "0.2",
+  "source": {
+    "repo": "addyosmani/agent-skills",
+    "ref": "main",
+    "revision": "1401c8b8030e023baeebb31781a6653fe8e93026",
+    "revision_type": "git-commit",
+    "tree_sha": "1401c8b8030e023baeebb31781a6653fe8e93026"
+  },
+  "discovered_skills": [
+    {
+      "path": "skills/api-and-interface-design/SKILL.md",
+      "name": "api-and-interface-design",
+      "description": "Guides stable API and interface design. Use when designing APIs, module boundaries, or any public interface. Use when creating REST or GraphQL endpoints, defining type contracts between modules, or establishing boundaries between frontend and backend.",
+      "skill_sha256": "e83d34f52ff12dd8a7c5134cd7e8140ea4541ec65e204f8a1e4cd366e30c4192",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "capabilities": {
+          "shell": false,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": true,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "filesystem-write",
+            "line": 30,
+            "evidence": "remove",
+            "context": "- **Plan for deprecation at design time.** See `deprecation-and-migration` for how to safely remove things users depend on."
+          },
+          {
+            "type": "filesystem-write",
+            "line": 56,
+            "evidence": "delete",
+            "context": "  // Idempotent delete — succeeds even if already deleted"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 138,
+            "evidence": "remove",
+            "context": "// Bad: Change existing field types or remove fields"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 226,
+            "evidence": "DELETE",
+            "context": "DELETE /api/tasks/:id          → Delete a task"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 226,
+            "evidence": "Delete",
+            "context": "DELETE /api/tasks/:id          → Delete a task"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/browser-testing-with-devtools/SKILL.md",
+      "name": "browser-testing-with-devtools",
+      "description": "Tests in real browsers via Chrome DevTools MCP. Use when building or debugging anything that runs in a browser. Use when you need to inspect the DOM, capture console errors, analyze network requests, profile performance, or verify visual output with real runtime data. Requires the chrome-devtools MCP server to be configured.",
+      "skill_sha256": "4e3aacd6a380cd25bc6c2d67fdd1c926a9b22535b8a62109ecd33cefd909e3d9",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "medium",
+        "capabilities": {
+          "shell": false,
+          "network": true,
+          "credentials": true,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "credential-access",
+            "line": 88,
+            "evidence": "credential",
+            "context": "- **No credential access.** Do not use JavaScript execution to read cookies, localStorage tokens, sessionStorage secrets, or any authentication material."
+          },
+          {
+            "type": "network-access",
+            "line": 192,
+            "evidence": "http://",
+            "context": "1. Navigate to http://localhost:3000/tasks"
+          },
+          {
+            "type": "credential-access",
+            "line": 289,
+            "evidence": "Credential",
+            "context": "| \"I need to read localStorage to debug this\" | Credential material is off-limits. Inspect application state through non-sensitive variables instead. |"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": true,
+        "credentials": true,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/ci-cd-and-automation/SKILL.md",
+      "name": "ci-cd-and-automation",
+      "description": "Automates CI/CD pipeline setup. Use when setting up or modifying build and deployment pipelines. Use when you need to automate quality gates, configure test runners in CI, or establish deployment strategies.",
+      "skill_sha256": "a6ed8ed56456b01ff8314c44eefc69897d9905ae4e06bb2b7036286efb79b5f0",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "capabilities": {
+          "shell": false,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": true,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "filesystem-write",
+            "line": 227,
+            "evidence": "Remove",
+            "context": "**Flag lifecycle:** Create → Enable for testing → Canary → Full rollout → Remove the flag and dead code. Flags that live forever become technical debt — set a cleanup date when you create them."
+          },
+          {
+            "type": "filesystem-write",
+            "line": 324,
+            "evidence": "Remove",
+            "context": "│   └── Remove slow tests from the critical path, run them on a schedule instead"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": true,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/code-review-and-quality/SKILL.md",
+      "name": "code-review-and-quality",
+      "description": "Conducts multi-axis code review. Use before merging any change. Use when reviewing code written by yourself, another agent, or a human. Use when you need to assess code quality across multiple dimensions before it enters the main branch. Use when asked to review a diff or a pull request, even when the diff is pasted inline.",
+      "skill_sha256": "2db1e850379f255fd3091ef278cde24cd6c7d2ba23e360cc52ea522c40d4396e",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "capabilities": {
+          "shell": false,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": true,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "filesystem-write",
+            "line": 98,
+            "evidence": "Delete",
+            "context": "- **Delete a pass-through wrapper** that adds indirection without clarifying the API."
+          },
+          {
+            "type": "filesystem-write",
+            "line": 134,
+            "evidence": "Delete",
+            "context": "**First line:** Short, imperative, standalone. \"Delete the FizzBuzz RPC\" not \"Deleting the FizzBuzz RPC.\" Must be informative enough that someone searching history can understand the change without reading the diff."
+          },
+          {
+            "type": "filesystem-write",
+            "line": 239,
+            "evidence": "remove",
+            "context": "3. **Ask before deleting:** \"Should I remove these now-unused elements: [list]?\""
+          },
+          {
+            "type": "filesystem-write",
+            "line": 241,
+            "evidence": "delete",
+            "context": "Don't leave dead code lying around — it confuses future readers and agents. But don't silently delete things you're not sure about. When in doubt, ask."
+          },
+          {
+            "type": "filesystem-write",
+            "line": 248,
+            "evidence": "remove",
+            "context": "→ Safe to remove these?"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": true,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/code-simplification/SKILL.md",
+      "name": "code-simplification",
+      "description": "Simplifies code for clarity. Use when refactoring code for clarity without changing behavior. Use when code works but is harder to read, maintain, or extend than it should be. Use when reviewing code that has accumulated unnecessary complexity.",
+      "skill_sha256": "f0c5ed754057eb0c1e027e2587f59de816651feb5e837242296c43ea21cf621d",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "capabilities": {
+          "shell": false,
+          "network": true,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": true,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "network-access",
+            "line": 8,
+            "evidence": "https://",
+            "context": "> Inspired by the [Claude Code Simplifier plugin](https://github.com/anthropics/claude-plugins-official/blob/main/plugins/code-simplifier/agents/code-simplifier.md). Adapted here as a model-agnostic, process-driven skill for any AI coding a"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 144,
+            "evidence": "Delete",
+            "context": "| Comments explaining \"what\" | `// increment counter` above `count++` | Delete the comment — the code is clear enough |"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 152,
+            "evidence": "Remove",
+            "context": "| Dead code | Unreachable branches, unused variables, commented-out blocks | Remove (after confirming it's truly dead) |"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 155,
+            "evidence": "Remove",
+            "context": "| Redundant type assertions | Casting to a type that's already inferred | Remove the assertion |"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 305,
+            "evidence": "Remove",
+            "context": "| \"This abstraction might be useful later\" | Don't preserve speculative abstractions. If it's not used now, it's complexity without value. Remove it and re-add when needed. |"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": true,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/constraint-driven-development/SKILL.md",
+      "name": "constraint-driven-development",
+      "description": "Establishes a project's quality bar as a written contract and stops agents quietly lowering it. Interviews the user on which dimensions matter, supplies sane default thresholds when they have no number in mind, records everything in CONSTRAINTS.md, and watches the diff for a weakened bar — new @ts-ignore or eslint-disable suppressions, skipped or deleted tests, assertions stripped out, unimplemented stubs, thresholds edited down. Use when no quality bar is written down, when the user says \"set up constraints\" or \"define our standards\", when the user wants dimensions they care about — accessibility, web performance, coverage — set up as enforced constraints, when an agent keeps silencing checks or skipping tests to get to green, when you need a coverage or performance threshold and don't know what number to pick, or when an agent writes more code than anyone will read.",
+      "skill_sha256": "06479d4305f286d23cfb99f5dc85695896785269664e1f6a8d800e3b71e70c10",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "medium",
+        "capabilities": {
+          "shell": false,
+          "network": false,
+          "credentials": true,
+          "dynamic_execution": false,
+          "package_install": true,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "package-install",
+            "line": 149,
+            "evidence": "pip install",
+            "context": "| Types (Python) | mypy | `pip install mypy` | `mypy .` | any error |"
+          },
+          {
+            "type": "package-install",
+            "line": 152,
+            "evidence": "pip install",
+            "context": "| Coverage (Python) | pytest-cov | `pip install pytest-cov` | `pytest --cov --cov-report=lcov` | same |"
+          },
+          {
+            "type": "credential-access",
+            "line": 164,
+            "evidence": "secret",
+            "context": "1. **`--redact` on gitleaks is not optional.** Without it the matched secret lands in the agent's transcript, which is how a leaked key ends up in a log, a summary, or a commit message. Report the rule and the location, never the value."
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": true,
+        "dynamic_execution": false,
+        "package_install": true
+      }
+    },
+    {
+      "path": "skills/context-engineering/SKILL.md",
+      "name": "context-engineering",
+      "description": "Optimizes agent context setup. Use when starting a new session, when agent output quality degrades, when switching between tasks, or when you need to configure rules files and context for a project.",
+      "skill_sha256": "8b736cb9e55b82b265ab6ff78349c0e826e8a6df550deddf665b7fb3ff858b63",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "verified",
+        "risk": "none",
+        "capabilities": {
+          "shell": false,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": []
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": true,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/debugging-and-error-recovery/SKILL.md",
+      "name": "debugging-and-error-recovery",
+      "description": "Guides systematic root-cause debugging. Use when tests fail, builds break, something that worked yesterday broke, behavior doesn't match expectations, or you encounter any unexpected error. Use when you need to figure out what broke and why — a systematic approach to finding and fixing the root cause rather than guessing.",
+      "skill_sha256": "21f3960f5d7ae2cc95c40896545004dbbcbbd752ea65fc2d53962554d4174220",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "medium",
+        "capabilities": {
+          "shell": true,
+          "network": false,
+          "credentials": true,
+          "dynamic_execution": false,
+          "package_install": true,
+          "filesystem_write": true,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "shell-execution",
+            "line": 76,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 102,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 115,
+            "evidence": "Remove",
+            "context": "- Remove unrelated code/config until only the bug remains"
+          },
+          {
+            "type": "shell-execution",
+            "line": 158,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "package-install",
+            "line": 195,
+            "evidence": "npm install",
+            "context": "├── Dependency error → Check package.json, run npm install"
+          },
+          {
+            "type": "credential-access",
+            "line": 221,
+            "evidence": "process.env",
+            "context": "  const value = process.env[key];"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 245,
+            "evidence": "Remove",
+            "context": "Add logging only when it helps. Remove it when done."
+          },
+          {
+            "type": "filesystem-write",
+            "line": 252,
+            "evidence": "remove",
+            "context": "**When to remove it:**"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 255,
+            "evidence": "remove",
+            "context": "- It contains sensitive data (always remove these)"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": true,
+        "dynamic_execution": false,
+        "package_install": true
+      }
+    },
+    {
+      "path": "skills/deprecation-and-migration/SKILL.md",
+      "name": "deprecation-and-migration",
+      "description": "Manages deprecation and migration. Use when removing old systems, APIs, or features. Use when migrating users from one implementation to another. Use when migrating a database schema in production, such as renaming or dropping a column without downtime (expand/contract). Use when deciding whether to maintain or sunset existing code.",
+      "skill_sha256": "6a624f942e09c69863a4219b9bd5d56975026b67b0c70bc83385ffd2120b6142",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "capabilities": {
+          "shell": false,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": true,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "filesystem-write",
+            "line": 35,
+            "evidence": "remove",
+            "context": "When building something new, ask: \"How would we remove this in 3 years?\" Systems designed with clean interfaces, feature flags, and minimal surface area are easier to deprecate than systems that leak implementation details everywhere."
+          },
+          {
+            "type": "filesystem-write",
+            "line": 102,
+            "evidence": "Remove",
+            "context": "4. Remove references to the old system"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 108,
+            "evidence": "Remove",
+            "context": "### Step 4: Remove the Old System"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 114,
+            "evidence": "Remove",
+            "context": "2. Remove the code"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 115,
+            "evidence": "Remove",
+            "context": "3. Remove associated tests, documentation, and configuration"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 116,
+            "evidence": "Remove",
+            "context": "4. Remove the deprecation notices"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 124,
+            "evidence": "remove",
+            "context": "Run old and new systems in parallel. Route traffic incrementally from old to new. When the old system handles 0% of traffic, remove it."
+          },
+          {
+            "type": "filesystem-write",
+            "line": 131,
+            "evidence": "Remove",
+            "context": "Phase 5: Remove old system"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 208,
+            "evidence": "remove",
+            "context": "| \"It still works, why remove it?\" | Working code that nobody maintains accumulates security debt and complexity. Maintenance cost grows silently. |"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/documentation-and-adrs/SKILL.md",
+      "name": "documentation-and-adrs",
+      "description": "Records decisions and documentation. Use when you need to document an architecture decision (ADR) or the reasoning behind a design choice, when changing public APIs, shipping features, or when you need to record context that future engineers and agents will need to understand the codebase.",
+      "skill_sha256": "359b22460045583b0233ec3f80223459c4096b0fa513f5c29ade9c3985207d65",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "medium",
+        "capabilities": {
+          "shell": false,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": true,
+          "filesystem_write": true,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "filesystem-write",
+            "line": 99,
+            "evidence": "delete",
+            "context": "- **Don't delete old ADRs.** They capture historical context."
+          },
+          {
+            "type": "filesystem-write",
+            "line": 134,
+            "evidence": "Delete",
+            "context": "// const oldImplementation = () => { ... }  ← Delete it, git has history"
+          },
+          {
+            "type": "package-install",
+            "line": 211,
+            "evidence": "npm install",
+            "context": "2. Install dependencies: `npm install`"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": true
+      }
+    },
+    {
+      "path": "skills/doubt-driven-development/SKILL.md",
+      "name": "doubt-driven-development",
+      "description": "Subjects every non-trivial decision to a fresh-context adversarial review before it stands. Use when you want every assumption cross-examined before proceeding, when stress-testing a plan for hidden failure modes, when correctness matters more than speed, when working in unfamiliar code, when stakes are high (production auth, security-sensitive logic, a high-stakes migration, irreversible operations), or any time a confident output would be cheaper to verify now than to debug later.",
+      "skill_sha256": "6fa1fcd8420c28daf7e53c5b08b0f20b907911efd2a6d9bce0b9740da20a4008",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "capabilities": {
+          "shell": true,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "shell-execution",
+            "line": 139,
+            "evidence": "bash",
+            "context": "```bash"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": true,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/frontend-ui-engineering/SKILL.md",
+      "name": "frontend-ui-engineering",
+      "description": "Builds production-quality, accessible, responsive user-facing UIs. Use when building or modifying interfaces and pages, creating components, implementing layouts, meeting WCAG accessibility requirements, managing state, or when the output needs to look and feel production-quality rather than AI-generated.",
+      "skill_sha256": "549044e9bd8d7fe993ce8e5c0d2b0f5465650676dc15805329973f936179eb1e",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "verified",
+        "risk": "none",
+        "capabilities": {
+          "shell": false,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": []
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/git-workflow-and-versioning/SKILL.md",
+      "name": "git-workflow-and-versioning",
+      "description": "Structures git workflow practices. Use when making any code change. Use when committing, branching, resolving conflicts, splitting uncommitted work in a messy working tree into clean atomic commits, opening or reviewing a pull request (PR), pushing to a remote, or when you need to organize work across multiple parallel streams. Use when cutting a release, choosing a semantic version bump, tagging, or writing a changelog.",
+      "skill_sha256": "b7465d187935c52546d39fdc7bd6ac36d94eda25a9500ef8c18b767d2eb116ea",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "medium",
+        "capabilities": {
+          "shell": true,
+          "network": false,
+          "credentials": true,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": true,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "filesystem-write",
+            "line": 135,
+            "evidence": "Delete",
+            "context": "- Delete branches after merge"
+          },
+          {
+            "type": "shell-execution",
+            "line": 151,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 164,
+            "evidence": "remove",
+            "context": "git worktree remove ../project-feature-a"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 170,
+            "evidence": "delete",
+            "context": "- If one experiment fails, delete the worktree — nothing is lost"
+          },
+          {
+            "type": "shell-execution",
+            "line": 215,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "credential-access",
+            "line": 220,
+            "evidence": "secret",
+            "context": "git diff --staged | grep -i \"password\\|secret\\|api_key\\|token\""
+          },
+          {
+            "type": "credential-access",
+            "line": 220,
+            "evidence": "api_key",
+            "context": "git diff --staged | grep -i \"password\\|secret\\|api_key\\|token\""
+          },
+          {
+            "type": "shell-execution",
+            "line": 252,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 290,
+            "evidence": "bash",
+            "context": "```bash"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": true,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/idea-refine/SKILL.md",
+      "name": "idea-refine",
+      "description": "Refines raw ideas into sharp, actionable concepts through structured divergent and convergent thinking. Use when an idea is still vague, when you need to stress-test assumptions before committing to a plan, or when you want to expand options before converging on one. Triggers on \"ideate\", \"refine this idea\", or \"stress-test my plan\".",
+      "skill_sha256": "79e773058963adc7646b0115b4f8a4afc974c5ff95843e4ef1cafff3cb51899e",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "capabilities": {
+          "shell": true,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "shell-execution",
+            "line": 20,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 22,
+            "evidence": "bash",
+            "context": "bash skills/idea-refine/scripts/idea-refine.sh"
+          },
+          {
+            "type": "shell-execution",
+            "line": 22,
+            "evidence": "sh",
+            "context": "bash skills/idea-refine/scripts/idea-refine.sh"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": true,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/incremental-implementation/SKILL.md",
+      "name": "incremental-implementation",
+      "description": "Delivers changes incrementally in thin, verifiable slices. Use when implementing any feature or change that touches more than one file, or when picking up the next task from a plan. Use when rolling a change out behind a feature flag, when you're about to write a large amount of code at once, or when a task feels too big to land in one step.",
+      "skill_sha256": "df66536610071727feae1ca95f3c391c248ad828041750ccd3699cce763aa00b",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "medium",
+        "capabilities": {
+          "shell": false,
+          "network": false,
+          "credentials": true,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": true,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "filesystem-write",
+            "line": 60,
+            "evidence": "Delete",
+            "context": "Slice 4: Delete a task (delete + API + UI + confirmation)"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 60,
+            "evidence": "delete",
+            "context": "Slice 4: Delete a task (delete + API + UI + confirmation)"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 122,
+            "evidence": "Remove",
+            "context": "- Remove comments you don't fully understand"
+          },
+          {
+            "type": "credential-access",
+            "line": 153,
+            "evidence": "process.env",
+            "context": "const ENABLE_TASK_SHARING = process.env.FEATURE_TASK_SHARING === 'true';"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": true,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/interview-me/SKILL.md",
+      "name": "interview-me",
+      "description": "Extracts what the user actually wants instead of what they think they should want. Achieves this through one-question-at-a-time interview until ~95% confidence about the underlying intent. Use when an ask is underspecified (\"build me X\" without \"for whom\" or \"why now\"), when the user explicitly invokes (\"interview me\", \"grill me\", \"are we sure?\", \"stress-test my thinking\"), or when you catch yourself silently filling in ambiguous requirements before any plan, spec, or code exists.",
+      "skill_sha256": "ace4b675999bb504593d572e0f73f3d7e803ad6fddf318445598c82c11939db2",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "verified",
+        "risk": "none",
+        "capabilities": {
+          "shell": false,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": []
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/observability-and-instrumentation/SKILL.md",
+      "name": "observability-and-instrumentation",
+      "description": "Instruments code so production behavior is visible and diagnosable. Use when adding logging, metrics, tracing, or alerting. Use when shipping any feature that runs in production and you need evidence it works. Use when production issues are reported but you can't tell what happened from the available data.",
+      "skill_sha256": "e7fcb0820306d46268de9594d676ad98e35040858926c412b7000faa52a61f87",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "medium",
+        "capabilities": {
+          "shell": false,
+          "network": false,
+          "credentials": true,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": true,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "credential-access",
+            "line": 101,
+            "evidence": "process.env",
+            "context": "// CLI invocation        -> runLog('cli', process.env.RUN_ID ?? crypto.randomUUID())"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 167,
+            "evidence": "delete",
+            "context": "1. **It must be actionable.** If the response is \"ignore it, it self-heals\", delete the alert."
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": true,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/performance-optimization/SKILL.md",
+      "name": "performance-optimization",
+      "description": "Optimizes application performance across frontend, backend, queries, and databases. Use when performance requirements exist, when you suspect performance regressions, when Core Web Vitals or load times need improvement, when N+1 query patterns need fixing, or when profiling reveals bottlenecks.",
+      "skill_sha256": "665a83a7218d6aebd02ca329a7b2422cf28f7c55cb56f870c05e12047770245c",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "capabilities": {
+          "shell": true,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "shell-execution",
+            "line": 48,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 62,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 204,
+            "evidence": "bash",
+            "context": "```bash"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/planning-and-task-breakdown/SKILL.md",
+      "name": "planning-and-task-breakdown",
+      "description": "Breaks work into ordered tasks. Use when you have a spec or clear requirements and need to break work into implementable tasks. Use when a task feels too large to start, when you need to estimate scope, or when parallel work is possible.",
+      "skill_sha256": "ed0f90cc5951ddd4bcab7f871f64efec93a49af9279ef93bc470da77ad8da3f7",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "capabilities": {
+          "shell": false,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": true,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "filesystem-write",
+            "line": 153,
+            "evidence": "delete",
+            "context": "- Different work → **stop and ask.** The unchecked tasks may be mid-build in another session. Do not delete, overwrite, or rename the existing files on your own; present the conflict and let the user decide (finish the old plan first, expli"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 155,
+            "evidence": "delete",
+            "context": "The same rule applies to an external task list target: never bulk-close or delete another plan's open tracker items to make room for new ones."
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/security-and-hardening/SKILL.md",
+      "name": "security-and-hardening",
+      "description": "Hardens code against vulnerabilities. Use when auditing an input handler for vulnerabilities, when handling user input, authentication, data storage, or external integrations, or when checking a login flow is safe against the OWASP Top Ten. Use when building any feature that accepts untrusted data, manages user sessions, or interacts with third-party services. Use when auditing dependencies for known vulnerabilities, triaging package-manager audit findings, or assessing supply-chain risk in a new package. Use when personal data or privacy compliance (GDPR, CCPA) is involved.",
+      "skill_sha256": "2e3fc60eed5aba97fe416f3f3c9317fdb014a682925ec70a733c3ff99e4b9858",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "high",
+        "capabilities": {
+          "shell": false,
+          "network": true,
+          "credentials": true,
+          "dynamic_execution": true,
+          "package_install": false,
+          "filesystem_write": true,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "credential-access",
+            "line": 10,
+            "evidence": "secret",
+            "context": "Security-first development practices for web applications. Treat every external input as hostile, every secret as sacred, and every authorization check as mandatory. Security isn't a phase — it's a constraint on every line of code that touc"
+          },
+          {
+            "type": "dynamic-execution",
+            "line": 71,
+            "evidence": "eval(",
+            "context": "- **Never use `eval()` or `innerHTML`** with user-provided data"
+          },
+          {
+            "type": "credential-access",
+            "line": 89,
+            "evidence": "secret",
+            "context": "- Hash passwords with bcrypt (≥12 rounds), scrypt, or argon2. The session secret comes from the environment, never from code."
+          },
+          {
+            "type": "filesystem-write",
+            "line": 117,
+            "evidence": "delete",
+            "context": "A delete, move, or overwrite is only as safe as the value naming its target, and trust follows who *wrote* that value, not which channel delivered it: another process's command line is as attacker-controlled as a form field. A shape check p"
+          },
+          {
+            "type": "credential-access",
+            "line": 129,
+            "evidence": "secret",
+            "context": "Secrets come from the environment. `.env.example` is committed with placeholders; real `.env*` files and key material are gitignored; grep the staged diff before committing. **A secret that reaches a remote is compromised the moment it land"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 148,
+            "evidence": "delete",
+            "context": "- **Set retention up front, then actually delete.** Every personal-data store needs a TTL and a working deletion path, including backups, caches, search indexes, and analytics copies."
+          },
+          {
+            "type": "filesystem-write",
+            "line": 149,
+            "evidence": "delete",
+            "context": "- **Support the data-subject rights your jurisdiction requires** (GDPR, CCPA, and kin): export, correct, delete. Design the schema so a user's data is findable and erasable, not smeared irreversibly across systems."
+          },
+          {
+            "type": "network-access",
+            "line": 156,
+            "evidence": "https://",
+            "context": "Calling an LLM — chatbots, summarizers, agents, RAG — adds a new attack surface; map it to the [OWASP Top 10 for LLM Applications (2025)](https://genai.owasp.org/llm-top-10/):"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 187,
+            "evidence": "delete",
+            "context": "- A delete, move, or overwrite whose target comes from a payload, a config value, or another process's command line, guarded only by a shape check on the path"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 199,
+            "evidence": "Delete",
+            "context": "- \"Delete my account\" that only flips a flag while the personal data lingers in stores and backups"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": true,
+        "credentials": true,
+        "dynamic_execution": true,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/shipping-and-launch/SKILL.md",
+      "name": "shipping-and-launch",
+      "description": "Prepares production launches. Use when preparing to deploy to production, or when asking what needs to be in place before shipping. Use when you need a pre-launch checklist, when setting up monitoring, when planning a staged rollout, or when you need a rollback strategy.",
+      "skill_sha256": "1055d25dfe6cfeb6ae31eba3e2328fd0e7c66b285f0e44c40f67c77a59813281",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "capabilities": {
+          "shell": false,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": true,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "filesystem-write",
+            "line": 101,
+            "evidence": "Remove",
+            "context": "5. CLEAN UP                 → Remove flag and dead code path after full rollout"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": true,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/source-driven-development/SKILL.md",
+      "name": "source-driven-development",
+      "description": "Grounds every implementation decision in official documentation. Use when you want to verify an approach against the official docs before implementing it, or when you want authoritative, source-cited code free from outdated patterns. Use when building with any framework or library where correctness matters.",
+      "skill_sha256": "c59faf851377f0eeda45306398d16eb96d77ab1c2fd3e1a7fb58e9a0af33c1e9",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "capabilities": {
+          "shell": false,
+          "network": true,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "network-access",
+            "line": 149,
+            "evidence": "https://",
+            "context": "// Source: https://react.dev/reference/react/useActionState#usage"
+          },
+          {
+            "type": "network-access",
+            "line": 160,
+            "evidence": "https://",
+            "context": "Source: https://react.dev/blog/2024/12/05/react-19#actions"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": true,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/spec-driven-development/SKILL.md",
+      "name": "spec-driven-development",
+      "description": "Creates specs before coding. Use when starting a new project, feature, or significant change and no specification exists yet. Use when drafting a PRD or requirements document with objectives and scope, or when requirements are unclear, ambiguous, or only exist as a vague idea. Use when a single requirement spans several independently testable capabilities and needs decomposing into a capability map of modules before specifying.",
+      "skill_sha256": "c4b97ce3d7f24be0e67fd612c7595f65504872e3a9f8d338d098b2363fdb66ef",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "capabilities": {
+          "shell": false,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": true,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "filesystem-write",
+            "line": 113,
+            "evidence": "remove",
+            "context": "   - **Never do:** Commit secrets, edit vendor directories, remove failing tests without approval"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": true,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/test-driven-development/SKILL.md",
+      "name": "test-driven-development",
+      "description": "Drives development with tests using the red-green-refactor loop. Use when implementing any logic, fixing any bug, or changing any behavior. Use when you need to prove that code works, when a bug report arrives, or when you're about to modify existing functionality.",
+      "skill_sha256": "7c0c6ac057c19d7f8be65d9f49c3a638703b868f4625c78b70da5439d5d74fca",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "capabilities": {
+          "shell": false,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": true,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "filesystem-write",
+            "line": 91,
+            "evidence": "Remove",
+            "context": "- Remove duplication"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": true,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/using-agent-skills/SKILL.md",
+      "name": "using-agent-skills",
+      "description": "Discovers and invokes agent skills. Use when starting a session, or when you need to decide which skill or workflow applies to the piece of work at hand. This is the meta-skill that governs how all other skills are discovered and invoked.",
+      "skill_sha256": "30787ef2c77bf1a4729fffed0f6523ba6fcbe81bdc436b36371b78c21394d3c3",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "capabilities": {
+          "shell": false,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": true,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "filesystem-write",
+            "line": 102,
+            "evidence": "Remove",
+            "context": "- Remove comments you don't understand"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 105,
+            "evidence": "Delete",
+            "context": "- Delete code that seems unused without explicit approval"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 189,
+            "evidence": "Remove",
+            "context": "| Ship | deprecation-and-migration | Remove old systems and migrate users safely |"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    }
+  ],
+  "license_files": [
+    {
+      "path": "LICENSE",
+      "sha256": "6f202f8bd568cd730dbb2b0d1f8e243bc74c2fa1f64dbce9b2c7ea08bd5c9fd7",
+      "preview": "MIT License Copyright (c) 2025 Addy Osmani Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal"
+    }
+  ],
+  "warnings": [
+    {
+      "path": "skills/constraint-driven-development/SKILL.md",
+      "type": "review-signal",
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": true,
+        "dynamic_execution": false,
+        "package_install": true
+      }
+    },
+    {
+      "path": "skills/debugging-and-error-recovery/SKILL.md",
+      "type": "review-signal",
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": true,
+        "dynamic_execution": false,
+        "package_install": true
+      }
+    },
+    {
+      "path": "skills/documentation-and-adrs/SKILL.md",
+      "type": "review-signal",
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": true
+      }
+    },
+    {
+      "path": "skills/security-and-hardening/SKILL.md",
+      "type": "review-signal",
+      "capabilities": {
+        "shell": false,
+        "network": true,
+        "credentials": true,
+        "dynamic_execution": true,
+        "package_install": false
+      }
+    }
+  ]
+}

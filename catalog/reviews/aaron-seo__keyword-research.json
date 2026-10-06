@@ -1,0 +1,176 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "aaron-seo/keyword-research",
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "aaron-he-zhu/aaron-marketing-skills",
+    "path": "seo-geo/survey/keyword-research",
+    "revision": "cc897fa9e1e3136eb6a301130e49d8d9d1c519b2"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "seo-geo/survey/keyword-research",
+    "url": "https://api.github.com/repos/aaron-he-zhu/aaron-marketing-skills/git/trees/cc897fa9e1e3136eb6a301130e49d8d9d1c519b2?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "Apache-2.0",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/aaron-he-zhu/aaron-marketing-skills/blob/cc897fa9e1e3136eb6a301130e49d8d9d1c519b2/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "seo-geo",
+        "seo-geo/survey",
+        "seo-geo/survey/keyword-research"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the Apache-2.0 license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares Apache-2.0 (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the Apache-2.0 notice condition; no NOTICE file exists, so section 4(d) adds no attribution text, and no file is modified.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "low",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": false,
+      "network": false,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md and references/example-report.md, instructions-detail.md, keyword-intent-taxonomy.md, keyword-prioritization-framework.md, topic-cluster-templates.md in full. Eight-phase keyword research workflow (scope, discover, variations, intent classification, opportunity scoring, GEO check, pillar/cluster grouping, delivery) with strict evidence labelling and no invented metrics.",
+      "Writes markdown under the user's memory/ directory (SKILL.md:32-36,97). SKILL.md:48-52 suggest optional keyless helpers `python3 \"${CLAUDE_PLUGIN_ROOT}/scripts/connectors/suggest.py|firecrawl.py|pageviews.py\"` (Google Autocomplete flagged as an unofficial endpoint, Firecrawl free tier, Wikipedia pageviews); none of these scripts ship with this skill, so those steps are unavailable and the skill falls back to user-provided seeds and metrics (SKILL.md:46). No installs or credentials.",
+      "~~SEO tool and ~~search console are optional; without them volume/difficulty are marked Unknown/Estimated rather than invented (SKILL.md:69). SKILL.md:85 notes the Impact x Confidence lens was 'adapted from an external SEO-ops competitive analysis' — a short, paraphrased scoring idea, not copied text. Non-shipping optional pointers: ../../../references/skill-contract.md (handoff shape), ../../../CONNECTORS.md, ../../../scripts/connectors/README.md, ../../evaluate/performance-monitor/references/evidence-and-cycle-control.md, and sibling skills."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "664cd12e1c315650bf14cb1385359d13d4724ac03940ac10918390ef78e4f5e7",
+      "bytes": 11347,
+      "mode": "100644",
+      "git_blob": "41889521f7dedb506da3ce1c9998b78965e45e6e",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root Apache-2.0 license, attached to carry its terms and notices.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 3,
+          "evidence": "http://",
+          "context": "                        http://www.apache.org/licenses/",
+          "disposition": "accepted",
+          "reason": "License text."
+        },
+        {
+          "type": "network-access",
+          "line": 195,
+          "evidence": "http://",
+          "context": "       http://www.apache.org/licenses/LICENSE-2.0",
+          "disposition": "accepted",
+          "reason": "License text."
+        }
+      ]
+    },
+    {
+      "path": "references/example-report.md",
+      "sha256": "40214f13ab403309a65c07b510f0335c808f9ece427587d327c106b13c65e7de",
+      "bytes": 3710,
+      "mode": "100644",
+      "git_blob": "3c0a0f495a21aef319bd9b8be8a4197b728c6290",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "references/instructions-detail.md",
+      "sha256": "fcbf70ef164650fec1d914408f0b6f62e9a66ffd565891a8857b88a0fcd7826f",
+      "bytes": 4658,
+      "mode": "100644",
+      "git_blob": "b7e501753300d1d4741d8c22f169fb94998ce353",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "references/keyword-intent-taxonomy.md",
+      "sha256": "762f9919aba2e2837c4b860e931c14389486f19bedd539f4165a600e462549df",
+      "bytes": 4582,
+      "mode": "100644",
+      "git_blob": "478bebafe77bd5565cffd13b2af70f694106bff3",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "references/keyword-prioritization-framework.md",
+      "sha256": "e1cc7c3b8c1f8c32a0c8adc0a2870e20c622c8a8997f1b61fec8d66ac8a28d0e",
+      "bytes": 1930,
+      "mode": "100644",
+      "git_blob": "aa7025b7d2ef88f646290ac5d75126d652d8bc14",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "references/topic-cluster-templates.md",
+      "sha256": "0da2b2baa789f0fd02e29299b16af3fa87a6160c12086944654883e3c1e836aa",
+      "bytes": 4304,
+      "mode": "100644",
+      "git_blob": "9437d813b626d27e967e13cd0e5383b1049f93f5",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "2b47555b8ce9f6a05499bc065e1cf41b9c558f039dc237efe07cee53a8c976b9",
+      "bytes": 8693,
+      "mode": "100644",
+      "git_blob": "f725848147eb889603aa6962fc1084d20c305d8d",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 10,
+          "evidence": "https://",
+          "context": "homepage: \"https://github.com/aaron-he-zhu/aaron-marketing-skills\"",
+          "disposition": "accepted",
+          "reason": "Only the upstream homepage URL in front-matter metadata (SKILL.md:10,13); no instruction to fetch it."
+        },
+        {
+          "type": "network-access",
+          "line": 13,
+          "evidence": "https://",
+          "context": "metadata: {\"author\": \"aaron-he-zhu\", \"version\": \"20.1.0\", \"discipline\": \"seo-geo\", \"phase\": \"survey\", \"geo-relevance\": \"medium\", \"hermes\": {\"tags\": [\"marketing\", \"seo-geo\", \"survey\"], \"category\": \"seo-geo\"}, \"openclaw\": {\"emoji\": \"🔍\", \"hom",
+          "disposition": "accepted",
+          "reason": "Only the upstream homepage URL in front-matter metadata (SKILL.md:10,13); no instruction to fetch it."
+        }
+      ]
+    }
+  ]
+}

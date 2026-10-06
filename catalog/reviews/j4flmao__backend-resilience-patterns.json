@@ -1,0 +1,194 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "j4flmao/backend-resilience-patterns",
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "j4flmao/agent-skills",
+    "path": "skills/backend/universal/resilience-patterns",
+    "revision": "d9f812988c8926767ee96f66c1a340d65b595799"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "skills/backend/universal/resilience-patterns",
+    "url": "https://api.github.com/repos/j4flmao/agent-skills/git/trees/d9f812988c8926767ee96f66c1a340d65b595799?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/j4flmao/agent-skills/blob/d9f812988c8926767ee96f66c1a340d65b595799/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "skills",
+        "skills/backend",
+        "skills/backend/universal",
+        "skills/backend/universal/resilience-patterns"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "low",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": false,
+      "network": false,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md and references/retry-backoff-strategies.md, resilience-cache.md, bulkhead-patterns.md, resilience-testing.md, timeout-retry-patterns.md, circuit-breaker-patterns.md, fallback-strategies.md, resilience4j-guide.md in full. Teaches timeouts, retry with exponential backoff and jitter, per-dependency circuit breakers, bulkheads, fallbacks, and their composition, with samples for Node (opossum), Resilience4j, Polly, and Python.",
+      "No commands, installs, credentials, or network access by the agent; outputs are config snippets and code for the user's service. Guidance is sound (idempotency keys before retrying, no retry on 4xx, cap retries, per-dependency breakers).",
+      "Quality caveats: SKILL.md:546-669 is generic boilerplate appended after the References/Handoff section (duplicate Implementation Patterns/Anti-Patterns/Rules headers, code blocks fenced with single backticks at SKILL.md:549-582); sample snippets have small gaps (bulkhead-patterns.md:47 calls an undefined drain(), resilience-cache.md:20-39 is illustrative). SKILL.md:373 hands off to an optional `openapi-documentation` skill that is not bundled."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "b6b8d73f01a48d1411da29d8196e2d85cd91cc9e8d7ae6ac4863ae7e06e6d314",
+      "bytes": 1064,
+      "mode": "100644",
+      "git_blob": "0e8b6e6d8678128ebfcc28d7cad91fa9ed7f2354",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
+      "findings": []
+    },
+    {
+      "path": "references/bulkhead-patterns.md",
+      "sha256": "f9b0d80948b5d46c5940c31588ed9bc89e34d70298373cb3ee0bbfdbbf96e4dd",
+      "bytes": 2943,
+      "mode": "100644",
+      "git_blob": "41f8d537d05f7214ee7c9201c9070dddb1a5f4e1",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "references/circuit-breaker-patterns.md",
+      "sha256": "e050d8e389f6e9e1c9741136f4369c534e11f4ae4f67d5846a094a52cb509f9f",
+      "bytes": 5965,
+      "mode": "100644",
+      "git_blob": "2940333ffaf1488e56b2617cafd28019881bd6a9",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "references/fallback-strategies.md",
+      "sha256": "300728a74efe79fb9614d29599c5579fb0eb12be457c5040ef43fff91a1f9f9d",
+      "bytes": 3822,
+      "mode": "100644",
+      "git_blob": "3771150d36291f3a9127fbe951dd98a5ca9b4680",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "references/resilience-cache.md",
+      "sha256": "67cd3fc0e41a18b077e8b4fae85e2f56b82c968fb5f47ac2d13c2ed6a857efdc",
+      "bytes": 4617,
+      "mode": "100644",
+      "git_blob": "470fcbb451657ffc5791d58f327142a34f834e4e",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 148,
+          "evidence": "delete",
+          "context": "        this.degradedKeys.delete(key);",
+          "disposition": "accepted",
+          "reason": "Matches are in-memory Set/Map .delete() calls in sample code (resilience-cache.md:148, SKILL.md:560); no files are written or deleted."
+        }
+      ]
+    },
+    {
+      "path": "references/resilience-testing.md",
+      "sha256": "d00e4cadb7523f0ef3d863e37103cc682f1ffd5acf8efc7ba0931b2a59c8e64c",
+      "bytes": 5130,
+      "mode": "100644",
+      "git_blob": "e1e64d15ed2f377d7cc94a2a196c9a66439202aa",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "references/resilience4j-guide.md",
+      "sha256": "575bb9c184ec57337ff14e05a6b59959085fb1328e86eaffa98bee4b8831ca90",
+      "bytes": 4057,
+      "mode": "100644",
+      "git_blob": "5cd7d0a758ac52b59ee42930a08da7100b3c18dc",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "references/retry-backoff-strategies.md",
+      "sha256": "43e86f72e27a5050d3e775113b2ef35c44d7d121f901b6b0fdfa04459ecd22ec",
+      "bytes": 4122,
+      "mode": "100644",
+      "git_blob": "de16300f1676d46251980264e690d85cb371e2c0",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "references/timeout-retry-patterns.md",
+      "sha256": "b46444171fa43340e59ee1519d48246cd48022d7f71ddd6c7a84ac882beb968f",
+      "bytes": 6856,
+      "mode": "100644",
+      "git_blob": "a7e1951ecfb968d74daddad4e3b1fc304232cb76",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "b786dccf6b5a6bfbafb9bfc1728cdeabc47c29a4b0be479de55cd913d3c11c8c",
+      "bytes": 25827,
+      "mode": "100644",
+      "git_blob": "d8fe861b365d5a7a128914d6f8ea66ffc020576b",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 560,
+          "evidence": "delete",
+          "context": "    this.observers.delete(observer);",
+          "disposition": "accepted",
+          "reason": "Matches are in-memory Set/Map .delete() calls in sample code (resilience-cache.md:148, SKILL.md:560); no files are written or deleted."
+        }
+      ]
+    }
+  ]
+}

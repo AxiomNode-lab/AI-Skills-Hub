@@ -1,0 +1,490 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "microsoft/azure-storage-queue-py",
+  "status": "approved",
+  "reviewed_on": "2026-10-02",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/azure-sdk-python/skills/azure-storage-queue-py",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": ".github/plugins/azure-sdk-python/skills/azure-storage-queue-py",
+    "url": "https://api.github.com/repos/microsoft/skills/git/trees/84d8eaa8ae95930f55cdceb3e27196c795dab038?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/microsoft/skills/blob/84d8eaa8ae95930f55cdceb3e27196c795dab038/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        ".github",
+        ".github/plugins",
+        ".github/plugins/azure-sdk-python",
+        ".github/plugins/azure-sdk-python/skills",
+        ".github/plugins/azure-sdk-python/skills/azure-storage-queue-py"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT License with its copyright notice, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file; front matter declares license: MIT with Microsoft as author. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "medium",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": true,
+      "network": false,
+      "credentials": false,
+      "package_install": true,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md, references/non-hero-scenarios.md and references/capabilities.md in full. Python guide to azure-storage-queue: DefaultAzureCredential clients, queue create/list/delete, send/receive/peek/update/delete messages, clearing queues, metadata, the async client, and binary Base64 message policies.",
+      "Medium only because SKILL.md:20 has `pip install azure-storage-queue azure-identity` (official Microsoft packages, unpinned). All queue operations are sample code for the user's application against their own storage account; credentials come from DefaultAzureCredential with placeholder account URLs, with no instruction for the agent to read or transmit secrets.",
+      "Samples include destructive service calls (delete_queue at SKILL.md:75, clear_messages at SKILL.md:169) that users should guard. SKILL.md:157-162 swallows processing exceptions with `pass`, whereas references/non-hero-scenarios.md:32-38 re-raises; the latter is the safer pattern. The async sample at SKILL.md:192 does not close its credential, contrary to the skill's own rule (fixed in non-hero-scenarios.md:68)."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "git_blob": "79656060de00aa4659ad2c276d5be8830664d544",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry the copyright and permission notice.",
+      "findings": []
+    },
+    {
+      "path": "references/capabilities.md",
+      "sha256": "a5d7c3fb5e84b54acbe547f78f2777f4e34f643fff973ab9691909c8f5b64235",
+      "bytes": 1861,
+      "mode": "100644",
+      "git_blob": "af6e9c29da61074750001a8ac07aaf2dbda00a69",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 18,
+          "evidence": "Delete",
+          "context": "- `Delete Message`: Dedicated example and implementation notes.  ",
+          "disposition": "accepted",
+          "reason": "Hits are Azure Queue service operations (delete_queue, delete_message, clear_messages), section headings and a checklist item about cleanup, not local file operations."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 19,
+          "evidence": "delete",
+          "context": "  See: [`non-hero-scenarios.md#delete-message`](non-hero-scenarios.md#delete-message)",
+          "disposition": "accepted",
+          "reason": "Hits are Azure Queue service operations (delete_queue, delete_message, clear_messages), section headings and a checklist item about cleanup, not local file operations."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 19,
+          "evidence": "delete",
+          "context": "  See: [`non-hero-scenarios.md#delete-message`](non-hero-scenarios.md#delete-message)",
+          "disposition": "accepted",
+          "reason": "Hits are Azure Queue service operations (delete_queue, delete_message, clear_messages), section headings and a checklist item about cleanup, not local file operations."
+        },
+        {
+          "type": "encoded-content",
+          "line": 26,
+          "evidence": "Base64",
+          "context": "- `Base64 Encoding`: Dedicated example and implementation notes.  ",
+          "disposition": "accepted",
+          "reason": "Refers to the SDK's BinaryBase64EncodePolicy/DecodePolicy for binary queue messages; no encoded payload is embedded in the skill."
+        },
+        {
+          "type": "encoded-content",
+          "line": 27,
+          "evidence": "base64",
+          "context": "  See: [`non-hero-scenarios.md#base64-encoding`](non-hero-scenarios.md#base64-encoding)",
+          "disposition": "accepted",
+          "reason": "Refers to the SDK's BinaryBase64EncodePolicy/DecodePolicy for binary queue messages; no encoded payload is embedded in the skill."
+        },
+        {
+          "type": "encoded-content",
+          "line": 27,
+          "evidence": "base64",
+          "context": "  See: [`non-hero-scenarios.md#base64-encoding`](non-hero-scenarios.md#base64-encoding)",
+          "disposition": "accepted",
+          "reason": "Refers to the SDK's BinaryBase64EncodePolicy/DecodePolicy for binary queue messages; no encoded payload is embedded in the skill."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 38,
+          "evidence": "delete",
+          "context": "- Include cleanup/delete paths for created resources in examples.",
+          "disposition": "accepted",
+          "reason": "Hits are Azure Queue service operations (delete_queue, delete_message, clear_messages), section headings and a checklist item about cleanup, not local file operations."
+        }
+      ]
+    },
+    {
+      "path": "references/non-hero-scenarios.md",
+      "sha256": "baff50197077731400be53613caec9687ebabcfe3e06d6adb3abf249d6fbdc20",
+      "bytes": 2634,
+      "mode": "100644",
+      "git_blob": "c4a37422cd249708f6f7629095c8aca386801d3c",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 26,
+          "evidence": "Delete",
+          "context": "## Delete Message",
+          "disposition": "accepted",
+          "reason": "Hits are Azure Queue service operations (delete_queue, delete_message, clear_messages), section headings and a checklist item about cleanup, not local file operations."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 29,
+          "evidence": "Delete",
+          "context": "# Delete after successful processing",
+          "disposition": "accepted",
+          "reason": "Hits are Azure Queue service operations (delete_queue, delete_message, clear_messages), section headings and a checklist item about cleanup, not local file operations."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 44,
+          "evidence": "Delete",
+          "context": "# Delete all messages",
+          "disposition": "accepted",
+          "reason": "Hits are Azure Queue service operations (delete_queue, delete_message, clear_messages), section headings and a checklist item about cleanup, not local file operations."
+        },
+        {
+          "type": "credential-access",
+          "line": 68,
+          "evidence": "credential",
+          "context": "    async with DefaultAzureCredential() as credential:",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential (sync and aio) and ManagedIdentityCredential in sample code; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 70,
+          "evidence": "https://",
+          "context": "            account_url=\"https://<account>.queue.core.windows.net\",",
+          "disposition": "accepted",
+          "reason": "Placeholder queue account URLs and a Microsoft Learn link in a code comment; the agent is not told to fetch them."
+        },
+        {
+          "type": "credential-access",
+          "line": 72,
+          "evidence": "credential",
+          "context": "            credential=credential",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential (sync and aio) and ManagedIdentityCredential in sample code; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 72,
+          "evidence": "credential",
+          "context": "            credential=credential",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential (sync and aio) and ManagedIdentityCredential in sample code; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "encoded-content",
+          "line": 86,
+          "evidence": "Base64",
+          "context": "## Base64 Encoding",
+          "disposition": "accepted",
+          "reason": "Refers to the SDK's BinaryBase64EncodePolicy/DecodePolicy for binary queue messages; no encoded payload is embedded in the skill."
+        },
+        {
+          "type": "credential-access",
+          "line": 95,
+          "evidence": "credential",
+          "context": "    credential=credential,",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential (sync and aio) and ManagedIdentityCredential in sample code; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 95,
+          "evidence": "credential",
+          "context": "    credential=credential,",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential (sync and aio) and ManagedIdentityCredential in sample code; no instruction for the agent to read, print, or send real secrets."
+        }
+      ]
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "7a348472e13aaafa5d631b39dc9198d5b90123ea00b4cac4d359cbcaf886bc45",
+      "bytes": 7801,
+      "mode": "100644",
+      "git_blob": "f8ed9816b14f837795dc9899ff4564e69cd2adc0",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 19,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks for `pip install` and placeholder environment-variable listings."
+        },
+        {
+          "type": "package-install",
+          "line": 20,
+          "evidence": "pip install",
+          "context": "pip install azure-storage-queue azure-identity",
+          "disposition": "accepted",
+          "reason": "Unpinned `pip install azure-storage-queue azure-identity`, official Azure SDK packages."
+        },
+        {
+          "type": "shell-execution",
+          "line": 25,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks for `pip install` and placeholder environment-variable listings."
+        },
+        {
+          "type": "network-access",
+          "line": 26,
+          "evidence": "https://",
+          "context": "AZURE_STORAGE_ACCOUNT_URL=https://<account>.queue.core.windows.net  # Required for all auth methods",
+          "disposition": "accepted",
+          "reason": "Placeholder queue account URLs and a Microsoft Learn link in a code comment; the agent is not told to fetch them."
+        },
+        {
+          "type": "credential-access",
+          "line": 36,
+          "evidence": "credential",
+          "context": ">    - Production: set `AZURE_TOKEN_CREDENTIALS=prod` (or `AZURE_TOKEN_CREDENTIALS=<specific_credential>`) to constrain the credential chain to production-safe credentials.",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential (sync and aio) and ManagedIdentityCredential in sample code; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 39,
+          "evidence": "credential",
+          "context": ">    - Async: `async with <Client>(...) as client:` **and** `async with DefaultAzureCredential() as credential:` (from `azure.identity.aio`)",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential (sync and aio) and ManagedIdentityCredential in sample code; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 48,
+          "evidence": "credential",
+          "context": "credential = DefaultAzureCredential(require_envvar=True)",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential (sync and aio) and ManagedIdentityCredential in sample code; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 49,
+          "evidence": "credential",
+          "context": "# Or use a specific credential directly in production:",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential (sync and aio) and ManagedIdentityCredential in sample code; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 50,
+          "evidence": "credential",
+          "context": "# See https://learn.microsoft.com/python/api/overview/azure/identity-readme?view=azure-python#credential-classes",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential (sync and aio) and ManagedIdentityCredential in sample code; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 50,
+          "evidence": "https://",
+          "context": "# See https://learn.microsoft.com/python/api/overview/azure/identity-readme?view=azure-python#credential-classes",
+          "disposition": "accepted",
+          "reason": "Placeholder queue account URLs and a Microsoft Learn link in a code comment; the agent is not told to fetch them."
+        },
+        {
+          "type": "credential-access",
+          "line": 51,
+          "evidence": "credential",
+          "context": "# credential = ManagedIdentityCredential()",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential (sync and aio) and ManagedIdentityCredential in sample code; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 52,
+          "evidence": "https://",
+          "context": "account_url = \"https://<account>.queue.core.windows.net\"",
+          "disposition": "accepted",
+          "reason": "Placeholder queue account URLs and a Microsoft Learn link in a code comment; the agent is not told to fetch them."
+        },
+        {
+          "type": "credential-access",
+          "line": 55,
+          "evidence": "credential",
+          "context": "with QueueServiceClient(account_url=account_url, credential=credential) as service_client:",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential (sync and aio) and ManagedIdentityCredential in sample code; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 55,
+          "evidence": "credential",
+          "context": "with QueueServiceClient(account_url=account_url, credential=credential) as service_client:",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential (sync and aio) and ManagedIdentityCredential in sample code; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 60,
+          "evidence": "credential",
+          "context": "with QueueClient(account_url=account_url, queue_name=\"myqueue\", credential=credential) as queue_client:",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential (sync and aio) and ManagedIdentityCredential in sample code; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 60,
+          "evidence": "credential",
+          "context": "with QueueClient(account_url=account_url, queue_name=\"myqueue\", credential=credential) as queue_client:",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential (sync and aio) and ManagedIdentityCredential in sample code; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 74,
+          "evidence": "Delete",
+          "context": "# Delete queue",
+          "disposition": "accepted",
+          "reason": "Hits are Azure Queue service operations (delete_queue, delete_message, clear_messages), section headings and a checklist item about cleanup, not local file operations."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 117,
+          "evidence": "Delete",
+          "context": "    # Delete after processing",
+          "disposition": "accepted",
+          "reason": "Hits are Azure Queue service operations (delete_queue, delete_message, clear_messages), section headings and a checklist item about cleanup, not local file operations."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 151,
+          "evidence": "Delete",
+          "context": "## Delete Message",
+          "disposition": "accepted",
+          "reason": "Hits are Azure Queue service operations (delete_queue, delete_message, clear_messages), section headings and a checklist item about cleanup, not local file operations."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 154,
+          "evidence": "Delete",
+          "context": "# Delete after successful processing",
+          "disposition": "accepted",
+          "reason": "Hits are Azure Queue service operations (delete_queue, delete_message, clear_messages), section headings and a checklist item about cleanup, not local file operations."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 168,
+          "evidence": "Delete",
+          "context": "# Delete all messages",
+          "disposition": "accepted",
+          "reason": "Hits are Azure Queue service operations (delete_queue, delete_message, clear_messages), section headings and a checklist item about cleanup, not local file operations."
+        },
+        {
+          "type": "credential-access",
+          "line": 192,
+          "evidence": "credential",
+          "context": "    credential = DefaultAzureCredential()",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential (sync and aio) and ManagedIdentityCredential in sample code; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 195,
+          "evidence": "https://",
+          "context": "        account_url=\"https://<account>.queue.core.windows.net\",",
+          "disposition": "accepted",
+          "reason": "Placeholder queue account URLs and a Microsoft Learn link in a code comment; the agent is not told to fetch them."
+        },
+        {
+          "type": "credential-access",
+          "line": 197,
+          "evidence": "credential",
+          "context": "        credential=credential",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential (sync and aio) and ManagedIdentityCredential in sample code; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 197,
+          "evidence": "credential",
+          "context": "        credential=credential",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential (sync and aio) and ManagedIdentityCredential in sample code; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "encoded-content",
+          "line": 211,
+          "evidence": "Base64",
+          "context": "## Base64 Encoding",
+          "disposition": "accepted",
+          "reason": "Refers to the SDK's BinaryBase64EncodePolicy/DecodePolicy for binary queue messages; no encoded payload is embedded in the skill."
+        },
+        {
+          "type": "credential-access",
+          "line": 220,
+          "evidence": "credential",
+          "context": "    credential=credential,",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential (sync and aio) and ManagedIdentityCredential in sample code; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 220,
+          "evidence": "credential",
+          "context": "    credential=credential,",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential (sync and aio) and ManagedIdentityCredential in sample code; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 231,
+          "evidence": "credential",
+          "context": "2. **Always use context managers for clients and async credentials.** Wrap every client in `with Client(...) as client:` (sync) or `async with Client(...) as client:` (async). For async `DefaultAzureCredential` from `azure.identity.aio`, al",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential (sync and aio) and ManagedIdentityCredential in sample code; no instruction for the agent to read, print, or send real secrets."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 233,
+          "evidence": "Delete",
+          "context": "4. **Delete messages after processing** to prevent reprocessing",
+          "disposition": "accepted",
+          "reason": "Hits are Azure Queue service operations (delete_queue, delete_message, clear_messages), section headings and a checklist item about cleanup, not local file operations."
+        }
+      ]
+    }
+  ]
+}

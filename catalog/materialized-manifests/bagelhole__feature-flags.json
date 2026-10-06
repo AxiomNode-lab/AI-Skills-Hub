@@ -1,0 +1,60 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "bagelhole/feature-flags",
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "devops/release/feature-flags",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "review": {
+    "path": "catalog/reviews/bagelhole__feature-flags.json",
+    "sha256": "7bfe1a3164e49110e9c805564b9730468e5b150e2b454fccb362d15b8b0a6b8d"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": false,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "credential-access",
+        "line": 46,
+        "evidence": "process.env",
+        "context": "const client = LaunchDarkly.init(process.env.LAUNCHDARKLY_SDK_KEY);",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 178,
+        "evidence": "http://",
+        "context": "  url: 'http://localhost:4242/api',",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 12370
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "76424e453a912a71cfa7af153e0bc0df2c6061eef7c48d6b5d7adb12ef40f957",
+      "bytes": 11302,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 12370
+}

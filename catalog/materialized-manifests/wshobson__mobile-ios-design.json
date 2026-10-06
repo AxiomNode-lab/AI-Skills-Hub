@@ -1,0 +1,113 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "wshobson/mobile-ios-design",
+  "source": {
+    "repo": "wshobson/agents",
+    "path": "plugins/ui-design/skills/mobile-ios-design",
+    "revision": "156b7a5e7a8b93642628a339ee4039c925b34c7f"
+  },
+  "review": {
+    "path": "catalog/reviews/wshobson__mobile-ios-design.json",
+    "sha256": "0ef6f40097ff1c12a2b052155e3a3da177a3dd4c42eeb3533f43d589fd039042"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "low",
+    "capabilities": {
+      "shell": false,
+      "network": true,
+      "credentials": false,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "filesystem-write",
+        "line": 26,
+        "evidence": "remove",
+        "context": "        items.remove(atOffsets: offsets)",
+        "file": "references/swiftui-components.md"
+      },
+      {
+        "type": "network-access",
+        "line": 121,
+        "evidence": "https://",
+        "context": "                Link(destination: URL(string: \"https://example.com/privacy\")!) {",
+        "file": "references/swiftui-components.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 195,
+        "evidence": "Delete",
+        "context": "Button(\"Delete\", role: .destructive) {",
+        "file": "references/swiftui-components.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 218,
+        "evidence": "Delete",
+        "context": "    Button(\"Delete\", systemImage: \"trash\", role: .destructive) { }",
+        "file": "references/swiftui-components.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 286,
+        "evidence": "Delete",
+        "context": "        Button(\"Delete Account\", role: .destructive) {",
+        "file": "references/swiftui-components.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 290,
+        "evidence": "Delete",
+        "context": "            \"Delete Account\",",
+        "file": "references/swiftui-components.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 294,
+        "evidence": "Delete",
+        "context": "            Button(\"Delete\", role: .destructive) {",
+        "file": "references/swiftui-components.md"
+      }
+    ],
+    "total_bytes": 50466
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "f89abb55d9f073f38f1703e4518f0613c788c6174be7f13b8dfe48a1c076c746",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/hig-patterns.md",
+      "sha256": "1d893427552da55887ed14a344532f40f736d5cc6d153ce385b9cc8c73c55302",
+      "bytes": 13627,
+      "mode": "100644"
+    },
+    {
+      "path": "references/ios-navigation.md",
+      "sha256": "8d6ab13ad2f6bf13b6555b2137f8861d4af374322f85fa3b06f10a6c0b70ef82",
+      "bytes": 14734,
+      "mode": "100644"
+    },
+    {
+      "path": "references/swiftui-components.md",
+      "sha256": "3eb82e50121d529ee664685da10f42f59aa8dee4cc14acaca4c5d377d8cd8700",
+      "bytes": 14116,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "2b3b2405aee645a345d137ce93bd86bac65d33da4ad40c4b6f007bf4a51b6c96",
+      "bytes": 6921,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 50466
+}

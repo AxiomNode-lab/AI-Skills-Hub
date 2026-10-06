@@ -1,0 +1,227 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "kdense/tiledbvcf",
+  "source": {
+    "repo": "K-Dense-AI/scientific-agent-skills",
+    "path": "skills/tiledbvcf",
+    "revision": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298"
+  },
+  "review": {
+    "path": "catalog/reviews/kdense__tiledbvcf.json",
+    "sha256": "d37cafd19312d2fd663f57b348593662dda1f817c83a235eebaa2d2c70e13a93"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "network-access",
+        "line": 7,
+        "evidence": "https://",
+        "context": "The [official TileDB channel metadata](https://api.anaconda.org/package/tiledb/tiledbvcf-py)",
+        "file": "references/verification.md"
+      },
+      {
+        "type": "network-access",
+        "line": 9,
+        "evidence": "https://",
+        "context": "[PyPI tiledbvcf metadata](https://pypi.org/pypi/tiledbvcf/json) and the",
+        "file": "references/verification.md"
+      },
+      {
+        "type": "network-access",
+        "line": 34,
+        "evidence": "https://",
+        "context": "- [Released Python Dataset source](https://github.com/TileDB-Inc/TileDB-VCF/blob/0.40.3/apis/python/src/tiledbvcf/dataset.py)",
+        "file": "references/verification.md"
+      },
+      {
+        "type": "network-access",
+        "line": 39,
+        "evidence": "https://",
+        "context": "- [Native in-memory exporter](https://github.com/TileDB-Inc/TileDB-VCF/blob/0.40.3/libtiledbvcf/src/read/in_memory_exporter.cc)",
+        "file": "references/verification.md"
+      },
+      {
+        "type": "network-access",
+        "line": 56,
+        "evidence": "https://",
+        "context": "The [published 0.14.4 wheel](https://pypi.org/pypi/tiledb-cloud/0.14.4/json),",
+        "file": "references/verification.md"
+      },
+      {
+        "type": "network-access",
+        "line": 62,
+        "evidence": "https://",
+        "context": "The default service base is `https://api.tiledb.com`; a configured deployment host",
+        "file": "references/verification.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 64,
+        "evidence": "API-KEY",
+        "context": "`X-TILEDB-REST-API-KEY` header. `tiledb.cloud.Config()` propagates the authenticated",
+        "file": "references/verification.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 76,
+        "evidence": "API-key",
+        "context": "These submission calls use API-key or basic authentication and have no pagination",
+        "file": "references/verification.md"
+      },
+      {
+        "type": "network-access",
+        "line": 91,
+        "evidence": "https://",
+        "context": "- [Data model](https://tiledb-inc.github.io/TileDB-VCF/documentation/data-model.html)",
+        "file": "references/verification.md"
+      },
+      {
+        "type": "network-access",
+        "line": 92,
+        "evidence": "https://",
+        "context": "- [Released CLI option definitions](https://github.com/TileDB-Inc/TileDB-VCF/blob/0.40.3/libtiledbvcf/src/cli/tiledbvcf.cc)",
+        "file": "references/verification.md"
+      },
+      {
+        "type": "network-access",
+        "line": 93,
+        "evidence": "https://",
+        "context": "- [Released QC wrapper](https://github.com/TileDB-Inc/TileDB-VCF/blob/0.40.3/apis/python/src/tiledbvcf/sample_qc.py)",
+        "file": "references/verification.md"
+      },
+      {
+        "type": "network-access",
+        "line": 94,
+        "evidence": "https://",
+        "context": "- [Released allele-frequency wrapper](https://github.com/TileDB-Inc/TileDB-VCF/blob/0.40.3/apis/python/src/tiledbvcf/allele_frequency.py)",
+        "file": "references/verification.md"
+      },
+      {
+        "type": "network-access",
+        "line": 95,
+        "evidence": "https://",
+        "context": "- [bcftools manual](https://samtools.github.io/bcftools/bcftools.html)",
+        "file": "references/verification.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 39,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 68,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 155,
+        "evidence": "mkdir",
+        "context": "Path(\"exported\").mkdir(exist_ok=True)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 173,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 221,
+        "evidence": "credential",
+        "context": "provider's credential chain or scoped configuration, and verify access to both",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 267,
+        "evidence": "credential",
+        "context": "patterns apply to `search_uri`. Registration requires the access credential name",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 276,
+        "evidence": "https://",
+        "context": "- [TileDB-VCF 0.40.3 release](https://github.com/TileDB-Inc/TileDB-VCF/releases/tag/0.40.3)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 277,
+        "evidence": "https://",
+        "context": "- [Dataset API](https://tiledb-inc.github.io/TileDB-VCF/documentation/reference/Dataset.html)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 278,
+        "evidence": "https://",
+        "context": "- [Ingestion](https://tiledb-inc.github.io/TileDB-VCF/documentation/how-to/ingest-samples.html)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 279,
+        "evidence": "https://",
+        "context": "- [Large queries](https://tiledb-inc.github.io/TileDB-VCF/documentation/how-to/handle-large-queries.html)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 280,
+        "evidence": "https://",
+        "context": "- [Cloud storage](https://tiledb-inc.github.io/TileDB-VCF/documentation/how-to/work-with-cloud-object-stores.html)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 281,
+        "evidence": "https://",
+        "context": "- [TileDB Cloud client release](https://pypi.org/project/tiledb-cloud/0.14.4/)",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 21087
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE.md"
+    },
+    {
+      "path": "references/verification.md",
+      "sha256": "a721c33ca3895e407563a55abc8423883f608bfbe186a516215e1790104ba6e1",
+      "bytes": 6119,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "38e55a6962e14637e82f60be8e53e6d87c78f1a7874b9f832f442a038942f7d5",
+      "bytes": 13900,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 21087
+}

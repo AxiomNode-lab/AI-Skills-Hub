@@ -1,0 +1,326 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "unitone/scanner-tuning",
+  "source": {
+    "repo": "UnitOneAI/SecuritySkills",
+    "path": "skills/vuln-management/scanner-tuning",
+    "revision": "70bc259bb01abb3015ad2ad859ad5253cbf0bcab"
+  },
+  "review": {
+    "path": "catalog/reviews/unitone__scanner-tuning.json",
+    "sha256": "d28bb6322b100b393a7e60a31671019f4f0acc22e7923878f23597b4da75f59d"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": false,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "credential-access",
+        "line": 139,
+        "evidence": "Credential",
+        "context": "| **Credential exclusions** | Systems where credentialed scanning is not permitted by policy | Documented reason; accept reduced detection accuracy |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 143,
+        "evidence": "credential",
+        "context": "Evaluate and configure credential-based (authenticated) scanning for improved accuracy.",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 154,
+        "evidence": "Credential",
+        "context": "| **Credential management** | None required | Requires credential vault integration (CyberArk, HashiCorp Vault, scanner-native vault) |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 154,
+        "evidence": "credential",
+        "context": "| **Credential management** | None required | Requires credential vault integration (CyberArk, HashiCorp Vault, scanner-native vault) |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 156,
+        "evidence": "credential",
+        "context": "| **Risk** | Low (non-invasive) | Medium (credential exposure, elevated access) |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 159,
+        "evidence": "Credential",
+        "context": "#### Credential Configuration Best Practices",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 163,
+        "evidence": "secret",
+        "context": "3. **Vault integration:** Store scan credentials in an enterprise secret management solution, not in the scanner's local credential store",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 163,
+        "evidence": "credential",
+        "context": "3. **Vault integration:** Store scan credentials in an enterprise secret management solution, not in the scanner's local credential store",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 164,
+        "evidence": " sudo",
+        "context": "4. **Per-platform credentials:** Maintain separate credentials for Windows (local admin or domain account), Linux/Unix (root or sudo-enabled account), network devices (read-only SNMP community/SSH), databases (read-only DB account), and VMw",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 165,
+        "evidence": "Credential",
+        "context": "5. **Credential verification:** Run a credential verification scan before full scan to confirm authentication success across all targets",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 165,
+        "evidence": "credential",
+        "context": "5. **Credential verification:** Run a credential verification scan before full scan to confirm authentication success across all targets",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 170,
+        "evidence": "Credential",
+        "context": "- Credential Source:   [Scanner-native | CyberArk | HashiCorp Vault | Other]",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 172,
+        "evidence": " sudo",
+        "context": "- Linux Auth:          [SSH key (preferred) | SSH password with sudo | root | N/A]",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 175,
+        "evidence": "API key",
+        "context": "- Cloud/API Auth:      [API key with read-only role | N/A]",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 176,
+        "evidence": "Credential",
+        "context": "- Credential Rotation: [Every N days]",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 293,
+        "evidence": "credential",
+        "context": "| **Basic** | Scanner operational but significant tuning gaps | False positive rate 15-30%, partial credential coverage, some ad-hoc overrides without documentation |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 367,
+        "evidence": "https://",
+        "context": "- CVSS 4.0 Specification: https://www.first.org/cvss/v4-0/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 368,
+        "evidence": "https://",
+        "context": "- CWE (MITRE): https://cwe.mitre.org/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 378,
+        "evidence": "https://",
+        "context": "- Specification: https://www.first.org/cvss/v4-0/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 379,
+        "evidence": "https://",
+        "context": "- Calculator: https://www.first.org/cvss/calculator/4.0",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 380,
+        "evidence": "https://",
+        "context": "- User Guide: https://www.first.org/cvss/v4.0/user-guide",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 384,
+        "evidence": "https://",
+        "context": "- Database: https://cwe.mitre.org/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 385,
+        "evidence": "https://",
+        "context": "- Top 25 (2024): https://cwe.mitre.org/top25/archive/2024/2024_cwe_top25.html",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 386,
+        "evidence": "https://",
+        "context": "- CWE/CVE Mapping: https://cwe.mitre.org/data/index.html",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 426,
+        "evidence": "https://",
+        "context": "- CVSS v4.0 Specification: https://www.first.org/cvss/v4-0/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 427,
+        "evidence": "https://",
+        "context": "- CVSS v4.0 Calculator: https://www.first.org/cvss/calculator/4.0",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 428,
+        "evidence": "https://",
+        "context": "- CWE (MITRE): https://cwe.mitre.org/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 429,
+        "evidence": "https://",
+        "context": "- CWE Top 25 (2024): https://cwe.mitre.org/top25/archive/2024/2024_cwe_top25.html",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 430,
+        "evidence": "https://",
+        "context": "- CIS Controls v8: https://www.cisecurity.org/controls/v8",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 431,
+        "evidence": "https://",
+        "context": "- CIS Benchmarks: https://www.cisecurity.org/cis-benchmarks",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 432,
+        "evidence": "https://",
+        "context": "- DISA STIGs: https://public.cyber.mil/stigs/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 433,
+        "evidence": "https://",
+        "context": "- PCI DSS 4.0 (Requirement 11.3): https://www.pcisecuritystandards.org/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 434,
+        "evidence": "https://",
+        "context": "- Qualys VMDR Documentation: https://www.qualys.com/documentation/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 435,
+        "evidence": "https://",
+        "context": "- Tenable Nessus Documentation: https://docs.tenable.com/nessus/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 436,
+        "evidence": "https://",
+        "context": "- Rapid7 InsightVM Documentation: https://docs.rapid7.com/insightvm/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 437,
+        "evidence": "https://",
+        "context": "- Greenbone/OpenVAS: https://greenbone.github.io/docs/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 438,
+        "evidence": "https://",
+        "context": "- Trivy: https://aquasecurity.github.io/trivy/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 439,
+        "evidence": "https://",
+        "context": "- Grype: https://github.com/anchore/grype",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 440,
+        "evidence": "https://",
+        "context": "- Nuclei: https://docs.projectdiscovery.io/tools/nuclei/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 441,
+        "evidence": "https://",
+        "context": "- NVD (NIST): https://nvd.nist.gov/",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 30612
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "66eb5ec637cc578833ddcbc870dbf46c6718fd83e985fad5f0f5cf30d60cf47d",
+      "bytes": 1067,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "389d96d7841380a75029977f6638d4e266ce3442c087739014d3dbfa3a72341f",
+      "bytes": 29545,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 30612
+}

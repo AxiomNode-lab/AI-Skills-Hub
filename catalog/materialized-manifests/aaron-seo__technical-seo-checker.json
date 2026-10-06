@@ -1,0 +1,220 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "aaron-seo/technical-seo-checker",
+  "source": {
+    "repo": "aaron-he-zhu/aaron-marketing-skills",
+    "path": "seo-geo/tune/technical-seo-checker",
+    "revision": "cc897fa9e1e3136eb6a301130e49d8d9d1c519b2"
+  },
+  "review": {
+    "path": "catalog/reviews/aaron-seo__technical-seo-checker.json",
+    "sha256": "f7d7b753168c4e6cdff8aa7743f544de2b6adbaf8db12098be9975ae8d37307c"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": false,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "network-access",
+        "line": 3,
+        "evidence": "http://",
+        "context": "                        http://www.apache.org/licenses/",
+        "file": "LICENSE.txt"
+      },
+      {
+        "type": "network-access",
+        "line": 195,
+        "evidence": "http://",
+        "context": "       http://www.apache.org/licenses/LICENSE-2.0",
+        "file": "LICENSE.txt"
+      },
+      {
+        "type": "network-access",
+        "line": 18,
+        "evidence": "https://",
+        "context": "1. **Sitemap URL** — `https://example.com/sitemap.xml` (or `sitemap_index.xml`)",
+        "file": "references/bulk-audit-playbook.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 58,
+        "evidence": "Remove",
+        "context": "1. Remove noindex from low-stock products (32 pages)  — theme.liquid",
+        "file": "references/bulk-audit-playbook.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 35,
+        "evidence": "Remove",
+        "context": "| 404 in sitemap | Remove or redirect to equivalent page |",
+        "file": "references/http-status-codes.md"
+      },
+      {
+        "type": "network-access",
+        "line": 58,
+        "evidence": "https://",
+        "context": "Sitemap: https://example.com/sitemap.xml",
+        "file": "references/llm-crawler-handling.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 92,
+        "evidence": "remove",
+        "context": "4. Unblock crawling (remove any staging noindex)",
+        "file": "references/pre-migration-playbook.md"
+      },
+      {
+        "type": "network-access",
+        "line": 12,
+        "evidence": "https://",
+        "context": "| `Sitemap: https://example.com/sitemap.xml` | Declare XML sitemap | Absolute URL; multiple lines allowed |",
+        "file": "references/robots-txt-reference.md"
+      },
+      {
+        "type": "network-access",
+        "line": 47,
+        "evidence": "https://",
+        "context": "Sitemap: https://example.com/sitemap.xml",
+        "file": "references/robots-txt-reference.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 59,
+        "evidence": "remove",
+        "context": "| Staging | `Disallow: /` plus noindex/auth; remove via Search Console if indexed |",
+        "file": "references/robots-txt-reference.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 29,
+        "evidence": "Remove",
+        "context": "| Only indexable URLs | [pass/warn/fail] | [noindex/canonical/redirect count] | Remove non-indexable URLs |",
+        "file": "references/technical-audit-example.md"
+      },
+      {
+        "type": "network-access",
+        "line": 10,
+        "evidence": "https://",
+        "context": "homepage: \"https://github.com/aaron-he-zhu/aaron-marketing-skills\"",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 14,
+        "evidence": "https://",
+        "context": "metadata: {\"author\": \"aaron-he-zhu\", \"version\": \"20.1.0\", \"discipline\": \"seo-geo\", \"phase\": \"tune\", \"geo-relevance\": \"low\", \"hermes\": {\"tags\": [\"marketing\", \"seo-geo\", \"tune\"], \"category\": \"seo-geo\"}, \"openclaw\": {\"emoji\": \"🔍\", \"homepage\":",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 75,
+        "evidence": "https://",
+        "context": "Audit all URLs in https://example.com/sitemap.xml",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 102,
+        "evidence": "curl",
+        "context": "**Keyless recipe sharpeners**: subdomain inventory from certificate-transparency logs — `curl \"https://crt.sh/?q=%25.<domain>&output=json\"` (dedupe on `name_value`; slow and occasionally times out) — surfaces forgotten or staging subdomains",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 102,
+        "evidence": "https://",
+        "context": "**Keyless recipe sharpeners**: subdomain inventory from certificate-transparency logs — `curl \"https://crt.sh/?q=%25.<domain>&output=json\"` (dedupe on `name_value`; slow and occasionally times out) — surfaces forgotten or staging subdomains",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 102,
+        "evidence": "https://",
+        "context": "**Keyless recipe sharpeners**: subdomain inventory from certificate-transparency logs — `curl \"https://crt.sh/?q=%25.<domain>&output=json\"` (dedupe on `name_value`; slow and occasionally times out) — surfaces forgotten or staging subdomains",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 102,
+        "evidence": "sh",
+        "context": "**Keyless recipe sharpeners**: subdomain inventory from certificate-transparency logs — `curl \"https://crt.sh/?q=%25.<domain>&output=json\"` (dedupe on `name_value`; slow and occasionally times out) — surfaces forgotten or staging subdomains",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 58701
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "664cd12e1c315650bf14cb1385359d13d4724ac03940ac10918390ef78e4f5e7",
+      "bytes": 11347,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/bulk-audit-playbook.md",
+      "sha256": "94e1080daf4bb3110a9d8753fe5f3b3dd9117b88dc1123d50c44cd3156b948f5",
+      "bytes": 4280,
+      "mode": "100644"
+    },
+    {
+      "path": "references/ecommerce-platform-patterns.md",
+      "sha256": "e544bd27385af746032f4d4c566326633844e4a20000908eb10a3befcf6265d8",
+      "bytes": 3826,
+      "mode": "100644"
+    },
+    {
+      "path": "references/http-status-codes.md",
+      "sha256": "04c2e9d0b4feba325e48d581cceb7e46093732f9d4c1ce2f8a329ef8b18b1bfb",
+      "bytes": 2529,
+      "mode": "100644"
+    },
+    {
+      "path": "references/llm-crawler-handling.md",
+      "sha256": "d831179bfab06d8a1d73cff9e9fc39a28dab1eab8cf3c69e2bcd4fe8be1dd68f",
+      "bytes": 4580,
+      "mode": "100644"
+    },
+    {
+      "path": "references/pre-migration-playbook.md",
+      "sha256": "b41a708de38ddf822bf37c24d7f8e60f9788b27715dc69725b75dcf756be1202",
+      "bytes": 6092,
+      "mode": "100644"
+    },
+    {
+      "path": "references/robots-txt-reference.md",
+      "sha256": "cb2eba170826f244c6cf653017b4f69379dbd7486aef37a493b975a409d0695d",
+      "bytes": 3138,
+      "mode": "100644"
+    },
+    {
+      "path": "references/technical-audit-example.md",
+      "sha256": "f92ca242d80b70c0e4e6c3cfac497964cf40e304fbacd1253f622646ebdb8680",
+      "bytes": 4221,
+      "mode": "100644"
+    },
+    {
+      "path": "references/technical-audit-templates.md",
+      "sha256": "0db1ed35641046727255d1b22bed57dd7b4feb6e755c9d405b2d494541e37215",
+      "bytes": 6368,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "644b100eb3f0d0c7858342873c792f4b3f01db5e80bc05e50ed97ac0c9c030ce",
+      "bytes": 12320,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 58701
+}

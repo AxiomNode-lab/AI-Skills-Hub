@@ -1,0 +1,129 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "wshobson/javascript-testing-patterns",
+  "source": {
+    "repo": "wshobson/agents",
+    "path": "plugins/javascript-typescript/skills/javascript-testing-patterns",
+    "revision": "156b7a5e7a8b93642628a339ee4039c925b34c7f"
+  },
+  "review": {
+    "path": "catalog/reviews/wshobson__javascript-testing-patterns.json",
+    "sha256": "3dfd59cd6c23a46c1d57815bc7a2e028e3f8eb6a86c69b99745a8703a87321e7"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": false,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "network-access",
+        "line": 432,
+        "evidence": "https://",
+        "context": "      avatar: 'https://example.com/avatar.jpg',",
+        "file": "references/advanced-testing-patterns.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 159,
+        "evidence": "delete",
+        "context": "  delete(id: string): boolean {",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 160,
+        "evidence": "delete",
+        "context": "    return this.users.delete(id);",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 218,
+        "evidence": "https://",
+        "context": "    const response = await fetch(`https://api.example.com/users/${id}`);",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 226,
+        "evidence": "https://",
+        "context": "    const response = await fetch(\"https://api.example.com/users\", {",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 262,
+        "evidence": "https://",
+        "context": "      expect(fetch).toHaveBeenCalledWith(\"https://api.example.com/users/1\");",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 288,
+        "evidence": "https://",
+        "context": "        \"https://api.example.com/users\",",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 309,
+        "evidence": "process.env",
+        "context": "    host: process.env.SMTP_HOST,",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 312,
+        "evidence": "process.env",
+        "context": "      user: process.env.SMTP_USER,",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 313,
+        "evidence": "process.env",
+        "context": "      pass: process.env.SMTP_PASS,",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 319,
+        "evidence": "process.env",
+        "context": "      from: process.env.EMAIL_FROM,",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 28534
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "f89abb55d9f073f38f1703e4518f0613c788c6174be7f13b8dfe48a1c076c746",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/advanced-testing-patterns.md",
+      "sha256": "c7aece88f868bb54b57cc7ea2ca87d3df0868ab32f974c22af247bb047ea353f",
+      "bytes": 12837,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "d99e1d7344ca7b87395c7e49f6c635ea67fe16d57f4698d72c78d405020f5782",
+      "bytes": 14629,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 28534
+}

@@ -1,0 +1,297 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "j4flmao/backend-structured-logging",
+  "source": {
+    "repo": "j4flmao/agent-skills",
+    "path": "skills/backend/universal/structured-logging",
+    "revision": "d9f812988c8926767ee96f66c1a340d65b595799"
+  },
+  "review": {
+    "path": "catalog/reviews/j4flmao__backend-structured-logging.json",
+    "sha256": "e7e3f52931bc610ced84395938e2b785d22e7cda6cb14a6f70b29cfd4c703507"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": false,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "credential-access",
+        "line": 75,
+        "evidence": "process.env",
+        "context": "  level: process.env.LOG_LEVEL || 'info',",
+        "file": "references/log-format.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 81,
+        "evidence": "process.env",
+        "context": "      obj['service.name'] = process.env.SERVICE_NAME;",
+        "file": "references/log-format.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 82,
+        "evidence": "process.env",
+        "context": "      obj['service.environment'] = process.env.NODE_ENV;",
+        "file": "references/log-format.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 87,
+        "evidence": "secret",
+        "context": "    paths: ['password', 'secret', 'token', 'ssn', 'email', 'creditCard', 'authorization'],",
+        "file": "references/log-format.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 162,
+        "evidence": "process.env",
+        "context": "    environment: process.env.NODE_ENV,",
+        "file": "references/log-format.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 196,
+        "evidence": "secret",
+        "context": "  { pattern: /\\b(?:password|secret|token|api[_-]?key|authorization)\\s*[:=]\\s*\\S+/gi, replacement: '$1: [REDACTED]' },",
+        "file": "references/log-format.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 55,
+        "evidence": "delete",
+        "context": "      this.buffer.delete(oldest);",
+        "file": "references/log-sampling-strategies.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 73,
+        "evidence": "delete",
+        "context": "    this.buffer.delete(traceId);",
+        "file": "references/log-sampling-strategies.md"
+      },
+      {
+        "type": "network-access",
+        "line": 112,
+        "evidence": "http://",
+        "context": "endpoint = \"http://elasticsearch:9200\"",
+        "file": "references/log-shipping.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 114,
+        "evidence": "secret",
+        "context": "encoding.except_fields = [\"password\", \"secret\", \"token\"]",
+        "file": "references/log-shipping.md"
+      },
+      {
+        "type": "network-access",
+        "line": 121,
+        "evidence": "http://",
+        "context": "endpoint = \"http://elasticsearch:9200\"",
+        "file": "references/log-shipping.md"
+      },
+      {
+        "type": "network-access",
+        "line": 56,
+        "evidence": "http://",
+        "context": "endpoints = [\"http://elasticsearch:9200\"]",
+        "file": "references/logging-aggregation.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 157,
+        "evidence": "delete",
+        "context": "      \"delete\": {",
+        "file": "references/logging-aggregation.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 160,
+        "evidence": "delete",
+        "context": "          \"delete\": {}",
+        "file": "references/logging-aggregation.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 49,
+        "evidence": "process.env",
+        "context": "  level: process.env.LOG_LEVEL || 'info',",
+        "file": "references/logging-architecture.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 55,
+        "evidence": "process.env",
+        "context": "      obj['service.name'] = process.env.SERVICE_NAME;",
+        "file": "references/logging-architecture.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 56,
+        "evidence": "process.env",
+        "context": "      obj['service.environment'] = process.env.NODE_ENV;",
+        "file": "references/logging-architecture.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 61,
+        "evidence": "secret",
+        "context": "    paths: ['password', 'secret', 'token', 'authorization', 'cookie'],",
+        "file": "references/logging-architecture.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 205,
+        "evidence": "process.env",
+        "context": "    if (level === 'debug') return process.env.LOG_LEVEL === 'debug';",
+        "file": "references/logging-architecture.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 104,
+        "evidence": "process.env",
+        "context": "    if (process.env.NODE_ENV === 'production') {",
+        "file": "references/structured-logging-implementation.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 138,
+        "evidence": "process.env",
+        "context": "  level: process.env.LOG_LEVEL || 'info',",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 144,
+        "evidence": "process.env",
+        "context": "      obj['service.name'] = process.env.SERVICE_NAME || 'unknown';",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 145,
+        "evidence": "process.env",
+        "context": "      obj['service.environment'] = process.env.NODE_ENV || 'development';",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 150,
+        "evidence": "secret",
+        "context": "    paths: ['password', 'secret', 'token', 'ssn', 'email', 'creditCard', 'authorization'],",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 259,
+        "evidence": "secret",
+        "context": "  { pattern: /\\b(?:password|secret|token|api[_-]?key|authorization)\\s*[:=]\\s*\\S+/gi, replacement: '$1: [REDACTED]' },",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 334,
+        "evidence": "secret",
+        "context": "    patterns: [password, secret, token, ssn, email, creditCard, authorization]",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 372,
+        "evidence": "secret",
+        "context": "| Secrets in logs | Blocklist-sensitive keys: `password`, `secret`, `token`, `key` |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 380,
+        "evidence": "remove",
+        "context": "| Logging in hot loops | 100K logs/sec kills performance | Sample or remove |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 428,
+        "evidence": "delete",
+        "context": "    this.observers.delete(observer);",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 69676
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "b6b8d73f01a48d1411da29d8196e2d85cd91cc9e8d7ae6ac4863ae7e06e6d314",
+      "bytes": 1064,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/log-aggregation.md",
+      "sha256": "b83d56a2d4a4c00dd52bc2bc307a79a0b20702efba5a22e1571d526de2026c71",
+      "bytes": 2772,
+      "mode": "100644"
+    },
+    {
+      "path": "references/log-correlation-tracing.md",
+      "sha256": "9f2645762614c6bf1ef3c7267d9a71379925d66386349d429bcd17b0784748cd",
+      "bytes": 5143,
+      "mode": "100644"
+    },
+    {
+      "path": "references/log-format.md",
+      "sha256": "1b0ae8c19ba7bc9a4793ef26a0a9c687432808eef73d6b6adae430df4325df0f",
+      "bytes": 8575,
+      "mode": "100644"
+    },
+    {
+      "path": "references/log-sampling-strategies.md",
+      "sha256": "aa0916bc0d40b88d772ef0a65e0fcf5255d3395892c53c32d0aba9fa7f1a47f2",
+      "bytes": 4697,
+      "mode": "100644"
+    },
+    {
+      "path": "references/log-shipping.md",
+      "sha256": "65262cd8f5b2e796dfe0371c00347d1cf64dd6036dbb442678a8b116c29963ef",
+      "bytes": 7377,
+      "mode": "100644"
+    },
+    {
+      "path": "references/logging-aggregation.md",
+      "sha256": "5909ce616dfe9b1a97d19e932b143f09a83a7e3b2ff2ad67d60978e99c070304",
+      "bytes": 6248,
+      "mode": "100644"
+    },
+    {
+      "path": "references/logging-architecture.md",
+      "sha256": "b77b3683e920e851f0f5358baa9f955aab7d138386158412b2b896d2c3e7ad5d",
+      "bytes": 7052,
+      "mode": "100644"
+    },
+    {
+      "path": "references/structured-logging-implementation.md",
+      "sha256": "ffd906b0beca0310685dcc8518118982630f694ce701d858dfb549f9e118c39f",
+      "bytes": 5508,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "9cc850046d64632824c2b57779b2196a479966bb1bb600a7608b00754c6a55c1",
+      "bytes": 21240,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 69676
+}

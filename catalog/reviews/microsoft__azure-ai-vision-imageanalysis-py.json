@@ -1,0 +1,338 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "microsoft/azure-ai-vision-imageanalysis-py",
+  "status": "approved",
+  "reviewed_on": "2026-10-02",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/azure-sdk-python/skills/azure-ai-vision-imageanalysis-py",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": ".github/plugins/azure-sdk-python/skills/azure-ai-vision-imageanalysis-py",
+    "url": "https://api.github.com/repos/microsoft/skills/git/trees/84d8eaa8ae95930f55cdceb3e27196c795dab038?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/microsoft/skills/blob/84d8eaa8ae95930f55cdceb3e27196c795dab038/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        ".github",
+        ".github/plugins",
+        ".github/plugins/azure-sdk-python",
+        ".github/plugins/azure-sdk-python/skills",
+        ".github/plugins/azure-sdk-python/skills/azure-ai-vision-imageanalysis-py"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT License with its copyright notice, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found; frontmatter declares MIT and samples follow Microsoft's own Azure SDK documentation. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "medium",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": true,
+      "network": false,
+      "credentials": false,
+      "package_install": true,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md and references/capabilities.md, references/non-hero-scenarios.md in full. Guidance and Python samples for the official azure-ai-vision-imageanalysis SDK: captions, dense captions, tags, objects, OCR, people detection, smart cropping, async client and error handling.",
+      "Medium only because SKILL.md:20 has `pip install azure-ai-vision-imageanalysis` (official Azure SDK package). Everything else is sample code for the user's application; credentials are DefaultAzureCredential or a legacy AzureKeyCredential read from VISION_KEY, the skill recommends Entra ID over keys, and the agent is not told to read, print, or send secrets.",
+      "references/non-hero-scenarios.md duplicates SKILL.md sections; capabilities.md is an index. No hidden content or external file dependencies."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "git_blob": "79656060de00aa4659ad2c276d5be8830664d544",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry the copyright and permission notice.",
+      "findings": []
+    },
+    {
+      "path": "references/capabilities.md",
+      "sha256": "960a7fbd228256952991c2a27c904b992d100b7810567186e7c17e287e190771",
+      "bytes": 2375,
+      "mode": "100644",
+      "git_blob": "b24da438beecbcf0190512c8f951f8478e757472",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 44,
+          "evidence": "delete",
+          "context": "- Include cleanup/delete paths for created resources in examples.",
+          "disposition": "accepted",
+          "reason": "Match is the checklist line 'Include cleanup/delete paths for created resources in examples' (capabilities.md:44); no file deletion."
+        }
+      ]
+    },
+    {
+      "path": "references/non-hero-scenarios.md",
+      "sha256": "9a173f9a41c90c274fb1d09b1175ceebdea69cf5a5c0be7964a93d45800d4458",
+      "bytes": 3743,
+      "mode": "100644",
+      "git_blob": "fe519431024080a6cfe80daaebf4b6459c81c53d",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "credential-access",
+          "line": 93,
+          "evidence": "credential",
+          "context": "    async with DefaultAzureCredential() as credential:",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential and legacy AzureKeyCredential(os.environ['VISION_KEY']) in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 96,
+          "evidence": "credential",
+          "context": "            credential=credential",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential and legacy AzureKeyCredential(os.environ['VISION_KEY']) in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 96,
+          "evidence": "credential",
+          "context": "            credential=credential",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential and legacy AzureKeyCredential(os.environ['VISION_KEY']) in sample code; no instruction to read, print, or send real secrets."
+        }
+      ]
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "b6bcdb76e29ccc125741a75a07f0f65ee971086749a72a87d0b83c20bf9f6ea5",
+      "bytes": 9966,
+      "mode": "100644",
+      "git_blob": "adaaf3c05668d618d8c5a932e37ac78053a255c7",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 19,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash fences hold the pip install command and placeholder environment variables only."
+        },
+        {
+          "type": "package-install",
+          "line": 20,
+          "evidence": "pip install",
+          "context": "pip install azure-ai-vision-imageanalysis",
+          "disposition": "accepted",
+          "reason": "`pip install azure-ai-vision-imageanalysis` installs the official Azure SDK package for the user's project."
+        },
+        {
+          "type": "shell-execution",
+          "line": 25,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash fences hold the pip install command and placeholder environment variables only."
+        },
+        {
+          "type": "network-access",
+          "line": 26,
+          "evidence": "https://",
+          "context": "VISION_ENDPOINT=https://<resource>.cognitiveservices.azure.com  # Required for all auth methods",
+          "disposition": "accepted",
+          "reason": "Placeholder Cognitive Services endpoint, a Microsoft-hosted sample image URL and an example.com image in sample code, plus a Microsoft Learn link; the agent is not told to fetch them."
+        },
+        {
+          "type": "credential-access",
+          "line": 28,
+          "evidence": "api-key",
+          "context": "VISION_KEY=<your-api-key>  # Only required for the legacy API-key auth path below",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential and legacy AzureKeyCredential(os.environ['VISION_KEY']) in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 28,
+          "evidence": "API-key",
+          "context": "VISION_KEY=<your-api-key>  # Only required for the legacy API-key auth path below",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential and legacy AzureKeyCredential(os.environ['VISION_KEY']) in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 37,
+          "evidence": "credential",
+          "context": ">    - Production: set `AZURE_TOKEN_CREDENTIALS=prod` (or `AZURE_TOKEN_CREDENTIALS=<specific_credential>`) to constrain the credential chain to production-safe credentials.",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential and legacy AzureKeyCredential(os.environ['VISION_KEY']) in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 40,
+          "evidence": "credential",
+          "context": ">    - Async: `async with <Client>(...) as client:` **and** `async with DefaultAzureCredential() as credential:` (from `azure.identity.aio`)",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential and legacy AzureKeyCredential(os.environ['VISION_KEY']) in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 51,
+          "evidence": "credential",
+          "context": "credential = DefaultAzureCredential(require_envvar=True)",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential and legacy AzureKeyCredential(os.environ['VISION_KEY']) in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 52,
+          "evidence": "credential",
+          "context": "# Or use a specific credential directly in production:",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential and legacy AzureKeyCredential(os.environ['VISION_KEY']) in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 53,
+          "evidence": "credential",
+          "context": "# See https://learn.microsoft.com/python/api/overview/azure/identity-readme?view=azure-python#credential-classes",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential and legacy AzureKeyCredential(os.environ['VISION_KEY']) in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 53,
+          "evidence": "https://",
+          "context": "# See https://learn.microsoft.com/python/api/overview/azure/identity-readme?view=azure-python#credential-classes",
+          "disposition": "accepted",
+          "reason": "Placeholder Cognitive Services endpoint, a Microsoft-hosted sample image URL and an example.com image in sample code, plus a Microsoft Learn link; the agent is not told to fetch them."
+        },
+        {
+          "type": "credential-access",
+          "line": 54,
+          "evidence": "credential",
+          "context": "# credential = ManagedIdentityCredential()",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential and legacy AzureKeyCredential(os.environ['VISION_KEY']) in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 58,
+          "evidence": "credential",
+          "context": "    credential=credential,",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential and legacy AzureKeyCredential(os.environ['VISION_KEY']) in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 58,
+          "evidence": "credential",
+          "context": "    credential=credential,",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential and legacy AzureKeyCredential(os.environ['VISION_KEY']) in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 61,
+          "evidence": "https://",
+          "context": "        image_url=\"https://aka.ms/azsdk/image-analysis/sample.jpg\",",
+          "disposition": "accepted",
+          "reason": "Placeholder Cognitive Services endpoint, a Microsoft-hosted sample image URL and an example.com image in sample code, plus a Microsoft Learn link; the agent is not told to fetch them."
+        },
+        {
+          "type": "credential-access",
+          "line": 66,
+          "evidence": "API Key",
+          "context": "### Legacy: API Key (existing keyed deployments)",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential and legacy AzureKeyCredential(os.environ['VISION_KEY']) in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 78,
+          "evidence": "credential",
+          "context": "    credential=AzureKeyCredential(os.environ[\"VISION_KEY\"]),",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential and legacy AzureKeyCredential(os.environ['VISION_KEY']) in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 81,
+          "evidence": "https://",
+          "context": "        image_url=\"https://aka.ms/azsdk/image-analysis/sample.jpg\",",
+          "disposition": "accepted",
+          "reason": "Placeholder Cognitive Services endpoint, a Microsoft-hosted sample image URL and an example.com image in sample code, plus a Microsoft Learn link; the agent is not told to fetch them."
+        },
+        {
+          "type": "network-access",
+          "line": 91,
+          "evidence": "https://",
+          "context": "image_url = \"https://example.com/image.jpg\"",
+          "disposition": "accepted",
+          "reason": "Placeholder Cognitive Services endpoint, a Microsoft-hosted sample image URL and an example.com image in sample code, plus a Microsoft Learn link; the agent is not told to fetch them."
+        },
+        {
+          "type": "credential-access",
+          "line": 237,
+          "evidence": "credential",
+          "context": "    async with DefaultAzureCredential() as credential:",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential and legacy AzureKeyCredential(os.environ['VISION_KEY']) in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 240,
+          "evidence": "credential",
+          "context": "            credential=credential",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential and legacy AzureKeyCredential(os.environ['VISION_KEY']) in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 240,
+          "evidence": "credential",
+          "context": "            credential=credential",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential and legacy AzureKeyCredential(os.environ['VISION_KEY']) in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 286,
+          "evidence": "credential",
+          "context": "2. **Always use context managers for clients and async credentials.** Wrap every client in `with ImageAnalysisClient(...) as client:` (sync) or `async with ImageAnalysisClient(...) as client:` (async). For async `DefaultAzureCredential` fro",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential and legacy AzureKeyCredential(os.environ['VISION_KEY']) in sample code; no instruction to read, print, or send real secrets."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,178 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "harperaa/security-prompts-threat-modeling",
+  "source": {
+    "repo": "harperaa/secure-claude-skills",
+    "path": "security-prompts/threat-modeling",
+    "revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223"
+  },
+  "review": {
+    "path": "catalog/reviews/harperaa__security-prompts-threat-modeling.json",
+    "sha256": "acb3aecf678b3a5371e67210c860483ef32f55e5e1e99902cae1eb34b23e7397"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "credential-access",
+        "line": 64,
+        "evidence": "Credential",
+        "context": "- Credential management?",
+        "file": "03_architecture_impact.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 99,
+        "evidence": "credential",
+        "context": "- Risks: Redis vulnerabilities, credential theft, network exposure",
+        "file": "03_architecture_impact.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 161,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "05_security_tests.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 59,
+        "evidence": "API Key",
+        "context": "**5. API Key Security**:",
+        "file": "07_payment_security.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 61,
+        "evidence": "secret",
+        "context": "- Are publishable and secret keys used correctly?",
+        "file": "07_payment_security.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 83,
+        "evidence": "secret",
+        "context": "- ❌ Exposing secret API keys client-side",
+        "file": "07_payment_security.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 100,
+        "evidence": "Secret",
+        "context": "- [ ] Secret key used server-side only",
+        "file": "07_payment_security.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 132,
+        "evidence": "Secret",
+        "context": "- 🚨 Secret keys exposed",
+        "file": "07_payment_security.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 159,
+        "evidence": "secret",
+        "context": "- ❌ Expose secret keys client-side",
+        "file": "07_payment_security.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 164,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "07_payment_security.md"
+      },
+      {
+        "type": "network-access",
+        "line": 166,
+        "evidence": "curl",
+        "context": "curl -X POST http://localhost:3000/api/webhooks/stripe \\",
+        "file": "07_payment_security.md"
+      },
+      {
+        "type": "network-access",
+        "line": 166,
+        "evidence": "http://",
+        "context": "curl -X POST http://localhost:3000/api/webhooks/stripe \\",
+        "file": "07_payment_security.md"
+      }
+    ],
+    "total_bytes": 45705
+  },
+  "materialized_files": [
+    {
+      "path": "01_stride_analysis.md",
+      "sha256": "62c6a297674d429e9d4931af3c87582293910703a309c3c7fd27794647b3761f",
+      "bytes": 3838,
+      "mode": "100644"
+    },
+    {
+      "path": "02_feature_threats.md",
+      "sha256": "d7600313a4bd9a7b730ce7f2866af3774fe54a8b9499024f4965b6176b206005",
+      "bytes": 3393,
+      "mode": "100644"
+    },
+    {
+      "path": "03_architecture_impact.md",
+      "sha256": "50ba020df62636ce8dc4a9b98bbae1f36415349b6c675107847425fdd6e145a8",
+      "bytes": 4103,
+      "mode": "100644"
+    },
+    {
+      "path": "04_code_review.md",
+      "sha256": "4c9efeec4303a9df16ca96f5d9f338f81836c81135aaa24caea6bfb0c313e0b2",
+      "bytes": 4009,
+      "mode": "100644"
+    },
+    {
+      "path": "05_security_tests.md",
+      "sha256": "34ad5f88239ff89815a3eaf88fa448713f1cc6d8ce4dd2b78227f1b85370963c",
+      "bytes": 4988,
+      "mode": "100644"
+    },
+    {
+      "path": "06_owasp_check.md",
+      "sha256": "eb4a9a96337cd3eef44dfcb8526c10f722988262493fca09a91d052b19782036",
+      "bytes": 4539,
+      "mode": "100644"
+    },
+    {
+      "path": "07_payment_security.md",
+      "sha256": "bb1febde85846e7c346a8a2b8a66a7feff9f94d14c1234ff7da70e88fa3c9163",
+      "bytes": 5637,
+      "mode": "100644"
+    },
+    {
+      "path": "08_update_model.md",
+      "sha256": "824403b3d30857dfb6fb5be103137e649101e353fd631c86a3db22368ca26ed1",
+      "bytes": 2408,
+      "mode": "100644"
+    },
+    {
+      "path": "LICENSE.txt",
+      "sha256": "e8f0d88e88dafeb5ba3503df8babaf5ef1c49323d6c1751c09989d29740fa919",
+      "bytes": 1069,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "1affbca2989abc173ea403746df43733c573510d06405fec7bad7b5d191f65db",
+      "bytes": 11721,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 45705
+}

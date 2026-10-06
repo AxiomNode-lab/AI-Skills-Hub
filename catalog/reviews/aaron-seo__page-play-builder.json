@@ -1,0 +1,165 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "aaron-seo/page-play-builder",
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "aaron-he-zhu/aaron-marketing-skills",
+    "path": "seo-geo/implement/page-play-builder",
+    "revision": "cc897fa9e1e3136eb6a301130e49d8d9d1c519b2"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "seo-geo/implement/page-play-builder",
+    "url": "https://api.github.com/repos/aaron-he-zhu/aaron-marketing-skills/git/trees/cc897fa9e1e3136eb6a301130e49d8d9d1c519b2?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "Apache-2.0",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/aaron-he-zhu/aaron-marketing-skills/blob/cc897fa9e1e3136eb6a301130e49d8d9d1c519b2/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "seo-geo",
+        "seo-geo/implement",
+        "seo-geo/implement/page-play-builder"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the Apache-2.0 license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares Apache-2.0 (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the Apache-2.0 notice condition; no NOTICE file exists, so section 4(d) adds no attribution text, and no file is modified.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "medium",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": false,
+      "network": false,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md and references/comparison.md, local.md, parasite.md, programmatic.md in full. Mode router that plans non-single-article SEO pages: programmatic (template x dataset page systems), parasite (publishing on third-party platforms that links back to an owned site), comparison (vs/alternative pages), and local (GBP, NAP, citations, location pages), each with its own guardrail.",
+      "Writes deliverables and a handoff summary to memory/content/ on user confirmation (SKILL.md:50-54,89). SKILL.md:73 describes a gated batch index push `python3 \"${CLAUDE_PLUGIN_ROOT}/scripts/connectors/indexpush.py\" indexnow --file new-urls.txt --key $INDEXNOW_KEY` (dry-run by default, `--live` to submit, only after the thin/duplicate guardrail passes); the script does not ship with this skill, so it cannot run from this artifact. Rated medium because of that described use of an environment secret against live indexing services and because parasite mode steers off-site publishing that needs user judgment; acceptable because the push is opt-in and unavailable standalone and all publishing is done by the user.",
+      "Guardrails are explicit and non-deceptive: parasite mode screens every placement against Google's site-reputation-abuse policy and platform ToS and rules out 'deceptive placements, fake reviews, hidden links, manipulated upvotes' (parasite.md:17-18,78-83); comparison mode requires an honesty rule and sourced or `[needs source]` competitor claims with no fabricated figures (comparison.md:17,21,98); programmatic mode requires real per-row data, N-gram dedup, and noindex for low-value pages (programmatic.md:96,147-158). Users should still review parasite-mode plans against current platform rules. Non-shipping optional pointers: ../../../references/skill-contract.md, humanizer-slop.md, platforms/*.md, ../../../CONNECTORS.md, ../../../SECURITY.md, and sibling skills including ../geo-content-optimizer/references/medium-github-surfaces.md."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "664cd12e1c315650bf14cb1385359d13d4724ac03940ac10918390ef78e4f5e7",
+      "bytes": 11347,
+      "mode": "100644",
+      "git_blob": "41889521f7dedb506da3ce1c9998b78965e45e6e",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root Apache-2.0 license, attached to carry its terms and notices.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 3,
+          "evidence": "http://",
+          "context": "                        http://www.apache.org/licenses/",
+          "disposition": "accepted",
+          "reason": "License text."
+        },
+        {
+          "type": "network-access",
+          "line": 195,
+          "evidence": "http://",
+          "context": "       http://www.apache.org/licenses/LICENSE-2.0",
+          "disposition": "accepted",
+          "reason": "License text."
+        }
+      ]
+    },
+    {
+      "path": "references/comparison.md",
+      "sha256": "e0753816c1844b0a71892bd1dc286527f0042721a9524446e1485af067e76643",
+      "bytes": 7491,
+      "mode": "100644",
+      "git_blob": "3cd4afd3d6d012192d3de26c949b5b6b65eb7ac6",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "references/local.md",
+      "sha256": "441a24e8e999358aa5e6a4df60b290913046c6334bceb1b3cbfba4b4c9340f8c",
+      "bytes": 5866,
+      "mode": "100644",
+      "git_blob": "25f1d2a4dbf31afafa920c86aa8331a2281344a8",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "references/parasite.md",
+      "sha256": "3b77026b81b17731f0cf5c860e218aea6ffe2dadd3ac2cae8f1fbb42fcfb0f10",
+      "bytes": 7235,
+      "mode": "100644",
+      "git_blob": "4f5974f576e89caf881766688a767e687d6ec1ca",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "references/programmatic.md",
+      "sha256": "b9ffaf307662d9759d89fbea9923b7a97883078f5ece3c1c3477f956099aab6d",
+      "bytes": 9872,
+      "mode": "100644",
+      "git_blob": "9d80b5989661fa35f2f32c889b5fea7908f42101",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "488194b1b359dc51fb196f362135145fbdc0861542d0d72f81005422da179c2e",
+      "bytes": 14832,
+      "mode": "100644",
+      "git_blob": "6471074fe02f72dea0711336060a46db4bd1c7f6",
+      "license": "Apache-2.0",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root Apache-2.0 license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 10,
+          "evidence": "https://",
+          "context": "homepage: \"https://github.com/aaron-he-zhu/aaron-marketing-skills\"",
+          "disposition": "accepted",
+          "reason": "Only the upstream homepage URL in front-matter metadata (SKILL.md:10,13); no instruction to fetch it."
+        },
+        {
+          "type": "network-access",
+          "line": 13,
+          "evidence": "https://",
+          "context": "metadata: {\"author\": \"aaron-he-zhu\", \"version\": \"20.1.0\", \"discipline\": \"seo-geo\", \"phase\": \"implement\", \"geo-relevance\": \"high\", \"hermes\": {\"tags\": [\"marketing\", \"seo-geo\", \"implement\"], \"category\": \"seo-geo\"}, \"openclaw\": {\"emoji\": \"🔍\", ",
+          "disposition": "accepted",
+          "reason": "Only the upstream homepage URL in front-matter metadata (SKILL.md:10,13); no instruction to fetch it."
+        }
+      ]
+    }
+  ]
+}

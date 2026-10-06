@@ -1,0 +1,386 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "microsoft/azure-storage-blob-py",
+  "status": "approved",
+  "reviewed_on": "2026-10-02",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/azure-sdk-python/skills/azure-storage-blob-py",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": ".github/plugins/azure-sdk-python/skills/azure-storage-blob-py",
+    "url": "https://api.github.com/repos/microsoft/skills/git/trees/84d8eaa8ae95930f55cdceb3e27196c795dab038?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/microsoft/skills/blob/84d8eaa8ae95930f55cdceb3e27196c795dab038/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        ".github",
+        ".github/plugins",
+        ".github/plugins/azure-sdk-python",
+        ".github/plugins/azure-sdk-python/skills",
+        ".github/plugins/azure-sdk-python/skills/azure-storage-blob-py"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT License with its copyright notice, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file; frontmatter declares license: MIT consistent with the repository-root MIT license. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "medium",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": false,
+      "package_install": true,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md, references/capabilities.md and references/non-hero-scenarios.md in full. Reference for the azure-storage-blob Python SDK: Entra ID auth, container/blob upload/download/list/delete, performance tuning, user-delegation SAS, properties/metadata, async client.",
+      "The only command is `pip install azure-storage-blob azure-identity` (line 20) for the user's project, which is why the risk is medium; the packages are official Azure SDK packages. All other content is sample code for the user's application; the agent is not told to read, print, or transmit real secrets; samples use DefaultAzureCredential/ManagedIdentityCredential and placeholder endpoints.",
+      "Sample code deletes blobs (lines 145-148) and overwrites blobs (overwrite=True) only when the user's code runs; the skill explicitly steers SAS generation to user-delegation keys rather than account keys. The async download sample at SKILL.md line 241 uses an undefined `credential` (fixed in references/non-hero-scenarios.md line 41); minor sample bug."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "git_blob": "79656060de00aa4659ad2c276d5be8830664d544",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry the copyright and permission notice.",
+      "findings": []
+    },
+    {
+      "path": "references/capabilities.md",
+      "sha256": "5f07b3f4925a40b16c7f5aaa4ad7e61524142a72a7d88de4031773297d67b942",
+      "bytes": 1310,
+      "mode": "100644",
+      "git_blob": "3a153a145649e0b74e4bb8c848720b682c39843a",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 30,
+          "evidence": "delete",
+          "context": "- Include cleanup/delete paths for created resources in examples.",
+          "disposition": "accepted",
+          "reason": "Hits are Blob service deletions (`delete_blob`, lines 142-148) in sample code and a checklist line about cleanup paths; no local file deletion is instructed."
+        }
+      ]
+    },
+    {
+      "path": "references/non-hero-scenarios.md",
+      "sha256": "b0ad5f98350ef38460ebda48b5ae2299b24a7b93dec149610ee5b10911533db6",
+      "bytes": 1621,
+      "mode": "100644",
+      "git_blob": "95d21b1b1c9dcda71fe8b6181ecefb2ade3b1b83",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "credential-access",
+          "line": 32,
+          "evidence": "credential",
+          "context": "    async with DefaultAzureCredential() as credential:",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage, context-manager guidance, and user-delegation SAS in sample code; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 33,
+          "evidence": "credential",
+          "context": "        async with BlobServiceClient(account_url, credential=credential) as client:",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage, context-manager guidance, and user-delegation SAS in sample code; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 33,
+          "evidence": "credential",
+          "context": "        async with BlobServiceClient(account_url, credential=credential) as client:",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage, context-manager guidance, and user-delegation SAS in sample code; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 41,
+          "evidence": "credential",
+          "context": "    async with DefaultAzureCredential() as credential:",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage, context-manager guidance, and user-delegation SAS in sample code; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 42,
+          "evidence": "credential",
+          "context": "        async with BlobServiceClient(account_url, credential=credential) as client:",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage, context-manager guidance, and user-delegation SAS in sample code; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 42,
+          "evidence": "credential",
+          "context": "        async with BlobServiceClient(account_url, credential=credential) as client:",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage, context-manager guidance, and user-delegation SAS in sample code; no instruction to read, print, or transmit secrets."
+        }
+      ]
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "036cde228f87b9e6aacbd3ec317bd504cb5639e04aec81f1b3ef631a9b240622",
+      "bytes": 9154,
+      "mode": "100644",
+      "git_blob": "31cd68bb85830a918a3115b67796d5f5daf0ef0c",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 19,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Two bash fences: the pip install line (19) and a placeholder environment-variable listing (25)."
+        },
+        {
+          "type": "package-install",
+          "line": 20,
+          "evidence": "pip install",
+          "context": "pip install azure-storage-blob azure-identity",
+          "disposition": "accepted",
+          "reason": "`pip install azure-storage-blob azure-identity` (line 20) installs official SDK packages for the user's project."
+        },
+        {
+          "type": "shell-execution",
+          "line": 25,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Two bash fences: the pip install line (19) and a placeholder environment-variable listing (25)."
+        },
+        {
+          "type": "network-access",
+          "line": 28,
+          "evidence": "https://",
+          "context": "AZURE_STORAGE_ACCOUNT_URL=https://<account>.blob.core.windows.net  # Alternative to account name",
+          "disposition": "accepted",
+          "reason": "Placeholder account URLs (https://<account>.blob.core.windows.net) and a Microsoft Learn link; nothing tells the agent to fetch them."
+        },
+        {
+          "type": "credential-access",
+          "line": 38,
+          "evidence": "credential",
+          "context": ">    - Production: set `AZURE_TOKEN_CREDENTIALS=prod` (or `AZURE_TOKEN_CREDENTIALS=<specific_credential>`) to constrain the credential chain to production-safe credentials.",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage, context-manager guidance, and user-delegation SAS in sample code; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 41,
+          "evidence": "credential",
+          "context": ">    - Async: `async with <Client>(...) as client:` **and** `async with DefaultAzureCredential() as credential:` (from `azure.identity.aio`)",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage, context-manager guidance, and user-delegation SAS in sample code; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 50,
+          "evidence": "credential",
+          "context": "credential = DefaultAzureCredential(require_envvar=True)",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage, context-manager guidance, and user-delegation SAS in sample code; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 51,
+          "evidence": "credential",
+          "context": "# Or use a specific credential directly in production:",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage, context-manager guidance, and user-delegation SAS in sample code; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 52,
+          "evidence": "credential",
+          "context": "# See https://learn.microsoft.com/python/api/overview/azure/identity-readme?view=azure-python#credential-classes",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage, context-manager guidance, and user-delegation SAS in sample code; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 52,
+          "evidence": "https://",
+          "context": "# See https://learn.microsoft.com/python/api/overview/azure/identity-readme?view=azure-python#credential-classes",
+          "disposition": "accepted",
+          "reason": "Placeholder account URLs (https://<account>.blob.core.windows.net) and a Microsoft Learn link; nothing tells the agent to fetch them."
+        },
+        {
+          "type": "credential-access",
+          "line": 53,
+          "evidence": "credential",
+          "context": "# credential = ManagedIdentityCredential()",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage, context-manager guidance, and user-delegation SAS in sample code; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 54,
+          "evidence": "https://",
+          "context": "account_url = \"https://<account>.blob.core.windows.net\"",
+          "disposition": "accepted",
+          "reason": "Placeholder account URLs (https://<account>.blob.core.windows.net) and a Microsoft Learn link; nothing tells the agent to fetch them."
+        },
+        {
+          "type": "credential-access",
+          "line": 56,
+          "evidence": "credential",
+          "context": "with BlobServiceClient(account_url, credential=credential) as blob_service_client:",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage, context-manager guidance, and user-delegation SAS in sample code; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 56,
+          "evidence": "credential",
+          "context": "with BlobServiceClient(account_url, credential=credential) as blob_service_client:",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage, context-manager guidance, and user-delegation SAS in sample code; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 142,
+          "evidence": "Delete",
+          "context": "### Delete Blob",
+          "disposition": "accepted",
+          "reason": "Hits are Blob service deletions (`delete_blob`, lines 142-148) in sample code and a checklist line about cleanup paths; no local file deletion is instructed."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 147,
+          "evidence": "Delete",
+          "context": "# Delete with snapshots",
+          "disposition": "accepted",
+          "reason": "Hits are Blob service deletions (`delete_blob`, lines 142-148) in sample code and a checklist line about cleanup paths; no local file deletion is instructed."
+        },
+        {
+          "type": "credential-access",
+          "line": 159,
+          "evidence": "credential",
+          "context": "    credential=credential,",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage, context-manager guidance, and user-delegation SAS in sample code; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 159,
+          "evidence": "credential",
+          "context": "    credential=credential,",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage, context-manager guidance, and user-delegation SAS in sample code; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 184,
+          "evidence": "https://",
+          "context": "account_url = \"https://<account>.blob.core.windows.net\"",
+          "disposition": "accepted",
+          "reason": "Placeholder account URLs (https://<account>.blob.core.windows.net) and a Microsoft Learn link; nothing tells the agent to fetch them."
+        },
+        {
+          "type": "credential-access",
+          "line": 186,
+          "evidence": "credential",
+          "context": "with BlobServiceClient(account_url, credential=DefaultAzureCredential()) as service:",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage, context-manager guidance, and user-delegation SAS in sample code; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 232,
+          "evidence": "credential",
+          "context": "    async with DefaultAzureCredential() as credential:",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage, context-manager guidance, and user-delegation SAS in sample code; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 233,
+          "evidence": "credential",
+          "context": "        async with BlobServiceClient(account_url, credential=credential) as client:",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage, context-manager guidance, and user-delegation SAS in sample code; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 233,
+          "evidence": "credential",
+          "context": "        async with BlobServiceClient(account_url, credential=credential) as client:",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage, context-manager guidance, and user-delegation SAS in sample code; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 241,
+          "evidence": "credential",
+          "context": "    async with BlobServiceClient(account_url, credential=credential) as client:",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage, context-manager guidance, and user-delegation SAS in sample code; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 241,
+          "evidence": "credential",
+          "context": "    async with BlobServiceClient(account_url, credential=credential) as client:",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage, context-manager guidance, and user-delegation SAS in sample code; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 251,
+          "evidence": "credential",
+          "context": "2. **Always use context managers for clients and async credentials.** Wrap every client in `with BlobServiceClient(...) as client:` (sync) or `async with BlobServiceClient(...) as client:` (async). For async `DefaultAzureCredential` from `a",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage, context-manager guidance, and user-delegation SAS in sample code; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 252,
+          "evidence": "credential",
+          "context": "3. **Use `DefaultAzureCredential`** for code that runs locally (instead of connection strings). Use a specific token credential for code that runs in Azure.",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage, context-manager guidance, and user-delegation SAS in sample code; no instruction to read, print, or transmit secrets."
+        }
+      ]
+    }
+  ]
+}

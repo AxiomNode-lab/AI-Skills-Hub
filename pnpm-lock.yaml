@@ -19,11 +19,18 @@ importers:
       '@ai-skills-hub/installer':
         specifier: workspace:*
         version: link:../installer
+      '@ai-skills-hub/server':
+        specifier: workspace:*
+        version: link:../server
       '@inquirer/prompts':
         specifier: ^8.7.2
         version: 8.7.2
 
-  packages/core: {}
+  packages/core:
+    dependencies:
+      yaml:
+        specifier: 2.9.1
+        version: 2.9.1
 
   packages/discovery:
     dependencies:
@@ -31,7 +38,11 @@ importers:
         specifier: workspace:*
         version: link:../core
 
-  packages/installer: {}
+  packages/installer:
+    dependencies:
+      '@ai-skills-hub/core':
+        specifier: workspace:*
+        version: link:../core
 
   packages/licenses: {}
 
@@ -40,6 +51,15 @@ importers:
   packages/plugin-export: {}
 
   packages/security: {}
+
+  packages/server:
+    dependencies:
+      '@ai-skills-hub/core':
+        specifier: workspace:*
+        version: link:../core
+      '@ai-skills-hub/discovery':
+        specifier: workspace:*
+        version: link:../discovery
 
 packages:
 
@@ -208,6 +228,11 @@ packages:
     resolution: {integrity: sha512-bzyZ1e88w9O1iNJbKnOlvYTrWPDl46O1bG0D3XInv+9tkPrxrN8jUUTiFlDkkmKWgn1M6CfIA13SuGqOa9Korw==}
     engines: {node: '>=14'}
 
+  yaml@2.9.1:
+    resolution: {integrity: sha512-3NxN8+78OdzbT7C/WjGsyfPAtJaN3FNDsWxv7Y7mcDsT/oOmgW8BpyQQFFBnvZE3j9Y2Sdz1ULFLezL7Eb2yFw==}
+    engines: {node: '>= 14.6'}
+    hasBin: true
+
 snapshots:
 
   '@inquirer/ansi@2.0.8': {}
@@ -324,3 +349,5 @@ snapshots:
   safer-buffer@2.1.2: {}
 
   signal-exit@4.1.0: {}
+
+  yaml@2.9.1: {}

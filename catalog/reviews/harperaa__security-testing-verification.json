@@ -1,0 +1,911 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "harperaa/security-testing-verification",
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "harperaa/secure-claude-skills",
+    "path": "security-testing",
+    "revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "security-testing",
+    "url": "https://api.github.com/repos/harperaa/secure-claude-skills/git/trees/c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/harperaa/secure-claude-skills/blob/c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "security-testing"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found; OWASP Testing Guide and scanner sites are linked only. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "medium",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "dynamic_execution": true,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md (715 lines) in full; it is the only file. A security verification guide for a Next.js/Clerk app: curl-based tests for rate limiting, CSRF (missing, valid, reused, invalid token), input validation, security headers, authentication/ownership/subscription gating and error verbosity; npm audit/outdated; online scanners; a pre-deployment checklist; a bash test-suite script and a GitHub Actions workflow; manual XSS/SQLi/CSRF checks against the user's own app.",
+      "Risk is medium because it has the agent create and run a `scripts/security-test.sh` that uses `eval` on its own fixed test command strings (SKILL.md:510-576), add a `.github/workflows/security.yml` CI job that runs `npm ci`, `npx wait-on` (unpinned npm download) and `pkill` (SKILL.md:587-634), and run npm audits. All of it targets the user's localhost or their own deployed domain; test payloads (XSS strings, `'; DROP TABLE users; --`, a self-hosted CSRF form) are standard negative tests for the user's own application, not attacks on third parties. Session-cookie tests use `<clerk-session-token>` placeholders.",
+      "Template dependence: tests assume Secure Vibe Coding OS endpoints and files (/api/test-rate-limit, /api/example-protected, /api/csrf with single-use tokens, `node scripts/test-rate-limit.js`, `scripts/security-check.sh` at SKILL.md:16-19, 375-382, 490, 555) that are not included. The manual curl equivalents for those steps are given inline, so the guidance works in other projects once endpoint paths are substituted; the two starter scripts will be unavailable.",
+      "Minor caveats: 'XSS sanitization' is described as stripping < and > (SKILL.md:156-158), which is weaker than output encoding; `export NODE_ENV=production` in the user's shell (SKILL.md:316) persists for later commands; the CI workflow pins Node 18, which is end-of-life."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "e8f0d88e88dafeb5ba3503df8babaf5ef1c49323d6c1751c09989d29740fa919",
+      "bytes": 1069,
+      "mode": "100644",
+      "git_blob": "346d6fb05afd34a37fb0b156a612166534ffc7d9",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "da1833a7d80ac2c1c8be7d9a46b56850e103d867afc0ce981502f16533fbf877",
+      "bytes": 15900,
+      "mode": "100644",
+      "git_blob": "04e3fceea4c278b7164a774fd334efcd078f84e6",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 16,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks running curl tests, npm audit/outdated, a generated security-test.sh, and starter scripts under scripts/ that are not bundled."
+        },
+        {
+          "type": "shell-execution",
+          "line": 46,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks running curl tests, npm audit/outdated, a generated security-test.sh, and starter scripts under scripts/ that are not bundled."
+        },
+        {
+          "type": "network-access",
+          "line": 50,
+          "evidence": "curl",
+          "context": "  curl -s -o /dev/null -w \"%{http_code}\\n\" \\",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "network-access",
+          "line": 51,
+          "evidence": "http://",
+          "context": "    http://localhost:3000/api/test-rate-limit",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "shell-execution",
+          "line": 62,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks running curl tests, npm audit/outdated, a generated security-test.sh, and starter scripts under scripts/ that are not bundled."
+        },
+        {
+          "type": "network-access",
+          "line": 65,
+          "evidence": "curl",
+          "context": "  curl http://localhost:3000/api/test-rate-limit",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "network-access",
+          "line": 65,
+          "evidence": "http://",
+          "context": "  curl http://localhost:3000/api/test-rate-limit",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "network-access",
+          "line": 72,
+          "evidence": "curl",
+          "context": "curl http://localhost:3000/api/test-rate-limit",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "network-access",
+          "line": 72,
+          "evidence": "http://",
+          "context": "curl http://localhost:3000/api/test-rate-limit",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "shell-execution",
+          "line": 81,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks running curl tests, npm audit/outdated, a generated security-test.sh, and starter scripts under scripts/ that are not bundled."
+        },
+        {
+          "type": "network-access",
+          "line": 82,
+          "evidence": "curl",
+          "context": "curl -X POST http://localhost:3000/api/example-protected \\",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "network-access",
+          "line": 82,
+          "evidence": "http://",
+          "context": "curl -X POST http://localhost:3000/api/example-protected \\",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "shell-execution",
+          "line": 94,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks running curl tests, npm audit/outdated, a generated security-test.sh, and starter scripts under scripts/ that are not bundled."
+        },
+        {
+          "type": "network-access",
+          "line": 96,
+          "evidence": "curl",
+          "context": "TOKEN=$(curl -s http://localhost:3000/api/csrf \\",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "network-access",
+          "line": 96,
+          "evidence": "http://",
+          "context": "TOKEN=$(curl -s http://localhost:3000/api/csrf \\",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "network-access",
+          "line": 100,
+          "evidence": "curl",
+          "context": "curl -X POST http://localhost:3000/api/example-protected \\",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "network-access",
+          "line": 100,
+          "evidence": "http://",
+          "context": "curl -X POST http://localhost:3000/api/example-protected \\",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "shell-execution",
+          "line": 111,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks running curl tests, npm audit/outdated, a generated security-test.sh, and starter scripts under scripts/ that are not bundled."
+        },
+        {
+          "type": "network-access",
+          "line": 113,
+          "evidence": "curl",
+          "context": "TOKEN=$(curl -s http://localhost:3000/api/csrf \\",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "network-access",
+          "line": 113,
+          "evidence": "http://",
+          "context": "TOKEN=$(curl -s http://localhost:3000/api/csrf \\",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "network-access",
+          "line": 117,
+          "evidence": "curl",
+          "context": "curl -X POST http://localhost:3000/api/example-protected \\",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "network-access",
+          "line": 117,
+          "evidence": "http://",
+          "context": "curl -X POST http://localhost:3000/api/example-protected \\",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "network-access",
+          "line": 123,
+          "evidence": "curl",
+          "context": "curl -X POST http://localhost:3000/api/example-protected \\",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "network-access",
+          "line": 123,
+          "evidence": "http://",
+          "context": "curl -X POST http://localhost:3000/api/example-protected \\",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "shell-execution",
+          "line": 133,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks running curl tests, npm audit/outdated, a generated security-test.sh, and starter scripts under scripts/ that are not bundled."
+        },
+        {
+          "type": "network-access",
+          "line": 134,
+          "evidence": "curl",
+          "context": "curl -X POST http://localhost:3000/api/example-protected \\",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "network-access",
+          "line": 134,
+          "evidence": "http://",
+          "context": "curl -X POST http://localhost:3000/api/example-protected \\",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "shell-execution",
+          "line": 149,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks running curl tests, npm audit/outdated, a generated security-test.sh, and starter scripts under scripts/ that are not bundled."
+        },
+        {
+          "type": "network-access",
+          "line": 151,
+          "evidence": "curl",
+          "context": "curl -X POST http://localhost:3000/api/example-protected \\",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "network-access",
+          "line": 151,
+          "evidence": "http://",
+          "context": "curl -X POST http://localhost:3000/api/example-protected \\",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "shell-execution",
+          "line": 163,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks running curl tests, npm audit/outdated, a generated security-test.sh, and starter scripts under scripts/ that are not bundled."
+        },
+        {
+          "type": "network-access",
+          "line": 165,
+          "evidence": "curl",
+          "context": "curl -X POST http://localhost:3000/api/example-protected \\",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "network-access",
+          "line": 165,
+          "evidence": "http://",
+          "context": "curl -X POST http://localhost:3000/api/example-protected \\",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "shell-execution",
+          "line": 181,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks running curl tests, npm audit/outdated, a generated security-test.sh, and starter scripts under scripts/ that are not bundled."
+        },
+        {
+          "type": "network-access",
+          "line": 182,
+          "evidence": "curl",
+          "context": "curl -X POST http://localhost:3000/api/contact \\",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "network-access",
+          "line": 182,
+          "evidence": "http://",
+          "context": "curl -X POST http://localhost:3000/api/contact \\",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "shell-execution",
+          "line": 202,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks running curl tests, npm audit/outdated, a generated security-test.sh, and starter scripts under scripts/ that are not bundled."
+        },
+        {
+          "type": "network-access",
+          "line": 203,
+          "evidence": "curl",
+          "context": "curl -X POST http://localhost:3000/api/contact \\",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "network-access",
+          "line": 203,
+          "evidence": "http://",
+          "context": "curl -X POST http://localhost:3000/api/contact \\",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "shell-execution",
+          "line": 216,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks running curl tests, npm audit/outdated, a generated security-test.sh, and starter scripts under scripts/ that are not bundled."
+        },
+        {
+          "type": "network-access",
+          "line": 217,
+          "evidence": "curl",
+          "context": "curl -I http://localhost:3000",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "network-access",
+          "line": 217,
+          "evidence": "http://",
+          "context": "curl -I http://localhost:3000",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "shell-execution",
+          "line": 228,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks running curl tests, npm audit/outdated, a generated security-test.sh, and starter scripts under scripts/ that are not bundled."
+        },
+        {
+          "type": "network-access",
+          "line": 230,
+          "evidence": "curl",
+          "context": "curl -I http://localhost:3000 | grep \"Content-Security-Policy\"",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "network-access",
+          "line": 230,
+          "evidence": "http://",
+          "context": "curl -I http://localhost:3000 | grep \"Content-Security-Policy\"",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "shell-execution",
+          "line": 240,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks running curl tests, npm audit/outdated, a generated security-test.sh, and starter scripts under scripts/ that are not bundled."
+        },
+        {
+          "type": "network-access",
+          "line": 242,
+          "evidence": "curl",
+          "context": "curl -I https://yourapp.com | grep \"Strict-Transport-Security\"",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "network-access",
+          "line": 242,
+          "evidence": "https://",
+          "context": "curl -I https://yourapp.com | grep \"Strict-Transport-Security\"",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "shell-execution",
+          "line": 250,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks running curl tests, npm audit/outdated, a generated security-test.sh, and starter scripts under scripts/ that are not bundled."
+        },
+        {
+          "type": "network-access",
+          "line": 251,
+          "evidence": "curl",
+          "context": "curl -I http://localhost:3000/dashboard",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "network-access",
+          "line": 251,
+          "evidence": "http://",
+          "context": "curl -I http://localhost:3000/dashboard",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "shell-execution",
+          "line": 261,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks running curl tests, npm audit/outdated, a generated security-test.sh, and starter scripts under scripts/ that are not bundled."
+        },
+        {
+          "type": "network-access",
+          "line": 263,
+          "evidence": "curl",
+          "context": "curl http://localhost:3000/api/protected-endpoint",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "network-access",
+          "line": 263,
+          "evidence": "http://",
+          "context": "curl http://localhost:3000/api/protected-endpoint",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "shell-execution",
+          "line": 274,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks running curl tests, npm audit/outdated, a generated security-test.sh, and starter scripts under scripts/ that are not bundled."
+        },
+        {
+          "type": "network-access",
+          "line": 276,
+          "evidence": "curl",
+          "context": "curl http://localhost:3000/api/protected-endpoint \\",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "network-access",
+          "line": 276,
+          "evidence": "http://",
+          "context": "curl http://localhost:3000/api/protected-endpoint \\",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "shell-execution",
+          "line": 284,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks running curl tests, npm audit/outdated, a generated security-test.sh, and starter scripts under scripts/ that are not bundled."
+        },
+        {
+          "type": "network-access",
+          "line": 286,
+          "evidence": "curl",
+          "context": "curl http://localhost:3000/api/posts/user-abc-post-123 \\",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "network-access",
+          "line": 286,
+          "evidence": "http://",
+          "context": "curl http://localhost:3000/api/posts/user-abc-post-123 \\",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "shell-execution",
+          "line": 298,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks running curl tests, npm audit/outdated, a generated security-test.sh, and starter scripts under scripts/ that are not bundled."
+        },
+        {
+          "type": "network-access",
+          "line": 300,
+          "evidence": "curl",
+          "context": "curl http://localhost:3000/api/premium/generate \\",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "network-access",
+          "line": 300,
+          "evidence": "http://",
+          "context": "curl http://localhost:3000/api/premium/generate \\",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "shell-execution",
+          "line": 314,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks running curl tests, npm audit/outdated, a generated security-test.sh, and starter scripts under scripts/ that are not bundled."
+        },
+        {
+          "type": "network-access",
+          "line": 319,
+          "evidence": "curl",
+          "context": "curl http://localhost:3000/api/error-test",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "network-access",
+          "line": 319,
+          "evidence": "http://",
+          "context": "curl http://localhost:3000/api/error-test",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "shell-execution",
+          "line": 330,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks running curl tests, npm audit/outdated, a generated security-test.sh, and starter scripts under scripts/ that are not bundled."
+        },
+        {
+          "type": "network-access",
+          "line": 332,
+          "evidence": "curl",
+          "context": "curl http://localhost:3000/api/error-test",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "network-access",
+          "line": 332,
+          "evidence": "http://",
+          "context": "curl http://localhost:3000/api/error-test",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "shell-execution",
+          "line": 347,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks running curl tests, npm audit/outdated, a generated security-test.sh, and starter scripts under scripts/ that are not bundled."
+        },
+        {
+          "type": "shell-execution",
+          "line": 357,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks running curl tests, npm audit/outdated, a generated security-test.sh, and starter scripts under scripts/ that are not bundled."
+        },
+        {
+          "type": "shell-execution",
+          "line": 366,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks running curl tests, npm audit/outdated, a generated security-test.sh, and starter scripts under scripts/ that are not bundled."
+        },
+        {
+          "type": "shell-execution",
+          "line": 375,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks running curl tests, npm audit/outdated, a generated security-test.sh, and starter scripts under scripts/ that are not bundled."
+        },
+        {
+          "type": "shell-execution",
+          "line": 376,
+          "evidence": "bash",
+          "context": "bash scripts/security-check.sh",
+          "disposition": "accepted",
+          "reason": "Runs starter script `scripts/security-check.sh`, which is not shipped with this skill."
+        },
+        {
+          "type": "shell-execution",
+          "line": 376,
+          "evidence": "sh",
+          "context": "bash scripts/security-check.sh",
+          "disposition": "accepted",
+          "reason": "Runs starter script `scripts/security-check.sh`, which is not shipped with this skill."
+        },
+        {
+          "type": "network-access",
+          "line": 388,
+          "evidence": "https://",
+          "context": "**Tool:** https://securityheaders.com/",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "network-access",
+          "line": 405,
+          "evidence": "https://",
+          "context": "**Tool:** https://observatory.mozilla.org/",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "network-access",
+          "line": 421,
+          "evidence": "https://",
+          "context": "**Tool:** https://www.ssllabs.com/ssltest/",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 474,
+          "evidence": "DELETE",
+          "context": "- [ ] All POST/PUT/DELETE routes have CSRF protection",
+          "disposition": "accepted",
+          "reason": "DELETE refers to HTTP methods and a delete-account endpoint used as the CSRF test target in the user's own app; no local file deletion."
+        },
+        {
+          "type": "network-access",
+          "line": 493,
+          "evidence": "curl",
+          "context": "- [ ] Check security headers: `curl -I https://yourapp.com`",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "network-access",
+          "line": 493,
+          "evidence": "https://",
+          "context": "- [ ] Check security headers: `curl -I https://yourapp.com`",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "shell-execution",
+          "line": 506,
+          "evidence": "sh",
+          "context": "### security-test.sh",
+          "disposition": "accepted",
+          "reason": "Heading for the security-test.sh the skill tells the agent to create; the script uses `eval` on fixed command strings and calls the unbundled `scripts/test-rate-limit.js`."
+        },
+        {
+          "type": "shell-execution",
+          "line": 510,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks running curl tests, npm audit/outdated, a generated security-test.sh, and starter scripts under scripts/ that are not bundled."
+        },
+        {
+          "type": "shell-execution",
+          "line": 511,
+          "evidence": "bash",
+          "context": "#!/bin/bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks running curl tests, npm audit/outdated, a generated security-test.sh, and starter scripts under scripts/ that are not bundled."
+        },
+        {
+          "type": "network-access",
+          "line": 559,
+          "evidence": "curl",
+          "context": "run_test \"X-Frame-Options\" \"curl -I http://localhost:3000\" \"X-Frame-Options: DENY\"",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "network-access",
+          "line": 559,
+          "evidence": "http://",
+          "context": "run_test \"X-Frame-Options\" \"curl -I http://localhost:3000\" \"X-Frame-Options: DENY\"",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "network-access",
+          "line": 560,
+          "evidence": "curl",
+          "context": "run_test \"X-Content-Type-Options\" \"curl -I http://localhost:3000\" \"X-Content-Type-Options: nosniff\"",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "network-access",
+          "line": 560,
+          "evidence": "http://",
+          "context": "run_test \"X-Content-Type-Options\" \"curl -I http://localhost:3000\" \"X-Content-Type-Options: nosniff\"",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "network-access",
+          "line": 561,
+          "evidence": "curl",
+          "context": "run_test \"Content-Security-Policy\" \"curl -I http://localhost:3000\" \"Content-Security-Policy\"",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "network-access",
+          "line": 561,
+          "evidence": "http://",
+          "context": "run_test \"Content-Security-Policy\" \"curl -I http://localhost:3000\" \"Content-Security-Policy\"",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "shell-execution",
+          "line": 579,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash blocks running curl tests, npm audit/outdated, a generated security-test.sh, and starter scripts under scripts/ that are not bundled."
+        },
+        {
+          "type": "shell-execution",
+          "line": 580,
+          "evidence": "bash",
+          "context": "bash scripts/security-test.sh",
+          "disposition": "accepted",
+          "reason": "Bash blocks running curl tests, npm audit/outdated, a generated security-test.sh, and starter scripts under scripts/ that are not bundled."
+        },
+        {
+          "type": "shell-execution",
+          "line": 580,
+          "evidence": "sh",
+          "context": "bash scripts/security-test.sh",
+          "disposition": "accepted",
+          "reason": "Bash blocks running curl tests, npm audit/outdated, a generated security-test.sh, and starter scripts under scripts/ that are not bundled."
+        },
+        {
+          "type": "network-access",
+          "line": 627,
+          "evidence": "http://",
+          "context": "        run: npx wait-on http://localhost:3000",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "shell-execution",
+          "line": 630,
+          "evidence": "bash",
+          "context": "        run: bash scripts/security-test.sh",
+          "disposition": "accepted",
+          "reason": "Bash blocks running curl tests, npm audit/outdated, a generated security-test.sh, and starter scripts under scripts/ that are not bundled."
+        },
+        {
+          "type": "shell-execution",
+          "line": 630,
+          "evidence": "sh",
+          "context": "        run: bash scripts/security-test.sh",
+          "disposition": "accepted",
+          "reason": "Bash blocks running curl tests, npm audit/outdated, a generated security-test.sh, and starter scripts under scripts/ that are not bundled."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 666,
+          "evidence": "delete",
+          "context": "   <form action=\"http://localhost:3000/api/delete-account\" method=\"POST\">",
+          "disposition": "accepted",
+          "reason": "A local CSRF test form posting to the user's own localhost delete-account endpoint to confirm it is blocked."
+        },
+        {
+          "type": "network-access",
+          "line": 666,
+          "evidence": "http://",
+          "context": "   <form action=\"http://localhost:3000/api/delete-account\" method=\"POST\">",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "network-access",
+          "line": 704,
+          "evidence": "https://",
+          "context": "- OWASP Testing Guide: https://owasp.org/www-project-web-security-testing-guide/",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "network-access",
+          "line": 705,
+          "evidence": "https://",
+          "context": "- Security Headers Scanner: https://securityheaders.com/",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "network-access",
+          "line": 706,
+          "evidence": "https://",
+          "context": "- Mozilla Observatory: https://observatory.mozilla.org/",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "network-access",
+          "line": 707,
+          "evidence": "https://",
+          "context": "- SSL Labs: https://www.ssllabs.com/ssltest/",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        },
+        {
+          "type": "network-access",
+          "line": 708,
+          "evidence": "https://",
+          "context": "- npm Audit: https://docs.npmjs.com/cli/v8/commands/npm-audit",
+          "disposition": "accepted",
+          "reason": "curl requests to the user's localhost:3000 app and their own deployed domain, plus links to securityheaders.com, Mozilla Observatory, SSL Labs, OWASP and npm docs."
+        }
+      ]
+    }
+  ]
+}

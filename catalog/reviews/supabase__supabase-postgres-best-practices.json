@@ -1,0 +1,1258 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "supabase/supabase-postgres-best-practices",
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "supabase/agent-skills",
+    "path": "skills/supabase-postgres-best-practices",
+    "revision": "c9be0e931b7930f7d02126d04774d904c381e7d7"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "skills/supabase-postgres-best-practices",
+    "url": "https://api.github.com/repos/supabase/agent-skills/git/trees/c9be0e931b7930f7d02126d04774d904c381e7d7?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/supabase/agent-skills/blob/c9be0e931b7930f7d02126d04774d904c381e7d7/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "skills",
+        "skills/supabase-postgres-best-practices"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT License with its copyright notice, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: SKILL.md declares license: MIT; no third-party copyright notice, other license grant, or copied third-party text found in any file (links to PostgreSQL and Supabase docs are citations only). A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "low",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": false,
+      "network": false,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md, CHANGELOG.md and all 34 files under references/ (including _contributing.md, _sections.md, _template.md) in full. The skill is a Supabase-maintained catalogue of Postgres rules (indexes, pooling, RLS, schema design, locking, pagination, monitoring), each with incorrect/correct SQL examples.",
+      "Guidance only shapes SQL the agent writes for the user's own database; no shell commands, installs, credentials, or network fetches. Examples include state-changing DDL/DML (ALTER SYSTEM, DROP TABLE on old partitions, DELETE cascade, REVOKE) presented as illustrative patterns, not instructions to run against a live database.",
+      "Minor inconsistencies: SKILL.md frontmatter says version 1.1.1 while CHANGELOG.md runs to 1.6.0 with repeated entries; the description mentions pg_cron, pgmq, pgvector and pg_restore but no reference file covers them. references/_contributing.md is contributor guidance (mentions `pnpm test`) and is not needed at runtime. security-privileges.md:42 uses placeholder password 'xxx'."
+    ]
+  },
+  "files": [
+    {
+      "path": "CHANGELOG.md",
+      "sha256": "751ad110037c85d400018c9894716a04fa46357ff55c22b1169b280752e19e88",
+      "bytes": 5684,
+      "mode": "100644",
+      "git_blob": "6d7d0d2acd380d09be9a4431037858149ce3496f",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 3,
+          "evidence": "https://",
+          "context": "## [1.6.0](https://github.com/supabase/agent-skills/compare/supabase-postgres-best-practices-v1.5.0...supabase-postgres-best-practices-v1.6.0) (2026-07-30)",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 8,
+          "evidence": "https://",
+          "context": "* add schema-constraints reference for safe migration patterns ([#30](https://github.com/supabase/agent-skills/issues/30)) ([9b236f3](https://github.com/supabase/agent-skills/commit/9b236f3ebd65d76a2c570f19931353da9c858d5a))",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 8,
+          "evidence": "https://",
+          "context": "* add schema-constraints reference for safe migration patterns ([#30](https://github.com/supabase/agent-skills/issues/30)) ([9b236f3](https://github.com/supabase/agent-skills/commit/9b236f3ebd65d76a2c570f19931353da9c858d5a))",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 9,
+          "evidence": "https://",
+          "context": "* using Supabase agent skills ([#12](https://github.com/supabase/agent-skills/issues/12)) ([7c2e389](https://github.com/supabase/agent-skills/commit/7c2e3894fddfde8eb6c77d2a8921904543b9be7a))",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 9,
+          "evidence": "https://",
+          "context": "* using Supabase agent skills ([#12](https://github.com/supabase/agent-skills/issues/12)) ([7c2e389](https://github.com/supabase/agent-skills/commit/7c2e3894fddfde8eb6c77d2a8921904543b9be7a))",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 14,
+          "evidence": "https://",
+          "context": "* correct broken reference link in postgres best practices skill ([#58](https://github.com/supabase/agent-skills/issues/58)) ([f4e2277](https://github.com/supabase/agent-skills/commit/f4e22777fd8573537297b568c16e5a45a25927da))",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 14,
+          "evidence": "https://",
+          "context": "* correct broken reference link in postgres best practices skill ([#58](https://github.com/supabase/agent-skills/issues/58)) ([f4e2277](https://github.com/supabase/agent-skills/commit/f4e22777fd8573537297b568c16e5a45a25927da))",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 15,
+          "evidence": "https://",
+          "context": "* cover SECURITY DEFINER, auth.role() deprecation, and BOLA in security checklist ([#85](https://github.com/supabase/agent-skills/issues/85)) ([133f43e](https://github.com/supabase/agent-skills/commit/133f43e8c2ffc48823ff0630c692cabecea3e3a",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 15,
+          "evidence": "https://",
+          "context": "* cover SECURITY DEFINER, auth.role() deprecation, and BOLA in security checklist ([#85](https://github.com/supabase/agent-skills/issues/85)) ([133f43e](https://github.com/supabase/agent-skills/commit/133f43e8c2ffc48823ff0630c692cabecea3e3a",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 16,
+          "evidence": "https://",
+          "context": "* **supabase-postgres-best-practices:** make skill description trigger-rich ([#194](https://github.com/supabase/agent-skills/issues/194)) ([3291216](https://github.com/supabase/agent-skills/commit/32912161e2732c3e5001c6811a76c1f8308ed0da))",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 16,
+          "evidence": "https://",
+          "context": "* **supabase-postgres-best-practices:** make skill description trigger-rich ([#194](https://github.com/supabase/agent-skills/issues/194)) ([3291216](https://github.com/supabase/agent-skills/commit/32912161e2732c3e5001c6811a76c1f8308ed0da))",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 18,
+          "evidence": "https://",
+          "context": "## [1.5.0](https://github.com/supabase/agent-skills/compare/supabase-postgres-best-practices-v1.4.0...supabase-postgres-best-practices-v1.5.0) (2026-07-30)",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 23,
+          "evidence": "https://",
+          "context": "* add schema-constraints reference for safe migration patterns ([#30](https://github.com/supabase/agent-skills/issues/30)) ([9b236f3](https://github.com/supabase/agent-skills/commit/9b236f3ebd65d76a2c570f19931353da9c858d5a))",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 23,
+          "evidence": "https://",
+          "context": "* add schema-constraints reference for safe migration patterns ([#30](https://github.com/supabase/agent-skills/issues/30)) ([9b236f3](https://github.com/supabase/agent-skills/commit/9b236f3ebd65d76a2c570f19931353da9c858d5a))",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 24,
+          "evidence": "https://",
+          "context": "* using Supabase agent skills ([#12](https://github.com/supabase/agent-skills/issues/12)) ([7c2e389](https://github.com/supabase/agent-skills/commit/7c2e3894fddfde8eb6c77d2a8921904543b9be7a))",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 24,
+          "evidence": "https://",
+          "context": "* using Supabase agent skills ([#12](https://github.com/supabase/agent-skills/issues/12)) ([7c2e389](https://github.com/supabase/agent-skills/commit/7c2e3894fddfde8eb6c77d2a8921904543b9be7a))",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 29,
+          "evidence": "https://",
+          "context": "* correct broken reference link in postgres best practices skill ([#58](https://github.com/supabase/agent-skills/issues/58)) ([f4e2277](https://github.com/supabase/agent-skills/commit/f4e22777fd8573537297b568c16e5a45a25927da))",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 29,
+          "evidence": "https://",
+          "context": "* correct broken reference link in postgres best practices skill ([#58](https://github.com/supabase/agent-skills/issues/58)) ([f4e2277](https://github.com/supabase/agent-skills/commit/f4e22777fd8573537297b568c16e5a45a25927da))",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 30,
+          "evidence": "https://",
+          "context": "* cover SECURITY DEFINER, auth.role() deprecation, and BOLA in security checklist ([#85](https://github.com/supabase/agent-skills/issues/85)) ([133f43e](https://github.com/supabase/agent-skills/commit/133f43e8c2ffc48823ff0630c692cabecea3e3a",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 30,
+          "evidence": "https://",
+          "context": "* cover SECURITY DEFINER, auth.role() deprecation, and BOLA in security checklist ([#85](https://github.com/supabase/agent-skills/issues/85)) ([133f43e](https://github.com/supabase/agent-skills/commit/133f43e8c2ffc48823ff0630c692cabecea3e3a",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 31,
+          "evidence": "https://",
+          "context": "* **supabase-postgres-best-practices:** make skill description trigger-rich ([#194](https://github.com/supabase/agent-skills/issues/194)) ([3291216](https://github.com/supabase/agent-skills/commit/32912161e2732c3e5001c6811a76c1f8308ed0da))",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 31,
+          "evidence": "https://",
+          "context": "* **supabase-postgres-best-practices:** make skill description trigger-rich ([#194](https://github.com/supabase/agent-skills/issues/194)) ([3291216](https://github.com/supabase/agent-skills/commit/32912161e2732c3e5001c6811a76c1f8308ed0da))",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 33,
+          "evidence": "https://",
+          "context": "## [1.4.0](https://github.com/supabase/agent-skills/compare/v1.3.0...v1.4.0) (2026-07-10)",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 38,
+          "evidence": "https://",
+          "context": "* add schema-constraints reference for safe migration patterns ([#30](https://github.com/supabase/agent-skills/issues/30)) ([9b236f3](https://github.com/supabase/agent-skills/commit/9b236f3ebd65d76a2c570f19931353da9c858d5a))",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 38,
+          "evidence": "https://",
+          "context": "* add schema-constraints reference for safe migration patterns ([#30](https://github.com/supabase/agent-skills/issues/30)) ([9b236f3](https://github.com/supabase/agent-skills/commit/9b236f3ebd65d76a2c570f19931353da9c858d5a))",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 39,
+          "evidence": "https://",
+          "context": "* using Supabase agent skills ([#12](https://github.com/supabase/agent-skills/issues/12)) ([7c2e389](https://github.com/supabase/agent-skills/commit/7c2e3894fddfde8eb6c77d2a8921904543b9be7a))",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 39,
+          "evidence": "https://",
+          "context": "* using Supabase agent skills ([#12](https://github.com/supabase/agent-skills/issues/12)) ([7c2e389](https://github.com/supabase/agent-skills/commit/7c2e3894fddfde8eb6c77d2a8921904543b9be7a))",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 44,
+          "evidence": "https://",
+          "context": "* correct broken reference link in postgres best practices skill ([#58](https://github.com/supabase/agent-skills/issues/58)) ([f4e2277](https://github.com/supabase/agent-skills/commit/f4e22777fd8573537297b568c16e5a45a25927da))",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 44,
+          "evidence": "https://",
+          "context": "* correct broken reference link in postgres best practices skill ([#58](https://github.com/supabase/agent-skills/issues/58)) ([f4e2277](https://github.com/supabase/agent-skills/commit/f4e22777fd8573537297b568c16e5a45a25927da))",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 45,
+          "evidence": "https://",
+          "context": "* cover SECURITY DEFINER, auth.role() deprecation, and BOLA in security checklist ([#85](https://github.com/supabase/agent-skills/issues/85)) ([133f43e](https://github.com/supabase/agent-skills/commit/133f43e8c2ffc48823ff0630c692cabecea3e3a",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 45,
+          "evidence": "https://",
+          "context": "* cover SECURITY DEFINER, auth.role() deprecation, and BOLA in security checklist ([#85](https://github.com/supabase/agent-skills/issues/85)) ([133f43e](https://github.com/supabase/agent-skills/commit/133f43e8c2ffc48823ff0630c692cabecea3e3a",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 47,
+          "evidence": "https://",
+          "context": "## [1.3.0](https://github.com/supabase/agent-skills/compare/v1.2.0...v1.3.0) (2026-06-05)",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 52,
+          "evidence": "https://",
+          "context": "* add schema-constraints reference for safe migration patterns ([#30](https://github.com/supabase/agent-skills/issues/30)) ([9b236f3](https://github.com/supabase/agent-skills/commit/9b236f3ebd65d76a2c570f19931353da9c858d5a))",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 52,
+          "evidence": "https://",
+          "context": "* add schema-constraints reference for safe migration patterns ([#30](https://github.com/supabase/agent-skills/issues/30)) ([9b236f3](https://github.com/supabase/agent-skills/commit/9b236f3ebd65d76a2c570f19931353da9c858d5a))",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 53,
+          "evidence": "https://",
+          "context": "* using Supabase agent skills ([#12](https://github.com/supabase/agent-skills/issues/12)) ([7c2e389](https://github.com/supabase/agent-skills/commit/7c2e3894fddfde8eb6c77d2a8921904543b9be7a))",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 53,
+          "evidence": "https://",
+          "context": "* using Supabase agent skills ([#12](https://github.com/supabase/agent-skills/issues/12)) ([7c2e389](https://github.com/supabase/agent-skills/commit/7c2e3894fddfde8eb6c77d2a8921904543b9be7a))",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 58,
+          "evidence": "https://",
+          "context": "* correct broken reference link in postgres best practices skill ([#58](https://github.com/supabase/agent-skills/issues/58)) ([f4e2277](https://github.com/supabase/agent-skills/commit/f4e22777fd8573537297b568c16e5a45a25927da))",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 58,
+          "evidence": "https://",
+          "context": "* correct broken reference link in postgres best practices skill ([#58](https://github.com/supabase/agent-skills/issues/58)) ([f4e2277](https://github.com/supabase/agent-skills/commit/f4e22777fd8573537297b568c16e5a45a25927da))",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 59,
+          "evidence": "https://",
+          "context": "* cover SECURITY DEFINER, auth.role() deprecation, and BOLA in security checklist ([#85](https://github.com/supabase/agent-skills/issues/85)) ([133f43e](https://github.com/supabase/agent-skills/commit/133f43e8c2ffc48823ff0630c692cabecea3e3a",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 59,
+          "evidence": "https://",
+          "context": "* cover SECURITY DEFINER, auth.role() deprecation, and BOLA in security checklist ([#85](https://github.com/supabase/agent-skills/issues/85)) ([133f43e](https://github.com/supabase/agent-skills/commit/133f43e8c2ffc48823ff0630c692cabecea3e3a",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 61,
+          "evidence": "https://",
+          "context": "## [1.2.0](https://github.com/supabase/agent-skills/compare/v1.1.1...v1.2.0) (2026-06-02)",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 66,
+          "evidence": "https://",
+          "context": "* add schema-constraints reference for safe migration patterns ([#30](https://github.com/supabase/agent-skills/issues/30)) ([9b236f3](https://github.com/supabase/agent-skills/commit/9b236f3ebd65d76a2c570f19931353da9c858d5a))",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 66,
+          "evidence": "https://",
+          "context": "* add schema-constraints reference for safe migration patterns ([#30](https://github.com/supabase/agent-skills/issues/30)) ([9b236f3](https://github.com/supabase/agent-skills/commit/9b236f3ebd65d76a2c570f19931353da9c858d5a))",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 67,
+          "evidence": "https://",
+          "context": "* using Supabase agent skills ([#12](https://github.com/supabase/agent-skills/issues/12)) ([7c2e389](https://github.com/supabase/agent-skills/commit/7c2e3894fddfde8eb6c77d2a8921904543b9be7a))",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 67,
+          "evidence": "https://",
+          "context": "* using Supabase agent skills ([#12](https://github.com/supabase/agent-skills/issues/12)) ([7c2e389](https://github.com/supabase/agent-skills/commit/7c2e3894fddfde8eb6c77d2a8921904543b9be7a))",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 72,
+          "evidence": "https://",
+          "context": "* correct broken reference link in postgres best practices skill ([#58](https://github.com/supabase/agent-skills/issues/58)) ([f4e2277](https://github.com/supabase/agent-skills/commit/f4e22777fd8573537297b568c16e5a45a25927da))",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 72,
+          "evidence": "https://",
+          "context": "* correct broken reference link in postgres best practices skill ([#58](https://github.com/supabase/agent-skills/issues/58)) ([f4e2277](https://github.com/supabase/agent-skills/commit/f4e22777fd8573537297b568c16e5a45a25927da))",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 73,
+          "evidence": "https://",
+          "context": "* cover SECURITY DEFINER, auth.role() deprecation, and BOLA in security checklist ([#85](https://github.com/supabase/agent-skills/issues/85)) ([133f43e](https://github.com/supabase/agent-skills/commit/133f43e8c2ffc48823ff0630c692cabecea3e3a",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 73,
+          "evidence": "https://",
+          "context": "* cover SECURITY DEFINER, auth.role() deprecation, and BOLA in security checklist ([#85](https://github.com/supabase/agent-skills/issues/85)) ([133f43e](https://github.com/supabase/agent-skills/commit/133f43e8c2ffc48823ff0630c692cabecea3e3a",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        }
+      ]
+    },
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "b65e575eb4f04a13c187d64e958321298e2ab84d67aa8428819f362056ba292c",
+      "bytes": 1065,
+      "mode": "100644",
+      "git_blob": "d3c9e94fbc6c28f66ecb5a01407d543c99c811b6",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry the copyright and permission notice.",
+      "findings": []
+    },
+    {
+      "path": "references/_contributing.md",
+      "sha256": "191e039e7d94764e6073410b513b559f9a594e0fdf0252a30c2a2986df2ab3bc",
+      "bytes": 4113,
+      "mode": "100644",
+      "git_blob": "1c055aff9ad2bf12cfe7edc0002f2f77fe6980d2",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 151,
+          "evidence": "https://",
+          "context": "[Postgres Indexes](https://www.postgresql.org/docs/current/indexes.html)",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        }
+      ]
+    },
+    {
+      "path": "references/_sections.md",
+      "sha256": "c9e992612b422c7122de0b7542ebc2450db283edaab08cfe86c6d657fcccccd5",
+      "bytes": 1682,
+      "mode": "100644",
+      "git_blob": "8ba57c23e8119e411fcc8a230cda08e695792cac",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": []
+    },
+    {
+      "path": "references/_template.md",
+      "sha256": "6299954250f212caabe339d752c3e5313a8e07d1a182a4e4b425baee91df1bd2",
+      "bytes": 1040,
+      "mode": "100644",
+      "git_blob": "91ace90e10a4d8ef354a82bb1994842e6979ebed",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 34,
+          "evidence": "https://",
+          "context": "Reference: [Postgres Docs](https://www.postgresql.org/docs/current/)",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        }
+      ]
+    },
+    {
+      "path": "references/advanced-full-text-search.md",
+      "sha256": "40c2606bbb4c4dce31308f201b24cc7f58c7df05b1d9c6856fe2b888d3b7cf28",
+      "bytes": 1468,
+      "mode": "100644",
+      "git_blob": "582cbeaada9378a280ad61f57e06c10d258e3c43",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 55,
+          "evidence": "https://",
+          "context": "Reference: [Full Text Search](https://supabase.com/docs/guides/database/full-text-search)",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        }
+      ]
+    },
+    {
+      "path": "references/advanced-jsonb-indexing.md",
+      "sha256": "24cacf6a8bc35901dd566d24502ce8e57f810a5c196b897e61d52726e521d106",
+      "bytes": 1444,
+      "mode": "100644",
+      "git_blob": "e3d261ea117fd7b1ad9c4f0d45308407b898ed5a",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 49,
+          "evidence": "https://",
+          "context": "Reference: [JSONB Indexes](https://www.postgresql.org/docs/current/datatype-json.html#JSON-INDEXING)",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        }
+      ]
+    },
+    {
+      "path": "references/conn-idle-timeout.md",
+      "sha256": "630588902c00fcec59a5988cc5d042f76dcf2c923a535abfd8c47dca205eaed5",
+      "bytes": 1282,
+      "mode": "100644",
+      "git_blob": "40b9cc50dd12cf347ed189fac965673b533f3f99",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 46,
+          "evidence": "https://",
+          "context": "Reference: [Connection Timeouts](https://www.postgresql.org/docs/current/runtime-config-client.html#GUC-IDLE-IN-TRANSACTION-SESSION-TIMEOUT)",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        }
+      ]
+    },
+    {
+      "path": "references/conn-limits.md",
+      "sha256": "11b2a67a7c7679cbbc5d807bbb17e69c98484a581d0c8b929c03408f412b81b2",
+      "bytes": 1325,
+      "mode": "100644",
+      "git_blob": "cb3e400c0234e7e9196c1650423faad66375b70b",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 44,
+          "evidence": "https://",
+          "context": "Reference: [Database Connections](https://supabase.com/docs/guides/platform/performance#connection-management)",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        }
+      ]
+    },
+    {
+      "path": "references/conn-pooling.md",
+      "sha256": "88cf086bf98ba865d2e9d0579974e1366b14157619d6a93e7da77be91084e4a5",
+      "bytes": 1382,
+      "mode": "100644",
+      "git_blob": "e2ebd581d3c85bff0a077e8d9a2cb562d2513d03",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 41,
+          "evidence": "https://",
+          "context": "Reference: [Connection Pooling](https://supabase.com/docs/guides/database/connecting-to-postgres#connection-pooler)",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        }
+      ]
+    },
+    {
+      "path": "references/conn-prepared-statements.md",
+      "sha256": "174e9332fe3dda5c99b2b00159fb1915ae36c00bab3a7882c14e73e4344e946e",
+      "bytes": 1529,
+      "mode": "100644",
+      "git_blob": "555547d834e35b5059152dfb2288eca5e9838ea0",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 46,
+          "evidence": "https://",
+          "context": "Reference: [Prepared Statements with Pooling](https://supabase.com/docs/guides/database/connecting-to-postgres#connection-pool-modes)",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        }
+      ]
+    },
+    {
+      "path": "references/data-batch-inserts.md",
+      "sha256": "531933b82d6a622d0fae29e0ea80be6fe5d78655adf2804c271ea84a1930de37",
+      "bytes": 1287,
+      "mode": "100644",
+      "git_blob": "997947cb17bfed67f29eaa8da2a58de2306cc2c1",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 54,
+          "evidence": "https://",
+          "context": "Reference: [COPY](https://www.postgresql.org/docs/current/sql-copy.html)",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        }
+      ]
+    },
+    {
+      "path": "references/data-n-plus-one.md",
+      "sha256": "21a44905e5b16a42741892ec34bb1bfef124d049b140a76934a9acd0f46f5fc2",
+      "bytes": 1361,
+      "mode": "100644",
+      "git_blob": "2109186ff88b3ba1cc32789f81e2a00d345c6e3f",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 53,
+          "evidence": "https://",
+          "context": "Reference: [N+1 Query Problem](https://supabase.com/docs/guides/database/query-optimization)",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        }
+      ]
+    },
+    {
+      "path": "references/data-pagination.md",
+      "sha256": "73c9fa10a3d439bedea0e11b640bd25bf30dd50f0d9006cf85baf7c3151543fa",
+      "bytes": 1358,
+      "mode": "100644",
+      "git_blob": "633d839323612e212a833dd96828cb31fdfb39f8",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 50,
+          "evidence": "https://",
+          "context": "Reference: [Pagination](https://supabase.com/docs/guides/database/pagination)",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        }
+      ]
+    },
+    {
+      "path": "references/data-upsert.md",
+      "sha256": "2612af83b20a2701dde30ef1f8d7efd26b7e9eef84717226b8f038a2d2150ff7",
+      "bytes": 1390,
+      "mode": "100644",
+      "git_blob": "bc95e2305d955679446c70854cb2b56b183aa56d",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 50,
+          "evidence": "https://",
+          "context": "Reference: [INSERT ON CONFLICT](https://www.postgresql.org/docs/current/sql-insert.html#SQL-ON-CONFLICT)",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        }
+      ]
+    },
+    {
+      "path": "references/lock-advisory.md",
+      "sha256": "c88d259dbf81c3771438f59a165f7eab8acd09999dd370bdf807521c73f35aab",
+      "bytes": 1531,
+      "mode": "100644",
+      "git_blob": "572eaf0dcf518ac925c4cde41beb60b62852b79c",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 56,
+          "evidence": "https://",
+          "context": "Reference: [Advisory Locks](https://www.postgresql.org/docs/current/explicit-locking.html#ADVISORY-LOCKS)",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        }
+      ]
+    },
+    {
+      "path": "references/lock-deadlock-prevention.md",
+      "sha256": "09aee46f51d7178c8e55fe056cd5a94a64ba2c122fe418e6900cd99f297b2347",
+      "bytes": 1855,
+      "mode": "100644",
+      "git_blob": "974da5edec32f79de0fcdc771d4ef759dc3e049d",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 68,
+          "evidence": "https://",
+          "context": "[Deadlocks](https://www.postgresql.org/docs/current/explicit-locking.html#LOCKING-DEADLOCKS)",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        }
+      ]
+    },
+    {
+      "path": "references/lock-short-transactions.md",
+      "sha256": "5aa7f61095916986d39644b446cdbcd2bacca7ef698a3bb50b3f82dd60207602",
+      "bytes": 1350,
+      "mode": "100644",
+      "git_blob": "e6b8ef2633248a4aa4394628e48d8cb693e7e6ab",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 50,
+          "evidence": "https://",
+          "context": "Reference: [Transaction Management](https://www.postgresql.org/docs/current/tutorial-transactions.html)",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        }
+      ]
+    },
+    {
+      "path": "references/lock-skip-locked.md",
+      "sha256": "6c45077f430f29cd9cd8f448c94d578e827e7bd023fcdaf717a756acb116fa4b",
+      "bytes": 1353,
+      "mode": "100644",
+      "git_blob": "77bdbb97045010ce2fdbd90733e8f764be82881a",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 54,
+          "evidence": "https://",
+          "context": "Reference: [SELECT FOR UPDATE SKIP LOCKED](https://www.postgresql.org/docs/current/sql-select.html#SQL-FOR-UPDATE-SHARE)",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        }
+      ]
+    },
+    {
+      "path": "references/monitor-explain-analyze.md",
+      "sha256": "4cb67ffbf8e57f2e5b380b0beb4242528b513723ce314a2c2ffcf083bd4203d7",
+      "bytes": 1441,
+      "mode": "100644",
+      "git_blob": "542978c3bafc510fa8d7a8864cff994ad40be4d7",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 45,
+          "evidence": "https://",
+          "context": "Reference: [EXPLAIN](https://supabase.com/docs/guides/database/inspect)",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        }
+      ]
+    },
+    {
+      "path": "references/monitor-pg-stat-statements.md",
+      "sha256": "89dca99d4e894fcbdcac136be7ad9fbc03d1342904f065c1b198dc9cf495f098",
+      "bytes": 1418,
+      "mode": "100644",
+      "git_blob": "d7e82f1aacd105d53789eb6188d11e8ea39e7310",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 55,
+          "evidence": "https://",
+          "context": "Reference: [pg_stat_statements](https://supabase.com/docs/guides/database/extensions/pg_stat_statements)",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        }
+      ]
+    },
+    {
+      "path": "references/monitor-vacuum-analyze.md",
+      "sha256": "2892272011710eb49b3f185ec12f15ce9ce4c365792c672f6e2a9c90da426a1a",
+      "bytes": 1506,
+      "mode": "100644",
+      "git_blob": "e0e8ea0b7db8c1513a0d1605be477192bc21d91d",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 55,
+          "evidence": "https://",
+          "context": "Reference: [VACUUM](https://supabase.com/docs/guides/database/database-size#vacuum-operations)",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        }
+      ]
+    },
+    {
+      "path": "references/query-composite-indexes.md",
+      "sha256": "73e42424e671f0266e74fdb220db3196790f69fb43e2b19c7b9483eb4971b554",
+      "bytes": 1454,
+      "mode": "100644",
+      "git_blob": "fea64523fd5bb3696f943d486ccaf2aea75d27b8",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 44,
+          "evidence": "https://",
+          "context": "Reference: [Multicolumn Indexes](https://www.postgresql.org/docs/current/indexes-multicolumn.html)",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        }
+      ]
+    },
+    {
+      "path": "references/query-covering-indexes.md",
+      "sha256": "daf2a7f0477fb7357b62b5fb5b185b1995a77a186347e45cb780e25e7a7589b6",
+      "bytes": 1287,
+      "mode": "100644",
+      "git_blob": "9d2a4947b94516dd975e1044d132bb007280f478",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 40,
+          "evidence": "https://",
+          "context": "Reference: [Index-Only Scans](https://www.postgresql.org/docs/current/indexes-index-only-scans.html)",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        }
+      ]
+    },
+    {
+      "path": "references/query-index-types.md",
+      "sha256": "472a74f22c2df203bd0154999b3a5a0187cca2ab3d9a3978e305bb7c32f1a282",
+      "bytes": 1521,
+      "mode": "100644",
+      "git_blob": "93b32590f4bfe377869274f45414ae6e43d168fa",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 48,
+          "evidence": "https://",
+          "context": "Reference: [Index Types](https://www.postgresql.org/docs/current/indexes-types.html)",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        }
+      ]
+    },
+    {
+      "path": "references/query-missing-indexes.md",
+      "sha256": "91ad8b0ff4365704b4830a7f077c6f140f7140fd5d3ce5cd0b92b160cf9e25f1",
+      "bytes": 1218,
+      "mode": "100644",
+      "git_blob": "e6daace7dd368c75cdf87dc61be4afd6ff66cbbe",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 43,
+          "evidence": "https://",
+          "context": "Reference: [Query Optimization](https://supabase.com/docs/guides/database/query-optimization)",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        }
+      ]
+    },
+    {
+      "path": "references/query-partial-indexes.md",
+      "sha256": "6448982bc8558c6555284958edc331b29239c6a0130e6b4501dd6d4da607a6dd",
+      "bytes": 1347,
+      "mode": "100644",
+      "git_blob": "3e61a3417b9cce3c8cee99b39b78b7ebf495dd1f",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 45,
+          "evidence": "https://",
+          "context": "Reference: [Partial Indexes](https://www.postgresql.org/docs/current/indexes-partial.html)",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        }
+      ]
+    },
+    {
+      "path": "references/schema-constraints.md",
+      "sha256": "90e8efda3e9e81095e642911ad4aae2809d160f29414338fa997253238f510f8",
+      "bytes": 1880,
+      "mode": "100644",
+      "git_blob": "1d2ef8f9a968cd6fa882c7299134c30ace06373c",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 80,
+          "evidence": "https://",
+          "context": "Reference: [Constraints](https://www.postgresql.org/docs/current/ddl-constraints.html)",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        }
+      ]
+    },
+    {
+      "path": "references/schema-data-types.md",
+      "sha256": "e01b58c14c7f3f65d8ead580b9a4fcf70b83baaab0f9a5f83c569c9fd113e8c8",
+      "bytes": 1453,
+      "mode": "100644",
+      "git_blob": "f253a5819d05531371e04485ab84f552fbb32fbe",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 46,
+          "evidence": "https://",
+          "context": "Reference: [Data Types](https://www.postgresql.org/docs/current/datatype.html)",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        }
+      ]
+    },
+    {
+      "path": "references/schema-foreign-key-indexes.md",
+      "sha256": "7587713d12a65a212365459b3d39e4717d8a79e4073b10bd62f1054d8192c0dd",
+      "bytes": 1679,
+      "mode": "100644",
+      "git_blob": "6c3d6ff622b8a9df358f6673f323292e682ce87c",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 17,
+          "evidence": "delete",
+          "context": "  customer_id bigint references customers(id) on delete cascade,",
+          "disposition": "accepted",
+          "reason": "Matches are SQL DELETE/ON DELETE CASCADE keywords in example queries and comments, not file deletion or writes."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 22,
+          "evidence": "DELETE",
+          "context": "-- JOINs and ON DELETE CASCADE both require full table scan",
+          "disposition": "accepted",
+          "reason": "Matches are SQL DELETE/ON DELETE CASCADE keywords in example queries and comments, not file deletion or writes."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 24,
+          "evidence": "delete",
+          "context": "delete from customers where id = 123;          -- Locks table, scans all orders",
+          "disposition": "accepted",
+          "reason": "Matches are SQL DELETE/ON DELETE CASCADE keywords in example queries and comments, not file deletion or writes."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 32,
+          "evidence": "delete",
+          "context": "  customer_id bigint references customers(id) on delete cascade,",
+          "disposition": "accepted",
+          "reason": "Matches are SQL DELETE/ON DELETE CASCADE keywords in example queries and comments, not file deletion or writes."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 41,
+          "evidence": "delete",
+          "context": "delete from customers where id = 123;          -- Uses index, fast cascade",
+          "disposition": "accepted",
+          "reason": "Matches are SQL DELETE/ON DELETE CASCADE keywords in example queries and comments, not file deletion or writes."
+        },
+        {
+          "type": "network-access",
+          "line": 59,
+          "evidence": "https://",
+          "context": "Reference: [Foreign Keys](https://www.postgresql.org/docs/current/ddl-constraints.html#DDL-CONSTRAINTS-FK)",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        }
+      ]
+    },
+    {
+      "path": "references/schema-lowercase-identifiers.md",
+      "sha256": "4bc80f70865f2390872591f326c8a6be6456a0aeb5a7e5a2475d7cd9d43059ab",
+      "bytes": 1728,
+      "mode": "100644",
+      "git_blob": "f0072940b159ff64e0c2d4fbb499133cb8f49a66",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 55,
+          "evidence": "https://",
+          "context": "Reference: [Identifiers and Key Words](https://www.postgresql.org/docs/current/sql-syntax-lexical.html#SQL-SYNTAX-IDENTIFIERS)",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        }
+      ]
+    },
+    {
+      "path": "references/schema-partitioning.md",
+      "sha256": "541e13fbeaf4bb1485c9059d4c9417dbdb766cf16f4237cd63a04ada7ec45b90",
+      "bytes": 1548,
+      "mode": "100644",
+      "git_blob": "13137a03275fa45001c870a40b0069204d44e005",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 46,
+          "evidence": "DELETE",
+          "context": "drop table events_2023_01;  -- Instant vs DELETE taking hours",
+          "disposition": "accepted",
+          "reason": "Matches are SQL DELETE/ON DELETE CASCADE keywords in example queries and comments, not file deletion or writes."
+        },
+        {
+          "type": "network-access",
+          "line": 55,
+          "evidence": "https://",
+          "context": "Reference: [Table Partitioning](https://www.postgresql.org/docs/current/ddl-partitioning.html)",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        }
+      ]
+    },
+    {
+      "path": "references/schema-primary-keys.md",
+      "sha256": "3c8beabef82066f9a0838b926da0885117fd2d9a263aaf84cb5ca9e5f0d400e9",
+      "bytes": 1821,
+      "mode": "100644",
+      "git_blob": "fb0fbb166fac9ea38c127d807a263282acc2dc93",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 61,
+          "evidence": "https://",
+          "context": "[Identity Columns](https://www.postgresql.org/docs/current/sql-createtable.html#SQL-CREATETABLE-PARMS-GENERATED-IDENTITY)",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        }
+      ]
+    },
+    {
+      "path": "references/security-privileges.md",
+      "sha256": "095909274a4fb43df785d7144cf674eeb40284d2d45628f14af4108737b93663",
+      "bytes": 1566,
+      "mode": "100644",
+      "git_blob": "448ec345fab6c5a0116c584d65638b86d758c558",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 39,
+          "evidence": "DELETE",
+          "context": "-- No DELETE permission",
+          "disposition": "accepted",
+          "reason": "Matches are SQL DELETE/ON DELETE CASCADE keywords in example queries and comments, not file deletion or writes."
+        },
+        {
+          "type": "network-access",
+          "line": 54,
+          "evidence": "https://",
+          "context": "Reference: [Roles and Privileges](https://supabase.com/blog/postgres-roles-and-privileges)",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        }
+      ]
+    },
+    {
+      "path": "references/security-rls-basics.md",
+      "sha256": "e04dd1a3a382aafdaaa73fe9f7976352acdde6e90c2a2470d281b94d4f44b096",
+      "bytes": 1372,
+      "mode": "100644",
+      "git_blob": "c61e1a8503de113be0981759b82f5e37090f344c",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 50,
+          "evidence": "https://",
+          "context": "Reference: [Row Level Security](https://supabase.com/docs/guides/database/postgres/row-level-security)",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        }
+      ]
+    },
+    {
+      "path": "references/security-rls-performance.md",
+      "sha256": "2e1faeca7d5746e246b1c78f9492fe2a9cfa41c4d7fa1e23c402d58fa18ea014",
+      "bytes": 2103,
+      "mode": "100644",
+      "git_blob": "c3c7c416d57d9a46a9993f4e0c20f772fb64483d",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 63,
+          "evidence": "https://",
+          "context": "Reference: [RLS Performance](https://supabase.com/docs/guides/database/postgres/row-level-security#rls-performance-recommendations)",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        }
+      ]
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "ad65e776f45e761bafc609d3f506c77c1032225aa65e0c4c02f241b8071e5855",
+      "bytes": 3231,
+      "mode": "100644",
+      "git_blob": "6400792389dfcc82c81953054e546bd72ebcd259",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 60,
+          "evidence": "https://",
+          "context": "- https://www.postgresql.org/docs/current/",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 61,
+          "evidence": "https://",
+          "context": "- https://supabase.com/docs",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 62,
+          "evidence": "https://",
+          "context": "- https://wiki.postgresql.org/wiki/Performance_Optimization",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 63,
+          "evidence": "https://",
+          "context": "- https://supabase.com/docs/guides/database/overview",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        },
+        {
+          "type": "network-access",
+          "line": 64,
+          "evidence": "https://",
+          "context": "- https://supabase.com/docs/guides/auth/row-level-security",
+          "disposition": "accepted",
+          "reason": "Reference links to postgresql.org, supabase.com docs/blog and GitHub changelog/commit URLs; the skill never instructs fetching them."
+        }
+      ]
+    }
+  ]
+}

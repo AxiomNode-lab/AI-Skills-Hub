@@ -3,9 +3,9 @@
   "source": {
     "repo": "K-Dense-AI/scientific-agent-skills",
     "ref": "main",
-    "revision": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298",
+    "revision": "92ace75ac21efe19a620434e0ca4e356081fe807",
     "revision_type": "git-commit",
-    "tree_sha": "154988403bb5a18e9d3c0ce4e6d5e2e4b184a298"
+    "tree_sha": "92ace75ac21efe19a620434e0ca4e356081fe807"
   },
   "discovered_skills": [
     {
@@ -1625,7 +1625,7 @@
     {
       "path": "skills/bids/SKILL.md",
       "name": "bids",
-      "description": ">",
+      "description": "Organizes, queries, validates, and converts Brain Imaging Data Structure (BIDS) datasets. Supports organizing neuroscience and biomedical data (MRI, EEG, MEG, iEEG, PET, microscopy, NIRS, motion capture, EMG, MR spectroscopy, behavioral), querying BIDS layouts, validating compliance, converting DICOM to BIDS, writing metadata sidecars, or creating BIDS derivatives.",
       "skill_sha256": "e1ae63105ccc2e4da7c40e8a2f40d031dd8f2a77270be626df780f0c39eb0b1b",
       "license": {
         "spdx": "https://creativecommons.org/licenses/by/4.0/",
@@ -10379,54 +10379,6 @@
             "context": "Check [current pricing](https://modal.com/pricing) and workspace quotas before sizing a run. GPU use requires a payment method even when credits remain."
           },
           {
-            "type": "dynamic-execution",
-            "line": 92,
-            "evidence": "function(",
-            "context": "A Modal `App` groups related functions. Functions decorated with `@app.function()` run remotely in the cloud:"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 99,
-            "evidence": "function(",
-            "context": "@app.function()"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 124,
-            "evidence": "function(",
-            "context": "@app.function(image=image, gpu=\"L40S\")"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 147,
-            "evidence": "function(",
-            "context": "@app.function(gpu=\"H100\")"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 154,
-            "evidence": "function(",
-            "context": "@app.function(gpu=\"H100:4\")"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 159,
-            "evidence": "function(",
-            "context": "@app.function(gpu=[\"H100\", \"A100-80GB\", \"A100-40GB\"])"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 182,
-            "evidence": "function(",
-            "context": "@app.function(volumes={\"/data\": vol})"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 191,
-            "evidence": "function(",
-            "context": "@app.function(volumes={\"/data\": vol})"
-          },
-          {
             "type": "network-access",
             "line": 206,
             "evidence": "https://",
@@ -10436,12 +10388,6 @@
             "type": "credential-access",
             "line": 216,
             "evidence": "Secret",
-            "context": "@app.function(secrets=[modal.Secret.from_name(\"my-api-keys\")])"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 216,
-            "evidence": "function(",
             "context": "@app.function(secrets=[modal.Secret.from_name(\"my-api-keys\")])"
           },
           {
@@ -10476,51 +10422,9 @@
           },
           {
             "type": "dynamic-execution",
-            "line": 236,
-            "evidence": "function(",
-            "context": "@app.function(image=web_image)"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 254,
-            "evidence": "function(",
-            "context": "@app.function(schedule=modal.Cron(\"0 9 * * *\"))  # Daily at 9 AM UTC"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 259,
-            "evidence": "function(",
-            "context": "@app.function(schedule=modal.Period(hours=6))"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 277,
-            "evidence": "function(",
-            "context": "@app.function("
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 298,
-            "evidence": "function(",
-            "context": "@app.function()"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 319,
-            "evidence": "function(",
-            "context": "@app.function("
-          },
-          {
-            "type": "dynamic-execution",
             "line": 373,
             "evidence": "exec(",
             "context": "    proc = sb.exec(\"python\", \"/tmp/job.py\")"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 429,
-            "evidence": "function(",
-            "context": "@app.function("
           },
           {
             "type": "credential-access",
@@ -11881,7 +11785,7 @@
     {
       "path": "skills/onekgpd/SKILL.md",
       "name": "onekgpd",
-      "description": ">",
+      "description": "Queries the 1000 Genomes Project dataset (3,202 whole-genome-sequenced individuals, GRCh38) at the level of individual participants. Use when a question is about individuals or variants in the 1000 Genomes Project cohort: which individuals carry variants matching specific criteria in a gene or region, which individuals are homozygous-reference at a position, which variants exist in the dataset or carried by specified individuals in a gene or region, the relatedness between two specified individuals. Variants are returned with 1000 Genomes allele frequencies (AF), gnomAD v4.1 exome and genome AF, AlphaMissense score, and HGVSp annotations.",
       "skill_sha256": "6a7c0a90c42e899e818de866e843cf60d5434422fa69b910a7db9a06f25240e9",
       "license": {
         "spdx": "MIT",
@@ -16791,7 +16695,7 @@
     {
       "path": "skills/pyzotero/SKILL.md",
       "name": "pyzotero",
-      "description": ">-",
+      "description": "Manages Zotero reference libraries using the pyzotero Python client: retrieves, creates, updates, and deletes items, collections, tags, and attachments via the Zotero Web API v3 or local API. Applies when working with Zotero libraries programmatically, managing bibliographic references, exporting citations, searching library contents, uploading PDF attachments, or building research automation workflows that integrate with Zotero.",
       "skill_sha256": "82dec36c7294674f33d9b6003e523d1dc4da33ed1c7427dc4e53731119fc5f74",
       "license": {
         "spdx": "MIT",

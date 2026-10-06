@@ -11,11 +11,11 @@
 - [x] CI validation
 - [x] source manifests
 - [x] provenance pinning
-- [x] API
-- [x] discovery web UI
+- [x] read-only registry API (`skills-hub serve`)
+- [ ] discovery web UI
 - [x] safe install planning
 - [x] materialization workflow
-- [x] MCP Skills server foundation
+- [x] MCP server foundation (`skills-hub mcp`)
 
 ## 0.2 Trust pipeline
 - [x] effective-license evidence extraction in ingestion
@@ -26,6 +26,7 @@
 - [x] explicit source ingestion allowlist
 - [x] scheduled registry sync workflow
 - [x] release gate for security-verified materialized Skills
+- [x] strict YAML 1.2 frontmatter parsing (fails closed)
 - [ ] SPDX parser with exception handling
 - [ ] deeper script/reference/assets static analysis
 - [ ] dependency and package manifest inspection
@@ -40,6 +41,11 @@
 - [x] source-direct bridge
 - [x] native materialized installer
 - [x] plugin.json package generation
+- [x] standalone npm package (`@axiomnode-lab/skills-hub`) with tarball E2E
+- [x] `update` to the released revision (no rollback transactions)
+- [x] non-interactive `uninstall <id>`
+- [x] manifest-verified native installs
+- [ ] first npm release via trusted publishing
 - [ ] update/rollback transactions
 - [ ] isolated extraction sandbox
 - [ ] signed release artifacts
@@ -47,8 +53,8 @@
 ## 0.4 Discovery
 - [x] registry API
 - [x] search/filter foundation
-- [x] web catalog foundation
-- [x] skill detail view
+- [ ] web catalog foundation
+- [x] skill detail API
 - [ ] ranking based on adoption + maintenance + security + evals
 - [ ] publisher/source pages
 - [ ] changelog and release history
@@ -56,8 +62,8 @@
 - [ ] semantic/vector search
 
 ## 0.5 Interoperability
-- [x] MCP Skills list/get/read implementation
-- [x] MCP pagination and caching metadata
+- [x] MCP search/get tools and released-skill resources over stdio and HTTP
+- [ ] MCP pagination and caching metadata
 - [x] Agent Plugins package export
 - [x] agent-specific install targets
 - [ ] client support matrix generated from tested integrations

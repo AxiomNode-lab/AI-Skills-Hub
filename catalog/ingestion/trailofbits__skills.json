@@ -775,37 +775,24 @@
         "evidence_path": "LICENSE"
       },
       "security": {
-        "scan_status": "review-required",
-        "risk": "high",
+        "scan_status": "verified",
+        "risk": "none",
         "capabilities": {
           "shell": false,
           "network": false,
           "credentials": false,
-          "dynamic_execution": true,
+          "dynamic_execution": false,
           "package_install": false,
           "filesystem_write": false,
           "encoded_content": false
         },
-        "findings": [
-          {
-            "type": "dynamic-execution",
-            "line": 93,
-            "evidence": "function (",
-            "context": "   - Unusual permit function (DAI, RAI, GLM)"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 217,
-            "evidence": "function (",
-            "context": "**Mitigation:** Use multi-sig for pause function (already implemented ✓)"
-          }
-        ]
+        "findings": []
       },
       "capabilities": {
         "shell": false,
         "network": false,
         "credentials": false,
-        "dynamic_execution": true,
+        "dynamic_execution": false,
         "package_install": false
       }
     },
@@ -3170,7 +3157,7 @@
     {
       "path": "plugins/post-patch-validation/skills/post-patch-validation/SKILL.md",
       "name": "post-patch-validation",
-      "description": ">",
+      "description": "Validates security patches with reproducible baseline-versus-patched evidence, including original exploits, root-cause variants, behavior preservation, regressions, and newly introduced security failures. Use after a patch exists and before accepting, merging, or reporting it as fixed; also use when an AI-generated patch, remediation commit, pull request, or proposed upstream fix needs adversarial post-patch validation across any language.",
       "skill_sha256": "33b604f4d7d62eab393d710edb98b18505fcbe079c07c9428daa018f29439b54",
       "license": {
         "spdx": "CC-BY-SA-4.0",
@@ -3948,7 +3935,7 @@
     {
       "path": "plugins/static-analysis/skills/codeql/SKILL.md",
       "name": "codeql",
-      "description": ">-",
+      "description": "Scans a codebase for security vulnerabilities using CodeQL's interprocedural data flow and taint tracking analysis. Triggers on \"run codeql\", \"codeql scan\", \"build codeql database\", \"SAST scan\", \"taint analysis\", \"dataflow analysis\", or \"find vulnerabilities in this repo\". Covers Python, JavaScript/TypeScript, Go, Java/Kotlin, C/C++, C#, Ruby, and Swift. Supports \"run all\" (security-and-quality + security-experimental) and \"important only\" (high-precision) scan modes, and creates data extension models for project-specific sources and sinks. For fast single-file pattern matching, or when no build is available for a compiled language, use the semgrep skill; to parse SARIF that already exists rather than produce it, use the sarif-parsing skill.",
       "skill_sha256": "1a6d919ff80f83b262daf650552af6eb6d2c32b19d0c529b70efe0c116b675cf",
       "license": {
         "spdx": "CC-BY-SA-4.0",
@@ -4114,7 +4101,7 @@
     {
       "path": "plugins/static-analysis/skills/sarif-parsing/SKILL.md",
       "name": "sarif-parsing",
-      "description": ">-",
+      "description": "Parses and processes SARIF files from static analysis tools like CodeQL, Semgrep, or other scanners. Triggers on \"parse sarif\", \"read scan results\", \"aggregate findings\", \"deduplicate alerts\", or \"process sarif output\". Handles filtering, deduplication, format conversion, and CI/CD integration of SARIF data. Does NOT run scans — use the Semgrep or CodeQL skills for that.",
       "skill_sha256": "cc5f008f40ffb8a1ae03ebd32d7234de43e828293955a0bc251b76ba249554fa",
       "license": {
         "spdx": "CC-BY-SA-4.0",
@@ -4232,7 +4219,7 @@
     {
       "path": "plugins/static-analysis/skills/semgrep/SKILL.md",
       "name": "semgrep",
-      "description": ">-",
+      "description": "Runs a Semgrep security scan over a codebase: detects languages, selects rulesets, presents the plan for explicit approval, then runs every approved ruleset through scripts/run-scans.sh, which batches the semgrep processes and writes scans.json, and merges the output to SARIF. Supports two scan modes, \"run all\" for full ruleset coverage and \"important only\" for security findings at medium-to-high confidence and impact. Uses Semgrep Pro for cross-file taint analysis when it is available. Use when asked to scan code for vulnerabilities, run a security audit with Semgrep, find bugs, or perform static analysis. For the same scan without the approval gate, use the /static-analysis:semgrep-scan workflow.",
       "skill_sha256": "52162605593f871cf45f48f9cf00b7c2d7e0759ccb7507981088442b7cc5d76c",
       "license": {
         "spdx": "CC-BY-SA-4.0",
@@ -5974,12 +5961,12 @@
       },
       "security": {
         "scan_status": "review-required",
-        "risk": "high",
+        "risk": "medium",
         "capabilities": {
           "shell": true,
           "network": true,
           "credentials": false,
-          "dynamic_execution": true,
+          "dynamic_execution": false,
           "package_install": true,
           "filesystem_write": true,
           "encoded_content": false
@@ -6124,12 +6111,6 @@
             "context": "```bash"
           },
           {
-            "type": "dynamic-execution",
-            "line": 447,
-            "evidence": "function (",
-            "context": "- Reuse the same harness function (`LLVMFuzzerTestOneInput`) with a different main function"
-          },
-          {
             "type": "shell-execution",
             "line": 456,
             "evidence": "bash",
@@ -6237,7 +6218,7 @@
         "shell": true,
         "network": true,
         "credentials": false,
-        "dynamic_execution": true,
+        "dynamic_execution": false,
         "package_install": true
       }
     },
@@ -8146,12 +8127,12 @@
       },
       "security": {
         "scan_status": "review-required",
-        "risk": "high",
+        "risk": "low",
         "capabilities": {
           "shell": true,
           "network": true,
           "credentials": false,
-          "dynamic_execution": true,
+          "dynamic_execution": false,
           "package_install": false,
           "filesystem_write": true,
           "encoded_content": false
@@ -8200,12 +8181,6 @@
             "context": "    curl -o \"${TMP_WYCHEPROOF_FOLDER}${i}\" \"${BASE_URL}${i}\""
           },
           {
-            "type": "dynamic-execution",
-            "line": 307,
-            "evidence": "function (",
-            "context": "  it(`[${tcId + 1}] ${tests[tcId].comment}`, function () {"
-          },
-          {
             "type": "network-access",
             "line": 383,
             "evidence": "https://",
@@ -8235,14 +8210,14 @@
         "shell": false,
         "network": true,
         "credentials": false,
-        "dynamic_execution": true,
+        "dynamic_execution": false,
         "package_install": false
       }
     },
     {
       "path": "plugins/trailmark/skills/audit-augmentation/SKILL.md",
       "name": "audit-augmentation",
-      "description": ">",
+      "description": "Augments Trailmark code graphs with external audit findings from SARIF static analysis results, weAudit annotation files, and version-gated Trailmark 0.4.x binary-analysis graph exports. Maps findings to graph nodes by file and line overlap, creates severity-based subgraphs, and enables cross-referencing findings with pre-analysis data (blast radius, taint, etc.). Use when projecting SARIF results onto a code graph, overlaying weAudit annotations, importing binary graph findings, cross-referencing Semgrep, CodeQL, or binary-analysis findings with call graph data, or visualizing audit findings in the context of code structure.",
       "skill_sha256": "164ab881bfc63e77c782cfc6b67b2bb6887695425d3654c6c4d498004392b1f7",
       "license": {
         "spdx": "CC-BY-SA-4.0",
@@ -8358,7 +8333,7 @@
     {
       "path": "plugins/trailmark/skills/diagramming-code/SKILL.md",
       "name": "diagramming-code",
-      "description": ">",
+      "description": "Generates Mermaid diagrams from Trailmark code graphs. Produces call graphs, class hierarchies, module dependency maps, containment diagrams, complexity heatmaps, and attack surface data flow visualizations. Use when visualizing code architecture, drawing call graphs, generating class diagrams, creating dependency maps, producing complexity heatmaps, or visualizing data flow and attack surface paths as Mermaid diagrams.",
       "skill_sha256": "1d2397bd08607b686122078afe8d2742cca2a46f19c8e924e54f5886136d1053",
       "license": {
         "spdx": "CC-BY-SA-4.0",
@@ -8426,12 +8401,12 @@
       },
       "security": {
         "scan_status": "review-required",
-        "risk": "high",
+        "risk": "medium",
         "capabilities": {
           "shell": true,
           "network": false,
           "credentials": false,
-          "dynamic_execution": true,
+          "dynamic_execution": false,
           "package_install": true,
           "filesystem_write": true,
           "encoded_content": false
@@ -8472,12 +8447,6 @@
             "line": 180,
             "evidence": "bash",
             "context": "```bash"
-          },
-          {
-            "type": "dynamic-execution",
-            "line": 204,
-            "evidence": "function (",
-            "context": "to a production function (see"
           }
         ]
       },
@@ -8485,14 +8454,14 @@
         "shell": false,
         "network": false,
         "credentials": false,
-        "dynamic_execution": true,
+        "dynamic_execution": false,
         "package_install": true
       }
     },
     {
       "path": "plugins/trailmark/skills/graph-evolution/SKILL.md",
       "name": "graph-evolution",
-      "description": ">",
+      "description": "Compares Trailmark code graphs at two source code snapshots (git commits, tags, or directories) to surface security-relevant structural changes. Detects new attack paths, complexity shifts, blast radius growth, taint propagation changes, and privilege boundary modifications that text diffs miss. Use when comparing code between commits or tags, analyzing structural evolution, detecting attack surface growth, reviewing what changed between audit snapshots, or finding security-relevant changes that text diffs miss.",
       "skill_sha256": "009055f8ad529fd9fa3bfe58c510fae79cf81d8b3d16b31b27a86ec248797618",
       "license": {
         "spdx": "CC-BY-SA-4.0",
@@ -9099,7 +9068,7 @@
     {
       "path": "plugins/vulnerability-triage-brocards/skills/vulnerability-triage-brocards/SKILL.md",
       "name": "vulnerability-triage-brocards",
-      "description": ">-",
+      "description": "This skill should be used when the user asks to \"triage a vulnerability report\", \"assess a CVE\", \"evaluate a bug bounty submission\", \"decide if a finding is valid\", \"review a security finding\", \"dismiss a vulnerability\", \"should we fix this CVE\", \"prioritize a vulnerability report\", or needs to determine whether an incoming vulnerability report warrants investigation. Applies 7 brocards (rules of thumb) to systematically accept, dismiss, or request more information on vulnerability reports, or needs to filter raw findings from agentic vulnerability discovery pipelines before human review.",
       "skill_sha256": "b033c02d83f65b19b96c79e70fbf7cee58e51c8cbdd8f81d907ad2351a1433db",
       "license": {
         "spdx": "CC-BY-SA-4.0",
@@ -9172,7 +9141,7 @@
     {
       "path": "plugins/yara-authoring/skills/yara-rule-authoring/SKILL.md",
       "name": "yara-rule-authoring",
-      "description": ">",
+      "description": "Guides authoring of high-quality YARA-X detection rules for malware identification. Use when writing, reviewing, or optimizing YARA rules. Covers naming conventions, string selection, performance optimization, migration from legacy YARA, and false positive reduction. Triggers on: YARA, YARA-X, malware detection, threat hunting, IOC, signature, crx module, dex module.",
       "skill_sha256": "c23ee1aeabf26318e25e00903ef8f31c2de294d796c230081ce8bcf95a668f7c",
       "license": {
         "spdx": "CC-BY-SA-4.0",
@@ -9474,17 +9443,6 @@
       }
     },
     {
-      "path": "plugins/building-secure-contracts/skills/token-integration-analyzer/SKILL.md",
-      "type": "review-signal",
-      "capabilities": {
-        "shell": false,
-        "network": false,
-        "credentials": false,
-        "dynamic_execution": true,
-        "package_install": false
-      }
-    },
-    {
       "path": "plugins/devcontainer-setup/skills/devcontainer-setup/SKILL.md",
       "type": "review-signal",
       "capabilities": {
@@ -9557,7 +9515,7 @@
         "shell": true,
         "network": true,
         "credentials": false,
-        "dynamic_execution": true,
+        "dynamic_execution": false,
         "package_install": true
       }
     },
@@ -9573,24 +9531,13 @@
       }
     },
     {
-      "path": "plugins/testing-handbook-skills/skills/wycheproof/SKILL.md",
-      "type": "review-signal",
-      "capabilities": {
-        "shell": false,
-        "network": true,
-        "credentials": false,
-        "dynamic_execution": true,
-        "package_install": false
-      }
-    },
-    {
       "path": "plugins/trailmark/skills/genotoxic/SKILL.md",
       "type": "review-signal",
       "capabilities": {
         "shell": false,
         "network": false,
         "credentials": false,
-        "dynamic_execution": true,
+        "dynamic_execution": false,
         "package_install": true
       }
     },

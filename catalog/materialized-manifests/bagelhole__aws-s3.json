@@ -1,0 +1,116 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "bagelhole/aws-s3",
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "infrastructure/cloud-aws/aws-s3",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "review": {
+    "path": "catalog/reviews/bagelhole__aws-s3.json",
+    "sha256": "615905e914217cce8a66229e3e8e8708142b6d5fdc698ccb0f013cda91879778"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "shell-execution",
+        "line": 33,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 97,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 163,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 218,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 256,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 274,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 277,
+        "evidence": "delete",
+        "context": "  --delete \\",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 289,
+        "evidence": "Remove",
+        "context": "# Remove all objects with a prefix",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 407,
+        "evidence": "delete",
+        "context": "| Bucket delete fails | Bucket not empty or has versioned objects | Delete all objects and versions first; disable versioning |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 407,
+        "evidence": "Delete",
+        "context": "| Bucket delete fails | Bucket not empty or has versioned objects | Delete all objects and versions first; disable versioning |",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 12945
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "377f4dc615ec8bc6311bc6483965f8db63b03cb764e82191f95b0b9b5b64f1b9",
+      "bytes": 11877,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 12945
+}

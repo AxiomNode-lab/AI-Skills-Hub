@@ -23,13 +23,16 @@ export async function syncCommand() {
 
       console.log(`Syncing ${entry.name}...`);
       try {
-        execFileSync("git", ["pull", "--ff-only"], {
+        // Fast-forward only, over https/ssh only; the working copy is never merged or reset.
+        execFileSync("git", ["pull", "--ff-only", "--no-recurse-submodules"], {
           cwd: capPath,
-          stdio: "inherit"
+          stdio: "inherit",
+          env: { ...process.env, GIT_ALLOW_PROTOCOL: "https:ssh", GIT_TERMINAL_PROMPT: "0" }
         });
         syncCount += 1;
       } catch {
         console.error(`Failed to sync ${entry.name}; repository left unchanged.`);
+        process.exitCode = 1;
       }
     }
 
@@ -44,5 +47,6 @@ export async function syncCommand() {
       return;
     }
     console.error(`Failed to read capabilities cache: ${error.message}`);
+    process.exitCode = 1;
   }
 }

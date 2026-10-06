@@ -1,0 +1,144 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "bagelhole/gcp-cloud-sql",
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "infrastructure/cloud-gcp/gcp-cloud-sql",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "review": {
+    "path": "catalog/reviews/bagelhole__gcp-cloud-sql.json",
+    "sha256": "c005ae6d8f8add9c2d31c0162f292ef02a3c356659405599565f3af90e56ca7f"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "encoded_content": true
+    },
+    "findings": [
+      {
+        "type": "shell-execution",
+        "line": 27,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 43,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "encoded-content",
+        "line": 54,
+        "evidence": "base64",
+        "context": "  --root-password=$(openssl rand -base64 24) \\",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "encoded-content",
+        "line": 59,
+        "evidence": "base64",
+        "context": "  --password=$(openssl rand -base64 24)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 64,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "encoded-content",
+        "line": 72,
+        "evidence": "base64",
+        "context": "  --root-password=$(openssl rand -base64 24)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 77,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 97,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 114,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 129,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 130,
+        "evidence": "curl",
+        "context": "curl -o cloud-sql-proxy \\",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 131,
+        "evidence": "https://",
+        "context": "  https://storage.googleapis.com/cloud-sql-connectors/cloud-sql-proxy/v2.11.0/cloud-sql-proxy.linux.amd64",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 131,
+        "evidence": "\nchmod",
+        "context": "  https://storage.googleapis.com/cloud-sql-connectors/cloud-sql-proxy/v2.11.0/cloud-sql-proxy.linux.amd64",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 235,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 10097
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "33022ce0851de9c595755ebb960a4effc766b0373c2dee92de212cc88b32bdb9",
+      "bytes": 9029,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 10097
+}

@@ -2,7 +2,9 @@ const patterns = [
   { type: "shell-execution", regex: /\b(?:bash|sh|zsh|pwsh|powershell)\b|(?:^|\s)(?:sudo|chmod)\b|\brm\s+-rf\b/gi },
   { type: "network-access", regex: /\b(?:curl|wget)\b|https?:\/\//gi },
   { type: "credential-access", regex: /\b(?:api[_ -]?key|access[_ -]?token|secret|credential|process\.env)\b/gi },
-  { type: "dynamic-execution", regex: /\b(?:eval|exec|Function)\s*\(/gi },
+  { type: "dynamic-execution", regex: /\b(?:eval|exec)\s*\(/gi },
+  // Case-sensitive: the Function constructor, not the JavaScript `function` keyword.
+  { type: "dynamic-execution", regex: /\bFunction\s*\(/g },
   { type: "encoded-content", regex: /\bbase64\b|(?:decode|decrypt).*payload/gi },
   { type: "destructive-operation", regex: /\brm\s+-rf\b|\bformat\s+[A-Z]:/gi },
   { type: "package-install", regex: /\b(?:npm|pnpm|yarn|pip|uv|cargo)\s+(?:install|add)\b/gi },

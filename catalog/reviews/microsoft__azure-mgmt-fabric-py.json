@@ -1,0 +1,306 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "microsoft/azure-mgmt-fabric-py",
+  "status": "approved",
+  "reviewed_on": "2026-10-02",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/azure-sdk-python/skills/azure-mgmt-fabric-py",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": ".github/plugins/azure-sdk-python/skills/azure-mgmt-fabric-py",
+    "url": "https://api.github.com/repos/microsoft/skills/git/trees/84d8eaa8ae95930f55cdceb3e27196c795dab038?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/microsoft/skills/blob/84d8eaa8ae95930f55cdceb3e27196c795dab038/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        ".github",
+        ".github/plugins",
+        ".github/plugins/azure-sdk-python",
+        ".github/plugins/azure-sdk-python/skills",
+        ".github/plugins/azure-sdk-python/skills/azure-mgmt-fabric-py"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT License with its copyright notice, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file; frontmatter declares license: MIT consistent with the repository-root MIT license. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "medium",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": false,
+      "package_install": true,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md, references/capabilities.md and references/non-hero-scenarios.md in full. Reference for the azure-mgmt-fabric Python management SDK: create/get/list/update/suspend/resume/delete Microsoft Fabric capacities, name availability, SKUs, LRO handling.",
+      "The only commands are `pip install azure-mgmt-fabric` and `pip install azure-identity` (lines 19-20), which is why the risk is medium; both are official packages. Everything else is sample code using DefaultAzureCredential and placeholder subscription/resource-group env vars; the agent is not told to read, print, or send secrets.",
+      "These are management-plane samples: running them creates, scales or deletes billable Fabric capacities in the user's Azure subscription, so the user's code should only run them deliberately. Sample inconsistencies: SKILL.md line 89 uses FabricCapacityAdministration without importing it; SKILL.md uses CapacitySku where references/non-hero-scenarios.md line 9 uses RpSku; list_skus is called with different arguments in the two files."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "git_blob": "79656060de00aa4659ad2c276d5be8830664d544",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry the copyright and permission notice.",
+      "findings": []
+    },
+    {
+      "path": "references/capabilities.md",
+      "sha256": "fc97e16f18b7b8944869e70f30fea7b31f7e2acef9abf724a5a4db11b8f46af5",
+      "bytes": 2552,
+      "mode": "100644",
+      "git_blob": "2671e9f66eb0a617dbce8e4858de741371776092",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 22,
+          "evidence": "Delete",
+          "context": "- `Delete Capacity`: Dedicated example and implementation notes.  ",
+          "disposition": "accepted",
+          "reason": "Hits are the 'Delete Capacity' Azure management operation (begin_delete) and a checklist line about cleanup paths; no local file deletion."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 23,
+          "evidence": "delete",
+          "context": "  See: [`non-hero-scenarios.md#delete-capacity`](non-hero-scenarios.md#delete-capacity)",
+          "disposition": "accepted",
+          "reason": "Hits are the 'Delete Capacity' Azure management operation (begin_delete) and a checklist line about cleanup paths; no local file deletion."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 23,
+          "evidence": "delete",
+          "context": "  See: [`non-hero-scenarios.md#delete-capacity`](non-hero-scenarios.md#delete-capacity)",
+          "disposition": "accepted",
+          "reason": "Hits are the 'Delete Capacity' Azure management operation (begin_delete) and a checklist line about cleanup paths; no local file deletion."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 46,
+          "evidence": "delete",
+          "context": "- Include cleanup/delete paths for created resources in examples.",
+          "disposition": "accepted",
+          "reason": "Hits are the 'Delete Capacity' Azure management operation (begin_delete) and a checklist line about cleanup paths; no local file deletion."
+        }
+      ]
+    },
+    {
+      "path": "references/non-hero-scenarios.md",
+      "sha256": "fe26d746648270d4e4058d5aab978e198ee52ca7e7374d7e3ffafbfe755bda02",
+      "bytes": 3345,
+      "mode": "100644",
+      "git_blob": "7847e5878c1f6f2629bd108b1d7e5b7a884b07d2",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 52,
+          "evidence": "Delete",
+          "context": "## Delete Capacity",
+          "disposition": "accepted",
+          "reason": "Hits are the 'Delete Capacity' Azure management operation (begin_delete) and a checklist line about cleanup paths; no local file deletion."
+        }
+      ]
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "0f746e9585020361bef8893f523c07782e200840da2770f7bff85290e939954c",
+      "bytes": 8895,
+      "mode": "100644",
+      "git_blob": "31cb7e05a4012d5d0fabb2baa3adda43822eca7f",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 18,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Two bash fences: the pip install lines (18) and a placeholder environment-variable listing (25)."
+        },
+        {
+          "type": "package-install",
+          "line": 19,
+          "evidence": "pip install",
+          "context": "pip install azure-mgmt-fabric",
+          "disposition": "accepted",
+          "reason": "`pip install azure-mgmt-fabric` and `pip install azure-identity` (lines 19-20) install official SDK packages for the user's project."
+        },
+        {
+          "type": "package-install",
+          "line": 20,
+          "evidence": "pip install",
+          "context": "pip install azure-identity",
+          "disposition": "accepted",
+          "reason": "`pip install azure-mgmt-fabric` and `pip install azure-identity` (lines 19-20) install official SDK packages for the user's project."
+        },
+        {
+          "type": "shell-execution",
+          "line": 25,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Two bash fences: the pip install lines (18) and a placeholder environment-variable listing (25)."
+        },
+        {
+          "type": "credential-access",
+          "line": 37,
+          "evidence": "credential",
+          "context": ">    - Production: set `AZURE_TOKEN_CREDENTIALS=prod` (or `AZURE_TOKEN_CREDENTIALS=<specific_credential>`) to constrain the credential chain to production-safe credentials.",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage and auth guidance in sample code; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 40,
+          "evidence": "credential",
+          "context": ">    - Async: `async with <Client>(...) as client:` **and** `async with DefaultAzureCredential() as credential:` (from `azure.identity.aio`)",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage and auth guidance in sample code; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 50,
+          "evidence": "credential",
+          "context": "credential = DefaultAzureCredential(require_envvar=True)",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage and auth guidance in sample code; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 51,
+          "evidence": "credential",
+          "context": "# Or use a specific credential directly in production:",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage and auth guidance in sample code; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 52,
+          "evidence": "credential",
+          "context": "# See https://learn.microsoft.com/python/api/overview/azure/identity-readme?view=azure-python#credential-classes",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage and auth guidance in sample code; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 52,
+          "evidence": "https://",
+          "context": "# See https://learn.microsoft.com/python/api/overview/azure/identity-readme?view=azure-python#credential-classes",
+          "disposition": "accepted",
+          "reason": "A Microsoft Learn link in a code comment (line 52); the skill does not tell the agent to fetch it."
+        },
+        {
+          "type": "credential-access",
+          "line": 53,
+          "evidence": "credential",
+          "context": "# credential = ManagedIdentityCredential()",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage and auth guidance in sample code; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 56,
+          "evidence": "credential",
+          "context": "    credential=credential,",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage and auth guidance in sample code; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 56,
+          "evidence": "credential",
+          "context": "    credential=credential,",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage and auth guidance in sample code; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 74,
+          "evidence": "credential",
+          "context": "credential = DefaultAzureCredential()",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage and auth guidance in sample code; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 76,
+          "evidence": "credential",
+          "context": "    credential=credential,",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage and auth guidance in sample code; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 76,
+          "evidence": "credential",
+          "context": "    credential=credential,",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage and auth guidance in sample code; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "filesystem-write",
+          "line": 179,
+          "evidence": "Delete",
+          "context": "## Delete Capacity",
+          "disposition": "accepted",
+          "reason": "Hits are the 'Delete Capacity' Azure management operation (begin_delete) and a checklist line about cleanup paths; no local file deletion."
+        },
+        {
+          "type": "credential-access",
+          "line": 274,
+          "evidence": "credential",
+          "context": "2. **Always use context managers for clients and async credentials.** Wrap every client in `with Client(...) as client:` (sync) or `async with Client(...) as client:` (async). For async `DefaultAzureCredential` from `azure.identity.aio`, al",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage and auth guidance in sample code; no instruction to read, print, or transmit secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 275,
+          "evidence": "credential",
+          "context": "3. **Use `DefaultAzureCredential`** for code that runs locally. Use a specific token credential for code that runs in Azure.",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential/ManagedIdentityCredential usage and auth guidance in sample code; no instruction to read, print, or transmit secrets."
+        }
+      ]
+    }
+  ]
+}

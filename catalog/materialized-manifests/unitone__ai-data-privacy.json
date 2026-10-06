@@ -1,0 +1,165 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "unitone/ai-data-privacy",
+  "source": {
+    "repo": "UnitOneAI/SecuritySkills",
+    "path": "skills/ai-security/ai-data-privacy",
+    "revision": "70bc259bb01abb3015ad2ad859ad5253cbf0bcab"
+  },
+  "review": {
+    "path": "catalog/reviews/unitone__ai-data-privacy.json",
+    "sha256": "712aff1b89107eb714d02949aa03fd225f0da2ff448ffddd72b6f5057da818bc"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "low",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": false,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "filesystem-write",
+        "line": 124,
+        "evidence": "delete",
+        "context": "Grep: \"consent|opt.in|opt.out|data.subject|right.to.delete|erasure|forget\" in **/*.{py,yaml,yml,json}",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 132,
+        "evidence": "delete",
+        "context": "- **CCPA/CPRA:** California residents have the right to know what personal information is collected, to delete it, and to opt out of its sale or sharing. AI training on personal data constitutes \"processing\" under CPRA.",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 224,
+        "evidence": "sh",
+        "context": "Glob: **/backup*.{py,sh,yaml,yml}",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 233,
+        "evidence": "delete",
+        "context": "| Vector store embeddings | Embeddings can be partially inverted to recover source text; accumulate indefinitely | TTL per document; delete embeddings when source document access is revoked |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 234,
+        "evidence": "delete",
+        "context": "| Fine-tuning datasets | May contain PII; needed for reproducibility but not for ongoing inference | Archive with access controls after training; delete when no longer needed for retraining |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 235,
+        "evidence": "delete",
+        "context": "| Model checkpoints | Encode training data in weights; large storage footprint | Retain only production and rollback versions; delete intermediate checkpoints |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 275,
+        "evidence": "sh",
+        "context": "Glob: **/eval*.{py,sh}",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 467,
+        "evidence": "https://",
+        "context": "**NIST AI RMF 1.0:** The AI Risk Management Framework organizes risk management into four functions: GOVERN (policies, roles, culture), MAP (context, risk identification), MEASURE (risk analysis and tracking), and MANAGE (risk response and ",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 469,
+        "evidence": "https://",
+        "context": "**OWASP LLM02:2025 -- Sensitive Information Disclosure:** Covers risks where LLMs reveal confidential data including PII from training data (memorization), PII from inference-time context, system prompt content, and internal system details.",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 489,
+        "evidence": "https://",
+        "context": "- NIST AI Risk Management Framework 1.0 (January 2023) -- https://www.nist.gov/aiframework",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 490,
+        "evidence": "https://",
+        "context": "- OWASP Top 10 for LLM Applications (2025), LLM02: Sensitive Information Disclosure -- https://genai.owasp.org/llmrisk/llm02-sensitive-information-disclosure/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 491,
+        "evidence": "https://",
+        "context": "- EU AI Act, Regulation (EU) 2024/1689 -- https://eur-lex.europa.eu/eli/reg/2024/1689",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 492,
+        "evidence": "https://",
+        "context": "- GDPR, Regulation (EU) 2016/679 -- https://eur-lex.europa.eu/eli/reg/2016/679",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 493,
+        "evidence": "https://",
+        "context": "- CCPA/CPRA, California Civil Code Sec. 1798.100-199 -- https://leginfo.legislature.ca.gov/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 497,
+        "evidence": "https://",
+        "context": "- Microsoft Presidio (PII detection and anonymization) -- https://github.com/microsoft/presidio",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 498,
+        "evidence": "https://",
+        "context": "- NIST SP 800-188, De-Identifying Government Datasets -- https://csrc.nist.gov/publications/detail/sp/800-188/final",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 499,
+        "evidence": "https://",
+        "context": "- Article 29 Working Party, Guidelines on Data Protection Impact Assessment (WP 248) -- https://ec.europa.eu/newsroom/article29/items/611236",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 33223
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "66eb5ec637cc578833ddcbc870dbf46c6718fd83e985fad5f0f5cf30d60cf47d",
+      "bytes": 1067,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "81b3757f40e8127eb77cb0f4fa1c1ea584973ba12cb71f4b525d97f91ff90a32",
+      "bytes": 32156,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 33223
+}

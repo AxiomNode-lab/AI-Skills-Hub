@@ -1,0 +1,298 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "bagelhole/windows-hardening",
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "security/hardening/windows-hardening",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "review": {
+    "path": "catalog/reviews/bagelhole__windows-hardening.json",
+    "sha256": "77419846d5d1f2e699b0e33cfd84c91dbef4205ffdb61dbdb8a16ef526b8b8b3"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "shell-execution",
+        "line": 28,
+        "evidence": "PowerShell",
+        "context": "- PowerShell 5.1+ (built into Windows Server)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 34,
+        "evidence": "powershell",
+        "context": "```powershell",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 36,
+        "evidence": "https://",
+        "context": "# Download from: https://www.microsoft.com/en-us/download/details.aspx?id=55319",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 56,
+        "evidence": "powershell",
+        "context": "```powershell",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 64,
+        "evidence": "PowerShell",
+        "context": "# Or configure via PowerShell DSC",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 95,
+        "evidence": "Remove",
+        "context": "# Remove unnecessary local accounts",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 106,
+        "evidence": "PowerShell",
+        "context": "Install-WindowsFeature -Name RSAT-AD-PowerShell",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 116,
+        "evidence": "powershell",
+        "context": "```powershell",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 153,
+        "evidence": "credential",
+        "context": "# Disable LLMNR (prevent credential theft)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 183,
+        "evidence": "powershell",
+        "context": "```powershell",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 262,
+        "evidence": "powershell",
+        "context": "```powershell",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 268,
+        "evidence": "Credential",
+        "context": "auditpol /set /subcategory:\"Credential Validation\" /success:enable /failure:enable",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 308,
+        "evidence": "PowerShell",
+        "context": "# PowerShell Logging (Critical for forensics)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 312,
+        "evidence": "PowerShell",
+        "context": "New-Item -Path \"HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\PowerShell\\ScriptBlockLogging\" -Force",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 313,
+        "evidence": "PowerShell",
+        "context": "Set-ItemProperty -Path \"HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\PowerShell\\ScriptBlockLogging\" `",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 317,
+        "evidence": "PowerShell",
+        "context": "New-Item -Path \"HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\PowerShell\\ModuleLogging\" -Force",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 318,
+        "evidence": "PowerShell",
+        "context": "Set-ItemProperty -Path \"HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\PowerShell\\ModuleLogging\" `",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 320,
+        "evidence": "PowerShell",
+        "context": "New-Item -Path \"HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\PowerShell\\ModuleLogging\\ModuleNames\" -Force",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 321,
+        "evidence": "PowerShell",
+        "context": "Set-ItemProperty -Path \"HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\PowerShell\\ModuleLogging\\ModuleNames\" `",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 325,
+        "evidence": "PowerShell",
+        "context": "New-Item -Path \"HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\PowerShell\\Transcription\" -Force",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 326,
+        "evidence": "PowerShell",
+        "context": "Set-ItemProperty -Path \"HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\PowerShell\\Transcription\" `",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 328,
+        "evidence": "PowerShell",
+        "context": "Set-ItemProperty -Path \"HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\PowerShell\\Transcription\" `",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 330,
+        "evidence": "PowerShell",
+        "context": "Set-ItemProperty -Path \"HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\PowerShell\\Transcription\" `",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 339,
+        "evidence": "powershell",
+        "context": "```powershell",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 384,
+        "evidence": "credential",
+        "context": "# Block credential stealing from LSASS",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 421,
+        "evidence": "powershell",
+        "context": "```powershell",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 455,
+        "evidence": "Credential",
+        "context": "## Credential Guard",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 457,
+        "evidence": "powershell",
+        "context": "```powershell",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 459,
+        "evidence": "Credential",
+        "context": "# Enable Windows Credential Guard",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 474,
+        "evidence": "Credential",
+        "context": "# Verify Credential Guard status",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 481,
+        "evidence": "powershell",
+        "context": "```powershell",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 489,
+        "evidence": "PowerShell",
+        "context": "# Create default executable rules via PowerShell",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 524,
+        "evidence": "powershell",
+        "context": "```powershell",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 585,
+        "evidence": "Credential",
+        "context": "| Credential Guard breaks apps | Legacy auth protocols blocked | Identify apps using NTLM/CredSSP; migrate to Kerberos/modern auth |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 595,
+        "evidence": "Credential",
+        "context": "- Enable Credential Guard on all compatible hardware",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 598,
+        "evidence": "PowerShell",
+        "context": "- Enable PowerShell script block and module logging on all servers",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 25620
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "46d283f368da2e25067a7662770b6fdf9c682343ca340c9308c6dcde1d572400",
+      "bytes": 24552,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 25620
+}

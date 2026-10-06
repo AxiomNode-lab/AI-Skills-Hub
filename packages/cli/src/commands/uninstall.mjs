@@ -3,74 +3,84 @@ import fs from "node:fs";
 import path from "node:path";
 import { readInstallRecords, removeInstallRecord } from "../../../installer/src/state.mjs";
 import { getMCPConfigPath, removeMCPServer } from "../../../installer/src/adapters/MCPAdapter.mjs";
-import { resolveInstallRoot } from "../../../installer/src/targets.mjs";
+import { uninstallSkillRecord } from "../../../installer/src/native.mjs";
+import { UsageError } from "../errors.mjs";
 
-function safeInside(root, candidate) {
-  const r = path.resolve(root);
-  const c = path.resolve(candidate);
-  return c !== r && c.startsWith(r + path.sep);
+// Removes one Hub-managed installation. Skill directories are removed only if
+// they sit directly in the agent's install root, are not symlinks, and still
+// match the recorded file hashes (unless force is set); MCP entries only from
+// the agent's expected configuration file.
+export function removeInstallation(record, { scope, cwd = process.cwd(), force = false }) {
+  if (record.type === "mcp-server") {
+    const expectedConfig = path.resolve(getMCPConfigPath(record.agent, scope, cwd));
+    if (expectedConfig !== path.resolve(record.destination)) {
+      throw new Error("Refusing to modify an MCP configuration outside the expected agent scope.");
+    }
+    removeMCPServer(expectedConfig, record.name || record.skill_id);
+    removeInstallRecord(record.skill_id, scope, cwd);
+    return { id: record.skill_id, action: "removed", destination: expectedConfig };
+  }
+  const destination = path.resolve(record.destination);
+  if (fs.existsSync(destination) && fs.lstatSync(destination).isSymbolicLink()) {
+    throw new Error("Refusing to remove a symbolic-link installation.");
+  }
+  return uninstallSkillRecord(record.skill_id, { scope, cwd, force });
 }
 
-export async function uninstallCommand(options = {}) {
+export async function uninstallCommand(id, options = {}) {
   const scope = options.scope || "project";
   const records = readInstallRecords(scope);
-  const installedList = Object.values(records);
 
+  if (id) {
+    const record = records[id];
+    const output = (result) => {
+      if (options.json) console.log(JSON.stringify(result, null, 2));
+      else if (result.success) console.log(`Uninstalled ${id} (${result.destination}).`);
+      else console.error(`Not uninstalled: ${id}: ${result.reason}`);
+      if (!result.success) process.exitCode = 1;
+    };
+    if (!record) return output({ success: false, id, scope, reason: "not_installed_in_scope" });
+    if (options.agent && record.agent !== options.agent) {
+      return output({ success: false, id, scope, reason: `installed_for_agent_${record.agent}` });
+    }
+    try {
+      const result = removeInstallation(record, { scope, force: options.force === true });
+      return output({ success: true, id, scope, agent: record.agent, destination: result.destination });
+    } catch (error) {
+      return output({ success: false, id, scope, reason: error.message });
+    }
+  }
+
+  if (options.json || !process.stdin.isTTY) {
+    throw new UsageError("uninstall needs a capability ID when not run interactively");
+  }
+
+  const installedList = Object.values(records);
   if (installedList.length === 0) {
-    console.log("No capabilities currently installed.");
+    console.log(`No capabilities installed in ${scope} scope.`);
     return;
   }
 
-  const choices = installedList.map((record) => ({
-    name: `${record.name || record.skill_id} [${record.type || "skill"}] (Agent: ${record.agent})`,
-    value: record.skill_id
-  }));
-
   const selectedId = await select({
     message: "Select a capability to uninstall:",
-    choices
+    choices: installedList.map((record) => ({
+      name: `${record.name || record.skill_id} [${record.type || "skill"}] (Agent: ${record.agent})`,
+      value: record.skill_id
+    }))
   });
 
   const record = records[selectedId];
-  const proceed = await confirm({
-    message: `Are you sure you want to uninstall ${record.name || record.skill_id}?`,
-    default: false
-  });
-
+  const proceed = await confirm({ message: `Uninstall ${record.name || record.skill_id}?`, default: false });
   if (!proceed) {
     console.log("Aborted.");
     return;
   }
 
   try {
-    if (record.type === "mcp-server") {
-      const expectedConfig = path.resolve(
-        getMCPConfigPath(record.agent, scope, process.cwd())
-      );
-      const recordedConfig = path.resolve(record.destination);
-      if (expectedConfig !== recordedConfig) {
-        throw new Error("Refusing to modify an MCP configuration outside the expected agent scope.");
-      }
-      removeMCPServer(recordedConfig, record.name || record.skill_id);
-    } else {
-      const root = resolveInstallRoot(record.agent || "agent-skills", scope, process.cwd());
-      const destination = path.resolve(record.destination);
-      if (
-        !safeInside(root, destination)
-        || path.dirname(destination) !== path.resolve(root)
-      ) {
-        throw new Error("Refusing to remove a path outside the managed installation root.");
-      }
-      const stat = fs.lstatSync(destination);
-      if (stat.isSymbolicLink()) {
-        throw new Error("Refusing to remove a symbolic-link installation.");
-      }
-      await fs.promises.rm(destination, { recursive: true, force: true });
-    }
-
-    removeInstallRecord(record.skill_id, scope, process.cwd());
-    console.log(`Successfully uninstalled ${record.skill_id}.`);
+    removeInstallation(record, { scope, force: options.force === true });
+    console.log(`Uninstalled ${record.skill_id}.`);
   } catch (error) {
     console.error(`Failed to uninstall ${record.skill_id}: ${error.message}`);
+    process.exitCode = 1;
   }
 }

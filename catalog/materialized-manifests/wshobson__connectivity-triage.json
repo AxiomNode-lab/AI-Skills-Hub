@@ -1,0 +1,234 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "wshobson/connectivity-triage",
+  "source": {
+    "repo": "wshobson/agents",
+    "path": "plugins/incident-response/skills/connectivity-triage",
+    "revision": "156b7a5e7a8b93642628a339ee4039c925b34c7f"
+  },
+  "review": {
+    "path": "catalog/reviews/wshobson__connectivity-triage.json",
+    "sha256": "a5e718f6cfefc6a3ebdbbe35889fc391d5e2819b88faff7e95eb3a63959e33ed"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "low",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": false,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "shell-execution",
+        "line": 44,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 70,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 95,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 115,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 134,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/details.md"
+      },
+      {
+        "type": "network-access",
+        "line": 155,
+        "evidence": "curl",
+        "context": "### `curl -w` timing",
+        "file": "references/details.md"
+      },
+      {
+        "type": "network-access",
+        "line": 157,
+        "evidence": "http://",
+        "context": "For an HTTP(S) endpoint, use a read-only request to the same host and safe path the incident concerns. Confirm the endpoint is a complete `http://` or `https://` URL, preserve the incident's original scheme, and pass it as one quoted argume",
+        "file": "references/details.md"
+      },
+      {
+        "type": "network-access",
+        "line": 157,
+        "evidence": "https://",
+        "context": "For an HTTP(S) endpoint, use a read-only request to the same host and safe path the incident concerns. Confirm the endpoint is a complete `http://` or `https://` URL, preserve the incident's original scheme, and pass it as one quoted argume",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 159,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/details.md"
+      },
+      {
+        "type": "network-access",
+        "line": 160,
+        "evidence": "curl",
+        "context": "curl -sS -o /dev/null \\",
+        "file": "references/details.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 181,
+        "evidence": "DELETE",
+        "context": "Use a safe read-only endpoint. Do not send POST, PUT, DELETE, or other state-changing requests merely to test connectivity.",
+        "file": "references/details.md"
+      },
+      {
+        "type": "network-access",
+        "line": 211,
+        "evidence": "curl",
+        "context": "Proxies, content filters, endpoint security products, and managed network extensions can cause one application's path to differ from direct command-line probes. If curl succeeds while the application fails, inspect application-specific acti",
+        "file": "references/details.md"
+      },
+      {
+        "type": "network-access",
+        "line": 234,
+        "evidence": "curl",
+        "context": "- whether curl timing changes in the same phase each time.",
+        "file": "references/details.md"
+      },
+      {
+        "type": "network-access",
+        "line": 252,
+        "evidence": "curl",
+        "context": "- curl connects and completes TLS quickly but spends most of the total time before first byte.",
+        "file": "references/details.md"
+      },
+      {
+        "type": "network-access",
+        "line": 284,
+        "evidence": "curl",
+        "context": "- bounded curl timing to a safe HTTP(S) endpoint on the same service is normal;",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 52,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 61,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 67,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 77,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 85,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 95,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 103,
+        "evidence": "curl",
+        "context": "For HTTP(S), use curl phase timing against the actual affected endpoint when a safe read-only request is available. Confirm the incident-supplied endpoint is a complete `http://` or `https://` URL, preserve its original scheme, and pass the",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 103,
+        "evidence": "http://",
+        "context": "For HTTP(S), use curl phase timing against the actual affected endpoint when a safe read-only request is available. Confirm the incident-supplied endpoint is a complete `http://` or `https://` URL, preserve its original scheme, and pass the",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 103,
+        "evidence": "https://",
+        "context": "For HTTP(S), use curl phase timing against the actual affected endpoint when a safe read-only request is available. Confirm the incident-supplied endpoint is a complete `http://` or `https://` URL, preserve its original scheme, and pass the",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 105,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 106,
+        "evidence": "curl",
+        "context": "curl -sS -o /dev/null \\",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 24337
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "f89abb55d9f073f38f1703e4518f0613c788c6174be7f13b8dfe48a1c076c746",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/details.md",
+      "sha256": "38244fb0faf77e0a213a490c7e87208f4da477500542d6a92360c92a2f3cfd4f",
+      "bytes": 15168,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "08cd3ebe37f8ea4d623e23f61f78f06ab897e69b19865ddf370e6d4f89df2c2b",
+      "bytes": 8101,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 24337
+}

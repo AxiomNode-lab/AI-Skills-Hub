@@ -1,0 +1,492 @@
+{
+  "schema_version": "0.1",
+  "review": "independent-batch-03",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted independent instruction review by the PR #10 author session, reading every file in full; not a security certification and not a performance evaluation",
+  "scope": "10 microsoft/skills skills (5 Java, 1 Python, 2 TypeScript, 1 .NET, 1 KQL) held by PR #11 with reason independent-instruction-review-incomplete",
+  "method": [
+    "Read every upstream file of each skill in full at microsoft/skills@84d8eaa8ae95930f55cdceb3e27196c795dab038.",
+    "Checked each file's SHA-256 against the review record and the local upstream clone, confirmed the record lists every file, and re-downloaded every released file from GitHub at the pinned commit (scripts/verify-upstream.mjs).",
+    "Classified instructions the agent itself would follow separately from sample code for the user's application.",
+    "Checked every relative link and path for references outside the skill directory.",
+    "Checked each service's lifecycle against Microsoft's documentation sources (MicrosoftDocs/azure-docs, MicrosoftDocs/azure-ai-docs) at the commits named in each lifecycle entry."
+  ],
+  "lifecycle_rule": "Retired, or closed to new customers: hold. Scheduled retirement or breaking change while still open to new customers: release with a lifecycle note.",
+  "corrections": [
+    {
+      "review": "independent-batch-01",
+      "id": "microsoft/azure-communication-chat-java",
+      "previous_decision": "release",
+      "decision": "hold",
+      "hold_reason": "upstream-service-retiring",
+      "evidence": "MicrosoftDocs/azure-docs@19d165730d956ca4fe807ca0c2f789458884c747, articles/communication-services/acs-retirement-and-breaking-changes-guide.md:58, :60, :109 (ACS Chat listed as Retired; new customers cannot sign up from 2026-10-23)",
+      "note": "Batch 1 did not check service lifecycle. The Azure Communication Services retirement was announced in September 2026."
+    },
+    {
+      "review": "independent-batch-01",
+      "id": "microsoft/azure-communication-common-java",
+      "previous_decision": "release",
+      "decision": "release",
+      "lifecycle": {
+        "status": "breaking-change",
+        "date": "2028-09-30",
+        "evidence": "MicrosoftDocs/azure-docs@19d165730d956ca4fe807ca0c2f789458884c747, articles/communication-services/acs-retirement-and-breaking-changes-guide.md:60, :109"
+      },
+      "note": "Shared identity and token types used by the Calling and Call Automation SDKs, which get breaking changes but remain available. Release with a lifecycle note."
+    }
+  ],
+  "skills": [
+    {
+      "id": "microsoft/azure-ai-vision-imageanalysis-java",
+      "decision": "release",
+      "risk": "low",
+      "agent_capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "package_install": false,
+        "filesystem_write": false,
+        "dynamic_execution": false,
+        "encoded_content": false
+      },
+      "agent_instructions": "None. Reference documentation: Maven snippets and Java samples with placeholder or environment-variable credentials. It gives the agent no command to run, nothing to install, and no credential to read.",
+      "out_of_package_references": [],
+      "lifecycle": {
+        "status": "retiring",
+        "date": "2028-09-25",
+        "evidence": "MicrosoftDocs/azure-ai-docs@e8d0ac6f7ebd7fd000e287657ab9beda5bccc1fa, articles/ai-services/computer-vision/migration-options.md:14 ('The Azure Vision in Foundry Tools - Image Analysis API will be retired on September 25, 2028')",
+        "note": "Still open to customers; release with a lifecycle note."
+      },
+      "license": "Repository-root MIT (microsoft/skills LICENSE), no nested notice; SKILL.md declares MIT; no third-party notice in any file.",
+      "sample_accuracy_notes": [
+        "Pins the beta 1.1.0-beta.1. Samples use List/ArrayList without imports; the parallel-analysis sample has unbounded flatMap concurrency.",
+        "The PEOPLE feature and OCR samples process images of people and documents; the application should handle that data accordingly."
+      ],
+      "files": [
+        {
+          "path": "LICENSE.txt",
+          "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+          "attached": true
+        },
+        {
+          "path": "references/examples.md",
+          "sha256": "63ae8aa36a41e956d5721fba66fee1d0c14eaca2210984cd09cdef4b207aa2c3",
+          "attached": false
+        },
+        {
+          "path": "SKILL.md",
+          "sha256": "ea209e06fc0dc906227ed226f6ea7a73c2352ae0aac251c9e1f30bbc0455ae37",
+          "attached": false
+        }
+      ]
+    },
+    {
+      "id": "microsoft/azure-appconfiguration-java",
+      "decision": "release",
+      "risk": "low",
+      "agent_capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "package_install": false,
+        "filesystem_write": false,
+        "dynamic_execution": false,
+        "encoded_content": false
+      },
+      "agent_instructions": "None. Reference documentation: Maven snippets and Java samples with placeholder or environment-variable credentials. It gives the agent no command to run, nothing to install, and no credential to read.",
+      "out_of_package_references": [],
+      "license": "Repository-root MIT (microsoft/skills LICENSE), no nested notice; SKILL.md declares MIT; no third-party notice in any file.",
+      "sample_accuracy_notes": [
+        "Samples store a database connection string as a plain setting value ('Server=prod.db.com;Database=myapp') while the best-practice list says to keep secrets in Key Vault references.",
+        "The complete example writes settings, a feature flag and a snapshot under the 'Production' label of the user's store.",
+        "The conditional-update sample treats a non-200 status as a conflict, but the SDK throws on a failed precondition, so that branch never runs."
+      ],
+      "files": [
+        {
+          "path": "LICENSE.txt",
+          "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+          "attached": true
+        },
+        {
+          "path": "references/examples.md",
+          "sha256": "68598ecf43d56c5f77a21587111eb782e5bd44d5ddddecae23ce74fd1bb540ec",
+          "attached": false
+        },
+        {
+          "path": "SKILL.md",
+          "sha256": "e50e155ebeb050ed77d8d3ed17bc0ddbec46bb09830fa926bca53b4cc4ac99bf",
+          "attached": false
+        }
+      ]
+    },
+    {
+      "id": "microsoft/azure-communication-callautomation-java",
+      "decision": "release",
+      "risk": "low",
+      "agent_capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "package_install": false,
+        "filesystem_write": false,
+        "dynamic_execution": false,
+        "encoded_content": false
+      },
+      "agent_instructions": "None. Reference documentation: Maven snippets and Java samples with placeholder or environment-variable credentials. It gives the agent no command to run, nothing to install, and no credential to read.",
+      "out_of_package_references": [],
+      "lifecycle": {
+        "status": "breaking-change",
+        "date": "2028-09-30",
+        "evidence": "MicrosoftDocs/azure-docs@19d165730d956ca4fe807ca0c2f789458884c747, articles/communication-services/acs-retirement-and-breaking-changes-guide.md:60 and :109 (Call Automation listed under 'Breaking Changes'; standalone scenarios unsupported after September 30, 2028)",
+        "note": "Remains available; standalone use loses support after 2028-09-30. Release with a lifecycle note."
+      },
+      "license": "Repository-root MIT (microsoft/skills LICENSE), no nested notice; SKILL.md declares MIT; no third-party notice in any file.",
+      "sample_accuracy_notes": [
+        "examples.md has a syntax error: 'TextSource transferee Prompt' (space in the variable name).",
+        "Version mismatch: 1.6.0 in SKILL.md vs 1.5.2 in examples.md; SKILL.md builds CreateCallOptions with a source identifier while examples.md uses CallInvite.",
+        "The webhook handler accepts callback events without verifying their origin, and call-recording samples do not mention participant notice or consent. Samples place billable PSTN calls."
+      ],
+      "files": [
+        {
+          "path": "LICENSE.txt",
+          "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+          "attached": true
+        },
+        {
+          "path": "references/examples.md",
+          "sha256": "f12d662deddea9a771020c8aa10cc94a7521b0ad01b71dbab5f0c39fd318aff8",
+          "attached": false
+        },
+        {
+          "path": "SKILL.md",
+          "sha256": "2b0a220f3ec73a263cdddb7748943b445b2a10efa5385f950d0fc6730bafadc8",
+          "attached": false
+        }
+      ]
+    },
+    {
+      "id": "microsoft/azure-communication-sms-java",
+      "decision": "hold",
+      "hold_reason": "upstream-service-retiring",
+      "risk": "low",
+      "agent_capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "package_install": false,
+        "filesystem_write": false,
+        "dynamic_execution": false,
+        "encoded_content": false
+      },
+      "agent_instructions": "None. Reference documentation: Maven snippets and Java samples with placeholder or environment-variable credentials. It gives the agent no command to run, nothing to install, and no credential to read.",
+      "out_of_package_references": [],
+      "lifecycle": {
+        "status": "retiring-closed-to-new-customers",
+        "date": "2028-09-30",
+        "evidence": "MicrosoftDocs/azure-docs@19d165730d956ca4fe807ca0c2f789458884c747, articles/communication-services/acs-retirement-and-breaking-changes-guide.md:58 ('Beginning October 23, 2026, new customers can't sign up for Azure Communication Services retiring services'), :60, :109 (ACS SMS listed as Retired), :399 ('maintenance mode only. New customers blocked from number purchase at announcement')",
+        "note": "Hold: a new user cannot buy a sending number, so the skill cannot be completed; it only serves existing customers until 2028-09-30."
+      },
+      "license": "Repository-root MIT (microsoft/skills LICENSE), no nested notice; SKILL.md declares MIT; no third-party notice in any file.",
+      "sample_accuracy_notes": [
+        "Content is safe reference documentation. The OTP sample has no attempt limit, compares codes with String.equals, keeps codes in memory, and puts the phone number in the message tag.",
+        "The bulk 'Flash sale' sample does not mention opt-in or opt-out rules for marketing SMS."
+      ],
+      "files": [
+        {
+          "path": "LICENSE.txt",
+          "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+          "attached": true
+        },
+        {
+          "path": "references/examples.md",
+          "sha256": "d9220c4787229b1a53d016991f3326eed2575949980fc01e5056de87025e0318",
+          "attached": false
+        },
+        {
+          "path": "SKILL.md",
+          "sha256": "78116489577296fe710c3dbd1f50e55536f612b71b26db2d5f56ddb8bc9b95ae",
+          "attached": false
+        }
+      ]
+    },
+    {
+      "id": "microsoft/azure-monitor-ingestion-java",
+      "decision": "release",
+      "risk": "low",
+      "agent_capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "package_install": false,
+        "filesystem_write": false,
+        "dynamic_execution": false,
+        "encoded_content": false
+      },
+      "agent_instructions": "None. Reference documentation: Maven snippets and Java samples with placeholder or environment-variable credentials. It gives the agent no command to run, nothing to install, and no credential to read.",
+      "out_of_package_references": [
+        {
+          "type": "optional",
+          "target": "../query/SKILL.md",
+          "note": "'See also' link to a sibling skill path that does not exist upstream (the sibling is azure-monitor-query-java). Not needed for the skill; it resolves to nothing once installed."
+        }
+      ],
+      "license": "Repository-root MIT (microsoft/skills LICENSE), no nested notice; SKILL.md declares MIT; no third-party notice in any file.",
+      "sample_accuracy_notes": [
+        "The batching and basic-upload samples upload anonymous Object instances whose fields have no getters, so they serialize as empty objects.",
+        "Version mismatch: 1.2.11 in SKILL.md vs 1.2.14 in examples.md."
+      ],
+      "files": [
+        {
+          "path": "LICENSE.txt",
+          "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+          "attached": true
+        },
+        {
+          "path": "references/examples.md",
+          "sha256": "930e5cfa1a13c14d17f1f46c6812b2143c4bed0194141909416a72c17bae8fd2",
+          "attached": false
+        },
+        {
+          "path": "SKILL.md",
+          "sha256": "edc52c6adc3d7503cfce4bee6fca0357f98f003b3555b4b2867daace43210f5f",
+          "attached": false
+        }
+      ]
+    },
+    {
+      "id": "microsoft/azure-monitor-ingestion-py",
+      "decision": "release",
+      "risk": "medium",
+      "agent_capabilities": {
+        "shell": true,
+        "network": false,
+        "credentials": false,
+        "package_install": true,
+        "filesystem_write": false,
+        "dynamic_execution": false,
+        "encoded_content": false
+      },
+      "agent_instructions": "The agent may run the documented install command (pip install azure-monitor-ingestion azure-identity) for official Microsoft packages, unpinned. Otherwise reference documentation with placeholder or environment-variable credentials; no credential reading or other commands for the agent.",
+      "out_of_package_references": [],
+      "license": "Repository-root MIT (microsoft/skills LICENSE), no nested notice; SKILL.md declares MIT; no third-party notice in any file.",
+      "sample_accuracy_notes": [
+        "The 'Ignore Errors' sample silently drops failed log batches.",
+        "The JSON-file sample uploads an arbitrary local file's content to the user's workspace."
+      ],
+      "files": [
+        {
+          "path": "LICENSE.txt",
+          "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+          "attached": true
+        },
+        {
+          "path": "references/capabilities.md",
+          "sha256": "d8638365a194e41c18c9ebadb5c035da72e2a34288b0ba5d9474967b59f97434",
+          "attached": false
+        },
+        {
+          "path": "references/non-hero-scenarios.md",
+          "sha256": "6787e17dc0f14a370104bd588dc9158c55d1021070587c2c44ffd0d7eeaee55e",
+          "attached": false
+        },
+        {
+          "path": "SKILL.md",
+          "sha256": "e9686a6ef133b735704d1f677fb926857a056b8b1bb80e085d495d9136c52eae",
+          "attached": false
+        }
+      ]
+    },
+    {
+      "id": "microsoft/azure-keyvault-keys-ts",
+      "decision": "release",
+      "risk": "medium",
+      "agent_capabilities": {
+        "shell": true,
+        "network": false,
+        "credentials": false,
+        "package_install": true,
+        "filesystem_write": false,
+        "dynamic_execution": false,
+        "encoded_content": false
+      },
+      "agent_instructions": "The agent may run the documented install command (npm install @azure/keyvault-keys @azure/identity) for official Microsoft packages, unpinned. Otherwise reference documentation with placeholder or environment-variable credentials; no credential reading or other commands for the agent.",
+      "out_of_package_references": [],
+      "license": "Repository-root MIT (microsoft/skills LICENSE), no nested notice; SKILL.md declares MIT; no third-party notice in any file.",
+      "sample_accuracy_notes": [
+        "SKILL.md uses SecretClient without importing it or installing @azure/keyvault-secrets.",
+        "'Delete Secret' purges and then tries to recover the same secret, which cannot succeed; purge is irreversible.",
+        "exportAllSecrets reads every secret value into memory; an import statement sits inside an if block (invalid TypeScript); the 'AES-256' key string is 30 bytes; expiry dates are in 2025.",
+        "RSA1_5 is listed without noting it is legacy."
+      ],
+      "files": [
+        {
+          "path": "LICENSE.txt",
+          "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+          "attached": true
+        },
+        {
+          "path": "references/keys.md",
+          "sha256": "cb436dc541fc0dbf94848066888cfac9ef368cf25887a20c19220a8bc9eec548",
+          "attached": false
+        },
+        {
+          "path": "references/secrets.md",
+          "sha256": "3abe16a446261dbf93d8b8c698cc91cd7552be58e3c5be11cd608af0aa1c3a2b",
+          "attached": false
+        },
+        {
+          "path": "SKILL.md",
+          "sha256": "fea0132867c93d93ad3d36617d66ce66c7e68c1e26046daa9324b676bd8e00cb",
+          "attached": false
+        }
+      ]
+    },
+    {
+      "id": "microsoft/azure-storage-blob-ts",
+      "decision": "release",
+      "risk": "medium",
+      "agent_capabilities": {
+        "shell": true,
+        "network": false,
+        "credentials": false,
+        "package_install": true,
+        "filesystem_write": false,
+        "dynamic_execution": false,
+        "encoded_content": false
+      },
+      "agent_instructions": "The agent may run the documented install command (npm install @azure/storage-blob @azure/identity) for official Microsoft packages, unpinned. Otherwise reference documentation with placeholder or environment-variable credentials; no credential reading or other commands for the agent.",
+      "out_of_package_references": [],
+      "license": "Repository-root MIT (microsoft/skills LICENSE), no nested notice; SKILL.md declares MIT; no third-party notice in any file.",
+      "sample_accuracy_notes": [
+        "SKILL.md generates an account SAS with all permissions ('rwdlacupi') for 24 hours and a container SAS with delete rights for 24 hours, while sas-tokens.md recommends least privilege and short expiry.",
+        "The SAS 'Complete Example' prints full SAS URLs (live tokens) to the console.",
+        "'Upload with Options' passes bufferSize both positionally and as an option and uses a non-existent 'concurrency' option; 'uuid' is imported but unused."
+      ],
+      "files": [
+        {
+          "path": "LICENSE.txt",
+          "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+          "attached": true
+        },
+        {
+          "path": "references/sas-tokens.md",
+          "sha256": "3cf8e1419061494c9d97f827df7de0da55a2e19c58d3bb01d8683f26b621ee68",
+          "attached": false
+        },
+        {
+          "path": "references/streaming.md",
+          "sha256": "6313cd1edaa8189ae974439d65cb95b5b8785699bcc3b7b0ff3e89def13d9653",
+          "attached": false
+        },
+        {
+          "path": "SKILL.md",
+          "sha256": "180a75a03963329bd2671651ab1b90ab7e21c1307e7f822a3f649d5bebf367d1",
+          "attached": false
+        }
+      ]
+    },
+    {
+      "id": "microsoft/azure-resource-manager-sql-dotnet",
+      "decision": "release",
+      "risk": "medium",
+      "agent_capabilities": {
+        "shell": true,
+        "network": false,
+        "credentials": false,
+        "package_install": true,
+        "filesystem_write": false,
+        "dynamic_execution": false,
+        "encoded_content": false
+      },
+      "agent_instructions": "The agent may run the documented install command (dotnet add package Azure.ResourceManager.Sql Azure.Identity) for official Microsoft packages, unpinned. Otherwise reference documentation with placeholder or environment-variable credentials; no credential reading or other commands for the agent.",
+      "out_of_package_references": [],
+      "license": "Repository-root MIT (microsoft/skills LICENSE), no nested notice; SKILL.md declares MIT; no third-party notice in any file.",
+      "sample_accuracy_notes": [
+        "Samples hard-code SQL admin passwords ('YourSecurePassword123!') despite the skill's own 'never hardcode passwords' rule.",
+        "The core workflow enables public network access and the 0.0.0.0 'AllowAzureServices' firewall rule, which admits traffic from any Azure tenant.",
+        "Includes a sample that disables Transparent Data Encryption (marked not recommended) and an elastic-pool deletion that deletes every database in the pool. All samples create billable resources."
+      ],
+      "files": [
+        {
+          "path": "LICENSE.txt",
+          "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+          "attached": true
+        },
+        {
+          "path": "references/database-operations.md",
+          "sha256": "0780a88d23a285ad779d3f97be9de38b59bc8bc866a912180a165cad8e1269b5",
+          "attached": false
+        },
+        {
+          "path": "references/elastic-pools.md",
+          "sha256": "350212861fcc57ea4a31433ab49311c0169ede6d9ba133c4245faa205597e4d2",
+          "attached": false
+        },
+        {
+          "path": "references/server-management.md",
+          "sha256": "a38accf22506d493baf36a10dbbed77eb55e6019e75bbcfcdfd1b8f92e2a0aa4",
+          "attached": false
+        },
+        {
+          "path": "SKILL.md",
+          "sha256": "95f952b72a93affd41483f7a44f1bb4043942794fc1d3ed070cde247e2cf1854",
+          "attached": false
+        }
+      ]
+    },
+    {
+      "id": "microsoft/kql",
+      "decision": "release",
+      "risk": "low",
+      "agent_capabilities": {
+        "shell": false,
+        "network": true,
+        "credentials": false,
+        "package_install": false,
+        "filesystem_write": false,
+        "dynamic_execution": false,
+        "encoded_content": false
+      },
+      "agent_instructions": "Agent-directed guidance: how to write, run and fix KQL queries (filter first, check join cardinality, bound results, fix the specific error instead of switching approach). It suggests optional 'try it' queries against Microsoft's public help cluster (help.kusto.windows.net) and, when a plugin is missing, falling back to running Python locally with the agent's own tool. Read-only `.show` discovery commands are recommended for schema exploration.",
+      "out_of_package_references": [],
+      "license": "Repository-root MIT (microsoft/skills LICENSE), no nested notice; SKILL.md declares no license, so the root MIT applies; no third-party notice in any file.",
+      "sample_accuracy_notes": [
+        "Write-type management commands (.create-or-alter graph_model, .create external table, .make graph_snapshot) appear as documentation examples; the skill does not tell the agent to run them, nor to ask before running them.",
+        "One 'try it' query loads a CSV from a third-party GitHub repository (uiuc-cse/data-fa14) through externaldata; the cluster fetches it, not the agent.",
+        "SKILL.md has no license field; the repository-root MIT applies."
+      ],
+      "files": [
+        {
+          "path": "LICENSE.txt",
+          "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+          "attached": true
+        },
+        {
+          "path": "references/advanced-patterns.md",
+          "sha256": "7c265cae0e78ac0804300b4b4c65377bfd9fd922395d967b1821390da816a6a5",
+          "attached": false
+        },
+        {
+          "path": "references/discovery-queries.md",
+          "sha256": "4f2b2b8d8b80ae6ebe53f20f5f9749ce46c0c8d5889c965ecb87b7ac43bfa6a8",
+          "attached": false
+        },
+        {
+          "path": "references/error-recovery.md",
+          "sha256": "3cbd921b8cae3c74a4948599d96db16eaeeced0972c920317e5792837268c388",
+          "attached": false
+        },
+        {
+          "path": "references/query-templates.md",
+          "sha256": "c42fd83ccaaec22d45eebc3f313f34a1b10691561c9a6790c7f7058ffb384b7f",
+          "attached": false
+        },
+        {
+          "path": "SKILL.md",
+          "sha256": "ffc1f17ed69d34dd5e8130cf1fc4adf9f3ea27410e8aa90f0cc1e5385f315ce2",
+          "attached": false
+        }
+      ]
+    }
+  ]
+}

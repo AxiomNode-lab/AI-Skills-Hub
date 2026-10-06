@@ -1,0 +1,101 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "microsoft/wiki-llms-txt",
+  "status": "approved",
+  "reviewed_on": "2026-10-02",
+  "reviewer": "AI-assisted artifact review; not an independent security certification",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/deep-wiki/skills/wiki-llms-txt",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": ".github/plugins/deep-wiki/skills/wiki-llms-txt",
+    "url": "https://api.github.com/repos/microsoft/skills/git/trees/84d8eaa8ae95930f55cdceb3e27196c795dab038?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/microsoft/skills/blob/84d8eaa8ae95930f55cdceb3e27196c795dab038/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        ".github",
+        ".github/plugins",
+        ".github/plugins/deep-wiki",
+        ".github/plugins/deep-wiki/skills",
+        ".github/plugins/deep-wiki/skills/wiki-llms-txt"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT License with its copyright notice, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares license MIT, consistent with the root license. Every file was read in full; no third-party copyright notice, other license grant, or copied third-party text was found. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "low",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": true,
+      "network": false,
+      "filesystem_write": true
+    },
+    "notes": [
+      "Read SKILL.md in full. Part of Microsoft's deep-wiki plugin. Generates llms.txt and llms-full.txt from existing wiki pages and does not overwrite an llms.txt it did not generate. llmstxt.org is a specification link.",
+      "Runs only read-only git commands (git remote get-url origin, git rev-parse) and asks the user for a remote URL before citing. No package installs, credentials, or network calls. Relative links in output templates are example paths for pages the agent creates, not files missing from this skill."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "git_blob": "79656060de00aa4659ad2c276d5be8830664d544",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry the copyright and permission notice.",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "62f14490deb8e0713eca06ab576f6fe45d081f1cbb9452a45389a9540f39ab69",
+      "bytes": 5167,
+      "mode": "100644",
+      "git_blob": "f9eaf717a42a1206bdde938219f1d8cfbb1c64c4",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 12,
+          "evidence": "https://",
+          "context": "Generate `llms.txt` and `llms-full.txt` files that provide LLM-friendly access to wiki documentation, following the [llms.txt specification](https://llmstxt.org/).",
+          "disposition": "accepted",
+          "reason": "Reference or citation link in documentation; the skill does not instruct the agent to fetch it."
+        },
+        {
+          "type": "network-access",
+          "line": 34,
+          "evidence": "https://",
+          "context": "The file follows the [llms.txt specification](https://llmstxt.org/):",
+          "disposition": "accepted",
+          "reason": "Reference or citation link in documentation; the skill does not instruct the agent to fetch it."
+        }
+      ]
+    }
+  ]
+}

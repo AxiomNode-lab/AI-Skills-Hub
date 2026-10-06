@@ -1,5 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import crypto from "node:crypto";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
@@ -32,7 +33,19 @@ function fixture(t) {
   ];
   fs.mkdirSync(path.join(cwd, "catalog"));
   const catalog = path.join(cwd, "catalog", "skills.json");
-  const save = () => fs.writeFileSync(catalog, JSON.stringify({ skills }));
+  // Every materialized fixture gets a release manifest over its current files.
+  const writeManifests = () => {
+    const dir = path.join(cwd, "catalog", "materialized-manifests");
+    fs.mkdirSync(dir, { recursive: true });
+    for (const skill of skills.filter(s => s.materialized && fs.existsSync(s.materialized_root))) {
+      const files = fs.readdirSync(skill.materialized_root).sort().map(file => {
+        const bytes = fs.readFileSync(path.join(skill.materialized_root, file));
+        return { path: file, bytes: bytes.length, sha256: crypto.createHash("sha256").update(bytes).digest("hex") };
+      });
+      fs.writeFileSync(path.join(dir, skill.id.replaceAll("/", "__") + ".json"), JSON.stringify({ skill_id: skill.id, source: skill.source, materialized_files: files }));
+    }
+  };
+  const save = () => { fs.writeFileSync(catalog, JSON.stringify({ skills })); writeManifests(); };
   save();
   const preload = path.join(cwd, "offline.mjs");
   fs.writeFileSync(preload, `
@@ -49,7 +62,7 @@ function fixture(t) {
   `);
   const run = (args, extraEnv = {}) => {
     const result = spawnSync(process.execPath, ["--import", pathToFileURL(preload).href, cli, ...args], {
-      cwd, encoding: "utf8", env: { ...process.env, ...extraEnv }
+      cwd, encoding: "utf8", env: { ...process.env, SKILLS_HUB_HOME: cwd, ...extraEnv }
     });
     assert.ifError(result.error);
     return result;
@@ -86,6 +99,9 @@ test("external installation requires consent and never executes without it", t =
   assert.equal(result.results[0].status, "confirmation-required");
   assert.equal(result.results[0].requires_confirmation, true);
   assert.equal(result.results[0].reason, "explicit_confirmation_required");
+  // The exact command is shown before consent: an allowlisted binary and an argument vector.
+  assert.ok(Array.isArray(result.results[0].command) && result.results[0].command.length > 1, JSON.stringify(result.results[0]));
+  assert.ok(["npx", "pnpm", "codex", "claude", "copilot"].includes(result.results[0].command[0]));
   assert.equal(fs.existsSync(path.join(f.cwd, "external-call.json")), false);
   assert.deepEqual(f.json(["list"]), []);
 });
@@ -221,7 +237,7 @@ test("missing IDs and dependencies produce per-item JSON failures without instal
 test("invalid install requests and missing catalogs still return JSON failure", t => {
   const f = fixture(t);
   for (const args of [["install"], ["install", "test/local-skill"], ["install", "test/local-skill", "--agent", "codex", "--scope", "invalid"]]) {
-    const result = f.json(args, 1);
+    const result = f.json(args, 2);
     assert.equal(result.success, false);
     assert.ok(result.error);
   }
@@ -245,6 +261,9 @@ test("JSON external execution captures subprocess output and marketplace setup i
 
 test("native adapter respects the explicit project cwd", async t => {
   const f = fixture(t);
+  const saved = process.env.SKILLS_HUB_HOME;
+  process.env.SKILLS_HUB_HOME = f.cwd;
+  t.after(() => { if (saved === undefined) delete process.env.SKILLS_HUB_HOME; else process.env.SKILLS_HUB_HOME = saved; });
   const result = await installCapability(f.skills[0], { agent: "codex", scope: "project", cwd: f.cwd });
   assert.equal(result.installed, true);
   assert.equal(result.destination, path.join(f.cwd, ".agents", "skills", "local-skill"));

@@ -1,0 +1,297 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "wshobson/incident-runbook-templates",
+  "source": {
+    "repo": "wshobson/agents",
+    "path": "plugins/incident-response/skills/incident-runbook-templates",
+    "revision": "156b7a5e7a8b93642628a339ee4039c925b34c7f"
+  },
+  "review": {
+    "path": "catalog/reviews/wshobson__incident-runbook-templates.json",
+    "sha256": "f0ab02c4ca22ef23178faf4ad7b72b0e693816b1207c19b656ee05189ad62517"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "network-access",
+        "line": 34,
+        "evidence": "https://",
+        "context": "- [Payment Service Dashboard](https://grafana/d/payments)",
+        "file": "references/details.md"
+      },
+      {
+        "type": "network-access",
+        "line": 35,
+        "evidence": "https://",
+        "context": "- [Error Tracking](https://sentry.io/payments)",
+        "file": "references/details.md"
+      },
+      {
+        "type": "network-access",
+        "line": 36,
+        "evidence": "https://",
+        "context": "- [Dependency Status](https://status.stripe.com)",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 42,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/details.md"
+      },
+      {
+        "type": "network-access",
+        "line": 50,
+        "evidence": "curl",
+        "context": "curl -s \"http://prometheus:9090/api/v1/query?query=sum(rate(http_requests_total{status=~'5..'}[5m]))\"",
+        "file": "references/details.md"
+      },
+      {
+        "type": "network-access",
+        "line": 50,
+        "evidence": "http://",
+        "context": "curl -s \"http://prometheus:9090/api/v1/query?query=sum(rate(http_requests_total{status=~'5..'}[5m]))\"",
+        "file": "references/details.md"
+      },
+      {
+        "type": "network-access",
+        "line": 56,
+        "evidence": "curl",
+        "context": "- [ ] Can you reach the service? `curl -I https://api.company.com/payments/health`",
+        "file": "references/details.md"
+      },
+      {
+        "type": "network-access",
+        "line": 56,
+        "evidence": "https://",
+        "context": "- [ ] Can you reach the service? `curl -I https://api.company.com/payments/health`",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 74,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 96,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/details.md"
+      },
+      {
+        "type": "network-access",
+        "line": 99,
+        "evidence": "curl",
+        "context": "  curl localhost:8080/metrics | grep db_pool",
+        "file": "references/details.md"
+      },
+      {
+        "type": "network-access",
+        "line": 112,
+        "evidence": "curl",
+        "context": "curl -w \"@curl-format.txt\" -o /dev/null -s https://api.stripe.com/v1/health",
+        "file": "references/details.md"
+      },
+      {
+        "type": "network-access",
+        "line": 112,
+        "evidence": "curl",
+        "context": "curl -w \"@curl-format.txt\" -o /dev/null -s https://api.stripe.com/v1/health",
+        "file": "references/details.md"
+      },
+      {
+        "type": "network-access",
+        "line": 112,
+        "evidence": "https://",
+        "context": "curl -w \"@curl-format.txt\" -o /dev/null -s https://api.stripe.com/v1/health",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 121,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/details.md"
+      },
+      {
+        "type": "network-access",
+        "line": 127,
+        "evidence": "https://",
+        "context": "# Go to Sentry: https://sentry.io/payments",
+        "file": "references/details.md"
+      },
+      {
+        "type": "network-access",
+        "line": 130,
+        "evidence": "curl",
+        "context": "curl -X POST https://api.company.com/internal/feature-flags \\",
+        "file": "references/details.md"
+      },
+      {
+        "type": "network-access",
+        "line": 130,
+        "evidence": "https://",
+        "context": "curl -X POST https://api.company.com/internal/feature-flags \\",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 142,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 176,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/details.md"
+      },
+      {
+        "type": "network-access",
+        "line": 178,
+        "evidence": "curl",
+        "context": "curl -s https://api.company.com/payments/health | jq",
+        "file": "references/details.md"
+      },
+      {
+        "type": "network-access",
+        "line": 178,
+        "evidence": "https://",
+        "context": "curl -s https://api.company.com/payments/health | jq",
+        "file": "references/details.md"
+      },
+      {
+        "type": "network-access",
+        "line": 181,
+        "evidence": "curl",
+        "context": "curl -s \"http://prometheus:9090/api/v1/query?query=sum(rate(http_requests_total{status=~'5..'}[5m]))\" | jq '.data.result[0].value[1]'",
+        "file": "references/details.md"
+      },
+      {
+        "type": "network-access",
+        "line": 181,
+        "evidence": "http://",
+        "context": "curl -s \"http://prometheus:9090/api/v1/query?query=sum(rate(http_requests_total{status=~'5..'}[5m]))\" | jq '.data.result[0].value[1]'",
+        "file": "references/details.md"
+      },
+      {
+        "type": "network-access",
+        "line": 184,
+        "evidence": "curl",
+        "context": "curl -s \"http://prometheus:9090/api/v1/query?query=histogram_quantile(0.99,sum(rate(http_request_duration_seconds_bucket[5m]))by(le))\" | jq",
+        "file": "references/details.md"
+      },
+      {
+        "type": "network-access",
+        "line": 184,
+        "evidence": "http://",
+        "context": "curl -s \"http://prometheus:9090/api/v1/query?query=histogram_quantile(0.99,sum(rate(http_request_duration_seconds_bucket[5m]))by(le))\" | jq",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 187,
+        "evidence": "sh",
+        "context": "./scripts/smoke-test-payments.sh",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 192,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 197,
+        "evidence": "sh",
+        "context": "./scripts/db-rollback.sh $MIGRATION_VERSION",
+        "file": "references/details.md"
+      },
+      {
+        "type": "network-access",
+        "line": 200,
+        "evidence": "curl",
+        "context": "curl -X POST https://api.company.com/internal/feature-flags \\",
+        "file": "references/details.md"
+      },
+      {
+        "type": "network-access",
+        "line": 200,
+        "evidence": "https://",
+        "context": "curl -X POST https://api.company.com/internal/feature-flags \\",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 326,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "references/details.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 339,
+        "evidence": "delete",
+        "context": "# If emergency, delete old data or expand disk",
+        "file": "references/details.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 70,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 95,
+        "evidence": "curl",
+        "context": "Runbooks rot because they're updated manually. Include a \"Last Verified\" date and owner at the top, and add a CI check that validates all `curl` endpoints and `kubectl` context names are still valid:",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 15300
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "f89abb55d9f073f38f1703e4518f0613c788c6174be7f13b8dfe48a1c076c746",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/details.md",
+      "sha256": "298751de2594e03ed2654e794a9d856123278c55533cdf97f659518d58f27a57",
+      "bytes": 8769,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "fd9ca9b9bc958da514039d59e453b05182208c7410696273d2c62350ff3ad1aa",
+      "bytes": 5463,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 15300
+}

@@ -1,0 +1,256 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "bagelhole/linux-administration",
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "infrastructure/servers/linux-administration",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "review": {
+    "path": "catalog/reviews/bagelhole__linux-administration.json",
+    "sha256": "37d6b45a46e9757ca7810203d418356487ececb21b20d16394bf21e27d8146c0"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": false,
+      "dynamic_execution": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "shell-execution",
+        "line": 25,
+        "evidence": " sudo",
+        "context": "- Root or sudo access on the target system",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 34,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 50,
+        "evidence": "Remove",
+        "context": "# Remove a package but keep its config files",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 51,
+        "evidence": "remove",
+        "context": "apt remove nginx",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 53,
+        "evidence": "Remove",
+        "context": "# Remove a package and purge all config files",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 56,
+        "evidence": "Remove",
+        "context": "# Remove unused dependency packages",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 70,
+        "evidence": "curl",
+        "context": "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 70,
+        "evidence": "https://",
+        "context": "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 71,
+        "evidence": "https://",
+        "context": "echo \"deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable\" \\",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 78,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 94,
+        "evidence": "Remove",
+        "context": "# Remove a package",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 95,
+        "evidence": "remove",
+        "context": "dnf remove nginx",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 116,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 133,
+        "evidence": "sh",
+        "context": "du -sh /var/log/*          # Summarize directory sizes",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 146,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 177,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 208,
+        "evidence": "sh",
+        "context": "nohup /opt/myapp/start.sh > /var/log/myapp.log 2>&1 &",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 211,
+        "evidence": "sh",
+        "context": "systemd-run --scope -p CPUQuota=25% --unit=limit-myapp /opt/myapp/start.sh",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 216,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 232,
+        "evidence": "sh",
+        "context": "30 2 * * * /usr/local/bin/backup.sh >> /var/log/backup.log 2>&1",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 235,
+        "evidence": "sh",
+        "context": "0 0 * * 0 /usr/local/bin/cleanup.sh",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 238,
+        "evidence": "sh",
+        "context": "*/5 * * * * /usr/local/bin/healthcheck.sh",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 250,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 272,
+        "evidence": "sh",
+        "context": "du -sh /var/log/*",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 296,
+        "evidence": "http://",
+        "context": "# URL=http://logserver.example.com:19532",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 301,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 336,
+        "evidence": "remove",
+        "context": "| Disk full | `df -h` and `du -sh /var/log/*` | Clear old logs, run `logrotate -f`, remove temp files |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 336,
+        "evidence": "sh",
+        "context": "| Disk full | `df -h` and `du -sh /var/log/*` | Clear old logs, run `logrotate -f`, remove temp files |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 337,
+        "evidence": "Delete",
+        "context": "| Out of inodes | `df -i` | Delete many small files, check `/tmp` and mail spools |",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 348,
+        "evidence": " sudo",
+        "context": "- `user-management` -- Create and manage users, groups, and sudo",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 9823
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "d4159b486144c40bd6e89742cef5a6ea00a4ec722c085c4bc52d1e9052bde153",
+      "bytes": 8755,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 9823
+}

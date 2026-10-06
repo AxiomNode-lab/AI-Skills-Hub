@@ -1,0 +1,67 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "microsoft/wiki-vitepress",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/deep-wiki/skills/wiki-vitepress",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "review": {
+    "path": "catalog/reviews/microsoft__wiki-vitepress.json",
+    "sha256": "8a69daf3c2ce67a7c9508497405b0a3b2dc8c4863bb0b590539b209d33849871"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": false,
+      "dynamic_execution": false,
+      "package_install": true,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "filesystem-write",
+        "line": 115,
+        "evidence": "remove",
+        "context": "    modal.addEventListener('click', () => modal.remove())",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "shell-execution",
+        "line": 141,
+        "evidence": "bash",
+        "context": "```bash",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "package-install",
+        "line": 142,
+        "evidence": "npm install",
+        "context": "cd wiki-site && npm install && npm run docs:build",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 5673
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "00d9f1678f604787f86026d26a5ebdec4573880e9e4ef44853820788584bbb36",
+      "bytes": 4533,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 5673
+}

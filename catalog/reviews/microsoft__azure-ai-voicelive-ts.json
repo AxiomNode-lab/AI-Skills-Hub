@@ -1,0 +1,378 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "microsoft/azure-ai-voicelive-ts",
+  "status": "approved",
+  "reviewed_on": "2026-10-02",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "microsoft/skills",
+    "path": ".github/plugins/azure-sdk-typescript/skills/azure-ai-voicelive-ts",
+    "revision": "84d8eaa8ae95930f55cdceb3e27196c795dab038"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": ".github/plugins/azure-sdk-typescript/skills/azure-ai-voicelive-ts",
+    "url": "https://api.github.com/repos/microsoft/skills/git/trees/84d8eaa8ae95930f55cdceb3e27196c795dab038?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/microsoft/skills/blob/84d8eaa8ae95930f55cdceb3e27196c795dab038/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        ".github",
+        ".github/plugins",
+        ".github/plugins/azure-sdk-typescript",
+        ".github/plugins/azure-sdk-typescript/skills",
+        ".github/plugins/azure-sdk-typescript/skills/azure-ai-voicelive-ts"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT License with its copyright notice, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found in any file; frontmatter declares MIT and Microsoft docs/samples are linked. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "medium",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": true,
+      "network": false,
+      "credentials": false,
+      "package_install": true,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md and references/audio-streaming.md, references/function-calling.md in full. TypeScript reference for @azure/ai-voicelive (1.0.0-beta.3): authenticating, configuring real-time voice sessions over WebSocket, handling events, function calling, and browser microphone capture/PCM16 playback.",
+      "Medium only because SKILL.md:18-22 has the agent run `npm install` of official Azure SDK packages (@azure/ai-voicelive, @azure/identity, @types/node), unpinned. Acceptable: these are first-party Microsoft packages installed into the user's project; everything else is sample code, with credentials from DefaultAzureCredential or placeholder API keys and an explicit 'never hardcode API keys' rule (SKILL.md:460).",
+      "Generated apps capture microphone audio and stream it to the user's Azure resource; the AudioWorklet file the browser sample loads (audio-streaming.md:118, 162) is supplied inline for the user to save in their own project. Function-calling examples return mock data and advise confirming bookings with the user."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d9a1b1e30d633d5732ea18e3cba9538d293ebc53e1a9e4e96ab739e0c5c4f1cb",
+      "bytes": 1140,
+      "mode": "100644",
+      "git_blob": "79656060de00aa4659ad2c276d5be8830664d544",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry the copyright and permission notice.",
+      "findings": []
+    },
+    {
+      "path": "references/audio-streaming.md",
+      "sha256": "7fa9be894cc0043c427cc8c953d1b2891b49bef19ba3aacdaa3bcaccb5c02e11",
+      "bytes": 12563,
+      "mode": "100644",
+      "git_blob": "c2858ec7790af3a9b41f111862de86f5d9b35173",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "network-access",
+          "line": 435,
+          "evidence": "https://",
+          "context": "- [Azure Voice Live Samples](https://github.com/microsoft-foundry/voicelive-samples)",
+          "disposition": "accepted",
+          "reason": "Links to npm, GitHub, Microsoft Learn and the voicelive-samples repo, plus placeholder cognitiveservices.azure.com endpoints in sample code; nothing is fetched by the agent."
+        }
+      ]
+    },
+    {
+      "path": "references/function-calling.md",
+      "sha256": "900325ee0cdcfbee67075da41a6f1bd1358200dece473ee58ac904e19dab6d4c",
+      "bytes": 13808,
+      "mode": "100644",
+      "git_blob": "27adcb7ec75b73403c4680cb7c7d6197edad8431",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "filesystem-write",
+          "line": 345,
+          "evidence": "delete",
+          "context": "    pendingCalls.delete(callId);",
+          "disposition": "accepted",
+          "reason": "The only hit is `pendingCalls.delete(callId)`, a JavaScript Map operation in sample code, not file deletion."
+        },
+        {
+          "type": "network-access",
+          "line": 500,
+          "evidence": "https://",
+          "context": "- [Azure Voice Live API Reference](https://learn.microsoft.com/javascript/api/@azure/ai-voicelive)",
+          "disposition": "accepted",
+          "reason": "Links to npm, GitHub, Microsoft Learn and the voicelive-samples repo, plus placeholder cognitiveservices.azure.com endpoints in sample code; nothing is fetched by the agent."
+        }
+      ]
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "d288827a7769dba34a4154b0981feee766ecefcd64ccd5e052f21d5e064d4d04",
+      "bytes": 13839,
+      "mode": "100644",
+      "git_blob": "64ca766cb56c16b7d2b015cd3684834e25f076db",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 18,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Two bash blocks: the npm install commands and a list of environment variable placeholders."
+        },
+        {
+          "type": "package-install",
+          "line": 19,
+          "evidence": "npm install",
+          "context": "npm install @azure/ai-voicelive @azure/identity",
+          "disposition": "accepted",
+          "reason": "Unpinned `npm install` of the official @azure/ai-voicelive, @azure/identity and @types/node packages into the user's project."
+        },
+        {
+          "type": "package-install",
+          "line": 21,
+          "evidence": "npm install",
+          "context": "npm install @types/node",
+          "disposition": "accepted",
+          "reason": "Unpinned `npm install` of the official @azure/ai-voicelive, @azure/identity and @types/node packages into the user's project."
+        },
+        {
+          "type": "shell-execution",
+          "line": 32,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Two bash blocks: the npm install commands and a list of environment variable placeholders."
+        },
+        {
+          "type": "network-access",
+          "line": 33,
+          "evidence": "https://",
+          "context": "AZURE_VOICELIVE_ENDPOINT=https://<resource>.cognitiveservices.azure.com",
+          "disposition": "accepted",
+          "reason": "Links to npm, GitHub, Microsoft Learn and the voicelive-samples repo, plus placeholder cognitiveservices.azure.com endpoints in sample code; nothing is fetched by the agent."
+        },
+        {
+          "type": "credential-access",
+          "line": 34,
+          "evidence": "API key",
+          "context": "# Optional: API key if not using Entra ID",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential, ManagedIdentityCredential, InteractiveBrowserCredential and AzureKeyCredential with placeholder keys and env var names in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 35,
+          "evidence": "api-key",
+          "context": "AZURE_VOICELIVE_API_KEY=<your-api-key>",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential, ManagedIdentityCredential, InteractiveBrowserCredential and AzureKeyCredential with placeholder keys and env var names in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 43,
+          "evidence": "Credential",
+          "context": "### Microsoft Entra Token Credential (Recommended)",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential, ManagedIdentityCredential, InteractiveBrowserCredential and AzureKeyCredential with placeholder keys and env var names in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 50,
+          "evidence": "credential",
+          "context": "const credential = new DefaultAzureCredential({requiredEnvVars: [\"AZURE_TOKEN_CREDENTIALS\"]});",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential, ManagedIdentityCredential, InteractiveBrowserCredential and AzureKeyCredential with placeholder keys and env var names in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 51,
+          "evidence": "credential",
+          "context": "// Or use a specific credential directly in production:",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential, ManagedIdentityCredential, InteractiveBrowserCredential and AzureKeyCredential with placeholder keys and env var names in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 52,
+          "evidence": "credential",
+          "context": "// See https://learn.microsoft.com/javascript/api/overview/azure/identity-readme?view=azure-node-latest#credential-classes",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential, ManagedIdentityCredential, InteractiveBrowserCredential and AzureKeyCredential with placeholder keys and env var names in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 52,
+          "evidence": "https://",
+          "context": "// See https://learn.microsoft.com/javascript/api/overview/azure/identity-readme?view=azure-node-latest#credential-classes",
+          "disposition": "accepted",
+          "reason": "Links to npm, GitHub, Microsoft Learn and the voicelive-samples repo, plus placeholder cognitiveservices.azure.com endpoints in sample code; nothing is fetched by the agent."
+        },
+        {
+          "type": "credential-access",
+          "line": 53,
+          "evidence": "credential",
+          "context": "// const credential = new ManagedIdentityCredential();",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential, ManagedIdentityCredential, InteractiveBrowserCredential and AzureKeyCredential with placeholder keys and env var names in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 54,
+          "evidence": "https://",
+          "context": "const endpoint = \"https://your-resource.cognitiveservices.azure.com\";",
+          "disposition": "accepted",
+          "reason": "Links to npm, GitHub, Microsoft Learn and the voicelive-samples repo, plus placeholder cognitiveservices.azure.com endpoints in sample code; nothing is fetched by the agent."
+        },
+        {
+          "type": "credential-access",
+          "line": 56,
+          "evidence": "credential",
+          "context": "const client = new VoiceLiveClient(endpoint, credential);",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential, ManagedIdentityCredential, InteractiveBrowserCredential and AzureKeyCredential with placeholder keys and env var names in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 59,
+          "evidence": "API Key",
+          "context": "### API Key",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential, ManagedIdentityCredential, InteractiveBrowserCredential and AzureKeyCredential with placeholder keys and env var names in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 65,
+          "evidence": "https://",
+          "context": "const endpoint = \"https://your-resource.cognitiveservices.azure.com\";",
+          "disposition": "accepted",
+          "reason": "Links to npm, GitHub, Microsoft Learn and the voicelive-samples repo, plus placeholder cognitiveservices.azure.com endpoints in sample code; nothing is fetched by the agent."
+        },
+        {
+          "type": "credential-access",
+          "line": 66,
+          "evidence": "credential",
+          "context": "const credential = new AzureKeyCredential(\"your-api-key\");",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential, ManagedIdentityCredential, InteractiveBrowserCredential and AzureKeyCredential with placeholder keys and env var names in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 66,
+          "evidence": "api-key",
+          "context": "const credential = new AzureKeyCredential(\"your-api-key\");",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential, ManagedIdentityCredential, InteractiveBrowserCredential and AzureKeyCredential with placeholder keys and env var names in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 68,
+          "evidence": "credential",
+          "context": "const client = new VoiceLiveClient(endpoint, credential);",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential, ManagedIdentityCredential, InteractiveBrowserCredential and AzureKeyCredential with placeholder keys and env var names in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 89,
+          "evidence": "credential",
+          "context": "const credential = new DefaultAzureCredential({requiredEnvVars: [\"AZURE_TOKEN_CREDENTIALS\"]});",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential, ManagedIdentityCredential, InteractiveBrowserCredential and AzureKeyCredential with placeholder keys and env var names in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 90,
+          "evidence": "process.env",
+          "context": "const endpoint = process.env.AZURE_VOICELIVE_ENDPOINT!;",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential, ManagedIdentityCredential, InteractiveBrowserCredential and AzureKeyCredential with placeholder keys and env var names in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 93,
+          "evidence": "credential",
+          "context": "const client = new VoiceLiveClient(endpoint, credential);",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential, ManagedIdentityCredential, InteractiveBrowserCredential and AzureKeyCredential with placeholder keys and env var names in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 442,
+          "evidence": "credential",
+          "context": "// Use browser-compatible credential",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential, ManagedIdentityCredential, InteractiveBrowserCredential and AzureKeyCredential with placeholder keys and env var names in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 443,
+          "evidence": "credential",
+          "context": "const credential = new InteractiveBrowserCredential({",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential, ManagedIdentityCredential, InteractiveBrowserCredential and AzureKeyCredential with placeholder keys and env var names in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "credential-access",
+          "line": 448,
+          "evidence": "credential",
+          "context": "const client = new VoiceLiveClient(endpoint, credential);",
+          "disposition": "accepted",
+          "reason": "DefaultAzureCredential, ManagedIdentityCredential, InteractiveBrowserCredential and AzureKeyCredential with placeholder keys and env var names in sample code; no instruction to read, print, or send real secrets."
+        },
+        {
+          "type": "network-access",
+          "line": 471,
+          "evidence": "https://",
+          "context": "| npm Package | https://www.npmjs.com/package/@azure/ai-voicelive |",
+          "disposition": "accepted",
+          "reason": "Links to npm, GitHub, Microsoft Learn and the voicelive-samples repo, plus placeholder cognitiveservices.azure.com endpoints in sample code; nothing is fetched by the agent."
+        },
+        {
+          "type": "network-access",
+          "line": 472,
+          "evidence": "https://",
+          "context": "| GitHub Source | https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/ai/ai-voicelive |",
+          "disposition": "accepted",
+          "reason": "Links to npm, GitHub, Microsoft Learn and the voicelive-samples repo, plus placeholder cognitiveservices.azure.com endpoints in sample code; nothing is fetched by the agent."
+        },
+        {
+          "type": "network-access",
+          "line": 473,
+          "evidence": "https://",
+          "context": "| Samples | https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/ai/ai-voicelive/samples |",
+          "disposition": "accepted",
+          "reason": "Links to npm, GitHub, Microsoft Learn and the voicelive-samples repo, plus placeholder cognitiveservices.azure.com endpoints in sample code; nothing is fetched by the agent."
+        },
+        {
+          "type": "network-access",
+          "line": 474,
+          "evidence": "https://",
+          "context": "| API Reference | https://learn.microsoft.com/javascript/api/@azure/ai-voicelive |",
+          "disposition": "accepted",
+          "reason": "Links to npm, GitHub, Microsoft Learn and the voicelive-samples repo, plus placeholder cognitiveservices.azure.com endpoints in sample code; nothing is fetched by the agent."
+        }
+      ]
+    }
+  ]
+}

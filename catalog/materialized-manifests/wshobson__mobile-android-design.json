@@ -1,0 +1,154 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "wshobson/mobile-android-design",
+  "source": {
+    "repo": "wshobson/agents",
+    "path": "plugins/ui-design/skills/mobile-android-design",
+    "revision": "156b7a5e7a8b93642628a339ee4039c925b34c7f"
+  },
+  "review": {
+    "path": "catalog/reviews/wshobson__mobile-android-design.json",
+    "sha256": "10b8c09c8c6b30d265e23d0d372563e9e8e573fbf3e94f1fbe54a34ca2f99447"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "low",
+    "capabilities": {
+      "shell": false,
+      "network": true,
+      "credentials": false,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "network-access",
+        "line": 451,
+        "evidence": "https://",
+        "context": "                    basePath = \"https://myapp.com/product\"",
+        "file": "references/android-navigation.md"
+      },
+      {
+        "type": "network-access",
+        "line": 465,
+        "evidence": "https://",
+        "context": "                    basePath = \"https://myapp.com/user\"",
+        "file": "references/android-navigation.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 91,
+        "evidence": "Delete",
+        "context": "                    Icons.Default.Delete,",
+        "file": "references/compose-components.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 92,
+        "evidence": "Delete",
+        "context": "                    contentDescription = \"Delete\",",
+        "file": "references/compose-components.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 377,
+        "evidence": "Delete",
+        "context": "            Text(\"Delete Item?\")",
+        "file": "references/compose-components.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 380,
+        "evidence": "delete",
+        "context": "            Text(\"Are you sure you want to delete \\\"$itemName\\\"? This action cannot be undone.\")",
+        "file": "references/compose-components.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 389,
+        "evidence": "Delete",
+        "context": "                Text(\"Delete\")",
+        "file": "references/compose-components.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 432,
+        "evidence": "Delete",
+        "context": "                Triple(Icons.Default.Delete, \"Delete\", \"delete\")",
+        "file": "references/compose-components.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 432,
+        "evidence": "Delete",
+        "context": "                Triple(Icons.Default.Delete, \"Delete\", \"delete\")",
+        "file": "references/compose-components.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 432,
+        "evidence": "delete",
+        "context": "                Triple(Icons.Default.Delete, \"Delete\", \"delete\")",
+        "file": "references/compose-components.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 440,
+        "evidence": "delete",
+        "context": "                            tint = if (action == \"delete\")",
+        "file": "references/compose-components.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 142,
+        "evidence": "Delete",
+        "context": "            Text(\"Delete\")",
+        "file": "references/material3-theming.md"
+      }
+    ],
+    "total_bytes": 73618
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "f89abb55d9f073f38f1703e4518f0613c788c6174be7f13b8dfe48a1c076c746",
+      "bytes": 1068,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "references/android-navigation.md",
+      "sha256": "6a28f9a113c4af16f9f8581d9d494ed7b278de8c6258cef58e3ecb822707d190",
+      "bytes": 19979,
+      "mode": "100644"
+    },
+    {
+      "path": "references/compose-components.md",
+      "sha256": "22d9a47cc8ec4c4bbec36f15cb7a5eea33d5a0b5b6c3ba29378fc37197a8a8a0",
+      "bytes": 23313,
+      "mode": "100644"
+    },
+    {
+      "path": "references/details.md",
+      "sha256": "854f692ebe2b6adbf42f1406d0e7e1f7bc895ee34baa4ceff1ef1afc9f2dd962",
+      "bytes": 9247,
+      "mode": "100644"
+    },
+    {
+      "path": "references/material3-theming.md",
+      "sha256": "72ba4c1ef77fba5740b039b3f8b3676902967495141e3f40e0b800df3e85da7c",
+      "bytes": 16214,
+      "mode": "100644"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "0a209a1c45585ce0056548cc2f0fd352b7fde5980a3b5dd397a9daf5dff19fe7",
+      "bytes": 3797,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 73618
+}

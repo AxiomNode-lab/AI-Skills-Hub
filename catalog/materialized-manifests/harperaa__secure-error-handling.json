@@ -1,0 +1,172 @@
+{
+  "schema_version": "0.2",
+  "skill_id": "harperaa/secure-error-handling",
+  "source": {
+    "repo": "harperaa/secure-claude-skills",
+    "path": "error-handling",
+    "revision": "c0b4abbf50f2bab3c0b4ba404ac9c04355fb0223"
+  },
+  "review": {
+    "path": "catalog/reviews/harperaa__secure-error-handling.json",
+    "sha256": "e53e83474a13720c3912001fbe2dd18ba94453172a05db44fa59419d4ed0be33"
+  },
+  "security_scan": {
+    "status": "verified",
+    "risk": "medium",
+    "capabilities": {
+      "shell": false,
+      "network": true,
+      "credentials": true,
+      "dynamic_execution": false,
+      "package_install": false,
+      "filesystem_write": true,
+      "encoded_content": false
+    },
+    "findings": [
+      {
+        "type": "credential-access",
+        "line": 28,
+        "evidence": "API key",
+        "context": "Stripe API error: Invalid API key format",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 261,
+        "evidence": "DELETE",
+        "context": "export async function DELETE(",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 283,
+        "evidence": "delete",
+        "context": "    // Only post owner can delete",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 285,
+        "evidence": "delete",
+        "context": "      return handleForbiddenError('Only the post author can delete this post');",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 288,
+        "evidence": "delete",
+        "context": "    await db.posts.delete({ id: postId });",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "filesystem-write",
+        "line": 293,
+        "evidence": "delete",
+        "context": "    return handleApiError(error, 'delete-post');",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 309,
+        "evidence": "process.env",
+        "context": "const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 480,
+        "evidence": "process.env",
+        "context": "  if (process.env.NODE_ENV === 'production') {",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 574,
+        "evidence": "process.env",
+        "context": "- Environment variables (`process.env`)",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 593,
+        "evidence": "apiKey",
+        "context": "  apiKey: stripeKey,      // ❌ Never log secrets",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 604,
+        "evidence": "secret",
+        "context": "  'password', 'token', 'secret', 'apiKey', 'ssn',",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 604,
+        "evidence": "apiKey",
+        "context": "  'password', 'token', 'secret', 'apiKey', 'ssn',",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 639,
+        "evidence": "process.env",
+        "context": "    environment: process.env.NODE_ENV",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "credential-access",
+        "line": 642,
+        "evidence": "process.env",
+        "context": "  if (process.env.NODE_ENV === 'production') {",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 781,
+        "evidence": "https://",
+        "context": "- OWASP Error Handling Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Error_Handling_Cheat_Sheet.html",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 782,
+        "evidence": "https://",
+        "context": "- OWASP Top 10 2021 - A04 Insecure Design: https://owasp.org/Top10/A04_2021-Insecure_Design/",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 783,
+        "evidence": "https://",
+        "context": "- HTTP Status Codes: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status",
+        "file": "SKILL.md"
+      },
+      {
+        "type": "network-access",
+        "line": 784,
+        "evidence": "https://",
+        "context": "- Node.js Error Handling: https://nodejs.org/api/errors.html",
+        "file": "SKILL.md"
+      }
+    ],
+    "total_bytes": 21264
+  },
+  "materialized_files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "e8f0d88e88dafeb5ba3503df8babaf5ef1c49323d6c1751c09989d29740fa919",
+      "bytes": 1069,
+      "mode": "100644",
+      "attached": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "7417062d89948ebb5c7ce7d439e279b3bcb4f9b743b2de9eb2b4622411b51019",
+      "bytes": 20195,
+      "mode": "100644"
+    }
+  ],
+  "total_bytes": 21264
+}

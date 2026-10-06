@@ -1,0 +1,168 @@
+{
+  "schema_version": "0.1",
+  "skill_id": "bagelhole/gcp-networking",
+  "status": "approved",
+  "reviewed_on": "2026-10-03",
+  "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
+  "source": {
+    "repo": "BagelHole/DevOps-Security-Agent-Skills",
+    "path": "infrastructure/cloud-gcp/gcp-networking",
+    "revision": "0365f57a079b1332f95cf26e31dd2d5332a8399f"
+  },
+  "inventory": {
+    "complete": true,
+    "scope": "infrastructure/cloud-gcp/gcp-networking",
+    "url": "https://api.github.com/repos/BagelHole/DevOps-Security-Agent-Skills/git/trees/0365f57a079b1332f95cf26e31dd2d5332a8399f?recursive=1",
+    "notes": "Non-truncated pinned tree read with git ls-tree. The skill subtree contains only Markdown/text files; no symlink, submodule, script, or binary. The root license is attached, not part of the subtree."
+  },
+  "license": {
+    "spdx": "MIT",
+    "scope": "repository",
+    "path": "LICENSE.txt",
+    "source_path": "LICENSE",
+    "url": "https://github.com/BagelHole/DevOps-Security-Agent-Skills/blob/0365f57a079b1332f95cf26e31dd2d5332a8399f/LICENSE",
+    "ancestor_check": {
+      "complete": true,
+      "overrides": [],
+      "checked": [
+        "infrastructure",
+        "infrastructure/cloud-gcp",
+        "infrastructure/cloud-gcp/gcp-networking"
+      ]
+    },
+    "redistributable": true,
+    "scope_reason": "No skill-local license exists. The repository-root LICENSE is the MIT license text, and the ancestor check found no nested LICENSE, COPYING, or NOTICE file at the repository root or in any directory on the path to the skill. SKILL.md declares no license or declares MIT (checked by draft-review). Every file was read in full: No third-party copyright notice, other license grant, or copied third-party text found; gcloud and Terraform snippets are short examples, not copied Google documentation. A byte-exact copy of LICENSE ships as LICENSE.txt to satisfy the MIT notice condition.",
+    "obligations": [
+      "Ship a byte-exact copy of the repository-root license, including its copyright notice, with the skill.",
+      "Preserve all upstream text and notices byte-for-byte.",
+      "No modified upstream files.",
+      "No trademark rights or endorsement are claimed."
+    ]
+  },
+  "content_review": {
+    "status": "approved",
+    "risk": "medium",
+    "blocking_findings": [],
+    "capabilities": {
+      "shell": true,
+      "network": true,
+      "credentials": false,
+      "package_install": false,
+      "filesystem_write": false,
+      "dynamic_execution": false,
+      "encoded_content": false
+    },
+    "notes": [
+      "Read SKILL.md in full; it is the only file. GCP networking guidance: custom-mode VPC and subnets (incl. GKE secondary and proxy-only ranges), firewall rules, Cloud NAT, external/internal load balancers, Cloud Armor, Private Service Connect, Shared VPC, an equivalent Terraform configuration and read-only list/describe commands.",
+      "Following it runs gcloud commands that create networks, firewall rules (including allow tcp:80/443 from 0.0.0.0/0 to http-server tagged instances, SKILL.md:62-64), NAT, load balancers, security policies and Shared VPC associations in the user's GCP project. Medium because these change real cloud infrastructure; acceptable because they are additive creation steps for the network the user is designing, there are no delete, firewall-flush or disable-security instructions, and the agent should confirm project and names before applying.",
+      "Related Skills are named in plain text only (SKILL.md:274-277), not linked. The Cloud Armor rule at SKILL.md:152 uses a placeholder region code 'XX'. Frontmatter declares license: MIT."
+    ]
+  },
+  "files": [
+    {
+      "path": "LICENSE.txt",
+      "attached": true,
+      "source_path": "LICENSE",
+      "sha256": "d4bc5c1bf6c112bf5ca498d450a62ef861ff2f53feb163f02f962bfaedbfa24b",
+      "bytes": 1068,
+      "mode": "100644",
+      "git_blob": "67c5c5cbb12cafb1515e449748866bd40da7dec9",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Byte-exact copy of the repository-root MIT license, attached to carry its terms and notices.",
+      "findings": []
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "f531a290c81a6e168aebabf431e36fc12477270fda641ff69f1a0c82f26622f9",
+      "bytes": 9654,
+      "mode": "100644",
+      "git_blob": "6533257d4d1e274b7cf64eb1ad60b280c02cdf96",
+      "license": "MIT",
+      "covered_by": "LICENSE.txt",
+      "license_reason": "Covered by the repository-root MIT license; no file-level notice says otherwise.",
+      "findings": [
+        {
+          "type": "shell-execution",
+          "line": 28,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash fences with gcloud commands that create and list VPC, firewall, NAT, load-balancer, Cloud Armor and PSC resources in the user's own project."
+        },
+        {
+          "type": "shell-execution",
+          "line": 34,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash fences with gcloud commands that create and list VPC, firewall, NAT, load-balancer, Cloud Armor and PSC resources in the user's own project."
+        },
+        {
+          "type": "shell-execution",
+          "line": 61,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash fences with gcloud commands that create and list VPC, firewall, NAT, load-balancer, Cloud Armor and PSC resources in the user's own project."
+        },
+        {
+          "type": "shell-execution",
+          "line": 86,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash fences with gcloud commands that create and list VPC, firewall, NAT, load-balancer, Cloud Armor and PSC resources in the user's own project."
+        },
+        {
+          "type": "shell-execution",
+          "line": 105,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash fences with gcloud commands that create and list VPC, firewall, NAT, load-balancer, Cloud Armor and PSC resources in the user's own project."
+        },
+        {
+          "type": "shell-execution",
+          "line": 133,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash fences with gcloud commands that create and list VPC, firewall, NAT, load-balancer, Cloud Armor and PSC resources in the user's own project."
+        },
+        {
+          "type": "shell-execution",
+          "line": 147,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash fences with gcloud commands that create and list VPC, firewall, NAT, load-balancer, Cloud Armor and PSC resources in the user's own project."
+        },
+        {
+          "type": "shell-execution",
+          "line": 166,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash fences with gcloud commands that create and list VPC, firewall, NAT, load-balancer, Cloud Armor and PSC resources in the user's own project."
+        },
+        {
+          "type": "shell-execution",
+          "line": 178,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash fences with gcloud commands that create and list VPC, firewall, NAT, load-balancer, Cloud Armor and PSC resources in the user's own project."
+        },
+        {
+          "type": "shell-execution",
+          "line": 250,
+          "evidence": "bash",
+          "context": "```bash",
+          "disposition": "accepted",
+          "reason": "Bash fences with gcloud commands that create and list VPC, firewall, NAT, load-balancer, Cloud Armor and PSC resources in the user's own project."
+        }
+      ]
+    }
+  ]
+}
