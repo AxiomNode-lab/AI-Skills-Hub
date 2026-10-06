@@ -3,9 +3,9 @@
   "source": {
     "repo": "anthropics/skills",
     "ref": "main",
-    "revision": "8a1541c4a3ffa5a20a5a91de0dcf3f0bab1d1ef4",
+    "revision": "683bc88e56f3e09ba94f7055977f3d3aa499f202",
     "revision_type": "git-commit",
-    "tree_sha": "8a1541c4a3ffa5a20a5a91de0dcf3f0bab1d1ef4"
+    "tree_sha": "683bc88e56f3e09ba94f7055977f3d3aa499f202"
   },
   "discovered_skills": [
     {
@@ -222,7 +222,7 @@
       "path": "skills/claude-api/SKILL.md",
       "name": "claude-api",
       "description": "Reference for the Claude API / Anthropic SDK — model ids, pricing, params, streaming, tool use, MCP, agents, caching, token counting, model migration.\nTRIGGER — read BEFORE opening the target file; don't skip because it \"looks like a one-liner\" — whenever: the prompt names Claude/Anthropic in any form (Claude, Anthropic, Fable, Opus, Sonnet, Haiku, `anthropic`, `@anthropic-ai`, `claude-*`, `us.anthropic.*`, `[1m]`); the user asks about an LLM (pricing/model choice/limits/caching) — never answer from memory; OR the task is LLM-shaped with provider unstated (agent/MCP/tool-definition/multi-agent/RAG/LLM-judge/computer-use; generate/summarize/extract/classify/rewrite/converse over NL; debugging refusals/cutoffs/streaming/tool-calls/tokens).\nSKIP only when another provider is being worked on (overrides all triggers): OpenAI/GPT/Gemini/Llama/Mistral/Cohere/Ollama named in the query; OR `grep -rE 'openai|langchain_openai|google.generativeai|genai|mistralai|cohere|ollama'` over the project hits (run this grep FIRST if no provider named — don't Read the file).",
-      "skill_sha256": "9aac10d9ffb8778c5b7c0b9ec612b3915e83065feb92763c8231469e9fbc29c9",
+      "skill_sha256": "d2d78eb159724410f2996489f054b15e803ec030198d36ca35cb764ab80520c0",
       "license": {
         "spdx": "Complete terms in LICENSE.txt",
         "redistributable": false,
@@ -431,133 +431,133 @@
           },
           {
             "type": "network-access",
-            "line": 425,
+            "line": 427,
             "evidence": "cURL",
             "context": "**Reading guide:** Start with `shared/managed-agents-overview.md`, then the topical `shared/managed-agents-*.md` files (core, environments, tools, events, outcomes, multiagent, webhooks, memory, scheduled-deployments, client-patterns, onboa"
           },
           {
             "type": "network-access",
-            "line": 425,
+            "line": 427,
             "evidence": "curl",
             "context": "**Reading guide:** Start with `shared/managed-agents-overview.md`, then the topical `shared/managed-agents-*.md` files (core, environments, tools, events, outcomes, multiagent, webhooks, memory, scheduled-deployments, client-patterns, onboa"
           },
           {
             "type": "network-access",
-            "line": 425,
+            "line": 427,
             "evidence": "curl",
             "context": "**Reading guide:** Start with `shared/managed-agents-overview.md`, then the topical `shared/managed-agents-*.md` files (core, environments, tools, events, outcomes, multiagent, webhooks, memory, scheduled-deployments, client-patterns, onboa"
           },
           {
             "type": "encoded-content",
-            "line": 457,
+            "line": 459,
             "evidence": "base64",
             "context": "**PDF (base64, no beta):** `{\"type\": \"document\", \"source\": {\"type\": \"base64\", \"media_type\": \"application/pdf\", \"data\": <b64 string>}}` in user content, placed before the text block. Base64 string must have no newlines. Limits: 32 MB request"
           },
           {
             "type": "encoded-content",
-            "line": 457,
+            "line": 459,
             "evidence": "base64",
             "context": "**PDF (base64, no beta):** `{\"type\": \"document\", \"source\": {\"type\": \"base64\", \"media_type\": \"application/pdf\", \"data\": <b64 string>}}` in user content, placed before the text block. Base64 string must have no newlines. Limits: 32 MB request"
           },
           {
             "type": "encoded-content",
-            "line": 457,
+            "line": 459,
             "evidence": "Base64",
             "context": "**PDF (base64, no beta):** `{\"type\": \"document\", \"source\": {\"type\": \"base64\", \"media_type\": \"application/pdf\", \"data\": <b64 string>}}` in user content, placed before the text block. Base64 string must have no newlines. Limits: 32 MB request"
           },
           {
             "type": "credential-access",
-            "line": 481,
+            "line": 483,
             "evidence": "credential",
             "context": "**Admin API (beta, since 2026-08-26):** organization management - members, invites, workspaces and workspace members, API keys, rate limit reports, service accounts, federation issuers/rules, CMEK external keys - under `client.beta.organiza"
           },
           {
             "type": "credential-access",
-            "line": 481,
+            "line": 483,
             "evidence": "API key",
             "context": "**Admin API (beta, since 2026-08-26):** organization management - members, invites, workspaces and workspace members, API keys, rate limit reports, service accounts, federation issuers/rules, CMEK external keys - under `client.beta.organiza"
           },
           {
             "type": "network-access",
-            "line": 493,
+            "line": 495,
             "evidence": "curl",
             "context": "After detecting the language, read the relevant files based on what the user needs. Every `{lang}/...`, `shared/...`, and `curl/...` path cited in this document is relative to this skill's base directory, and none of those files' content is"
           },
           {
             "type": "network-access",
-            "line": 495,
+            "line": 497,
             "evidence": "cURL",
             "context": "**All SDK languages use the same multi-file layout** - directory `{lang}/claude-api/` containing `README.md` (install, client init, basic request, thinking, caching, stop details, misc), `tool-use.md` (tool definitions, agentic loop, Anthro"
           },
           {
             "type": "network-access",
-            "line": 495,
+            "line": 497,
             "evidence": "cURL",
             "context": "**All SDK languages use the same multi-file layout** - directory `{lang}/claude-api/` containing `README.md` (install, client init, basic request, thinking, caching, stop details, misc), `tool-use.md` (tool definitions, agentic loop, Anthro"
           },
           {
             "type": "network-access",
-            "line": 495,
+            "line": 497,
             "evidence": "curl",
             "context": "**All SDK languages use the same multi-file layout** - directory `{lang}/claude-api/` containing `README.md` (install, client init, basic request, thinking, caching, stop details, misc), `tool-use.md` (tool definitions, agentic loop, Anthro"
           },
           {
             "type": "dynamic-execution",
-            "line": 517,
+            "line": 519,
             "evidence": "eval (",
             "context": "**Iteratively improving an app against an eval (prompt tuning, hill-climbing):**"
           },
           {
             "type": "filesystem-write",
-            "line": 531,
+            "line": 533,
             "evidence": "remove",
             "context": "**Auditing or cleaning up prompts, tool descriptions, skills, or agent configuration files such as `CLAUDE.md` (\"is this prompt outdated\", \"remove the cruft\", \"this was written for an older model\"):**"
           },
           {
             "type": "filesystem-write",
-            "line": 532,
+            "line": 534,
             "evidence": "delete",
             "context": "-> Read `shared/prompt-audit.md` - dated-pattern tables with greppable signals, the keep list (what NOT to delete), and the report + proposed-diff output contract"
           },
           {
             "type": "shell-execution",
-            "line": 542,
+            "line": 544,
             "evidence": "bash",
             "context": "-> Read `shared/agent-design.md` (bash vs. dedicated tools, programmatic tool calling, tool search/skills, context editing vs. compaction vs. memory, caching principles)"
           },
           {
             "type": "network-access",
-            "line": 551,
+            "line": 553,
             "evidence": "curl",
             "context": "-> Read `shared/admin-api.md` - `client.beta.organization` endpoint/method table, admin credentials, per-language naming and pagination, what stays curl-only"
           },
           {
             "type": "network-access",
-            "line": 560,
+            "line": 562,
             "evidence": "curl",
             "context": "-> See the reading guide in the `## Managed Agents (Beta)` section above - it lists every `shared/managed-agents-*.md` file and the language-specific READMEs (`{lang}/managed-agents/README.md`, `curl/managed-agents.md`)."
           },
           {
             "type": "filesystem-write",
-            "line": 580,
+            "line": 582,
             "evidence": "delete",
             "context": "- **Disabling thinking on Claude Opus 5 has two failure modes - prefer low/medium effort instead.** (On Claude Opus 5.5 it can't be disabled at all - `{type: \"disabled\"}` is a 400 at every effort level; use `low` effort. On Claude Sonnet 5."
           },
           {
             "type": "shell-execution",
-            "line": 588,
+            "line": 590,
             "evidence": "Bash",
             "context": "- **Bash and text editor tools are Anthropic-defined, schema-less.** Declare `{\"type\": \"bash_20250124\", \"name\": \"bash\"}` / `{\"type\": \"text_editor_20250728\", \"name\": \"str_replace_based_edit_tool\"}` - no `input_schema`. A custom tool with you"
           },
           {
             "type": "shell-execution",
-            "line": 588,
+            "line": 590,
             "evidence": "bash",
             "context": "- **Bash and text editor tools are Anthropic-defined, schema-less.** Declare `{\"type\": \"bash_20250124\", \"name\": \"bash\"}` / `{\"type\": \"text_editor_20250728\", \"name\": \"str_replace_based_edit_tool\"}` - no `input_schema`. A custom tool with you"
           },
           {
             "type": "shell-execution",
-            "line": 588,
+            "line": 590,
             "evidence": "bash",
             "context": "- **Bash and text editor tools are Anthropic-defined, schema-less.** Declare `{\"type\": \"bash_20250124\", \"name\": \"bash\"}` / `{\"type\": \"text_editor_20250728\", \"name\": \"str_replace_based_edit_tool\"}` - no `input_schema`. A custom tool with you"
           }
