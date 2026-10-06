@@ -1,6 +1,6 @@
 # Current Status
 
-Snapshot: 2026-10-05, version `0.3.0-beta.1`. Counts come from `catalog/skills.json`, `catalog/bundles.json` and `catalog/sources.json`, and from running the commands below, not from earlier reports.
+Snapshot: 2026-10-06, version `0.3.0-beta.1`. Counts come from `catalog/skills.json`, `catalog/bundles.json` and `catalog/sources.json`, and from running the commands below, not from earlier reports.
 
 ## Catalog
 
@@ -50,6 +50,8 @@ pnpm e2e:package       # build, pack, install the tarball in a temp dir, run the
 ```
 
 CI runs `validate-all` on Linux and Windows (Node 22), `verify-upstream` on Linux, and the package E2E on both.
+
+The three synthetic Codex skill probes are documented in the [evaluation report](../evaluations/skills/results/2026-10-02.md) and [replay guide](../evaluations/skills/README.md). Their project installs and file checks passed, but managed execution policy blocked instruction reads, so all three tasks remain `not-run`; instruction use and output quality are unproven. The [2026-10-06 preflight](../evaluations/skills/results/2026-10-06-preflight.md) reproduced the block after this branch was reconciled with `main`. The runner requires a successful project-local read/write/read preflight before any paid case, and independent human review remains pending.
 
 ## Known limitations
 
