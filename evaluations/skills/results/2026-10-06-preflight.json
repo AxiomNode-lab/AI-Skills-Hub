@@ -1,0 +1,28 @@
+{
+  "kind": "synthetic-policy-preflight",
+  "started": "2026-10-06T09:31:25.213Z",
+  "finished": "2026-10-06T09:31:44.737Z",
+  "platform": "win32",
+  "codex_version": "codex-cli 0.153.0",
+  "status": "blocked-by-policy",
+  "process": { "exit_code": 0, "session_completed": true },
+  "checks": { "instruction_read": false, "proof_written": false, "proof_read": false },
+  "diagnostics": [
+    "Project-local proof.txt write rejected: blocked by policy",
+    "Project-local proof.txt read rejected: blocked by policy",
+    "Project-local .agents/skills/synthetic-preflight/SKILL.md read rejected: blocked by policy"
+  ],
+  "raw_evidence": {
+    "local_directory": ".ai-skills-hub/evaluations/preflight-GVIa9O",
+    "prompt_sha256": "86703bd6f73c5ae6125678f3d03498c6346f63425f3f736cebc56a2e027a0b6b",
+    "trace_sha256": "debac2d92d4d7db76c7fbdfb7a97293d080cac2493d8b51ae5906187a5f521e0",
+    "stderr_sha256": "5f7bb6c4030b147fe5efca3b70a08d5b39a7faf221d879d95b6234a0f4f35f9d",
+    "instruction_sha256": "5273bced72417c94c42c86fefa3a8b08e2854408af4d30912d4ca012744ab44"
+  },
+  "evaluation_cases_started": 0,
+  "case_statuses": {
+    "frontend-design": { "agent": "not-run", "usage": "unproven", "output": "not-run", "human_review": "pending" },
+    "brand-guidelines": { "agent": "not-run", "usage": "unproven", "output": "not-run", "human_review": "pending" },
+    "internal-comms": { "agent": "not-run", "usage": "unproven", "output": "not-run", "human_review": "pending" }
+  }
+}

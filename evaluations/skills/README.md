@@ -1,5 +1,7 @@
 # Local skill behavior evaluations
 
+The latest [2026-10-06 synthetic preflight](results/2026-10-06-preflight.md) remains blocked by managed execution policy after PR #9 was reconciled with current `main`. No fixed case was started in that run; the three recorded case outcomes below remain `not-run`.
+
 These are three independent, synthetic task probes, not a benchmark or evidence
 of improvement over Codex without skills. Installation success, instruction
 loading, execution, and output quality are separate results. Licensed skill
