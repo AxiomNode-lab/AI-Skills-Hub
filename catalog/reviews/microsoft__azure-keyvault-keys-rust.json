@@ -1,7 +1,7 @@
 {
   "schema_version": "0.1",
   "skill_id": "microsoft/azure-keyvault-keys-rust",
-  "status": "approved",
+  "status": "held",
   "reviewed_on": "2026-10-02",
   "reviewer": "AI-assisted artifact review by parallel review agents with lead-reviewer validation; not an independent security certification",
   "source": {
@@ -42,9 +42,17 @@
     ]
   },
   "content_review": {
-    "status": "approved",
-    "risk": "medium",
-    "blocking_findings": [],
+    "status": "blocked",
+    "risk": "high",
+    "blocking_findings": [
+      {
+        "type": "unsafe-cryptographic-example",
+        "file": "SKILL.md",
+        "line": 159,
+        "evidence": "let dek = random::<u32>().to_le_bytes().to_vec();",
+        "reason": "The example explicitly labels a four-byte (32-bit) value as a symmetric data encryption key for envelope encryption. NIST FIPS 197 permits AES keys of 128, 192, or 256 bits, while Microsoft Azure encryption-at-rest guidance describes the DEK in its envelope-encryption hierarchy as a symmetric AES-256 key. The value is therefore unusable as an AES DEK as written and, if treated as generic encryption-key material, has only 2^32 possibilities. Because this skill guides an agent to produce the code, the finding blocks release until a corrected immutable upstream artifact is reviewed."
+      }
+    ],
     "capabilities": {
       "shell": true,
       "network": false,
@@ -57,7 +65,7 @@
     "notes": [
       "Read SKILL.md (the only file) in full. Guidance and Rust samples for the official azure_security_keyvault_keys crate: authentication with DeveloperToolsCredential/ManagedIdentityCredential, create/update/delete/list keys, and wrap/unwrap envelope encryption.",
       "Medium because SKILL.md:28 and Best Practice SKILL.md:207 tell the agent to run `cargo add` (package install from crates.io) rather than edit Cargo.toml, and SKILL.md:214 suggests `cargo clippy`; acceptable because the crates are the named official azure-sdk crates and SKILL.md:23 explicitly warns against unofficial look-alike crates. Key create/delete calls are sample code for the user's application, not commands the agent runs against a vault.",
-      "No hidden content, no external file dependencies. Users should note the sample's DEK generation (random u32, SKILL.md:159) is illustrative only and not a production-strength key."
+      "SUPERSEDED 2026-10-05: the prior review treated SKILL.md:159 as illustrative. The independent Batch 06 correction confirms that `random::<u32>().to_le_bytes().to_vec()` yields exactly four bytes/32 bits while the surrounding workflow calls it a symmetric DEK. NIST AES keys are 128/192/256 bits and Microsoft describes Azure envelope-encryption DEKs as symmetric AES-256 keys. This is now a blocking content-quality/security finding; upstream bytes and provenance remain unchanged."
     ]
   },
   "files": [

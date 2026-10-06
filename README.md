@@ -19,7 +19,7 @@ AI Skills Hub is a package manager for [Agent Skills](https://agentskills.io) (`
 
 ## What it is, and what it is not
 
-- **A curated catalog.** 1083 skills are indexed from the upstream repositories listed in `catalog/sources.json`; **415 are released** for installation. The rest stay listed as `review-required`, `source-direct` or `blocked`, with the reason.
+- **A curated catalog.** 1083 skills are indexed from the upstream repositories listed in `catalog/sources.json`; **414 are released** for installation. The rest stay listed as `review-required`, `source-direct` or `blocked`, with the reason.
 - **Provenance and licensing.** Every released skill records its source repository, commit, path, license evidence and per-file hashes ([evidence](docs/VERIFIED-LOCAL-SKILLS.md), [policy](docs/LICENSE-POLICY.md)). A public GitHub repository is not treated as permission to redistribute.
 - **Not a security certification.** Reviews are AI-assisted and recorded with their reasoning; they are not legal advice or a guarantee. Skills are instructions your agent follows, so read what you install.
 - **Not task-performance tested.** Released means reviewed, licensed and integrity-checked, not benchmarked.
