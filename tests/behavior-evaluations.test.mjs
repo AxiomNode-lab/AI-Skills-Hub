@@ -20,6 +20,12 @@ test('usage evidence accepts complete successful reads on Windows and POSIX', ()
     assert.equal(readEvidence([event(command, 'first\r\nsecond')], 'F:\\project', 'frontend-design', 'SKILL.md', 'first\nsecond')[0].item_id, 'read-1');
   }
 });
+test('usage evidence requires correctly decoded UTF-8 instructions', () => {
+  const command = "Get-Content -LiteralPath '.agents/skills/frontend-design/SKILL.md' -Raw -Encoding utf8";
+  const expected = 'Make a distinctive design, never a cliché.';
+  assert.equal(readEvidence([event(command, expected)], 'F:\\project', 'frontend-design', 'SKILL.md', expected).length, 1);
+  assert.deepEqual(readEvidence([event(command, 'Make a distinctive design, never a clichأ©.')], 'F:\\project', 'frontend-design', 'SKILL.md', expected), []);
+});
 test('execution classification separates startup failure, incomplete execution and completion', () => {
   assert.equal(executionStatus([{ type: 'thread.started' }, { type: 'turn.failed' }], 1), 'not-run');
   assert.equal(executionStatus([event('node build.mjs', 'built')], 1), 'incomplete');

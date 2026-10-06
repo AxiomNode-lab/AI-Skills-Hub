@@ -53,7 +53,10 @@ for (const fixture of preflight.summary.status === 'passed' ? cases : []) {
   if (git.status !== 0) throw new Error(git.stderr);
   fs.writeFileSync(path.join(project, 'AGENTS.md'), 'Evaluation project: synthetic data only. Work only inside this project. No network, connectors, messages, personal files, package/font installs or subprocess agents. Do not modify .agents, catalog or installation records. Use only the named local skill. Write the requested artifacts; do not grade your own success.\n');
   const reads = fixture.required_reads.map(f => `.agents/skills/${fixture.name}/${f}`);
-  const prompt = `Use the installed $${fixture.name} skill for this task. First read these complete files with a shell read command, so the execution trace records which instructions you used: ${reads.join(', ')}. Do not merely mention their names.\n\n${fixture.brief}\n\nWork only within this project; no network, connectors or external sends, no personal files, package installation or subagents. Do not modify installed skill files. Complete the actual artifact, not just a plan.\n`;
+  const readCommands = reads.map(target => process.platform === 'win32'
+    ? `Get-Content -LiteralPath '${target}' -Raw -Encoding utf8`
+    : `cat '${target}'`);
+  const prompt = `Use the installed $${fixture.name} skill for this task. First read these complete files with the following shell commands, so the execution trace records the full, correctly decoded UTF-8 instructions. A file name or a garbled read is not enough:\n${readCommands.join('\n')}\n\n${fixture.brief}\n\nWork only within this project; no network, connectors or external sends, no personal files, package installation or subagents. Do not modify installed skill files. Complete the actual artifact, not just a plan.\n`;
   fs.writeFileSync(path.join(project, 'task.txt'), prompt);
   const command = ['exec', '--ignore-user-config', '--ephemeral', '--sandbox', 'workspace-write', '-c', 'web_search="disabled"', '-c', 'features.apps=false', '-c', 'features.multi_agent=false', '--json', '--color', 'never', '-C', project, '-'];
   const started = new Date().toISOString();

@@ -33,6 +33,13 @@ loading evidence. The read detector supports complete `cat`, `Get-Content` and
 file-read command traces; alternative mechanisms require explicit trace review,
 not silently treating a missing match as proof of non-use.
 
+On Windows PowerShell, the runner prompts for `Get-Content -Raw -Encoding utf8` so
+UTF-8 skill files without a BOM are decoded correctly. An interactive scratch
+run on 2026-10-06 read the complete `frontend-design` file without an explicit
+encoding; its output matched the legacy ANSI decoding rather than the actual
+UTF-8 text. That read is exploratory, not exact instruction-use evidence for a
+fixed case.
+
 ## Reproduce
 
 Requirements: repository dependencies, Node >=22, Git and an installed,
