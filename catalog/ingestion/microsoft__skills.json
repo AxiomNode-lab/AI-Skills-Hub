@@ -3,9 +3,9 @@
   "source": {
     "repo": "microsoft/skills",
     "ref": "main",
-    "revision": "354361d83247c76a1c21e802e0d4887c4d8323a3",
+    "revision": "3898ec894e90afdfdae982a925db28b6a7b334e3",
     "revision_type": "git-commit",
-    "tree_sha": "354361d83247c76a1c21e802e0d4887c4d8323a3"
+    "tree_sha": "3898ec894e90afdfdae982a925db28b6a7b334e3"
   },
   "discovered_skills": [
     {
@@ -22340,8 +22340,8 @@
     {
       "path": ".github/plugins/azure-skills/skills/azure-diagnostics/SKILL.md",
       "name": "azure-diagnostics",
-      "description": "Debug Azure production issues on Azure using AppLens, Azure Monitor, resource health, and safe triage. WHEN: debug production issues, troubleshoot app service, app service high CPU, app service deployment failure, troubleshoot container apps, troubleshoot functions, troubleshoot AKS, VM RDP, Linux SSH, VM black screen, can't connect to VM, reset VM password, NSG or firewall blocking, kubectl cannot connect, kube-system/CoreDNS failures, pod pending, crashloop, node not ready, upgrade failures, analyze logs, KQL, insights, image pull failures, cold start issues, health probe failures, resource health, root cause of errors, troubleshoot event hubs, troubleshoot service bus, messaging SDK error, AMQP connection failure, message lock lost, service bus dead letter.",
-      "skill_sha256": "346d28f90a806ef20bc3542984eed185cd8dbca153fe59f1c4a3831cd9619707",
+      "description": "Debug Azure production issues on Azure using AppLens, Azure Monitor, resource health, and safe triage. WHEN: debug production issues, troubleshoot app service, app service high CPU, app service deployment failure, troubleshoot container apps, container app 503 or target port mismatch, troubleshoot functions, function telemetry missing or stopped after a config/connection-string change, troubleshoot AKS, VM RDP, Linux SSH, VM black screen, can't connect to VM, reset VM password, NSG or firewall blocking, kubectl cannot connect, kube-system/CoreDNS failures, pod pending, crashloop, node not ready, upgrade failures, analyze logs, KQL, insights, image pull failures, cold start issues, health probe failures, resource health, root cause of errors, troubleshoot event hubs, troubleshoot service bus, messaging SDK error, AMQP connection failure, message lock lost, lock renewal during long-running processing, service bus dead letter.",
+      "skill_sha256": "c73ae7fc915e889693e30c538f7132e5dbb076bfdfbc6850beef181cc4ae2b06",
       "license": {
         "spdx": "MIT",
         "redistributable": true,
@@ -22370,25 +22370,25 @@
           },
           {
             "type": "credential-access",
-            "line": 62,
+            "line": 65,
             "evidence": "credential",
             "context": "| **Compute** | VM RDP/SSH connectivity, NSG/firewall blocks, credential resets, VM agent/tooling issues | [VM Connectivity Troubleshooting](troubleshooting/compute/vm-troubleshooting.md) |"
           },
           {
             "type": "credential-access",
-            "line": 71,
+            "line": 74,
             "evidence": "credential",
             "context": "- Route Azure VM RDP/SSH connectivity, NSG/firewall, credential reset, and VM agent troubleshooting to [VM Connectivity Troubleshooting](troubleshooting/compute/vm-troubleshooting.md)."
           },
           {
             "type": "shell-execution",
-            "line": 80,
+            "line": 83,
             "evidence": "bash",
             "context": "```bash"
           },
           {
             "type": "shell-execution",
-            "line": 138,
+            "line": 141,
             "evidence": "bash",
             "context": "```bash"
           }
