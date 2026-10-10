@@ -3,11 +3,346 @@
   "source": {
     "repo": "microsoft/skills",
     "ref": "main",
-    "revision": "3898ec894e90afdfdae982a925db28b6a7b334e3",
+    "revision": "d5741a1e9325adead3a28d1d203bb69283907e06",
     "revision_type": "git-commit",
-    "tree_sha": "3898ec894e90afdfdae982a925db28b6a7b334e3"
+    "tree_sha": "d5741a1e9325adead3a28d1d203bb69283907e06"
   },
   "discovered_skills": [
+    {
+      "path": ".github/plugins/aks-skills/skills/aks-gpu-inference/SKILL.md",
+      "name": "aks-gpu-inference",
+      "description": "Diagnose Day-2 AKS GPU and KAITO incidents using profile-aware, read-only evidence. WHEN: 'Insufficient nvidia.com/gpu', GPU pod Pending, model-load OOM, DCGM/VRAM, KAITO Workspace not ready, or GPU autoscaling. DO NOT USE FOR: setup (airunway-aks-setup), non-GPU incidents (aks-troubleshooting), standalone VM quota (azure-quotas), or generic cost (cost-analysis or cost-optimization from the optional azure-cost plugin).",
+      "skill_sha256": "0968850f574d452300a063c8b73f708a1cc54a7ba6adc103ce3c5a601f1a3f3e",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_type": "skill-frontmatter",
+        "evidence_path": ".github/plugins/aks-skills/skills/aks-gpu-inference/SKILL.md"
+      },
+      "security": {
+        "scan_status": "verified",
+        "risk": "none",
+        "capabilities": {
+          "shell": false,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": []
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": ".github/plugins/aks-skills/skills/aks-known-issues/SKILL.md",
+      "name": "aks-known-issues",
+      "description": "Lookup documented AKS fixes only when the prompt includes an exact catalog signature and all of its qualifiers: VMCannotFitEphemeralOSDisk; NodePoolMcVersionIncompatible; 'NodeImageVersion is not accepted'; AKS SkuNotAvailable with size, location, and zone; ZonalAllocationFailed with insufficient zone capacity; OverconstrainedAllocationRequest with listed constraints; nested AKS vmssCSE/CSE VMExtensionError_OutboundConnFail, VMExtensionError_K8SAPIServerConnFail, or VMExtensionError_K8SAPIServerDNSLookupFail; or AllocationFailed with the full cataloged internal-error or insufficient-regional-capacity message. Never use for quota errors, code-only or bare wrappers, generic symptoms, incomplete signatures, or failures outside AKS; use aks-troubleshooting or azure-diagnostics.",
+      "skill_sha256": "cb8520de767456a29e99e4321903e501946b3b8de06c0cc79fa0f2b938521791",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_type": "skill-frontmatter",
+        "evidence_path": ".github/plugins/aks-skills/skills/aks-known-issues/SKILL.md"
+      },
+      "security": {
+        "scan_status": "verified",
+        "risk": "none",
+        "capabilities": {
+          "shell": false,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": []
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": ".github/plugins/aks-skills/skills/aks-network-capture/SKILL.md",
+      "name": "aks-network-capture",
+      "description": "Collects bounded packet captures from AKS nodes and Azure network configuration for wire-level evidence. WHEN: \"capture packets on an AKS node\", \"take a pcap\", \"run tcpdump on AKS\", \"prove where packets drop\". Use for explicit packet-capture intent after read-only diagnostics, not general AKS connectivity or ingress troubleshooting.",
+      "skill_sha256": "afa6c749b8a502cb580b8a5eaee036a288ad0dcfd95da1c7723d5ef1add03087",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_type": "skill-frontmatter",
+        "evidence_path": ".github/plugins/aks-skills/skills/aks-network-capture/SKILL.md"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "capabilities": {
+          "shell": true,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "shell-execution",
+            "line": 30,
+            "evidence": "Bash",
+            "context": "Bash or PowerShell execution, `kubectl` access to the bound cluster, `az` for"
+          },
+          {
+            "type": "shell-execution",
+            "line": 30,
+            "evidence": "PowerShell",
+            "context": "Bash or PowerShell execution, `kubectl` access to the bound cluster, `az` for"
+          },
+          {
+            "type": "shell-execution",
+            "line": 49,
+            "evidence": "Bash",
+            "context": "1. Install [Bash](scripts/setup-capture-configmap.sh) / [PowerShell](scripts/setup-capture-configmap.ps1)."
+          },
+          {
+            "type": "shell-execution",
+            "line": 49,
+            "evidence": "sh",
+            "context": "1. Install [Bash](scripts/setup-capture-configmap.sh) / [PowerShell](scripts/setup-capture-configmap.ps1)."
+          },
+          {
+            "type": "shell-execution",
+            "line": 49,
+            "evidence": "PowerShell",
+            "context": "1. Install [Bash](scripts/setup-capture-configmap.sh) / [PowerShell](scripts/setup-capture-configmap.ps1)."
+          },
+          {
+            "type": "shell-execution",
+            "line": 50,
+            "evidence": "Bash",
+            "context": "2. Capture nodes or pods with [Bash](scripts/create-capture.sh) / [PowerShell](scripts/create-capture.ps1)."
+          },
+          {
+            "type": "shell-execution",
+            "line": 50,
+            "evidence": "sh",
+            "context": "2. Capture nodes or pods with [Bash](scripts/create-capture.sh) / [PowerShell](scripts/create-capture.ps1)."
+          },
+          {
+            "type": "shell-execution",
+            "line": 50,
+            "evidence": "PowerShell",
+            "context": "2. Capture nodes or pods with [Bash](scripts/create-capture.sh) / [PowerShell](scripts/create-capture.ps1)."
+          },
+          {
+            "type": "shell-execution",
+            "line": 51,
+            "evidence": "Bash",
+            "context": "3. Generate traffic if approved with [Bash](scripts/generate-test-traffic.sh) / [PowerShell](scripts/generate-test-traffic.ps1)."
+          },
+          {
+            "type": "shell-execution",
+            "line": 51,
+            "evidence": "sh",
+            "context": "3. Generate traffic if approved with [Bash](scripts/generate-test-traffic.sh) / [PowerShell](scripts/generate-test-traffic.ps1)."
+          },
+          {
+            "type": "shell-execution",
+            "line": 51,
+            "evidence": "PowerShell",
+            "context": "3. Generate traffic if approved with [Bash](scripts/generate-test-traffic.sh) / [PowerShell](scripts/generate-test-traffic.ps1)."
+          },
+          {
+            "type": "shell-execution",
+            "line": 52,
+            "evidence": "Bash",
+            "context": "4. Retrieve the exact run with [Bash](scripts/retrieve-captures.sh) / [PowerShell](scripts/retrieve-captures.ps1)."
+          },
+          {
+            "type": "shell-execution",
+            "line": 52,
+            "evidence": "sh",
+            "context": "4. Retrieve the exact run with [Bash](scripts/retrieve-captures.sh) / [PowerShell](scripts/retrieve-captures.ps1)."
+          },
+          {
+            "type": "shell-execution",
+            "line": 52,
+            "evidence": "PowerShell",
+            "context": "4. Retrieve the exact run with [Bash](scripts/retrieve-captures.sh) / [PowerShell](scripts/retrieve-captures.ps1)."
+          },
+          {
+            "type": "shell-execution",
+            "line": 53,
+            "evidence": "Bash",
+            "context": "5. Gather Azure evidence with [Bash](scripts/collect-azure-network-info.sh) / [PowerShell](scripts/collect-azure-network-info.ps1)."
+          },
+          {
+            "type": "shell-execution",
+            "line": 53,
+            "evidence": "sh",
+            "context": "5. Gather Azure evidence with [Bash](scripts/collect-azure-network-info.sh) / [PowerShell](scripts/collect-azure-network-info.ps1)."
+          },
+          {
+            "type": "shell-execution",
+            "line": 53,
+            "evidence": "PowerShell",
+            "context": "5. Gather Azure evidence with [Bash](scripts/collect-azure-network-info.sh) / [PowerShell](scripts/collect-azure-network-info.ps1)."
+          },
+          {
+            "type": "shell-execution",
+            "line": 55,
+            "evidence": "sh",
+            "context": "The ConfigMap runs [run-capture.sh](scripts/run-capture.sh) inside its pinned Linux image."
+          },
+          {
+            "type": "shell-execution",
+            "line": 55,
+            "evidence": "sh",
+            "context": "The ConfigMap runs [run-capture.sh](scripts/run-capture.sh) inside its pinned Linux image."
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": true,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": ".github/plugins/aks-skills/skills/aks-troubleshooting/SKILL.md",
+      "name": "aks-troubleshooting",
+      "description": "Debug live Azure Kubernetes Service (AKS) incidents with a read-only, evidence-first investigation. WHEN: pod crashes or Pending, CrashLoopBackOff, OOMKilled, ImagePullBackOff, node NotReady, DNS or ingress failure, connectivity timeout, network policy, SNAT exhaustion, node-pool scaling blocked by QuotaExceeded or InsufficientVCPUQuota, upgrade stuck, spot or zone disruption, a bare VMExtensionProvisioningError or AllocationFailed wrapper, an uncataloged capacity symptom, or 'investigate my AKS cluster'. DO NOT USE FOR: packet capture (use aks-network-capture); GPU or model-serving issues (use aks-gpu-inference); cluster creation or provisioning (use azure-kubernetes); cost (use cost-analysis from the optional azure-cost plugin); pod rightsizing (use azure-kubernetes); a fully qualified documented AKS signature with every required nested qualifier (use aks-known-issues); standalone failures on non-AKS Azure resources (use azure-diagnostics). Unqualified errors and open-ended incidents stay here only for AKS.",
+      "skill_sha256": "fdf30800f2ce84a13ea3c126c8f6e00ed88123d400596a78c6a2e63f173e9dbc",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_type": "skill-frontmatter",
+        "evidence_path": ".github/plugins/aks-skills/skills/aks-troubleshooting/SKILL.md"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "capabilities": {
+          "shell": true,
+          "network": true,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": true,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "filesystem-write",
+            "line": 16,
+            "evidence": "delete",
+            "context": "**Read-only by default.** Do not restart, delete, cordon, drain, scale, upgrade, or reconfigure any resource unless the user explicitly asks for remediation. Gather evidence, name the root cause, and propose the fix — but do not apply it un"
+          },
+          {
+            "type": "shell-execution",
+            "line": 69,
+            "evidence": "sh",
+            "context": "Both shipped scripts are POSIX `sh` and read-only; use them only when the host capability gate is satisfied. They require an explicit resource group, cluster, and kube context, then verify that the context endpoint matches the named AKS res"
+          },
+          {
+            "type": "shell-execution",
+            "line": 71,
+            "evidence": "sh",
+            "context": "- `scripts/cluster-snapshot.sh <resource-group> <cluster> <kube-context>` — target-bound cluster overview (nodes, recent events, pressure, and node-pool state)."
+          },
+          {
+            "type": "shell-execution",
+            "line": 72,
+            "evidence": "sh",
+            "context": "- `scripts/pod-deep-dive.sh <namespace> <pod> <resource-group> <cluster> <kube-context> <artifacts-dir>` — target-bound pod evidence. Raw current/previous logs stay in the artifact directory; stdout contains redacted projections and no more"
+          },
+          {
+            "type": "shell-execution",
+            "line": 93,
+            "evidence": "sh",
+            "context": "- When the host capability gate is satisfied, use `pod-deep-dive.sh` so current and previous streams are collected together, raw output stays outside model context, and visible log evidence is bounded and redacted. Otherwise use an equivale"
+          },
+          {
+            "type": "network-access",
+            "line": 108,
+            "evidence": "https://",
+            "context": "Microsoft's AKS troubleshooting hub: https://learn.microsoft.com/troubleshoot/azure/azure-kubernetes/welcome-azure-kubernetes"
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": true,
+        "credentials": true,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": ".github/plugins/aks-skills/skills/azure-search-nav/SKILL.md",
+      "name": "azure-search-nav",
+      "description": "Builds an Azure portal deep link to a specific blade/menu item for supported Microsoft.ContainerService, Microsoft.Kubernetes, and Microsoft.Compute resources using the aks-search-direct-mid semantic search API. WHEN: 'find where in the Azure portal to do something', 'search the portal for an operation', 'construct a portal link from a search query and a resource'.",
+      "skill_sha256": "7e869e37173d7608320554e85a444aa337c3e66cc3b7145cd33caae67b5c0abd",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_type": "skill-frontmatter",
+        "evidence_path": ".github/plugins/aks-skills/skills/azure-search-nav/SKILL.md"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "capabilities": {
+          "shell": true,
+          "network": true,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "shell-execution",
+            "line": 18,
+            "evidence": "PowerShell",
+            "context": "| Prerequisite | `Az.Accounts` PowerShell module |"
+          },
+          {
+            "type": "network-access",
+            "line": 34,
+            "evidence": "https://",
+            "context": "   `https://portal.azure.com`."
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": true,
+        "network": true,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
     {
       "path": ".github/plugins/azure-cost/skills/cost-analysis/SKILL.md",
       "name": "cost-analysis",
@@ -21683,7 +22018,7 @@
       "path": ".github/plugins/azure-skills/skills/airunway-aks-setup/SKILL.md",
       "name": "airunway-aks-setup",
       "description": "Set up AI Runway on AKS — from bare cluster to running model. Covers cluster verification, controller install, GPU assessment, provider setup, and first deployment. WHEN: \"setup AI Runway\", \"onboard AKS cluster\", \"install AI Runway\", \"airunway setup\", \"deploy model to AKS\", \"GPU inference on AKS\", \"KAITO setup on AKS\", \"run LLM on AKS\", \"vLLM on AKS\", \"set up model serving on AKS\", \"AI Runway controller\".",
-      "skill_sha256": "fff89af6c8c81005b48a073e470636f3b11ef3f991e55c109dae9f36105ffda7",
+      "skill_sha256": "cb076706a81bef96568a0f71fdda9e44ab67bc76a3c40541d20046ae129f29df",
       "license": {
         "spdx": "MIT",
         "redistributable": true,
@@ -21941,7 +22276,7 @@
       "path": ".github/plugins/azure-skills/skills/azure-app-onboard/SKILL.md",
       "name": "azure-app-onboard",
       "description": "End-to-end orchestrator: from a business idea, app idea, or existing app to running Azure deployment with cost estimates and pre-deploy approval. Analyzes your app, auto-detects the right Azure services, scaffolds infrastructure code, and deploys — tailored to your app, not a template. Handles moving existing apps to Azure without rewriting or with minimal changes. WHEN: bring your app to Azure, plan my app, cost to run, is my code ready to deploy, deploy my app to the cloud, deploy all my services, what Azure services do I need, plan my Azure deployment, deploy my new app to Azure, one-click deploy, I have an app and want it on Azure, migrate my app to Azure, help me get started, build an app, no code yet, starter project. DO NOT USE FOR: use azd for deployment(use azure-deploy), optimizing existing costs (use cost-optimization), code readiness checks only (use azure-app-onboard-prereq).",
-      "skill_sha256": "ce6fa884c2e02f7d6821f37569d0f9f1412423b3922414200921a4c8bca138f8",
+      "skill_sha256": "63848257b7e4330576e99c3a0b8de81fb0dacb45ddb574861185cea6d2f34892",
       "license": {
         "spdx": "MIT",
         "redistributable": true,
@@ -22341,7 +22676,7 @@
       "path": ".github/plugins/azure-skills/skills/azure-diagnostics/SKILL.md",
       "name": "azure-diagnostics",
       "description": "Debug Azure production issues on Azure using AppLens, Azure Monitor, resource health, and safe triage. WHEN: debug production issues, troubleshoot app service, app service high CPU, app service deployment failure, troubleshoot container apps, container app 503 or target port mismatch, troubleshoot functions, function telemetry missing or stopped after a config/connection-string change, troubleshoot AKS, VM RDP, Linux SSH, VM black screen, can't connect to VM, reset VM password, NSG or firewall blocking, kubectl cannot connect, kube-system/CoreDNS failures, pod pending, crashloop, node not ready, upgrade failures, analyze logs, KQL, insights, image pull failures, cold start issues, health probe failures, resource health, root cause of errors, troubleshoot event hubs, troubleshoot service bus, messaging SDK error, AMQP connection failure, message lock lost, lock renewal during long-running processing, service bus dead letter.",
-      "skill_sha256": "c73ae7fc915e889693e30c538f7132e5dbb076bfdfbc6850beef181cc4ae2b06",
+      "skill_sha256": "a939eab5ca7e303707c362f6673a3c9c5e6b7061495affba13db26bea43dbade",
       "license": {
         "spdx": "MIT",
         "redistributable": true,
@@ -22370,25 +22705,25 @@
           },
           {
             "type": "credential-access",
-            "line": 65,
+            "line": 67,
             "evidence": "credential",
             "context": "| **Compute** | VM RDP/SSH connectivity, NSG/firewall blocks, credential resets, VM agent/tooling issues | [VM Connectivity Troubleshooting](troubleshooting/compute/vm-troubleshooting.md) |"
           },
           {
             "type": "credential-access",
-            "line": 74,
+            "line": 76,
             "evidence": "credential",
             "context": "- Route Azure VM RDP/SSH connectivity, NSG/firewall, credential reset, and VM agent troubleshooting to [VM Connectivity Troubleshooting](troubleshooting/compute/vm-troubleshooting.md)."
           },
           {
             "type": "shell-execution",
-            "line": 83,
+            "line": 85,
             "evidence": "bash",
             "context": "```bash"
           },
           {
             "type": "shell-execution",
-            "line": 141,
+            "line": 143,
             "evidence": "bash",
             "context": "```bash"
           }
@@ -22440,7 +22775,7 @@
       "path": ".github/plugins/azure-skills/skills/azure-kubernetes/SKILL.md",
       "name": "azure-kubernetes",
       "description": "Plan, create, and configure production-ready Azure Kubernetes Service (AKS) clusters. Covers Day-0 checklist, SKU selection (Automatic vs Standard), networking options (private API server, Azure CNI Overlay, egress configuration), security, and operations (autoscaling, upgrade strategy, cost analysis). WHEN: create AKS environment, provision AKS, enable AKS observability, design AKS networking, choose AKS SKU, secure AKS, optimize AKS, AKS spot nodes, AKS cluster-autoscaler, rightsize AKS pod, pod rightsizing, over-provisioned AKS pod, pod resource requests and limits, Vertical Pod Autoscaler, VPA recommendations.",
-      "skill_sha256": "a5d09eecf5af6dd2a03397689c37aed69c4fef7965b3ff559878f2238a9464b5",
+      "skill_sha256": "bb2aaef280fa59b2b15fbd7994085e1903e83a60bd26819ce7075c6e57f64c20",
       "license": {
         "spdx": "MIT",
         "redistributable": true,
@@ -22463,13 +22798,13 @@
         "findings": [
           {
             "type": "network-access",
-            "line": 69,
+            "line": 74,
             "evidence": "https://",
             "context": "  - Docs: https://learn.microsoft.com/azure/aks/azure-cni-overlay"
           },
           {
             "type": "credential-access",
-            "line": 158,
+            "line": 163,
             "evidence": "credential",
             "context": "| Workload Identity not working | Missing OIDC issuer or federated credential | Enable `--enable-oidc-issuer --enable-workload-identity`, configure federated identity |"
           }
@@ -22521,7 +22856,7 @@
       "path": ".github/plugins/azure-skills/skills/azure-kubernetes/azure-kubernetes-automatic-readiness/SKILL.md",
       "name": "azure-kubernetes-automatic-readiness",
       "description": "Assess Kubernetes workloads and cluster configuration for AKS Automatic compatibility. Identifies incompatibilities, generates fixes, and guides migration from AKS Standard to AKS Automatic. WHEN: migrate to AKS Automatic, check AKS Automatic readiness, validate manifests for Automatic, assess cluster for Automatic compatibility, fix deployment for Automatic compatibility, identify AKS Automatic migration blockers, is my cluster ready for AKS Automatic.",
-      "skill_sha256": "bc3ebaf7b6b8148d322e4155e9a490ad01985265deaa4d669ef0dfd1b19d4d43",
+      "skill_sha256": "66fc85d1e8f354abe57d174733aaaf1877197d54cc972cc0372b0d28e8b8c852",
       "license": {
         "spdx": "MIT",
         "redistributable": true,
@@ -22533,7 +22868,7 @@
         "scan_status": "review-required",
         "risk": "medium",
         "capabilities": {
-          "shell": false,
+          "shell": true,
           "network": true,
           "credentials": true,
           "dynamic_execution": false,
@@ -22556,13 +22891,25 @@
           },
           {
             "type": "network-access",
-            "line": 119,
+            "line": 80,
             "evidence": "https://",
-            "context": "> \"The Azure MCP server is not configured in your editor. To enable live cluster assessment, follow the setup guide at [aka.ms/azure-mcp-setup](https://aka.ms/azure-mcp-setup). For now, I can validate your local manifests offline.\""
+            "context": "2. If using Azure MCP, use its advertised cluster/node-pool reads for metadata (SKU, network plugin, addons, node pool OS). The documented surface has no readiness-assessment operation — do not expect one ([Azure MCP AKS tools](https://lear"
+          },
+          {
+            "type": "credential-access",
+            "line": 81,
+            "evidence": "Secret",
+            "context": "3. Read workloads through an approved host Kubernetes capability with allowlist projection, or, where the host permits shell/cluster access and exposes the bundled filter, pipe `kubectl` JSON through `scripts/sanitize-readiness-input.jq` (r"
+          },
+          {
+            "type": "shell-execution",
+            "line": 85,
+            "evidence": "bash",
+            "context": "```bash"
           },
           {
             "type": "filesystem-write",
-            "line": 189,
+            "line": 186,
             "evidence": "remove",
             "context": "- `safeguard-container-capabilities` — remove `capabilities.add`"
           }
@@ -22580,7 +22927,7 @@
       "path": ".github/plugins/azure-skills/skills/azure-kusto/SKILL.md",
       "name": "azure-kusto",
       "description": "Query and analyze data in Azure Data Explorer (Kusto/ADX) using KQL for log analytics, telemetry, and time series analysis. WHEN: KQL queries, Kusto database queries, Azure Data Explorer, ADX clusters, log analytics, time series data, IoT telemetry, anomaly detection.",
-      "skill_sha256": "a8b8e9f6743b0f0a400a06fa2ded9f5273b44cda9be15d3bb64cafbe16074c68",
+      "skill_sha256": "f0920e96ac8a4b8941e0bc29591d53bcfdd3a3a61e713249d3d489c55f6d98c8",
       "license": {
         "spdx": "MIT",
         "redistributable": true,
@@ -22603,13 +22950,13 @@
         "findings": [
           {
             "type": "shell-execution",
-            "line": 201,
+            "line": 184,
             "evidence": "bash",
             "context": "```bash"
           },
           {
             "type": "network-access",
-            "line": 203,
+            "line": 186,
             "evidence": "https://",
             "context": "  --url \"https://<cluster>.<region>.kusto.windows.net/v1/rest/query\" \\"
           }
@@ -22661,7 +23008,7 @@
       "path": ".github/plugins/azure-skills/skills/azure-prepare/SKILL.md",
       "name": "azure-prepare",
       "description": "Prepare azd-based Azure projects for deployment: generates azure.yaml, infrastructure (Bicep/Terraform), and Dockerfiles for the Azure Developer CLI (azd) workflow. USE ONLY when the user explicitly wants to use azd as the deployment tool, or the project already has an azure.yaml file. DO NOT USE FOR: non-azd deployments, Python App Service code-only deploys (use python-appservice-deploy), or cross-cloud migration (use azure-cloud-migrate). WHEN: prepare app for azd, create azure.yaml, set up azd infrastructure, modernize app for Azure with azd, deploy with azd, function app, timer trigger, service bus trigger, event-driven function, managed identity, generate Bicep, generate Terraform, create and deploy to Azure.",
-      "skill_sha256": "d90c1cc298bac2b434ca4caa27358320144711da0fd0247a8497f7c9710ee689",
+      "skill_sha256": "909adc349a0ada39f0a316fa0f554befe78fd4d958c9916bc667df0edf24f35f",
       "license": {
         "spdx": "MIT",
         "redistributable": true,
@@ -27035,6 +27382,11 @@
     }
   ],
   "license_files": [
+    {
+      "path": ".github/plugins/aks-skills/LICENSE",
+      "sha256": "8a5d8efb70942e65032f930c761d097feeb41a7517ebd04c9d2e4ec3764071c5",
+      "preview": "MIT License Copyright 2025 (c) Microsoft Corporation. Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\""
+    },
     {
       "path": ".github/plugins/azure-cost/LICENSE",
       "sha256": "8a5d8efb70942e65032f930c761d097feeb41a7517ebd04c9d2e4ec3764071c5",

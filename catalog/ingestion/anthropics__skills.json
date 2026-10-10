@@ -3,9 +3,9 @@
   "source": {
     "repo": "anthropics/skills",
     "ref": "main",
-    "revision": "9d630808e4add0a7146de4af9384155d5dee350a",
+    "revision": "dbd4588f9e1033efb41dad4bef2f7947c8993d44",
     "revision_type": "git-commit",
-    "tree_sha": "9d630808e4add0a7146de4af9384155d5dee350a"
+    "tree_sha": "dbd4588f9e1033efb41dad4bef2f7947c8993d44"
   },
   "discovered_skills": [
     {
@@ -222,7 +222,7 @@
       "path": "skills/claude-api/SKILL.md",
       "name": "claude-api",
       "description": "Reference for the Claude API / Anthropic SDK — model ids, pricing, params, streaming, tool use, MCP, agents, caching, token counting, model migration.\nTRIGGER — read BEFORE opening the target file; don't skip because it \"looks like a one-liner\" — whenever: the prompt names Claude/Anthropic in any form (Claude, Anthropic, Fable, Opus, Sonnet, Haiku, `anthropic`, `@anthropic-ai`, `claude-*`, `us.anthropic.*`, `[1m]`); the user asks about an LLM (pricing/model choice/limits/caching) — never answer from memory; OR the task is LLM-shaped with provider unstated (agent/MCP/tool-definition/multi-agent/RAG/LLM-judge/computer-use; generate/summarize/extract/classify/rewrite/converse over NL; debugging refusals/cutoffs/streaming/tool-calls/tokens).\nSKIP only when another provider is being worked on (overrides all triggers): OpenAI/GPT/Gemini/Llama/Mistral/Cohere/Ollama named in the query; OR `grep -rE 'openai|langchain_openai|google.generativeai|genai|mistralai|cohere|ollama'` over the project hits (run this grep FIRST if no provider named — don't Read the file).",
-      "skill_sha256": "9b2e9285d4e47c43a8fe65ddb1a383a5079ab5aaa0f9adffe8e7b4c449e56141",
+      "skill_sha256": "40537cca17c4aa86e4ce83ced39efcbfb1204905e3cf4c4ff98f2eab011e4b7f",
       "license": {
         "spdx": "Complete terms in LICENSE.txt",
         "redistributable": false,
@@ -311,253 +311,253 @@
           },
           {
             "type": "shell-execution",
-            "line": 127,
+            "line": 128,
             "evidence": "bash",
             "context": "> **Note:** Managed Agents is the right choice when you want Anthropic to run the agent loop *and* host the container where tools execute - file ops, bash, code execution all run in the per-session workspace. If you want to host the compute"
           },
           {
             "type": "shell-execution",
-            "line": 139,
+            "line": 140,
             "evidence": "bash",
             "context": "| 3 | **Managed Agents** (REST, beta) | Agent config + your tool results | Anthropic supplies the harness **and** hosts a per-session sandbox (**harness + deployment**) | Anthropic-hosted sandbox (bash, files, code exec) + Skills/MCP + your"
           },
           {
             "type": "shell-execution",
-            "line": 140,
+            "line": 141,
             "evidence": "Bash",
             "context": "| 4 | **Claude Agent SDK** - *separate product* (`claude-agent-sdk` / `@anthropic-ai/claude-agent-sdk`) | A prompt + options | SDK supplies the Claude Code harness + built-in tools (**harness only**); you host | Built-in Read/Write/Edit/Bas"
           },
           {
             "type": "shell-execution",
-            "line": 146,
+            "line": 147,
             "evidence": "bash",
             "context": "> - **Claude Agent SDK** (`claude-agent-sdk` / `@anthropic-ai/claude-agent-sdk`) is Claude Code packaged as a library. It ships built-in tools (file read/write/edit, bash, grep, web search), the full agent loop, context management, hooks, s"
           },
           {
             "type": "network-access",
-            "line": 197,
+            "line": 198,
             "evidence": "https://",
             "context": "**Partner pricing:** The prices above are Anthropic first-party API rates - they also apply to Claude on Microsoft Foundry, which is billed through the Microsoft Marketplace at standard API rates. Claude on Amazon Bedrock and Vertex AI is p"
           },
           {
             "type": "network-access",
-            "line": 197,
+            "line": 198,
             "evidence": "https://",
             "context": "**Partner pricing:** The prices above are Anthropic first-party API rates - they also apply to Claude on Microsoft Foundry, which is billed through the Microsoft Marketplace at standard API rates. Claude on Amazon Bedrock and Vertex AI is p"
           },
           {
             "type": "credential-access",
-            "line": 236,
+            "line": 237,
             "evidence": "credential",
             "context": "**When you need to call the API and `ANTHROPIC_API_KEY` is unset, don't ask the user for a key.** First run `ant auth status` - it shows which credential source and profile is active. If it reports an active profile:"
           },
           {
             "type": "credential-access",
-            "line": 239,
+            "line": 240,
             "evidence": "access-token",
             "context": "- **Raw `curl` / HTTP:** get a short-lived token with `ant auth print-credentials --access-token` and send it as `Authorization: Bearer <token>` **plus** the header `anthropic-beta: oauth-2025-04-20` (OAuth tokens go on `Authorization: Bear"
           },
           {
             "type": "credential-access",
-            "line": 239,
+            "line": 240,
             "evidence": "api-key",
             "context": "- **Raw `curl` / HTTP:** get a short-lived token with `ant auth print-credentials --access-token` and send it as `Authorization: Bearer <token>` **plus** the header `anthropic-beta: oauth-2025-04-20` (OAuth tokens go on `Authorization: Bear"
           },
           {
             "type": "credential-access",
-            "line": 239,
+            "line": 240,
             "evidence": "API key",
             "context": "- **Raw `curl` / HTTP:** get a short-lived token with `ant auth print-credentials --access-token` and send it as `Authorization: Bearer <token>` **plus** the header `anthropic-beta: oauth-2025-04-20` (OAuth tokens go on `Authorization: Bear"
           },
           {
             "type": "credential-access",
-            "line": 239,
+            "line": 240,
             "evidence": "access-token",
             "context": "- **Raw `curl` / HTTP:** get a short-lived token with `ant auth print-credentials --access-token` and send it as `Authorization: Bearer <token>` **plus** the header `anthropic-beta: oauth-2025-04-20` (OAuth tokens go on `Authorization: Bear"
           },
           {
             "type": "network-access",
-            "line": 239,
+            "line": 240,
             "evidence": "curl",
             "context": "- **Raw `curl` / HTTP:** get a short-lived token with `ant auth print-credentials --access-token` and send it as `Authorization: Bearer <token>` **plus** the header `anthropic-beta: oauth-2025-04-20` (OAuth tokens go on `Authorization: Bear"
           },
           {
             "type": "network-access",
-            "line": 239,
+            "line": 240,
             "evidence": "curl",
             "context": "- **Raw `curl` / HTTP:** get a short-lived token with `ant auth print-credentials --access-token` and send it as `Authorization: Bearer <token>` **plus** the header `anthropic-beta: oauth-2025-04-20` (OAuth tokens go on `Authorization: Bear"
           },
           {
             "type": "credential-access",
-            "line": 241,
+            "line": 242,
             "evidence": "credential",
             "context": "Only ask the user for a key if `ant auth status` reports no active credential source (or `ant` itself isn't installed). Suggest `ant auth login` as the first option - it stores a profile under `~/.config/anthropic/` that the SDKs read autom"
           },
           {
             "type": "credential-access",
-            "line": 243,
+            "line": 244,
             "evidence": "API-key",
             "context": "Full auth details (named profiles, scopes, the API-key-shadows-profile trap, refresh-token expiry): `shared/anthropic-cli.md`."
           },
           {
             "type": "network-access",
-            "line": 316,
+            "line": 317,
             "evidence": "cURL",
             "context": "| cURL | `anthropic-beta: fast-mode-2026-02-01` header | `\"speed\": \"fast\"` in body |"
           },
           {
             "type": "credential-access",
-            "line": 368,
+            "line": 369,
             "evidence": "api_key",
             "context": "| Python | `from anthropic import AnthropicFoundry` -> `AnthropicFoundry(api_key=..., resource=\"...\")` |"
           },
           {
             "type": "credential-access",
-            "line": 378,
+            "line": 379,
             "evidence": "API key",
             "context": "Two required constructor args: GCP `project_id` and `region`. Vertex model IDs take **no prefix** - current-generation models (Opus 5.5/5/4.8/4.7/4.6, Sonnet 5.5, Sonnet 5, Sonnet 4.6) use the bare first-party ID (e.g. `\"claude-opus-5-5\"`);"
           },
           {
             "type": "filesystem-write",
-            "line": 411,
+            "line": 412,
             "evidence": "delete",
             "context": "**Claude Opus 5, Claude Opus 5.5, Claude Opus 4.8, Claude Fable 5, Claude Fable 5.1, Claude Mythos 5, Claude Mythos 5.1, Claude Sonnet 5.5, and Claude Haiku 5.5; not Claude Sonnet 5; no beta header.** Append `{\"role\": \"system\", \"content\": \""
           },
           {
             "type": "shell-execution",
-            "line": 417,
+            "line": 418,
             "evidence": "bash",
             "context": "**Managed Agents** is a third surface: server-managed stateful agents with Anthropic-hosted tool execution. You create a persisted, versioned Agent config (`POST /v1/agents`), then start Sessions that reference it. Each session provisions a"
           },
           {
             "type": "network-access",
-            "line": 433,
+            "line": 434,
             "evidence": "cURL",
             "context": "**Reading guide:** Start with `shared/managed-agents-overview.md`, then the topical `shared/managed-agents-*.md` files (core, environments, tools, events, outcomes, multiagent, webhooks, memory, scheduled-deployments, client-patterns, onboa"
           },
           {
             "type": "network-access",
-            "line": 433,
+            "line": 434,
             "evidence": "curl",
             "context": "**Reading guide:** Start with `shared/managed-agents-overview.md`, then the topical `shared/managed-agents-*.md` files (core, environments, tools, events, outcomes, multiagent, webhooks, memory, scheduled-deployments, client-patterns, onboa"
           },
           {
             "type": "network-access",
-            "line": 433,
+            "line": 434,
             "evidence": "curl",
             "context": "**Reading guide:** Start with `shared/managed-agents-overview.md`, then the topical `shared/managed-agents-*.md` files (core, environments, tools, events, outcomes, multiagent, webhooks, memory, scheduled-deployments, client-patterns, onboa"
           },
           {
             "type": "encoded-content",
-            "line": 465,
+            "line": 468,
             "evidence": "base64",
             "context": "**PDF (base64, no beta):** `{\"type\": \"document\", \"source\": {\"type\": \"base64\", \"media_type\": \"application/pdf\", \"data\": <b64 string>}}` in user content, placed before the text block. Base64 string must have no newlines. Limits: 32 MB request"
           },
           {
             "type": "encoded-content",
-            "line": 465,
+            "line": 468,
             "evidence": "base64",
             "context": "**PDF (base64, no beta):** `{\"type\": \"document\", \"source\": {\"type\": \"base64\", \"media_type\": \"application/pdf\", \"data\": <b64 string>}}` in user content, placed before the text block. Base64 string must have no newlines. Limits: 32 MB request"
           },
           {
             "type": "encoded-content",
-            "line": 465,
+            "line": 468,
             "evidence": "Base64",
             "context": "**PDF (base64, no beta):** `{\"type\": \"document\", \"source\": {\"type\": \"base64\", \"media_type\": \"application/pdf\", \"data\": <b64 string>}}` in user content, placed before the text block. Base64 string must have no newlines. Limits: 32 MB request"
           },
           {
             "type": "credential-access",
-            "line": 489,
+            "line": 492,
             "evidence": "credential",
             "context": "**Admin API (beta, since 2026-08-26):** organization management - members, invites, workspaces and workspace members, API keys, rate limit reports, service accounts, federation issuers/rules, CMEK external keys - under `client.beta.organiza"
           },
           {
             "type": "credential-access",
-            "line": 489,
+            "line": 492,
             "evidence": "API key",
             "context": "**Admin API (beta, since 2026-08-26):** organization management - members, invites, workspaces and workspace members, API keys, rate limit reports, service accounts, federation issuers/rules, CMEK external keys - under `client.beta.organiza"
           },
           {
             "type": "network-access",
-            "line": 501,
+            "line": 504,
             "evidence": "curl",
             "context": "After detecting the language, read the relevant files based on what the user needs. Every `{lang}/...`, `shared/...`, and `curl/...` path cited in this document is relative to this skill's base directory, and none of those files' content is"
           },
           {
             "type": "network-access",
-            "line": 503,
+            "line": 506,
             "evidence": "cURL",
             "context": "**All SDK languages use the same multi-file layout** - directory `{lang}/claude-api/` containing `README.md` (install, client init, basic request, thinking, caching, stop details, misc), `tool-use.md` (tool definitions, agentic loop, Anthro"
           },
           {
             "type": "network-access",
-            "line": 503,
+            "line": 506,
             "evidence": "cURL",
             "context": "**All SDK languages use the same multi-file layout** - directory `{lang}/claude-api/` containing `README.md` (install, client init, basic request, thinking, caching, stop details, misc), `tool-use.md` (tool definitions, agentic loop, Anthro"
           },
           {
             "type": "network-access",
-            "line": 503,
+            "line": 506,
             "evidence": "curl",
             "context": "**All SDK languages use the same multi-file layout** - directory `{lang}/claude-api/` containing `README.md` (install, client init, basic request, thinking, caching, stop details, misc), `tool-use.md` (tool definitions, agentic loop, Anthro"
           },
           {
             "type": "dynamic-execution",
-            "line": 525,
+            "line": 530,
             "evidence": "eval (",
             "context": "**Iteratively improving an app against an eval (prompt tuning, hill-climbing):**"
           },
           {
             "type": "filesystem-write",
-            "line": 539,
+            "line": 544,
             "evidence": "remove",
             "context": "**Auditing or cleaning up prompts, tool descriptions, skills, or agent configuration files such as `CLAUDE.md` (\"is this prompt outdated\", \"remove the cruft\", \"this was written for an older model\"):**"
           },
           {
             "type": "filesystem-write",
-            "line": 540,
+            "line": 545,
             "evidence": "delete",
             "context": "-> Read `shared/prompt-audit.md` - dated-pattern tables with greppable signals, the keep list (what NOT to delete), and the report + proposed-diff output contract"
           },
           {
             "type": "shell-execution",
-            "line": 550,
+            "line": 555,
             "evidence": "bash",
             "context": "-> Read `shared/agent-design.md` (bash vs. dedicated tools, programmatic tool calling, tool search/skills, context editing vs. compaction vs. memory, caching principles)"
           },
           {
             "type": "network-access",
-            "line": 559,
+            "line": 564,
             "evidence": "curl",
             "context": "-> Read `shared/admin-api.md` - `client.beta.organization` endpoint/method table, admin credentials, per-language naming and pagination, what stays curl-only"
           },
           {
             "type": "network-access",
-            "line": 568,
+            "line": 573,
             "evidence": "curl",
             "context": "-> See the reading guide in the `## Managed Agents (Beta)` section above - it lists every `shared/managed-agents-*.md` file and the language-specific READMEs (`{lang}/managed-agents/README.md`, `curl/managed-agents.md`)."
           },
           {
             "type": "filesystem-write",
-            "line": 588,
+            "line": 593,
             "evidence": "delete",
             "context": "- **Disabling thinking on Claude Opus 5 has two failure modes - prefer low/medium effort instead.** (On Claude Opus 5.5, `{type: \"disabled\"}` is a 400 at every effort level - use `low` effort. On Claude Sonnet 5.5 it is also a 400 - try `lo"
           },
           {
             "type": "shell-execution",
-            "line": 596,
+            "line": 601,
             "evidence": "Bash",
             "context": "- **Bash and text editor tools are Anthropic-defined, schema-less.** Declare `{\"type\": \"bash_20250124\", \"name\": \"bash\"}` / `{\"type\": \"text_editor_20250728\", \"name\": \"str_replace_based_edit_tool\"}` - no `input_schema`. A custom tool with you"
           },
           {
             "type": "shell-execution",
-            "line": 596,
+            "line": 601,
             "evidence": "bash",
             "context": "- **Bash and text editor tools are Anthropic-defined, schema-less.** Declare `{\"type\": \"bash_20250124\", \"name\": \"bash\"}` / `{\"type\": \"text_editor_20250728\", \"name\": \"str_replace_based_edit_tool\"}` - no `input_schema`. A custom tool with you"
           },
           {
             "type": "shell-execution",
-            "line": 596,
+            "line": 601,
             "evidence": "bash",
             "context": "- **Bash and text editor tools are Anthropic-defined, schema-less.** Declare `{\"type\": \"bash_20250124\", \"name\": \"bash\"}` / `{\"type\": \"text_editor_20250728\", \"name\": \"str_replace_based_edit_tool\"}` - no `input_schema`. A custom tool with you"
           }

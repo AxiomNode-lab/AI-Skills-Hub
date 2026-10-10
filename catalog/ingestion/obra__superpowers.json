@@ -3,16 +3,16 @@
   "source": {
     "repo": "obra/superpowers",
     "ref": "main",
-    "revision": "8ca22dba9a94f28898bbce59f2537ff4d87c747d",
+    "revision": "bb92a77741419a4ab5f06e711a283343f1ada0c3",
     "revision_type": "git-commit",
-    "tree_sha": "8ca22dba9a94f28898bbce59f2537ff4d87c747d"
+    "tree_sha": "bb92a77741419a4ab5f06e711a283343f1ada0c3"
   },
   "discovered_skills": [
     {
       "path": "skills/brainstorming/SKILL.md",
       "name": "brainstorming",
-      "description": "You MUST use this before any creative work - creating features, building components, adding functionality, or modifying behavior. Explores user intent, requirements and design before implementation.",
-      "skill_sha256": "a32d2255354775aa124855aa7100cf276bea096fff4ebb3a0edf57be216e6c72",
+      "description": "You MUST use this before any creative work - creating features, building components, adding functionality, modifying behavior, or planning anything new, in software or out of it (a talk, a business, a renovation).",
+      "skill_sha256": "6ee10d1481b8a2580d5336ff66c5c08acc9d4b251b13bbc3bfd31be99c261d43",
       "license": {
         "spdx": "MIT",
         "redistributable": true,
@@ -20,25 +20,18 @@
         "evidence_path": "LICENSE"
       },
       "security": {
-        "scan_status": "review-required",
-        "risk": "low",
+        "scan_status": "verified",
+        "risk": "none",
         "capabilities": {
           "shell": false,
           "network": false,
           "credentials": false,
           "dynamic_execution": false,
           "package_install": false,
-          "filesystem_write": true,
+          "filesystem_write": false,
           "encoded_content": false
         },
-        "findings": [
-          {
-            "type": "filesystem-write",
-            "line": 214,
-            "evidence": "remove",
-            "context": "- YAGNI ruthlessly - remove unnecessary features from every approach and design"
-          }
-        ]
+        "findings": []
       },
       "capabilities": {
         "shell": false,
@@ -395,7 +388,7 @@
       "path": "skills/requesting-code-review/SKILL.md",
       "name": "requesting-code-review",
       "description": "Use when completing tasks, implementing major features, or before merging to verify work meets requirements",
-      "skill_sha256": "cfcee1b06774e7c0517f1e09be1a11f2d5680257072723e709ddbcf7e08b795a",
+      "skill_sha256": "2180e14a448e9410bec88e6646a2d1f0ce7fdd58de27388c1e052e929679d2bc",
       "license": {
         "spdx": "MIT",
         "redistributable": true,
@@ -577,7 +570,7 @@
       "path": "skills/systematic-debugging/SKILL.md",
       "name": "systematic-debugging",
       "description": "Use when encountering any bug, test failure, or unexpected behavior, before proposing fixes",
-      "skill_sha256": "808fc5717aa88ad65efff312b11c186294d3e6ee301afb584e2f86599b137787",
+      "skill_sha256": "51c6435d98c83c42c96ba7c35725a0b2c376cd487fb1a4e6bd0ddbe7e33ef202",
       "license": {
         "spdx": "MIT",
         "redistributable": true,
