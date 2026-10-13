@@ -169,12 +169,14 @@ test("stale or modified install records are shown as unverified, not installed",
   assert.equal(status.reason, "file_count_changed");
 });
 
-test("mixed successful and skipped installs report overall failure and each outcome", t => {
+test("a request with an item that cannot install reports each outcome and installs nothing", t => {
   const f = fixture(t);
   const result = f.install(`test/local-skill,${brainstorming}`, 1);
   assert.equal(result.success, false);
-  assert.deepEqual(result.results.map(x => x.installed), [true, false]);
-  assert.equal(f.json(["list"]).length, 1);
+  assert.deepEqual(result.results.map(x => x.installed), [false, false]);
+  assert.equal(result.results[0].reason, "not_installed_request_incomplete");
+  assert.equal(result.results[1].status, "hold");
+  assert.equal(f.json(["list"]).length, 0);
 });
 
 test("multiple successful local installs return overall success", t => {

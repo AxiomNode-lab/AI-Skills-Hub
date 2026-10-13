@@ -33,7 +33,8 @@ Install rules:
 
 - Only released skills install locally: `distribution: bundled`, `materialized: true`, `release.status: eligible`, and compatible with `--agent`. A held release returns `bundle_not_released`, a review-required skill `manual_review_required`, a blocked one `registry_blocked`; `--yes` overrides none of these.
 - Before writing, the released files are checked against their release manifest (exact file set, size and SHA-256); a mismatch installs nothing.
-- Dependencies install first. If one fails, the skills that need it are reported as `dependency-failed` and not installed. Other items in the same command keep their outcome; nothing is rolled back.
+- One command installs everything it was asked for, or nothing. Every item (and each dependency) is checked before anything is written; if one cannot install, the others are reported as `skipped` with `not_installed_request_incomplete`, and the skills that need it as `dependency-failed`. Two requested skills that would use the same folder are refused with `destination_conflict`.
+- Dependencies install first. If a write fails after checking, the skills this command installed are removed and any installation it replaced is restored (files and record); those items are reported as `rolled-back`. An external installer that already ran (after `--yes`) cannot be undone and is marked `rollback: not-possible`.
 - Reinstalling the same revision reports `already-installed` and changes nothing. A folder the Hub did not create, or a Hub installation whose files you edited, is replaced only with `--force`.
 - An install path that goes through a symlink or junction is refused.
 - `install @name` is refused with `bundle_aliases_not_supported`: bundles are catalog groupings, not install targets.

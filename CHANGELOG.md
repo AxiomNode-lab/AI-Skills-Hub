@@ -17,6 +17,7 @@ First npm release candidate: `npx @axiomnode-lab/skills-hub`.
 - Internal workspace packages are private.
 - `add` no longer reports "Successfully installed" for adapter-pending, confirmation-required or other non-installs; its Git path accepts only https/SSH.
 - Install and uninstall refuse paths through symlinks; `sync` failures exit 1.
+- A multi-skill `install` is all or nothing: every item is checked before anything is written (`skipped` / `not_installed_request_incomplete` for the rest when one cannot install, `destination_conflict` for two skills with the same folder), and a failure while writing removes this command's new installs and restores the ones it replaced (`rolled-back`).
 
 ### Added
 - `skills-hub mcp` (stdio) and `skills-hub serve` (HTTP) run a read-only catalog server with `search_skills` and `get_skill` MCP tools, released-skill file resources, and the `/api` routes in docs/API.md.

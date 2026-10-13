@@ -1,5 +1,7 @@
 import { readLocalCapabilities, resolveDependencies } from "../utils.mjs";
-import { installCapability } from "../install-executor.mjs";
+import { installCapability, preflightCapability } from "../install-executor.mjs";
+import { captureDirectory, restoreDirectory } from "../../../installer/src/native.mjs";
+import { readInstallRecords, removeInstallRecord, writeInstallRecord } from "../../../installer/src/state.mjs";
 import { paint } from "../ui.mjs";
 
 export async function installCommand(ids, options = {}) {
@@ -63,49 +65,116 @@ export async function installCommand(ids, options = {}) {
     })));
   }
 
-  const results = [];
-  const failed = new Set();
+  const installOptions = {
+    agent,
+    scope,
+    cwd: process.cwd(),
+    confirmed: options.yes === true,
+    force: options.force === true,
+    env: {},
+    json: options.json === true
+  };
+  const notices = cap => cap.release?.notices ?? [];
+  const resultFor = (cap, result) => {
+    const status = result.installed === true
+      ? (result.action === "already-installed" ? "already-installed" : "success")
+      : result.requires_confirmation ? "confirmation-required" : result.action;
+    return {
+      id: cap.id,
+      status,
+      installed: result.installed === true,
+      requires_confirmation: result.requires_confirmation === true,
+      reason: result.reason ?? (result.installed === true ? null : result.action),
+      destination: result.destination ?? null,
+      // The exact external command --yes would run, shown before consent.
+      ...(result.requires_confirmation && Array.isArray(result.argv) ? { command: result.argv } : {}),
+      notices: notices(cap)
+    };
+  };
+  const errorResult = (cap, error) => ({ id: cap.id, status: "error", installed: false, reason: error.message, message: error.message, notices: notices(cap) });
 
+  // Phase 1: check every item before anything is written or run. One item that
+  // cannot install stops the whole request, so a command never leaves half of
+  // what was asked for behind.
+  const checks = new Map();
+  const failed = new Set();
+  const results = [];
   for (const cap of finalInstallList) {
-    // Nothing is installed on top of a dependency that did not install.
     const brokenDependency = (cap.dependencies ?? []).find((dependency) => failed.has(dependency));
     if (brokenDependency) {
       failed.add(cap.id);
-      results.push({ id: cap.id, status: "dependency-failed", installed: false, requires_confirmation: false, reason: "dependency_not_installed: " + brokenDependency, destination: null, notices: cap.release?.notices ?? [] });
+      results.push({ id: cap.id, status: "dependency-failed", installed: false, requires_confirmation: false, reason: "dependency_not_installed: " + brokenDependency, destination: null, notices: notices(cap) });
       continue;
     }
     try {
-      const result = await installCapability(cap, {
-        agent,
-        scope,
-        cwd: process.cwd(),
-        confirmed: options.yes === true,
-        force: options.force === true,
-        env: {},
-        json: options.json === true
-      });
-
-      const status = result.installed === true
-        ? (result.action === "already-installed" ? "already-installed" : "success")
-        : result.requires_confirmation ? "confirmation-required" : result.action;
-      if (result.installed !== true) failed.add(cap.id);
-      results.push({
-        id: cap.id,
-        status,
-        installed: result.installed === true,
-        requires_confirmation: result.requires_confirmation === true,
-        reason: result.reason ?? (result.installed === true ? null : result.action),
-        destination: result.destination ?? null,
-        // The exact external command --yes would run, shown before consent.
-        ...(result.requires_confirmation && Array.isArray(result.argv) ? { command: result.argv } : {}),
-        notices: cap.release?.notices ?? []
-      });
-
+      const check = preflightCapability(cap, installOptions);
+      checks.set(cap.id, check);
+      // Two requested skills with the same folder name would overwrite each other.
+      const clash = check.ok && check.destination && [...checks].find(([id, other]) => id !== cap.id && other.destination === check.destination);
+      if (clash) {
+        failed.add(cap.id);
+        results.push({ id: cap.id, status: "error", installed: false, requires_confirmation: false, reason: "destination_conflict: " + clash[0], destination: check.destination, notices: notices(cap) });
+      } else if (!check.ok) {
+        failed.add(cap.id);
+        results.push(resultFor(cap, check.result));
+      } else {
+        results.push(null);
+      }
     } catch (error) {
       failed.add(cap.id);
-      results.push({ id: cap.id, status: "error", installed: false, reason: error.message, message: error.message });
+      results.push(errorResult(cap, error));
     }
   }
+  if (failed.size > 0) {
+    return report(results.map((result, index) => result ?? {
+      id: finalInstallList[index].id, status: "skipped", installed: false, requires_confirmation: false,
+      reason: "not_installed_request_incomplete", destination: null, notices: notices(finalInstallList[index])
+    }));
+  }
 
-  return report(results);
+  // Phase 2: install in dependency order. Each native write is journaled with
+  // the folder and record it replaces; if a later item fails, those are put
+  // back. External installers cannot be undone and are reported as such.
+  const applied = [];
+  const journal = [];
+  let failure = null;
+  for (const cap of finalInstallList) {
+    const check = checks.get(cap.id);
+    try {
+      if (!check.external && !check.unchanged) {
+        journal.push({ id: cap.id, destination: check.destination, folder: captureDirectory(check.destination), record: readInstallRecords(scope, installOptions.cwd)[cap.id] ?? null });
+      }
+      const result = await installCapability(cap, installOptions);
+      const entry = resultFor(cap, result);
+      applied.push(entry);
+      if (!entry.installed) { failure = cap.id; break; }
+    } catch (error) {
+      applied.push(errorResult(cap, error));
+      failure = cap.id;
+      break;
+    }
+  }
+  if (!failure) return report(applied);
+
+  const rolledBack = new Set();
+  for (const step of journal.reverse()) {
+    try {
+      restoreDirectory(step.destination, step.folder);
+      if (step.record) writeInstallRecord(step.record, installOptions.cwd);
+      else removeInstallRecord(step.id, scope, installOptions.cwd);
+      rolledBack.add(step.id);
+    } catch (error) {
+      const entry = applied.find((result) => result.id === step.id);
+      if (entry) entry.rollback_error = error.message;
+    }
+  }
+  const final = finalInstallList.map((cap) => {
+    const entry = applied.find((result) => result.id === cap.id);
+    if (!entry) return { id: cap.id, status: "skipped", installed: false, requires_confirmation: false, reason: "not_installed_request_incomplete", destination: null, notices: notices(cap) };
+    if (entry.id === failure) return entry;
+    if (rolledBack.has(cap.id)) return { ...entry, status: "rolled-back", installed: false, reason: "rolled_back_after_failure: " + failure };
+    // Already present before this command, or an external installer that ran.
+    return checks.get(cap.id).external ? { ...entry, rollback: "not-possible" } : entry;
+  });
+  return report(final);
 }

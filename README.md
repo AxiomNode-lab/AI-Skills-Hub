@@ -71,7 +71,7 @@ npx @axiomnode-lab/skills-hub uninstall anthropics/frontend-design --agent codex
 - `list` shows installations as `installed` only when the files still match their recorded hashes; otherwise `unverified`.
 - `update` moves installed skills to the revision the catalog now releases. It refuses held or blocked releases and keeps locally edited files unless you pass `--force`.
 - `uninstall` removes only a Hub-managed folder in the agent's skills directory, never through a symlink, and refuses edited files without `--force`.
-- Several installs in one command are not atomic: successes are kept and each failure is reported.
+- One command installs all the requested skills or none: every item is checked first, and if a write fails, what the command changed is put back. Each item's outcome is reported.
 - Exit codes: `0` success, `1` the operation did not complete, `2` invalid usage.
 
 Some skills carry a notice (for example a dated service retirement); `info` and `install` print it.

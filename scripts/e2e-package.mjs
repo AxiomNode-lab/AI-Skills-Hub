@@ -74,6 +74,8 @@ try {
   if (hub(["install", "anthropics/frontend-design", "--agent", "codex", "--json"], { json: true }).results[0].status !== "already-installed") fail("reinstall is not a no-op");
   if (hub(["update", "--json"], { json: true }).results[0].status !== "up-to-date") fail("update status");
   hub(["install", "obra/superpowers/brainstorming", "--agent", "codex", "--json"], { expect: 1 });
+  const mixed = hub(["install", "anthropics/brand-guidelines,obra/superpowers/brainstorming", "--agent", "codex", "--json"], { expect: 1, json: true });
+  if (mixed.results[0].status !== "skipped" || fs.existsSync(path.join(project, ".agents", "skills", "brand-guidelines"))) fail("a refused item did not stop the whole install");
   hub(["frobnicate"], { expect: 2 });
   hub(["uninstall", "anthropics/frontend-design", "--agent", "codex", "--json"], { json: true });
   if (fs.existsSync(path.join(project, ".agents", "skills", "frontend-design"))) fail("uninstall left the folder");

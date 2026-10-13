@@ -109,19 +109,66 @@ test("reinstalling the same revision is a no-op; unmanaged or modified folders n
   assert.equal(fs.readFileSync(path.join(h.installed("beta"), "notes.md"), "utf8"), "mine");
 });
 
-test("a failed dependency stops its dependents; earlier successes are reported, not rolled back", t => {
+test("an item that cannot install stops the whole request before anything is written", t => {
   const h = hub(t);
   h.release("held", { status: "hold" });
   h.release("child", { dependencies: ["test/held"] });
   h.release("alpha");
   const result = h.run("install", "test/alpha,test/child", "--agent", "codex", "--json");
   assert.equal(result.status, 1);
+  assert.equal(result.json.success, false);
   const byId = Object.fromEntries(result.json.results.map(r => [r.id, r]));
-  assert.equal(byId["test/alpha"].installed, true);
+  assert.equal(byId["test/alpha"].status, "skipped");
+  assert.equal(byId["test/alpha"].reason, "not_installed_request_incomplete");
   assert.equal(byId["test/held"].installed, false);
   assert.equal(byId["test/child"].status, "dependency-failed");
   assert.equal(fs.existsSync(h.installed("child")), false);
-  assert.equal(fs.existsSync(h.installed("alpha")), true);
+  assert.equal(fs.existsSync(h.installed("alpha")), false);
+  assert.equal(fs.existsSync(path.join(h.project, ".ai-skills-hub", "installed.json")), false);
+});
+
+test("two requested skills that resolve to the same folder are refused before writing", t => {
+  const h = hub(t);
+  h.release("alpha");
+  const twin = h.release("twin");
+  const catalog = JSON.parse(fs.readFileSync(path.join(h.home, "catalog", "skills.json"), "utf8"));
+  catalog.skills.find(s => s.id === twin.id).name = "alpha";
+  fs.writeFileSync(path.join(h.home, "catalog", "skills.json"), JSON.stringify(catalog));
+  const result = h.run("install", "test/alpha,test/twin", "--agent", "codex", "--json");
+  assert.equal(result.status, 1);
+  assert.match(result.json.results.find(r => r.id === "test/twin").reason, /^destination_conflict: test\/alpha/);
+  assert.equal(fs.existsSync(h.installed("alpha")), false);
+});
+
+test("a failure after writing rolls back this command's installs and restores replaced ones", t => {
+  const h = hub(t);
+  h.release("alpha");
+  h.release("beta");
+  assert.equal(h.run("install", "test/alpha", "--agent", "github-copilot", "--json").status, 0);
+  const skillsRoot = path.join(h.project, ".github", "skills");
+  const before = fs.readFileSync(path.join(skillsRoot, "alpha", "SKILL.md"), "utf8");
+  const stateFile = path.join(h.project, ".ai-skills-hub", "installed.json");
+  const stateBefore = JSON.parse(fs.readFileSync(stateFile, "utf8")).installed;
+
+  // A new revision of alpha, a new skill, and an MCP configuration that fails
+  // only when written: the existing .mcp.json is not a JSON object.
+  h.release("alpha", { revision: REV_B, body: "v2" });
+  const catalog = JSON.parse(fs.readFileSync(path.join(h.home, "catalog", "skills.json"), "utf8"));
+  catalog.skills.push({ id: "test/srv", name: "srv", publisher: "test", artifact_type: "mcp-server", type: "mcp-server", description: "srv fixture", compatibility: ["github-copilot"], distribution: "source-direct", installation: { method: "remote", url: "https://example.invalid/mcp" }, source: { repo: "test/repo", path: "srv", revision: REV_A }, dependencies: ["test/alpha", "test/beta"] });
+  fs.writeFileSync(path.join(h.home, "catalog", "skills.json"), JSON.stringify(catalog));
+  fs.writeFileSync(path.join(h.project, ".mcp.json"), "[]");
+
+  const result = h.run("install", "test/srv", "--agent", "github-copilot", "--yes", "--json");
+  assert.equal(result.status, 1, result.stdout + result.stderr);
+  const byId = Object.fromEntries(result.json.results.map(r => [r.id, r]));
+  assert.equal(byId["test/srv"].status, "error");
+  assert.equal(byId["test/alpha"].status, "rolled-back");
+  assert.equal(byId["test/beta"].status, "rolled-back");
+  assert.match(byId["test/beta"].reason, /rolled_back_after_failure: test\/srv/);
+  assert.equal(fs.existsSync(path.join(skillsRoot, "beta")), false, "a new install is removed");
+  assert.equal(fs.readFileSync(path.join(skillsRoot, "alpha", "SKILL.md"), "utf8"), before, "a replaced install is restored");
+  assert.deepEqual(JSON.parse(fs.readFileSync(stateFile, "utf8")).installed, stateBefore, "install records are restored");
+  assert.equal(fs.readFileSync(path.join(h.project, ".mcp.json"), "utf8"), "[]");
 });
 
 test("uninstall <id> removes only the managed directory and checks agent, scope and integrity", t => {

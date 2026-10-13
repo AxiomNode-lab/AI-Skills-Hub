@@ -3,6 +3,7 @@ import { buildAdapterPlan } from "@ai-skills-hub/discovery";
 import { getAdapter } from "../../installer/src/adapters/index.mjs";
 import { readInstallRecords, verifyInstallRecord, writeInstallRecord } from "../../installer/src/state.mjs";
 import { buildInstallPlan } from "../../installer/src/index.mjs";
+import { checkMaterializedInstall } from "../../installer/src/native.mjs";
 
 const TRUSTED_BINARIES = new Set(["npx", "pnpm", "codex", "claude", "copilot"]);
 
@@ -121,6 +122,36 @@ export function planCapability(capability, agent, { scope = "project" } = {}) {
     if (policy.action !== "source-direct") plan = policy;
   }
   return plan;
+}
+
+// What installCapability would do, decided without writing or running anything:
+// { ok: true } when it would install (or find the same revision installed),
+// otherwise { ok: false, result } with the result installCapability would give.
+// A multi-item install checks every item this way before it writes.
+export function preflightCapability(capability, { agent, scope = "project", cwd = process.cwd(), confirmed = false, force = false } = {}) {
+  if (!agent) throw new Error("Target agent is required.");
+  const plan = planCapability(capability, agent, { scope });
+
+  if (["incompatible", "blocked", "adapter-pending", "unsupported", "hold"].includes(plan.action)) {
+    return { ok: false, result: { ...plan, installed: false } };
+  }
+  if (["source-direct", "marketplace", "configuration"].includes(plan.action)) {
+    if (!confirmed) {
+      return { ok: false, result: { ...plan, installed: false, requires_confirmation: true, reason: plan.reason || "explicit_confirmation_required" } };
+    }
+    if (plan.action !== "configuration") assertSafeExternalPlan(plan, agent);
+    return { ok: true, plan, external: true };
+  }
+  if (plan.action === "install") {
+    const existing = readInstallRecords(scope, cwd)[capability.id];
+    if (existing && existing.agent === agent
+      && existing.source?.revision === capability.source?.revision && verifyInstallRecord(existing).ok) {
+      return { ok: true, plan, unchanged: true, destination: existing.destination };
+    }
+    const { destination } = checkMaterializedInstall(capability, { agent, scope, cwd, overwrite: true, force });
+    return { ok: true, plan, destination };
+  }
+  throw new Error(`Unsupported installation action: ${plan.action}`);
 }
 
 export async function installCapability(
