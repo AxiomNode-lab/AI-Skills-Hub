@@ -71,6 +71,26 @@ function cardHTML(skill) {
     '<div class="card-bottom"><span class="license-pill">' + esc(skill.license?.spdx || "License unknown") + '</span>' +
     '<a class="card-link" href="' + esc(pageLink) + '">' + openLabel + '</a></div></article>';
 }
+function relevanceScore(skill, query) {
+  if (!query) return 0;
+  const q = query.trim().toLocaleLowerCase();
+  const id = String(skill.id || "").toLocaleLowerCase();
+  const name = String(skill.name || "").toLocaleLowerCase();
+  const haystack = getTextIndex(skill);
+  let score = 0;
+  if (id === q) score += 1000;
+  if (name === q) score += 900;
+  if (id.startsWith(q)) score += 500;
+  if (name.startsWith(q)) score += 400;
+  if (haystack.includes(q)) score += 180;
+  for (const word of q.split(/\\s+/).filter(Boolean)) {
+    if (name.includes(word)) score += 35;
+    else if (id.includes(word)) score += 25;
+    else if (haystack.includes(word)) score += 10;
+  }
+  if (skill.releaseStatus === "eligible") score += 2;
+  return score;
+}
 function filterSkills() {
   const query = queryInput.value.trim().toLocaleLowerCase();
   const agent = agentFilter.value;
@@ -85,7 +105,7 @@ function filterSkills() {
   });
   if (sortSelect.value === "name") matches.sort((a,b) => String(a.name).localeCompare(String(b.name)) || String(a.id).localeCompare(String(b.id)));
   else if (sortSelect.value === "publisher") matches.sort((a,b) => String(a.publisher).localeCompare(String(b.publisher)) || String(a.name).localeCompare(String(b.name)));
-  else matches.sort((a,b) => Number(b.releaseStatus === "eligible") - Number(a.releaseStatus === "eligible") || String(a.id).localeCompare(String(b.id)));
+  else matches.sort((a,b) => relevanceScore(b, query) - relevanceScore(a, query) || String(a.id).localeCompare(String(b.id)));
   return matches;
 }
 function render() {
