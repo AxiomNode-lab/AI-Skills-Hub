@@ -5,6 +5,7 @@ const targets = {
   "generic": { project: [".agents/skills"], user: [".agents/skills"] },
   "agent-skills": { project: [".agents/skills"], user: [".agents/skills"] },
   "codex": { project: [".agents/skills", ".codex/skills"], user: [".agents/skills", ".codex/skills"] },
+  "gemini-cli": { project: [".gemini/skills", ".agents/skills"], user: ["~/.gemini/skills", "~/.agents/skills"] },
   "claude-code": { project: [".claude/skills", ".agents/skills"], user: [".claude/skills", ".agents/skills"] },
   "cursor": { project: [".agents/skills", ".cursor/skills"], user: [".cursor/skills", ".agents/skills"] },
   "github-copilot": { project: [".github/skills", ".agents/skills"], user: ["~/.copilot/skills", "~/.agents/skills"] },
