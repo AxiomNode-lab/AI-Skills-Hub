@@ -22,6 +22,8 @@ pnpm cli available --agent codex
 
 AI Skills Hub is a package manager for [Agent Skills](https://agentskills.io) (`SKILL.md` folders) used by Claude Code, Codex, Cursor, GitHub Copilot and OpenCode. Each installable skill has been read in full, has a recorded license basis, is pinned to an exact upstream commit, and ships with SHA-256 hashes that are checked before anything is written to your project.
 
+If the license and provenance workflow is useful to you, consider starring or forking the repository to evaluate it with your own agent-skill workflow. Reproducible feedback and focused pull requests help us improve it.
+
 > **Release status:** `0.3.0-beta.1` is the source/workspace version, not proof of an npm publication. The current distribution status and release checklist are maintained in [docs/STATUS.md](docs/STATUS.md) and [docs/RELEASING.md](docs/RELEASING.md).
 
 ## What it is, and what it is not
