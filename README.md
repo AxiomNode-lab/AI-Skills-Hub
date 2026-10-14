@@ -13,7 +13,7 @@
 npx @axiomnode-lab/skills-hub --help
 ```
 
-AI Skills Hub is a package manager for [Agent Skills](https://agentskills.io) (`SKILL.md` folders) used by Claude Code, Codex, Cursor, GitHub Copilot and OpenCode. Each installable skill has been read in full, has a recorded license basis, is pinned to an exact upstream commit, and ships with SHA-256 hashes that are checked before anything is written to your project.
+AI Skills Hub is a package manager for [Agent Skills](https://agentskills.io) (`SKILL.md` folders) used by Claude Code, Codex, Gemini CLI, Cursor, GitHub Copilot and OpenCode. Each installable skill has been read in full, has a recorded license basis, is pinned to an exact upstream commit, and ships with SHA-256 hashes that are checked before anything is written to your project.
 
 > **Release status:** `0.3.0-beta.1` is the first npm release candidate. Until it is published to npm, build and run the package locally as described in [Development](#development).
 
@@ -82,6 +82,7 @@ Some skills carry a notice (for example a dated service retirement); `info` and 
 | --- | --- | --- | --- |
 | Claude Code | `claude-code` | `.claude/skills` | `~/.claude/skills` |
 | Codex | `codex` | `.agents/skills` | `~/.agents/skills` |
+| Gemini CLI | `gemini-cli` | `.gemini/skills` | `~/.gemini/skills` |
 | Cursor | `cursor` | `.agents/skills` | `~/.cursor/skills` |
 | GitHub Copilot | `github-copilot` | `.github/skills` | `~/.copilot/skills` |
 | OpenCode | `opencode` | `.opencode/skills` | `~/.config/opencode/skills` |
