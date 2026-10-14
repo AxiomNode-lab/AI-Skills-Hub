@@ -13,6 +13,7 @@ const filterSummary = document.querySelector("#filter-summary");
 const emptyState = document.querySelector("#empty-state");
 const loadMoreButton = document.querySelector("#load-more");
 const resetButton = document.querySelector("#reset");
+const shareButton = document.querySelector("#share-search");
 const searchForm = document.querySelector("#search-form");
 
 let catalog = [];
@@ -107,9 +108,37 @@ function render() {
   emptyState.hidden = lastFiltered.length !== 0;
   loadMoreButton.hidden = shown.length >= lastFiltered.length;
 }
+function syncUrl() {
+  const url = new URL(window.location.href);
+  const values = {
+    q: queryInput.value.trim(),
+    agent: agentFilter.value === "any" ? "" : agentFilter.value,
+    status: statusFilter.value === "eligible" ? "" : statusFilter.value,
+    category: categoryFilter.value === "all" ? "" : categoryFilter.value,
+    sort: sortSelect.value === "relevance" ? "" : sortSelect.value
+  };
+  for (const [key, value] of Object.entries(values)) {
+    if (value) url.searchParams.set(key, value);
+    else url.searchParams.delete(key);
+  }
+  window.history.replaceState({}, "", url.pathname + (url.search ? url.search : "") + url.hash);
+}
+function loadUrlState() {
+  const params = new URLSearchParams(window.location.search);
+  queryInput.value = params.get("q") || "";
+  const agent = params.get("agent");
+  if (agent && [...agentFilter.options].some(option => option.value === agent)) agentFilter.value = agent;
+  const status = params.get("status");
+  if (status && [...statusFilter.options].some(option => option.value === status)) statusFilter.value = status;
+  const category = params.get("category");
+  if (category && [...categoryFilter.options].some(option => option.value === category)) categoryFilter.value = category;
+  const sort = params.get("sort");
+  if (sort && [...sortSelect.options].some(option => option.value === sort)) sortSelect.value = sort;
+}
 function applyFilters() {
   visibleLimit = PAGE_SIZE;
   render();
+  syncUrl();
 }
 queryInput.addEventListener("input", applyFilters);
 agentFilter.addEventListener("change", applyFilters);
@@ -127,6 +156,17 @@ resetButton.addEventListener("click", () => {
   applyFilters();
   queryInput.focus();
 });
+shareButton.addEventListener("click", async () => {
+  syncUrl();
+  const original = shareButton.textContent;
+  try {
+    await navigator.clipboard.writeText(window.location.href);
+    shareButton.textContent = "Link copied ✓";
+  } catch {
+    shareButton.textContent = "URL updated above";
+  }
+  window.setTimeout(() => { shareButton.textContent = original; }, 1600);
+});
 document.addEventListener("keydown", event => {
   if (event.key === "/" && !["INPUT","TEXTAREA","SELECT"].includes(document.activeElement?.tagName) && !event.metaKey && !event.ctrlKey && !event.altKey) {
     event.preventDefault();
@@ -142,7 +182,9 @@ fetch(CATALOG_URL)
   .then(data => {
     catalog = Array.isArray(data.skills) ? data.skills : [];
     fillCategories();
+    loadUrlState();
     render();
+    syncUrl();
   })
   .catch(() => {
     loadError = "The searchable catalog is temporarily unavailable.";
