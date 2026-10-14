@@ -53,7 +53,7 @@ CI runs `validate-all` on Linux and Windows (Node 22), `verify-upstream` on Linu
 
 ## Known limitations
 
-- The model-based reranker in `@ai-skills-hub/discovery` is not reachable from the CLI; search is keyword-based.
+- Search defaults to local keyword ranking. Opt-in model reranking is available with `search --ai-rerank` when `SKILLS_HUB_RERANK_BASE_URL` and `SKILLS_HUB_RERANK_MODEL` are configured; it sends the query and metadata for up to 20 matching candidates to that endpoint, never skill file contents. If the provider is unavailable, the CLI warns and keeps keyword ranking.
 - Bundle aliases (`@frontend`) are catalog groupings only; `install @name` is refused with `bundle_aliases_not_supported`.
 - 49 catalog records have no description; none is released. Descriptions are repaired only from the same upstream file (hash match), which is not available for them.
 - PR #11 asked for an additional independent instruction review of the 139-skill expansion. The [reconciliation matrix](reviews/2026-10-05-pr10-expansion-reconciliation.json) now records 50 with additional batch evidence, 5 held and 89 eligible without that additional review.

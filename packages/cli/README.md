@@ -16,7 +16,7 @@ Requires Node.js 22+. The package includes the catalog and every released skill;
 | Command | What it does |
 | --- | --- |
 | `available [query]` | Skills you can install now (`--agent` to filter) |
-| `search <query>` | Keyword search over the whole catalog (`--installable`, `--limit`, `--json`) |
+| `search <query>` | Keyword search over the whole catalog (`--installable`, `--ai-rerank`, `--limit`, `--json`) |
 | `info <id>` | License, security, release state and provenance of one skill |
 | `install <id[,id...]>` | Install released skills into the current project (`--agent` required, `--scope user` for your home directory) |
 | `list` | Hub-managed installations and whether their files still match |
@@ -32,3 +32,16 @@ Exit codes: `0` success, `1` operation did not complete, `2` invalid usage. `--j
 Each installable skill was read in full by an AI-assisted reviewer, has a recorded license basis (Apache-2.0 or MIT, with the license file shipped alongside), is pinned to an exact upstream commit, and is verified against SHA-256 hashes before it is written to your project. This is not a security certification or legal advice, and skills are not benchmarked for task performance. Unreleased catalog entries are shown with the reason they cannot be installed.
 
 Source, documentation, license policy and release evidence: https://github.com/AxiomNode-lab/AI-Skills-Hub
+
+
+## Optional AI reranking
+
+By default, search ranks locally and makes no model request. To rerank the top keyword matches, configure an OpenAI-compatible endpoint and pass `--ai-rerank`:
+
+```bash
+export SKILLS_HUB_RERANK_BASE_URL="http://127.0.0.1:11434/v1"
+export SKILLS_HUB_RERANK_MODEL="qwen3:8b"
+skills-hub search "frontend testing patterns" --agent codex --ai-rerank
+```
+
+`SKILLS_HUB_RERANK_API_KEY` is optional and only needed by endpoints that require a key. The request contains the query and metadata for up to 20 local candidate entries; it does not send skill contents. If the endpoint fails, the CLI warns on stderr and retains the keyword order. Model output only changes ranking; it cannot make held skills installable.

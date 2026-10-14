@@ -21,6 +21,21 @@ skills-hub list --agent codex --scope project --json
 
 `search` and `info` report catalog availability (`hub_status.availability`: eligible, source-direct, review-required, blocked or catalog-only) separately from installation state (`hub_status.installation`: installed, unverified or not-recorded). Catalog metadata never establishes installation.
 
+## Optional AI reranking
+
+Keyword search is local by default. To rerank matches with a local Ollama server or another OpenAI-compatible endpoint:
+
+```bash
+export SKILLS_HUB_RERANK_BASE_URL="http://127.0.0.1:11434/v1"
+export SKILLS_HUB_RERANK_MODEL="qwen3:8b" # replace with your installed model
+# Optional for endpoints that require a key:
+# export SKILLS_HUB_RERANK_API_KEY="..."
+skills-hub search "secure a TypeScript API" --agent codex --ai-rerank
+```
+
+Only use `--ai-rerank` when you consent to sending the query and up to 20 matching candidate metadata records (ID, name, description, categories and publisher) to the configured endpoint. Skill file contents are not sent. If the model call fails, the CLI warns and keeps keyword ranking. Search ranking never changes a skill's licensing or release state.
+
+
 ## Install
 
 ```bash
