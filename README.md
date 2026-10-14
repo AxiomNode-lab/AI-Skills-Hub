@@ -1,7 +1,7 @@
 <div align="center">
   <img src="docs/images/logo.jpg" alt="AI Skills Hub Logo" width="300" />
   <h1>AI Skills Hub</h1>
-  <p><strong>Install reviewed, license-checked Agent Skills into your coding agent.</strong></p>
+  <p><strong>A license-aware package manager for reviewed Agent Skills across Claude Code, Codex, Cursor, GitHub Copilot and OpenCode.</strong></p>
 
   <p>
     <a href="https://github.com/AxiomNode-lab/AI-Skills-Hub/actions"><img src="https://img.shields.io/github/actions/workflow/status/AxiomNode-lab/AI-Skills-Hub/ci.yml?branch=main&label=Build&style=flat-square" alt="Build Status"></a>
@@ -10,12 +10,19 @@
 </div>
 
 ```bash
-npx @axiomnode-lab/skills-hub --help
+git clone https://github.com/AxiomNode-lab/AI-Skills-Hub.git
+cd AI-Skills-Hub
+corepack enable
+pnpm install --frozen-lockfile
+pnpm cli --help
+pnpm cli available --agent codex
 ```
+
+> **First-run note (checked 2026-10-14):** the repository's [release status](docs/STATUS.md#distribution) says the npm package has not yet been published. The `npx @axiomnode-lab/skills-hub` and global `npm install` commands below are for after the first npm release. Until then, run from this checkout with `pnpm cli <command>` as shown above.
 
 AI Skills Hub is a package manager for [Agent Skills](https://agentskills.io) (`SKILL.md` folders) used by Claude Code, Codex, Cursor, GitHub Copilot and OpenCode. Each installable skill has been read in full, has a recorded license basis, is pinned to an exact upstream commit, and ships with SHA-256 hashes that are checked before anything is written to your project.
 
-> **Release status:** `0.3.0-beta.1` is the first npm release candidate. Until it is published to npm, build and run the package locally as described in [Development](#development).
+> **Release status:** `0.3.0-beta.1` is the source/workspace version, not proof of an npm publication. The current distribution status and release checklist are maintained in [docs/STATUS.md](docs/STATUS.md) and [docs/RELEASING.md](docs/RELEASING.md).
 
 ## What it is, and what it is not
 
@@ -24,16 +31,23 @@ AI Skills Hub is a package manager for [Agent Skills](https://agentskills.io) (`
 - **Not a security certification.** Reviews are AI-assisted and recorded with their reasoning; they are not legal advice or a guarantee. Skills are instructions your agent follows, so read what you install.
 - **Not task-performance tested.** Released means reviewed, licensed and integrity-checked, not benchmarked.
 
-## Install
+## Install from npm (after the first release)
 
-No installation is needed with `npx`. To install it globally:
+Once the package is published, use it without cloning the repository:
+
+```bash
+npx @axiomnode-lab/skills-hub --help
+npx @axiomnode-lab/skills-hub available --agent codex
+```
+
+Or install globally:
 
 ```bash
 npm install -g @axiomnode-lab/skills-hub
 skills-hub --help
 ```
 
-Requires Node.js 22 or later. The package contains the catalog and every released skill, so it works offline after installation.
+Requires Node.js 22 or later. The published package is designed to include the catalog and released skill artifacts, so installation and local skill installation can work offline; external discovery and optional installers need network access. Until the first npm release is live, follow the source-checkout quick start at the top of this README.
 
 ## Find skills
 
