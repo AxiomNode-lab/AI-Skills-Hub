@@ -29,14 +29,17 @@ test("agent detection finds executables on PATH and config directories on every 
   const bin = temp(t, "hub-bin-");
   fakeExecutable(bin, "codex");
   fakeExecutable(bin, "claude");
+  fakeExecutable(bin, "gemini");
   fs.mkdirSync(path.join(home, ".copilot"));
   const env = { PATH: bin, PATHEXT: ".EXE;.CMD", APPDATA: path.join(home, "AppData", "Roaming") };
   const agents = await detectAgents({ env, home });
   const byId = Object.fromEntries(agents.map(agent => [agent.id, agent]));
-  for (const id of ["claude-code", "codex", "cursor", "github-copilot", "opencode", "agent-skills"]) assert.ok(byId[id], id);
+  for (const id of ["claude-code", "codex", "gemini-cli", "cursor", "github-copilot", "opencode", "agent-skills"]) assert.ok(byId[id], id);
   assert.equal(byId.codex.detected, true);
   assert.match(byId.codex.evidence, /codex/i);
   assert.equal(byId["claude-code"].detected, true);
+  assert.equal(byId["gemini-cli"].detected, true);
+  assert.match(byId["gemini-cli"].evidence, /gemini/i);
   assert.equal(byId["github-copilot"].evidence, path.join(home, ".copilot"));
   assert.equal(byId.cursor.detected, false);
   assert.equal(byId.opencode.detected, false);
@@ -48,7 +51,15 @@ test("agent detection reports nothing detected on an empty machine but still lis
   const home = temp(t, "hub-home-");
   const agents = await detectAgents({ env: { PATH: "" }, home });
   assert.deepEqual(agents.filter(a => a.detected).map(a => a.id), ["agent-skills"]);
-  assert.equal(agents.length, 6);
+  assert.equal(agents.length, 7);
+});
+
+test("a released skill installs into Gemini CLI's native project skills directory", t => {
+  const { cwd, result } = run(t, ["install", "microsoft/wiki-qa", "--agent", "gemini-cli", "--json"]);
+  assert.equal(result.status, 0, result.stdout + result.stderr);
+  assert.equal(JSON.parse(result.stdout).success, true);
+  assert.ok(fs.existsSync(path.join(cwd, ".gemini", "skills", "wiki-qa", "SKILL.md")));
+  assert.ok(fs.existsSync(path.join(cwd, ".gemini", "skills", "wiki-qa", "LICENSE.txt")));
 });
 
 test("colors follow TTY, NO_COLOR, FORCE_COLOR and TERM=dumb", () => {
@@ -80,6 +91,10 @@ test("available lists only installable skills, per agent, without color codes wh
   const claude = JSON.parse(run(t, ["available", "--agent", "claude-code", "--json"]).result.stdout);
   assert.equal(claude.length, all.length, "every released Agent Skills format skill installs for Claude Code");
   assert.ok(claude.some(s => s.id.startsWith("microsoft/") && s.compatibility_basis === "standard"));
+
+  const gemini = JSON.parse(run(t, ["available", "--agent", "gemini-cli", "--json"]).result.stdout);
+  assert.equal(gemini.length, all.length, "every released Agent Skills format skill installs for Gemini CLI");
+  assert.ok(gemini.some(s => s.id === "microsoft/wiki-qa" && s.compatibility_basis === "standard"));
 
   const text = run(t, ["available", "design", "--agent", "codex"]).result;
   assert.match(text.stdout, /installable skills for codex matching "design"/);

@@ -74,7 +74,7 @@ Catalog servers (read-only, no authentication)
   serve                     HTTP API and MCP endpoint on 127.0.0.1:8787
 
 Options
-  --agent <id>              claude-code, codex, cursor, github-copilot, opencode, agent-skills
+  --agent <id>              claude-code, codex, gemini-cli, cursor, github-copilot, opencode, agent-skills
   --scope <project|user>    Install location (default: project)
   --yes, -y                 Confirm external installers or agent configuration changes
   --force                   Replace an unmanaged or locally modified installation

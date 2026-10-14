@@ -63,7 +63,7 @@ export function resolveBundle(registry, bundleName) {
 
 // Agents that load skills in the open Agent Skills format (a directory with
 // SKILL.md and name/description frontmatter). See catalog/agents.json.
-export const AGENT_SKILLS_STANDARD_AGENTS = ["claude-code", "codex", "cursor", "github-copilot", "copilot", "opencode", "generic-agent", "agent-skills"];
+export const AGENT_SKILLS_STANDARD_AGENTS = ["claude-code", "codex", "gemini-cli", "cursor", "github-copilot", "copilot", "opencode", "generic-agent", "agent-skills"];
 
 // Why a capability can be used with an agent: "listed" when the catalog names the
 // agent (a generic agent accepts anything listed for "agent-skills"), "standard"

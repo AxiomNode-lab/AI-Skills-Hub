@@ -25,6 +25,7 @@ skills-hub list --agent codex --scope project --json
 
 ```bash
 skills-hub install anthropics/frontend-design,anthropics/brand-guidelines,anthropics/internal-comms --agent codex --json
+skills-hub install microsoft/wiki-qa --agent gemini-cli --json
 ```
 
 Expected: exit code 0, `success: true`, three items with `status: success`. Each skill has `SKILL.md` and `LICENSE.txt` under `.agents/skills/<name>/` (internal-comms also has four `examples/*.md`). `.ai-skills-hub/installed.json` records the source revision and the SHA-256 of every installed file.
@@ -69,6 +70,7 @@ skills-hub uninstall anthropics/frontend-design --agent codex --scope project
 | Agent | Project | User (`--scope user`) |
 | --- | --- | --- |
 | Codex, generic Agent Skills | `.agents/skills` | `~/.agents/skills` |
+| Gemini CLI | `.gemini/skills` | `~/.gemini/skills` |
 | Cursor | `.agents/skills` | `~/.cursor/skills` |
 | Claude Code | `.claude/skills` | `~/.claude/skills` |
 | GitHub Copilot | `.github/skills` | `~/.copilot/skills` |

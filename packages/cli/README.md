@@ -1,6 +1,6 @@
 # @axiomnode-lab/skills-hub
 
-Install reviewed, license-checked [Agent Skills](https://agentskills.io) into Claude Code, Codex, Cursor, GitHub Copilot and OpenCode projects.
+Install reviewed, license-checked [Agent Skills](https://agentskills.io) into Claude Code, Codex, Gemini CLI, Cursor, GitHub Copilot and OpenCode projects.
 
 ```bash
 npx @axiomnode-lab/skills-hub --help

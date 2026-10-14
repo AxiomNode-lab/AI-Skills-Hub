@@ -107,7 +107,7 @@ write("README.md", fs.readFileSync(fs.existsSync(readme) ? readme : path.join(RO
 const pkg = {
   name: PACKAGE_NAME,
   version: rootPkg.version,
-  description: "Install reviewed, license-checked Agent Skills into Claude Code, Codex, Cursor, GitHub Copilot and OpenCode projects.",
+  description: "Install reviewed, license-checked Agent Skills into Claude Code, Codex, Gemini CLI, Cursor, GitHub Copilot and OpenCode projects.",
   license: "MIT",
   type: "module",
   bin: { "skills-hub": ENTRY },
