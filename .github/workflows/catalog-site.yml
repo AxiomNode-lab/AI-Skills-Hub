@@ -1,0 +1,64 @@
+name: Searchable catalog site
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "catalog/skills.json"
+      - "catalog/agents.json"
+      - "site/**"
+      - "scripts/build-catalog-site.mjs"
+      - "tests/catalog-site.test.mjs"
+      - "package.json"
+      - ".github/workflows/catalog-site.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "catalog/skills.json"
+      - "catalog/agents.json"
+      - "site/**"
+      - "scripts/build-catalog-site.mjs"
+      - "tests/catalog-site.test.mjs"
+      - "package.json"
+      - ".github/workflows/catalog-site.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: catalog-pages-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22.x
+      - name: Build the static catalog
+        run: node scripts/build-catalog-site.mjs --out site-dist
+      - name: Test generated catalog pages and sitemap
+        run: node --test tests/catalog-site.test.mjs
+      - name: Package Pages artifact
+        if: github.event_name == 'push'
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: site-dist
+
+  deploy:
+    if: github.event_name == 'push'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy catalog
+        id: deployment
+        uses: actions/deploy-pages@v4
