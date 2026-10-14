@@ -27,6 +27,7 @@ function parseOptions(argsArray) {
     const arg = argsArray[i];
     if (arg === "--json") options.json = true;
     else if (arg === "--installable") options.installable = true;
+    else if (arg === "--ai-rerank") options.aiRerank = true;
     else if (arg === "--yes" || arg === "-y") options.yes = true;
     else if (arg === "--force") options.force = true;
     else if (arg === "--dry-run") options.dryRun = true;
@@ -81,6 +82,7 @@ Options
   --dry-run                 update: report what would change
   --json                    Machine-readable output
   --installable             search: only skills that can be installed now
+  --ai-rerank               search: opt-in model reranking via configured endpoint
   --limit <n>               search: maximum results (default 50)
   --port <n>, --host <addr> serve: bind address (default 127.0.0.1:8787)
   --version, -v             Print the version
