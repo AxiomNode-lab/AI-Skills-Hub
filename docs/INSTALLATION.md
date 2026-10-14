@@ -1,6 +1,21 @@
 # Installation
 
-Use the npm package from any project directory. Node.js 22 or later is required.
+**Current availability (checked 2026-10-14):** the repository's [status page](STATUS.md#distribution) says the npm package has not yet been published. Until the first release is available, use the source checkout below. The `npx` and global-install commands become usable after the package is published.
+
+Requires Node.js 22 or later.
+
+```bash
+git clone https://github.com/AxiomNode-lab/AI-Skills-Hub.git
+cd AI-Skills-Hub
+corepack enable
+pnpm install --frozen-lockfile
+pnpm cli --help
+pnpm cli available --agent codex
+```
+
+From a source checkout, replace `skills-hub <command>` in the examples below with `pnpm cli <command>`. For example, run `pnpm cli search "frontend design" --agent codex`.
+
+After the first npm release, install from any project directory:
 
 ```bash
 npx @axiomnode-lab/skills-hub --help
@@ -8,7 +23,7 @@ npx @axiomnode-lab/skills-hub --help
 npm install -g @axiomnode-lab/skills-hub && skills-hub --help
 ```
 
-The package contains the catalog and every released skill, so commands run without the repository and without network access (except `add` discovery, external installers and the daily npm update check, which is skipped in CI and off a terminal; disable it with `SKILLS_HUB_NO_UPDATE_CHECK=1`). Until the first release is published, build it from a checkout with `pnpm build:package` and run `node dist/npm/packages/cli/bin/skills-hub.mjs`.
+The published package is built with the catalog and every released skill, so commands are designed to run without the source repository and without network access for bundled operations. External discovery, external installers and the daily npm update check need network access; the update check is skipped in CI and off a terminal and can be disabled with `SKILLS_HUB_NO_UPDATE_CHECK=1`.
 
 ## Inspect before installing
 
