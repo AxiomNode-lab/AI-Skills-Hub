@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>AI Skills Hub — Find reviewed agent skills</title>
+  <meta name="description" content="Explore a license-aware catalog of AI agent skills. Search by task, check release status and provenance, and find an install path for your coding agent.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="AI Skills Hub — Find reviewed agent skills">
+  <meta property="og:description" content="Search a license-aware catalog of AI agent skills for Claude Code, Codex, Cursor, GitHub Copilot and OpenCode.">
+  <meta property="og:url" content="https://axiomnode-lab.github.io/AI-Skills-Hub/">
+  <meta name="twitter:card" content="summary">
+  <link rel="canonical" href="https://axiomnode-lab.github.io/AI-Skills-Hub/">
+  <link rel="stylesheet" href="./assets/styles.css">
+  <script src="./assets/app.js" defer></script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebSite","name":"AI Skills Hub","url":"https://axiomnode-lab.github.io/AI-Skills-Hub/","description":"A license-aware catalog and package manager for AI Agent Skills.","publisher":{"@type":"Organization","name":"AxiomNode-lab","url":"https://github.com/AxiomNode-lab"}}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#catalog">Skip to catalog</a>
+  <header class="topbar">
+    <a class="brand" href="./" aria-label="AI Skills Hub home"><span class="brand-mark" aria-hidden="true">H</span><span>AI Skills <strong>Hub</strong></span></a>
+    <nav aria-label="Main navigation"><a href="#how-it-works">How it works</a><a href="https://github.com/AxiomNode-lab/AI-Skills-Hub">GitHub repository ↗</a></nav>
+  </header>
+  <main>
+    <section class="hero">
+      <div class="eyebrow"><span class="pulse"></span> OPEN CATALOG · CLEAR PROVENANCE</div>
+      <h1>Find the right skill.<br><span>Know what you’re installing.</span></h1>
+      <p class="hero-copy">Explore Agent Skills by task, agent, license and release state. AI Skills Hub keeps source and verification details visible instead of treating every public skill as automatically trusted.</p>
+      <div class="hero-actions"><a class="button button-primary" href="#catalog">Explore the catalog <span aria-hidden="true">↓</span></a><a class="button button-secondary" href="https://github.com/AxiomNode-lab/AI-Skills-Hub">View source on GitHub ↗</a></div>
+      <div class="proof-row" aria-label="Catalog principles"><div><span class="proof-icon">01</span><span>License evidence</span></div><div><span class="proof-icon">02</span><span>Source pinned to a commit</span></div><div><span class="proof-icon">03</span><span>Integrity checks on install</span></div></div>
+    </section>
+    <section class="catalog-section" id="catalog">
+      <div class="section-heading"><div><p class="eyebrow">SKILL EXPLORER</p><h2>What are you trying to do?</h2><p class="section-copy">Search the catalog and inspect the evidence before choosing a skill.</p></div><div class="catalog-total" aria-live="polite"><strong id="result-count">Loading…</strong><span>matching entries</span></div></div>
+      <form class="search-panel" id="search-form" role="search">
+        <label class="search-box"><span class="sr-only">Search skills</span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 4.5 4.5"></path></svg><input id="query" name="q" type="search" placeholder="Try “API security”, “PDF”, or “frontend design”" autocomplete="off"><kbd>/</kbd></label>
+        <div class="filters">
+          <label>Target agent<select id="agent-filter"><option value="any">Any compatible agent</option><option value="claude-code">Claude Code</option><option value="codex">Codex</option><option value="cursor">Cursor</option><option value="github-copilot">GitHub Copilot</option><option value="opencode">OpenCode</option><option value="agent-skills">Generic Agent Skills</option></select></label>
+          <label>Release status<select id="status-filter"><option value="eligible">Ready to install</option><option value="all">All catalog records</option><option value="review-required">Review required</option><option value="source-direct">External source</option><option value="blocked">Blocked by policy</option><option value="catalog-only">Catalog only</option></select></label>
+          <label>Category<select id="category-filter"><option value="all">All categories</option></select></label>
+          <button class="button button-secondary reset-button" id="reset" type="button">Reset</button>
+        </div>
+      </form>
+      <div class="catalog-toolbar"><p id="filter-summary">Preparing the catalog…</p><label class="sort-control">Sort<select id="sort"><option value="relevance">Best match</option><option value="name">Name A–Z</option><option value="publisher">Publisher A–Z</option></select></label></div>
+      <div class="skill-grid" id="results" aria-live="polite" aria-busy="true"><div class="loading-card"><span class="loader"></span><span>Loading catalog records…</span></div></div>
+      <div class="load-more-wrap"><button class="button button-secondary" id="load-more" type="button" hidden>Load more skills</button></div>
+      <p class="empty-state" id="empty-state" hidden>No skills match those filters. Try a broader query or choose “All catalog records”.</p>
+    </section>
+    <section class="how-section" id="how-it-works">
+      <div class="section-heading"><div><p class="eyebrow">BUILT FOR INSPECTION</p><h2>Discovery is not the same as trust.</h2></div></div>
+      <div class="principle-grid">
+        <article class="principle-card"><span class="principle-number">01</span><h3>Inspect the source</h3><p>Each record links to its upstream repository and path so you can review where it came from.</p></article>
+        <article class="principle-card"><span class="principle-number">02</span><h3>Check release state</h3><p>Only eligible, materialized records are offered for local installation. Held or blocked records stay clearly labelled.</p></article>
+        <article class="principle-card"><span class="principle-number">03</span><h3>Verify what gets written</h3><p>The Hub verifies released artifacts against recorded SHA-256 hashes before installation.</p></article>
+      </div>
+      <div class="notice"><span class="notice-mark" aria-hidden="true">i</span><p>License review and integrity checks are not a security certification or a guarantee of task performance. Read the skill and its limitations before use.</p></div>
+    </section>
+    <section class="community-cta"><div><p class="eyebrow">OPEN SOURCE</p><h2>Useful? Keep it close.</h2><p>Star the project to find it later, or fork it to evaluate the catalog and build on the workflow.</p></div><div class="community-actions"><a class="button button-primary" href="https://github.com/AxiomNode-lab/AI-Skills-Hub">Star or fork on GitHub ↗</a><a class="text-link" href="https://github.com/AxiomNode-lab/AI-Skills-Hub/issues">Report a problem or suggest a skill →</a></div></section>
+  </main>
+  <footer class="footer"><a class="brand" href="./"><span class="brand-mark" aria-hidden="true">H</span><span>AI Skills <strong>Hub</strong></span></a><p>Built in public by <a href="https://github.com/AxiomNode-lab">AxiomNode-lab</a>. <a href="https://github.com/AxiomNode-lab/AI-Skills-Hub/blob/main/docs/LICENSE-POLICY.md">License policy</a> · <a href="https://github.com/AxiomNode-lab/AI-Skills-Hub/blob/main/SECURITY.md">Security policy</a></p></footer>
+</body>
+</html>
