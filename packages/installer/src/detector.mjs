@@ -11,6 +11,7 @@ function agentSpecs(home, env) {
   return [
     { id: "claude-code", name: "Claude Code", commands: ["claude"], dirs: [path.join(home, ".claude")] },
     { id: "codex", name: "Codex", commands: ["codex"], dirs: [path.join(home, ".codex")] },
+    { id: "gemini-cli", name: "Gemini CLI", commands: ["gemini"], dirs: [path.join(home, ".gemini")] },
     {
       id: "cursor", name: "Cursor", commands: ["cursor", "cursor-agent"],
       dirs: [path.join(home, ".cursor"), path.join(appData, "Cursor"), path.join(home, "Library", "Application Support", "Cursor"), path.join(home, ".config", "Cursor")]
