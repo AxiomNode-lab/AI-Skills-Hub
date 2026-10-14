@@ -39,6 +39,7 @@ test("catalog site build emits compact search data, SEO pages, and a complete si
   const app = fs.readFileSync(path.join(out, "assets", "app.js"), "utf8");
   assert.match(home, /id="share-search"/);
   assert.match(app, /URLSearchParams/);
+  assert.match(app, /relevanceScore/);
   assert.match(app, /navigator\.clipboard\.writeText/);
 
   const first = compact.skills.find(skill => skill.releaseStatus === "eligible");
