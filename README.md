@@ -52,10 +52,10 @@ Requires Node.js 22 or later. The published package is designed to include the c
 ## Find skills
 
 ```bash
-npx @axiomnode-lab/skills-hub available --agent codex            # what you can install now
-npx @axiomnode-lab/skills-hub available security --agent codex   # filtered by keyword
-npx @axiomnode-lab/skills-hub search "frontend design" --agent codex
-npx @axiomnode-lab/skills-hub info anthropics/frontend-design --agent codex
+pnpm cli available --agent codex            # what you can install now
+pnpm cli available security --agent codex   # filtered by keyword
+pnpm cli search "frontend design" --agent codex
+pnpm cli info anthropics/frontend-design --agent codex
 ```
 
 `search` is keyword search over IDs, names, publishers, descriptions, categories and tags; a query must match the text before compatibility or release state affect the ranking. It is not semantic or vector search. `--installable` limits `search` to released skills; `--json` gives machine-readable output.
@@ -73,11 +73,11 @@ Each result shows its availability:
 ## Install, update and remove skills
 
 ```bash
-npx @axiomnode-lab/skills-hub install anthropics/frontend-design --agent codex
-npx @axiomnode-lab/skills-hub list --agent codex
-npx @axiomnode-lab/skills-hub update --dry-run
-npx @axiomnode-lab/skills-hub update
-npx @axiomnode-lab/skills-hub uninstall anthropics/frontend-design --agent codex
+pnpm cli install anthropics/frontend-design --agent codex
+pnpm cli list --agent codex
+pnpm cli update --dry-run
+pnpm cli update
+pnpm cli uninstall anthropics/frontend-design --agent codex
 ```
 
 - `install` takes one or more IDs (`id1,id2`), installs dependencies first, and writes files into the agent's skills folder in the current project (`--scope user` for your home directory). Before copying, the released files are checked against their manifest hashes. A record with per-file hashes is written to `.ai-skills-hub/installed.json`.
@@ -106,9 +106,9 @@ These folders follow each agent's current documentation. A skill is offered for 
 ## Interactive mode and local review
 
 ```bash
-npx @axiomnode-lab/skills-hub          # browse and install (needs a terminal)
-npx @axiomnode-lab/skills-hub add "pdf tools"
-npx @axiomnode-lab/skills-hub add https://github.com/owner/repo.git
+pnpm cli          # browse and install (needs a terminal)
+pnpm cli add "pdf tools"
+pnpm cli add https://github.com/owner/repo.git
 ```
 
 - `add <phrase>` searches the catalog and public directories (skills.sh, the MCP registry, npm, plugin directories) and lets you pick. Popularity can raise a result in the list; it never makes anything trusted or released. External results need confirmation, and success is reported only when something was actually installed.
