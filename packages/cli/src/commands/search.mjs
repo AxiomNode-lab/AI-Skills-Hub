@@ -1,9 +1,11 @@
 import { searchRegistry } from "@ai-skills-hub/discovery";
+import { rerankWithModel } from "@ai-skills-hub/discovery/rerank";
 import { isInstallable, loadRegistry } from "@ai-skills-hub/core";
+import { UsageError } from "../errors.mjs";
 import { statusReader, printCapabilityStatus } from "../capability-status.mjs";
 import { paint } from "../ui.mjs";
 
-export function searchCommand(query, options = {}) {
+export async function searchCommand(query, options = {}) {
   const registry = loadRegistry();
 
   const readStatus = statusReader(options);
@@ -11,10 +13,31 @@ export function searchCommand(query, options = {}) {
   const pool = options.installable
     ? { ...registry, skills: registry.skills.filter(isInstallable) }
     : registry;
-  const results = searchRegistry(pool, query || "", {
+  const lexical = searchRegistry(pool, query || "", {
     agent: options.agent || undefined,
     limit: options.limit || 50
-  }).map(({ item, score }) => ({ ...item, _score: score, hub_status: readStatus(item) }));
+  });
+  let ranked = lexical;
+
+  if (options.aiRerank) {
+    const baseUrl = process.env.SKILLS_HUB_RERANK_BASE_URL;
+    const model = process.env.SKILLS_HUB_RERANK_MODEL;
+    if (!baseUrl || !model) {
+      throw new UsageError("--ai-rerank requires SKILLS_HUB_RERANK_BASE_URL and SKILLS_HUB_RERANK_MODEL; configure an OpenAI-compatible endpoint first");
+    }
+    try {
+      ranked = await rerankWithModel(lexical, query || "", {
+        baseUrl,
+        model,
+        apiKey: process.env.SKILLS_HUB_RERANK_API_KEY || ""
+      });
+    } catch (error) {
+      // Search should remain useful during provider outages or local-model startup.
+      console.error(`AI reranking failed; using keyword ranking: ${error.message}`);
+    }
+  }
+
+  const results = ranked.map(({ item, score }) => ({ ...item, _score: score, hub_status: readStatus(item) }));
 
   if (options.json) {
     console.log(JSON.stringify(results, null, 2));
@@ -26,7 +49,7 @@ export function searchCommand(query, options = {}) {
     return;
   }
 
-  console.log(`Found ${results.length} capabilities:\n`);
+  console.log(`Found ${results.length} capabilities${options.aiRerank ? " (AI reranking requested)" : ""}:\n`);
   for (const cap of results) {
     console.log(`ID: ${paint("bold", cap.id)}`);
     console.log(`Name: ${cap.name}`);
