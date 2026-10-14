@@ -44,7 +44,18 @@ npx @axiomnode-lab/skills-hub search "frontend design" --agent codex
 npx @axiomnode-lab/skills-hub info anthropics/frontend-design --agent codex
 ```
 
-`search` is keyword search over IDs, names, publishers, descriptions, categories and tags; a query must match the text before compatibility or release state affect the ranking. It is not semantic or vector search. `--installable` limits `search` to released skills; `--json` gives machine-readable output.
+`search` uses local keyword matching over IDs, names, publishers, descriptions, categories and tags by default. `--installable` limits results to released skills, and `--json` gives machine-readable output.
+
+For optional model-based reranking, set an OpenAI-compatible endpoint and opt in with `--ai-rerank`:
+
+```bash
+export SKILLS_HUB_RERANK_BASE_URL="http://127.0.0.1:11434/v1"
+export SKILLS_HUB_RERANK_MODEL="qwen3:8b" # replace with a model available on your endpoint
+# Set SKILLS_HUB_RERANK_API_KEY only when your endpoint requires it.
+skills-hub search "review this TypeScript API for security and reliability" --agent codex --ai-rerank
+```
+
+AI reranking sends the query and metadata for up to 20 keyword-matched candidates (ID, name, description, category and publisher) to the endpoint you configure; it does not send skill files. It is opt-in, never changes release eligibility, license review or install safety, and falls back to keyword order if the provider is unavailable. Use a local endpoint when the query or candidate metadata must stay on your machine.
 
 Each result shows its availability:
 
