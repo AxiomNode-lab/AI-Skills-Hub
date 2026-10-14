@@ -1,6 +1,6 @@
 {
   "schema_version": "0.2",
-  "generated_at": "2026-10-01",
+  "generated_at": "2026-10-14",
   "agents": [
     {
       "id": "claude-code",
@@ -19,6 +19,21 @@
         "~/.agents/skills"
       ],
       "pluginSupport": true
+    },
+    {
+      "id": "gemini-cli",
+      "displayName": "Gemini CLI",
+      "nativeSkillDirs": [
+        ".gemini/skills",
+        ".agents/skills",
+        "~/.gemini/skills",
+        "~/.agents/skills"
+      ],
+      "userSkillDirs": [
+        "~/.gemini/skills",
+        "~/.agents/skills"
+      ],
+      "pluginSupport": false
     },
     {
       "id": "cursor",
