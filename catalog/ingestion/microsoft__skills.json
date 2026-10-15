@@ -3,9 +3,9 @@
   "source": {
     "repo": "microsoft/skills",
     "ref": "main",
-    "revision": "fc164ba1d7a0c10377dbcc1c9ac07253b9329fdb",
+    "revision": "d2f769fd9d7ee81b4d768301bcd2eae14ddcfd0a",
     "revision_type": "git-commit",
-    "tree_sha": "fc164ba1d7a0c10377dbcc1c9ac07253b9329fdb"
+    "tree_sha": "d2f769fd9d7ee81b4d768301bcd2eae14ddcfd0a"
   },
   "discovered_skills": [
     {
@@ -23079,7 +23079,7 @@
       "path": ".github/plugins/azure-skills/skills/azure-quotas/SKILL.md",
       "name": "azure-quotas",
       "description": "Check/manage Azure quotas and usage across providers. For deployment planning, capacity validation, region selection. WHEN: \"check quotas\", \"service limits\", \"current usage\", \"request quota increase\", \"quota exceeded\", \"validate capacity\", \"regional availability\", \"provisioning limits\", \"vCPU limit\", \"how many vCPUs available in my subscription\".",
-      "skill_sha256": "3bce38d6df08def03e5934469313e5cd532607a6f5087d08f75712e286550ae2",
+      "skill_sha256": "82ac42524b655f947bdd6bbd6b86a670145d296a3447555f510e37ea2d377733",
       "license": {
         "spdx": "MIT",
         "redistributable": true,
@@ -23439,7 +23439,7 @@
       "path": ".github/plugins/azure-skills/skills/azure-upgrade/SKILL.md",
       "name": "azure-upgrade",
       "description": "Assess and upgrade Azure workloads between plans, tiers, or SKUs, or modernize Azure SDK dependencies in source code. WHEN: upgrade Consumption to Flex Consumption, upgrade Azure Functions plan, change hosting plan, function app SKU, migrate App Service to Container Apps, modernize legacy Azure Java SDKs (com.microsoft.azure to com.azure), migrate Azure Cache for Redis (ACR/ACRE) to Azure Managed Redis (AMR).",
-      "skill_sha256": "26b538372a248f42a6c1976eb307c19ae3f6966a1bcbe7a066b4090f9568d6ab",
+      "skill_sha256": "c9ae1cbb4a851ab56918391c48f3567fb25da58de4867fae1f98b10ece845cd9",
       "license": {
         "spdx": "MIT",
         "redistributable": true,
@@ -23462,19 +23462,19 @@
         "findings": [
           {
             "type": "filesystem-write",
-            "line": 35,
+            "line": 38,
             "evidence": "delete",
-            "context": "7. Never delete or stop the original app without explicit user confirmation"
+            "context": "9. Never delete or stop the original app without explicit user confirmation"
           },
           {
             "type": "network-access",
-            "line": 81,
+            "line": 93,
             "evidence": "https://",
             "context": "  - [Redis (ACR or ACRE) to AMR Migration](references/services/redis/redis-to-amr.md) — routes to dedicated [amr-migration-skill](https://github.com/AzureManagedRedis/amr-migration-skill) (ACR/OSS) or [acre-to-amr-migration-skill](https://g"
           },
           {
             "type": "network-access",
-            "line": 81,
+            "line": 93,
             "evidence": "https://",
             "context": "  - [Redis (ACR or ACRE) to AMR Migration](references/services/redis/redis-to-amr.md) — routes to dedicated [amr-migration-skill](https://github.com/AzureManagedRedis/amr-migration-skill) (ACR/OSS) or [acre-to-amr-migration-skill](https://g"
           }
@@ -23997,8 +23997,8 @@
     {
       "path": ".github/plugins/azure-skills/skills/microsoft-foundry/SKILL.md",
       "name": "microsoft-foundry",
-      "description": "Build, deploy, evaluate, optimize, fine-tune, and manage Microsoft Foundry agents, models, and resources end to end. USE FOR: foundry, azd ai agent, azd provision/deploy, hosted agent scaffold/develop/run/deploy/troubleshoot, prompt agent create, create agent, update agent, add tool to agent, invoke agent, agent.yaml, agent insights, pull agent insights, evaluate agent, batch eval, continuous eval, continuous monitoring, agent CI/CD, optimize prompt, improve prompt, prompt optimizer, optimize agent instructions, Agent Optimizer scaffold, dataset curation from traces, deploy model, model fine-tuning (SFT/DPO/RFT), Foundry project, RBAC, role assignment, permissions, quota, capacity, region, deployment failure, AI Services, create Foundry resource, knowledge index, customize deployment, onboard, availability, training-data, grader, distillation, large file upload. DO NOT USE FOR: Azure Functions, App Service, general Azure deploy (use azure-deploy), general Azure prep (use azure-prepare).",
-      "skill_sha256": "a157211705a8c9e44b0bb5c6999f1b863cbbd36b2318dbebbbe785c1a9f9697f",
+      "description": "Build, deploy, evaluate, optimize, fine-tune, and manage Microsoft Foundry agents, models, and resources end to end. USE FOR: foundry, azd ai agent, azd provision/deploy, hosted agent scaffold/develop/run/deploy/troubleshoot, prompt agent create, managed harness agent create, GitHub Copilot harness agent, create agent, update agent, add tool to agent, invoke agent, agent insights, evaluate agent, batch eval, continuous eval, continuous monitoring, agent CI/CD, optimize prompt, improve prompt, optimize agent instructions, Agent Optimizer scaffold, dataset curation from traces, deploy model, model fine-tuning (SFT/DPO/RFT), Foundry project, RBAC, role assignment, permissions, quota, capacity, region, deployment failure, AI Services, create Foundry resource, knowledge index, customize deployment, onboard, availability, training-data, grader, distillation, large file upload. DO NOT USE FOR: Azure Functions, App Service, general Azure deploy (use azure-deploy), general Azure prep (use azure-prepare).",
+      "skill_sha256": "dc8b45f94d8298ca2c0bcc4200e2ed81858e91e03cebac827d476ef60f51b6b6",
       "license": {
         "spdx": "MIT",
         "redistributable": true,
@@ -24039,37 +24039,37 @@
           },
           {
             "type": "filesystem-write",
-            "line": 235,
+            "line": 237,
             "evidence": "remove",
             "context": "Do not copy azd-owned deployment values into metadata when azd already provides them. If the selected file is a preferred single-environment file, rewrite only that one environment block. If the selected file is a legacy multi-environment f"
           },
           {
             "type": "network-access",
-            "line": 272,
+            "line": 281,
             "evidence": "https://",
             "context": "- [Foundry Hosted Agents](https://learn.microsoft.com/azure/ai-foundry/agents/concepts/hosted-agents?view=foundry)"
           },
           {
             "type": "network-access",
-            "line": 273,
+            "line": 282,
             "evidence": "https://",
             "context": "- [Foundry Agent Runtime Components](https://learn.microsoft.com/azure/ai-foundry/agents/concepts/runtime-components?view=foundry)"
           },
           {
             "type": "network-access",
-            "line": 277,
+            "line": 286,
             "evidence": "curl",
             "context": "Applies to **any** call against a Foundry project or its parent Foundry account — Foundry MCP tools, `azd`, `az` CLI, `curl`, REST, or SDK."
           },
           {
             "type": "shell-execution",
-            "line": 283,
+            "line": 292,
             "evidence": "bash",
             "context": "```bash"
           },
           {
             "type": "network-access",
-            "line": 291,
+            "line": 300,
             "evidence": "https://",
             "context": "If it's indeed a network isolation issue, supported connection options are documented in [Choose a secure connection method to Foundry](https://learn.microsoft.com/azure/foundry/how-to/configure-private-link#choose-a-secure-connection-metho"
           }
@@ -24892,8 +24892,8 @@
     {
       "path": ".github/plugins/foundry-iq-skills/skills/foundry-iq/SKILL.md",
       "name": "foundry-iq",
-      "description": "Foundry IQ knowledge bases. WHEN: make local or Blob documents searchable; create/diagnose KBs; triage unsupported connectors or multi-source KB creation/reconfiguration; connect existing KB to agents (including multi-source KBs); create/reuse a Search service; retrieve from an existing knowledge base with citations; no brand words needed. Read its procedure before query/target questions. NOT: other KB providers, repository-file search, classic Azure AI Search index/query/app work, generic agent creation.",
-      "skill_sha256": "96dcea6d4430c16cc3b098f6824b5e4272b665de3ee25f6fb22f2449bce0be84",
+      "description": "Foundry IQ knowledge bases. WHEN: make local or Blob documents searchable; create/diagnose KBs; triage unsupported connectors or multi-source KB creation/reconfiguration (even with classic-search terms); connect existing KB to agents (including multi-source KBs); create/reuse a Search service; retrieve from an existing knowledge base with citations; no brand words needed. Read its procedure before query/target questions. NOT: other KB providers, repository-file search, classic Azure AI Search index/query/app work with no Foundry IQ KB or connector request, generic agent creation.",
+      "skill_sha256": "8dd305faf28f923b974d5ec1211ab66ed9c7ea8e52e0b970b488f4ca774ea850",
       "license": {
         "spdx": "MIT",
         "redistributable": true,

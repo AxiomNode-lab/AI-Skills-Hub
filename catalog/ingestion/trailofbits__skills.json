@@ -3,9 +3,9 @@
   "source": {
     "repo": "trailofbits/skills",
     "ref": "main",
-    "revision": "8e54050ae63c2f62224c35b1616efe71865b4777",
+    "revision": "e1f86a390d4caf28bf1c377a7d86707b2898669c",
     "revision_type": "git-commit",
-    "tree_sha": "8e54050ae63c2f62224c35b1616efe71865b4777"
+    "tree_sha": "e1f86a390d4caf28bf1c377a7d86707b2898669c"
   },
   "discovered_skills": [
     {
@@ -2032,8 +2032,8 @@
     {
       "path": "plugins/dimensional-analysis/skills/dimensional-analysis/SKILL.md",
       "name": "dimensional-analysis",
-      "description": "Annotates codebases with dimensional analysis comments documenting units, dimensions, and decimal scaling. Use when someone asks to annotate units in a codebase, perform a dimensional analysis, or find vulnerabilities in a DeFi protocol, offchain code, or other blockchain-related codebase with arithmetic. Prevents dimensional mismatches and catches formula bugs early.",
-      "skill_sha256": "0434b5ec95a0ae3037160e24d38d6579c3127ad86d0020e6f430d5f71c18c66b",
+      "description": "Audits code for unit and decimal-scaling bugs and annotates it with dimensional comments recording the units of each value. Use when someone asks to audit or review code for unit confusion, decimals or scaling mismatches, WAD/RAY scale errors, or the wrong token's decimals; to annotate units in a codebase; or to perform a dimensional analysis of a DeFi protocol, offchain code, or other arithmetic-heavy codebase. Catches formulas that combine values carrying different units or scales.",
+      "skill_sha256": "e3a091ca6acd079a00044a74929153bd569731b08c24b4bbaba59203c734a67c",
       "license": {
         "spdx": "CC-BY-SA-4.0",
         "redistributable": true,
@@ -2158,7 +2158,7 @@
       "path": "plugins/firebase-apk-scanner/skills/firebase-apk-scanner/SKILL.md",
       "name": "firebase-apk-scanner",
       "description": "Scans Android APKs for Firebase security misconfigurations including open databases, storage buckets, authentication issues, and exposed cloud functions. Use when analyzing APK files for Firebase vulnerabilities, performing mobile app security audits, or testing Firebase endpoint security. For authorized security research only.",
-      "skill_sha256": "fd7376ea038ea5a44a819e6fb75aa8e6e2ad38a2ec0d237cc6f71aa8ebbf95a4",
+      "skill_sha256": "1c63bf5e2a0cfde241eefdc12d20a4df0572d0df96df503a163f7224af137be3",
       "license": {
         "spdx": "CC-BY-SA-4.0",
         "redistributable": true,
@@ -2222,165 +2222,33 @@
           },
           {
             "type": "shell-execution",
-            "line": 56,
-            "evidence": "bash",
-            "context": "```bash"
-          },
-          {
-            "type": "shell-execution",
-            "line": 66,
+            "line": 57,
             "evidence": "bash",
             "context": "```bash"
           },
           {
             "type": "shell-execution",
             "line": 67,
-            "evidence": "sh",
-            "context": "{baseDir}/scanner.sh $ARGUMENTS"
-          },
-          {
-            "type": "shell-execution",
-            "line": 85,
             "evidence": "bash",
             "context": "```bash"
           },
           {
+            "type": "shell-execution",
+            "line": 68,
+            "evidence": "sh",
+            "context": "{baseDir}/scanner.sh \"$ARGUMENTS\""
+          },
+          {
             "type": "credential-access",
-            "line": 117,
+            "line": 96,
+            "evidence": "API key",
+            "context": "first project ID and API key it extracted."
+          },
+          {
+            "type": "credential-access",
+            "line": 126,
             "evidence": "API Key",
             "context": "| API Key | `extracted_value` |"
-          },
-          {
-            "type": "shell-execution",
-            "line": 141,
-            "evidence": "bash",
-            "context": "```bash"
-          },
-          {
-            "type": "credential-access",
-            "line": 157,
-            "evidence": "API_KEY",
-            "context": "Once you have the PROJECT_ID and API_KEY:"
-          },
-          {
-            "type": "shell-execution",
-            "line": 160,
-            "evidence": "bash",
-            "context": "```bash"
-          },
-          {
-            "type": "network-access",
-            "line": 162,
-            "evidence": "curl",
-            "context": "curl -s -X POST -H \"Content-Type: application/json\" \\"
-          },
-          {
-            "type": "credential-access",
-            "line": 164,
-            "evidence": "API_KEY",
-            "context": "  \"https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=API_KEY\""
-          },
-          {
-            "type": "network-access",
-            "line": 164,
-            "evidence": "https://",
-            "context": "  \"https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=API_KEY\""
-          },
-          {
-            "type": "network-access",
-            "line": 167,
-            "evidence": "curl",
-            "context": "curl -s -X POST -H \"Content-Type: application/json\" \\"
-          },
-          {
-            "type": "credential-access",
-            "line": 169,
-            "evidence": "API_KEY",
-            "context": "  \"https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=API_KEY\""
-          },
-          {
-            "type": "network-access",
-            "line": 169,
-            "evidence": "https://",
-            "context": "  \"https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=API_KEY\""
-          },
-          {
-            "type": "shell-execution",
-            "line": 173,
-            "evidence": "bash",
-            "context": "```bash"
-          },
-          {
-            "type": "network-access",
-            "line": 175,
-            "evidence": "curl",
-            "context": "curl -s \"https://PROJECT_ID.firebaseio.com/.json\""
-          },
-          {
-            "type": "network-access",
-            "line": 175,
-            "evidence": "https://",
-            "context": "curl -s \"https://PROJECT_ID.firebaseio.com/.json\""
-          },
-          {
-            "type": "network-access",
-            "line": 178,
-            "evidence": "curl",
-            "context": "curl -s \"https://firestore.googleapis.com/v1/projects/PROJECT_ID/databases/(default)/documents\""
-          },
-          {
-            "type": "network-access",
-            "line": 178,
-            "evidence": "https://",
-            "context": "curl -s \"https://firestore.googleapis.com/v1/projects/PROJECT_ID/databases/(default)/documents\""
-          },
-          {
-            "type": "shell-execution",
-            "line": 182,
-            "evidence": "bash",
-            "context": "```bash"
-          },
-          {
-            "type": "network-access",
-            "line": 184,
-            "evidence": "curl",
-            "context": "curl -s \"https://firebasestorage.googleapis.com/v0/b/PROJECT_ID.appspot.com/o\""
-          },
-          {
-            "type": "network-access",
-            "line": 184,
-            "evidence": "https://",
-            "context": "curl -s \"https://firebasestorage.googleapis.com/v0/b/PROJECT_ID.appspot.com/o\""
-          },
-          {
-            "type": "shell-execution",
-            "line": 188,
-            "evidence": "bash",
-            "context": "```bash"
-          },
-          {
-            "type": "credential-access",
-            "line": 189,
-            "evidence": "api-key",
-            "context": "curl -s -H \"x-goog-api-key: API_KEY\" \\"
-          },
-          {
-            "type": "credential-access",
-            "line": 189,
-            "evidence": "API_KEY",
-            "context": "curl -s -H \"x-goog-api-key: API_KEY\" \\"
-          },
-          {
-            "type": "network-access",
-            "line": 189,
-            "evidence": "curl",
-            "context": "curl -s -H \"x-goog-api-key: API_KEY\" \\"
-          },
-          {
-            "type": "network-access",
-            "line": 190,
-            "evidence": "https://",
-            "context": "  \"https://firebaseremoteconfig.googleapis.com/v1/projects/PROJECT_ID/remoteConfig\""
           }
         ]
       },
@@ -8334,7 +8202,7 @@
       "path": "plugins/trailmark/skills/diagramming-code/SKILL.md",
       "name": "diagramming-code",
       "description": "Generates Mermaid diagrams from Trailmark code graphs. Produces call graphs, class hierarchies, module dependency maps, containment diagrams, complexity heatmaps, and attack surface data flow visualizations. Use when visualizing code architecture, drawing call graphs, generating class diagrams, creating dependency maps, producing complexity heatmaps, or visualizing data flow and attack surface paths as Mermaid diagrams.",
-      "skill_sha256": "1d2397bd08607b686122078afe8d2742cca2a46f19c8e924e54f5886136d1053",
+      "skill_sha256": "1af57963c6d8c68eec1c360f3ee4cfec5be7c163a3c01c701f58a67980fff910",
       "license": {
         "spdx": "CC-BY-SA-4.0",
         "redistributable": true,
@@ -8374,7 +8242,7 @@
           },
           {
             "type": "shell-execution",
-            "line": 168,
+            "line": 161,
             "evidence": "bash",
             "context": "```bash"
           }
@@ -8544,7 +8412,7 @@
       "path": "plugins/trailmark/skills/mermaid-to-proverif/SKILL.md",
       "name": "mermaid-to-proverif",
       "description": "Translates Mermaid sequenceDiagrams describing cryptographic protocols into ProVerif formal verification models (.pv files). Use when generating a ProVerif model, formally verifying a protocol, converting a Mermaid diagram to ProVerif, verifying protocol security properties (secrecy, authentication, forward secrecy), checking for replay attacks, or producing a .pv file from a sequence diagram.",
-      "skill_sha256": "2f096151ad7fb5de2d74556bfa85322510a6e71710f4aa0ff963e5ce6ec3fa25",
+      "skill_sha256": "705339f9f8e942319a73489d67e02ac4a6f52f7fe69900b8662fb28adb681989",
       "license": {
         "spdx": "CC-BY-SA-4.0",
         "redistributable": true,
@@ -8572,19 +8440,19 @@
           },
           {
             "type": "credential-access",
-            "line": 252,
+            "line": 254,
             "evidence": "secret",
-            "context": "that leaks both long-term secret keys to the attacker, then check that a past"
+            "context": "that leaks both long-term secret keys to the attacker *after* the sessions (in"
           },
           {
             "type": "credential-access",
-            "line": 253,
+            "line": 255,
             "evidence": "secret",
-            "context": "session key remains secret. Pair it with a `free fs_witness: key [private]`"
+            "context": "`phase 1`), then check that a past session key remains secret. Pair it with a `free fs_witness: key [private]`"
           },
           {
             "type": "credential-access",
-            "line": 367,
+            "line": 368,
             "evidence": "secret",
             "context": "      secret, and the query is `query x: sk_type; event(key_exposed(x))`"
           }
@@ -8642,7 +8510,7 @@
       "path": "plugins/trailmark/skills/trailmark-finding-triage/SKILL.md",
       "name": "trailmark-finding-triage",
       "description": "Performs graph-assisted triage of a single security finding, SARIF result, weAudit annotation, suspicious function, or report excerpt using Trailmark reachability, entrypoint paths, taint, privilege-boundary, blast-radius, caller/callee, and neighborhood evidence. Use when deciding whether one candidate issue is reachable, prioritizing a finding before PoC work, preparing evidence for exploit validation, or checking whether a static-analysis result is actionable.",
-      "skill_sha256": "9f76e25b1ef98076e462dcac78afb488825bdab4d4d9fd5ffb74decc419c6989",
+      "skill_sha256": "51c7b9346866b1350295e84fb1cf23f9efee523e67fc5d6cb49631b242ddb4f8",
       "license": {
         "spdx": "CC-BY-SA-4.0",
         "redistributable": true,
@@ -8667,6 +8535,12 @@
             "line": 5,
             "evidence": "Bash",
             "context": "  - Bash"
+          },
+          {
+            "type": "shell-execution",
+            "line": 87,
+            "evidence": "bash",
+            "context": "```bash"
           }
         ]
       },
@@ -8914,7 +8788,7 @@
       "path": "plugins/trailmark/skills/trailmark/SKILL.md",
       "name": "trailmark",
       "description": "Builds and queries multi-language source and binary code graphs for security analysis. Includes pre-analysis passes for blast radius, taint propagation, privilege boundaries, entry point enumeration, proxy/unresolved-call tracking, type/reference queries, structural traversal, graph diffs, audit augmentation, declared cross-language/FFI/external links via `.trailmark/links.toml`, and SQL schema graphs. Use when analyzing call paths, mapping attack surface, finding complexity hotspots, enumerating entry points, tracing taint propagation, measuring blast radius, importing SARIF/weAudit/binary findings, linking source graphs across language or RPC boundaries, or building a code graph for audit prioritization. Feature-gate version-specific Trailmark APIs before using them; prefer `trailmark.parse.detect_languages()` or `--language auto` when the target language is unknown or polyglot.",
-      "skill_sha256": "113af24db2830394ca7a42078a3172d3a693c1080acdc9e3f66209eaeaa36876",
+      "skill_sha256": "616e2272ed39e077add3ee7cb55454aa297ce573f1600b09fab1010b27c6f1ae",
       "license": {
         "spdx": "CC-BY-SA-4.0",
         "redistributable": true,
@@ -8954,7 +8828,7 @@
           },
           {
             "type": "shell-execution",
-            "line": 259,
+            "line": 260,
             "evidence": "bash",
             "context": "```bash"
           }
@@ -9142,7 +9016,7 @@
       "path": "plugins/yara-authoring/skills/yara-rule-authoring/SKILL.md",
       "name": "yara-rule-authoring",
       "description": "Guides authoring of high-quality YARA-X detection rules for malware identification. Use when writing, reviewing, or optimizing YARA rules. Covers naming conventions, string selection, performance optimization, migration from legacy YARA, and false positive reduction. Triggers on: YARA, YARA-X, malware detection, threat hunting, IOC, signature, crx module, dex module.",
-      "skill_sha256": "c23ee1aeabf26318e25e00903ef8f31c2de294d796c230081ce8bcf95a668f7c",
+      "skill_sha256": "ab54de171d618927b39c351e0e297496bf3306a86b63a84a53441f67b261455c",
       "license": {
         "spdx": "CC-BY-SA-4.0",
         "redistributable": true,
@@ -9163,134 +9037,140 @@
         },
         "findings": [
           {
+            "type": "shell-execution",
+            "line": 16,
+            "evidence": "sh",
+            "context": "and [review helper](scripts/review.sh) from this installed `SKILL.md`'s directory."
+          },
+          {
             "type": "package-install",
-            "line": 15,
+            "line": 21,
             "evidence": "cargo install",
             "context": "**This skill targets YARA-X**, the Rust-based successor to legacy YARA — 5-10x faster regex, better errors, built-in formatter, stricter validation, new modules (crx, dex), 99% rule compatibility. It powers VirusTotal's production systems. "
           },
           {
             "type": "credential-access",
-            "line": 72,
+            "line": 78,
             "evidence": "Credential",
             "context": "- Credential theft: `security find-generic-password`, `keychain`"
           },
           {
             "type": "credential-access",
-            "line": 93,
+            "line": 99,
             "evidence": "credential",
             "context": "| npm package | `package.json` patterns, postinstall/preinstall hooks, exfil combination: fetch + env access + credential paths |"
           },
           {
             "type": "credential-access",
-            "line": 101,
+            "line": 107,
             "evidence": "process.env",
             "context": "**Bad JS strings:** `require`, `fetch`, `axios` (too common); `Buffer`, `crypto` (legitimate uses everywhere); `process.env` alone (need specific env var names)."
           },
           {
             "type": "encoded-content",
-            "line": 128,
+            "line": 134,
             "evidence": "base64",
             "context": "| Unknown encoding (XOR, base64) | Modifier: `$s = \"config\" xor(0x00-0xFF)` |"
           },
           {
             "type": "credential-access",
-            "line": 145,
+            "line": 151,
             "evidence": "credential",
             "context": "**Lesson from production:** rules using `any of ($network_*)` where the strings included `fetch`, `axios`, and `http` matched virtually all web applications. Switching to require a credential path AND a network call AND an exfil destination"
           },
           {
             "type": "shell-execution",
-            "line": 259,
+            "line": 265,
             "evidence": "bash",
             "context": "```bash"
           },
           {
             "type": "shell-execution",
-            "line": 312,
+            "line": 318,
             "evidence": "bash",
             "context": "```bash"
           },
           {
             "type": "encoded-content",
-            "line": 322,
+            "line": 328,
             "evidence": "Base64",
             "context": "| Base64 strings | Any length | 3+ chars required |"
           },
           {
             "type": "filesystem-write",
-            "line": 324,
+            "line": 330,
             "evidence": "Remove",
             "context": "| Duplicate modifiers | Allowed | Remove duplicates |"
           },
           {
             "type": "network-access",
-            "line": 342,
+            "line": 348,
             "evidence": "https://",
             "context": "    reference = \"https://example.com/analysis\""
           },
           {
             "type": "shell-execution",
-            "line": 362,
+            "line": 368,
             "evidence": "bash",
             "context": "```bash"
           },
           {
             "type": "encoded-content",
-            "line": 391,
+            "line": 405,
             "evidence": "Base64",
             "context": "- [ ] Base64 modifier only on strings with 3+ characters"
           },
           {
             "type": "shell-execution",
-            "line": 403,
+            "line": 417,
             "evidence": "bash",
             "context": "```bash"
           },
           {
             "type": "network-access",
-            "line": 432,
+            "line": 447,
             "evidence": "https://",
             "context": "**Rule repositories to learn from:** [Neo23x0/signature-base](https://github.com/Neo23x0/signature-base) (17,000+ production rules), [elastic/protections-artifacts](https://github.com/elastic/protections-artifacts) (endpoint-tested), [imp0r"
           },
           {
             "type": "network-access",
-            "line": 432,
+            "line": 447,
             "evidence": "https://",
             "context": "**Rule repositories to learn from:** [Neo23x0/signature-base](https://github.com/Neo23x0/signature-base) (17,000+ production rules), [elastic/protections-artifacts](https://github.com/elastic/protections-artifacts) (endpoint-tested), [imp0r"
           },
           {
             "type": "network-access",
-            "line": 432,
+            "line": 447,
             "evidence": "https://",
             "context": "**Rule repositories to learn from:** [Neo23x0/signature-base](https://github.com/Neo23x0/signature-base) (17,000+ production rules), [elastic/protections-artifacts](https://github.com/elastic/protections-artifacts) (endpoint-tested), [imp0r"
           },
           {
             "type": "network-access",
-            "line": 432,
+            "line": 447,
             "evidence": "https://",
             "context": "**Rule repositories to learn from:** [Neo23x0/signature-base](https://github.com/Neo23x0/signature-base) (17,000+ production rules), [elastic/protections-artifacts](https://github.com/elastic/protections-artifacts) (endpoint-tested), [imp0r"
           },
           {
             "type": "network-access",
-            "line": 434,
+            "line": 449,
             "evidence": "https://",
             "context": "**Guides:** [YARA Style Guide](https://github.com/Neo23x0/YARA-Style-Guide) and [YARA Performance Guidelines](https://github.com/Neo23x0/YARA-Performance-Guidelines) (Neo23x0), [YARA-X documentation](https://virustotal.github.io/yara-x/)."
           },
           {
             "type": "network-access",
-            "line": 434,
+            "line": 449,
             "evidence": "https://",
             "context": "**Guides:** [YARA Style Guide](https://github.com/Neo23x0/YARA-Style-Guide) and [YARA Performance Guidelines](https://github.com/Neo23x0/YARA-Performance-Guidelines) (Neo23x0), [YARA-X documentation](https://virustotal.github.io/yara-x/)."
           },
           {
             "type": "network-access",
-            "line": 434,
+            "line": 449,
             "evidence": "https://",
             "context": "**Guides:** [YARA Style Guide](https://github.com/Neo23x0/YARA-Style-Guide) and [YARA Performance Guidelines](https://github.com/Neo23x0/YARA-Performance-Guidelines) (Neo23x0), [YARA-X documentation](https://virustotal.github.io/yara-x/)."
           },
           {
             "type": "network-access",
-            "line": 436,
+            "line": 451,
             "evidence": "https://",
             "context": "**macOS specifics:** Apple's own production rules ship at `/System/Library/CoreServices/XProtect.bundle/`; [objective-see](https://objective-see.org/) publishes macOS malware research and samples."
           }
@@ -9308,7 +9188,7 @@
       "path": "plugins/zeroize-audit/skills/zeroize-audit/SKILL.md",
       "name": "zeroize-audit",
       "description": "Detects missing zeroization of sensitive data in source code and identifies zeroization removed by compiler optimizations, with assembly-level analysis, and control-flow verification. Use for auditing C/C++/Rust code handling secrets, keys, passwords, or other sensitive data.",
-      "skill_sha256": "b0a6c227817f9702d5168105c85977bb32ec077c6e90fd1ae094aa07b69a47cc",
+      "skill_sha256": "933273f0c9cd0ae197c010a4d3de81782a593b2160507b897f1e04d579bfba6f",
       "license": {
         "spdx": "CC-BY-SA-4.0",
         "redistributable": true,
@@ -9336,79 +9216,79 @@
           },
           {
             "type": "credential-access",
-            "line": 40,
+            "line": 50,
             "evidence": "secret",
             "context": "- Data-flow tracking for secret copies"
           },
           {
             "type": "shell-execution",
-            "line": 72,
+            "line": 82,
             "evidence": "sh",
             "context": "| `enable_asm` | no | `true` | Enable assembly emission and analysis (Step 8); produces `STACK_RETENTION`, `REGISTER_SPILL`. Auto-disabled if `emit_asm.sh` is missing. |"
           },
           {
             "type": "shell-execution",
-            "line": 91,
+            "line": 101,
             "evidence": "sh",
             "context": "| `{baseDir}/tools/emit_ir.sh` | Fail fast — IR analysis impossible |"
           },
           {
             "type": "shell-execution",
-            "line": 92,
+            "line": 102,
             "evidence": "sh",
             "context": "| `{baseDir}/tools/emit_asm.sh` | Warn and skip assembly findings (STACK_RETENTION, REGISTER_SPILL) |"
           },
           {
             "type": "shell-execution",
-            "line": 93,
+            "line": 103,
             "evidence": "sh",
             "context": "| `{baseDir}/tools/mcp/check_mcp.sh` | Warn and treat as MCP unavailable |"
           },
           {
             "type": "shell-execution",
-            "line": 104,
+            "line": 114,
             "evidence": "sh",
             "context": "| `{baseDir}/tools/validate_rust_toolchain.sh` | Warn — run preflight manually. Checks all tools, scripts, nightly, and optionally `cargo check`. Use `--json` for machine-readable output, `--manifest` to also validate the crate builds. |"
           },
           {
             "type": "shell-execution",
-            "line": 105,
+            "line": 115,
             "evidence": "sh",
             "context": "| `{baseDir}/tools/emit_rust_mir.sh` | Fail fast — MIR analysis impossible (`--opt`, `--crate`, `--bin/--lib` supported; `--out` can be file or directory) |"
           },
           {
             "type": "shell-execution",
-            "line": 106,
+            "line": 116,
             "evidence": "sh",
             "context": "| `{baseDir}/tools/emit_rust_ir.sh` | Fail fast — LLVM IR analysis impossible (`--opt` required; `--crate`, `--bin/--lib` supported; `--out` must be `.ll`) |"
           },
           {
             "type": "shell-execution",
-            "line": 107,
+            "line": 117,
             "evidence": "sh",
             "context": "| `{baseDir}/tools/emit_rust_asm.sh` | Warn and skip assembly findings (`STACK_RETENTION`, `REGISTER_SPILL`). Supports `--opt`, `--crate`, `--bin/--lib`, `--target`, `--intel-syntax`; `--out` can be `.s` file or directory. |"
           },
           {
             "type": "shell-execution",
-            "line": 108,
+            "line": 118,
             "evidence": "sh",
             "context": "| `{baseDir}/tools/diff_rust_mir.sh` | Warn and skip MIR-level optimization comparison. Accepts 2+ MIR files, normalizes, diffs pairwise, and reports first opt level where zeroize/drop-glue patterns disappear. |"
           },
           {
             "type": "credential-access",
-            "line": 155,
+            "line": 165,
             "evidence": "Secret",
             "context": "| `INSECURE_HEAP_ALLOC` | Secret uses insecure allocator (malloc vs. secure_malloc) | Source only | Yes (C/C++ only) |"
           },
           {
             "type": "credential-access",
-            "line": 345,
+            "line": 355,
             "evidence": "secret",
             "context": "| `STACK_RETENTION` | Assembly excerpt showing secret bytes on stack at `ret` |"
           },
           {
             "type": "credential-access",
-            "line": 374,
+            "line": 384,
             "evidence": "secret",
             "context": "- *\"This isn't a real secret\"* — If it matches detection heuristics, audit it. Treat as sensitive until explicitly excluded via config."
           }
