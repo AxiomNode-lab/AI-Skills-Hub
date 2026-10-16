@@ -3,9 +3,9 @@
   "source": {
     "repo": "getsentry/skills",
     "ref": "main",
-    "revision": "d18b7aa8ba878354e5c348310230e652f7690f9c",
+    "revision": "f57ada2d0b640406ea7e25b11d636c530e77c58b",
     "revision_type": "git-commit",
-    "tree_sha": "d18b7aa8ba878354e5c348310230e652f7690f9c"
+    "tree_sha": "f57ada2d0b640406ea7e25b11d636c530e77c58b"
   },
   "discovered_skills": [
     {
@@ -155,7 +155,7 @@
       "path": "skills/claude-settings-audit/SKILL.md",
       "name": "claude-settings-audit",
       "description": "Analyze a repository to generate recommended Claude Code settings.json permissions. Use when setting up a new project, auditing existing settings, or determining which read-only bash commands to allow. Detects tech stack, build tools, and monorepo structure.",
-      "skill_sha256": "53e0964b7a98c351e6d3dda055abb33ec5e2c287eebd4c74485b60312be9dfa9",
+      "skill_sha256": "470c4b7e72562aa226a2e742f6bfa489c87657474766efef688028d124e8910d",
       "license": {
         "spdx": "NOASSERTION",
         "redistributable": false,
@@ -375,31 +375,31 @@
           },
           {
             "type": "credential-access",
-            "line": 165,
+            "line": 166,
             "evidence": "secret",
             "context": "  \"Skill(sentry-skills:secret-serialization)\","
           },
           {
             "type": "shell-execution",
-            "line": 211,
+            "line": 212,
             "evidence": "bash",
             "context": "```bash"
           },
           {
             "type": "network-access",
-            "line": 224,
+            "line": 225,
             "evidence": "https://",
             "context": "      \"url\": \"https://mcp.sentry.dev/mcp/{org-slug}/{project-slug}\""
           },
           {
             "type": "shell-execution",
-            "line": 302,
+            "line": 303,
             "evidence": "sh",
             "context": "- **Custom scripts** - Never include project scripts that may have side effects (e.g., `./scripts/deploy.sh`)"
           },
           {
             "type": "filesystem-write",
-            "line": 304,
+            "line": 305,
             "evidence": "delete",
             "context": "- **Commands that modify state** - No install, build, run, write, or delete commands"
           }
@@ -1212,6 +1212,70 @@
         "shell": false,
         "network": true,
         "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": "skills/pr-screenshots/SKILL.md",
+      "name": "pr-screenshots",
+      "description": "Capture screenshots of the Sentry UI in a web browser, lay them out in a pull request description as before/after tables, and upload them with `gh --attach`.",
+      "skill_sha256": "b2e2b7a6d8af7d6659751e4cac246aba634d664623304c220048c65fdbe633f6",
+      "license": {
+        "spdx": "NOASSERTION",
+        "redistributable": false,
+        "status": "review-required",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "medium",
+        "capabilities": {
+          "shell": true,
+          "network": false,
+          "credentials": true,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": true,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "credential-access",
+            "line": 43,
+            "evidence": "secret",
+            "context": "   headers, cookies, signed URLs, secret keys, and webhook endpoints. Remove"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 43,
+            "evidence": "Remove",
+            "context": "   headers, cookies, signed URLs, secret keys, and webhook endpoints. Remove"
+          },
+          {
+            "type": "shell-execution",
+            "line": 103,
+            "evidence": "bash",
+            "context": "```bash"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 113,
+            "evidence": "delete",
+            "context": "| HTML tables | `<img src=\"./x.png\">` is not rewritten. Attach first, copy the appended URLs into the `<img>` tags, delete the appended lines, then write the final body with `--body-file`. |"
+          },
+          {
+            "type": "filesystem-write",
+            "line": 118,
+            "evidence": "delete",
+            "context": "from the body does not delete the uploaded file."
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": true,
         "dynamic_execution": false,
         "package_install": false
       }

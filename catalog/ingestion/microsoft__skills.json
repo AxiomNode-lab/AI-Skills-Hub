@@ -3,9 +3,9 @@
   "source": {
     "repo": "microsoft/skills",
     "ref": "main",
-    "revision": "d2f769fd9d7ee81b4d768301bcd2eae14ddcfd0a",
+    "revision": "146f047391145d5c16c981ca8774fb722090efba",
     "revision_type": "git-commit",
-    "tree_sha": "d2f769fd9d7ee81b4d768301bcd2eae14ddcfd0a"
+    "tree_sha": "146f047391145d5c16c981ca8774fb722090efba"
   },
   "discovered_skills": [
     {
@@ -338,6 +338,81 @@
       "capabilities": {
         "shell": true,
         "network": true,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": ".github/plugins/azure-advisor/skills/azure-advisor-actionability/SKILL.md",
+      "name": "azure-advisor-actionability",
+      "description": "Remediate Azure Advisor recommendations. WHEN: \"fix Advisor recommendation\".",
+      "skill_sha256": "cd39c4549de3914a735298b9999917b19d4f11b69182b3f525ba7b257970b22a",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_type": "skill-frontmatter",
+        "evidence_path": ".github/plugins/azure-advisor/skills/azure-advisor-actionability/SKILL.md"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "capabilities": {
+          "shell": true,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "shell-execution",
+            "line": 24,
+            "evidence": "PowerShell",
+            "context": "5. Preserve step order; separate Azure CLI and PowerShell."
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": true,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": ".github/plugins/azure-advisor/skills/azure-advisor/SKILL.md",
+      "name": "azure-advisor",
+      "description": "Use Azure Advisor recommendations. WHEN: \"show Advisor recommendations\", \"service retirements\", \"update recommendation status\". DO NOT USE FOR: fixes or remediation (use azure-advisor-actionability).",
+      "skill_sha256": "9c3a5bc090a87be502443132a174f1032efa5c6d439bf14c437657ca1128dfc3",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_type": "skill-frontmatter",
+        "evidence_path": ".github/plugins/azure-advisor/skills/azure-advisor/SKILL.md"
+      },
+      "security": {
+        "scan_status": "verified",
+        "risk": "none",
+        "capabilities": {
+          "shell": false,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": []
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
         "credentials": false,
         "dynamic_execution": false,
         "package_install": false
@@ -27384,6 +27459,11 @@
   "license_files": [
     {
       "path": ".github/plugins/aks-skills/LICENSE",
+      "sha256": "8a5d8efb70942e65032f930c761d097feeb41a7517ebd04c9d2e4ec3764071c5",
+      "preview": "MIT License Copyright 2025 (c) Microsoft Corporation. Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\""
+    },
+    {
+      "path": ".github/plugins/azure-advisor/LICENSE",
       "sha256": "8a5d8efb70942e65032f930c761d097feeb41a7517ebd04c9d2e4ec3764071c5",
       "preview": "MIT License Copyright 2025 (c) Microsoft Corporation. Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\""
     },

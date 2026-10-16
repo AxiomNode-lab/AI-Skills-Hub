@@ -3,9 +3,9 @@
   "source": {
     "repo": "trailofbits/skills",
     "ref": "main",
-    "revision": "e1f86a390d4caf28bf1c377a7d86707b2898669c",
+    "revision": "5c99c03fb8a9ea568432ecbcba5d86e9f4ac2bf0",
     "revision_type": "git-commit",
-    "tree_sha": "e1f86a390d4caf28bf1c377a7d86707b2898669c"
+    "tree_sha": "5c99c03fb8a9ea568432ecbcba5d86e9f4ac2bf0"
   },
   "discovered_skills": [
     {
@@ -2106,7 +2106,7 @@
       "path": "plugins/entry-point-analyzer/skills/entry-point-analyzer/SKILL.md",
       "name": "entry-point-analyzer",
       "description": "Analyzes smart contract codebases to identify state-changing entry points for security auditing. Detects externally callable functions that modify state, categorizes them by access level (public, admin, role-restricted, contract-only), and generates structured audit reports. Excludes view/pure/read-only functions. Use when auditing smart contracts (Solidity, Vyper, Solana/Rust, Move, TON, CosmWasm) or when asked to find entry points, audit flows, external functions, access control patterns, or privileged operations.",
-      "skill_sha256": "0d0e2956bdf9bf5be7efdfcefc754cabd2c1deb015731f3341f919eae2a0e3ca",
+      "skill_sha256": "167dca47592a8bd248916ca06977103cadc6b9492fe701ad6a6464b38fec0aec",
       "license": {
         "spdx": "CC-BY-SA-4.0",
         "redistributable": true,
@@ -2128,26 +2128,20 @@
         "findings": [
           {
             "type": "shell-execution",
-            "line": 4,
-            "evidence": "Bash",
-            "context": "allowed-tools: Read Grep Glob Bash"
-          },
-          {
-            "type": "shell-execution",
-            "line": 59,
+            "line": 70,
             "evidence": "bash",
             "context": "```bash"
           },
           {
             "type": "shell-execution",
-            "line": 65,
+            "line": 76,
             "evidence": "bash",
             "context": "```bash"
           }
         ]
       },
       "capabilities": {
-        "shell": true,
+        "shell": false,
         "network": false,
         "credentials": false,
         "dynamic_execution": false,
