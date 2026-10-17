@@ -87,9 +87,11 @@ test("unreleased brainstorming is held with a false JSON result and no installed
   assert.deepEqual(f.json(["list", "--agent", "codex"]), []);
   const normal = f.run(["install", brainstorming, "--agent", "codex"]);
   assert.equal(normal.status, 1);
-  assert.match(normal.stdout, /Installation incomplete/);
+  assert.match(normal.stdout, /Nothing was installed by this command/);
+  assert.match(normal.stdout, /skills-hub search <words> --installable --agent codex/);
   assert.doesNotMatch(normal.stdout, /Installation complete\./);
-  assert.match(normal.stderr, /bundle_not_released/);
+  assert.match(normal.stderr, /: not released/);
+  assert.equal(f.json(["install", brainstorming, "--agent", "codex"], 1).results[0].message.startsWith("not released"), true);
 });
 
 test("external installation requires consent and never executes without it", t => {
@@ -125,12 +127,13 @@ test("search and info distinguish catalog availability from installation evidenc
     assert.equal(info.hub_status.installation.status, "not-recorded");
     const search = f.json(["search", id, "--agent", "codex"]).find(x => x.id === id);
     assert.deepEqual(search.hub_status, info.hub_status);
-    for (const command of ["info", "search"]) {
-      const normal = f.run([command, id, "--agent", "codex"]);
-      assert.equal(normal.status, 0);
-      assert.match(normal.stdout, new RegExp(`Availability: ${availability}`));
-      assert.match(normal.stdout, /Installation: not-recorded/);
-    }
+    const normal = f.run(["info", id, "--agent", "codex"]);
+    assert.equal(normal.status, 0);
+    assert.match(normal.stdout, new RegExp(`Availability: +${availability}`));
+    assert.match(normal.stdout, /Installation: +not-recorded/);
+    const listed = f.run(["search", id, "--agent", "codex"]);
+    assert.equal(listed.status, 0);
+    assert.match(listed.stdout, availability === "eligible" ? /Installable now\n  test\/local-skill/ : new RegExp(`Not installable\\n(?:.*\\n)*?  ${id.replace(/[/]/g, "\\/")}  `));
   }
   assert.equal(fs.readFileSync(path.join(f.cwd, "catalog", "skills.json"), "utf8"), before);
 });

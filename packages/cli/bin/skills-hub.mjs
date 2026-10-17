@@ -30,6 +30,7 @@ function parseOptions(argsArray) {
     else if (arg === "--yes" || arg === "-y") options.yes = true;
     else if (arg === "--force") options.force = true;
     else if (arg === "--dry-run") options.dryRun = true;
+    else if (arg === "--content") options.content = true;
     else if (arg === "--agent") options.agent = value(i++, arg);
     else if (arg === "--scope") options.scope = value(i++, arg);
     else if (arg === "--port") options.port = integerOption("--port", value(i++, arg), 0, 65535);
@@ -51,7 +52,7 @@ function parseOptions(argsArray) {
 const COMMAND_HELP = {
   available: "available [query] [--agent <id>] [--json]\n  Skills you can install now. A query filters by keyword.",
   search: "search <query> [--agent <id>] [--installable] [--limit <n>] [--json]\n  Keyword search over the whole catalog, including skills that cannot be installed.",
-  info: "info <id> [--agent <id>] [--json]\n  License, security findings, release state and source of one skill.",
+  info: "info <id> [--agent <id>] [--content] [--json]\n  License, source, security findings and release state of one skill. --content also prints its SKILL.md.",
   install: "install <id> [<id>...] --agent <id> [--scope project|user] [--force] [--yes] [--json]\n  Installs released skills and their dependencies, all or nothing. IDs may also be comma-separated.",
   list: "list [--agent <id>] [--scope project|user] [--json]\n  Skills the Hub installed in this scope, with whether their files still match.",
   update: "update [id] [--agent <id>] [--dry-run] [--force] [--json]\n  Moves installed skills to the revision the catalog releases now.",
@@ -116,6 +117,7 @@ Options
   --dry-run                 update: report what would change
   --json                    Machine-readable output
   --installable             search: only skills that can be installed now
+  --content                 info: also print the skill's SKILL.md
   --limit <n>               search: maximum results (default 50)
   --port <n>, --host <addr> serve: bind address (default 127.0.0.1:8787)
   --version, -v             Print the version

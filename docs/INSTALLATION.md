@@ -19,7 +19,7 @@ skills-hub info anthropics/frontend-design --agent codex --json
 skills-hub list --agent codex --scope project --json
 ```
 
-`search` and `info` report catalog availability (`hub_status.availability`: eligible, source-direct, review-required, blocked or catalog-only) separately from installation state (`hub_status.installation`: installed, unverified or not-recorded). Catalog metadata never establishes installation.
+`info` prints the license, source (`repo@commit` and path), supported agents and scanner matches; `--content` adds the SKILL.md. `search` and `info` report catalog availability (`hub_status.availability`: eligible, source-direct, review-required, blocked or catalog-only) separately from installation state (`hub_status.installation`: installed, unverified or not-recorded). Catalog metadata never establishes installation.
 
 ## Install
 

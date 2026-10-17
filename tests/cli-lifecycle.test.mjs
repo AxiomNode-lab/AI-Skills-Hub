@@ -387,3 +387,38 @@ test("per-command help, typo suggestions, and one error line for a bad install r
   assert.equal(add.status, 2);
   assert.match(add.stderr, /add <phrase> is interactive/);
 });
+
+test("a held skill reports why it is held, for every agent, in words", t => {
+  const h = hub(t);
+  h.release("held", { status: "hold" });
+  const catalog = JSON.parse(fs.readFileSync(path.join(h.home, "catalog", "skills.json"), "utf8"));
+  // A reviewed bundle whose release is held, listed only for codex.
+  Object.assign(catalog.skills[0], { compatibility: ["codex"], distribution: "bundled", materialized: true, release: { status: "hold", reasons: ["upstream-skill-missing"] } });
+  fs.writeFileSync(path.join(h.home, "catalog", "skills.json"), JSON.stringify(catalog));
+  for (const agent of ["codex", "claude-code"]) {
+    const result = h.run("install", "test/held", "--agent", agent, "--json");
+    assert.equal(result.json.results[0].reason, "bundle_not_released", agent);
+    assert.equal(result.json.results[0].message, "not released: the skill no longer exists upstream", agent);
+  }
+  const human = h.run("install", "test/held", "--agent", "codex");
+  assert.match(human.stderr, /✖ test\/held: not released: the skill no longer exists upstream/);
+  assert.match(human.stdout, /skills-hub search <words> --installable --agent codex/);
+});
+
+test("info shows license, source and scanner matches, and prints SKILL.md only with --content", t => {
+  const h = hub(t);
+  h.release("alpha");
+  const catalog = JSON.parse(fs.readFileSync(path.join(h.home, "catalog", "skills.json"), "utf8"));
+  catalog.skills[0].security = { risk: "low", scan_status: "verified", findings: [{ type: "network-access", line: 4, evidence: "http://", file: "LICENSE.txt" }] };
+  fs.writeFileSync(path.join(h.home, "catalog", "skills.json"), JSON.stringify(catalog));
+  const info = h.run("info", "test/alpha");
+  assert.equal(info.status, 0);
+  assert.match(info.stdout, /License: +MIT/);
+  assert.match(info.stdout, /Source: +github\.com\/test\/repo@aaaaaaaaaaaa  skills\/alpha/);
+  assert.match(info.stdout, /low risk — 1 pattern match \(network-access\); each was reviewed before release/);
+  assert.match(info.stdout, /network-access LICENSE\.txt:4 \(license text\)/);
+  assert.doesNotMatch(info.stdout, /^v1$/m);
+  assert.match(info.stdout, /SKILL\.md: skills-hub info test\/alpha --content/);
+  assert.match(h.run("info", "test/alpha", "--content").stdout, /--- SKILL\.md ---[\s\S]*^v1$/m);
+  assert.ok(h.run("info", "test/alpha", "--json").json.skill_content.includes("v1"));
+});

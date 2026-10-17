@@ -17,7 +17,7 @@ Requires Node.js 22.13+. The package includes the catalog and every released ski
 | --- | --- |
 | `available [query]` | Skills you can install now (`--agent` to filter) |
 | `search <query>` | Keyword search over the whole catalog (`--installable`, `--limit`, `--json`) |
-| `info <id>` | License, security, release state and provenance of one skill |
+| `info <id>` | License, source commit, scanner matches and release state of one skill (`--content` for the SKILL.md) |
 | `install <id> [<id>...]` | Install released skills into the current project (`--agent` required, `--scope user` for your home directory) |
 | `list` | Hub-managed installations and whether their files still match |
 | `update [id]` | Move installed skills to the released revision (`--dry-run`) |

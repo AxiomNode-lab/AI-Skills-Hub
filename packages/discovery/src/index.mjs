@@ -25,25 +25,58 @@ function expandQuery(value) {
   return [original, ...parts.map(x => ARABIC_HINTS.get(x)).filter(Boolean)].join(" ").trim();
 }
 
-const words = (v) => norm(v).split(/[^a-z0-9@._/-]+/).filter(Boolean);
+// Matching is by word, not substring: "react" finds "React" and "react-dom"
+// but not "reactive"; a query word also matches its common inflections
+// ("deploy" finds "deployment", "test" finds "testing"). Punctuation inside a
+// word is ignored, so "next.js", "Next.js" and "nextjs" are the same word.
+const INFLECTION = /^(?:s|es|ing|ed|er|ers|ment|ments|ation|ations)$/;
+const compact = (v) => norm(v).replace(/[^a-z0-9]+/g, "");
+
+function queryWords(query) {
+  return [...new Set(norm(expandQuery(query)).split(/\s+/).map(compact).filter(Boolean))];
+}
+
+function tokensOf(text) {
+  const tokens = new Set();
+  for (const chunk of norm(text).split(/\s+/)) {
+    const whole = compact(chunk);
+    if (whole) tokens.add(whole);
+    for (const part of chunk.split(/[^a-z0-9]+/)) if (part) tokens.add(part);
+  }
+  return tokens;
+}
+
+function hasWord(tokens, word) {
+  if (tokens.has(word)) return true;
+  for (const token of tokens) {
+    if (token.length > word.length && token.startsWith(word) && INFLECTION.test(token.slice(word.length))) return true;
+  }
+  return false;
+}
 
 function score(query, item, agent, { requireTextMatch = false } = {}) {
   const q = norm(expandQuery(query));
-  const hay = norm([item.id,item.name,item.publisher,item.description,...(item.category ?? []),...(item.tags ?? [])].join(" "));
+  const qWords = queryWords(query);
+  const nameTokens = tokensOf(item.name);
+  const hayTokens = tokensOf([item.id, item.name, item.publisher, item.description, ...(item.category ?? []), ...(item.tags ?? [])].join(" "));
   let n = 0;
   if (!q) n = 1;
-  if (norm(item.id) === q) n += 120;
-  if (norm(item.name) === q) n += 100;
-  if (norm(item.name).startsWith(q)) n += 50;
-  if (hay.includes(q)) n += 30;
-  for (const w of words(q)) n += norm(item.name).includes(w) ? 18 : hay.includes(w) ? 6 : 0;
+  if (q && norm(item.id) === norm(query)) n += 120;
+  if (q && compact(item.name) === compact(query)) n += 100;
+  if (qWords.length && qWords.every((w) => hasWord(nameTokens, w))) n += 50;
+  if (qWords.length > 1 && qWords.every((w) => hasWord(hayTokens, w))) n += 30;
+  for (const w of qWords) n += hasWord(nameTokens, w) ? 18 : hasWord(hayTokens, w) ? 6 : 0;
   // Local relevance must come from text, before compatibility and status bonuses.
   if (requireTextMatch && (!q || n === 0)) return 0;
   if (agent && (item.compatibility ?? []).includes(agent)) n += 20;
   if (item.release?.status === "eligible") n += 12;
   if (item.distribution === "bundled") n += 8;
+  // Entries nobody can install, or that say nothing about themselves, sink.
+  if (item.distribution === "blocked") n -= 30;
+  if (!item.description) n -= 10;
   if (item.security?.risk === "high") n -= 80;
-  return n;
+  // A text match is never dropped by these penalties, only ranked last.
+  return requireTextMatch ? Math.max(n, 1) : n;
 }
 
 export function searchRegistry(registry, query, { agent, limit=20 }={}) {

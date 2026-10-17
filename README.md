@@ -44,7 +44,7 @@ npx @axiomnode-lab/skills-hub search "frontend design" --agent codex
 npx @axiomnode-lab/skills-hub info anthropics/frontend-design --agent codex
 ```
 
-`search` is keyword search over IDs, names, publishers, descriptions, categories and tags; a query must match the text before compatibility or release state affect the ranking. It is not semantic or vector search. `--installable` limits `search` to released skills; `--json` gives machine-readable output.
+`search` is keyword search over IDs, names, publishers, descriptions, categories and tags. It matches whole words ("react" does not match "reactive"; "deploy" also finds "deployment"; `next.js` and `nextjs` are the same), lists installable results first, and ranks blocked or undescribed entries last. A query must match the text before compatibility or release state affect the ranking. It is not semantic or vector search. `--installable` limits `search` to released skills; `--json` gives machine-readable output. `info <id>` shows the license, source commit, supported agents and every scanner match with its file and line; add `--content` to print the SKILL.md.
 
 Each result shows its availability:
 

@@ -2,10 +2,32 @@ import { readLocalCapabilities, resolveDependencies } from "../utils.mjs";
 import { installCapability, preflightCapability } from "../install-executor.mjs";
 import { captureDirectory, restoreDirectory } from "../../../installer/src/native.mjs";
 import { findInstallRecord, readInstallRecords, removeInstallRecord, writeInstallRecord } from "../../../installer/src/state.mjs";
-import { paint } from "../ui.mjs";
+import { paint, reasonText } from "../ui.mjs";
+
+// What a refusal means and what to do next, in words. JSON output keeps the
+// reason code and carries this text as `message`.
+export function refusalMessage(result, cap) {
+  const reason = String(result.reason ?? "");
+  const held = (cap?.release?.reasons ?? []).filter((code) => code !== "manual-review-required").map(reasonText);
+  if (reason === "registry_blocked") return `blocked by the registry${held.length ? ` (${held.join("; ")})` : ""}`;
+  if (reason === "manual_review_required") return "not released yet: it is awaiting review";
+  if (reason === "bundle_not_released") return `not released${held.length ? `: ${held.join("; ")}` : ""}`;
+  if (reason === "agent_not_supported") return `not available for --agent ${result.agent ?? "this agent"}; supported: ${(cap?.compatibility ?? []).join(", ") || "none listed"}`;
+  if (reason === "capability_not_found") return "no skill with this ID in the catalog";
+  if (reason === "bundle_aliases_not_supported") return "bundle names (@name) cannot be installed; install the skill IDs instead";
+  if (reason === "not_installed_request_incomplete") return "not installed, because another requested skill cannot be installed";
+  if (reason === "request_contains_missing_capabilities") return "not installed, because another requested ID was not found";
+  if (reason.startsWith("dependency_not_installed: ")) return `needs ${reason.slice(26)}, which cannot be installed`;
+  if (reason.startsWith("destination_conflict: ")) return `uses the same folder as ${reason.slice(22)}`;
+  if (reason.startsWith("rolled_back_after_failure: ")) return `undone because ${reason.slice(27)} failed`;
+  if (result.requires_confirmation) return "uses an external installer; re-run with --yes to confirm";
+  return reason;
+}
 
 export async function installCommand(ids, options = {}) {
-  const report = (results, error = null) => {
+  let catalog = new Map();
+  const report = (rawResults, error = null) => {
+    const results = rawResults.map((result) => (result.installed ? result : { ...result, message: refusalMessage({ agent: options.agent, ...result }, catalog.get(result.id)) }));
     const success = !error && results.length > 0 && results.every(result => result.installed === true);
     if (!success) process.exitCode = 1;
     const output = { success, results, ...(error ? { error } : {}) };
@@ -18,13 +40,17 @@ export async function installCommand(ids, options = {}) {
           console.log(`${paint("green", "✔")} ${verb} ${result.id}${result.destination ? paint("dim", ` → ${result.destination}`) : ""}`);
           for (const notice of result.notices ?? []) console.log(`  ${paint("yellow", "⚠ Notice:")} ${notice.text}`);
         } else {
-          console.error(`${paint("red", "✖", process.stderr)} ${result.status}: ${result.id}: ${result.reason}${result.requires_confirmation ? ". Re-run with --yes to confirm." : ""}`);
+          console.error(`${paint("red", "✖", process.stderr)} ${result.id}: ${result.message}`);
           if (result.command) console.error(`  Command that --yes would run: ${result.command.map((part) => (/^[\w@./:=-]+$/.test(part) ? part : JSON.stringify(part))).join(" ")}`);
           // Shown before the user confirms with --yes.
           if (result.requires_confirmation) for (const notice of result.notices ?? []) console.error(`  ${paint("yellow", "⚠ Notice:", process.stderr)} ${notice.text}`);
         }
       }
-      console.log(success ? paint("green", "Installation complete.") : paint("yellow", "Installation incomplete; not all requested capabilities were installed."));
+      if (success) console.log(paint("green", "Installation complete."));
+      else {
+        console.log(paint("yellow", "Nothing was installed by this command unless listed with ✔ above."));
+        console.log(`Find installable alternatives: skills-hub search <words> --installable${options.agent ? ` --agent ${options.agent}` : ""}`);
+      }
     }
     return output;
   };
@@ -58,6 +84,7 @@ export async function installCommand(ids, options = {}) {
   let allCapabilities;
   try {
     allCapabilities = readLocalCapabilities();
+    catalog = new Map(allCapabilities.map((cap) => [cap.id, cap]));
   } catch (error) {
     return report(ids.map(id => ({ id, status: "skipped", installed: false, reason: error.message })), error.message);
   }

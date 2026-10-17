@@ -51,13 +51,50 @@ export function availabilityText(status, stream) {
   return paint(style, text, stream);
 }
 
+// "none" means the pattern scanner matched nothing; it is not a guarantee.
 export function riskLabel(risk, stream) {
   const style = { none: "green", low: "green", medium: "yellow", high: "red" }[risk] ?? "gray";
-  return paint(style, `${risk ?? "unknown"} risk`, stream);
+  return paint(style, risk === "none" ? "no scanner findings" : `${risk ?? "unknown"} risk`, stream);
+}
+
+// The scanner's verdict with what it matched, for `info`.
+export function securitySummary(security = {}, { reviewed = false, stream } = {}) {
+  const findings = security.findings ?? [];
+  if (!findings.length) return `${riskLabel(security.risk ?? "unknown", stream)}${security.scan_status ? paint("dim", ` (${security.scan_status})`, stream) : ""}`;
+  const types = [...new Set(findings.map((finding) => finding.type))].join(", ");
+  return `${riskLabel(security.risk, stream)} — ${findings.length} pattern match${findings.length === 1 ? "" : "es"} (${types})${reviewed ? "; each was reviewed before release" : ""}`;
 }
 
 // Shortens text to fit one terminal line.
 export function truncate(text, width) {
   const value = String(text ?? "").replace(/\s+/g, " ").trim();
   return value.length > width ? value.slice(0, Math.max(0, width - 1)) + "…" : value;
+}
+
+// Release reasons recorded in the catalog, in words a user can act on.
+const REASON_TEXT = {
+  "manual-review-required": "awaiting review",
+  "non-redistributable": "its license does not allow the Hub to ship it",
+  "upstream-service-retired": "the service it targets was retired",
+  "upstream-service-retiring": "the service it targets is being retired",
+  "upstream-skill-missing": "the skill no longer exists upstream",
+  "upstream-moved": "it moved to another upstream location",
+  "upstream-api-removed": "it uses an API that was removed upstream",
+  "required-skill-not-released": "it needs a skill that is not released",
+  "unsafe-four-byte-dek-example": "held for an unsafe code example"
+};
+
+export function reasonText(code) {
+  return REASON_TEXT[code] ?? String(code).replace(/[-_]+/g, " ");
+}
+
+// One short phrase for why a catalog entry cannot be installed with `install`.
+export function whyNotInstallable(cap, status) {
+  const reasons = (cap.release?.reasons ?? []).filter((code) => code !== "manual-review-required").map(reasonText);
+  switch (status) {
+    case "blocked": return `blocked${reasons.length ? ": " + reasons.join("; ") : ""}`;
+    case "review-required": return "awaiting review";
+    case "source-direct": return `external installer only (needs --yes)${reasons.length ? ": " + reasons.join("; ") : ""}`;
+    default: return reasons.length ? `held: ${reasons.join("; ")}` : "not released";
+  }
 }

@@ -2,7 +2,8 @@ import { readLocalCapabilities } from "../utils.mjs";
 import fs from "node:fs/promises";
 import { resolveHubPath } from "@ai-skills-hub/core";
 import path from "node:path";
-import { statusReader, printCapabilityStatus } from "../capability-status.mjs";
+import { statusReader } from "../capability-status.mjs";
+import { availabilityLabel, installationLabel, paint, securitySummary, truncate, whyNotInstallable } from "../ui.mjs";
 
 export async function infoCommand(id, options = {}) {
   if (!id) {
@@ -35,23 +36,35 @@ export async function infoCommand(id, options = {}) {
     return;
   }
 
-  console.log("==========================================");
-  console.log(` ID:           ${cap.id}`);
-  console.log(` Name:         ${cap.name}`);
-  printCapabilityStatus(output.hub_status);
-  console.log(` Type:         ${cap.artifact_type || cap.type || "skill"}`);
-  console.log(` Publisher:    ${cap.publisher || "N/A"}`);
-  console.log(` Distribution: ${cap.distribution}`);
-  const releaseReasons = cap.release?.reasons?.length ? ` (${cap.release.reasons.join(", ")})` : "";
-  console.log(` Release:      ${cap.release?.status || "unknown"}${releaseReasons}`);
-  for (const notice of cap.release?.notices ?? []) console.log(` Notice:       ${notice.text}`);
-  console.log(` Security:     ${cap.security?.risk || "unknown"} / ${cap.security?.scan_status || "unknown"}`);
-  console.log(` Description:  ${cap.description || "N/A"}`);
-  if (cap.dependencies?.length) console.log(` Dependencies: ${cap.dependencies.join(", ")}`);
-  console.log("==========================================");
-
+  const status = output.hub_status;
+  const availability = status.availability.status;
+  const label = (name) => paint("dim", `${name}:`.padEnd(14));
+  console.log(paint("bold", cap.id) + (cap.name && cap.name !== cap.id.split("/").pop() ? paint("dim", `  (${cap.name})`) : ""));
+  if (cap.description) console.log(`  ${cap.description}`);
+  console.log("");
+  console.log(`  ${label("Availability")}${availabilityLabel(availability)} — ${availability === "eligible" ? "installable with skills-hub install" : whyNotInstallable(cap, availability)}`);
+  const installation = status.installation;
+  console.log(`  ${label("Installation")}${installationLabel(installation.status)}${installation.status === "not-recorded" ? "" : ` (${installation.agent}, ${installation.scope})`}${installation.reason && installation.status !== "not-recorded" ? paint("dim", ` ${installation.reason}`) : ""}`);
+  const license = cap.license ?? {};
+  console.log(`  ${label("License")}${license.spdx ?? "unknown"}${license.scope === "repository" ? paint("dim", " (repository license)") : ""}${license.status ? paint("dim", `, ${license.status}`) : ""}`);
+  if (cap.source?.repo) {
+    const revision = cap.source.revision ? `@${cap.source.revision.slice(0, 12)}` : "";
+    console.log(`  ${label("Source")}github.com/${cap.source.repo}${revision}${cap.source.path ? `  ${cap.source.path}` : ""}`);
+  }
+  console.log(`  ${label("Publisher")}${cap.publisher || "unknown"}`);
+  console.log(`  ${label("Agents")}${(cap.compatibility ?? []).join(", ") || "none listed"}`);
+  console.log(`  ${label("Security")}${securitySummary(cap.security, { reviewed: availability === "eligible" })}`);
+  for (const finding of cap.security?.findings ?? []) {
+    const licenseText = /^(?:LICEN[CS]E|NOTICE|COPYING)/i.test(finding.file ?? "") ? " (license text)" : "";
+    console.log(paint("dim", `    ${finding.type} ${finding.file ?? "SKILL.md"}:${finding.line}${licenseText}  “${truncate(finding.evidence, 40)}”`));
+  }
+  if (cap.security?.review || cap.license?.evidence?.startsWith?.("catalog/reviews/")) console.log(`  ${label("Review")}${cap.security?.review ?? cap.license.evidence}`);
+  if (cap.dependencies?.length) console.log(`  ${label("Depends on")}${cap.dependencies.join(", ")}`);
+  for (const notice of cap.release?.notices ?? []) console.log(`  ${label("Notice")}${paint("yellow", notice.text)}`);
+  console.log("");
+  if (availability === "eligible") console.log(`Install: ${paint("green", `skills-hub install ${cap.id} --agent ${options.agent || "<agent>"}`)}`);
   if (output.skill_content) {
-    console.log("\n--- SKILL.md Content ---\n");
-    console.log(output.skill_content);
+    if (options.content) console.log("\n--- SKILL.md ---\n\n" + output.skill_content);
+    else console.log(`SKILL.md: skills-hub info ${cap.id} --content`);
   }
 }
