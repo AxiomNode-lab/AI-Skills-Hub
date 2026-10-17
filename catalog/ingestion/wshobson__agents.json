@@ -3,16 +3,16 @@
   "source": {
     "repo": "wshobson/agents",
     "ref": "main",
-    "revision": "46891e7e60da0e52baf1050b7b6391b64e84c6d9",
+    "revision": "044b4b21f083948e69ec878a7b07c8d0951a6ffa",
     "revision_type": "git-commit",
-    "tree_sha": "46891e7e60da0e52baf1050b7b6391b64e84c6d9"
+    "tree_sha": "044b4b21f083948e69ec878a7b07c8d0951a6ffa"
   },
   "discovered_skills": [
     {
       "path": "plugins/accessibility-compliance/skills/screen-reader-testing/SKILL.md",
       "name": "screen-reader-testing",
       "description": "Test web applications with screen readers including VoiceOver, NVDA, and JAWS. Use when validating screen reader compatibility, debugging accessibility issues, or ensuring assistive technology support.",
-      "skill_sha256": "591c7ff80f40ed866071920f723c1d22a6ceb096c0794aeec1cf9562865119d8",
+      "skill_sha256": "d7a4190a8869fcd60e38e1dc0d92d62573d025e46afb3a03eba140e841d7185d",
       "license": {
         "spdx": "MIT",
         "redistributable": true,
@@ -34,13 +34,13 @@
         "findings": [
           {
             "type": "filesystem-write",
-            "line": 366,
+            "line": 73,
             "evidence": "Delete",
             "context": "  <h2 id=\"dialog-title\">Confirm Delete</h2>"
           },
           {
             "type": "filesystem-write",
-            "line": 369,
+            "line": 76,
             "evidence": "Delete",
             "context": "  <button>Delete</button>"
           }
@@ -327,7 +327,7 @@
       "path": "plugins/api-scaffolding/skills/fastapi-templates/SKILL.md",
       "name": "fastapi-templates",
       "description": "Create production-ready FastAPI projects with async patterns, dependency injection, and comprehensive error handling. Use when building new FastAPI applications or setting up backend API projects.",
-      "skill_sha256": "92d4394d030080ded938cf247eb79885ed4b467a6c5b60cd94bb569cf6ea2b17",
+      "skill_sha256": "dba8e1287ae03591198ea0ea638bb9862ec3c7b5cbdeb1163368f3ebc9487cb6",
       "license": {
         "spdx": "MIT",
         "redistributable": true,
@@ -349,9 +349,9 @@
         "findings": [
           {
             "type": "network-access",
-            "line": 116,
+            "line": 135,
             "evidence": "http://",
-            "context": "    async with AsyncClient(app=app, base_url=\"http://test\") as client:"
+            "context": "    async with AsyncClient(transport=transport, base_url=\"http://test\") as client:"
           }
         ]
       },
@@ -2205,6 +2205,39 @@
       }
     },
     {
+      "path": "plugins/content-marketing/skills/social-evidence-research/SKILL.md",
+      "name": "social-evidence-research",
+      "description": "Research public discussion on social platforms and keep every report claim tied to the source material that supports it. Use when researching or comparing how a product, event, or topic is discussed across social platforms or supplied social exports, when turning search results into a cited report, or when auditing a social research report for discovery-only evidence, double-counted reposts, misattributed comments, claims that go beyond the sample, or hidden access gaps.",
+      "skill_sha256": "344fa1b35ff1c480768635337526fb3bee23ef0c52821ae71ad82c4b40a4fe1d",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_path": "LICENSE"
+      },
+      "security": {
+        "scan_status": "verified",
+        "risk": "none",
+        "capabilities": {
+          "shell": false,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": []
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
       "path": "plugins/data-engineering/skills/airflow-dag-patterns/SKILL.md",
       "name": "airflow-dag-patterns",
       "description": "Build production Apache Airflow DAGs with best practices for operators, sensors, testing, and deployment. Use when creating data pipelines, orchestrating workflows, or scheduling batch jobs.",
@@ -2459,7 +2492,7 @@
       "path": "plugins/developer-essentials/skills/code-review-excellence/SKILL.md",
       "name": "code-review-excellence",
       "description": "Master effective code review practices to provide constructive feedback, catch bugs early, and foster knowledge sharing while maintaining team morale. Use when reviewing pull requests, establishing review standards, or mentoring developers.",
-      "skill_sha256": "014fff1c8db75807106484d5b16451607f0dde266ae50182a2753d68ad3449ed",
+      "skill_sha256": "1e264e04e7d2db9f4de3d34576f444650233752ba79396ea96c1f8dc8df486ea",
       "license": {
         "spdx": "MIT",
         "redistributable": true,
@@ -2467,31 +2500,24 @@
         "evidence_path": "LICENSE"
       },
       "security": {
-        "scan_status": "review-required",
-        "risk": "high",
+        "scan_status": "verified",
+        "risk": "none",
         "capabilities": {
           "shell": false,
           "network": false,
           "credentials": false,
-          "dynamic_execution": true,
+          "dynamic_execution": false,
           "package_install": false,
           "filesystem_write": false,
           "encoded_content": false
         },
-        "findings": [
-          {
-            "type": "dynamic-execution",
-            "line": 422,
-            "evidence": "eval(",
-            "context": "- [ ] No eval() or similar dynamic execution?"
-          }
-        ]
+        "findings": []
       },
       "capabilities": {
         "shell": false,
-        "network": true,
-        "credentials": true,
-        "dynamic_execution": true,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
         "package_install": false
       }
     },
@@ -2499,7 +2525,7 @@
       "path": "plugins/developer-essentials/skills/debugging-strategies/SKILL.md",
       "name": "debugging-strategies",
       "description": "Master systematic debugging techniques, profiling tools, and root cause analysis to efficiently track down bugs across any codebase or technology stack. Use when investigating bugs, performance issues, or unexpected behavior.",
-      "skill_sha256": "f7361b6e479a148fa609aa2b0c377fd09ed254985aa5763f509be38f7e7e9c0d",
+      "skill_sha256": "1c8a71ccf478690589b6c7fc9d375e774b77910a38d01c7ca35e1220c2873f7d",
       "license": {
         "spdx": "MIT",
         "redistributable": true,
@@ -2510,8 +2536,8 @@
         "scan_status": "review-required",
         "risk": "low",
         "capabilities": {
-          "shell": true,
-          "network": true,
+          "shell": false,
+          "network": false,
           "credentials": false,
           "dynamic_execution": false,
           "package_install": false,
@@ -2532,26 +2558,14 @@
             "context": "   - Remove complexity"
           },
           {
-            "type": "network-access",
-            "line": 299,
-            "evidence": "http://",
-            "context": "// Visit http://localhost:6060/debug/pprof/"
-          },
-          {
-            "type": "shell-execution",
-            "line": 317,
-            "evidence": "bash",
-            "context": "```bash"
-          },
-          {
             "type": "filesystem-write",
-            "line": 492,
+            "line": 230,
             "evidence": "Remove",
             "context": "2. **Isolate the Problem**: Remove complexity until minimal case"
           },
           {
             "type": "filesystem-write",
-            "line": 505,
+            "line": 243,
             "evidence": "Remove",
             "context": "- **Debug Logging in Prod**: Remove before shipping"
           }
@@ -2559,7 +2573,7 @@
       },
       "capabilities": {
         "shell": false,
-        "network": true,
+        "network": false,
         "credentials": false,
         "dynamic_execution": false,
         "package_install": false
@@ -2569,7 +2583,7 @@
       "path": "plugins/developer-essentials/skills/e2e-testing-patterns/SKILL.md",
       "name": "e2e-testing-patterns",
       "description": "Master end-to-end testing with Playwright and Cypress to build reliable test suites that catch bugs, improve confidence, and enable fast deployment. Use when implementing E2E tests, debugging flaky tests, or establishing testing standards.",
-      "skill_sha256": "1653690dde9eeca6dcb66086277791c2a3ccc2b37eaab6ec9b627a10adfb94be",
+      "skill_sha256": "b59a3d80c852f41bb73d6941410cd0fc98bbdb63a61d2ed0da2415f8dde0e1c7",
       "license": {
         "spdx": "MIT",
         "redistributable": true,
@@ -2635,7 +2649,7 @@
       "path": "plugins/developer-essentials/skills/git-advanced-workflows/SKILL.md",
       "name": "git-advanced-workflows",
       "description": "Master advanced Git workflows including rebasing, cherry-picking, bisect, worktrees, and reflog to maintain clean history and recover from any situation. Use when managing complex Git histories, collaborating on feature branches, or troubleshooting repository issues.",
-      "skill_sha256": "05205690ef34b05d1ae2596a59f9897680511198b16b38e9a6c1bf04e8da9711",
+      "skill_sha256": "8b912fe7d2ff010fd4f8947a61ecdb8058628dc8e4a7ff20b7675cde11c4e7dd",
       "license": {
         "spdx": "MIT",
         "redistributable": true,
@@ -2747,7 +2761,7 @@
       "path": "plugins/developer-essentials/skills/monorepo-management/SKILL.md",
       "name": "monorepo-management",
       "description": "Master monorepo management with Turborepo, Nx, and pnpm workspaces to build efficient, scalable multi-package repositories with optimized builds and dependency management. Use when setting up monorepos, optimizing builds, or managing shared dependencies.",
-      "skill_sha256": "d34706cfb810e5cd512cf5adc0aae5382ef7f7df33ad1c764a2fcda47c1fc851",
+      "skill_sha256": "002666511709bbc0d1dc1eadf321aa7607487bb372079741cbfe294c19f72e60",
       "license": {
         "spdx": "MIT",
         "redistributable": true,
@@ -2781,25 +2795,25 @@
           },
           {
             "type": "destructive-operation",
-            "line": 119,
+            "line": 118,
             "evidence": "rm -rf",
             "context": "    \"clean\": \"turbo run clean && rm -rf node_modules\""
           },
           {
             "type": "shell-execution",
-            "line": 119,
+            "line": 118,
             "evidence": "rm -rf",
             "context": "    \"clean\": \"turbo run clean && rm -rf node_modules\""
           },
           {
             "type": "shell-execution",
-            "line": 193,
+            "line": 194,
             "evidence": "bash",
             "context": "```bash"
           },
           {
             "type": "package-install",
-            "line": 195,
+            "line": 196,
             "evidence": "pnpm add",
             "context": "pnpm add -Dw @changesets/cli"
           }
@@ -3206,7 +3220,7 @@
       "path": "plugins/documentation-generation/skills/architecture-decision-records/SKILL.md",
       "name": "architecture-decision-records",
       "description": "Write and maintain Architecture Decision Records (ADRs) following best practices for technical decision documentation. Use when documenting significant technical decisions, reviewing past architectural choices, or establishing decision processes.",
-      "skill_sha256": "f8928e30d37eb7654e18adc93c752b43e7272f88054fba5a7813b434779c50e6",
+      "skill_sha256": "c01316d5ef7b5ff27ac658fd3b0509fc9b76ce78f580fd830ba41c46f4f7b781",
       "license": {
         "spdx": "MIT",
         "redistributable": true,
@@ -3218,47 +3232,17 @@
         "risk": "low",
         "capabilities": {
           "shell": true,
-          "network": true,
+          "network": false,
           "credentials": false,
           "dynamic_execution": false,
           "package_install": false,
-          "filesystem_write": true,
+          "filesystem_write": false,
           "encoded_content": false
         },
         "findings": [
           {
-            "type": "network-access",
-            "line": 151,
-            "evidence": "https://",
-            "context": "- [PostgreSQL JSON Documentation](https://www.postgresql.org/docs/current/datatype-json.html)"
-          },
-          {
-            "type": "network-access",
-            "line": 152,
-            "evidence": "https://",
-            "context": "- [PostgreSQL Full Text Search](https://www.postgresql.org/docs/current/textsearch.html)"
-          },
-          {
-            "type": "filesystem-write",
-            "line": 227,
-            "evidence": "Remove",
-            "context": "4. **Phase 4** (Week 6): Remove MongoDB writes, decommission"
-          },
-          {
-            "type": "network-access",
-            "line": 323,
-            "evidence": "https://",
-            "context": "- [Event Sourcing by Martin Fowler](https://martinfowler.com/eaaDev/EventSourcing.html)"
-          },
-          {
-            "type": "network-access",
-            "line": 324,
-            "evidence": "https://",
-            "context": "- [EventStoreDB Documentation](https://www.eventstore.com/docs)"
-          },
-          {
             "type": "shell-execution",
-            "line": 376,
+            "line": 100,
             "evidence": "bash",
             "context": "```bash"
           }
@@ -3266,7 +3250,7 @@
       },
       "capabilities": {
         "shell": false,
-        "network": true,
+        "network": false,
         "credentials": false,
         "dynamic_execution": false,
         "package_install": false
@@ -6488,7 +6472,7 @@
       "path": "plugins/python-development/skills/async-python-patterns/SKILL.md",
       "name": "async-python-patterns",
       "description": "Master Python asyncio, concurrent programming, and async/await patterns for high-performance applications. Use when building async APIs, concurrent systems, or I/O-bound applications requiring non-blocking operations.",
-      "skill_sha256": "beeac92f802f21a968088e5d12fc587833b772ad69806eddf6812f1a2e9c7a57",
+      "skill_sha256": "c2da0b41953cda62a960d37126c0a5cb387b8f8b0093e3f71cc1c78455cb815a",
       "license": {
         "spdx": "MIT",
         "redistributable": true,
@@ -7731,7 +7715,7 @@
       "path": "plugins/reverse-engineering/skills/protocol-reverse-engineering/SKILL.md",
       "name": "protocol-reverse-engineering",
       "description": "Master network protocol reverse engineering including packet analysis, protocol dissection, and custom protocol documentation. Use when analyzing network traffic, understanding proprietary protocols, or debugging network communication.",
-      "skill_sha256": "feb62efcbc6c9f970550b8e10be7aff37747a59aaf126fc9dc54f87c8aa4a95a",
+      "skill_sha256": "89e4f51f398554ce74dbe72a0f2090c3252ea99cc25b3c227a7a4f11bbd43384",
       "license": {
         "spdx": "MIT",
         "redistributable": true,
@@ -7780,30 +7764,6 @@
             "line": 87,
             "evidence": "bash",
             "context": "```bash"
-          },
-          {
-            "type": "shell-execution",
-            "line": 292,
-            "evidence": "bash",
-            "context": "```bash"
-          },
-          {
-            "type": "shell-execution",
-            "line": 312,
-            "evidence": "bash",
-            "context": "```bash"
-          },
-          {
-            "type": "credential-access",
-            "line": 313,
-            "evidence": "secret",
-            "context": "# Pre-master secret log (browser)"
-          },
-          {
-            "type": "credential-access",
-            "line": 318,
-            "evidence": "Secret",
-            "context": "# (Pre)-Master-Secret log filename: /tmp/keys.log"
           }
         ]
       },
@@ -8451,7 +8411,7 @@
       "path": "plugins/ship-mate/skills/scan/SKILL.md",
       "name": "scan",
       "description": "Scans the codebase to generate project-doc.md and AGENTS.md. Use when bootstrapping a new agent-driven repo, refreshing project documentation after architectural changes, or running a delta scan to detect drift. Runs a full scan on first use and a smart delta scan on subsequent runs. Uses understand-anything + context-mode when available, falls back to native tools otherwise. Only updates AGENTS.md on detected architectural changes with human confirmation.",
-      "skill_sha256": "0fb5a38acbcbb8775d7f04d5f5266e3074c10feb3ff666119afaac4e970b79b4",
+      "skill_sha256": "ea94c8b6e00990bf358331dbf0a414d6c28383b1d2df08dbcea27f61a129571f",
       "license": {
         "spdx": "MIT",
         "redistributable": true,
@@ -8474,8 +8434,8 @@
       },
       "capabilities": {
         "shell": false,
-        "network": true,
-        "credentials": true,
+        "network": false,
+        "credentials": false,
         "dynamic_execution": false,
         "package_install": false
       }
@@ -8484,7 +8444,7 @@
       "path": "plugins/signed-audit-trails/skills/signed-audit-trails-recipe/SKILL.md",
       "name": "signed-audit-trails-recipe",
       "description": "Step-by-step cookbook for setting up cryptographically signed audit trails on Claude Code tool calls. Use when explaining, evaluating, or demonstrating the pattern before committing to the protect-mcp runtime hooks. Covers Cedar policy, Ed25519 receipts, offline verification, tamper detection, CI/CD integration, and SLSA composition.",
-      "skill_sha256": "27aa1ea6583638045960a8d5b2ba0bb7f336b32b3eea20b6a89fd8c331fd2080",
+      "skill_sha256": "7a027e3267f986bc3188ab0190f248d6f0eaf4d99906eba8a62d2a8f0dbcb50d",
       "license": {
         "spdx": "MIT",
         "redistributable": true,
@@ -8880,7 +8840,7 @@
       "path": "plugins/startup-business-analyst/skills/competitive-landscape/SKILL.md",
       "name": "competitive-landscape",
       "description": "Analyze competition, identify differentiation opportunities, and develop winning market positioning strategies using Porter's Five Forces, Blue Ocean Strategy, and positioning maps. Use this skill when evaluating competitors, assessing market positioning, identifying sustainable competitive advantages, or preparing competitive strategy analysis for a startup or investor pitch.",
-      "skill_sha256": "2567fd2da6173e6b5ddcfa4c0acaaf0f78d0628a3664d535a13787aa561f4135",
+      "skill_sha256": "b374fee4ac2dcb5522d536c70b800fb189839d87f7d5e35e5b4cd8820460b93a",
       "license": {
         "spdx": "MIT",
         "redistributable": true,
@@ -8979,7 +8939,7 @@
       "path": "plugins/startup-business-analyst/skills/startup-metrics-framework/SKILL.md",
       "name": "startup-metrics-framework",
       "description": "Track, calculate, and optimize key performance metrics for SaaS, marketplace, consumer, and B2B startups from seed through Series A, including unit economics, growth efficiency, and cash management. Use this skill when defining a metrics framework, calculating CAC/LTV/burn multiple, benchmarking business health, or preparing metrics dashboards for investors or board reporting.",
-      "skill_sha256": "3505e10c0867642a4ef79fe54dd643fc65fa16680130b83de0c8ca73971c0f99",
+      "skill_sha256": "89d3e39365b55b29dbffed7c46d474056281a008c9b9ec7c0bdaf757063d8a82",
       "license": {
         "spdx": "MIT",
         "redistributable": true,
@@ -9540,17 +9500,6 @@
         "credentials": false,
         "dynamic_execution": false,
         "package_install": true
-      }
-    },
-    {
-      "path": "plugins/developer-essentials/skills/code-review-excellence/SKILL.md",
-      "type": "review-signal",
-      "capabilities": {
-        "shell": false,
-        "network": true,
-        "credentials": true,
-        "dynamic_execution": true,
-        "package_install": false
       }
     },
     {

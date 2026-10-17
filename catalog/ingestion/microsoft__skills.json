@@ -3,9 +3,9 @@
   "source": {
     "repo": "microsoft/skills",
     "ref": "main",
-    "revision": "91ec09549ca16bd6c44e6ccdef26d61eb2082f07",
+    "revision": "8850874f66fb4d905bfcfcb923a18883bb70d1cd",
     "revision_type": "git-commit",
-    "tree_sha": "91ec09549ca16bd6c44e6ccdef26d61eb2082f07"
+    "tree_sha": "8850874f66fb4d905bfcfcb923a18883bb70d1cd"
   },
   "discovered_skills": [
     {
@@ -338,6 +338,81 @@
       "capabilities": {
         "shell": true,
         "network": true,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": ".github/plugins/azure-advisor/skills/azure-advisor-actionability/SKILL.md",
+      "name": "azure-advisor-actionability",
+      "description": "Remediate Azure Advisor recommendations. WHEN: \"fix Advisor recommendation\".",
+      "skill_sha256": "cd39c4549de3914a735298b9999917b19d4f11b69182b3f525ba7b257970b22a",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_type": "skill-frontmatter",
+        "evidence_path": ".github/plugins/azure-advisor/skills/azure-advisor-actionability/SKILL.md"
+      },
+      "security": {
+        "scan_status": "review-required",
+        "risk": "low",
+        "capabilities": {
+          "shell": true,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": [
+          {
+            "type": "shell-execution",
+            "line": 24,
+            "evidence": "PowerShell",
+            "context": "5. Preserve step order; separate Azure CLI and PowerShell."
+          }
+        ]
+      },
+      "capabilities": {
+        "shell": true,
+        "network": false,
+        "credentials": false,
+        "dynamic_execution": false,
+        "package_install": false
+      }
+    },
+    {
+      "path": ".github/plugins/azure-advisor/skills/azure-advisor/SKILL.md",
+      "name": "azure-advisor",
+      "description": "Use Azure Advisor recommendations. WHEN: \"show Advisor recommendations\", \"service retirements\", \"update recommendation status\". DO NOT USE FOR: fixes or remediation (use azure-advisor-actionability).",
+      "skill_sha256": "9c3a5bc090a87be502443132a174f1032efa5c6d439bf14c437657ca1128dfc3",
+      "license": {
+        "spdx": "MIT",
+        "redistributable": true,
+        "status": "verified",
+        "evidence_type": "skill-frontmatter",
+        "evidence_path": ".github/plugins/azure-advisor/skills/azure-advisor/SKILL.md"
+      },
+      "security": {
+        "scan_status": "verified",
+        "risk": "none",
+        "capabilities": {
+          "shell": false,
+          "network": false,
+          "credentials": false,
+          "dynamic_execution": false,
+          "package_install": false,
+          "filesystem_write": false,
+          "encoded_content": false
+        },
+        "findings": []
+      },
+      "capabilities": {
+        "shell": false,
+        "network": false,
         "credentials": false,
         "dynamic_execution": false,
         "package_install": false
@@ -22676,7 +22751,7 @@
       "path": ".github/plugins/azure-skills/skills/azure-diagnostics/SKILL.md",
       "name": "azure-diagnostics",
       "description": "Debug Azure production issues on Azure using AppLens, Azure Monitor, resource health, and safe triage. WHEN: debug production issues, troubleshoot app service, app service high CPU, app service deployment failure, troubleshoot container apps, container app 503 or target port mismatch, troubleshoot functions, function telemetry missing or stopped after a config/connection-string change, troubleshoot AKS, VM RDP, Linux SSH, VM black screen, can't connect to VM, reset VM password, NSG or firewall blocking, kubectl cannot connect, kube-system/CoreDNS failures, pod pending, crashloop, node not ready, upgrade failures, analyze logs, KQL, insights, image pull failures, cold start issues, health probe failures, resource health, root cause of errors, troubleshoot event hubs, troubleshoot service bus, messaging SDK error, AMQP connection failure, message lock lost, lock renewal during long-running processing, service bus dead letter.",
-      "skill_sha256": "a939eab5ca7e303707c362f6673a3c9c5e6b7061495affba13db26bea43dbade",
+      "skill_sha256": "d75378be4860e59c76a3700abb4b62dce6e7e210662ce1cce263857459c5b84a",
       "license": {
         "spdx": "MIT",
         "redistributable": true,
@@ -23079,7 +23154,7 @@
       "path": ".github/plugins/azure-skills/skills/azure-quotas/SKILL.md",
       "name": "azure-quotas",
       "description": "Check/manage Azure quotas and usage across providers. For deployment planning, capacity validation, region selection. WHEN: \"check quotas\", \"service limits\", \"current usage\", \"request quota increase\", \"quota exceeded\", \"validate capacity\", \"regional availability\", \"provisioning limits\", \"vCPU limit\", \"how many vCPUs available in my subscription\".",
-      "skill_sha256": "3bce38d6df08def03e5934469313e5cd532607a6f5087d08f75712e286550ae2",
+      "skill_sha256": "82ac42524b655f947bdd6bbd6b86a670145d296a3447555f510e37ea2d377733",
       "license": {
         "spdx": "MIT",
         "redistributable": true,
@@ -23439,7 +23514,7 @@
       "path": ".github/plugins/azure-skills/skills/azure-upgrade/SKILL.md",
       "name": "azure-upgrade",
       "description": "Assess and upgrade Azure workloads between plans, tiers, or SKUs, or modernize Azure SDK dependencies in source code. WHEN: upgrade Consumption to Flex Consumption, upgrade Azure Functions plan, change hosting plan, function app SKU, migrate App Service to Container Apps, modernize legacy Azure Java SDKs (com.microsoft.azure to com.azure), migrate Azure Cache for Redis (ACR/ACRE) to Azure Managed Redis (AMR).",
-      "skill_sha256": "26b538372a248f42a6c1976eb307c19ae3f6966a1bcbe7a066b4090f9568d6ab",
+      "skill_sha256": "c9ae1cbb4a851ab56918391c48f3567fb25da58de4867fae1f98b10ece845cd9",
       "license": {
         "spdx": "MIT",
         "redistributable": true,
@@ -23462,19 +23537,19 @@
         "findings": [
           {
             "type": "filesystem-write",
-            "line": 35,
+            "line": 38,
             "evidence": "delete",
-            "context": "7. Never delete or stop the original app without explicit user confirmation"
+            "context": "9. Never delete or stop the original app without explicit user confirmation"
           },
           {
             "type": "network-access",
-            "line": 81,
+            "line": 93,
             "evidence": "https://",
             "context": "  - [Redis (ACR or ACRE) to AMR Migration](references/services/redis/redis-to-amr.md) — routes to dedicated [amr-migration-skill](https://github.com/AzureManagedRedis/amr-migration-skill) (ACR/OSS) or [acre-to-amr-migration-skill](https://g"
           },
           {
             "type": "network-access",
-            "line": 81,
+            "line": 93,
             "evidence": "https://",
             "context": "  - [Redis (ACR or ACRE) to AMR Migration](references/services/redis/redis-to-amr.md) — routes to dedicated [amr-migration-skill](https://github.com/AzureManagedRedis/amr-migration-skill) (ACR/OSS) or [acre-to-amr-migration-skill](https://g"
           }
@@ -23997,8 +24072,8 @@
     {
       "path": ".github/plugins/azure-skills/skills/microsoft-foundry/SKILL.md",
       "name": "microsoft-foundry",
-      "description": "Build, deploy, evaluate, optimize, fine-tune, and manage Microsoft Foundry agents, models, and resources end to end. USE FOR: foundry, azd ai agent, azd provision/deploy, hosted agent scaffold/develop/run/deploy/troubleshoot, prompt agent create, create agent, update agent, add tool to agent, invoke agent, agent.yaml, agent insights, pull agent insights, evaluate agent, batch eval, continuous eval, continuous monitoring, agent CI/CD, optimize prompt, improve prompt, prompt optimizer, optimize agent instructions, Agent Optimizer scaffold, dataset curation from traces, deploy model, model fine-tuning (SFT/DPO/RFT), Foundry project, RBAC, role assignment, permissions, quota, capacity, region, deployment failure, AI Services, create Foundry resource, knowledge index, customize deployment, onboard, availability, training-data, grader, distillation, large file upload. DO NOT USE FOR: Azure Functions, App Service, general Azure deploy (use azure-deploy), general Azure prep (use azure-prepare).",
-      "skill_sha256": "a157211705a8c9e44b0bb5c6999f1b863cbbd36b2318dbebbbe785c1a9f9697f",
+      "description": "Build, deploy, evaluate, optimize, fine-tune, and manage Microsoft Foundry agents, models, and resources end to end. USE FOR: foundry, azd ai agent, azd provision/deploy, hosted agent scaffold/develop/run/deploy/troubleshoot, prompt agent create, managed harness agent create, GitHub Copilot harness agent, create agent, update agent, add tool to agent, invoke agent, agent insights, evaluate agent, batch eval, continuous eval, continuous monitoring, agent CI/CD, optimize prompt, improve prompt, optimize agent instructions, Agent Optimizer scaffold, dataset curation from traces, deploy model, model fine-tuning (SFT/DPO/RFT), Foundry project, RBAC, role assignment, permissions, quota, capacity, region, deployment failure, AI Services, create Foundry resource, knowledge index, customize deployment, onboard, availability, training-data, grader, distillation, large file upload. DO NOT USE FOR: Azure Functions, App Service, general Azure deploy (use azure-deploy), general Azure prep (use azure-prepare).",
+      "skill_sha256": "dc8b45f94d8298ca2c0bcc4200e2ed81858e91e03cebac827d476ef60f51b6b6",
       "license": {
         "spdx": "MIT",
         "redistributable": true,
@@ -24039,37 +24114,37 @@
           },
           {
             "type": "filesystem-write",
-            "line": 235,
+            "line": 237,
             "evidence": "remove",
             "context": "Do not copy azd-owned deployment values into metadata when azd already provides them. If the selected file is a preferred single-environment file, rewrite only that one environment block. If the selected file is a legacy multi-environment f"
           },
           {
             "type": "network-access",
-            "line": 272,
+            "line": 281,
             "evidence": "https://",
             "context": "- [Foundry Hosted Agents](https://learn.microsoft.com/azure/ai-foundry/agents/concepts/hosted-agents?view=foundry)"
           },
           {
             "type": "network-access",
-            "line": 273,
+            "line": 282,
             "evidence": "https://",
             "context": "- [Foundry Agent Runtime Components](https://learn.microsoft.com/azure/ai-foundry/agents/concepts/runtime-components?view=foundry)"
           },
           {
             "type": "network-access",
-            "line": 277,
+            "line": 286,
             "evidence": "curl",
             "context": "Applies to **any** call against a Foundry project or its parent Foundry account — Foundry MCP tools, `azd`, `az` CLI, `curl`, REST, or SDK."
           },
           {
             "type": "shell-execution",
-            "line": 283,
+            "line": 292,
             "evidence": "bash",
             "context": "```bash"
           },
           {
             "type": "network-access",
-            "line": 291,
+            "line": 300,
             "evidence": "https://",
             "context": "If it's indeed a network isolation issue, supported connection options are documented in [Choose a secure connection method to Foundry](https://learn.microsoft.com/azure/foundry/how-to/configure-private-link#choose-a-secure-connection-metho"
           }
@@ -24892,8 +24967,8 @@
     {
       "path": ".github/plugins/foundry-iq-skills/skills/foundry-iq/SKILL.md",
       "name": "foundry-iq",
-      "description": "Foundry IQ knowledge bases. WHEN: make local or Blob documents searchable; create/diagnose KBs; triage unsupported connectors or multi-source KB creation/reconfiguration; connect existing KB to agents (including multi-source KBs); create/reuse a Search service; retrieve from an existing knowledge base with citations; no brand words needed. Read its procedure before query/target questions. NOT: other KB providers, repository-file search, classic Azure AI Search index/query/app work, generic agent creation.",
-      "skill_sha256": "96dcea6d4430c16cc3b098f6824b5e4272b665de3ee25f6fb22f2449bce0be84",
+      "description": "Foundry IQ knowledge bases. WHEN: make local or Blob documents searchable; create/diagnose KBs; triage unsupported connectors or multi-source KB creation/reconfiguration (even with classic-search terms); connect existing KB to agents (including multi-source KBs); create/reuse a Search service; retrieve from an existing knowledge base with citations; no brand words needed. Read its procedure before query/target questions. NOT: other KB providers, repository-file search, classic Azure AI Search index/query/app work with no Foundry IQ KB or connector request, generic agent creation.",
+      "skill_sha256": "8dd305faf28f923b974d5ec1211ab66ed9c7ea8e52e0b970b488f4ca774ea850",
       "license": {
         "spdx": "MIT",
         "redistributable": true,
@@ -27384,6 +27459,11 @@
   "license_files": [
     {
       "path": ".github/plugins/aks-skills/LICENSE",
+      "sha256": "8a5d8efb70942e65032f930c761d097feeb41a7517ebd04c9d2e4ec3764071c5",
+      "preview": "MIT License Copyright 2025 (c) Microsoft Corporation. Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\""
+    },
+    {
+      "path": ".github/plugins/azure-advisor/LICENSE",
       "sha256": "8a5d8efb70942e65032f930c761d097feeb41a7517ebd04c9d2e4ec3764071c5",
       "preview": "MIT License Copyright 2025 (c) Microsoft Corporation. Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\""
     },

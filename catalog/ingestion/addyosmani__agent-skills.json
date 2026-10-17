@@ -3,9 +3,9 @@
   "source": {
     "repo": "addyosmani/agent-skills",
     "ref": "main",
-    "revision": "1be8e34187e34647bb83adc3a1323b26ae6f6abe",
+    "revision": "aeac41d4d005999432bb7312f7ff06383a91d59d",
     "revision_type": "git-commit",
-    "tree_sha": "1be8e34187e34647bb83adc3a1323b26ae6f6abe"
+    "tree_sha": "aeac41d4d005999432bb7312f7ff06383a91d59d"
   },
   "discovered_skills": [
     {
@@ -776,7 +776,7 @@
       "path": "skills/idea-refine/SKILL.md",
       "name": "idea-refine",
       "description": "Refines raw ideas into sharp, actionable concepts through structured divergent and convergent thinking. Use when an idea is still vague, when you need to stress-test assumptions before committing to a plan, or when you want to expand options before converging on one. Triggers on \"ideate\", \"refine this idea\", or \"stress-test my plan\".",
-      "skill_sha256": "79e773058963adc7646b0115b4f8a4afc974c5ff95843e4ef1cafff3cb51899e",
+      "skill_sha256": "21ef828e3a2144245b67f840cc3805f761e98c9acce9a96670b7cd7441353463",
       "license": {
         "spdx": "MIT",
         "redistributable": true,
@@ -798,19 +798,19 @@
         "findings": [
           {
             "type": "shell-execution",
-            "line": 20,
+            "line": 30,
             "evidence": "bash",
             "context": "```bash"
           },
           {
             "type": "shell-execution",
-            "line": 22,
+            "line": 32,
             "evidence": "bash",
             "context": "bash skills/idea-refine/scripts/idea-refine.sh"
           },
           {
             "type": "shell-execution",
-            "line": 22,
+            "line": 32,
             "evidence": "sh",
             "context": "bash skills/idea-refine/scripts/idea-refine.sh"
           }
@@ -965,7 +965,7 @@
       "path": "skills/performance-optimization/SKILL.md",
       "name": "performance-optimization",
       "description": "Optimizes application performance across frontend, backend, queries, and databases. Use when performance requirements exist, when you suspect performance regressions, when Core Web Vitals or load times need improvement, when N+1 query patterns need fixing, or when profiling reveals bottlenecks.",
-      "skill_sha256": "665a83a7218d6aebd02ca329a7b2422cf28f7c55cb56f870c05e12047770245c",
+      "skill_sha256": "bd36a30e55a5f84329a6977eba5e1ab7654146e71eaba88e34337d4ee020460f",
       "license": {
         "spdx": "MIT",
         "redistributable": true,
@@ -985,18 +985,6 @@
           "encoded_content": false
         },
         "findings": [
-          {
-            "type": "shell-execution",
-            "line": 48,
-            "evidence": "bash",
-            "context": "```bash"
-          },
-          {
-            "type": "shell-execution",
-            "line": 62,
-            "evidence": "bash",
-            "context": "```bash"
-          },
           {
             "type": "shell-execution",
             "line": 204,
@@ -1282,8 +1270,8 @@
     {
       "path": "skills/test-driven-development/SKILL.md",
       "name": "test-driven-development",
-      "description": "Drives development with tests using the red-green-refactor loop. Use when implementing any logic, fixing any bug, or changing any behavior. Use when you need to prove that code works, when a bug report arrives, or when you're about to modify existing functionality.",
-      "skill_sha256": "7c0c6ac057c19d7f8be65d9f49c3a638703b868f4625c78b70da5439d5d74fca",
+      "description": "Drives development with tests using the red-green-refactor loop. Use when implementing any logic, fixing any bug, or changing any behavior. Use when you need to prove that code works, when a bug report arrives, or when you're about to modify existing functionality. Use when asked to add tests to a function, fix a bug in it or change its behavior, even when the code is pasted inline and the request does not mention tests.",
+      "skill_sha256": "a3aa6ba95638497025577469eda10ed17918698209615aeafbc26f131bf2469d",
       "license": {
         "spdx": "MIT",
         "redistributable": true,
