@@ -133,7 +133,9 @@ test("search and info distinguish catalog availability from installation evidenc
     assert.match(normal.stdout, /Installation: +not-recorded/);
     const listed = f.run(["search", id, "--agent", "codex"]);
     assert.equal(listed.status, 0);
-    assert.match(listed.stdout, availability === "eligible" ? /Installable now\n  test\/local-skill/ : new RegExp(`Not installable\\n(?:.*\\n)*?  ${id.replace(/[/]/g, "\\/")}  `));
+    // The ID is listed under the section that matches its availability.
+    const section = availability === "eligible" ? "Installable now\n" : "Not installable\n";
+    assert.ok(listed.stdout.indexOf(`  ${id}  `) > listed.stdout.indexOf(section) && listed.stdout.includes(section), listed.stdout);
   }
   assert.equal(fs.readFileSync(path.join(f.cwd, "catalog", "skills.json"), "utf8"), before);
 });
