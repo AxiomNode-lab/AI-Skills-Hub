@@ -194,11 +194,11 @@ test("records without file evidence cannot establish installation", t => {
   f.install("test/local-skill");
   const stateFile = path.join(f.cwd, ".ai-skills-hub", "installed.json");
   const state = JSON.parse(fs.readFileSync(stateFile, "utf8"));
-  state.installed["test/local-skill"].files = [];
+  state.installed["test/local-skill::codex"].files = [];
   fs.writeFileSync(stateFile, JSON.stringify(state));
   assert.equal(f.json(["info", "test/local-skill"]).hub_status.installation.status, "unverified");
   assert.equal(f.json(["list"])[0].hub_status.installation.reason, "record_has_no_verifiable_skill_files");
-  state.installed["test/local-skill"].scope = "user";
+  state.installed["test/local-skill::codex"].scope = "user";
   fs.writeFileSync(stateFile, JSON.stringify(state));
   assert.equal(f.json(["info", "test/local-skill"]).hub_status.installation.status, "not-recorded");
   assert.deepEqual(f.json(["list"]), []);

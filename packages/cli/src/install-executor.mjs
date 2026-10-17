@@ -1,7 +1,7 @@
 import { execFileSync } from "node:child_process";
 import { buildAdapterPlan, SKILLS_CLI_PACKAGE } from "@ai-skills-hub/discovery";
 import { getAdapter } from "../../installer/src/adapters/index.mjs";
-import { readInstallRecords, verifyInstallRecord, writeInstallRecord } from "../../installer/src/state.mjs";
+import { findInstallRecord, readInstallRecords, verifyInstallRecord, writeInstallRecord } from "../../installer/src/state.mjs";
 import { buildInstallPlan } from "../../installer/src/index.mjs";
 import { checkMaterializedInstall } from "../../installer/src/native.mjs";
 
@@ -143,7 +143,7 @@ export function preflightCapability(capability, { agent, scope = "project", cwd 
     return { ok: true, plan, external: true };
   }
   if (plan.action === "install") {
-    const existing = readInstallRecords(scope, cwd)[capability.id];
+    const existing = findInstallRecord(readInstallRecords(scope, cwd), capability.id, agent);
     if (existing && existing.agent === agent
       && existing.source?.revision === capability.source?.revision && verifyInstallRecord(existing).ok) {
       return { ok: true, plan, unchanged: true, destination: existing.destination };
@@ -223,7 +223,7 @@ export async function installCapability(
 
   if (plan.action === "configuration" || plan.action === "install") {
     // Reinstalling the same verified revision is a no-op, not a rewrite.
-    const existing = readInstallRecords(scope, cwd)[capability.id];
+    const existing = findInstallRecord(readInstallRecords(scope, cwd), capability.id, agent);
     if (plan.action === "install" && existing && existing.agent === agent
       && existing.source?.revision === capability.source?.revision && verifyInstallRecord(existing).ok) {
       return { ...plan, action: "already-installed", installed: true, destination: existing.destination, record: existing };

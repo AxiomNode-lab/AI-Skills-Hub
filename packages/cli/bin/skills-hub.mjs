@@ -47,6 +47,41 @@ function parseOptions(argsArray) {
   return { options, positional };
 }
 
+// Usage line and notes shown by `<command> --help`.
+const COMMAND_HELP = {
+  available: "available [query] [--agent <id>] [--json]\n  Skills you can install now. A query filters by keyword.",
+  search: "search <query> [--agent <id>] [--installable] [--limit <n>] [--json]\n  Keyword search over the whole catalog, including skills that cannot be installed.",
+  info: "info <id> [--agent <id>] [--json]\n  License, security findings, release state and source of one skill.",
+  install: "install <id> [<id>...] --agent <id> [--scope project|user] [--force] [--yes] [--json]\n  Installs released skills and their dependencies, all or nothing. IDs may also be comma-separated.",
+  list: "list [--agent <id>] [--scope project|user] [--json]\n  Skills the Hub installed in this scope, with whether their files still match.",
+  update: "update [id] [--agent <id>] [--dry-run] [--force] [--json]\n  Moves installed skills to the revision the catalog releases now.",
+  uninstall: "uninstall <id> [--agent <id>] [--scope project|user] [--force] [--json]\n  Removes a Hub-managed installation. Pass --agent when the skill is installed for several agents.",
+  add: "add <phrase>  |  add <git-url>\n  Interactive search across the catalog and public directories (terminal only), or clone a repository into capabilities-library/ for review.",
+  sync: "sync\n  Fast-forwards the Git repositories in capabilities-library/.",
+  create: "create\n  Scaffolds a new capability in capabilities-library/ (terminal only).",
+  mcp: "mcp\n  Read-only MCP server over stdio (tools: search_skills, get_skill). Example: claude mcp add skills-hub -- npx -y @axiomnode-lab/skills-hub mcp",
+  serve: "serve [--host <addr>] [--port <n>]\n  Read-only HTTP API and MCP endpoint, 127.0.0.1:8787 by default, no authentication."
+};
+
+// The closest known command for a typo, if it is close enough to be a guess.
+function suggestCommand(input) {
+  const distance = (a, b) => {
+    const row = Array.from({ length: b.length + 1 }, (_, j) => j);
+    for (let i = 1; i <= a.length; i += 1) {
+      let previous = row[0];
+      row[0] = i;
+      for (let j = 1; j <= b.length; j += 1) {
+        const current = row[j];
+        row[j] = Math.min(row[j] + 1, row[j - 1] + 1, previous + (a[i - 1] === b[j - 1] ? 0 : 1));
+        previous = current;
+      }
+    }
+    return row[b.length];
+  };
+  const [best] = [...COMMANDS].map((name) => [name, distance(input.toLowerCase(), name)]).sort((x, y) => x[1] - y[1]);
+  return best && best[1] <= 2 ? best[0] : null;
+}
+
 const HELP = `AI Skills Hub — install reviewed Agent Skills into your project
 
 Usage: skills-hub <command> [options]
@@ -57,7 +92,7 @@ Find skills
   info <id>                 Catalog, license, security and release details
 
 Manage installed skills
-  install <id[,id...]>      Install released skills (--agent required)
+  install <id> [<id>...]    Install released skills, all or nothing (--agent required)
   list                      Skills installed by the Hub in this scope
   update [id]               Update installed skills to the released revision (--dry-run)
   uninstall <id>            Remove a Hub-managed installation
@@ -84,6 +119,7 @@ Options
   --limit <n>               search: maximum results (default 50)
   --port <n>, --host <addr> serve: bind address (default 127.0.0.1:8787)
   --version, -v             Print the version
+  <command> --help          Help for one command
 
 Examples
   skills-hub available --agent codex
@@ -100,9 +136,24 @@ async function main() {
     console.log(HELP);
     return;
   }
-  if (command && !COMMANDS.has(command)) throw new UsageError(command.startsWith("-") ? `Unknown option: ${command}` : `Unknown command: ${command}`);
+  if (command && !COMMANDS.has(command)) {
+    if (command.startsWith("-")) throw new UsageError(`Unknown option: ${command}`);
+    const guess = suggestCommand(command);
+    throw new UsageError(`Unknown command: ${command}${guess ? ` (did you mean '${guess}'?)` : ""}`);
+  }
+  if (command && (args.includes("--help") || args.includes("-h"))) {
+    console.log(`Usage: skills-hub ${COMMAND_HELP[command] ?? command}\n\nRun 'skills-hub help' for all commands and options.`);
+    return;
+  }
 
   const { options, positional } = parseOptions(args);
+  // Commands that take one ID refuse extra words instead of ignoring them.
+  const single = (what) => {
+    if (positional.length > 1) throw new UsageError(`${command} takes one ${what}; got: ${positional.join(" ")}`);
+    return positional[0];
+  };
+  // A search phrase may be given with or without quotes.
+  const phrase = positional.length ? positional.join(" ") : undefined;
   const need = (value, what) => {
     if (!value) throw new UsageError(`${command} needs ${what}`);
     return value;
@@ -115,31 +166,31 @@ async function main() {
       await (await import("../src/commands/create.mjs")).createCommand();
       break;
     case "add":
-      await (await import("../src/commands/add.mjs")).addCommand(positional[0], options);
+      await (await import("../src/commands/add.mjs")).addCommand(phrase, options);
       break;
     case "sync":
       await (await import("../src/commands/sync.mjs")).syncCommand();
       break;
     case "uninstall":
-      await (await import("../src/commands/uninstall.mjs")).uninstallCommand(positional[0], options);
+      await (await import("../src/commands/uninstall.mjs")).uninstallCommand(single("capability ID"), options);
       break;
     case "update":
-      await (await import("../src/commands/update.mjs")).updateCommand(positional[0], options);
+      await (await import("../src/commands/update.mjs")).updateCommand(single("capability ID"), options);
       break;
     case "search":
-      await (await import("../src/commands/search.mjs")).searchCommand(need(positional[0], "a query"), options);
+      await (await import("../src/commands/search.mjs")).searchCommand(need(phrase, "a query"), options);
       break;
     case "info":
-      await (await import("../src/commands/info.mjs")).infoCommand(need(positional[0], "a capability ID"), options);
+      await (await import("../src/commands/info.mjs")).infoCommand(need(single("capability ID"), "a capability ID"), options);
       break;
     case "available":
-      await (await import("../src/commands/available.mjs")).availableCommand(positional[0], options);
+      await (await import("../src/commands/available.mjs")).availableCommand(phrase, options);
       break;
     case "list":
       await (await import("../src/commands/list.mjs")).listCommand(options);
       break;
     case "install":
-      await (await import("../src/commands/install.mjs")).installCommand(positional[0]?.split(",").filter(Boolean) || [], options);
+      await (await import("../src/commands/install.mjs")).installCommand(positional.flatMap((value) => value.split(",")).filter(Boolean), options);
       break;
     case "mcp":
       await (await import("@ai-skills-hub/server")).runStdioServer();

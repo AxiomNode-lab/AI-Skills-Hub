@@ -68,7 +68,7 @@ try {
   if (!installed.success) fail("install failed");
   if (!fs.existsSync(path.join(project, ".agents", "skills", "frontend-design", "SKILL.md"))) fail("SKILL.md not installed");
   const state = JSON.parse(fs.readFileSync(path.join(project, ".ai-skills-hub", "installed.json"), "utf8"));
-  if (!state.installed["anthropics/frontend-design"]) fail("installation record missing");
+  if (!state.installed["anthropics/frontend-design::codex"]) fail("installation record missing");
   const listed = hub(["list", "--agent", "codex", "--scope", "project", "--json"], { json: true });
   if (listed[0]?.hub_status?.installation?.status !== "installed") fail("list status");
   if (hub(["install", "anthropics/frontend-design", "--agent", "codex", "--json"], { json: true }).results[0].status !== "already-installed") fail("reinstall is not a no-op");

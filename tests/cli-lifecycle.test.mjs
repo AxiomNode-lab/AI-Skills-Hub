@@ -192,12 +192,12 @@ test("uninstall <id> removes only the managed directory and checks agent, scope 
   assert.ok(fs.existsSync(h.installed("beta")), "other installations stay");
   assert.equal(fs.readFileSync(path.join(h.project, ".agents", "skills", "unrelated.md"), "utf8"), "keep");
   const records = JSON.parse(fs.readFileSync(path.join(h.project, ".ai-skills-hub", "installed.json"), "utf8")).installed;
-  assert.deepEqual(Object.keys(records), ["test/beta"]);
+  assert.deepEqual(Object.keys(records), ["test/beta::codex"]);
 
   // A forged record pointing outside the install root is refused.
   const state = path.join(h.project, ".ai-skills-hub", "installed.json");
   const forged = JSON.parse(fs.readFileSync(state, "utf8"));
-  forged.installed["test/beta"].destination = h.project;
+  forged.installed["test/beta::codex"].destination = h.project;
   fs.writeFileSync(state, JSON.stringify(forged));
   const escaped = h.run("uninstall", "test/beta", "--force", "--json");
   assert.equal(escaped.status, 1);
@@ -222,7 +222,7 @@ test("update installs a newer released revision, and refuses held releases and l
   assert.equal(updated.status, 0);
   assert.equal(updated.json.results[0].status, "updated");
   assert.match(fs.readFileSync(path.join(h.installed("alpha"), "SKILL.md"), "utf8"), /v2/);
-  const record = JSON.parse(fs.readFileSync(path.join(h.project, ".ai-skills-hub", "installed.json"), "utf8")).installed["test/alpha"];
+  const record = JSON.parse(fs.readFileSync(path.join(h.project, ".ai-skills-hub", "installed.json"), "utf8")).installed["test/alpha::codex"];
   assert.equal(record.source.revision, REV_B);
   assert.equal(h.run("list", "--json").json.find(r => r.skill_id === "test/alpha").hub_status.installation.status, "installed");
 
@@ -304,4 +304,86 @@ test("a project state folder that is a symbolic link is refused", t => {
   const result = h.run("install", "test/alpha", "--agent", "codex", "--json");
   assert.equal(result.status, 1);
   assert.deepEqual(fs.readdirSync(elsewhere), []);
+});
+
+test("one skill installed for two agents keeps a record per agent", t => {
+  const h = hub(t);
+  h.release("alpha");
+  const catalog = JSON.parse(fs.readFileSync(path.join(h.home, "catalog", "skills.json"), "utf8"));
+  catalog.skills[0].compatibility = ["codex", "claude-code", "cursor", "agent-skills"];
+  fs.writeFileSync(path.join(h.home, "catalog", "skills.json"), JSON.stringify(catalog));
+  const claudeDir = path.join(h.project, ".claude", "skills", "alpha");
+
+  assert.equal(h.run("install", "test/alpha", "--agent", "codex", "--json").status, 0);
+  assert.equal(h.run("install", "test/alpha", "--agent", "claude-code", "--json").status, 0);
+  assert.equal(h.run("list", "--agent", "codex", "--json").json.length, 1);
+  assert.equal(h.run("list", "--agent", "claude-code", "--json").json.length, 1);
+
+  const removed = h.run("uninstall", "test/alpha", "--agent", "codex", "--json");
+  assert.equal(removed.status, 0, removed.stdout);
+  assert.equal(fs.existsSync(h.installed("alpha")), false);
+  assert.equal(fs.existsSync(claudeDir), true, "the claude-code copy stays");
+  assert.equal(h.run("install", "test/alpha", "--agent", "codex", "--json").status, 0, "reinstall for codex needs no --force");
+
+  // Codex and Cursor share .agents/skills: the folder stays until its last record goes.
+  assert.equal(h.run("install", "test/alpha", "--agent", "cursor", "--json").status, 0);
+  assert.equal(h.run("uninstall", "test/alpha", "--agent", "codex", "--json").status, 0);
+  assert.equal(fs.existsSync(h.installed("alpha")), true, "still recorded for cursor");
+  assert.equal(h.run("uninstall", "test/alpha", "--agent", "cursor", "--json").status, 0);
+  assert.equal(fs.existsSync(h.installed("alpha")), false);
+
+  // Without --agent, an ID installed for several agents is ambiguous.
+  assert.equal(h.run("install", "test/alpha", "--agent", "codex", "--json").status, 0);
+  const ambiguous = h.run("uninstall", "test/alpha", "--json");
+  assert.equal(ambiguous.status, 1);
+  assert.equal(ambiguous.json.reason, "installed_for_several_agents: claude-code, codex; pass --agent");
+  assert.equal(fs.existsSync(claudeDir), true);
+});
+
+test("state files written before per-agent keys are still read and updated", t => {
+  const h = hub(t);
+  h.release("alpha");
+  assert.equal(h.run("install", "test/alpha", "--agent", "codex", "--json").status, 0);
+  const file = path.join(h.project, ".ai-skills-hub", "installed.json");
+  const state = JSON.parse(fs.readFileSync(file, "utf8"));
+  state.installed = { "test/alpha": state.installed["test/alpha::codex"] };
+  fs.writeFileSync(file, JSON.stringify(state));
+  assert.equal(h.run("list", "--agent", "codex", "--json").json[0].hub_status.installation.status, "installed");
+  assert.equal(h.run("install", "test/alpha", "--agent", "codex", "--json").json.results[0].status, "already-installed");
+  assert.equal(h.run("uninstall", "test/alpha", "--agent", "codex", "--json").status, 0);
+  assert.equal(fs.existsSync(h.installed("alpha")), false);
+});
+
+test("install takes several IDs separated by spaces, and one-ID commands refuse extra words", t => {
+  const h = hub(t);
+  h.release("alpha");
+  h.release("beta");
+  const both = h.run("install", "test/alpha", "test/beta", "--agent", "codex", "--json");
+  assert.equal(both.status, 0);
+  assert.deepEqual(both.json.results.map(r => r.id).sort(), ["test/alpha", "test/beta"]);
+  assert.equal(fs.existsSync(h.installed("beta")), true);
+  for (const args of [["info", "test/alpha", "test/beta"], ["uninstall", "test/alpha", "test/beta"], ["update", "test/alpha", "test/beta"]]) {
+    const result = h.run(...args, "--json");
+    assert.equal(result.status, 2, args.join(" "));
+    assert.match(result.json.error, /takes one capability ID/);
+  }
+});
+
+test("per-command help, typo suggestions, and one error line for a bad install request", t => {
+  const h = hub(t);
+  h.release("alpha");
+  const help = h.run("install", "--help");
+  assert.equal(help.status, 0);
+  assert.match(help.stdout, /^Usage: skills-hub install <id> \[<id>\.\.\.\] --agent/);
+  const typo = h.run("instal");
+  assert.equal(typo.status, 2);
+  assert.match(typo.stderr, /Unknown command: instal \(did you mean 'install'\?\)/);
+  assert.doesNotMatch(h.run("zzzzzzzz").stderr, /did you mean/);
+  const missingAgent = h.run("install", "test/alpha");
+  assert.equal(missingAgent.status, 2);
+  assert.equal(missingAgent.stderr.match(/You must specify the target agent/g).length, 1);
+  assert.match(missingAgent.stderr, /Usage: skills-hub install/);
+  const add = h.run("add", "pdf tools");
+  assert.equal(add.status, 2);
+  assert.match(add.stderr, /add <phrase> is interactive/);
 });

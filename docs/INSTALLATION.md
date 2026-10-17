@@ -63,7 +63,7 @@ skills-hub uninstall anthropics/frontend-design --agent codex --scope project
 
 `update` compares each installed revision with the catalog's current release. Statuses: `up-to-date`, `update-available` (dry run), `updated`, `modified` (installed files were edited; use `--force`), `not-releasable` (the newer revision is held or blocked; the installed version is kept), `not-in-catalog`.
 
-`uninstall <id>` removes a Hub-managed skill folder that sits directly in the agent's skills root. It refuses a different agent (`installed_for_agent_<agent>`), the wrong scope (`not_installed_in_scope`), edited files (unless `--force`), and paths through symlinks, and leaves everything else in the folder untouched. Without an ID it runs interactively in a terminal.
+`uninstall <id>` removes a Hub-managed skill folder that sits directly in the agent's skills root. Each agent has its own record, so a skill installed for Claude Code and Codex is removed per agent: without `--agent` an ID installed for several agents is refused (`installed_for_several_agents`), and with an agent that has no record it reports which agents do (`installed_for_agent_<agents>`). A folder shared by agents (Codex and Cursor both use `.agents/skills`) is removed when its last record goes. It also refuses the wrong scope (`not_installed_in_scope`), edited files (unless `--force`), and paths through symlinks, and leaves everything else in the folder untouched. Without an ID it runs interactively in a terminal.
 
 ## Destinations and state
 

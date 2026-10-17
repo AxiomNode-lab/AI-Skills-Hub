@@ -1,7 +1,7 @@
 import { readLocalCapabilities, resolveDependencies } from "../utils.mjs";
 import { installCapability, preflightCapability } from "../install-executor.mjs";
 import { captureDirectory, restoreDirectory } from "../../../installer/src/native.mjs";
-import { readInstallRecords, removeInstallRecord, writeInstallRecord } from "../../../installer/src/state.mjs";
+import { findInstallRecord, readInstallRecords, removeInstallRecord, writeInstallRecord } from "../../../installer/src/state.mjs";
 import { paint } from "../ui.mjs";
 
 export async function installCommand(ids, options = {}) {
@@ -30,9 +30,16 @@ export async function installCommand(ids, options = {}) {
   };
   // A request that cannot run as given is a usage error (exit code 2).
   const invalidRequest = (reason) => {
-    const output = report((Array.isArray(ids) ? ids : []).map(id => ({ id, status: "skipped", installed: false, reason })), reason);
+    const results = (Array.isArray(ids) ? ids : []).map(id => ({ id, status: "skipped", installed: false, reason }));
     process.exitCode = 2;
-    return output;
+    if (options.json) {
+      const output = { success: false, results, error: reason };
+      console.log(JSON.stringify(output, null, 2));
+      return output;
+    }
+    console.error(paint("red", `Error: ${reason}`, process.stderr));
+    console.error("Usage: skills-hub install <id> [<id>...] --agent <claude-code|codex|cursor|github-copilot|opencode|agent-skills>");
+    return { success: false, results, error: reason };
   };
   if (!Array.isArray(ids) || ids.length === 0) {
     return invalidRequest("You must specify at least one capability ID to install.");
@@ -142,7 +149,7 @@ export async function installCommand(ids, options = {}) {
     const check = checks.get(cap.id);
     try {
       if (!check.external && !check.unchanged) {
-        journal.push({ id: cap.id, destination: check.destination, folder: captureDirectory(check.destination), record: readInstallRecords(scope, installOptions.cwd)[cap.id] ?? null });
+        journal.push({ id: cap.id, destination: check.destination, folder: captureDirectory(check.destination), record: findInstallRecord(readInstallRecords(scope, installOptions.cwd), cap.id, agent) });
       }
       const result = await installCapability(cap, installOptions);
       const entry = resultFor(cap, result);
@@ -161,7 +168,7 @@ export async function installCommand(ids, options = {}) {
     try {
       restoreDirectory(step.destination, step.folder);
       if (step.record) writeInstallRecord(step.record, installOptions.cwd);
-      else removeInstallRecord(step.id, scope, installOptions.cwd);
+      else removeInstallRecord(step.id, scope, installOptions.cwd, agent);
       rolledBack.add(step.id);
     } catch (error) {
       const entry = applied.find((result) => result.id === step.id);

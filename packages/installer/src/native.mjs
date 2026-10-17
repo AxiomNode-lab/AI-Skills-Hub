@@ -9,7 +9,9 @@ import {
   removeInstallRecord,
   writeInstallRecord,
   readInstallRecords,
-  verifyInstallRecord
+  verifyInstallRecord,
+  findInstallRecord,
+  installRecordsFor
 } from "./state.mjs";
 
 // Refuses a target reached through a symlink or junction: every existing
@@ -126,8 +128,10 @@ export function checkMaterializedInstall(skill, options = {}) {
     if (!overwrite) {
       throw new Error("Destination exists; pass --overwrite to replace: " + destination);
     }
-    const records = readInstallRecords(scope, cwd);
-    const existing = records[skill.id];
+    // Agents that share a skills folder (Codex, Cursor) share its records: the
+    // folder is managed when any record of this skill points at it.
+    const existing = installRecordsFor(readInstallRecords(scope, cwd), skill.id)
+      .find((record) => path.resolve(record.destination ?? "") === path.resolve(destination));
     if (!existing) {
       if (!force) {
         throw new Error("Destination is not managed by AI Skills Hub; pass --force to replace: " + destination);
@@ -204,11 +208,19 @@ export function restoreDirectory(destination, snapshot) {
   }
 }
 
+// The record for a skill and agent; without an agent, the only record of that
+// skill (null when there are none or several).
+function recordFor(records, skillId, agent) {
+  if (agent) return findInstallRecord(records, skillId, agent);
+  const all = installRecordsFor(records, skillId);
+  return all.length === 1 ? all[0] : null;
+}
+
 export function verifyInstalledSkill(skillId, options = {}) {
   const scope = options.scope ?? "project";
   const cwd = options.cwd ?? process.cwd();
   const records = readInstallRecords(scope, cwd);
-  const record = records[skillId];
+  const record = recordFor(records, skillId, options.agent);
   if (!record) return { ok: false, reason: "installation_not_recorded", skill_id: skillId };
   return verifyInstallRecord(record);
 }
@@ -225,7 +237,7 @@ export function uninstallSkillRecord(skillId, options = {}) {
   const cwd = options.cwd ?? process.cwd();
   const force = options.force === true;
   const records = readInstallRecords(scope, cwd);
-  const record = records[skillId];
+  const record = recordFor(records, skillId, options.agent);
 
   if (!record) throw new Error("Installation record not found: " + skillId);
 
@@ -249,11 +261,18 @@ export function uninstallSkillRecord(skillId, options = {}) {
     }
   }
 
-  fs.rmSync(destination, { recursive: true, force: true });
-  removeInstallRecord(skillId, scope, cwd);
+  // A folder shared by agents (Codex and Cursor both use .agents/skills) stays
+  // until the last agent's record is removed.
+  const sharedWith = installRecordsFor(records, skillId)
+    .filter((other) => other.agent !== record.agent && path.resolve(other.destination ?? "") === destination)
+    .map((other) => other.agent);
+  if (sharedWith.length === 0) fs.rmSync(destination, { recursive: true, force: true });
+  removeInstallRecord(skillId, scope, cwd, record.agent);
   return {
     id: skillId,
-    action: "removed",
-    destination
+    agent: record.agent,
+    action: sharedWith.length ? "record-removed" : "removed",
+    destination,
+    ...(sharedWith.length ? { kept_for: sharedWith } : {})
   };
 }

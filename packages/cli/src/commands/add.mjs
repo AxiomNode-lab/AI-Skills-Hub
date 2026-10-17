@@ -76,6 +76,11 @@ export async function addCommand(query, options = {}) {
 
   const agent = options.agent || "agent-skills";
 
+  // Picking a result needs a terminal; scripts use search and install instead.
+  if (!isGitReference(query) && (!process.stdin.isTTY || !process.stdout.isTTY)) {
+    throw new UsageError("add <phrase> is interactive and needs a terminal; use 'skills-hub search' and 'skills-hub install' in scripts");
+  }
+
   if (isGitReference(query)) {
     assertGitReference(query);
     try {

@@ -97,10 +97,13 @@ export function writeInstallRecord(record, cwd=process.cwd()) {
   data.schema_version = "0.2";
   data.history = Array.isArray(data.history) ? data.history : [];
 
-  const previous = data.installed[record.skill_id];
+  data.installed = normalizeInstalled(data.installed);
+  const key = recordKey(record.skill_id, record.agent);
+  const previous = data.installed[key];
   if (previous && previous.destination === record.destination) {
     data.history.push({
       skill_id: record.skill_id,
+      agent: record.agent ?? null,
       action: "replace",
       at: new Date().toISOString(),
       previous_revision: previous.source?.revision ?? null,
@@ -109,8 +112,33 @@ export function writeInstallRecord(record, cwd=process.cwd()) {
     if (data.history.length > 100) data.history = data.history.slice(-100);
   }
 
-  data.installed[record.skill_id] = record;
+  data.installed[key] = record;
   atomicWrite(file, JSON.stringify(data, null, 2) + "\n");
+}
+
+// Records are keyed by skill and agent, so one skill can be installed for
+// several agents in the same scope. Files written before that used the skill
+// ID alone as the key; they are read the same way.
+export function recordKey(skillId, agent) {
+  return `${skillId}::${agent ?? "agent-skills"}`;
+}
+
+function normalizeInstalled(installed) {
+  const out = {};
+  for (const record of Object.values(installed ?? {})) {
+    if (record && typeof record === "object" && record.skill_id) out[recordKey(record.skill_id, record.agent)] = record;
+  }
+  return out;
+}
+
+// The record for one skill and agent, or null.
+export function findInstallRecord(records, skillId, agent) {
+  return records[recordKey(skillId, agent)] ?? null;
+}
+
+// Every record of one skill in this scope (one per agent).
+export function installRecordsFor(records, skillId) {
+  return Object.values(records).filter((record) => record.skill_id === skillId);
 }
 
 export function readInstallRecords(scope="project", cwd=process.cwd()) {
@@ -120,15 +148,16 @@ export function readInstallRecords(scope="project", cwd=process.cwd()) {
   const body = fs.readFileSync(file, "utf8");
   if (Buffer.byteLength(body) > MAX_STATE_BYTES) throw new Error("installation state is too large");
   const parsed = JSON.parse(body);
-  return parsed.installed ?? {};
+  return normalizeInstalled(parsed.installed);
 }
 
-export function removeInstallRecord(skillId, scope="project", cwd=process.cwd()) {
+export function removeInstallRecord(skillId, scope="project", cwd=process.cwd(), agent) {
   const file = stateFile(scope, cwd);
   assertStateFileSafe(file, scope);
   if (!fs.existsSync(file)) return;
   const data = JSON.parse(fs.readFileSync(file, "utf8"));
-  delete data.installed[skillId];
+  data.installed = normalizeInstalled(data.installed);
+  delete data.installed[recordKey(skillId, agent)];
 
   if (Object.keys(data.installed).length === 0) {
     fs.rmSync(file, { force: true });
