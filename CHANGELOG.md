@@ -4,7 +4,7 @@ All notable changes to AI Skills Hub are documented here.
 
 ## 0.3.0-beta.1 (unreleased)
 
-First npm release candidate: `npx @axiomnode-lab/skills-hub`.
+First npm release candidate: `npx @axiomnode-lab/skills-hub`. 414 released skills are installable (the per-batch totals below were true when each batch landed).
 
 ### Highlights
 - One user-facing npm package, `@axiomnode-lab/skills-hub` (binary `skills-hub`), built by `scripts/build-package.mjs` with the catalog and every released skill; `pnpm e2e:package` installs the packed tarball in a temporary project and runs it there, through `npx` and a global install. CI runs it on Linux and Windows.
@@ -17,6 +17,15 @@ First npm release candidate: `npx @axiomnode-lab/skills-hub`.
 - Internal workspace packages are private.
 - `add` no longer reports "Successfully installed" for adapter-pending, confirmation-required or other non-installs; its Git path accepts only https/SSH.
 - Install and uninstall refuse paths through symlinks; `sync` failures exit 1.
+- `add` shows the exact command or MCP configuration before asking for confirmation and labels results the Hub has not reviewed. MCP registry entries may only name a package runner (`npx`, `uvx`, `pipx`, `bunx`, `node`, `deno`, `docker`, `python`, `dnx`). The third-party `skills` installer is pinned to `skills@1.7.2`.
+- A project's `.ai-skills-hub` state folder and MCP configuration folders are refused when they are symbolic links.
+- Install records are kept per skill and agent. Installing a skill for a second agent no longer replaces the first agent's record (which left its files untracked); `uninstall` takes `--agent` when a skill is installed for several agents, and a folder shared by agents is removed with its last record. State files written by earlier versions are read as before.
+- Search matches whole words with common inflections instead of substrings ("react" no longer matches "reactive"; `next.js` = `nextjs`), lists installable results first, and ranks blocked and undescribed entries last. `available <keyword>` lists matches by relevance. `search` prints one line and a description per result with a plain-language reason for anything not installable.
+- `info` shows the license, source commit and path, supported agents and each scanner match with file and line (matches in license files are labelled), and prints the SKILL.md only with `--content`. A risk level of "none" is shown as "no scanner findings".
+- Refusals name the real reason: release state (blocked, awaiting review, held and why) is checked before agent compatibility, `install` prints each refusal in words with a hint to `search --installable`, and `--json` results carry the text as `message` next to the reason code.
+- `install a b` installs both IDs (extra IDs used to be ignored while reporting success); `info`, `update` and `uninstall` refuse extra words (exit 2). `<command> --help` prints that command's usage, an unknown command suggests the closest one, a bad `install` request prints one error with the usage line, and `add <phrase>` off a terminal exits 2 instead of failing on a prompt.
+- Node.js 22.13 or later is required. The release workflow pins npm, and a prerelease replaces `latest` until a stable version exists. First-publish and trusted-publisher steps are in docs/RELEASING.md; `validate-workspace` checks that every package version and the changelog match.
+- A multi-skill `install` is all or nothing: every item is checked before anything is written (`skipped` / `not_installed_request_incomplete` for the rest when one cannot install, `destination_conflict` for two skills with the same folder), and a failure while writing removes this command's new installs and restores the ones it replaced (`rolled-back`).
 
 ### Added
 - `skills-hub mcp` (stdio) and `skills-hub serve` (HTTP) run a read-only catalog server with `search_skills` and `get_skill` MCP tools, released-skill file resources, and the `/api` routes in docs/API.md.

@@ -14,12 +14,20 @@ function buildInstallPlan(skills, agent, options = {}) {
       source: "https://github.com/" + skill.source.repo
     };
 
-    if (!isCompatible) {
-      return { ...base, action: "incompatible", reason: "agent_not_supported", command: null };
-    }
-
+    // Release state is reported before compatibility: "blocked" or "awaiting
+    // review" is the real reason a skill cannot be installed, for any agent.
     if (skill.distribution === "blocked") {
       return { ...base, action: "blocked", reason: "registry_blocked", command: null };
+    }
+    if (skill.distribution === "review-required" && !allowReview) {
+      return { ...base, action: "hold", reason: "manual_review_required", command: null };
+    }
+    if (skill.distribution === "bundled" && (skill.release?.status !== "eligible" || !skill.materialized)) {
+      return { ...base, action: "hold", reason: "bundle_not_released", command: null };
+    }
+
+    if (!isCompatible) {
+      return { ...base, action: "incompatible", reason: "agent_not_supported", command: null };
     }
 
     if (skill.distribution === "source-direct") {

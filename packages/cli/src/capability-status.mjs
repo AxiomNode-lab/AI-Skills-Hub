@@ -1,6 +1,6 @@
 import { catalogAvailability } from "@ai-skills-hub/core";
 import { availabilityLabel, installationLabel } from "./ui.mjs";
-import { readInstallRecords, verifyInstallRecord } from "../../installer/src/state.mjs";
+import { findInstallRecord, installRecordsFor, readInstallRecords, verifyInstallRecord } from "../../installer/src/state.mjs";
 
 
 export function recordedInstallation(record) {
@@ -21,8 +21,8 @@ export function statusReader(options = {}) {
   const scope = options.scope || "project";
   const records = readInstallRecords(scope);
   return (cap) => {
-    const record = records[cap.id];
-    const matches = record && record.scope === scope && (!options.agent || record.agent === options.agent);
+    const record = options.agent ? findInstallRecord(records, cap.id, options.agent) : installRecordsFor(records, cap.id)[0];
+    const matches = record && record.scope === scope;
     return {
       availability: catalogAvailability(cap),
       installation: matches ? recordedInstallation(record) : {

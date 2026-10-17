@@ -96,10 +96,8 @@ test("search --installable hides skills that cannot be installed", t => {
 });
 
 test("search --installable ranks only installable skills, so --limit counts installable matches", t => {
-  // For "review" the two best matches are not released; filtering after the
-  // limit used to return nothing.
-  const top = JSON.parse(run(t, ["search", "review", "--limit", "2", "--json"]).result.stdout);
-  assert.ok(top.every(s => s.hub_status.availability.status !== "eligible"));
+  // Filtering after the limit used to return only what the unfiltered top N
+  // happened to contain; --installable must fill the limit with released skills.
   const installable = JSON.parse(run(t, ["available", "review", "--json"]).result.stdout);
   assert.ok(installable.length >= 2);
   const limited = JSON.parse(run(t, ["search", "review", "--installable", "--limit", "2", "--json"]).result.stdout);

@@ -7,6 +7,24 @@ import { loadRegistry } from "@ai-skills-hub/core";
 import { installCapability } from "../install-executor.mjs";
 import { UsageError } from "../errors.mjs";
 
+// What an external choice will do, shown before the user consents: the exact
+// command, or the configuration written into the agent's MCP file. Anything
+// not released by the Hub is labelled as unreviewed.
+export function describeExternalAction(choice) {
+  const lines = [];
+  if (choice.release?.status !== "eligible") {
+    lines.push(`Not reviewed by AI Skills Hub (source: ${choice.origin ?? choice.source?.registry ?? choice.source?.url ?? "unknown"}). Read it before you continue.`);
+  }
+  if (Array.isArray(choice.argv) && choice.argv.length) {
+    lines.push(`Command: ${choice.argv.map((part) => (/^[\w@./:=-]+$/.test(part) ? part : JSON.stringify(part))).join(" ")}`);
+  }
+  if (choice.config) {
+    lines.push(`Writes to ${choice.target ?? "the agent's MCP configuration"}:`);
+    lines.push(JSON.stringify(choice.config, null, 2));
+  }
+  return lines;
+}
+
 // Looks like a repository reference rather than a search phrase.
 function isGitReference(value) {
   return /^[a-z][a-z0-9+.-]*:\/\//i.test(value) || /^git@/i.test(value) || /^[a-z0-9+.-]+::/i.test(value) || /\.git\/?$/i.test(value);
@@ -57,6 +75,11 @@ export async function addCommand(query, options = {}) {
   if (!query) throw new UsageError("add needs a search phrase or a Git repository URL");
 
   const agent = options.agent || "agent-skills";
+
+  // Picking a result needs a terminal; scripts use search and install instead.
+  if (!isGitReference(query) && (!process.stdin.isTTY || !process.stdout.isTTY)) {
+    throw new UsageError("add <phrase> is interactive and needs a terminal; use 'skills-hub search' and 'skills-hub install' in scripts");
+  }
 
   if (isGitReference(query)) {
     assertGitReference(query);
@@ -121,10 +144,9 @@ export async function addCommand(query, options = {}) {
 
     let confirmed = Boolean(options.yes);
 
-    if (
-      ["source-direct", "marketplace", "configuration"].includes(selected.action)
-      && !confirmed
-    ) {
+    const external = ["source-direct", "marketplace", "configuration"].includes(selected.action);
+    if (external) for (const line of describeExternalAction(selected)) console.log(line);
+    if (external && !confirmed) {
       const proceed = await confirm({
         message: `This action uses an external installer or modifies agent configuration. Continue with ${selected.name}?`,
         default: false

@@ -9,7 +9,9 @@ import {
   removeInstallRecord,
   writeInstallRecord,
   readInstallRecords,
-  verifyInstallRecord
+  verifyInstallRecord,
+  findInstallRecord,
+  installRecordsFor
 } from "./state.mjs";
 
 // Refuses a target reached through a symlink or junction: every existing
@@ -93,13 +95,15 @@ function writeVerifiedFiles(files, destination, overwrite = false) {
   }
 }
 
-export function installMaterializedSkill(skill, options = {}) {
+// Every check an install makes before it writes: release state, the artifact
+// against its manifest, the destination path, and ownership of an existing
+// folder. Writes nothing, so a multi-skill install can check all items first.
+export function checkMaterializedInstall(skill, options = {}) {
   const cwd = options.cwd ?? process.cwd();
   const scope = options.scope ?? "project";
   const agent = options.agent ?? "agent-skills";
   const overwrite = options.overwrite === true;
   const force = options.force === true;
-  const persistState = options.persistState !== false;
 
   if (
     skill.distribution !== "bundled" ||
@@ -124,8 +128,10 @@ export function installMaterializedSkill(skill, options = {}) {
     if (!overwrite) {
       throw new Error("Destination exists; pass --overwrite to replace: " + destination);
     }
-    const records = readInstallRecords(scope, cwd);
-    const existing = records[skill.id];
+    // Agents that share a skills folder (Codex, Cursor) share its records: the
+    // folder is managed when any record of this skill points at it.
+    const existing = installRecordsFor(readInstallRecords(scope, cwd), skill.id)
+      .find((record) => path.resolve(record.destination ?? "") === path.resolve(destination));
     if (!existing) {
       if (!force) {
         throw new Error("Destination is not managed by AI Skills Hub; pass --force to replace: " + destination);
@@ -138,7 +144,14 @@ export function installMaterializedSkill(skill, options = {}) {
     }
   }
 
-  writeVerifiedFiles(files, destination, overwrite);
+  return { files, root, destination, agent, scope, cwd };
+}
+
+export function installMaterializedSkill(skill, options = {}) {
+  const persistState = options.persistState !== false;
+  const { files, root, destination, agent, scope, cwd } = checkMaterializedInstall(skill, options);
+
+  writeVerifiedFiles(files, destination, options.overwrite === true);
 
   const record = buildInstallRecord(skill, destination, { agent, scope });
   if (persistState) writeInstallRecord(record, cwd);
@@ -155,11 +168,59 @@ export function installMaterializedSkill(skill, options = {}) {
   };
 }
 
+// Captures a destination folder (files, directories and symlinks, without
+// following links) so a failed multi-skill install can put it back.
+export function captureDirectory(destination) {
+  let stat;
+  try {
+    stat = fs.lstatSync(destination);
+  } catch (error) {
+    if (error.code === "ENOENT") return { existed: false, entries: [] };
+    throw error;
+  }
+  if (!stat.isDirectory()) throw new Error("Install destination is not a directory: " + destination);
+  const entries = [];
+  const visit = (dir) => {
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const full = path.join(dir, entry.name);
+      const relative = path.relative(destination, full);
+      if (entry.isSymbolicLink()) entries.push({ path: relative, type: "symlink", target: fs.readlinkSync(full) });
+      else if (entry.isDirectory()) { entries.push({ path: relative, type: "dir" }); visit(full); }
+      else if (entry.isFile()) entries.push({ path: relative, type: "file", bytes: fs.readFileSync(full), mode: fs.statSync(full).mode & 0o777 });
+      else throw new Error("Install destination contains an unsupported entry: " + full);
+    }
+  };
+  visit(destination);
+  return { existed: true, entries };
+}
+
+// Puts a destination back to what captureDirectory saw (removes it if it did
+// not exist). The caller has already checked the path is inside the skills root.
+export function restoreDirectory(destination, snapshot) {
+  fs.rmSync(destination, { recursive: true, force: true });
+  if (!snapshot.existed) return;
+  fs.mkdirSync(destination, { recursive: true });
+  for (const entry of snapshot.entries) {
+    const target = path.join(destination, entry.path);
+    if (entry.type === "dir") fs.mkdirSync(target, { recursive: true });
+    else if (entry.type === "symlink") fs.symlinkSync(entry.target, target);
+    else fs.writeFileSync(target, entry.bytes, { mode: entry.mode });
+  }
+}
+
+// The record for a skill and agent; without an agent, the only record of that
+// skill (null when there are none or several).
+function recordFor(records, skillId, agent) {
+  if (agent) return findInstallRecord(records, skillId, agent);
+  const all = installRecordsFor(records, skillId);
+  return all.length === 1 ? all[0] : null;
+}
+
 export function verifyInstalledSkill(skillId, options = {}) {
   const scope = options.scope ?? "project";
   const cwd = options.cwd ?? process.cwd();
   const records = readInstallRecords(scope, cwd);
-  const record = records[skillId];
+  const record = recordFor(records, skillId, options.agent);
   if (!record) return { ok: false, reason: "installation_not_recorded", skill_id: skillId };
   return verifyInstallRecord(record);
 }
@@ -176,7 +237,7 @@ export function uninstallSkillRecord(skillId, options = {}) {
   const cwd = options.cwd ?? process.cwd();
   const force = options.force === true;
   const records = readInstallRecords(scope, cwd);
-  const record = records[skillId];
+  const record = recordFor(records, skillId, options.agent);
 
   if (!record) throw new Error("Installation record not found: " + skillId);
 
@@ -200,11 +261,18 @@ export function uninstallSkillRecord(skillId, options = {}) {
     }
   }
 
-  fs.rmSync(destination, { recursive: true, force: true });
-  removeInstallRecord(skillId, scope, cwd);
+  // A folder shared by agents (Codex and Cursor both use .agents/skills) stays
+  // until the last agent's record is removed.
+  const sharedWith = installRecordsFor(records, skillId)
+    .filter((other) => other.agent !== record.agent && path.resolve(other.destination ?? "") === destination)
+    .map((other) => other.agent);
+  if (sharedWith.length === 0) fs.rmSync(destination, { recursive: true, force: true });
+  removeInstallRecord(skillId, scope, cwd, record.agent);
   return {
     id: skillId,
-    action: "removed",
-    destination
+    agent: record.agent,
+    action: sharedWith.length ? "record-removed" : "removed",
+    destination,
+    ...(sharedWith.length ? { kept_for: sharedWith } : {})
   };
 }

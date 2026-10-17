@@ -20,12 +20,21 @@ test("external installation plans reject untrusted executables", () => {
   );
 });
 
+test("skills CLI plans must use the pinned installer version", () => {
+  for (const cli of ["skills", "skills@latest", "skills@1.7.1"]) {
+    assert.throws(() => assertSafeExternalPlan({
+      adapter: "skills-cli",
+      argv: ["npx", "--yes", cli, "add", "https://github.com/example/repository", "--skill", "demo-skill", "--agent", "codex", "-y"]
+    }, "codex"), /Invalid skills CLI/, cli);
+  }
+});
+
 test("skills CLI plans require HTTPS and the requested agent", () => {
   assert.doesNotThrow(
     () => assertSafeExternalPlan({
       adapter: "skills-cli",
       argv: [
-        "npx", "--yes", "skills", "add",
+        "npx", "--yes", "skills@1.7.2", "add",
         "https://github.com/example/repository",
         "--skill", "demo-skill",
         "--agent", "codex", "-y"
@@ -37,7 +46,7 @@ test("skills CLI plans require HTTPS and the requested agent", () => {
     () => assertSafeExternalPlan({
       adapter: "skills-cli",
       argv: [
-        "npx", "--yes", "skills", "add",
+        "npx", "--yes", "skills@1.7.2", "add",
         "http://evil.example/repository",
         "--skill", "demo-skill",
         "--agent", "codex", "-y"

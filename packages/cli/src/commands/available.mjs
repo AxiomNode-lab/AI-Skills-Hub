@@ -8,9 +8,8 @@ export function installableSkills(registry, { agent, query, pool } = {}) {
   let skills = pool ? [...pool] : registry.skills.filter(isInstallable);
   if (agent && !pool) skills = skills.filter((skill) => compatibilityBasis(skill, agent) !== null);
   if (query) {
-    // The pool is already agent-filtered.
-    const matched = new Set(searchRegistry({ skills }, query, { limit: Infinity }).map(({ item }) => item.id));
-    skills = skills.filter((skill) => matched.has(skill.id));
+    // The pool is already agent-filtered; matches keep their relevance order.
+    return searchRegistry({ skills }, query, { limit: Infinity }).map(({ item }) => item);
   }
   return skills.sort((a, b) => a.id.localeCompare(b.id));
 }
@@ -41,15 +40,23 @@ export function availableCommand(query, options = {}) {
 
   const width = Math.max(40, (process.stdout.columns || 100) - 6);
   console.log(paint("bold", `${skills.length} installable skills${scope ? " " + scope : ""}`));
-  for (const [owner, group] of groupByPublisher(skills)) {
-    console.log("\n" + paint("cyan", owner));
-    for (const skill of group) {
-      const basis = options.agent && compatibilityBasis(skill, options.agent) === "standard" ? paint("dim", " (Agent Skills format)") : "";
-      console.log(`  ${paint("bold", skill.id)}  ${riskLabel(skill.security?.risk)}${basis}`);
-      console.log(`    ${paint("dim", truncate(skill.description, width))}`);
+  const print = (skill) => {
+    const basis = options.agent && compatibilityBasis(skill, options.agent) === "standard" ? paint("dim", " (Agent Skills format)") : "";
+    console.log(`  ${paint("bold", skill.id)}  ${riskLabel(skill.security?.risk)}${basis}`);
+    console.log(`    ${paint("dim", truncate(skill.description, width))}`);
+  };
+  // With a query the best matches come first; without one, group by publisher.
+  if (query) {
+    console.log("");
+    skills.forEach(print);
+  } else {
+    for (const [owner, group] of groupByPublisher(skills)) {
+      console.log("\n" + paint("cyan", owner));
+      group.forEach(print);
     }
+    console.log(paint("dim", "\nNarrow the list with a keyword: skills-hub available <keyword>"));
   }
   const agent = options.agent || "<agent>";
-  console.log(`\nInstall: ${paint("green", `skills-hub install <id>[,<id>...] --agent ${agent}`)}`);
+  console.log(`\nInstall: ${paint("green", `skills-hub install <id> [<id>...] --agent ${agent}`)}`);
   console.log(`Details: skills-hub info <id>`);
 }

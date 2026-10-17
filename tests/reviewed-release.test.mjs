@@ -120,7 +120,7 @@ for (const skill of released) {
     }
     assert.ok(fs.existsSync(path.join(target, "SKILL.md")));
     const state = JSON.parse(fs.readFileSync(path.join(cwd, ".ai-skills-hub", "installed.json"), "utf8"));
-    const record = state.installed[skill.id];
+    const record = state.installed[`${skill.id}::${agent}`];
     assert.equal(record.scope, "project");
     assert.equal(record.source.revision, skill.source.revision);
     assert.equal(record.files.length, manifest.materialized_files.length);

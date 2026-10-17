@@ -9,7 +9,7 @@ npx @axiomnode-lab/skills-hub search "frontend design" --agent codex
 npx @axiomnode-lab/skills-hub install anthropics/frontend-design --agent codex
 ```
 
-Requires Node.js 22+. The package includes the catalog and every released skill; installing a skill needs no network access.
+Requires Node.js 22.13+. The package includes the catalog and every released skill; installing a skill needs no network access. `add <phrase>` searches public directories online, and an interactive run checks npm for a newer version (`SKILLS_HUB_NO_UPDATE_CHECK=1` turns that off).
 
 ## Commands
 
@@ -17,11 +17,11 @@ Requires Node.js 22+. The package includes the catalog and every released skill;
 | --- | --- |
 | `available [query]` | Skills you can install now (`--agent` to filter) |
 | `search <query>` | Keyword search over the whole catalog (`--installable`, `--limit`, `--json`) |
-| `info <id>` | License, security, release state and provenance of one skill |
-| `install <id[,id...]>` | Install released skills into the current project (`--agent` required, `--scope user` for your home directory) |
+| `info <id>` | License, source commit, scanner matches and release state of one skill (`--content` for the SKILL.md) |
+| `install <id> [<id>...]` | Install released skills into the current project (`--agent` required, `--scope user` for your home directory) |
 | `list` | Hub-managed installations and whether their files still match |
 | `update [id]` | Move installed skills to the released revision (`--dry-run`) |
-| `uninstall <id>` | Remove a Hub-managed installation |
+| `uninstall <id>` | Remove a Hub-managed installation (`--agent` when installed for several agents) |
 | `add <phrase\|git-url>` | Interactive discovery, or clone a repository into `capabilities-library/` for review |
 | `mcp` / `serve` | Read-only catalog over MCP stdio, or HTTP on 127.0.0.1:8787 (no authentication) |
 

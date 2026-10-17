@@ -1,7 +1,7 @@
 import { searchRegistry } from "@ai-skills-hub/discovery";
 import { isInstallable, loadRegistry } from "@ai-skills-hub/core";
-import { statusReader, printCapabilityStatus } from "../capability-status.mjs";
-import { paint } from "../ui.mjs";
+import { statusReader } from "../capability-status.mjs";
+import { paint, riskLabel, truncate, whyNotInstallable } from "../ui.mjs";
 
 export function searchCommand(query, options = {}) {
   const registry = loadRegistry();
@@ -22,20 +22,27 @@ export function searchCommand(query, options = {}) {
   }
 
   if (results.length === 0) {
-    console.log(`No capabilities found matching "${query || ""}".`);
+    console.log(`No skills match "${query || ""}". Try a broader word, or 'skills-hub available' for everything installable.`);
     return;
   }
 
-  console.log(`Found ${results.length} capabilities:\n`);
-  for (const cap of results) {
-    console.log(`ID: ${paint("bold", cap.id)}`);
-    console.log(`Name: ${cap.name}`);
-    printCapabilityStatus(cap.hub_status);
-    console.log(`Type: ${cap.artifact_type || cap.type || "skill"}`);
-    console.log(`Distribution: ${cap.distribution}`);
-    console.log(`Release: ${cap.release?.status || "unknown"}`);
-    console.log(`Security: ${cap.security?.risk || "unknown"} / ${cap.security?.scan_status || "unknown"}`);
-    console.log(`Description: ${cap.description || "N/A"}`);
-    console.log("------------------------------------------");
+  const width = Math.max(40, (process.stdout.columns || 100) - 6);
+  const installable = results.filter((cap) => cap.hub_status.availability.status === "eligible");
+  const other = results.filter((cap) => cap.hub_status.availability.status !== "eligible");
+  console.log(paint("bold", `${results.length} results for "${query}" (${installable.length} installable)`));
+  const line = (cap, note) => {
+    const installed = cap.hub_status.installation.status === "installed" ? paint("green", "  ✔ installed") : "";
+    console.log(`  ${paint("bold", cap.id)}  ${note}${installed}`);
+    console.log(`    ${paint("dim", truncate(cap.description || "No description.", width))}`);
+  };
+  if (installable.length) {
+    console.log("\n" + paint("green", "Installable now"));
+    for (const cap of installable) line(cap, riskLabel(cap.security?.risk));
   }
+  if (other.length) {
+    console.log("\n" + paint("yellow", "Not installable"));
+    for (const cap of other) line(cap, paint("gray", whyNotInstallable(cap, cap.hub_status.availability.status)));
+  }
+  console.log(`\nInstall: ${paint("green", `skills-hub install <id> --agent ${options.agent || "<agent>"}`)}`);
+  console.log("Details: skills-hub info <id>");
 }

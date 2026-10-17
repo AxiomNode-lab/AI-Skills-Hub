@@ -33,7 +33,7 @@ npm install -g @axiomnode-lab/skills-hub
 skills-hub --help
 ```
 
-Requires Node.js 22 or later. The package contains the catalog and every released skill, so it works offline after installation.
+Requires Node.js 22.13 or later. The package contains the catalog and every released skill, so installing a skill needs no network access.
 
 ## Find skills
 
@@ -44,7 +44,7 @@ npx @axiomnode-lab/skills-hub search "frontend design" --agent codex
 npx @axiomnode-lab/skills-hub info anthropics/frontend-design --agent codex
 ```
 
-`search` is keyword search over IDs, names, publishers, descriptions, categories and tags; a query must match the text before compatibility or release state affect the ranking. It is not semantic or vector search. `--installable` limits `search` to released skills; `--json` gives machine-readable output.
+`search` is keyword search over IDs, names, publishers, descriptions, categories and tags. It matches whole words ("react" does not match "reactive"; "deploy" also finds "deployment"; `next.js` and `nextjs` are the same), lists installable results first, and ranks blocked or undescribed entries last. A query must match the text before compatibility or release state affect the ranking. It is not semantic or vector search. `--installable` limits `search` to released skills; `--json` gives machine-readable output. `info <id>` shows the license, source commit, supported agents and every scanner match with its file and line; add `--content` to print the SKILL.md.
 
 Each result shows its availability:
 
@@ -66,12 +66,13 @@ npx @axiomnode-lab/skills-hub update
 npx @axiomnode-lab/skills-hub uninstall anthropics/frontend-design --agent codex
 ```
 
-- `install` takes one or more IDs (`id1,id2`), installs dependencies first, and writes files into the agent's skills folder in the current project (`--scope user` for your home directory). Before copying, the released files are checked against their manifest hashes. A record with per-file hashes is written to `.ai-skills-hub/installed.json`.
+- `install` takes one or more IDs (`install a b` or `install a,b`), installs dependencies first, and writes files into the agent's skills folder in the current project (`--scope user` for your home directory). Before copying, the released files are checked against their manifest hashes. A record with per-file hashes is written to `.ai-skills-hub/installed.json`.
 - Reinstalling the same revision does nothing. An existing folder the Hub did not create, or a Hub installation you edited, is not overwritten unless you pass `--force`.
 - `list` shows installations as `installed` only when the files still match their recorded hashes; otherwise `unverified`.
 - `update` moves installed skills to the revision the catalog now releases. It refuses held or blocked releases and keeps locally edited files unless you pass `--force`.
-- `uninstall` removes only a Hub-managed folder in the agent's skills directory, never through a symlink, and refuses edited files without `--force`.
-- Several installs in one command are not atomic: successes are kept and each failure is reported.
+- `uninstall` removes only a Hub-managed folder in the agent's skills directory, never through a symlink, and refuses edited files without `--force`. A skill can be installed for several agents; each keeps its own record, so pass `--agent` to remove one of them. Agents that share a folder (Codex and Cursor use `.agents/skills`) keep it until the last one uninstalls.
+- `skills-hub <command> --help` shows the options of one command.
+- One command installs all the requested skills or none: every item is checked first, and if a write fails, what the command changed is put back. Each item's outcome is reported.
 - Exit codes: `0` success, `1` the operation did not complete, `2` invalid usage.
 
 Some skills carry a notice (for example a dated service retirement); `info` and `install` print it.
@@ -97,7 +98,7 @@ npx @axiomnode-lab/skills-hub add "pdf tools"
 npx @axiomnode-lab/skills-hub add https://github.com/owner/repo.git
 ```
 
-- `add <phrase>` searches the catalog and public directories (skills.sh, the MCP registry, npm, plugin directories) and lets you pick. Popularity can raise a result in the list; it never makes anything trusted or released. External results need confirmation, and success is reported only when something was actually installed.
+- `add <phrase>` searches the catalog and public directories (skills.sh, the MCP registry, npm, GitHub, plugin directories) and lets you pick; your search phrase is sent to those services. Popularity can raise a result in the list; it never makes anything trusted or released. Before an external result is installed, `add` prints the exact command or the MCP configuration it would write and marks anything the Hub has not reviewed; it runs only after you confirm. Success is reported only when something was actually installed.
 - `add <git-url>` clones an `https://` or SSH repository into `./capabilities-library/` for your own review. It installs nothing and releases nothing. `sync` fast-forwards those clones; `create` scaffolds a new capability there.
 
 ## Give your agent the catalog (MCP)

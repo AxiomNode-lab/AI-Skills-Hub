@@ -87,9 +87,11 @@ test("unreleased brainstorming is held with a false JSON result and no installed
   assert.deepEqual(f.json(["list", "--agent", "codex"]), []);
   const normal = f.run(["install", brainstorming, "--agent", "codex"]);
   assert.equal(normal.status, 1);
-  assert.match(normal.stdout, /Installation incomplete/);
+  assert.match(normal.stdout, /Nothing was installed by this command/);
+  assert.match(normal.stdout, /skills-hub search <words> --installable --agent codex/);
   assert.doesNotMatch(normal.stdout, /Installation complete\./);
-  assert.match(normal.stderr, /bundle_not_released/);
+  assert.match(normal.stderr, /: not released/);
+  assert.equal(f.json(["install", brainstorming, "--agent", "codex"], 1).results[0].message.startsWith("not released"), true);
 });
 
 test("external installation requires consent and never executes without it", t => {
@@ -125,12 +127,15 @@ test("search and info distinguish catalog availability from installation evidenc
     assert.equal(info.hub_status.installation.status, "not-recorded");
     const search = f.json(["search", id, "--agent", "codex"]).find(x => x.id === id);
     assert.deepEqual(search.hub_status, info.hub_status);
-    for (const command of ["info", "search"]) {
-      const normal = f.run([command, id, "--agent", "codex"]);
-      assert.equal(normal.status, 0);
-      assert.match(normal.stdout, new RegExp(`Availability: ${availability}`));
-      assert.match(normal.stdout, /Installation: not-recorded/);
-    }
+    const normal = f.run(["info", id, "--agent", "codex"]);
+    assert.equal(normal.status, 0);
+    assert.match(normal.stdout, new RegExp(`Availability: +${availability}`));
+    assert.match(normal.stdout, /Installation: +not-recorded/);
+    const listed = f.run(["search", id, "--agent", "codex"]);
+    assert.equal(listed.status, 0);
+    // The ID is listed under the section that matches its availability.
+    const section = availability === "eligible" ? "Installable now\n" : "Not installable\n";
+    assert.ok(listed.stdout.indexOf(`  ${id}  `) > listed.stdout.indexOf(section) && listed.stdout.includes(section), listed.stdout);
   }
   assert.equal(fs.readFileSync(path.join(f.cwd, "catalog", "skills.json"), "utf8"), before);
 });
@@ -169,12 +174,14 @@ test("stale or modified install records are shown as unverified, not installed",
   assert.equal(status.reason, "file_count_changed");
 });
 
-test("mixed successful and skipped installs report overall failure and each outcome", t => {
+test("a request with an item that cannot install reports each outcome and installs nothing", t => {
   const f = fixture(t);
   const result = f.install(`test/local-skill,${brainstorming}`, 1);
   assert.equal(result.success, false);
-  assert.deepEqual(result.results.map(x => x.installed), [true, false]);
-  assert.equal(f.json(["list"]).length, 1);
+  assert.deepEqual(result.results.map(x => x.installed), [false, false]);
+  assert.equal(result.results[0].reason, "not_installed_request_incomplete");
+  assert.equal(result.results[1].status, "hold");
+  assert.equal(f.json(["list"]).length, 0);
 });
 
 test("multiple successful local installs return overall success", t => {
@@ -192,11 +199,11 @@ test("records without file evidence cannot establish installation", t => {
   f.install("test/local-skill");
   const stateFile = path.join(f.cwd, ".ai-skills-hub", "installed.json");
   const state = JSON.parse(fs.readFileSync(stateFile, "utf8"));
-  state.installed["test/local-skill"].files = [];
+  state.installed["test/local-skill::codex"].files = [];
   fs.writeFileSync(stateFile, JSON.stringify(state));
   assert.equal(f.json(["info", "test/local-skill"]).hub_status.installation.status, "unverified");
   assert.equal(f.json(["list"])[0].hub_status.installation.reason, "record_has_no_verifiable_skill_files");
-  state.installed["test/local-skill"].scope = "user";
+  state.installed["test/local-skill::codex"].scope = "user";
   fs.writeFileSync(stateFile, JSON.stringify(state));
   assert.equal(f.json(["info", "test/local-skill"]).hub_status.installation.status, "not-recorded");
   assert.deepEqual(f.json(["list"]), []);

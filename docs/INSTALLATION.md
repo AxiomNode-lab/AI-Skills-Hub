@@ -1,6 +1,6 @@
 # Installation
 
-Use the npm package from any project directory. Node.js 22 or later is required.
+Use the npm package from any project directory. Node.js 22.13 or later is required.
 
 ```bash
 npx @axiomnode-lab/skills-hub --help
@@ -19,7 +19,7 @@ skills-hub info anthropics/frontend-design --agent codex --json
 skills-hub list --agent codex --scope project --json
 ```
 
-`search` and `info` report catalog availability (`hub_status.availability`: eligible, source-direct, review-required, blocked or catalog-only) separately from installation state (`hub_status.installation`: installed, unverified or not-recorded). Catalog metadata never establishes installation.
+`info` prints the license, source (`repo@commit` and path), supported agents and scanner matches; `--content` adds the SKILL.md. `search` and `info` report catalog availability (`hub_status.availability`: eligible, source-direct, review-required, blocked or catalog-only) separately from installation state (`hub_status.installation`: installed, unverified or not-recorded). Catalog metadata never establishes installation.
 
 ## Install
 
@@ -33,7 +33,8 @@ Install rules:
 
 - Only released skills install locally: `distribution: bundled`, `materialized: true`, `release.status: eligible`, and compatible with `--agent`. A held release returns `bundle_not_released`, a review-required skill `manual_review_required`, a blocked one `registry_blocked`; `--yes` overrides none of these.
 - Before writing, the released files are checked against their release manifest (exact file set, size and SHA-256); a mismatch installs nothing.
-- Dependencies install first. If one fails, the skills that need it are reported as `dependency-failed` and not installed. Other items in the same command keep their outcome; nothing is rolled back.
+- One command installs everything it was asked for, or nothing. Every item (and each dependency) is checked before anything is written; if one cannot install, the others are reported as `skipped` with `not_installed_request_incomplete`, and the skills that need it as `dependency-failed`. Two requested skills that would use the same folder are refused with `destination_conflict`.
+- Dependencies install first. If a write fails after checking, the skills this command installed are removed and any installation it replaced is restored (files and record); those items are reported as `rolled-back`. An external installer that already ran (after `--yes`) cannot be undone and is marked `rollback: not-possible`.
 - Reinstalling the same revision reports `already-installed` and changes nothing. A folder the Hub did not create, or a Hub installation whose files you edited, is replaced only with `--force`.
 - An install path that goes through a symlink or junction is refused.
 - `install @name` is refused with `bundle_aliases_not_supported`: bundles are catalog groupings, not install targets.
@@ -50,7 +51,7 @@ Expected: exit code 1, item `status: blocked`, `reason: registry_blocked` (this 
 skills-hub install anthropics/mcp-builder --agent codex --json
 ```
 
-Expected: exit code 1, item `status: confirmation-required`, `reason: explicit_confirmation_required`, and `command` showing what `--yes` would run: `npx --yes skills add https://github.com/anthropics/skills/tree/<commit>/skills/mcp-builder/SKILL.md --skill mcp-builder --agent codex -y`. Consenting runs that third-party installer (the `skills` package from npm). Its result is reported, but it does not create a verified Hub record, so `list` may not show it.
+Expected: exit code 1, item `status: confirmation-required`, `reason: explicit_confirmation_required`, and `command` showing what `--yes` would run: `npx --yes skills@1.7.2 add https://github.com/anthropics/skills/tree/<commit>/skills/mcp-builder/SKILL.md --skill mcp-builder --agent codex -y`. Consenting runs that third-party installer (the `skills` package from npm, pinned to an exact version). Its result is reported, but it does not create a verified Hub record, so `list` may not show it.
 
 ## Update and uninstall
 
@@ -62,7 +63,7 @@ skills-hub uninstall anthropics/frontend-design --agent codex --scope project
 
 `update` compares each installed revision with the catalog's current release. Statuses: `up-to-date`, `update-available` (dry run), `updated`, `modified` (installed files were edited; use `--force`), `not-releasable` (the newer revision is held or blocked; the installed version is kept), `not-in-catalog`.
 
-`uninstall <id>` removes a Hub-managed skill folder that sits directly in the agent's skills root. It refuses a different agent (`installed_for_agent_<agent>`), the wrong scope (`not_installed_in_scope`), edited files (unless `--force`), and paths through symlinks, and leaves everything else in the folder untouched. Without an ID it runs interactively in a terminal.
+`uninstall <id>` removes a Hub-managed skill folder that sits directly in the agent's skills root. Each agent has its own record, so a skill installed for Claude Code and Codex is removed per agent: without `--agent` an ID installed for several agents is refused (`installed_for_several_agents`), and with an agent that has no record it reports which agents do (`installed_for_agent_<agents>`). A folder shared by agents (Codex and Cursor both use `.agents/skills`) is removed when its last record goes. It also refuses the wrong scope (`not_installed_in_scope`), edited files (unless `--force`), and paths through symlinks, and leaves everything else in the folder untouched. Without an ID it runs interactively in a terminal.
 
 ## Destinations and state
 
