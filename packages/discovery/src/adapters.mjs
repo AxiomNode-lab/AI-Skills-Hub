@@ -1,5 +1,9 @@
 export const artifactTypes = ["skill","mcp-server","agent-plugin","cli-tool"];
 
+// The third-party installer for source-direct skills, pinned to an exact
+// version so consenting with --yes never runs whatever is newest on npm.
+export const SKILLS_CLI_PACKAGE = "skills@1.7.2";
+
 function sourceUrl(source) {
   return source?.install_url ?? source?.url ?? (source?.repo ? "https://github.com/" + source.repo : null);
 }
@@ -43,8 +47,8 @@ export function buildAdapterPlan(item, agent, { scope="project" } = {}) {
       action:"source-direct",
       status:"implemented",
       adapter:"skills-cli",
-      argv:["npx","--yes","skills","add",url,"--skill",name,"--agent",agent,"-y"],
-      command:["npx","--yes","skills","add",url,"--skill",name,"--agent",agent,"-y"].join(" ")
+      argv:["npx","--yes",SKILLS_CLI_PACKAGE,"add",url,"--skill",name,"--agent",agent,"-y"],
+      command:["npx","--yes",SKILLS_CLI_PACKAGE,"add",url,"--skill",name,"--agent",agent,"-y"].join(" ")
     };
   }
 

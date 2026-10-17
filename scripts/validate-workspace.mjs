@@ -47,6 +47,13 @@ for(const file of packageFiles){
 
 const rootPkg=JSON.parse(fs.readFileSync("package.json","utf8"));
 if(rootPkg.packageManager!=="pnpm@10.4.1") errors.push("root packageManager must stay pinned to pnpm@10.4.1");
+// The published package takes the root version; workspace packages and the
+// changelog must agree with it before a release tag can match.
+for(const file of packageFiles){
+  const pkg=JSON.parse(fs.readFileSync(file,"utf8"));
+  if(pkg.version!==rootPkg.version) errors.push(`${pkg.name}: version ${pkg.version} differs from root ${rootPkg.version}`);
+}
+if(!fs.readFileSync("CHANGELOG.md","utf8").split("\n").some((line)=>line.startsWith(`## ${rootPkg.version} `)||line===`## ${rootPkg.version}`)) errors.push(`CHANGELOG.md has no "## ${rootPkg.version}" section`);
 
 if(errors.length){
   console.error(errors.join("\n"));

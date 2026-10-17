@@ -1,6 +1,6 @@
 # Installation
 
-Use the npm package from any project directory. Node.js 22 or later is required.
+Use the npm package from any project directory. Node.js 22.13 or later is required.
 
 ```bash
 npx @axiomnode-lab/skills-hub --help
@@ -51,7 +51,7 @@ Expected: exit code 1, item `status: blocked`, `reason: registry_blocked` (this 
 skills-hub install anthropics/mcp-builder --agent codex --json
 ```
 
-Expected: exit code 1, item `status: confirmation-required`, `reason: explicit_confirmation_required`, and `command` showing what `--yes` would run: `npx --yes skills add https://github.com/anthropics/skills/tree/<commit>/skills/mcp-builder/SKILL.md --skill mcp-builder --agent codex -y`. Consenting runs that third-party installer (the `skills` package from npm). Its result is reported, but it does not create a verified Hub record, so `list` may not show it.
+Expected: exit code 1, item `status: confirmation-required`, `reason: explicit_confirmation_required`, and `command` showing what `--yes` would run: `npx --yes skills@1.7.2 add https://github.com/anthropics/skills/tree/<commit>/skills/mcp-builder/SKILL.md --skill mcp-builder --agent codex -y`. Consenting runs that third-party installer (the `skills` package from npm, pinned to an exact version). Its result is reported, but it does not create a verified Hub record, so `list` may not show it.
 
 ## Update and uninstall
 

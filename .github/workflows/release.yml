@@ -32,8 +32,11 @@ jobs:
           node-version: 22.x
           cache: pnpm
           registry-url: https://registry.npmjs.org
-      - name: Use an npm version that supports trusted publishing
-        run: npm install -g npm@11
+      - name: Use an npm version that supports trusted publishing (>= 11.5.1)
+        run: |
+          npm install -g npm@11.21.1
+          node -v
+          npm -v
       - run: pnpm install --frozen-lockfile
 
       - name: Check the tag matches the package version
@@ -57,13 +60,17 @@ jobs:
         working-directory: dist/npm
         run: |
           version=$(node -p "require('./package.json').version")
-          # Prereleases go to "next" once a stable version owns "latest"; until
-          # then they are "latest", so `npx @axiomnode-lab/skills-hub` resolves.
+          # Prereleases go to "next" only once a stable version owns "latest";
+          # until then each beta replaces "latest", so `npx @axiomnode-lab/skills-hub`
+          # always resolves to the newest beta. Trusted publishing adds provenance.
           tag=latest
           case "$version" in
-            *-*) npm view @axiomnode-lab/skills-hub dist-tags.latest >/dev/null 2>&1 && tag=next ;;
+            *-*)
+              current=$(npm view @axiomnode-lab/skills-hub dist-tags.latest 2>/dev/null || true)
+              case "$current" in ""|*-*) tag=latest ;; *) tag=next ;; esac
+              ;;
           esac
-          npm publish --provenance --access public --tag "$tag"
+          npm publish --access public --tag "$tag"
 
       - name: Verify the published package
         run: |

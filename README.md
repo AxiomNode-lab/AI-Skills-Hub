@@ -33,7 +33,7 @@ npm install -g @axiomnode-lab/skills-hub
 skills-hub --help
 ```
 
-Requires Node.js 22 or later. The package contains the catalog and every released skill, so it works offline after installation.
+Requires Node.js 22.13 or later. The package contains the catalog and every released skill, so installing a skill needs no network access.
 
 ## Find skills
 
@@ -97,7 +97,7 @@ npx @axiomnode-lab/skills-hub add "pdf tools"
 npx @axiomnode-lab/skills-hub add https://github.com/owner/repo.git
 ```
 
-- `add <phrase>` searches the catalog and public directories (skills.sh, the MCP registry, npm, plugin directories) and lets you pick. Popularity can raise a result in the list; it never makes anything trusted or released. External results need confirmation, and success is reported only when something was actually installed.
+- `add <phrase>` searches the catalog and public directories (skills.sh, the MCP registry, npm, GitHub, plugin directories) and lets you pick; your search phrase is sent to those services. Popularity can raise a result in the list; it never makes anything trusted or released. Before an external result is installed, `add` prints the exact command or the MCP configuration it would write and marks anything the Hub has not reviewed; it runs only after you confirm. Success is reported only when something was actually installed.
 - `add <git-url>` clones an `https://` or SSH repository into `./capabilities-library/` for your own review. It installs nothing and releases nothing. `sync` fast-forwards those clones; `create` scaffolds a new capability there.
 
 ## Give your agent the catalog (MCP)

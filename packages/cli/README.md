@@ -9,7 +9,7 @@ npx @axiomnode-lab/skills-hub search "frontend design" --agent codex
 npx @axiomnode-lab/skills-hub install anthropics/frontend-design --agent codex
 ```
 
-Requires Node.js 22+. The package includes the catalog and every released skill; installing a skill needs no network access.
+Requires Node.js 22.13+. The package includes the catalog and every released skill; installing a skill needs no network access. `add <phrase>` searches public directories online, and an interactive run checks npm for a newer version (`SKILLS_HUB_NO_UPDATE_CHECK=1` turns that off).
 
 ## Commands
 

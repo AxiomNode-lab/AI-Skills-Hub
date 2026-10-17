@@ -22,6 +22,20 @@ function getMCPConfigPath(agent, scope = "project", cwd = process.cwd()) {
   );
 }
 
+// A project-scope config folder (.cursor, .vscode…) comes with the checkout;
+// a planted link would turn a project install into a write elsewhere.
+function assertNoLinkedParents(base, file) {
+  const relative = path.relative(path.resolve(base), path.dirname(path.resolve(file)));
+  if (relative.startsWith("..") || path.isAbsolute(relative)) return;
+  let current = path.resolve(base);
+  for (const part of relative.split(path.sep).filter(Boolean)) {
+    current = path.join(current, part);
+    let stat;
+    try { stat = fs.lstatSync(current); } catch (error) { if (error.code === "ENOENT") return; throw error; }
+    if (stat.isSymbolicLink()) throw new Error(`Refusing to write MCP configuration through a symbolic link: ${current}`);
+  }
+}
+
 function assertRegularFileOrMissing(file) {
   if (!fs.existsSync(file)) return;
   if (fs.lstatSync(file).isSymbolicLink()) {
@@ -50,10 +64,14 @@ function packageIdentifier(value) {
   return normalized;
 }
 
+// Package runtimes an MCP registry entry may name. A shell or any other
+// command would turn a registry entry into arbitrary code in agent config.
+const MCP_RUNTIMES = new Set(["npx", "uvx", "pipx", "bunx", "node", "deno", "docker", "python", "python3", "dnx"]);
+
 function runtimeName(value) {
   const normalized = String(value ?? "npx").trim();
-  if (!/^[A-Za-z0-9._-]+$/.test(normalized)) {
-    throw new Error(`Unsafe MCP runtime: ${normalized}`);
+  if (!MCP_RUNTIMES.has(normalized)) {
+    throw new Error(`Unsupported MCP runtime: ${normalized}`);
   }
   return normalized;
 }
@@ -180,6 +198,7 @@ export class MCPAdapter {
     const scope = options.scope ?? "project";
     const cwd = options.cwd ?? process.cwd();
     const configPath = options.configPath ?? getMCPConfigPath(agent, scope, cwd);
+    if (scope !== "user") assertNoLinkedParents(cwd, configPath);
     const name = serverName(this.capability);
     const config = readConfig(configPath);
     config.mcpServers[name] = buildServerConfig(this.capability, agent, options.env ?? {});
@@ -196,7 +215,8 @@ export class MCPAdapter {
   }
 }
 
-export function removeMCPServer(configPath, name) {
+export function removeMCPServer(configPath, name, { projectRoot = null } = {}) {
+  if (projectRoot) assertNoLinkedParents(projectRoot, configPath);
   assertRegularFileOrMissing(configPath);
   if (!fs.existsSync(configPath)) return false;
 

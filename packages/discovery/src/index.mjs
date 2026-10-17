@@ -218,4 +218,4 @@ export function summarizeInstallPlan(searchResult,agent,{scope="project"}={}) {
   };
 }
 
-export { buildAdapterPlan } from "./adapters.mjs";
+export { buildAdapterPlan, SKILLS_CLI_PACKAGE } from "./adapters.mjs";

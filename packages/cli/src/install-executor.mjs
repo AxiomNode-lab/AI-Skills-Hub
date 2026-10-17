@@ -1,5 +1,5 @@
 import { execFileSync } from "node:child_process";
-import { buildAdapterPlan } from "@ai-skills-hub/discovery";
+import { buildAdapterPlan, SKILLS_CLI_PACKAGE } from "@ai-skills-hub/discovery";
 import { getAdapter } from "../../installer/src/adapters/index.mjs";
 import { readInstallRecords, verifyInstallRecord, writeInstallRecord } from "../../installer/src/state.mjs";
 import { buildInstallPlan } from "../../installer/src/index.mjs";
@@ -49,7 +49,7 @@ function assertSafeExternalPlan(plan, agent) {
       if (
         binary !== "npx"
         || flag !== "--yes"
-        || cli !== "skills"
+        || cli !== SKILLS_CLI_PACKAGE
         || action !== "add"
         || !validHttpsUrl(repository)
         || skillFlag !== "--skill"

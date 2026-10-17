@@ -16,7 +16,7 @@ export function removeInstallation(record, { scope, cwd = process.cwd(), force =
     if (expectedConfig !== path.resolve(record.destination)) {
       throw new Error("Refusing to modify an MCP configuration outside the expected agent scope.");
     }
-    removeMCPServer(expectedConfig, record.name || record.skill_id);
+    removeMCPServer(expectedConfig, record.name || record.skill_id, { projectRoot: scope === "user" ? null : cwd });
     removeInstallRecord(record.skill_id, scope, cwd);
     return { id: record.skill_id, action: "removed", destination: expectedConfig };
   }

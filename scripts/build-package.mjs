@@ -117,7 +117,8 @@ const pkg = {
   homepage: "https://github.com/AxiomNode-lab/AI-Skills-Hub#readme",
   bugs: { url: "https://github.com/AxiomNode-lab/AI-Skills-Hub/issues" },
   keywords: ["agent-skills", "claude-code", "codex", "cursor", "github-copilot", "opencode", "mcp", "skills"],
-  files: ["packages/", "catalog/", "skills/", "README.md", "LICENSE", "NOTICE.md"]
+  files: ["packages/", "catalog/", "skills/", "README.md", "LICENSE", "NOTICE.md"],
+  publishConfig: { access: "public" }
 };
 write("package.json", JSON.stringify(pkg, null, 2) + "\n");
 

@@ -6,7 +6,7 @@ import os from "node:os";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
-import { addOutcome } from "../packages/cli/src/commands/add.mjs";
+import { addOutcome, describeExternalAction } from "../packages/cli/src/commands/add.mjs";
 
 const cli = fileURLToPath(new URL("../packages/cli/bin/skills-hub.mjs", import.meta.url));
 const REV_A = "a".repeat(40);
@@ -283,4 +283,25 @@ test("bundle aliases are refused with an explicit reason, never expanded", t => 
   const result = h.run("install", "@frontend", "--agent", "codex", "--json");
   assert.equal(result.status, 1);
   assert.equal(result.json.results[0].reason, "bundle_aliases_not_supported");
+});
+
+test("add shows what an external choice runs or writes, and flags unreviewed sources", () => {
+  const command = describeExternalAction({ release: { status: "hold" }, origin: "mcp-registry", argv: ["claude", "mcp", "add", "demo", "--", "npx", "-y", "@x/demo"] });
+  assert.match(command[0], /Not reviewed by AI Skills Hub \(source: mcp-registry\)/);
+  assert.equal(command[1], "Command: claude mcp add demo -- npx -y @x/demo");
+  const config = describeExternalAction({ release: { status: "hold" }, target: ".cursor/mcp.json", config: { mcpServers: { demo: { command: "npx", args: ["-y", "@x/demo"] } } } });
+  assert.equal(config[1], "Writes to .cursor/mcp.json:");
+  assert.match(config[2], /"command": "npx"/);
+  assert.deepEqual(describeExternalAction({ release: { status: "eligible" }, argv: ["npx", "--yes", "skills@1.7.2", "add", "https://x/y"] }), ["Command: npx --yes skills@1.7.2 add https://x/y"]);
+});
+
+test("a project state folder that is a symbolic link is refused", t => {
+  const h = hub(t);
+  h.release("alpha");
+  const elsewhere = fs.mkdtempSync(path.join(os.tmpdir(), "hub-state-target-"));
+  t.after(() => fs.rmSync(elsewhere, { recursive: true, force: true }));
+  try { fs.symlinkSync(elsewhere, path.join(h.project, ".ai-skills-hub"), "dir"); } catch { t.skip("symlinks unavailable"); return; }
+  const result = h.run("install", "test/alpha", "--agent", "codex", "--json");
+  assert.equal(result.status, 1);
+  assert.deepEqual(fs.readdirSync(elsewhere), []);
 });

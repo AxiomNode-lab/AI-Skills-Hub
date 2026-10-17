@@ -103,3 +103,22 @@ test("MCP adapter writes Cursor stdio transport metadata for package servers", a
   assert.equal(config.mcpServers.local.type, "stdio");
   assert.deepEqual(config.mcpServers.local.args, ["-y", "@example/mcp-server@1.2.3"]);
 });
+
+test("MCP adapter refuses runtimes outside the package-runner allowlist", async () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "ai-skills-hub-mcp-"));
+  for (const runtime of ["bash", "sh", "curl", "powershell"]) {
+    const adapter = new MCPAdapter({ id: "demo/evil", name: "evil", type: "mcp-server", installation: { method: "package", runtime, identifier: "@example/mcp-server" } });
+    await assert.rejects(adapter.install({ agent: "cursor", scope: "project", cwd: dir }), /Unsupported MCP runtime/, runtime);
+  }
+  assert.equal(fs.existsSync(path.join(dir, ".cursor", "mcp.json")), false);
+});
+
+test("MCP adapter refuses a project config folder that is a symbolic link", async (t) => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "ai-skills-hub-mcp-"));
+  const elsewhere = fs.mkdtempSync(path.join(os.tmpdir(), "ai-skills-hub-mcp-target-"));
+  t.after(() => { fs.rmSync(dir, { recursive: true, force: true }); fs.rmSync(elsewhere, { recursive: true, force: true }); });
+  try { fs.symlinkSync(elsewhere, path.join(dir, ".cursor"), "dir"); } catch { t.skip("symlinks unavailable"); return; }
+  const adapter = new MCPAdapter({ id: "demo/local", name: "local", type: "mcp-server", installation: { method: "package", runtime: "npx", identifier: "@example/mcp-server" } });
+  await assert.rejects(adapter.install({ agent: "cursor", scope: "project", cwd: dir }), /symbolic link/);
+  assert.deepEqual(fs.readdirSync(elsewhere), []);
+});

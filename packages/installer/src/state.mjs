@@ -68,7 +68,16 @@ function atomicWrite(file, body) {
   fs.renameSync(temp, file);
 }
 
-function assertStateFileSafe(file) {
+function assertStateFileSafe(file, scope="project") {
+  // A project's .ai-skills-hub folder comes with the checkout, so a planted
+  // link there would redirect state reads, writes and removal elsewhere.
+  if (scope !== "user") {
+    try {
+      if (fs.lstatSync(path.dirname(file)).isSymbolicLink()) throw new Error("installation state folder cannot be a symbolic link");
+    } catch (error) {
+      if (error.code !== "ENOENT") throw error;
+    }
+  }
   if (!fs.existsSync(file)) return;
   if (fs.lstatSync(file).isSymbolicLink()) {
     throw new Error("installation state file cannot be a symbolic link");
@@ -80,7 +89,7 @@ function assertStateFileSafe(file) {
 
 export function writeInstallRecord(record, cwd=process.cwd()) {
   const file = stateFile(record.scope, cwd);
-  assertStateFileSafe(file);
+  assertStateFileSafe(file, record.scope);
   const data = fs.existsSync(file)
     ? JSON.parse(fs.readFileSync(file, "utf8"))
     : { schema_version: "0.2", installed: {}, history: [] };
@@ -106,7 +115,7 @@ export function writeInstallRecord(record, cwd=process.cwd()) {
 
 export function readInstallRecords(scope="project", cwd=process.cwd()) {
   const file = stateFile(scope, cwd);
-  assertStateFileSafe(file);
+  assertStateFileSafe(file, scope);
   if (!fs.existsSync(file)) return {};
   const body = fs.readFileSync(file, "utf8");
   if (Buffer.byteLength(body) > MAX_STATE_BYTES) throw new Error("installation state is too large");
@@ -116,7 +125,7 @@ export function readInstallRecords(scope="project", cwd=process.cwd()) {
 
 export function removeInstallRecord(skillId, scope="project", cwd=process.cwd()) {
   const file = stateFile(scope, cwd);
-  assertStateFileSafe(file);
+  assertStateFileSafe(file, scope);
   if (!fs.existsSync(file)) return;
   const data = JSON.parse(fs.readFileSync(file, "utf8"));
   delete data.installed[skillId];

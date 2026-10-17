@@ -4,7 +4,7 @@ All notable changes to AI Skills Hub are documented here.
 
 ## 0.3.0-beta.1 (unreleased)
 
-First npm release candidate: `npx @axiomnode-lab/skills-hub`.
+First npm release candidate: `npx @axiomnode-lab/skills-hub`. 414 released skills are installable (the per-batch totals below were true when each batch landed).
 
 ### Highlights
 - One user-facing npm package, `@axiomnode-lab/skills-hub` (binary `skills-hub`), built by `scripts/build-package.mjs` with the catalog and every released skill; `pnpm e2e:package` installs the packed tarball in a temporary project and runs it there, through `npx` and a global install. CI runs it on Linux and Windows.
@@ -17,6 +17,9 @@ First npm release candidate: `npx @axiomnode-lab/skills-hub`.
 - Internal workspace packages are private.
 - `add` no longer reports "Successfully installed" for adapter-pending, confirmation-required or other non-installs; its Git path accepts only https/SSH.
 - Install and uninstall refuse paths through symlinks; `sync` failures exit 1.
+- `add` shows the exact command or MCP configuration before asking for confirmation and labels results the Hub has not reviewed. MCP registry entries may only name a package runner (`npx`, `uvx`, `pipx`, `bunx`, `node`, `deno`, `docker`, `python`, `dnx`). The third-party `skills` installer is pinned to `skills@1.7.2`.
+- A project's `.ai-skills-hub` state folder and MCP configuration folders are refused when they are symbolic links.
+- Node.js 22.13 or later is required. The release workflow pins npm, and a prerelease replaces `latest` until a stable version exists. First-publish and trusted-publisher steps are in docs/RELEASING.md; `validate-workspace` checks that every package version and the changelog match.
 - A multi-skill `install` is all or nothing: every item is checked before anything is written (`skipped` / `not_installed_request_incomplete` for the rest when one cannot install, `destination_conflict` for two skills with the same folder), and a failure while writing removes this command's new installs and restores the ones it replaced (`rolled-back`).
 
 ### Added
